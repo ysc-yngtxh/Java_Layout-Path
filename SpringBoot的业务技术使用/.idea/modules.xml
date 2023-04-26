@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/SpringBoot-zh_CN/SpringBoot-zh_CN.iml" filepath="$PROJECT_DIR$/SpringBoot-zh_CN/SpringBoot-zh_CN.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/SpringBoot的业务技术使用.iml" filepath="$PROJECT_DIR$/.idea/SpringBoot的业务技术使用.iml" />
-    </modules>
-  </component>
-</project>
