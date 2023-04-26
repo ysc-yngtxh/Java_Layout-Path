@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="xxl-job-core" />
+        <module name="03_custom-exception-status_code" />
+        <module name="13_rabbitmq-priority" />
+        <module name="config-client" />
+        <module name="09_shiro-demo" />
+        <module name="02_springboot-configuration-mapper" />
+        <module name="07_jwt-demo" />
+        <module name="08_shiro" />
+        <module name="15_spring-rabbitmq-redis-retry" />
+        <module name="05_canal-demo" />
+        <module name="11_RabbitMQ--springboot" />
+        <module name="provice" />
+        <module name="xxl-job-executor-sample-springboot" />
+        <module name="xxl-job-admin" />
+        <module name="consumer" />
+        <module name="04_Elasticsearch" />
+        <module name="10_RabbitMQ" />
+        <module name="xxl-job-executor-sample-frameless" />
+        <module name="config-client2" />
+        <module name="config-server" />
+        <module name="14_spring-retry" />
+        <module name="16_spring-redis-lock" />
+        <module name="06_canal-elasticsearch" />
+        <module name="17_SpringBoot-WebSocket" />
+        <module name="Eureka" />
+        <module name="config" />
+        <module name="18_SpringBoot-xxl-job" />
+        <module name="gateway" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="12_rabbitmq-backups" target="1.8" />
+      <module name="xxl-job" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="02_springboot-configuration-mapper" options="-parameters" />
+      <module name="03_custom-exception-status_code" options="-parameters" />
+      <module name="05_canal-demo" options="-parameters" />
+      <module name="06_canal-elasticsearch" options="-parameters" />
+      <module name="07_jwt-demo" options="-parameters" />
+      <module name="08_shiro" options="-parameters" />
+      <module name="11_RabbitMQ--springboot" options="-parameters" />
+      <module name="13_rabbitmq-priority" options="-parameters" />
+      <module name="14_spring-retry" options="-parameters" />
+      <module name="15_spring-rabbitmq-redis-retry" options="-parameters" />
+      <module name="16_spring-redis-lock" options="-parameters" />
+      <module name="17_SpringBoot-WebSocket" options="-parameters" />
+      <module name="18_SpringBoot-xxl-job" options="-parameters" />
+      <module name="Eureka" options="-parameters" />
+      <module name="config" options="-parameters" />
+      <module name="config-client" options="-parameters" />
+      <module name="config-client2" options="-parameters" />
+      <module name="config-server" options="-parameters" />
+      <module name="consumer" options="-parameters" />
+      <module name="gateway" options="-parameters" />
+      <module name="provice" options="-parameters" />
+    </option>
+  </component>
+</project>

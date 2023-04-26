@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="15_springboot-dubbo-ssm-consumer:Web exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/15_springboot_dubbo_ssm_consumer_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="15_springboot-dubbo-ssm-consumer/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="15_springboot-dubbo-ssm-consumer" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

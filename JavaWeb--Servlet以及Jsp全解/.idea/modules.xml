@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/01_Servlet接口实现类开发步骤/01_Servlet接口实现类开发步骤.iml" filepath="$PROJECT_DIR$/01_Servlet接口实现类开发步骤/01_Servlet接口实现类开发步骤.iml" />
+      <module fileurl="file://$PROJECT_DIR$/02_在线考试管理系统/02_在线考试管理系统.iml" filepath="$PROJECT_DIR$/02_在线考试管理系统/02_在线考试管理系统.iml" />
+      <module fileurl="file://$PROJECT_DIR$/03_多个Servlet之间调用规则/03_多个Servlet之间调用规则.iml" filepath="$PROJECT_DIR$/03_多个Servlet之间调用规则/03_多个Servlet之间调用规则.iml" />
+      <module fileurl="file://$PROJECT_DIR$/04_订餐会员卡/04_订餐会员卡.iml" filepath="$PROJECT_DIR$/04_订餐会员卡/04_订餐会员卡.iml" />
+      <module fileurl="file://$PROJECT_DIR$/05_商品购物车/05_商品购物车.iml" filepath="$PROJECT_DIR$/05_商品购物车/05_商品购物车.iml" />
+      <module fileurl="file://$PROJECT_DIR$/06_监听器接口/06_监听器接口.iml" filepath="$PROJECT_DIR$/06_监听器接口/06_监听器接口.iml" />
+      <module fileurl="file://$PROJECT_DIR$/07_过滤器接口/07_过滤器接口.iml" filepath="$PROJECT_DIR$/07_过滤器接口/07_过滤器接口.iml" />
+      <module fileurl="file://$PROJECT_DIR$/08_JSP规范/08_JSP规范.iml" filepath="$PROJECT_DIR$/08_JSP规范/08_JSP规范.iml" />
+      <module fileurl="file://$PROJECT_DIR$/09_EL表达式/09_EL表达式.iml" filepath="$PROJECT_DIR$/09_EL表达式/09_EL表达式.iml" />
+      <module fileurl="file://$PROJECT_DIR$/10_(完整版)在线考试管理系统/10_(完整版)在线考试管理系统.iml" filepath="$PROJECT_DIR$/10_(完整版)在线考试管理系统/10_(完整版)在线考试管理系统.iml" />
+    </modules>
+  </component>
+</project>

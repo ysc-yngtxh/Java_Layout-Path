@@ -1,0 +1,46 @@
+package J10流.B2文件专属流;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class FileOutputStream的使用4 {
+    public static void main(String[] args) {
+        FileOutputStream fos = null;
+        FileOutputStream fos2 = null;
+        try {
+            //myFile文件不存在的时候会自动新建。
+            //这种方式请谨慎使用，因为在myFile文件存在的时候会将原文件内容清空，然后重新写入
+            fos = new FileOutputStream("myFile");
+
+            //以追加的方式在文件末尾写入，不会清空源文件内容
+            fos2 = new FileOutputStream("myFile2", true);
+
+            //开始写
+            byte[] b ={97,98,99,100,101,102};//将byte数组全部写出
+            fos.write(b);
+            //将byte数组的一部分写出
+            fos.write(b, 0, 2);
+
+            String s = "我好想你，陈嘉琪！";
+            //将字符串转换成byte数组
+            byte[] bytes = s.getBytes();
+            fos2.write(bytes);
+
+            //写完之后，最后一定要刷新
+            fos.flush();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}

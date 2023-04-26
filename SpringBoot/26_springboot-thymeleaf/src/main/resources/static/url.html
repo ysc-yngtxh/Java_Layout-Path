@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>URL路径表达式</title>
+</head>
+<body>
+      <h1>URL路径表达式(不带参数):@{}</h1>
+      <a href="http://www.baidu.com">传统写法:跳转至百度</a><br><br><br>
+      <a th:href="@{http://www.baidu.com}">路径表达式:路径到百度</a><br><br><br>
+      <a th:href="@{http://localhost:8080/user/detail}">跳转至：/user/detail</a>
+
+      <h1>URL路径表达式,相对路径(实际开发中推荐使用的)</h1>
+      <a th:href="@{/user/detail}">跳转至：/user/detail</a>
+
+      <h1>相对路径(带参数)</h1>
+      <a th:href="@{/test?username=lisi}">相对路径，带参数</a><br><br><br><!--这里问号爆红但不影响效果-->
+      <a th:href="@{'/url?username='+${id}}">相对路径，带参数</a><br><br><br>
+      <a th:href="@{'/url'(id=${id})}">小括号相当于？号。当多个参数的时候，直接在后面添加逗号写</a><br><br><br>
+
+      <a th:href="@{'/text/'+${id}}">风格为RESTful的路径表达式</a><br><br><br>
+</body>
+</html>

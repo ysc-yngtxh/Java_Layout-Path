@@ -1,0 +1,21 @@
+# 应用服务 WEB 访问端口
+server:
+  port: 8080
+# Elasticsearch搜索引擎
+spring:
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+  elasticsearch:
+    rest:
+      uris: localhost:9200
+      connection-timeout: 5000
+
+  application:
+    name: 15_elasticsearch-demo
+
+
+
+
+

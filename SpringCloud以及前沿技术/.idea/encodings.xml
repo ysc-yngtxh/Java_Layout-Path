@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/../../Apache-Maven/repository/org/springframework/boot/spring-boot-starter-parent/2.0.6.RELEASE/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../Apache-Maven/repository/org/springframework/boot/spring-boot-starter-parent/2.4.1/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../Apache-Maven/repository/org/springframework/boot/spring-boot-starter-parent/2.5.2/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../../Apache-Maven/repository/org/springframework/boot/spring-boot-starter-parent/2.6.4/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/01_springcloud-parem/Eureka/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/01_springcloud-parem/config/config-client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/01_springcloud-parem/config/config-client2/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/01_springcloud-parem/config/config-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/01_springcloud-parem/config/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/01_springcloud-parem/consumer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/01_springcloud-parem/gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/01_springcloud-parem/provice/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/01_springcloud-parem/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/01_springcloud-parem/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/02_springboot-configuration-mapper/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/03_custom-exception-status_code/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/04_Elasticsearch/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/04_Elasticsearch/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/05_canal-demo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/06_canal-elasticsearch/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/07_jwt-demo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/08_Shiro/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/09_shiro-demo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/09_shiro-demo/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/11_RabbitMQ--springboot/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/13_rabbitmq-priority/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/14_spring-retry/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/15_spring-rabbitmq-redis-retry/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/16_spring-redis-lock/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/17_SpringBoot-WebSocket/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/18_SpringBoot-XXl-Job/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxl-job/xxl-job-admin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxl-job/xxl-job-admin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxl-job/xxl-job-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxl-job/xxl-job-core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxl-job/xxl-job-executor-samples/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxl-job/xxl-job-executor-samples/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxl-job/xxl-job-executor-samples/xxl-job-executor-sample-frameless/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxl-job/xxl-job-executor-samples/xxl-job-executor-sample-frameless/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxl-job/xxl-job-executor-samples/xxl-job-executor-sample-springboot/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xxl-job/xxl-job-executor-samples/xxl-job-executor-sample-springboot/src/main/resources" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

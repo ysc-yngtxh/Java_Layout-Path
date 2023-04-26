@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="07_dubbo-zookeeper-provider:war">
+    <output-path>$PROJECT_DIR$/07_dubbo-zookeeper-provider/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>07_dubbo-zookeeper-provider</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="07_dubbo-zookeeper-provider-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="07_dubbo-zookeeper-provider:war exploded" />
+    </root>
+  </artifact>
+</component>

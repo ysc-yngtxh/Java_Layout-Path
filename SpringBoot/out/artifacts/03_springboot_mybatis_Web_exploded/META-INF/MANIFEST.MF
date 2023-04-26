@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: 游诗成
+Build-Jdk: 1.8.0_261
+Implementation-Title: 03_springboot-mybatis
+Implementation-Version: 1.0.1
+Implementation-Vendor-Id: com.bjpowernode.springboot
+Main-Class: ${start-class}
+

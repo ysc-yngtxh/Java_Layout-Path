@@ -1,0 +1,43 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="29_SpringMVC-处理器方法的返回值:war exploded">
+    <output-path>$PROJECT_DIR$/29_SpringMVC-处理器方法的返回值/target/27_SpringMVC-RequestMapping</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>29_SpringMVC-处理器方法的返回值</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="29_SpringMVC-处理器方法的返回值" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:5.3.15" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:5.3.15" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:5.3.15" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:5.3.15" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jcl:5.3.15" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:5.3.15" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.3.15" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:5.3.15" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.5.9" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:2.0.7" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.3.15" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.25" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
+          <element id="library" level="project" name="Maven: com.alibaba:druid:1.2.8" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-web:5.3.15" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.13.1" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.13.1" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.13.1" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/29_SpringMVC-处理器方法的返回值/target/27_SpringMVC-RequestMapping/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="29_SpringMVC-处理器方法的返回值/web/Web" />
+    </root>
+  </artifact>
+</component>

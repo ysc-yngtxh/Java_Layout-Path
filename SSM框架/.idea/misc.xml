@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/06_Maven Use Web" />
+    <file type="web" url="file://$PROJECT_DIR$/06_Maven-Web" />
+    <file type="web" url="file://$PROJECT_DIR$/12.1_MyBatis-一对一，一对多，多对多" />
+    <file type="web" url="file://$PROJECT_DIR$/13.1_Mybatis一对一、一对多、多对多" />
+    <file type="web" url="file://$PROJECT_DIR$/25_Spring-Web" />
+    <file type="web" url="file://$PROJECT_DIR$/26_SpringMVC-开发步骤" />
+    <file type="web" url="file://$PROJECT_DIR$/27_SpringMVC-RequestMapping" />
+    <file type="web" url="file://$PROJECT_DIR$/28_SpringMVC-接收参数" />
+    <file type="web" url="file://$PROJECT_DIR$/29_Spring-处理器方法的返回值" />
+    <file type="web" url="file://$PROJECT_DIR$/29_SpringMVC-处理器方法的的返回值" />
+    <file type="web" url="file://$PROJECT_DIR$/29_SpringMVC-处理器方法的返回值" />
+    <file type="web" url="file://$PROJECT_DIR$/30_SpringMVC-静态资源处理方式" />
+    <file type="web" url="file://$PROJECT_DIR$/31_SpringMVC-整合SSM" />
+    <file type="web" url="file://$PROJECT_DIR$/32_SpringMVC-异常处理类" />
+    <file type="web" url="file://$PROJECT_DIR$/33_SpringMVC-拦截器" />
+    <file type="web" url="file://$PROJECT_DIR$/34_SpringMVC-登陆验证拦截器实现" />
+    <file type="web" url="file://$PROJECT_DIR$/35_实验" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/../05_使用Maven工具/pom.xml" />
+        <option value="$PROJECT_DIR$/05_使用Maven工具模块/pom.xml" />
+        <option value="$PROJECT_DIR$/05_Maven/pom.xml" />
+        <option value="$PROJECT_DIR$/06_Maven-Web/pom.xml" />
+        <option value="$PROJECT_DIR$/07_MyBatis-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/08_MyBatis-Dao/pom.xml" />
+        <option value="$PROJECT_DIR$/09_MyBatis-动态代理/pom.xml" />
+        <option value="$PROJECT_DIR$/10_MyBatis-param/pom.xml" />
+        <option value="$PROJECT_DIR$/11_MyBatis-result/pom.xml" />
+        <option value="$PROJECT_DIR$/12_MyBatis-sql/pom.xml" />
+        <option value="$PROJECT_DIR$/13_Spring-hello/pom.xml" />
+        <option value="$PROJECT_DIR$/14_设值注入/pom.xml" />
+        <option value="$PROJECT_DIR$/14_Spring-设值注入/pom.xml" />
+        <option value="$PROJECT_DIR$/15_Spring-容器创建对象/pom.xml" />
+        <option value="$PROJECT_DIR$/16_Spring-引用类型的自动注入/pom.xml" />
+        <option value="$PROJECT_DIR$/17_Spring-注解/pom.xml" />
+        <option value="$PROJECT_DIR$/18-Spring-使用注解使容器创建对象/pom.xml" />
+        <option value="$PROJECT_DIR$/18_Spring-使用注解使容器创建对象/pom.xml" />
+        <option value="$PROJECT_DIR$/20_Spring-aspectJ/pom.xml" />
+        <option value="$PROJECT_DIR$/21_Spring-整合mybatis/pom.xml" />
+        <option value="$PROJECT_DIR$/20_Spring-电商购买商品/pom.xml" />
+        <option value="$PROJECT_DIR$/22_Spring-电商购买商品/pom.xml" />
+        <option value="$PROJECT_DIR$/23_Spring-事务/pom.xml" />
+        <option value="$PROJECT_DIR$/24_Spring-aspectJ配置aop/pom.xml" />
+        <option value="$PROJECT_DIR$/23_Spring-中小项目事务/pom.xml" />
+        <option value="$PROJECT_DIR$/24_Spring-大型项目事务/pom.xml" />
+        <option value="$PROJECT_DIR$/25_Spring-Web/pom.xml" />
+        <option value="$PROJECT_DIR$/26_SpringMVC-开发步骤/pom.xml" />
+        <option value="$PROJECT_DIR$/27_SpringMVC-RequestMapping/pom.xml" />
+        <option value="$PROJECT_DIR$/28_SpringMVC-接收参数/pom.xml" />
+        <option value="$PROJECT_DIR$/29_SpringMVC-处理器方法的的返回值/pom.xml" />
+        <option value="$PROJECT_DIR$/29_SpringMVC-处理器方法的返回值/pom.xml" />
+        <option value="$PROJECT_DIR$/29_Spring-处理器方法的返回值/pom.xml" />
+        <option value="$PROJECT_DIR$/30_SpringMVC-静态资源处理方式/pom.xml" />
+        <option value="$PROJECT_DIR$/31_SpringMVC-整合SSM/pom.xml" />
+        <option value="$PROJECT_DIR$/32_SpringMVC-异常处理类/pom.xml" />
+        <option value="$PROJECT_DIR$/33_SpringMVC-拦截器/pom.xml" />
+        <option value="$PROJECT_DIR$/34_SpringMVC-登陆验证拦截器实现/pom.xml" />
+        <option value="$PROJECT_DIR$/13.1_Mybatis一对一、一对多、多对多/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

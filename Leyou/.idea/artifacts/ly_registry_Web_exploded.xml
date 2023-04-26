@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ly-registry:Web exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ly_registry_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="ly-registry/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ly-registry" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

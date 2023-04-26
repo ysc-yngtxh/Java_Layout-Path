@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/../互联网分布式/02_dubbo-link2" />
+    <file type="web" url="file://$PROJECT_DIR$/01_dubbo-link1" />
+    <file type="web" url="file://$PROJECT_DIR$/02_dubbo-link2" />
+    <file type="web" url="file://$PROJECT_DIR$/03_dubbo-interface" />
+    <file type="web" url="file://$PROJECT_DIR$/04_dubbo-provider" />
+    <file type="web" url="file://$PROJECT_DIR$/05_dubbo-consumer" />
+    <file type="web" url="file://$PROJECT_DIR$/06_dubbo-zookeeper-interface" />
+    <file type="web" url="file://$PROJECT_DIR$/07_dubbo-zookeeper-provider" />
+    <file type="web" url="file://$PROJECT_DIR$/08_dubbo-zookeeper-consumer" />
+    <file type="web" url="file://$PROJECT_DIR$/09_dubbo-version-provider" />
+    <file type="web" url="file://$PROJECT_DIR$/10_dubbo-version-consumer" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/01_dubbo-link1/pom.xml" />
+        <option value="$PROJECT_DIR$/02_dubbo-link2/pom.xml" />
+        <option value="$PROJECT_DIR$/03_dubbo-interface/pom.xml" />
+        <option value="$PROJECT_DIR$/04_dubbo-provider/pom.xml" />
+        <option value="$PROJECT_DIR$/05_dubbo-consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/06_dubbo-zookeeper-interface/pom.xml" />
+        <option value="$PROJECT_DIR$/07_dubbo-zookeeper-provider/pom.xml" />
+        <option value="$PROJECT_DIR$/08_dubbo-consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/09_dubbo-version-provider/pom.xml" />
+        <option value="$PROJECT_DIR$/10_dubbo-version-consumer/pom.xml" />
+        <option value="$PROJECT_DIR$/08_dubbo-zookeeper-consumer/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="04_订餐会员卡:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/04__war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="04_订餐会员卡" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="mysql-connector-java-8.0.28" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="04_订餐会员卡/web/Web" />
+    </root>
+  </artifact>
+</component>

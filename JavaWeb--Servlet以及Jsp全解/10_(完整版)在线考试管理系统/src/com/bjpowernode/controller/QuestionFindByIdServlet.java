@@ -1,0 +1,31 @@
+package com.bjpowernode.controller;
+
+import com.bjpowernode.dao.QuestionDao;
+import com.bjpowernode.entity.Question;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+public class QuestionFindByIdServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String questionId;
+        QuestionDao dao = new QuestionDao();
+
+        //1、调用请求头里的请求参数
+        questionId = request.getParameter("questionId");
+        //2、将请求头里的请求参数传到【根据试题编号查询试题信息】
+        Question question = dao.findById(questionId);
+        //3、调用question_Update.jsp将试题信息写入到响应体
+        request.setAttribute("key",question);
+        request.getRequestDispatcher("/question_Update.jsp").forward(request,response);
+
+    }
+}

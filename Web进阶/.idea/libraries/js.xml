@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="js">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/04_jQuery介绍/web/WEB-INF/js" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/04_jQuery介绍/web/WEB-INF/js" recursive="false" />
+  </library>
+</component>

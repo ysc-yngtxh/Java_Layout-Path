@@ -1,0 +1,38 @@
+
+
+server:
+  port: 10010
+
+spring:
+  application:
+    name: api-gateway
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka/
+
+zuul:
+  prefix: /api    #zuul添加路由前缀
+  routes:
+    item-service: /item/**
+    upload-service:  #当你的客户端的请求路径是/upload/**，而Controller层的请求路径也是/upload。这个时候就只会
+#在请求的时候只有一个/upload，那如何才能有一个完整的路径http://api.leyou.com/upload/upload/image。需要在nginx中进行配置
+      path: /upload/**
+      serviceId: upload-service
+      strip-prefix: false
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000   #熔断超时时长：5000
+
+ribbon:
+  ConnectTimeout: 1000          #ribbon连接超时时长
+  ReadTimeout: 3500             #ribbon读取超时时长
+  MaxAutoRetries: 0             #当前服务重试次数
+  MaxAutoRetriesNextServer: 0   #切换服务重试次数
+

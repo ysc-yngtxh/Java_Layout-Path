@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="05_结合jQuery和Ajax技术实现级联查询:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/05_jQueryAjax_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="05_结合jQuery和Ajax技术实现级联查询" />
+          <element id="library" level="project" name="apache-tomcat-10.0" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="lib" />
+          <element id="library" level="project" name="mysql-connector-java-8.0.28" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="05_结合jQuery和Ajax技术实现级联查询/web/Web" />
+    </root>
+  </artifact>
+</component>

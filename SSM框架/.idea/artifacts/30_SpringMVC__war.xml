@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="30_SpringMVC-静态资源处理方式:war">
+    <output-path>$PROJECT_DIR$/30_SpringMVC-静态资源处理方式/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>30_SpringMVC-静态资源处理方式</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="30_SpringMVC-source-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="30_SpringMVC-静态资源处理方式:war exploded" />
+    </root>
+  </artifact>
+</component>

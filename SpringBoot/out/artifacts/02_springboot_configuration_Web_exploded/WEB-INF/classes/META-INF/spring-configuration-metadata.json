@@ -1,0 +1,37 @@
+{
+  "groups": [
+    {
+      "name": "abc",
+      "type": "com.bjpowernode.springboot.domain.Abc",
+      "sourceType": "com.bjpowernode.springboot.domain.Abc"
+    },
+    {
+      "name": "school",
+      "type": "com.bjpowernode.springboot.domain.School",
+      "sourceType": "com.bjpowernode.springboot.domain.School"
+    }
+  ],
+  "properties": [
+    {
+      "name": "abc.name",
+      "type": "java.lang.String",
+      "sourceType": "com.bjpowernode.springboot.domain.Abc"
+    },
+    {
+      "name": "abc.websit",
+      "type": "java.lang.String",
+      "sourceType": "com.bjpowernode.springboot.domain.Abc"
+    },
+    {
+      "name": "school.name",
+      "type": "java.lang.String",
+      "sourceType": "com.bjpowernode.springboot.domain.School"
+    },
+    {
+      "name": "school.websit",
+      "type": "java.lang.String",
+      "sourceType": "com.bjpowernode.springboot.domain.School"
+    }
+  ],
+  "hints": []
+}

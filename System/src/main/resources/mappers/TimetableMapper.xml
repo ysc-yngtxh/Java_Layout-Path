@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.dao.TimetableDao">
+
+    <resultMap id="myTimetable" type="com.system.pojo.Timetable" autoMapping="true">
+        <id property="id" column="id"/>
+        <result property="objectId" column="objectId"/>
+        <!--后面还有映射属性没写 可以自动映射(必须是同名)-->
+        <!--
+            重点: user.list<Orders> list 属性 跟 结果集的一部分进行映射
+
+            关系: 一个用户对应多个订单 (一对多)
+                1. association : 一对一
+                2. collection : 一对多
+
+            # collection 标签
+                1. property : 指定属性名
+                2. ofType : 指定集合的元素类型
+
+             注意: 结果集同名字段的最左原则
+        -->
+        <collection property="courses" ofType="Courses" autoMapping="true">
+            <id property="cid" column="cid"/>
+            <!--后面还有映射属性没写 可以自动映射(必须是同名)-->
+        </collection>
+    </resultMap>
+
+    <select id="selectAll" resultMap="myTimetable">
+        select *
+        from timetable t
+            inner join relation r
+                    on t.code = r.code
+            inner join courses c
+                    on t.code = c.code
+        where t.objectId=#{objectId}
+    </select>
+
+</mapper>

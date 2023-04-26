@@ -1,0 +1,33 @@
+SpringBoot讲解项目案例顺序
+1、如何创建一个springboot框架web项目
+2、使用springboot框架集成springmvc
+3、使用springboot框架核心配置文件application.properties或者application.yml或者application.yaml
+4、多环境下核心配置文件的使用，工作中开发的环境有哪些：开发环境、测试环境、准生产环境、生产环境
+5、springboot在核心配置文件application.properties自定义配置一个一个获取@Value
+6、springboot在核心配置文件将自定义配置映射到一个对象
+7、springboot集成jsp
+8、springboot集成mybatis
+      a、添加mybatis依赖，MySQL驱动
+      b、使用mybatis提供的逆向工程生成实体bean,映射文件，DAO接口
+
+  *****逆向工程*****
+      项目中有一些东西是经常使用，但是格式基本固定的。所以，逆向工程呼之欲出
+      (1)创建一个XML文件放在项目下，内容自己去看--GeneratorMapper.xml
+      (2)然后还要在pom文件里添加代码自动生成的插件
+      (3)再然后在Maven中找到你的项目，点击Plugins-->mybatis-generator-->mybatis-generator:generate
+      (4)就可以在你的项目目录下看到自动生成的dao,domain类了。
+
+9、springboot集成mybatis,最主要的是两个注解 @Mapper  @MapperScan
+      @Mapper      需要在每一个Mapper接口类上添加，作用扫描dao接口
+      @MapperScan  是在springboot启动入口类上添加的，它是扫描所有的包
+10、关于Mapper映射文件存放位置的写法有以下两种
+      a、将Mapper接口和Mapper映射文件存放到src/main/java同一目录下，
+         还需要再pom文件中手动指定资源文件夹路径resources
+      b、将Mapper接口和Mapper映射文件分开存放
+         Mapper接口类存放到src/main/java目录下
+         Mapper映射文件存放到resources(类路径)
+         在springboot核心配置文件中指定mapper映射文件存放到位置
+11、springboot项目下使用事务
+      事务是一个完整的功能，也叫做是一个完整的业务
+      事务只跟什么SQL语句有关系？事务只跟DML语句有关系：增删改
+      DML,DQL,DDL,TCL,DCL
