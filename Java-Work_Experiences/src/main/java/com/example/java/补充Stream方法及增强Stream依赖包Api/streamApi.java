@@ -1,4 +1,4 @@
-package com.example.java.增强Stream依赖包Api及补充Stream方法;
+package com.example.java.补充Stream方法及增强Stream依赖包Api;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.log.Log;

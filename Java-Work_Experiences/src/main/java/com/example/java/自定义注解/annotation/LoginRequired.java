@@ -13,5 +13,5 @@ public @interface LoginRequired {
 
     // 一般自定义注解使用场景：参数是否校验，访问路径是否白名单。。。。。
 
-    String value() default "threelevel";
+    String value() default "threeLevel";
 }

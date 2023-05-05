@@ -23,7 +23,7 @@ public class LoginUser implements UserDetails {
 
     @Serial
     private static final long serialVersionUID = 3691360652528252534L;
-    private User user;
+    private transient User user;
 
     /**
      * 返回用户的权限

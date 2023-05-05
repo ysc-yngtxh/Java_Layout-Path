@@ -51,7 +51,7 @@ public class WxLocaleConfigs implements LocaleResolver,InitializingBean {
         //如果没有就使用默认的（根据主机的语言环境生成一个 Locale
         Locale locale = LocaleContextHolder.getLocale();
         //如果请求的链接中携带了 国际化的参数
-        if (!StringUtils.isEmpty(language)){
+        if (StringUtils.hasText(language)){
             //zh_CN
             String[] s = language.split("_");
             //国家，地区
