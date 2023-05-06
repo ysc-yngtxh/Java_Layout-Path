@@ -1,13 +1,15 @@
 package com.example;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StringBootTreeBuilderApplication {
+@MapperScan("com.example.dao")
+public class TreeBuilderApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(StringBootTreeBuilderApplication.class, args);
+        SpringApplication.run(TreeBuilderApplication.class, args);
     }
 
 }

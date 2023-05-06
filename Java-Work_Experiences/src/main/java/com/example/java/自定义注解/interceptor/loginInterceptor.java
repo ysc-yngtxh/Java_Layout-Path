@@ -21,7 +21,7 @@ public class loginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        if(HandlerMethod.class.equals(handler.getClass())) {  // handler instanceOf HandlerMethod
+        if(HandlerMethod.class.equals(handler.getClass())) {  // handler instanceof HandlerMethod
             HandlerMethod handl = (HandlerMethod) handler;
             LoginRequired annotation = handl.getMethod().getAnnotation(LoginRequired.class);
             String str = ResourceBundle.getBundle("infoclass").getString("white.open");
