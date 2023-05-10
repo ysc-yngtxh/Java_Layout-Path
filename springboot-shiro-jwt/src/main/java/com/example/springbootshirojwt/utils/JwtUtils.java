@@ -41,7 +41,7 @@ public class JwtUtils {
         Date expiration = claimsJws.getBody().getExpiration();
         int i = expiration.compareTo(new Date(System.currentTimeMillis()));
 
-        if (i>=0) {
+        if (i >= 0) {
             return true; //token没过期
         }
         return false;

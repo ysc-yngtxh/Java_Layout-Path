@@ -1,20 +1,20 @@
 一、入门案例认证流程
-    接口  AbstractAuthenticationProcessingFilter  AuthenticationManager   AbstractUserDetailsAuthenticationProvider    UserDetailsService
-    实现类 UsernamePasswordAuthenticationFilter    ProviderManager          DaoAuthenticationProvider              InMemoryUserDetailsManager
+    接口  AbstractAuthenticationProcessingFilter  AuthenticationManager   AuthenticationProvider       UserDetailsService
+    实现类 UsernamePasswordAuthenticationFilter    ProviderManager        DaoAuthenticationProvider   InMemoryUserDetailsManager
 
     1、提交用户名密码
     2、通过实现类 UsernamePasswordAuthenticationFilter 封装Authentication对象，这时候最多只有用户名和密码，权限还没有
-    3、调用 ProviderManager 实现类的 authenticate方法进行认证
-    4、调用 DaoAuthenticationProvider 实现类的authenticate方法进行委托认证
-    5、调用 InMemoryUserDetailsManager 实现类的loadUserByUsername方法查询用户
-      Ⅰ、根据用户名去查询对应的用户以及这个用户对应的权限信息，InMemoryUserDetailsManager是在内存中查找
-      Ⅱ、把对应的用户信息包括去权限信息封装成UserDetails对象
-    6、返回UserDetails对象给实现类 DaoAuthenticationProvider
-      Ⅰ、通过PasswordEncoder对比UserDetails中的密码和Authentication的密码是否正确
-      Ⅱ、如果正确就把UserDetails中的权限信息设置到Authentication对象中
-    7、返回Authentication对象给实现类 UsernamePasswordAuthenticationFilter
-      Ⅰ、如果上一步返回了Authentication对象就使用SecurityContextHolder.getContext().setAuthentication方法存储该对象
-         其他过滤器会通过SecurityContextHolder来获取当前用户信息
+    3、调用 ProviderManager 实现类的 authenticate() 方法进行认证
+    4、调用 AuthenticationProvider 实现类的 authenticate() 方法进行委托认证
+    5、调用 InMemoryUserDetailsManager 实现类的 loadUserByUsername() 方法查询用户
+      Ⅰ、根据用户名去查询对应的用户以及这个用户对应的权限信息，InMemoryUserDetailsManager 是在内存中查找
+      Ⅱ、把对应的用户信息包括去权限信息封装成 UserDetails 对象
+    6、返回 UserDetails 对象给实现类 DaoAuthenticationProvider
+      Ⅰ、通过 PasswordEncoder 对比 UserDetails 中的密码和 Authentication 的密码是否正确
+      Ⅱ、如果正确就把 UserDetails 中的权限信息设置到 Authentication 对象中
+    7、返回 Authentication 对象给实现类 UsernamePasswordAuthenticationFilter
+      Ⅰ、如果上一步返回了 Authentication 对象就使用 SecurityContextHolder.getContext().setAuthentication 方法存储该对象
+         其他过滤器会通过 SecurityContextHolder 来获取当前用户信息
 
 
 二、授权：

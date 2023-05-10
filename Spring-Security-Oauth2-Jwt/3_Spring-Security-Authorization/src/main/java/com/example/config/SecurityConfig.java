@@ -2,6 +2,8 @@ package com.example.config;
 
 import com.alibaba.fastjson2.JSON;
 import com.example.domain.ResponseResult;
+import com.example.exception.CustomException;
+import com.example.exception.EnumResponse;
 import com.example.filter.JwtAuthenticationTokenFilter;
 import com.example.service.impl.UserDetailsServiceImpl;
 import com.example.utils.WebUtil;
@@ -63,6 +65,14 @@ public class SecurityConfig {
 
     }
 
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
+    }
+
     /**
      * Spring Security的过滤器链
      * (UsernamePasswordAuthenticationFilter => ExceptionTranslationFilter => FilterSecurityInterceptor)
@@ -91,12 +101,6 @@ public class SecurityConfig {
 
                 // 见名知意。添加过滤器在某某过滤器之前。这里我们添加UsernamePasswordAuthenticationFilter之前的过滤器jwtAuthenticationTokenFilter
                 .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
-
-                // 配置异常处理器(这里的内容还么弄懂，全局异常处理也没用)
-                // .exceptionHandling()
-                // .authenticationEntryPoint(authenticationEntryPoint())
-                // .accessDeniedHandler(accessDeniedHandler()).and().anonymous()
-                // .and()
 
                 // 设置哪些路径可以直接访问不需要认证(permitAll()表示允许所有人访问)
                 .authorizeHttpRequests().requestMatchers("/").permitAll()
@@ -160,42 +164,6 @@ public class SecurityConfig {
             public void customize(WebSecurity web) {
                 // 这里忽略的一般都是一些静态文件，例如js,css等
                 web.ignoring().requestMatchers("/static/**");
-            }
-        };
-    }
-
-    @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
-        provider.setPasswordEncoder(passwordEncoder());
-        return provider;
-    }
-
-    // 定义一个认证失败的异常处理
-    @Bean
-    public AuthenticationEntryPoint authenticationEntryPoint(){
-        return new AuthenticationEntryPoint() {
-            @Override
-            public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-                ResponseResult<Void> result =
-                        new ResponseResult<>(HttpStatus.UNAUTHORIZED.value(), "用户认证失败请查询登录", null);
-                String jsonString = JSON.toJSONString(result);
-                WebUtil.renderText(response, jsonString);
-            }
-        };
-    }
-
-    // 定义一个鉴权失败的异常处理
-    @Bean
-    public AccessDeniedHandler accessDeniedHandler(){
-        return new AccessDeniedHandler() {
-            @Override
-            public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-                ResponseResult<Void> result =
-                        new ResponseResult<>(HttpStatus.FORBIDDEN.value(), "您的权限不足！", null);
-                String jsonString = JSON.toJSONString(result);
-                WebUtil.renderText(response, jsonString);
             }
         };
     }
