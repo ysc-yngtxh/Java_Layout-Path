@@ -29,6 +29,19 @@
     3、如果正确就把UserDetails中的权限信息设置到Authentication中。
 
 
+三、注销
+     1、问题：
+               我在页面的注销按钮提供一个 /logout 路径，但是整个项目我都没有去提供注销的逻辑接口，
+            另外也没有在SpringSecurity中进行过注销的配置。那么这个路径究竟会指向何方呢？
+     2、回答：
+               如果自定义的前端登出接口是 /logout，那么就会使用SpringSecurity的内置接口 /logout
+            内置接口则会执行 logoutUrl("/logout"); 清除HttpSession，Cookie，用户信息SecurityContextHolder 等。
+            还会执行 logoutSuccessUrl("/toLoginForm?logout"); 这里的 /toLoginForm 路径会根据自己的设置的登录路径替换。
+     3、参照：
+           可依照默认SpringSecurity的 LogoutConfigurer 类，不进行注销功能配置，只需要把注销接口设置为 /logout
+
+
+
 
 
 

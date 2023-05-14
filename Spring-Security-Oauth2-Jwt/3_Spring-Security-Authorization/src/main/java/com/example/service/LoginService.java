@@ -5,7 +5,7 @@ import com.example.domain.ResponseResult;
 import java.util.Map;
 
 public interface LoginService {
-    Map<Object, Object> login();
+    String login();
 
-    ResponseResult<Void> logout();
+    ResponseResult<String> logout();
 }

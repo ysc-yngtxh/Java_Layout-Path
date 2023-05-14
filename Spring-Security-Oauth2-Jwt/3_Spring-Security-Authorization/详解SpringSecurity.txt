@@ -29,12 +29,29 @@
 
 三、thymeleaf集成spring security
     1、需要在html标签上加 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6
+
     2、<div sec:authorize="!isAuthenticated()"> 表示没登录认证就能显示
        <div sec:authorize="isAuthenticated()">  表示登录认证了才能显示
+
     3、<span sec:authentication="principal.username">  表示获取该登录用户的账号
        <span sec:authentication="principal.authorities"></span>  表示获取该登录用户的权限
+
     4、<div class="column" sec:authorize="hasRole('vip2')">  表示需要该用户有'vip2'的权限才能显示
 
+
+四、自定义注销
+    1、前端的注销接口可以自己定义，也可以继续使用 /logout。对应SpringSecurity配置的 logoutUrl("/***")，
+       这个只是作为响应的接口，实际不会去执行接口逻辑。实际处理注销逻辑的接口在 logoutSuccessUrl("/***") 中
+
+    2、这里需要注意一下：
+          如果前端注销接口是 /logout，我们就不需要配置 logoutUrl("/logout")。
+          如果是其他的路径，那么就需要在配置加上 logoutUrl("/***")，并且还需要在控制层有响应的路径接口方法
+
+    3、作为自定义注销，是无论如何都要配置 logoutSuccessUrl("/***")，【不配置不就相当于使用原有默认的逻辑吗】
+       并且还需要在控制层提供其 logoutSuccessUrl("/***") 中的路径接口方法，
+
+    4、清除HttpSession，Cookie，用户信息SecurityContextHolder 都已经被Spring security在内部完成了，
+       这里我们不需要做过多的操作。（这里提供一种猜测：控制层的前端注销接口没被调用，是不是在这里做清理了）
 
 
 

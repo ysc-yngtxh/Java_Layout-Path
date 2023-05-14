@@ -3,6 +3,8 @@ package com.example.service.impl;
 import cn.hutool.core.util.ObjectUtil;
 import com.example.domain.LoginUser;
 import com.example.domain.ResponseResult;
+import com.example.service.LoginService;
+import com.example.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,7 +17,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @RequiredArgsConstructor
-public class LoginServiceImpl {
+public class LoginServiceImpl implements LoginService {
 
 
     public String login(){
@@ -28,14 +30,7 @@ public class LoginServiceImpl {
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
 
         String userId = loginUser.getUser().getId().toString();
-        return userId;
-    }
-
-    public ResponseResult<Void> logout() {
-        // 获取SecurityContextHolder中的用户id
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
-        String userId = loginUser.getUser().getId().toString();
-        return new ResponseResult<>(200, "登出成功", null);
+        // 使用userId生成一个jwt，并将jwt放入ResponseResult返回
+        return JwtUtil.createJwt(userId);
     }
 }

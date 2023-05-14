@@ -12,8 +12,14 @@
 
     最后，通过我们的操作就可以自定义权限方法：@PreAuthorize("@spel.hasAuthoriza()")
 
+二、SpringSecurity的异常处理
+    1、没有进行异常配置信息时候，是没有办法去统一处理和管理在认证和授权过程中可能出现的异常信息。
+       并且在出现异常后，直接给你重定向到登陆界面，而且没有相应的异常信息去返回给前端，实际体验非常不好。
 
-二、CSRF攻击(跨域请求伪造 Cross-site request forgery)
+    2、具体的异常处理去代码去看吧 --- SecurityConfig类
+
+
+三、CSRF攻击(跨域请求伪造 Cross-site request forgery)
         比如说，我们的有一个不是前后端分离的项目系统A，前后端都是通过Cookie或者JSESSIONID来校验用户信息的，
     有一天我通过这个A系统给自己的的女朋友转账（转账行为看成是C），转了大概有十个小目标。
     这个时候外部有一个钓鱼网站系统B，我在不知道是非法网站的的情况下点击了这个网站，
@@ -30,7 +36,7 @@
     只不过我们只在前后端分离项目中使用Jwt,所以我们在做前后端分离项目时候，就可以把csrf()关闭，
     前后端分离项目天生就预防了CSRF攻击
 
-三、其他认证方案畅想
+四、其他认证方案畅想
        1、实现UsernamePasswordAuthenticationFilter类表单登录Filter，重写其登录方法
        2、实现AuthenticationManager类来进行用户的认证，重写其authentication方法
        3、实现UserDetailsService类来进行数据库账号查询，重写其loadUserByUsername方法

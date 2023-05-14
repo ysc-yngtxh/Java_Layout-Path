@@ -1,7 +1,5 @@
 package com.example.config;
 
-import com.alibaba.fastjson.JSON;
-import com.example.filter.JwtAuthenticationTokenFilter;
 import com.example.service.impl.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -13,13 +11,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import java.io.PrintWriter;
 
 /**
  * @author 游诗成
@@ -31,12 +26,7 @@ import java.io.PrintWriter;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-
     private final AuthenticationConfiguration authenticationConfiguration;
-
-
-    private final JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
-
 
     private final UserDetailsServiceImpl userDetailsService;
 
@@ -73,10 +63,10 @@ public class SecurityConfig {
 
 
     /**
-     * Spring Security的过滤器链(UsernamePasswordAuthenticationFilter=>ExceptionTranslationFilter=>FilterSecurityInterceptor)
+     * Spring Security的过滤器链(UsernamePasswordAuthenticationFilter=>ExceptionTranslationFilter=>AuthorizationFilter )
      * 1、UsernamePasswordAuthenticationFilter 负责处理我们在登录页面填写了用户名密码后的登录请求，入门案例的认证工作主要由他负责
      * 2、ExceptionTranslationFilter 处理过滤器链中抛出的任何AccessDeniedException和AuthenticationException
-     * 3、FilterSecurityInterceptor 负责权限校验的过滤器
+     * 3、AuthorizationFilter  负责权限校验的过滤器
      */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -96,11 +86,9 @@ public class SecurityConfig {
                 // .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 // .and()
 
-                // 见名知意。添加过滤器在某某过滤器之前。这里我们添加在UsernamePasswordAuthenticationFilter之前的过滤器jwtAuthenticationTokenFilter
-                .addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class)
 
                 // 设置哪些路径可以直接访问不需要认证(permitAll()表示允许所有人访问)
-                .authorizeHttpRequests().requestMatchers("/").permitAll()
+                .authorizeHttpRequests().requestMatchers("/user/index","/").permitAll()
                 .requestMatchers("/user/login").anonymous()  // anonymous()表示匿名访问（登陆提交接口通常都是匿名访问）
                 // .requestMatchers("/static/**").permitAll()
                 // 其余的都需要认证校验(拦截)
@@ -135,6 +123,27 @@ public class SecurityConfig {
                 // 重载方法二：当存在两个参数，且第二个参数值为true时，表示无论用户在登陆前方法的是哪个路径，在登陆后跳转的路径始终都是/toMain
                 //           效果同successForwardUrl("/toMain")
                .defaultSuccessUrl("/toMain")
+
+
+                /** 可依照默认SpringSecurity的 LogoutConfigurer 类，不进行配置。如果自定义的前端登出接口是/logout，那么就会使用SpringSecurity的内置接口/logout
+                 *  内置接口则会执行 logoutUrl("/logout"); 并且清除HttpSession，Cookie，用户信息SecurityContextHolder 等。
+                 *  还会执行 logoutSuccessUrl("/user/index?logout"); 这里的路径会根据自己的设置的登录路径替换。*/
+                // .and()
+                // .logout()
+                // 表单退出登录的执行路径
+                // .logoutUrl("/logout")
+                // 表单退出登录，成功后执行的操作路径
+                // .logoutSuccessUrl("/toLoginForm")
+                // 注销处理器
+                // .logoutSuccessHandler((req, resp, authentication) -> {
+                //     LoginUser principal = (LoginUser) authentication.getPrincipal();
+                //     resp.setContentType("application/json;charset=utf-8");
+                //     PrintWriter out = resp.getWriter();
+                //     out.write(principal.getUsername() + "退出登录！");
+                //     out.flush();
+                //     out.close();
+                // })
+                // .permitAll()
                ;
    /**
      * 这里有一个问题：
@@ -144,10 +153,9 @@ public class SecurityConfig {
      *   而是我们一开始访问的路径http://localhost:8080，但是我们并没有在Controller层定义"/"路径，
      *   从而被重定向到web的默认欢迎资源文件index.html ,所以又会出现登陆后跳转到登陆前的页面。
      *
-     *   解决这种问题方案：一、在requestMatchers()中加上"/"路径，用来排除需要认证的拦截，那么在我们一开始跳转"/"路径时就不需要再被拦截，
-     *                     直接被重定向到web的默认欢迎资源文件index.html，但是默认欢迎文件又正好是我们的登陆路径。
-     *                     而defaultSuccessUrl("/toMain")只会在登陆后跳转到一开始用户访问路径不是登录路径的路径
-     *                     从而解决问题，跳转到在defaultSuccessUrl()方法的/toMain
+     *   解决这种问题方案：一、在requestMatchers()中加上"/"路径，用来排除需要认证的拦截，那么在我们跳转"/"路径时就不需要再被拦截，
+     *                     然后会发现在Controller里并没有"/"路径，直接被重定向到web的默认欢迎资源文件index.html，
+     *                     但是默认欢迎文件又正好是我们的登陆路径/toLoginForm,那么就会跳转到在defaultSuccessUrl()方法的/toMain
      *                  二、在defaultSuccessUrl()中加上第二个参数true，那么登陆成功后就不会跳转到一开始访问的路径
      */
 

@@ -38,8 +38,6 @@ import static org.springframework.web.context.request.RequestAttributes.SCOPE_RE
 @RequiredArgsConstructor
 public class LoginServiceImpl implements LoginService {
 
-    private final AuthenticationManager authenticationManager;
-
     private final RedisCache redisCache;
 
     @Override
@@ -69,20 +67,10 @@ public class LoginServiceImpl implements LoginService {
         // 把完整的用户信息存入Redis,使用userId作为key
         redisCache.setCacheObject("login:" + userId, loginUser);
 
+        // 获取请求中的属性对象
         RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();
         // 获取Session中参数
         requestAttributes.setAttribute("token", map.get("token"), SCOPE_REQUEST);
         return map;
-    }
-
-    @Override
-    public ResponseResult<Void> logout() {
-        // 获取SecurityContextHolder中的用户id
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
-        String userId = loginUser.getUser().getId().toString();
-        // 删除redis中的值
-        redisCache.deleteObject("login:" + userId);
-        return new ResponseResult<>(200, "登出成功", null);
     }
 }

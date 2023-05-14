@@ -7,6 +7,4 @@ import java.util.Map;
 
 public interface LoginService {
     Map<Object, Object> login();
-
-    ResponseResult<Void> logout();
 }

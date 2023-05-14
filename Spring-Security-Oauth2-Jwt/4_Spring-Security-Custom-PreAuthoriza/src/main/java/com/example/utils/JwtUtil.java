@@ -62,9 +62,9 @@ public class JwtUtil {
         long expMillis = nowMillis + ttlMilis;
         Date expDate = new Date(expMillis);
         return Jwts.builder()
-                .setId(uuid)          //唯一的Id
+                .setId(uuid)         //唯一的Id
                 .setSubject(Subject)  //主题
-                .setIssuer("ysc")     //签发者
+                .setIssuer("ysc")    //签发者
                 .setIssuedAt(now)     //签发时间
                 .signWith(sigbatureAlgorithm, secreKey)  //签名算法和密钥
                 .setExpiration(expDate);  //过期时间

@@ -109,4 +109,6 @@ public class User implements Serializable {
      * 删除标志(0未删除， 1已删除)
      */
     private Integer delFlag;
+
+    private transient String token;
 }

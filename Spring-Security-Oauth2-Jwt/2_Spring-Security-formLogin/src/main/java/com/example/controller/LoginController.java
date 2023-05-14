@@ -37,6 +37,7 @@ public class LoginController {
 
     @RequestMapping(value = "/user/login", method = RequestMethod.POST)
     public void login(@RequestBody User user){
+        // 这里只是提供一个表单提交接口，实际并不会执行这个接口的业务逻辑
         System.out.println("login");
     }
 
@@ -47,11 +48,5 @@ public class LoginController {
         modelAndView.setViewName("success");
         modelAndView.addObject("token", login.get("token"));
         return modelAndView;
-    }
-
-    @RequestMapping("/logout")
-    public ResponseResult<Void> logout(){
-        // 登出
-        return loginService.logout();
     }
 }
