@@ -190,7 +190,7 @@ public class SecurityConfig {
                  *  内置接口则会执行 logoutUrl("/logout"); 清除HttpSession，Cookie，用户信息SecurityContextHolder 等。
                  *  还会执行 logoutSuccessUrl("/toLoginForm?logout"); 这里的路径会根据自己的设置的登录路径替换。*/
                 // TODO 需要注意的是：我们没有进行登出配置，因此默认登出的时候重定向请求到/toLoginForm,
-                //       这里配置了认证权限入口 AuthenticationEntryPoint ，登录认证成功前，会拦截所有的接口,
+                //       这里配置了认证权限入口 AuthenticationEntryPoint ，登录认证成功前，除排除路径外，会拦截所有的接口,
                 //       因此有两种方法：一、在排除认证的路径加上requestMatchers("/","toLoginForm").permitAll()
                 //                    二、配置自己的logout，并允许所有人访问.permitAll()
                 // .and()
