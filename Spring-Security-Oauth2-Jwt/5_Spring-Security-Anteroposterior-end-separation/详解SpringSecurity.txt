@@ -1,0 +1,6 @@
+
+一、首先需要明白一件事，对于登入登出我们都不需要自己编写controller接口，Spring Security为我们封装好了。
+    默认登入路径:/login，登出路径:/logout。当然我们可以也修改默认的名字。
+    当登录成功或登录失败都需要返回统一的json返回体给前台，前台才能知道对应的做什么处理。
+    而实现登录成功和失败的异常处理需要分别实现AuthenticationSuccessHandler和AuthenticationFailureHandler接口
+    并在WebSecurityConfig中注入

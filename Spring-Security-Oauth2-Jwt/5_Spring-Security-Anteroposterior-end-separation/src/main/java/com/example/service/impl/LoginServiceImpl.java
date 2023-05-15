@@ -1,9 +1,13 @@
 package com.example.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.example.authentication.CustomAuthenticationManager;
 import com.example.domain.LoginUser;
 import com.example.domain.ResponseResult;
+import com.example.entity.SysUser;
+import com.example.mapper.SysUserMapper;
+import com.example.service.LoginService;
 import com.example.utils.RedisCache;
 import com.example.vo.User;
 import lombok.RequiredArgsConstructor;
@@ -19,34 +23,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @RequiredArgsConstructor
-public class LoginServiceImpl {
-
-    private final CustomAuthenticationManager customAuthenticationManager;
+public class LoginServiceImpl implements LoginService {
 
     private final RedisCache redisCache;
 
-    public String login(User user){
+    private SysUserMapper userMapper;
 
-        UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword());
-
-        // 进行认证
-        Authentication authenticate = customAuthenticationManager.authenticate(authenticationToken);
-
-        // 如果认证没通过，给出对应的提示
-        if (ObjectUtil.isNull(authenticate)) {
-            throw new RuntimeException("登陆失败");
-        }
-
-        // 如果认证通过，根据我们的认证逻辑是获取该用户所有信息的
-        LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
-
-        String userId = loginUser.getCurrentSysUserInfo().getId().toString();
-        // 使用userId生成一个jwt，并将jwt放入ResponseResult返回
-        String jwt = loginUser.getCurrentSysUserInfo().getToken();
-        // 把完整的用户信息存入Redis,使用userId作为key
-        redisCache.setCacheObject("login:" + userId, loginUser);
-        return jwt;
+    public SysUser findByUser(String userName){
+        return userMapper.selectOne(Wrappers.<SysUser>lambdaQuery().eq(SysUser::getUserName, userName));
     }
 
     public ResponseResult<String> logout() {

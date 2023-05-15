@@ -1,5 +1,6 @@
 package com.example.authentication;
 
+import cn.hutool.core.lang.UUID;
 import com.example.domain.LoginUser;
 import com.example.service.impl.UserDetailsServiceImpl;
 import com.example.utils.JwtUtil;
@@ -11,6 +12,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
+
+import java.util.Random;
 
 /**
  * @author youshicheng
@@ -45,9 +48,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         //  String token = PasswordUtils.encodePassword(String.valueOf(System.currentTimeMillis()), userInfo.getCurrentSysUserInfo().getSalt());
 
         // 生成jwt访问令牌
-        String jwt = JwtUtil.createJwt(userInfo.getCurrentSysUserInfo().getId().toString(), "Subject", null);
+        String jwt = JwtUtil.createJwt(
+                String.valueOf(new Random(5).nextInt())
+                , userInfo.getCurrentSysUserInfo().getId().toString()
+                , null);
 
         userInfo.getCurrentSysUserInfo().setToken(jwt);
+        // 使用三个参数的构造方法，用以表示为通过认证
         return new UsernamePasswordAuthenticationToken(userInfo, password, userInfo.getAuthorities());
 
     }

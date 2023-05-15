@@ -1,25 +1,27 @@
 package com.example.authorization;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
-import com.example.domain.LoginUser;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.example.entity.SysMenu;
+import com.example.entity.SysRole;
+import com.example.entity.SysRoleMenu;
 import com.example.mapper.SysMenuMapper;
 import com.example.mapper.SysRoleMapper;
+import com.example.mapper.SysRoleMenuMapper;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.authorization.AuthorizationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.web.access.intercept.RequestAuthorizationContext;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 /**
  * <p> 对访问url进行权限认证处理 </p>
@@ -33,13 +35,12 @@ public class UrlAuthorizationManager implements AuthorizationManager<RequestAuth
 
     @Resource
     private SysMenuMapper sysMenuMapper;
-    /**
-     * 这一个方法不需要重写,原生 verify() 就是调用的下面的 check() 方法
-     */
-    @Override
-    public void verify(Supplier<Authentication> authentication, RequestAuthorizationContext object) {
-        AuthorizationManager.super.verify(authentication, object);
-    }
+
+    @Resource
+    private SysRoleMapper sysRoleMapper;
+
+    @Resource
+    private SysRoleMenuMapper sysRoleMenuMapper;
 
     // 有权限：new AuthorizationDecision(true)
     // 无权限：new AuthorizationDecision(false)
@@ -47,17 +48,31 @@ public class UrlAuthorizationManager implements AuthorizationManager<RequestAuth
     public AuthorizationDecision check(Supplier<Authentication> authentication
             , RequestAuthorizationContext requestAuthorizationContext) {
         // 获取当前用户访问路径
-        String requestURI = requestAuthorizationContext.getRequest().getRequestURI();
+        HttpServletRequest request = requestAuthorizationContext.getRequest();
+        String requestURI = request.getRequestURI();
         // 获取当前用户拥有权限
         Collection<? extends GrantedAuthority> authorities = authentication.get().getAuthorities();
         List<String> list = authorities.stream().map(GrantedAuthority::getAuthority).toList();
-        Optional.of(list)
-                .orElseThrow(() -> new RuntimeException("该用户么有权限！"));
 
-        // 获取该用户能访问的所有路径
-        List<SysMenu> sysMenus = sysMenuMapper.selectList(new LambdaQueryWrapper<SysMenu>().in(SysMenu::getPath, list));
-        // 该用户所有路径中是否包含当前访问路径
-        boolean isAuthorizationUrl = sysMenus.stream().anyMatch(item -> item.getPath().equals(requestURI));
-        return isAuthorizationUrl ? new AuthorizationDecision(true) : new AuthorizationDecision(false);
+        // 获取角色Id
+        List<SysRole> sysRoles = sysRoleMapper.selectList(Wrappers.<SysRole>lambdaQuery().in(SysRole::getName, list));
+        List<Long> roleIds = sysRoles.stream().map(SysRole::getId).toList();
+        boolean isAuthorizationUrl= false;
+        if (roleIds.size() > 0) {
+            // 获取菜单Id
+            List<SysRoleMenu> sysRoleMenus = sysRoleMenuMapper.selectList(Wrappers.<SysRoleMenu>lambdaQuery().in(SysRoleMenu::getRoleId, roleIds));
+            List<Long> menuIds = sysRoleMenus.stream().map(SysRoleMenu::getMenuId).distinct().toList();
+            // 获取该用户能访问的所有路径
+            List<SysMenu> sysMenus = sysMenuMapper.selectList(new LambdaQueryWrapper<SysMenu>().in(SysMenu::getId, menuIds));
+
+            isAuthorizationUrl = sysMenus.stream().anyMatch(item -> {
+                AntPathRequestMatcher antPathRequestMatcher = new AntPathRequestMatcher(item.getPath(), HttpMethod.POST.toString());
+                return antPathRequestMatcher.matches(request);
+            });
+        }
+        if (isAuthorizationUrl) {
+            return new AuthorizationDecision(true);
+        }
+        return new AuthorizationDecision(false);
     }
 }

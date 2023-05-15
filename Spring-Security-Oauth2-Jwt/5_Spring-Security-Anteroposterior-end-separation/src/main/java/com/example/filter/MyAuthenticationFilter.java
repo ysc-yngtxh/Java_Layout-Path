@@ -1,5 +1,8 @@
 package com.example.filter;
 
+import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.example.domain.LoginUser;
 import com.example.utils.JwtUtil;
@@ -7,20 +10,20 @@ import com.example.utils.MultiReadHttpServletRequest;
 import com.example.utils.MultiReadHttpServletResponse;
 import com.example.utils.RedisCache;
 import io.jsonwebtoken.Claims;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 import org.springframework.web.filter.OncePerRequestFilter;
-
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -61,12 +64,12 @@ public class MyAuthenticationFilter extends OncePerRequestFilter {
 
             // TODO 这里给需要忽略的路径放行
 
-            SecurityContext context = SecurityContextHolder.getContext();
+            // SecurityContext context = SecurityContextHolder.getContext();
             // 判断当前用户是否认证过,
-            if (context.getAuthentication() != null && context.getAuthentication().isAuthenticated()) {
-                filterChain.doFilter(wrappedRequest, wrappedResponse);
-                return;
-            }
+            // if (context.getAuthentication() != null && context.getAuthentication().isAuthenticated()) {
+            //     filterChain.doFilter(wrappedRequest, wrappedResponse);
+            //     return;
+            // }
 
             // 前后端分离情况下，前端登录后将token储存在localStorage中，每次访问接口时通过token去拿用户权限
             String token = wrappedRequest.getHeader("token");
@@ -83,13 +86,16 @@ public class MyAuthenticationFilter extends OncePerRequestFilter {
                 }
                 // 从redis中获取用户信息
                 String redisKey = "login:" + userId;
-                LoginUser loginUser = redisCache.getCacheObject(redisKey);
+                Object cacheObject = redisCache.getCacheObject(redisKey);
+                // LoginUser loginUser = JSONObject.parseObject(JSON.toJSONString(cacheObject), LoginUser.class);
+                String jsonString = JSONObject.toJSONString(cacheObject);
+                LoginUser loginUser = JSONUtil.toBean(jsonString, LoginUser.class);
 
                 if (loginUser == null || loginUser.getCurrentSysUserInfo() == null) {
                     throw new AccessDeniedException("TOKEN已过期，请重新登录！");
                 }
                 UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(loginUser, null, loginUser.getAuthorities());
+                        new UsernamePasswordAuthenticationToken(loginUser, loginUser.getCurrentSysUserInfo().getPassword(), loginUser.getAuthorities());
                 // 全局注入角色权限信息和登录用户基本信息
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }

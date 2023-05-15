@@ -23,9 +23,9 @@ public class LoginUser implements UserDetails {
     @Serial
     private static final long serialVersionUID = 1415757646948554315L;
 
-    private transient SysUser currentSysUserInfo;
+    private SysUser currentSysUserInfo;
 
-    private transient List<String> permission;
+    private List<String> permission;
 
     // 存储Security所需要的权限信息集合，这里权限敏感数据，不去做序列化
     // 这里的SimpleGrantedAuthority类是GrantedAuthority类的实现类
@@ -45,6 +45,7 @@ public class LoginUser implements UserDetails {
         authorityList = permission.stream().map(SimpleGrantedAuthority::new).toList();
         return authorityList;
     }
+
 
     @Override
     public String getPassword() {

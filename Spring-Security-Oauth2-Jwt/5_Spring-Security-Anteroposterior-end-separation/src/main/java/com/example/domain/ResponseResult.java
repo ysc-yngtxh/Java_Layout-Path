@@ -4,16 +4,18 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
 /**
  * @author 游诗成
  * @date 2022/07/05
  * @apiNote
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
+@Component
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseResult<T> {
 
     /**
@@ -31,4 +33,12 @@ public class ResponseResult<T> {
      */
     private T data;
 
+    public ResponseResult<T> success(String msg, T data){
+        return new ResponseResult<T>(null, msg, data);
+    }
+
+    public ResponseResult<T> failure(Integer code, String msg){
+        return new ResponseResult<T>(400, msg, null);
+    }
 }
+

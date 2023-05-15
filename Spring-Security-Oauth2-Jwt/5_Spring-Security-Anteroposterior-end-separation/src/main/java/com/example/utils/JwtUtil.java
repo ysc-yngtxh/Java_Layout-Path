@@ -7,6 +7,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import javax.security.auth.Subject;
 import java.util.Base64;
 import java.util.Date;
 import java.util.UUID;
@@ -31,7 +32,7 @@ public class JwtUtil {
      * 生成jwt token
      */
     public static String createJwt(String Subject) {
-        JwtBuilder builder = getJwtBuilder(Subject, null, getUUID()); //设置过期时间
+        JwtBuilder builder = getJwtBuilder(getUUID(), Subject, null); //设置过期时间
         return builder.compact();
     }
 
@@ -39,7 +40,7 @@ public class JwtUtil {
      * 生成jwt token
      */
     public static String createJwt(String Subject, Long ttlMilis) {
-        JwtBuilder builder = getJwtBuilder(Subject, ttlMilis, getUUID()); //设置过期时间
+        JwtBuilder builder = getJwtBuilder(getUUID(), Subject, ttlMilis); //设置过期时间
         return builder.compact();
     }
 
@@ -47,11 +48,11 @@ public class JwtUtil {
      * 生成jwt token
      */
     public static String createJwt(String id, String Subject, Long ttlMilis) {
-        JwtBuilder builder = getJwtBuilder(Subject, ttlMilis, id); //设置过期时间
+        JwtBuilder builder = getJwtBuilder(id, Subject, ttlMilis); //设置过期时间
         return builder.compact();
     }
 
-    private static JwtBuilder getJwtBuilder(String Subject, Long ttlMilis, String uuid) {
+    private static JwtBuilder getJwtBuilder(String uuid, String Subject, Long ttlMilis) {
         SignatureAlgorithm sigbatureAlgorithm = SignatureAlgorithm.HS256;
         SecretKey secreKey = generalKey();
         long nowMillis = System.currentTimeMillis();
