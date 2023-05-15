@@ -1,0 +1,147 @@
+package com.example.config;
+
+import com.alibaba.fastjson2.JSON;
+import com.example.authorization.UrlAuthorizationManager;
+import com.example.domain.LoginUser;
+import com.example.domain.ResponseResult;
+import com.example.filter.AdminAuthenticationProcessingFilter;
+import com.example.filter.MyAuthenticationFilter;
+import com.example.entity.SysUser;
+import com.example.utils.WebUtil;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.context.SecurityContextHolderFilter;
+
+import java.io.IOException;
+import java.util.Objects;
+
+/**
+ * @author 游诗成
+ * @date 2022/07/30 20:53
+ * @apiNote
+ */
+@Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
+public class SecurityConfig {
+
+    private final AdminAuthenticationProcessingFilter adminAuthenticationProcessingFilter;
+
+    private final MyAuthenticationFilter myAuthenticationFilter;
+
+    private final UrlAuthorizationManager urlAuthorizationManager;
+
+
+    // 认证权限入口 - 未登录的情况下访问所有接口都会拦截到此(除了配置的不需要认证的路径) - 作为异常情况下的逻辑输出
+    @Bean
+    public AuthenticationEntryPoint authenticationEntryPoint(){
+        return new AuthenticationEntryPoint() {
+            @Override
+            public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+                if (Objects.nonNull(authException)) {
+                    ResponseResult<Void> result =
+                            new ResponseResult<>(HttpStatus.UNAUTHORIZED.value(), "用户认证失败请查询登录", null);
+                    String jsonString = JSON.toJSONString(result);
+                    WebUtil.renderText(response, jsonString);
+                }
+            }
+        };
+    }
+
+    // 登录认证成功后的业务逻辑，但需要进行配置，这里我没有配置所以不会被执行
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler(){
+        return new AuthenticationSuccessHandler() {
+            @Override
+            public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+                SysUser sysUser = new SysUser();
+                LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+                String token = loginUser.getCurrentSysUserInfo().getToken();
+                WebUtil.renderText(response, token);
+            }
+        };
+    }
+
+    // 登录认证失败后的业务逻辑，但需要进行配置，这里我没有配置所以不会被执行
+    @Bean
+    public AuthenticationFailureHandler authenticationFailureHandler(){
+        return new AuthenticationFailureHandler() {
+            @Override
+            public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+                System.out.println("登录失败");
+                response.sendRedirect("/");
+            }
+        };
+    }
+
+    // 定义一个鉴权失败的异常处理
+    // 认证url权限 - 登录后访问接口无权限 - 自定义403无权限响应内容
+    // 登录过后的权限处理 【注：要和未登录时的权限处理区分开哦~】
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler(){
+        return new AccessDeniedHandler() {
+            @Override
+            public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
+                ResponseResult<Void> result =
+                        new ResponseResult<>(HttpStatus.FORBIDDEN.value(), "您的权限不足！", null);
+                String jsonString = JSON.toJSONString(result);
+                WebUtil.renderText(response, jsonString);
+            }
+        };
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                // 关闭csrf
+                .csrf().disable()
+                // 关闭cors
+                .cors().disable()
+                // 不创建会话 - 即通过前端传token到后台过滤器中验证是否存在访问权限
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+
+                // 见名知意。添加过滤器在某某过滤器之前。这里我们添加在BasicAuthenticationFilter之前的过滤器myAuthenticationFilter
+                .addFilterBefore(myAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                // 也是一样的添加过滤器adminAuthenticationProcessingFilter在UsernamePasswordAuthenticationFilter附近
+                .addFilterAfter(adminAuthenticationProcessingFilter, UsernamePasswordAuthenticationFilter.class)
+
+
+                // 配置异常处理器
+                .exceptionHandling()
+                // 登录前访问需要认证的路径出现认证异常的，被认证异常返回
+                .authenticationEntryPoint(authenticationEntryPoint())
+                // 登录后去访问该认证用户没有权限的路径时，被鉴权异常返回
+                .accessDeniedHandler(accessDeniedHandler()).and().anonymous()
+                .and()
+
+                // 设置哪些路径可以直接访问不需要认证(permitAll()表示允许所有人访问)
+                .authorizeHttpRequests().requestMatchers(HttpMethod.POST,"/toLogin").authenticated()
+                // 其余的都需要认证校验(拦截)
+                // TODO 注意：这里设置成url权限认证处理
+                .anyRequest().access(urlAuthorizationManager)
+                ;
+        return http.build();
+    }
+}
