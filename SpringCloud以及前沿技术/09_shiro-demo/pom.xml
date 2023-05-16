@@ -41,9 +41,9 @@
 
         <!--shiro整合thymeleaf依赖-->
         <dependency>
-            <groupId>com.GitHub.theborakompanioni</groupId>
+            <groupId>com.github.theborakompanioni</groupId>
             <artifactId>thymeleaf-extras-shiro</artifactId>
-            <version>2.0.0</version>
+            <version>2.1.0</version>
         </dependency>
 
         <dependency>

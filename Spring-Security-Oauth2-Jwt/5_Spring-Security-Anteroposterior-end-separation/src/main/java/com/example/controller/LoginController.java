@@ -1,10 +1,12 @@
 package com.example.controller;
 
+import com.example.config.MyAuthorizationProperties;
 import com.example.dto.ResponseResult;
 import com.example.entity.SysUser;
 import com.example.service.LoginService;
 import com.example.vo.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,9 +26,16 @@ public class LoginController {
 
     private final ResponseResult<SysUser> responseResult;
 
+    // @Value("${auth.saveLoginTime}")
+    private String time;
+
+
     @PostMapping("/find/user")
     @ResponseBody
     public ResponseEntity<ResponseResult<SysUser>> findBtUser(@RequestBody User user){
+        System.out.println("========="+time);
+        MyAuthorizationProperties properties = new MyAuthorizationProperties();
+        System.out.println(properties.getTokenExpireTime());
         return ResponseEntity.ok()
                 .body(responseResult.success("访问成功",
                         loginService.findByUser(user.getUserName())));

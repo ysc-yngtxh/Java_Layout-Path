@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -46,6 +47,8 @@ public class SecurityConfig {
 
     private final CustomFailureHandler customFailureHandler;
 
+    private final MyAuthorizationProperties myAuthorizationProperties;
+
 
     // 认证权限入口 - 未登录的情况下访问所有接口都会拦截到此(除了配置的不需要认证的路径) - 作为异常情况下的逻辑输出
     @Bean
@@ -68,7 +71,7 @@ public class SecurityConfig {
     // 认证url权限 - 登录后访问接口无权限 - 自定义403无权限响应内容
     // 登录过后的权限处理 【注：要和未登录时的权限处理区分开哦~】
     @Bean
-    public AccessDeniedHandler accessDeniedHandler(){
+    public AccessDeniedHandler accessDeniedHandler() {
         return new AccessDeniedHandler() {
             @Override
             public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
@@ -109,13 +112,28 @@ public class SecurityConfig {
                 // 设置哪些路径可以直接访问不需要认证(permitAll()表示允许所有人访问)
                 .authorizeHttpRequests(authorized ->
                         authorized
-                        // 其余的都需要认证校验(拦截)
+                                // 通过配置文件进行配置SpringSecurity的忽略路径
+                                .requestMatchers(myAuthorizationProperties.getIgnoreUrls().toArray(new String[10])).permitAll()
+                                // 其余的都需要认证校验(拦截)
+                                // .anyRequest().authenticated()
+                                // .requestMatchers("/**").hasAuthority("admin")
+                                // OPTIONS(选项)：查找适用于一个特定网址资源的通讯选择。 在不需执行具体的涉及数据传输的动作情况下，
+                                // 允许客户端来确定与资源相关的选项以及 / 或者要求， 或是一个服务器的性能
+                                // denyAll()表示全部拒绝访问
+                                .requestMatchers(HttpMethod.OPTIONS, "/**").denyAll()
+                                // 其余所有请求都需要认证
                                 // .anyRequest().authenticated()
                                 // TODO 注意：这里设置成url权限认证处理
                                 .anyRequest().access(urlAuthorizationManager)
+
                 )
 
-                .formLogin().disable()
+                // 自动登录 - cookie储存方式
+                .rememberMe()
+                // 防止iframe 造成跨域
+                .and().headers().frameOptions().disable()
+                // 禁用form表单提交的方式
+                .and().formLogin().disable()
                 ;
         return http.build();
     }
