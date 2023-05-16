@@ -1,4 +1,4 @@
-package com.example.domain;
+package com.example.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

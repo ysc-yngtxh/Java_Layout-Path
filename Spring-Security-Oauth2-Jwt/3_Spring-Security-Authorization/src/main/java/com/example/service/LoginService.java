@@ -1,8 +1,6 @@
 package com.example.service;
 
-import com.example.domain.ResponseResult;
-
-import java.util.Map;
+import com.example.dto.ResponseResult;
 
 public interface LoginService {
     String login();

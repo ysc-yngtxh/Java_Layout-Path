@@ -1,17 +1,13 @@
 package com.example.service.impl;
 
-import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.example.authentication.CustomAuthenticationManager;
-import com.example.domain.LoginUser;
-import com.example.domain.ResponseResult;
+import com.example.dto.LoginUser;
+import com.example.dto.ResponseResult;
 import com.example.entity.SysUser;
 import com.example.mapper.SysUserMapper;
 import com.example.service.LoginService;
 import com.example.utils.RedisCache;
-import com.example.vo.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;

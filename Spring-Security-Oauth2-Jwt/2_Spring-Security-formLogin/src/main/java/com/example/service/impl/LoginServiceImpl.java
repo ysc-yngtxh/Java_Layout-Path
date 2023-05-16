@@ -1,31 +1,20 @@
 package com.example.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.example.domain.LoginUser;
-import com.example.domain.ResponseResult;
-import com.example.pojo.User;
+import com.example.dto.LoginUser;
 import com.example.service.LoginService;
 import com.example.utils.JwtUtil;
 import com.example.utils.RedisCache;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.servlet.support.RequestContext;
-import org.springframework.web.servlet.support.RequestContextUtils;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.springframework.web.context.request.RequestAttributes.REFERENCE_REQUEST;
 import static org.springframework.web.context.request.RequestAttributes.SCOPE_REQUEST;
 
 /**

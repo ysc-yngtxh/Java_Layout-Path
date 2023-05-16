@@ -1,7 +1,6 @@
 package com.example.authentication;
 
-import cn.hutool.core.lang.UUID;
-import com.example.domain.LoginUser;
+import com.example.dto.LoginUser;
 import com.example.service.impl.UserDetailsServiceImpl;
 import com.example.utils.JwtUtil;
 import jakarta.annotation.Resource;

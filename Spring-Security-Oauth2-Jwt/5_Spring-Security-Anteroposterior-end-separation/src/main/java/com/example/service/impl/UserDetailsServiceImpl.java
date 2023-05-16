@@ -1,7 +1,7 @@
 package com.example.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.example.domain.LoginUser;
+import com.example.dto.LoginUser;
 import com.example.entity.SysRole;
 import com.example.entity.SysUser;
 import com.example.mapper.SysRoleMapper;

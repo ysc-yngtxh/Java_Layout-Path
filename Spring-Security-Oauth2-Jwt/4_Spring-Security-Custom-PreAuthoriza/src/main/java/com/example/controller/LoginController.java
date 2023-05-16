@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import com.example.domain.ResponseResult;
 import com.example.pojo.User;
 import com.example.service.impl.LoginServiceImpl;
 import lombok.RequiredArgsConstructor;

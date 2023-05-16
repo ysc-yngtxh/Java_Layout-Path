@@ -1,8 +1,7 @@
 package com.example.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.example.domain.LoginUser;
-import com.example.domain.ResponseResult;
+import com.example.dto.LoginUser;
 import com.example.service.LoginService;
 import com.example.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;

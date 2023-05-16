@@ -2,7 +2,7 @@ package com.example.config;
 
 import com.alibaba.fastjson2.JSON;
 import com.example.authorization.UrlAuthorizationManager;
-import com.example.domain.ResponseResult;
+import com.example.dto.ResponseResult;
 import com.example.filter.AdminAuthenticationProcessingFilter;
 import com.example.filter.MyAuthenticationFilter;
 import com.example.handler.CustomFailureHandler;
@@ -115,9 +115,8 @@ public class SecurityConfig {
                                 .anyRequest().access(urlAuthorizationManager)
                 )
 
-
                 .formLogin().disable()
-        ;
+                ;
         return http.build();
     }
 }

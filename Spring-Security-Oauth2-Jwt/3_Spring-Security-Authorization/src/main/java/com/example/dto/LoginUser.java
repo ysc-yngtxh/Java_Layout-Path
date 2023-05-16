@@ -1,16 +1,13 @@
-package com.example.domain;
+package com.example.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.example.pojo.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serial;
-import java.security.Permission;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;

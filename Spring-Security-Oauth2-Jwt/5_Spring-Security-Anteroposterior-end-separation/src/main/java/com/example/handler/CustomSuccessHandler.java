@@ -1,8 +1,8 @@
 package com.example.handler;
 
 import com.alibaba.fastjson2.JSON;
-import com.example.domain.LoginUser;
-import com.example.domain.ResponseResult;
+import com.example.dto.LoginUser;
+import com.example.dto.ResponseResult;
 import com.example.utils.RedisCache;
 import com.example.utils.WebUtil;
 import jakarta.annotation.Resource;

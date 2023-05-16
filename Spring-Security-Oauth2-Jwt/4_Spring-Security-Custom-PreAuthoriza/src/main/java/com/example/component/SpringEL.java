@@ -1,12 +1,10 @@
 package com.example.component;
 
-import com.example.domain.LoginUser;
+import com.example.dto.LoginUser;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 

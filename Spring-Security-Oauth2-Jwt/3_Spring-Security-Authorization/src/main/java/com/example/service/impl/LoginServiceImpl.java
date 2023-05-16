@@ -1,23 +1,14 @@
 package com.example.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.example.domain.LoginUser;
-import com.example.domain.ResponseResult;
+import com.example.dto.LoginUser;
+import com.example.dto.ResponseResult;
 import com.example.service.LoginService;
 import com.example.utils.JwtUtil;
-import com.example.utils.RedisCache;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.http.fileupload.RequestContext;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import java.util.Arrays;
 
 /**
  * @author youshicheng

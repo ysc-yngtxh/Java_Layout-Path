@@ -1,4 +1,4 @@
-package com.example.domain;
+package com.example.dto;
 
 import com.example.pojo.User;
 import lombok.AllArgsConstructor;

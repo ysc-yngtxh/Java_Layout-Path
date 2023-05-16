@@ -1,9 +1,8 @@
 package com.example.config;
 
 import com.alibaba.fastjson2.JSON;
-import com.example.domain.LoginUser;
-import com.example.domain.ResponseResult;
-import com.example.pojo.User;
+import com.example.dto.LoginUser;
+import com.example.dto.ResponseResult;
 import com.example.service.impl.UserDetailsServiceImpl;
 import com.example.utils.WebUtil;
 import jakarta.servlet.ServletException;
@@ -30,7 +29,6 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Objects;
 
 /**
