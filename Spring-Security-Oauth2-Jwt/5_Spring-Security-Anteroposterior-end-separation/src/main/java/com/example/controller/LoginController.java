@@ -3,10 +3,12 @@ package com.example.controller;
 import com.example.domain.ResponseResult;
 import com.example.entity.SysUser;
 import com.example.service.LoginService;
+import com.example.vo.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -25,10 +27,10 @@ public class LoginController {
 
     @PostMapping("/find/user")
     @ResponseBody
-    public ResponseEntity<ResponseResult<SysUser>> findBtUser(@RequestParam("name") String userName){
+    public ResponseEntity<ResponseResult<SysUser>> findBtUser(@RequestBody User user){
         return ResponseEntity.ok()
                 .body(responseResult.success("访问成功",
-                        loginService.findByUser(userName)));
+                        loginService.findByUser(user.getUserName())));
     }
 
 

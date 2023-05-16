@@ -27,10 +27,10 @@ public class LoginServiceImpl implements LoginService {
 
     private final RedisCache redisCache;
 
-    private SysUserMapper userMapper;
+    private final SysUserMapper sysUserMapper;
 
     public SysUser findByUser(String userName){
-        return userMapper.selectOne(Wrappers.<SysUser>lambdaQuery().eq(SysUser::getUserName, userName));
+        return sysUserMapper.selectOne(Wrappers.<SysUser>lambdaQuery().eq(SysUser::getUserName, userName));
     }
 
     public ResponseResult<String> logout() {

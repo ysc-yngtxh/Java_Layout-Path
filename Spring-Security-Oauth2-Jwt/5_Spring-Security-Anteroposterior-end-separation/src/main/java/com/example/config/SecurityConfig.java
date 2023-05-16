@@ -108,10 +108,11 @@ public class SecurityConfig {
 
                 // 设置哪些路径可以直接访问不需要认证(permitAll()表示允许所有人访问)
                 .authorizeHttpRequests(authorized ->
-                                authorized.requestMatchers("/login").permitAll()
+                        authorized
                         // 其余的都需要认证校验(拦截)
-                        // TODO 注意：这里设置成url权限认证处理
-                        .anyRequest().access(urlAuthorizationManager)
+                                // .anyRequest().authenticated()
+                                // TODO 注意：这里设置成url权限认证处理
+                                .anyRequest().access(urlAuthorizationManager)
                 )
 
 

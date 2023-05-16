@@ -81,19 +81,18 @@ public class MyAuthenticationFilter extends OncePerRequestFilter {
                     Claims claims = JwtUtil.parseJwt(token);
                     userId = claims.getSubject();
                 } catch (Exception e) {
-                    e.printStackTrace();
                     throw new RuntimeException("token非法");
                 }
                 // 从redis中获取用户信息
                 String redisKey = "login:" + userId;
                 Object cacheObject = redisCache.getCacheObject(redisKey);
-                // LoginUser loginUser = JSONObject.parseObject(JSON.toJSONString(cacheObject), LoginUser.class);
-                String jsonString = JSONObject.toJSONString(cacheObject);
-                LoginUser loginUser = JSONUtil.toBean(jsonString, LoginUser.class);
+                LoginUser loginUser =
+                        JSONUtil.toBean(JSONObject.toJSONString(cacheObject), LoginUser.class);
 
                 if (loginUser == null || loginUser.getCurrentSysUserInfo() == null) {
                     throw new AccessDeniedException("TOKEN已过期，请重新登录！");
                 }
+                // 三个参数的构造方法，用以表明认证成功
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(loginUser, loginUser.getCurrentSysUserInfo().getPassword(), loginUser.getAuthorities());
                 // 全局注入角色权限信息和登录用户基本信息
