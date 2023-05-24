@@ -1,8 +1,8 @@
 package com.example.java.建造者模式builder;
 
+import cn.hutool.log.Log;
+import cn.hutool.log.LogFactory;
 import com.example.java.vo.User;
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
 import lombok.SneakyThrows;
 
 /**
@@ -12,7 +12,7 @@ import lombok.SneakyThrows;
  * @date 2022/11/29 23:03
  */
 public class stepBuilder {
-    public static final Logger log = LoggerFactory.getLogger(stepBuilder.class);
+    public static final Log log = LogFactory.get(stepBuilder.class);
 
     @SneakyThrows
     public static void main(String[] args) {

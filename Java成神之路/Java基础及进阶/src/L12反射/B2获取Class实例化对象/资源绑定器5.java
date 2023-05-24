@@ -1,7 +1,5 @@
 package L12反射.B2获取Class实例化对象;
 
-import com.sun.xml.internal.bind.v2.runtime.output.Encoded;
-
 import java.util.ResourceBundle;
 
 /*

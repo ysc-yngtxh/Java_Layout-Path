@@ -13,8 +13,9 @@ public class PipelineMain {
         Handler3 handler3 = new Handler3();
 
         OrderPipeline orderPipeline = new OrderPipeline(new PipelineContext("youshicheng"));
-        // orderPipeline.addHead(handler1,handler2,handler3);
-        // orderPipeline.start();
+        orderPipeline.addHead(handler1,handler2,handler3);
+        orderPipeline.start();
+
         orderPipeline.addTail(handler1, handler2, handler3);
         orderPipeline.start();
     }

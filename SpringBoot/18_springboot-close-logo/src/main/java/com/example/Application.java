@@ -19,7 +19,7 @@ public class Application {
         //获取入口
         SpringApplication springApplication = new SpringApplication(Application.class);
         //设置它的属性
-        springApplication.setBannerMode(Banner.Mode.CONSOLE);//Banner.Mode.OFF表示不要logo
+        // springApplication.setBannerMode(Banner.Mode.CONSOLE);//Banner.Mode.OFF表示不要logo
         springApplication.run(args);
 
 

@@ -26,7 +26,7 @@ public class LoginController {
 
     private final ResponseResult<SysUser> responseResult;
 
-    // @Value("${auth.saveLoginTime}")
+    // @Value("${security.saveLoginTime}")
     private String time;
 
 

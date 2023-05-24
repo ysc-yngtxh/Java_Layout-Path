@@ -5,14 +5,11 @@ import cn.hutool.log.LogFactory;
 import com.example.java.vo.ModelView;
 import com.example.java.vo.Models;
 import com.example.java.vo.User;
-import org.mapstruct.ap.shaded.freemarker.template.utility.CollectionUtils;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Supplier;
 
 /**
  * @author 游家纨绔
@@ -50,7 +47,7 @@ public class OptionalApi {
                 .map(Models::getModelView)
                 .map(ModelView::getAddress)
                 .orElseGet(() -> "空值");
-//              .orElse("空值"); 这里要不为空置的话，最后应该返回的地址address的值
+//              .orElse("空值"); 这里要不为空值的话，最后应该返回的地址address的值
         log.debug(stringOptional);
 
 
@@ -91,6 +88,9 @@ public class OptionalApi {
         User user2 = null;
         boolean present = Optional.ofNullable(user2).isPresent();
         log.debug(String.valueOf(present));
+        // TODO 判断是否有值, 如果值存在则执行块.注意：这里是if不是is
+        User user5 = new User("ysc",25);
+        Optional.ofNullable(user5).ifPresent(u -> log.debug(u.toString()));
 
         // TODO 为空返回一个异常
         Optional.ofNullable(user2).orElseThrow(() -> new NullPointerException("从未见过有如此厚颜无耻之人！--叶诗琪"));

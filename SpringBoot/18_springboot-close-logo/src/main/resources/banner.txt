@@ -5,6 +5,8 @@
  \_, /\___/\_,_/___/_//_/_/\__/_//_/\__/_//_/\_, /
 /___/                                       /___/
 ${AnsiColor.BRIGHT_BLUE}
+通过application.properties文件进行配置打印信息，使用${}符号获取
+
 Application Name: ${spring.application.name}
 Application Profile: ${spring.profiles.active}
 Server Port: ${server.port}

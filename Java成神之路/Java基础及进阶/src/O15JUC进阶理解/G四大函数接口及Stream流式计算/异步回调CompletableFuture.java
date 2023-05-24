@@ -15,7 +15,7 @@ public class 异步回调CompletableFuture {
          */
         CompletableFuture<Void> completableFuture = CompletableFuture.runAsync(()->{
             try {
-                TimeUnit.SECONDS.sleep(2);
+                TimeUnit.SECONDS.sleep(5);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -33,7 +33,7 @@ public class 异步回调CompletableFuture {
         */
         CompletableFuture<Integer> completableFuture1 =CompletableFuture.supplyAsync(()->{
             System.out.println("Hello World!");
-            //int i=10/0;
+            int i=10/0;
             return 2021;
         });
 

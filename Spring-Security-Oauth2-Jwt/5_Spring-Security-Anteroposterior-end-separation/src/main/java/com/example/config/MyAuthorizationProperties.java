@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Data
 @Component
-@ConfigurationProperties(prefix = "auth")
+@ConfigurationProperties(prefix = "security")
 public class MyAuthorizationProperties {
 
     private Integer saveLoginTime;

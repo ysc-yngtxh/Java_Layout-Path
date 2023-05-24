@@ -7,6 +7,7 @@ import org.reflections.scanners.FieldAnnotationsScanner;
 import org.reflections.scanners.MethodAnnotationsScanner;
 import org.reflections.scanners.MethodParameterNamesScanner;
 import org.reflections.scanners.MethodParameterScanner;
+import org.reflections.scanners.Scanners;
 import org.reflections.scanners.SubTypesScanner;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
@@ -28,15 +29,16 @@ import java.util.regex.Pattern;
  */
 public class whitelistUri {
 
+
     // TODO Reflections依赖包中的实例详解
     public static void  getKnowledgePoints(){
         // 扫包
         Reflections reflections = new Reflections(new ConfigurationBuilder()
                 .forPackages("com.boothsun.reflections") // 指定路径URL
-                .addScanners(new SubTypesScanner()) // 添加子类扫描工具
-                .addScanners(new FieldAnnotationsScanner()) // 添加 属性注解扫描工具
-                .addScanners(new MethodAnnotationsScanner() ) // 添加 方法注解扫描工具
-                .addScanners(new MethodParameterScanner() ) // 添加方法参数扫描工具
+                .addScanners(Scanners.SubTypes) // 添加子类扫描工具
+                .addScanners(Scanners.FieldsAnnotated) // 添加 属性注解扫描工具
+                .addScanners(Scanners.MethodsAnnotated) // 添加 方法注解扫描工具
+                .addScanners(Scanners.MethodsParameter) // 添加方法参数扫描工具
         );
 
         // 反射出子类
@@ -61,9 +63,6 @@ public class whitelistUri {
 
         Set<Method> voidMethods = reflections.getMethodsReturn(void.class);//无返回值的方法
         System.out.println( "getMethodsReturn:" + voidMethods);
-
-        Set<Method> pathParamMethods =reflections.getMethodsAnnotatedWith(LoginRequired.class);//含有相应注解的方法
-        System.out.println("getMethodsWithAnyParamAnnotated:" + pathParamMethods);
 
         // 获取资源文件
         Set<String> properties = reflections.getResources(Pattern.compile(".*\\.properties"));

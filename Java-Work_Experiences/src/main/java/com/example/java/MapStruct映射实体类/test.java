@@ -1,14 +1,12 @@
 package com.example.java.MapStruct映射实体类;
 
+import cn.hutool.log.Log;
+import cn.hutool.log.LogFactory;
 import com.example.java.vo.ModelView;
 import com.example.java.vo.Models;
 import com.example.java.vo.User;
 import com.example.java.vo.Users;
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Date;
 
 /**
@@ -18,7 +16,7 @@ import java.util.Date;
  * @date 2022/11/30 17:48
  */
 public class test {
-    public static final Logger log = LoggerFactory.getLogger(test.class);
+    public static final Log log = LogFactory.get(test.class);
 
     public static void main(String[] args) {
         User user = User.builder().id(123L).name("小娘皮叶诗琪").email("google@163.com").date(new Date()).build();

@@ -1,13 +1,9 @@
 package O15JUC进阶理解.G四大函数接口及Stream流式计算;
 
-import com.sun.xml.internal.ws.util.StringUtils;
-
-import javax.lang.model.element.VariableElement;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 public class A四大函数 {
     /**
