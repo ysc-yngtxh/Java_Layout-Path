@@ -27,7 +27,7 @@ public class RetryService {
 
     //这里,当抛出RemoteAccessException时重试会尝试运行。
     //当@Retryable方法因指定异常而失败时，@Recover注释用于在@Retryable方法因指定的异常而失败时定义单独的恢复方法
-    //recover方法返回值需要与重试方法返回值保证一致
+    //recover()方法返回值需要与重试方法返回值保证一致
     @Recover
     public boolean recover(Exception e, String param){
         log.error("达到最大重试次数，或抛出了一个没有指定进行重试的异常 {}", e);

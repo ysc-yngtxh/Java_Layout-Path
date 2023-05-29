@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>20_Spring-Batch</artifactId>
+    <artifactId>Spring-Batch-abc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>20_Spring-Batch</name>
-    <description>20_Spring-Batch</description>
+    <name>21_Spring-Batch-abc</name>
+    <description>21_Spring-Batch-abc</description>
     <properties>
         <java.version>17</java.version>
     </properties>
@@ -21,7 +21,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-batch</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
