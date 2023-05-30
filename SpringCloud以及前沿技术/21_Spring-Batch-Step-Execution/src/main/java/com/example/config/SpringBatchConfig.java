@@ -2,15 +2,20 @@ package com.example.config;
 
 import com.example.listener.CustomStepListener;
 import jakarta.annotation.Resource;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
+import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
+import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -57,7 +62,7 @@ public class SpringBatchConfig {
     public ItemProcessor<String, String> itemProcessor(){
         return new ItemProcessor<String, String>() {
             @Override
-            public String process(String item) throws Exception {
+            public String process(@NotNull String item) throws Exception {
                 System.out.println("===========process==========" +item);
                 return "process-ret->" + item;
             }
@@ -69,7 +74,7 @@ public class SpringBatchConfig {
     public ItemWriter<String> itemWriter(){
         return new ItemWriter<String>() {
             @Override
-            public void write(Chunk<? extends String> chunk) throws Exception {
+            public void write(@NotNull Chunk<? extends String> chunk) throws Exception {
                 System.out.println(chunk);
             }
         };
@@ -97,6 +102,76 @@ public class SpringBatchConfig {
     public Job job1(){
         return new JobBuilder("Job", jobRepository)
                 .start(step())
+                .build();
+    }
+
+    /**
+     * TODO 步骤条件分支控制
+     */
+    @Bean
+    public Tasklet tasklet1(){
+        return new Tasklet() {
+            @Override
+            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+                System.out.println("开始执行步骤");
+                throw new RuntimeException("假装异常！！！");
+                // return RepeatStatus.FINISHED;
+            }
+        };
+    }
+    @Bean
+    public Tasklet tasklet2(){
+        return new Tasklet() {
+            @Override
+            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+                System.out.println("执行成功步骤");
+                return RepeatStatus.FINISHED;
+            }
+        };
+    }
+    @Bean
+    public Tasklet tasklet3(){
+        return new Tasklet() {
+            @Override
+            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+                System.out.println("执行失败步骤");
+                return RepeatStatus.FINISHED;
+            }
+        };
+    }
+    @Bean
+    public Step executorStep(){
+        return new StepBuilder("executorStep", jobRepository)
+                .tasklet(tasklet1(), batchTransactionManager)
+                .build();
+    }
+    @Bean
+    public Step successStep(){
+        return new StepBuilder("executorStep", jobRepository)
+                .tasklet(tasklet2(), batchTransactionManager)
+                .build();
+    }
+    @Bean
+    public Step failedStep(){
+        return new StepBuilder("executorStep", jobRepository)
+                .tasklet(tasklet3(), batchTransactionManager)
+                .build();
+    }
+
+    /**
+     * TODO
+     *   1、on方法表示条件，上一个步骤返回值，匹配指定的字符串，满足后执行后续to步骤
+     *   2、*为通配符，表示能匹配任意返回值
+     *   3、from表示从某个步骤开始进行条件判断
+     *   4、分支判断结束，流程以end方法结束，表示if/else逻辑结束
+     *   5、on方法中字符串取值于 ExitStatus 类常量，当然也可以自定义
+     */
+    @Bean
+    public Job job2(){
+        return new JobBuilder("Step Condition Branch Control", jobRepository)
+                .start(executorStep()).on("FAILED").to(failedStep())
+                .from(executorStep()).on("*").to(successStep())
+                .end()
                 .build();
     }
 }

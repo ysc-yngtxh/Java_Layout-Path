@@ -36,7 +36,7 @@ public class JobExecutionApplication {
     public CommandLineRunner commandLineRunner(){
         return args -> {
             JobParameters jobParameters = new JobParametersBuilder().addLocalDateTime("CurrentTime", LocalDateTime.now()).toJobParameters();
-            jobLauncher.run(job1, jobParameters);
+            jobLauncher.run(job2, jobParameters);
         };
     }
 
