@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>20_Spring-Batch-Param-Validate</artifactId>
+    <artifactId>20_Spring-Batch-JobParam-Validate-Listener-Context</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>20_Spring-Batch-Param-Validate</name>
-    <description>20_Spring-Batch-Param-Validate</description>
+    <name>20_Spring-Batch-Param-Validate-Listener-Context</name>
+    <description>20_Spring-Batch-Param-Validate-Listener-Context</description>
     <properties>
         <java.version>17</java.version>
     </properties>

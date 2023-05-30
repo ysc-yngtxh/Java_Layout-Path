@@ -20,6 +20,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Objects;
 
@@ -46,6 +47,7 @@ public class SpringBatchValidateApplication {
     private final Job job6;
     private final Job job7;
     private final Job job8;
+    private final Job job9;
 
     // TODO 可以通过修改run()方法中的job值，来进行各个案例测试
     @Bean
@@ -59,6 +61,9 @@ public class SpringBatchValidateApplication {
                     // new JobParameters( Map.of("name", new JobParameter<>("游诗成", String.class),
                     //         "age", new JobParameter<>("78fg9", String.class)) )
             );
+
+            JobParameters jobParameters = new JobParametersBuilder().addLocalDateTime("CurrentTime", LocalDateTime.now()).toJobParameters();
+            jobLauncher.run(job9, jobParameters);
 
             Long newRunId = jobExecution.getJobId();
             long previousRunId = newRunId - 1;

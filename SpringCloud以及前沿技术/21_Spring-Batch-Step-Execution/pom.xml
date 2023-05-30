@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>Spring-Batch-abc</artifactId>
+    <artifactId>21_Spring-Batch-Step-Execution</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>21_Spring-Batch-abc</name>
-    <description>21_Spring-Batch-abc</description>
+    <name>21_Spring-Batch-Step-Execution</name>
+    <description>21_Spring-Batch-Step-Execution</description>
     <properties>
         <java.version>17</java.version>
     </properties>
@@ -45,6 +45,12 @@
             <groupId>org.springframework.batch</groupId>
             <artifactId>spring-batch-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

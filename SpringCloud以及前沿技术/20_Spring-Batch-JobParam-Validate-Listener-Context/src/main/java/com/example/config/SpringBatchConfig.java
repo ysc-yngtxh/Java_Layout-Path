@@ -19,6 +19,7 @@ import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.core.step.tasklet.Tasklet;
+import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -209,6 +210,111 @@ public class SpringBatchConfig {
                 // .listener(new CustomAnnoJobExecutionListener())
                 // 作业监听器：方式二
                 .listener(JobListenerFactoryBean.getListener(new CustomAnnoJobExecutionListener()))
+                .build();
+    }
+
+
+    // TODO 获取作业及步骤上下文
+    @Bean
+    public Tasklet tasklet1(){
+        return new Tasklet() {
+            @Override
+            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+                System.out.println("Spring Batch 执行 Job1");
+
+                /**
+                  TODO 通过获取(Job或者Step)上下文来获取同一个组件中的共享数据。
+                    在一个Job中我可以通过获取 Job上下文 来共享或者修改 Job 或者 Step 里数据
+                    而在同一个Job里的同一个Step中我可以通过获取 Step上下文 来共享或者修改 Step 里数据
+
+                   TODO 注意：
+                      不同的Step获取的是不同的Step上下文，所以无法在Step2中获取Step1里的数据。
+                      在不同的Job里肯定是不能通过上下文获取共享数据的。但是，同一个Job里因为是包含多个步骤Step的，
+                      所以只要获取到 Job上下文 就可以获取所有的Step中的共享数据。
+                 */
+
+                // 步骤Step
+                // 获取Step上下文方式一：可以获取共享数据，但是不允许修改
+                Map<String, Object> stepExecutionContext = chunkContext.getStepContext().getStepExecutionContext();
+                // 获取Step上下文方式二：通过执行上下文对象获取跟设置参数
+                ExecutionContext stepExecutionContextEx = chunkContext.getStepContext().getStepExecution().getExecutionContext();
+                stepExecutionContextEx.put("step1-tasklet1-key", "step1-tasklet1-value");
+
+                System.out.println("=================1===============");
+
+                // 作业Job
+                // 获取Job上下文：通过执行上下文对象获取跟设置参数
+                ExecutionContext jobExecutionContext = chunkContext.getStepContext().getStepExecution().getJobExecution().getExecutionContext();
+                jobExecutionContext.put("job-step1-tasklet1-key", "job-step1-tasklet1-value");
+
+                // 每个步骤都会包含一个完整的执行状态。这个状态通过RepeatStatus来表示
+                return RepeatStatus.FINISHED;
+            }
+        };
+    }
+
+    // 批处理中的一部分任务
+    @Bean
+    public Tasklet tasklet2(){
+        return new Tasklet() {
+            @Override
+            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+                System.out.println("Spring Batch 执行 Job2");
+
+                /*
+                  TODO 通过获取(Job或者Step)上下文来获取同一个组件中的共享数据。
+                    在一个Job中我可以通过获取 Job上下文 来共享或者修改 Job 或者 Step 里数据
+                    而在同一个Job里的同一个Step中我可以通过获取 Step上下文 来共享或者修改 Step 里数据
+
+                   TODO 注意：
+                      不同的Step获取的是不同的Step上下文，所以无法在Step2中获取Step1里的数据。
+                      在不同的Job里肯定是不能通过上下文获取共享数据的。但是，同一个Job里因为是包含多个步骤Step的，
+                      所以只要获取到 Job上下文 就可以获取所有的Step中的共享数据。
+                 */
+
+                // 步骤Step
+                // 获取Step上下文方式一：可以获取共享数据，但是不允许修改
+                Map<String, Object> stepExecutionContext = chunkContext.getStepContext().getStepExecutionContext();
+                // 获取Step上下文方式二：通过执行上下文对象获取跟设置参数
+                ExecutionContext stepExecutionContextEx = chunkContext.getStepContext().getStepExecution().getExecutionContext();
+                System.err.println(stepExecutionContextEx.get("step1-tasklet1-key"));
+
+                System.out.println("=================2===============");
+
+                // 作业Job
+                // 获取Job上下文：通过执行上下文对象获取跟设置参数
+                ExecutionContext jobExecutionContext = chunkContext.getStepContext().getStepExecution().getJobExecution().getExecutionContext();
+                System.err.println(jobExecutionContext.get("job-step1-tasklet1-key"));
+
+                // 每个步骤都会包含一个完整的执行状态。这个状态通过RepeatStatus来表示
+                return RepeatStatus.FINISHED;
+            }
+        };
+    }
+
+    // 批处理中的顺序步骤
+    @Bean
+    public Step step1(){
+        return new StepBuilder("Spring Batch Step1", jobRepository)
+                .tasklet(tasklet1(), batchTransactionManager)
+                .build();
+    }
+
+    // 批处理中的顺序步骤
+    @Bean
+    public Step step2(){
+        return new StepBuilder("Spring Batch Step2", jobRepository)
+                .tasklet(tasklet2(), batchTransactionManager)
+                .build();
+    }
+
+
+    @Bean
+    public Job job9(){
+        return new JobBuilder("Spring Batch Job Execution1", jobRepository)
+                .start(step1())
+                // 紧接step1()步骤后执行
+                .next(step2())
                 .build();
     }
 }
