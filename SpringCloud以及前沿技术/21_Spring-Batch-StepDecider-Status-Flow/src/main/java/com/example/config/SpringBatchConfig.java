@@ -248,25 +248,25 @@ public class SpringBatchConfig {
     }
     @Bean
     public Step stepA(){
-        return new StepBuilder("executorStep", jobRepository)
+        return new StepBuilder("stepA", jobRepository)
                 .tasklet(taskletA(), batchTransactionManager)
                 .build();
     }
     @Bean
     public Step stepB1(){
-        return new StepBuilder("executorStep", jobRepository)
+        return new StepBuilder("stepB1", jobRepository)
                 .tasklet(taskletB(), batchTransactionManager)
                 .build();
     }
     @Bean
     public Step stepB2(){
-        return new StepBuilder("executorStep", jobRepository)
+        return new StepBuilder("stepB2", jobRepository)
                 .tasklet(taskletB(), batchTransactionManager)
                 .build();
     }
     @Bean
     public Step stepB3(){
-        return new StepBuilder("executorStep", jobRepository)
+        return new StepBuilder("stepB3", jobRepository)
                 .tasklet(taskletB(), batchTransactionManager)
                 .build();
     }
@@ -288,7 +288,7 @@ public class SpringBatchConfig {
     }
     @Bean
     public Step stepC(){
-        return new StepBuilder("executorStep", jobRepository)
+        return new StepBuilder("stepC", jobRepository)
                 .tasklet(taskletC(), batchTransactionManager)
                 .build();
     }
