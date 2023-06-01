@@ -216,6 +216,7 @@ public class SpringBatchConfig {
     }
 
     // TODO 流式步骤--比如步骤StepB中会存在Step1、Step2、Step3
+    //  使用FlowStep的好处在于，在处理复杂批处理逻辑中，flowStep可以单独实现一个子步骤流程，为批处理提供更高的灵活性
     @Bean
     public Tasklet taskletA(){
         return new Tasklet() {
