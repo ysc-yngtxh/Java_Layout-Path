@@ -1,12 +1,15 @@
 package com.example.config;
 
+import com.example.decider.CustomStatusDecider;
 import com.example.listener.CustomStepListener;
 import jakarta.annotation.Resource;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.StepContribution;
+import org.springframework.batch.core.job.builder.FlowBuilder;
 import org.springframework.batch.core.job.builder.JobBuilder;
+import org.springframework.batch.core.job.flow.Flow;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.builder.StepBuilder;
@@ -100,7 +103,7 @@ public class SpringBatchConfig {
 
     @Bean
     public Job job1(){
-        return new JobBuilder("Job", jobRepository)
+        return new JobBuilder("Job Item", jobRepository)
                 .start(step())
                 .build();
     }
@@ -114,6 +117,7 @@ public class SpringBatchConfig {
             @Override
             public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
                 System.out.println("开始执行步骤");
+                // 这里模拟异常
                 throw new RuntimeException("假装异常！！！");
                 // return RepeatStatus.FINISHED;
             }
@@ -147,13 +151,13 @@ public class SpringBatchConfig {
     }
     @Bean
     public Step successStep(){
-        return new StepBuilder("executorStep", jobRepository)
+        return new StepBuilder("successStep", jobRepository)
                 .tasklet(tasklet2(), batchTransactionManager)
                 .build();
     }
     @Bean
     public Step failedStep(){
-        return new StepBuilder("executorStep", jobRepository)
+        return new StepBuilder("failedStep", jobRepository)
                 .tasklet(tasklet3(), batchTransactionManager)
                 .build();
     }
@@ -164,7 +168,7 @@ public class SpringBatchConfig {
      *   2、*为通配符，表示能匹配任意返回值
      *   3、from表示从某个步骤开始进行条件判断
      *   4、分支判断结束，流程以end方法结束，表示if/else逻辑结束
-     *   5、on方法中字符串取值于 ExitStatus 类常量，当然也可以自定义
+     *   5、on方法中字符串取值于 ExitStatus 类常量(有五种类型的常量)，当然也可以自定义
      */
     @Bean
     public Job job2(){
@@ -174,4 +178,129 @@ public class SpringBatchConfig {
                 .end()
                 .build();
     }
+
+    // TODO 自定义条件分支执行--决策器
+    @Bean
+    public CustomStatusDecider customStatusDecider(){
+        return new CustomStatusDecider();
+    }
+    @Bean
+    public Job job3(){
+        return new JobBuilder("Custom Step Condition Branch Control", jobRepository)
+                .start(executorStep())
+                // 这里有一个坑点：就是不能使用使用new CustomStatusDecider()的方式
+                // 原因在于：每一次new出来的都是不同对象，那么from就找不到相应执行过的步骤，从而无效
+                .next(customStatusDecider())
+                .from(customStatusDecider()).on("A").to(executorStep())
+                .from(customStatusDecider()).on("B").to(successStep())
+                .from(customStatusDecider()).on("*").to(failedStep())
+                .end()
+                .build();
+    }
+
+    // TODO SpringBatch的 BATCH_JOB_EXECUTION 表中会记录每一次工作执行完的状态。
+    //  而我们可以通过自己的配置将 失败结束的步骤 直接转成其他状态的步骤
+    @Bean
+    public Job job4(){
+        return new JobBuilder("Custom Step Failed Convert Status", jobRepository)
+                .start(executorStep())
+                // 表示将当前本应该是失败结束的步骤直接转成正常结束--COMPLETED
+                //.on("FAILED").end()
+                // 表示将当前本应该是失败结束的步骤直接转成失败结束：FAILED
+                //.on("FAILED").fail()
+                // 表示将当前本应该是失败结束的步骤直接转成停止结束：STOPPED   里面参数表示后续要重启时， 从successStep位置开始
+                .on("FAILED").stopAndRestart(successStep())
+                .from(executorStep()).on("*").to(successStep())
+                .end()
+                .build();
+    }
+
+    // TODO 流式步骤--比如步骤StepB中会存在Step1、Step2、Step3
+    @Bean
+    public Tasklet taskletA(){
+        return new Tasklet() {
+            @Override
+            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+                System.out.println("------------StepA----------");
+                return RepeatStatus.FINISHED;
+            }
+        };
+    }
+    @Bean
+    public Tasklet taskletB(){
+        return new Tasklet() {
+            @Override
+            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+                System.out.println("------------StepB----------");
+                return RepeatStatus.FINISHED;
+            }
+        };
+    }
+    @Bean
+    public Tasklet taskletC(){
+        return new Tasklet() {
+            @Override
+            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+                System.out.println("------------StepC----------");
+                return RepeatStatus.FINISHED;
+            }
+        };
+    }
+    @Bean
+    public Step stepA(){
+        return new StepBuilder("executorStep", jobRepository)
+                .tasklet(taskletA(), batchTransactionManager)
+                .build();
+    }
+    @Bean
+    public Step stepB1(){
+        return new StepBuilder("executorStep", jobRepository)
+                .tasklet(taskletB(), batchTransactionManager)
+                .build();
+    }
+    @Bean
+    public Step stepB2(){
+        return new StepBuilder("executorStep", jobRepository)
+                .tasklet(taskletB(), batchTransactionManager)
+                .build();
+    }
+    @Bean
+    public Step stepB3(){
+        return new StepBuilder("executorStep", jobRepository)
+                .tasklet(taskletB(), batchTransactionManager)
+                .build();
+    }
+    // 整合stepB1、stepB2、stepB3
+    @Bean
+    public Flow flow(){
+        return new FlowBuilder<Flow>("流式步骤")
+                .start(stepB1())
+                .next(stepB2())
+                .next(stepB3())
+                .build();
+    }
+    // 将整合的Flow，交给步骤stepB
+    @Bean
+    public Step stepB(){
+        return new StepBuilder("stepB", jobRepository)
+                .flow(flow())
+                .build();
+    }
+    @Bean
+    public Step stepC(){
+        return new StepBuilder("executorStep", jobRepository)
+                .tasklet(taskletC(), batchTransactionManager)
+                .build();
+    }
+    @Bean
+    public Job job5(){
+        return new JobBuilder("Step Condition Branch Control", jobRepository)
+                .start(stepA())
+                // 我们可以发现next()方法只有两个重载方法，一个是Step类型参数，一个是JobExecutionDecider类型参数
+                // 所以我们无法把flow()方法传进去。只能通过Step的flow()方法将flow转成Step
+                .next(stepB())
+                .next(stepC())
+                .build();
+    }
+
 }

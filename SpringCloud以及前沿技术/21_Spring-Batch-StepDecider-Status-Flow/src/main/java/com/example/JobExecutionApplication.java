@@ -29,14 +29,18 @@ public class JobExecutionApplication {
 
     @Resource
     private JobLauncher jobLauncher;
+
     private final Job job1;
     private final Job job2;
+    private final Job job3;
+    private final Job job4;
+    private final Job job5;
 
     @Bean
     public CommandLineRunner commandLineRunner(){
         return args -> {
             JobParameters jobParameters = new JobParametersBuilder().addLocalDateTime("CurrentTime", LocalDateTime.now()).toJobParameters();
-            jobLauncher.run(job2, jobParameters);
+            jobLauncher.run(job5, jobParameters);
         };
     }
 

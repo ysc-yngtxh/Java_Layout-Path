@@ -208,7 +208,7 @@ public class SpringBatchConfig {
                 .start(step())
                 // 作业监听器：方式一
                 // .listener(new CustomAnnoJobExecutionListener())
-                // 作业监听器：方式二
+                // 作业监听器：方式二(两种方式都可以，只是写法不同)
                 .listener(JobListenerFactoryBean.getListener(new CustomAnnoJobExecutionListener()))
                 .build();
     }
