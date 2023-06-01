@@ -40,7 +40,7 @@ public class JobControlApplication {
     public CommandLineRunner commandLineRunner(){
         return args -> {
             JobParameters jobParameters = new JobParametersBuilder().addLocalDateTime("CurrentTime", LocalDateTime.now()).toJobParameters();
-            jobLauncher.run(job5, jobParameters);
+            jobLauncher.run(job1, jobParameters);
         };
     }
 
