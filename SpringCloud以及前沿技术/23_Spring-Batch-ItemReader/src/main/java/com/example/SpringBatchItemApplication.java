@@ -36,7 +36,7 @@ public class SpringBatchItemApplication {
     public CommandLineRunner commandLineRunner1(){
         return args -> {
             JobParameters jobParameters = new JobParametersBuilder().addLocalDateTime("CurrentTime", LocalDateTime.now()).toJobParameters();
-            jobLauncher.run(job2, jobParameters);
+            jobLauncher.run(job1, jobParameters);
         };
     }
 
