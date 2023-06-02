@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>22_Spring-Batch-JobControl</artifactId>
+    <artifactId>22_Spring-Batch-Control</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>22_Spring-Batch-JobControl</name>
-    <description>22_Spring-Batch-JobControl</description>
+    <name>22_Spring-Batch-Control</name>
+    <description>22_Spring-Batch-Control</description>
     <properties>
         <java.version>17</java.version>
     </properties>
