@@ -20,7 +20,6 @@ import java.time.LocalDateTime;
         dataSourceRef = "batchDataSource",
         transactionManagerRef = "batchTransactionManager"
 )
-@RequiredArgsConstructor
 public class JobControlApplication {
 
     public static void main(String[] args) {
@@ -29,18 +28,32 @@ public class JobControlApplication {
 
     @Resource
     private JobLauncher jobLauncher;
+    @Resource
+    private Job job1;
+    @Resource
+    private Job job2;
 
-    private final Job job1;
-    private final Job job2;
-    private final Job job3;
-    private final Job job4;
-    private final Job job5;
+    // @Bean
+    // public CommandLineRunner commandLineRunner1(){
+    //     return args -> {
+    //         JobParameters jobParameters = new JobParametersBuilder().addLocalDateTime("CurrentTime", LocalDateTime.now()).toJobParameters();
+    //         jobLauncher.run(job2, jobParameters);
+    //     };
+    // }
 
+
+    @Resource
+    private Job job3;
+    @Resource
+    private Job job4;
+    @Resource
+    private Job job5;
+
+    // TODO 区别以上的jobLauncher.run(),在于每次启动都是不一样的参数(也就是说每次启动都是不一样的作业)，因此会影响作业重启的demo
     @Bean
-    public CommandLineRunner commandLineRunner(){
+    public CommandLineRunner commandLineRunner2(){
         return args -> {
-            JobParameters jobParameters = new JobParametersBuilder().addLocalDateTime("CurrentTime", LocalDateTime.now()).toJobParameters();
-            jobLauncher.run(job1, jobParameters);
+            jobLauncher.run(job5, new JobParameters());
         };
     }
 
