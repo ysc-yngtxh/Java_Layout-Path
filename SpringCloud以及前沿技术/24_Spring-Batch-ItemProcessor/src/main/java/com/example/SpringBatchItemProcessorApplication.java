@@ -19,10 +19,10 @@ import java.time.LocalDateTime;
         dataSourceRef = "batchDataSource",
         transactionManagerRef = "batchTransactionManager"
 )
-public class SpringBatchItemApplication {
+public class SpringBatchItemProcessorApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBatchItemApplication.class, args);
+        SpringApplication.run(SpringBatchItemProcessorApplication.class, args);
     }
 
     @Resource
@@ -42,8 +42,7 @@ public class SpringBatchItemApplication {
     public CommandLineRunner commandLineRunner1(){
         return args -> {
             JobParameters jobParameters = new JobParametersBuilder().addLocalDateTime("CurrentTime", LocalDateTime.now()).toJobParameters();
-            jobLauncher.run(job1, jobParameters);
+            jobLauncher.run(job5, jobParameters);
         };
     }
-
 }
