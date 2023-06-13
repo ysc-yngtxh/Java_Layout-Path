@@ -1,5 +1,6 @@
 package com.example.incr;
 
+import lombok.NonNull;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.JobParametersIncrementer;
@@ -13,7 +14,7 @@ import java.util.Date;
  */
 public class DailyTimesParametersIncrementer implements JobParametersIncrementer {
     @Override
-    public JobParameters getNext(JobParameters parameters) {
+    public @NonNull JobParameters getNext(JobParameters parameters) {
         return new JobParametersBuilder(parameters)
                 .addLong("daily", new Date().getTime())
                 .toJobParameters();

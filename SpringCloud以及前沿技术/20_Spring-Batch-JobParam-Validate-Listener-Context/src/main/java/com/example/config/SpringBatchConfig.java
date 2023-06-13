@@ -197,8 +197,6 @@ public class SpringBatchConfig {
                 // 作业监听器
                 .listener(new CustomInterfaceJobExecutionListener())
                 .build();
-
-
     }
 
     // 7、作业监听器 -- 注解实现方式

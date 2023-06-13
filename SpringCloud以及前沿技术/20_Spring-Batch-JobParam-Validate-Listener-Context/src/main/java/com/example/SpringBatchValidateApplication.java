@@ -56,7 +56,7 @@ public class SpringBatchValidateApplication {
             // Job job = jobRegistry.getJob("Spring Batch Job RunIdIncr");
             // JobParameters jobParameters = job.getJobParametersIncrementer().getNext(jobExplorer.getLastJobExecution((JobInstance) job).getJobParameters());
 
-            JobExecution jobExecution = jobLauncher.run(job5, new JobParameters()
+            JobExecution jobExecution = jobLauncher.run(job6, new JobParameters()
                     // 添加作业参数
                     // new JobParameters( Map.of("name", new JobParameter<>("游诗成", String.class),
                     //         "age", new JobParameter<>("78fg9", String.class)) )
