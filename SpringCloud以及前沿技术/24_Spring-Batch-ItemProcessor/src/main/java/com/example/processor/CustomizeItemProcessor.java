@@ -10,6 +10,7 @@ import org.springframework.batch.item.ItemProcessor;
  * @apiNote TODO 自定义处理器
  */
 public class CustomizeItemProcessor implements ItemProcessor<User, User> {
+
     @Override
     public User process(@NonNull User item) throws Exception {
         // 将id为偶数数据获取，其他的放弃--返回null
