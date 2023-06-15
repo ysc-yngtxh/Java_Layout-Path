@@ -1,9 +1,11 @@
 package com.example.config;
 
 import com.example.dto.User;
+import com.example.processor.CustomizeItemProcessor;
 import com.example.service.Impl.UserServiceImpl;
 import jakarta.annotation.Resource;
 import lombok.NonNull;
+import org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.job.builder.JobBuilder;
@@ -14,14 +16,17 @@ import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.adapter.ItemProcessorAdapter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
+import org.springframework.batch.item.support.CompositeItemProcessor;
 import org.springframework.batch.item.support.ScriptItemProcessor;
 import org.springframework.batch.item.validator.BeanValidatingItemProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.transaction.PlatformTransactionManager;
+
+import javax.script.ScriptEngineManager;
+import java.util.Arrays;
 
 /**
  * @author 游家纨绔
@@ -55,6 +60,7 @@ public class SpringBatchConfig {
                 .targetType(User.class) // 自动封装
                 .build();
     }
+    // 校验参数是否合法，不合法则丢弃
     @Bean
     public BeanValidatingItemProcessor<User> beanValidatingItemProcessor(){
         BeanValidatingItemProcessor<User> itemProcessor = new BeanValidatingItemProcessor<>();
@@ -108,7 +114,9 @@ public class SpringBatchConfig {
     @Bean
     public ItemProcessorAdapter<User, User> itemProcessorAdapter(){
         ItemProcessorAdapter<User, User> adapter = new ItemProcessorAdapter<>();
+        // 适配目标方法
         adapter.setTargetMethod("toUpperCase");
+        // 适配目标对象
         adapter.setTargetObject(new UserServiceImpl());
         return adapter;
     }
@@ -117,7 +125,7 @@ public class SpringBatchConfig {
         return new StepBuilder("step2", jobRepository)
                 .<User, User>chunk(1, batchTransactionManager)
                 .reader(itemReader2())
-                // 这里多了一步操作，以便引入ItemProcessor组件springboot
+                // 引入适配器处理器
                 .processor(itemProcessorAdapter())
                 .writer(itemWriter1())
                 .build();
@@ -136,15 +144,24 @@ public class SpringBatchConfig {
     public ScriptItemProcessor<User, User> scriptItemProcessor(){
         ScriptItemProcessor<User, User> scriptItemProcessor = new ScriptItemProcessor<>();
         // 加载js文件，执行js中转换逻辑
-        scriptItemProcessor.setScript(new FileSystemResource("userScript.js"));
+        scriptItemProcessor.setScript(new ClassPathResource("userScript.js"));
         return scriptItemProcessor;
+    }
+    // TODO 这里需要注意的是，在jdk在11开始就标注要取消NashornScriptEngineFactory类。在17中删除。给出的理由是因为jdk中维护不方便。
+    //  所以我们可以在maven中加入对应的开发包。这里使用了 Nashorn 引擎，并通过 registerEngineExtension 方法将其与 .js 文件扩展名关联起来。
+    //  JDK17之前的版本自带js匹配引擎，不受影响
+    @Bean
+    public ScriptEngineManager scriptEngineManager() {
+        ScriptEngineManager factory = new ScriptEngineManager();
+        factory.registerEngineExtension("js", new NashornScriptEngineFactory());
+        return factory;
     }
     @Bean
     public Step step3() {
         return new StepBuilder("step3", jobRepository)
                 .<User, User>chunk(1, batchTransactionManager)
                 .reader(itemReader2())
-                // 这里多了一步操作，以便引入ItemProcessor组件springboot
+                // 引入脚本处理器
                 .processor(scriptItemProcessor())
                 .writer(itemWriter1())
                 .build();
@@ -153,6 +170,49 @@ public class SpringBatchConfig {
     public Job job3() {
         return new JobBuilder("Script Processor Job", jobRepository)
                 .start(step3())
+                .build();
+    }
+
+    // TODO CompositeItemProcessor：组合处理器
+    //  将 校验处理器 和 脚本处理器 组合。先校验参数是否合法，然后再通过脚本将name值转为大写
+    @Bean
+    public CompositeItemProcessor<User, User> compositeItemProcessor(){
+        CompositeItemProcessor<User, User> compositeItemProcessor = new CompositeItemProcessor<>();
+        compositeItemProcessor.setDelegates(Arrays.asList(beanValidatingItemProcessor(), scriptItemProcessor()));
+        return compositeItemProcessor;
+    }
+    @Bean
+    public Step step4() {
+        return new StepBuilder("step4", jobRepository)
+                .<User, User>chunk(1, batchTransactionManager)
+                .reader(itemReader1())
+                // 引入组合处理器
+                .processor(compositeItemProcessor())
+                .writer(itemWriter1())
+                .build();
+    }
+    @Bean
+    public Job job4() {
+        return new JobBuilder("Composite Processor Job", jobRepository)
+                .start(step4())
+                .build();
+    }
+
+    // TODO 自定义处理器
+    @Bean
+    public Step step5() {
+        return new StepBuilder("step5", jobRepository)
+                .<User, User>chunk(1, batchTransactionManager)
+                .reader(itemReader2())
+                // 引入自定义处理器
+                .processor(new CustomizeItemProcessor())
+                .writer(itemWriter1())
+                .build();
+    }
+    @Bean
+    public Job job5() {
+        return new JobBuilder("Customize Processor Job", jobRepository)
+                .start(step5())
                 .build();
     }
 }

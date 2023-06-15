@@ -1,6 +1,7 @@
 package com.example.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -9,6 +10,7 @@ import lombok.Data;
  * @apiNote TODO 用户类
  */
 @Data
+@Builder
 public class User {
 
     private long Id;

@@ -42,7 +42,7 @@ public class SpringBatchItemProcessorApplication {
     public CommandLineRunner commandLineRunner1(){
         return args -> {
             JobParameters jobParameters = new JobParametersBuilder().addLocalDateTime("CurrentTime", LocalDateTime.now()).toJobParameters();
-            jobLauncher.run(job3, jobParameters);
+            jobLauncher.run(job5, jobParameters);
         };
     }
 }
