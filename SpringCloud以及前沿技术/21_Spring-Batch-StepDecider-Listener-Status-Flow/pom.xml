@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>21_Spring-Batch-StepDecider-Status-Flow</artifactId>
+    <artifactId>21_Spring-Batch-StepDecider-Listener-Status-Flow</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>21_Spring-Batch-StepDecider-Status-Flow</name>
-    <description>21_Spring-Batch-StepDecider-Status-Flow</description>
+    <name>21_Spring-Batch-StepDecider-Listener-Status-Flow</name>
+    <description>21_Spring-Batch-StepDecider-Listener-Status-Flow</description>
     <properties>
         <java.version>17</java.version>
     </properties>
