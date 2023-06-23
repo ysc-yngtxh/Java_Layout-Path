@@ -36,7 +36,7 @@ public class SpringBatchItemWriterApplication {
     private final Job job4;
 
     @Bean
-    public CommandLineRunner commandLineRunner1(){
+    public CommandLineRunner commandLineRunner(){
         return args -> {
             JobParameters jobParameters = new JobParametersBuilder().addLocalDateTime("CurrentTime", LocalDateTime.now()).toJobParameters();
             jobLauncher.run(job4, jobParameters);

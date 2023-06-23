@@ -70,6 +70,7 @@ public class SpringBatchConfig {
 
                 // 获取批处理执行的参数方法二：
                 // 需要加上@StepScope注解，并且给上相对应的 @Value("#{jobParameters['name']}" 赋值
+                // 且 jobParameters['****'] 为固定写法，里面的属性名为传参时的属性名
                 // System.out.println(name);
 
                 // 每个步骤都会包含一个完整的执行状态。这个状态通过RepeatStatus来表示

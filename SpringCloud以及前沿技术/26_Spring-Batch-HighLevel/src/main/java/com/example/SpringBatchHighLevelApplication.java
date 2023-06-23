@@ -31,13 +31,12 @@ public class SpringBatchHighLevelApplication {
 	private final Job job1;
 	private final Job job2;
 	private final Job job3;
-	private final Job job4;
 
 	@Bean
 	public CommandLineRunner commandLineRunner1(){
 		return args -> {
 			JobParameters jobParameters = new JobParametersBuilder().addLocalDateTime("CurrentTime", LocalDateTime.now()).toJobParameters();
-			jobLauncher.run(job1, jobParameters);
+			jobLauncher.run(job3, jobParameters);
 		};
 	}
 }

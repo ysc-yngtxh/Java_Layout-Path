@@ -18,7 +18,6 @@ import lombok.NoArgsConstructor;
 public class User {
 
     private long id;
-    @NotBlank(message = "用户名不能为null或空值")
     private String name;
     private int age;
 }
