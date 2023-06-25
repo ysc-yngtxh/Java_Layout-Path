@@ -30,7 +30,7 @@ public class SpringBatchConfig {
     private PlatformTransactionManager batchTransactionManager;  // 事务管理器
 
     // 模拟从数据库查询数据
-    private int readCountDB = 100;
+    private final int readCountDB = 100;
 
     // TODO 作业停止--方式一：使用监听器方式，不满足条件的直接返回停止状态
     @Bean
@@ -52,7 +52,7 @@ public class SpringBatchConfig {
             @Override
             public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
                 System.out.println("------------step2------------");
-                System.err.println("readCount:" + ResourceCount.totalCount + "----totalCount:" + ResourceCount.totalCount);
+                System.err.println("readCount:" + ResourceCount.readCount + "----totalCount:" + ResourceCount.totalCount);
                 return RepeatStatus.FINISHED;
             }
         };

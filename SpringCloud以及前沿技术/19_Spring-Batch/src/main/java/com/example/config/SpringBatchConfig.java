@@ -1,5 +1,6 @@
 package com.example.config;
 
+import lombok.NonNull;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.StepContribution;
@@ -35,7 +36,7 @@ public class SpringBatchConfig {
     public Tasklet tasklet(){
         return new Tasklet() {
             @Override
-            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+            public RepeatStatus execute(@NonNull StepContribution contribution, @NonNull ChunkContext chunkContext) throws Exception {
                 System.out.println("Spring Batch执行Job");
                 // 每个步骤都会包含一个完整的执行状态。这个状态通过RepeatStatus来表示
                 return RepeatStatus.FINISHED;

@@ -208,7 +208,7 @@ public class SpringBatchConfig {
                 //.on("FAILED").end()
                 // 表示将当前本应该是失败结束的步骤直接转成失败结束：FAILED
                 //.on("FAILED").fail()
-                // 表示将当前本应该是失败结束的步骤直接转成停止结束：STOPPED   里面参数表示后续要重启时， 从successStep位置开始
+                // 表示将当前本应该是失败结束的步骤直接转成停止结束：STOPPED。里面参数表示后续要重启时，从successStep位置开始
                 .on("FAILED").stopAndRestart(successStep())
                 .from(executorStep()).on("*").to(successStep())
                 .end()

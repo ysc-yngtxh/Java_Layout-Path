@@ -15,7 +15,7 @@ import java.util.Random;
  */
 public class CustomStatusDecider implements JobExecutionDecider {
     @Override
-    public FlowExecutionStatus decide(@NotNull JobExecution jobExecution, StepExecution stepExecution) {
+    public @NotNull FlowExecutionStatus decide(@NotNull JobExecution jobExecution, StepExecution stepExecution) {
 
         long ret = new Random().nextInt(3);
 

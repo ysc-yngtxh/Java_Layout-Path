@@ -51,12 +51,12 @@ public class SpringBatchValidateApplication {
 
     // TODO 可以通过修改run()方法中的job值，来进行各个案例测试
     @Bean
-    public CommandLineRunner commandLineRunner() {
+    public CommandLineRunner commandLineRunner1() {
         return args -> {
             // Job job = jobRegistry.getJob("Spring Batch Job RunIdIncr");
             // JobParameters jobParameters = job.getJobParametersIncrementer().getNext(jobExplorer.getLastJobExecution((JobInstance) job).getJobParameters());
 
-            JobExecution jobExecution = jobLauncher.run(job6, new JobParameters()
+            JobExecution jobExecution = jobLauncher.run(job5, new JobParameters()
                     // 添加作业参数
                     // new JobParameters( Map.of("name", new JobParameter<>("游诗成", String.class),
                     //         "age", new JobParameter<>("78fg9", String.class)) )

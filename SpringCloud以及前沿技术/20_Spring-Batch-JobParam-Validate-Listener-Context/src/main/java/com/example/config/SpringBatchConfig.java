@@ -5,6 +5,7 @@ import com.example.listener.CustomAnnoJobExecutionListener;
 import com.example.listener.CustomInterfaceJobExecutionListener;
 import com.example.validate.CustomValidate;
 import jakarta.annotation.Resource;
+import lombok.NonNull;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.Step;
@@ -56,7 +57,7 @@ public class SpringBatchConfig {
     public Tasklet tasklet(/*@Value("#{jobParameters['name']}") String name*/){
         return new Tasklet() {
             @Override
-            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+            public RepeatStatus execute(@NonNull StepContribution contribution, @NonNull ChunkContext chunkContext) throws Exception {
 
                 System.out.println("Spring Batch 执行 Job");
 
@@ -218,7 +219,7 @@ public class SpringBatchConfig {
     public Tasklet tasklet1(){
         return new Tasklet() {
             @Override
-            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+            public RepeatStatus execute(@NonNull StepContribution contribution, @NonNull ChunkContext chunkContext) throws Exception {
                 System.out.println("Spring Batch 执行 Job1");
 
                 /**
@@ -257,7 +258,7 @@ public class SpringBatchConfig {
     public Tasklet tasklet2(){
         return new Tasklet() {
             @Override
-            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+            public RepeatStatus execute(@NonNull StepContribution contribution, @NonNull ChunkContext chunkContext) throws Exception {
                 System.out.println("Spring Batch 执行 Job2");
 
                 /*
