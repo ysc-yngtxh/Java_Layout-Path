@@ -3,6 +3,7 @@ package com.example.config;
 import com.example.constant.ResourceCount;
 import com.example.listener.CustomizeListener;
 import jakarta.annotation.Resource;
+import lombok.NonNull;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.StepContribution;
@@ -22,6 +23,7 @@ import org.springframework.transaction.PlatformTransactionManager;
  * @apiNote TODO SpringBatch配置类
  */
 @Configuration
+// @SuppressWarnings("NullableProblems")  // 用于抑制警告。相当于有了这个注解就可以不用加上 @NonNull、@NotNull等
 public class SpringBatchConfig {
     @Resource
     private JobRepository jobRepository;  // SpringBatch数据库的操作
@@ -37,7 +39,7 @@ public class SpringBatchConfig {
     public Tasklet tasklet1() {
         return new Tasklet() {
             @Override
-            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+            public RepeatStatus execute(@NonNull StepContribution contribution, @NonNull ChunkContext chunkContext) throws Exception {
                 System.out.println("------------step1------------");
                 for (int i = 0; i < readCountDB; i++) {
                     ResourceCount.readCount++;
@@ -50,7 +52,7 @@ public class SpringBatchConfig {
     public Tasklet tasklet2() {
         return new Tasklet() {
             @Override
-            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+            public RepeatStatus execute(@NonNull StepContribution contribution, @NonNull ChunkContext chunkContext) throws Exception {
                 System.out.println("------------step2------------");
                 System.err.println("readCount:" + ResourceCount.readCount + "----totalCount:" + ResourceCount.totalCount);
                 return RepeatStatus.FINISHED;
@@ -90,7 +92,7 @@ public class SpringBatchConfig {
     public Tasklet tasklet3() {
         return new Tasklet() {
             @Override
-            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+            public RepeatStatus execute(@NonNull StepContribution contribution, @NonNull ChunkContext chunkContext) throws Exception {
                 System.out.println("------------step3------------");
                 for (int i = 0; i < readCountDB; i++) {
                     ResourceCount.readCount++;
@@ -146,7 +148,7 @@ public class SpringBatchConfig {
     public Tasklet tasklet4() {
         return new Tasklet() {
             @Override
-            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+            public RepeatStatus execute(@NonNull StepContribution contribution, @NonNull ChunkContext chunkContext) throws Exception {
                 System.out.println("------------step5------------");
 
                 // setTerminateOnly() 给运行中的stepExecution设置停止标记，Spring Batch 识别后直接停止步骤，进而停止流程
@@ -160,7 +162,7 @@ public class SpringBatchConfig {
     public Tasklet tasklet5() {
         return new Tasklet() {
             @Override
-            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+            public RepeatStatus execute(@NonNull StepContribution contribution, @NonNull ChunkContext chunkContext) throws Exception {
                 System.out.println("------------step6------------");
                 return RepeatStatus.FINISHED;
             }

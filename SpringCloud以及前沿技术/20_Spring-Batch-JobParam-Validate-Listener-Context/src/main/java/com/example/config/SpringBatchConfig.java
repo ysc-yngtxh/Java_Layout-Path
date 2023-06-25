@@ -41,6 +41,7 @@ import java.util.Map;
         dataSourceRef = "batchDataSource",
         transactionManagerRef = "batchTransactionManager"
 )
+// @SuppressWarnings("NullableProblems")  // 用于抑制警告。相当于有了这个注解就可以不用加上 @NonNull、@NotNull等
 public class SpringBatchConfig {
 
     @Resource

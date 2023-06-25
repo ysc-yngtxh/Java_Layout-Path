@@ -13,6 +13,7 @@ import java.util.Random;
  * @dateTime 2023-06-01 11:34
  * @apiNote TODO 指定step返回状态值决策器
  */
+// @SuppressWarnings("NullableProblems")  // 用于抑制警告。相当于有了这个注解就可以不用加上 @NonNull、@NotNull等
 public class CustomStatusDecider implements JobExecutionDecider {
     @Override
     public @NotNull FlowExecutionStatus decide(@NotNull JobExecution jobExecution, StepExecution stepExecution) {

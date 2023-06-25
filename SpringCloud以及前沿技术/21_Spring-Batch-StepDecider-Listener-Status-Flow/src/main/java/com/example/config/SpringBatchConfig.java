@@ -4,6 +4,7 @@ import com.example.decider.CustomStatusDecider;
 import com.example.listener.CustomStepListener;
 import jakarta.annotation.Resource;
 import jakarta.validation.constraints.NotNull;
+import lombok.NonNull;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.StepContribution;
@@ -29,6 +30,7 @@ import org.springframework.transaction.PlatformTransactionManager;
  * @apiNote TODO 批处理配置类
  */
 @Configuration
+// @SuppressWarnings("NullableProblems")  // 用于抑制警告。相当于有了这个注解就可以不用加上 @NonNull、@NotNull等
 public class SpringBatchConfig {
 
     @Resource
@@ -115,7 +117,7 @@ public class SpringBatchConfig {
     public Tasklet tasklet1(){
         return new Tasklet() {
             @Override
-            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+            public RepeatStatus execute(@NonNull StepContribution contribution, @NonNull ChunkContext chunkContext) throws Exception {
                 System.out.println("开始执行步骤");
                 // 这里模拟异常
                 throw new RuntimeException("假装异常！！！");
@@ -127,7 +129,7 @@ public class SpringBatchConfig {
     public Tasklet tasklet2(){
         return new Tasklet() {
             @Override
-            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+            public RepeatStatus execute(@NonNull StepContribution contribution, @NonNull ChunkContext chunkContext) throws Exception {
                 System.out.println("执行成功步骤");
                 return RepeatStatus.FINISHED;
             }
@@ -137,7 +139,7 @@ public class SpringBatchConfig {
     public Tasklet tasklet3(){
         return new Tasklet() {
             @Override
-            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+            public RepeatStatus execute(@NonNull StepContribution contribution, @NonNull ChunkContext chunkContext) throws Exception {
                 System.out.println("执行失败步骤");
                 return RepeatStatus.FINISHED;
             }
@@ -221,7 +223,7 @@ public class SpringBatchConfig {
     public Tasklet taskletA(){
         return new Tasklet() {
             @Override
-            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+            public RepeatStatus execute(@NonNull StepContribution contribution, @NonNull ChunkContext chunkContext) throws Exception {
                 System.out.println("------------StepA----------");
                 return RepeatStatus.FINISHED;
             }
@@ -231,7 +233,7 @@ public class SpringBatchConfig {
     public Tasklet taskletB(){
         return new Tasklet() {
             @Override
-            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+            public RepeatStatus execute(@NonNull StepContribution contribution, @NonNull ChunkContext chunkContext) throws Exception {
                 System.out.println("------------StepB----------");
                 return RepeatStatus.FINISHED;
             }
@@ -241,7 +243,7 @@ public class SpringBatchConfig {
     public Tasklet taskletC(){
         return new Tasklet() {
             @Override
-            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+            public RepeatStatus execute(@NonNull StepContribution contribution, @NonNull ChunkContext chunkContext) throws Exception {
                 System.out.println("------------StepC----------");
                 return RepeatStatus.FINISHED;
             }

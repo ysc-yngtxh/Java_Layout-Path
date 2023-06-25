@@ -12,6 +12,7 @@ import java.util.Date;
  * @dateTime 2023-05-27 20:10
  * @apiNote TODO 自定义作业增量参数--时间戳
  */
+// @SuppressWarnings("NullableProblems")  // 用于抑制警告。相当于有了这个注解就可以不用加上 @NonNull、@NotNull等
 public class DailyTimesParametersIncrementer implements JobParametersIncrementer {
     @Override
     public @NonNull JobParameters getNext(JobParameters parameters) {
