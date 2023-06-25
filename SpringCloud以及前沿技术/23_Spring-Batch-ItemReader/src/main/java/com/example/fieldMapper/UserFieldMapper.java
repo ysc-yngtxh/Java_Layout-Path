@@ -11,6 +11,7 @@ import org.springframework.validation.BindException;
  * @dateTime 2023-06-02 21:51
  * @apiNote TODO 自定义封装
  */
+// @SuppressWarnings("NullableProblems")  // 用于抑制警告。相当于有了这个注解就可以不用加上 @NonNull、@NotNull等
 public class UserFieldMapper implements FieldSetMapper<User2> {
     @Override
     public @NonNull User2 mapFieldSet(@NonNull FieldSet fieldSet) throws BindException {

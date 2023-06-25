@@ -9,6 +9,7 @@ import org.springframework.batch.item.ItemProcessor;
  * @dateTime 2023-06-16 00:07
  * @apiNote TODO 自定义处理器
  */
+// @SuppressWarnings("NullableProblems")  // 用于抑制警告。相当于有了这个注解就可以不用加上 @NonNull、@NotNull等
 public class CustomizeItemProcessor implements ItemProcessor<User, User> {
 
     @Override

@@ -14,6 +14,7 @@ import java.util.Map;
  * 用户文件读取分区器
  * 作用：指定从步骤名称 + 配置从步骤需要上下文环境
  */
+// @SuppressWarnings("NullableProblems")  // 用于抑制警告。相当于有了这个注解就可以不用加上 @NonNull、@NotNull等
 public class UserPartitioner  implements Partitioner {
     @Override
     public @NonNull Map<String, ExecutionContext> partition(int gridSize) {
@@ -22,7 +23,7 @@ public class UserPartitioner  implements Partitioner {
         int range = 10; // 文件间隔
         int start = 11; // 开始位置
         int end = 10;  // 结束位置
-        String text = "user%s-%s.txt";
+        String text = "user%s-%s.txt";  // 也可以使用 MessageFormat 进行字符串格式化，效率更高
  
         for (int i = 0; i < gridSize; i++) {
             ExecutionContext value = new ExecutionContext();
