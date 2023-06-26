@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.youshicheng</groupId>
-    <artifactId>01_Springcloud-Parem</artifactId>
+    <artifactId>01_SpringCloud-Parem</artifactId>
     <version>1.0.0</version>
     <modules>
         <module>provice</module>

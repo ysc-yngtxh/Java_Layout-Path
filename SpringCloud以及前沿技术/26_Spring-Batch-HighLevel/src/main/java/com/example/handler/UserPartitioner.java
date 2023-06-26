@@ -15,7 +15,7 @@ import java.util.Map;
  * 作用：指定从步骤名称 + 配置从步骤需要上下文环境
  */
 // @SuppressWarnings("NullableProblems")  // 用于抑制警告。相当于有了这个注解就可以不用加上 @NonNull、@NotNull等
-public class UserPartitioner  implements Partitioner {
+public class UserPartitioner implements Partitioner {
     @Override
     public @NonNull Map<String, ExecutionContext> partition(int gridSize) {
         Map<String, ExecutionContext> result = new HashMap<>(gridSize);

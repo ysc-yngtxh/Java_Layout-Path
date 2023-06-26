@@ -51,12 +51,13 @@
             <artifactId>spring-batch-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--jackson依赖-->
+        <!-- jackson依赖 -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.12.7.1</version>
         </dependency>
+        <!-- 谷歌gson依赖 -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>

@@ -3,6 +3,7 @@ package com.example.config;
 import com.example.dto.User;
 import com.example.handler.UserPartitioner;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.Resource;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.partition.PartitionHandler;
 import org.springframework.batch.core.partition.support.TaskExecutorPartitionHandler;
@@ -37,10 +38,10 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 // @SuppressWarnings("NullableProblems")  // 用于抑制警告。相当于有了这个注解就可以不用加上 @NonNull、@NotNull等
 public class SpringBatchConfig {
-    @jakarta.annotation.Resource
+    @Resource
     private JobRepository jobRepository;  // SpringBatch数据库的操作
 
-    @jakarta.annotation.Resource
+    @Resource
     private PlatformTransactionManager batchTransactionManager;  // 事务管理器
 
 
@@ -132,7 +133,7 @@ public class SpringBatchConfig {
                 .start(step2())
                 // 开启线程执行步骤
                 .split(new SimpleAsyncTaskExecutor())
-                // 并行步骤1 并行步骤2 同时启动
+                // 将 并行步骤1 添加到 并行步骤2 ，这样子步骤同时启动
                 .add(flowParallel)
                 .build();
 

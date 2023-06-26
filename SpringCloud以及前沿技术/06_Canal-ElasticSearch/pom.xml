@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>06_Canal-Elasticsearch</artifactId>
+    <artifactId>06_Canal-ElasticSearch</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>06_canal-elasticsearch</name>
     <description>06_canal-elasticsearch</description>

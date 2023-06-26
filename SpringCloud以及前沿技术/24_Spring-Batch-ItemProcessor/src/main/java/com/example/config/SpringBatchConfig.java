@@ -61,7 +61,7 @@ public class SpringBatchConfig {
                 .targetType(User.class) // 自动封装
                 .build();
     }
-    // 校验参数是否合法，不合法则丢弃
+    // 校验参数是否合法，不合法则丢弃，并不会产生异常
     @Bean
     public BeanValidatingItemProcessor<User> beanValidatingItemProcessor(){
         BeanValidatingItemProcessor<User> itemProcessor = new BeanValidatingItemProcessor<>();
@@ -148,7 +148,7 @@ public class SpringBatchConfig {
         scriptItemProcessor.setScript(new ClassPathResource("userScript.js"));
         return scriptItemProcessor;
     }
-    // TODO 这里需要注意的是，在jdk在11开始就标注要取消NashornScriptEngineFactory类。在17中删除。给出的理由是因为jdk中维护不方便。
+    // TODO 这里需要注意的是，在jdk在11开始就标注要取消NashornScriptEngineFactory类，在17中删除。给出的理由是因为jdk中维护不方便。
     //  所以我们可以在maven中加入对应的开发包。这里使用了 Nashorn 引擎，并通过 registerEngineExtension 方法将其与 .js 文件扩展名关联起来。
     //  JDK17之前的版本自带js匹配引擎，不受影响
     @Bean
