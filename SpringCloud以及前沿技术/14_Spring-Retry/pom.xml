@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>14_Spring-Retry</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>14_spring-retry</name>
-    <description>14_spring-retry</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>

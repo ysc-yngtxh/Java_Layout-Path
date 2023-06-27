@@ -5,7 +5,7 @@
     <groupId>com.example</groupId>
     <artifactId>09_Shiro-Demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>09_shiro-demo</name>
+    <name>${project.artifactId}</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

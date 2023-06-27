@@ -11,7 +11,7 @@
 	<groupId>com.cn.youshicheng</groupId>
 	<artifactId>02_SpringBoot-Configuration-Mapper</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>02_springboot-configuration-mapper</name>
+	<name>${project.artifactId}</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

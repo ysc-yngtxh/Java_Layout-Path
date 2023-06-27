@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>05_Canal-Demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>05_canal-demo</name>
-    <description>05_canal-demo</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>

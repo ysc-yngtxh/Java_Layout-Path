@@ -11,7 +11,7 @@
     <groupId>com.example</groupId>
     <artifactId>11_RabbitMQ-Springboot</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>11_RabbitMQ--springboot</name>
+    <name>${project.artifactId}</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
