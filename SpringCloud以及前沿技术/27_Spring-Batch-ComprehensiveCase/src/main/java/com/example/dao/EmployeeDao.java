@@ -13,6 +13,8 @@ import java.util.List;
  */
 public interface EmployeeDao {
 
+    void save(Employee employee);
+
     /**
      * 通过ID查询单条数据
      *
@@ -69,6 +71,5 @@ public interface EmployeeDao {
      * @return 影响行数
      */
     int deleteById(Integer id);
-
 }
 

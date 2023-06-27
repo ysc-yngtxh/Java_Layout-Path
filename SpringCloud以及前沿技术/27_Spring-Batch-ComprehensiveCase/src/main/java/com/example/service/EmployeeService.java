@@ -11,6 +11,12 @@ import com.example.entity.Employee;
 public interface EmployeeService {
 
     /**
+     * 保存
+     */
+    void save(Employee employee);
+
+
+    /**
      * 通过ID查询单条数据
      *
      * @param id 主键

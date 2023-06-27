@@ -9,6 +9,10 @@
         <result property="sex" column="sex" jdbcType="INTEGER"/>
     </resultMap>
 
+    <insert id="save" keyColumn="id" useGeneratedKeys="true" keyProperty="id">
+        insert into employee(id, name, age, sex) values(#{id},#{name},#{age},#{sex})
+    </insert>
+
     <!--查询单个-->
     <select id="queryById" resultMap="EmployeeMap">
         select

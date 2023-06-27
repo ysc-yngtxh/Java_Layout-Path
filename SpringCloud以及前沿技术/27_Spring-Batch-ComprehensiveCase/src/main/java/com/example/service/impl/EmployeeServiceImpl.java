@@ -17,6 +17,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Resource
     private EmployeeDao employeeDao;
 
+    @Override
+    public void save(Employee employee) {
+        employeeDao.save(employee);
+    }
+
+
     /**
      * 通过ID查询单条数据
      *
