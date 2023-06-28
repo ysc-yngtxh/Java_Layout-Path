@@ -158,8 +158,10 @@ public class SpringBatchConfig {
                 .name("Partition Step ItemReader")
                 // TODO 动态获取文件
                 .resource( resource )
-                // 解析数据 -- 指定解析其使用#分割 -- 默认是，逗号
-                .delimited().delimiter("#")
+                // 解析数据
+                .delimited()
+                // 指定解析其使用#分割 -- 默认是，逗号
+                .delimiter("#")
                 // 按照#截取数据之后，数据怎么命名
                 .names("id", "name", "age")
                 // 封装数据 -- 将读取的数据封装到对象：User对象

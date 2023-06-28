@@ -53,7 +53,7 @@ public class JobControlApplication {
     @Bean
     public CommandLineRunner commandLineRunner2(){
         return args -> {
-            jobLauncher.run(job5, new JobParameters());
+            jobLauncher.run(job3, new JobParameters());
         };
     }
 

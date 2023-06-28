@@ -9,6 +9,8 @@ import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.explore.JobExplorer;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,9 +42,9 @@ public class EmployeeController {
     private Job csvToDBJob;
 
     @GetMapping("/dataInit")
-    public String dataInit() throws IOException {
+    public ResponseEntity<String> dataInit() throws IOException {
         employeeService.dataInit();
-        return "ok";
+        return ResponseEntity.ok().body("五十万数据重新生成成功!!! 🥸🥸🥸");
     }
 
     @GetMapping("/csvToDB")
@@ -51,10 +53,14 @@ public class EmployeeController {
 
         // 需要多次执行，run.id 必须重写之前，再重构一个新的参数对象
         JobParameters jobParameters = new JobParametersBuilder(new JobParameters(), jobExplorer)
-                .addLong("time", new Date().getTime())
                 .getNextJobParameters(csvToDBJob).toJobParameters();
         JobExecution run = jobLauncher.run(csvToDBJob, jobParameters);
         return run.getId().toString();
+    }
+
+    @GetMapping("/Truncate")
+    public void delete(){
+        employeeService.truncateTemp();
     }
 }
 

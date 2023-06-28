@@ -1,28 +1,18 @@
 package com.example;
 
-import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.JobInstance;
-import org.springframework.batch.core.JobParameter;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
-import org.springframework.batch.core.JobParametersIncrementer;
-import org.springframework.batch.core.configuration.JobRegistry;
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.explore.JobExplorer;
 import org.springframework.batch.core.launch.JobLauncher;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDateTime;
-import java.util.Map;
-import java.util.Objects;
 
 @SpringBootApplication
 @RequiredArgsConstructor
@@ -32,12 +22,8 @@ public class SpringBatchValidateApplication {
         SpringApplication.run(SpringBatchValidateApplication.class, args);
     }
 
-    @Resource
-    private JobLauncher jobLauncher;
-    @Autowired
-    private JobRegistry jobRegistry;
-    @Autowired
-    private JobExplorer jobExplorer;
+    private final JobLauncher jobLauncher;
+    private final JobExplorer jobExplorer;
 
     private final Job job1;
     private final Job job2;
@@ -53,23 +39,27 @@ public class SpringBatchValidateApplication {
     @Bean
     public CommandLineRunner commandLineRunner1() {
         return args -> {
-            // Job job = jobRegistry.getJob("Spring Batch Job RunIdIncr");
-            // JobParameters jobParameters = job.getJobParametersIncrementer().getNext(jobExplorer.getLastJobExecution((JobInstance) job).getJobParameters());
 
-            JobExecution jobExecution = jobLauncher.run(job5, new JobParameters()
-                    // 添加作业参数
-                    // new JobParameters( Map.of("name", new JobParameter<>("游诗成", String.class),
-                    //         "age", new JobParameter<>("78fg9", String.class)) )
-            );
-
-            JobParameters jobParameters = new JobParametersBuilder().addLocalDateTime("CurrentTime", LocalDateTime.now()).toJobParameters();
-            jobLauncher.run(job9, jobParameters);
+            // job5,job6需要多次执行，run.id 必须在重写之前，重构一个新的参数对象给执行的run()方法里
+            JobParameters newJobParameters =
+                    // 新建一个空的参数建造者对象 JobParametersBuilder
+                    new JobParametersBuilder(new JobParameters(), jobExplorer)
+                            // 在这个空的参数建造者对象里获取工作job5最后执行过的参数对象信息，并且依据自增参数逻辑，获取更新的参数
+                            .getNextJobParameters(job5)
+                            // 将 参数建造者对象 JobParametersBuilder 转换成 JobParameters 类型
+                            .toJobParameters();
+            JobExecution jobExecution = jobLauncher.run(job5, newJobParameters);
 
             Long newRunId = jobExecution.getJobId();
             long previousRunId = newRunId - 1;
 
             System.out.println("New run id: " + newRunId);
             System.out.println("Previous run id: " + previousRunId);
+
+            // 重构一个当前毫秒时间的参数值去运行job
+            JobParameters jobParameters = new JobParametersBuilder().addLocalDateTime("CurrentTime", LocalDateTime.now()).toJobParameters();
+            jobLauncher.run(job9, jobParameters);
+
         };
     }
 
