@@ -2,6 +2,8 @@ package com.example.service;
 
 import com.example.entity.Employee;
 
+import java.io.IOException;
+
 /**
  * (Employee)表服务接口
  *
@@ -15,37 +17,18 @@ public interface EmployeeService {
      */
     void save(Employee employee);
 
+    /**
+     * 初始化数据：生成50w数据
+     */
+    void dataInit() throws IOException;
 
     /**
-     * 通过ID查询单条数据
-     *
-     * @param id 主键
-     * @return 实例对象
+     * 清空数据
      */
-    Employee queryById(Integer id);
+    void truncateAll();
 
     /**
-     * 新增数据
-     *
-     * @param employee 实例对象
-     * @return 实例对象
+     * 清空employee_temp数据
      */
-    Employee insert(Employee employee);
-
-    /**
-     * 修改数据
-     *
-     * @param employee 实例对象
-     * @return 实例对象
-     */
-    Employee update(Employee employee);
-
-    /**
-     * 通过主键删除数据
-     *
-     * @param id 主键
-     * @return 是否成功
-     */
-    boolean deleteById(Integer id);
-
+    void truncateTemp();
 }

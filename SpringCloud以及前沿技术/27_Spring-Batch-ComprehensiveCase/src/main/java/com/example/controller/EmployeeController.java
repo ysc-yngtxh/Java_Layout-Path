@@ -1,10 +1,20 @@
 package com.example.controller;
 
-import com.example.entity.Employee;
 import com.example.service.EmployeeService;
 import jakarta.annotation.Resource;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.JobParametersBuilder;
+import org.springframework.batch.core.explore.JobExplorer;
+import org.springframework.batch.core.launch.JobLauncher;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
+import java.util.Date;
 
 
 /**
@@ -16,55 +26,35 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("employee")
 public class EmployeeController {
-    /**
-     * 服务对象
-     */
     @Resource
     private EmployeeService employeeService;
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("{id}")
-    public ResponseEntity<Employee> queryById(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok(this.employeeService.queryById(id));
+    @Resource
+    private JobLauncher jobLauncher;
+
+    @Resource
+    private JobExplorer jobExplorer;
+
+    @Resource
+    @Qualifier("csvToDBJob")
+    private Job csvToDBJob;
+
+    @GetMapping("/dataInit")
+    public String dataInit() throws IOException {
+        employeeService.dataInit();
+        return "ok";
     }
 
-    /**
-     * 新增数据
-     *
-     * @param employee 实体
-     * @return 新增结果
-     */
-    @PostMapping
-    public ResponseEntity<Employee> add(Employee employee) {
-        return ResponseEntity.ok(this.employeeService.insert(employee));
-    }
+    @GetMapping("/csvToDB")
+    public String csvToDB() throws Exception {
+        employeeService.truncateTemp(); // 清空数据运行多次执行
 
-    /**
-     * 编辑数据
-     *
-     * @param employee 实体
-     * @return 编辑结果
-     */
-    @PutMapping
-    public ResponseEntity<Employee> edit(Employee employee) {
-        return ResponseEntity.ok(this.employeeService.update(employee));
+        // 需要多次执行，run.id 必须重写之前，再重构一个新的参数对象
+        JobParameters jobParameters = new JobParametersBuilder(new JobParameters(), jobExplorer)
+                .addLong("time", new Date().getTime())
+                .getNextJobParameters(csvToDBJob).toJobParameters();
+        JobExecution run = jobLauncher.run(csvToDBJob, jobParameters);
+        return run.getId().toString();
     }
-
-    /**
-     * 删除数据
-     *
-     * @param id 主键
-     * @return 删除是否成功
-     */
-    @DeleteMapping
-    public ResponseEntity<Boolean> deleteById(Integer id) {
-        return ResponseEntity.ok(this.employeeService.deleteById(id));
-    }
-
 }
 
