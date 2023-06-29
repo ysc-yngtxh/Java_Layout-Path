@@ -2,6 +2,9 @@ package com.example.dao;
 
 import com.example.entity.Employee;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * (Employee)表数据库访问层
  *
@@ -29,5 +32,10 @@ public interface EmployeeDao {
      * 清空临时表数据
      */
     void truncateTemp();
+
+    /**
+     * 查询临时表数据
+     */
+    List<Employee> selectTemp();
 }
 

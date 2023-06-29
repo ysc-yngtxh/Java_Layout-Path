@@ -41,6 +41,10 @@ public class EmployeeController {
     @Qualifier("csvToDBJob")
     private Job csvToDBJob;
 
+    @Resource
+    @Qualifier("dbToDBJob")
+    private Job dbToDBJob;
+
     @GetMapping("/dataInit")
     public ResponseEntity<String> dataInit() throws IOException {
         employeeService.dataInit();
@@ -61,6 +65,16 @@ public class EmployeeController {
     @GetMapping("/Truncate")
     public void delete(){
         employeeService.truncateTemp();
+    }
+
+
+    @GetMapping("/dbToDB")
+    public String dbToDB() throws Exception {
+        employeeService.truncateAll();
+        JobParameters jobParameters = new JobParametersBuilder(new JobParameters(),jobExplorer)
+                .getNextJobParameters(dbToDBJob).toJobParameters();
+        JobExecution run = jobLauncher.run(dbToDBJob, jobParameters);
+        return run.getId().toString();
     }
 }
 

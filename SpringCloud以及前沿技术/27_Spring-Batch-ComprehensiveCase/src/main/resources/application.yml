@@ -37,6 +37,7 @@ spring:
       data-locations:
   batch:
     job:
+      # 表示启动项目时候默认不开启SpringBatch
       enabled: false
 
 # mybatis日志打印
