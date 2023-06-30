@@ -98,15 +98,16 @@ public class SpringBatchConfig {
     @Bean
     @StepScope
     public MyBatisPagingItemReader<Employee> dBToDBJobItemReader(
-            @Value("#{stepExecutionContext[from]}") final Integer from,
-            @Value("#{stepExecutionContext[to]}") final Integer to,
-            @Value("#{stepExecutionContext[range]}") final Integer range){
+            @Value("#{stepExecutionContext[from]}") Integer from,
+            @Value("#{stepExecutionContext[to]}") Integer to,
+            @Value("#{stepExecutionContext[range]}") Integer range){
 
         System.out.println("----------MyBatisPagingItemReader开始-----from: " + from + "  -----to:" + to + "  -----每片数量:" + range);
         MyBatisPagingItemReader<Employee> itemReader = new MyBatisPagingItemReader<Employee>();
         itemReader.setSqlSessionFactory(sqlSessionFactory);
         itemReader.setQueryId("com.example.dao.EmployeeDao.selectTemp");
-        itemReader.setPageSize(SpringBatchConfig.PAGESIZE);
+        // 通过分页来读取数据(还有通过游标来读取数据的方式)，表示每读取1000条数据为一页。
+        itemReader.setPageSize(PAGESIZE);
         Map<String, Object> map = new HashMap<>();
         map.put("from", from);
         map.put("to", to);
@@ -122,18 +123,17 @@ public class SpringBatchConfig {
         itemWriter.setStatementId("com.example.dao.EmployeeDao.save");  //操作sql
         return itemWriter;
     }
-
     // 文件分区处理器-处理分区
     @Bean
     public PartitionHandler dbToDBPartitionHandler() {
         TaskExecutorPartitionHandler handler = new TaskExecutorPartitionHandler();
-        handler.setGridSize(SpringBatchConfig.GRIDSIZE);
+        handler.setGridSize(GRIDSIZE);
         handler.setTaskExecutor(new SimpleAsyncTaskExecutor());
         handler.setStep(workStep());
         try {
             handler.afterPropertiesSet();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return handler;
     }
@@ -141,17 +141,16 @@ public class SpringBatchConfig {
     @Bean
     public Step workStep() {
         return new StepBuilder("workStep", jobRepository)
-                .<Employee, Employee>chunk(SpringBatchConfig.PAGESIZE, batchTransactionManager)
+                .<Employee, Employee>chunk(PAGESIZE, batchTransactionManager)
                 .reader(dBToDBJobItemReader(null, null, null))
                 .writer(dbToDBItemWriter())
                 .build();
     }
-
     // 主分区操作步骤
     @Bean
     public Step masterStep() {
         return new StepBuilder("masterStep", jobRepository)
-                .partitioner(workStep().getName(),new DBToDBPartitioner())
+                .partitioner(workStep().getName(), new DBToDBPartitioner())
                 .partitionHandler(dbToDBPartitionHandler())
                 .build();
     }

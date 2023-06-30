@@ -45,12 +45,14 @@ public class EmployeeController {
     @Qualifier("dbToDBJob")
     private Job dbToDBJob;
 
+    // 生成csv文件数据
     @GetMapping("/dataInit")
     public ResponseEntity<String> dataInit() throws IOException {
         employeeService.dataInit();
         return ResponseEntity.ok().body("五十万数据重新生成成功!!! 🥸🥸🥸");
     }
 
+    // 将csv文件数据添加到临时表 EmployeeTemp 中，返回执行工作的执行Id
     @GetMapping("/csvToDB")
     public String csvToDB() throws Exception {
         employeeService.truncateTemp(); // 清空数据运行多次执行
@@ -62,12 +64,7 @@ public class EmployeeController {
         return run.getId().toString();
     }
 
-    @GetMapping("/Truncate")
-    public void delete(){
-        employeeService.truncateTemp();
-    }
-
-
+    // 将临时表EmployeeTemp数据迁移到 Employee 表中
     @GetMapping("/dbToDB")
     public String dbToDB() throws Exception {
         employeeService.truncateAll();

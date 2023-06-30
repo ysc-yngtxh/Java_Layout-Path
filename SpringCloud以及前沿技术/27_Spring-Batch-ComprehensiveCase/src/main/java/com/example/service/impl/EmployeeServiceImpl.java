@@ -19,6 +19,7 @@ import java.util.Random;
  * @since 2023-06-27 23:55:26
  */
 @Service("employeeService")
+@SuppressWarnings("ResultOfMethodCallIgnored")
 public class EmployeeServiceImpl implements EmployeeService {
     @Resource
     private EmployeeDao employeeDao;

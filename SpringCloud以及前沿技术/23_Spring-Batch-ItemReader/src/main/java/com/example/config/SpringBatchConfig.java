@@ -240,7 +240,7 @@ public class SpringBatchConfig {
                 .parameterValues(Map.of("age", 16))
                 // 定义读取每页数据的条数
                 .pageSize(10)
-                // 数据库独处数据跟用户对象属性一一映射
+                // 数据库读取数据跟用户对象属性一一映射
                 .rowMapper(new UserRowMapper())
                 .build();
     }
