@@ -31,7 +31,7 @@ import java.util.Map;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-06-17 18:04
+ * @dateTime 2023-06-30 07:26
  * @apiNote TODO SpringBatch配置类
  */
 @Configuration
@@ -48,6 +48,7 @@ public class SpringBatchConfig {
     @Value("${job.data.path}")
     private String path;
 
+    // TODO 工作一： 将csv文件数据读取到临时表EmployeeTemp中
     // 多线程读-读文件，使用FlatFileItemReader
     @Bean
     public FlatFileItemReader<Employee> cvsToDBItemReader() {
@@ -60,17 +61,15 @@ public class SpringBatchConfig {
                 .targetType(Employee.class)
                 .build();
     }
-
     // 数据库写-使用mybatis提供批处理读入
     @Bean
     public MyBatisBatchItemWriter<Employee> cvsToDBItemWriter() {
         MyBatisBatchItemWriter<Employee> itemWriter = new MyBatisBatchItemWriter<>();
         itemWriter.setSqlSessionFactory(sqlSessionFactory); // 需要指定sqlSession工厂
-        // 指定要操作sql语句，路径id为：EmployeeMapper.xml定义的sql语句id
+        // 指定要操作sql语句，路径id为：EmployeeDao.xml定义的sql语句id
         itemWriter.setStatementId("com.example.dao.EmployeeDao.saveTemp");  // 操作sql
         return itemWriter;
     }
-
     @Bean
     public Step csvToDBStep() {
         return new StepBuilder("csvToDBStep", jobRepository)
@@ -81,7 +80,6 @@ public class SpringBatchConfig {
                 .build();
 
     }
-
     @Bean
     public Job csvToDBJob() {
         return new JobBuilder("csvToDB-step-job", jobRepository)
@@ -91,13 +89,12 @@ public class SpringBatchConfig {
                 .build();
     }
 
-    //
-    public static int PAGESIZE = 1000;   //mybatis分页读取数据，跟chunkSize 一样
-    public static int RANGE = 10000;  //每个分区读取数据范围(理解为个数)
-    public static int GRIDSIZE = 50;  //分区个数
 
+    public static int PAGESIZE = 1000;   // mybatis分页读取数据，跟chunkSize 一样
+    public static int RANGE = 10000;  // 每个分区读取数据范围(理解为个数)
+    public static int GRIDSIZE = 50;  // 分区个数
 
-    //读数据-从employee_temp 表读 -- mybatis
+    // TODO 工作二：读数据-从临时表 employee_temp 表数据读到 employee 表中
     @Bean
     @StepScope
     public MyBatisPagingItemReader<Employee> dBToDBJobItemReader(
@@ -117,7 +114,7 @@ public class SpringBatchConfig {
 
         return itemReader;
     }
-    //数据库写- 写入到employee 表中
+    // 数据库写- 写入到employee 表中
     @Bean
     public MyBatisBatchItemWriter<Employee> dbToDBItemWriter(){
         MyBatisBatchItemWriter<Employee> itemWriter = new MyBatisBatchItemWriter<>();
@@ -126,7 +123,7 @@ public class SpringBatchConfig {
         return itemWriter;
     }
 
-    //文件分区处理器-处理分区
+    // 文件分区处理器-处理分区
     @Bean
     public PartitionHandler dbToDBPartitionHandler() {
         TaskExecutorPartitionHandler handler = new TaskExecutorPartitionHandler();
@@ -140,7 +137,7 @@ public class SpringBatchConfig {
         }
         return handler;
     }
-    //每个从分区操作步骤
+    // 每个从分区操作步骤
     @Bean
     public Step workStep() {
         return new StepBuilder("workStep", jobRepository)
@@ -150,7 +147,7 @@ public class SpringBatchConfig {
                 .build();
     }
 
-    //主分区操作步骤
+    // 主分区操作步骤
     @Bean
     public Step masterStep() {
         return new StepBuilder("masterStep", jobRepository)
@@ -165,5 +162,4 @@ public class SpringBatchConfig {
                 .incrementer(new RunIdIncrementer())
                 .build();
     }
-
 }
