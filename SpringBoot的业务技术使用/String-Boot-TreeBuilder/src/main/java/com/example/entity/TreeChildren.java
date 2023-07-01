@@ -30,23 +30,29 @@ import java.util.Set;
 public class TreeChildren implements Serializable {
     @Serial
     private static final long serialVersionUID = 413556348265113072L;
+
     /**
      * 主键
      */
     @TableId
     private Integer id;
+
     /**
      * 地址
      */
     private String address;
+
     /**
      * 父节点Id
      */
+    @TableField("parentId")  // 这里需要加上注解映射数据库中的字段名，否则sql语句中的返回字段将会是 parent_id
     private Integer parentId;
+
     /**
      * 备注
      */
     private String remake;
+
     /**
      * 排序
      */

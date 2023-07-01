@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.6</version>
+        <version>3.1.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
@@ -52,7 +52,7 @@
             <artifactId>guava</artifactId>
             <version>31.1-jre</version>
             <!-- or, for Android: -->
-<!--            <version>31.1-android</version>-->
+            <!-- <version>31.1-android</version> -->
         </dependency>
     </dependencies>
 
@@ -64,7 +64,7 @@
                 <configuration>
                     <excludes>
                         <exclude>
-                            <groupId>org.projectlombok</groupId>
+                            <groupId>org.project.lombok</groupId>
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
