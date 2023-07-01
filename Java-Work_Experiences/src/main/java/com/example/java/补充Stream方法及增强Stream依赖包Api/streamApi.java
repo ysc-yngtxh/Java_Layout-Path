@@ -41,12 +41,13 @@ public class streamApi {
          * 假设您有一个整数列表，并且想要在某个初始值（这里使用23）基础上计算所有元素的总和，运行得到结果为26（23+1+1+1）
          */
         List<Integer> integers = Arrays.asList(1, 1, 1);
-        Integer reduced = integers.stream().reduce(23, (a, b) -> a + b);
+        Integer reduced1 = integers.stream().reduce(23, (a, b) -> a + b);
+        Integer reduced2 = integers.stream().reduce(23, Integer::sum);  //同上效果一样
 
         // TODO 3、分组 groupingBy
         List<User> users = Arrays.asList(
                 new User(1L, null, null, 0, null
-                        , new Models(new ModelView("WUHEN"), null), null)
+                        , new Models(new ModelView("WUHAN"), null), null)
                 , new User(1L, "YOUSHICHENG", "google@163.com", 25, null
                         , new Models(new ModelView("SHENZHEN"), null), null));
         // 第一个例子中，为每个组创建了Person集合；
@@ -119,9 +120,11 @@ public class streamApi {
         Map<Long, User> collect1 = users.stream()
                 .filter(ObjectUtil::isNotEmpty)
                 .collect(Collectors.toMap(User::getId, y -> y));
+        log.error(collect1.toString());
         // 这里第三个参数表示：当key值重复了，取下标靠前的值;如果这里(v1, v2) -> v2，则表示key值重复了，取下标靠后的值
         Map<Long, User> collect2 = users.stream()
                 .filter(ObjectUtil::isNotEmpty)
-                .collect(Collectors.toMap(User::getId, y -> y, (v1, v2) -> v1));
+                .collect(Collectors.toMap(User::getId, y -> y, (v1, v2) -> v2));
+        log.error(collect2.toString());
     }
 }

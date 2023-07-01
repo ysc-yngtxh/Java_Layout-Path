@@ -28,8 +28,8 @@ import static io.vavr.control.Validation.valid;
  */
 public class openVavr {
     public static final Log log = LogFactory.get(openVavr.class);
-    static final String NAME_ERR = "Invalid characters in name: ";
-    static final String AGE_ERR = "Age must be at least 0";
+    static final String NAME_ERR = "Invalid Characters In Name: ";
+    static final String AGE_ERR = "Age Must Be At Least 0";
 
     public static void main(String[] args) {
         // TODO 1、元组(引用元素时从1开始，而不是0。),元组中就可以存进不同类型的数据
@@ -50,7 +50,7 @@ public class openVavr {
 
         // TODO 3、验证Validation。
         // 通常情况下程序遇到错误未做处理就会终止。然而，Validation会继续处理，并将程序错误累积，最终最为一个整体处理。
-        User user = new User(1L,"youshicheng","coogle@163.com",25);
+        User user = new User(1L, "youshicheng", "coogle@163.com", 25);
         String invalidChars = user.getName().replaceAll("[a-zA-Z]", "");
         Validation<String, String> objects1 = invalidChars.isEmpty() ?
                 valid(user.getName())
@@ -61,7 +61,7 @@ public class openVavr {
         // 这里只会做校验处理，所以当没有遇到错误时并不会返回po类数据，因此对象为空(而且我们业务处理一般只需要错误信息即可)
         log.info(users.isInvalid() ? users.getError().toString() : users.get().toString());
 
-        User user1 = new User(1L,"youshicheng😃--97","coogle@163.com",-1);
+        User user1 = new User(1L, "youshicheng😃--97", "coogle@163.com", -1);
         String invalidChars1 = user1.getName().replaceAll("[a-zA-Z]", "");
         Validation<Seq<String>, User> users1 = Validation.combine(
                 invalidChars1.isEmpty() ? valid(user1.getName())
@@ -73,13 +73,13 @@ public class openVavr {
         log.info(String.valueOf(users1.getError().size()));
         log.info(users1.getError().get(0) +" && "+ users1.getError().get(1));
         if (users1.isInvalid()){
-            String error = users1.getError().get(0);
+            StringBuilder error = new StringBuilder(users1.getError().get(0));
             if (users1.getError().size() >= 2){
                 for (int i = 1; i < users1.getError().size(); i++) {
-                    error = error +" && "+ users1.getError().get(i);
+                    error.append(" && ").append(users1.getError().get(i));
                 }
             }
-            log.info(error);
+            log.info(error.toString());
         }
 
         // TODO 4、模式匹配Pattern Matching
@@ -89,7 +89,7 @@ public class openVavr {
                 Case($(1), "one"),
                 Case($(is(2)), "two"),//写法效果是一样的的
                 Case($(3), "three"),
-                Case($(), "?"));  //除开1、2、3的其他情况会走这里
+                Case($(), "other......"));  //除开1、2、3的其他情况会走这里
         log.info(output);
 
         int i = 5;

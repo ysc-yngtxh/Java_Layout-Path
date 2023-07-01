@@ -34,7 +34,7 @@ public class streamExApi {
     public static void main(String[] args) throws FileNotFoundException {
         List<User> users = Arrays.asList(
                 new User(null,null,null,0,null
-                        ,new Models(new ModelView("WUHEN"),null),null)
+                        ,new Models(new ModelView("WUHAN"),null),null)
                 ,new User(1L,"YOUSHICHENG","google@163.com",25,null
                         ,new Models(new ModelView("SHENZHEN"),null),null));
         // TODO 1、简单使用StreamEx映射name属性输出为List(不需要collect)
@@ -89,7 +89,7 @@ public class streamExApi {
 
         // TODO 9、StreamEx读文件
         BufferedReader bf =
-                new BufferedReader(new FileReader("D:\\IDEA\\Java-Work Experiences\\src\\main\\java\\com\\example\\java\\vo\\User.java"));
+                new BufferedReader(new FileReader("/Users/youshicheng/IDEA/java-layout-path/Java-Work_Experiences/src/main/java/com/example/java/vo/User.java"));
         StreamEx.ofLines(bf)
                 .remove(String::isEmpty)
                 .forEach(System.out::println);
@@ -109,7 +109,7 @@ public class streamExApi {
         List<String> stringList = StreamEx.of(users)
                 .map(User::getName)
                 .prepend("begin--")
-                .append("end")
+                .append("--end")
                 .toList();
         log.info(stringList.toString());
 

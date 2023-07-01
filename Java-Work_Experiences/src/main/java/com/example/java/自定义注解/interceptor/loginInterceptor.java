@@ -1,12 +1,12 @@
 package com.example.java.自定义注解.interceptor;
 
 import com.example.java.自定义注解.annotation.LoginRequired;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
  * @description: TODO
  * @date 2022/12/1 13:32
  */
+@SuppressWarnings("NullableProblems")
 public class loginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

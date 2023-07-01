@@ -58,10 +58,10 @@ CustomerCollection {
         /**
          *为什么要用List list = new ArrayList(),而不用ArrayList list = new ArrayList()呢?
          */
-//        1、问题就在于List接口有多个实现类，现在你用的是ArrayList，也许哪一天你需要换成其它的实现类，如LinkedList或者Vector等等，
-//           这时你只要改变这一行就行了： List list = new LinkedList(); 其它使用了list地方的代码根本不需要改动。
-//        2、假设你开始用ArrayList list = new ArrayList(), 这下你有的改了，特别是如果你使用了ArrayList实现类特有的方法和属性。
-//        3、这样的好处是为了代码的可维护性，可复用性，可扩展性以及灵活性，再者就是这符合了里氏代换原则和开闭原则。
+        // 1、问题就在于List接口有多个实现类，现在你用的是ArrayList，也许哪一天你需要换成其它的实现类，如LinkedList或者Vector等等，
+        //    这时你只要改变这一行就行了： List list = new LinkedList(); 其它使用了list地方的代码根本不需要改动。
+        // 2、假设你开始用ArrayList list = new ArrayList(), 这下你有的改了，特别是如果你使用了ArrayList实现类特有的方法和属性。
+        // 3、这样的好处是为了代码的可维护性，可复用性，可扩展性以及灵活性，再者就是这符合了里氏代换原则和开闭原则。
 
         // 集合拆分
         List<String> arrayList1 = Lists.newArrayList("123", "456", "789"

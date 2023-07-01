@@ -26,7 +26,7 @@ public class loginAop {
      * 这里有个问题啊，你会发现切面Controller类中的方法没生效(切面Service层就不会有这问题)：
      *     1、Spring与SpringMVC是2个不同的父子容器， @Aspect如果被spring容器加载的话，
      *       而@Controller注解的这些类的实例化以及注入却是由SpringMVC来完成。
-     *     2、@Aspect如果被spring容器加载的时候，可能Spring MVC容器还未初始化，Controller类还未初始化，所以无法正常织入.
+     *     2、@Aspect如果被spring容器加载的时候，可能Spring MVC容器还未初始化，Controller类还未初始化，所以无法正常植入.
      *
      *  解决方案：
      *     首先去掉@Component注解，然后把  aop:aspectj-autoproxy  移入springmvc配置文件中，并定义bean
