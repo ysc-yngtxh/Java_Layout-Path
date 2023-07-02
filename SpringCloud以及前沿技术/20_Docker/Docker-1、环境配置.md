@@ -207,9 +207,9 @@ ping baidu.com
   ```
   # 安装
   yum install openssh-server -y
-  # 开始
+  # 启动
   systemctl start sshd.service
-  # 启用
+  # 设置开机启动
   systemctl enable sshd.service
   ```
 
