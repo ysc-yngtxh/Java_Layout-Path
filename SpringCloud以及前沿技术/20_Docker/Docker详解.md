@@ -1,3 +1,7 @@
+---
+
+---
+
 ## **学习了解 Docker**
 
 #### 一、安装 虚拟机-VMware、CentOS 镜像系统
@@ -136,3 +140,106 @@ ping baidu.com
 > 2、连接成功
 
 ![241688291354_.pic](src/main/resources/static/241688291354_.pic.jpg)
+
+---
+
+#### 四、系统初始化
+
+- 关闭selinux（它是一个 Linux 内核模块，也是 Linux 的一个安全子系统)
+
+    - 查看状态
+
+      ```
+      getenforce
+      ```
+
+    - 临时关闭
+
+      ```
+      setenforce 0
+      ```
+
+    - 永久关闭
+
+      ```
+      vi /etc/selinux/config
+      ```
+
+      ```
+      # 设置为disabled
+      SELINUX=disabled
+      ```
+
+---
+
+- 防火墙
+
+    - 查看防火墙状态
+
+      ```
+      systemctl status firewalld
+      ```
+
+    - 关闭
+
+      ```
+      systemctl stop firewalld
+      ```
+
+    - 关闭开机启动防火墙
+
+      ```
+      systemctl disable firewalld
+      ```
+
+---
+
+- 安装Net-tools (终端命令，没安装之前是无法执行 ifconfig 等命令的)
+
+  ```
+  yum install net-tools -y
+  ```
+
+---
+
+- 安装Openssh-server(便于直接使用命令进行连接虚拟机)
+
+  ```
+  # 安装
+  yum install openssh-server -y
+  # 开始
+  systemctl start sshd.service
+  # 启用
+  systemctl enable sshd.service
+  ```
+
+  ![261688301191_.pic](src/main/resources/static/261688301191_.pic.png)
+
+---
+
+- 修改Host，使IP映射域名
+
+  ![281688301260_.pic](src/main/resources/static/281688301260_.pic.jpg)
+
+  ![271688301224_.pic](src/main/resources/static/271688301224_.pic.png)
+
+---
+
+- 可以在win上用Xshell等工具SSH连接CentOS
+
+- wget
+
+  ```
+  yum install wget -y
+  ```
+
+---
+
+- CentOS常用工具包
+
+  ```
+  yum install -y wget bash-completion vim lrzsz wget expect net-tools nc nmap tree dos2unix htop iftop iotop unzip telnet sl psmisc nethogs glances bc ntpdate openldap-devel
+  ```
+
+---
+
