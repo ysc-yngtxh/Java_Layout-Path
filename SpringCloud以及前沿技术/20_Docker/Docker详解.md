@@ -8,7 +8,7 @@
 
 ---
 
-> 2、引入CentOS镜像
+> 2、引入CentOS镜像：下载网址（[Index of /centos/7.9.2009/isos/x86_64/ | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror](https://mirrors.tuna.tsinghua.edu.cn/centos/7.9.2009/isos/x86_64/)）
 
 ![81688276903_.pic](src/main/resources/static/81688276903_.pic.jpg)
 
