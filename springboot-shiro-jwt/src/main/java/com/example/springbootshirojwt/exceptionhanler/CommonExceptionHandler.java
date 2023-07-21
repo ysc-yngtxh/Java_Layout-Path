@@ -9,6 +9,6 @@ public class CommonExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)  //异常种类
     public ResponseEntity<ExceptionResult> handlerException(LyException e){
-        return ResponseEntity.status(e.getExceptionEnum().getCord()).body(new ExceptionResult(e.getExceptionEnum()));
+        return ResponseEntity.ok().body(new ExceptionResult(e.getExceptionEnum()));
     }
 }

@@ -47,18 +47,16 @@ class ApplicationTests {
 
     @Autowired
     private RestHighLevelClient client;
-    @Autowired
-    private ElasticsearchClient elasticsearchClient;
 
     @Test
     void contextLoads() throws IOException {
-        //创建索引名为"ysc"的请求
+        // 创建索引名为"ysc"的请求
         CreateIndexRequest request = new CreateIndexRequest("ysc");
-        //客户端执行请求后请求 IndicesClient ,获得响应
+        // 客户端执行请求后请求 IndicesClient ,获得响应
         CreateIndexResponse Response = client.indices().create(request, RequestOptions.DEFAULT);
     }
 
-    //测试获取索引，判断其是否存在
+    // 测试获取索引，判断其是否存在
     @Test
     void testExistIndex() throws IOException{
         GetIndexRequest request = new GetIndexRequest("ysc");
@@ -66,7 +64,7 @@ class ApplicationTests {
         System.out.println(exists);
     }
 
-    //测试删除索引
+    // 测试删除索引
     @Test
     void testDeleteIndex() throws IOException{
         DeleteIndexRequest request = new DeleteIndexRequest("ysc");
@@ -74,24 +72,24 @@ class ApplicationTests {
         System.out.println(delete.isAcknowledged());
     }
 
-    //测试添加文档(插入)
+    // 测试添加文档(插入)
     @Test
     void testAddDocument() throws IOException {
-        //创建对象
+        // 创建对象
         User user = new User();
 
-        //创建文档请求，获取索引名为"user"的对象（如果没有则会自行创建）
+        // 创建文档请求，获取索引名为"user"的对象（如果没有则会自行创建）
         IndexRequest request = new IndexRequest("user");
 
-        //规则 PUT /user/_doc/1000
+        // 规则 PUT /user/_doc/1000
         request.id("1000");
-        request.timeout(TimeValue.timeValueSeconds(1));//timeout用于请求超时设置
-        request.timeout("1s");//timeout用于请求超时设置
+        request.timeout(TimeValue.timeValueSeconds(1)); // timeout用于请求超时设置
+        request.timeout("1s");   // timeout用于请求超时设置
 
-        //将我们的数据放入请求 json
+        // 将我们的数据放入请求 json
         request.source(JSON.toJSONString(user), XContentType.JSON);
 
-        //客户端发送请求
+        // 客户端发送请求
         IndexResponse indexResponse = client.index(request,RequestOptions.DEFAULT);
 
         System.out.println(indexResponse.toString());
@@ -99,11 +97,11 @@ class ApplicationTests {
     }
 
 
-    //获取文档 判断是否存在 GET /user/_doc/1000
+    // 获取文档 判断是否存在 GET /user/_doc/1000
     @Test
     void testIsExists() throws IOException {
         GetRequest getRequest = new GetRequest("user","1000");
-        //不获取返回的_source的上下文了
+        // 不获取返回的_source的上下文了
         /*getRequest.fetchSourceContext(new FetchSourceContext(false));
         getRequest.storedFields("_none_");*/
 
@@ -115,44 +113,44 @@ class ApplicationTests {
 
     }
 
-    //获得文档的信息 GET /user/_doc/10
+    // 获得文档的信息 GET /user/_doc/10
     @Test
     void testGetDocument() throws IOException {
         GetRequest getRequest = new GetRequest("user","10");
         GetResponse getResponse = client.get(getRequest,RequestOptions.DEFAULT);
-        System.out.println(getResponse.getSourceAsString());//打印文档的内容
+        System.out.println(getResponse.getSourceAsString());  // 打印文档的内容
     }
 
-    //更新文档的信息 PUT /user/_doc/1000
+    // 更新文档的信息 PUT /user/_doc/1000
     @Test
     void testPutDocument() throws IOException {
         UpdateRequest updateRequest = new UpdateRequest("user","1000");
-        updateRequest.timeout("1s");//timeout用于请求超时设置
+        updateRequest.timeout("1s");  // timeout用于请求超时设置
 
         User user = new User(1012,"狂神说","20000",18);
         updateRequest.doc(JSON.toJSONString(user), XContentType.JSON);
 
         UpdateResponse updateResponse = client.update(updateRequest,RequestOptions.DEFAULT);
-        System.out.println(updateResponse.status());//打印文档的内容
+        System.out.println(updateResponse.status());  // 打印文档的内容
     }
 
 
-    //删除文档的信息
+    // 删除文档的信息
     @Test
     void testDeleteDocument() throws IOException {
         DeleteRequest deleteRequest = new DeleteRequest("user","1000");
-        deleteRequest.timeout("1s");//timeout用于请求超时设置
+        deleteRequest.timeout("1s"); // timeout用于请求超时设置
 
         DeleteResponse delete = client.delete(deleteRequest,RequestOptions.DEFAULT);
-        System.out.println(delete.status());//打印文档的内容
+        System.out.println(delete.status()); // 打印文档的内容
     }
 
 
-    //特殊的，真的项目一般都会批量插入数据
+    // 特殊的，真的项目一般都会批量插入数据
     @Test
     void testBulkRequest() throws IOException {
         BulkRequest bulkRequest = new BulkRequest();
-        bulkRequest.timeout("10s");//timeout用于请求超时设置
+        bulkRequest.timeout("10s");  // timeout用于请求超时设置
 
         ArrayList<User> userList = new ArrayList<>();
         userList.add(new User(999,"游诗成","4520",3));
@@ -169,7 +167,7 @@ class ApplicationTests {
         userList.add(new User(1010,"游鹏","075",24));
         userList.add(new User(1011,"宁航","78",24));
 
-        for (int i = 0; i < userList.size(); i++) {//请求体，响应体内容都是JSON格式
+        for (int i = 0; i < userList.size(); i++) {  // 请求体，响应体内容都是JSON格式
             bulkRequest.add(
                     new IndexRequest("user")
                             .id(""+(i+1))
@@ -177,30 +175,30 @@ class ApplicationTests {
             );
         }
         BulkResponse bulk = client.bulk(bulkRequest, RequestOptions.DEFAULT);
-        System.out.println(bulk.hasFailures());//是否失败，返回falst表示成功！
+        System.out.println(bulk.hasFailures());  // 是否失败，返回falst表示成功！
     }
 
-    //查询
-    //SearchRequest  搜索请求
-    //SearchSourceBuilder 条件构造
-    //MatchAllQueryBuilder 匹配所有
-    //xxx  QueryBuilder  对应我们刚才
+    // 查询
+    // SearchRequest  搜索请求
+    // SearchSourceBuilder 条件构造
+    // MatchAllQueryBuilder 匹配所有
+    // xxx  QueryBuilder  对应我们刚才
     @Test
     void testSearch() throws IOException{
-        //获取目标文档对象
+        // 获取目标文档对象
         SearchRequest request = new SearchRequest("user");
-        //搜索构建器
+        // 搜索构建器
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-        //查询条件，我们可以使用QueryBuilder工具来实现
+        // 查询条件，我们可以使用QueryBuilder工具来实现
         MatchQueryBuilder matchQueryBuilder = QueryBuilders.matchQuery("name","邵荣珍");
 
         sourceBuilder.query(matchQueryBuilder);
-        sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));//timeout用于请求超时设置
+        sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS)); // timeout用于请求超时设置
 
         request.source(sourceBuilder);
         SearchResponse searchResponse = client.search(request,RequestOptions.DEFAULT);
 
-        System.out.println(JSON.toJSONString(searchResponse.getHits()));//请求体，响应体内容都是JSON格式
+        System.out.println(JSON.toJSONString(searchResponse.getHits())); // 请求体，响应体内容都是JSON格式
         System.out.println("==================");
 
         for (SearchHit documentFields : searchResponse.getHits().getHits()) {
@@ -210,24 +208,24 @@ class ApplicationTests {
         client.close();
     }
 
-    //HighlightBuilder 构建高亮
-    //TermQueryBuilder  精确查询
+    // HighlightBuilder 构建高亮
+    // TermQueryBuilder  精确查询
     @Test
     void testSearchHigh() throws IOException {
-        //获取目标文档对象
+        // 获取目标文档对象
         SearchRequest request = new SearchRequest("user");
-        //搜索构建器
+        // 搜索构建器
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 
         TermQueryBuilder title = QueryBuilders.termQuery("name","成");
         sourceBuilder.query(title);
         sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
 
-        //构建高亮
-        HighlightBuilder highlightBuilder = new HighlightBuilder();  //高亮构建器
-        highlightBuilder.field("name");//高亮的字段
-        highlightBuilder.requireFieldMatch(false);//是否多个字段都高亮
-        highlightBuilder.preTags("<span style='color:red'>");//前缀后缀
+        // 构建高亮
+        HighlightBuilder highlightBuilder = new HighlightBuilder();  // 高亮构建器
+        highlightBuilder.field("name");                        // 高亮的字段
+        highlightBuilder.requireFieldMatch(false);             // 是否多个字段都高亮
+        highlightBuilder.preTags("<span style='color:red'>");  // 前缀后缀
         highlightBuilder.postTags("</span>");
         sourceBuilder.highlighter(highlightBuilder);
 
@@ -236,19 +234,19 @@ class ApplicationTests {
 
         System.out.println(JSON.toJSONString(search.getHits()));
 
-        //解析结果
+        // 解析结果
         for (SearchHit hit : search.getHits().getHits()) {
-            //解析高亮的字段
-            //获取高亮字段
+            // 解析高亮的字段
+            // 获取高亮字段
             Map<String, HighlightField> highlightFields = hit.getHighlightFields();
             System.out.println("=========="+highlightFields);
 
             HighlightField name = highlightFields.get("name");
             System.out.println("==name=="+name);
 
-            System.out.println(hit.getSourceAsMap());//原本的结果
+            System.out.println(hit.getSourceAsMap());  // 原本的结果
 
-            //将原来的字段替换为高亮字段即可
+            // 将原来的字段替换为高亮字段即可
             if (name != null){
                 String s = Arrays.toString(name.getFragments());
                 System.out.println(s);
@@ -261,17 +259,17 @@ class ApplicationTests {
     //排序分页
     @Test
     void testSearchOrder() throws IOException{
-        //获取目标文档对象
+        // 获取目标文档对象
         SearchRequest searchRequest = new SearchRequest("user");
-        //搜索构建器
+        // 搜索构建器
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-        //排序、分页条件
+        // 排序、分页条件
         sourceBuilder.sort("id", SortOrder.ASC);
-        sourceBuilder.from(5);//表示偏移量，不表示第几页。就是总共有13条数据，from是12，那么就会从第13条数据开始
+        sourceBuilder.from(5); // 表示偏移量，不表示第几页。就是总共有13条数据，from是12，那么就会从第13条数据开始
         sourceBuilder.size(7);
         //将构建器交给目标文档对象
         searchRequest.source(sourceBuilder);
-        //获取到响应消息
+        // 获取到响应消息
         SearchResponse search = client.search(searchRequest, RequestOptions.DEFAULT);
 
         System.out.println(JSON.toJSONString(search.getHits()));
@@ -285,41 +283,41 @@ class ApplicationTests {
     }
 
 
-    //汇总搜索内容
+    // 汇总搜索内容
     @Test
     void testsuibian() throws IOException {
-        //搜索文档请求
+        // 搜索文档请求
         SearchRequest searchRequest = new SearchRequest("user");
-        //搜索构建器
+        // 搜索构建器
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-        //模糊查询
+        // 模糊查询
         MatchQueryBuilder matchQueryBuilder = QueryBuilders.matchQuery("name","李");
-        //将查询条件交给构建器
+        // 将查询条件交给构建器
         sourceBuilder.query(matchQueryBuilder);
         sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
-        //进行排序
+        // 进行排序
         sourceBuilder.sort("id",SortOrder.ASC);
-        //进行分页
+        // 进行分页
         sourceBuilder.from(0);
         sourceBuilder.size(5);
-        //构建高亮
+        // 构建高亮
         HighlightBuilder highlightBuilder = new HighlightBuilder();
-        //构建高亮的字段
+        // 构建高亮的字段
         highlightBuilder.field("name");
-        //是否多个字段都高亮
+        // 是否多个字段都高亮
         highlightBuilder.requireFieldMatch(true);
-        //前缀后缀
+        // 前缀后缀
         highlightBuilder.preTags("<span style='color:red'>");
         highlightBuilder.postTags("</span>");
-        //将构建高亮方式交给构建器
+        // 将构建高亮方式交给构建器
         sourceBuilder.highlighter(highlightBuilder);
         sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
-        //构建器交给文档对象
+        // 构建器交给文档对象
         searchRequest.source(sourceBuilder);
-        //返回响应
+        // 返回响应
         SearchResponse response = client.search(searchRequest,RequestOptions.DEFAULT);
 
-        //解析结果
+        // 解析结果
         for (SearchHit searchHit : response.getHits().getHits()){
             System.out.println(searchHit.getSourceAsMap());
             System.out.println( Arrays.toString(searchHit.getHighlightFields().get("name").getFragments()) );
