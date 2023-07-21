@@ -25,14 +25,12 @@
   ```
 
 ## 二、启动docker-ce社区版
-
-- 设置开机启动
-
+- ### 2.1.1 设置开机启动
   ```
   systemctl enable docker
   ```
 
-- 启动docker
+- ### 2.1.2 启动docker
 
   ```
   # 启动
@@ -41,31 +39,34 @@
   systemctl restart docker
   ```
 
-- 停止docker
+- ### 2.1.3 停止docker
 
   ```
   systemctl stop docker
   ```
 
-- 其他
+- ### 2.1.4 其他
 
   ```
   # 查看docker版本
   docker version
+  
   # 查看docker信息
   docker info
+  
   # docker-client
   ```
 
-- 启动docker后需要安装ubuntu(乌邦图)系统，由于下载地址在国外，速度会非常缓慢。因此我们需要在国内找一个镜像下载
+- ### 2.2 配置镜像加速
+  - 启动docker后需要安装ubuntu(乌邦图)系统，由于下载地址在国外，速度会非常缓慢。因此我们需要在国内找一个镜像下载
 
-  [阿里云容器镜像服务 (aliyun.com)](https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors)
-  ![image-20230721174626022](src/main/resources/static/image-20230721174626022.png)
+    [阿里云容器镜像服务 (aliyun.com)](https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors)
+    ![image-20230721174626022](src/main/resources/static/image-20230721174626022.png)
 
-  [道客镜像站_DaoCloud道客](https://www.daocloud.io/mirror)
-  ![image-20230721174936892](src/main/resources/static/image-20230721174936892.png)
+    [道客镜像站_DaoCloud道客](https://www.daocloud.io/mirror)
+    ![image-20230721174936892](src/main/resources/static/image-20230721174936892.png)
 
-- 然后在命令行中依次输入以下命令,便是设置好了镜像
+- ### 2.2.2 在命令行中进行镜像配置
 
   ```
   sudo mkdir -p /etc/docker
@@ -85,7 +86,7 @@
   # 查看镜像是否添加成功
   cat /etc/docker/daemon.json
   ```
- 
+
   ```
   # 镜像添加成功，我们需要加载一下让镜像生效
   sudo systemctl daemon-reload
@@ -96,7 +97,7 @@
   sudo systemctl restart docker
   ```
 
-- 下载ubuntu镜像系统
+- ### 2.2.3 下载ubuntu镜像系统
 
   ```
   # 查看docker有哪些容器
@@ -109,7 +110,7 @@
   docker pull ubuntu
   ```
 
-- 宿主机网卡转发
+- ### 2.2.4 宿主机网卡转发
   - 我们的docker中有许多的容器，每一个容器中可能有不同的服务。
     例如ubuntu+reis、ubuntu+mysql、ubuntu+kafaka.....
   - 所以我们在请求这些服务的时候，需要通过转发才能把合适的请求打给我们想要的服务上面。因此我们需要进行一些转发配置
