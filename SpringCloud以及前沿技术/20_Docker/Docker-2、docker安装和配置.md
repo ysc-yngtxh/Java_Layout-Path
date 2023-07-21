@@ -110,6 +110,9 @@
   ```
 
 - 宿主机网卡转发
+  - 我们的docker中有许多的容器，每一个容器中可能有不同的服务。
+    例如ubuntu+reis、ubuntu+mysql、ubuntu+kafaka.....
+  - 所以我们在请求这些服务的时候，需要通过转发才能把合适的请求打给我们想要的服务上面。因此我们需要进行一些转发配置
 
   ```
   cat <<EOF > /etc/sysctl.d/docker.conf
