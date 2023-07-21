@@ -24,7 +24,7 @@ public class TokenController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<BackResponse> testdemo(@RequestBody User user, HttpServletRequest request) {
+    public ResponseEntity<BackResponse> testDemo(@RequestBody User user, HttpServletRequest request) {
         /*
            我算是发现了，程序员的bug是一个接一个啊。这里登录还是需要进行认证授权工作的，必须是先进行认证身份后，才能进行后面的数据处理
            把shiro流程稍微说一下：

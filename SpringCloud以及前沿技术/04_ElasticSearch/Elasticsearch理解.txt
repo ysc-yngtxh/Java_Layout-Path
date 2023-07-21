@@ -62,7 +62,7 @@ Elasticsearch是一个分布式的搜索引擎
                 "number_of_shards": "8",    ###主分片8块
                 "number_of_replicas": "1"   ###副本1个，副本分片8块
               }
-            }
+            },
                mapping映射。用来定义一个文档以及其所包含的字段如何被存储和索引，可以在映射中事先定义字段的数据类型、字段的权重、分词器等属性，
                就如同在关系型数据库中创建数据表时会设置字段的类型。
             "mappings":{
@@ -105,7 +105,7 @@ Elasticsearch是一个分布式的搜索引擎
           {
               "title":"超米手机",
               "images":"http://image.leyou.com/12479122.jpg",
-              "price":3699.00,
+              "price":3699.00
           }
 
       ④、更新数据(PUT)
@@ -125,7 +125,7 @@ Elasticsearch是一个分布式的搜索引擎
                 {                                  {
                   "query": {                          "query": {
                      "match": {                         "match_all": {}
-                       "name": 大米手机"                }
+                       "title": "大米手机"                }
                      }                             }
                   }
                 }

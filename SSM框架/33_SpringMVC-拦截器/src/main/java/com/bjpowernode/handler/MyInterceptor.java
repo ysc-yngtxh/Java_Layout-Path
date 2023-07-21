@@ -8,7 +8,8 @@ import java.util.Date;
 
 /**
  * @author 游家纨绔
- */ //拦截器类：拦截用户的请求
+ * @dep 拦截器类：拦截用户的请求
+ */
 public class MyInterceptor implements HandlerInterceptor {
     long btime;
     /**
