@@ -66,7 +66,7 @@
     [道客镜像站_DaoCloud道客](https://www.daocloud.io/mirror)
     ![image-20230721174936892](src/main/resources/static/image-20230721174936892.png)
 
-- ### 2.2.2 在命令行中进行镜像配置
+- ### 2.2.1 在命令行中进行镜像配置
 
   ```
   sudo mkdir -p /etc/docker
@@ -97,7 +97,7 @@
   sudo systemctl restart docker
   ```
 
-- ### 2.2.3 下载ubuntu镜像系统
+- ### 2.3 下载ubuntu镜像系统
 
   ```
   # 查看docker有哪些容器
@@ -110,7 +110,7 @@
   docker pull ubuntu
   ```
 
-- ### 2.2.4 宿主机网卡转发
+- ### 2.4 宿主机网卡转发
   - 我们的docker中有许多的容器，每一个容器中可能有不同的服务。
     例如ubuntu+redis、ubuntu+mysql、ubuntu+kafka.....
   - 所以我们在请求这些服务的时候，需要通过转发才能把合适的请求打给我们想要的服务上面。因此我们需要进行一些转发配置
