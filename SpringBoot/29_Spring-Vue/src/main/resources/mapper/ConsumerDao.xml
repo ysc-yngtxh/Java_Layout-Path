@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.ConsumerDao">
+
+    <resultMap type="com.example.entity.Consumer" id="ConsumerMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="age" column="age" jdbcType="INTEGER"/>
+        <result property="sex" column="sex" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into consumer(username, password, name, age, sex, phone, address, delete_flag)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.username}, #{entity.password}, #{entity.name}, #{entity.age}, #{entity.sex}, #{entity.phone}, #{entity.address}, #{entity.deleteFlag})
+        </foreach>
+        on duplicate key update
+        username = values(username),
+        password = values(password),
+        name = values(name),
+        age = values(age),
+        sex = values(sex),
+        phone = values(phone),
+        address = values(address),
+        delete_flag = values(deleteFlag),
+    </insert>
+</mapper>
+
