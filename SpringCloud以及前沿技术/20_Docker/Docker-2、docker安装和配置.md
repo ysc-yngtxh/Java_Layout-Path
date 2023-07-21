@@ -24,7 +24,7 @@
   yum install -y docker-ce-23.0.6
   ```
 
-## 二、启动dock er-ce社区版
+## 二、启动docker-ce社区版
 
 - 设置开机启动
 
@@ -57,16 +57,5 @@
   # docker-client
   
   ```
-sudo mkdir -p /etc/docker
-sudo tee /etc/docker/daemon.json <<-'EOF'
-{
-  "registry-mirrors": [
-    "https://pswmha6n.mirror.aliyuncs.com",
-    "http://f1361db2.m.daocloud.io"
-  ]
-}
-EOF
-sudo systemctl daemon-reload
-sudo systemctl restart docker
 
   

@@ -227,7 +227,7 @@ ping baidu.com
 
 - 可以在win上用Xshell等工具SSH连接CentOS
 
-- wget
+- wget（下载工具）
 
   ```
   yum install wget -y
