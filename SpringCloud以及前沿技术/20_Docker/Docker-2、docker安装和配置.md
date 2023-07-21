@@ -9,7 +9,7 @@
   yum clean all && yum makecache
   ```
 
-- 查看可下载版本
+- 查看可下载版本123
 
   ```
   yum list docker-ce --showduplicates | sort -r
