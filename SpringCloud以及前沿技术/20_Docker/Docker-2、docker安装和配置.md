@@ -55,6 +55,10 @@
   docker info
   
   # docker-client
+  # 列出本地主机上已有镜像的基本信息
+  docker images
+  # 搜索docker有哪有ubuntu版本
+  docker search ubuntu
   ```
 
 - ### 2.2 配置镜像加速
