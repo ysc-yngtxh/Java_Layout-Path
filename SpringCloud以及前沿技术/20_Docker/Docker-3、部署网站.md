@@ -26,7 +26,7 @@ docker build -t java:17.0.8 .
 # 镜像名：java；版本：17.0.8；需要注意的是后面一定要空格之后有一个.符号(表示的是在当前路径下；如果是docker build -t /opt/java:17.0.8 .则表示在路径/opt下的Dockerfile构建镜像)
 
 docker images
-![输入图片说明](src/main/resources/static/image.png)
+![输入图片说明](src/main/resources/static/image1.png)
 
 将我们的SpringBoot项目上传到服务器，可以通过XSell直接拖进我们想存放的目录下
 并在该目录下进行启动容器步骤配置
@@ -47,7 +47,7 @@ CMD ["java", "-jar", "/app.jar"]
 # 在当前路径下构建名为docker-springboot的镜像，后面的为镜像版本(可写可不写，不写的话就默认为latest)
 docker build -t docker-springboot:1.0.0 .
 docker images
-![输入图片说明](src/main/resources/static/image.png)
+![输入图片说明](src/main/resources/static/image1.png)
 
 # 运行镜像docker-springboot，并取名容器名为docker-springboot
 docker run -d -p 8080:8080 --name docker-springboot docker-springboot
