@@ -1,10 +1,54 @@
-查看当前下载的jdk版本
-https://www.oracle.com/java/technologies/downloads/#jdk17-linux
-通过wget命令下载jdk17
-wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
-下载完需要我们通过配置Dockerfile来制作镜像
-vim Dockerfile
+## 一、构建Java运行环境镜像
 
+### 1.1 拉取ubuntu镜像
+
+```
+docker pull ubuntu:23.04
+```
+
+### 1.2 拉取mysql镜像
+
+```
+docker pull mysql:8.0.26
+docker images
+```
+
+### 1.2.1 运行mysql镜像
+
+> ##### **docker run -d -p 3306:3306 --name docker-mysql -v /mydata:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=131474 mysql:8.0.26**
+>
+> - -d : 作为守护进程
+> - -p 3306:3306 : 第一个3306是指mysql这个服务的端口为3306；第二个3306是容器里运行环境开放的端口
+> - --name docker-mysql : 表示取的运行容器的名字
+> - -v /mydata:/var/lib/mysql : 将本机的/mydata下文件跟容器中/var/lib/mysql文件同步
+> - -e MYSQL_ROOT_PASSWORD=131474 : 设置mysql初始密码
+> - mysql:8.0.26 : 就是容器运行的来源镜像
+
+```
+# 显示所有docker容器
+docker ps
+```
+
+
+### 1.3 下载jdk17安装包
+#### 1.3.1 下载
+
+``` 
+# 通过wget命令下载jdk17
+wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
+
+# 浏览器查看当前下载的jdk版本
+https://www.oracle.com/java/technologies/downloads/#jdk17-linux
+```
+
+
+#### 1.3.2 配置Dockerfile来制作jdk17镜像
+```
+# 进入当前路径的Dockerfile配置文件中
+vim Dockerfile
+```
+
+```
 # 指定基础镜像 ubuntu:23.04
 FROM ubuntu:23.04
 
@@ -18,21 +62,30 @@ ADD jdk-17_linux-x64_bin.tar.gz /usr/local/
 # 运行指定的命令
 RUN javac --version \
     && java --version
+```
 
-
-
-构建我们的服务器Java镜像
+#### 1.3.3 构建我们的jdk17镜像
+```
+# 镜像名：java；版本：17.0.8
 docker build -t java:17.0.8 .
-# 镜像名：java；版本：17.0.8；需要注意的是后面一定要空格之后有一个.符号(表示的是在当前路径下；如果是docker build -t /opt/java:17.0.8 .则表示在路径/opt下的Dockerfile构建镜像)
 
-docker images
+-- 需要注意的是命令最后面一定要空格之后接一个.符号。表示的是通过当前路径下的Dockerdile构建jdk17镜像；
+-- 如果是docker build -t /opt/java:17.0.8 . 则表示通过路径/opt下的Dockerfile构建jdk17镜像)
+```
+
+> 查看构建完成的jdk17镜像：docker images
 ![输入图片说明](src/main/resources/static/image1.png)
 
-将我们的SpringBoot项目上传到服务器，可以通过XSell直接拖进我们想存放的目录下
-并在该目录下进行启动容器步骤配置
-vim dockerfile
+#### 1.4.1 上传我们的SpringBoot项目并进行Dockerfile配置
+> 新建一个目录：  
+> mkdir ./opt/dockerfiles
+> 
+> 将我们的SpringBoot项目上传到服务器，可以通过Xshell直接拖进我们想存放的目录下，
+并在该目录下进行启动容器步骤配置  
+> 
+> vim dockerfile
 
-
+```
 # 指定基础镜像：仓库是java，tag是17.0.8
 FROM jdk:17.0.8
 # 定义匿名数据卷。相当于数据存档点，可以有多个，方便回到想要的数据存档点
@@ -43,16 +96,19 @@ ADD *.jar app.jar
 EXPOSE 8082
 # 容器启动时要执行的命令--启动Java命令
 CMD ["java", "-jar", "/app.jar"]
+```
 
-# 在当前路径下构建名为docker-springboot的镜像，后面的为镜像版本(可写可不写，不写的话就默认为latest)
+#### 1.4.2 构建名为docker-springboot的镜像，后面的为镜像版本(可写可不写，不写的话就默认为latest)
+```
 docker build -t docker-springboot:1.0.0 .
 docker images
+```
 ![输入图片说明](src/main/resources/static/image1.png)
 
 # 运行镜像docker-springboot，并取名容器名为docker-springboot
 docker run -d -p 8080:8080 --name docker-springboot docker-springboot
 
-项目成功运行，我们现在来测试一下吧。
+项目成功运行，我们现在来测试一下吧。这里的path路径被我使用switchHosts做了域名映射（192.168.75.128 docker）
 ![输入图片说明](src/main/resources/static/image.png)
 
 进入docker-springboot容器目录：方法一
