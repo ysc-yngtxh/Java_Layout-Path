@@ -115,8 +115,8 @@ docker images
 > - --name docker-springboot : 表示取的运行容器的名字
 > - docker-springboot : 就是容器运行的来源镜像
 
->> 项目成功运行，我们现在来测试一下吧。这里的path路径被我使用switchHosts做了域名映射（192.168.75.128 docker）
-![输入图片说明](src/main/resources/static/image.png)
+- 项目成功运行，我们现在来测试一下吧。这里的path路径被我使用switchHosts做了域名映射（192.168.75.128 docker)
+  ![输入图片说明](src/main/resources/static/image.png)
 
 #### 1.4.4 进入容器目录
 ```
