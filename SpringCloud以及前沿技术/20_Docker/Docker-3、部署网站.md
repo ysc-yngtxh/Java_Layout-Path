@@ -54,3 +54,11 @@ docker run -d -p 8080:8080 --name docker-springboot docker-springboot
 
 项目成功运行，我们现在来测试一下吧。
 ![输入图片说明](src/main/resources/static/image.png)
+
+进入docker-springboot容器目录：方法一
+docker exec -it docker-springboot /bin/bash
+查看容器Id
+docker ps -aqf "name=docker-springboot"
+进入docker-springboot容器目录：方法二
+docker exec -it 容器Id /bin/bash
+![输入图片说明](src/main/resources/static/image2.png)
