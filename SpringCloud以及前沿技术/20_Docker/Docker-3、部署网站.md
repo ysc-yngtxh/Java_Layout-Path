@@ -98,23 +98,34 @@ EXPOSE 8082
 CMD ["java", "-jar", "/app.jar"]
 ```
 
-#### 1.4.2 构建名为docker-springboot的镜像，后面的为镜像版本(可写可不写，不写的话就默认为latest)
+#### 1.4.2 构建名为docker-springboot的镜像
 ```
+# 后面的为镜像版本(可写可不写，不写的话就默认为latest)
 docker build -t docker-springboot:1.0.0 .
+
 docker images
 ```
 ![输入图片说明](src/main/resources/static/image1.png)
 
-# 运行镜像docker-springboot，并取名容器名为docker-springboot
-docker run -d -p 8080:8080 --name docker-springboot docker-springboot
+#### 1.4.3 运行镜像docker-springboot，并取名容器名为docker-springboot
+> docker run -d -p 8080:8080 --name docker-springboot docker-springboot
+>
+> - -d : 作为守护进程
+> - -p 8080:8080 : 第一个8080是指镜像的端口为3306；第二个8080是容器里运行环境开放的端口
+> - --name docker-springboot : 表示取的运行容器的名字
+> - docker-springboot : 就是容器运行的来源镜像
 
-项目成功运行，我们现在来测试一下吧。这里的path路径被我使用switchHosts做了域名映射（192.168.75.128 docker）
+>> 项目成功运行，我们现在来测试一下吧。这里的path路径被我使用switchHosts做了域名映射（192.168.75.128 docker）
 ![输入图片说明](src/main/resources/static/image.png)
 
-进入docker-springboot容器目录：方法一
-docker exec -it docker-springboot /bin/bash
-查看容器Id
+#### 1.4.4 进入容器目录
+```
+# 查看容器Id
 docker ps -aqf "name=docker-springboot"
-进入docker-springboot容器目录：方法二
+
+# 进入docker-springboot容器目录：方法一
+docker exec -it docker-springboot /bin/bash
+# 进入docker-springboot容器目录：方法二
 docker exec -it 容器Id /bin/bash
+```
 ![输入图片说明](src/main/resources/static/image2.png)
