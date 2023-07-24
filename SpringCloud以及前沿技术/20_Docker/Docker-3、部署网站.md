@@ -17,7 +17,7 @@
 
   - #### 1.2.1 运行mysql镜像
 
-    > ##### **docker run -d -p 3306:3306 --name docker-mysql -v /mydata:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=131474 mysql:8.0.26**
+    > **docker run -d -p 3306:3306 --name docker-mysql -v /mydata:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=131474 mysql:8.0.26**
     >
     > - -d : 作为守护进程
     > - -p 3306:3306 : 第一个3306是指mysql这个服务的端口为3306；第二个3306是容器里运行环境开放的端口
@@ -117,7 +117,7 @@
     > - --name docker-springboot : 表示取的运行容器的名字
     > - docker-springboot : 就是容器运行的来源镜像
 
-    ###### 项目成功运行，我们现在来测试一下吧。这里的path路径被我使用switchHosts做了域名映射（192.168.75.128 docker)
+    *项目成功运行，我们现在来测试一下吧。这里的path路径被我使用switchHosts做了域名映射（192.168.75.128 docker)*
      
        - ![输入图片说明](src/main/resources/static/image.png)
 
