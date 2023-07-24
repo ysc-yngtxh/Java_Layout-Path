@@ -121,8 +121,6 @@
      
        - ![输入图片说明](src/main/resources/static/image.png)
 
-  ***
-
   - #### 1.4.4 进入容器目录
     ```
     # 查看容器Id
