@@ -130,7 +130,8 @@
 ---
 
 3. 查看虚拟机网络配置：VMnet8是否连接，是否启动，IP、网关地址，掩码，起始IP、结束IP等
-
+![输入图片说明](src/main/resources/static/image1-15.png)
+![输入图片说明](src/main/resources/static/image1-16.png)
    ![171688279618_.pic](src/main/resources/static/171688279618_.pic.png)
 
    ![181688279644_.pic](src/main/resources/static/181688279644_.pic.jpg)
@@ -141,19 +142,19 @@
 ```
 ping baidu.com
 ```
-
+![输入图片说明](src/main/resources/static/image1-17.png)
 ![221688291085_.pic](src/main/resources/static/221688291085_.pic.jpg)
 
 #### 三、Xshell -- 终端模拟器
 
 > 1、连接虚拟机
-
+![输入图片说明](src/main/resources/static/image1-18.png)
 ![231688291267_.pic](src/main/resources/static/231688291267_.pic.png)
 
 ---
 
 > 2、连接成功
-
+![输入图片说明](src/main/resources/static/image1-19.png)
 ![241688291354_.pic](src/main/resources/static/241688291354_.pic.jpg)
 
 ---
@@ -227,13 +228,14 @@ ping baidu.com
   # 设置开机启动
   systemctl enable sshd.service
   ```
-
+![输入图片说明](src/main/resources/static/image1-20.png)
   ![261688301191_.pic](src/main/resources/static/261688301191_.pic.png)
 
 ---
 
 - 修改Host，使IP映射域名
-
+![输入图片说明](src/main/resources/static/image1-21.png)
+![输入图片说明](src/main/resources/static/image1-22.png)
   ![281688301260_.pic](src/main/resources/static/281688301260_.pic.jpg)
 
   ![271688301224_.pic](src/main/resources/static/271688301224_.pic.png)
