@@ -81,6 +81,7 @@ uname -r
 cat /etc/redhat-release
 ```
 
+![输入图片说明](src/main/resources/static/image1-14.png)
 ![WechatIMG21](src/main/resources/static/WechatIMG21.png)
 
 #### 二、配置虚拟机环境
