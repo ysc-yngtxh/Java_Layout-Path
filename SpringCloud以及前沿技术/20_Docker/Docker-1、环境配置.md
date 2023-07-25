@@ -8,46 +8,57 @@
 
 > 1、安装好VMware后，新建一个虚拟机
 
+![输入图片说明](src/main/resources/static/image1-1.png)
 ![71688276871_.pic](src/main/resources/static/71688276871_.pic.jpg)
 
 ---
 
 > 2、引入CentOS镜像：下载网址（[Index of /centos/7.9.2009/isos/x86_64/ | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror](https://mirrors.tuna.tsinghua.edu.cn/centos/7.9.2009/isos/x86_64/)）
 
+![输入图片说明](src/main/resources/static/image1-2.png)
 ![81688276903_.pic](src/main/resources/static/81688276903_.pic.jpg)
 
 ---
 
 > 3、设置4个处理器
 
+![输入图片说明](src/main/resources/static/image1-3.png)
 ![91688277153_.pic](src/main/resources/static/91688277153_.pic.jpg)
 
 ---
 
 > 4、设置虚拟机内存：8G
 
+![输入图片说明](src/main/resources/static/image1-4.png)
 ![101688277186_.pic](src/main/resources/static/101688277186_.pic.jpg)
 
 ---
-
+![输入图片说明](src/main/resources/static/image1-5.png)
 > 5、设置磁盘大小：100G
 
+![输入图片说明](src/main/resources/static/image1-6.png)
 ![111688277206_.pic](src/main/resources/static/111688277206_.pic.jpg)
 
 ---
+![输入图片说明](src/main/resources/static/image1-7.png)
 
 > 6、安装设置语言
 
+![输入图片说明](src/main/resources/static/image1-8.png)
 ![121688277425_.pic](src/main/resources/static/121688277425_.pic.png)
 
 ---
 
 > 7、设置安装地址
 
+![输入图片说明](src/main/resources/static/image1-9.png)
 ![131688277454_.pic](src/main/resources/static/131688277454_.pic.png)
 
+![输入图片说明](src/main/resources/static/image1-10.png)
 ![141688277487_.pic](src/main/resources/static/141688277487_.pic.png)
 
+![输入图片说明](src/main/resources/static/image1-11.png)
+![输入图片说明](src/main/resources/static/image1-12.png)
 ---
 
 > 8、开始安装
@@ -58,6 +69,7 @@
 
 > 9、设置root密码，以及自定用户名的信息
 
+![输入图片说明](src/main/resources/static/image1-13.png)
 ![161688277592_.pic](src/main/resources/static/161688277592_.pic.png)
 
 ---
