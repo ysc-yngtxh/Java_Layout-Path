@@ -110,8 +110,8 @@
   # 搜索有哪些ubuntu版本
   docker search ubuntu
   
-  # docker拉取ubuntu
-  docker pull ubuntu
+  # docker拉取ubuntu, 版本为23.04
+  docker pull ubuntu:23.04
   ```
 
 - ### 2.4 宿主机网卡转发

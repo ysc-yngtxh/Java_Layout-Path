@@ -83,19 +83,19 @@
   - #### 1.4.1 上传我们的SpringBoot项目并进行Dockerfile配置
 
     > 新建一个目录  
-      mkdir ./opt/dockerfiles
+      mkdir /opt/dockerfiles
     >
     > 将我们的SpringBoot项目上传到服务器，可以通过Xshell直接拖进我们想存放的目录下，并在该目录下进行启动容器步骤配置  
      vim dockerfile
     ```
     # 指定基础镜像：仓库是java，tag是17.0.8
-    FROM jdk:17.0.8
+    FROM java:17.0.8
     # 定义匿名数据卷。相当于数据存档点，可以有多个，方便回到想要的数据存档点
     VOLUME "/data-source"
     # 当前路径下通配符匹配的jar包改名并复制到容器里为app.jar
     ADD *.jar app.jar
     # 暴露服务端口
-    EXPOSE 8082
+    EXPOSE 8080
     # 容器启动时要执行的命令--启动Java命令
     CMD ["java", "-jar", "/app.jar"]
     ```
@@ -110,12 +110,12 @@
      - ![输入图片说明](src/main/resources/static/image1.png)
 
   - #### 1.4.3 运行镜像docker-springboot，并取名容器名为docker-springboot
-    > docker run -d -p 8080:8080 --name docker-springboot docker-springboot
+    > docker run -d -p 8080:8080 --name docker-springboot docker-springboot:1.0.0
     >
     > - -d : 作为守护进程
     > - -p 8080:8080 : 第一个8080是指镜像的端口为3306；第二个8080是容器里运行环境开放的端口
     > - --name docker-springboot : 表示取的运行容器的名字
-    > - docker-springboot : 就是容器运行的来源镜像
+    > - docker-springboot:1.0.0 : 就是容器运行的来源镜像
 
     *项目成功运行，我们现在来测试一下吧。这里的path路径被我使用switchHosts做了域名映射（192.168.75.128 docker)*
      
@@ -132,3 +132,24 @@
     docker exec -it 容器Id /bin/bash
     ```
      - ![输入图片说明](src/main/resources/static/image2.png)
+
+***
+
+- ### 1.5 命令
+  ```
+  # 删除镜像
+  docker rmi [image镜像名]
+  
+  # 启动容器运行
+  docker start [container容器名]
+  # 重启容器运行
+  docker restart [container容器名]
+  # 停止容器运行
+  docker stop [container容器名]
+  
+  # 删除容器
+  docker rm [container容器名]
+  
+  # 查看所有(包括启动失败)的容器
+  docker ps -a
+  ```
