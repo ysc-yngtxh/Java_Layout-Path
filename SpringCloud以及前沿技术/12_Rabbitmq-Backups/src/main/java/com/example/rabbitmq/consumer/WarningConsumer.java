@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class WarningConsumer {
 
-    //这里既然设置了备份交换机模式，那么程序就不走回退消息给生产者。所以回退的日志没打印
+    // 这里既然设置了备份交换机模式，那么程序就不走回退消息给生产者。所以回退的日志没打印
     @RabbitListener(queues = "warningQueue")
     public void warning(Message message){
         String msg = new String(message.getBody());

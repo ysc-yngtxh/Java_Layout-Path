@@ -17,7 +17,7 @@ import java.util.Date;
  */
 public class DelayedComsumer {
 
-    //接收消息。这里监听的是基于插件的队列，这里当做是消费者
+    // 接收消息。这里监听的是基于插件的队列，这里当做是消费者
     @RabbitListener(queues = "delayedQueue")
     public void receive(Message message , Channel channel){
         String msg = new String(message.getBody());

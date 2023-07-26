@@ -18,7 +18,7 @@ public class ConfirmController {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    //开始发消息  测试确认
+    // 开始发消息  测试确认
     @GetMapping("/sendMessage/{message}")
     public void sendConfirm(@PathVariable String message){
         CorrelationData correlationData1 = new CorrelationData("1");

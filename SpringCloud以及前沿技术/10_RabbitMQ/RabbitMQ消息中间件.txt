@@ -18,7 +18,11 @@ AMQP协议和RabbitMQ
 
 RabbitMQ消息中间件的地址：http://localhost:15672
 默认用户名，密码：guest
-打开方式，解压包下的/sbin/rabbiitmq-server.bat
+打开方式，解压包下的/sbin/rabbitmq-server.bat
+
+rabbitmq端口15672和5672分别是RabbitMQ管理界面和AMQP协议的默认端口。
+    15672端口用于Web管理界面，可以通过浏览器http访问，用于查看和管理RabbitMQ的各种信息和状态。
+    5672端口是AMQP协议的默认端口，用于RabbitMQ客户端和服务器之间的通信，包括消息的发送和接收等操作。
 
 一、先了解一下AMQP协议中间的几个重要概念：
     Server：接收客户端的连接，实现AMQP实体服务。

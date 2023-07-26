@@ -38,14 +38,13 @@ class JwtDemoApplicationTests {
                 .signWith(SignatureAlgorithm.HS256,signature)
                 .compact(); //将所有信息紧凑起来
 
-
         log.info(jwtToken);
     }
 
 
 
     @Test
-    void parse(){
+    void parse() {
 
         String token = "eyJ0cHkiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoi6ZmI546J5qKFIiwicHdkIjoiNTE0Iiwic3ViIjoiYWRtaW4tdGVzdCIsImV4cCI6MTYzNTM1MDE4NywianRpIjoiZjk1NjQ5ZmQtOGZlMS00NjMzLWJmNjctMTgyODNjZDkxNmUxIn0._yGitIWtGZ2LyD2wXIUGKNPqqqneWNxoVk8kdOtWdn0";
         JwtParser jwtParser = Jwts.parser();
@@ -58,8 +57,6 @@ class JwtDemoApplicationTests {
         System.out.println(claims.getId());
         System.out.println(claims.getSubject());
         log.info(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(claims.getExpiration()));
-
-
     }
 
     @Test

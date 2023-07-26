@@ -14,19 +14,19 @@ import java.util.Map;
 @Configuration
 public class PriorityConfig {
 
-    //交换机
+    // 交换机
     @Bean("priorityExchange")
     public DirectExchange exChange(){
         return new DirectExchange("priorityExchange",true,false);
     }
-    //队列
+    // 队列
     @Bean("priorityQueue")
     public Queue directQueue(){
         Map<String, Object> map = new HashMap<>(1);
-        map.put("x-max-priority",10);   //这里设置最大优先级为10。RabbitMq中优先级0~255，但我们没必要设置那么大，越大越耗内存占CPU
+        map.put("x-max-priority",10);   // 这里设置最大优先级为10。RabbitMq中优先级0~255，但我们没必要设置那么大，越大越耗内存占CPU
         return new Queue("priorityQueue",true,false,false,map);
     }
-    //绑定交换机和队列
+    // 绑定交换机和队列
     @Bean
     public Binding queueBinding(@Qualifier("priorityExchange") DirectExchange directExchange,
                                 @Qualifier("priorityQueue") Queue directQueue){

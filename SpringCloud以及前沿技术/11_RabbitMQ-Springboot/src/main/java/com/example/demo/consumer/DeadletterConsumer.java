@@ -17,7 +17,7 @@ import java.util.Date;
  */
 public class DeadletterConsumer {
 
-    //接收消息。这里监听的是死信队列，因为没有消费者，最终的消息都会流到死信中
+    // 接收消息。这里监听的是死信队列，因为没有消费者，最终的消息都会流到死信中
     @RabbitListener(queues = "deadQueue")
     public void receive(Message message , Channel channel){
         String msg = new String(message.getBody());

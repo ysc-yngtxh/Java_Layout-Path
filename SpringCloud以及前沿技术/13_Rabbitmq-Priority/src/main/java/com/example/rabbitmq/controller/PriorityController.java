@@ -15,7 +15,7 @@ public class PriorityController {
     @Autowired
     private RabbitTemplate rabbitTemplete;
 
-    //这里操作的话，先将监听priorityQueue队列的方法注释掉，再发消息到队列。最后再打开注释进行消费，可以发现i=5优先消费
+    // 这里操作的话，先将监听priorityQueue队列的方法注释掉，再发消息到队列。最后再打开注释进行消费，可以发现i=5优先消费
     @GetMapping("/priority/{message}")
     public void send(@PathVariable String message){
         for(int i = 1; i < 11; i++){
