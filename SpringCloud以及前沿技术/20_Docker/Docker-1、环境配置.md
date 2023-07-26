@@ -129,7 +129,7 @@
    ```
 ---
 
-3. ### ***查看虚拟机网络配置：VMnet0是否连接，是否启动，IP、网关地址，掩码，起始IP、结束IP等***
+3. ### ***查看虚拟机网络配置：VMnet0是否连接，是否配置成宿主网络***
     
    ![输入图片说明](src/main/resources/static/image1-15.png)
    ![输入图片说明](src/main/resources/static/image1-16.png)

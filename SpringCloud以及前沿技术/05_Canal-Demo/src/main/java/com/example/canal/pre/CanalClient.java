@@ -5,7 +5,6 @@ import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.client.CanalConnectors;
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.google.protobuf.ByteString;
-import com.google.protobuf.InvalidProtocolBufferException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 import com.alibaba.otter.canal.protocol.Message;
@@ -19,13 +18,13 @@ import java.util.concurrent.TimeUnit;
  * @author 游家纨绔
  */
 @Component
-public class CannalClient implements InitializingBean {
-    //InitializingBean接口为bean提供了初始化方法的方式，它只包括afterPropertiesSet方法，
-    //凡是继承该接口的类，在初始化bean的时候会执行该方法。
+public class CanalClient implements InitializingBean {
+    // InitializingBean接口为bean提供了初始化方法的方式，它只包括afterPropertiesSet方法，
+    // 凡是继承该接口的类，在初始化bean的时候会执行该方法。
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        //TODO 获取连接
+        // TODO 获取连接
         CanalConnector canalConnector = CanalConnectors.newSingleConnector(
                 new InetSocketAddress("127.0.0.1", 11111)
                 , "example", "", "");
