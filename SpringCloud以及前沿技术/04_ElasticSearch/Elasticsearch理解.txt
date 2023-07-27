@@ -120,7 +120,7 @@ Elasticsearch是一个分布式的搜索引擎
           DELETE /索引库名/_doc/id值  根据id删除
 
       ⑥、查询索引（GET）
-            Ⅰ、全文检索(match模糊查询)
+            Ⅰ、全文检索(match模糊查询，搜索的词会先进行分词)
                 GET /ysc/_search                   GET /ysc/_search             GET /ysc/_doc/{id}
                 {                                  {
                   "query": {                          "query": {
@@ -133,7 +133,7 @@ Elasticsearch是一个分布式的搜索引擎
                 Elasticsearch会先做一个分词处理，比如："大","米","手","机","手机"......。
                 所以只要包含这些词条的信息就都会被查询到。
 
-            Ⅱ、词条匹配(terms查询用于精准值匹配，这些精准只可能是数字，时间，布尔或者其他未分词的字符串)
+            Ⅱ、词条匹配(terms查询用于精准值匹配，搜索的词不会进行分词)
                 GET /ysc/_search                 GET /ysc/_search
                 {                                {
                   "query": {                       "query": {
