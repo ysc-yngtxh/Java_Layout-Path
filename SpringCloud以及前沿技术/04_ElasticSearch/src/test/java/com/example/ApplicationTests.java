@@ -2,6 +2,7 @@ package com.example;
 
 import com.alibaba.fastjson.JSON;
 import com.example.pojo.User;
+import org.elasticsearch.action.DocWriteRequest;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
@@ -13,6 +14,7 @@ import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.support.WriteRequest;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
@@ -86,9 +88,34 @@ class ApplicationTests {
         request.timeout(TimeValue.timeValueSeconds(1)); // timeout用于请求超时设置
         request.timeout("1s");   // timeout用于请求超时设置
 
-        // 将我们的数据放入请求 json
+       /*
+        * ----------设置ES插入后的刷新策略------------
+        * RefreshPolicy # IMMEDIATE:
+            请求向ElasticSearch提交了数据，立即进行数据刷新，然后再结束请求。
+            优点：实时性高、操作延时短。
+            缺点：资源消耗高。
+          RefreshPolicy # WAIT_UNTIL:
+            请求向ElasticSearch提交了数据，等待数据完成刷新，然后再结束请求。
+            优点：实时性高、操作延时长。
+            缺点：资源消耗低。
+          RefreshPolicy # NONE:
+            默认策略。
+            请求向ElasticSearch提交了数据，不关系数据是否已经完成刷新，直接结束请求。
+            优点：操作延时短、资源消耗低。
+            缺点：实时性低。
+        * */
+        request = request.setRefreshPolicy(WriteRequest.RefreshPolicy.IMMEDIATE);
+
+        // 将我们的数据放入请求 json。这里数据user为空，所以索引名为 'user' 的并不会创建其属性properties
         request.source(JSON.toJSONString(user), XContentType.JSON);
 
+        /*
+          为true则表示创建一个索引，如果id重复，索引操作失败
+          为false则表示更新索引
+         */
+        request.create(true);
+        // 这种写法同上 request.create(true) 一个意思
+        request.opType(DocWriteRequest.OpType.CREATE);
         // 客户端发送请求
         IndexResponse indexResponse = client.index(request,RequestOptions.DEFAULT);
 
@@ -100,6 +127,7 @@ class ApplicationTests {
     // 获取文档 判断是否存在 GET /user/_doc/1000
     @Test
     void testIsExists() throws IOException {
+        // GetIndexRequest表示获取索引请求，GetRequest表示获取文档请求
         GetRequest getRequest = new GetRequest("user","1000");
         // 不获取返回的_source的上下文了
         /*getRequest.fetchSourceContext(new FetchSourceContext(false));
@@ -175,7 +203,7 @@ class ApplicationTests {
             );
         }
         BulkResponse bulk = client.bulk(bulkRequest, RequestOptions.DEFAULT);
-        System.out.println(bulk.hasFailures());  // 是否失败，返回falst表示成功！
+        System.out.println(bulk.hasFailures());  // 是否失败，返回false表示成功！
     }
 
     // 查询
@@ -256,7 +284,7 @@ class ApplicationTests {
         client.close();
     }
 
-    //排序分页
+    // 排序分页
     @Test
     void testSearchOrder() throws IOException{
         // 获取目标文档对象
@@ -267,7 +295,7 @@ class ApplicationTests {
         sourceBuilder.sort("id", SortOrder.ASC);
         sourceBuilder.from(5); // 表示偏移量，不表示第几页。就是总共有13条数据，from是12，那么就会从第13条数据开始
         sourceBuilder.size(7);
-        //将构建器交给目标文档对象
+        // 将构建器交给目标文档对象
         searchRequest.source(sourceBuilder);
         // 获取到响应消息
         SearchResponse search = client.search(searchRequest, RequestOptions.DEFAULT);
@@ -285,7 +313,7 @@ class ApplicationTests {
 
     // 汇总搜索内容
     @Test
-    void testsuibian() throws IOException {
+    void testSummary() throws IOException {
         // 搜索文档请求
         SearchRequest searchRequest = new SearchRequest("user");
         // 搜索构建器
