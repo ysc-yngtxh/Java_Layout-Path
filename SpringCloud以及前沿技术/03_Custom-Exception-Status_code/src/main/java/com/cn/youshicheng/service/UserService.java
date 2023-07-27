@@ -22,7 +22,7 @@ public class UserService {
     public List<User> queryUser1(Integer id){
         User user = new User();
         user.setId(id);
-        //select  根据实体类查询，返回一个List类型
+        // select  根据实体类查询，返回一个List类型
         List<User> select = userMapper.select(user);
         if(select.isEmpty()){
             throw new LyException(UserEnum.NO_URL);
@@ -31,7 +31,7 @@ public class UserService {
     }
 
     public User queryUser2(Integer id){
-        //selectByPrimaryKey  根据主键查询，返回实体类型
+        // selectByPrimaryKey  根据主键查询，返回实体类型
         User users = userMapper.selectByPrimaryKey(id);
         if(users==null){
             throw new LyException(UserEnum.NO_URL);
@@ -40,12 +40,12 @@ public class UserService {
     }
 
     public List<User> queryUser3(User user){
-        //过滤
+        // 过滤
         Example example = new Example(User.class);
         Example.Criteria criteria = example.createCriteria();
-        //默认排序
+        // 默认排序
         example.setOrderByClause("age DESC");
-        //查询  selectByExample 能应付大部分的查询条件
+        // 查询  selectByExample 能应付大部分的查询条件
         List<User> users = userMapper.selectByExample(example);
         if(users.isEmpty()){
             throw new LyException(UserEnum.NO_URL);
@@ -64,10 +64,10 @@ public class UserService {
     public void saveUser2(User user){
         user.setId(100);
         user.setUsername("游诗成");
-        //indest是添加所有的字段，insertSelective是只对Selective的字段进行插入
+        // insert是添加所有的字段，insertSelective是只对Selective的字段进行插入
         int i = userMapper.insertSelective(user);
         if(i!=1){
-            //throw new RuntimeException("不好意思，你添加的商品操作失败！");
+            // throw new RuntimeException("不好意思，你添加的商品操作失败！");
             throw new LyException(UserEnum.NO_INSERT);
         }
     }

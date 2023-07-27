@@ -21,7 +21,7 @@ Elasticsearch是一个分布式的搜索引擎
 一、elasticsearch也是基于Lucene的全文检索库，本质也是存储数据，很多的概念与MySQL类似
       对比关系：
          索引集：逻辑上的完整索引     索引集(indices)-------Databases数据库
-                                     类型(type)-----------------表(自elasticsearch8.0惨遭移除)
+                                     类型(type)-----------------表(从6.0.0开始单个索引中只能有一个类型，7.0.0以后将不建议使用，8.0.0 以后完全不支持)
                                         文档(Document)----------Row行(类比字段类型,是否主键等)
                                            字段(Field)----------low列(类比字段)
          每个Elasticsearch索引都有自己的 分片(number_of_shards) 和 副本(number_of_replicas)
@@ -121,7 +121,7 @@ Elasticsearch是一个分布式的搜索引擎
 
       ⑥、查询索引（GET）
             Ⅰ、全文检索(match模糊查询)
-                GET /ysc/_search                   GET /ysc/_search
+                GET /ysc/_search                   GET /ysc/_search             GET /ysc/_doc/{id}
                 {                                  {
                   "query": {                          "query": {
                      "match": {                         "match_all": {}
@@ -260,7 +260,7 @@ Elasticsearch是一个分布式的搜索引擎
                 和关系型数据库中的聚合函数相类似
                 GET /test/_search
                 {
-                  "size":0,
+                  "size":0,ⅩⅩ
                   "aggs":{
                     "max_title":{   自定义的名字
                       "max":{
@@ -272,6 +272,20 @@ Elasticsearch是一个分布式的搜索引擎
 
                 注意：es中进行过滤,排序,聚合的字段,不能被分词!!!!*
 
+            Ⅹ、实现搜索高亮highlight
+               GET /ysc/_search
+               {
+                  "query": {
+                     "match": {
+                        "title": "手机"
+                     }
+                  },
+                  "highlight": {
+                    "fields": {
+                      "title": {}
+                    }
+                  }
+               }
 
 
 

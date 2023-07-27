@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public enum UserEnum {
 
-    //注释
+    // 注释
     NO_INSERT(201,"新增商品失败!"),
     NO_URL(404,"无法访问到资源");
 

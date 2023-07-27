@@ -39,6 +39,6 @@ public class TestController {
     public ResponseEntity<Void> saveUser2(User user){
         userService.saveUser2(user);
         return ResponseEntity.status(HttpStatus.CREATED).build();
-        //因为我们不需要返回值，所以可以不去写body，写上build会更合适
+        // 因为我们不需要返回值，所以可以不去写body，写上build会更合适
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 /**
  * @author 游家纨绔
  */
-@EnableEurekaServer  //这个注解表示的是 启用Eureka服务
+@EnableEurekaServer  // 这个注解表示的是 启用Eureka服务
 @SpringBootApplication
 public class EurekaServer {
 
