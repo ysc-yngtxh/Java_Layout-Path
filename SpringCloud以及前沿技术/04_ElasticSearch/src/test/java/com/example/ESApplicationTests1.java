@@ -2,6 +2,7 @@ package com.example;
 
 import com.alibaba.fastjson.JSON;
 import com.example.pojo.User;
+import org.apache.http.HttpHost;
 import org.elasticsearch.action.DocWriteRequest;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.bulk.BulkRequest;
@@ -19,6 +20,7 @@ import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.CreateIndexResponse;
@@ -30,6 +32,8 @@ import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
@@ -60,6 +64,9 @@ class ESApplicationTests1 {
         request.settings(Settings.builder().put("number_of_shards", 5).put("number_of_replicas", 1));
         // 客户端执行请求后请求 IndicesClient ,获得响应
         CreateIndexResponse Response = client.indices().create(request, RequestOptions.DEFAULT);
+
+        // 关闭 ES 客户端
+        client.close();
     }
 
     // 测试获取索引，判断其是否存在
@@ -68,6 +75,9 @@ class ESApplicationTests1 {
         GetIndexRequest request = new GetIndexRequest("ysc");
         boolean exists = client.indices().exists(request, RequestOptions.DEFAULT);
         System.out.println(exists);
+
+        // 关闭 ES 客户端
+        client.close();
     }
 
     // 测试删除索引
@@ -76,6 +86,9 @@ class ESApplicationTests1 {
         DeleteIndexRequest request = new DeleteIndexRequest("ysc");
         AcknowledgedResponse delete = client.indices().delete(request, RequestOptions.DEFAULT);
         System.out.println(delete.isAcknowledged());
+
+        // 关闭 ES 客户端
+        client.close();
     }
 
     // 测试添加文档(插入)
@@ -125,6 +138,9 @@ class ESApplicationTests1 {
 
         System.out.println(indexResponse.toString());
         System.out.println(indexResponse.status());
+
+        // 关闭 ES 客户端
+        client.close();
     }
 
 
@@ -143,6 +159,8 @@ class ESApplicationTests1 {
         boolean exists = client.exists(getRequest, RequestOptions.DEFAULT);
         System.out.println(exists);
 
+        // 关闭 ES 客户端
+        client.close();
     }
 
     // 获得文档的信息 GET /user/_doc/10
@@ -151,6 +169,9 @@ class ESApplicationTests1 {
         GetRequest getRequest = new GetRequest("user","10");
         GetResponse getResponse = client.get(getRequest,RequestOptions.DEFAULT);
         System.out.println(getResponse.getSourceAsString());  // 打印文档的内容
+
+        // 关闭 ES 客户端
+        client.close();
     }
 
     // 更新文档的信息 PUT /user/_doc/1000
@@ -164,6 +185,9 @@ class ESApplicationTests1 {
 
         UpdateResponse updateResponse = client.update(updateRequest,RequestOptions.DEFAULT);
         System.out.println(updateResponse.status());  // 打印文档的内容
+
+        // 关闭 ES 客户端
+        client.close();
     }
 
 
@@ -175,6 +199,9 @@ class ESApplicationTests1 {
 
         DeleteResponse delete = client.delete(deleteRequest,RequestOptions.DEFAULT);
         System.out.println(delete.status()); // 打印文档的内容
+
+        // 关闭 ES 客户端
+        client.close();
     }
 
 
@@ -208,6 +235,9 @@ class ESApplicationTests1 {
         }
         BulkResponse bulk = client.bulk(bulkRequest, RequestOptions.DEFAULT);
         System.out.println(bulk.hasFailures());  // 是否失败，返回false表示成功！
+
+        // 关闭 ES 客户端
+        client.close();
     }
 
     // 查询
@@ -237,6 +267,7 @@ class ESApplicationTests1 {
             System.out.println(documentFields.getSourceAsMap());
         }
 
+        // 关闭 ES 客户端
         client.close();
     }
 
@@ -285,6 +316,7 @@ class ESApplicationTests1 {
             }
         }
 
+        // 关闭 ES 客户端
         client.close();
     }
 
@@ -311,6 +343,7 @@ class ESApplicationTests1 {
             System.out.println(documentFields.getSourceAsMap());
         }
 
+        // 关闭 ES 客户端
         client.close();
     }
 
@@ -354,5 +387,45 @@ class ESApplicationTests1 {
             System.out.println(searchHit.getSourceAsMap());
             System.out.println( Arrays.toString(searchHit.getHighlightFields().get("name").getFragments()) );
         }
+
+        // 关闭 ES 客户端
+        client.close();
+    }
+
+
+    // 聚合查询：最大值
+    @Test
+    void aggregation() throws IOException {
+        SearchRequest request = new SearchRequest().indices("user");
+        // 搜索构建器
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+        // "maxAge"表示给聚合查询最大值起的名字；"age"表示聚合查询字段
+        sourceBuilder.aggregation(AggregationBuilders.max("maxAge").field("age"));
+        // 客户端发送请求，获取响应对象
+        SearchResponse response = client.search(request.source(sourceBuilder), RequestOptions.DEFAULT);
+        // 打印响应结果
+        System.out.println(response);
+
+        // 关闭 ES 客户端
+        client.close();
+    }
+
+
+    // 聚合查询：分组统计
+    @Test
+    void aggregationTerm() throws IOException {
+        SearchRequest request = new SearchRequest().indices("user");
+        // 搜索构建器
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+        // "ageGroupBy"表示给聚合查询分组起的名字
+        sourceBuilder.aggregation(AggregationBuilders.terms("ageGroupBy").field("age"));
+        // 客户端发送请求，获取响应对象
+        SearchResponse response = client.search(request.source(sourceBuilder), RequestOptions.DEFAULT);
+        // 打印响应结果
+        SearchHits hits = response.getHits();
+        System.out.println(response);
+
+        // 关闭 ES 客户端
+        client.close();
     }
 }

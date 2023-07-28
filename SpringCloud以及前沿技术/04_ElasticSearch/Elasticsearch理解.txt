@@ -285,7 +285,7 @@ Elasticsearch是一个分布式的搜索引擎
                 GET /test/_search
                 {
                   "size":0,ⅩⅩ
-                  "aggs":{
+                  "aggs":{          官方的属性，用于表示开启聚合
                     "max_title":{   自定义的名字
                       "max":{
                         "field": "title"
