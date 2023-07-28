@@ -186,7 +186,6 @@ public class ESApplicationTests2 {
     /**
      * 文档操作测试
      */
-
     @Test
     void addOneDocument() throws IOException {
         ElasticsearchClient elasticsearchClient = elasticsearchClient();
@@ -280,7 +279,7 @@ public class ESApplicationTests2 {
     @Test
     void batchAddDocument() throws IOException {
         ElasticsearchClient elasticsearchClient = elasticsearchClient();
-        // 1、use BulkOperation
+        // 1、使用 BulkOperation
         List<User> users = new ArrayList<>();
         users.add(new User(1, "赵四", "20", 26, new Date()));
         users.add(new User(2, "阿旺", "25", 26, new Date()));

@@ -164,8 +164,8 @@ class ESApplicationTests1 {
     // 获得文档的信息 GET /user/_doc/10
     @Test
     void testGetDocument() throws IOException {
-        GetRequest getRequest = new GetRequest("user","10");
-        GetResponse getResponse = client.get(getRequest,RequestOptions.DEFAULT);
+        GetRequest getRequest = new GetRequest("user", "10");
+        GetResponse getResponse = client.get(getRequest, RequestOptions.DEFAULT);
         System.out.println(getResponse.getSourceAsString());  // 打印文档的内容
 
         // 关闭 ES 客户端
@@ -394,6 +394,7 @@ class ESApplicationTests1 {
     // 聚合查询：最大值
     @Test
     void aggregationMax() throws IOException {
+        // SearchRequest request = new SearchRequest("user"); 源码效果一样
         SearchRequest request = new SearchRequest().indices("user");
         // 搜索构建器
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
@@ -412,6 +413,7 @@ class ESApplicationTests1 {
     // 聚合查询：分组统计
     @Test
     void aggregationTerm() throws IOException {
+        // SearchRequest request = new SearchRequest("user"); 源码效果一样
         SearchRequest request = new SearchRequest().indices("user");
         // 搜索构建器
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
