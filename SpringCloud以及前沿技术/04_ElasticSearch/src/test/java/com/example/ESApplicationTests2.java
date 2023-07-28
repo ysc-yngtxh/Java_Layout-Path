@@ -41,7 +41,6 @@ import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.junit.jupiter.api.Test;
@@ -112,7 +111,7 @@ public class ESApplicationTests2 {
 
         if (con.getResponseCode() == 200) {
             BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String str = null;
+            String str;
             while ((str = br.readLine()) != null) {
                 System.err.println(str);
             }
@@ -129,12 +128,8 @@ public class ESApplicationTests2 {
 
         // 创建低级客户端
         RestClientBuilder builder = RestClient.builder(new HttpHost("localhost", 9200))
-                .setHttpClientConfigCallback(new RestClientBuilder.HttpClientConfigCallback() {
-                    @Override
-                    public HttpAsyncClientBuilder customizeHttpClient(HttpAsyncClientBuilder httpClientBuilder) {
-                        return httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
-                    }
-                });
+                .setHttpClientConfigCallback(httpClientBuilder ->
+                        httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider));
 
         RestClient restClient = builder.build();
 
@@ -371,7 +366,7 @@ public class ESApplicationTests2 {
     @Test
     void searchOne() throws IOException {
         ElasticsearchClient elasticsearchClient = elasticsearchClient();
-        String searchText = "liuyihu";
+        String searchText = "LiuYiHu";
         SearchResponse<User> response = elasticsearchClient.search(s -> s
                         // 我们要搜索的索引的名称
                         .index("users")
@@ -411,7 +406,7 @@ public class ESApplicationTests2 {
     @Test
     void searchTwo() throws IOException {
         ElasticsearchClient elasticsearchClient = elasticsearchClient();
-        String searchText = "liuyihu";
+        String searchText = "LiuYiHu";
         int maxAge = 30;
         // byName、byMaxAge：分别为各个条件创建查询
         Query byName = MatchQuery.of(m -> m
@@ -464,7 +459,7 @@ public class ESApplicationTests2 {
                 ));
         // 开始使用模板搜索
         String field = "name";
-        String value = "liuyifei";
+        String value = "LiuYiHu";
         SearchTemplateResponse<User> response = elasticsearchClient.searchTemplate(r -> r
                         .index("users")
                         // 要使用的模板脚本的标识符
@@ -569,8 +564,8 @@ public class ESApplicationTests2 {
                                         // 需要判断的字段名称
                                         .field("name")
                                         // 需要模糊查询的关键词
-                                        // 目前文档中没有liuyi这个用户名
-                                        .value("liuyi")
+                                        // 目前文档中没有LiuYi这个用户名
+                                        .value("LiuYi")
                                         // fuzziness代表可以与关键词有误差的字数，可选值为0、1、2这三项
                                         .fuzziness("2")
                                 )
@@ -602,7 +597,7 @@ public class ESApplicationTests2 {
                         .query(q -> q
                                 .term(t -> t
                                         .field("name")
-                                        .value("zhaosi"))
+                                        .value("ZhaoSi"))
                         )
                         .highlight(h -> h
                                 .fields("name", f -> f
