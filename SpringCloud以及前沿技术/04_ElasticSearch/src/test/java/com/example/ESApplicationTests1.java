@@ -18,12 +18,12 @@ import org.elasticsearch.action.support.WriteRequest;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
-import org.elasticsearch.client.ElasticsearchClient;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.client.indices.GetIndexRequest;
+import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.core.TimeValue;
 import org.elasticsearch.index.query.MatchQueryBuilder;
@@ -41,12 +41,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
-class ApplicationTests {
+class ESApplicationTests1 {
 
+    // 连接的地址是配置文件中所指定的uri
     @Autowired
     private RestHighLevelClient client;
 
@@ -54,6 +56,8 @@ class ApplicationTests {
     void contextLoads() throws IOException {
         // 创建索引名为"ysc"的请求
         CreateIndexRequest request = new CreateIndexRequest("ysc");
+        // 设置主分片、副本
+        request.settings(Settings.builder().put("number_of_shards", 5).put("number_of_replicas", 1));
         // 客户端执行请求后请求 IndicesClient ,获得响应
         CreateIndexResponse Response = client.indices().create(request, RequestOptions.DEFAULT);
     }
@@ -155,7 +159,7 @@ class ApplicationTests {
         UpdateRequest updateRequest = new UpdateRequest("user","1000");
         updateRequest.timeout("1s");  // timeout用于请求超时设置
 
-        User user = new User(1012,"狂神说","20000",18);
+        User user = new User(1012,"狂神说","20000",18,new Date());
         updateRequest.doc(JSON.toJSONString(user), XContentType.JSON);
 
         UpdateResponse updateResponse = client.update(updateRequest,RequestOptions.DEFAULT);
@@ -181,19 +185,19 @@ class ApplicationTests {
         bulkRequest.timeout("10s");  // timeout用于请求超时设置
 
         ArrayList<User> userList = new ArrayList<>();
-        userList.add(new User(999,"游诗成","4520",3));
-        userList.add(new User(1000,"邵荣珍","2454",3));
-        userList.add(new User(1001,"陈嘉琪","45000",3));
-        userList.add(new User(1002,"李晶晶","54000",3));
-        userList.add(new User(1003,"张宝丹","25400",3));
-        userList.add(new User(1004,"李安琪","20521",3));
-        userList.add(new User(1005,"邱淑贞","20000",3));
-        userList.add(new User(1006,"王祖贤","404040",3));
-        userList.add(new User(1007,"翁美玲","4040",3));
-        userList.add(new User(1008,"小透明","75027",3));
-        userList.add(new User(1009,"赵丽颖","457",24));
-        userList.add(new User(1010,"游鹏","075",24));
-        userList.add(new User(1011,"宁航","78",24));
+        userList.add(new User(999,"游诗成","4520",3,new Date()));
+        userList.add(new User(1000,"邵荣珍","2454",3,new Date()));
+        userList.add(new User(1001,"陈嘉琪","45000",3,new Date()));
+        userList.add(new User(1002,"李晶晶","54000",3,new Date()));
+        userList.add(new User(1003,"张宝丹","25400",3,new Date()));
+        userList.add(new User(1004,"李安琪","20521",3,new Date()));
+        userList.add(new User(1005,"邱淑贞","20000",3,new Date()));
+        userList.add(new User(1006,"王祖贤","404040",3,new Date()));
+        userList.add(new User(1007,"翁美玲","4040",3,new Date()));
+        userList.add(new User(1008,"小透明","75027",3,new Date()));
+        userList.add(new User(1009,"赵丽颖","457",24,new Date()));
+        userList.add(new User(1010,"游鹏","075",24,new Date()));
+        userList.add(new User(1011,"宁航","78",24,new Date()));
 
         for (int i = 0; i < userList.size(); i++) {  // 请求体，响应体内容都是JSON格式
             bulkRequest.add(

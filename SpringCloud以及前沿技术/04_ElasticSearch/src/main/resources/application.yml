@@ -8,9 +8,9 @@ spring:
       repositories:
         enabled: true
   elasticsearch:
-    rest:
-      uris: localhost:9200
-      connection-timeout: 5000
+    uris: localhost:9200
+    connection-timeout: 5000
+
 
   application:
     name: 15_elasticsearch-demo

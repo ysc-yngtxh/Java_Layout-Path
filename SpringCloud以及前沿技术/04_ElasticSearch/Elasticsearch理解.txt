@@ -91,8 +91,22 @@ Elasticsearch是一个分布式的搜索引擎
           }
            type: text(可分词)、keyword(不可分词)、long、integer、short、double、
                  float、date、boolean、binary......
-           fields: 实现一个字段多种数据类型，例如下例name是全文检索的，但是我们也可以对其进行排序或者聚合等，
-                   其中kyName可以理解为附加名，如果不设置，默认是keyword。
+           fields: 实现一个字段多种数据类型，例如上述name是全文检索可以进行分词的，但是我们也可以对其进行排序或者聚合等，
+                   很奇怪：正常的不是说es中进行过滤、排序、聚合的字段,不能被分词嘛，怎么name又可以进行排序或者聚合等呢？
+                   因为其中kyName可以理解为附加名，不设置的话默认是keyword。我们通过name.kyName作为排序条件：
+                   GET /ysc/_search
+                   {
+                      "query": {
+                        "match_all": {}
+                      },
+                      "sort": [
+                        {
+                          "name.kyName": {
+                            "order": "asc"
+                          }
+                        }
+                      ]
+                   }
            index: true表示字段会被索引，默认是true。false表示字段不会被索引
            store: Elasticsearch在创建文档索引时，会将文档中的原始数据备份，保存在一个叫做_source的属性中。
                   而我们可以通过过滤_source来选择哪些要显示，那些不显示。
