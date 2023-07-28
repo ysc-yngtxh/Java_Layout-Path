@@ -395,7 +395,7 @@ class ESApplicationTests1 {
 
     // 聚合查询：最大值
     @Test
-    void aggregation() throws IOException {
+    void aggregationMax() throws IOException {
         SearchRequest request = new SearchRequest().indices("user");
         // 搜索构建器
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();

@@ -651,7 +651,6 @@ public class ESApplicationTests2 {
     }
 
 
-
     /**
      * 聚合查询：年龄分组
      */
@@ -675,7 +674,7 @@ public class ESApplicationTests2 {
 
 
     /**
-     * 性别分组
+     * 聚合查询：性别分组
      */
     @Test
     void groupBySexTest() throws IOException {
@@ -695,4 +694,12 @@ public class ESApplicationTests2 {
                 .sterms();
         log.info("stringTermsAggregate:{}", stringTermsAggregate.buckets());
     }
+    // TODO 问题
+    // 我们根据性别分组，按理来说，field直接写sex就行，但是我们发现，如果不加.keyword，运行测试用例会报错
+
+    // TODO 原因分析：
+    // 这个错误的原因是因为我的分组聚合查询的字符串sex类型是text(可分词)类型。当使用到 term 查询的时候，
+    // 由于是精准匹配，所以查询的关键字在es上的类型，必须是keyword而不能是text。
+    // 所以想要分组查询，指定根据分组字段的keyword属性就可以了。
+
 }
