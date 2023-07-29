@@ -45,7 +45,7 @@
   - #### 1.3.2 配置Dockerfile来制作jdk17镜像
     ```
     # 进入当前路径的Dockerfile配置文件中
-    vim Dockerfile
+    vim dockerfile
     ```
 
     ```
