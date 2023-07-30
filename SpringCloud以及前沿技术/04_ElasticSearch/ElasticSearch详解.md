@@ -1,61 +1,93 @@
 ## Elasticsearch是一个分布式的搜索引擎
+
 #### &emsp;&emsp;&emsp;&emsp;&emsp;他的服务IP是：https://localhost:9200
+
 #### &emsp;&emsp;&emsp;&emsp;&emsp;为了更好的在浏览器上直观的显示搜索命令可以使用kibana
+
 #### &emsp;&emsp;&emsp;&emsp;&emsp;kibana的服务IP是：http://localhost:5601
-#### &emsp;&emsp;&emsp;&emsp;&emsp;windows系统下不需要安装Elasticsearch和kibana，只需要在bin目录下运行后缀为elasticsearch.bat或kibana.bat的文件      
+
+#### &emsp;&emsp;&emsp;&emsp;&emsp;windows系统下不需要安装Elasticsearch和kibana，只需要在bin目录下运行后缀为elasticsearch.bat或kibana.bat的文件
+
 ***
 
 #### &emsp;&emsp;&emsp;&emsp;&emsp;基本elasticsearch7以上版本都需要安全验证登录使用。第一次下载安装，命令行会给你 密码 和 token
+
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-> Password for the elastic user (reset with `bin/elasticsearch-reset-password -u elastic`):
+
 ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;AIZYCiFJwTzV21As6tmW
 
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;->  Configure Kibana to use this cluster:
+
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;* Run Kibana and click the configuration link in the terminal when Kibana starts.
+
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;* Copy the following enrollment token and paste it into Kibana in your browser (valid for the next 30 minutes):`eyJ2ZXIiOiI4LjAuMCIsImFkciI6WyIxOTIuMTY4LjAuMTAxOjkyMDAiXSwiZmdyIjoiM2ZiZDI1OTJhZWQ3MGI3ZmE0YzFhY2QxYzgwMDY4NDM4ZTVmZTM0Y2I5YjU4N2UyZGM2YmNjZjcxZDViZjc3MSIsImtleSI6ImRPY0tSbjhCd2gwVk03c09WdWg3OjlyMEtnekJRUXltTThWcHpmUU9qaFEifQ==`
 
-#### &emsp;&emsp;&emsp;&emsp;&emsp;进入 https://localhost:9200 地址会弹出用户名和密码登录界面：  
+#### &emsp;&emsp;&emsp;&emsp;&emsp;进入 https://localhost:9200 地址会弹出用户名和密码登录界面：
+
 ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;用户名 ==> elastic(固定的)    密码 ==> AIZYCiFJwTzV21As6tmW
+
 #### &emsp;&emsp;&emsp;&emsp;&emsp;进入 http://localhost:5601 地址会弹出注册令牌的界面:`eyJ2ZXIiOiI4LjAuMCIsImFkciI6WyIxOTIuMTY4LjAuMTAxOjkyMDAiXSwiZmdyIjoiM2ZiZDI1OTJhZWQ3MGI3ZmE0YzFhY2QxYzgwMDY4NDM4ZTVmZTM0Y2I5YjU4N2UyZGM2YmNjZjcxZDViZjc3MSIsImtleSI6ImRPY0tSbjhCd2gwVk03c09WdWg3OjlyMEtnekJRUXltTThWcHpmUU9qaFEifQ==`
+
 ***
 
-## 一、elasticsearch也是基于Lucene的全文检索库，本质也是存储数据，很多的概念与MySQL类似
+## 一、Elasticsearch也是基于Lucene的全文检索库，本质也是存储数据，很多的概念与MySQL类似
+
 #### &emsp;&emsp;&emsp;&emsp;对比关系：
+
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;索引集(indices)-------Databases数据库
+
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;类型(type)-----------------表(从6.0.0开始单个索引中只能有一个类型，7.0.0以后将不建议使用，8.0.0 以后完全不支持,现在统一用'_doc')
+
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;文档(Document)----------Row行(类比字段类型,是否主键等)
+
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;字段(Field)----------low列(类比字段)
+
 #### &emsp;&emsp;&emsp;&emsp;每个Elasticsearch索引都有自己的 分片(number_of_shards) 和 副本(number_of_replicas)
+
 ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;分片：数据拆分后的各个部分（比如"我是中国人"，进行分词后就会有"我","是","中国人","中国","国人"，那么就会有五个分片）
+
 ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;副本：每个分片的复制（就是"我","是","中国人","中国","国人"的备份，避免主分片出现异常错误，可以在副本中检索）
 
 #### &emsp;&emsp;&emsp;&emsp;Elasticsearch 集群有多个节点组成，形成分布式集群。那么，什么是节点呢？
+
 ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;节点（Node），就是一个 Elasticsearch 应用实例。大家都知道 Elasticsearch 源代码是 Java 写的，那么节点就是一个 Java 进程。
+
 ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;所以类似 Spring 应用一样，一台服务器或者本机可以运行多个节点，只要对应的端口不同即可。但生产服务器中，
+
 ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;一般一台服务器运行一个 Elasticsearch 节点。（通俗讲就是启动一个elasticsearch就有一个节点）
 
 #### &emsp;&emsp;&emsp;&emsp;要注意的是:Elasticsearch本身就是分布式的，因此即便你只有一个节点，Elasticsearch默认也会对你的数据进行主分片和副本分片操作，当你向集群添加新数据时，数据也会在新加入的节点中进行平衡。
+
 ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;比如：节点indexA索引的主分片为5，副本为1(复制一份主分片)，则表示一共有10块分片。
+
 ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;这个时候再启动一个节点indexB，那么10块分片会均匀分布。(例如：indexA节点主分片有3块分片，副本分片4块，indexB节点3块分片)
 
 #### &emsp;&emsp;&emsp;&emsp;索引状态：
+
 ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Green 主分片与副本分片都正常
+
 ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Yellow 主分片正常，副本分片不正常
+
 ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Red 有主分片不正常，可能某个分片容量超过了磁盘大小等
 
+#### &emsp;&emsp;&emsp;&emsp;***** 为了能将搜索细化到底，可以使用ik分词器，可以下载解压后放入Elasticsearch包下的plugins包内，并重启elasticsearch *****
 
-#### &emsp;&emsp;&emsp;&emsp;***** 为了能将搜索细化到底，可以使用ik分词器，可以下载解压后放入Elasticsearch包下的pluings包内，并重启elasticsearch *****
-- - - - ```
-         POST _analyze               
-         {  
-           "analyzer": "ik_max_word",  
-           "text": "我是中国人"  
-         }  
-         analyzer: "ik_max_word"  最细的分法  
-         analyzer: "ik_smart"     稍粗略的分法
-        ```
-        ![ES原理图片](src/main/resources/static/9872.jpg)
+-
+    -
+        -
+            - ```
+    POST _analyze               
+    {  
+    "analyzer": "ik_max_word",  
+    "text": "我是中国人"  
+    }  
+    analyzer: "ik_max_word"  最细的分法  
+    analyzer: "ik_smart"     稍粗略的分法
+      ```
+            ![ES原理图片](src/main/resources/static/9872.jpg)
 
 ## 二、CURL语法
+
 - **①、创建索引（PUT）**
   ```
   PUT /索引       # 索引名类比于MySQL的数据库
@@ -118,11 +150,11 @@
          {girl:{name:"rose",age:21}}
          会处理成两个字段：girl.name和girl.age
   ```
-- **②、查看映射关系**  
-  ### &emsp;&emsp;&emsp;&emsp;&emsp;```GET /索引名/_mapping```  
+- **②、查看映射关系**
+  ### &emsp;&emsp;&emsp;&emsp;&emsp;```GET /索引名/_mapping```
 
 
-- **③、新增(更新)数据（POST）其实使用PUT也有一样的效果，学了就能理解**  
+- **③、新增(更新)数据（POST）其实使用PUT也有一样的效果，学了就能理解**
     ```
     POST /索引库名/_doc      # id会随机赋值进行新增
     {
@@ -149,8 +181,8 @@
   ```
 
 - **⑤、删除索引（DELETE）**
-   ### &emsp;&emsp;&emsp;&emsp;```DELETE /索引库名/_doc/id值    # 根据id删除```
-          
+  ### &emsp;&emsp;&emsp;&emsp;```DELETE /索引库名/_doc/id值 # 根据id删除```
+
 
 - **⑥、查询索引（GET）**
   ```
@@ -401,125 +433,134 @@
           }
        }
   ```
-如果想要让 索引 和 查询 时使用不同的分词器，ElasticSearch也是能支持的，只需要在字段上加上search_analyzer参数
 
-在索引时，只会去看字段有没有定义analyzer，有定义的话就用定义的，没定义就用ES预设的
+## 三、高级内容
 
-在查询时，会先去看字段有没有定义search_analyzer，如果没有定义，就去看有没有analyzer，再没有定义，才会去使用ES预设的
-## 三、权重
-当 ES 自带的分词器无法满足时，可以自定义分词器。通过自己组合不同的组件实现
+### &emsp;&emsp;**①、自定义分词**
 
-Character Filter
+  - ##### &emsp;&emsp;&emsp;&emsp;*当 ES 自带的分词器无法满足时，可以自定义分词器。通过自己组合不同的组件实现*
+  
+    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Character Filter
+    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tokenizer
+    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Filter
+    
+    ##### &emsp;&emsp;&emsp;&emsp;*通过自己组合上面不同的组件，可以实现出不同的分词器效果。*
+    
+  - ### &emsp;&emsp;&emsp;&emsp;Character Filter
+    
+    ##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*在 Tokenizer 之前对文本进行处理。可以配置多个进行不同的文本处理。会影响 Tokenizer 的 position 和 offset 信息。下面是自带的 Character Filter*
+    
+    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;HTML strip 去除 html 标签  
+    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Mapping 字符串替换  
+    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Pattern replace 正则匹配替换
+    
+  - ### &emsp;&emsp;&emsp;&emsp;Tokenizer
 
-Tokenizer
+    ##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*将原始的文本按照一定的规则，切分为词。下面是一些ES内置的 Tokenizer*
 
-Token Filter
+    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;whitespace
+    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;standard
+    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;uax_url_email
+    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;pattern
+    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;keyword
+    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;path hierarchy
+    ##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*也可以用 JAVA 开发插件，实现自己的 Tokenizer*
 
-通过自己组合上面不同的组件，可以实现出不同的分词器效果。
+  - ### &emsp;&emsp;&emsp;&emsp;Filter
+    ##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*将 Tokenizer 输出的单词 进行增加修改删除等操作。下面是ES 自带的*
 
-Character Filter
-在 Tokenizer 之前对文本进行处理。可以配置多个进行不同的文本处理。会影响 Tokenizer 的 position 和 offset 信息
+    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Lowercase 小写
+    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;stop 停止词
+    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;synonym 近义词
 
-下面是一些自带的 Character Filter
+  - ### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;这几个操作简单来说就是
 
-HTML strip 去除 html 标签
-Mapping 字符串替换
-Pattern replace 正则匹配替换
-Tokenizer
-将原始的文本按照一定的规则，切分为词
+    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Character Filter 在分词前进行处理
+    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tokenizer 分词
+    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Token Filter 分词后进行处理
 
-下面是一些ES内置的 Tokenizer
-
-whitespace
-standard
-uax_url_email
-pattern
-keyword
-path hierarchy
-也可以用 JAVA 开发插件，实现自己的 Tokenizer
-
-Token filter
-将 Tokenizer 输出的单词 进行增加修改删除等操作
-
-下面是ES 自带的
-
-Lowercase 小写
-stop 停止词
-synonym 近义词
-这几个操作简单来说就是
-
-Character Filter 在分词前进行处理
-Tokenizer 分词
-Token Filter 分词后进行处理
-PUT test_home
-{
-  "settings":{
-    "analysis":{
-      "analyzer":{
-        my_analyzer:{    //自定义分词器
-          "type":"custom",
-          "char_filter":[
-            "test"    //自定义 character filter
-          ],
-          "tokenizer":"test_tokenizer",  //自定义 tokenizer
-          "filter":[         //token filter
-            "lowercase",
-            "english_stop"
-          ]
-        },
-        "tokenizer":{         //自定义 tokenizer
-          "test_tokenizer":{
-            "type":"pattern",
-            "pattern":"[?]"
-          }
-        },
-        "char_filter":{        //自定义 character filter -替换成_
-          "test":{
-            "type":"mapping",
-            "mappings":[
-              "-" => "_"
+- ```
+  PUT test_home
+  {
+    "settings": {
+      "analysis": {
+        "analyzer": {
+          "my_analyzer": {      # 自定义分词器
+            "type": "custom",
+            "char_filter": [
+              "test"            # 引入自定义的 character filter
+            ],
+            "tokenizer": "test_tokenizer",  # 引入自定义的 tokenizer
+            "filter": [
+              "lowercase",
+              "english_stop"    # 引入自定义的 token filter
             ]
-          }
-        }，
-        "filter":{       //设置 停止词
-          "english_stop":{
-            "type":"stop",
-            "stopwords":"_englsh_"
+          },
+          "char_filter": {      # 自定义 character filter -替换成_
+            "test": {
+              "type": "mapping",
+              "mappings": [
+                "-" => "_"
+              ]
+            }
+          },
+          "tokenizer": {        # 自定义 tokenizer
+            "test_tokenizer": {
+              "type": "pattern",
+              "pattern": "[?]"
+            }
+          },
+          "filter": {           # 设置 停止词
+            "english_stop": {
+              "type": "stop",
+              "stopwords": "_english_"
+            }
           }
         }
       }
     }
   }
-}
-
-
-PUT index
-{
-    "settings" : {
-        "analysis" : {
-            "analyzer" : {
-                "ik_smart_pinyin" : {
-                    "tokenizer" : "ik_smart",
-                    "filter" : "pinyin_first_letter_and_full_pinyin_filter"
-                },
-                "ik_max_pinyin" : {
-                    "tokenizer" : "ik_max_word",
-                    "filter" : "pinyin_first_letter_and_full_pinyin_filter"
-                }
-            },
-            "filter" : {
-                "pinyin_first_letter_and_full_pinyin_filter" : {
-                    "type" : "pinyin",
-                    "keep_separate_first_letter" : false,
-                    "keep_full_pinyin" : true,
-                    "keep_original" : true,
-                    "limit_first_letter_length" : 16,
-                    "lowercase" : true,
-                    "remove_duplicated_term" : true
-                }
-            }
+  ```
+- ```
+  实操ElasticSearch同时支持中文ik分词器和pinyin分词器：需要去下载pinyin分词器解压到plugins包下，重启elasticsearch
+  PUT index
+  {
+    "settings": {
+      "analysis": {
+        "analyzer": {
+          "ik_smart_pinyin": { 
+            "tokenizer": "ik_smart",
+            "filter": "pinyin_first_letter_and_full_pinyin_filter"  #使用自定义的filter
+          },
+          "ik_max_pinyin": {
+            "tokenizer": "ik_max_word",
+            "filter": "pinyin_first_letter_and_full_pinyin_filter"
+          }
+        },
+        "filter": {
+          "pinyin_first_letter_and_full_pinyin_filter": {  # 自定义filter名称
+            "type": "pinyin",                    # 使用插件拼音分词
+            "keep_separate_first_letter": true,  # 单独保留首字母
+            "keep_full_pinyin": true,            # 保留所有拼音
+            "keep_original": true,               # 保留原创
+            "limit_first_letter_length": 16,     # 首字母长度限制
+            "lowercase": true,                   # 转小写
+            "remove_duplicated_term": true       # 删除重复
+          }
         }
+      }
     }
-}
+  }
+  ```
+
+### &emsp;&emsp;**②、如果想要让 索引 和 查询 时使用不同的分词器，ElasticSearch也是能支持的，只需要在字段上加上search_analyzer参数**
+##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;analyzer：是在创建索引的时候对文档中相应的字段属性数据进行分词
+##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;search_analyzer：是对查询条件中的数据，进行分词(通常指的是用户输入的关键字)
+
+##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;在索引时，只会去看字段有没有定义analyzer，有定义的话就用定义的，没定义就用ES预设的
+
+##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;在查询时，会先去看字段有没有定义search_analyzer，如果没有定义，就去看有没有analyzer，再没有定义，才会去使用ES预设的
+
+## 四、权重
 
 
