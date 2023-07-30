@@ -7,7 +7,7 @@
 
 #### &emsp;&emsp;&emsp;&emsp;&emsp;基本elasticsearch7以上版本都需要安全验证登录使用。第一次下载安装，命令行会给你 密码 和 token
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;->  Password for the elastic user (reset with `bin/elasticsearch-reset-password -u elastic`):
-#### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;AIZYCiFJwTzV21As6tmW
+###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;AIZYCiFJwTzV21As6tmW
 
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;->  Configure Kibana to use this cluster:
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;* Run Kibana and click the configuration link in the terminal when Kibana starts.
