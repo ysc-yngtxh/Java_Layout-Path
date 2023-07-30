@@ -35,7 +35,7 @@
 
 #### &emsp;&emsp;&emsp;&emsp;要注意的是:Elasticsearch本身就是分布式的，因此即便你只有一个节点，Elasticsearch默认也会对你的数据进行主分片和副本分片操作，当你向集群添加新数据时，数据也会在新加入的节点中进行平衡。
 ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;比如：节点indexA索引的主分片为5，副本为1(复制一份主分片)，则表示一共有10块分片。
-###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;这个时候再启动一个节点indexB，那么10块分片会均匀分布。(例如：indexA节点主分片有3块分片，副本分片4块，indexB节点3块分片)
+###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;这个时候再启动一个节点indexB，那么10块分片会均匀分布。(例如：indexA节点主分片有3块分片，副本分片4块，indexB节点3块分片)
 
 #### &emsp;&emsp;&emsp;&emsp;索引状态：
 ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Green 主分片与副本分片都正常
@@ -58,28 +58,28 @@
 ## 二、CURL语法
 - **①、创建索引（PUT）**
   ```
-  PUT /索引       ###索引名类比于MySQL的数据库
+  PUT /索引       # 索引名类比于MySQL的数据库
   {
-    "settings": {   ###设置
-      "index": {    ###索引
-        "number_of_shards": "8",    ###主分片8块
-        "number_of_replicas": "1"   ###副本1个，副本分片8块
+    "settings": {   # 设置
+      "index": {    # 索引
+        "number_of_shards": "8",    # 主分片8块
+        "number_of_replicas": "1"   # 副本1个，副本分片8块
       }
     },
         mapping映射。用来定义一个文档以及其所包含的字段如何被存储和索引，可以在映射中事先定义字段的数据类型、字段的权重、分词器等属性，
         就如同在关系型数据库中创建数据表时会设置字段的类型。
     "mappings":{
-      "properties": {   属性
-        "title":{       标题
-          "type": "text",    可分词的类型
-          "analyzer": "ik_max_word"   最细的分法
+      "properties": {   # 属性
+        "title":{       # 标题
+          "type": "text",    # 可分词的类型
+          "analyzer": "ik_max_word"   # 最细的分法
         },
-        "images":{         图片，是一个url地址
-          "type": "keyword",  不需要分词，所以可以加一个keyword类型
-          "index": false    也没必要加上搜索
+        "images":{         # 图片，是一个url地址
+          "type": "keyword",  # 不需要分词，所以可以加一个keyword类型
+          "index": false    # 也没必要加上搜索
         },
-        "price":{           价格
-          "type": "float"   float类型
+        "price":{           # 价格
+          "type": "float"   # float类型
         },
         "name": {
           "type": "text",
@@ -92,6 +92,7 @@
       }
     }
   }
+  
   type: text(可分词)、keyword(不可分词)、long、integer、short、double、
         float、date、boolean、binary......
   fields: 实现一个字段多种数据类型，例如上述name是全文检索可以进行分词的，但是我们也可以对其进行排序或者聚合等，
@@ -118,19 +119,19 @@
          会处理成两个字段：girl.name和girl.age
   ```
 - **②、查看映射关系**  
-  ### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;```GET /索引名/_mapping```  
+  ### &emsp;&emsp;&emsp;&emsp;&emsp;```GET /索引名/_mapping```  
 
 
 - **③、新增(更新)数据（POST）其实使用PUT也有一样的效果，学了就能理解**  
     ```
-    POST /索引库名/_doc      id会随机赋值进行新增
+    POST /索引库名/_doc      # id会随机赋值进行新增
     {
       "title": "小米手机",
       "images": "http://localhost:8080/img/2.jpg",
       "price": 2699.00
     }
 
-    POST /索引库名/_doc/自定义id值     根据id进行新增
+    POST /索引库名/_doc/自定义id值     # 根据id进行新增
     {
         "title":"超米手机",
         "images":"http://image.leyou.com/12479122.jpg",
@@ -139,7 +140,7 @@
     ```
 - **④、更新数据(PUT)**
   ```
-  PUT /索引库/_doc/id值    根据文档id更新
+  PUT /索引库/_doc/id值    # 根据文档id更新
   {
     "title": "巨无霸手机",
     "images": "http://localhost:8080/img/2.jpg",
@@ -148,7 +149,7 @@
   ```
 
 - **⑤、删除索引（DELETE）**
-   ### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;```DELETE /索引库名/_doc/id值    根据id删除```
+   ### &emsp;&emsp;&emsp;&emsp;```DELETE /索引库名/_doc/id值    # 根据id删除```
           
 
 - **⑥、查询索引（GET）**
@@ -162,6 +163,7 @@
              }                             }
           }
         }
+  
         你会发现，你做一个全文检索 "大米手机"，会查出很多的数据。这是因为，你在做 "大米手机" 检索的时候。
         Elasticsearch会先做一个分词处理，比如："大","米","手","机","手机"......。
         所以只要包含这些词条的信息就都会被查询到。
@@ -171,14 +173,14 @@
         {                                {
           "query": {                       "query": {
             "term": {                        "terms": {
-              "title": "小米"                   "title": ["小米","oppo"]  这里注意,里面的英文oppo要小写，大写查询不到
+              "title": "小米"                   "title": ["小米","oppo"]  # 这里注意,里面的英文oppo要小写，大写查询不到
             }                                 }
           }                                 }
         }                                }
    
         match与term的区别：
-        match是代表模糊查询，match查询会先对搜索词进行分词,分词完毕后再逐个对分词结果进行匹配，
-        term是代表精确查询，搜索前不会再对搜索词进行分词，所以我们的搜索词必须是文档分词集合中的一个
+          match是代表模糊查询，match查询会先对搜索词进行分词,分词完毕后再逐个对分词结果进行匹配，
+          term是代表精确查询，搜索前不会再对搜索词进行分词，所以我们的搜索词必须是文档分词集合中的一个
 
   Ⅲ、结果过滤(excludes:不显示的字段  includes: 显示的字段)
         GET /ysc/_search
@@ -192,18 +194,20 @@
              }
           }
         }
+  
         表示搜索出来的信息返回的只有"title","price"
 
-  Ⅳ、模糊查询(fuzziness可以允许搜索字段是错误的)
+  Ⅳ、模糊查询(fuzzy可以允许搜索字段是错误的)
         GET /ysc/_search
         {
           "_source": ["title","price"],
           "query": {
-             "fuzziness": {
+             "fuzzy": {
                 "title": "appla"
              }
           }
         }
+  
         我的索引库中只有一个apple手机的信息，但是这里，我去查询appla。按理说词条是错误的查询不到
         但是结果还是能得到apple手机信息。这种纠错查询挺牛逼的。
 
@@ -214,21 +218,22 @@
           "query": {
              "range": {
                 "price": {
-                   "gte":1000,  大于1000
-                   "lte":3000   小于3000
+                   "gte":1000,  # 大于1000
+                   "lte":3000   # 小于3000
                 }
              }
           }
         }
+  
         通过"range"关键字，在价格里进行范围查询。
 
   Ⅵ、布尔查询(bool)
         GET /ysc/_search
         {
           "_source": ["title","price"],
-          "query":{
-            "bool":{
-              "must":[       表示的是查询条件都要满足，还有一个must_not表示查询条件都不满足
+          "query": {
+            "bool": {
+              "must": [       # 表示的是查询条件都要满足，还有一个must_not表示查询条件都不满足
                 {"match":{"title": "apple"}},{"range":{"price": {"gte": 3000}}}
               ]
             }
@@ -238,26 +243,37 @@
         GET /ysc/_search
         {
           "_source": ["title","price"],
-          "query":{
-            "bool":{
-              "should":[       表示的是只要满足一个条件就可以
-                {"match":{"title": "apple"}},{"range":{"price": {"gte": 3000}}}
+          "query": {
+            "bool": {
+              "should": [       # 表示的是只要满足一个条件就可以
+                {"match": {"title": "apple"}},{"range":{"price": {"gte": 3000}}}
               ]
             }
           }
         }
 
-  Ⅶ、过滤(filter)
+  Ⅶ、过滤(filter),过滤只能在bool属性或者聚合查询桶之下使用
         GET /ysc/_search
         {
           "_source": ["title","price"],
-          "query":{
-            "bool":{
-              "must":[
-                {"match":{"title": "apple"}}
+          "query": {
+            "bool": {
+              "must": [
+                {"match": {"title": "apple"}}
               ],
-              "filter":{
-                "range":{"price": {"gte": 3000}}
+              "filter": {
+                "term": {"name.keyword": "游诗成"},  # 精准匹配name值为游诗成的数据，并进行过滤掉(name为可分词的字段属性，精准匹配则需加上keyword)
+                "terms": {"context": ["123", "456"]},  # 多数据精准匹配
+                "range": {"price": {"gte": 3000}},  # 取范围price值大于3000的数据
+                "bool": {                          # 
+                  "must": {
+                    "match": {"hobby": "运维大佬"}
+                  }
+                },
+                "age": [25,26,27],      # 过滤掉字段属性age值为[25,26,27]的数据
+                "exits": {              # 过滤存在指定字段，获取字段不为空的索引记录使用
+                  "field": "sex"
+                }
               }
             }
           }
@@ -267,13 +283,13 @@
         GET /ysc/_search
         {
           "_source": ["title","price"],
-          "query":{
-            "bool":{
-              "must":[
-                {"match":{"title": "apple"}}
+          "query": {
+            "bool": {
+              "must": [
+                {"match": {"title": "apple"}}
               ],
-              "filter":{
-                "range":{"price": {"gte": 3000}}
+              "filter": {
+                "range": {"price": {"gte": 3000}}
               }
             }
           },
@@ -284,20 +300,53 @@
                }
             }
           ],
-          "from":1,  表示当前偏移量：一共有13条数据，如果from是12，则只会有一条数据
-          "size":7    表示一页几条数据
+          "from":1,  # 表示当前偏移量：一共有13条数据，如果from是12，则只会有一条数据
+          "size":7   # 表示一页几条数据
         }
 
   Ⅸ、聚合aggregations
-       Elasticsearch中的聚合，包含多种类型，最常用的两种，一个叫“桶(相当于分组)”，一个叫“度量(相当于求max,min,avg)”
+       Elasticsearch中的聚合，包含多种类型，最常用的两种，一个叫“桶(相当于分组)”，一个叫“度量(相当于求max,min,avg,sum...)”
        和关系型数据库中的聚合函数相类似
        GET /test/_search
        {
-         "size":0,ⅩⅩ
-         "aggs":{          官方的属性，用于表示开启聚合
-           "max_title":{   自定义的名字
-             "max":{
+         "size": 0,         # size设置为0，返回结果里是没有文档数据的，只有分组aggregations数据
+         "aggs": {          # 官方的属性，用于表示开启聚合
+           "max_title": {   # 自定义的名字
+             "max": {
                "field": "title"
+             }
+           }
+         }
+       }
+       
+       聚合中常用的桶terms、filter、top_hits
+       GET /test/_search
+       {
+         "query": {
+           "match_all": {}
+         },
+         "size": 0,             # size设置为0，返回结果里是没有文档数据的，只有分组aggregations数据
+         "aggs": {              # 官方的属性，用于表示开启聚合
+           "group_by_name": {   # 自定义的名字
+             "terms": {         # 第一个桶：terms桶--针对某个field的值进行分组，field有几种值就分成几组
+               "field": "name", # 查询的字段name
+               "size": 10000,   # 指定桶的个数
+               "order": {       # 按照price值进行倒排
+                 "price": "desc"
+               } 
+             },
+             "aggs":{           # aggs可以嵌套在别的aggs里，相当于分组之后继续进行分组
+               "group_by_price": {
+                 "sum": {
+                   "field": "price"
+                 }
+               }
+             }
+           },
+           "group_by_title": {
+             "filter": {             # 第二个桶：filter--一个用来过滤的桶。用法与上述布尔中filter一致
+               "term": {
+                 "title": "游诗成"
              }
            }
          }
