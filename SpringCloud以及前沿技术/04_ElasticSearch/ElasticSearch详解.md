@@ -7,7 +7,7 @@
 
 #### &emsp;&emsp;&emsp;&emsp;&emsp;基本elasticsearch7以上版本都需要安全验证登录使用。第一次下载安装，命令行会给你 密码 和 token
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;->  Password for the elastic user (reset with `bin/elasticsearch-reset-password -u elastic`):
-#### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;AIZYCiFJwTzV21As6tmW
+#### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;AIZYCiFJwTzV21As6tmW
 
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;->  Configure Kibana to use this cluster:
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;* Run Kibana and click the configuration link in the terminal when Kibana starts.
@@ -16,8 +16,9 @@
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ZTVmZTM0Y2I5YjU4N2UyZGM2YmNjZjcxZDViZjc3MSIsImtleSI6ImRPY0tSbjhCd2gwVk03c09WdWg3OjlyMEtnekJRUXltTThWcHpmUU9qaFEifQ==
 ***
 
-#### &emsp;&emsp;&emsp;&emsp;&emsp;进入https://localhost:9200地址会弹出用户名和密码登录界面：  用户名 ==> elastic(固定的)    密码 ==> AIZYCiFJwTzV21As6tmW
-#### &emsp;&emsp;&emsp;&emsp;&emsp;进入http://localhost:5601地址会弹出注册令牌的界面: eyJ2ZXIiOiI4LjAuMCIsImFkciI6WyIxOTIuMTY4LjAuMTAxOjkyMDAiXSwiZmdyIjoiM2ZiZDI1OTJhZWQ3MGI3ZmE0YzFhY2QxYzgwMDY4NDM4ZTVmZTM0Y2I5YjU4N2UyZGM2YmNjZjcxZDViZjc3MSIsImtleSI6ImRPY0tSbjhCd2gwVk03c09WdWg3OjlyMEtnekJRUXltTThWcHpmUU9qaFEifQ==
+#### &emsp;&emsp;&emsp;&emsp;&emsp;进入 https://localhost:9200 地址会弹出用户名和密码登录界面：  
+#### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;用户名 ==> elastic(固定的)    密码 ==> AIZYCiFJwTzV21As6tmW
+#### &emsp;&emsp;&emsp;&emsp;&emsp;进入 http://localhost:5601 地址会弹出注册令牌的界面: eyJ2ZXIiOiI4LjAuMCIsImFkciI6WyIxOTIuMTY4LjAuMTAxOjkyMDAiXSwiZmdyIjoiM2ZiZDI1OTJhZWQ3MGI3ZmE0YzFhY2QxYzgwMDY4NDM4ZTVmZTM0Y2I5YjU4N2UyZGM2YmNjZjcxZDViZjc3MSIsImtleSI6ImRPY0tSbjhCd2gwVk03c09WdWg3OjlyMEtnekJRUXltTThWcHpmUU9qaFEifQ==
 ***
 
 ## 一、elasticsearch也是基于Lucene的全文检索库，本质也是存储数据，很多的概念与MySQL类似
