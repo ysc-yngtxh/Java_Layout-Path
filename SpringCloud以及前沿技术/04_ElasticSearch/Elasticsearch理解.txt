@@ -297,6 +297,10 @@ Elasticsearch是一个分布式的搜索引擎
                 注意：es中进行过滤,排序,聚合的字段,不能被分词!!!!*
 
             Ⅹ、实现搜索高亮highlight
+               这个高亮的字段是你想要查询的可分词的字段。
+               比如：我去百度一个关键字，给出的结果高亮部分肯定是你关键词中分词的一部分
+               所以，这里高亮的字段必须跟的query查询中的字段
+
                GET /ysc/_search
                {
                   "query": {
@@ -308,6 +312,34 @@ Elasticsearch是一个分布式的搜索引擎
                     "fields": {
                       "title": {}
                     }
+                  }
+               }
+
+               // 构建多个字段高亮
+               GET /ysc/_search
+               {
+                  "query": {
+                     "bool": {
+                        "should": [{
+                           "match": {
+                              "title": "手机"
+                           }
+                        }, {
+                           "match": {
+                              "price": "4562"
+                           }
+                        }]
+                     }
+
+                  },
+                  "highlight": {
+                    "fields": [{
+                      "name": {}
+                    }, {
+                      "price": {}
+                    }],
+                    "preTags": "<span style='color: blue'",
+                    "postTags": "</spn>"
                   }
                }
 

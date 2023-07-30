@@ -42,9 +42,8 @@
 6. ### ***设置磁盘大小：100G； 并将虚拟磁盘存储为单个文件； 完成创建虚拟机配置***
 
    ![输入图片说明](src/main/resources/static/image1-6.png)
-
    ![输入图片说明](src/main/resources/static/image1-7.png)
-
+  
 ---
 
 7. ### ***安装设置 中文 语言***
