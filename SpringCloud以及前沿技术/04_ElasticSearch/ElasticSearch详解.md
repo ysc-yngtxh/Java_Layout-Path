@@ -546,6 +546,25 @@
           }
         }
       }
+    },
+    "mappings": {
+      "properties": {
+        "title": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word",
+          "fields": {
+            "costom_suggest": {
+              "type": "completion",
+              "analyzer": "ik_max_word"
+            }
+          }
+        },
+        "content": {
+          "type": "text",
+          "analyzer": "ik_max_word"
+        }
+      }
     }
   }
   ```
