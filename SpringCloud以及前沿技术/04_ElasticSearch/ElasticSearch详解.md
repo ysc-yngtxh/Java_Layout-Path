@@ -359,7 +359,7 @@
            "group_by_name": {   # 自定义的名字
              "terms": {         # 第一个桶：terms桶--针对某个field的值进行分组，field有几种值就分成几组
                "field": "name", # 查询的字段name
-               "size": 10000,   # 指定桶的个数
+               "size": 10000,   # 指定返回的term个数，默认为10
                "order": {       # 按照price值进行倒排
                  "price": "desc"
                } 
