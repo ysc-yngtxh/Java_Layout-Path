@@ -552,12 +552,12 @@
         "title": {
           "type": "text",
           "analyzer": "ik_max_pinyin",
-          "search_analyzer": "ik_smart_pinyin"   # 查询条件
+          "search_analyzer": "ik_smart_pinyin"   # 查询条件的分词器
         },
         "content": {
           "type": "text",
           "analyzer": "ik_smart_pinyin",
-          "search_analyzer": "ik_smart_pinyin"   # 删除重复
+          "search_analyzer": "ik_smart_pinyin"   # 查询条件的分词器
         }
       }
     }
@@ -566,21 +566,21 @@
 
 ### &emsp;&emsp;**②、如果想要让 索引 和 查询 时使用不同的分词器，ElasticSearch也是能支持的，只需要在字段上加上search_analyzer参数**
 
-##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;analyzer：是在创建索引的时候对文档中相应的字段属性数据进行分词
+##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;analyzer：是在创建索引的时候对文档中相应的字段属性数据进行分词
 
-##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;search_analyzer：是对查询条件中的数据，进行分词(通常指的是用户输入的关键字)
+##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;search_analyzer：是对查询条件中的数据，进行分词(通常指的是用户输入的关键字)
 
-##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;在索引时，只会去看字段有没有定义analyzer，有定义的话就用定义的，没定义就用ES预设的
+##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;在索引时，只会去看字段有没有定义analyzer，有定义的话就用定义的，没定义就用ES预设的
 
-##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;在查询时，会先去看字段有没有定义search_analyzer，如果没有定义，就去看有没有analyzer，再没有定义，才会去使用ES预设的
+##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;在查询时，会先去看字段有没有定义search_analyzer，如果没有定义，就去看有没有analyzer，再没有定义，才会去使用ES预设的
 
 ### &emsp;&emsp;**③、Suggest查询建议(自动补全&纠错)**
 
-##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;现代的搜索引擎,一般会提供一个Suggest as you type 功能
+##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;现代的搜索引擎,一般会提供一个Suggest as you type 功能
 
-##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;帮助用户在输入搜索的工程中,进行自动补全或者纠错.通过协助用户输入更加精确的关键词,提高后续搜索阶段文档匹配的长度
+##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;帮助用户在输入搜索的工程中,进行自动补全或者纠错.通过协助用户输入更加精确的关键词,提高后续搜索阶段文档匹配的长度
 
-##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;在google上搜索,一开始会自动补全.当输入到一定长度,如果因为单词拼写错误无法补全,就会开始提示相似的词或者句子
+##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;在google上搜索,一开始会自动补全.当输入到一定长度,如果因为单词拼写错误无法补全,就会开始提示相似的词或者句子
 
 
 
