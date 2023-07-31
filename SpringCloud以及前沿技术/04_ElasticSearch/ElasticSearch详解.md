@@ -552,12 +552,12 @@
         "title": {
           "type": "text",
           "analyzer": "ik_max_pinyin",
-          "search_analyzer": "ik_smart_pinyin"   # 查询条件
+          "search_analyzer": "ik_smart_pinyin"   # 查询条件的分词器
         },
         "content": {
           "type": "text",
           "analyzer": "ik_smart_pinyin",
-          "search_analyzer": "ik_smart_pinyin"   # 删除重复
+          "search_analyzer": "ik_smart_pinyin"   # 查询条件的分词器
         }
       }
     }
