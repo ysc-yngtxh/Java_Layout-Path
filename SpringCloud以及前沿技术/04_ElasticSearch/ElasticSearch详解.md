@@ -17,6 +17,7 @@
 
 elasticsearch-reset--password --username elastic -i
 按照提示输入y确定要继续更新密码，然后输入两次密码即可，这里可以输的密码好记一点
+![输入图片说明](src/main/resources/static/image-2.png)
 
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-> Password for the elastic user (reset with `bin/elasticsearch-reset-password -u elastic`):
 
