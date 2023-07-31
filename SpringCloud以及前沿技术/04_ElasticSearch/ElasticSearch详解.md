@@ -13,6 +13,11 @@
 #### &emsp;&emsp;&emsp;&emsp;&emsp;基本elasticsearch7以上版本都需要安全验证登录使用。第一次下载安装，命令行会给你 密码 和 token
 ![输入图片说明](src/main/resources/static/image-1.png)
 
+在ES的bin目录下输入
+
+elasticsearch-reset--password --username elastic -i
+按照提示输入y确定要继续更新密码，然后输入两次密码即可，这里可以输的密码好记一点
+
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-> Password for the elastic user (reset with `bin/elasticsearch-reset-password -u elastic`):
 
 ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;AIZYCiFJwTzV21As6tmW
