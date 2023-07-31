@@ -14,7 +14,7 @@
 
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-> Password for the elastic user (reset with `bin/elasticsearch-reset-password -u elastic`):
 
-###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;AIZYCiFJwTzV21As6tmW
+###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;AIZYCiFJwTzV21As6tmW
 
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;->  Configure Kibana to use this cluster:
 
@@ -44,47 +44,44 @@
 
 #### &emsp;&emsp;&emsp;&emsp;每个Elasticsearch索引都有自己的 分片(number_of_shards) 和 副本(number_of_replicas)
 
-###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;分片：数据拆分后的各个部分（比如"我是中国人"，进行分词后就会有"我","是","中国人","中国","国人"，那么就会有五个分片）
+###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;分片：数据拆分后的各个部分（比如"我是中国人"，进行分词后就会有"我","是","中国人","中国","国人"，那么就会有五个分片）
 
-###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;副本：每个分片的复制（就是"我","是","中国人","中国","国人"的备份，避免主分片出现异常错误，可以在副本中检索）
+###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;副本：每个分片的复制（就是"我","是","中国人","中国","国人"的备份，避免主分片出现异常错误，可以在副本中检索）
 
 #### &emsp;&emsp;&emsp;&emsp;Elasticsearch 集群有多个节点组成，形成分布式集群。那么，什么是节点呢？
 
-###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;节点（Node），就是一个 Elasticsearch 应用实例。大家都知道 Elasticsearch 源代码是 Java 写的，那么节点就是一个 Java 进程。
+###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;节点（Node），就是一个 Elasticsearch 应用实例。大家都知道 Elasticsearch 源代码是 Java 写的，那么节点就是一个 Java 进程。
 
-###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;所以类似 Spring 应用一样，一台服务器或者本机可以运行多个节点，只要对应的端口不同即可。但生产服务器中，
+###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;所以类似 Spring 应用一样，一台服务器或者本机可以运行多个节点，只要对应的端口不同即可。但生产服务器中，
 
-###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;一般一台服务器运行一个 Elasticsearch 节点。（通俗讲就是启动一个elasticsearch就有一个节点）
+###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;一般一台服务器运行一个 Elasticsearch 节点。（通俗讲就是启动一个elasticsearch就有一个节点）
 
 #### &emsp;&emsp;&emsp;&emsp;要注意的是:Elasticsearch本身就是分布式的，因此即便你只有一个节点，Elasticsearch默认也会对你的数据进行主分片和副本分片操作，当你向集群添加新数据时，数据也会在新加入的节点中进行平衡。
 
-###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;比如：节点indexA索引的主分片为5，副本为1(复制一份主分片)，则表示一共有10块分片。
+###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;比如：节点indexA索引的主分片为5，副本为1(复制一份主分片)，则表示一共有10块分片。
 
-###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;这个时候再启动一个节点indexB，那么10块分片会均匀分布。(例如：indexA节点主分片有3块分片，副本分片4块，indexB节点3块分片)
+###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;这个时候再启动一个节点indexB，那么10块分片会均匀分布。(例如：indexA节点主分片有3块分片，副本分片4块，indexB节点3块分片)
 
 #### &emsp;&emsp;&emsp;&emsp;索引状态：
 
-###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Green 主分片与副本分片都正常
+###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Green 主分片与副本分片都正常
 
-###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Yellow 主分片正常，副本分片不正常
+###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Yellow 主分片正常，副本分片不正常
 
-###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Red 有主分片不正常，可能某个分片容量超过了磁盘大小等
+###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Red 有主分片不正常，可能某个分片容量超过了磁盘大小等
 
 #### &emsp;&emsp;&emsp;&emsp;***** 为了能将搜索细化到底，可以使用ik分词器，可以下载解压后放入Elasticsearch包下的plugins包内，并重启elasticsearch *****
 
--
-    -
-        -
-            - ```
-    POST _analyze               
-    {  
-    "analyzer": "ik_max_word",  
-    "text": "我是中国人"  
-    }  
-    analyzer: "ik_max_word"  最细的分法  
-    analyzer: "ik_smart"     稍粗略的分法
-      ```
-            ![ES原理图片](src/main/resources/static/9872.jpg)
+- - - - ```
+        POST _analyze               
+        {  
+        "analyzer": "ik_max_word",  
+        "text": "我是中国人"  
+        }  
+        analyzer: "ik_max_word"  最细的分法  
+        analyzer: "ik_smart"     稍粗略的分法
+        ```
+        ![ES原理图片](src/main/resources/static/9872.jpg)
 
 ## 二、CURL语法
 
@@ -151,7 +148,7 @@
          会处理成两个字段：girl.name和girl.age
   ```
 - **②、查看映射关系**
-  ### &emsp;&emsp;&emsp;&emsp;&emsp;```GET /索引名/_mapping```
+  ### &emsp;&emsp;```GET /索引名/_mapping```
 
 
 - **③、新增(更新)数据（POST）其实使用PUT也有一样的效果，学了就能理解**
@@ -181,7 +178,7 @@
   ```
 
 - **⑤、删除索引（DELETE）**
-  ### &emsp;&emsp;&emsp;&emsp;```DELETE /索引库名/_doc/id值 # 根据id删除```
+  ### &emsp;&emsp;```DELETE /索引库名/_doc/id值 # 根据id删除```
 
 
 - **⑥、查询索引（GET）**
