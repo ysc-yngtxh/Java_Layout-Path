@@ -11,6 +11,7 @@
 ***
 
 #### &emsp;&emsp;&emsp;&emsp;&emsp;基本elasticsearch7以上版本都需要安全验证登录使用。第一次下载安装，命令行会给你 密码 和 token
+![输入图片说明](src/main/resources/static/image-1.png)
 
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-> Password for the elastic user (reset with `bin/elasticsearch-reset-password -u elastic`):
 
