@@ -32,6 +32,8 @@ import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
+import org.elasticsearch.search.aggregations.metrics.MaxAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
@@ -391,15 +393,17 @@ class ESApplicationTests1 {
     }
 
 
-    // 聚合查询：最大值
+    // 聚合查询：度量--最大值
     @Test
     void aggregationMax() throws IOException {
         // SearchRequest request = new SearchRequest("user"); 源码效果一样
         SearchRequest request = new SearchRequest().indices("user");
         // 搜索构建器
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-        // "maxAge"表示给聚合查询最大值起的名字；"age"表示聚合查询字段
-        sourceBuilder.aggregation(AggregationBuilders.max("maxAge").field("age"));
+        // 聚合构建器："maxAge"表示给聚合查询最大值起的名字；"age"表示聚合查询字段
+        MaxAggregationBuilder field = AggregationBuilders.max("maxAge").field("age");
+
+        sourceBuilder.aggregation(field);
         // 客户端发送请求，获取响应对象
         SearchResponse response = client.search(request.source(sourceBuilder), RequestOptions.DEFAULT);
         // 打印响应结果
@@ -410,15 +414,17 @@ class ESApplicationTests1 {
     }
 
 
-    // 聚合查询：分组统计
+    // 聚合查询：桶--分组统计
     @Test
     void aggregationTerm() throws IOException {
         // SearchRequest request = new SearchRequest("user"); 源码效果一样
         SearchRequest request = new SearchRequest().indices("user");
         // 搜索构建器
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-        // "ageGroupBy"表示给聚合查询分组起的名字
-        sourceBuilder.aggregation(AggregationBuilders.terms("ageGroupBy").field("age"));
+        // 聚合构建器："ageGroupBy"表示给聚合查询分组起的名字
+        TermsAggregationBuilder field = AggregationBuilders.terms("ageGroupBy").field("age");
+
+        sourceBuilder.aggregation(field);
         // 客户端发送请求，获取响应对象
         SearchResponse response = client.search(request.source(sourceBuilder), RequestOptions.DEFAULT);
         // 打印响应结果
