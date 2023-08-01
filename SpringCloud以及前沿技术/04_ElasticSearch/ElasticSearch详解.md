@@ -166,7 +166,7 @@ elasticSearch-head可视化插件
    ```
 2. **查看映射关系**
  
-   ### &emsp;&emsp;```GET /索引名/_mapping```
+   ### &emsp;```GET /索引名/_mapping```
 
 3. **新增(更新)数据（POST）其实使用PUT也有一样的效果，学了就能理解**
     ```
@@ -195,7 +195,7 @@ elasticSearch-head可视化插件
    ```
 
 5. **删除索引（DELETE）**
-   ### &emsp;&emsp;```DELETE /索引库名/_doc/id值 # 根据id删除```
+   ### &emsp;```DELETE /索引库名/_doc/id值 # 根据id删除```
 
 
 6. **查询索引（GET）**
@@ -450,154 +450,154 @@ elasticSearch-head可视化插件
 
 ## 三、高级内容
 
-### &emsp;&emsp;**①、自定义分词**
+### 1. **自定义分词**
 
-  - ##### &emsp;&emsp;&emsp;&emsp;*当 ES 自带的分词器无法满足时，可以自定义分词器。通过自己组合不同的组件实现*
-  
-    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Character Filter
-    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tokenizer
-    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Filter
-    
-    ##### &emsp;&emsp;&emsp;&emsp;*通过自己组合上面不同的组件，可以实现出不同的分词器效果。*
-    
-  - ### &emsp;&emsp;&emsp;&emsp;Character Filter
-    
-    ##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*在 Tokenizer 之前对文本进行处理。可以配置多个进行不同的文本处理。会影响 Tokenizer 的 position 和 offset 信息。下面是自带的 Character Filter*
-    
-    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;HTML strip 去除 html 标签  
-    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Mapping 字符串替换  
-    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Pattern replace 正则匹配替换
-    
-  - ### &emsp;&emsp;&emsp;&emsp;Tokenizer
-
-    ##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*将原始的文本按照一定的规则，切分为词。下面是一些ES内置的 Tokenizer*
-
-    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;whitespace
-    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;standard
-    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;uax_url_email
-    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;pattern
-    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;keyword
-    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;path hierarchy
-    ##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*也可以用 JAVA 开发插件，实现自己的 Tokenizer*
-
-  - ### &emsp;&emsp;&emsp;&emsp;Filter
-    ##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*将 Tokenizer 输出的单词 进行增加修改删除等操作。下面是ES 自带的*
-
-    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Lowercase 小写
-    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;stop 停止词
-    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;synonym 近义词
-
-  - ### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;这几个操作简单来说就是
-
-    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Character Filter 在分词前进行处理
-    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tokenizer 分词
-    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Token Filter 分词后进行处理
-
-- ```
-  PUT test_home
-  {
-    "settings": {
-      "analysis": {
-        "analyzer": {
-          "my_analyzer": {      # 自定义分词器
-            "type": "custom",
-            "char_filter": [
-              "test"            # 引入自定义的 character filter
-            ],
-            "tokenizer": "test_tokenizer",  # 引入自定义的 tokenizer
-            "filter": [
-              "lowercase",
-              "english_stop"    # 引入自定义的 token filter
-            ]
-          },
-          "char_filter": {      # 自定义 character filter -替换成_
-            "test": {
-              "type": "mapping",
-              "mappings": [
-                "-" => "_"
-              ]
-            }
-          },
-          "tokenizer": {        # 自定义 tokenizer
-            "test_tokenizer": {
-              "type": "pattern",
-              "pattern": "[?]"
-            }
-          },
-          "filter": {           # 设置 停止词
-            "english_stop": {
-              "type": "stop",
-              "stopwords": "_english_"
+   - ##### &emsp;&emsp;&emsp;&emsp;*当 ES 自带的分词器无法满足时，可以自定义分词器。通过自己组合不同的组件实现*
+   
+     ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Character Filter
+     ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tokenizer
+     ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Filter
+     
+     ##### &emsp;&emsp;&emsp;&emsp;*通过自己组合上面不同的组件，可以实现出不同的分词器效果。*
+     
+   - ### &emsp;&emsp;&emsp;&emsp;Character Filter
+     
+     ##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*在 Tokenizer 之前对文本进行处理。可以配置多个进行不同的文本处理。会影响 Tokenizer 的 position 和 offset 信息。下面是自带的 Character Filter*
+     
+     ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;HTML strip 去除 html 标签  
+     ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Mapping 字符串替换  
+     ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Pattern replace 正则匹配替换
+     
+   - ### &emsp;&emsp;&emsp;&emsp;Tokenizer
+ 
+     ##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*将原始的文本按照一定的规则，切分为词。下面是一些ES内置的 Tokenizer*
+ 
+     ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;whitespace
+     ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;standard
+     ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;uax_url_email
+     ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;pattern
+     ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;keyword
+     ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;path hierarchy
+     ##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*也可以用 JAVA 开发插件，实现自己的 Tokenizer*
+ 
+   - ### &emsp;&emsp;&emsp;&emsp;Filter
+     ##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*将 Tokenizer 输出的单词 进行增加修改删除等操作。下面是ES 自带的*
+ 
+     ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Lowercase 小写
+     ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;stop 停止词
+     ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;synonym 近义词
+ 
+   - ### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;这几个操作简单来说就是
+ 
+     ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Character Filter 在分词前进行处理
+     ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tokenizer 分词
+     ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Token Filter 分词后进行处理
+ 
+   -  ```
+      PUT test_home
+      {
+        "settings": {
+          "analysis": {
+            "analyzer": {
+              "my_analyzer": {      # 自定义分词器
+                "type": "custom",
+                "char_filter": [
+                  "test"            # 引入自定义的 character filter
+                ],
+                "tokenizer": "test_tokenizer",  # 引入自定义的 tokenizer
+                "filter": [
+                  "lowercase",
+                  "english_stop"    # 引入自定义的 token filter
+                ]
+              },
+              "char_filter": {      # 自定义 character filter -替换成_
+                "test": {
+                  "type": "mapping",
+                  "mappings": [
+                    "-" => "_"
+                  ]
+                }
+              },
+              "tokenizer": {        # 自定义 tokenizer
+                "test_tokenizer": {
+                  "type": "pattern",
+                  "pattern": "[?]"
+                }
+              },
+              "filter": {           # 设置 停止词
+                "english_stop": {
+                  "type": "stop",
+                  "stopwords": "_english_"
+                }
+              }
             }
           }
         }
       }
-    }
-  }
-  ```
-- ```
-  实操ElasticSearch同时支持中文ik分词器和pinyin分词器：需要去下载pinyin分词器解压到plugins包下，重启elasticsearch
-  PUT index
-  {
-    "settings": {
-      "analysis": {
-        "analyzer": {
-          "ik_smart_pinyin": { 
-            "tokenizer": "ik_smart",
-            "filter": "pinyin_first_letter_and_full_pinyin_filter"  #使用自定义的filter
-          },
-          "ik_max_pinyin": {
-            "tokenizer": "ik_max_word",
-            "filter": "pinyin_first_letter_and_full_pinyin_filter"
+      ```
+   -  ```
+      实操ElasticSearch同时支持中文ik分词器和pinyin分词器：需要去下载pinyin分词器解压到plugins包下，重启elasticsearch
+      PUT index
+      {
+        "settings": {
+          "analysis": {
+            "analyzer": {
+              "ik_smart_pinyin": { 
+                "tokenizer": "ik_smart",
+                "filter": "pinyin_first_letter_and_full_pinyin_filter"  #使用自定义的filter
+              },
+              "ik_max_pinyin": {
+                "tokenizer": "ik_max_word",
+                "filter": "pinyin_first_letter_and_full_pinyin_filter"
+              }
+            },
+            "filter": {
+              "pinyin_first_letter_and_full_pinyin_filter": {  # 自定义filter名称
+                "type": "pinyin",                    # 使用插件拼音分词
+                "keep_separate_first_letter": true,  # 单独保留首字母
+                "keep_full_pinyin": true,            # 保留所有拼音
+                "keep_original": true,               # 保留原创
+                "limit_first_letter_length": 16,     # 首字母长度限制
+                "lowercase": true,                   # 转小写
+                "remove_duplicated_term": true       # 删除重复
+              }
+            }
           }
         },
-        "filter": {
-          "pinyin_first_letter_and_full_pinyin_filter": {  # 自定义filter名称
-            "type": "pinyin",                    # 使用插件拼音分词
-            "keep_separate_first_letter": true,  # 单独保留首字母
-            "keep_full_pinyin": true,            # 保留所有拼音
-            "keep_original": true,               # 保留原创
-            "limit_first_letter_length": 16,     # 首字母长度限制
-            "lowercase": true,                   # 转小写
-            "remove_duplicated_term": true       # 删除重复
+        "mapping": {
+          "properrties": {
+            "title": {
+              "type": "text",
+              "analyzer": "ik_max_pinyin",
+              "search_analyzer": "ik_smart_pinyin"   # 查询条件的分词器
+            },
+            "content": {
+              "type": "text",
+              "analyzer": "ik_smart_pinyin",
+              "search_analyzer": "ik_smart_pinyin"   # 查询条件的分词器
+            }
           }
         }
       }
-    },
-    "mapping": {
-      "properrties": {
-        "title": {
-          "type": "text",
-          "analyzer": "ik_max_pinyin",
-          "search_analyzer": "ik_smart_pinyin"   # 查询条件的分词器
-        },
-        "content": {
-          "type": "text",
-          "analyzer": "ik_smart_pinyin",
-          "search_analyzer": "ik_smart_pinyin"   # 查询条件的分词器
-        }
-      }
-    }
-  }
-  ```
+      ```
 
-### &emsp;&emsp;**②、如果想要让 索引 和 查询 时使用不同的分词器，ElasticSearch也是能支持的，只需要在字段上加上search_analyzer参数**
+2. ### **如果想要让 索引 和 查询 时使用不同的分词器，ElasticSearch也是能支持的，只需要在字段上加上search_analyzer参数**
 
-##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;analyzer：是在创建索引的时候对文档中相应的字段属性数据进行分词
+   ###### &emsp;&emsp;&emsp;analyzer：是在创建索引的时候对文档中相应的字段属性数据进行分词
+   
+   ###### &emsp;&emsp;&emsp;search_analyzer：是对查询条件中的数据，进行分词(通常指的是用户输入的关键字)
+   
+   ###### &emsp;&emsp;&emsp;在索引时，只会去看字段有没有定义analyzer，有定义的话就用定义的，没定义就用ES预设的
+   
+   ###### &emsp;&emsp;&emsp;在查询时，会先去看字段有没有定义search_analyzer，如果没有定义，就去看有没有analyzer，再没有定义，才会去使用ES预设的
 
-##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;search_analyzer：是对查询条件中的数据，进行分词(通常指的是用户输入的关键字)
+3. ### **Suggest查询建议(自动补全&纠错)**
 
-##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;在索引时，只会去看字段有没有定义analyzer，有定义的话就用定义的，没定义就用ES预设的
-
-##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;在查询时，会先去看字段有没有定义search_analyzer，如果没有定义，就去看有没有analyzer，再没有定义，才会去使用ES预设的
-
-### &emsp;&emsp;**③、Suggest查询建议(自动补全&纠错)**
-
-##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;现代的搜索引擎,一般会提供一个Suggest as you type 功能
-
-##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;帮助用户在输入搜索的工程中,进行自动补全或者纠错.通过协助用户输入更加精确的关键词,提高后续搜索阶段文档匹配的长度
-
-##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;在google上搜索,一开始会自动补全.当输入到一定长度,如果因为单词拼写错误无法补全,就会开始提示相似的词或者句子
+   ###### &emsp;&emsp;&emsp;现代的搜索引擎,一般会提供一个Suggest as you type 功能
+   
+   ###### &emsp;&emsp;&emsp;帮助用户在输入搜索的工程中,进行自动补全或者纠错.通过协助用户输入更加精确的关键词,提高后续搜索阶段文档匹配的长度
+   
+   ###### &emsp;&emsp;&emsp;在google上搜索,一开始会自动补全.当输入到一定长度,如果因为单词拼写错误无法补全,就会开始提示相似的词或者句子
 
 
 
