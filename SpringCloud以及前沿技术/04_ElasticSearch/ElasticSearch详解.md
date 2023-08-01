@@ -452,25 +452,15 @@ elasticSearch-head可视化插件
 
 ### 1. **自定义分词**
 
-   ##### &emsp;&emsp;&emsp;&emsp;*当 ES 自带的分词器无法满足时，可以自定义分词器。通过自己组合不同的组件实现*
+   #### &emsp;&emsp;&emsp;&emsp;*①、当 ES 自带的分词器无法满足时，可以自定义分词器。通过自己组合上面不同的组件，可以实现出不同的分词器效果。*
    
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Character Filter
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tokenizer
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Filter
-   
-   ##### &emsp;&emsp;&emsp;&emsp;*通过自己组合上面不同的组件，可以实现出不同的分词器效果。*
-   
-   ### &emsp;&emsp;&emsp;&emsp;Character Filter
-   
-   ##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*在 Tokenizer 之前对文本进行处理。可以配置多个进行不同的文本处理。会影响 Tokenizer 的 position 和 offset 信息。下面是自带的 Character Filter*
+   ##### &emsp;&emsp;&emsp;&emsp;Character Filter（在 Tokenizer 之前对文本进行处理。可以配置多个进行不同的文本处理。会影响 Tokenizer 的 position 和 offset 信息。下面是自带的 Character Filter）
    
    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;HTML strip 去除 html 标签  
    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Mapping 字符串替换  
    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Pattern replace 正则匹配替换
    
-   ### &emsp;&emsp;&emsp;&emsp;Tokenizer
- 
-   ##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*将原始的文本按照一定的规则，切分为词。下面是一些ES内置的 Tokenizer*
+   ##### &emsp;&emsp;&emsp;&emsp;Tokenizer（将原始的文本按照一定的规则，切分为词。下面是一些ES内置的 Tokenizer）
  
    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;whitespace
    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;standard
@@ -480,20 +470,19 @@ elasticSearch-head可视化插件
    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;path hierarchy
    ##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*也可以用 JAVA 开发插件，实现自己的 Tokenizer*
  
-   ### &emsp;&emsp;&emsp;&emsp;Filter
-   ##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*将 Tokenizer 输出的单词 进行增加修改删除等操作。下面是ES 自带的*
+   ##### &emsp;&emsp;&emsp;&emsp;Filter（将 Tokenizer 输出的单词 进行增加修改删除等操作。下面是ES 自带的）
  
    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Lowercase 小写
    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;stop 停止词
    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;synonym 近义词
  
-   ### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;这几个操作简单来说就是
+   ### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*③、这几个操作简单来说就是*
  
    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Character Filter 在分词前进行处理
    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tokenizer 分词
    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Token Filter 分词后进行处理
  
-    ```
+- ```
     PUT test_home
     {
       "settings": {
@@ -535,6 +524,7 @@ elasticSearch-head可视化插件
       }
     }
     ```
+
     ```
     实操ElasticSearch同时支持中文ik分词器和pinyin分词器：需要去下载pinyin分词器解压到plugins包下，重启elasticsearch
     PUT index
