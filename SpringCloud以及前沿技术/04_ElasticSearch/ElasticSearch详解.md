@@ -20,9 +20,13 @@
     &emsp;&emsp;&emsp;&emsp;**进入 http://localhost:5601 地址会弹出注册令牌的界面:**
       `eyJ2ZXIiOiI4LjkuMCIsImFkciI6WyIxOTIuMTY4LjEuNTo5MjAwIl0sImZnciI6Ijg4MTQzOTk2NjgyNWNhNTg2N2YzNmE10TcxNGFiNWYzMTU0MGIwYTg5YzVkZjRiOGJiNDNiZTVhOGNjNTI30DIiLCrZXkiOiJpTkNrcklrQm1WNkZmek80S2dXVjpmS25laHpOWFFPLWdIX1AzU2VYdnV3In0=`
 
+***
+
 - **通常在我们自己个人使用需要在config包下的Elasticsearch.yml中关闭安全连接SSL: false; 当然如果公司需要我们也可以去开启这个安全设置**
   - ![输入图片说明](src/main/resources/static/image-3.png)
  
+***
+
 - **如果我们不想使用自动生成的密码，我们还可以自己修改成固定的密码**
   
   - 在ES的bin目录下输入：`elasticsearch-reset--password --username elastic -i`
