@@ -595,39 +595,23 @@
 #### &emsp;&emsp;&emsp;**①、自动补全**
 
   - ```
-PUT /movie
-{
-  "mappings": {
-    "properties": {
-      "title": {
-        "type": "text",
-        "analyzer": "ik_max_word",
-        "fields": {
-          "suggest": { //这个名字可以随便起,这里取名为suggest
-            "type": "completion", //类型是completion,就是自动补全
-            "analyzer": "ik_max_word" //采用的分词器
-          }
-        }
-      },
-      "content": {
-        "type": "text",
-        "analyzer": "ik_max_word"
-      }
-    }
-  }
-}
- 
-
-    GET /movie/_search
-    {
-      "suggest": {                        # 定义建议 suggest
-        "my_suggest": {                   # 自定义的名字
-          "prefix": "西游记",              # 搜索的前缀
-          "completion": {                 # 补全
-            "field": "title.custom_suggest"  # 补全的字段属性为 title.custom_suggest
-          }
-        }
-      }
+    # 创建movie的索引                                                        # 查询前缀为'西游记'的title
+    PUT /movie                                                             GET /movie/_search
+    {                                                                      {
+      "mappings": {                                                          "suggest": {                        # 定义建议 suggest
+        "properties": {                                                        "my_suggest": {                   # 自定义的名字
+          "title": {                                                             "prefix": "西游记",              # 搜索的前缀
+            "type": "text",                                                      "completion": {                 # 补全
+            "analyzer": "ik_max_word",                                             "field": "title.custom_suggest"  # 补全的字段属性为 title.custom_suggest           
+            "fields": {                                                          }
+              "suggest": { # 这个名字可以随便起,这里取名为suggest                   }
+                "type": "completion", # 类型是completion,就是自动补全           }
+                "analyzer": "ik_max_word" # 采用的分词器                     }
+              }                                                             
+            }                                                             
+          }                                                          
+        }                                                             
+      }                                                             
     }
     ```
 elasticsearch提供了以下不同类型的suggester来完成拼写纠错和自动完成功能；
