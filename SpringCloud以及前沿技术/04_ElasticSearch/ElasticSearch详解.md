@@ -1,6 +1,6 @@
 ## Elasticsearch是一个分布式的搜索引擎
 
-   &emsp;&emsp;&emsp;&emsp;他的服务IP是：https://localhost:9200 {ignore=true}
+   &emsp;&emsp;&emsp;&emsp;他的服务IP是：https://localhost:9200
 
    &emsp;&emsp;&emsp;&emsp;为了更好的在浏览器上直观的显示搜索命令可以使用kibana
 
@@ -11,7 +11,7 @@
 ***
 
 - **基本elasticsearch7.7以上版本都可以设置安全验证登录使用。第一次下载安装，命令行会给你 密码 和 token令牌。需要注意的是只有在第一次启动的时候才会显示出来**
-  - ![输入图片说明](src/main/resources/static/image-1.png)
+    - ![输入图片说明](src/main/resources/static/image-1.png)
 
     &emsp;&emsp;&emsp;&emsp;**进入 https://localhost:9200 地址会弹出用户名和密码登录界面：**
 
@@ -20,7 +20,7 @@
     &emsp;&emsp;&emsp;&emsp;**进入 http://localhost:5601 地址会弹出注册令牌的界面:**
       `eyJ2ZXIiOiI4LjkuMCIsImFkciI6WyIxOTIuMTY4LjEuNTo5MjAwIl0sImZnciI6Ijg4MTQzOTk2NjgyNWNhNTg2N2YzNmE10TcxNGFiNWYzMTU0MGIwYTg5YzVkZjRiOGJiNDNiZTVhOGNjNTI30DIiLCrZXkiOiJpTkNrcklrQm1WNkZmek80S2dXVjpmS25laHpOWFFPLWdIX1AzU2VYdnV3In0=`
 
-- **记得需要在config包下的Elasticsearch.yml中关闭安全连接SSL: false; 当然我们也可以去开启这个安全设置**
+- **通常在我们自己个人使用需要在config包下的Elasticsearch.yml中关闭安全连接SSL: false; 当然如果公司需要我们也可以去开启这个安全设置**
   - ![输入图片说明](src/main/resources/static/image-3.png)
  
 - **如果我们不想使用自动生成的密码，我们还可以自己修改成固定的密码**
@@ -33,17 +33,16 @@
 
 ***
 
-elsticSearch.yml配置：
-\# 关闭elasticsearch的机器学习
-xpack.ml.enabled: false
-\# 开启跨域支持
-http.cors.enabled: true
-\# 允许所有人跨域访问
-http.cors.allow-origin: "*"
-
-elasticSearch-head可视化插件
-对于刚下载的插件cd到该目录下—引入依赖：cnpm install
-并在该目录下启动插件：npm run start
+- **ElasticSearch-head可视化插件**
+  - 1、在GitHub上下载好插件并且cd到该目录下----引入依赖：cnpm install  
+  - 2、在该目录下启动插件：npm run start
+  - 3、对ElasticSearch.yml文件进行配置  
+    - 关闭elasticsearch的机器学习  
+      &emsp;&emsp;&emsp;&emsp;xpack.ml.enabled: false
+    - 开启跨域支持  
+      &emsp;&emsp;&emsp;&emsp;http.cors.enabled: true
+    - 允许所有人跨域访问  
+      &emsp;&emsp;&emsp;&emsp;http.cors.allow-origin: "*"
 
 ***
 
