@@ -1,12 +1,12 @@
 ## Elasticsearch是一个分布式的搜索引擎
 
-   &emsp;&emsp;&emsp;&emsp;他的服务IP是：https://localhost:9200
+   &emsp;&emsp;&emsp;&emsp;ElasticSearch的服务IP是：https://localhost:9200
 
    &emsp;&emsp;&emsp;&emsp;为了更好的在浏览器上直观的显示搜索命令可以使用kibana
 
    &emsp;&emsp;&emsp;&emsp;kibana的服务IP是：http://localhost:5601
 
-   &emsp;&emsp;&emsp;&emsp;windows系统下不需要安装Elasticsearch和kibana，只需要在bin目录下运行后缀为elasticsearch.bat或kibana.bat的文件
+   &emsp;&emsp;&emsp;&emsp;Windows系统下不需要安装ElasticSearch和kibana，只需要在bin目录下运行后缀为elasticsearch.bat或kibana.bat的文件
 
 ***
 
@@ -15,7 +15,7 @@
 
     &emsp;&emsp;&emsp;&emsp;**进入 https://localhost:9200 地址会弹出用户名和密码登录界面：**
 
-    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;用户名 ==> elastic(固定的)    密码 ==> AIZYCiFJwTzV21As6tmW
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;用户名 ==> elastic(固定的)    密码 ==> fVH4-Z3vb2Kqvxn1jyjF
 
     &emsp;&emsp;&emsp;&emsp;**进入 http://localhost:5601 地址会弹出注册令牌的界面:**
       `eyJ2ZXIiOiI4LjkuMCIsImFkciI6WyIxOTIuMTY4LjEuNTo5MjAwIl0sImZnciI6Ijg4MTQzOTk2NjgyNWNhNTg2N2YzNmE10TcxNGFiNWYzMTU0MGIwYTg5YzVkZjRiOGJiNDNiZTVhOGNjNTI30DIiLCrZXkiOiJpTkNrcklrQm1WNkZmek80S2dXVjpmS25laHpOWFFPLWdIX1AzU2VYdnV3In0=`
@@ -40,7 +40,7 @@
 - **ElasticSearch-head可视化插件**
   - 1、在GitHub上下载好插件并且cd到该目录下----引入依赖：cnpm install  
   - 2、在该目录下启动插件：npm run start
-  - 3、对ElasticSearch.yml文件进行配置  
+  - 3、对ElasticSearch.yml文件进行配置，添加一下配置到文件的最后  
     - 关闭elasticsearch的机器学习  
       &emsp;&emsp;&emsp;&emsp;xpack.ml.enabled: false
     - 开启跨域支持  
