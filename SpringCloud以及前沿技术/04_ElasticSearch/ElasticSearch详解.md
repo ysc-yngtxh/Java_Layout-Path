@@ -525,8 +525,8 @@ elasticSearch-head可视化插件
     }
     ```
 
-    ```
-    实操ElasticSearch同时支持中文ik分词器和pinyin分词器：需要去下载pinyin分词器解压到plugins包下，重启elasticsearch
+    ```dsl {.line-numbers}
+    # 实操ElasticSearch同时支持中文ik分词器和pinyin分词器：需要去下载pinyin分词器解压到plugins包下，重启elasticsearch
     PUT index
     {
       "settings": {
