@@ -1,12 +1,12 @@
 ## Elasticsearch是一个分布式的搜索引擎
 
-#### &emsp;&emsp;&emsp;&emsp;&emsp;他的服务IP是：https://localhost:9200
+   &emsp;&emsp;&emsp;&emsp;&emsp;他的服务IP是：https://localhost:9200 {ignore=true}
 
-#### &emsp;&emsp;&emsp;&emsp;&emsp;为了更好的在浏览器上直观的显示搜索命令可以使用kibana
+   &emsp;&emsp;&emsp;&emsp;&emsp;为了更好的在浏览器上直观的显示搜索命令可以使用kibana
 
-#### &emsp;&emsp;&emsp;&emsp;&emsp;kibana的服务IP是：http://localhost:5601
+   &emsp;&emsp;&emsp;&emsp;&emsp;kibana的服务IP是：http://localhost:5601
 
-#### &emsp;&emsp;&emsp;&emsp;&emsp;windows系统下不需要安装Elasticsearch和kibana，只需要在bin目录下运行后缀为elasticsearch.bat或kibana.bat的文件
+   &emsp;&emsp;&emsp;&emsp;&emsp;windows系统下不需要安装Elasticsearch和kibana，只需要在bin目录下运行后缀为elasticsearch.bat或kibana.bat的文件
 
 ***
 
@@ -452,7 +452,7 @@ elasticSearch-head可视化插件
 
 ### 1. **自定义分词**
 
-   #### &emsp;&emsp;&emsp;&emsp;*①、当 ES 自带的分词器无法满足时，可以自定义分词器。通过自己组合上面不同的组件，可以实现出不同的分词器效果。*
+   &emsp;&emsp;&emsp;&emsp;*①、当 ES 自带的分词器无法满足时，可以自定义分词器。通过自己组合上面不同的组件，可以实现出不同的分词器效果。*
    
    ##### &emsp;&emsp;&emsp;&emsp;Character Filter（在 Tokenizer 之前对文本进行处理。可以配置多个进行不同的文本处理。会影响 Tokenizer 的 position 和 offset 信息。下面是自带的 Character Filter）
    
@@ -476,7 +476,7 @@ elasticSearch-head可视化插件
    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;stop 停止词
    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;synonym 近义词
  
-   ### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*③、这几个操作简单来说就是*
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*②、这几个操作简单来说就是*
  
    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Character Filter 在分词前进行处理
    ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tokenizer 分词
@@ -525,7 +525,7 @@ elasticSearch-head可视化插件
     }
     ```
 
-    ```dsl {.line-numbers}
+    ```
     # 实操ElasticSearch同时支持中文ik分词器和pinyin分词器：需要去下载pinyin分词器解压到plugins包下，重启elasticsearch
     PUT index
     {
@@ -573,21 +573,21 @@ elasticSearch-head可视化插件
 
 ### 2. **如果想要让 索引 和 查询 时使用不同的分词器，ElasticSearch也是能支持的，只需要在字段上加上search_analyzer参数**
 
-   ###### &emsp;&emsp;&emsp;analyzer：是在创建索引的时候对文档中相应的字段属性数据进行分词
+   &emsp;&emsp;&emsp;analyzer：是在创建索引的时候对文档中相应的字段属性数据进行分词
    
-   ###### &emsp;&emsp;&emsp;search_analyzer：是对查询条件中的数据，进行分词(通常指的是用户输入的关键字)
+   &emsp;&emsp;&emsp;search_analyzer：是对查询条件中的数据，进行分词(通常指的是用户输入的关键字)
    
-   ###### &emsp;&emsp;&emsp;在索引时，只会去看字段有没有定义analyzer，有定义的话就用定义的，没定义就用ES预设的
+   &emsp;&emsp;&emsp;在索引时，只会去看字段有没有定义analyzer，有定义的话就用定义的，没定义就用ES预设的
    
-   ###### &emsp;&emsp;&emsp;在查询时，会先去看字段有没有定义search_analyzer，如果没有定义，就去看有没有analyzer，再没有定义，才会去使用ES预设的
+   &emsp;&emsp;&emsp;在查询时，会先去看字段有没有定义search_analyzer，如果没有定义，就去看有没有analyzer，再没有定义，才会去使用ES预设的
 
 ### 3. **Suggest查询建议(自动补全&纠错)**
 
-   ###### &emsp;&emsp;&emsp;现代的搜索引擎,一般会提供一个Suggest as you type 功能
+   &emsp;&emsp;&emsp;现代的搜索引擎,一般会提供一个Suggest as you type 功能
    
-   ###### &emsp;&emsp;&emsp;帮助用户在输入搜索的工程中,进行自动补全或者纠错.通过协助用户输入更加精确的关键词,提高后续搜索阶段文档匹配的长度
+   &emsp;&emsp;&emsp;帮助用户在输入搜索的工程中,进行自动补全或者纠错.通过协助用户输入更加精确的关键词,提高后续搜索阶段文档匹配的长度
    
-   ###### &emsp;&emsp;&emsp;在google上搜索,一开始会自动补全.当输入到一定长度,如果因为单词拼写错误无法补全,就会开始提示相似的词或者句子
+   &emsp;&emsp;&emsp;在google上搜索,一开始会自动补全.当输入到一定长度,如果因为单词拼写错误无法补全,就会开始提示相似的词或者句子
 
 
 
