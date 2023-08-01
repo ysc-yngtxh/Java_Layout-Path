@@ -586,13 +586,16 @@
 
 ### 3. **Suggest查询建议(自动补全&纠错)**
 
-   &emsp;&emsp;&emsp;现代的搜索引擎,一般会提供一个Suggest as you type 功能
-   
-   &emsp;&emsp;&emsp;帮助用户在输入搜索的工程中,进行自动补全或者纠错.通过协助用户输入更加精确的关键词,提高后续搜索阶段文档匹配的长度
-   
-   &emsp;&emsp;&emsp;在google上搜索,一开始会自动补全.当输入到一定长度,如果因为单词拼写错误无法补全,就会开始提示相似的词或者句子
+   &emsp;&emsp;&emsp;&emsp;**现代的搜索引擎,一般会提供一个Suggest as you type 功能。elasticsearch提供了以下不同类型的suggester来完成拼写纠错和自动完成功能**
 
-#### &emsp;&emsp;&emsp;**①、自动补全**
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**completion suggester**主要提供一种快速高效的自动提示功能；
+
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**term suggester**主要针对单个的term分词进行纠正的场景；(只针对英文单词进行纠错。中文无法纠错，因为中文每一个字始终是对的，只是词性不对，无法纠错)
+
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**phrase suggester**主要针对整个短语的拼写纠正场景；(只针对英文单词进行纠错。中文无法纠错，因为中文每一个字始终是对的，只是词性不对，无法纠错)
+
+
+#### &emsp;&emsp;&emsp;**①、自动补全（completion suggester）**
 
   - ```
     # 创建movie的索引                                                        # 查询前缀为'西游记'的title
@@ -604,7 +607,7 @@
             "type": "text",                                                      "completion": {                 # 补全
             "analyzer": "ik_max_word",                                             "field": "title.custom_suggest"  # 补全的字段属性为 title.custom_suggest           
             "fields": {                                                          }
-              "suggest": { # 这个名字可以随便起,这里取名为suggest                   }
+              "custom_suggest": {     # 这个名字可以随便起,这里取名为suggest        }
                 "type": "completion", # 类型是completion,就是自动补全           }
                 "analyzer": "ik_max_word" # 采用的分词器                     }
               }                                                             
@@ -614,12 +617,14 @@
       }                                                             
     }
     ```
-elasticsearch提供了以下不同类型的suggester来完成拼写纠错和自动完成功能；
+    
+    ![image-5.png](src/main/resources/static/image-5.png)   
+    
+#### &emsp;&emsp;&emsp;**②、词语纠错，这里不需要加上title的多类型（term suggester）**
+  - ![image-4.png](src/main/resources/static/image-4.png)
 
-term suggester主要针对单个的term分词进行纠正的场景；
+#### &emsp;&emsp;&emsp;**③、短语纠错，这里不需要加上title的多类型（phrase suggester）**
+  - ![image-6.png](src/main/resources/static/image-6.png)
 
-phrase suggester主要针对整个短语的拼写纠正场景；
-
-completion suggester主要提供一种快速高效的自动提示功能；
 
 ## 四、权重
