@@ -1,29 +1,29 @@
 ## Elasticsearch是一个分布式的搜索引擎
 
-   &emsp;&emsp;&emsp;&emsp;&emsp;他的服务IP是：https://localhost:9200 {ignore=true}
+   &emsp;&emsp;&emsp;&emsp;他的服务IP是：https://localhost:9200 {ignore=true}
 
-   &emsp;&emsp;&emsp;&emsp;&emsp;为了更好的在浏览器上直观的显示搜索命令可以使用kibana
+   &emsp;&emsp;&emsp;&emsp;为了更好的在浏览器上直观的显示搜索命令可以使用kibana
 
-   &emsp;&emsp;&emsp;&emsp;&emsp;kibana的服务IP是：http://localhost:5601
+   &emsp;&emsp;&emsp;&emsp;kibana的服务IP是：http://localhost:5601
 
-   &emsp;&emsp;&emsp;&emsp;&emsp;windows系统下不需要安装Elasticsearch和kibana，只需要在bin目录下运行后缀为elasticsearch.bat或kibana.bat的文件
+   &emsp;&emsp;&emsp;&emsp;windows系统下不需要安装Elasticsearch和kibana，只需要在bin目录下运行后缀为elasticsearch.bat或kibana.bat的文件
 
 ***
 
-- &emsp;&emsp;&emsp;&emsp;&emsp;基本elasticsearch7.7以上版本都可以设置安全验证登录使用。第一次下载安装，命令行会给你 密码 和 token令牌。需要注意的是只有在第一次启动的时候才会显示出来
+- **基本elasticsearch7.7以上版本都可以设置安全验证登录使用。第一次下载安装，命令行会给你 密码 和 token令牌。需要注意的是只有在第一次启动的时候才会显示出来**
   - ![输入图片说明](src/main/resources/static/image-1.png)
 
-    &emsp;&emsp;&emsp;&emsp;&emsp;**进入 https://localhost:9200 地址会弹出用户名和密码登录界面：**
+    &emsp;&emsp;&emsp;&emsp;**进入 https://localhost:9200 地址会弹出用户名和密码登录界面：**
 
-      &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;用户名 ==> elastic(固定的)    密码 ==> AIZYCiFJwTzV21As6tmW
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;用户名 ==> elastic(固定的)    密码 ==> AIZYCiFJwTzV21As6tmW
 
-    &emsp;&emsp;&emsp;&emsp;&emsp;**进入 http://localhost:5601 地址会弹出注册令牌的界面:**
+    &emsp;&emsp;&emsp;&emsp;**进入 http://localhost:5601 地址会弹出注册令牌的界面:**
       `eyJ2ZXIiOiI4LjkuMCIsImFkciI6WyIxOTIuMTY4LjEuNTo5MjAwIl0sImZnciI6Ijg4MTQzOTk2NjgyNWNhNTg2N2YzNmE10TcxNGFiNWYzMTU0MGIwYTg5YzVkZjRiOGJiNDNiZTVhOGNjNTI30DIiLCrZXkiOiJpTkNrcklrQm1WNkZmek80S2dXVjpmS25laHpOWFFPLWdIX1AzU2VYdnV3In0=`
 
-- &emsp;&emsp;&emsp;&emsp;&emsp;记得需要在config包下的Elasticsearch.yml中关闭安全连接SSL: false; 当然我们也可以去开启这个安全设置
+- &emsp;&emsp;记得需要在config包下的Elasticsearch.yml中关闭安全连接SSL: false; 当然我们也可以去开启这个安全设置
   - ![输入图片说明](src/main/resources/static/image-3.png)
  
-- &emsp;&emsp;&emsp;&emsp;&emsp;如果我们不想使用自动生成的密码，我们还可以自己修改成固定的密码：
+- **如果我们不想使用自动生成的密码，我们还可以自己修改成固定的密码**
   
   - 在ES的bin目录下输入：`elasticsearch-reset--password --username elastic -i`
   - 按照提示输入y确定要继续更新密码，然后输入两次密码即可，这里可以输的密码好记一点
@@ -164,7 +164,7 @@ elasticSearch-head可视化插件
           {girl:{name:"rose",age:21}}
           会处理成两个字段：girl.name和girl.age
    ```
-### 2. **查看映射关系**
+### 2. **查看映射关系（_mapping）**
  
    &emsp;`GET /索引名/_mapping`
 
@@ -450,7 +450,7 @@ elasticSearch-head可视化插件
 
 ## 三、高级内容
 
-### 1. **自定义分词**
+### 1. **自定义分词（analyzer）**
 
    - **①、当 ES 自带的分词器无法满足时，可以自定义分词器。通过自己组合上面不同的组件，可以实现出不同的分词器效果。**
    
@@ -478,9 +478,9 @@ elasticSearch-head可视化插件
  
    - **②、这几个操作简单来说就是**
  
-     - &emsp;&emsp;&emsp;&emsp;Character Filter 在分词前进行处理  
-     - &emsp;&emsp;&emsp;&emsp;Tokenizer 分词  
-     - &emsp;&emsp;&emsp;&emsp;Token Filter 分词后进行处理  
+     - Character Filter 在分词前进行处理  
+     - Tokenizer 分词  
+     - Token Filter 分词后进行处理  
  
    - ```
      PUT test_home
