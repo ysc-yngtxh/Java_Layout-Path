@@ -630,5 +630,12 @@ PUT /movie
       }
     }
     ```
+elasticsearch提供了以下不同类型的suggester来完成拼写纠错和自动完成功能；
+
+term suggester主要针对单个的term分词进行纠正的场景；
+
+phrase suggester主要针对整个短语的拼写纠正场景；
+
+completion suggester主要提供一种快速高效的自动提示功能；
 
 ## 四、权重
