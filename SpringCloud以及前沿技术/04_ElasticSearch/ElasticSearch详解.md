@@ -10,20 +10,20 @@
 
 ***
 
-- #### &emsp;&emsp;&emsp;&emsp;&emsp;基本elasticsearch7.7以上版本都可以设置安全验证登录使用。第一次下载安装，命令行会给你 密码 和 token令牌。需要注意的是只有在第一次启动的时候才会显示出来
+- &emsp;&emsp;&emsp;&emsp;&emsp;基本elasticsearch7.7以上版本都可以设置安全验证登录使用。第一次下载安装，命令行会给你 密码 和 token令牌。需要注意的是只有在第一次启动的时候才会显示出来
   - ![输入图片说明](src/main/resources/static/image-1.png)
 
-    #### &emsp;&emsp;&emsp;&emsp;&emsp;进入 https://localhost:9200 地址会弹出用户名和密码登录界面：
+    &emsp;&emsp;&emsp;&emsp;&emsp;**进入 https://localhost:9200 地址会弹出用户名和密码登录界面：**
 
-      ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;用户名 ==> elastic(固定的)    密码 ==> AIZYCiFJwTzV21As6tmW
+      &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;用户名 ==> elastic(固定的)    密码 ==> AIZYCiFJwTzV21As6tmW
 
-    #### &emsp;&emsp;&emsp;&emsp;&emsp;进入 http://localhost:5601 地址会弹出注册令牌的界面:
-      ###### `eyJ2ZXIiOiI4LjkuMCIsImFkciI6WyIxOTIuMTY4LjEuNTo5MjAwIl0sImZnciI6Ijg4MTQzOTk2NjgyNWNhNTg2N2YzNmE10TcxNGFiNWYzMTU0MGIwYTg5YzVkZjRiOGJiNDNiZTVhOGNjNTI30DIiLCrZXkiOiJpTkNrcklrQm1WNkZmek80S2dXVjpmS25laHpOWFFPLWdIX1AzU2VYdnV3In0=`
+    &emsp;&emsp;&emsp;&emsp;&emsp;**进入 http://localhost:5601 地址会弹出注册令牌的界面:**
+      `eyJ2ZXIiOiI4LjkuMCIsImFkciI6WyIxOTIuMTY4LjEuNTo5MjAwIl0sImZnciI6Ijg4MTQzOTk2NjgyNWNhNTg2N2YzNmE10TcxNGFiNWYzMTU0MGIwYTg5YzVkZjRiOGJiNDNiZTVhOGNjNTI30DIiLCrZXkiOiJpTkNrcklrQm1WNkZmek80S2dXVjpmS25laHpOWFFPLWdIX1AzU2VYdnV3In0=`
 
-- #### &emsp;&emsp;&emsp;&emsp;&emsp;记得需要在config包下的Elasticsearch.yml中关闭安全连接SSL: false; 当然我们也可以去开启这个安全设置
+- &emsp;&emsp;&emsp;&emsp;&emsp;记得需要在config包下的Elasticsearch.yml中关闭安全连接SSL: false; 当然我们也可以去开启这个安全设置
   - ![输入图片说明](src/main/resources/static/image-3.png)
  
-- #### &emsp;&emsp;&emsp;&emsp;&emsp;如果我们不想使用自动生成的密码，我们还可以自己修改成固定的密码：
+- &emsp;&emsp;&emsp;&emsp;&emsp;如果我们不想使用自动生成的密码，我们还可以自己修改成固定的密码：
   
   - 在ES的bin目录下输入：`elasticsearch-reset--password --username elastic -i`
   - 按照提示输入y确定要继续更新密码，然后输入两次密码即可，这里可以输的密码好记一点
@@ -49,29 +49,29 @@ elasticSearch-head可视化插件
 
 ## 一、Elasticsearch也是基于Lucene的全文检索库，本质也是存储数据，很多的概念与MySQL类似
 
-1. #### &emsp;&emsp;&emsp;&emsp;对比关系：
+1. &emsp;&emsp;&emsp;&emsp;**对比关系：**
 
-   #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;索引集(indices)-------Databases数据库
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;索引集(indices)-------Databases数据库
    
-   #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;类型(type)-----------------表(从6.0.0开始单个索引中只能有一个类型，7.0.0以后将不建议使用，8.0.0 以后完全不支持,现在统一用'_doc')
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;类型(type)-----------------表(从6.0.0开始单个索引中只能有一个类型，7.0.0以后将不建议使用，8.0.0 以后完全不支持,现在统一用'_doc')
    
-   #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;文档(Document)----------Row行(类比字段类型,是否主键等)
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;文档(Document)----------Row行(类比字段类型,是否主键等)
    
-   #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;字段(Field)----------low列(类比字段)
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;字段(Field)----------low列(类比字段)
 
-2. #### &emsp;&emsp;&emsp;&emsp;每个Elasticsearch索引都有自己的 分片(number_of_shards) 和 副本(number_of_replicas)
+2. &emsp;&emsp;&emsp;&emsp;**每个Elasticsearch索引都有自己的 分片(number_of_shards) 和 副本(number_of_replicas)**
 
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;分片：数据拆分后的各个部分（比如"我是中国人"，进行分词后就会有"我","是","中国人","中国","国人"，那么就会有五个分片）
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;分片：数据拆分后的各个部分（比如"我是中国人"，进行分词后就会有"我","是","中国人","中国","国人"，那么就会有五个分片）
 
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;副本：每个分片的复制（就是"我","是","中国人","中国","国人"的备份，避免主分片出现异常错误，可以在副本中检索）
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;副本：每个分片的复制（就是"我","是","中国人","中国","国人"的备份，避免主分片出现异常错误，可以在副本中检索）
 
-3. #### &emsp;&emsp;&emsp;&emsp;Elasticsearch 集群有多个节点组成，形成分布式集群。那么，什么是节点呢？
+3. &emsp;&emsp;&emsp;&emsp;**Elasticsearch 集群有多个节点组成，形成分布式集群。那么，什么是节点呢？**
 
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;节点（Node），就是一个 Elasticsearch 应用实例。大家都知道 Elasticsearch 源代码是 Java 写的，那么节点就是一个 Java 进程。
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;节点（Node），就是一个 Elasticsearch 应用实例。大家都知道 Elasticsearch 源代码是 Java 写的，那么节点就是一个 Java 进程。
    
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;所以类似 Spring 应用一样，一台服务器或者本机可以运行多个节点，只要对应的端口不同即可。但生产服务器中，
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;所以类似 Spring 应用一样，一台服务器或者本机可以运行多个节点，只要对应的端口不同即可。但生产服务器中，
    
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;一般一台服务器运行一个 Elasticsearch 节点。（通俗讲就是启动一个elasticsearch就有一个节点）
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;一般一台服务器运行一个 Elasticsearch 节点。（通俗讲就是启动一个elasticsearch就有一个节点）
 
 4. #### &emsp;&emsp;&emsp;&emsp;要注意的是:Elasticsearch本身就是分布式的，因此即便你只有一个节点，Elasticsearch默认也会对你的数据进行主分片和副本分片操作，当你向集群添加新数据时，数据也会在新加入的节点中进行平衡。
 
