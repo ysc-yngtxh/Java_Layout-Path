@@ -23,7 +23,7 @@
 ***
 
 - **通常在我们自己个人使用需要在config包下的elasticsearch.yml中关闭安全连接SSL: false; 当然如果公司需要我们也可以去开启这个安全设置**
-  - ![输入图片说明](src/main/resources/static/image-3.png)
+  - ![输入图片说明](src/main/resources/static/image-2.png)
  
 ***
 
@@ -32,7 +32,7 @@
   - 在ES的bin目录下输入：`elasticsearch-reset--password --username elastic -i`
   - 按照提示输入y确定要继续更新密码，然后输入两次密码即可，这里可以输的密码好记一点
   - 设置好后我们去访问一下端口为9200的请求
-    ![输入图片说明](src/main/resources/static/image-2.png)
+    ![输入图片说明](src/main/resources/static/image-3.png)
 
 
 ***
@@ -101,7 +101,7 @@
       analyzer: "ik_max_word"  最细的分法  
       analyzer: "ik_smart"     稍粗略的分法
       ```  
-      - ![ES原理图片](src/main/resources/static/9872.jpg)
+      - ![ES原理图片](src/main/resources/static/image-0.jpg)
 
 ## 二、CURL语法
 
