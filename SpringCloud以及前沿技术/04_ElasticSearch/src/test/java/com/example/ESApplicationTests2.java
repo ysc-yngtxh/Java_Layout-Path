@@ -124,7 +124,7 @@ public class ESApplicationTests2 {
     private static ElasticsearchClient elasticsearchClient() {
         // 基本凭证提供者(用户名、密码)
         CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
-        credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials("elastic", "password"));
+        credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials("elastic", "elastic"));
 
         // 创建低级客户端
         RestClientBuilder builder = RestClient.builder(new HttpHost("localhost", 9200))

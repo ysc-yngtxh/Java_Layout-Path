@@ -378,7 +378,7 @@
           "aggs": {              # 官方的属性，用于表示开启聚合
             "group_by_name": {   # 自定义的名字
               "terms": {         # 第一个桶：terms桶--针对某个field的值进行分组，field有几种值就分成几组
-                "field": "name", # 查询的字段name
+                "field": "name", # 查询的字段name,注意：这个name不能是text类型的，不可以被分词。如果是text类型则要定义name.keyword
                 "size": 10000,   # 指定返回的term个数，默认为10
                 "order": {       # 按照price值进行倒排
                   "price": "desc"
@@ -393,7 +393,7 @@
               }
             },
             "group_by_title": {
-              "filter": {             # 第二个桶：filter--一个用来过滤的桶。用法与上述布尔中filter一致
+              "filter": {        # 第二个桶：filter--一个用来过滤的桶。用法与上述布尔中filter一致
                 "term": {
                   "title": "游诗成"
               }
@@ -592,6 +592,20 @@
    
    &emsp;&emsp;&emsp;在google上搜索,一开始会自动补全.当输入到一定长度,如果因为单词拼写错误无法补全,就会开始提示相似的词或者句子
 
+#### &emsp;&emsp;&emsp;**①、自动补全**
 
+  - ```
+    GET /movie/_search
+    {
+      "suggest": {                        # 定义建议 suggest
+        "my_suggest": {                   # 自定义的名字
+          "prefix": "西游记",              # 搜索的前缀
+          "completion": {                 # 补全
+            "field": "title.custom_suggest"  # 补全的字段属性为 title.custom_suggest
+          }
+        }
+      }
+    }
+    ```
 
 ## 四、权重
