@@ -22,7 +22,7 @@
 
 ***
 
-- **通常在我们自己个人使用需要在config包下的Elasticsearch.yml中关闭安全连接SSL: false; 当然如果公司需要我们也可以去开启这个安全设置**
+- **通常在我们自己个人使用需要在config包下的elasticsearch.yml中关闭安全连接SSL: false; 当然如果公司需要我们也可以去开启这个安全设置**
   - ![输入图片说明](src/main/resources/static/image-3.png)
  
 ***
@@ -37,10 +37,10 @@
 
 ***
 
-- **ElasticSearch-head可视化插件**
+- **ElasticSearch-head 可视化工具**
   - 1、在GitHub上下载好插件并且cd到该目录下----引入依赖：cnpm install  
   - 2、在该目录下启动插件：npm run start
-  - 3、对ElasticSearch.yml文件进行配置，添加一下配置到文件的最后  
+  - 3、对elasticsearch.yml文件进行配置，添加一下配置到文件的最后  
     - 关闭elasticsearch的机器学习  
       &emsp;&emsp;&emsp;&emsp;xpack.ml.enabled: false
     - 开启跨域支持  
@@ -70,11 +70,11 @@
 
 ### 3. **Elasticsearch 集群有多个节点组成，形成分布式集群。那么，什么是节点呢？**
 
-&emsp;&emsp;&emsp;&emsp节点（Node），就是一个 Elasticsearch 应用实例。大家都知道 Elasticsearch 源代码是 Java 写的，那么节点就是一个 Java 进程。
+&emsp;&emsp;&emsp;&emsp;节点（Node），就是一个 Elasticsearch 应用实例。大家都知道 Elasticsearch 源代码是 Java 写的，那么节点就是一个 Java 进程。
 
-&emsp;&emsp;&emsp;&emsp所以类似 Spring 应用一样，一台服务器或者本机可以运行多个节点，只要对应的端口不同即可。但生产服务器中，
+&emsp;&emsp;&emsp;&emsp;所以类似 Spring 应用一样，一台服务器或者本机可以运行多个节点，只要对应的端口不同即可。但生产服务器中，
 
-&emsp;&emsp;&emsp;&emsp一般一台服务器运行一个 Elasticsearch 节点。（通俗讲就是启动一个elasticsearch就有一个节点）
+&emsp;&emsp;&emsp;&emsp;一般一台服务器运行一个 Elasticsearch 节点。（通俗讲就是启动一个elasticsearch就有一个节点）
 
 ### 4. **要注意的是:Elasticsearch本身就是分布式的，因此即便你只有一个节点，Elasticsearch默认也会对你的数据进行主分片和副本分片操作，当你向集群添加新数据时，数据也会在新加入的节点中进行平衡。**
 
@@ -92,7 +92,7 @@
 
 ### 6. **为了能将搜索细化到底，可以使用ik分词器，可以下载解压后放入Elasticsearch包下的plugins包内，并重启Elasticsearch**
 
-- ```
+   - ```
       POST _analyze               
       {  
       "analyzer": "ik_max_word",  
