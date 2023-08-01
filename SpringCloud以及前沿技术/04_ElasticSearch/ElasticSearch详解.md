@@ -73,21 +73,21 @@ elasticSearch-head可视化插件
    
    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;一般一台服务器运行一个 Elasticsearch 节点。（通俗讲就是启动一个elasticsearch就有一个节点）
 
-4. #### &emsp;&emsp;&emsp;&emsp;要注意的是:Elasticsearch本身就是分布式的，因此即便你只有一个节点，Elasticsearch默认也会对你的数据进行主分片和副本分片操作，当你向集群添加新数据时，数据也会在新加入的节点中进行平衡。
+4. &emsp;&emsp;&emsp;&emsp;**要注意的是:Elasticsearch本身就是分布式的，因此即便你只有一个节点，Elasticsearch默认也会对你的数据进行主分片和副本分片操作，当你向集群添加新数据时，数据也会在新加入的节点中进行平衡。**
 
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;比如：节点indexA索引的主分片为5，副本为1(复制一份主分片)，则表示一共有10块分片。
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;比如：节点indexA索引的主分片为5，副本为1(复制一份主分片)，则表示一共有10块分片。
    
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;这个时候再启动一个节点indexB，那么10块分片会均匀分布。(例如：indexA节点主分片有3块分片，副本分片4块，indexB节点3块分片)
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;这个时候再启动一个节点indexB，那么10块分片会均匀分布。(例如：indexA节点主分片有3块分片，副本分片4块，indexB节点3块分片)
 
-5. #### &emsp;&emsp;&emsp;&emsp;索引状态：
+5. &emsp;&emsp;&emsp;&emsp;**索引状态：**
 
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Green 主分片与副本分片都正常
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Green 主分片与副本分片都正常
    
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Yellow 主分片正常，副本分片不正常
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Yellow 主分片正常，副本分片不正常
    
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Red 有主分片不正常，可能某个分片容量超过了磁盘大小等
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Red 有主分片不正常，可能某个分片容量超过了磁盘大小等
 
-6. #### &emsp;&emsp;&emsp;&emsp;为了能将搜索细化到底，可以使用ik分词器，可以下载解压后放入Elasticsearch包下的plugins包内，并重启Elasticsearch
+6. &emsp;&emsp;&emsp;&emsp;**为了能将搜索细化到底，可以使用ik分词器，可以下载解压后放入Elasticsearch包下的plugins包内，并重启Elasticsearch**
 
     - ```
       POST _analyze               
@@ -166,7 +166,7 @@ elasticSearch-head可视化插件
    ```
 2. **查看映射关系**
  
-   ### &emsp;```GET /索引名/_mapping```
+   &emsp;```GET /索引名/_mapping```
 
 3. **新增(更新)数据（POST）其实使用PUT也有一样的效果，学了就能理解**
     ```
@@ -195,7 +195,7 @@ elasticSearch-head可视化插件
    ```
 
 5. **删除索引（DELETE）**
-   ### &emsp;```DELETE /索引库名/_doc/id值 # 根据id删除```
+   &emsp;```DELETE /索引库名/_doc/id值 # 根据id删除```
 
 
 6. **查询索引（GET）**
@@ -452,35 +452,35 @@ elasticSearch-head可视化插件
 
 ### 1. **自定义分词**
 
-   &emsp;&emsp;&emsp;&emsp;*①、当 ES 自带的分词器无法满足时，可以自定义分词器。通过自己组合上面不同的组件，可以实现出不同的分词器效果。*
+   &emsp;&emsp;&emsp;&emsp;**①、当 ES 自带的分词器无法满足时，可以自定义分词器。通过自己组合上面不同的组件，可以实现出不同的分词器效果。**
    
-   ##### &emsp;&emsp;&emsp;&emsp;Character Filter（在 Tokenizer 之前对文本进行处理。可以配置多个进行不同的文本处理。会影响 Tokenizer 的 position 和 offset 信息。下面是自带的 Character Filter）
+   &emsp;&emsp;&emsp;&emsp;Character Filter（在 Tokenizer 之前对文本进行处理。可以配置多个进行不同的文本处理。会影响 Tokenizer 的 position 和 offset 信息。下面是自带的 Character Filter）
    
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;HTML strip 去除 html 标签  
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Mapping 字符串替换  
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Pattern replace 正则匹配替换
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;HTML strip 去除 html 标签  
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Mapping 字符串替换  
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Pattern replace 正则匹配替换
    
-   ##### &emsp;&emsp;&emsp;&emsp;Tokenizer（将原始的文本按照一定的规则，切分为词。下面是一些ES内置的 Tokenizer）
+   &emsp;&emsp;&emsp;&emsp;Tokenizer（将原始的文本按照一定的规则，切分为词。下面是一些ES内置的 Tokenizer）
  
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;whitespace
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;standard
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;uax_url_email
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;pattern
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;keyword
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;path hierarchy
-   ##### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*也可以用 JAVA 开发插件，实现自己的 Tokenizer*
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;whitespace
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;standard
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;uax_url_email
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;pattern
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;keyword
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;path hierarchy
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*也可以用 JAVA 开发插件，实现自己的 Tokenizer*
  
-   ##### &emsp;&emsp;&emsp;&emsp;Filter（将 Tokenizer 输出的单词 进行增加修改删除等操作。下面是ES 自带的）
+   &emsp;&emsp;&emsp;&emsp;Filter（将 Tokenizer 输出的单词 进行增加修改删除等操作。下面是ES 自带的）
  
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Lowercase 小写
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;stop 停止词
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;synonym 近义词
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Lowercase 小写
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;stop 停止词
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;synonym 近义词
  
-   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;*②、这几个操作简单来说就是*
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**②、这几个操作简单来说就是**
  
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Character Filter 在分词前进行处理
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tokenizer 分词
-   ###### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Token Filter 分词后进行处理
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Character Filter 在分词前进行处理
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tokenizer 分词
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Token Filter 分词后进行处理
  
 - ```
     PUT test_home
