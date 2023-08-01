@@ -478,9 +478,9 @@ elasticSearch-head可视化插件
  
    &emsp;&emsp;&emsp;&emsp;**②、这几个操作简单来说就是**
  
-   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Character Filter 在分词前进行处理
-   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tokenizer 分词
-   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Token Filter 分词后进行处理
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Character Filter 在分词前进行处理  
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Tokenizer 分词  
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Token Filter 分词后进行处理  
  
 - ```
     PUT test_home
