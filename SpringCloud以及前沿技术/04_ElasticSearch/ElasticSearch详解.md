@@ -595,6 +595,29 @@
 #### &emsp;&emsp;&emsp;**①、自动补全**
 
   - ```
+PUT /movie
+{
+  "mappings": {
+    "properties": {
+      "title": {
+        "type": "text",
+        "analyzer": "ik_max_word",
+        "fields": {
+          "suggest": { //这个名字可以随便起,这里取名为suggest
+            "type": "completion", //类型是completion,就是自动补全
+            "analyzer": "ik_max_word" //采用的分词器
+          }
+        }
+      },
+      "content": {
+        "type": "text",
+        "analyzer": "ik_max_word"
+      }
+    }
+  }
+}
+ 
+
     GET /movie/_search
     {
       "suggest": {                        # 定义建议 suggest
