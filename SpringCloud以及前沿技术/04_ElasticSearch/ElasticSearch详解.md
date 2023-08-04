@@ -29,7 +29,7 @@
 
 - **如果我们不想使用自动生成的密码，我们还可以自己修改成固定的密码**
   
-  - 在ES的bin目录下输入：`elasticsearch-reset--password --username elastic -i`
+  - 在ES的bin目录下输入：`elasticsearch-reset-password --username elastic -i`
   - 按照提示输入y确定要继续更新密码，然后输入两次密码即可，这里可以输的密码好记一点
   - 设置好后我们去访问一下端口为9200的请求
     ![输入图片说明](src/main/resources/static/image-3.png)
@@ -37,7 +37,7 @@
 
 ***
 
-- **ElasticSearch-head 可视化工具**
+- **ElasticSearch-head 可视化工具(长时间没有更新版本，已弃用)**
   - 1、在GitHub上下载好插件并且cd到该目录下----引入依赖：cnpm install  
   - 2、在该目录下启动插件：npm run start
   - 3、对elasticsearch.yml文件进行配置，添加一下配置到文件的最后  
@@ -48,6 +48,7 @@
     - 允许所有人跨域访问  
       &emsp;&emsp;&emsp;&emsp;http.cors.allow-origin: "*"
 
+- **推荐使用Edge浏览器的扩展：es-client 来实现对ElasticSearch的可视化操作**
 ***
 
 ## 一、Elasticsearch也是基于Lucene的全文检索库，本质也是存储数据，很多的概念与MySQL类似
@@ -588,11 +589,11 @@
 
    &emsp;&emsp;&emsp;&emsp;**现代的搜索引擎,一般会提供一个Suggest as you type 功能。elasticsearch提供了以下不同类型的suggester来完成拼写纠错和自动完成功能**
 
-   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**completion suggester**主要提供一种快速高效的自动提示功能；
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**complethion suggester**主要提供一种快速高效的自动提示功能；
 
-   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**term suggester**主要针对单个的term分词进行纠正的场景；(只针对英文单词进行纠错。中文无法纠错，因为中文每一个字始终是对的，只是词性不对，无法纠错)
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**term suggester**主要针对单个的term分词进行纠正的场景；(只针对英文单词进行纠错。中文无法纠错，因为中文每一个字始终是对的，只是词性不对，无法纠错)
 
-   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**phrase suggester**主要针对整个短语的拼写纠正场景；(只针对英文单词进行纠错。中文无法纠错，因为中文每一个字始终是对的，只是词性不对，无法纠错)
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**phrase suggester**主要针对整个短语的拼写纠正场景；(只针对英文单词进行纠错。中文无法纠错，因为中文每一个字始终是对的，只是词性不对，无法纠错)
 
 
 #### &emsp;&emsp;&emsp;**①、自动补全（completion suggester）**
@@ -628,8 +629,10 @@
 
 
 ## 四、权重
-1.查询时设置权重
-在默认情况下，这些查询的权重都为1，也就是查询之间都是平等的。有时我们希望某些查询的权重高一些，也就是在其他条件相同的情况下，匹配该查询的文档得分更高。
-1.1 查询时boost参数的设置
-在ES中可以通过查询的boost值对某个查询设定其权重。在默认情况下，所有查询的boost值为1。但是当设置某个查询的boost为2时，不代表匹配该查询的文档评分是原来的2倍，而是代表匹配该查询的文档得分相对于其他文档得分被提升了。
-boost值的设置只限定在term查询和类match查询中，其他类型的查询不能使用boost设置。boost值没有特别约束，因为它代表的是一个相对值。当该值在0～1时表示对权重起负向作用，当该值大于1时表示对权重起正向作用。
+
+### 1.查询时设置权重
+&emsp;&emsp;&emsp;&emsp;在默认情况下，这些查询的权重都为1，也就是查询之间都是平等的。有时我们希望某些查询的权重高一些，也就是在其他条件相同的情况下，匹配该查询的文档得分更高。
+但是我们在做一般查询的时候可以看到相关的索引结果的得分是不一样的，在没有外部人为影响的情况下，造成这个得分不同的最大原因是搜索分片占比  
+**1.1 查询时boost参数的设置**  
+&emsp;&emsp;&emsp;&emsp;在ES中可以通过查询的boost值对某个查询设定其权重。在默认情况下，所有查询的boost值为1。但是当设置某个查询的boost为2时，不代表匹配该查询的文档评分是原来的2倍，而是代表匹配该查询的文档得分相对于其他文档得分被提升了。  
+&emsp;&emsp;&emsp;&emsp;boost值的设置只限定在term查询和类match查询中，其他类型的查询不能使用boost设置。boost值没有特别约束，因为它代表的是一个相对值。当该值在0～1时表示对权重起负向作用，当该值大于1时表示对权重起正向作用。
