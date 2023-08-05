@@ -26,11 +26,6 @@ public class PictureController {
 
     private static String upPath = "https://ysc-test0322.oss-cn-shenzhen.aliyuncs.com/";
 
-    // @RequestMapping("/")
-    // public String index(){
-    //     return "updown";
-    // }
-
     @PostMapping("/upload")
     @ResponseBody
     public String upload(MultipartFile file) throws IOException {
