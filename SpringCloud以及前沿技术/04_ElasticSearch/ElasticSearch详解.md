@@ -589,7 +589,7 @@
 
    &emsp;&emsp;&emsp;&emsp;**现代的搜索引擎,一般会提供一个Suggest as you type 功能。elasticsearch提供了以下不同类型的suggester来完成拼写纠错和自动完成功能**
 
-   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**complethion suggester**主要提供一种快速高效的自动提示功能；
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**completion suggester**主要提供一种快速高效的自动提示功能；
 
    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;**term suggester**主要针对单个的term分词进行纠正的场景；(只针对英文单词进行纠错。中文无法纠错，因为中文每一个字始终是对的，只是词性不对，无法纠错)
 
@@ -616,7 +616,7 @@
           }                                                          
         }                                                             
       }                                                             
-    }
+    }0
     ```
     
     ![image-5.png](src/main/resources/static/image-5.png)   

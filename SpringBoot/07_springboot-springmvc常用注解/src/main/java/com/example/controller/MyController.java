@@ -12,7 +12,7 @@ public class MyController {
     @RequestMapping(value="/student",method={RequestMethod.GET,RequestMethod.POST})
     //@ResponseBody
     public Object query(){
-        return "啊，我被李晶晶拒绝了。有意思~";
+        return "啊。有意思~";
     }
 
     //@RequestMapping(value="/student1",method=RequestMethod.GET)
