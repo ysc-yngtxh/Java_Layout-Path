@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -37,17 +38,18 @@ public class PictureController {
             return "上传文件失败";
         }
         String filename = file.getOriginalFilename();
-        String substr = filename.substring(filename.indexOf("."));
+        String substr = Objects.requireNonNull(filename).substring(filename.indexOf("."));
         String reFileName = UUID.randomUUID().toString().replace("-", "") + substr;
 
         String endpoint = "http://oss-cn-shenzhen.aliyuncs.com";
         String accessKeyId = "LTAI5tMGA97nbLGRdSVBqZxQ";
-        String accessKeySecret = "VPBZ6qcRNlFdJ5PE2eFlOQ87y0XKIO";
+        String accessKeySecret = "VPBZ6qcRNlFdJ5PE2eFlOQ87y0XKIO游诗成"; //这里密钥有点问题，需要更改
         OSS ossClient = new OSSClientBuilder().build(
                 endpoint          // 地域节点
                 , accessKeyId     // 访问密钥 ID
                 , accessKeySecret // 连接秘钥
         );
+
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setContentType("image/jpg");
         objectMetadata.setContentDisposition("inline");
@@ -55,9 +57,10 @@ public class PictureController {
                 "ysc-test0322"  // 列表名
                 , reFileName    // 文件名
                 , file.getInputStream()  //文件流
-                , objectMetadata
+                , objectMetadata  //设置响应体参数
         );
-        ossClient.shutdown();
+
+        ossClient.shutdown();   // 关闭连接
         return upPath + reFileName;
     }
 }
