@@ -661,3 +661,5 @@
 **1.3 boosting查询**  
 - &emsp;&emsp;&emsp;&emsp;虽然使用boost值可以对查询的权重进行调整，但是仅限于term查询和类match查询。 有时需要调整更多类型的查询，如搜索酒店时，需要将房价低于200的酒店权重降低，此时可能需要用到range查询，但是range查询不能使用boost参数，这时可以使用ES的boosting查询进行封装。
 ES的boosting查询分为两部分，一部分是positive查询，代表正向查询，另一部分是negative查询，代表负向查询。 可以通过negative_boost参数设置负向查询的权重系数，该值的范围为0～1。最终的文档得分为：正向匹配值+负向匹配值×negative_boost。
+![输入图片说明](src/main/resources/static/image-10.png)
+![输入图片说明](src/main/resources/static/image-11.png)
