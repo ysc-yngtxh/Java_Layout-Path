@@ -450,6 +450,22 @@
              "postTags": "</spn>"
            }
         }
+   
+   Ⅺ、修改新增已经创建好的索引字段
+        GET /ysc/_mapping
+        {
+          "properties": {
+            "price": {
+              "type": "long"
+            },
+            "price": {
+              "type": "keyword"
+            },
+            "price": {
+              "type": "keyword"
+            }
+          }  
+        }
    ```
 
 ## 三、高级内容
@@ -634,14 +650,14 @@
 &emsp;&emsp;&emsp;&emsp;在默认情况下，这些查询的权重都为1，也就是查询之间都是平等的。有时我们希望某些查询的权重高一些，也就是在其他条件相同的情况下，匹配该查询的文档得分更高。
 但是我们在做一般查询的时候可以看到相关的索引结果的得分是不一样的，在没有外部人为影响的情况下，造成这个得分不同的最大原因是搜索分片占比  
 **1.1 查询时boost参数的设置**  
-&emsp;&emsp;&emsp;&emsp;在ES中可以通过查询的boost值对某个查询设定其权重。在默认情况下，所有查询的boost值为1。但是当设置某个查询的boost为2时，不代表匹配该查询的文档评分是原来的2倍，而是代表匹配该查询的文档得分相对于其他文档得分被提升了。  
-&emsp;&emsp;&emsp;&emsp;boost值的设置只限定在term查询和类match查询中，其他类型的查询不能使用boost设置。boost值没有特别约束，因为它代表的是一个相对值。当该值在0～1时表示对权重起负向作用，当该值大于1时表示对权重起正向作用。
+- &emsp;&emsp;&emsp;&emsp;在ES中可以通过查询的boost值对某个查询设定其权重。在默认情况下，所有查询的boost值为1。但是当设置某个查询的boost为2时，不代表匹配该查询的文档评分是原来的2倍，而是代表匹配该查询的文档得分相对于其他文档得分被提升了。  
+- &emsp;&emsp;&emsp;&emsp;boost值的设置只限定在term查询和类match查询中，其他类型的查询不能使用boost设置。boost值没有特别约束，因为它代表的是一个相对值。当该值在0～1时表示对权重起负向作用，当该值大于1时表示对权重起正向作用。
 ![输入图片说明](src/main/resources/static/image-7.png)
 ![输入图片说明](src/main/resources/static/image-8.png)
 
-在默认情况下，文档的boost为BM25中的k1+1，因为在默认情况下k1=1.2，所以boost=k1+1=1.2+1=2.2。当在match查询中设置boost为2时，匹配该查询文档的最终boost=（k1+1）×2=（1.2+1）×2=4.4。可以使用explain进行验证：
+- &emsp;&emsp;&emsp;&emsp;在默认情况下，文档的boost为BM25中的k1+1，因为在默认情况下k1=1.2，所以boost=k1+1=1.2+1=2.2。当在match查询中设置boost为2时，匹配该查询文档的最终boost=（k1+1）×2=（1.2+1）×2=4.4。可以使用explain进行验证：
 ![输入图片说明](src/main/resources/static/image-9.png)
 
-1.3  boosting查询
-虽然使用boost值可以对查询的权重进行调整，但是仅限于term查询和类match查询。 有时需要调整更多类型的查询，如搜索酒店时，需要将房价低于200的酒店权重降低，此时可能需要用到range查询，但是range查询不能使用boost参数，这时可以使用ES的boosting查询进行封装。
+**1.3 boosting查询**  
+- &emsp;&emsp;&emsp;&emsp;虽然使用boost值可以对查询的权重进行调整，但是仅限于term查询和类match查询。 有时需要调整更多类型的查询，如搜索酒店时，需要将房价低于200的酒店权重降低，此时可能需要用到range查询，但是range查询不能使用boost参数，这时可以使用ES的boosting查询进行封装。
 ES的boosting查询分为两部分，一部分是positive查询，代表正向查询，另一部分是negative查询，代表负向查询。 可以通过negative_boost参数设置负向查询的权重系数，该值的范围为0～1。最终的文档得分为：正向匹配值+负向匹配值×negative_boost。
