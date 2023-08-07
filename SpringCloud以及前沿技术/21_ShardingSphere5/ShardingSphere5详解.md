@@ -4,10 +4,10 @@
   ```
   docker run -d \
   -p 3306:3306 \
-  -v /mysql/master/conf:/etc/mysql/conf.d \mysql配置文件映射到宿主机上
-  -v /mysql/master/data:/var/lib/mysql \mysql数据映射到宿主机上
+  -v /mysql/master/conf:/etc/mysql/conf.d \ mysql配置文件映射到宿主机上
+  -v /mysql/master/data:/var/lib/mysql \ mysql数据映射到宿主机上
   -e MYSQL_ROOT_PASSWORD=131474 \
-  --name mysql-master
+  --name mysql-master \
   mysql:8.0.26
   ```
 - step2:创建 Mysql 主服务器配置文件  
@@ -48,7 +48,7 @@
   ALTER USER 'root'@'%' IDENTIFIED WIHT mysql_native_password BY '131474';
   ``` 
 
-- setp4：主机中创建 slave 用户
+- step4：主机中创建 slave 用户(在 Mysql 命令行中执行命令)
   ```
   -- 创建 slave 用户,密码为 131474
   CREATE USER 'mysql_slave'@'%' IDENTIFIED BY '131474'; 
