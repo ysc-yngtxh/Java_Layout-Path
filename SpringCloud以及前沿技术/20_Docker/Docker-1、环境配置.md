@@ -79,7 +79,9 @@
 1. ### ***使用命令查看虚拟机是否安装成功***
 
    ```
+   # 查看系统内核
    uname -r
+   # 查看已安装的 CentOS 版本信息
    cat /etc/redhat-release
    ```
 
