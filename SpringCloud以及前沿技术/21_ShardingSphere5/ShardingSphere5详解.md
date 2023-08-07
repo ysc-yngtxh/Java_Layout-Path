@@ -61,6 +61,7 @@
   &emsp;&emsp;执行完此步骤后不要在操作主服务器 MySQL，防止主服务器状态值变化  
   &emsp;&emsp;&emsp;&emsp;`SHOW MASTER STATUS;`  
   &emsp;&emsp;记下 File 和 Position 的值。执行完此步骤后不要再操作主服务器 Mysql，防止主服务器状态值变化。
+![输入图片说明](src/main/resources/image-1.png)
 
 ---
 
