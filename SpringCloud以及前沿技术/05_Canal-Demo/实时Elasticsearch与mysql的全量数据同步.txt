@@ -28,7 +28,7 @@
            上文中，如果需要将mysql的数据同步到elasticsearch，直接运行 canal Adapter，修改相关的配置即可。
 
        canal Adapter elasticsearch 改造
-              因为有了canal和canal Adapter这个神器，同步到elasticsearch、hbase等问题都解决了，但是自己的开发的过程中发现，
+           因为有了canal和canal Adapter这个神器，同步到elasticsearch、hbase等问题都解决了，但是自己的开发的过程中发现，
            Adapter使用还是有些问题，因为先使用的是elasticsearch同步功能，所以对elasticsearch进行了一些改造：
 
 
@@ -38,7 +38,7 @@
        MySql 8.0.21
        ElasticSearch 7.16.2
        Canal-deployer 1.1.5（Canal服务器）
-       Canal-adapter 1.1.5 （Canal适配器）
+       Canal-adaper 1.1.5 （Canal适配器）
 
    二、配置mysql
        canal的原理是基于mysql binlog技术，所以一定需要开启mysql的binlog写入功能，建议配置binlog模式为row
@@ -51,7 +51,7 @@
       1、cluster.name: my-elasticsearch  原这条语句时被注释掉的，现在把注释去掉 (后面的 my-application是集群名称，可以随便取)
       2、提前创建好与 mysql中表testysc 匹配的索引映射(mappings)结构
 
-   四、因为版本问题Canal-adapter会有一个druid依赖冲突。所以你需要在官网下载源码：
+   四、因为版本问题Canal-adaper会有一个druid依赖冲突。所以你需要在官网下载源码：
       1、打开源码：client-adapter 1.1.5\client-adapter\escore\pom.xml
          找到druid依赖，加入 <scope>provided</scope>
       2、加入语句后就需要打成jar包去替换
@@ -66,7 +66,7 @@
       3、canal.instance.dbUsername=root（你需要连接的数据库用户名）
          canal.instance.dbPassword=131474（你需要连接的数据库密码）
 
-   六、canal-adapter进行配置
+   六、canal-adaper进行配置
       1、在 canal.adapter-1.1.5\conf\application.yml 中配置
           srcDataSources:
             defaultDS:
@@ -105,6 +105,6 @@
 
    七、启动顺序
 
-         mysql -->  elasticsearch  -->  canal-deployer(bin目录下的startup.bat) -->  canal-adapter
+         mysql -->  elasticsearch  -->  canal-deployer(bin目录下的startup.bat) -->  canal-adaper
 
 
