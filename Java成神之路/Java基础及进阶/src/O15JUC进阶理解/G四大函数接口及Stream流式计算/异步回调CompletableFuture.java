@@ -19,12 +19,12 @@ public class 异步回调CompletableFuture {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println(Thread.currentThread().getName()+"runAsync=>Void");
+            System.out.println(Thread.currentThread().getName()+" ---- runAsync ==> Void");
         });
 
         System.out.println("11111");
 
-        completableFuture.get();  //获取阻塞执行结果
+        completableFuture.get();  // 获取阻塞执行结果
 
         /**
          * 有返回值的supplyAsync异步回调 Ajax，
@@ -33,7 +33,7 @@ public class 异步回调CompletableFuture {
         */
         CompletableFuture<Integer> completableFuture1 =CompletableFuture.supplyAsync(()->{
             System.out.println("Hello World!");
-            int i=10/0;
+            int i= 10/0;
             return 2021;
         });
 

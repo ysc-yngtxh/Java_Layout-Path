@@ -163,25 +163,25 @@ Java8新特性
        Function<T,R>:函数型接口
             R apply(T t);
        Predicate<T>:断言型接口
-            booean test(T t);
-三、方法引用：若Lombda体中的内容有方法已经实现了，我们可以使用“方法引用”
-            (可以理解为方法引用是是 Lombda表达式得另一种表现形式)
+            boolean test(T t);
+三、方法引用：若Lambda体中的内容有方法已经实现了，我们可以使用“方法引用”
+            (可以理解为方法引用是是 Lambda表达式得另一种表现形式)
     主要有三种语法格式：
        1、对象::实例方法名
        public void test(){
-            Consumer<String> con = (x) -> Sysytem.out.println(x);
-            PrintStream ps = Sysytem.out;
-            Consumer<String> con1 = ps::printn;
+            Consumer<String> con = (x) -> System.out.println(x);
+            PrintStream ps = System.out;
+            Consumer<String> con1 = ps::println;
        }
 
        2、类::静态方法名
-       pubilc void test(){
+       public void test(){
            Comparator<Integer> com = (x,y) -> Integer.compare(x,y);
            Comparator<Integer> com1 = Integer::compare;
        }
 
        3、类::实例方法名
-       pubilc void test(){
+       public void test(){
            BiPredicate<String,String> bp = (x,y) -> x.equals(y);
            BiPredicate<String,String> bp2 = String::equals;
        }

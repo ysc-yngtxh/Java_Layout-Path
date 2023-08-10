@@ -26,7 +26,7 @@ class SpringRedisLockApplicationTests {
        所以必须使用Redis中的分布式锁进行处理*/
     @Test
     public void test1() {
-        //redis中如果有K1值那么结果就为false，表示已经有锁。没有K1值结果为true，并创建K1缓存值,并获取锁
+        // redis中如果有K1值那么结果就为false，表示已经有锁。没有K1值结果为true，并创建K1缓存值,并获取锁
         Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", "V1");
         if (success) {
             //缓存中key为order的值进行自增
@@ -41,13 +41,13 @@ class SpringRedisLockApplicationTests {
     /**上面的test1测试有缺陷：就是当前线程在自增缓存时候如果出现异常。这时候其他线程过来发现并没有释放锁，就只会走else。这不是我们想要的*/
     @Test
     public void test2() {
-        //redis中如果有K1值那么结果就为false，表示上锁。没有K1值结果为true，并创建K1缓存值,并获取锁  设置5秒锁的失效时间
+        // redis中如果有K1值那么结果就为false，表示上锁。没有K1值结果为true，并创建K1缓存值,并获取锁  设置5秒锁的失效时间
         Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", "V1", 5 , TimeUnit.SECONDS);
         if (success) {
-            //缓存中key为order的值进行自增
+            // 缓存中key为order的值进行自增
             redisTemplate.opsForValue().increment("order");
-            //Integer.parseInt("ysc");   这里模拟一下异常
-            //释放锁
+            // Integer.parseInt("ysc");   这里模拟一下异常
+            // 释放锁
             redisTemplate.delete("K1");
         } else {
             log.error("有线程在使用，请稍后再试！");
@@ -65,10 +65,10 @@ class SpringRedisLockApplicationTests {
         initRedisScript();
         String value = UUID.randomUUID().toString();
 
-        //redis中如果有K1值那么结果就为false，表示上锁。没有K1值结果为true，并创建K1缓存值,并获取锁  设置120秒锁的失效时间
+        // redis中如果有K1值那么结果就为false，表示上锁。没有K1值结果为true，并创建K1缓存值,并获取锁  设置120秒锁的失效时间
         Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", value, 120 , TimeUnit.SECONDS);
         if (success) {
-            //缓存中key为order的值进行自增
+            // 缓存中key为order的值进行自增
             redisTemplate.opsForValue().increment("order");
             /**这里是通过给K1赋一个随机值value。先去获取到锁，然后再去判断锁的值是否一致，一致的话才会删除
               但是这里你又会想说，那这样要什么脚本嘛，可以自己写啊。这里我还不大懂，反正老师说，获取锁，判断值，删除三个操作不是原子性的。*/

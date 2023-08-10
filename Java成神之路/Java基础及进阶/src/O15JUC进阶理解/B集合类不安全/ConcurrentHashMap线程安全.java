@@ -1,5 +1,6 @@
 package O15JUC进阶理解.B集合类不安全;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -28,9 +29,20 @@ public class ConcurrentHashMap线程安全 {
                ConcurrentHashMap<>()集合类似原理
     }*/
 
+    // public static void main(String[] args) {
+    //     Map<Object,String> map = new ConcurrentHashMap<>();
+    //     for (int i = 0; i < 10; i++) {
+    //         new Thread(()->{
+    //             map.put(Thread.currentThread().getName(), UUID.randomUUID().toString().substring(0,5));
+    //             System.out.println(Thread.currentThread().getName()+"---"+map);
+    //         },String.valueOf(i)).start();
+    //     }
+    // }
+
     public static void main(String[] args) {
-        Map<Object,String> map = new ConcurrentHashMap<>();
-        for (int i = 0; i < 10; i++) {
+        Map<String, String> map = new HashMap<>();
+
+        for (int i = 1; i < 10; i++) {
             new Thread(()->{
                 map.put(Thread.currentThread().getName(),UUID.randomUUID().toString().substring(0,5));
                 System.out.println(Thread.currentThread().getName()+"---"+map);
