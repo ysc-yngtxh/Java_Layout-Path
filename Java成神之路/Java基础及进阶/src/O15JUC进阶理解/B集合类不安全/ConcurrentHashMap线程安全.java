@@ -33,7 +33,7 @@ public class ConcurrentHashMap线程安全 {
         for (int i = 0; i < 10; i++) {
             new Thread(()->{
                 map.put(Thread.currentThread().getName(),UUID.randomUUID().toString().substring(0,5));
-                System.out.println(Thread.currentThread().getName()+"---"+map);
+                System.out.println(Thread.currentThread().getName()+"11---"+map);
             },String.valueOf(i)).start();
         }
     }
