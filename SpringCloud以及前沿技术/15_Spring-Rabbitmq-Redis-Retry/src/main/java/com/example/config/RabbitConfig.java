@@ -12,12 +12,12 @@ import java.util.Map;
 @Slf4j
 @Component
 public class RabbitConfig {
-    //基于 插件的队列 （避免用户设置延时队列造成消息等待----延时短的消息 等待 延时长的消息消费）
+    // 基于 插件的队列 （避免用户设置延时队列造成消息等待----延时短的消息 等待 延时长的消息消费）
     @Bean("OrderExchange")
     public CustomExchange OrderExChange(){
         HashMap<String, Object> map = new HashMap<>(1);
         map.put("x-delayed-type","direct");
-        //交换机名称  交换机类型  是否持久化   是否自动删除  其他
+        // 交换机名称  交换机类型  是否持久化   是否自动删除  其他
         return new CustomExchange("OrderExchange","x-delayed-message",true,false,map);
     }
     @Bean("OrderQueue")
@@ -33,7 +33,7 @@ public class RabbitConfig {
         return BindingBuilder.bind(integrationQueue).to(integrationExchange).with("Orderroutingkey").noargs();
     }
 
-    //基于 插件的队列 （避免用户设置延时队列造成消息等待----延时短的消息 等待 延时长的消息消费）
+    // 基于 插件的队列 （避免用户设置延时队列造成消息等待----延时短的消息 等待 延时长的消息消费）
     @Bean("integrationExchange")
     public CustomExchange exchange(){
         HashMap<String, Object> map = new HashMap<>(1);

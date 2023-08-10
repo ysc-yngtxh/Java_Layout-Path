@@ -19,6 +19,7 @@ public class PriorityConfig {
     public DirectExchange exChange(){
         return new DirectExchange("priorityExchange",true,false);
     }
+
     // 队列
     @Bean("priorityQueue")
     public Queue directQueue(){
@@ -26,6 +27,7 @@ public class PriorityConfig {
         map.put("x-max-priority",10);   // 这里设置最大优先级为10。RabbitMq中优先级0~255，但我们没必要设置那么大，越大越耗内存占CPU
         return new Queue("priorityQueue",true,false,false,map);
     }
+
     // 绑定交换机和队列
     @Bean
     public Binding queueBinding(@Qualifier("priorityExchange") DirectExchange directExchange,
