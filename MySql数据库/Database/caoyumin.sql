@@ -13,8 +13,9 @@
 
  Date: 12/08/2023 17:07:19
 */
-
+CREATE DATABASE IF EXISTS caoyumin;
 CREATE DATABASE caouyumin;
+USE caoyumin;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
