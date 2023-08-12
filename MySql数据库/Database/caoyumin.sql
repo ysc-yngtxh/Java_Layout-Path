@@ -13,7 +13,7 @@
 
  Date: 12/08/2023 17:07:19
 */
-CREATE DATABASE IF EXISTS caoyumin;
+DROP DATABASE IF EXISTS caoyumin;
 CREATE DATABASE caouyumin;
 USE caoyumin;
 
