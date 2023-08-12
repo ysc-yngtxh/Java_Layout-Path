@@ -13,6 +13,9 @@
 
  Date: 12/08/2023 17:58:46
 */
+DROP DATABASE IF EXISTS springdb;
+CREATE DATABASE springdb;
+USE springdb;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
