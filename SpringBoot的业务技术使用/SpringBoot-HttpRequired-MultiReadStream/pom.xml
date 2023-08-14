@@ -18,6 +18,7 @@
 
     <modules>
         <module>1_MultiRead-Content-InputStream</module>
+        <module>2_MultiRead-Content-Parameter</module>
     </modules>
 
     <properties>
