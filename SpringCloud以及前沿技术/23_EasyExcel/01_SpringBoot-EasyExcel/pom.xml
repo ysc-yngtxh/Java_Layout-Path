@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>1_SpringBoot-EasyExcel</artifactId>
+    <artifactId>01_SpringBoot-EasyExcel</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>1_SpringBoot-EasyExcel</name>
-    <description>1_SpringBoot-EasyExcel</description>
+    <name>01_SpringBoot-EasyExcel</name>
+    <description>01_SpringBoot-EasyExcel</description>
     <properties>
         <java.version>17</java.version>
     </properties>

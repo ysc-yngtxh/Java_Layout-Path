@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<excels>
+    <!--配置了一个id为student的映射,要映射对应的JavaBean实体为 StudentModel-->
+    <excel id="student" class="com.example.pojo.StudentModel">
+        <!--excel文件中标题为ID的列,把它的值映射到 StudentModel .id属性上-->
+        <field name="id" title="ID"/>
+        <field name="name" title="学生姓名"/>
+        <field name="age" title="年龄" isNull="false" regex="^[1-9]\d*$" regexErrMsg="必须是数字"/>
+        <field name="studentNo" title="学号" isNull="false" />
+        <field name="createTime" title="创建时间" pattern="yyyy-MM-dd,yyyy/MM/dd"/>
+        <field name="status" title="状态" format="1:正常,0:禁用,-1:无效" />
+        <field name="createUser" title="创建人"/>
+        <!-- 复杂对象 -->
+        <field name="book.bookName" title="图书名称" />
+        <field name="book.author.authorName" title="作者名称"/>
+    </excel>
+</excels>
