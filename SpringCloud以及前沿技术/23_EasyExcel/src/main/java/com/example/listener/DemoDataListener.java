@@ -9,6 +9,7 @@ import com.alibaba.excel.util.ConverterUtils;
 import com.alibaba.excel.util.ListUtils;
 import com.alibaba.fastjson.JSON;
 import com.example.pojo.Demo2;
+import org.apache.poi.ss.formula.functions.T;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
@@ -21,14 +22,14 @@ import java.util.Map;
  * @dateTime 2023-08-15 22:56
  * @apiNote TODO
  */
-public class DemoDataListener implements ReadListener<Demo2> {
+public class DemoDataListener<T> implements ReadListener<T> {
 
     private final Logger log = LoggerFactory.getLogger(DemoDataListener.class);
 
     // 单次缓存的数据量
     public static final int BATCH_COUNT = 100;
     // 临时存储
-    private List<Demo2> cachedDataList = ListUtils.newArrayListWithExpectedSize(BATCH_COUNT);
+    private List<T> cachedDataList = ListUtils.newArrayListWithExpectedSize(BATCH_COUNT);
 
     // 读取表头数据
     @Override
@@ -42,7 +43,7 @@ public class DemoDataListener implements ReadListener<Demo2> {
 
     // 这个方法,每一条数据解析都会来调用
     @Override
-    public void invoke(Demo2 data, AnalysisContext context) {
+    public void invoke(T data, AnalysisContext context) {
         log.info("正在读取sheet:[{}]的数据:{}", context.readSheetHolder().getSheetName(), JSON.toJSONString(data));
         cachedDataList.add(data);
         if (cachedDataList.size() <= BATCH_COUNT) {

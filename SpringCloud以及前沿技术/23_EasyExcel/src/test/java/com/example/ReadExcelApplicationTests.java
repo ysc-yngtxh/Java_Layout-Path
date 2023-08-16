@@ -4,6 +4,7 @@ import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.enums.CellExtraTypeEnum;
+import com.alibaba.excel.exception.ExcelDataConvertException;
 import com.alibaba.excel.read.listener.PageReadListener;
 import com.alibaba.excel.read.listener.ReadListener;
 import com.alibaba.excel.read.metadata.ReadSheet;
@@ -12,6 +13,7 @@ import com.alibaba.fastjson.JSON;
 import com.example.listener.DemoDataListener;
 import com.example.pojo.Demo1;
 import com.example.pojo.Demo2;
+import com.example.pojo.Demo3;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -94,9 +96,9 @@ class ReadExcelApplicationTests {
         try ( ExcelReader excelReader = EasyExcel.read(fileName).build() ) {
             // 这里为了简单 所以注册了 同样的head 和Listener 自己使用功能必须不同的Listener
             ReadSheet readSheet1 =
-                    EasyExcel.readSheet(0).head(Demo2.class).registerReadListener(new DemoDataListener()).build();
+                    EasyExcel.readSheet(0).head(Demo2.class).registerReadListener(new DemoDataListener<Demo2>()).build();
             ReadSheet readSheet2 =
-                    EasyExcel.readSheet(1).head(Demo2.class).registerReadListener(new DemoDataListener()).build();
+                    EasyExcel.readSheet(1).head(Demo2.class).registerReadListener(new DemoDataListener<Demo2>()).build();
             // 这里注意 一定要把sheet1 sheet2 一起传进去，不然有个问题就是03版的excel 会读取多次，浪费性能
             excelReader.read(readSheet1, readSheet2);
         }
@@ -107,12 +109,19 @@ class ReadExcelApplicationTests {
     public void extraRead() {
         File fileName = new File("/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿demo2.xlsx");
         // 这里 需要指定读用哪个class去读，然后读取第一个sheet
-        EasyExcel.read(fileName, Demo2.class, new DemoDataListener())
+        EasyExcel.read(fileName, Demo2.class, new DemoDataListener<Demo2>())
                 // 需要读取批注 默认不读取
                 .extraRead(CellExtraTypeEnum.COMMENT)
                 // 需要读取超链接 默认不读取
                 .extraRead(CellExtraTypeEnum.HYPERLINK)
                 // 需要读取合并单元格信息 默认不读取
                 .extraRead(CellExtraTypeEnum.MERGE).sheet().doRead();
+    }
+
+    // 数据转换等异常处理
+    @Test
+    public void cellDataRead() {
+        File fileName = new File("/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿demo3.xlsx");
+        EasyExcel.read(fileName, Demo3.class, new DemoDataListener<Demo3>()).sheet().doRead();
     }
 }
