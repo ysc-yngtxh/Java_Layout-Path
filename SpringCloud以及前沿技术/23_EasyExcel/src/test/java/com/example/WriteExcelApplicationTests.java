@@ -2,14 +2,35 @@ package com.example;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.enums.CellDataTypeEnum;
+import com.alibaba.excel.metadata.data.CommentData;
+import com.alibaba.excel.metadata.data.FormulaData;
+import com.alibaba.excel.metadata.data.HyperlinkData;
+import com.alibaba.excel.metadata.data.ImageData;
+import com.alibaba.excel.metadata.data.RichTextStringData;
+import com.alibaba.excel.metadata.data.WriteCellData;
+import com.alibaba.excel.util.FileUtils;
 import com.alibaba.excel.util.ListUtils;
 import com.alibaba.excel.write.metadata.WriteSheet;
-import com.example.pojo.WriteDemo1;
+import com.alibaba.excel.write.metadata.style.WriteCellStyle;
+import com.alibaba.excel.write.metadata.style.WriteFont;
+import com.example.pojo.write.WriteDemo1;
+import com.example.pojo.write.WriteDemo2;
+import com.example.pojo.write.WriteDemo3;
+import com.example.pojo.write.WriteDemo4;
+import com.example.pojo.write.WriteDemo5;
+import com.example.pojo.write.WriteDemo6;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -40,18 +61,18 @@ public class WriteExcelApplicationTests {
     // 注意 在数据量不大的情况下可以使用（5000以内，具体也要看实际情况），数据量大参照 重复多次写入
     @Test
     void writeExcel1(){
-        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo4.xlsx";
+        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
         // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板1 然后文件流会自动关闭
         EasyExcel.write(fileName, WriteDemo1.class)
                 .sheet("模板1")
-                .doWrite(data());
+                .doWrite( data() );
     }
 
-    // 重复多次写入(写到单个或者多个Sheet)
+    // 重复多次写入(写到单个或者多个Sheet，分担写入数据压力)
     @Test
-    public void repeatedWrite() {
+    public void repeatedWrite1() {
         // 方法1: 如果写到同一个sheet
-        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo4.xlsx";
+        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
         // 这里 需要指定写用哪个class去写
         try (ExcelWriter excelWriter = EasyExcel.write(fileName, WriteDemo1.class).build()) {
             // 这里注意 如果同一个sheet只要创建一次
@@ -65,7 +86,7 @@ public class WriteExcelApplicationTests {
         }
 
         // 方法2: 如果写到不同的sheet 同一个对象
-        fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo4.xlsx";
+        fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
         // 这里 指定文件
         try (ExcelWriter excelWriter = EasyExcel.write(fileName, WriteDemo1.class).build()) {
             // 去调用写入,这里我调用了五次，实际使用时根据数据库分页的总的页数来。这里最终会写到5个sheet里面
@@ -79,7 +100,7 @@ public class WriteExcelApplicationTests {
         }
 
         // 方法3 如果写到不同的sheet 不同的对象
-        fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo4.xlsx";
+        fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
         // 这里 指定文件
         try (ExcelWriter excelWriter = EasyExcel.write(fileName).build()) {
             // 去调用写入,这里我调用了五次，实际使用时根据数据库分页的总的页数来。这里最终会写到5个sheet里面
@@ -97,12 +118,189 @@ public class WriteExcelApplicationTests {
 
     // 导出指定的列【excludeColumnFieldNames()排除列 ｜｜ includeColumnFieldNames()包含列】
     @Test
-    void writeExcel2(){
-        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo4.xlsx";
-
+    void writeExcel11(){
+        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
         EasyExcel.write(fileName, WriteDemo1.class)
                 .excludeColumnFieldNames(Set.of("date"))
                 .sheet("模板2")
                 .doWrite(data());
+    }
+
+    // 复杂头写入
+    @Test
+    void writeExcel2(){
+        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
+        EasyExcel.write(fileName, WriteDemo2.class)
+                .sheet("模板2")
+                .doWrite(data());
+    }
+
+    // 日期、数字或者自定义格式转换
+    @Test
+    void writeExcel3(){
+        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
+        EasyExcel.write(fileName, WriteDemo3.class)
+                .sheet("模板3")
+                .doWrite(data());
+    }
+
+    // 图片导出
+    @Test
+    public void imageWrite4() throws Exception {
+        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
+
+        // 这里注意下 所有的图片都会放到内存 暂时没有很好的解法，大量图片的情况下建议 2选1:
+        // 1. 将图片上传到oss 或者其他存储网站: https://www.aliyun.com/product/oss ，然后直接放链接
+        // 2. 使用: https://github.com/coobird/thumbnailator 或者其他工具压缩图片
+
+        String imagePath = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/src/main/resources/static/下载.jpeg";
+        try (InputStream inputStream = FileUtils.openInputStream(new File(imagePath))) {
+            List<WriteDemo4> list =  ListUtils.newArrayList();
+            WriteDemo4 writeDemo = new WriteDemo4();
+            list.add(writeDemo);
+            // 放入五种类型的图片 实际使用只要选一种即可
+            writeDemo.setByteArray(FileUtils.readFileToByteArray(new File(imagePath)));
+            writeDemo.setFile(new File(imagePath));
+            writeDemo.setString(imagePath);
+            writeDemo.setInputStream(inputStream);
+            writeDemo.setUrl(new URL("https://www.wohaoyun.com/img/M00/06/1F/wKjg2lvJRi6AUblsAAMb93MwhpY910.jpg"));
+
+            // 这里演示的是额外的单元格，放入两张图片还有文字，个人觉得了解即可，不需要记忆
+            // 第一个图片靠左
+            // 第二个靠右 而且要额外的占用他后面的单元格
+            WriteCellData<Void> writeCellData = new WriteCellData<>();
+            writeDemo.setWriteCellDataFile(writeCellData);
+            // 这里可以设置为 EMPTY 则代表不需要其他数据了
+            writeCellData.setType(CellDataTypeEnum.STRING);
+            writeCellData.setStringValue("额外的放一些文字");
+
+            // 可以放入多个图片
+            List<ImageData> imageDataList = new ArrayList<>();
+            ImageData imageData = new ImageData();
+            imageDataList.add(imageData);
+            writeCellData.setImageDataList(imageDataList);
+            // 放入2进制图片
+            imageData.setImage(FileUtils.readFileToByteArray(new File(imagePath)));
+            // 图片类型
+            imageData.setImageType(ImageData.ImageType.PICTURE_TYPE_PNG);
+            // 上 右 下 左 需要留空
+            // 这个类似于 css 的 margin
+            // 这里实测 不能设置太大 超过单元格原始大小后 打开会提示修复。暂时未找到很好的解法。
+            imageData.setTop(5);
+            imageData.setRight(40);
+            imageData.setBottom(5);
+            imageData.setLeft(5);
+
+            // 放入第二个图片
+            imageData = new ImageData();
+            imageDataList.add(imageData);
+            writeCellData.setImageDataList(imageDataList);
+            imageData.setImage(FileUtils.readFileToByteArray(new File(imagePath)));
+            imageData.setImageType(ImageData.ImageType.PICTURE_TYPE_PNG);
+            imageData.setTop(5);
+            imageData.setRight(5);
+            imageData.setBottom(5);
+            imageData.setLeft(50);
+            // 设置图片的位置 假设 现在目标 是 覆盖 当前单元格 和当前单元格右边的单元格
+            // 起点相对于当前单元格为0 当然可以不写
+            imageData.setRelativeFirstRowIndex(0);
+            imageData.setRelativeFirstColumnIndex(0);
+            imageData.setRelativeLastRowIndex(0);
+            // 前面3个可以不写  下面这个需要写 也就是 结尾 需要相对当前单元格 往右移动一格
+            // 也就是说 这个图片会覆盖当前单元格和 后面的那一格
+            imageData.setRelativeLastColumnIndex(1);
+
+            // 写入数据
+            EasyExcel.write(fileName, WriteDemo4.class).sheet().doWrite(list);
+        }
+    }
+
+    // 超链接、备注、公式、指定单个单元格的样式、单个单元格多种样式
+    @Test
+    public void writeCellDataWrite5() {
+        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
+        WriteDemo5 writeCellDemoData = new WriteDemo5();
+
+        // TODO 设置超链接
+        WriteCellData<String> hyperlink = new WriteCellData<>("官方网站");
+        writeCellDemoData.setHyperlink(hyperlink);
+        HyperlinkData hyperlinkData = new HyperlinkData();
+        hyperlink.setHyperlinkData(hyperlinkData);
+        hyperlinkData.setAddress("https://gitee.com/you-shicheng/java-layout-path");
+        hyperlinkData.setHyperlinkType(HyperlinkData.HyperlinkType.URL);
+
+        // TODO 设置备注
+        WriteCellData<String> comment = new WriteCellData<>("备注的单元格信息");
+        writeCellDemoData.setCommentData(comment);
+        CommentData commentData = new CommentData();
+        comment.setCommentData(commentData);
+        commentData.setAuthor("Jiaju Zhuang");
+        commentData.setRichTextStringData(new RichTextStringData("这是一个备注"));
+        // 备注的默认大小是按照单元格的大小 这里想调整到4个单元格那么大 所以向后 向下 各额外占用了一个单元格
+        commentData.setRelativeLastColumnIndex(1);
+        commentData.setRelativeLastRowIndex(1);
+
+        // TODO 设置公式
+        WriteCellData<String> formula = new WriteCellData<>();
+        writeCellDemoData.setFormulaData(formula);
+        FormulaData formulaData = new FormulaData();
+        formula.setFormulaData(formulaData);
+        // 将 123456789 中的第一个数字替换成 2
+        // 单元格内容 123456789, 下标 1, 替换字符数量 1, 替换内容 2
+        // 这里只是例子 如果真的涉及到公式 能内存算好尽量内存算好 公式能不用尽量不用
+        formulaData.setFormulaValue("REPLACE(123456789, 1, 1, 2)");
+
+        // TODO 设置单个单元格的样式 当然样式 很多的话 也可以用注解等方式。
+        WriteCellData<String> writeCellStyle = new WriteCellData<>("单元格样式");
+        writeCellStyle.setType(CellDataTypeEnum.STRING);
+        writeCellDemoData.setWriteCellStyle(writeCellStyle);
+        WriteCellStyle writeCellStyleData = new WriteCellStyle();
+        writeCellStyle.setWriteCellStyle(writeCellStyleData);
+        // 这里需要指定 FillPatternType 为FillPatternType.SOLID_FOREGROUND 不然无法显示背景颜色.
+        writeCellStyleData.setFillPatternType(FillPatternType.SOLID_FOREGROUND);
+        // 背景绿色
+        writeCellStyleData.setFillForegroundColor(IndexedColors.GREEN.getIndex());
+
+        // TODO 设置单个单元格多种样式
+        // 这里需要设置 inMomery=true 不然会导致无法展示单个单元格多种样式，所以慎用
+        WriteCellData<String> richTest = new WriteCellData<>();
+        richTest.setType(CellDataTypeEnum.RICH_TEXT_STRING);
+        writeCellDemoData.setRichText(richTest);
+        RichTextStringData richTextStringData = new RichTextStringData();
+        richTest.setRichTextStringDataValue(richTextStringData);
+        richTextStringData.setTextString("红色绿色默认");
+        // 前2个字红色
+        WriteFont writeFont = new WriteFont();
+        writeFont.setColor(IndexedColors.RED.getIndex());
+        richTextStringData.applyFont(0, 2, writeFont);
+        // 接下来2个字绿色
+        writeFont = new WriteFont();
+        writeFont.setColor(IndexedColors.GREEN.getIndex());
+        richTextStringData.applyFont(2, 4, writeFont);
+
+        List<WriteDemo5> data = new ArrayList<>();
+        data.add(writeCellDemoData);
+        EasyExcel.write(fileName, WriteDemo5.class).inMemory(true).sheet("模板").doWrite(data);
+    }
+
+    // 注解形式自定义单元格样式
+    @Test
+    public void annotationStyleWrite6() {
+        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
+        // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
+        EasyExcel.write(fileName,  WriteDemo6.class).sheet("模板").doWrite(data());
+    }
+
+    // 根据模板写入（类似于追加数据）
+    @Test
+    public void templateWrite1() {
+        String templateFileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";;
+        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo2.xlsx";
+        // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
+        // 这里要注意 withTemplate 的模板文件会全量存储在内存里面，所以尽量不要用于追加文件，如果文件模板文件过大会OOM（内存溢出）
+        // 如果要在文件中追加（无法在一个线程里面处理，可以在一个线程的建议参照多次写入的demo） 建议临时存储到数据库 或者 磁盘缓存(ehcache) 然后再一次性写入
+        EasyExcel.write(fileName).withTemplate(templateFileName).sheet().doWrite(data());
+        // 追加的有表头的数据
+        // EasyExcel.write(fileName, WriteDemo1.class).withTemplate(templateFileName).sheet().doWrite(data());
     }
 }

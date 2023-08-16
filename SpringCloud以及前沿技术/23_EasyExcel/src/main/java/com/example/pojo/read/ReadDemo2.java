@@ -1,4 +1,4 @@
-package com.example.pojo;
+package com.example.pojo.read;
 
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
