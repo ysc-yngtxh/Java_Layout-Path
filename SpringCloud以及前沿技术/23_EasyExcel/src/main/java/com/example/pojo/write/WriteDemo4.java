@@ -2,6 +2,7 @@ package com.example.pojo.write;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.ColumnWidth;
+import com.alibaba.excel.annotation.write.style.ContentLoopMerge;
 import com.alibaba.excel.annotation.write.style.ContentRowHeight;
 import com.alibaba.excel.annotation.write.style.HeadRowHeight;
 import com.alibaba.excel.converters.string.StringImageConverter;
@@ -18,12 +19,6 @@ import java.net.URL;
  * @apiNote TODO
  */
 @Data
-// 内容行高
-@ContentRowHeight(100)
-// 表头行高
-@HeadRowHeight(20)
-// 全部列宽
-@ColumnWidth(100 / 8)
 public class WriteDemo4 {
 
     private File file;
@@ -34,7 +29,6 @@ public class WriteDemo4 {
      * 如果string类型 必须指定转换器，string默认转换成string
      */
     @ExcelProperty(converter = StringImageConverter.class)
-    @ColumnWidth(50)  // 单个列宽
     private String string;
 
     private byte[] byteArray;

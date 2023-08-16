@@ -9,8 +9,15 @@ import com.alibaba.excel.metadata.data.HyperlinkData;
 import com.alibaba.excel.metadata.data.ImageData;
 import com.alibaba.excel.metadata.data.RichTextStringData;
 import com.alibaba.excel.metadata.data.WriteCellData;
+import com.alibaba.excel.util.BooleanUtils;
 import com.alibaba.excel.util.FileUtils;
 import com.alibaba.excel.util.ListUtils;
+import com.alibaba.excel.write.handler.CellWriteHandler;
+import com.alibaba.excel.write.handler.RowWriteHandler;
+import com.alibaba.excel.write.handler.SheetWriteHandler;
+import com.alibaba.excel.write.handler.context.CellWriteHandlerContext;
+import com.alibaba.excel.write.handler.context.RowWriteHandlerContext;
+import com.alibaba.excel.write.handler.context.SheetWriteHandlerContext;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.excel.write.metadata.style.WriteCellStyle;
 import com.alibaba.excel.write.metadata.style.WriteFont;
@@ -20,8 +27,21 @@ import com.example.pojo.write.WriteDemo3;
 import com.example.pojo.write.WriteDemo4;
 import com.example.pojo.write.WriteDemo5;
 import com.example.pojo.write.WriteDemo6;
+import org.apache.poi.common.usermodel.HyperlinkType;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Comment;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.DataValidation;
+import org.apache.poi.ss.usermodel.DataValidationConstraint;
+import org.apache.poi.ss.usermodel.DataValidationHelper;
+import org.apache.poi.ss.usermodel.Drawing;
 import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.Hyperlink;
 import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.util.CellRangeAddressList;
+import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
+import org.apache.poi.xssf.usermodel.XSSFRichTextString;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,6 +65,20 @@ public class WriteExcelApplicationTests {
 
     private final Logger log = LoggerFactory.getLogger(WriteExcelApplicationTests.class);
 
+    private List<List<String>> head() {
+        List<List<String>> list = ListUtils.newArrayList();
+        List<String> head0 = ListUtils.newArrayList();
+        head0.add("字符串" + System.currentTimeMillis());
+        List<String> head1 = ListUtils.newArrayList();
+        head1.add("数字" + System.currentTimeMillis());
+        List<String> head2 = ListUtils.newArrayList();
+        head2.add("日期" + System.currentTimeMillis());
+        list.add(head0);
+        list.add(head1);
+        list.add(head2);
+        return list;
+    }
+
     private List<WriteDemo1> data() {
         List<WriteDemo1> list = ListUtils.newArrayList();
         for (int i = 0; i < 10; i++) {
@@ -57,7 +91,15 @@ public class WriteExcelApplicationTests {
         return list;
     }
 
-    // 简单写入一个 Excel
+    // 简单写入一个 Excel，不创建对象的写
+    @Test
+    public void noModelWrite() {
+        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
+        // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
+        EasyExcel.write(fileName).head(head()).sheet("模板").doWrite(data());
+    }
+
+    // 简单写入一个 Excel，创建对象的写入
     // 注意 在数据量不大的情况下可以使用（5000以内，具体也要看实际情况），数据量大参照 重复多次写入
     @Test
     void writeExcel1(){
@@ -215,7 +257,7 @@ public class WriteExcelApplicationTests {
         }
     }
 
-    // 超链接、备注、公式、指定单个单元格的样式、单个单元格多种样式
+    // 超链接、批注、公式、指定单个单元格的样式、单个单元格多种样式
     @Test
     public void writeCellDataWrite5() {
         String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
@@ -229,7 +271,7 @@ public class WriteExcelApplicationTests {
         hyperlinkData.setAddress("https://gitee.com/you-shicheng/java-layout-path");
         hyperlinkData.setHyperlinkType(HyperlinkData.HyperlinkType.URL);
 
-        // TODO 设置备注
+        // TODO 设置批注
         WriteCellData<String> comment = new WriteCellData<>("备注的单元格信息");
         writeCellDemoData.setCommentData(comment);
         CommentData commentData = new CommentData();
@@ -302,5 +344,66 @@ public class WriteExcelApplicationTests {
         EasyExcel.write(fileName).withTemplate(templateFileName).sheet().doWrite(data());
         // 追加的有表头的数据
         // EasyExcel.write(fileName, WriteDemo1.class).withTemplate(templateFileName).sheet().doWrite(data());
+    }
+
+    // TODO 前面实现的超链接和批注都是在新建的扩展单元格中，这里我们实现在已定义好的表头数据里做超链接、批注等
+    // 下拉，超链接等自定义拦截器，这里实现3点。
+    // 1. 对第一行第一列的表头超链接到: https://gitee.com/you-shicheng/java-layout-path
+    // 2. 对第一列第一行和第二行的内容数据新增下拉框，显示 测试1 测试2
+    // 3. 对第一行第二列内容数据创建批注
+    @Test
+    public void customHandlerWrite() {
+        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo2.xlsx";
+        // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
+        EasyExcel.write(fileName, WriteDemo3.class)
+                // 这里我是用的是匿名内部类的方式注册写入处理器，将第一行第一列的表头超链接
+                .registerWriteHandler(new CellWriteHandler(){
+                    @Override
+                    public void afterCellDispose(CellWriteHandlerContext context) {
+                        Cell cell = context.getCell();
+                        // 这里可以对cell进行任何操作
+                        log.info("第{}行，第{}列写入完成。", cell.getRowIndex(), cell.getColumnIndex());
+                        if (BooleanUtils.isTrue(context.getHead()) && cell.getColumnIndex() == 0) {
+                            CreationHelper createHelper = context.getWriteSheetHolder().getSheet().getWorkbook().getCreationHelper();
+                            Hyperlink hyperlink = createHelper.createHyperlink(HyperlinkType.URL);
+                            hyperlink.setAddress("https://gitee.com/you-shicheng/java-layout-path");
+                            cell.setHyperlink(hyperlink);
+                        }
+                    }
+                })
+                // 这里我是用的是匿名内部类的方式注册写入处理器，将第一列第一行和第二行的内容数据新增下拉框
+                .registerWriteHandler(new SheetWriteHandler(){
+                    @Override
+                    public void afterSheetCreate(SheetWriteHandlerContext context) {
+                        log.info("第{}个Sheet写入成功。", context.getWriteSheetHolder().getSheetNo());
+
+                        // 区间设置 第一列第一行和第二行的数据。由于第一行是头，所以第一、二行的数据实际上是第二三行
+                        CellRangeAddressList cellRangeAddressList = new CellRangeAddressList(1, 2, 0, 0);
+                        DataValidationHelper helper = context.getWriteSheetHolder().getSheet().getDataValidationHelper();
+                        DataValidationConstraint constraint = helper.createExplicitListConstraint(new String[] {"测试1", "测试2"});
+                        DataValidation dataValidation = helper.createValidation(constraint, cellRangeAddressList);
+                        context.getWriteSheetHolder().getSheet().addValidationData(dataValidation);
+                    }
+                })
+                // 这里我是用的是匿名内部类的方式注册写入处理器，将第二行第二列 内容数据创建批注
+                .registerWriteHandler(new RowWriteHandler(){
+                    @Override
+                    public void afterRowDispose(RowWriteHandlerContext context) {
+                        if (BooleanUtils.isTrue(context.getHead())) {
+                            Sheet sheet = context.getWriteSheetHolder().getSheet();
+                            Drawing<?> drawingPatriarch = sheet.createDrawingPatriarch();
+                            // 这里定义的是锚点，前四个参数不用管
+                            // col1 和 row1 代表左上坐标。col1：从左往右数的边框线  row1：从上往下数得边框线
+                            // col2 和 row2 代表右下坐标。同上
+                            Comment comment =
+                                    drawingPatriarch.createCellComment(new XSSFClientAnchor(0, 0, 0, 0, (short)1, 2, (short)2, 3));
+                            // 输入批注信息
+                            comment.setString(new XSSFRichTextString("创建批注!"));
+                            // 将批注添加到单元格对象中
+                            sheet.getRow(0).getCell(1).setCellComment(comment);
+                        }
+                    }
+                })
+                .sheet("模板").doWrite(data());
     }
 }
