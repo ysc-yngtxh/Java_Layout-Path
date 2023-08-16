@@ -1,12 +1,18 @@
 package com.example.pojo;
 
+import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
 
 import java.util.Date;
 
+/**
+ * @author 游家纨绔
+ * @dateTime 2023-08-16 09:09
+ * @apiNote TODO
+ */
 @Data
-public class Demo3 {
+public class WriteDemo1 {
 
     @ExcelProperty("字符串标题")
     private String string;
@@ -17,6 +23,9 @@ public class Demo3 {
     @ExcelProperty("数字标题")
     private Double doubleData;
 
-    @ExcelProperty("公式")
-    private String formulaValue;
+    /**
+     * 忽略这个字段
+     */
+    @ExcelIgnore
+    private String ignore;
 }

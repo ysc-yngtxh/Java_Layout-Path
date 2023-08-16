@@ -3,7 +3,7 @@ package com.example.controller;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.read.listener.PageReadListener;
 import com.alibaba.fastjson.JSON;
-import com.example.pojo.Demo1;
+import com.example.pojo.ReadDemo1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,10 +27,10 @@ public class ReadExcelController {
     @RequestMapping("/upload")
     public String onUpLoad(MultipartFile file) throws IOException {
         EasyExcel.read(file.getInputStream()
-                , Demo1.class
-                , new PageReadListener<Demo1>(dataList -> {
-                    for (Demo1 demo1Data : dataList) {
-                        log.info("读取到一条数据{}", JSON.toJSONString(demo1Data));
+                , ReadDemo1.class
+                , new PageReadListener<ReadDemo1>(dataList -> {
+                    for (ReadDemo1 readDemo1Data : dataList) {
+                        log.info("读取到一条数据{}", JSON.toJSONString(readDemo1Data));
                     }
                 })).sheet().doRead();
         return "上传成功！";

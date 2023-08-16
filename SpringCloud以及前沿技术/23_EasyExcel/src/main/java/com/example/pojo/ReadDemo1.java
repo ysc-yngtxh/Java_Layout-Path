@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Demo1 {
+public class ReadDemo1 {
 
     private Integer id;
 

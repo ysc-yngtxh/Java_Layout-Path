@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Demo2 {
+public class ReadDemo2 {
 
     // 映射 Excel 的头标题
     @ExcelProperty("Id")
