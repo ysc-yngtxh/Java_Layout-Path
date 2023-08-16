@@ -1,10 +1,6 @@
 package com.example.pojo.write;
 
 import com.alibaba.excel.annotation.ExcelProperty;
-import com.alibaba.excel.annotation.write.style.ColumnWidth;
-import com.alibaba.excel.annotation.write.style.ContentLoopMerge;
-import com.alibaba.excel.annotation.write.style.ContentRowHeight;
-import com.alibaba.excel.annotation.write.style.HeadRowHeight;
 import com.alibaba.excel.converters.string.StringImageConverter;
 import com.alibaba.excel.metadata.data.WriteCellData;
 import lombok.Data;
