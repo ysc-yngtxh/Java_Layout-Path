@@ -1,12 +1,8 @@
 package O15JUC进阶理解.D读写锁;
 
-import javax.lang.model.element.VariableElement;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class ReadWriteLock读写锁 {

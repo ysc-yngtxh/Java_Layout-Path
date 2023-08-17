@@ -28,7 +28,7 @@ public class DemoDataListener<T> implements ReadListener<T> {
     // 临时存储
     private List<T> cachedDataList = ListUtils.newArrayListWithExpectedSize(BATCH_COUNT);
 
-    // 读取表头数据
+    // 读取第一行表头数据
     @Override
     public void invokeHead(Map<Integer, ReadCellData<?>> headMap, AnalysisContext context) {
         Map<Integer, String> stringMap = ConverterUtils.convertToStringMap(headMap, context);
@@ -39,6 +39,8 @@ public class DemoDataListener<T> implements ReadListener<T> {
     }
 
     // 这个方法,每一条数据解析都会来调用
+    // 一行一行去读取excel内容并封装到 T 类型中
+    // 默认从第二行读取数据，因为第一行一般都是表头
     @Override
     public void invoke(T data, AnalysisContext context) {
         log.info("正在读取sheet:[{}]的数据:{}", context.readSheetHolder().getSheetName(), JSON.toJSONString(data));

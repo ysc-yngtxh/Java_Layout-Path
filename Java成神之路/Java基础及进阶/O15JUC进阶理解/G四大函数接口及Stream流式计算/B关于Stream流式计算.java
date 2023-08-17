@@ -2,7 +2,6 @@ package O15JUC进阶理解.G四大函数接口及Stream流式计算;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
 public class B关于Stream流式计算 {
     /**

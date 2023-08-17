@@ -96,7 +96,7 @@ public class WriteExcelApplicationTests {
     public void noModelWrite() {
         String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
         // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
-        EasyExcel.write(fileName).head(head()).sheet("模板").doWrite(data());
+        EasyExcel.write(fileName).head(head()).sheet("模板").doWrite( data() );
     }
 
     // 简单写入一个 Excel，创建对象的写入
@@ -117,7 +117,7 @@ public class WriteExcelApplicationTests {
         String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
         // 这里 需要指定写用哪个class去写
         try (ExcelWriter excelWriter = EasyExcel.write(fileName, WriteDemo1.class).build()) {
-            // 这里注意 如果同一个sheet只要创建一次
+            // 这里注意 如果同一个sheet只需要创建一次
             WriteSheet writeSheet = EasyExcel.writerSheet("模板").build();
             // 去调用写入,这里我调用了五次，实际使用时根据数据库分页的总的页数来
             for (int i = 0; i < 5; i++) {
@@ -147,8 +147,8 @@ public class WriteExcelApplicationTests {
         try (ExcelWriter excelWriter = EasyExcel.write(fileName).build()) {
             // 去调用写入,这里我调用了五次，实际使用时根据数据库分页的总的页数来。这里最终会写到5个sheet里面
             for (int i = 0; i < 5; i++) {
-                // 每次都要创建writeSheet 这里注意必须指定sheetNo 而且sheetName必须不一样。这里注意DemoData.class 可以每次都变，我这里为了方便 所以用的同一个class
-                // 实际上可以一直变
+                // 每次都要创建writeSheet; 这里注意必须指定 sheetNo ,而且 sheetName 必须不一样。
+                // 这里注意表头 head 可以每次都变，我这里为了方便 所以用的同一个class,实际上可以一直变
                 WriteSheet writeSheet = EasyExcel.writerSheet(i, "模板" + i).head(WriteDemo1.class).build();
                 // 分页去数据库查询数据 这里可以去数据库查询每一页的数据
                 List<WriteDemo1 > data = data();

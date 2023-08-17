@@ -1,4 +1,5 @@
 package L12反射.B2获取Class实例化对象.实例化对象2;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
