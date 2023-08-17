@@ -94,7 +94,7 @@ public class WriteExcelApplicationTests {
     // 简单写入一个 Excel，不创建对象的写
     @Test
     public void noModelWrite() {
-        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
+        String fileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";
         // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
         EasyExcel.write(fileName).head(head()).sheet("模板").doWrite( data() );
     }
@@ -103,7 +103,7 @@ public class WriteExcelApplicationTests {
     // 注意 在数据量不大的情况下可以使用（5000以内，具体也要看实际情况），数据量大参照 重复多次写入
     @Test
     void writeExcel1(){
-        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
+        String fileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";
         // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板1 然后文件流会自动关闭
         EasyExcel.write(fileName, WriteDemo1.class)
                 .sheet("模板1")
@@ -114,7 +114,7 @@ public class WriteExcelApplicationTests {
     @Test
     public void repeatedWrite1() {
         // 方法1: 如果写到同一个sheet
-        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
+        String fileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";
         // 这里 需要指定写用哪个class去写
         try (ExcelWriter excelWriter = EasyExcel.write(fileName, WriteDemo1.class).build()) {
             // 这里注意 如果同一个sheet只需要创建一次
@@ -128,7 +128,7 @@ public class WriteExcelApplicationTests {
         }
 
         // 方法2: 如果写到不同的sheet 同一个对象
-        fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
+        fileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";
         // 这里 指定文件
         try (ExcelWriter excelWriter = EasyExcel.write(fileName, WriteDemo1.class).build()) {
             // 去调用写入,这里我调用了五次，实际使用时根据数据库分页的总的页数来。这里最终会写到5个sheet里面
@@ -142,7 +142,7 @@ public class WriteExcelApplicationTests {
         }
 
         // 方法3 如果写到不同的sheet 不同的对象
-        fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
+        fileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";
         // 这里 指定文件
         try (ExcelWriter excelWriter = EasyExcel.write(fileName).build()) {
             // 去调用写入,这里我调用了五次，实际使用时根据数据库分页的总的页数来。这里最终会写到5个sheet里面
@@ -161,7 +161,7 @@ public class WriteExcelApplicationTests {
     // 导出指定的列【excludeColumnFieldNames()排除列 ｜｜ includeColumnFieldNames()包含列】
     @Test
     void writeExcel11(){
-        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
+        String fileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";
         EasyExcel.write(fileName, WriteDemo1.class)
                 .excludeColumnFieldNames(Set.of("date"))
                 .sheet("模板2")
@@ -171,7 +171,7 @@ public class WriteExcelApplicationTests {
     // 复杂头写入
     @Test
     void writeExcel2(){
-        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
+        String fileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";
         EasyExcel.write(fileName, WriteDemo2.class)
                 .sheet("模板2")
                 .doWrite(data());
@@ -180,7 +180,7 @@ public class WriteExcelApplicationTests {
     // 日期、数字或者自定义格式转换
     @Test
     void writeExcel3(){
-        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
+        String fileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";
         EasyExcel.write(fileName, WriteDemo3.class)
                 .sheet("模板3")
                 .doWrite(data());
@@ -189,13 +189,13 @@ public class WriteExcelApplicationTests {
     // 图片导出
     @Test
     public void imageWrite4() throws Exception {
-        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
+        String fileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";
 
         // 这里注意下 所有的图片都会放到内存 暂时没有很好的解法，大量图片的情况下建议 2选1:
         // 1. 将图片上传到oss 或者其他存储网站: https://www.aliyun.com/product/oss ，然后直接放链接
         // 2. 使用: https://github.com/coobird/thumbnailator 或者其他工具压缩图片
 
-        String imagePath = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/src/main/resources/static/下载.jpeg";
+        String imagePath = System.getProperty("user.dir") + "/src/main/resources/static/下载.jpeg";
         try (InputStream inputStream = FileUtils.openInputStream(new File(imagePath))) {
             List<WriteDemo4> list =  ListUtils.newArrayList();
             WriteDemo4 writeDemo = new WriteDemo4();
@@ -260,7 +260,7 @@ public class WriteExcelApplicationTests {
     // 超链接、批注、公式、指定单个单元格的样式、单个单元格多种样式
     @Test
     public void writeCellDataWrite5() {
-        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
+        String fileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";
         WriteDemo5 writeCellDemoData = new WriteDemo5();
 
         // TODO 设置超链接
@@ -328,7 +328,7 @@ public class WriteExcelApplicationTests {
     // 注解形式自定义单元格样式
     @Test
     public void annotationStyleWrite6() {
-        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";
+        String fileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";
         // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
         EasyExcel.write(fileName,  WriteDemo6.class).sheet("模板").doWrite(data());
     }
@@ -336,8 +336,8 @@ public class WriteExcelApplicationTests {
     // 根据模板写入（类似于追加数据）
     @Test
     public void templateWrite1() {
-        String templateFileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo1.xlsx";;
-        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo2.xlsx";
+        String templateFileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";;
+        String fileName = System.getProperty("user.dir") + "/工作簿WriteDemo2.xlsx";
         // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
         // 这里要注意 withTemplate 的模板文件会全量存储在内存里面，所以尽量不要用于追加文件，如果文件模板文件过大会OOM（内存溢出）
         // 如果要在文件中追加（无法在一个线程里面处理，可以在一个线程的建议参照多次写入的demo） 建议临时存储到数据库 或者 磁盘缓存(ehcache) 然后再一次性写入
@@ -353,7 +353,7 @@ public class WriteExcelApplicationTests {
     // 3. 对第一行第二列内容数据创建批注
     @Test
     public void customHandlerWrite() {
-        String fileName = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿WriteDemo2.xlsx";
+        String fileName = System.getProperty("user.dir") + "/工作簿WriteDemo2.xlsx";
         // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
         EasyExcel.write(fileName, WriteDemo3.class)
                 // 这里我是用的是匿名内部类的方式注册写入处理器，将第一行第一列的表头超链接

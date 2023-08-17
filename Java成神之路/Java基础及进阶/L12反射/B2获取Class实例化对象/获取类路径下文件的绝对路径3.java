@@ -1,11 +1,16 @@
 package L12反射.B2获取Class实例化对象;
 
+import A1抽象类.C;
+import com.sun.org.apache.bcel.internal.util.ClassPath;
+
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
 
 public class 获取类路径下文件的绝对路径3 {
-    public static void main(String[] args) throws UnsupportedEncodingException, URISyntaxException {
+    public static void main(String[] args) throws IOException, URISyntaxException {
 
         //注意：试用一下通用方式的前提是：这个文件必须在类路径下。我调的是src为类路径
 
@@ -22,6 +27,14 @@ public class 获取类路径下文件的绝对路径3 {
         System.out.println(path);
 
         String paths = Thread.currentThread().getContextClassLoader().getResource("classinfo.properties").getPath();
-        System.out.println( URLDecoder.decode(paths,"UTF-8") );//解决中文乱码问题
+        System.out.println( URLDecoder.decode(paths, "UTF-8") );//解决中文乱码问题
+
+        // 获取当前项目路径
+        System.err.println("path1: " + System.getProperty("user.dir"));
+
+        // 通过 File 获取当前项目路径
+        File directory = new File(""); // 参数为空
+        String courseFile = directory.getCanonicalPath();
+        System.out.println("path2: " + courseFile);
     }
 }

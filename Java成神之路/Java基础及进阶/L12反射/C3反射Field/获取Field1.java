@@ -11,7 +11,7 @@ public class 获取Field1 {
     public static void main(String[] args) throws Exception{
 
         //获取整个类
-        Class studentClass = Class.forName("L12反射.C3反射Field.Student");
+        Class<?> studentClass = Class.forName("L12反射.C3反射Field.Student");
 
         //获取类名
         String className = studentClass.getName();

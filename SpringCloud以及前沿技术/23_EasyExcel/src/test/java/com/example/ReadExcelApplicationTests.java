@@ -32,7 +32,7 @@ class ReadExcelApplicationTests {
     // 且此时读取一张工作表----sheet()【默认为第一张工作表】； 还可加上参数表示读取指定的表格数据----sheet(1)【表示读取第二张工作表】
     @Test
     void readExcel1() {
-        File file = new File("/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿ReadDemo1.xlsx");
+        File file = new File(System.getProperty("user.dir") + "/工作簿ReadDemo1.xlsx");
         EasyExcel.read(
                 file
                 , ReadDemo1.class
@@ -49,7 +49,7 @@ class ReadExcelApplicationTests {
     // 且此时由于没有加上sheet()方法，表示读取全部工作表数据
     @Test
     void readExcel2() {
-        File file = new File("/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿ReadDemo2.xlsx");
+        File file = new File(System.getProperty("user.dir") + "/工作簿ReadDemo2.xlsx");
         EasyExcel.read(
                 file
                 , ReadDemo2.class
@@ -64,7 +64,7 @@ class ReadExcelApplicationTests {
     // 使用匿名内部类监听器来对数据解析和读取，重写其方法逻辑。且此时由于没有加上sheet()方法，表示读取全部表格数据
     @Test
     void readExcel3() {
-    	String fileString = "/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿ReadDemo2.xlsx";
+    	String fileString = System.getProperty("user.dir") + "/工作簿ReadDemo2.xlsx";
     	EasyExcel.read(fileString, ReadDemo2.class, new ReadListener<ReadDemo2>(){
             // 单次缓存的数据量
             public static final int BATCH_COUNT = 100;
@@ -91,7 +91,7 @@ class ReadExcelApplicationTests {
     // 当存在多工作表 Excel ，却只想解析需要的工作表时(比如：sheet1、sheet2、sheet3；我只想解析sheet1、sheet2)
     @Test
     void readExcel4() {
-        File fileName = new File("/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿ReadDemo2.xlsx");
+        File fileName = new File(System.getProperty("user.dir") + "/工作簿ReadDemo2.xlsx");
         try ( ExcelReader excelReader = EasyExcel.read(fileName).build() ) {
             // 这里为了简单 所以注册了 同样的head 和Listener 自己使用功能必须不同的Listener
             ReadSheet readSheet1 =
@@ -106,7 +106,7 @@ class ReadExcelApplicationTests {
     // 需要读取批注、合并单元格、超链接
     @Test
     public void extraRead() {
-        File fileName = new File("/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿ReadDemo2.xlsx");
+        File fileName = new File(System.getProperty("user.dir") + "/工作簿ReadDemo2.xlsx");
         // 这里 需要指定读用哪个class去读，然后读取第一个sheet
         EasyExcel.read(fileName, ReadDemo2.class, new DemoDataListener<ReadDemo2>())
                 // 需要读取批注 默认不读取
@@ -120,7 +120,7 @@ class ReadExcelApplicationTests {
     // 数据转换等异常处理
     @Test
     public void cellDataRead() {
-        File fileName = new File("/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/23_EasyExcel/工作簿ReadDemo3.xlsx");
+        File fileName = new File(System.getProperty("user.dir") + "/工作簿ReadDemo3.xlsx");
         EasyExcel.read(fileName, ReadDemo3.class, new DemoDataListener<ReadDemo3>()).sheet().doRead();
     }
 }
