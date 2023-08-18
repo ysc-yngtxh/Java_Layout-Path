@@ -15,6 +15,7 @@ public class 异步回调CompletableFuture {
      */
     public static void main(String[] args) throws ExecutionException, InterruptedException, TimeoutException {
         // TODO 一、创建异步任务
+        System.out.println("================================一、创建异步任务==================================");
         /**
          * runAsync 是创建没有返回值的异步任务。
          * 它有两个方法，一个是使用默认线程池（ForkJoinPool.commonPool()）的方法(如下)，一个是带有自定义线程池的重载方法
@@ -58,6 +59,7 @@ public class 异步回调CompletableFuture {
         System.out.println( "supplyAsync方法使用默认线程池在 1 秒时间内等待得到的结果 -> " + cfSupplyAsync.get(1, TimeUnit.SECONDS) );
 
         // TODO 二、异步回调处理
+        System.out.println("================================二、异步回调处理==================================");
         /**
          * thenApply 表示某个任务执行完成后执行的动作，即回调方法，会将该任务的执行结果即方法返回值作为入参传递到回调方法中，带有返回值。
          */
@@ -89,6 +91,7 @@ public class 异步回调CompletableFuture {
         System.out.println( cf2.get() );
 
         // TODO 三、多任务组合处理
+        System.out.println("================================三、多任务组合处理==================================");
         /**
          * thenCombine、thenAcceptBoth 和runAfterBoth
          * thenCombine 会将两个任务的执行结果作为所提供函数的参数，且该方法有返回值；
@@ -96,12 +99,12 @@ public class 异步回调CompletableFuture {
          * runAfterBoth没有入参，也没有返回值。注意两个任务中只要有一个执行异常，则将该异常信息作为指定任务的执行结果。
          */
         CompletableFuture<Integer> supplyAsync1 = CompletableFuture.supplyAsync(() -> {
-            System.out.println(Thread.currentThread() + " supplyAsync1 do something....");
+            System.out.println(Thread.currentThread().getName() + " supplyAsync1 do something....");
             return 1;
         });
 
         CompletableFuture<Integer> supplyAsync2 = CompletableFuture.supplyAsync(() -> {
-            System.out.println(Thread.currentThread() + " supplyAsync2 do something....");
+            System.out.println(Thread.currentThread().getName() + " supplyAsync2 do something....");
             return 2;
         });
 
