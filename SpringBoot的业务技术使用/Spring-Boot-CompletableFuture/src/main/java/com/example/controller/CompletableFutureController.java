@@ -24,6 +24,14 @@ public class CompletableFutureController {
     @Autowired
     private CoursesService coursesService;
 
+    // 简单的预加载类接口，用于 SpringBoot 项目启动第一次请求时间比较慢的预加载接口
+    @RequestMapping("/load")
+    public String load(){
+        brandService.getOne(1);
+        return "已成功调用加载接口！";
+    }
+
+
     // TODO 使用 CompletableFuture 的应用场景：
     //   1、在一个接口中调用多个已存在的查询，这个时候可以整合在一起并进行优化查询时间
     //   2、需要分别调用多个RPC接口，无先后顺序关系，数据处理是需要同时依赖两多个接口的返回数据
@@ -39,7 +47,7 @@ public class CompletableFutureController {
         brand.setCourses(courses);
 
         stopWatch.stop();
-        System.out.println("耗时：" + stopWatch.getLastTaskTimeMillis());
+        System.out.println("正常耗时：" + stopWatch.getLastTaskTimeMillis());
 
         return brand;
     }
@@ -63,10 +71,11 @@ public class CompletableFutureController {
             return a;
         });
 
+        Brand brand = combine.get();
         stopWatch.stop();
-        System.out.println("耗时：" + stopWatch.getLastTaskTimeMillis());
+        System.out.println("CompletableFuture耗时：" + stopWatch.getLastTaskTimeMillis());
 
-        return combine.get();
+        return brand;
     }
 
 }

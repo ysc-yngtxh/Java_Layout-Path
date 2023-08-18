@@ -47,7 +47,11 @@
             <artifactId>fastjson2</artifactId>
             <version>2.0.39</version>
         </dependency>
-
+        <dependency>
+            <groupId>jdbc</groupId>
+            <artifactId>jdbc</artifactId>
+            <version>2.0</version>
+        </dependency>
     </dependencies>
 
     <build>
