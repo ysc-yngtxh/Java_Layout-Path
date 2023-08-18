@@ -10,23 +10,23 @@ public class CPU密集型和IO密集型 {
      *    2、IO密集型 > 判断你程序中十分耗IO的线程
      */
     public static void main(String[] args) {
-        //获取当前用户CPU的核数
-        System.out.println(Runtime.getRuntime().availableProcessors());
+        // 获取当前用户CPU的核数
+        System.out.println( Runtime.getRuntime().availableProcessors() );
 
         ExecutorService threadPoolExecutor = new ThreadPoolExecutor(
-                Runtime.getRuntime().availableProcessors()*10,       //根据用户的CPU核数来设置核心线程池大小
-                Runtime.getRuntime().availableProcessors()*30,  //根据用户的CPU核数来设置最大核心线程池大小
-                3,                     //超时时间,超过核心线程的线程在此时间后会被释放
-                TimeUnit.SECONDS,                   //超时单位
-                new LinkedBlockingDeque<>(3),//阻塞队列
-                Executors.defaultThreadFactory(),   //线程工厂。创建线程的，一般不动
-                new ThreadPoolExecutor.AbortPolicy()//拒绝策略
+                Runtime.getRuntime().availableProcessors() * 10,  // 根据用户的CPU核数来设置核心线程池大小
+                Runtime.getRuntime().availableProcessors() * 30,  // 根据用户的CPU核数来设置最大核心线程池大小
+                3,                                   // 超时时间,超过核心线程的线程在此时间后会被释放
+                TimeUnit.SECONDS,                    // 超时单位
+                new LinkedBlockingDeque<>(3),        // 阻塞队列
+                Executors.defaultThreadFactory(),    // 线程工厂。创建线程的，一般不动
+                new ThreadPoolExecutor.AbortPolicy() // 拒绝策略
         );
 
         try {
-            for (int i = 1; i <= 9; i++) {//最大线程数=阻塞队列数+最大线程池大小
+            for (int i = 1; i <= 9; i++) { // 最大线程数 = 阻塞队列数 + 最大线程池大小
                 threadPoolExecutor.execute(()->{
-                    System.out.println(Thread.currentThread().getName()+"--OK");//运行可以发现同步线程数最大值是5
+                    System.out.println(Thread.currentThread().getName()+"--OK"); // 运行可以发现同步线程数最大值是5
                 });
             }
         } catch (Exception e) {

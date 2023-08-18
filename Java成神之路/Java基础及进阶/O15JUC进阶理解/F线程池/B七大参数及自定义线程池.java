@@ -35,18 +35,18 @@ public class B七大参数及自定义线程池 {
        }
      */
     public static void main(String[] args) {
-        //自定义线程池！工作中使用ThreadPoolExecutor
+        // 自定义线程池！工作中使用ThreadPoolExecutor
         ExecutorService threadPoolExecutor = new ThreadPoolExecutor(
-                2,         //核心线程池大小
-                5,          //最大核心线程池大小
-                3,          //超时时间。当超过核心线程数的线程，线程池会让该线程保持存活keepAliveTime时间，超过该时间则会销毁该线程。
-                TimeUnit.SECONDS,                   //超时单位
-                new LinkedBlockingDeque<>(3),//阻塞队列
-                Executors.defaultThreadFactory(),   //线程工厂。创建线程的，一般不动
-                new ThreadPoolExecutor.AbortPolicy()//拒绝策略(有四种拒绝策略)
-                //new ThreadPoolExecutor.CallerRunsPolicy()    哪里来的就哪里去
-                //new ThreadPoolExecutor.DiscardPolicy()       队列满了，就丢掉任务，不会抛异常
-                //new ThreadPoolExecutor.DiscardOldestPolicy() 队列满了，尝试和最早的队列进行竞争，也不会抛出异常
+                2,          // 核心线程池大小
+                5,          // 最大核心线程池大小
+                3,          // 超时时间。当超过核心线程数的线程，线程池会让该线程保持存活keepAliveTime时间，超过该时间则会销毁该线程。
+                TimeUnit.SECONDS,             // 超时单位
+                new LinkedBlockingDeque<>(3), // 阻塞队列
+                Executors.defaultThreadFactory(),    // 线程工厂。创建线程的，一般不动
+                new ThreadPoolExecutor.AbortPolicy() // 拒绝策略(有四种拒绝策略)
+                //new ThreadPoolExecutor.CallerRunsPolicy()    // 哪里来的就哪里去
+                //new ThreadPoolExecutor.DiscardPolicy()       // 队列满了，就丢掉任务，不会抛异常
+                //new ThreadPoolExecutor.DiscardOldestPolicy() // 队列满了，尝试和最早的队列进行竞争，也不会抛出异常
 
                 /*这里要注意一下：
                      1、当你的排队策略为有界队列，并且配置的拒绝策略是ThreadPoolExecutor.AbortPolicy，
@@ -68,9 +68,9 @@ public class B七大参数及自定义线程池 {
          *    3、有限提交，用类似ArrayBlockingQueue有界队列。特点是可以保存超过核心线程的任务，并且队列也是有上限的。超过上限，新建线程（满了抛错）。更好地保护资源，防止崩溃，也是最常用的排队策略。
          */
         try {
-            for (int i = 1; i <= 9; i++) {//最大线程数=阻塞队列数+最大线程池大小
+            for (int i = 1; i <= 9; i++) { // 最大线程数 = 阻塞队列数 + 最大线程池大小
                 threadPoolExecutor.execute(()->{
-                    System.out.println(Thread.currentThread().getName()+"--OK");//运行可以发现同步线程数最大值是5
+                    System.out.println(Thread.currentThread().getName()+"--OK"); // 运行可以发现同步线程数最大值是5
                 });
             }
         } catch (Exception e) {

@@ -20,7 +20,7 @@ public class ConcurrentHashMap线程安全 {
                 System.out.println(map);
             },String.valueOf(i)).start();
         }
-        //会出现java.util.ConcurrentModificationException异常，并发修改异常
+        // 会出现java.util.ConcurrentModificationException异常，并发修改异常
 
         方案一：使用集合Properties,他是继承于Hashtable的，都是线程安全的集合
         方案二：Map<Object,String> map = Collections.synchronizedMap(new HashMap<>())
@@ -31,10 +31,10 @@ public class ConcurrentHashMap线程安全 {
     public static void main(String[] args) {
         Map<Object,String> map = new ConcurrentHashMap<>();
         for (int i = 0; i < 10; i++) {
-            new Thread(()->{
-                map.put(Thread.currentThread().getName(),UUID.randomUUID().toString().substring(0,5));
-                System.out.println(Thread.currentThread().getName()+"---"+map);
-            },String.valueOf(i)).start();
+            new Thread(() -> {
+                map.put( Thread.currentThread().getName(), UUID.randomUUID().toString().substring(0, 5) );
+                System.out.println(Thread.currentThread().getName() + "---" + map);
+            }, String.valueOf(i)).start();
         }
     }
 

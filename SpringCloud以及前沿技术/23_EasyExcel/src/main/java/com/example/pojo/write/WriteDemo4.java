@@ -1,6 +1,8 @@
 package com.example.pojo.write;
 
 import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.write.style.ColumnWidth;
+import com.alibaba.excel.annotation.write.style.ContentRowHeight;
 import com.alibaba.excel.converters.string.StringImageConverter;
 import com.alibaba.excel.metadata.data.WriteCellData;
 import lombok.Data;
@@ -15,6 +17,8 @@ import java.net.URL;
  * @apiNote TODO
  */
 @Data
+@ContentRowHeight(100)
+@ColumnWidth(15)
 public class WriteDemo4 {
 
     private File file;

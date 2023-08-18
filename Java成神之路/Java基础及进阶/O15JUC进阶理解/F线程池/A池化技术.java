@@ -1,7 +1,9 @@
 package O15JUC进阶理解.F线程池;
 
+import java.sql.Time;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class A池化技术 {
     /**
@@ -23,40 +25,44 @@ public class A池化技术 {
      */
     public static void main(String[] args) {
         //不建议使用这种形式去创建线程池
-        ExecutorService executorService1 = Executors.newSingleThreadExecutor();//Single单例线程
-        ExecutorService executorService2 = Executors.newFixedThreadPool(5);//固定线程，5个线程
-        ExecutorService executorService3 = Executors.newCachedThreadPool();//可伸缩线程，随用户需要去扩展线程数
+        ExecutorService executorService1 = Executors.newSingleThreadExecutor(); // Single单例线程
+        ExecutorService executorService2 = Executors.newFixedThreadPool(5); // 固定线程，5个线程
+        ExecutorService executorService3 = Executors.newCachedThreadPool(); // 可伸缩线程，随用户需要去扩展线程数
 
         try {
-            //可以在运行后发现线程启动最多只有一个
+            // 可以在运行后发现线程启动最多只有一个
             for (int i = 1; i <= 10; i++) {
-                executorService1.execute(()->{
-                    System.out.println(Thread.currentThread().getName()+"--OK");
+                executorService1.execute(() -> {
+                    System.out.println(Thread.currentThread().getName() + "--OK");
                 });
             }
 
+            TimeUnit.SECONDS.sleep(2);
             System.out.println("====================");
 
-            //可以在运行后发现线程启动最多有五个
+            // 可以在运行后发现线程启动最多有五个
             for (int i = 1; i <= 10; i++) {
-                executorService2.execute(()->{
-                    System.out.println(Thread.currentThread().getName()+"--OK");
+                executorService2.execute(() -> {
+                    System.out.println(Thread.currentThread().getName() + "--OK");
                 });
             }
 
+            TimeUnit.SECONDS.sleep(2);
             System.out.println("====================");
 
-            //可以在运行后发现线程启动最多有十个
+            // 可以在运行后发现线程启动最多有十个
             for (int i = 1; i <= 10; i++) {
-                executorService3.execute(()->{
-                    System.out.println(Thread.currentThread().getName()+"--OK");
+                executorService3.execute(() -> {
+                    System.out.println(Thread.currentThread().getName() + "--OK");
                 });
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            //线程池用完一定要记得关闭
+            // 线程池用完一定要记得关闭
             executorService1.shutdown();
+            executorService2.shutdown();
+            executorService3.shutdown();
         }
     }
 }

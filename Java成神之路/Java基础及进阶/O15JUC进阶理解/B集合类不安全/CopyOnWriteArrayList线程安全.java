@@ -31,10 +31,10 @@ public class CopyOnWriteArrayList线程安全 {
         List<String> list = new CopyOnWriteArrayList<>();
 
         for (int i = 0; i < 10; i++) {
-            new Thread(()->{
-                list.add(UUID.randomUUID().toString().substring(0,5));
+            new Thread(() -> {
+                list.add( UUID.randomUUID().toString().substring(0, 5) );
                 System.out.println(list);
-            },String.valueOf(i)).start();
+            }, String.valueOf(i)).start();
         }
     }
 }

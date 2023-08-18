@@ -33,18 +33,18 @@ public class A关于Volatile的详解 {
 
     public static void main(String[] args) {
         for (int i = 1; i <= 20; i++) {
-            new Thread(()->{
+            new Thread(() -> {
                 for (int j = 0; j < 1000; j++) {
                     add();
                 }
-            },"A").start();
+            }, "A").start();
         }
 
-        while (Thread.activeCount()>2){
+        while (Thread.activeCount() > 2){
             Thread.yield();
         }
 
-        System.out.println(Thread.currentThread().getName()+" "+num);//结果总是小于20000,没办法保证
+        System.out.println(Thread.currentThread().getName() + " " + num); // 结果总是小于20000,没办法保证
 
     }
 }
