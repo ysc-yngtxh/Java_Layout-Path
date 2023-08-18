@@ -8,7 +8,7 @@ public class Synchronized语句while {
     public static void main(String[] args) {
         Datas data = new Datas();
 
-        new Thread(()->{
+        new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 try {
                     data.demo1();
@@ -53,23 +53,23 @@ public class Synchronized语句while {
 
 class Datas{
 
-    int num=0;
+    int num = 0;
 
     public synchronized void demo1() throws InterruptedException {
-        while (num==0){
+        while (num == 0){
             this.wait();
         }
         num--;
-        System.out.println(Thread.currentThread().getName()+"---num值---"+num);
+        System.out.println(Thread.currentThread().getName() + "---num值---" + num);
         this.notifyAll();
     }
 
     public synchronized void demo2() throws InterruptedException {
-        while(num!=0){
+        while(num != 0){
             this.wait();
         }
         num++;
-        System.out.println(Thread.currentThread().getName()+"---num值---"+num);
+        System.out.println(Thread.currentThread().getName() + "---num值---" + num);
         this.notifyAll();
     }
 }

@@ -3,8 +3,8 @@ package O15JUC进阶理解.A关于lock锁.Lock8锁;
 import java.util.concurrent.TimeUnit;
 
 /**
- *情况六：一个类中两方法都有static synchronized关键字，这个时候我在main方法中创建两对象，并分别去执行A和B线程。。
- *       这个时候先打印出来的是”发短信“还是”打电话“
+ *情况六：一个类中都加上static synchronized关键字
+ *       这个时候我在main方法中创建两对象，并分别去执行A和B线程。。。 先打印出来的是 "发短信" 还是 "打电话" ？
  */
 public class f六 {
 
@@ -13,26 +13,28 @@ public class f六 {
         Test6 test1 = new Test6();
         Test6 test2 = new Test6();
 
-        new Thread(()->{
+        // 使用Test6静态方法 Send()
+        new Thread(() -> {
             test1.Send();
-        },"A").start();
+        }, "A").start();
 
         try {
-            TimeUnit.SECONDS.sleep(1);  //睡眠，不再使用Thread.sleep()
+            TimeUnit.SECONDS.sleep(1);  // 睡眠，不再使用Thread.sleep()
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        new Thread(()->{
+        // 使用Test6对象正常方法 Call()
+        new Thread(() -> {
             test2.Call();
-        },"B").start();
+        }, "B").start();
     }
 }
 
 class Test6{
     public static synchronized void Send(){
         try {
-            TimeUnit.SECONDS.sleep(2);  //睡眠，不再使用Thread.sleep()
+            TimeUnit.SECONDS.sleep(2);  // 睡眠，不再使用Thread.sleep()
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -45,5 +47,5 @@ class Test6{
 }
 
 /**
- * 回答：先打印的”发短信“，还是那句话，无论怎么操作，加了static关键字的那么，锁只有一把（类锁），线程需要排队执行。
+ * 回答：先打印的"发短信"，还是那句话，无论怎么操作，加了static关键字的那么，锁只有一把（类锁），线程需要排队执行。
  */

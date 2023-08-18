@@ -56,20 +56,20 @@ class Data{
     int num=0;
 
     public synchronized void demo1() throws InterruptedException {
-        if(num==0){
+        if(num == 0){
             this.wait();
         }
         num--;
-        System.out.println(Thread.currentThread().getName()+"---num值---"+num);
+        System.out.println(Thread.currentThread().getName() + "---num值---" + num);
         this.notifyAll();
     }
 
     public synchronized void demo2() throws InterruptedException {
-        if(num!=0){
+        if(num != 0){
             this.wait();
         }
         num++;
-        System.out.println(Thread.currentThread().getName()+"---num值---"+num);
+        System.out.println(Thread.currentThread().getName() + "---num值---" + num);
         this.notifyAll();
     }
 }

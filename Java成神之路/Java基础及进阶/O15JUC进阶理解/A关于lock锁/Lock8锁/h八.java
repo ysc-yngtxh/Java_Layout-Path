@@ -3,8 +3,9 @@ package O15JUC进阶理解.A关于lock锁.Lock8锁;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 情况八：一个类中两方法，一方法被static synchronized修饰，一个方法被synchronized修饰。换句话说一个是静态同步方法，一个是普通同步方法
- *        这个时候在main方法中创建两对象，并分别去执行A和B线程。先打印出来的是”发短信“还是”打电话“
+ * 情况八：一个类中两方法，一方法被static synchronized修饰，一个方法被synchronized修饰。
+ *       换句话说一个是静态同步方法，一个是普通同步方法
+ *       这个时候在main方法中创建两对象，并分别去执行A和B线程。先打印出来的是 "发短信" 还是 "打电话" ？
  */
 public class h八 {
 
@@ -13,26 +14,28 @@ public class h八 {
         Test8 test1 = new Test8();
         Test8 test2 = new Test8();
 
-        new Thread(()->{
+        // 使用Test8的静态方法 Send()
+        new Thread(() -> {
             test1.Send();
-        },"A").start();
+        }, "A").start();
 
         try {
-            TimeUnit.SECONDS.sleep(1);  //睡眠，不再使用Thread.sleep()
+            TimeUnit.SECONDS.sleep(1);  // 睡眠，不再使用Thread.sleep()
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        new Thread(()->{
+        // 使用Test8对象正常方法 Call()
+        new Thread(() -> {
             test2.Call();
-        },"B").start();
+        }, "B").start();
     }
 }
 
 class Test8{
     public static synchronized void Send(){
         try {
-            TimeUnit.SECONDS.sleep(2);  //睡眠，不再使用Thread.sleep()
+            TimeUnit.SECONDS.sleep(2);  // 睡眠，不再使用Thread.sleep()
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -45,6 +48,6 @@ class Test8{
 }
 
 /**
- * 先打印的是”打电话“。一个是静态同步方法，锁是类锁。一个是普通同步方法，锁是普通锁。
- * 不是同一把锁的情况下，先执行的是”打电话“
+ * 先打印的是"打电话"。一个是静态同步方法，锁是类锁。一个是普通同步方法，锁是普通锁。
+ * 不是同一把锁的情况下，还是不同的对象，所以先执行的是"打电话"
  */

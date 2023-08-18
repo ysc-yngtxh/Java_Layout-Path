@@ -3,27 +3,29 @@ package O15JUC进阶理解.A关于lock锁.Lock8锁;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 情况五：一个类中都加上static synchronized关键字，这个时候执行main方法，先打印出来的是”发短信“还是”打电话“
+ * 情况五：一个类中都加上static synchronized关键字，这个时候我在main方法中创建一个对象，先打印出来的是 "发短信" 还是 "打电话" ？
  */
 public class e五 {
 
     public static void main(String[] args) {
 
-        Test5 test = new Test5();
+        Test5 test5 = new Test5();
 
-        new Thread(()->{
-            test.Send();
-        },"A").start();
+        // 使用Test5的静态方法 Send()
+        new Thread(() -> {
+            Test5.Send();
+        }, "A").start();
 
         try {
-            TimeUnit.SECONDS.sleep(1);  //睡眠，不再使用Thread.sleep()
+            TimeUnit.SECONDS.sleep(1);  // 睡眠，不再使用Thread.sleep()
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        new Thread(()->{
-            test.Call();
-        },"B").start();
+        // 使用Test5的静态方法 Call()
+        new Thread(() -> {
+            test5.Call();
+        }, "B").start();
     }
 }
 
@@ -43,6 +45,6 @@ class Test5{
 }
 
 /**
- * 回答：先执行的是”发短信“。因为不论是A线程还是B线程执行的方法都加上了static关键字，那么这个时候也还是一把锁，但是这把锁是类锁。
- *      我们知道，类锁只有一把。线程在加锁情况下又是需要排队的，所以先执行的是”发短信“
+ * 回答：先执行的是"发短信"。因为不论是A线程还是B线程执行的方法都加上了static关键字，那么这个时候也还是一把锁，但是这把锁是类锁。
+ *      我们知道，类锁只有一把。线程在加锁情况下又是需要排队的，所以先执行的是"发短信"
  */

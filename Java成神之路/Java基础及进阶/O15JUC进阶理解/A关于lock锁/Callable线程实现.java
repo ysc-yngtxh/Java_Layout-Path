@@ -17,10 +17,10 @@ public class Callable线程实现 {
         FutureTask<Integer> task = new FutureTask<>(demo);
 
         new Thread(task,"A").start();
-        new Thread(task,"B").start();//这里创建两个Demo对象并不会让结果出现两次。可以理解为结果缓存
+        new Thread(task,"B").start(); // 这里创建两个Demo对象并不会让结果出现两次。可以理解为结果缓存
 
-        //通过task对象的get方法获取返回结果.
-        //但是这一步会产生阻塞，因为它会去等待结果的返回。如果Demo类中的Call()方法被睡眠了或者其他异常，等待时间过长就会阻塞
+        // 通过task对象的get方法获取返回结果.
+        // 但是这一步会产生阻塞，因为它会去等待结果的返回。如果Demo类中的Call()方法被睡眠了或者其他异常，等待时间过长就会阻塞
         Integer o = task.get();
         System.out.println(o);
 
