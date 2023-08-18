@@ -13,9 +13,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 /**
- * 品牌表(Brand)表控制层
- *
- * @author makejava
+ * @author 游家纨绔
  * @since 2023-08-18 23:15:44
  */
 @RestController
