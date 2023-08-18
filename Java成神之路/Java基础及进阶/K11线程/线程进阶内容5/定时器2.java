@@ -26,33 +26,31 @@ import java.util.TimerTask;
 public class 定时器2 {
     public static void main(String[] args) throws ParseException {
 
-        //创建定时器对象
+        // 创建定时器对象
         Timer timer = new Timer();
-        //Timer timer = new Timer(true);  //守护线程的方式
+        //Timer timer = new Timer(true);  // 守护线程的方式
 
-        //指定定时任务
-        //timer.schedule(定时任务,开始时间,间隔多久执行时间);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SS");
-        Date firstTime = sdf.parse("2021-7-08 16:57:00 00");//使用parse方法将日期字符串String,转换成Date类型.
-        timer.schedule(new LongTimeTask(),firstTime,1000*10);
+        // 指定定时任务：timer.schedule(定时任务, 开始时间, 间隔多久执行时间);
+        timer.schedule(new LongTimeTask(), new Date(), 1000*10);
     }
 }
 
-//编写一个定时任务类
+// 编写一个定时任务类
 class LongTimeTask extends TimerTask {
 
-
-    //一个定时的日志
+    // 一个定时的日志
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public void run() {
         try{
-            PrintStream out = new PrintStream(new FileOutputStream("log2",true));
-            //改变输出方向，不再是控制台输出
+            // 改变输出方向，不再是控制台输出
+            PrintStream out = new PrintStream(new FileOutputStream("log2", true));
             System.setOut(out);
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SS");
-            String strTime = sdf.format(new Date());    //使用format方法将Date类型转换成日期字符串String
-            System.out.println(strTime + ":成功完成了一次数据备份！");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS");
+            // 使用format方法将Date类型转换成日期字符串String
+            String strTime = sdf.format(new Date());
+            System.out.println(strTime + ":成功完成了一次数据备份!");
         } catch(FileNotFoundException e) {
             e.printStackTrace();
         }

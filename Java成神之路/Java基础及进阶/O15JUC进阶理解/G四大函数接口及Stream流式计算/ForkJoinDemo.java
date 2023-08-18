@@ -1,5 +1,7 @@
 package O15JUC进阶理解.G四大函数接口及Stream流式计算;
 
+import com.sun.prism.paint.Stop;
+
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
@@ -15,8 +17,8 @@ public class ForkJoinDemo extends RecursiveTask<Long> {
      * 求和计算的任务！
      * 3000   6000(ForkJoin)  9000(Stream并行流)
      *如何使用ForkJoin
-     *    1、forkjoinPool  通过它来执行
-     *    2、计算任务forkjoinPoll,execute(ForkJoinTask task)
+     *    1、forkJoinPool  通过它来执行
+     *    2、计算任务forkJoinPoll,execute(ForkJoinTask task)
      *    3、计算类要继承ForkJoinTask
      */
     private Long start;
@@ -31,19 +33,19 @@ public class ForkJoinDemo extends RecursiveTask<Long> {
     //计算方法
     @Override
     protected Long compute() {
-        if ((end-start)<temp){
-            Long sum = 0L;
+        if ((end-start) < temp){
+            long sum = 0L;
             for(Long i = start; i <= end; i++){
                 sum += i;
             }
             return sum;
-        }else{   //forkjoin
-            Long middle = (start +end)/2;//中间值
-            ForkJoinDemo task1 = new ForkJoinDemo(start,middle);
-            task1.fork();//拆分任务，把任务压入线程队列
-            ForkJoinDemo task2 = new ForkJoinDemo(middle+1,end);
-            task2.fork();//拆分任务，把任务压入线程队列
-            return task1.join()+task2.join();
+        }else{
+            long middle = (start + end)/2L; // 中间值
+            ForkJoinDemo task1 = new ForkJoinDemo(start, middle);
+            task1.fork(); // 拆分任务，把任务压入线程队列
+            ForkJoinDemo task2 = new ForkJoinDemo(middle+1, end);
+            task2.fork(); // 拆分任务，把任务压入线程队列
+            return task1.join() + task2.join();
         }
     }
 }
@@ -54,31 +56,31 @@ class Test{
         test2();
         test3();
     }
-    //普通程序员
+    // 普通程序员
     public static void test1(){
-        Long sum =0L;
+        long sum = 0L;
         Long start = System.currentTimeMillis();
-        for (Long i = 0L; i < 10_0000_0000; i++) {
+        for (long i = 0L; i < 10_0000_0000L; i++) {
             sum += i;
         }
         Long end = System.currentTimeMillis();
-        System.out.println("sum="+sum+"时间："+(end-start));
+        System.out.println("sum=" + sum + " => for循环 执行所需时间：" + (end-start) + "毫秒");
     }
-    //会使用forkjoin
+    // 高级程序员：会使用ForkJoin
     public static void test2() throws ExecutionException, InterruptedException {
         Long start = System.currentTimeMillis();
         ForkJoinPool forkJoinPool = new ForkJoinPool();
-        ForkJoinTask<Long> task = new ForkJoinDemo(0L,10_0000_0000L);
+        ForkJoinTask<Long> task = new ForkJoinDemo(0L, 10_0000_0000L);
         ForkJoinTask<Long> submit = forkJoinPool.submit(task);
         Long sum = submit.get();
         Long end = System.currentTimeMillis();
-        System.out.println("sum="+sum+" 时间："+(end-start));
+        System.out.println("sum=" + sum + " => ForkJoin 执行所需时间：" + (end-start) + "毫秒");
     }
-    //使用Stream并行流
+    // 超级程序员：使用Stream并行流
     public static void test3(){
         Long start = System.currentTimeMillis();
-        Long sum = LongStream.rangeClosed(0L,10_0000_0000).parallel().reduce(0,Long::sum);
+        long sum = LongStream.rangeClosed(0L, 10_0000_0000L).parallel().reduce(0, Long::sum);
         Long end = System.currentTimeMillis();
-        System.out.println("sum="+sum+"时间："+(end-start));
+        System.out.println("sum=" + sum + " => Stream并行流 执行所需时间：" + (end-start) + "毫秒");
     }
 }

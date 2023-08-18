@@ -1,11 +1,7 @@
 package L12反射.B2获取Class实例化对象;
 
-import A1抽象类.C;
-import com.sun.org.apache.bcel.internal.util.ClassPath;
-
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
 

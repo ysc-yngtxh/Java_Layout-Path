@@ -26,21 +26,21 @@ public class A1日期的处理 {
         ss       秒
         SS       毫秒(毫秒3位，最高999.1000毫秒表示1秒)
          */
-        //SimpleDateFormat是java.text包下的。专门负责日期格式化
-        //Date类型转换成日期字符串String
+        // SimpleDateFormat是java.text包下的。专门负责日期格式化
+        // Date类型转换成日期字符串String
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss SSS");
         String nowTimeStr = sdf.format(nowTime);  //使用format方法将Date类型转换成日期字符串String
         System.out.println(nowTimeStr);
 
         System.out.println("=========================================================================================");
 
-        //假设现在有一个日期字符串String，怎么转换成Date类型？
+        // 假设现在有一个日期字符串String，怎么转换成Date类型？
         String time = "2020-05-26  08:08:08 888";
-        //注意：字符串的日期格式和SimpleDateFormat对象指定的日期格式要一致。不然会出现异常：java.text.ParseException
+        // 注意：字符串的日期格式和SimpleDateFormat对象指定的日期格式要一致。不然会出现异常：java.text.ParseException
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss SSS");
-        Date dateTime = sdf1.parse(time);   //使用parse方法将日期字符串String,转换成Date类型.
+        Date dateTime = sdf1.parse(time);   // 使用parse方法将日期字符串String,转换成Date类型.
         System.out.println(dateTime);
-        //Tue May 26 08:08:08 CST 2020
-        //Date类重写了toString()方法，所以输出
+        // Tue May 26 08:08:08 CST 2020
+        // Date类重写了toString()方法，所以输出
     }
 }

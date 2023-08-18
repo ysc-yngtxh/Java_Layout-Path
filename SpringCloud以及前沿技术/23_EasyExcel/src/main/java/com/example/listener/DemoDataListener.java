@@ -59,6 +59,7 @@ public class DemoDataListener<T> implements ReadListener<T> {
 
     // 解析额外的表格信息：批注、超链接、图表、合并单元格信息读取等
     // 由于是流式读取，没法在读取到单元格数据的时候直接读取到额外信息，所以只能最后通知哪些单元格有哪些额外信息
+    // 在 invoke() 方法之后执行，在 doAfterAllAnalysed() 之前执行
     @Override
     public void extra(CellExtra extra, AnalysisContext context) {
         // log.info("读取到了一条额外信息:{}", JSON.toJSONString(extra));
@@ -106,8 +107,11 @@ public class DemoDataListener<T> implements ReadListener<T> {
         // 如果是某一个单元格的转换异常 能获取到具体行号
         // 如果要获取头的信息 配合invokeHeadMap使用
         if (exception instanceof ExcelDataConvertException excelDataConvertException) {
-            log.error("第{}行，第{}列解析异常，数据为:{}", excelDataConvertException.getRowIndex(),
-                    excelDataConvertException.getColumnIndex(), excelDataConvertException.getCellData());
+            log.error("第{}行，第{}列解析异常，数据为:{}"
+                    , excelDataConvertException.getRowIndex()
+                    , excelDataConvertException.getColumnIndex()
+                    , excelDataConvertException.getCellData().getStringValue()
+            );
         }
     }
 }

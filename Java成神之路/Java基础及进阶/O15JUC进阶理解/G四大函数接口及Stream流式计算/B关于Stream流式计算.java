@@ -21,9 +21,9 @@ public class B关于Stream流式计算 {
         User user4 = new User(4,"d1",24);
         User user5 = new User(6,"e1",25);
         User user6 = new User(6,"e1",25);
-        //Arrays.asList得到的List的长度是不可改变的，当你向这个List添加或删除一个元素时（例如 list.add("d");）程序就会抛出异常
-        //如果你的List只是用来遍历，就用Arrays.asList()。
-        //如果你的List还要添加或删除元素，还是乖乖地new一个java.util.ArrayList，然后一个一个的添加元素。
+        // Arrays.asList得到的List的长度是不可改变的，当你向这个List添加或删除一个元素时（例如 list.add("d");）程序就会抛出异常
+        // 如果你的List只是用来遍历，就用Arrays.asList()。
+        // 如果你的List还要添加或删除元素，还是乖乖地new一个java.util.ArrayList，然后一个一个的添加元素。
         List<User> list = Arrays.asList(user1, user2, user3, user4, user5, user6);
 
 
@@ -55,7 +55,7 @@ public class B关于Stream流式计算 {
 
         List<Integer> lists = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24);
 
-        //Stream<String> stream = list.stream(); //获取一个顺序流
+        // Stream<String> stream = list.stream(); // 获取一个顺序流
         Integer v2 = lists.stream().reduce(0,
                 (x1, x2) -> {
                     System.out.println("stream accumulator: x1:" + x1 + "  x2:" + x2);
@@ -65,11 +65,11 @@ public class B关于Stream流式计算 {
                     System.out.println("stream combiner: x1:" + x1 + "  x2:" + x2);
                     return x1 * x2;
                 });
-        //(0-1,0-2,0-3,0-4,0-5,0-6,0-7,0-8,0-9,......)
+        // (0-1, 0-2, 0-3, 0-4, 0-5, 0-6, 0-7, 0-8, 0-9, ......)
         System.out.println(v2);
 
-        //Stream<String> parallelStream = list.parallelStream(); //获取一个并行流
-        //经过测试，当元素个数小于24时，并行时线程数等于元素个数，当大于等于24时，并行时线程数为16
+        // Stream<String> parallelStream = list.parallelStream(); // 获取一个并行流
+        // 经过测试，当元素个数小于24时，并行时线程数等于元素个数，当大于等于24时，并行时线程数为16
         Integer v3 = lists.parallelStream().reduce(0,
                 (x1, x2) -> {
                     System.out.println("parallelStream accumulator: x1:" + x1 + "  x2:" + x2);

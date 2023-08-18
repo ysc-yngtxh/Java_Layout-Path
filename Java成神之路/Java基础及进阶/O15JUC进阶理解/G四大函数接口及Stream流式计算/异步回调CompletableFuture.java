@@ -4,6 +4,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+@SuppressWarnings("CallToPrintStackTrace")
 public class 异步回调CompletableFuture {
     /**
      * 异步调用：CompletableFuture
@@ -13,36 +14,37 @@ public class 异步回调CompletableFuture {
         /**
          * 没有返回值的runAsync异步回调Ajax
          */
-        CompletableFuture<Void> completableFuture = CompletableFuture.runAsync(()->{
+        CompletableFuture<Void> completableFuture = CompletableFuture.runAsync( () -> {
             try {
                 TimeUnit.SECONDS.sleep(5);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println(Thread.currentThread().getName()+"runAsync=>Void");
+            System.out.println(Thread.currentThread().getName()+" ---- runAsync => Void");
         });
 
         System.out.println("11111");
 
-        completableFuture.get();  //获取阻塞执行结果
+        completableFuture.get();  // 获取阻塞执行结果
 
         /**
          * 有返回值的supplyAsync异步回调 Ajax，
          * 成功和失败的回调
          * 返回的是错误信息
         */
-        CompletableFuture<Integer> completableFuture1 =CompletableFuture.supplyAsync(()->{
+        CompletableFuture<Integer> completableFuture1 = CompletableFuture.supplyAsync( () -> {
             System.out.println("Hello World!");
-            int i=10/0;
+            int i = 10/0;
             return 2021;
         });
 
-        completableFuture1.whenComplete( (t,u)->{
-            System.out.println("t=>"+t);
-            System.out.println("u=>"+u);
-        }).exceptionally( (e)->{
+        completableFuture1.whenComplete( (t,u) -> {
+            // t:表示执行成功的返回值  u:表示执行失败的报错信息
+            System.out.println("t => " + t);
+            System.out.println("u => " + u);
+        }).exceptionally( (e) -> {
             System.out.println(e.getMessage());
             return 233;
-        }).get();
+        });
     }
 }
