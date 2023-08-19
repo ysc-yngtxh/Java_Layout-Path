@@ -34,6 +34,7 @@ public class B七大参数及自定义线程池 {
                                           new SynchronousQueue<Runnable>());
        }
      */
+
     public static void main(String[] args) {
         // 自定义线程池！工作中使用ThreadPoolExecutor
         ExecutorService threadPoolExecutor = new ThreadPoolExecutor(

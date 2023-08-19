@@ -90,9 +90,9 @@ public class SpringBatchConfig {
     }
 
 
-    public static int PAGESIZE = 1000;   // mybatis分页读取数据，跟chunkSize 一样
-    public static int RANGE = 10000;  // 每个分区读取数据范围(理解为个数)
-    public static int GRIDSIZE = 50;  // 分区个数
+    public static int PAGESIZE = 1000; // mybatis分页读取数据，跟chunkSize 一样
+    public static int RANGE = 10000;   // 每个分区读取数据范围(理解为个数)
+    public static int GRIDSIZE = 50;   // 分区个数
 
     // TODO 工作二：读数据-从临时表 employee_temp 表数据读到 employee 表中
     @Bean
@@ -120,7 +120,7 @@ public class SpringBatchConfig {
     public MyBatisBatchItemWriter<Employee> dbToDBItemWriter(){
         MyBatisBatchItemWriter<Employee> itemWriter = new MyBatisBatchItemWriter<>();
         itemWriter.setSqlSessionFactory(sqlSessionFactory);
-        itemWriter.setStatementId("com.example.dao.EmployeeDao.save");  //操作sql
+        itemWriter.setStatementId("com.example.dao.EmployeeDao.save");  // 操作sql
         return itemWriter;
     }
     // 文件分区处理器-处理分区

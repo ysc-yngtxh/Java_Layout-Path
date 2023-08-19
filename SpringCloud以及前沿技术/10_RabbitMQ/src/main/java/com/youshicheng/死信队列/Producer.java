@@ -1,4 +1,4 @@
-package com.youshicheng.死信;
+package com.youshicheng.死信队列;
 
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;

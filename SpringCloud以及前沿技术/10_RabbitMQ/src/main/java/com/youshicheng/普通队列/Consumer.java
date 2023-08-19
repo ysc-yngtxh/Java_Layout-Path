@@ -1,9 +1,8 @@
-package com.youshicheng.普通;
+package com.youshicheng.普通队列;
 
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 消费者

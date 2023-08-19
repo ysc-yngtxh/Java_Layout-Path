@@ -1,4 +1,4 @@
-package com.youshicheng.普通;
+package com.youshicheng.普通队列;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
