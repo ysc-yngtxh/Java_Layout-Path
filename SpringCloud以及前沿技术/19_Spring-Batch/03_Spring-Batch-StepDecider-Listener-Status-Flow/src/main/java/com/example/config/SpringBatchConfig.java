@@ -166,11 +166,11 @@ public class SpringBatchConfig {
 
     /**
      * TODO
-     *   1、on方法表示条件，上一个步骤返回值，匹配指定的字符串，满足后执行后续to步骤
-     *   2、*为通配符，表示能匹配任意返回值
-     *   3、from表示从某个步骤开始进行条件判断
+     *   1、on() 方法表示条件，上一个步骤返回值，匹配指定的字符串，满足后执行后续to步骤
+     *   2、* 为通配符，表示能匹配任意返回值
+     *   3、from() 表示从某个步骤开始进行条件判断
      *   4、分支判断结束，流程以end方法结束，表示if/else逻辑结束
-     *   5、on方法中字符串取值于 ExitStatus 类常量(有五种类型的常量)，当然也可以自定义
+     *   5、on() 方法中字符串取值于 ExitStatus 类常量(有五种类型的常量)，当然也可以自定义
      */
     @Bean
     public Job job2(){
@@ -190,7 +190,7 @@ public class SpringBatchConfig {
     public Job job3(){
         return new JobBuilder("Custom Step Condition Branch Control", jobRepository)
                 .start(executorStep())
-                // 这里有一个坑点：就是不能使用使用new CustomStatusDecider()的方式
+                // 这里有一个坑点：就是不能使用new CustomStatusDecider()的方式
                 // 原因在于：每一次new出来的都是不同对象，那么from就找不到相应执行过的步骤，从而无效
                 .next(customStatusDecider())
                 .from(customStatusDecider()).on("A").to(executorStep())

@@ -19,7 +19,7 @@ public class ErrorItemReaderListener implements ItemReadListener<User1> {
 
     @Override
     public void afterRead(User1 item) {
-        System.err.println("读取文件中的监听器被执行"+item);
+        System.err.println("读取文件中的监听器被执行" + item);
     }
 
     @Override

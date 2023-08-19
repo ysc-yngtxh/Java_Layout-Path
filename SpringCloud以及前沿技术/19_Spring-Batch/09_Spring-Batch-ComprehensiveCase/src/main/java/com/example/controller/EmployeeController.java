@@ -58,8 +58,10 @@ public class EmployeeController {
         employeeService.truncateTemp(); // 清空数据运行多次执行
 
         // 需要多次执行，run.id 必须重写之前，再重构一个新的参数对象
-        JobParameters jobParameters = new JobParametersBuilder(new JobParameters(), jobExplorer)
-                .getNextJobParameters(csvToDBJob).toJobParameters();
+        JobParameters jobParameters =
+                new JobParametersBuilder(new JobParameters(), jobExplorer)
+                        .getNextJobParameters(csvToDBJob)
+                        .toJobParameters();
         JobExecution run = jobLauncher.run(csvToDBJob, jobParameters);
         return run.getId().toString();
     }

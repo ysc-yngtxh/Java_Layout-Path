@@ -187,7 +187,7 @@ public class SpringBatchConfig {
                 // 执行sql查询数据，将返回的数据以游标形式一条一条读
                 .sql("select * from user where age < ? and name like ?")
                 // 拼接参数
-                .preparedStatementSetter(new ArgumentPreparedStatementSetter(new Object[]{16, "%fei%"}))
+                .preparedStatementSetter(new ArgumentPreparedStatementSetter(new Object[]{20, "%敏%"}))
                 // 数据库独处数据跟用户对象属性一一映射
                 .rowMapper(new UserRowMapper())
                 .build();
@@ -237,7 +237,7 @@ public class SpringBatchConfig {
                 // 分页逻辑
                 .queryProvider(pagingQueryProvider())
                 // 条件
-                .parameterValues(Map.of("age", 16))
+                .parameterValues(Map.of("age", 20))
                 // 定义读取每页数据的条数
                 .pageSize(10)
                 // 数据库读取数据跟用户对象属性一一映射

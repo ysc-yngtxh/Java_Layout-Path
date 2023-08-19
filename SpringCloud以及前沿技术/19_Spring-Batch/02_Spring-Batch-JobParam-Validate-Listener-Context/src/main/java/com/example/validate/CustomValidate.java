@@ -15,7 +15,7 @@ public class CustomValidate implements JobParametersValidator {
     public void validate(JobParameters parameters) throws JobParametersInvalidException {
 
         assert parameters != null;
-        String parametersString = parameters.getString("name");
+        String parametersString = parameters.getLocalDateTime("name").toString();
 
         if (!StringUtils.hasText(parametersString)) {
             throw new JobParametersInvalidException("批处理name参数不能为null或者空");

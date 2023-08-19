@@ -39,7 +39,10 @@ public class JobExecutionApplication {
     @Bean
     public CommandLineRunner commandLineRunner(){
         return args -> {
-            JobParameters jobParameters = new JobParametersBuilder().addLocalDateTime("CurrentTime", LocalDateTime.now()).toJobParameters();
+            JobParameters jobParameters =
+                    new JobParametersBuilder()
+                            .addLocalDateTime("CurrentTime", LocalDateTime.now())
+                            .toJobParameters();
             jobLauncher.run(job5, jobParameters);
         };
     }

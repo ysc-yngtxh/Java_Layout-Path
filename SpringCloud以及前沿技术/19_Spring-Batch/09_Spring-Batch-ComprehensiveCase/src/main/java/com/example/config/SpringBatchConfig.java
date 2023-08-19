@@ -55,8 +55,8 @@ public class SpringBatchConfig {
         return new FlatFileItemReaderBuilder<Employee>()
                 .name("employeeCSVItemReader")
                 .saveState(false) // 防止状态被覆盖
-                .resource(new PathResource(new File(path, "employee.csv").getAbsolutePath()))
-                .delimited()
+                .resource(new PathResource(new File(System.getProperty("user.dir") + path, "employee.csv").getAbsolutePath()))
+                .delimited().delimiter(",")
                 .names("id", "name", "age", "sex")
                 .targetType(Employee.class)
                 .build();
@@ -66,7 +66,7 @@ public class SpringBatchConfig {
     public MyBatisBatchItemWriter<Employee> cvsToDBItemWriter() {
         MyBatisBatchItemWriter<Employee> itemWriter = new MyBatisBatchItemWriter<>();
         itemWriter.setSqlSessionFactory(sqlSessionFactory); // 需要指定sqlSession工厂
-        // 指定要操作sql语句，路径id为：EmployeeDao.xml定义的sql语句id
+        // 指定要操作sql语句的路径id：EmployeeDao.xml定义的sql语句id
         itemWriter.setStatementId("com.example.dao.EmployeeDao.saveTemp");  // 操作sql
         return itemWriter;
     }

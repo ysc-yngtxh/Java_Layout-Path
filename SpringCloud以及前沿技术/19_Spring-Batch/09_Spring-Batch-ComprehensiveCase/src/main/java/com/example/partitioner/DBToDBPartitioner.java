@@ -15,7 +15,7 @@ import java.util.Map;
  */
 @SuppressWarnings("NullableProblems")
 public class DBToDBPartitioner implements Partitioner {
-    //约定分50个区， 每个区10000个数据
+    // 约定分50个区， 每个区10000个数据
     @Override
     public Map<String, ExecutionContext> partition(int gridSize) {
         String text = "----DBToDBPartitioner---第%s分区-----开始：%s---结束：%s---数据量：%s--------------";

@@ -3,6 +3,7 @@ package com.example;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobParameter;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.explore.JobExplorer;
@@ -13,6 +14,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDateTime;
+import java.util.Map;
+import java.util.Objects;
 
 @SpringBootApplication
 @RequiredArgsConstructor
@@ -22,7 +25,10 @@ public class SpringBatchValidateApplication {
         SpringApplication.run(SpringBatchValidateApplication.class, args);
     }
 
+    // JobLauncher - 作业启动器
     private final JobLauncher jobLauncher;
+
+    // JobExplorer - 用于查找以前的作业参数信息的作业资源管理器
     private final JobExplorer jobExplorer;
 
     private final Job job1;
@@ -40,26 +46,41 @@ public class SpringBatchValidateApplication {
     public CommandLineRunner commandLineRunner1() {
         return args -> {
 
-            // job5,job6需要多次执行，run.id 必须在重写之前，重构一个新的参数对象给执行的run()方法里
-            JobParameters newJobParameters =
-                    // 新建一个空的参数建造者对象 JobParametersBuilder
-                    new JobParametersBuilder(new JobParameters(), jobExplorer)
-                            // 在这个空的参数建造者对象里获取工作job5最后执行过的参数对象信息，并且依据自增参数逻辑，获取更新的参数
-                            .getNextJobParameters(job5)
-                            // 将 参数建造者对象 JobParametersBuilder 转换成 JobParameters 类型
+            // 作业参数生成器 JobParametersBuilder()
+            // 重构一个作业参数 key为"CurrentTime" value为'当前时间' 的生成器
+            JobParameters jobParameters1 =
+                    new JobParametersBuilder()
+                            .addLocalDateTime("name", LocalDateTime.now())
                             .toJobParameters();
-            JobExecution jobExecution = jobLauncher.run(job5, newJobParameters);
+            JobExecution execution1 = jobLauncher.run(job1, jobParameters1);
+            Object currentTime = Objects.requireNonNull(execution1.getJobParameters().getParameter("name")).getValue();
+            System.out.println("参数name值：" + currentTime);
+            Long jobInstanceId1 = execution1.getJobId();
+            System.out.println("该作业执行的工作实例Id：" + jobInstanceId1);
 
-            Long newRunId = jobExecution.getJobId();
-            long previousRunId = newRunId - 1;
 
-            System.out.println("New run id: " + newRunId);
-            System.out.println("Previous run id: " + previousRunId);
+            System.out.println("=========================================================================");
 
-            // 重构一个当前毫秒时间的参数值去运行job
-            JobParameters jobParameters = new JobParametersBuilder().addLocalDateTime("CurrentTime", LocalDateTime.now()).toJobParameters();
-            jobLauncher.run(job9, jobParameters);
 
+            // 作业参数生成器 JobParametersBuilder(JobExplorer jobExplorer)
+            // 重构一个能 查找以前对应的作业参数信息 的生成器
+            JobParameters jobParameters2 =
+                    new JobParametersBuilder( jobExplorer )
+                            // 在这个作业参数生成器里 获取指定作业最后执行过的参数对象信息，并且依据增量参数逻辑，获取更新的参数
+                            .getNextJobParameters( job6 )
+                            // 将 参数生成器对象 JobParametersBuilder 转换成 JobParameters 类型
+                            .toJobParameters();
+            JobExecution execution2 = jobLauncher.run(job6, jobParameters2);
+            Map<String, JobParameter<?>> parameters = execution2.getJobParameters().getParameters();
+            System.out.println("作业参数信息: " + parameters);
+            Long newJobInstanceId = execution2.getJobId();
+            System.out.println("New JobInstanceId: " + newJobInstanceId);
+
+
+            System.out.println("=========================================================================");
+
+
+            jobLauncher.run(job9, jobParameters1);
         };
     }
 

@@ -68,7 +68,7 @@ public class SpringBatchConfig {
 
                 // 获取批处理执行的参数方法一：
                 Map<String, Object> parameters = chunkContext.getStepContext().getJobParameters();
-                System.out.println(parameters.get("run.id"));
+                System.out.println("tasklet方法中获取参数: " + parameters);
 
                 // 获取批处理执行的参数方法二：
                 // 需要加上@StepScope注解，并且给上相对应的 @Value("#{jobParameters['name']}" 赋值
@@ -221,7 +221,7 @@ public class SpringBatchConfig {
         return new Tasklet() {
             @Override
             public RepeatStatus execute(@NonNull StepContribution contribution, @NonNull ChunkContext chunkContext) throws Exception {
-                System.out.println("Spring Batch 执行 Job1");
+                System.out.println("Spring Batch 获取作业及步骤上下文 Job1");
 
                 /**
                   TODO 通过获取(Job或者Step)上下文来获取同一个组件中的共享数据。
@@ -235,7 +235,7 @@ public class SpringBatchConfig {
                  */
 
                 // 步骤Step
-                // 获取Step上下文方式一：可以获取共享数据，但是不允许修改
+                // 获取Step上下文方式一：可以获取共享数据，但是不允许设置或修改
                 Map<String, Object> stepExecutionContext = chunkContext.getStepContext().getStepExecutionContext();
                 // 获取Step上下文方式二：通过执行上下文对象获取跟设置参数
                 ExecutionContext stepExecutionContextEx = chunkContext.getStepContext().getStepExecution().getExecutionContext();
@@ -260,7 +260,7 @@ public class SpringBatchConfig {
         return new Tasklet() {
             @Override
             public RepeatStatus execute(@NonNull StepContribution contribution, @NonNull ChunkContext chunkContext) throws Exception {
-                System.out.println("Spring Batch 执行 Job2");
+                System.out.println("Spring Batch 获取作业及步骤上下文 Job2");
 
                 /*
                   TODO 通过获取(Job或者Step)上下文来获取同一个组件中的共享数据。
