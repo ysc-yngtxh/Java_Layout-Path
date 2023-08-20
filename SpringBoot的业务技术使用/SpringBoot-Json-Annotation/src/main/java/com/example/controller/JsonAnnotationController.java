@@ -37,13 +37,14 @@ public class JsonAnnotationController {
                 .phone(null)
                 .address("山西太原")
                 .deleteFlag(0)
-                .date(new Date())
+                .date( new Date() )
                 .price(0.568)
-                .optional(Optional.empty())
-                .atomicReference(new AtomicReference<>())
+                .optional( Optional.empty() )
+                .atomicReference( new AtomicReference<>() )
                 .supplier( Supplier.builder().id(1).build() )
+                .customer( new Date() )
                 .build();
-        System.out.println(JSON.toJSONString(consumer1));
+        System.out.println( JSON.toJSONString(consumer1) );
         return consumer1;
     }
 
@@ -61,11 +62,12 @@ public class JsonAnnotationController {
                 // .deleteFlag(0L)
                 .date(new Date())
                 // .price(0.568)
-                .optional(Optional.empty())
-                .atomicReference(new AtomicReference<>())
+                .optional( Optional.empty() )
+                .atomicReference( new AtomicReference<>() )
                 .supplier( Supplier.builder().id(1).build() )
+                .customer( new Date() )
                 .build();
-        System.out.println(JSON.toJSONString(consumer2));
+        System.out.println( JSON.toJSONString(consumer2) );
         return consumer2;
     }
 
@@ -75,18 +77,12 @@ public class JsonAnnotationController {
                 .id(3)
                 .username("")
                 .password(" ")
-                .alias("敲你脑阔啊敲")
-                .sex(null)
-                .age(22)
-                .phone(null)
-                .address("四川成都")
-                .deleteFlag(null)
-                .date(new Date())
-                .price(0.568)
-                .optional(Optional.empty())
-                .atomicReference(new AtomicReference<>())
+                .optional( Optional.empty() )
+                .atomicReference( new AtomicReference<>() )
                 .supplier( Supplier.builder().id(1).build() )
+                .gender(2)
                 .build();
+        System.out.println( JSON.toJSONString(consumer3) );
         return consumer3;
     }
 }

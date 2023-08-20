@@ -1,25 +1,24 @@
 package com.example.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.utils.GenderDataDeserializer;
+import com.example.utils.GenderJsonSerializer;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.NumberFormat;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * (Consumer3)实体类
- *
+ * Consumer3 实体类
  * @author 游家纨绔
  * @since 2023-08-19 17:30:49
  */
@@ -28,17 +27,14 @@ import java.util.concurrent.atomic.AtomicReference;
 @AllArgsConstructor
 @NoArgsConstructor
 /**
- * ALWAYS ：默认策略，任何情况下都序列化该字段
- * NON_NULL ：注解的字段为null不序列化
- * NON_ABSENT ：注解的字段为null的时候不序列化
- * NON_EMPTY ：注解的字段为null或为空不序列化
- * NON_DEFAULT ：字段是默认值的话就不序列化
- * USE_DEFAULTS ：字段是默认值的话就进行序列化
- * CUSTOM ：自定义排除序列化规则
+ * ALWAYS     ：默认策略，任何情况下都序列化该字段
+ * NON_NULL   ：注解的字段为 null 的不序列化（排除 Optional 类、AtomicReference 类）
+ * NON_ABSENT ：注解的字段为 null 的不序列化（包括 Optional 类、AtomicReference 类）
+ * NON_EMPTY  ：注解的字段为 null 或 为空 不序列化
  */
-@JsonInclude( JsonInclude.Include.NON_EMPTY )  // 实际效果就是返回给前端的的Json 字符串中 值为 null 和空的字段不显示
-@JsonPropertyOrder({"consumerId", "username", "password", "alias", "age", "sex", "phone", "address"
-        , "deleteFlag", "date", "price", "optional", "atomicReference", "supplier"})  // 可以指定json映射名称属性在 json 字符串中的顺序
+@JsonInclude( JsonInclude.Include.NON_EMPTY )  // 实际效果就是返回给前端的的Json字符串中值为 null 和 空 的字段不显示
+// @JsonPropertyOrder 可以指定json映射名称属性在 json 字符串中的顺序
+@JsonPropertyOrder({"consumerId", "username", "password", "optional", "atomicReference", "supplier", "customer"})
 public class Consumer3 implements Serializable {
     @Serial
     private static final long serialVersionUID = 424381199466784776L;
@@ -50,30 +46,6 @@ public class Consumer3 implements Serializable {
 
     private String password;
 
-    @JsonIgnore  // 用来完全忽略被注解的字段和方法对应的属性
-    private String alias;
-
-    private Integer age;
-
-    private String sex;
-
-    private String phone;
-
-    private String address;
-
-    private Integer deleteFlag;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss SSS", timezone = "GMT+8")  // 格式化 时间数据
-    private Date date;
-
-    /**
-     * Style.CURRENCY：货币类型
-     * Style.NUMBER：正常数字类型
-     * Style.PERCENT：百分比类型
-     */
-    @NumberFormat(pattern = "#.##%")  // 格式化 数字数据
-    private double price;
-
     // Optional 类是一个可以为null的容器对象
     private Optional<String> optional;
 
@@ -81,5 +53,10 @@ public class Consumer3 implements Serializable {
     private AtomicReference<String> atomicReference;
 
     private Supplier supplier;
+
+    // @JsonDeserialize 用于属性或者setter方法上，用于在反序列化时可以嵌入我们自定义的代码逻辑
+    @JsonDeserialize(using = GenderDataDeserializer.class)
+    @JsonSerialize(using = GenderJsonSerializer.class)
+    private Integer gender;
 }
 

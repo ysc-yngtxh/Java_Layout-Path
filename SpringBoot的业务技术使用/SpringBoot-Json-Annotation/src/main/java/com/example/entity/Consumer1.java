@@ -1,5 +1,6 @@
 package com.example.entity;
 
+import com.example.utils.CustomDateSerialize;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -7,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,8 +22,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * (Consumer1)实体类
- *
+ * Consumer1 实体类
  * @author 游家纨绔
  * @since 2023-08-19 17:30:49
  */
@@ -30,18 +31,17 @@ import java.util.concurrent.atomic.AtomicReference;
 @AllArgsConstructor
 @NoArgsConstructor
 /**
- * ALWAYS ：默认策略，任何情况下都序列化该字段
- * NON_NULL ：注解的字段为null不序列化（除了 Optional 类、AtomicReference 类）
- * NON_ABSENT ：注解的字段为null的时候不序列化
- * NON_EMPTY ：注解的字段为null或为空不序列化
- * NON_DEFAULT ：字段是默认值的话就不序列化
- * USE_DEFAULTS ：字段是默认值的话就进行序列化
- * CUSTOM ：自定义排除序列化规则
+ * ALWAYS    ：默认策略，任何情况下都序列化该字段
+ * NON_NULL  ：注解的字段为 null 的不序列化（排除 Optional 类、AtomicReference 类）
+ * NON_ABSENT：注解的字段为 null 的不序列化（包括 Optional 类、AtomicReference 类）
+ * NON_EMPTY ：注解的字段为 null 或 为空 不序列化
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)  // 实际效果就是返回给前端的的Json 字符串中 值为 null 的字段不显示
-@JsonIgnoreProperties({"age", "deleteFlag"})  // 序列化和反序列化,定义的属性忽略掉
+@JsonInclude(JsonInclude.Include.NON_NULL)    // 实际效果就是返回给前端的的 Json 字符串中 值为 null 的字段不显示
+// @JsonIgnoreProperties 可以 忽略指定属性 的 序列化 和 反序列化
+@JsonIgnoreProperties({"age", "deleteFlag"})
+// @JsonPropertyOrder 可以指定json映射名称属性在 json 字符串中的顺序
 @JsonPropertyOrder({"consumerId", "username", "password", "alias", "age", "sex", "phone", "address"
-        , "deleteFlag", "date", "price", "optional", "atomicReference", "supplier"})  // 可以指定json映射名称属性在 json 字符串中的顺序
+        , "deleteFlag", "date", "price", "optional", "atomicReference", "supplier"})
 public class Consumer1 implements Serializable {
     @Serial
     private static final long serialVersionUID = 424381199466784776L;
@@ -84,5 +84,9 @@ public class Consumer1 implements Serializable {
     private AtomicReference<String> atomicReference;
 
     private Supplier supplier;
+
+    // 用于属性或getter方法，在序列化时嵌入自定义代码
+    @JsonSerialize(using = CustomDateSerialize.class)
+    private Date customer;
 }
 
