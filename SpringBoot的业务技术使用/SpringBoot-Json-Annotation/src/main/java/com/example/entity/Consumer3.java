@@ -2,6 +2,9 @@ package com.example.entity;
 
 import com.example.utils.GenderDataDeserializer;
 import com.example.utils.GenderJsonSerializer;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -14,6 +17,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -58,5 +62,11 @@ public class Consumer3 implements Serializable {
     @JsonDeserialize(using = GenderDataDeserializer.class)
     @JsonSerialize(using = GenderJsonSerializer.class)
     private Integer gender;
+
+    @JsonAnySetter  // 反序列化时实体对象不存在对应的属性时加上该 注解，不存在的属性都会放到Map中去
+    private Map<String, String> properties;
+
+    @JsonAnyGetter  // 序列化时Map加上该属性可以将map中的属性序列化为指定字符串
+    private Map<String, String> propertiesJson;
 }
 

@@ -6,16 +6,15 @@ import com.example.entity.Consumer1;
 import com.example.entity.Consumer2;
 import com.example.entity.Consumer3;
 import com.example.entity.Supplier;
-import lombok.Data;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
-
-import static java.util.concurrent.ThreadLocalRandom.current;
 
 /**
  * @author 游家纨绔
@@ -26,7 +25,40 @@ import static java.util.concurrent.ThreadLocalRandom.current;
 public class JsonAnnotationController {
 
     @RequestMapping("/consumer1")
-    public Consumer1 test1() {
+    public Consumer1 test1(@RequestBody(required = false) Consumer1 param) {
+
+        System.out.println("参数转成对象" + param);
+
+        // TODO jdk17 之前定义一个 JSON 字符串：1、双引号需要进行转义；2、为了字符串的可读性需要通过+号连接；
+
+        // 反序列化
+        // 通过Java 17中的文本块语法，类似的字符串处理则会方便很多；
+        // 通过三个双引号可以定义一个文本块，并且结束的三个双引号不能和开始的在同一行。
+        String jsonString = """
+                {
+                	"consumerId": 1,
+                	"username": "",
+                	"password": " ",
+                	"alias": "小曹啊小曹",
+                	"age": 22,
+                	"sex": null,
+                	"phone": null,
+                	"address": "山西太原",
+                	"deleteFlag": 0,
+                	"date": "2023-08-20 22:52:42 186",
+                	"price": 0.568,
+                	"optional": null,
+                	"atomicReference": null,
+                	"supplier": {
+                	    "id": "1"
+                	},
+                	"customer": "2023-08-20"
+                }
+                """;
+        Consumer1 parseObject = JSONObject.parseObject(jsonString, Consumer1.class);
+        System.out.println("反序列化: " + parseObject);
+
+        // 序列化
         Consumer1 consumer1 = Consumer1.builder()
                 .id(1)
                 .username("")
@@ -37,19 +69,20 @@ public class JsonAnnotationController {
                 .phone(null)
                 .address("山西太原")
                 .deleteFlag(0)
-                .date( new Date() )
+                .date(new Date())
                 .price(0.568)
-                .optional( Optional.empty() )
-                .atomicReference( new AtomicReference<>() )
-                .supplier( Supplier.builder().id(1).build() )
-                .customer( new Date() )
+                .optional(Optional.empty())
+                .atomicReference(new AtomicReference<>())
+                .supplier(Supplier.builder().id(1).build())
+                .customer(new Date())
                 .build();
-        System.out.println( JSON.toJSONString(consumer1) );
+        System.out.println("序列化: " + JSON.toJSONString(consumer1));
         return consumer1;
     }
 
     @RequestMapping("/consumer2")
     public Consumer2 test2() {
+        // 序列化
         Consumer2 consumer2 = Consumer2.builder()
                 .id(2)
                 .username("")
@@ -67,12 +100,35 @@ public class JsonAnnotationController {
                 .supplier( Supplier.builder().id(1).build() )
                 .customer( new Date() )
                 .build();
-        System.out.println( JSON.toJSONString(consumer2) );
+        System.out.println("序列化: " + JSON.toJSONString(consumer2));
         return consumer2;
     }
 
     @RequestMapping("/consumer3")
-    public Consumer3 test3() {
+    public Consumer3 test3(@RequestBody(required = false) Consumer3 param) {
+
+        System.out.println("参数转成对象" + param);
+
+        // 反序列化：这里的属性gender必须替换成 Integer 类型，因为走的是阿里的反序列化，没有走嵌入自定义的代码逻辑
+        String jsonString = """
+                {
+                	"consumerId": 3,
+                	"username": "",
+                	"password": " ",
+                	"optional": null,
+                	"atomicReference": null,
+                	"supplier": {
+                 		"id": 11
+                 	},
+                	"gender": 1,
+                	"title": "标题",
+                	"propertiesJson": {"id": 1, "user": "ysc"}
+                }
+                """;
+        Consumer3 parseObject = JSONObject.parseObject(jsonString, Consumer3.class);
+        System.out.println("反序列化: " + parseObject);
+
+        // 序列化
         Consumer3 consumer3 = Consumer3.builder()
                 .id(3)
                 .username("")
@@ -80,9 +136,11 @@ public class JsonAnnotationController {
                 .optional( Optional.empty() )
                 .atomicReference( new AtomicReference<>() )
                 .supplier( Supplier.builder().id(1).build() )
-                .gender(2)
+                .gender(0)
+                .properties(Map.of("title", "标题"))
+                .propertiesJson(Map.of("id", "1", "user", "ysc"))
                 .build();
-        System.out.println( JSON.toJSONString(consumer3) );
+        System.out.println("序列化: " + JSON.toJSONString(consumer3));
         return consumer3;
     }
 }
