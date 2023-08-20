@@ -25,9 +25,6 @@ import static java.util.concurrent.ThreadLocalRandom.current;
 @RestController
 public class JsonAnnotationController {
 
-    public JsonAnnotationController() {
-    }
-
     @RequestMapping("/consumer1")
     public Consumer1 test1() {
         Consumer1 consumer1 = Consumer1.builder()
@@ -46,6 +43,7 @@ public class JsonAnnotationController {
                 .atomicReference(new AtomicReference<>())
                 .supplier( Supplier.builder().id(1).build() )
                 .build();
+
         System.out.println(JSON.toJSONString(consumer1));
         return consumer1;
     }
@@ -58,13 +56,17 @@ public class JsonAnnotationController {
                 .password(" ")
                 .alias("我的宝啊宝")
                 .sex(null)
-                .age(null)
+                // .age(22)
                 .phone(null)
-                .address("湖北武汉")
-                .deleteFlag(null)
+                .address("山西太原")
+                // .deleteFlag(0L)
+                .date(new Date())
+                // .price(0.568)
                 .optional(Optional.empty())
                 .atomicReference(new AtomicReference<>())
+                .supplier( Supplier.builder().id(1).build() )
                 .build();
+        System.out.println(JSON.toJSONString(consumer2));
         return consumer2;
     }
 
@@ -76,12 +78,15 @@ public class JsonAnnotationController {
                 .password(" ")
                 .alias("敲你脑阔啊敲")
                 .sex(null)
-                .age(null)
+                .age(22)
                 .phone(null)
                 .address("四川成都")
                 .deleteFlag(null)
+                .date(new Date())
+                .price(0.568)
                 .optional(Optional.empty())
                 .atomicReference(new AtomicReference<>())
+                .supplier( Supplier.builder().id(1).build() )
                 .build();
         return consumer3;
     }

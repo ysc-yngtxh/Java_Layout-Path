@@ -1,13 +1,19 @@
 package com.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.NumberFormat;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -31,19 +37,23 @@ import java.util.concurrent.atomic.AtomicReference;
  * CUSTOM ：自定义排除序列化规则
  */
 @JsonInclude( JsonInclude.Include.NON_ABSENT )  // 实际效果就是返回给前端的的Json 字符串中 值为 null 的字段不显示
+@JsonPropertyOrder({"consumerId", "username", "password", "alias", "age", "sex", "phone", "address"
+        , "deleteFlag", "date", "price", "optional", "atomicReference", "supplier"})  // 可以指定json映射名称属性在 json 字符串中的顺序
 public class Consumer2 implements Serializable {
     @Serial
     private static final long serialVersionUID = 424381199466784776L;
 
+    @JsonProperty("consumerId")  // 指定某个属性和json映射的名称
     private Integer id;
 
     private String username;
 
     private String password;
 
+    @JsonIgnore  // 用来完全忽略被注解的字段和方法对应的属性
     private String alias;
 
-    private Integer age;
+    private int age;
 
     private String sex;
 
@@ -51,13 +61,25 @@ public class Consumer2 implements Serializable {
 
     private String address;
 
-    private Integer deleteFlag;
+    private long deleteFlag;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss SSS", timezone = "GMT+8")  // 格式化 时间数据
+    private Date date;
+
+    /**
+     * Style.CURRENCY：货币类型
+     * Style.NUMBER：正常数字类型
+     * Style.PERCENT：百分比类型
+     */
+    @NumberFormat(pattern = "#.##%")  // 格式化 数字数据
+    private double price;
 
     // Optional 类是一个可以为null的容器对象
     private Optional<String> optional;
 
-    // AtomicReference 类提供了对象引用的非阻塞原子性读写操作
+    // AtomicReference 类是提供了对象引用的非阻塞原子性读写操作，可以为 null 的包装类
     private AtomicReference<String> atomicReference;
 
+    private Supplier supplier;
 }
 
