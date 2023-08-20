@@ -43,7 +43,6 @@ public class JsonAnnotationController {
                 .atomicReference(new AtomicReference<>())
                 .supplier( Supplier.builder().id(1).build() )
                 .build();
-
         System.out.println(JSON.toJSONString(consumer1));
         return consumer1;
     }
