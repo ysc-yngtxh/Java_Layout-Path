@@ -30,7 +30,7 @@ public class ReadWriteLock读写锁 {
         }
 
         // 读取
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             final int temp = i;
             new Thread(() -> {
                 myCache.get(temp + "");

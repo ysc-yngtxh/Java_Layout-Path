@@ -11,11 +11,11 @@ public class Lock锁 {
      * 2、Synchronized无法判断获取锁的状态，Lock可以判断是否获取到了锁
      * 3、Synchronized会自动释放锁,Lock必须手动释放锁(如果不释放锁----死锁)
      * 4、Synchronized：线程1(获得锁，阻塞)，线程2(等待)
-     * Lock锁不一定会等待下去
+     *    Lock锁不一定会等待下去
      * 5、Synchronized可重入锁，不可以中断，公平(十分公平，先来后到)
-     * Lock可重入锁，可判断锁，非公平(非常不公平，可插队)
+     *    Lock可重入锁，可判断锁，非公平(非常不公平，可插队)
      * 6、Synchronized适合少量代码同步问题
-     * Lock适合锁大量的同步代码
+     *    Lock适合锁大量的同步代码
      * <p>
      * 严格来说Synchronized比Lock锁要效率高的，但是Lock的API方便呀！😁😁😁
      */

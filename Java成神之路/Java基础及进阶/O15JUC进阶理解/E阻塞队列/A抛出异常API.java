@@ -19,11 +19,11 @@ public class A抛出异常API {
      * 队列溢出或者队列空取会抛出异常,且异常没有返回值
      */
     public static void test(){
-        ArrayBlockingQueue<Object> queue = new ArrayBlockingQueue<>(3);//队列卡槽为3个
+        ArrayBlockingQueue<Object> queue = new ArrayBlockingQueue<>(3); // 队列卡槽为3个
         // 往队列中添加元素
-        System.out.println(queue.add("a"));//true
-        System.out.println(queue.add("b"));//true
-        System.out.println(queue.add("c"));//true
+        System.out.println(queue.add("a")); // true
+        System.out.println(queue.add("b")); // true
+        System.out.println(queue.add("c")); // true
         //System.out.println(queue.add("d")); // 队列已满，再添加就会抛异常IllegalStateException: Queue full
 
         System.out.println("===========================");
