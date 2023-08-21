@@ -38,7 +38,8 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 @JsonInclude( JsonInclude.Include.NON_EMPTY )  // 实际效果就是返回给前端的的Json字符串中值为 null 和 空 的字段不显示
 // @JsonPropertyOrder 可以指定json映射名称属性在 json 字符串中的顺序
-@JsonPropertyOrder({"consumerId", "username", "password", "optional", "atomicReference", "supplier", "customer"})
+@JsonPropertyOrder({"consumerId", "username", "password", "optional"
+        , "atomicReference", "supplier", "gender", "properties", "propertiesJson"})
 public class Consumer3 implements Serializable {
     @Serial
     private static final long serialVersionUID = 424381199466784776L;

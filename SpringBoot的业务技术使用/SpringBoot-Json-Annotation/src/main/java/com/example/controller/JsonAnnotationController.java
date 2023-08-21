@@ -71,10 +71,10 @@ public class JsonAnnotationController {
                 .deleteFlag(0)
                 .date(new Date())
                 .price(0.568)
-                .optional(Optional.empty())
-                .atomicReference(new AtomicReference<>())
-                .supplier(Supplier.builder().id(1).build())
-                .customer(new Date())
+                .optional( Optional.empty() )
+                .atomicReference( new AtomicReference<>() )
+                .supplier( Supplier.builder().id(1).build() )
+                .customer( new Date() )
                 .build();
         System.out.println("序列化: " + JSON.toJSONString(consumer1));
         return consumer1;
@@ -137,8 +137,8 @@ public class JsonAnnotationController {
                 .atomicReference( new AtomicReference<>() )
                 .supplier( Supplier.builder().id(1).build() )
                 .gender(0)
-                .properties(Map.of("title", "标题"))
-                .propertiesJson(Map.of("id", "1", "user", "ysc"))
+                .properties( Map.of("title", "标题") )
+                .propertiesJson( Map.of("id", "1", "user", "ysc") )
                 .build();
         System.out.println("序列化: " + JSON.toJSONString(consumer3));
         return consumer3;
