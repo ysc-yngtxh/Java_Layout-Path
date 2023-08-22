@@ -8,16 +8,11 @@ package O15_JUC进阶理解.I关于AtomicReference非阻塞原子性读写操作
 
 public class DebitCard {
 
-    /**
-     * 账户名名
-     */
+    // 账户名
     private final String account;
 
-    /**
-     * 账户金额
-     */
+    // 账户金额
     private final int amount;
-
 
     public DebitCard(String account, int amount) {
         this.account = account;
@@ -29,7 +24,6 @@ public class DebitCard {
     public int getAmount() {
         return amount;
     }
-
     @Override
     public String toString() {
         return "DebitCard{" +

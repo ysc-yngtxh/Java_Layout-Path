@@ -10,7 +10,7 @@ import static java.util.concurrent.ThreadLocalRandom.current;
  * @dateTime 2023-08-21 07:06
  * @apiNote TODO
  */
-public class AtomicReference示例 {
+public class Atomic_1_AtomicReference示例 {
 
     /**
      * AtomicReference类提供了对象引用的非阻塞原子性读写操作，并且提供了其他一些高级的用法
@@ -64,6 +64,10 @@ public class AtomicReference示例 {
         TimeUnit.SECONDS.sleep(3);
 
 
+        /**
+         * synchronized是一种阻塞式的解决方案，同一时刻只能有一个线程真正在工作，其他线程都将陷入阻塞。因此这并不是一种效率很高的解决方案
+         * 这个时候就可以利用 AtomicReference 的非阻塞原子性解决方案提供更加高效的方式了
+         */
         for (int i = 0; i < 10; i++) {
             new Thread("T-" + i) {
                 @Override
