@@ -49,15 +49,15 @@ public class Map接口的常用方法1 {
     public static void main(String[] args) {
 
         Map<Integer,String> map = new HashMap<>();
-        map.put(1,"张三");//1在这里自动装箱
-        map.put(2,"李四");
-        map.put(3,"王五");
-        map.put(4,"赵六");
+        map.put(1, "张三"); // 1在这里自动装箱
+        map.put(2, "李四");
+        map.put(3, "王五");
+        map.put(4, "赵六");
 
-        //第一种方式：获取所有的key，通过遍历key,来遍历value
+        // 第一种方式：获取所有的key，通过遍历key,来遍历value
         Set<Integer> keys = map.keySet();
 
-        //方法一：建立迭代器对象，遍历key，可以通过key获取value，
+        // 方法一：建立迭代器对象，遍历key，可以通过key获取value，
         Iterator<Integer> it = keys.iterator();
         while(it.hasNext()){
             Integer key = it.next();
@@ -65,7 +65,7 @@ public class Map接口的常用方法1 {
             System.out.println(key + "=" + value);
         }
 
-        //方法二：增强for循环
+        // 方法二：增强for循环
         for (Integer key : keys
              ) {
             System.out.println(map);
@@ -74,11 +74,11 @@ public class Map接口的常用方法1 {
 
         System.out.println("=========================================================================================");
 
-        //第二种方式：Set<Map.Entry<K,V>> entrySet()。这个方法是把Map集合直接全部转换成Set集合
+        // 第二种方式：Set<Map.Entry<K,V>> entrySet()。这个方法是把Map集合直接全部转换成Set集合
         Set<Map.Entry<Integer,String>> set = map.entrySet();
-        //遍历Set集合，每一次取出一个Node
+        // 遍历Set集合，每一次取出一个Node
 
-        //方法一：迭代器
+        // 方法一：迭代器
         Iterator<Map.Entry<Integer,String>> it1 = set.iterator();
         while(it1.hasNext()){
             Map.Entry<Integer,String> node = it1.next();
@@ -87,11 +87,10 @@ public class Map接口的常用方法1 {
             System.out.println(key + "===" + value);
         }
 
-        //方法二：增强for循环
-        //这种方式效率比较高，因为获取key和value都是直接从node对象中获取的属性值
-        //这种方式比较适合于大数据量
-        for (Map.Entry<Integer,String> node: set
-             ) {
+        // 方法二：增强for循环
+        // 这种方式效率比较高，因为获取key和value都是直接从node对象中获取的属性值
+        // 这种方式比较适合于大数据量
+        for (Map.Entry<Integer,String> node: set) {
             System.out.println(node.getKey() + "--->" + node.getValue());
             System.out.println(node);
             System.out.println(map);

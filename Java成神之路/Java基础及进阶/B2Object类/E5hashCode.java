@@ -19,7 +19,7 @@ public class E5hashCode {
         Object obj = new Object();
         int hashCodeValue = obj.hashCode();
 
-        //对象内存地址经过哈希算法转换的一串数字。可以等同看作内存地址。
+        // 对象内存地址经过哈希算法转换的一串数字。可以等同看作内存地址。
         System.out.println(hashCodeValue);   //1442002549
 
         Myclass mc = new Myclass();
@@ -27,7 +27,7 @@ public class E5hashCode {
 
         System.out.println(new Myclass().hashCode());
     }
-    //现在我们不需要去弄懂哈希表，哈希码，哈希算法，后面会讲到。我们现在只需要知道hashCode是将对象的内存地址通过哈希算法转换的数字
+    // 现在我们不需要去弄懂哈希表，哈希码，哈希算法，后面会讲到。我们现在只需要知道hashCode是将对象的内存地址通过哈希算法转换的数字
 }
 class Myclass {
     private Integer id;

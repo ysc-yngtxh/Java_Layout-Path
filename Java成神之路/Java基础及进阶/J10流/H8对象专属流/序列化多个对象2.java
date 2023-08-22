@@ -16,17 +16,17 @@ public class 序列化多个对象2 {
     public static void main(String[] args) throws Exception{
         List<User> u = new ArrayList<>();
         u.add(new User(1,"游诗成"));
-        u.add(new User(2,"陈嘉琪"));
+        u.add(new User(2,"曹玉敏"));
         u.add(new User(3,"我想你"));
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Users"));
         oos.writeObject(u);
         oos.close();
         oos.flush();
 
-        //反序列化集合
+        // 反序列化集合
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Users"));
-        List<User> userList = (List<User>)ois.readObject();   //是个List集合，强转成List集合
-        for (User user : userList         //集合元素遍历
+        List<User> userList = (List<User>)ois.readObject();   // 是个List集合，强转成List集合
+        for (User user : userList         // 集合元素遍历
              ) {
             System.out.println(user);
         }

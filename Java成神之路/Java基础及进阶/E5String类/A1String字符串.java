@@ -9,12 +9,12 @@ package E5String类;
  */
 public class A1String字符串 {
     public static void main(String[] args) {
-        //这两行代码表示底层创建了3个字符串对象，都在字符串常量池当中
-        String s1 ="abcd";   //"abcd"是存储在方法区的字符串常量池当中，所以这个"abcd"对象不会新建(因为这个对象已经存在了)
+        // 这两行代码表示底层创建了3个字符串对象，都在字符串常量池当中
+        String s1 ="abcd";   // "abcd"是存储在方法区的字符串常量池当中，所以这个"abcd"对象不会新建(因为这个对象已经存在了)
         String s2 ="abcd" + "xy";
 
-        //凡是双引号括起来的都在字符串常量池中有一份
-        //new对象的时候一定在堆内存当中开辟空间
+        // 凡是双引号括起来的都在字符串常量池中有一份
+        // new对象的时候一定在堆内存当中开辟空间
         String s3 =new String("xy");
     }
 }

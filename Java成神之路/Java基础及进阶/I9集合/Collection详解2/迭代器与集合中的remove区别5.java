@@ -16,22 +16,22 @@ import java.util.Iterator;
  */
 public class 迭代器与集合中的remove区别5 {
     public static void main(String[] args) {
-        //创建集合
-        Collection c= new ArrayList();
+        // 创建集合
+        Collection<Object> c = new ArrayList<>();
 
-        Iterator it1 = c.iterator();//如果在此处获取集合的迭代器对象，那么集合中是没有元素的
+        Iterator<Object> it1 = c.iterator(); // 如果在此处获取集合的迭代器对象，那么集合中是没有元素的
         c.add("abc");
         c.add("def");
         c.add("xyz");
-        //在集合中添加元素后，集合的结构发生改变时，迭代器必须重新获取
-        Iterator it2 = c.iterator();
+        // 在集合中添加元素后，集合的结构发生改变时，迭代器必须重新获取
+        Iterator<Object> it2 = c.iterator();
         while(it2.hasNext()){
             Object o = it2.next();
-            //删除元素之后，集合的结构发生了变化，应该重新去获取迭代器
-            //但是，循环下一次的时候并没有重新获取迭代器，所以会出现异常：java.util.ConcurrentModificationException
-            //c.remove(o);//通过集合去删除元素，没有通知迭代器。（导致迭代器的快照和原集合状态不同）
-            it2.remove();//删除的一定是迭代器指向的当前元素
-            //迭代器去删除时，会自动更新迭代器，并且更新集合（删除集合中的元素）
+            // 删除元素之后，集合的结构发生了变化，应该重新去获取迭代器
+            // 但是，循环下一次的时候并没有重新获取迭代器，所以会出现异常：java.util.ConcurrentModificationException
+            // c.remove(o); // 通过集合去删除元素，没有通知迭代器。（导致迭代器的快照和原集合状态不同）
+            it2.remove();   // 删除的一定是迭代器指向的当前元素
+            // 迭代器去删除时，会自动更新迭代器，并且更新集合（删除集合中的元素）
             System.out.println(o);
         }
         System.out.println(c.size());
@@ -39,7 +39,7 @@ public class 迭代器与集合中的remove区别5 {
 }
 
 /*
-什么时候使用迭代器迭代，什么时候使用for循环遍历?
-   1、for循环每次遍历都需要访问list长度，故可以在循环遍历中操作元素（增删）
-   2、在进入迭代器循环前，集合长度已经确认了所以有的时候我们不太确定集合中到底有多少个元素，这个时候要想遍历集合，就可以使用迭代器
+  什么时候使用迭代器迭代，什么时候使用for循环遍历?
+     1、for循环每次遍历都需要访问list长度，故可以在循环遍历中操作元素（增删）
+     2、在进入迭代器循环前，集合长度已经确认了所以有的时候我们不太确定集合中到底有多少个元素，这个时候要想遍历集合，就可以使用迭代器
  */

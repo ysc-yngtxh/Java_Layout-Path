@@ -26,21 +26,21 @@ public class B2编译时异常和运行时异常 {
     public static void main(String[] args) {
 
         /*
-        一般不建议在main方法中使用throw,因为这个异常如果真正发生了，一定会抛给JVM。JVM只有终止
-        异常处理异常的作用就是增强程序的健壮性。
-        所以一般main方法中的异常建议try...catch进行捕捉。main就不要继续上抛了
+          一般不建议在main方法中使用throw,因为这个异常如果真正发生了，一定会抛给JVM。JVM只有终止
+          异常处理异常的作用就是增强程序的健壮性。
+          所以一般main方法中的异常建议try...catch进行捕捉。main就不要继续上抛了
          */
 
         System.out.println("main begin!");
 
         try {
             m1();
-            //尝试执行m1
-            System.out.println("Hello World!");//m1异常，后续try程序不执行
+            // 尝试执行m1
+            System.out.println("Hello World!"); // m1异常，后续try程序不执行
         } catch (FileNotFoundException e) {
-            //catch是捕捉异常之后走的分支
+            // catch是捕捉异常之后走的分支
             System.out.println("文件不存在，可能路径错误，也可能是该文件被删除了！");
-            System.out.println(e);//这个分支中可以使用e引用，e引用保存的内存地址是那个new出来异常对象的内存地址
+            System.out.println(e); // 这个分支中可以使用e引用，e引用保存的内存地址是那个new出来异常对象的内存地址
         }
 
         System.out.println("main over!");
@@ -59,7 +59,8 @@ public class B2编译时异常和运行时异常 {
     private static void m3() throws FileNotFoundException {
         System.out.println("m3 begin");
 
-        /*编译报错的原因：
+        /*
+          编译报错的原因：
               第一：这里调用了一个构造方法：FileInputStream(String name)
               第二：这个构造方法的声明位置上有：throws FileNotFoundException
               第三：通过类的继承结构看到：FileNotFoundException父类是IOException，IOException父类是Exception

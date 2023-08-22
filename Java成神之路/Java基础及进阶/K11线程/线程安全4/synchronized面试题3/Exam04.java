@@ -2,10 +2,10 @@ package K11线程.线程安全4.synchronized面试题3;
 
 /*
 面试题：
-在主方法中创建两个MyClass2对象，且MyClass方法中的synchronized是在静态方法中
-doOther方法的执行需不需要等doSome方法的结束？
+  在主方法中创建两个MyClass2对象，且MyClass方法中的synchronized是在静态方法中
+  doOther方法的执行需不需要等doSome方法的结束？
 
-需要，因为静态方法是类锁。类锁是不管创建几个对象，都只有一把
+  需要，因为静态方法是类锁。类锁是不管创建几个对象，都只有一把
  */
 public class Exam04 {
     public static void main(String[] args) throws InterruptedException {
@@ -18,7 +18,7 @@ public class Exam04 {
         t2.setName("t2");
 
         t1.start();
-        Thread.sleep(1000);  //这个睡眠的作用是：为了保证1线程先执行
+        Thread.sleep(1000);  // 这个睡眠的作用是：为了保证1线程先执行
         t2.start();
     }
 }

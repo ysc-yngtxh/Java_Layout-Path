@@ -83,7 +83,8 @@ HashMap集合：
 public class 哈希表数据结构2 {
     public static void main(String[] args) {
 
-        /*为什么哈希表的随机增删，以及查询效率都很高？
+        /*
+          为什么哈希表的随机增删，以及查询效率都很高？
              增删是在链表上完成
              查询是在数组上进行的，不需要都扫描，只需要部分扫描
 
@@ -91,17 +92,17 @@ public class 哈希表数据结构2 {
                 一个是hashCode(),一个方法是equals()，那么这两个方法都需要重写
         */
 
-        //测试HashMap集合key部分的元素特点
-        //Integer是key，他的hashCode和equals都重写了
+        // 测试HashMap集合key部分的元素特点
+        // Integer是key，他的hashCode和equals都重写了
         Map<Integer,String> map = new HashMap<>();
-        map.put(111,"张三");
-        map.put(666,"李四");
-        map.put(777,"王五");
-        map.put(222,"赵六");
-        map.put(222,"游诗成");//key重复，value覆盖
+        map.put(111, "张三");
+        map.put(666, "李四");
+        map.put(777, "王五");
+        map.put(222, "赵六");
+        map.put(222, "游诗成"); // key重复，value覆盖
         System.out.println(map.size());
 
-        //遍历方法一：获取所有的key，来遍历value
+        // 遍历方法一：获取所有的key，来遍历value
         Set<Integer> s = map.keySet();
         Iterator<Integer> it = s.iterator();
         while(it.hasNext()){
@@ -110,7 +111,7 @@ public class 哈希表数据结构2 {
             System.out.println(key + "==" + value);
         }
 
-        //方法二：将Map集合转换成Set集合
+        // 方法二：将Map集合转换成Set集合
         Set<Map.Entry<Integer, String>> set = map.entrySet();
         Iterator<Map.Entry<Integer, String>> it1 = set.iterator();
         while(it1.hasNext()){

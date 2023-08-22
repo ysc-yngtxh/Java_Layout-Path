@@ -28,14 +28,14 @@ package H8异常;
  */
 public class A1异常概述 {
     public static void main(String[] args) {
-        int a=10;
-        int b=0;
-        //实际上JVM在执行到此处的时候，会new异常对象（算术异常）：new ArithmeticException("by zero")
-        //并且JVN将new的异常对象，打印输出信息到控制台
-        int c=a/b;
+        int a = 10;
+        int b = 0;
+        // 实际上JVM在执行到此处的时候，会new异常对象（算术异常）：new ArithmeticException("by zero")
+        // 并且JVN将new的异常对象，打印输出信息到控制台
+        int c = a/b;
         System.out.println(a + "/" + b + "=" + c);
 
-        //发生异常时，JVM执行内容
+        // 发生异常时，JVM执行内容
         NullPointerException npe = new NullPointerException("空指针异常发生了");
         System.out.println(npe);
 

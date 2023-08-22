@@ -4,10 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /*
-死锁代码要会写。
-一般面试官要求你会写
-只有会写的，才会在以后的开发中注意这个事儿
-因为死锁很难调试
+  死锁代码要会写。
+  一般面试官要求你会写
+  只有会写的，才会在以后的开发中注意这个事儿
+  因为死锁很难调试
  */
 public class 死锁代码1 {
     public static void main(String[] args) {
@@ -38,7 +38,7 @@ class MyThread5 extends Thread{
         try {
             synchronized(o1){
                 System.out.println(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").format(new Date()) + " MyThread5 锁住 o1");
-                Thread.sleep(1000);// 此处等待是给MyThread6能锁住机会
+                Thread.sleep(1000); // 此处等待是给MyThread6能锁住机会
                 synchronized(o2){
                     System.out.println(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").format(new Date()) + " MyThread5 锁住 o2");
                     Thread.sleep(1000*60);
@@ -66,10 +66,10 @@ class MyThread6 extends Thread{
         try {
             synchronized(o2){
                 System.out.println(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").format(new Date()) + " MyThread6 锁住 o2");
-                Thread.sleep(1000);// 此处等待是给MyThread6能锁住机会
+                Thread.sleep(1000); // 此处等待是给MyThread6能锁住机会
                 synchronized(o1){
                     System.out.println(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").format(new Date()) + " MyThread6 锁住 o1");
-                    Thread.sleep(1000*60);// 为测试，占用了就不放
+                    Thread.sleep(1000*60); // 为测试，占用了就不放
                 }
             }
         } catch (Exception e) {

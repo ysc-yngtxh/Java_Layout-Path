@@ -13,8 +13,8 @@ public class F6练习 {
 }
 
 class User{
-    String name;     //用户名
-    Address addr;    //用户的地址
+    String name;     // 用户名
+    Address addr;    // 用户的地址
     public User(){}
     public User(String name,Address addr){
         this.name=name;
@@ -27,8 +27,8 @@ class User{
         if(this==obj) {
             return true;
         }
-        User u=(User)obj;   //能执行到这一步，说明obj肯定是User类型,所以不再需要强制类型转换符instanceof
-        if(this.name.equals(u.name)  &&  this.addr.equals(u.addr)){  //this.name表示本类中的name。u.name表示的是形参中的name，即main函数中的name实参
+        User u=(User)obj;   // 能执行到这一步，说明obj肯定是User类型,所以不再需要强制类型转换符instanceof
+        if(this.name.equals(u.name)  &&  this.addr.equals(u.addr)){  // this.name表示本类中的name。u.name表示的是形参中的name，即main函数中的name实参
             return true;
         }
         return false;
@@ -36,9 +36,9 @@ class User{
 }
 
 class Address{
-    String city;        //城市
-    String street;      //街道
-    String zipcode;     //邮编
+    String city;        // 城市
+    String street;      // 街道
+    String zipcode;     // 邮编
     public Address(){}
     public Address(String city,String street,String zipcode){
         this.city=city;

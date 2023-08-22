@@ -7,8 +7,12 @@ import java.util.Properties;
 public class 以流的形式直接返回4 {
     public static void main(String[] args) throws URISyntaxException {
 
-        //获取一个文件的绝对路径
-        String path = Thread.currentThread().getContextClassLoader().getResource("classinfo.properties").toURI().getPath();
+        // 获取一个文件的绝对路径
+        String path = Thread.currentThread()
+                .getContextClassLoader()
+                .getResource("classinfo.properties")
+                .toURI()
+                .getPath();
         FileInputStream reader = null;
         try{
             reader = new FileInputStream(path);
@@ -32,7 +36,7 @@ public class 以流的形式直接返回4 {
 
         System.out.println("=========================================================================================");
 
-        //通过流来返回，其实就是将获取路径和创建流对象两行代码合并
+        // 通过流来返回，其实就是将获取路径和创建流对象两行代码合并
         InputStream in = null;
         try{
             in = Thread.currentThread().getContextClassLoader().getResourceAsStream("classinfo.properties");

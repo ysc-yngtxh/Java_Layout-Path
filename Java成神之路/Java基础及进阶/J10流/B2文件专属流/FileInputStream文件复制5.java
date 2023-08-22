@@ -15,17 +15,17 @@ public class FileInputStream文件复制5 {
         FileInputStream fis = null;
         FileOutputStream fos = null;
         try {
-            fis = new FileInputStream("D:\\IDEA\\Java成神之路\\src\\idea快捷键.java");
-            fos = new FileOutputStream("idea快捷键.java");
+            fis = new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/idea快捷键.java");
+            fos = new FileOutputStream(System.getProperty("user.dir") + "/idea快捷键.java");
 
-            //一边读一边写
-            byte[] bytes = new  byte[1024*1024];
+            // 一边读一边写
+            byte[] bytes = new  byte[1024 * 1024];
             int readCount = 0;
-            while((readCount=fis.read(bytes)) != -1){
-                fos.write(bytes,0,readCount);
+            while((readCount = fis.read(bytes)) != -1){
+                fos.write(bytes, 0, readCount);
             }
 
-            //刷新，输出流最后要刷新
+            // 刷新，输出流最后要刷新
             fos.flush();
         } catch (FileNotFoundException e) {
             e.printStackTrace();

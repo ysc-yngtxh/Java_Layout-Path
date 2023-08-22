@@ -13,23 +13,23 @@ public class A1日期的处理 {
 
         System.out.println(LocalDateTime.now());
 
-        //java.util.Date类的toString()方法已经重写
-        //输出的应该不是一个对象的内存地址，应该是一个日期字符串。
+        // java.util.Date类的toString()方法已经重写
+        // 输出的应该不是一个对象的内存地址，应该是一个日期字符串。
 
 
         /*
-        yyyy     年（年是四位）
-        MM       月（月是两位）
-        dd       日
-        HH       时+
-        mm       分
-        ss       秒
-        SS       毫秒(毫秒3位，最高999.1000毫秒表示1秒)
+          yyyy     年（年是四位）
+          MM       月（月是两位）
+          dd       日
+          HH       时+
+          mm       分
+          ss       秒
+          SS       毫秒(毫秒3位，最高999.1000毫秒表示1秒)
          */
         // SimpleDateFormat是java.text包下的。专门负责日期格式化
         // Date类型转换成日期字符串String
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss SSS");
-        String nowTimeStr = sdf.format(nowTime);  //使用format方法将Date类型转换成日期字符串String
+        String nowTimeStr = sdf.format(nowTime);  // 使用format方法将Date类型转换成日期字符串String
         System.out.println(nowTimeStr);
 
         System.out.println("=========================================================================================");

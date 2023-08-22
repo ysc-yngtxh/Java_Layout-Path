@@ -51,7 +51,7 @@ class T{
     }
 }
 class Y extends T{
-    final int age;//实例变量加上关键字final，必须赋值，或者在构造函数中赋值。换种说法，赶在构造函数赋默认值之前赋值就行
+    final int age; // 实例变量加上关键字final，必须赋值，或者在构造函数中赋值。换种说法，赶在构造函数赋默认值之前赋值就行
     Y(){
         age=10;
     }
@@ -70,9 +70,9 @@ class person{
 }
 public class final关键字2 {
     public static void main(String[] args) {
-        T c = new Y();   //多态，父类引用子类对象
+        T c = new Y();   // 多态，父类引用子类对象
 
-        //c.dOoSome();不能被调用，T类引用中没有dOoSome()方法
+        // c.dOoSome();不能被调用，T类引用中没有dOoSome()方法
 
         if(c instanceof Y){
             Y d1=(Y)c;
@@ -87,10 +87,10 @@ public class final关键字2 {
         System.out.println(p1.a);
 
         final person p2=new person(20);
-        //p2=new person(50);
-		/*编译错误，new person(20)可以看成地址x0111,所以final p2=x0111
-		final 关键字的p2重新赋值new person(50)可以看作p2= x4567;
-		所以编译错误
+        // p2=new person(50);
+		/* 编译错误，new person(20)可以看成地址x0111,所以final p2=x0111
+		   final 关键字的p2重新赋值new person(50)可以看作p2= x4567;
+		   所以编译错误
 		*/
 
     }

@@ -7,24 +7,27 @@ public class Constructor1 {
     public static void main(String[] args) throws Exception{
 
         StringBuilder s = new StringBuilder();
-        Class vipClass =Class.forName("L12反射.E5反射Constructor.Vip");
+        Class<?> vipClass =Class.forName("L12反射.E5反射Constructor.Vip");
 
-        s.append(Modifier.toString(vipClass.getModifiers()) + " class " + vipClass.getSimpleName() + " {\n");
+        s.append( Modifier.toString(vipClass.getModifiers()) )
+                .append(" class ")
+                .append(vipClass.getSimpleName())
+                .append(" {\n");
 
-        Constructor[] constructors = vipClass.getDeclaredConstructors();
-        for (Constructor constructor: constructors
+        Constructor<?>[] constructors = vipClass.getDeclaredConstructors();
+        for (Constructor<?> constructor: constructors
         ) {
             s.append("\t");  //  "\t"是制表符，即每个类下代码前的空格
-            s.append(Modifier.toString(constructor.getModifiers()) + " ");
-            s.append(vipClass.getSimpleName() + "(");
+            s.append(Modifier.toString(constructor.getModifiers())).append(" ");
+            s.append(vipClass.getSimpleName()).append("(");
 
-            //参数列表
-            Class[] parameterTypes = constructor.getParameterTypes();
-            for (Class parameterType1:parameterTypes
+            // 参数列表
+            Class<?>[] parameterTypes = constructor.getParameterTypes();
+            for (Class<?> parameterType1:parameterTypes
             ) {
-                s.append(parameterType1.getSimpleName() + ",");
+                s.append(parameterType1.getSimpleName()).append(",");
             }
-            //删除指定下标位置上的字符(删除多余的逗号,)
+            // 删除指定下标位置上的字符(删除多余的逗号,)
             if (parameterTypes.length > 0) {
                 s.deleteCharAt(s.length() - 1);
             }

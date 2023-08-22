@@ -15,20 +15,20 @@ public class FileInputStream常用方法3 {
         FileInputStream fis = null;
         try{
 
-            fis = new FileInputStream("D:\\IDEA\\Java成神之路\\src\\J10流\\Filetemp");
-            //int available():返回流当中剩余的没有读到的字节数量
+            fis = new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/J10流/Filetemp");
+            // int available():返回流当中剩余的没有读到的字节数量
             System.out.println("总字节数量：" + fis.available());
 
-            int readByte = fis.read();   //读了一个字节
+            int readByte = fis.read();   // 读了一个字节
             System.out.println("还剩下多少个字节没有读：" + fis.available());
 
-            //skip跳过几个字节不读取，这个方法也可能以后会用
+            // skip跳过几个字节不读取，这个方法也可能以后会用
             fis.skip(3);
-            System.out.println(fis.read());  //读到e，ASCⅡ码是101
+            System.out.println(fis.read());  // 读到e，ASCⅡ码是101
 
-            //这种方式不再需要循环了，直接读一次就好了。但是这种方式不太适合太大的文件，因为byte[]数组不能太大
+            // 这种方式不再需要循环了，直接读一次就好了。但是这种方式不太适合太大的文件，因为byte[]数组不能太大
             byte[] bytes = new byte[fis.available()];
-            fis.read(bytes);//读数组bytes
+            fis.read(bytes); // 读数组bytes
             System.out.println(new String(bytes));
 
         }catch (FileNotFoundException e){

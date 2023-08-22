@@ -20,7 +20,7 @@ public class G7枚举类型 {
 
         System.out.println("=========================================================================================");
 
-        //switch也能进行枚举，但好像低版本是不可以的
+        // switch也能进行枚举，但好像低版本是不可以的
         switch(Season.SUMMER){
             case SPRING:
                 System.out.println("春天");
@@ -37,7 +37,7 @@ public class G7枚举类型 {
         }
     }
 
-    public static Result divide(int a,int b){
+    public static Result divide(int a, int b){
         try{
             int c = a/b;
             return Result.SUCCESS;
@@ -50,18 +50,25 @@ public class G7枚举类型 {
 
 
 enum Result{
-    //SUCCESS,FAIL是枚举Result类型中的值
-    //枚举中的每一个值，可以看作是“常量”
-    SUCCESS,FAIL
+    // SUCCESS,FAIL是枚举Result类型中的值
+    // 枚举中的每一个值，可以看作是“常量”
+    SUCCESS,
+    FAIL;
 }
 
-//四季枚举类型
+// 四季枚举类型
 enum Season{
-    SPRING,SUMMER,AUTUMN,WINTER
+    SPRING,
+    SUMMER,
+    AUTUMN,
+    WINTER
 }
 
-//颜色枚举类型
+// 颜色枚举类型
 enum Color{
-    RED,BIUE,YELLO,BLACK
+    RED,
+    BIUE,
+    YELLO,
+    BLACK
 }
 

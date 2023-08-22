@@ -16,21 +16,20 @@ public class 带有缓冲区的字符流1 {
         FileReader fr = null;
         try{
             fr = new FileReader("D:\\IDEA\\Java成神之路\\Java基础及进阶\\src\\J10流\\A1iO流概述.java");
-            //当一个流的构造方法中需要一个流的时候，这个被传进来的流叫做：节点流
-            //外部负责包装的这个流，叫做：包装流。还有一个名字叫做：处理流
-            //像当前这个程序来说：FileReader就是一个节点流。BufferedReader就是包装流/处理流
-            BufferedReader br = new BufferedReader(fr);  //传的参数只能是字符流的构造方法
+            // 当一个流的构造方法中需要一个流的时候，这个被传进来的流叫做：节点流
+            // 外部负责包装的这个流，叫做：包装流。还有一个名字叫做：处理流
+            // 像当前这个程序来说：FileReader就是一个节点流。BufferedReader就是包装流/处理流
+            BufferedReader br = new BufferedReader(fr);  // 传的参数只能是字符流的构造方法
 
-            //读一行
-            String s1 = br.readLine();//readLine()是读文件一行的方法
+            // 读一行
+            String s1 = br.readLine();// readLine()是读文件一行的方法
             System.out.println(s1);
 
-            //读到文件结束
+            // 读到文件结束
             String s2 = null;
             while((s2 = br.readLine()) != null){
                 System.out.println(s2);
             }
-
 
         } catch(FileNotFoundException e){
             e.printStackTrace();
@@ -39,7 +38,7 @@ public class 带有缓冲区的字符流1 {
         } finally {
             if (fr != null) {
                 try {
-                    //对于包装流来说，只需要关闭最外层流就行，里面的节点流会自动关闭
+                    // 对于包装流来说，只需要关闭最外层流就行，里面的节点流会自动关闭
                     fr.close();
                 } catch (IOException e) {
                     e.printStackTrace();

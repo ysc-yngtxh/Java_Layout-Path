@@ -11,23 +11,23 @@ package D4数组;
 */
 public class F6数组的扩容与拷贝 {
     public static void main(String[] args) {
-        //拷贝源（从这个数组中拷贝）
+        // 拷贝源（从这个数组中拷贝）
         int[] src = {1, 11, 22, 3, 4};
 
         //拷贝目标
-        int[] dest = new int[20];     //动态初始化一个长度为20的数组，每一个元素默认值为0
+        int[] dest = new int[20];     // 动态初始化一个长度为20的数组，每一个元素默认值为0
 
-        //调用JDK System类中的arraycopy（）方法，来完成数组的拷贝
-        //System.arraycopy(源数组，从下标1开始，目标数组，从下标3开始，  );
+        // 调用JDK System类中的arraycopy（）方法，来完成数组的拷贝
+        // System.arraycopy(源数组，从下标1开始，目标数组，从下标3开始，  );
         System.arraycopy(src, 1, dest, 3, 2);
 
-        //遍历目标数组
+        // 遍历目标数组
         for (int i = 0; i < dest.length; i++) {
             System.out.println(dest[i]);
         }
 
 
-        //数组中如果存储的元素是引用，可以拷贝吗？当然可以。
+        // 数组中如果存储的元素是引用，可以拷贝吗？当然可以。
         String[] strs = {"hello", "world!", "study", "java", "mysql", "jdbc", "oracle"};
         String[] newstrs = new String[20];
         System.arraycopy(strs, 0, newstrs, 0, strs.length);
@@ -35,7 +35,7 @@ public class F6数组的扩容与拷贝 {
             System.out.println(newstrs[i]);
         }
 
-        //还有数组拷贝的是对象地址
+        // 还有数组拷贝的是对象地址
         Object[] objs = {new Object(), new Object(), new Object()};
         Object[] newObjes = new Object[10];
         System.arraycopy(objs, 0, newObjes, 0, objs.length);

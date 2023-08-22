@@ -31,13 +31,13 @@ import java.util.TreeSet;
 public class 自平衡二叉树6 {
     public static void main(String[] args) {
 
-        //创建TreeSet集合的时候，需要使用这个比较器
-        //TreeSet<WuGui> t = new TreeSet<>(new WuGuiComparator);第一种写法，传进Comparator对象，但要有WuGuiComparator类
+        // 创建TreeSet集合的时候，需要使用这个比较器
+        // TreeSet<WuGui> t = new TreeSet<>(new WuGuiComparator); 第一种写法，传进Comparator对象，但要有WuGuiComparator类
         TreeSet<WuGui> t = new TreeSet<>(new Comparator<WuGui>() {
             @Override
             public int compare(WuGui o1, WuGui o2) {
                 return o1.age-o2.age;
-            }   //C3匿名内部类
+            }   // C3匿名内部类
         });
         t.add(new WuGui(100));
         t.add(new WuGui(500));
@@ -66,12 +66,14 @@ class WuGui{
 
 }
 
-/*class WuGuiComparator implements Comparator<WuGui>{
+/*
+class WuGuiComparator implements Comparator<WuGui>{
 
     @Override
     public int compare(WuGui o1, WuGui o2) {
-        //指定比较规则
-        //按照年龄排序
+        // 指定比较规则
+        // 按照年龄排序
         return o1.age-o2.age;
     }
-}*/
+}
+*/

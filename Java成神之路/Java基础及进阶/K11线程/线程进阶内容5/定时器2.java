@@ -28,7 +28,7 @@ public class 定时器2 {
 
         // 创建定时器对象
         Timer timer = new Timer();
-        //Timer timer = new Timer(true);  // 守护线程的方式
+        // Timer timer = new Timer(true);  // 守护线程的方式
 
         // 指定定时任务：timer.schedule(定时任务, 开始时间, 间隔多久执行时间);
         timer.schedule(new LongTimeTask(), new Date(), 1000*10);

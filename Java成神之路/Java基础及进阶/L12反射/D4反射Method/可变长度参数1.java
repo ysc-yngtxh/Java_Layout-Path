@@ -27,7 +27,7 @@ public class 可变长度参数1 {
         System.out.println("m方法执行了！");
     }
 
-    public static void m2(int a,String...args1){    //可变长度参数一定要写在形参后面，并且一个方法里只能写一个
+    public static void m2(int a,String...args1){    // 可变长度参数一定要写在形参后面，并且一个方法里只能写一个
 
     }
 

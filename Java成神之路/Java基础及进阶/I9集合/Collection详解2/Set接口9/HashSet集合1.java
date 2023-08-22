@@ -11,7 +11,7 @@ public class HashSet集合1 {
 
     public static void main(String[] args) {
 
-        //演示一下HashSet集合特点
+        // 演示一下HashSet集合特点
         Set<String> s = new HashSet<>();
 
         s.add("hello3");
@@ -24,15 +24,15 @@ public class HashSet集合1 {
         s.add(null);
 
 
-        //遍历
+        // 遍历
         for (String r : s
              ) {
             System.out.println(r);
         }
          /*
-         1、存储时顺序和取出时顺序不同
-         2、不可重复
-         3、放到HashSet集合中的元素实际上是放到HashMap集合的key部分了。
+           1、存储时顺序和取出时顺序不同
+           2、不可重复
+           3、放到HashSet集合中的元素实际上是放到HashMap集合的key部分了。
           */
     }
 }

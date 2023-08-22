@@ -26,7 +26,8 @@ public class 泛型机制7<E> {
 
     public static void main(String[] args) {
 
-        /*//不使用泛型
+        /*
+        // 不使用泛型
         List myList = new ArrayList();
         Cat c = new Cat();
         Bird b = new Bird();
@@ -41,39 +42,40 @@ public class 泛型机制7<E> {
                 Animal a = (Animal)obj;
                 a.move();
             }
-        }*/
+        }
+        */
 
 
 
-        //使用泛型List<Animal>之后，表示List集合中只允许存储Animal类型的数据
-        //用泛型来指定集合中存储的数据类型。
-        List<Animal> myList = new ArrayList<Animal>();//类型自动判断(钻石表达式)。ArrayList<Animal>中的Animal可以不写
+        // 使用泛型List<Animal>之后，表示List集合中只允许存储Animal类型的数据
+        // 用泛型来指定集合中存储的数据类型。
+        List<Animal> myList = new ArrayList<Animal>(); // 类型自动判断(钻石表达式)。ArrayList<Animal>中的Animal可以不写
 
-        //指定List集合中只能存储Animal，那么存储String就编译报错了
-        //这样用了泛型之后，集合中元素的数据类型更加统一了
+        // 指定List集合中只能存储Animal，那么存储String就编译报错了
+        // 这样用了泛型之后，集合中元素的数据类型更加统一了
 
         myList.add(new Cat());
         myList.add(new Bird());
 
-        //获取迭代器，这个迭代器表示的是Animal类型
+        // 获取迭代器，这个迭代器表示的是Animal类型
         Iterator<Animal> it = myList.iterator();
         while(it.hasNext()){
-            Animal a = it.next();//使用泛型之后，每一次迭代返回的数据都是Animal类型
+            Animal a = it.next(); // 使用泛型之后，每一次迭代返回的数据都是Animal类型
             a.move();
         }
 
         System.out.println("=========================================================================================");
 
         泛型机制7<String> g = new 泛型机制7<>();
-        //new对象的时候指定了泛型是：String类型
+        // new对象的时候指定了泛型是：String类型
 
         g.doSome("abc");
-        //g.doSome(100);类型不匹配
+        // g.doSome(100);类型不匹配
     }
 
     public void doSome(E e){
         System.out.println(e);
-    }   //自定义泛型
+    }   // 自定义泛型
 }
 
 class Animal{

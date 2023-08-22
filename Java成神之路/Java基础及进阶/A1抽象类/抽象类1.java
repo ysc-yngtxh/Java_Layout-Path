@@ -31,7 +31,7 @@ package A1抽象类;
 abstract class A{
     A(){
         System.out.println("A,无参构造函数");
-    }  //这个是构造方法，不是方法体
+    }  // 这个是构造方法，不是方法体
 }
 class B extends A{
     B(){
@@ -48,16 +48,16 @@ abstract class Animal{
         this.qwer = qwer;
     }
 
-    //动物类
+    // 动物类
     public abstract void move();
 
     public void abc(){
         System.out.println("ff");
     };
 }
-class Bird extends Animal{      //鸟儿类
+class Bird extends Animal{      // 鸟儿类
     public void move(){                          //必须要将父类的抽象方法进行方法覆盖，否则Bird继承Animal的构造体中肯定有public abstract void move();
-        System.out.println("鸟儿在飞翔");  //但是有abstract的抽象方法必是抽象类，但Bird类不是抽象类，因此在编译时会不通过，所以要进行方法覆盖
+        System.out.println("鸟儿在飞翔");  // 但是有abstract的抽象方法必是抽象类，但Bird类不是抽象类，因此在编译时会不通过，所以要进行方法覆盖
     }
 }
 abstract class Cat extends Animal{
@@ -70,7 +70,7 @@ public class 抽象类1 {
     public static void main(String[] args) {
         Animal a=new Bird();
         a.move();
-        //Animal a=new Cat();为什么无法创建Cat对象，记住：抽象类不能创建对象。
+        // Animal a=new Cat(); // 为什么无法创建Cat对象，记住：抽象类不能创建对象。
     }
 }
 

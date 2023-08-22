@@ -9,11 +9,11 @@ package K11线程.实现线程2;
  */
 public class 实现线程的第二种方式2 {
     public static void main(String[] args) {
-        //创建一个可运行的对象
-        //MyRunnable r = new MyRunnable();
-        //将可运行的对象封装成一个线程对象
+        // 创建一个可运行的对象
+        // MyRunnable r = new MyRunnable();
+        // 将可运行的对象封装成一个线程对象
         Thread t = new Thread(new MyRunnable());
-        //启动线程
+        // 启动线程
         t.start();
         for (int i = 0; i < 100; i++) {
             System.out.println("主线程--->" + i);

@@ -36,7 +36,7 @@ public class A四大函数 {
         /*
         Predicate = new Predicate<String>() {
             @Override
-            public boolean test(String str) {
+            public boolean Test(String str) {
                 return false;
             }
         };

@@ -6,7 +6,7 @@ package N14练习题;
  * @description: TODO
  * @date 2022/11/04 22:24
  */
-public class USER {
+public class User {
 
     private String id;
     private String user;
@@ -17,7 +17,7 @@ public class USER {
 
     @Override
     public String toString() {
-        return "USER{" +
+        return "User{" +
                 "id='" + id + '\'' +
                 ", user='" + user + '\'' +
                 ", name='" + name + '\'' +

@@ -26,29 +26,32 @@ public class FileReader和FileWriter的使用6 {
             reader = new FileReader("myFile2");
             writer = new FileWriter("myFile3", true);
 
-            //字符输入流
-            char[] chars = new char[4];  //每次读取4个字符
+            // 字符输入流
+            char[] charsInput = new char[4];  // 每次读取4个字符
             int readCount = 0;
-            while ((readCount = reader.read(chars)) != -1) {
-                System.out.println(new String(chars, 0, readCount));
+            while ((readCount = reader.read(charsInput)) != -1) {
+                System.out.println(new String(charsInput, 0, readCount));
             }
 
-            //字符输出流
-            char[] chars1 = {'我', '是', '中', '国', '人'};
-            writer.write(chars1);
-            writer.write(chars1, 2, 3);
+            // 字符输出流
+            char[] charsOut = {'我', '是', '中', '国', '人'};
+            writer.write(charsOut);
+            writer.write(charsOut, 2, 3);
 
-            //普通文本文件的拷贝
-            r = new FileReader("D:\\IDEA\\Java成神之路\\src\\idea快捷键.java");
+            // 普通文本文件的拷贝
+            r = new FileReader(System.getProperty("user.dir") + "/Java基础及进阶/idea快捷键.java");
             w = new FileWriter("idea快捷键.java");
-            char[] c = new char[1024*512];
+            char[] c = new char[1024 * 3];
             int rc = 0;
             while((rc = r.read(c)) != -1){
-                w.write(c, 0,rc);
+                System.out.println(c);
+                System.out.println(rc);
+                w.write(c, 0, rc);
             }
 
-
+            // 刷新流
             writer.flush();
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -57,6 +60,13 @@ public class FileReader和FileWriter的使用6 {
             if (reader != null) {
                 try {
                     reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (writer != null) {
+                try {
+                    writer.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

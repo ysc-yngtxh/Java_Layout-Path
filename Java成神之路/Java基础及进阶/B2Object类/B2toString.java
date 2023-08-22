@@ -11,8 +11,10 @@ package B2Object类;
 public class B2toString {
     public static void main(String[] args) {
         MyTime t1 = new MyTime(1997,4,29);
-		/*String s1=t1.toString();
-		System.out.println(s1);*/
+		/*
+		  String s1=t1.toString();
+		  System.out.println(s1);
+		 */
         System.out.println(t1.toString());
     }
 }
@@ -33,5 +35,5 @@ class MyTime{
         return this.year + "/" + this.month + "/" + this.day;
     }
 }
-//以后写一个类都是要重写toString()方法的
+// 以后写一个类都是要重写toString()方法的
 

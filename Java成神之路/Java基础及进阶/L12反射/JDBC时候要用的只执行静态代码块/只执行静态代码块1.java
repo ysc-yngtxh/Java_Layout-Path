@@ -16,7 +16,7 @@ package L12反射.JDBC时候要用的只执行静态代码块;
 public class 只执行静态代码块1 {
     public static void main(String[] args) {
         try {
-            //Class.forName()这个方法的执行会导致：类加载
+            // Class.forName()这个方法的执行会导致：类加载
             Class.forName("L12反射.JDBC时候要用的只执行静态代码块.MyClass");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

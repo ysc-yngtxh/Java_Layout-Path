@@ -2,10 +2,10 @@ package K11线程.线程安全4.synchronized面试题3;
 
 /*
 面试题：
-MyClass中两方法都有synchronized
-doOther方法的执行需不需要等doSome方法的结束？
+  MyClass中两方法都有synchronized
+  doOther方法的执行需不需要等doSome方法的结束？
 
-需要，因为共享对象是this。且是同一个
+  需要，因为共享对象是this。且是同一个
  */
 public class Exam02 {
     public static void main(String[] args) throws InterruptedException {
@@ -18,7 +18,7 @@ public class Exam02 {
         t2.setName("t2");
 
         t1.start();
-        Thread.sleep(1000);  //这个睡眠的作用是：为了保证1线程先执行
+        Thread.sleep(1000);  // 这个睡眠的作用是：为了保证1线程先执行
         t2.start();
     }
 }

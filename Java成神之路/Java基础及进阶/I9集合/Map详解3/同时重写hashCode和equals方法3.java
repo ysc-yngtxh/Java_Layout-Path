@@ -36,16 +36,16 @@ import java.util.Set;
  */
 public class 同时重写hashCode和equals方法3 {
     public static void main(String[] args) {
-        Student s1 = new Student("陈嘉琪");
-        Student s2 = new Student("陈嘉琪");
+        Student s1 = new Student("曹玉敏");
+        Student s2 = new Student("曹玉敏");
 
         System.out.println(s1.equals(s2));
 
-        //hashCode是用来在散列存储结构中确定对象的存储地址的；
+        // hashCode是用来在散列存储结构中确定对象的存储地址的；
         System.out.println("s1的hashCode:" + s1.hashCode());
         System.out.println("s2的hashCode:" + s2.hashCode());
 
-        //s1.equals(s2)的结果已经是true了，那么往HashSet集合中放（HashSet集合特点：无序不可重复）
+        // s1.equals(s2)的结果已经是true了，那么往HashSet集合中放（HashSet集合特点：无序不可重复）
         Set<Student> set = new HashSet<>();
         set.add(s1);
         set.add(s2);

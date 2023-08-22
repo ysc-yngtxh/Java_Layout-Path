@@ -7,12 +7,12 @@ package A1抽象类;
  * @date 2023/1/12 17:36
  */
 public class 修饰符访问级别5 {
-    /*
-    修饰符	   当前类  包  子类  其他包
-    public	    √	  √	   √	 √
-    protected	√	  √	   √	 ×
-    no modifier	√	  √	   ×	 ×
-    private	    √	  ×	   ×	 ×
+    /**
+       修饰符	   当前类  包  子类  其他包
+       public	    √	  √	   √	 √
+       protected	√	  √	   √	 ×
+       no modifier	√	  √	   ×	 ×
+       private	    √	  ×	   ×	 ×
     */
     public static void main(String[] args) {
         // TODO 同一个包下（不能访问到被private修饰的属性）

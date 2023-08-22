@@ -19,11 +19,18 @@ public class 获取类路径下文件的绝对路径3 {
               getPath()               该方法返回此抽象路径名的路径名字符串的形式。
 
          */
-        String path = Thread.currentThread().getContextClassLoader().getResource("classinfo.properties").toURI().getPath();
+        String path = Thread.currentThread()
+                .getContextClassLoader()
+                .getResource("classinfo.properties")
+                .toURI()
+                .getPath();
         System.out.println(path);
 
-        String paths = Thread.currentThread().getContextClassLoader().getResource("classinfo.properties").getPath();
-        System.out.println( URLDecoder.decode(paths, "UTF-8") );//解决中文乱码问题
+        String paths = Thread.currentThread()
+                .getContextClassLoader()
+                .getResource("classinfo.properties")
+                .getPath();
+        System.out.println( URLDecoder.decode(paths, "UTF-8") ); // 解决中文乱码问题
 
         // 获取当前项目路径
         System.err.println("path1: " + System.getProperty("user.dir"));

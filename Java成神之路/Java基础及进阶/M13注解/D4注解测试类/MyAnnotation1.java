@@ -12,9 +12,9 @@ public @interface MyAnnotation1 {
      */
     String name();
 
-    //颜色属性
+    // 颜色属性
     String color();
 
-    //年龄属性
-    int age() default 23;  //default：属性指定默认值
+    // 年龄属性
+    int age() default 23;  // default：属性指定默认值
 }

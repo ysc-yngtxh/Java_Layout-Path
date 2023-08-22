@@ -45,18 +45,18 @@ public class 线程调度方法 {
         Thread t = new Thread(new YSC());
         t.setName("t");
         t.start();
-        t.setPriority(10);  //优先级较高的，只是抢到的CPU时间片相对多一些。大概率方向更偏向优先级比较高的
+        t.setPriority(10);  // 优先级较高的，只是抢到的CPU时间片相对多一些。大概率方向更偏向优先级比较高的
 
         for (int i = 1; i <= 100; i++) {
             System.out.println(Thread.currentThread().getName() + "--->" + i);
         }
 
         try {
-            t.join();      //t线程先执行，直到t线程结束，主线程才可以继续。
+            t.join();      // t线程先执行，直到t线程结束，主线程才可以继续。
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("main over!");  //所以这条语句是最后执行的
+        System.out.println("main over!");  // 所以这条语句是最后执行的
     }
 }
 
@@ -64,13 +64,13 @@ class YSC implements Runnable{
     @Override
     public void run() {
 
-        //默认的优先级是5
+        // 默认的优先级是5
         for (int i = 1; i <= 100; i++) {
 
-            //每10个让位一次
+            // 每10个让位一次
             if(i % 10 == 0){
-                Thread.yield();   //当前线程暂停一下，让给主线程
-                //比如在t-->29后，执行的就是main线程
+                Thread.yield();   // 当前线程暂停一下，让给主线程
+                // 比如在t-->29后，执行的就是main线程
             }
             System.out.println(Thread.currentThread().getName() + "-->" + i);
         }

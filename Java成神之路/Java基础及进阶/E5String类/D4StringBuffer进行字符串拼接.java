@@ -17,44 +17,44 @@ public class D4StringBuffer进行字符串拼接 {
             s += i;
             System.out.println(s);
         }
-        //0
-        //01
-        //012
-        //0123
-        //01234
-        //012345
-        //0123456
-        //01234567
-        //012345678
-        //0123456789
-        //一次循环：""是一个String对象，i是个对象，s += i又是个对象。下一次循环又会创建三个对象
+        // 0
+        // 01
+        // 012
+        // 0123
+        // 01234
+        // 012345
+        // 0123456
+        // 01234567
+        // 012345678
+        // 0123456789
+        // 一次循环：""是一个String对象，i是个对象，s += i又是个对象。下一次循环又会创建三个对象
         // 每一次循环都会新建String对象，并开辟一个方法区常量池空间，会给方法区常量池带来很大的压力
 
 
 
-        //创建一个初始化容量为16个byte[] D4数组。（字符串缓冲区对象）
+        // 创建一个初始化容量为16个byte[] D4数组。（字符串缓冲区对象）
         StringBuffer  stringBuffer = new StringBuffer();
 
-        //拼接字符串，以后拼接字符串统一调用append()方法
-        //append是追加的意思
+        // 拼接字符串，以后拼接字符串统一调用append()方法
+        // append是追加的意思
         stringBuffer.append("a");
-        stringBuffer.append("b");//直接会在byte数组中填，并不会重新开辟一个方法区
+        stringBuffer.append("b"); // 直接会在byte数组中填，并不会重新开辟一个方法区
         stringBuffer.append("c");
         stringBuffer.append("Hello");
         stringBuffer.append("World");
-        //append方法底层在进行追加的时候，如果byte数组满了，会自动扩容
+        // append方法底层在进行追加的时候，如果byte数组满了，会自动扩容
         stringBuffer.append(100L);
 
         System.out.println(stringBuffer);
 
-        //指定初始化容量的StringBuffer对象（字符串缓冲对象）
-        StringBuffer sb =new StringBuffer(100);
+        // 指定初始化容量的StringBuffer对象（字符串缓冲对象）
+        StringBuffer sb = new StringBuffer(100);
         sb.append("a");
         sb.append("b");
         sb.append("c");
         sb.append("Hello");
         sb.append("World");
-        System.out.println(sb);  //在println()方法中引用会自动调用toString()方法
+        System.out.println(sb);  // 在println()方法中引用会自动调用toString()方法
 
 
     }

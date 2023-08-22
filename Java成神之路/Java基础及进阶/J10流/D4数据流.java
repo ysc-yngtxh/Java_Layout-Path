@@ -1,6 +1,11 @@
 package J10流;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /*
 java.io.DataOutputStream:数据专属的流
@@ -16,7 +21,7 @@ public class D4数据流 {
         FileInputStream fis = null;
         FileOutputStream fos = null;
         try{
-            //创建数据专属的字节输出流
+            // 创建数据专属的字节输出流
             fos = new FileOutputStream("data");
             DataOutputStream dos = new DataOutputStream(fos);
 

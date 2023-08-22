@@ -32,31 +32,31 @@ ArrayList集合：是非线程安全的
 public class ArrayList集合初始化容量及扩容2 {
     public static void main(String[] args) {
 
-        //默认初始化容量10
-        List list = new ArrayList();
-        System.out.println(list.size());//0
+        // 默认初始化容量10
+        List<Object> list = new ArrayList<>();
+        System.out.println(list.size()); // 0
 
-        //指定初始化容量20
-        List list2 = new ArrayList(100);//ArrayList集合扩容
+        // 指定初始化容量20
+        List<Object> list2 = new ArrayList<>(100); // ArrayList集合扩容
         System.out.println(list2.size());//0
-        //集合的size()方法是获取当前集合中元素的个数。不是获取集合的容量
+        // 集合的size()方法是获取当前集合中元素的个数。不是获取集合的容量
 
-        //创建一个HashSet集合
-        Collection c = new HashSet();
-        //添加元素到Set集合
+        // 创建一个HashSet集合
+        Collection<Object> c = new HashSet<>();
+        // 添加元素到Set集合
         c.add(100);
         c.add(200);
         c.add(900);
         c.add(50);
 
-        //通过这个构造方法就可以将HashSet集合转换成List集合。
-        List list3 = new ArrayList(c);   //将HashSet集合对象通过引用c传到ArrayList集合里
+        // 通过这个构造方法就可以将HashSet集合转换成List集合。
+        List<Object> list3 = new ArrayList<>(c);   // 将HashSet集合对象通过引用c传到ArrayList集合里
         for (int i = 0; i < list3.size(); i++) {
             System.out.println(list3.get(i));
         }
 
 
-        System.out.println(10 >> 1);   //5
-        //右移1位   即00001010-->00000101
+        System.out.println(10 >> 1);   // 5
+        // 右移1位   即00001010-->00000101
     }
 }

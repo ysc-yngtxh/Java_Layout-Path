@@ -51,7 +51,8 @@ package I9集合;
 
  */
 public class 集合概述1 {
-    /*Map集合
+    /*
+      Map集合
         1、Map集合和Collection集合没有关系
         2、Map集合以key和value这种键值对的方存储元素
         3、key和value都是存储java对象的内存地址

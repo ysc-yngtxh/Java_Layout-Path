@@ -11,17 +11,17 @@ import java.lang.reflect.Method;
 public class 反射机制调用方法3 {
     public static void main(String[] args) throws Exception{
 
-        //不使用反射机制调用方法
+        // 不使用反射机制调用方法
         user users= new user();
-        boolean logins = users.login("admin","123");
+        boolean logins = users.login("admin", "123");
         System.out.println(logins ? "登陆成功" : "登陆失败");
 
-        //使用反射机制调用方法
-        Class userser =Class.forName("L12反射.D4反射Method.user");//获取class
-        Object obj = userser.newInstance();   //创建对象，底层调用的是无参构造方法
-        Method loginMethod = userser.getDeclaredMethod("login",String.class,String.class);//获取Method
-        Object retValue = loginMethod.invoke(obj,"admin","123"); //invoke英文翻译是调用,即调用方法
+        // 使用反射机制调用方法
+        Class<?> userser =Class.forName("L12反射.D4反射Method.user"); // 获取class
+        Object obj = userser.newInstance();   // 创建对象，底层调用的是无参构造方法
+        Method loginMethod = userser.getDeclaredMethod("login",String.class,String.class); // 获取Method
+        Object retValue = loginMethod.invoke(obj,"admin","123"); // invoke英文翻译是调用,即调用方法
         System.out.println((boolean)retValue ? "登陆成功" : "登陆失败");
-        //System.out.println(loginMethod.invoke(obj,"admin","123"));
+        // System.out.println(loginMethod.invoke(obj,"admin","123"));
     }
 }

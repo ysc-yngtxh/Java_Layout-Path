@@ -2,7 +2,7 @@ package L12反射.C3反射Field;
 
 public class Student {
 
-    //5个Field，分别采用了不同的访问控制权限修饰符
+    // 5个Field，分别采用了不同的访问控制权限修饰符
     public String name;
     protected int age;
     boolean sex;

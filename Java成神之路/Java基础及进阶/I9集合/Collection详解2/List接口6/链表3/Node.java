@@ -9,10 +9,10 @@ package I9集合.Collection详解2.List接口6.链表3;
  */
 public class Node {
 
-    //存储的数据
+    // 存储的数据
     Object data;
 
-    //下一个节点的内存地址
+    // 下一个节点的内存地址
     Node next;
 
     public Node(){

@@ -24,30 +24,30 @@ public class
 Collection接口常用方法1 {
     public static void main(String[] args) {
 
-        Collection c = new ArrayList();
+        Collection<Object> c = new ArrayList<>();
 
-        c.add(100);//自动装箱（Java5的新特性），实际上放进去了
+        c.add(100); // 自动装箱（Java5的新特性），实际上放进去了
         // 一个对象的内存地址。Integer x = new Integer();
-        c.add(3.14);//自动装箱
+        c.add(3.14); // 自动装箱
         c.add(new Object());
         c.add(new Student());
-        c.add(true);//自动装箱
+        c.add(true); // 自动装箱
 
-        //获取集合中元素的个数
+        // 获取集合中元素的个数
         System.out.println("集合中元素的个数是：" + c.size());
 
-        //清空集合
+        // 清空集合
         c.clear();
         System.out.println("集合中元素的个数是：" + c.size());
 
-        //再向集合中添加元素
+        // 再向集合中添加元素
         c.add("Hello");
         c.add("World");
         c.add("浩克");
         c.add("绿巨人");
         c.add(1);
 
-        //判断集合中是否包含"绿巨人"
+        // 判断集合中是否包含"绿巨人"
         boolean flag = c.contains("绿巨人");
         System.out.println(flag);
         boolean flag2 = c.contains("绿巨人2");
@@ -56,22 +56,22 @@ Collection接口常用方法1 {
 
         System.out.println("集合中元素的个数是：" + c.size());
 
-        //删除集合中某个元素
+        // 删除集合中某个元素
         c.remove(1);
         System.out.println("集合中元素的个数是：" + c.size());
 
-        //判断集合是否为空（集合中是否存在元素）
-        System.out.println(c.isEmpty());//false
-        //清空
+        // 判断集合是否为空（集合中是否存在元素）
+        System.out.println(c.isEmpty()); // false
+        // 清空
         c.clear();
-        System.out.println(c.isEmpty());//true,(true表示集合中没有元素了！)
+        System.out.println(c.isEmpty()); // true,(true表示集合中没有元素了！)
 
         c.add("abc");
         c.add("def");
         c.add(100);
         c.add("helloworld!");
 
-        //转换成数组(了解，使用的不多)
+        // 转换成数组(了解，使用的不多)
         Object[] obj = c.toArray();
         for (int i = 0; i < obj.length; i++) {
             //遍历数组

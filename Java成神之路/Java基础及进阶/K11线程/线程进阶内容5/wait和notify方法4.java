@@ -42,16 +42,16 @@ import java.util.List;
 public class wait和notify方法4 {
     public static void main(String[] args) {
 
-        //创建List仓库集合对象，共享的
-        List list = new ArrayList();
+        // 创建List仓库集合对象，共享的
+        List<Object> list = new ArrayList<>();
 
-        //创建生产者线程对象
+        // 创建生产者线程对象
         Thread t1 = new Thread(new Producer(list),"生产者线程");
-        //创建消费者线程对象
+        // 创建消费者线程对象
         Thread t2 = new Thread(new Consumer(list),"消费者线程");
 
-        //t1.setName("生产者线程");
-        //t2.setName("消费者线程");
+        // t1.setName("生产者线程");
+        // t2.setName("消费者线程");
         t1.start();
         t2.start();
     }
@@ -60,43 +60,43 @@ public class wait和notify方法4 {
 //生产线程
 class Producer implements Runnable{
 
-    private List list;
+    private List<Object> list;
 
-    public Producer(List list) {
+    public Producer(List<Object> list) {
         this.list = list;
     }
 
     @Override
     public void run() {
-        //一直生产(使用死循环来模拟一直生产)
+        // 一直生产(使用死循环来模拟一直生产)
         while(true){
-            //给仓库对象list加一把锁
+            // 给仓库对象list加一把锁
             synchronized(list){
-                if(list.size() > 0){  //大于0，说明仓库中已经有1个元素了。
+                if(list.size() > 0){  // 大于0，说明仓库中已经有1个元素了。
                     try {
-                        //当前线程进入等待状态，并且释放list集合的锁
+                        // 当前线程进入等待状态，并且释放list集合的锁
                         list.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-                //程序能够执行到此处，说明仓库是空的，可以生产
+                // 程序能够执行到此处，说明仓库是空的，可以生产
                 Object obj = new Object();
                 list.add(obj);
                 System.out.println(Thread.currentThread().getName() + "-->" +obj);
-                //唤醒消费者消费
+                // 唤醒消费者消费
                 list.notifyAll();
             }
         }
     }
 }
 
-//消费线程
+// 消费线程
 class Consumer implements Runnable{
 
-    private List list;
+    private List<Object> list;
 
-    public Consumer(List list) {
+    public Consumer(List<Object> list) {
         this.list = list;
     }
 
@@ -105,17 +105,17 @@ class Consumer implements Runnable{
         while(true){
             synchronized(list){
                 if(list.size() == 0){
-                    //仓库空了，消费者线程等待，释放掉list集合的锁
+                    // 仓库空了，消费者线程等待，释放掉list集合的锁
                     try {
                         list.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-                //程序能执行到此处，说明仓库中有数据，进行消费
+                // 程序能执行到此处，说明仓库中有数据，进行消费
                 Object obj = list.remove(0);   //删除指定下标的元素
                 System.out.println(Thread.currentThread().getName() + "-->" +obj);
-                //唤醒生产者生产
+                // 唤醒生产者生产
                 list.notifyAll();
             }
         }

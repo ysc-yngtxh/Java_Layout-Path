@@ -3,7 +3,7 @@ package M13注解.F6注解在开发中的作用;
 @Id
 public class User {
 
-    //int id;
+    // int id;
 
     String no;
 

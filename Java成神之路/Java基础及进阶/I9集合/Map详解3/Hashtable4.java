@@ -24,29 +24,30 @@ import java.util.Properties;
  */
 public class Hashtable4  {
     public static void main(String[] args) {
-        Map map = new HashMap();
+        Map<Object, Object> map = new HashMap<>();
         map.put(null,"100");
         map.put(100,"null");
         System.out.println(map.get(null));
         System.out.println(map.get(100));
 
-        Map map2 = new Hashtable();
-        map2.put(null,"游诗成");
-        map2.put(222,"null");
-        map2.put(333,"陈嘉琪");
+        Map<Object, Object> map2 = new Hashtable<>();
+        map2.put(null, "游诗成");
+        map2.put(222, "null");
+        map2.put(333, "曹玉敏");
+        // Hashtable的key和value不允许null的,否则会出现空指针异常：java.lang.NullPointerException
         System.out.println(map.get(null));
-        System.out.println(map.get(222));//Hashtable的key和value不允许null的,否则会出现空指针异常：java.lang.NullPointerException
+        System.out.println(map.get(222));
 
         System.out.println("=========================================================================================");
 
-        //创建一个Properties对象
+        // 创建一个Properties对象
         Properties pro = new Properties();
-        //需要掌握Properties的两个方法，一个存，一个取
-        pro.setProperty("ur1","jdbc://localhost:3306//bjpowernode");
-        pro.setProperty("driver","com.mysql.jdbc");
-        pro.setProperty("username","root");
-        pro.setProperty("password","123");
-        //通过key获取value
+        // 需要掌握Properties的两个方法，一个存，一个取
+        pro.setProperty("ur1", "jdbc://localhost:3306//bjpowernode");
+        pro.setProperty("driver", "com.mysql.jdbc");
+        pro.setProperty("username", "root");
+        pro.setProperty("password", "123");
+        // 通过key获取value
         String ur1 = pro.getProperty("ur1");
         String ur2 = pro.getProperty("driver");
         String ur3 = pro.getProperty("username");

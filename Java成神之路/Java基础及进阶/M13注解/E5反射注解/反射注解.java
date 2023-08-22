@@ -8,8 +8,8 @@ import java.lang.reflect.Method;
 public class 反射注解 {
     public static void main(String[] args) throws Exception{
 
-        //获取这个类
-        Class c = Class.forName("M13注解.E5反射注解.MyAnnotationTest");
+        // 获取这个类
+        Class<?> c = Class.forName("M13注解.E5反射注解.MyAnnotationTest");
         //判断这个类型上是否有这个@MyAnnotation注解
         if(c.isAnnotationPresent(MyAnnotation.class)){
             //获取该注解对象

@@ -32,17 +32,17 @@ import java.io.*;
 public class 序列化与反序列化的实现1 {
     public static void main(String[] args) throws Exception{
 
-        //创建Java对象
-        Student s= new Student(111,"游诗成","男");
-        //序列化
+        // 创建Java对象
+        Student s= new Student(111, "游诗成", "男");
+        // 序列化
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Student"));
-        //序列化对象
+        // 序列化对象
         oos.writeObject(s);
 
-        //反序列化
+        // 反序列化
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Student"));
         Object obj = ois.readObject();
-        //反序列化回来时一个学生对象，所以会调用学生对象的toString方法1
+        // 反序列化回来时一个学生对象，所以会调用学生对象的toString方法1
         System.out.println(obj);
         oos.close();
         oos.flush();
@@ -51,13 +51,13 @@ public class 序列化与反序列化的实现1 {
 
 class Student implements Serializable {
 
-    //IDEA工具快捷键生成的固定序化版本号
+    // IDEA工具快捷键生成的固定序化版本号
     private static final long serialVersionUID = -3199561984941795299L;
 
     private int no;
     private String name;
 
-    //**transient关键字是不参加序列化操作
+    // **transient关键字是不参加序列化操作
     private transient String sex;
 
     public Student() {

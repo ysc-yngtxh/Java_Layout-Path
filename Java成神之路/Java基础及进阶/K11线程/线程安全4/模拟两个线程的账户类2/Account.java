@@ -1,8 +1,8 @@
 package K11线程.线程安全4.模拟两个线程的账户类2;
 
 public class Account {
-    private String action;  //账号
-    private double balance;  //余额
+    private String action;  // 账号
+    private double balance;  // 余额
 
     public Account() {
     }

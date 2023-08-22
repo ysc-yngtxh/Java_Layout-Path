@@ -16,7 +16,7 @@ import java.util.Collection;
 public class contains详解3 {
     public static void main(String[] args) {
         //创建集合对象
-        Collection c = new ArrayList();
+        Collection<Object> c = new ArrayList<>();
 
         String s1 = "abc";
         String s2 = "def";
@@ -24,21 +24,21 @@ public class contains详解3 {
         c.add(s2);
         System.out.println("元素的个数是：" + c.size());
         String s3 = "abc";
-        System.out.println(c.contains(s3));//判断集合中是否存在“abc”，可以在底层源码看到contains调用了equals方法
-        System.out.println(s1.equals(s3));//String类的equals方法已经重写，比较的内容.所以是true
+        System.out.println(c.contains(s3)); // 判断集合中是否存在“abc”，可以在底层源码看到contains调用了equals方法
+        System.out.println(s1.equals(s3));  // String类的equals方法已经重写，比较的内容.所以是true
 
         User u1 = new User("游诗成");
-        User u2 = new User("陈嘉琪，我好想你！");
+        User u2 = new User("曹玉敏，我好想你！");
         c.add(u1);
         c.add(u2);
         System.out.println("元素的个数是：" + c.size());
         User u3 = new User("游诗成");
-        System.out.println(c.contains(u3));//User类并没有重写equals方法，所以调用的Object类的equals方法。所以是false
+        System.out.println(c.contains(u3)); // User类并没有重写equals方法，所以调用的Object类的equals方法。所以是false
 
         Integer x = new Integer(1000);
         c.add(x);
         Integer y = new Integer(1000);
-        System.out.println(c.contains(y));//true,因为Integer也重写了equals方法
+        System.out.println(c.contains(y)); // true,因为Integer也重写了equals方法
     }
 }
 
@@ -54,13 +54,13 @@ class User{
 }
     /*
 
-    //Object类的equals方法，比较的是对象的内存地址
+    // Object类的equals方法，比较的是对象的内存地址
     public boolean equals(Object obj){
          return (this == obj);
     }
 
 
-    //String类的equals方法，比较的是对象的内容。
+    // String类的equals方法，比较的是对象的内容。
     public boolean equals(Object anObject) {
         if (this == anObject) {
             return true;

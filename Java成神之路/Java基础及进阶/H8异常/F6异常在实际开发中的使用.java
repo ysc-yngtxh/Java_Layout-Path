@@ -36,7 +36,7 @@ class MyException extends Exception{
 
 
 
-//方法覆盖的时候，重写之后的方法不能比重写之前的方法抛出更多（更广法）的异常
+// 方法覆盖的时候，重写之后的方法不能比重写之前的方法抛出更多（更广法）的异常
 class Aimal{
     public void doSome(){
 
@@ -55,11 +55,11 @@ class Cat extends Aimal{
 
     }
 
-    /*public void doSome() throws Exception{
+    /*
+    public void doSome() throws Exception{
            编译失败
-    }*/
+    }
+    */
 }
 
-
-
-//******异常在实际开发中的使用具体可参考数组作业第一题，关于压栈弹栈失败，可以当作异常来处理
+// ******异常在实际开发中的使用具体可参考数组作业第一题，关于压栈弹栈失败，可以当作异常来处理

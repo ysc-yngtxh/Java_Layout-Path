@@ -28,34 +28,34 @@ import java.util.List;
  */
 public class List接口的常用方法1 {
     public static void main(String[] args) {
-        //创建List对象
-        List myList = new ArrayList();
+        // 创建List对象
+        List<Object> myList = new ArrayList<>();
 
-        //添加元素。
+        // 添加元素。
         myList.add("A");
         myList.add("B");
         myList.add("C");
         myList.add("C");
         myList.add("D");
 
-        //在列表的指定位置插入指定元素（第一个参数是下标）
-        //这个方法使用不多，因为对于ArrayList集合来说效率比较低
-        //myList.add(index：下标,element：元素);
+        // 在列表的指定位置插入指定元素（第一个参数是下标）
+        // 这个方法使用不多，因为对于ArrayList集合来说效率比较低
+        // myList.add(index：下标,element：元素);
         myList.add(1,"KING");
 
-        //迭代
-        Iterator it = myList.iterator();
+        // 迭代
+        Iterator<Object> it = myList.iterator();
         while(it.hasNext()){
             Object o =it.next();
             System.out.println(o);
         }
 
-        //根据下标获取元素
+        // 根据下标获取元素
         Object firstObj = myList.get(0);
         System.out.println(firstObj);
 
-        //因为有下标，所以List集合有自己比较特殊的遍历方式
-        //通过下标遍历.[List集合特有的方式，Set没有]
+        // 因为有下标，所以List集合有自己比较特殊的遍历方式
+        // 通过下标遍历.[List集合特有的方式，Set没有]
         for (int i = 0; i < myList.size(); i++) {
             Object obj = myList.get(i);
             System.out.println(obj);
@@ -63,21 +63,21 @@ public class List接口的常用方法1 {
 
         System.out.println("=========================================================================================");
 
-        //获取指定对象第一次出现出的索引
+        // 获取指定对象第一次出现出的索引
         System.out.println(myList.indexOf("KING"));
 
-        //获取指定对象最后一次出现的索引
+        // 获取指定对象最后一次出现的索引
         System.out.println(myList.lastIndexOf("C"));
 
-        //删除指定下标位置的元素
-        //删除下标为0的元素
+        // 删除指定下标位置的元素
+        // 删除下标为0的元素
         myList.remove(0);
         System.out.println(myList.size());
 
-        //修改指定位置的元素
+        // 修改指定位置的元素
         myList.set(2,"Soft");
 
-        //遍历集合
+        // 遍历集合
         for (int i = 0; i < myList.size(); i++) {
             Object obj = myList.get(i);
             System.out.println(obj);

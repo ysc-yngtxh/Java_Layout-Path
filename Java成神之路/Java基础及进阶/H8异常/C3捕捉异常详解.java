@@ -30,9 +30,9 @@ public class C3捕捉异常详解 {
             FileInputStream fis = new FileInputStream("D:\\游诗成\\文档\\数据库作业sql");
         }catch(FileNotFoundException e){
             System.out.println("文件不存在");
-        }catch(IOException e){     //IOException是FileNotFoundException的父类型
+        }catch(IOException e){     // IOException是FileNotFoundException的父类型
             System.out.println("读文件报错！");
-        }catch(ArithmeticException | NullPointerException e){    //catch中可以加上或符号是在JDK8之后才有的新特性
+        }catch(ArithmeticException | NullPointerException e){    // catch中可以加上或符号是在JDK8之后才有的新特性
             System.out.println("数学异常？空指针异常？都有可能");
         }
     }

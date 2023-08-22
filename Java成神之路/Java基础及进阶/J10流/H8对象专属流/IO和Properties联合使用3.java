@@ -19,19 +19,19 @@ IO+Properties的联合应用
 public class IO和Properties联合使用3 {
     public static void main(String[] args) throws Exception{
         /*
-        Properties是一个Map集合，key和value都是String类型
-        想将userinfo文件中的数据加载到Properties对象当中
+          Properties是一个Map集合，key和value都是String类型
+          想将userinfo文件中的数据加载到Properties对象当中
          */
-        //新建一个输入流对象
+        // 新建一个输入流对象
         FileReader fr = new FileReader("D:\\IDEA\\Java成神之路\\Java基础及进阶\\src\\J10流\\H8对象专属流\\userinfo.properties");
 
-        //新建一个Map集合
+        // 新建一个Map集合
         Properties pro = new Properties();
 
-        //调用Properties对象的Load方法将文件中的数据加载到Map集合中
-        pro.load(fr);//文件中的数据顺着管道加载到Map集合当中，其中等号=左边做key,右边做value
+        // 调用Properties对象的Load方法将文件中的数据加载到Map集合中
+        pro.load(fr); // 文件中的数据顺着管道加载到Map集合当中，其中等号=左边做key,右边做value
 
-        //通过key来获取value
+        // 通过key来获取value
         String username = pro.getProperty("username");
         System.out.println(username);
 

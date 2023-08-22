@@ -12,21 +12,21 @@ import static java.util.stream.Collectors.groupingBy;
  * @description: TODO
  * @date 2022/11/04 22:44
  */
-public class test {
+public class Test {
     public static void main(String[] args) {
         System.out.println("--游诗成");
-        USER user1 = new USER();
+        User user1 = new User();
         user1.setDate("2022-11-01");
-        USER user2 = new USER();
+        User user2 = new User();
         user2.setDate("2022-11-02");
-        USER user3 = new USER();
+        User user3 = new User();
         user3.setDate("2022-11-03");
-        USER user4 = new USER();
+        User user4 = new User();
         user4.setDate("2022-11-02");
-        List<USER> users = Arrays.asList(user1, user2, user3, user4);
+        List<User> users = Arrays.asList(user1, user2, user3, user4);
 
-        Map<String, List<USER>> collect = users.stream()
-                .collect(groupingBy(USER::getDate));
+        Map<String, List<User>> collect = users.stream()
+                .collect(groupingBy(User::getDate));
 
 
 //        collect
@@ -38,7 +38,7 @@ public class test {
 
 //        collect.forEach(user->
 //        {
-            System.out.println(user1.toString());
+            System.out.println(user1);
 //        });
 
     }

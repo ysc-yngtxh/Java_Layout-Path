@@ -25,67 +25,68 @@ package C3匿名内部类;
 
 
 class Test{
-    static String country;   //静态变量
+    static String country;   // 静态变量
 
-    //该类在类的内部，所以被称为内部类
-    //由于前面有static，所以称为“静态内部类”
+    // 该类在类的内部，所以被称为内部类
+    // 由于前面有static，所以称为“静态内部类”
     static class Inner1{
 
     }
 
-    int age;  //实例变量
+    int age;  // 实例变量
 
-    //该类在类的内部，所以被称为内部类
-    //没有static叫做实例内部类
+    // 该类在类的内部，所以被称为内部类
+    // 没有static叫做实例内部类
     class Inner2{
 
     }
 
-    //方法
+    // 方法
     public void doSome(){
         int i=100;
 
-        //该类在类的内部，所以被称为内部类
-        //局部内部类
+        // 该类在类的内部，所以被称为内部类
+        // 局部内部类
         class Inner3{
 
         }
     }
 
     public void doOther(){
-        //doSome()方法中的局部内部类Inner3,在doOther()中不能使用。
+        // doSome()方法中的局部内部类Inner3,在doOther()中不能使用。
     }
 }
 
 
-/*public class 概述 {
+/*
+public class 概述 {
 
 	public static void main(String[] args) {
 		MyMath mm=new MyMath();
 		mm.mysum(new ComputeImpl(),100,200);
-		//mysum()中的第一个形参是接口类Compute的引用，但是接口类是无法new对象的，
-		//所以就要编写一个实现类ComputeImpl()，再将实现类进行new对象。
+		// mysum()中的第一个形参是接口类Compute的引用，但是接口类是无法new对象的，
+		// 所以就要编写一个实现类ComputeImpl()，再将实现类进行new对象。
 	}
 }
 
-//负责计算的接口
+// 负责计算的接口
 interface Compute{
-	//抽象方法
+	// 抽象方法
 	int sum(int a,int b);
 }
 
 class ComputeImpl implements Compute{
-	//对方法的实现
+	// 对方法的实现
 	public int sum(int a,int b){
 		return a+b;
 	}
 }
 
-//数学类
+// 数学类
 class MyMath{
-	//数学求和方法
+	// 数学求和方法
 	public void mysum(Compute c,int x,int y){
-		int retValue=c.sum(x, y);
+		int retValue = c.sum(x, y);
 		System.out.println(x + "+" + y + "=" + retValue);
 	}
 }*/
@@ -94,26 +95,26 @@ class MyMath{
 public class 匿名内部类概述 {
 
     public static void main(String[] args) {
-        MyMath mm=new MyMath();
-        mm.mysum(new Compute(){        //C3匿名内部类
+        MyMath mm = new MyMath();
+        mm.mysum(new Compute(){        // C3匿名内部类
             public int sum(int a,int b){
                 return a+b;
-            }//这里看起来是new了一个接口Compute。但是实际上并不是接口可以new了，后面的{}代表了对接口的实现。
-        },100,200);
+            } // 这里看起来是new了一个接口Compute。但是实际上并不是接口可以new了，后面的{}代表了对接口的实现。
+        }, 100, 200);
     }
 }
 
-//负责计算的接口
+// 负责计算的接口
 interface Compute{
-    //抽象方法
-    int sum(int a,int b);
+    // 抽象方法
+    int sum(int a, int b);
 }
 
 
-//数学类
+// 数学类
 class MyMath{
-    //数学求和方法
-    public void mysum(Compute c,int x,int y){
+    // 数学求和方法
+    public void mysum(Compute c, int x, int y){
         int retValue = c.sum(x, y);
         System.out.println(x + "+" + y + "=" + retValue);
     }

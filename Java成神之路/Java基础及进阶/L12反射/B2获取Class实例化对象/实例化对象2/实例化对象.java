@@ -28,24 +28,24 @@ import java.util.Properties;
 public class 实例化对象 {
     public static void main(String[] args) {
 
-        //第一种方式
-        //这不是用反射机制，创建对象
+        // 第一种方式
+        // 这不是用反射机制，创建对象
         User user = new User();
         System.out.println(user);
 
         System.out.println("==================================================================");
 
-        //第二种方式
-        //下面这段代码是以反射机制的方式创建对象
+        // 第二种方式
+        // 下面这段代码是以反射机制的方式创建对象
         try {
-            //通过反射机制获取Class，通过Class来实例化对象
-            Class c = Class.forName("L12反射.B2获取Class实例化对象.实例化对象2.User");  //c代表User类型1
+            // 通过反射机制获取Class，通过Class来实例化对象
+            Class<?> c = Class.forName("L12反射.B2获取Class实例化对象.实例化对象2.User");  // c代表User类型1
 
             System.out.println(c);
 
-            //newInstance()这个方法会调用User这个类的无参构造方法，完成对象的创建
-            //重点是：newInstance()调用的是无参构造，必须保证无参构造是存在的
-            Object obj = c.newInstance();   //这种方法在JDK9之后就过时了，改为 c.getDeclaredConstructor().newInstance();
+            // newInstance()这个方法会调用User这个类的无参构造方法，完成对象的创建
+            // 重点是：newInstance()调用的是无参构造，必须保证无参构造是存在的
+            Object obj = c.newInstance();   // 这种方法在JDK9之后就过时了，改为 c.getDeclaredConstructor().newInstance();
             System.out.println(obj);
 
         } catch (ClassNotFoundException e) {
@@ -58,27 +58,27 @@ public class 实例化对象 {
 
         System.out.println("=========================================================================================");
 
-        //第三种方式
-        //通过Io流读取classinfo.properties配置文件
+        // 第三种方式
+        // 通过Io流读取classinfo.properties配置文件
         FileInputStream fis = null;
         try {
-            //创建输入流对象。
-            fis = new FileInputStream("L12反射\\B2获取Class实例化对象\\实例化对象2\\classinfo.properties");
-            //创建属性类对象Map
+            // 创建输入流对象。
+            fis = new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/L12反射/B2获取Class实例化对象/实例化对象2/classinfo.properties");
+            // 创建属性类对象Map
             Properties pro = new Properties();
-            //加载
+            // 加载
             pro.load(fis);
             System.out.println(pro);
-            //通过key获取value
+            // 通过key获取value
             String className11 = pro.getProperty("className1");
             String className22 = pro.getProperty("className2");
 
-            //通过反射机制实例化对象
-            Class c1 = Class.forName(className11);
+            // 通过反射机制实例化对象
+            Class<?> c1 = Class.forName(className11);
             Object obj1 = c1.newInstance();
             System.out.println(obj1);
 
-            Class c2 = Class.forName(className22);
+            Class<?> c2 = Class.forName(className22);
             Object obj2 = c2.newInstance();
             System.out.println(obj2);
 

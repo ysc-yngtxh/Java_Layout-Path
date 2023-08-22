@@ -11,11 +11,11 @@ LinkedList集合底层采用了双向链表数据结构
  */
 public class LinkedList集合4 {
     public static void main(String[] args) {
-        //LinkedList集合有初始化容量吗？没有
-        //不管是LinkedList还是ArrayList，以后写代码时不需要关心具体是哪个集合
-        //因为我们要面向接口编程，调用的方法都是接口中的方法
-        //List list2 = new ArrayList();   //这样写表示底层你用了数组
-        List list3 = new LinkedList();   //这样写表示底层你用了双向链表
+        // LinkedList集合有初始化容量吗？没有
+        // 不管是LinkedList还是ArrayList，以后写代码时不需要关心具体是哪个集合
+        // 因为我们要面向接口编程，调用的方法都是接口中的方法
+        // List list2 = new ArrayList();   // 这样写表示底层你用了数组
+        List<Object> list3 = new LinkedList<>();   // 这样写表示底层你用了双向链表
 
         //以下这些方法你面向的都是接口编程
         list3.add(123);

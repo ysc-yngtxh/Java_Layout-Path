@@ -2,10 +2,10 @@ package K11线程.线程安全4.synchronized面试题3;
 
 /*
 面试题：
-MyClass方法中一个有synchronized，一个没有
-doOther方法的执行需不需要等doSome方法的结束？
+  MyClass方法中一个有synchronized，一个没有
+  doOther方法的执行需不需要等doSome方法的结束？
 
-不需要，因为doOther方法没有synchronized
+  不需要，因为doOther方法没有synchronized
  */
 public class Exam01 {
     public static void main(String[] args) throws InterruptedException {
@@ -19,7 +19,7 @@ public class Exam01 {
 
         t1.start();
 
-        Thread.sleep(1000);  //这个睡眠的作用是：为了保证1线程先执行
+        Thread.sleep(1000);  // 这个睡眠的作用是：为了保证1线程先执行
         t2.start();
     }
 }

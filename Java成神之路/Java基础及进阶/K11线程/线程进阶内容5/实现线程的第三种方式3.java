@@ -11,12 +11,12 @@ import java.util.concurrent.FutureTask;
  */
 public class 实现线程的第三种方式3 {
     public static void main(String[] args) throws Exception {
-        //第一步：创建一个“未来任务类”对象。
-        FutureTask task = new FutureTask(new Callable() {
+        // 第一步：创建一个“未来任务类”对象。
+        FutureTask<Object> task = new FutureTask<>(new Callable<Object>() {
             @Override
             public Object call() throws Exception {  //Call方法就相当于run方法。只不过这个有返回值
-                //线程执行一个任务，执行之后可能会有一个执行结果
-                //模拟执行
+                // 线程执行一个任务，执行之后可能会有一个执行结果
+                // 模拟执行
                 System.out.println("Call method begin");
                 Thread.sleep(1000*10);
                 System.out.println("Call method end");

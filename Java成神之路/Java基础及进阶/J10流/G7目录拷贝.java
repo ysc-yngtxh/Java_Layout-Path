@@ -4,23 +4,23 @@ import java.io.*;
 
 public class G7目录拷贝 {
     public static void main(String[] args) {
-        File srcDir = new File("D:\\course");  //手动填写源文件夹路径
-        File targetDir = new File("D:\\a"); //手动填写目标路径
-        copyDir(srcDir, targetDir); //调用复制文件夹方法
+        File srcDir = new File("D:\\course");  // 手动填写源文件夹路径
+        File targetDir = new File("D:\\a");    // 手动填写目标路径
+        copyDir(srcDir, targetDir);            // 调用复制文件夹方法
     }
-    //复制文件夹方法
+    // 复制文件夹方法
     public static void copyDir(File srcDir, File targetDir) {
-        if (!targetDir.exists()) { //如果目标路径不存在
-            targetDir.mkdir(); //则创建之
+        if (!targetDir.exists()) { // 如果目标路径不存在
+            targetDir.mkdir();     // 则创建之
         }
-        File[] files = srcDir.listFiles(); //列举目录下所有文件（包含子目录）存放至数组
-        for (File file : files) {  //增强for循环提取文件
-            if (file.isFile()) {  //判断是否为文件
+        File[] files = srcDir.listFiles(); // 列举目录下所有文件（包含子目录）存放至数组
+        for (File file : files) {          // 增强for循环提取文件
+            if (file.isFile()) {           // 判断是否为文件
                 copyFile(new File(srcDir + "\\" + file.getName()), new File(targetDir + "\\" + file.getName()));
-                //调用复制文件方法；创建新的File表示源文件名及目标文件名，文件名为源文件夹路径＋文件名，目标文件名同理
-            } else { //不是文件则为文件夹，以下为文件夹的处理方法
+                // 调用复制文件方法；创建新的File表示源文件名及目标文件名，文件名为源文件夹路径＋文件名，目标文件名同理
+            } else { // 不是文件则为文件夹，以下为文件夹的处理方法
                 copyDir(new File(srcDir + "\\" + file.getName()), new File(targetDir + "\\" + file.getName()));
-                //如果当前file为文件夹，则再次调用copyDir方法（递归）
+                // 如果当前file为文件夹，则再次调用copyDir方法（递归）
             }
         }
     }
@@ -36,7 +36,8 @@ public class G7目录拷贝 {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(targetFile)));
             while(br.readLine()!=null){
                 bw.write(br.readLine());
-            }*/
+            }
+            */
             fis = new FileInputStream(srcFile);
             fos = new FileOutputStream(targetFile);
             // 边读边写

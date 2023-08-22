@@ -25,10 +25,10 @@ Vector：
  */
 public class Vector集合源码分析5 {
     public static void main(String[] args) {
-        //创建一个Vector集合
-        List vector = new Vector();
+        // 创建一个Vector集合
+        List<Object> vector = new Vector<>();
 
-        //添加元素，默认容量10个
+        // 添加元素，默认容量10个
         vector.add(1);
         vector.add(2);
         vector.add(3);
@@ -40,25 +40,27 @@ public class Vector集合源码分析5 {
         vector.add(9);
         vector.add(10);
 
-        //满了之后扩容(扩容之后的容量是20)
+        // 满了之后扩容(扩容之后的容量是20)
         vector.add(11);
         for (int i = 0; i < vector.size(); i++) {
             System.out.println(vector.get(i));
         }
-        /*Iterator it = vector.iterator();
+        /*
+        Iterator it = vector.iterator();
         while(it.hasNext()){
             Object obj = it.next();
             System.out.println(obj);
-        }*/
+        }
+        */
 
         System.out.println("======================================================================================");
 
-        //这个可能以后要使用！！！
-        List mylist = new ArrayList();
-        //变成线程安全的
-        Collections.synchronizedList(mylist);//这里暂时没办法看效果，因为多线程没学，你记住先！
+        // 这个可能以后要使用！！！
+        List<Object> mylist = new ArrayList<>();
+        // 变成线程安全的
+        Collections.synchronizedList(mylist); // 这里暂时没办法看效果，因为多线程没学，你记住先！
 
-        //mylist就是线程安全的了
+        // mylist就是线程安全的了
         mylist.add("111");
         mylist.add("222");
         mylist.add("333");
