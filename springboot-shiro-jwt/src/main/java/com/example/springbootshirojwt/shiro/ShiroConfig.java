@@ -45,30 +45,30 @@ public class ShiroConfig {
         Map<String,String> map = new LinkedHashMap<>();
         /*map.put("/user/chen","roles[vip]");
         map.put("/user/update","perms[user:update]");*/
-        map.put("/login","anon");//登录不需要认证授权，只需要去数据库里校验用户名及密码正确即可
+        map.put("/login","anon"); // 登录不需要认证授权，只需要去数据库里校验用户名及密码正确即可
         map.put("/user/ysc","roles[svip]");
         map.put("/user/you","jwt");
-        //map.put("/**","jwt"); //一般自己定义的过滤器放最底下
-        FactoryBean.setFilterChainDefinitionMap(map); //将授权信息写入过滤器链中
+        //map.put("/**","jwt"); // 一般自己定义的过滤器放最底下
+        FactoryBean.setFilterChainDefinitionMap(map); // 将授权信息写入过滤器链中
 
-        //设置登陆的请求(未认证的请求会转到sgf页面)
+        // 设置登陆的请求(未认证的请求会转到sgf页面)
         FactoryBean.setLoginUrl("/Authentication");
-        //设置未授权的页面
+        // 设置未授权的页面
         FactoryBean.setUnauthorizedUrl("/Authorization");
-        //设置成功登陆的跳转页面
-        //FactoryBean.setSuccessUrl("/user/you");
+        // 设置成功登陆的跳转页面
+        // FactoryBean.setSuccessUrl("/user/you");
 
         return FactoryBean;
     }
 
 
-    //配置一个SecurityManager 安全管理器
+    // 配置一个SecurityManager 安全管理器
     @Bean
     public DefaultWebSecurityManager defaultWebSecurityManager(@Qualifier("myRealm") MyRealm myrealm){
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(myrealm);
 
-        //关闭shiro的session（无状态的方式使用shiro）
+        // 关闭shiro的session（无状态的方式使用shiro）
         DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
         DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();
         defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
@@ -79,7 +79,7 @@ public class ShiroConfig {
     }
 
 
-    //配置一个自定义的Realm的bean,最终将使用这个bean返回的对象完成我们的认证和授权
+    // 配置一个自定义的Realm的bean,最终将使用这个bean返回的对象完成我们的认证和授权
     @Bean
     public MyRealm myRealm(){
 

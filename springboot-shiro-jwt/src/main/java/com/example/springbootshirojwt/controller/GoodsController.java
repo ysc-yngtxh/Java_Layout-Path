@@ -18,11 +18,11 @@ public class GoodsController {
     //分页查询Spu
     @GetMapping("/spu/page")
     public ResponseEntity<PageResult<Spu>> querySpuByPage(
-            @RequestParam(value="page",defaultValue = "1") Integer page,      //当前页数
-            @RequestParam(value="rows",defaultValue = "5") Integer rows,      //数据显示行数
-            @RequestParam(value="saleable",required = false) Boolean saleable,//是否上架
-            @RequestParam(value="key",required = false) String key){          //搜索字段
+            @RequestParam(value="page",defaultValue = "1") Integer page,      // 当前页数
+            @RequestParam(value="rows",defaultValue = "5") Integer rows,      // 数据显示行数
+            @RequestParam(value="saleable",required = false) Boolean saleable,// 是否上架
+            @RequestParam(value="key",required = false) String key){          // 搜索字段
 
-        return ResponseEntity.ok(goodsService.querySpuByPage(page,rows,saleable,key));
+        return ResponseEntity.ok(goodsService.querySpuByPage(page, rows, saleable, key));
     }
 }

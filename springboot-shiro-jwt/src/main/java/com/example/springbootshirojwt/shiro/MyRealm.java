@@ -25,13 +25,13 @@ public class MyRealm extends AuthorizingRealm {
     @Autowired
     private ShiroJwtService shiroJwtService;
 
-    //限定这个realm只能处理JwtToken（不加的话会报错）
+    // 限定这个realm只能处理JwtToken（不加的话会报错）
     @Override
     public boolean supports(AuthenticationToken token) {
         return token instanceof JwtToken;
     }
 
-    //授权
+    // 授权
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
 
@@ -45,25 +45,25 @@ public class MyRealm extends AuthorizingRealm {
         if (!StringUtils.isEmpty(username)) {
 
             User user = shiroJwtService.queryByName(username);
-            //设置角色权限
+            // 设置角色权限
             info.addRole(user.getPerms());
             
-            //info.addRole("vip");
-            //设置权限
-            //info.addStringPermission("user:vip");
+            // info.addRole("vip");
+            // 设置权限
+            // info.addStringPermission("user:vip");
         }
 
         return info;
     }
 
 
-    //认证
+    // 认证
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken auth) throws AuthenticationException {
 
         System.out.println("执行了--doGetAuthenticationInfo认证"+auth.toString());
 
-        //获取token
+        // 获取token
         String principal = (String)auth.getCredentials();
         System.out.println(principal);
         String username = JwtUtils.getUsername(principal);
@@ -73,7 +73,7 @@ public class MyRealm extends AuthorizingRealm {
             throw new AuthenticationException("token错误!");
         }
 
-        //根据用户名，查询数据库获取到正确的用户信息
+        // 根据用户名，查询数据库获取到正确的用户信息
         User user = shiroJwtService.queryByName(username);
         if (user == null) {
             throw new AuthenticationException("用户不存在!");

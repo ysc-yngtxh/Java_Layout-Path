@@ -28,7 +28,7 @@ public class BrandController {
             @RequestParam(value="desc",defaultValue = "false") Boolean desc,
             @RequestParam(value="key",required = false) String key
     ){
-        return ResponseEntity.ok(brandService.queryBrandByPage(page,rows,sortBy,desc,key));
+        return ResponseEntity.ok(brandService.queryBrandByPage(page, rows, sortBy, desc, key));
     }
 
 
@@ -37,10 +37,10 @@ public class BrandController {
      */
     @PostMapping("/pid ")
     public ResponseEntity<Void> saveBrand(Brand brand,@RequestParam("cids") List<Long> cids){
-        //这里的新增商品不需要返回值，所以我们泛型里写上Void.
+        // 这里的新增商品不需要返回值，所以我们泛型里写上Void.
         brandService.saveBrand(brand,cids);
         return ResponseEntity.status(HttpStatus.CREATED).build();
-        //因为我们不需要返回值，所以可以不去写body，写上build会更合适
+        // 因为我们不需要返回值，所以可以不去写body，写上build会更合适
     }
 
     /**

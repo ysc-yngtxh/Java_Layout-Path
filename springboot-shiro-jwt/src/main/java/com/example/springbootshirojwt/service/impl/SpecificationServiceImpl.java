@@ -24,13 +24,13 @@ public class SpecificationServiceImpl implements SpecificationService {
     private SpecParamMapper paramMapper;
 
     public List<SpecGroup> queryGroupByCid(Long cid) {
-        //查询条件
+        // 查询条件
         SpecGroup group = new SpecGroup();
         group.setCid(cid);
-        //查询
+        // 查询
         List<SpecGroup> list = groupMapper.select(group);
         if(CollectionUtils.isEmpty(list)){
-            //没查到
+            // 没查到
             throw new LyException(ExceptionEnum.SPEC_GROUP_NOT_FOND);
         }
 
@@ -44,7 +44,7 @@ public class SpecificationServiceImpl implements SpecificationService {
         param.setSearching(searching);
         List<SpecParam> list = paramMapper.select(param);
         if(CollectionUtils.isEmpty(list)){
-            //没查到
+            // 没查到
             throw new LyException(ExceptionEnum.SPEC_PARAM_NOT_FOND);
         }
         return list;
@@ -55,7 +55,7 @@ public class SpecificationServiceImpl implements SpecificationService {
         group.setName(name);
         List<SpecGroup> list = groupMapper.select(group);
         if(CollectionUtils.isEmpty(list)){
-            //没查到
+            // 没查到
             throw new LyException(ExceptionEnum.SPEC_PARAM_NOT_FOND);
         }
         return list;

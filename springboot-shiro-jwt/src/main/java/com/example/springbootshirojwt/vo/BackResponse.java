@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class BackResponse {
 
-    //状态码
+    // 状态码
     private int code;
 
-    //消息内容
+    // 消息内容
     private String message;
 
-    //返回数据
+    // 返回数据
     private Object obj;
 
 

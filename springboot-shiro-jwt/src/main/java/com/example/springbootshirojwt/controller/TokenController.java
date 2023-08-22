@@ -41,45 +41,45 @@ public class TokenController {
 
         if(null == users){
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(backResponse.error(401,"用户不存在！！！"));
+                    .body(backResponse.error(401, "用户不存在！！！"));
         }else if( !password.equals(users.getPwd()) ){
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(backResponse.error(402,"密码错误，请重新输入！！！"));
+                    .body(backResponse.error(402, "密码错误，请重新输入！！！"));
         }else if( !code.equalsIgnoreCase(captcha) ){
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(backResponse.error(403,"验证码错误！！！"));
+                    .body(backResponse.error(403, "验证码错误！！！"));
         }
         String jwtsToken = JwtUtils.getJwtsToken(username, password);
         return ResponseEntity.status(HttpStatus.OK)
-                .body(backResponse.success(200,"登陆成功！！！",jwtsToken));
+                .body(backResponse.success(200, "登陆成功！！！",jwtsToken));
     }
 
     @RequestMapping("/user/you")
     public BackResponse registers() {
 
-        return backResponse.success(200,"跳转成功！");
+        return backResponse.success(200, "跳转成功！");
 
     }
 
     @PostMapping("/user/ysc")
     public BackResponse register(HttpServletRequest request) {
 
-        //盐 + 输入的密码(注意不是用户的正确密码) + 1024次散列，作为token生成的密钥
-        //Md5Hash md5Hash = new Md5Hash(admin.getPassword());
+        // 盐 + 输入的密码(注意不是用户的正确密码) + 1024次散列，作为token生成的密钥
+        // Md5Hash md5Hash = new Md5Hash(admin.getPassword());
 
-        //通过请求体中的Header获取到浏览器传过来的Token
+        // 通过请求体中的Header获取到浏览器传过来的Token
         String authorization = request.getHeader("Authorization");
-        //将传过来String类型的Token转换成AuthenticationToken类型
+        // 将传过来String类型的Token转换成AuthenticationToken类型
         JwtToken token = new JwtToken(authorization);
 
-        //封装用户的登录数据
-        //UsernamePasswordToken token = new UsernamePasswordToken(user.getName(), user.getPwd());
+        // 封装用户的登录数据
+        // UsernamePasswordToken token = new UsernamePasswordToken(user.getName(), user.getPwd());
 
-        //token.setRememberMe(true); //设置记住我
+        //token.setRememberMe(true); // 设置记住我
 
         Subject subject = SecurityUtils.getSubject();
         try{
-            subject.login(token);//执行登陆方法,即Shiro开始进行认证授权的工作
+            subject.login(token); // 执行登陆方法,即Shiro开始进行认证授权的工作
             return backResponse.success(200,"认证成功！");
         } catch(Exception e){
             e.printStackTrace();

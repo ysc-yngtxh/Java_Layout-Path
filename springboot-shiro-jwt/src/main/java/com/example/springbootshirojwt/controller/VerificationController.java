@@ -33,17 +33,17 @@ public class VerificationController {
         response.setContentType("image/jpeg");
 
         //-------------------生成验证码 begin --------------------------
-        //获取验证码文本内容
+        // 获取验证码文本内容
         String text = defaultKaptcha.createText();
         System.out.println("验证码内容：" + text);
-        //将验证码放入session中
+        // 将验证码放入session中
         request.getSession().setAttribute("captcha", text);
-        //根据文本内容创建图形验证码
+        // 根据文本内容创建图形验证码
         BufferedImage image = defaultKaptcha.createImage(text);
         ServletOutputStream outputStream = null;
         try {
             outputStream = response.getOutputStream();
-            //输出流输出图片，格式jpg
+            // 输出流输出图片，格式jpg
             ImageIO.write(image, "jpg", outputStream);
             outputStream.flush();
         } catch (IOException e) {

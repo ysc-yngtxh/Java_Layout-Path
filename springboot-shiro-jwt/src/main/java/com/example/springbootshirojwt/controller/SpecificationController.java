@@ -16,19 +16,19 @@ public class SpecificationController {
     @Autowired
     private SpecificationService specService;
 
-    //根据分类id查询规格组
+    // 根据分类id查询规格组
     @GetMapping("groups/{cid}")
     public ResponseEntity<List<SpecGroup>> queryGroupByCid(@PathVariable("cid") Long cid){
         return ResponseEntity.ok(specService.queryGroupByCid(cid));
     }
-    //根据组id查询参数
+    // 根据组id查询参数
     @GetMapping("/params")
     public ResponseEntity<List<SpecParam>> queryParamByGid(
             @RequestParam(value="gid",required = false) Long gid,
             @RequestParam(value="cid",required = false) Long cid,
             @RequestParam(value="searching",required = false) Boolean searching
             ){
-        return ResponseEntity.ok(specService.queryParamByGid(gid,cid,searching));
+        return ResponseEntity.ok(specService.queryParamByGid(gid, cid, searching));
     }
 
     @GetMapping("/name")

@@ -23,7 +23,7 @@ public class CategoryController {
      */
     @GetMapping("/list")
     public ResponseEntity<List<Category>> queryCategoryListByPid(@RequestParam("pid") Long pid){
-        //return ResponseEntity.status(HttpStatus.OK).body(null);简写以下形式
+        // return ResponseEntity.status(HttpStatus.OK).body(null); // 简写以下形式
         return ResponseEntity.ok(categoryService.queryCategoryListByPid(pid));
 
     }

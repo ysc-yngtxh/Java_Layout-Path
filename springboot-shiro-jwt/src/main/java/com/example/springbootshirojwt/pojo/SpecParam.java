@@ -18,7 +18,7 @@ public class SpecParam {
     private Long groupid;
     private String name;
 
-    @Column(name="`numeric`")  //numeris在sql里是一个关键字，为了用于区分，加上了一个``
+    @Column(name="`numeric`")  // numeric 在sql里是一个关键字，为了用于区分，加上了一个``
     private Boolean numeric;
     private String unit;
     private Boolean generic;

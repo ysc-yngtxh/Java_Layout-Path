@@ -18,17 +18,17 @@ public class JwtUtils {
     public static String getJwtsToken(String username,String password){
         JwtBuilder jwtBuilder = Jwts.builder();
         String jwtToken = jwtBuilder
-                //Header
+                // Header
                 .setHeaderParam("tpy","JWT")
                 .setHeaderParam("alg","HS256")
-                //payload
+                // payload
                 .claim("name",username)
                 .claim("pwd",password)
-                .setSubject("admin-test")  //设置主题
-                .setExpiration(new Date(System.currentTimeMillis()+EXPIRE_TIME))  //设置有效时间
-                //signature
+                .setSubject("admin-test")  // 设置主题
+                .setExpiration(new Date(System.currentTimeMillis()+EXPIRE_TIME))  // 设置有效时间
+                // signature
                 .signWith(SignatureAlgorithm.HS256 , salt)
-                .compact(); //将所有信息紧凑起来
+                .compact(); // 将所有信息紧凑起来
         return jwtToken;
     }
 
@@ -42,7 +42,7 @@ public class JwtUtils {
         int i = expiration.compareTo(new Date(System.currentTimeMillis()));
 
         if (i >= 0) {
-            return true; //token没过期
+            return true; // token没过期
         }
         return false;
     }
@@ -85,7 +85,7 @@ public class JwtUtils {
             String alg = claimsJws.getHeader().get("alg").toString();
             String username = (String) claimsJws.getBody().get("name");
             String password = (String) claimsJws.getBody().get("pwd");
-            //判断token是否过期，  头部类型、算法，   载荷信息是否正确
+            // 判断token是否过期，  头部类型、算法，   载荷信息是否正确
             if (isExpire(token) && tpy.equals("JWT") && alg.equals("HS256") && pwd.equals(password)) {
                 return true;
             }

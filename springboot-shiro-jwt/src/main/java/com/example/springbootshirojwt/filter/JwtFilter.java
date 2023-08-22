@@ -56,22 +56,22 @@ public class JwtFilter extends AuthenticationFilter {
         BackResponse back = new BackResponse();
         JwtToken token = new JwtToken(jwt);
 
-        //请求头中有token，那么就去Authentication中去认证，以及后续的授权操作
+        // 请求头中有token，那么就去Authentication中去认证，以及后续的授权操作
         if ( !StringUtils.isEmpty(jwt) ) {
             Subject subject = SecurityUtils.getSubject();
             try {
                 subject.login(token);
             } catch (AuthenticationException e) {
-                back.error(401,"认证授权错误！");
+                back.error(401, "认证授权错误！");
                 print(res,back);
                 e.printStackTrace();
                 return false;
             }
         }
 
-        log.info("请求的 Header 中藏有 jwtToken {" +jwt+ "}");
+        log.info("请求的 Header 中藏有 jwtToken {" + jwt + "}");
 
-        //走到这里就是不存在token，但还是返回turn，因为可能是游客访问及用户登录，所以放行请求。反正没有走认证授权，就算是恶意访问，它也没有权限。
+        // 走到这里就是不存在token，但还是返回turn，因为可能是游客访问及用户登录，所以放行请求。反正没有走认证授权，就算是恶意访问，它也没有权限。
         return true;
     }
 
