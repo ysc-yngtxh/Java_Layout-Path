@@ -4,13 +4,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.example</groupId>
-		<artifactId>SpringBoot-HttpRequired-MultiReadStream</artifactId>
+		<artifactId>SpringBoot_HttpRequired-MultiReadStream</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
 	</parent>
 
 	<groupId>com.example</groupId>
-	<artifactId>2_MultiRead-Content-Parameter</artifactId>
+	<artifactId>1_MultiRead-Content-InputStream</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>${project.artifactId}</name>
 	<description>${project.artifactId}</description>
@@ -52,8 +52,16 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
-	<build>
+    <build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

@@ -5,27 +5,41 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.2</version>
+        <version>3.1.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.example</groupId>
-    <artifactId>Spring-Boot-CompletableFuture</artifactId>
+    <artifactId>SpringBoot_HttpRequired-MultiReadStream</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Spring-Boot-CompletableFuture</name>
-    <description>Spring-Boot-CompletableFuture</description>
+    <packaging>pom</packaging>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
+
+    <modules>
+        <module>1_MultiRead-Content-InputStream</module>
+        <module>2_MultiRead-Content-Parameter</module>
+    </modules>
+
     <properties>
         <java.version>17</java.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
 
         <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -38,19 +52,17 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.3.1</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba.fastjson2</groupId>
             <artifactId>fastjson2</artifactId>
-            <version>2.0.39</version>
-        </dependency>
-        <dependency>
-            <groupId>jdbc</groupId>
-            <artifactId>jdbc</artifactId>
-            <version>2.0</version>
+            <version>2.0.22</version>
         </dependency>
     </dependencies>
 
