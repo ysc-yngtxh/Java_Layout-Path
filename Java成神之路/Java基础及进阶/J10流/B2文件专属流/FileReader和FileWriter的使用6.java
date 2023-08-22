@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 /*
 FileReader:
@@ -40,7 +41,7 @@ public class FileReader和FileWriter的使用6 {
 
             // 普通文本文件的拷贝
             r = new FileReader(System.getProperty("user.dir") + "/Java基础及进阶/idea快捷键.java");
-            w = new FileWriter("idea快捷键.java");
+            w = new FileWriter("idea快捷键.java", true);
             char[] c = new char[1024 * 3];
             int rc = 0;
             while((rc = r.read(c)) != -1){
@@ -49,8 +50,9 @@ public class FileReader和FileWriter的使用6 {
                 w.write(c, 0, rc);
             }
 
-            // 刷新流
+            // 刷新流,记得一定要将输出流刷新缓存，否则会出现：写入文件数据并没有成功写进去的情况
             writer.flush();
+            w.flush();
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

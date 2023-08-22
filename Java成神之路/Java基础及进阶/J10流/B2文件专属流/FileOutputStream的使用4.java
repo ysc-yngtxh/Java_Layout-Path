@@ -26,9 +26,10 @@ public class FileOutputStream的使用4 {
             byte[] bytes = s.getBytes();
             fos2.write(bytes);
 
-            // 写完之后，最后一定要刷新
+            // 写完之后，最后一定要刷新缓存，否则会出现：写入文件数据并没有成功写进去的情况
             fos.flush();
             fos2.flush();
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
