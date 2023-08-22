@@ -39,7 +39,7 @@ public class 流_6_FileReader和FileWriter的使用 {
             writer.write(charsOut, 2, 3);
 
             // 普通文本文件的拷贝
-            r = new FileReader(System.getProperty("user.dir") + "/Java基础及进阶/idea快捷键.java");
+            r = new FileReader(System.getProperty("User.dir") + "/Java基础及进阶/idea快捷键.java");
             w = new FileWriter("idea快捷键.java", true);
             char[] c = new char[1024 * 3];
             int rc = 0;

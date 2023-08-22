@@ -14,7 +14,7 @@ File:
 public class 流_12_File概述 {
     public static void main(String[] args) {
         // 创建一个file对象
-        File f1 = new File(System.getProperty("user.dir") + "file");
+        File f1 = new File(System.getProperty("User.dir") + "file");
 
         // 判断是否存在！
         System.out.println(f1.exists());
@@ -47,7 +47,7 @@ public class 流_12_File概述 {
         System.out.println(f3.getAbsoluteFile());
 
         // getParent()获取文件的父路径
-        File f4 = new File(System.getProperty("user.dir") + "/id快捷键.java");
+        File f4 = new File(System.getProperty("User.dir") + "/id快捷键.java");
         String s = f4.getParent();
         System.out.println(s);
     }

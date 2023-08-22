@@ -17,17 +17,17 @@ public class 流_1_FileInputStream演示版 {
         try{
 
             // 获取当前项目的绝对路径
-            System.out.println(System.getProperty("user.dir"));
+            System.out.println(System.getProperty("User.dir"));
 
             // 创建文件字节输入流对象
             // 文件路径：/Users/youshicheng/IDEA/java-layout-path/Java成神之路/log (IDEA会自动把\编程\\，因为Java中\表示转义)
             // 以下都是采用了：绝对路径的方式
             // 也可以写成这样：fis = new FileInputStream("/Users/youshicheng/IDEA/java-layout-path/Java成神之路/log");
-            fis1 = new FileInputStream(System.getProperty("user.dir") + "/log");
+            fis1 = new FileInputStream(System.getProperty("User.dir") + "/log");
 
             // 绝对路径：D:IDEA\java-layout-path\Java成神之路\Java基础及进阶\J10_流\Filetemp
             // 相对路径：从IDEA模块路径出发
-            fis2 = new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/J10_流/Filetemp");
+            fis2 = new FileInputStream(System.getProperty("User.dir") + "/Java基础及进阶/J10_流/Filetemp");
             fis3 = new FileInputStream("log");
             // 开始读
             while(true){

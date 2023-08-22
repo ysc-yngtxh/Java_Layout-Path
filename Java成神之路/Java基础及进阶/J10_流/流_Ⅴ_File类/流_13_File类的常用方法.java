@@ -17,7 +17,7 @@ File类的常用方法：
  */
 public class 流_13_File类的常用方法 {
     public static void main(String[] args) {
-        File f1 = new File(System.getProperty("user.dir") + "file");
+        File f1 = new File(System.getProperty("User.dir") + "file");
         // getName()获取文件名
         System.out.println("文件名：" + f1.getName());
 
@@ -41,7 +41,7 @@ public class 流_13_File类的常用方法 {
         System.out.println("=========================================================================================");
 
         // File[] listFiles()获取当前目录下所有的子文件及子目录
-        File f2 = new File(System.getProperty("user.dir"));
+        File f2 = new File(System.getProperty("User.dir"));
         File[] files = f2.listFiles();
         assert files != null;
         for (File file : files) {

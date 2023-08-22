@@ -23,10 +23,10 @@ public class Test {
         user3.setDate("2022-11-03");
         User user4 = new User();
         user4.setDate("2022-11-02");
-        List<User> users = Arrays.asList(user1, user2, user3, user4);
+        List<User> Users = Arrays.asList(user1, user2, user3, user4);
 
-        Map<String, List<User>> collect = users.stream()
-                .collect(groupingBy(User::getDate));
+        Map<String, List<User>> collect = Users.stream()
+                .collect(groupingBy(N14_练习题.User::getDate));
 
 
 //        collect
@@ -36,7 +36,7 @@ public class Test {
 //                        }
 //                ).collect(Collectors.toList());
 
-//        collect.forEach(user->
+//        collect.forEach(User->
 //        {
             System.out.println(user1);
 //        });

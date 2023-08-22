@@ -29,7 +29,7 @@ public class 流_10_标准输出流 {
             System.in
             System.exit(0)
             System.arraycopy()
-            System.getProperty("user.dir")
+            System.getProperty("User.dir")
          */
 
         // 标准输出流不再指向控制台，指向“log”文件

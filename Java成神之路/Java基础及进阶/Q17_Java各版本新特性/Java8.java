@@ -74,8 +74,8 @@ Java8新特性
         Stream<String> stream = list.stream();
 
         // 2、通过Arrays中的静态方法stream()获取数组流
-        User[] user = new User[10];
-        Stream<User> stream2 = Arrays.stream(user);
+        User[] User = new User[10];
+        Stream<User> stream2 = Arrays.stream(User);
 
         // 3、通过Stream类中的静态方法of()
         Stream<String> stream3 = Stream.of("aa", "bb", "cc");

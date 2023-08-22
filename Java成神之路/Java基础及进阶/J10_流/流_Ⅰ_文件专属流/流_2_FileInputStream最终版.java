@@ -11,7 +11,7 @@ public class 流_2_FileInputStream最终版 {
     public static void main(String[] args) {
         FileInputStream fis = null;
         try{
-            fis = new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/J10_流/Filetemp");
+            fis = new FileInputStream(System.getProperty("User.dir") + "/Java基础及进阶/J10_流/Filetemp");
             byte[] bytes = new byte[4];
             int readCount = 0;
             while( (readCount = fis.read(bytes)) != -1 ){

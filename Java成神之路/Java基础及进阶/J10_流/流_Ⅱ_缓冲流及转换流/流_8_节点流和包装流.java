@@ -14,7 +14,7 @@ public class 流_8_节点流和包装流 {
         FileInputStream fis = null;
         try{
             // 字节流
-            fis = new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/J10_流/A1iO流概述.java");
+            fis = new FileInputStream(System.getProperty("User.dir") + "/Java基础及进阶/J10_流/A1iO流概述.java");
 
             // 通过转换流转换（InputStreamReader将字节流转换成字符流）
             InputStreamReader isr = new InputStreamReader(fis);
@@ -26,7 +26,7 @@ public class 流_8_节点流和包装流 {
             // *****br2就是转换流，包装流合并后的套娃程序
             BufferedReader br2 = new BufferedReader(
                     new InputStreamReader(
-                            new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/J10_流/A1iO流概述.java")));
+                            new FileInputStream(System.getProperty("User.dir") + "/Java基础及进阶/J10_流/A1iO流概述.java")));
 
 
             String s = null;
