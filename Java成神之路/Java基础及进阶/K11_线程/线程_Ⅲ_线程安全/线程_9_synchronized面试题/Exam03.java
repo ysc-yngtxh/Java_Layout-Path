@@ -1,44 +1,44 @@
-package K11_线程.线程_Ⅲ_线程安全.synchronized面试题3;
+package K11_线程.线程_Ⅲ_线程安全.线程_9_synchronized面试题;
 
 /*
 面试题：
-  MyClass方法中一个有synchronized，一个没有
+  MyClass中两方法都有synchronized，且，在主方法中创建两个MyClass2对象
   doOther方法的执行需不需要等doSome方法的结束？
 
-  不需要，因为doOther方法没有synchronized
+  不需要，因为MyClass是有两把锁，没有共享的对象。谁也不影响谁
  */
-public class Exam01 {
+public class Exam03 {
     public static void main(String[] args) throws InterruptedException {
-        MyClass mc = new MyClass();
+        MyClass2 mc2 = new MyClass2();
+        MyClass2 mc3 = new MyClass2();
 
-        Thread t1 = new MyThread(mc);
-        Thread t2 = new MyThread(mc);
+        Thread t1 = new MyThread2(mc2);
+        Thread t2 = new MyThread2(mc3);
 
         t1.setName("t1");
         t2.setName("t2");
 
         t1.start();
-
         Thread.sleep(1000);  // 这个睡眠的作用是：为了保证1线程先执行
         t2.start();
     }
 }
 
-class MyThread extends Thread{
-    private MyClass mc;
-    public MyThread(MyClass mc){
-        this.mc = mc;
+class MyThread2 extends Thread{
+    private MyClass2 mc2;
+    public MyThread2(MyClass2 m){
+        this.mc2 = mc2;
     }
     public void run(){
         if(Thread.currentThread().getName().equals("t1")){
-            mc.doSome();
+            mc2.doSome();
         }
         if(Thread.currentThread().getName().equals("t2")){
-            mc.doOther();
+            mc2.doOther();
         }
     }
 }
-class MyClass{
+class MyClass2 {
     public synchronized void doSome(){
         System.out.println("doSome begin");
         try{
@@ -49,7 +49,7 @@ class MyClass{
         System.out.println("doSome over");
     }
 
-    public void doOther(){
+    public synchronized void doOther(){
         System.out.println("doOther begin");
         System.out.println("doOther over");
     }

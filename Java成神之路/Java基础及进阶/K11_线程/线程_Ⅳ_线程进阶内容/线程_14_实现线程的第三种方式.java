@@ -9,7 +9,7 @@ import java.util.concurrent.FutureTask;
      这种方式的优点：可以获取到线程的执行结果
      这种方式的缺点：效率比较低，在获取t线程执行结果的时候，当前线程受阻塞，效率较低
  */
-public class 实现线程的第三种方式3 {
+public class 线程_14_实现线程的第三种方式 {
     public static void main(String[] args) throws Exception {
         // 第一步：创建一个“未来任务类”对象。
         FutureTask<Object> task = new FutureTask<>(new Callable<Object>() {

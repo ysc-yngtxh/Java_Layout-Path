@@ -23,7 +23,7 @@ import java.util.TimerTask;
 
             在实际的开发中，目前使用较多的是Spring框架中提供的SpringTask框架，这个框架只要进行简单的配置，就可以完成定时器的任务。
  */
-public class 定时器2 {
+public class 线程_13_定时器 {
     public static void main(String[] args) throws ParseException {
 
         // 创建定时器对象

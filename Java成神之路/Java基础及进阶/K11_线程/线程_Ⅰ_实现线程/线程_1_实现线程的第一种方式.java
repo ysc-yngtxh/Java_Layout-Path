@@ -15,7 +15,7 @@ package K11_线程.线程_Ⅰ_实现线程;
      有先有后
      有多有少
  */
-public class 实现线程的第一种方式1 {
+public class 线程_1_实现线程的第一种方式 {
     public static void main(String[] args) {
 
         // 这里是main方法，这里的代码属于主线程，在主栈中运行

@@ -16,7 +16,7 @@ package K11_线程.线程_Ⅳ_线程进阶内容;
         每天00：00的时候系统数据自动备份，这个需要使用到定时器，并且我们可以将定时器设置为守护线程
         一直在那里看着，每到00：00的时候就备份一次，所有的用户线程如果结束了，守护线程自动退出，没有必要进行数据备份了
  */
-public class 守护线程1 {
+public class 线程_12_守护线程 {
     public static void main(String[] args) {
         Thread t = new BakDataThread();
         t.setName("备份数据的线程");

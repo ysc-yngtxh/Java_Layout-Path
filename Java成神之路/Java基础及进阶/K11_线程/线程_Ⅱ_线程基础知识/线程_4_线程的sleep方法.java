@@ -17,7 +17,7 @@ package K11_线程.线程_Ⅱ_线程基础知识;
 
 
  */
-public class 线程的sleep方法2 {
+public class 线程_4_线程的sleep方法 {
     public static void main(String[] args) {
 
 
@@ -53,7 +53,7 @@ public class 线程的sleep方法2 {
 
         try{
             // 问题：这行代码会让线程t进入休眠状态吗？
-            t.sleep(1000*5);
+            t.sleep(1000 * 5);
             // 睡眠的不是t，而是调用sleep方法时所在类的main线程。在执行的时候还是会转换成：Thread.sleep(1000*5);
             // 如果想要某个线程睡眠，sleep最好使用在run方法的内部,因为写在run方法内部可以让该线程休眠
         } catch(InterruptedException e2){

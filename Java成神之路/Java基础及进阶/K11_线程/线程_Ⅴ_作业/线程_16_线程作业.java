@@ -16,7 +16,7 @@ package K11_线程.线程_Ⅴ_作业;
           两个线程共享一个数字，每个线程执行时都要对这个数字进行：++
 
  */
-public class 线程作业6 {
+public class 线程_16_线程作业 {
     public static void main(String[] args) {
 
         Number nb = new Number(1);

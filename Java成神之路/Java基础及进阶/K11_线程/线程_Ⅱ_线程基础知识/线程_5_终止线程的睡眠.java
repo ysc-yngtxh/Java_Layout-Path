@@ -4,7 +4,7 @@ package K11_线程.线程_Ⅱ_线程基础知识;
 sleep睡眠太久了，如果希望半道上醒来，怎么叫醒一个正在睡眠的线程？
        注意：这个不是中断线程的执行，是终止线程的睡眠
  */
-public class 终止线程的睡眠3 {
+public class 线程_5_终止线程的睡眠 {
     public static void main(String[] args) {
         Thread t = new Thread(new MyRunnable2());
         t.setName("t");

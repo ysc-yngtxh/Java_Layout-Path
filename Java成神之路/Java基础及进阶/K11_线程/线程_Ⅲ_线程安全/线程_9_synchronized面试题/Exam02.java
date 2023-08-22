@@ -1,18 +1,18 @@
-package K11_线程.线程_Ⅲ_线程安全.synchronized面试题3;
+package K11_线程.线程_Ⅲ_线程安全.线程_9_synchronized面试题;
 
 /*
 面试题：
-  在主方法中创建两个MyClass2对象，且MyClass方法中的synchronized是在静态方法中
+  MyClass中两方法都有synchronized
   doOther方法的执行需不需要等doSome方法的结束？
 
-  需要，因为静态方法是类锁。类锁是不管创建几个对象，都只有一把
+  需要，因为共享对象是this。且是同一个
  */
-public class Exam04 {
+public class Exam02 {
     public static void main(String[] args) throws InterruptedException {
-        MyClass4 mc4 = new MyClass4();
+        MyClass1 mc1 = new MyClass1();
 
-        Thread t1 = new MyThread4(mc4);
-        Thread t2 = new MyThread4(mc4);
+        Thread t1 = new MyThread1(mc1);
+        Thread t2 = new MyThread1(mc1);
 
         t1.setName("t1");
         t2.setName("t2");
@@ -23,22 +23,22 @@ public class Exam04 {
     }
 }
 
-class MyThread4 extends Thread{
-    private MyClass4 mc4;
-    public MyThread4(MyClass4 mc4){
-        this.mc4 = mc4;
+class MyThread1 extends Thread{
+    private MyClass1 mc1;
+    public MyThread1(MyClass1 mc1){
+        this.mc1 = mc1;
     }
     public void run(){
         if(Thread.currentThread().getName().equals("t1")){
-            mc4.doSome();
+            mc1.doSome();
         }
         if(Thread.currentThread().getName().equals("t2")){
-            mc4.doOther();
+            mc1.doOther();
         }
     }
 }
-class MyClass4 {
-    public synchronized static void doSome(){
+class MyClass1 {
+    public synchronized void doSome(){
         System.out.println("doSome begin");
         try{
             Thread.sleep(1000*10);
@@ -48,9 +48,8 @@ class MyClass4 {
         System.out.println("doSome over");
     }
 
-    public synchronized static void doOther(){
+    public synchronized void doOther(){
         System.out.println("doOther begin");
         System.out.println("doOther over");
     }
 }
-

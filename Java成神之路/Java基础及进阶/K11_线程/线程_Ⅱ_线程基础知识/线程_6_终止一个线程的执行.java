@@ -1,6 +1,6 @@
 package K11_线程.线程_Ⅱ_线程基础知识;
 
-public class 终止一个线程的执行4 {
+public class 线程_6_终止一个线程的执行 {
     public static void main(String[] args) {
         MyT m = new MyT();
         Thread t = new Thread(m);

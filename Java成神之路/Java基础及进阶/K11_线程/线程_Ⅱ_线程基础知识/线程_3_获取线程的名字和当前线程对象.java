@@ -20,7 +20,7 @@ package K11_线程.线程_Ⅱ_线程基础知识;
       Thread-5
       ...
  */
-public class 获取线程的名字和当前线程对象1 {
+public class 线程_3_获取线程的名字和当前线程对象 {
     public static void main(String[] args) {
 
         // 这个代码出现在main方法当中，所以当前线程就是主线程

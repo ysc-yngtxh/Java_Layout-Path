@@ -39,7 +39,7 @@ package K11_线程.线程_Ⅱ_线程基础知识;
               class MyThread2 extends Thread{
               }
  */
-public class 线程调度方法 {
+public class 线程_7_线程调度方法 {
     public static void main(String[] args) {
 
         Thread t = new Thread(new YSC());

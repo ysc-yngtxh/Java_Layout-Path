@@ -1,4 +1,4 @@
-package K11_线程.线程_Ⅲ_线程安全.模拟两个线程的账户类2;
+package K11_线程.线程_Ⅲ_线程安全.线程_8_模拟两个线程的账户类;
 
 public class Account {
     private String action;  // 账号
