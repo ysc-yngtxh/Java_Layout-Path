@@ -34,7 +34,7 @@ public class 数组_2_初始化数组 {
     public static void main(String[] args) {
 
         // 声明一个int类型的数组，使用静态初始化的方式
-        int[] a={1,100,10,20,55,689};
+        int[] a = {1,100,10,20,55,689};
         // 所有的数组对象都有length属性
         System.out.println("数组中元素的个数=" + a.length);
         System.out.println("第一个元素=" + a[0]);
@@ -79,7 +79,7 @@ public class 数组_2_初始化数组 {
         }
 
         // 静态初始化
-        String[] str={"abc","def","hij"};
+        String[] str = {"abc", "def", "hij"};
         for (int i = 0; i < str.length; i++) {
             System.out.println(str[i]);
         }

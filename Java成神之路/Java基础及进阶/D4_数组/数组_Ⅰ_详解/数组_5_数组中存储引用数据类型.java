@@ -8,7 +8,7 @@ public class 数组_5_数组中存储引用数据类型 {
         Animal a2 = new Animal();
         Animal[] animals = {a1, a2};
 
-        // 对Aniaml数组进行遍历
+        // 对Animal数组进行遍历
         for (int i = 0; i < animals.length; i++) {
             /*
               Animal a = animals[i];
@@ -39,7 +39,7 @@ public class 数组_5_数组中存储引用数据类型 {
                 Cat cat = (Cat)anis[i];
                 cat.catchMouse();
             }else if (anis[i] instanceof Bird){
-                Bird bird=(Bird)anis[i];
+                Bird bird = (Bird)anis[i];
                 bird.sing();
             }
 

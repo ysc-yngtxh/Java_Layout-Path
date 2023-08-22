@@ -53,7 +53,7 @@ class T{
 class Y extends T{
     final int age; // 实例变量加上关键字final，必须赋值，或者在构造函数中赋值。换种说法，赶在构造函数赋默认值之前赋值就行
     Y(){
-        age=10;
+        age = 10;
     }
     public void dOoSome(){
         System.out.println("D.s doSome...");
@@ -75,21 +75,21 @@ public class 抽象类_2_final关键字 {
         // c.dOoSome();不能被调用，T类引用中没有dOoSome()方法
 
         if(c instanceof Y){
-            Y d1=(Y)c;
+            Y d1 = (Y)c;
             d1.dOoSome();
         }     //向下强制转型
 
         //或者
-        Y d=new Y();
+        Y d = new Y();
         d.dOoSome();
 
-        person p1=new person(30);
+        person p1 = new person(30);
         System.out.println(p1.a);
 
-        final person p2=new person(20);
-        // p2=new person(50);
-		/* 编译错误，new person(20)可以看成地址x0111,所以final p2=x0111
-		   final 关键字的p2重新赋值new person(50)可以看作p2= x4567;
+        final person p2 = new person(20);
+        // p2 = new person(50);
+		/* 编译错误，new person(20)可以看成地址x0111,所以final p2 = x0111
+		   final 关键字的p2重新赋值new person(50)可以看作p2 = x4567;
 		   所以编译错误
 		*/
 

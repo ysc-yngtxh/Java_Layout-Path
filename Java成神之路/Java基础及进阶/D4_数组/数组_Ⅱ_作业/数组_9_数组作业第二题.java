@@ -16,32 +16,32 @@ import java.util.Scanner;
  */
 public class 数组_9_数组作业第二题 {
     public static void main(String[] args) {
-        Hotel hotel=new Hotel();
+        Hotel hotel = new Hotel();
         System.out.println("欢迎使用酒店系统,请认真阅读以下使用说明");
         System.out.println("功能编号对应的功能：[1]表示查看房间列表。[2]表示订房。[3]表示退房。[0]表示退出系统");
-        Scanner s=new Scanner(System.in);  //我们可以通过 Scanner 类来获取用户的输入。
+        Scanner s=new Scanner(System.in);  // 我们可以通过 Scanner 类来获取用户的输入。
 
-        //while死循环，可以一直用
+        // while死循环，可以一直用
         while(true){
             System.out.print("请输入功能编号：");
-            int i = s.nextInt();         //这个表示吸取输入台输入的int类型
-            //还有String st = s.nextLine();表示的是吸取输入台输入的字符串类型
-            if(i==1){
-                //查看房间列表
+            int i = s.nextInt();         // 这个表示吸取输入台输入的int类型
+            // 还有String st = s.nextLine();表示的是吸取输入台输入的字符串类型
+            if(i == 1){
+                // 查看房间列表
                 hotel.print();
-            }else if(i==2){
+            }else if(i == 2){
                 System.out.print("请输入订房编号：");
-                int roomNo=s.nextInt();
+                int roomNo = s.nextInt();
                 hotel.order(roomNo);
-            }else if(i==3){
+            }else if(i == 3){
                 System.out.print("请输入退房编号：");
-                int roomNo=s.nextInt();
+                int roomNo = s.nextInt();
                 hotel.exit(roomNo);
-            }else if(i==0){
+            }else if(i == 0){
                 System.out.print("再见，欢迎下次再来！");
                 return;
             }else{
-                //出错了
+                // 出错了
                 System.out.println("输入功能编号有误，请重新输入！");
             }
         }
@@ -53,29 +53,29 @@ class Hotel{
     private Room[][] rooms;
 
     public Hotel() {
-        //设置酒店房间：酒店三层，每层5间房子
-        this.rooms=new Room[3][5];
+        // 设置酒店房间：酒店三层，每层5间房子
+        this.rooms = new Room[3][5];
 
         for (int i = 0; i < rooms.length; i++) {
             for (int j = 0; j < rooms[i].length; j++) {
-                if(i==0){
-                    rooms[i][j]=new Room((i+1)*100+j+1,"单人间",true);
-                }else if (i==1){
-                    rooms[i][j]=new Room((i+1)*100+j+1,"双人间",true);
-                }else if (i==2){
-                    rooms[i][j]=new Room((i+1)*100+j+1,"总统套间",true);
+                if(i == 0){
+                    rooms[i][j]=new Room( (i+1) * 100 + j + 1, "单人间", true );
+                }else if (i == 1){
+                    rooms[i][j]=new Room( (i+1) * 100 + j + 1, "双人间", true );
+                }else if (i == 2){
+                    rooms[i][j]=new Room( (i+1) * 100 + j + 1, "总统套间", true );
                 }
             }
         }
     }
 
-    //在酒店对象上提供一个打印房间列表的方法
+    // 在酒店对象上提供一个打印房间列表的方法
     public void print(){
-        //打印所有房间状态，就是遍历二维数组
+        // 打印所有房间状态，就是遍历二维数组
         for (int i = 0; i < rooms.length; i++) {
             for (int j = 0; j < rooms[i].length; j++) {
-                Room room=rooms[i][j];
-                //在 System.out.println()中插入引用，系统会自动调用toString()方法，但我们在Room中重写了toString()方法
+                Room room = rooms[i][j];
+                // 在 System.out.println()中插入引用，系统会自动调用toString()方法，但我们在Room中重写了toString()方法
                 System.out.print(room);
             }
             //换行
@@ -84,17 +84,17 @@ class Hotel{
     }
 
     public void order(int roomNo){
-        //订房最主要的是将房间对象的status修改为false
-        //假设房间编号205,下标是rooms[1][4]。都是实例类，没必要new对象
-        Room room=rooms[roomNo/100-1][roomNo%100-1];
-        //修改为占用
+        // 订房最主要的是将房间对象的status修改为false
+        // 假设房间编号205,下标是rooms[1][4]。都是实例类，没必要new对象
+        Room room = rooms[roomNo/100-1][roomNo%100-1];
+        // 修改为占用
         room.setStatus(false);
         System.out.println(roomNo + "已订房！");
     }
 
     public void exit(int roomNo){
-        Room room=rooms[roomNo/100-1][roomNo%100-1];
-        //修改为空闲
+        Room room = rooms[roomNo/100-1][roomNo%100-1];
+        // 修改为空闲
         room.setStatus(true);
         System.out.println(roomNo + "已退房！");
     }
@@ -102,9 +102,9 @@ class Hotel{
 }
 
 class Room{
-    private int no;          //房间编号
-    private String type;     //房间类型
-    private boolean status;  //房间状态
+    private int no;          // 房间编号
+    private String type;     // 房间类型
+    private boolean status;  // 房间状态
 
     public Room() {
     }
@@ -131,8 +131,8 @@ class Room{
         this.type = type;
     }
 
-    //IDEA工具对于Boolean类型的变量，生成的get方法的方法名是：isXxx()
-    //如果不喜欢这种方式，可以修改为getXxx()
+    // IDEA工具对于Boolean类型的变量，生成的get方法的方法名是：isXxx()
+    // 如果不喜欢这种方式，可以修改为getXxx()
     public boolean isStatus() {
         return status;
     }
@@ -141,10 +141,10 @@ class Room{
         this.status = status;
     }
 
-    //equals重写
-    //equals是用来比较两个对象是否相同的
-    //至于怎么比较，这个还是程序员自己定。
-    //你认为两个房间的编号相同，就表示同一个房间，那么你写代码比较房间编号就行
+    // equals重写
+    // equals是用来比较两个对象是否相同的
+    // 至于怎么比较，这个还是程序员自己定。
+    // 你认为两个房间的编号相同，就表示同一个房间，那么你写代码比较房间编号就行
     @Override
     public boolean equals(Object obj) {
         if ( obj == null || !(obj instanceof Room) ){
@@ -153,16 +153,16 @@ class Room{
             return true;
         }
         Room room = (Room)obj;
-        //当前房间编号等于传过来的房间编号
+        // 当前房间编号等于传过来的房间编号
         return this.getNo()==room.getNo();
     }
 
-    //toString重写
-    //toString方法的目的就是将Java对象转换成字符串的形式
-    //怎么转，转换成什么格式，程序员自己定。目的就是：简单、清晰明了。
+    // toString重写
+    // toString方法的目的就是将Java对象转换成字符串的形式
+    // 怎么转，转换成什么格式，程序员自己定。目的就是：简单、清晰明了。
     @Override
     public String toString() {
-        /*return "[101,单人间,占用]";*/
+        /*return "[101, 单人间, 占用]";*/
         return "["+ no +" , "+ type +" , "+ (status ? "空闲" : "占用") +"]";
     }
 }

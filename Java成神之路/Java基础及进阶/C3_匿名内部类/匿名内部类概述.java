@@ -95,7 +95,7 @@ public class 匿名内部类概述 {
     public static void main(String[] args) {
         MyMath mm = new MyMath();
         mm.mysum(new Compute() {        // C3_匿名内部类
-            public int sum(int a,int b){
+            public int sum(int a, int b){
                 return a + b;
             } // 这里看起来是new了一个接口Compute。但是实际上并不是接口可以new了，后面的{}代表了对接口的实现。
         }, 100, 200);

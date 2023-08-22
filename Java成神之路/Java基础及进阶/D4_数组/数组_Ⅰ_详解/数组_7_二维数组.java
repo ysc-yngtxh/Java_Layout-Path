@@ -12,9 +12,9 @@ package D4_数组.数组_Ⅰ_详解;
 public class 数组_7_二维数组 {
     public static void main(String[] args) {
         // 一维数组
-        int[] array={100,200,300};
+        int[] array = {100, 200, 300};
         // 二维数组
-        int[][] a={ {100,200,300} , {30,20,40,50,60} , {6,7,9,1} , {0} };
+        int[][] a = { {100,200,300} , {30,20,40,50,60} , {6,7,9,1} , {0} };
         System.out.println(a.length);       // 表示有4个一维数组
         System.out.println(a[0].length);    // 表示第一个一维数组中有几个元素
 
@@ -29,9 +29,9 @@ public class 数组_7_二维数组 {
         System.out.println("=======================================================");
 
         String[][] ar = {
-                {"java","oracle","c++","python","c#"},
-                {"张三","李四","王五"},
-                {"lucy","jack","rose"}
+                {"java", "oracle", "c++", "python", "c#"},
+                {"张三", "李四", "王五"},
+                {"lucy", "jack", "rose"}
         };
         // 遍历二维数组
         for (int i = 0; i < ar.length; i++) {

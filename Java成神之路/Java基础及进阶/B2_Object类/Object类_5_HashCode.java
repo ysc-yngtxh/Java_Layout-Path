@@ -13,17 +13,17 @@ import java.util.Objects;
  *            实际上就是一个Java对象的内存地址，经过哈希算法，得出的一个值
  *            所以hashCode()方法的执行结果可以等同看作一个Java对象的内存地址
  * */
-public class Object类_5_hashCode {
+public class Object类_5_HashCode {
 
     public static void main(String[] args) {
         Object obj = new Object();
         int hashCodeValue = obj.hashCode();
 
         // 对象内存地址经过哈希算法转换的一串数字。可以等同看作内存地址。
-        System.out.println(hashCodeValue);   //1442002549
+        System.out.println(hashCodeValue);   // 1442002549
 
         Myclass mc = new Myclass();
-        System.out.println(mc.hashCode());  //1701381926
+        System.out.println(mc.hashCode());   // 1701381926
 
         System.out.println(new Myclass().hashCode());
     }

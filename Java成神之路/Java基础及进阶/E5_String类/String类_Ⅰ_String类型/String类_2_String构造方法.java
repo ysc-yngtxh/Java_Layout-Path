@@ -19,7 +19,7 @@ public class String类_2_String构造方法 {
         System.out.println(s1);
 
         // 这里只掌握常见的构造方法
-        byte[] bytes ={97,98,99};  // 97是a, 98是b, 99是c  参照的是ASCⅡ字符码
+        byte[] bytes = {97,98,99};  // 97是a, 98是b, 99是c  参照的是ASCⅡ字符码
         String s2 =new String(bytes);
 
         // 输出一个引用的时候，会自动调用toString()方法，默认Object的话，会自动输出对象的内存地址。

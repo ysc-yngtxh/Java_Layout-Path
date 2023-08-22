@@ -12,7 +12,7 @@ public class Object类_2_toString {
     public static void main(String[] args) {
         MyTime t1 = new MyTime(1997,4,29);
 		/*
-		  String s1=t1.toString();
+		  String s1 = t1.toString();
 		  System.out.println(s1);
 		 */
         System.out.println(t1.toString());

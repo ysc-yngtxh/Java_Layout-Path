@@ -37,10 +37,10 @@ public class 数组_6_数组的扩容与拷贝 {
 
         // 还有数组拷贝的是对象地址
         Object[] objs = {new Object(), new Object(), new Object()};
-        Object[] newObjes = new Object[10];
-        System.arraycopy(objs, 0, newObjes, 0, objs.length);
-        for (int i = 0; i < newObjes.length; i++) {
-            System.out.println(newObjes[i]);
+        Object[] newObjs = new Object[10];
+        System.arraycopy(objs, 0, newObjs, 0, objs.length);
+        for (int i = 0; i < newObjs.length; i++) {
+            System.out.println(newObjs[i]);
         }
     }
 }

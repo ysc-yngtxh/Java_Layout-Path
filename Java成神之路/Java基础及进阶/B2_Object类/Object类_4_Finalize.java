@@ -30,9 +30,9 @@ package B2_Object类;
  *      垃圾太少或者时间未到,种种条件下，有可能启动，也有可能不启动
  * */
 
-public class Object类_4_finalize {
+public class Object类_4_Finalize {
     public static void main(String[] args) {
-        for(int i=0; i<1000; i++){
+        for(int i = 0; i < 1000; i++){
             Person p = new Person();
             p = null;
             if (i % 2 == 0) {

@@ -32,9 +32,9 @@ public class 数组_4_main方法Args参数 {
          // 程序员执行到此处说明用户确实提供了用户名和密码
          // 接下来判断用户名和密码是否正确
          // 取出用户名
-         String username=args[0];
+         String username = args[0];
          // 取出密码
-         String password=args[1];
+         String password = args[1];
 
          // 假设用户名是admin，密码是123的时候表示登陆成功。其他一律失效。
          // 判断两个字符串是否相等，需要使用equals方法。

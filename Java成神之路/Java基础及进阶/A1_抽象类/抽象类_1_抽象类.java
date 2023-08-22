@@ -68,7 +68,7 @@ abstract class Cat extends Animal{
 
 public class 抽象类_1_抽象类 {
     public static void main(String[] args) {
-        Animal a=new Bird();
+        Animal a = new Bird();
         a.move();
         // Animal a = new Cat(); // 为什么无法创建Cat对象，记住：抽象类不能创建对象。
     }
