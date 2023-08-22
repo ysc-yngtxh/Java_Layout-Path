@@ -1,7 +1,5 @@
 package L12反射.B2获取Class实例化对象;
 
-import A1抽象类.T;
-
 import java.util.Date;
 
 /*
