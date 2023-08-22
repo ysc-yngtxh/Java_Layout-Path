@@ -33,7 +33,7 @@ public class 序列化与反序列化的实现1 {
     public static void main(String[] args) throws Exception{
 
         // 创建Java对象
-        Student s= new Student(111, "游诗成", "男");
+        Student s = new Student(111, "游诗成", "男");
         // 序列化
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Student"));
         // 序列化对象

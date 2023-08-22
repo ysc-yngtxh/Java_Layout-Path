@@ -14,12 +14,12 @@ File:
 public class File概述1 {
     public static void main(String[] args) {
         // 创建一个file对象
-        File f1 = new File("D:\\file");
+        File f1 = new File(System.getProperty("user.dir") + "file");
 
         // 判断是否存在！
         System.out.println(f1.exists());
 
-        // 如果D:\file不存在，则以文件的形式创建出来
+        // 如果 ../Java成神之路/file 不存在，则以文件的形式创建出来
         if(!f1.exists()){
             try {
                 f1.createNewFile();
@@ -29,12 +29,12 @@ public class File概述1 {
         }
 
 
-        // 如果D:\file不存在，则以目录(文件名)的形式创建出来
+        // 如果 ../Java成神之路/file 不存在，则以目录(文件名)的形式创建出来
         if(!f1.exists()){
             f1.mkdir();
         }
 
-        // 如果D:\file不存在，则以多重目录(文件名)的形式创建出来
+        // 如果 ../Java成神之路/file 不存在，则以多重目录(文件名)的形式创建出来
         File f2 = new File("D:\\a\\b\\c\\d\\e\\f\\g");
         if(!f2.exists()){
             f2.mkdirs();
@@ -47,7 +47,7 @@ public class File概述1 {
         System.out.println(f3.getAbsoluteFile());
 
         // getParent()获取文件的父路径
-        File f4 = new File("D:\\IDEA\\Java成神之路\\id快捷键.java");
+        File f4 = new File(System.getProperty("user.dir") + "/id快捷键.java");
         String s = f4.getParent();
         System.out.println(s);
     }

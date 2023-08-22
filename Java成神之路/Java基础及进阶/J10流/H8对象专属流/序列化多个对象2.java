@@ -25,7 +25,7 @@ public class 序列化多个对象2 {
 
         // 反序列化集合
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Users"));
-        List<User> userList = (List<User>)ois.readObject();   // 是个List集合，强转成List集合
+        List<User> userList = (List<User>) ois.readObject();   // 是个List集合，强转成List集合
         for (User user : userList         // 集合元素遍历
              ) {
             System.out.println(user);

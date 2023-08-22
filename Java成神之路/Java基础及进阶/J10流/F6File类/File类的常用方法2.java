@@ -17,7 +17,7 @@ File类的常用方法：
  */
 public class File类的常用方法2 {
     public static void main(String[] args) {
-        File f1 = new File("D:\\酷我音乐\\音乐.txt");
+        File f1 = new File(System.getProperty("user.dir") + "file");
         // getName()获取文件名
         System.out.println("文件名：" + f1.getName());
 
@@ -41,10 +41,10 @@ public class File类的常用方法2 {
         System.out.println("=========================================================================================");
 
         // File[] listFiles()获取当前目录下所有的子文件及子目录
-        File f2 = new File("D:\\IDEA\\Java成神之路\\src");
+        File f2 = new File(System.getProperty("user.dir"));
         File[] files = f2.listFiles();
-        for (File file:files
-             ) {
+        assert files != null;
+        for (File file : files) {
             System.out.println(file.getAbsolutePath());
         }
 

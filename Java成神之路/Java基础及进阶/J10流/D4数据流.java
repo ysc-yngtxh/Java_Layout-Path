@@ -9,12 +9,12 @@ import java.io.IOException;
 
 /*
 java.io.DataOutputStream:数据专属的流
-这个流可以将数据连同数据的类型一同写入文件
-注意：这个文件不是普通文本文件。（这个文件用记事本打不开）bytes
+  这个流可以将数据连同数据的类型一同写入文件
+  注意：这个文件不是普通文本文件。（这个文件用记事本打不开）bytes
 
 java.io.DataInputStream:数据字节输入流
-DataOutputStream写的文件，只能使用DataInputStream去读，并且读的时候你需要提前知道写入的顺序。
-读的顺序需要和写的顺序一致，才可以正常取出数据
+  DataOutputStream写的文件，只能使用DataInputStream去读，并且读的时候你需要提前知道写入的顺序。
+  读的顺序需要和写的顺序一致，才可以正常取出数据
  */
 public class D4数据流 {
     public static void main(String[] args) {
@@ -25,7 +25,7 @@ public class D4数据流 {
             fos = new FileOutputStream("data");
             DataOutputStream dos = new DataOutputStream(fos);
 
-            //写数据
+            // 写数据
             byte b = 100;
             short s = 200;
             int i = 300;
@@ -35,8 +35,8 @@ public class D4数据流 {
             boolean sex = false;
             char c = 'a';
 
-            //写
-            dos.writeByte(b);  //把数据以及数据类型一起写进去
+            // 写
+            dos.writeByte(b);  // 把数据以及数据类型一起写进去
             dos.writeShort(s);
             dos.writeInt(i);
             dos.writeLong(l);
@@ -45,10 +45,10 @@ public class D4数据流 {
             dos.writeBoolean(sex);
             dos.writeChar(c);
 
-            //创建数据专属的字节输入流
+            // 创建数据专属的字节输入流
             fis = new FileInputStream("data");
             DataInputStream dis = new DataInputStream(fis);
-            //开始读
+            // 开始读
             byte b1 = dis.readByte();
             short s1 = dis.readShort();
             int i1 = dis.readInt();

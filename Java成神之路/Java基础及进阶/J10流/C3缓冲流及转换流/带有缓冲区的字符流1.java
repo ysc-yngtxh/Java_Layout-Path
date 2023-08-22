@@ -15,7 +15,7 @@ public class 带有缓冲区的字符流1 {
     public static void main(String[] args)  {
         FileReader fr = null;
         try{
-            fr = new FileReader("D:\\IDEA\\Java成神之路\\Java基础及进阶\\src\\J10流\\A1iO流概述.java");
+            fr = new FileReader(System.getProperty("user.dir") + "/Java基础及进阶/J10流/A1iO流概述.java");
             // 当一个流的构造方法中需要一个流的时候，这个被传进来的流叫做：节点流
             // 外部负责包装的这个流，叫做：包装流。还有一个名字叫做：处理流
             // 像当前这个程序来说：FileReader就是一个节点流。BufferedReader就是包装流/处理流

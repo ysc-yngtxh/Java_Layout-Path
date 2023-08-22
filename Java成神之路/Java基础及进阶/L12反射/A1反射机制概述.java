@@ -16,10 +16,10 @@ package L12反射;
       java.lang.reflect.Field           代表字节码中的属性字节码，代表类中的成员变量（静态变量）
 
       public class User{
-        //Field
+          // Field
           int n;
 
-       //Constructor
+          // Constructor
           public User() {
           }
 
@@ -27,7 +27,7 @@ package L12反射;
               this.n = n;
           }
 
-        //Method
+          // Method
           public int getN() {
               return n;
           }
