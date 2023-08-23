@@ -1,4 +1,6 @@
-package K11_线程.线程_Ⅲ_线程安全.线程_11_ThreadLocal;
+package com.example.main;
+
+import com.example.vo.User;
 
 import java.util.concurrent.TimeUnit;
 
@@ -68,6 +70,6 @@ public class Test {
         getAndPrintData();
         THREAD_LOCAL.remove();
 
-        // 可以发现对于共享对象User,多线程并发互不影响数据。不论线程A和线程B赋值多少次，在主线程中的user始终为空。
+        // 可以发现对于User共享对象,多线程并发互不影响数据。不论线程A和线程B赋值多少次，在主线程中的user始终为空。
     }
 }

@@ -1,4 +1,4 @@
-package com.bjpowernode.controller;
+package src.com.bjpowernode.controller;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

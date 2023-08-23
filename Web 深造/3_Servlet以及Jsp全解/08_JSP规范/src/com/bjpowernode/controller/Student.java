@@ -1,4 +1,4 @@
-package com.bjpowernode.controller;
+package src.com.bjpowernode.controller;
 
 public class Student {
     private Integer sid;

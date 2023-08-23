@@ -8,14 +8,12 @@ package K11_线程.线程_Ⅱ_线程基础知识;
 
     2、参数是毫秒
 
-    3、作用：让当前线程进入休眠，进入“阻塞状态”，放弃占有CPU时间片，让给其他线程使用
+    3、作用：让当前线程进入休眠，进入 "阻塞状态"，放弃占有CPU时间片，让给其他线程使用
            这行代码出现在A线程中，A线程就会进入休眠
            这行代码出现在B线程中，B线程就会进入休眠
 
     4、Thread.sleep()方法，可以做到这种效果：
            间隔特定的时间，去执行一段特定的代码，每隔多久执行一次
-
-
  */
 public class 线程_4_线程的sleep方法 {
     public static void main(String[] args) {
@@ -29,7 +27,7 @@ public class 线程_4_线程的sleep方法 {
             e.printStackTrace();
         }
 
-        //5秒之后执行的代码
+        // 5秒之后执行的代码
         System.out.println("Hello World!");
 
         for (int i = 0; i < 10; i++) {
@@ -47,7 +45,7 @@ public class 线程_4_线程的sleep方法 {
 
        // ***关于Thread.sleep()方法的面试题：
 
-        Thread t = new MyThread1();  //多态
+        Thread t = new MyThread1();  // 多态
         t.setName("t");
         t.start();
 

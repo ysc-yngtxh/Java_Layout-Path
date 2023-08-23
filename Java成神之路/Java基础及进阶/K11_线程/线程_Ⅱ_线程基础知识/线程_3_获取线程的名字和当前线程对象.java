@@ -50,9 +50,9 @@ class MyThread extends Thread{
     @Override
     public void run(){
         for (int i = 0; i < 100; i++) {
-            // currentThread就是当前线程对象
-            // 当m线程执行run方法，那么这个当前线程就是m
-            // 当mf线程执行run方法，那么这个当前线程就是mf
+            // currentThread 就是当前线程对象
+            // 当m线程执行run方法，那么这个当前线程就是 m
+            // 当mf线程执行run方法，那么这个当前线程就是 mf
             Thread c = Thread.currentThread();
             System.out.println(c.getName() + "-->" + i);
         }

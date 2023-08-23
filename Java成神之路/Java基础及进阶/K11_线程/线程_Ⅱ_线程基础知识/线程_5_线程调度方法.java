@@ -1,7 +1,7 @@
 package K11_线程.线程_Ⅱ_线程基础知识;
 
 /*
-关于现成的调度（这部分内容属于了解）
+关于线程的调度
     1、常见的线程调度模型有哪些?
          抢占式调度模型：
              哪个线程的优先级比较高，抢到的CPU时间片的效率就高一些/多一些
@@ -23,7 +23,7 @@ package K11_线程.线程_Ⅱ_线程基础知识;
              static void yield()  让位方法
              暂停当前正在执行的线程对象，并执行其他线程
              yield()方法不是阻塞方法。让当前线程让位，让给其他线程使用
-             yield()方法的执行会让当前线程从“运行状态”回到“就绪状态”
+             yield()方法的执行会让当前线程从 "运行状态" 回到 "就绪状态"
              注意：在回到就绪之后，有可能还会再次抢到
 
          实例方法：
@@ -31,7 +31,7 @@ package K11_线程.线程_Ⅱ_线程基础知识;
              合并线程
              class MyThread1 extends Thread{
                 public void doSome(){
-                   MyThread2 t = new MyThread()
+                   MyThread2 t = new MyThread2()
                    t.join();//t线程先执行，直到t线程结束，主线程才可以继续。
                 }
               }
@@ -39,7 +39,7 @@ package K11_线程.线程_Ⅱ_线程基础知识;
               class MyThread2 extends Thread{
               }
  */
-public class 线程_7_线程调度方法 {
+public class 线程_5_线程调度方法 {
     public static void main(String[] args) {
 
         Thread t = new Thread(new YSC());
@@ -66,9 +66,8 @@ class YSC implements Runnable{
 
         // 默认的优先级是5
         for (int i = 1; i <= 100; i++) {
-
             // 每10个让位一次
-            if(i % 10 == 0){
+            if(i % 10 == 0) {
                 Thread.yield();   // 当前线程暂停一下，让给主线程
                 // 比如在t-->29后，执行的就是main线程
             }

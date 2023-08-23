@@ -39,7 +39,7 @@ import java.util.List;
         如果List集合中元素个数是0,就表示仓库空了
         保证List集合中永远都是最多存储1个元素
  */
-public class 线程_15_wait和notify方法 {
+public class 线程_10_wait和notify方法 {
     public static void main(String[] args) {
 
         // 创建List仓库集合对象，共享的
@@ -57,7 +57,7 @@ public class 线程_15_wait和notify方法 {
     }
 }
 
-//生产线程
+// 生产线程
 class Producer implements Runnable{
 
     private List<Object> list;

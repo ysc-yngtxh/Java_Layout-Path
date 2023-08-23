@@ -1,4 +1,4 @@
-package K11_线程.线程_Ⅲ_线程安全.线程_10_死锁概念;
+package K11_线程.线程_Ⅲ_线程安全.线程_9_死锁概念;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,7 +9,7 @@ import java.util.Date;
   只有会写的，才会在以后的开发中注意这个事儿
   因为死锁很难调试
  */
-public class 死锁代码1 {
+public class 死锁代码 {
     public static void main(String[] args) {
         Object o1 = new Object();
         Object o2 = new Object();

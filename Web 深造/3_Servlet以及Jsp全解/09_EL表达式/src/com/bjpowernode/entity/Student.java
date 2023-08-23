@@ -1,4 +1,4 @@
-package com.bjpowernode.entity;
+package src.com.bjpowernode.entity;
 
 public class Student {
     int sid;

@@ -1,4 +1,4 @@
-package com.bjpowernode.controllerr;
+package src.com.bjpowernode.controllerr;
 
 import com.bjpowernode.entity.Student;
 
