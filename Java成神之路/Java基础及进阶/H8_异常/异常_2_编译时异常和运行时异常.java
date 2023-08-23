@@ -18,8 +18,8 @@ import java.io.FileNotFoundException;
 
 注意：
     只要异常没有捕捉，采用上报的方式，此方法的后续代码不会执行
-    另外需要注意，try语句块中的某一行出现异常，该行后面的代码不会执行
-    try...catch捕捉异常之后，后续代码可以执行
+    另外需要注意，try语句块中的某一行出现异常，该行后面的在 try 中的代码不会执行
+    try...catch捕捉异常之后， try...catch之外的后续代码可以执行
  */
 public class 异常_2_编译时异常和运行时异常 {
     public static void main(String[] args) {

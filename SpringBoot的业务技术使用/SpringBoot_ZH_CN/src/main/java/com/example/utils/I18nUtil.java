@@ -68,7 +68,7 @@ public class I18nUtil{
         Map<String, String> map = new HashMap<String, String>();
 
         Properties prop = loadI18nProp();
-        if (keys!=null && keys.length>0) {
+        if (keys != null && keys.length > 0) {
             for (String key: keys) {
                 map.put(key, prop.getProperty(key));
             }

@@ -9,18 +9,18 @@ import java.util.List;
           wait方法和notify方法不是通过线程对象调用的。不是这样的：t.wait(),t.notify();...
 
     第二：wait()方法作用？
-          Object o = new Object();
-          o.wait();
+          Object obj = new Object();
+          obj.wait();
 
           表示：
-              o.wait()方法的调用，会让“当前线程”(正在o对象上活动的线程)进入等待状态，无限期等待，直到被唤醒为止
+              obj.wait()方法的调用，会让 "当前线程" (正在obj对象上活动的线程)进入等待状态，无限期等待，直到被唤醒为止
 
     第三：notify()方法作用？
-          Object o = new Object();
-          o.notify();
+          Object obj = new Object();
+          obj.notify();
 
           表示：
-              唤醒正在o对象上等待的线程
+              唤醒正在obj对象上等待的线程
 
           还有一个notifyAll()方法：
                唤醒对象上处于等待的所有线程。
@@ -39,7 +39,7 @@ import java.util.List;
         如果List集合中元素个数是0,就表示仓库空了
         保证List集合中永远都是最多存储1个元素
  */
-public class 线程_10_wait和notify方法 {
+public class 线程_10_Object类中的wait和notify方法 {
     public static void main(String[] args) {
 
         // 创建List仓库集合对象，共享的

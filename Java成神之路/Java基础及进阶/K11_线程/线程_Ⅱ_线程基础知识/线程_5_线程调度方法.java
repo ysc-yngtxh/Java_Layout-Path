@@ -11,7 +11,8 @@ package K11_线程.线程_Ⅱ_线程基础知识;
              有一些编程语言，线程调度模型采用的是这种方式
 
     2、Java中提供了哪些方法是和线程调度有关系的？
-         实例方法：
+
+        1)、实例方法：setPriority(int newPriority)
             void setPriority(int newPriority) 设置线程的优先级
             int getPriority() 获取线程优先级
             最低优先级1
@@ -19,20 +20,20 @@ package K11_线程.线程_Ⅱ_线程基础知识;
             最高优先级10
             优先级比较高的获取CPU时间片可能会多一些。（但也不完全是，大概率是高的）
 
-         静态方法：
-             static void yield()  让位方法
-             暂停当前正在执行的线程对象，并执行其他线程
-             yield()方法不是阻塞方法。让当前线程让位，让给其他线程使用
-             yield()方法的执行会让当前线程从 "运行状态" 回到 "就绪状态"
+         2)、静态方法：yield()
+             static void yield()  让位方法(指的是如果当前线程抢到时间片，就把时间片让掉，然后和其他的线程在同一起点重新去争抢)
+             yield() 方法不是阻塞方法。使当前线程从执行状态（运行状态）变为可执行态（就绪状态）。
+                cpu会从众多的可执行态里选择，也就是说，执行yield()的线程还是有可能会被再次执行到的，
+             并不是说一定会执行其他线程而执行yield()的线程在下一次中不会执行到了。
              注意：在回到就绪之后，有可能还会再次抢到
 
-         实例方法：
+         3)、实例方法：join()
              void join()  插队
-             合并线程
+             join()是 Thread 类中的一个方法，当我们需要让线程按照自己指定的顺序执行的时候，就可以利用这个方法。
              class MyThread1 extends Thread{
                 public void doSome(){
                    MyThread2 t = new MyThread2()
-                   t.join();//t线程先执行，直到t线程结束，主线程才可以继续。
+                   t.join(); // t线程先执行，直到t线程结束，主线程才可以继续。
                 }
               }
 
@@ -68,10 +69,9 @@ class YSC implements Runnable{
         for (int i = 1; i <= 100; i++) {
             // 每10个让位一次
             if(i % 10 == 0) {
-                Thread.yield();   // 当前线程暂停一下，让给主线程
-                // 比如在t-->29后，执行的就是main线程
+                Thread.yield();   // 当前线程时间片让掉，和其它线程重新争抢时间片
             }
-            System.out.println(Thread.currentThread().getName() + "-->" + i);
+            System.out.println(Thread.currentThread().getName() + " --> " + i);
         }
     }
 }
