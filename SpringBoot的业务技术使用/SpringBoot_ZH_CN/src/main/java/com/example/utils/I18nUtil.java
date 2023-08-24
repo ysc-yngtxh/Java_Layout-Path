@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 public class I18nUtil{
-    private static Logger logger = LoggerFactory.getLogger(I18nUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(I18nUtil.class);
     private static Properties prop = null;
 
     /**

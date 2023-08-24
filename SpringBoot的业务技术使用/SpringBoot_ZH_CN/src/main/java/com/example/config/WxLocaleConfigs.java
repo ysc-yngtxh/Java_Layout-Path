@@ -2,6 +2,7 @@ package com.example.config;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
@@ -27,11 +28,8 @@ import java.util.Locale;
 @Configuration
 public class WxLocaleConfigs implements LocaleResolver,InitializingBean {
 
+    @Getter
     private static WxLocaleConfigs wxLocaleConfigs;
-
-    public static WxLocaleConfigs getWxLocaleConfigs() {
-        return wxLocaleConfigs;
-    }
 
     @Autowired
     private HttpServletRequest request;
@@ -48,13 +46,13 @@ public class WxLocaleConfigs implements LocaleResolver,InitializingBean {
         // 这里有坑,不能使用getParameter()方法,因为LocaleResolver只实现了五种场景解析,可以看源码
         // 其中不包括参数解析,所以不要把请求语言放入参数中
         String language = httpServletRequest.getHeader("X-Language");
-        //如果没有就使用默认的（根据主机的语言环境生成一个 Locale
+        // 如果没有就使用默认的（根据主机的语言环境生成一个 Locale)
         Locale locale = LocaleContextHolder.getLocale();
-        //如果请求的链接中携带了 国际化的参数
+        // 如果请求的链接中携带了 国际化的参数
         if (StringUtils.hasText(language)){
-            //zh_CN
+            // zh_CN
             String[] s = language.split("_");
-            //国家，地区
+            // 国家，地区
             locale = new Locale(s[0], s[1]);
         }
         return locale;

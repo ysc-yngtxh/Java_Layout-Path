@@ -31,7 +31,7 @@ public class BrandServiceImpl implements BrandService {
         if(StringUtils.isNotBlank(key)){
             // 过滤条件  WHERE 'name' LIKE "%X%" OR letter == 'x'
             example.createCriteria().orLike("name","%" + key + "%")
-                    .orEqualTo("letter",key.toUpperCase()); // key表示的是搜索字段，toUpperCase()方法忽略大小写
+                    .orEqualTo("letter",key.toUpperCase()); // key表示的是搜索字段，toUpperCase()方法表示全部转大写
         }
         // 排序
         if(StringUtils.isNotBlank(sortBy)){

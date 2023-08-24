@@ -8,6 +8,7 @@ import org.springframework.util.ObjectUtils;
 
 import java.io.IOException;
 
+@SuppressWarnings("rawtypes")
 public class GenderDataDeserializer extends JsonDeserializer {
     @Override
     public Object deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
@@ -15,14 +16,11 @@ public class GenderDataDeserializer extends JsonDeserializer {
             return null;
         }
         int gender = 0;
-        switch ( jsonParser.getText() ) { // 通过getText获取参数
-            case "男":
-                gender = 1;
-                break;
-            case "女":
-                break;
-            default:
-                throw new RuntimeException("传入的性别为非法字符");
+        switch (jsonParser.getText()) { // 通过getText获取参数
+            case "男" -> gender = 1;
+            case "女" -> {
+            }
+            default -> throw new RuntimeException("传入的性别为非法字符");
         }
 
         return gender;
