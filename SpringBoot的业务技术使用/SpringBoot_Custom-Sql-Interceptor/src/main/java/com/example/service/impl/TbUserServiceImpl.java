@@ -1,0 +1,66 @@
+package com.example.service.impl;
+
+import com.example.entity.TbUser;
+import com.example.dao.TbUserDao;
+import com.example.service.TbUserService;
+import jakarta.annotation.Resource;
+import org.springframework.stereotype.Service;
+
+/**
+ * 用户表(TbUser)表服务实现类
+ *
+ * @author 游家纨绔
+ * @since 2023-08-24 23:42:21
+ */
+@Service("tbUserService")
+public class TbUserServiceImpl implements TbUserService {
+    @Resource
+    private TbUserDao tbUserDao;
+
+    /**
+     * 通过ID查询单条数据
+     *
+     * @param id 主键
+     * @return 实例对象
+     */
+    @Override
+    public TbUser queryById(Long id) {
+        return this.tbUserDao.queryById(id);
+    }
+
+
+    /**
+     * 新增数据
+     *
+     * @param tbUser 实例对象
+     * @return 实例对象
+     */
+    @Override
+    public TbUser insert(TbUser tbUser) {
+        this.tbUserDao.insert(tbUser);
+        return tbUser;
+    }
+
+    /**
+     * 修改数据
+     *
+     * @param tbUser 实例对象
+     * @return 实例对象
+     */
+    @Override
+    public TbUser update(TbUser tbUser) {
+        this.tbUserDao.update(tbUser);
+        return this.queryById(tbUser.getId());
+    }
+
+    /**
+     * 通过主键删除数据
+     *
+     * @param id 主键
+     * @return 是否成功
+     */
+    @Override
+    public boolean deleteById(Long id) {
+        return this.tbUserDao.deleteById(id) > 0;
+    }
+}
