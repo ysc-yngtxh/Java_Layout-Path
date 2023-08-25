@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
 import java.util.Date;
 import java.io.Serializable;
 
@@ -17,6 +18,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TbUser implements Serializable {
+    @Serial
     private static final long serialVersionUID = 882909710663298133L;
     /**
      * 主键
@@ -25,7 +27,7 @@ public class TbUser implements Serializable {
     /**
      * 租户Id
      */
-    private Integer tenandId;
+    private Integer tenantId;
     /**
      * 用户名
      */

@@ -38,7 +38,7 @@ package M13_注解.注解_Ⅰ_注解概论;
             表示该注解可以出现在：构造方法上，字段上，局部变量上，方法上，包上，参数上，类上
 
    关于Retention注解：
-       @Retention(RetentionPolicy.SOURCE)  表示该注解只被保留在Java源文件中。
+       @Retention(RetentionPolicy.SOURCE)   表示该注解只被保留在Java源文件中。
        @Retention(RetentionPolicy.CLASS)    表示该注解被保存在class文件中
        @Retention(RetentionPolicy.RUNTIME)  表示该注解被保存在class文件中，并且可以被反射机制读取
 

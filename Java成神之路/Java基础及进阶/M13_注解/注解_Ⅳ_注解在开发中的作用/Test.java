@@ -13,7 +13,7 @@ import java.lang.reflect.Field;
 public class Test {
     public static void main(String[] args) throws Exception{
 
-        Class userClass = Class.forName("M13_注解.注解_Ⅳ_注解在开发中的作用.User");
+        Class<?> userClass = Class.forName("M13_注解.注解_Ⅳ_注解在开发中的作用.User");
         // 判断类上是否存在Id注解
         if(userClass.isAnnotationPresent(Id.class)){
             // 当一个类上面有@Id注解的时候，要求类中必须存在int类型的id属性
@@ -31,7 +31,7 @@ public class Test {
 
             // 判断是否合法
             if(!isOK){
-                throw new HasNotIdPropertyEception("被@Id注解标注的类中必须要有一个int类型的id属性");
+                throw new HasNotIdPropertyException("被@Id注解标注的类中必须要有一个int类型的id属性");
             }
         }
     }

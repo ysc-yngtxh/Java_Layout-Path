@@ -1,6 +1,6 @@
 package com.example.execution;
 
-import com.example.interceptor.MyInterceptor;
+import com.example.interceptor.SqlInterceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -13,6 +13,6 @@ public class MyBatisSqlInterceptorConfiguration implements ApplicationContextAwa
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         SqlSessionFactory sqlSessionFactory = applicationContext.getBean(SqlSessionFactory.class);
-        sqlSessionFactory.getConfiguration().addInterceptor(new MyInterceptor());
+        sqlSessionFactory.getConfiguration().addInterceptor(new SqlInterceptor());
     }
 }

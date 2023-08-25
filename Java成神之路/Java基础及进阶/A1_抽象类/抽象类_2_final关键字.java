@@ -11,7 +11,6 @@ package A1_抽象类;
              【final修饰的局部变量，一旦赋值不能重新赋值】
              【final修饰的实例变量，系统不负责赋默认值，要求程序员必须手动赋值。这个手动赋值，在变量后面赋值可以，在构造方法中赋值也可以】
 
-
      5、final修饰的方法
              【final修饰的方法无法被覆盖，被重写。】
 
@@ -23,26 +22,25 @@ package A1_抽象类;
 
              //实例变量在什么时候赋值（初始化）？
 
-
-               一般都会在实例变量前面加上static，变为静态的，存储在方法区，例如： static final int i=10；
+               一般都会在实例变量前面加上static，变为静态的，存储在方法区，例如： static final int i = 10；
                这样的话，引用对象时候，节省空间
-               常量：final String COUNTRY="中国"  //无需封装，因为无法改变
-               静态常量：static final String YSC="湖北武汉"
+               常量：final String COUNTRY = "中国"  // 无需封装，因为无法改变
+               静态常量：static final String YSC = "湖北武汉"
                常量和静态变量，都是存储在方法区，在类加载时初始化
  */
 
 /*class MyMath{
-    public static final double PI=3.1415926;//静态常量
+    public static final double PI=3.1415926; // 静态常量
 }
 
 
 final class A{
-    //没有子孙，不能被继承
+    // 没有子孙，不能被继承
 }
 class B extends A{
 
 }
-*/     //编译错误
+*/     // 编译错误
 
 
 class T{
