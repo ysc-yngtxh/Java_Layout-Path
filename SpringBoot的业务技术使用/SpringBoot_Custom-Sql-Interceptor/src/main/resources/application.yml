@@ -1,0 +1,16 @@
+logging:
+    level:
+        com:
+            example: debug
+mybatis:
+    mapper-locations: classpath:mapper/*.xml
+server:
+    port: 8081
+    servlet:
+        context-path: /
+spring:
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: 131474
+        url: jdbc:mysql://localhost:3306/caoyumin?serverTimezone=UTC&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+        username: root

@@ -1,17 +1,17 @@
 package com.example.dao;
 
 import com.example.entity.TbUser;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
-import java.awt.print.Pageable;
 import java.util.List;
 
 /**
- * 用户表(TbUser)表数据库访问层
+ * (TbUser)表数据库访问层
  *
  * @author 游家纨绔
- * @since 2023-08-24 23:42:09
+ * @since 2023-08-25 00:19:30
  */
+@Mapper
 public interface TbUserDao {
 
     /**
@@ -21,15 +21,6 @@ public interface TbUserDao {
      * @return 实例对象
      */
     TbUser queryById(Long id);
-
-    /**
-     * 查询指定行数据
-     *
-     * @param tbUser 查询条件
-     * @param pageable         分页对象
-     * @return 对象列表
-     */
-    List<TbUser> queryAllByLimit(TbUser tbUser, @Param("pageable") Pageable pageable);
 
     /**
      * 统计总行数

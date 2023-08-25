@@ -2,44 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.TbUserDao">
 
-    <resultMap type="com.example.entity.TbUser" id="TbUserMap">
+    <resultMap id="TbUserMap" type="com.example.entity.TbUser">
         <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="username" column="username" jdbcType="VARCHAR"/>
-        <result property="password" column="password" jdbcType="VARCHAR"/>
-        <result property="phone" column="phone" jdbcType="VARCHAR"/>
-        <result property="created" column="created" jdbcType="TIMESTAMP"/>
+        <result property="tenandId" column="tenand_id" jdbcType="INTEGER"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="passWord" column="pass_word" jdbcType="VARCHAR"/>
+        <result property="commodity" column="commodity" jdbcType="VARCHAR"/>
+        <result property="color" column="color" jdbcType="VARCHAR"/>
+        <result property="number" column="number" jdbcType="INTEGER"/>
+        <result property="price" column="price" jdbcType="NUMERIC"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="updatedDate" column="updated_date" jdbcType="TIMESTAMP"/>
+        <result property="deleteFlag" column="delete_flag" jdbcType="INTEGER"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="TbUserMap">
-        select id,username,password,phone,created
+        select id,
+               tenand_id,
+               user_name,
+               pass_word,
+               commodity,
+               color,
+               number,
+               price,
+               create_date,
+               updated_date,
+               delete_flag
         from tb_user
         where id = #{id}
-    </select>
-
-    <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="TbUserMap">
-        select
-        id,username,password,phone,created
-        from tb_user
-        <where>
-            <if test="id != null">
-                and id = #{id}
-            </if>
-            <if test="username != null and username != ''">
-                and username = #{username}
-            </if>
-            <if test="password != null and password != ''">
-                and password = #{password}
-            </if>
-            <if test="phone != null and phone != ''">
-                and phone = #{phone}
-            </if>
-            <if test="created != null">
-                and created = #{created}
-            </if>
-        </where>
-        limit #{pageable.offset}, #{pageable.pageSize}
     </select>
 
     <!--统计总行数-->
@@ -50,60 +41,106 @@
             <if test="id != null">
                 and id = #{id}
             </if>
-            <if test="username != null and username != ''">
-                and username = #{username}
+            <if test="tenandId != null">
+                and tenand_id = #{tenandId}
             </if>
-            <if test="password != null and password != ''">
-                and password = #{password}
+            <if test="userName != null and userName != ''">
+                and user_name = #{userName}
             </if>
-            <if test="phone != null and phone != ''">
-                and phone = #{phone}
+            <if test="passWord != null and passWord != ''">
+                and pass_word = #{passWord}
             </if>
-            <if test="created != null">
-                and created = #{created}
+            <if test="commodity != null and commodity != ''">
+                and commodity = #{commodity}
+            </if>
+            <if test="color != null and color != ''">
+                and color = #{color}
+            </if>
+            <if test="number != null">
+                and number = #{number}
+            </if>
+            <if test="price != null">
+                and price = #{price}
+            </if>
+            <if test="createDate != null">
+                and create_date = #{createDate}
+            </if>
+            <if test="updatedDate != null">
+                and updated_date = #{updatedDate}
+            </if>
+            <if test="deleteFlag != null">
+                and delete_flag = #{deleteFlag}
             </if>
         </where>
     </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into tb_user(username,password,phone,created)
-        values (#{username}#{password}#{phone}#{created})
+        insert into tb_user(tenand_id,user_name,pass_word,commodity,color,number,price,create_date,updated_date,delete_flag)
+        values (#{tenandId},#{userName},#{passWord},#{commodity},#{color},#{number},#{price},#{createDate},#{updatedDate},#{deleteFlag})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into tb_user(username,password,phone,created)
+        insert into tb_user(tenand_id,user_name,pass_word,commodity,color,number,price,create_date,updated_date,delete_flag)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.username}#{entity.password}#{entity.phone}#{entity.created})
+        (#{entity.tenandId},#{entity.userName},#{entity.passWord},#{entity.commodity},#{entity.color},#{entity.number},#{entity.price},#{entity.createDate},#{entity.updatedDate},#{entity.deleteFlag})
         </foreach>
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into tb_user(username,password,phone,created)
+        insert into
+        tb_user(tenand_id,user_name,pass_word,commodity,color,number,price,create_date,updated_date,delete_flag)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.username}#{entity.password}#{entity.phone}#{entity.created})
+            (#{entity.tenandId},#{entity.userName},#{entity.passWord},#{entity.commodity},#{entity.color},#{entity.number},#{entity.price},#{entity.createDate},#{entity.updatedDate},#{entity.deleteFlag})
         </foreach>
         on duplicate key update
-        username = values(username)password = values(password)phone = values(phone)created = values(created)
+        tenand_id = values(tenand_id),
+        user_name = values(user_name),
+        pass_word = values(pass_word),
+        commodity = values(commodity),
+        color = values(color),
+        number = values(number),
+        price = values(price),
+        create_date = values(create_date),
+        updated_date = values(updated_date),
+        delete_flag = values(delete_flag)
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
         update tb_user
         <set>
-            <if test="username != null and username != ''">
-                username = #{username},
+            <if test="tenandId != null">
+                tenand_id = #{tenandId},
             </if>
-            <if test="password != null and password != ''">
-                password = #{password},
+            <if test="userName != null and userName != ''">
+                user_name = #{userName},
             </if>
-            <if test="phone != null and phone != ''">
-                phone = #{phone},
+            <if test="passWord != null and passWord != ''">
+                pass_word = #{passWord},
             </if>
-            <if test="created != null">
-                created = #{created},
+            <if test="commodity != null and commodity != ''">
+                commodity = #{commodity},
+            </if>
+            <if test="color != null and color != ''">
+                color = #{color},
+            </if>
+            <if test="number != null">
+                number = #{number},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate},
+            </if>
+            <if test="updatedDate != null">
+                updated_date = #{updatedDate},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag},
             </if>
         </set>
         where id = #{id}
@@ -111,9 +148,7 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete
-        from tb_user
-        where id = #{id}
+        delete from tb_user where id = #{id}
     </delete>
 
 </mapper>

@@ -4,13 +4,19 @@ import com.example.entity.TbUser;
 import com.example.service.TbUserService;
 import jakarta.annotation.Resource;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 用户表(TbUser)表控制层
+ * (TbUser)表控制层
  *
- * @author 游家纨绔
- * @since 2023-08-24 23:42:04
+ * @author makejava
+ * @since 2023-08-25 00:19:30
  */
 @RestController
 @RequestMapping("tbUser")

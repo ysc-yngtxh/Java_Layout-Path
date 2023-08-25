@@ -7,10 +7,10 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 /**
- * 用户表(TbUser)表服务实现类
+ * (TbUser)表服务实现类
  *
- * @author 游家纨绔
- * @since 2023-08-24 23:42:21
+ * @author makejava
+ * @since 2023-08-25 00:19:30
  */
 @Service("tbUserService")
 public class TbUserServiceImpl implements TbUserService {
@@ -27,7 +27,6 @@ public class TbUserServiceImpl implements TbUserService {
     public TbUser queryById(Long id) {
         return this.tbUserDao.queryById(id);
     }
-
 
     /**
      * 新增数据

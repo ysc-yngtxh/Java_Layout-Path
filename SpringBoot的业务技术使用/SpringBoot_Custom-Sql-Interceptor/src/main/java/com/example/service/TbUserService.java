@@ -3,10 +3,10 @@ package com.example.service;
 import com.example.entity.TbUser;
 
 /**
- * 用户表(TbUser)表服务接口
+ * (TbUser)表服务接口
  *
- * @author 游家纨绔
- * @since 2023-08-24 23:42:19
+ * @author makejava
+ * @since 2023-08-25 00:19:30
  */
 public interface TbUserService {
 
@@ -17,7 +17,6 @@ public interface TbUserService {
      * @return 实例对象
      */
     TbUser queryById(Long id);
-
 
     /**
      * 新增数据

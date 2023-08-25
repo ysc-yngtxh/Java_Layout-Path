@@ -8,13 +8,17 @@ import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
+import org.apache.ibatis.plugin.Plugin;
 import org.apache.ibatis.plugin.Signature;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 
 import java.sql.Connection;
 import java.util.Date;
+import java.util.Properties;
 
 /**
  * @Intercepts：标识该类是一个拦截器,需要一个Signature(拦截点)参数数组。
@@ -29,11 +33,11 @@ import java.util.Date;
  *       - args：在定义拦截方法的基础之上在定义拦截的方法对应的参数，JAVA里面方法可能重载，故注意参数的类型和顺序
  * */
 @Intercepts({
-        @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),
-        @Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class, Integer.class}),
+        // @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}),
+        @Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class, Integer.class})
 })
-@Configuration
 public class MyInterceptor implements Interceptor {
+    private static final Logger log = LoggerFactory.getLogger(MyInterceptor.class);
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
         StatementHandler statementHandler = (StatementHandler) invocation.getTarget();
@@ -55,4 +59,17 @@ public class MyInterceptor implements Interceptor {
         return invocation.proceed();
     }
 
+    @Override
+    public Object plugin(Object target) {
+        // TODO Auto-generated method stub
+        log.info("MysqlInterceptor plugin>>>>>>>{}", target);
+        return Plugin.wrap(target, this);
+    }
+
+    @Override
+    public void setProperties(Properties properties) {
+        // TODO Auto-generated method stub
+        String dialect = properties.getProperty("dialect");
+        log.info("mybatis intercept dialect:>>>>>>>{}", dialect);
+    }
 }

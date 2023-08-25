@@ -8,33 +8,59 @@ import java.util.Date;
 import java.io.Serializable;
 
 /**
- * 用户表(TbUser)实体类
+ * (TbUser)实体类
  *
  * @author 游家纨绔
- * @since 2023-08-24 23:42:15
+ * @since 2023-08-25 00:19:30
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class TbUser implements Serializable {
-    private static final long serialVersionUID = -77721830271963325L;
-
+    private static final long serialVersionUID = 882909710663298133L;
+    /**
+     * 主键
+     */
     private Long id;
+    /**
+     * 租户Id
+     */
+    private Integer tenandId;
     /**
      * 用户名
      */
-    private String username;
+    private String userName;
     /**
-     * 密码，加密存储
+     * 密码
      */
-    private String password;
+    private String passWord;
     /**
-     * 注册手机号
+     * 商品
      */
-    private String phone;
+    private String commodity;
+    /**
+     * 颜色
+     */
+    private String color;
+    /**
+     * 数量
+     */
+    private Integer number;
+    /**
+     * 价格
+     */
+    private Double price;
     /**
      * 创建时间
      */
-    private Date created;
+    private Date createDate;
+    /**
+     * 更新时间
+     */
+    private Date updatedDate;
+    /**
+     * 逻辑删除
+     */
+    private Integer deleteFlag;
 }
 
