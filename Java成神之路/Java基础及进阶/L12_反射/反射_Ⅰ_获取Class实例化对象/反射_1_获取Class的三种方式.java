@@ -26,10 +26,10 @@ public class 反射_1_获取Class的三种方式 {
         Class<?> c1 = null;
         Class<?> c4 = null;
         try {
-            c1 = Class.forName("java.lang.String");    // c1代表String.class文件，或者说c1代表String类型
-            Class<?> c2 = Class.forName("java.lang.Integer");   // c2代表Integer类型
-            Class<?> c3 = Class.forName("java.lang.System");    // c3代表System类型
-            c4 = Class.forName("java.util.Date");      // c4代表Date类型
+            c1 = Class.forName("java.lang.String");           // c1代表String.class文件，或者说c1代表String类型
+            Class<?> c2 = Class.forName("java.lang.Integer"); // c2代表Integer类型
+            Class<?> c3 = Class.forName("java.lang.System");  // c3代表System类型
+            c4 = Class.forName("java.util.Date");             // c4代表Date类型
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

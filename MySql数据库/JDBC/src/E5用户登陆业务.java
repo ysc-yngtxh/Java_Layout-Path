@@ -40,48 +40,49 @@ import java.util.Scanner;
 public class E5用户登陆业务 {
     public static void main(String[] args) {
 
-        //初始化界面
-        Map<String,String> userLoginInfo = initUI();
-        //验证用户名和密码
+        // 初始化界面
+        Map<String, String> userLoginInfo = initUI();
+        // 验证用户名和密码
         boolean loginSuccess = login(userLoginInfo);
-        //最后输出结果
+        // 最后输出结果
         System.out.println(loginSuccess ? "登陆成功" : "登陆失败");
 
     }
 
     /**
      * 用户登陆
-     * @param   userLoginInfo 用户登录信息
-     * @return  false表示失败，true表示成功
+     *
+     * @param userLoginInfo 用户登录信息
+     * @return false表示失败，true表示成功
      */
     private static boolean login(Map<String, String> userLoginInfo) {
 
-        //打标记
-        Boolean loginSuccess = false;
-        //JDBC代码
+        // 打标记
+        boolean loginSuccess = false;
+        // JDBC代码
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
 
-        try{
-            //1、注册驱动
+        try {
+            // 1、注册驱动
             Class.forName("com.mysql.cj.jdbc.Driver");
-            //2、获取驱动
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bjpowernode?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC","root","131474");
-            //3、获取数据库操作对象
+            // 2、获取驱动
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bjpowernode?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC", "root", "131474");
+            // 3、获取数据库操作对象
             stmt = conn.createStatement();
-            //4、执行SQL
-            String sql = "select * from t_student where name='"+ userLoginInfo.get("loginName") +"' and age= '"+ userLoginInfo.get("loginPwd") +"'";
+            // 4、执行SQL
+            String sql = "select * from t_student where name='" + userLoginInfo.get("loginName") + "' and age= '" + userLoginInfo.get("loginPwd") + "'";
             rs = stmt.executeQuery(sql);
-            //5、处理查询结果集
-            if (rs.next()){
-                //登陆成功
-                loginSuccess=true;
+            // 5、处理查询结果集
+            if (rs.next()) {
+                // 登陆成功
+                loginSuccess = true;
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        } finally{
-            //6、释放资源
+        } finally {
+            // 6、释放资源
             if (rs != null) {
                 try {
                     rs.close();
@@ -110,20 +111,21 @@ public class E5用户登陆业务 {
 
     /**
      * 初始化界面
-     * @return  loginName用户名
-     *          loginPwd密码
+     *
+     * @return loginName用户名
+     * loginPwd密码
      */
-    private static Map<String,String> initUI() {
+    private static Map<String, String> initUI() {
         Scanner s = new Scanner(System.in);
         System.out.println("用户名：");
-        String loginName= s.nextLine();
+        String loginName = s.nextLine();
 
         System.out.println("密码：");
         String loginPwd = s.nextLine();
 
-        Map<String,String> userLoginInfo = new HashMap<>(10);
-        userLoginInfo.put("loginName",loginName);
-        userLoginInfo.put("loginPwd",loginPwd);
+        Map<String, String> userLoginInfo = new HashMap<>(10);
+        userLoginInfo.put("loginName", loginName);
+        userLoginInfo.put("loginPwd", loginPwd);
 
         return userLoginInfo;
 

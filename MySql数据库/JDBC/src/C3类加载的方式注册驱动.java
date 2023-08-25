@@ -25,6 +25,7 @@ public class Driver extends com.mysql.cj.jdbc.Driver {
        所以，我们在第一步注册驱动的时候还有一种写法：即Class.forName("完整类名");
        这种方法也是我们最常用的方法
  */
+
 /**
  * @author 游家纨绔
  */
@@ -33,19 +34,19 @@ public class C3类加载的方式注册驱动 {
 
         Connection conn = null;
         Statement stmt = null;
-        try{
-            //1、注册驱动的第二种写法：类加载方式
-              //为什么这种方式常用？因为参数是一个字符串，字符串可以写到xxx.properties文件中
-              //以下方法不需要接收返回值，因为我们只想用他的类加载动作
+        try {
+            // 1、注册驱动的第二种写法：类加载方式
+            // 为什么这种方式常用？因为参数是一个字符串，字符串可以写到xxx.properties文件中
+            // 以下方法不需要接收返回值，因为我们只想用他的类加载动作
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            //2、获取连接
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bjpowernode?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC","root","131474");
+            // 2、获取连接
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bjpowernode?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC", "root", "131474");
 
-            //3、获取数据库操作对象
+            // 3、获取数据库操作对象
             stmt = conn.createStatement();
 
-            //4、执行SQL
+            // 4、执行SQL
             String sql = "insert into t_student(no,name,age) values(10,'shenfang','28')";
             int count = stmt.executeUpdate(sql);
             System.out.println(count == 1 ? "新增成功" : "新增失败");
@@ -54,8 +55,8 @@ public class C3类加载的方式注册驱动 {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        } finally{
-            //6、释放资源
+        } finally {
+            // 6、释放资源
             if (stmt != null) {
                 try {
                     stmt.close();

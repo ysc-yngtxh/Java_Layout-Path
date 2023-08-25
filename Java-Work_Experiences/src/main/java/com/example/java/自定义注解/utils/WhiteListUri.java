@@ -1,7 +1,6 @@
 package com.example.java.自定义注解.utils;
 
 import com.example.java.自定义注解.annotation.LoginRequired;
-import jdk.internal.reflect.Reflection;
 import org.reflections.Reflections;
 import org.reflections.scanners.MethodParameterNamesScanner;
 import org.reflections.scanners.Scanners;
@@ -23,7 +22,7 @@ import java.util.regex.Pattern;
  * @description: 获取标注了@LogRequired注解的所有Url：白名单列表
  * @date 2022/12/1 19:59
  */
-public class whitelistUri {
+public class WhiteListUri {
 
 
     // TODO Reflections依赖包中的实例详解
@@ -31,10 +30,10 @@ public class whitelistUri {
         // 扫包
         Reflections reflections = new Reflections(new ConfigurationBuilder()
                 .forPackages("com.boothsun.reflections") // 指定路径URL
-                .addScanners(Scanners.SubTypes) // 添加子类扫描工具
-                .addScanners(Scanners.FieldsAnnotated) // 添加 属性注解扫描工具
-                .addScanners(Scanners.MethodsAnnotated) // 添加 方法注解扫描工具
-                .addScanners(Scanners.MethodsParameter) // 添加方法参数扫描工具
+                .addScanners(Scanners.SubTypes)          // 添加子类扫描工具
+                .addScanners(Scanners.FieldsAnnotated)   // 添加 属性注解扫描工具
+                .addScanners(Scanners.MethodsAnnotated)  // 添加 方法注解扫描工具
+                .addScanners(Scanners.MethodsParameter)  // 添加方法参数扫描工具
         );
 
         // 反射出子类

@@ -2,12 +2,16 @@ package com.example.interceptor;
 
 import com.example.advice.SqlEnum;
 import com.example.advice.SqlException;
+import com.example.annotation.ExcludeTenant;
 import com.example.holder.TenantContextHolder;
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.lang.reflect.Method;
 
 /**
  * @author 游家纨绔
@@ -17,6 +21,13 @@ import org.springframework.web.servlet.ModelAndView;
 public class MyInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        if(handler instanceof HandlerMethod) {
+            HandlerMethod handl = (HandlerMethod) handler;
+            Method method = handl.getMethod();
+            if (method.isAnnotationPresent(ExcludeTenant.class)) {
+
+            }
+        }
         String tenant = request.getHeader("Global-TenantId");
         if(StringUtils.isBlank(tenant)){
             throw new SqlException(SqlEnum.TENANT_NULL);

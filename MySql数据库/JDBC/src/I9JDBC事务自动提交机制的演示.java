@@ -17,15 +17,16 @@ JDBC事务机制：
 
 /**
  * SQL脚本：
- *     drop table if exists t_act;
- *     create table t_act(
- *         actno bigint,
- *         balance double(7,2)      注意：7表示有效数字的个数，2表示小数位的个数
- *     );
- *     insert into t_act(actno,balance) values(111,20000);
- *     insert into t_act(actno,balance) values(222,0);
- *     commit;
- *     select * from t_act;
+ * drop table if exists t_act;
+ * create table t_act(
+ * actno bigint,
+ * balance double(7,2)      注意：7表示有效数字的个数，2表示小数位的个数
+ * );
+ * insert into t_act(actno,balance) values(111,20000);
+ * insert into t_act(actno,balance) values(222,0);
+ * commit;
+ * select * from t_act;
+ *
  * @author 游家纨绔
  */
 public class I9JDBC事务自动提交机制的演示 {
@@ -34,31 +35,31 @@ public class I9JDBC事务自动提交机制的演示 {
         Connection conn = null;
         PreparedStatement ps = null;
 
-        try{
+        try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bjpowernode?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC","root","131474");
-            //将自动提交机制修改为手动修改
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bjpowernode?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC", "root", "131474");
+            // 将自动提交机制修改为手动修改
             conn.setAutoCommit(false);
 
             String sql = "update t_act set balance=? where actno=?";
             ps = conn.prepareStatement(sql);
 
-            ps.setDouble(1,10000);
-            ps.setInt(2,111);
+            ps.setDouble(1, 10000);
+            ps.setInt(2, 111);
             int count = ps.executeUpdate();
 
-            ps.setDouble(1,10000);
-            ps.setInt(2,222);
+            ps.setDouble(1, 10000);
+            ps.setInt(2, 222);
             count += ps.executeUpdate();
 
             System.out.println(count == 2 ? "转账成功" : "转账失败");
 
-            //程序能够走够这里说明以上程序没有异常，事务结束，手动提交数据
+            // 程序能够走够这里说明以上程序没有异常，事务结束，手动提交数据
             conn.commit();
 
-        } catch(Exception e){
-            //回滚事务
+        } catch (Exception e) {
+            // 回滚事务
             if (conn != null) {
                 try {
                     conn.rollback();
@@ -67,7 +68,7 @@ public class I9JDBC事务自动提交机制的演示 {
                 }
             }
             e.printStackTrace();
-        } finally{
+        } finally {
             if (ps != null) {
                 try {
                     ps.close();

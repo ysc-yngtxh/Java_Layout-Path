@@ -1,4 +1,5 @@
 import util.DButil;
+
 import java.sql.*;
 
 /*
@@ -12,6 +13,7 @@ import java.sql.*;
 /**
  * 这个程序开启一个事务，这个事务专门进行查询，并且使用行级锁/悲观锁，锁住相关的记录
  * 配合L12演示行级锁一起使用，方便理解
+ *
  * @author 游家纨绔
  */
 public class J10悲观锁和乐观锁的概念 {
@@ -20,25 +22,25 @@ public class J10悲观锁和乐观锁的概念 {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        try{
+        try {
             conn = DButil.getConnection();
 
-            //开启事务
+            // 开启事务
             conn.setAutoCommit(false);
 
             String sql = "select no,name,age from t_student where age=? for update";
             ps = conn.prepareStatement(sql);
-            ps.setString(1,"18");
+            ps.setString(1, "18");
 
             rs = ps.executeQuery();
-            while(rs.next()){
-                System.out.println(rs.getString("no")+" "+rs.getString("name")+" "+rs.getString("age"));
+            while (rs.next()) {
+                System.out.println(rs.getString("no") + " " + rs.getString("name") + " " + rs.getString("age"));
             }
 
-            //提交事务
+            // 提交事务
             conn.commit();
         } catch (SQLException e) {
-            //回滚事务
+            // 回滚事务
             if (conn != null) {
                 try {
                     conn.rollback();
@@ -47,8 +49,8 @@ public class J10悲观锁和乐观锁的概念 {
                 }
             }
             e.printStackTrace();
-        } finally{
-            DButil.close(conn,ps,rs);
+        } finally {
+            DButil.close(conn, ps, rs);
         }
     }
 }
