@@ -130,6 +130,11 @@ public class StatementInterceptor implements Interceptor {
                             .replaceAll(" where ", " WHERE ")
                             .replaceAll(" WHERE ", " WHERE version = " + versionObj + " and ");
 
+                    // TODO 这里为什么可以直接重写 sql 就可以，而 Executor 执行器却要重新构建MappedStatement？
+                    // MappedStatement中属性BoundSql是加有final关键字的。BoundSql修改后，通过对象引用获取sql值与反射获取到的sql值是不一样的
+                    // Executor 执行完后还有处理器StatementHandler，处理器从BoundSql对象中获取sql数据，是旧的数据
+                    // 处理器StatementHandler执行完，Statement 则是通过反射获取sql，获取的是新数据
+                    // 因此，Executor修改完sql后需要重新包装BoundSql对象，StatementHandler修改完sql只需要重新赋值BoundSql类中的属性sql
                     ReflectUtil.setFieldValue(boundSql, "sql", sql);
                 }
             }
