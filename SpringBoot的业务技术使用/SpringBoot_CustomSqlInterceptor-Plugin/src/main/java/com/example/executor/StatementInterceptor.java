@@ -93,6 +93,14 @@ public class StatementInterceptor implements Interceptor {
             ReflectUtil.setFieldValue(obj, "updatedDate", new Date());
             ReflectUtil.setFieldValue(boundSql, "parameterObject", obj);
         } else if (SqlCommandType.UPDATE.equals(statement.getSqlCommandType())) {
+            /**
+             * 乐观锁实现思路：
+             *   1. 判断语句类型，仅支持update
+             *   2. 获取数据对象，提取出version值，设该值为oldVersion，令其+1设该值为newVersion
+             *   3. 获取SQL语句，用JSqlParser工具修改version参数值为newVersion，
+             *      添加version的查询条件：where version = oldVersion
+             *   4. 将新的SQL语句覆盖进去，然后继续执行
+             */
             // 这里用JSqlParser工具来解析 sql 语句
             Update update = (Update) CCJSqlParserUtil.parse(sql);
             // 判断当前操作表是否已经有悲观锁。如果有，那么就没必要使用乐观锁了
@@ -103,17 +111,18 @@ public class StatementInterceptor implements Interceptor {
                 // 判断该表是否有乐观锁字段
                 if (Arrays.stream(fields).map(Field::getName).toList().contains("version")) {
                     final Object[] versionValue = {null};
-                    Arrays.stream(methods).filter(item -> item.getName().equals("getVersion"))
-                            .map(method -> {
-                                try {
-                                    versionValue[0] = method.invoke(obj);
-                                } catch (IllegalAccessException e) {
-                                    throw new RuntimeException(e);
-                                } catch (InvocationTargetException e) {
-                                    throw new RuntimeException(e);
-                                }
-                                return null;
-                            }).toList();
+                    // 通过反射getVersion方法获取返回值
+                    Arrays.stream(methods).forEach(item -> {
+                        if (item.getName().equals("getVersion")) {
+                            try {
+                                versionValue[0] = item.invoke(obj);
+                            } catch (IllegalAccessException e) {
+                                throw new RuntimeException(e);
+                            } catch (InvocationTargetException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    });
                     Integer versionObj = (Integer) versionValue[0];
                     sql = sql.replaceAll(" set ", " SET ")
                             .replaceAll(" Set ", " SET ")
