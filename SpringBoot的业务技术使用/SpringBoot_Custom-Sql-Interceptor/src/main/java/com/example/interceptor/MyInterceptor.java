@@ -21,13 +21,7 @@ import java.lang.reflect.Method;
 public class MyInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if(handler instanceof HandlerMethod) {
-            HandlerMethod handl = (HandlerMethod) handler;
-            Method method = handl.getMethod();
-            if (method.isAnnotationPresent(ExcludeTenant.class)) {
-
-            }
-        }
+        // 这里是前端传给后端的请求头信息中必须要有 Global-TenantId,用来传递租户Id
         String tenant = request.getHeader("Global-TenantId");
         if(StringUtils.isBlank(tenant)){
             throw new SqlException(SqlEnum.TENANT_NULL);

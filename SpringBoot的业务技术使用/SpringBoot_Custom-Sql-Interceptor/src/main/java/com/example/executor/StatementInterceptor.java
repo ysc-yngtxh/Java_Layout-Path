@@ -1,0 +1,110 @@
+package com.example.executor;
+
+import cn.hutool.core.util.ReflectUtil;
+import com.example.holder.TenantContextHolder;
+import org.apache.ibatis.executor.Executor;
+import org.apache.ibatis.executor.statement.StatementHandler;
+import org.apache.ibatis.mapping.BoundSql;
+import org.apache.ibatis.plugin.Interceptor;
+import org.apache.ibatis.plugin.Intercepts;
+import org.apache.ibatis.plugin.Invocation;
+import org.apache.ibatis.plugin.Plugin;
+import org.apache.ibatis.plugin.Signature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import java.sql.Connection;
+import java.util.Date;
+import java.util.Properties;
+
+/**
+ * @author 游家纨绔
+ * @dateTime 2023-08-27 08:28
+ * @apiNote TODO
+ */
+/**
+ * Mybatis 拦截器
+ *
+ * @Intercepts：标识该类是一个拦截器,需要一个Signature(拦截点)参数数组。 通过Signature来指定拦截哪个对象里面的哪个方法，只有符合拦截点的条件才会进入到拦截器
+ * @Signature：指明自定义拦截器需要拦截哪一个类型，哪一个方法；
+ *       - type：定义拦截的类，拦截的类型具体有四种
+ *              1)、Executor：        拦截执行器的方法。
+ *              2)、ParameterHandler：拦截参数的处理器。
+ *              3)、ResultHandler：   拦截结果集的处理器。
+ *              4)、StatementHandler：拦截Sql语法构建的处理器。
+ *           ** 可以这么说，Executor 执行器中包含有三种处理器ParameterHandler、ResultHandler、StatementHandler
+ *              我们自己在自定义Mybatis拦截器的时候，可以选择针对性的处理器进行拦截即可
+ *              如果上述三种处理器满足不了我们的需求，我们就可以使用 Executor 直接定义处理流程
+ *       - method：在定义拦截类的基础之上，再定义拦截的方法（可以在拦截器中预览需要的方法）
+ *       - args：在定义拦截方法的基础之上在定义拦截的方法对应的参数，方法可能重载，故注意参数的类型和顺序（可以在拦截器中预览需要的方法参数）
+ */
+@Intercepts(
+        @Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class, Integer.class})
+)
+public class StatementInterceptor implements Interceptor {
+    private static final Logger log = LoggerFactory.getLogger(StatementInterceptor.class);
+
+    // 每一次 CRUD 操作都会经过mybatis拦截器，拦截器对象有以上四个，并且依次顺序执行
+    // 每经过一个拦截器对象就会调用插件的plugin方法，也就是说该方法会调用4次。根据 @Intercepts 注解来决定是否进行拦截处理
+    @Override
+    public Object plugin(Object target) {
+        log.info("StatementInterceptor Plugin >>>>>>> {}", target);
+        // 判断一下目标类型，是本插件要拦截的对象时才执行Plugin.wrap方法，否则的话，直接返回目标本身
+        // 我们要拦截的对象是定义在 @Signature 中的第一个参数 type 值
+        if (target instanceof StatementHandler) {
+            // 返回一个拦截器代理对象，这里的 this 就是我们的 StatementInterceptor 类，作为代理对象会去执行我们重写的拦截 intercept() 方法
+            return Plugin.wrap(target, this);
+        }
+        // 返回目标对象，表示执行自己原有的内部拦截逻辑，也就不会去执行我们定义的 intercept(Invocation invocation) 方法
+        return target;
+    }
+    @Override
+    public Object intercept(Invocation invocation) throws Throwable {
+        log.info("触发自定义的Mybatis拦截器 StatementHandler");
+
+        // 在 plugin方法中我们已经对拦截器对象进行过滤,所以能走到这里说明拦截器只能是 StatementHandler
+        StatementHandler statementHandler = (StatementHandler) invocation.getTarget();
+        BoundSql boundSql = statementHandler.getBoundSql();
+        Object obj = boundSql.getParameterObject();
+        String sql = boundSql.getSql();
+        if (sql.trim().toUpperCase().startsWith("INSERT")) {
+            ReflectUtil.setFieldValue(obj, "rev", 0);
+            ReflectUtil.setFieldValue(obj, "createTime", new Date());
+            ReflectUtil.setFieldValue(obj, "operateTime", new Date());
+            ReflectUtil.setFieldValue(boundSql, "parameterObject", obj);
+        } else if (sql.trim().toUpperCase().startsWith("UPDATE")) {
+            sql = sql.replaceAll(" set ", " SET ")
+                    .replaceAll(" Set ", " SET ")
+                    .replaceAll(" SET ", " SET rev = rev+1, operate_time = NOW(), ");
+            ReflectUtil.setFieldValue(boundSql, "sql", sql);
+        } else if (sql.trim().toUpperCase().startsWith("SELECT")) {
+            // 如果是查询请求, 切分where 拼装 tenant_id信息
+            StringBuffer sb = new StringBuffer();
+            // 获取 tenant_id 租户值
+            String tenant = TenantContextHolder.getTenant();
+            if (sql.contains("where ") || sql.contains("WHERE ")) {
+                // 只要包含where 的 语句, 全都拼上 需要的id信息
+                String[] sqlWheres = sql.split("where|WHERE");
+                for (int i = 0; i < sqlWheres.length; i++) {
+                    if (i == 0) {
+                        // 第一个不需要
+                        sb.append(sqlWheres[i]);
+                        continue;
+                    }
+                    String sqlEnd = sqlWheres[i];
+
+                    sb.append(" where ").append(" tenant_id = ").append(tenant).append(" and ");
+                    sb.append(sqlEnd);
+                }
+            }
+            ReflectUtil.setFieldValue(boundSql, "sql", sb.toString());
+        }
+        return invocation.proceed();
+    }
+
+    @Override
+    public void setProperties(Properties properties) {
+        Interceptor.super.setProperties(properties);
+    }
+}

@@ -1,5 +1,6 @@
 package com.example.dao;
 
+import com.example.annotation.ExcludeTenant;
 import com.example.entity.TbUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -20,6 +21,7 @@ public interface TbUserDao {
      * @param id 主键
      * @return 实例对象
      */
+    @ExcludeTenant
     TbUser queryById(Long id);
 
     /**
