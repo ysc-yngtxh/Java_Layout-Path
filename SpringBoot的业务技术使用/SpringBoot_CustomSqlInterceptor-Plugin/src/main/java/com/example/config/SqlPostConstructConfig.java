@@ -1,5 +1,7 @@
 package com.example.config;
 
+import com.example.executor.ParameterInterceptor;
+import com.example.executor.ResultInterceptor;
 import com.example.executor.StatementInterceptor;
 import com.example.tenant.TenantContextHolderInterceptor;
 import jakarta.annotation.PostConstruct;
@@ -38,7 +40,7 @@ public class SqlPostConstructConfig implements WebMvcConfigurer {
         org.apache.ibatis.session.Configuration configuration = sqlSessionFactory.getConfiguration();
         // 最后添加的会更早执行
         configuration.addInterceptor(new StatementInterceptor(lockTables));
-        // configuration.addInterceptor(new ParameterInterceptor());
-        // configuration.addInterceptor(new ResultInterceptor());
+        configuration.addInterceptor(new ParameterInterceptor());
+        configuration.addInterceptor(new ResultInterceptor());
     }
 }

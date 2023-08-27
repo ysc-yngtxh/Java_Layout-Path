@@ -9,7 +9,9 @@ import org.apache.ibatis.plugin.Signature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.Method;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
 /**
@@ -52,7 +54,20 @@ public class ResultInterceptor implements Interceptor {
     public Object intercept(Invocation invocation) throws Throwable {
         log.info("触发自定义的Mybatis拦截器 ResultSetHandler");
 
-        return null;
+        // ResultSetHandler resultSetHandler1 = (ResultSetHandler) invocation.getTarget();
+        // 通过java反射获得mappedStatement属性值
+        // 可以获得mybatis里的 resultType
+        Object result = invocation.proceed();
+        if (result instanceof ArrayList<?> resultList) {
+            for (Object oi : resultList) {
+                Class<?> c = oi.getClass();
+                Class<?>[] types = {Double.class};
+                Method method = c.getMethod("setPrice", types);
+                // 调用obj对象的 method 方法
+                method.invoke(oi, 800.0);
+            }
+        }
+        return result;
     }
 
     @Override

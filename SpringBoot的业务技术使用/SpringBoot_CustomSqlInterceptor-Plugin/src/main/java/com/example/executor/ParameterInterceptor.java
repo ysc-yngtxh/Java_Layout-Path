@@ -1,6 +1,8 @@
 package com.example.executor;
 
+import com.alibaba.fastjson2.JSON;
 import org.apache.ibatis.executor.parameter.ParameterHandler;
+import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
@@ -9,7 +11,9 @@ import org.apache.ibatis.plugin.Signature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.Field;
 import java.sql.PreparedStatement;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -53,7 +57,28 @@ public class ParameterInterceptor implements Interceptor {
     public Object intercept(Invocation invocation) throws Throwable {
         log.info("触发自定义的Mybatis拦截器 ParameterHandler");
 
-        return null;
+        ParameterHandler parameterHandler = (ParameterHandler) invocation.getTarget();
+        PreparedStatement ps = (PreparedStatement) invocation.getArgs()[0];
+        // 反射获取 BoundSql 对象，此对象包含生成的sql和sql的参数map映射
+        Field boundSqlField = parameterHandler.getClass().getDeclaredField("boundSql");
+        boundSqlField.setAccessible(true);
+        BoundSql boundSql = (BoundSql) boundSqlField.get(parameterHandler);
+        // 反射获取 参数对象
+        Field parameterField =
+                parameterHandler.getClass().getDeclaredField("parameterObject");
+        parameterField.setAccessible(true);
+        Object parameterObject = parameterField.get(parameterHandler);
+        if (parameterObject instanceof Map) {
+            // 将参数中的name值改为2
+            ((Map) parameterObject).put("name","2");
+        }
+        // 改写的参数设置到原parameterHandler对象
+        parameterField.set(parameterHandler, parameterObject);
+        parameterHandler.setParameters(ps);
+        log.error(JSON.toJSONString(boundSql.getParameterMappings()));
+        log.error(JSON.toJSONString(parameterObject));
+
+        return invocation.proceed();
     }
 
     @Override
