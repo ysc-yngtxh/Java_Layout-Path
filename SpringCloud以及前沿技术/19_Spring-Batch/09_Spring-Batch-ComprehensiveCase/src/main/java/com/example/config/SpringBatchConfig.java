@@ -78,7 +78,6 @@ public class SpringBatchConfig {
                 .writer(cvsToDBItemWriter())
                 .taskExecutor(new SimpleAsyncTaskExecutor())  // 多线程读写
                 .build();
-
     }
     @Bean
     public Job csvToDBJob() {
