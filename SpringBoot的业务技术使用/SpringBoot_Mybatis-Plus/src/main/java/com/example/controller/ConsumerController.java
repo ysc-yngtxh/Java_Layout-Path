@@ -4,6 +4,7 @@ import com.example.entity.Consumer;
 import com.example.service.impl.ConsumerServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -88,6 +89,12 @@ public class ConsumerController {
     @RequestMapping("/selectByWrapper11")
     public List<Consumer> selectByWrapper11() {
         return consumerService.selectByWrapper11();
+    }
+
+    @RequestMapping("/condition")
+    public List<Consumer> condition(@RequestParam(value = "name", required = false) String name,
+                                    @RequestParam(value = "email", required = false) String email) {
+        return consumerService.condition(name, email);
     }
 }
 

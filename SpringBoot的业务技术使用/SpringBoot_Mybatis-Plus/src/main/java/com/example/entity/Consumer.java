@@ -1,50 +1,68 @@
 package com.example.entity;
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.io.Serial;
+import java.util.Date;
 import java.io.Serializable;
 
 /**
- * (Consumer)表实体类
+ * (Consumer)实体类
  * @author 游家纨绔
- * @since 2023-08-28 22:28:21
+ * @since 2023-08-29 06:30:48
  */
-@Getter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Consumer extends Model<Consumer> {
-
     @Serial
-    private static final long serialVersionUID = -5855679260765705905L;
-
-    private Integer id;
-
-    private String username;
-
-    private String password;
-
-    private String alias;
-
-    private Integer age;
-
-    private String sex;
-    
-    private String phone;
-
-    private String address;
-
-    private Integer deleteFlag;
-
-
+    private static final long serialVersionUID = 692869694057194050L;
     /**
-     * 获取主键值
-     * @return 主键值
+     * 主键Id
      */
-    @Override
-    public Serializable pkVal() {
-        return this.id;
-    }
+    private Integer id;
+    /**
+     * 用户名
+     */
+    private String username;
+    /**
+     * 密码
+     */
+    private String password;
+    /**
+     * 别名
+     */
+    private String alias;
+    /**
+     * 年龄
+     */
+    private Integer age;
+    /**
+     * 性别
+     */
+    private Integer sex;
+    /**
+     * 手机号
+     */
+    private String phone;
+    /**
+     * 地址
+     */
+    private String address;
+    /**
+     * 逻辑删除
+     */
+    private Integer deleteFlag;
+    /**
+     * 创建时间
+     */
+    private Date createdDate;
+    /**
+     * 更新时间
+     */
+    private Date updatedDate;
 }
 

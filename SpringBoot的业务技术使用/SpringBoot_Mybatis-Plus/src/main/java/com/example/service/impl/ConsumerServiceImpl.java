@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.mapper.ConsumerMapper;
 import com.example.entity.Consumer;
 import com.example.service.ConsumerService;
+import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +30,7 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
      * 根据Id查询
      */
     public Consumer selectById() {
-        Consumer consumer = consumerMapper.selectById(10);
-        return consumer;
+        return consumerMapper.selectById(10);
     }
 
     /**
@@ -175,6 +175,24 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
                 .lt("age", 40)
                 .select(Consumer.class
                         , info -> !info.getColumn().equals("create_time") && !info.getColumn().equals("manager_id"));
+        return consumerMapper.selectList(queryWrapper);
+    }
+
+    /**
+     * 校验传入参数不为空的时候，进行模糊查询
+     * condition作用：当它的值为true的时候，这个方法才会执行
+     */
+    public List<Consumer> condition(String name, String email) {
+        QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
+        // if(StringUtils.isNotEmpty(name)){
+        //   queryWrapper.like("name", name);
+        // }
+        // if(StringUtils.isNotEmpty(email)){
+        //	 queryWrapper.like("email", email);
+        // }
+        // 下面的写法可以替代上面的这两个逻辑判断
+        queryWrapper.like(StringUtils.isNotEmpty(name), "name", name)
+                .like(StringUtils.isNotEmpty(email), "email", email);
         return consumerMapper.selectList(queryWrapper);
     }
 }
