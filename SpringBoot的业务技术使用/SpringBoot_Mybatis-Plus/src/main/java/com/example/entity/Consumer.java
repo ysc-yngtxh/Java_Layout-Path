@@ -10,7 +10,6 @@ import java.io.Serializable;
 
 /**
  * (Consumer)表实体类
- *
  * @author 游家纨绔
  * @since 2023-08-28 22:28:21
  */

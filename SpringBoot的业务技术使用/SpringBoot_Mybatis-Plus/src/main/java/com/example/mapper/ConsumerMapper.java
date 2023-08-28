@@ -5,7 +5,6 @@ import com.example.entity.Consumer;
 
 /**
  * (Consumer)表数据库访问层
- *
  * @author 游家纨绔
  * @since 2023-08-28 22:28:21
  */

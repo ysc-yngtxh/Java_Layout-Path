@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * (Consumer)表控制层Ø
- *
+ * (Consumer)表控制层
  * @author 游家纨绔
  * @since 2023-08-28 22:28:21
  */
