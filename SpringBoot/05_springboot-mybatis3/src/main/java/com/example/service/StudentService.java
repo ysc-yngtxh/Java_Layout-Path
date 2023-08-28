@@ -6,7 +6,8 @@ import java.util.Map;
 
 public interface StudentService {
 
-    Map<String, Student> queryStudentById(Integer id);
-
     Map<String, Student> queryStudentByIdMap(Integer id);
+
+    Map<String, Student> queryStudentByIdStudent(Integer id);
+
 }

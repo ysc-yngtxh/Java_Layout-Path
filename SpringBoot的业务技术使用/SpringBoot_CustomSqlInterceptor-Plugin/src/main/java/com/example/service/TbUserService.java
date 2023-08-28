@@ -2,6 +2,8 @@ package com.example.service;
 
 import com.example.entity.TbUser;
 
+import java.util.Map;
+
 /**
  * (TbUser)表服务接口
  *
@@ -26,7 +28,7 @@ public interface TbUserService {
      */
     TbUser queryByIdIgnoreTenant(Long id);
 
-    TbUser query();
+    Map<String, TbUser> query();
 
     /**
      * 新增数据

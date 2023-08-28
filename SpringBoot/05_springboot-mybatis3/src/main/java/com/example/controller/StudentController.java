@@ -15,19 +15,19 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @RequestMapping("/student")
-    public @ResponseBody Map<String, Student> student(Integer id){
-        Map<String, Student> student = studentService.queryStudentById(id);
-        String email = student.get("游诗成").getEmail();
+    @RequestMapping("/studentMap")
+    public @ResponseBody Map<String, Student> queryStudentByIdMap(Integer id){
+        Map<String, Student> student = studentService.queryStudentByIdMap(id);
+        // String emails = student.get("游诗成").getEmail();  // 这样获取 email 会报错
+        Map<String,String> email = (Map) student.get("游诗成");  // 这才是正确获取的写法
+        email.get("email");
         return student;
     }
 
-    @RequestMapping("/studentMap")
-    public @ResponseBody Map<String, Student> studentMap(Integer id){
-        Map<String, Student> student = studentService.queryStudentByIdMap(id);
-        // String email = student.get("游诗成").getEmail();  会报错
-        Map<String,String> email = (Map) student.get("游诗成");
-        email.get("email");
+    @RequestMapping("/student")
+    public @ResponseBody Map<String, Student> queryStudentByIdStudent(Integer id){
+        Map<String, Student> student = studentService.queryStudentByIdStudent(id);
+        String email = student.get("游诗成").getEmail();
         return student;
     }
 }

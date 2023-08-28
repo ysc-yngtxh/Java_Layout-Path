@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 /**
  * (TbUser)表控制层
  *
@@ -51,7 +53,7 @@ public class TbUserController {
     }
 
     @GetMapping("/query")
-    public ResponseEntity<TbUser> query() {
+    public ResponseEntity<Map<String, TbUser>> query() {
         return ResponseEntity.ok(this.tbUserService.query());
     }
 

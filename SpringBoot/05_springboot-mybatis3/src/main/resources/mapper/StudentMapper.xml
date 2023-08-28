@@ -18,7 +18,7 @@
     from student
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="com.example.domain.Student">
+  <select id="selectByPrimaryKeyStudent" parameterType="java.lang.Integer" resultType="com.example.domain.Student">
     select
     <include refid="Base_Column_List" />
     from student

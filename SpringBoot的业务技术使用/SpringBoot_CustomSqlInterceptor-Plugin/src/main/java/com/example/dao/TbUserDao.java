@@ -2,9 +2,11 @@ package com.example.dao;
 
 import com.example.annotation.IgnoreTenantId;
 import com.example.entity.TbUser;
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
+import java.util.Map;
 
 /**
  * (TbUser)表数据库访问层
@@ -32,9 +34,8 @@ public interface TbUserDao {
     @IgnoreTenantId
     TbUser queryByIdIgnoreTenant(Long id);
 
-
-    @IgnoreTenantId
-    TbUser query();
+    @MapKey("userName")
+    Map<String, TbUser> query();
 
     /**
      * 统计总行数

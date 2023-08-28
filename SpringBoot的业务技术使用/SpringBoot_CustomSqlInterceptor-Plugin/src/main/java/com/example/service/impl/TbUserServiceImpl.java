@@ -6,6 +6,8 @@ import com.example.service.TbUserService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 /**
  * (TbUser)表服务实现类
  *
@@ -40,7 +42,7 @@ public class TbUserServiceImpl implements TbUserService {
     }
 
     @Override
-    public TbUser query() {
+    public Map<String, TbUser> query() {
         return this.tbUserDao.query();
     }
 

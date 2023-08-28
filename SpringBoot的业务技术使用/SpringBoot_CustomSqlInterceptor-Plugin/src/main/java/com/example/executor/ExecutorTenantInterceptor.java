@@ -4,8 +4,13 @@ import com.example.advice.SqlEnum;
 import com.example.advice.SqlException;
 import com.example.annotation.IgnoreTenantId;
 import com.example.tenant.TenantContextHolder;
+import net.sf.jsqlparser.expression.Expression;
+import net.sf.jsqlparser.expression.LongValue;
+import net.sf.jsqlparser.expression.NotExpression;
 import net.sf.jsqlparser.expression.operators.conditional.AndExpression;
+import net.sf.jsqlparser.expression.operators.relational.EqualsTo;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
+import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.select.PlainSelect;
 import net.sf.jsqlparser.statement.select.Select;
 import org.apache.ibatis.cache.CacheKey;
@@ -105,9 +110,9 @@ public class ExecutorTenantInterceptor implements Interceptor {
         //  如果在 Mapper 层的查询方法上加有 @IgnoreTenantId 的注解，则不进行条件 Tenant_id = ? 拼接
         // 原本查询的 sql语句
         String oldSql = boundSql.getSql();
-        if ( !(oldSql.contains("where") || oldSql.contains("WHERE")) ) {
-            throw new SqlException(SqlEnum.SQL_QUERY_WHERE_NULL);
-        }
+        // if ( !(oldSql.contains("where") || oldSql.contains("WHERE")) ) {
+        //     throw new SqlException(SqlEnum.SQL_QUERY_WHERE_NULL);
+        // }
         // 获取节点的id属性加命名空间,其实就是全限定名称加唯一标识Id的路径（com.example.dao.TbUserDao.queryById）
         String id = statements.getId();
         // 获取 Class 路径
@@ -135,8 +140,16 @@ public class ExecutorTenantInterceptor implements Interceptor {
             // 这里用JSqlParser工具来修改 where条件，组装新的 sql语句
             Select select = (Select)CCJSqlParserUtil.parse(oldSql);
             PlainSelect plainSelect = (PlainSelect) select.getSelectBody();
-            plainSelect.setWhere(new AndExpression(plainSelect.getWhere()
-                    , CCJSqlParserUtil.parseCondExpression("tenant_id = " + tenant)));
+            Expression where = plainSelect.getWhere();
+            if (Objects.isNull(where)) {
+                EqualsTo equalsTo = new EqualsTo();
+                equalsTo.withLeftExpression(new Column("tenant_id"));
+                equalsTo.withRightExpression(new LongValue(tenant));
+                plainSelect.setWhere(equalsTo);
+            } else {
+                plainSelect.setWhere(new AndExpression(where
+                        , CCJSqlParserUtil.parseCondExpression("tenant_id = " + tenant)));
+            }
             // 重新new一个查询Sql语句对象
             BoundSql newBoundSql = new BoundSql(statements.getConfiguration(), select.toString(),
                     boundSql.getParameterMappings(), boundSql.getParameterObject());
