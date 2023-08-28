@@ -15,6 +15,7 @@ import java.util.Map;
 
 /**
  * (Consumer)表服务实现类
+ *
  * @author 游家纨绔
  * @since 2023-08-28 22:28:21
  */
@@ -23,7 +24,7 @@ import java.util.Map;
 public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> implements ConsumerService {
 
     private final ConsumerMapper consumerMapper;
-    
+
     /**
      * 根据Id查询
      */
@@ -37,8 +38,7 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
      */
     public List<Consumer> selectByIds() {
         List<Integer> idsList = Arrays.asList(4, 8, 13, 26); // 获取id集合
-        List<Consumer> consumerList = consumerMapper.selectBatchIds(idsList);
-        return consumerList;
+        return consumerMapper.selectBatchIds(idsList);
     }
 
     /**
@@ -48,8 +48,7 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
         Map<String, Object> columnMap = new HashMap<>();
         // columnMap.put("name","三体");	 // 必须与数据库中的对应，如果没有会报错
         columnMap.put("age", 73);        // 键是数据库中的列  where age= 27
-        List<Consumer> consumerList = consumerMapper.selectByMap(columnMap);
-        return consumerList;
+        return consumerMapper.selectByMap(columnMap);
     }
 
     /**
@@ -60,8 +59,7 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
     public List<Consumer> selectByWrapper1() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
         queryWrapper.like("name", "月").lt("age", 40);
-        List<Consumer> consumerList = consumerMapper.selectList(queryWrapper);
-        return consumerList;
+        return consumerMapper.selectList(queryWrapper);
     }
 
     /**
@@ -72,8 +70,7 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
     public List<Consumer> selectByWrapper2() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
         queryWrapper.like("name", "月").between("age", 20, 40).isNotNull("email");
-        List<Consumer> consumerList = consumerMapper.selectList(queryWrapper);
-        return consumerList;
+        return consumerMapper.selectList(queryWrapper);
     }
 
     /**
@@ -84,8 +81,7 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
     public List<Consumer> selectByWrapper3() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
         queryWrapper.likeRight("name", "伍").or().ge("age", 25).orderByDesc("age").orderByAsc("id");
-        List<Consumer> consumerList = consumerMapper.selectList(queryWrapper);
-        return consumerList;
+        return consumerMapper.selectList(queryWrapper);
     }
 
     /**
@@ -96,8 +92,7 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
     public List<Consumer> selectByWrapper4() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
         queryWrapper.apply("date_format(create_time,'%Y-%m-%d')=2023-08-29").inSql("manager_id", "select id from Consumer where name like '王%'");
-        List<Consumer> consumerList = consumerMapper.selectList(queryWrapper);
-        return consumerList;
+        return consumerMapper.selectList(queryWrapper);
     }
 
     /**
@@ -108,8 +103,7 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
     public List<Consumer> selectByWrapper5() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
         queryWrapper.likeRight("name", "王").and(wq -> wq.lt("age", 40).or().isNotNull("email"));
-        List<Consumer> consumerList = consumerMapper.selectList(queryWrapper);
-        return consumerList;
+        return consumerMapper.selectList(queryWrapper);
     }
 
     /**
@@ -120,8 +114,7 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
     public List<Consumer> selectByWrapper6() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
         queryWrapper.likeRight("name", "王").or(wq -> wq.lt("age", 40).gt("age", 20).isNotNull("email"));
-        List<Consumer> consumerList = consumerMapper.selectList(queryWrapper);
-        return consumerList;
+        return consumerMapper.selectList(queryWrapper);
     }
 
 
@@ -133,8 +126,7 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
     public List<Consumer> selectByWrapper7() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
         queryWrapper.nested(wq -> wq.lt("age", 40).or().isNotNull("email")).likeRight("name", "王");
-        List<Consumer> consumerList = consumerMapper.selectList(queryWrapper);
-        return consumerList;
+        return consumerMapper.selectList(queryWrapper);
     }
 
     /**
@@ -145,8 +137,7 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
     public List<Consumer> selectByWrapper8() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
         queryWrapper.in("age", Arrays.asList(30, 31, 34, 35));
-        List<Consumer> consumerList = consumerMapper.selectList(queryWrapper);
-        return consumerList;
+        return consumerMapper.selectList(queryWrapper);
     }
 
     /**
@@ -157,8 +148,7 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
     public List<Consumer> selectByWrapper9() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
         queryWrapper.in("age", Arrays.asList(30, 31, 34, 35)).last("limit 1");
-        List<Consumer> consumerList = consumerMapper.selectList(queryWrapper);
-        return consumerList;
+        return consumerMapper.selectList(queryWrapper);
     }
 
     /**
@@ -169,8 +159,7 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
     public List<Consumer> selectByWrapper10() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
         queryWrapper.select("id", "name").like("name", "雨").lt("age", 40);
-        List<Consumer> consumerList = consumerMapper.selectList(queryWrapper);
-        return consumerList;
+        return consumerMapper.selectList(queryWrapper);
     }
 
 
@@ -182,8 +171,7 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
     public List<Consumer> selectByWrapper11() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
         queryWrapper.like("name", "雨").lt("age", 40).select(Consumer.class, info -> !info.getColumn().equals("create_time") && !info.getColumn().equals("manager_id"));
-        List<Consumer> consumerList = consumerMapper.selectList(queryWrapper);
-        return consumerList;
+        return consumerMapper.selectList(queryWrapper);
     }
 }
 
