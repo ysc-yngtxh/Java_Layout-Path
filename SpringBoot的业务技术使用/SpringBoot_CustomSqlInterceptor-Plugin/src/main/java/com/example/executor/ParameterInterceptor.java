@@ -59,18 +59,18 @@ public class ParameterInterceptor implements Interceptor {
 
         ParameterHandler parameterHandler = (ParameterHandler) invocation.getTarget();
         PreparedStatement ps = (PreparedStatement) invocation.getArgs()[0];
-        // 反射获取 BoundSql 对象，此对象包含生成的sql和sql的参数map映射
+        // 通过反射获取 BoundSql 对象，此对象包含生成的sql和sql的参数map映射
         Field boundSqlField = parameterHandler.getClass().getDeclaredField("boundSql");
         boundSqlField.setAccessible(true);
         BoundSql boundSql = (BoundSql) boundSqlField.get(parameterHandler);
-        // 反射获取 参数对象
+        // 通过反射获取参数对象
         Field parameterField =
                 parameterHandler.getClass().getDeclaredField("parameterObject");
         parameterField.setAccessible(true);
         Object parameterObject = parameterField.get(parameterHandler);
         if (parameterObject instanceof Map) {
             // 将参数中的name值改为2
-            ((Map) parameterObject).put("name","2");
+            ((Map) parameterObject).put("number", "2");
         }
         // 改写的参数设置到原parameterHandler对象
         parameterField.set(parameterHandler, parameterObject);

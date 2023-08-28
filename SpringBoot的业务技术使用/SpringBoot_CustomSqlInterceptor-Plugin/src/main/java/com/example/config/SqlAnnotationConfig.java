@@ -20,8 +20,9 @@ public class SqlAnnotationConfig implements ApplicationContextAware {
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         SqlSessionFactory sqlSessionFactory = applicationContext.getBean(SqlSessionFactory.class);
 
-        AllowTables allowTables = applicationContext.getBean(AllowTables.class);
         sqlSessionFactory.getConfiguration().addInterceptor(new ExecutorTenantInterceptor());
+
+        AllowTables allowTables = applicationContext.getBean(AllowTables.class);
         sqlSessionFactory.getConfiguration().addInterceptor(new ExecutorWhereInterceptor(allowTables));
     }
 }

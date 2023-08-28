@@ -5,7 +5,15 @@ import cn.hutool.json.JSON;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.example.config.LockTables;
+import net.sf.jsqlparser.expression.AllValue;
+import net.sf.jsqlparser.expression.DateValue;
+import net.sf.jsqlparser.expression.Function;
+import net.sf.jsqlparser.expression.LongValue;
+import net.sf.jsqlparser.expression.StringValue;
+import net.sf.jsqlparser.expression.TimeValue;
+import net.sf.jsqlparser.expression.operators.conditional.AndExpression;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
+import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.Statement;
 import net.sf.jsqlparser.statement.update.Update;
 import org.apache.ibatis.executor.statement.StatementHandler;
@@ -22,11 +30,13 @@ import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cglib.core.Local;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Connection;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Properties;
@@ -116,26 +126,25 @@ public class StatementInterceptor implements Interceptor {
                         if (item.getName().equals("getVersion")) {
                             try {
                                 versionValue[0] = item.invoke(obj);
-                            } catch (IllegalAccessException e) {
-                                throw new RuntimeException(e);
-                            } catch (InvocationTargetException e) {
+                            } catch (IllegalAccessException | InvocationTargetException e) {
                                 throw new RuntimeException(e);
                             }
                         }
                     });
                     Integer versionObj = (Integer) versionValue[0];
-                    sql = sql.replaceAll(" set ", " SET ")
-                            .replaceAll(" Set ", " SET ")
-                            .replaceAll(" SET ", " SET version = version+1, updated_date = NOW(), ")
-                            .replaceAll(" where ", " WHERE ")
-                            .replaceAll(" WHERE ", " WHERE version = " + versionObj + " and ");
+                    // 添加 SET ... and version = version+1, updated_date = NOW()
+                    update.addUpdateSet(new Column("version"), new LongValue("version+1"));
+                    update.addUpdateSet(new Column("updated_date"), new StringValue(LocalDateTime.now().toString()));
+                    // WHERE ... and version = ?
+                    update.setWhere(new AndExpression(update.getWhere()
+                            , CCJSqlParserUtil.parseCondExpression(" version = " + versionObj)));
 
                     // TODO 这里为什么可以直接重写 sql 就可以，而 Executor 执行器却要重新构建MappedStatement？
                     // MappedStatement中属性BoundSql是加有final关键字的。BoundSql修改后，通过对象引用获取sql值与反射获取到的sql值是不一样的
                     // Executor 执行完后还有处理器StatementHandler，处理器从BoundSql对象中获取sql数据，是旧的数据
                     // 处理器StatementHandler执行完，Statement 则是通过反射获取sql，获取的是新数据
                     // 因此，Executor修改完sql后需要重新包装BoundSql对象，StatementHandler修改完sql只需要重新赋值BoundSql类中的属性sql
-                    ReflectUtil.setFieldValue(boundSql, "sql", sql);
+                    ReflectUtil.setFieldValue(boundSql, "sql", update.toString());
                 }
             }
         }

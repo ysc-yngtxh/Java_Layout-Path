@@ -64,7 +64,7 @@ public class ResultInterceptor implements Interceptor {
                 Class<?>[] types = {Double.class};
                 Method method = c.getMethod("setPrice", types);
                 // 调用obj对象的 method 方法
-                method.invoke(oi, 800.0);
+                method.invoke(oi, 1000.0);
             }
         }
         return result;

@@ -3,8 +3,12 @@ package com.example.executor;
 import com.example.advice.SqlEnum;
 import com.example.advice.SqlException;
 import com.example.config.AllowTables;
+import net.sf.jsqlparser.JSQLParserException;
+import net.sf.jsqlparser.expression.ExpressionVisitorAdapter;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
+import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.delete.Delete;
+import net.sf.jsqlparser.statement.select.Select;
 import net.sf.jsqlparser.statement.update.Update;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
@@ -44,6 +48,7 @@ import java.util.Properties;
 public class ExecutorWhereInterceptor implements Interceptor {
     private static final Logger log = LoggerFactory.getLogger(ExecutorWhereInterceptor.class);
 
+    // 获取允许全表操作的表信息
     final AllowTables allowTables;
 
     public ExecutorWhereInterceptor(AllowTables allowTables) {

@@ -4,6 +4,10 @@ import com.example.advice.SqlEnum;
 import com.example.advice.SqlException;
 import com.example.annotation.IgnoreTenantId;
 import com.example.tenant.TenantContextHolder;
+import net.sf.jsqlparser.expression.operators.conditional.AndExpression;
+import net.sf.jsqlparser.parser.CCJSqlParserUtil;
+import net.sf.jsqlparser.statement.select.PlainSelect;
+import net.sf.jsqlparser.statement.select.Select;
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
@@ -126,18 +130,15 @@ public class ExecutorTenantInterceptor implements Interceptor {
             }
         }
         if (Objects.isNull(ignoreTenantId)) {
-            // 组装新的 sql语句
-            StringBuffer sb = new StringBuffer();
             // 获取 tenant_id 租户值
             Integer tenant = TenantContextHolder.getTbUser().getTenantId();
-            // 首先我们能走到这里，sql 里肯定是有 where 的，但是有几个并不清楚。
-            // 我们在第一个where子句拼上需要的租户信息，所以这里我们只拆分了一次 where
-            String[] sqlWheres = oldSql.split("where|WHERE", 2);
-            sb.append(sqlWheres[0])
-                    .append(" where ").append(" tenant_id = ").append(tenant).append(" and ")
-                    .append(sqlWheres[1]);
+            // 这里用JSqlParser工具来修改 where条件，组装新的 sql语句
+            Select select = (Select)CCJSqlParserUtil.parse(oldSql);
+            PlainSelect plainSelect = (PlainSelect) select.getSelectBody();
+            plainSelect.setWhere(new AndExpression(plainSelect.getWhere()
+                    , CCJSqlParserUtil.parseCondExpression("tenant_id = " + tenant)));
             // 重新new一个查询Sql语句对象
-            BoundSql newBoundSql = new BoundSql(statements.getConfiguration(), sb.toString(),
+            BoundSql newBoundSql = new BoundSql(statements.getConfiguration(), select.toString(),
                     boundSql.getParameterMappings(), boundSql.getParameterObject());
             // 从旧的Sql对象中获取属性映射字段，放入到新的Sql对象中
             for (ParameterMapping mapping : boundSql.getParameterMappings()) {
@@ -197,8 +198,7 @@ public class ExecutorTenantInterceptor implements Interceptor {
 
     @Override
     public void setProperties(Properties properties) {
-        // TODO Auto-generated method stub
-        String dialect = properties.getProperty("dialect");
-        log.info("mybatis intercept dialect  >>>>>>> {}", dialect);
+        // TODO Auto-generated method stub 不怎么使用这个方法
+        log.error("Mybatis Intercept Properties  >>>>>>> {}", "prop1");
     }
 }
