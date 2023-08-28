@@ -91,7 +91,8 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
      */
     public List<Consumer> selectByWrapper4() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
-        queryWrapper.apply("date_format(create_time,'%Y-%m-%d')=2023-08-29").inSql("manager_id", "select id from Consumer where name like '王%'");
+        queryWrapper.apply("date_format(create_time,'%Y-%m-%d') = 2023-08-29")
+                .inSql("manager_id", "select id from Consumer where name like '王%'");
         return consumerMapper.selectList(queryWrapper);
     }
 
@@ -170,7 +171,10 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
      */
     public List<Consumer> selectByWrapper11() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
-        queryWrapper.like("name", "雨").lt("age", 40).select(Consumer.class, info -> !info.getColumn().equals("create_time") && !info.getColumn().equals("manager_id"));
+        queryWrapper.like("name", "雨")
+                .lt("age", 40)
+                .select(Consumer.class
+                        , info -> !info.getColumn().equals("create_time") && !info.getColumn().equals("manager_id"));
         return consumerMapper.selectList(queryWrapper);
     }
 }
