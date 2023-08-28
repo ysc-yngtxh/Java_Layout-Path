@@ -19,7 +19,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Map<String, Student> queryStudentById(Integer id) {
+    public Map<String, Student> queryStudentByIdStudent(Integer id) {
         return studentMapper.selectByPrimaryKeyStudent(id);
     }
 }
