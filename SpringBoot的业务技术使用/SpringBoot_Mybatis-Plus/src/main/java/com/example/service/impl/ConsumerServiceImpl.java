@@ -16,7 +16,6 @@ import java.util.Map;
 
 /**
  * (Consumer)表服务实现类
- *
  * @author 游家纨绔
  * @since 2023-08-28 22:28:21
  */
@@ -46,7 +45,7 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
      */
     public List<Consumer> selectByMap() {
         Map<String, Object> columnMap = new HashMap<>();
-        // columnMap.put("name","三体");	 // 必须与数据库中的对应，如果没有会报错
+        // columnMap.put("username","三体");	 // 必须与数据库中的对应，如果没有会报错
         columnMap.put("age", 73);        // 键是数据库中的列  where age= 27
         return consumerMapper.selectByMap(columnMap);
     }
@@ -58,7 +57,7 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
      */
     public List<Consumer> selectByWrapper1() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
-        queryWrapper.like("name", "月").lt("age", 40);
+        queryWrapper.like("username", "月").lt("age", 40);
         return consumerMapper.selectList(queryWrapper);
     }
 
@@ -69,7 +68,7 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
      */
     public List<Consumer> selectByWrapper2() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
-        queryWrapper.like("name", "月").between("age", 20, 40).isNotNull("email");
+        queryWrapper.like("username", "月").between("age", 20, 50).isNotNull("email");
         return consumerMapper.selectList(queryWrapper);
     }
 
@@ -80,53 +79,53 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
      */
     public List<Consumer> selectByWrapper3() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
-        queryWrapper.likeRight("name", "伍").or().ge("age", 25).orderByDesc("age").orderByAsc("id");
+        queryWrapper.likeRight("username", "伍").or().ge("age", 25).orderByDesc("age").orderByAsc("id");
         return consumerMapper.selectList(queryWrapper);
     }
 
     /**
      * 条件构造器查询
-     * 需求4： 创建日期为2023年8月29日并且直属上级为名字为王姓
-     * data_format(create_time,'%Y-%m-%d') and manager_id in (select id from Consumer where name like '王%')
+     * 需求4： 创建日期为2023年8月29日并且直属上级为名字为伍姓
+     * data_format(create_time,'%Y-%m-%d') and manager_id in (select id from Consumer where name like '伍%')
      */
     public List<Consumer> selectByWrapper4() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
-        queryWrapper.apply("date_format(create_time,'%Y-%m-%d') = 2023-08-29")
-                .inSql("manager_id", "select id from Consumer where name like '王%'");
+        queryWrapper.apply("date_format(created_date,'%Y-%m-%d') = 2023-08-29")
+                .inSql("manager_id", "select id from Consumer where username like '伍%'");
         return consumerMapper.selectList(queryWrapper);
     }
 
     /**
      * 条件构造器查询
-     * 需求5： 名字为王姓并且（年龄小于40或邮箱不为空）
-     * name like '王%' and (age<40 or email is not null)
+     * 需求5： 名字为伍姓并且（年龄小于40或邮箱不为空）
+     * name like '伍%' and (age<40 or email is not null)
      */
     public List<Consumer> selectByWrapper5() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
-        queryWrapper.likeRight("name", "王").and(wq -> wq.lt("age", 40).or().isNotNull("email"));
+        queryWrapper.likeRight("username", "伍").and(wq -> wq.lt("age", 40).or().isNotNull("email"));
         return consumerMapper.selectList(queryWrapper);
     }
 
     /**
      * 条件构造器查询
-     * 需求6： 名字为王姓或者（年龄小于40并且年龄大于20并且邮箱不为空）
-     * name like '王%' or (age<40 and age>20 and email is not null)
+     * 需求6： 名字为伍姓或者（年龄小于40并且年龄大于20并且邮箱不为空）
+     * name like '伍%' or (age<40 and age>20 and email is not null)
      */
     public List<Consumer> selectByWrapper6() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
-        queryWrapper.likeRight("name", "王").or(wq -> wq.lt("age", 40).gt("age", 20).isNotNull("email"));
+        queryWrapper.likeRight("username", "伍").or(wq -> wq.lt("age", 40).gt("age", 20).isNotNull("email"));
         return consumerMapper.selectList(queryWrapper);
     }
 
 
     /**
      * 条件构造器查询
-     * 需求7： (年龄小于40或邮箱不为空)并且名字为王姓
-     * (age<40 or email is not null) and name like '王%'
+     * 需求7： (年龄小于40或邮箱不为空)并且名字为伍姓
+     * (age<40 or email is not null) and name like '伍%'
      */
     public List<Consumer> selectByWrapper7() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
-        queryWrapper.nested(wq -> wq.lt("age", 40).or().isNotNull("email")).likeRight("name", "王");
+        queryWrapper.nested(wq -> wq.lt("age", 40).or().isNotNull("email")).likeRight("username", "伍");
         return consumerMapper.selectList(queryWrapper);
     }
 
@@ -155,26 +154,26 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
     /**
      * 条件构造器查询
      * 需求10： 名字中包含雨并且年龄小于40   只查询id,name两个字段
-     * name like '%雨%' and age<40
+     * name like '%月%' and age<40
      */
     public List<Consumer> selectByWrapper10() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
-        queryWrapper.select("id", "name").like("name", "雨").lt("age", 40);
+        queryWrapper.select("id", "username").like("name", "月").lt("age", 40);
         return consumerMapper.selectList(queryWrapper);
     }
 
 
     /**
      * 条件构造器查询
-     * 需求11： 名字中包含雨并且年龄小于40   只查询部分字段使用排除法
-     * select id,name,age,email from Consumer where like '%雨%' and age<40
+     * 需求11： 名字中包含月并且年龄小于40  并且排除created_date、updated_date两个字段
+     * select id,username,age,email from Consumer where like '%月%' and age<40
      */
     public List<Consumer> selectByWrapper11() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>();
-        queryWrapper.like("name", "雨")
+        queryWrapper.like("username", "月")
                 .lt("age", 40)
-                .select(Consumer.class
-                        , info -> !info.getColumn().equals("create_time") && !info.getColumn().equals("manager_id"));
+                .select(Consumer.class, info ->
+                        !info.getColumn().equals("created_date") && !info.getColumn().equals("updated_date"));
         return consumerMapper.selectList(queryWrapper);
     }
 
@@ -191,8 +190,18 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer> i
         //	 queryWrapper.like("email", email);
         // }
         // 下面的写法可以替代上面的这两个逻辑判断
-        queryWrapper.like(StringUtils.isNotEmpty(name), "name", name)
-                .like(StringUtils.isNotEmpty(email), "email", email);
+        queryWrapper.likeRight(StringUtils.isNotEmpty(name), "username", name)
+                .likeLeft(StringUtils.isNotEmpty(email), "email", email);
+        return consumerMapper.selectList(queryWrapper);
+    }
+
+    /**实体作为条件构造器构造方法的参数*/
+    public List<Consumer> selectByWrapperEntity(){
+        Consumer consumer = new Consumer();
+        consumer.setUsername("双月之城");
+        consumer.setAge(5);
+        QueryWrapper<Consumer> queryWrapper = new QueryWrapper<Consumer>(consumer);
+        queryWrapper.like("username", "月").lt("age", 40);	// 这条语句写上，会与whereUser这条同时生效；
         return consumerMapper.selectList(queryWrapper);
     }
 }

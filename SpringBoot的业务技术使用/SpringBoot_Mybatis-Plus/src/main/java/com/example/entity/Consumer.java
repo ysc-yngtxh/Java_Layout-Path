@@ -53,6 +53,10 @@ public class Consumer extends Model<Consumer> {
      */
     private String address;
     /**
+     * 邮件
+     */
+    private String email;
+    /**
      * 逻辑删除
      */
     private Integer deleteFlag;

@@ -96,5 +96,10 @@ public class ConsumerController {
                                     @RequestParam(value = "email", required = false) String email) {
         return consumerService.condition(name, email);
     }
+
+    @RequestMapping("/selectByWrapperEntity")
+    public List<Consumer> selectByWrapperEntity() {
+        return consumerService.selectByWrapperEntity();
+    }
 }
 
