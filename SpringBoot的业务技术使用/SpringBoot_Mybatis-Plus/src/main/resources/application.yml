@@ -1,9 +1,7 @@
-logging:
-  level:
-    com:
-      example: debug
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 server:
   port: 8082
   servlet:
@@ -14,3 +12,4 @@ spring:
     password: 131474
     url: jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
+

@@ -1,6 +1,11 @@
 package com.example.entity;
 
+import com.baomidou.mybatisplus.annotation.SqlCondition;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,15 +20,21 @@ import java.io.Serializable;
  * @since 2023-08-29 06:30:48
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Consumer extends Model<Consumer> {
+@AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public class Consumer implements Serializable {
     @Serial
     private static final long serialVersionUID = 692869694057194050L;
+
     /**
      * 主键Id
      */
     private Integer id;
+    /**
+     * 上级Id
+     */
+    private Integer superiorId;
     /**
      * 用户名
      */

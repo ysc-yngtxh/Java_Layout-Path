@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.entity.Consumer;
 import com.example.service.impl.ConsumerServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * (Consumer)表控制层
@@ -100,6 +102,31 @@ public class ConsumerController {
     @RequestMapping("/selectByWrapperEntity")
     public List<Consumer> selectByWrapperEntity() {
         return consumerService.selectByWrapperEntity();
+    }
+
+    @RequestMapping("/selectByWrapperAllEq")
+    public List<Consumer> selectByWrapperAllEq() {
+        return consumerService.selectByWrapperAllEq();
+    }
+
+    @RequestMapping("/selectByWrapperMap")
+    public List<Map<String, Object>> selectByWrapperMap() {
+        return consumerService.selectByWrapperMap();
+    }
+
+    @RequestMapping("/selectCustomAnnotation")
+    public Map<String, List<Consumer>> selectCustomAnnotation() {
+        return consumerService.selectCustomAnnotation();
+    }
+
+    @RequestMapping("/selectLambdaQuery")
+    public List<Consumer> selectLambdaQuery() {
+        return consumerService.selectLambdaQuery();
+    }
+
+    @RequestMapping("/selectPage")
+    public Page<Consumer> selectPage() {
+        return consumerService.selectPage();
     }
 }
 
