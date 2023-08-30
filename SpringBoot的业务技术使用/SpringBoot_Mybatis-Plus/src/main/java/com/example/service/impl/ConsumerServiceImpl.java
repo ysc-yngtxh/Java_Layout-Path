@@ -295,9 +295,9 @@ public class ConsumerServiceImpl implements ConsumerService {
         System.out.println("page1 是否有下一页：" + selectPage1.hasNext());
 
         // Page 重载方法，第三个参数如果为false则不查询总记录数,只查询具体数据的
-        Page<Map<String,Object>> page2 = new Page<>(1, 4, false);
+        Page<Map<String, Object>> page2 = new Page<>(1, 4, false);
         // selectMapsPage()方法返回分页数据为一个 Map 类型
-        Page<Map<String,Object>> selectPage2 = consumerMapper.selectMapsPage(page2, queryWrapper);
+        Page<Map<String, Object>> selectPage2 = consumerMapper.selectMapsPage(page2, queryWrapper);
         selectPage2.getRecords().forEach(System.out::println);
 
         System.out.println("page2 当前页：" + selectPage2.getCurrent());

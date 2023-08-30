@@ -20,13 +20,13 @@
                 2. 一对多: collection
 
             # association 标签
-                1. javaType : 此属性的类型
-                2. property : 属性名(Oders类中对应的属性名)
+                1. property : 属性名(Orders实体类中对应的属性名)
+                2. javaType : 此属性的类型
 
                子标签 : 设置user和结果集之间的映射
                    注意 最左原则
         -->
-        <association javaType="User" property="user" autoMapping="true">
+        <association property="user" javaType="org.example.pojo.User" autoMapping="true">
             <id property="id" column="uid"/>
             <result property="username" column="username"/>
             <!--这后面还有映射属性没写，但是我加了autoMapping="true"可以自动映射(必须是同名)-->

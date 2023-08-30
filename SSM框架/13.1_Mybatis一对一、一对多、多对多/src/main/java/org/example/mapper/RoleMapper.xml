@@ -21,12 +21,12 @@ namespace 指定接口的类全名
                 2. collection : 一对多
 
             # collection 标签
-                1. property : 指定属性名(List属性的小写)
+                1. property : 指定java属性名,实体类中对应的属性名
                 2. ofType : 指定集合的元素类型
 
              注意: 结果集同名字段的最左原则
         -->
-        <collection property="list" ofType="User" autoMapping="true">
+        <collection property="list" ofType="org.example.pojo.User" autoMapping="true">
             <id property="id" column="uid"/>
             <!--这后面还有映射属性没写，但是我加了autoMapping="true"可以自动映射(必须是同名)-->
         </collection>
