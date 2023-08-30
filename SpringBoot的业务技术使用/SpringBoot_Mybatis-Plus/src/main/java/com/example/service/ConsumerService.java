@@ -39,5 +39,14 @@ public interface ConsumerService {
 
     // TODO 第三部分：分页查询
     Page<Consumer> selectPage();
+
+    // TODO 第四部分：更新操作
+    void updateConsumer();
+
+    // TODO 第五部分：删除操作
+    void  deleteConsumer();
+
+    // TODO 第五部分：插入操作
+    Consumer insertConsumer();
 }
 

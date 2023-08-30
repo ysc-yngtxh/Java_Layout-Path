@@ -128,5 +128,20 @@ public class ConsumerController {
     public Page<Consumer> selectPage() {
         return consumerService.selectPage();
     }
+
+    @RequestMapping("/updateConsumer")
+    public void updateConsumer() {
+        consumerService.updateConsumer();
+    }
+
+    @RequestMapping("/deleteConsumer")
+    public void deleteConsumer() {
+        consumerService.deleteConsumer();
+    }
+
+    @RequestMapping("/insertConsumer")
+    public Consumer insertConsumer() {
+        return consumerService.insertConsumer();
+    }
 }
 

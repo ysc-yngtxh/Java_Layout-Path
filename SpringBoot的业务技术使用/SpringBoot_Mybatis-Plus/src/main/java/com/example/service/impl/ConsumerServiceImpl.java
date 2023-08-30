@@ -2,21 +2,24 @@ package com.example.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.mapper.ConsumerMapper;
 import com.example.entity.Consumer;
+import com.example.mapper.ConsumerMapper;
 import com.example.service.ConsumerService;
+import com.google.common.collect.ImmutableMap;
 import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static java.time.LocalTime.now;
 
 /**
  * (Consumer)表服务实现类
@@ -279,7 +282,8 @@ public class ConsumerServiceImpl implements ConsumerService {
     public Page<Consumer> selectPage() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("phone", "15623041568");
-        // 两个参数：current的值默认是1，从1开始，不是0。size是每一页的条数。
+        // 使用 Page 分页查询正常是两条SQL语句，一条是查询总记录数，一条是查询具体数据的
+        // Page两个参数：current表示当前页 值默认是1，从1开始，不是0。size表示每页显示条数。
         Page<Consumer> page1 = new Page<>(1, 4);
         Page<Consumer> selectPage1 = consumerMapper.selectPage(page1, queryWrapper);
         selectPage1.getRecords().forEach(System.out::println);
@@ -290,7 +294,9 @@ public class ConsumerServiceImpl implements ConsumerService {
         System.out.println("page1 是否有上一页：" + selectPage1.hasPrevious());
         System.out.println("page1 是否有下一页：" + selectPage1.hasNext());
 
-        Page page2 = new Page<>(1, 4);
+        // Page 重载方法，第三个参数如果为false则不查询总记录数,只查询具体数据的
+        Page<Map<String,Object>> page2 = new Page<>(1, 4, false);
+        // selectMapsPage()方法返回分页数据为一个 Map 类型
         Page<Map<String,Object>> selectPage2 = consumerMapper.selectMapsPage(page2, queryWrapper);
         selectPage2.getRecords().forEach(System.out::println);
 
@@ -300,6 +306,40 @@ public class ConsumerServiceImpl implements ConsumerService {
         System.out.println("page2 是否有上一页：" + selectPage2.hasPrevious());
         System.out.println("page2 是否有下一页：" + selectPage2.hasNext());
         return selectPage1;
+    }
+
+    // TODO 第四部分：更新操作
+    public void updateConsumer() {
+        Consumer consumer1 = Consumer.builder().id(28).age(26).email("dfgsd@163.com").build();
+        int updateById = consumerMapper.updateById(consumer1);
+        System.out.println(updateById);
+
+        LambdaUpdateWrapper<Consumer> updateWrapper = new LambdaUpdateWrapper<Consumer>().gt(Consumer::getAge, 30);
+        Consumer consumer2 = Consumer.builder().id(28).age(26).email("bjdfhd@qq.com").build();
+        int update = consumerMapper.update(consumer2, updateWrapper);
+        System.out.println(update);
+    }
+
+    // TODO 第五部分：删除操作
+    public void  deleteConsumer() {
+        int deleteById = consumerMapper.deleteById(28);
+        System.out.println(deleteById);
+
+        int deleteByMap = consumerMapper.deleteByMap(ImmutableMap.of("username", "测试", "age", 26));
+        System.out.println(deleteByMap);
+    }
+
+    // TODO 第五部分：插入操作
+    public Consumer insertConsumer() {
+        Consumer consumer = Consumer.builder()
+                .superiorId(1).username("测试").password("616165").alias("法师")
+                .sex(1).age(24).phone("15623041568").address("安徽省合肥市长丰县")
+                .email("yamwaihan@outlook.com").deleteFlag(0)
+                .createdDate(new Date()).updatedDate(new Date())
+                .build();
+        int insert = consumerMapper.insert(consumer);
+        System.out.println(insert);
+        return consumer;
     }
 }
 

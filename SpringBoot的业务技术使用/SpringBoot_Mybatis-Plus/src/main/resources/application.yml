@@ -1,11 +1,8 @@
-mybatis-plus:
-  mapper-locations: classpath:mapper/*.xml
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 server:
   port: 8082
   servlet:
     context-path: /
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -13,3 +10,14 @@ spring:
     url: jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
 
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:                         # 全局配置 db
+      id-type: assign_uuid             # 设置全局Id生成策略（注意：如果有局部Id生成策略，那局部策略生效，它是优先于全局策略）
+      logic-delete-field: deleteFlag   # 全局逻辑删除的实体字段名(注意：设置的是实体类中的字段名)
+      logic-delete-value: 1            # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0        # 逻辑未删除值(默认为 0)
+      table-prefix: tb_                # 设置表前缀

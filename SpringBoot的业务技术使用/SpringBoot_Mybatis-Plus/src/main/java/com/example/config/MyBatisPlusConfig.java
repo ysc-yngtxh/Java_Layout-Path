@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MyBatisPlusConfig {
     /**
-     * 注册插件
+     * 注册分页插件
      */
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
