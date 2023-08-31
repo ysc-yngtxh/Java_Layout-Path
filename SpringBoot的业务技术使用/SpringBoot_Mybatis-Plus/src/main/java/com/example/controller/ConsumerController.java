@@ -38,6 +38,11 @@ public class ConsumerController {
         return consumerService.selectByMap();
     }
 
+    @RequestMapping("/selectMaps")
+    public List<Map<String, Object>> selectMaps() {
+        return consumerService.selectMaps();
+    }
+
     @RequestMapping("/selectByWrapper1")
     public List<Consumer> selectByWrapper1() {
         return consumerService.selectByWrapper1();

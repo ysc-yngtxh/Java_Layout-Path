@@ -17,6 +17,7 @@ public interface ConsumerService {
     Consumer selectById();
     List<Consumer> selectByIds();
     List<Consumer> selectByMap();
+    List<Map<String, Object>> selectMaps();
     List<Consumer> selectByWrapper1();
     List<Consumer> selectByWrapper2();
     List<Consumer> selectByWrapper3();

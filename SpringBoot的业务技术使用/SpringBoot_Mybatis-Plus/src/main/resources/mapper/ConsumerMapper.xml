@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.dao.ConsumerDao">
+<mapper namespace="com.example.mapper.ConsumerMapper">
 
-    <resultMap type="com.example.entity.Consumer" id="ConsumerMap">
-        <result property="id" column="id" jdbcType="INTEGER"/>
+    <resultMap id="ConsumerMap" type="com.example.entity.Consumer">
+        <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="superiorId" column="superior_id" jdbcType="INTEGER"/>
-        <result property="username" column="username" jdbcType="VARCHAR"/>
-        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="passWord" column="pass_word" jdbcType="VARCHAR"/>
         <result property="alias" column="alias" jdbcType="VARCHAR"/>
         <result property="age" column="age" jdbcType="INTEGER"/>
         <result property="sex" column="sex" jdbcType="INTEGER"/>
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
         <result property="address" column="address" jdbcType="VARCHAR"/>
         <result property="email" column="email" jdbcType="VARCHAR"/>
-        <collection property="list" ofType="Orders" autoMapping="true">
-            <id property="id" column="oid"/>
-            <!--这后面还有映射属性没写，但是我加了autoMapping="true"可以自动映射(必须是同名)-->
-        </collection>
-        <collection property="" column="menu" jdbcType="VARCHAR"/>
+        <result property="menuList" column="menu" jdbcType="VARCHAR" typeHandler="com.example.handler.CustomHandler"/>
         <result property="deleteFlag" column="delete_flag" jdbcType="INTEGER"/>
         <result property="createdDate" column="created_date" jdbcType="TIMESTAMP"/>
         <result property="updatedDate" column="updated_date" jdbcType="TIMESTAMP"/>

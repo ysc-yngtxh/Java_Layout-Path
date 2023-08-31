@@ -53,9 +53,18 @@ public class ConsumerServiceImpl implements ConsumerService {
      */
     public List<Consumer> selectByMap() {
         Map<String, Object> columnMap = new HashMap<>();
-        // columnMap.put("username","三体");	 // 必须与数据库中的对应，如果没有会报错
+        // columnMap.put("user_name","三体");	 // 必须与数据库中的对应，如果没有会报错
         columnMap.put("age", 73);            // 键是数据库中的列 where age= 27
         return consumerMapper.selectByMap(columnMap);
+    }
+
+    /**
+     * 根据条件查询,返回一个 Map 类型数据
+     */
+    public List<Map<String, Object>> selectMaps() {
+        QueryWrapper<Consumer> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("user_name", "一");
+        return consumerMapper.selectMaps(queryWrapper);
     }
 
     /**
@@ -65,7 +74,7 @@ public class ConsumerServiceImpl implements ConsumerService {
      */
     public List<Consumer> selectByWrapper1() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("username", "月").lt("age", 40);
+        queryWrapper.like("user_name", "月").lt("age", 40);
         return consumerMapper.selectList(queryWrapper);
     }
 
@@ -76,7 +85,7 @@ public class ConsumerServiceImpl implements ConsumerService {
      */
     public List<Consumer> selectByWrapper2() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("username", "月").between("age", 20, 50).isNotNull("email");
+        queryWrapper.like("user_name", "月").between("age", 20, 50).isNotNull("email");
         return consumerMapper.selectList(queryWrapper);
     }
 
@@ -88,7 +97,7 @@ public class ConsumerServiceImpl implements ConsumerService {
     public List<Consumer> selectByWrapper3() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<>();
         // likeRight()方法表示查询字段的右边部分是模糊查询
-        queryWrapper.likeRight("username", "伍").or().ge("age", 25).orderByDesc("age").orderByAsc("id");
+        queryWrapper.likeRight("user_name", "伍").or().ge("age", 25).orderByDesc("age").orderByAsc("id");
         return consumerMapper.selectList(queryWrapper);
     }
 
@@ -100,7 +109,7 @@ public class ConsumerServiceImpl implements ConsumerService {
     public List<Consumer> selectByWrapper4() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<>();
         queryWrapper.apply("date_format(created_date,'%Y-%m-%d') = '2023-08-29'")
-                .inSql("superior_id", "select id from consumer where username like '伍%'");
+                .inSql("superior_id", "select id from consumer where user_name like '伍%'");
         return consumerMapper.selectList(queryWrapper);
     }
 
@@ -111,7 +120,7 @@ public class ConsumerServiceImpl implements ConsumerService {
      */
     public List<Consumer> selectByWrapper5() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<>();
-        queryWrapper.likeRight("username", "伍").and(wq -> wq.lt("age", 40).or().isNotNull("email"));
+        queryWrapper.likeRight("user_name", "伍").and(wq -> wq.lt("age", 40).or().isNotNull("email"));
         return consumerMapper.selectList(queryWrapper);
     }
 
@@ -122,7 +131,7 @@ public class ConsumerServiceImpl implements ConsumerService {
      */
     public List<Consumer> selectByWrapper6() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<>();
-        queryWrapper.likeRight("username", "伍").or(wq -> wq.lt("age", 40).gt("age", 20).isNotNull("email"));
+        queryWrapper.likeRight("user_name", "伍").or(wq -> wq.lt("age", 40).gt("age", 20).isNotNull("email"));
         return consumerMapper.selectList(queryWrapper);
     }
 
@@ -134,7 +143,7 @@ public class ConsumerServiceImpl implements ConsumerService {
      */
     public List<Consumer> selectByWrapper7() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<>();
-        queryWrapper.nested(wq -> wq.lt("age", 40).or().isNotNull("email")).likeRight("username", "伍");
+        queryWrapper.nested(wq -> wq.lt("age", 40).or().isNotNull("email")).likeRight("user_name", "伍");
         return consumerMapper.selectList(queryWrapper);
     }
 
@@ -167,7 +176,7 @@ public class ConsumerServiceImpl implements ConsumerService {
      */
     public List<Consumer> selectByWrapper10() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("id", "username").like("username", "月").lt("age", 40);
+        queryWrapper.select("id", "user_name").like("user_name", "月").lt("age", 40);
         return consumerMapper.selectList(queryWrapper);
     }
 
@@ -179,7 +188,7 @@ public class ConsumerServiceImpl implements ConsumerService {
      */
     public List<Consumer> selectByWrapper11() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("username", "月")
+        queryWrapper.like("user_name", "月")
                 .lt("age", 40)
                 .select(Consumer.class, info ->
                         !info.getColumn().equals("created_date") && !info.getColumn().equals("updated_date"));
@@ -194,27 +203,27 @@ public class ConsumerServiceImpl implements ConsumerService {
     public List<Consumer> condition(String name, String email) {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<>();
         // if(StringUtils.isNotEmpty(name)){
-        //   queryWrapper.like("name", name);
+        //   queryWrapper.like("user_name", name);
         // }
         // if(StringUtils.isNotEmpty(email)){
         //	 queryWrapper.like("email", email);
         // }
         // 下面的写法可以替代上面的这两个逻辑判断
-        queryWrapper.likeRight(StringUtils.isNotEmpty(name), "username", name)
+        queryWrapper.likeRight(StringUtils.isNotEmpty(name), "user_name", name)
                 .likeLeft(StringUtils.isNotEmpty(email), "email", email);
         return consumerMapper.selectList(queryWrapper);
     }
 
     /**
      * 实体类作为条件构造器构造方法的参数
-     * SELECT * FROM consumer WHERE username='双月之城' AND age=5 AND (username LIKE '%月%' AND age < 40)
+     * SELECT * FROM consumer WHERE user_name='双月之城' AND age=5 AND (user_name LIKE '%月%' AND age < 40)
      */
     public List<Consumer> selectByWrapperEntity() {
         Consumer consumer = new Consumer();
-        consumer.setUsername("双月之城");
+        consumer.setUserName("双月之城");
         consumer.setAge(5);
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<>(consumer);
-        queryWrapper.like("username", "月").lt("age", 40);	// 这条语句写上，会与where User这条同时生效；
+        queryWrapper.like("user_name", "月").lt("age", 40);	// 这条语句写上，会与where User这条同时生效；
         return consumerMapper.selectList(queryWrapper);
     }
 
@@ -225,11 +234,11 @@ public class ConsumerServiceImpl implements ConsumerService {
     public List<Consumer> selectByWrapperAllEq() {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<>();
         Map<String,Object> params = new HashMap<>();
-        params.put("username", "王天风");
+        params.put("user_name", "王天风");
         params.put("age", 44);
         // queryWrapper.allEq(params);
         // 过滤查询
-        queryWrapper.allEq( (k,v) -> !k.equals("username"), params);
+        queryWrapper.allEq( (k,v) -> !k.equals("user_name"), params);
         return consumerMapper.selectList(queryWrapper);
     }
 
@@ -254,7 +263,7 @@ public class ConsumerServiceImpl implements ConsumerService {
         List<Consumer> annotationParam = consumerMapper.selectCustomAnnotationParam("灵%", 40, "email");
         // 第二种方式：注解形式sql获取 Wrapper对象参数，解析后进行拼接
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("*").likeRight("username", "灵").and(w -> w.lt("age", 40).or().isNotNull("email"));
+        queryWrapper.select("*").likeRight("user_name", "灵").and(w -> w.lt("age", 40).or().isNotNull("email"));
         List<Consumer> annotationWrapper = consumerMapper.selectCustomAnnotationWrapper(queryWrapper);
 
         Map<String, List<Consumer>> map = new HashMap<>();
@@ -274,7 +283,7 @@ public class ConsumerServiceImpl implements ConsumerService {
         // LambdaQueryWrapper<Consumer> lambdaQuery = new QueryWrapper<Consumer>().lambda;
         // 第三种：
         LambdaQueryWrapper<Consumer> lambdaQuery= Wrappers.<Consumer>lambdaQuery();
-        lambdaQuery.like(Consumer::getUsername, "灵").lt(Consumer::getAge, 40);
+        lambdaQuery.like(Consumer::getUserName, "灵").lt(Consumer::getAge, 40);
         return consumerMapper.selectList(lambdaQuery);
     }
 
@@ -332,7 +341,7 @@ public class ConsumerServiceImpl implements ConsumerService {
     // TODO 第五部分：插入操作
     public Consumer insertConsumer() {
         Consumer consumer = Consumer.builder()
-                .superiorId(1).username("测试").password("616165").alias("法师")
+                .superiorId(1).userName("测试").passWord("616165").alias("法师")
                 .sex(1).age(24).phone("15623041568").address("安徽省合肥市长丰县")
                 .email("yamwaihan@outlook.com").deleteFlag(0)
                 .createdDate(new Date()).updatedDate(new Date())
