@@ -65,7 +65,7 @@ public class Tb_3_Order implements Serializable {
     // @TableLogic注解是逻辑删除，加上这个注解在执行删除方法会变成修改。前端根据所加注解字段进行显隐即可达到逻辑删除效果。
     @TableLogic(value = "0", delval = "1")
     private Integer deleteFlag;
-    // tb_consumer数据
+    // consumer数据
     // TODO @TableName(autoResultMap = true)开启映射注解,选择FastjsonTypeHandler内置处理器解析数据
     //  也可以选择JacksonTypeHandler内置处理器
     @TableField(value = "consumer_json", typeHandler = JacksonTypeHandler.class)

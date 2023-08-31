@@ -23,6 +23,9 @@ public class Tb_2_SkuServiceImpl implements Tb_2_SkuService {
         return tb2SkuMapper.selectById(1);
     }
 
+    /**
+     * 根据 Id删除数据
+     */
     public void deleteLogic() {
         tb2SkuMapper.deleteById(1);
     }
