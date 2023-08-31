@@ -1,14 +1,14 @@
 package com.example.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.entity.TbSku;
+import com.example.entity.Tb_2_Sku;
 
 /**
- * (TbSku)表数据库访问层
+ * (Tb_2_Sku)表数据库访问层
  *
  * @author makejava
  * @since 2023-08-31 19:36:59
  */
-public interface TbSkuMapper extends BaseMapper<TbSku> {
+public interface Tb_2_SkuMapper extends BaseMapper<Tb_2_Sku> {
 }
 

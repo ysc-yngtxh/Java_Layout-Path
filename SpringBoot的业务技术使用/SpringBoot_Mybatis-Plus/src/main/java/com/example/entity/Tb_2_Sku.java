@@ -3,9 +3,9 @@ package com.example.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.Getter;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * (TbSku)实体类
+ * (Tb_2_Sku)实体类
  * @author 游家纨绔
  * @since 2023-08-31 19:37:00
  */
@@ -26,7 +26,7 @@ import java.util.List;
 //            参数五：keepGlobalPrefix  表示该映射表名是否保留在配置文件中设置的全局表名前缀(true表示保留)
 //            参数六：excludeProperty 表示需要排除的属性字段。插入数据的时候会排除该字段数据
 @TableName(value = "sku", resultMap = "TbSkuMap", keepGlobalPrefix = true, excludeProperty = {"context"})
-public class TbSku implements Serializable {
+public class Tb_2_Sku implements Serializable {
     @Serial
     private static final long serialVersionUID = 436500863014955490L;
 
@@ -56,10 +56,12 @@ public class TbSku implements Serializable {
     // 更新人
     private String updatedBy;
     // 逻辑删除
+    // @TableLogic注解是逻辑删除，加上这个注解在执行删除方法会变成修改。前端根据所加注解字段进行显隐即可达到逻辑删除效果。
+    @TableLogic(value = "0", delval = "1")
     private Integer deleteFlag;
     // 订单数据
-    // TODO 通过注解@TableName的属性resultMap映射xml文件，并且使用自定义数据类型处理器TbOrderStringHandler进行 String转 TbOrder
-    private TbOrder order;
+    // TODO 通过注解@TableName的属性resultMap映射xml文件，并且使用自定义数据类型处理器TbOrderStringHandler进行 String转 Tb_3_Order
+    private Tb_3_Order order;
 
     /**
      * 使用 @TableField(exist = false) ，表示该字段在数据库中不存在 ，所以不会插入数据库中

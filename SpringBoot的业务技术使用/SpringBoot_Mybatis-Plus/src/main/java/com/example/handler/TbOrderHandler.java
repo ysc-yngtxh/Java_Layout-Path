@@ -2,9 +2,10 @@ package com.example.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.example.entity.TbOrder;
+import com.example.entity.Tb_3_Order;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.TypeHandler;
+import org.springframework.stereotype.Component;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -16,27 +17,28 @@ import java.sql.SQLException;
  * @dateTime 2023-08-31 23:23
  * @apiNote TODO
  */
-public class TbOrderHandler implements TypeHandler<TbOrder> {
+@Component
+public class TbOrderHandler implements TypeHandler<Tb_3_Order> {
     @Override
-    public void setParameter(PreparedStatement ps, int i, TbOrder parameter, JdbcType jdbcType) throws SQLException {
+    public void setParameter(PreparedStatement ps, int i, Tb_3_Order parameter, JdbcType jdbcType) throws SQLException {
         ps.setString(i, JSON.toJSONString(parameter));
     }
 
     @Override
-    public TbOrder getResult(ResultSet rs, String columnName) throws SQLException {
-        TbOrder parseTbOrder = JSONObject.parseObject(rs.getString(columnName), TbOrder.class);
-        return parseTbOrder;
+    public Tb_3_Order getResult(ResultSet rs, String columnName) throws SQLException {
+        Tb_3_Order parseTb3Order = JSONObject.parseObject(rs.getString(columnName), Tb_3_Order.class);
+        return parseTb3Order;
     }
 
     @Override
-    public TbOrder getResult(ResultSet rs, int columnIndex) throws SQLException {
-        TbOrder parseTbOrder = JSONObject.parseObject(rs.getString(columnIndex), TbOrder.class);
-        return parseTbOrder;
+    public Tb_3_Order getResult(ResultSet rs, int columnIndex) throws SQLException {
+        Tb_3_Order parseTb3Order = JSONObject.parseObject(rs.getString(columnIndex), Tb_3_Order.class);
+        return parseTb3Order;
     }
 
     @Override
-    public TbOrder getResult(CallableStatement cs, int columnIndex) throws SQLException {
-        TbOrder parseTbOrder = JSONObject.parseObject(cs.getString(columnIndex), TbOrder.class);
-        return parseTbOrder;
+    public Tb_3_Order getResult(CallableStatement cs, int columnIndex) throws SQLException {
+        Tb_3_Order parseTb3Order = JSONObject.parseObject(cs.getString(columnIndex), Tb_3_Order.class);
+        return parseTb3Order;
     }
 }

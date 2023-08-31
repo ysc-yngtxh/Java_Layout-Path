@@ -1,8 +1,8 @@
 package com.example.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.entity.TbConsumer;
-import com.example.service.impl.TbConsumerServiceImpl;
+import com.example.entity.Tb_1_Consumer;
+import com.example.service.Tb_1_ConsumerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,29 +12,28 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * (TbConsumer)表控制层
+ * (Tb_1_Consumer)表控制层
  * @author 游家纨绔
  * @since 2023-08-28 22:28:21
  */
 @RestController
 @RequestMapping("/tbConsumer")
 @RequiredArgsConstructor
-public class TbConsumerController {
-
-    private final TbConsumerServiceImpl consumerService;
+public class Tb_1_ConsumerController {
+    private final Tb_1_ConsumerService consumerService;
 
     @RequestMapping("/selectById")
-    public TbConsumer selectById() {
+    public Tb_1_Consumer selectById() {
         return consumerService.selectById();
     }
 
     @RequestMapping("/selectByIds")
-    public List<TbConsumer> selectByIds() {
+    public List<Tb_1_Consumer> selectByIds() {
         return consumerService.selectByIds();
     }
 
     @RequestMapping("/selectByMap")
-    public List<TbConsumer> selectByMap() {
+    public List<Tb_1_Consumer> selectByMap() {
         return consumerService.selectByMap();
     }
 
@@ -44,73 +43,73 @@ public class TbConsumerController {
     }
 
     @RequestMapping("/selectByWrapper1")
-    public List<TbConsumer> selectByWrapper1() {
+    public List<Tb_1_Consumer> selectByWrapper1() {
         return consumerService.selectByWrapper1();
     }
 
     @RequestMapping("/selectByWrapper2")
-    public List<TbConsumer> selectByWrapper2() {
+    public List<Tb_1_Consumer> selectByWrapper2() {
         return consumerService.selectByWrapper2();
     }
 
     @RequestMapping("/selectByWrapper3")
-    public List<TbConsumer> selectByWrapper3() {
+    public List<Tb_1_Consumer> selectByWrapper3() {
         return consumerService.selectByWrapper3();
     }
 
     @RequestMapping("/selectByWrapper4")
-    public List<TbConsumer> selectByWrapper4() {
+    public List<Tb_1_Consumer> selectByWrapper4() {
         return consumerService.selectByWrapper4();
     }
 
     @RequestMapping("/selectByWrapper5")
-    public List<TbConsumer> selectByWrapper5() {
+    public List<Tb_1_Consumer> selectByWrapper5() {
         return consumerService.selectByWrapper5();
     }
 
     @RequestMapping("/selectByWrapper6")
-    public List<TbConsumer> selectByWrapper6() {
+    public List<Tb_1_Consumer> selectByWrapper6() {
         return consumerService.selectByWrapper6();
     }
 
     @RequestMapping("/selectByWrapper7")
-    public List<TbConsumer> selectByWrapper7() {
+    public List<Tb_1_Consumer> selectByWrapper7() {
         return consumerService.selectByWrapper7();
     }
 
     @RequestMapping("/selectByWrapper8")
-    public List<TbConsumer> selectByWrapper8() {
+    public List<Tb_1_Consumer> selectByWrapper8() {
         return consumerService.selectByWrapper8();
     }
 
     @RequestMapping("/selectByWrapper9")
-    public List<TbConsumer> selectByWrapper9() {
+    public List<Tb_1_Consumer> selectByWrapper9() {
         return consumerService.selectByWrapper9();
     }
 
     @RequestMapping("/selectByWrapper10")
-    public List<TbConsumer> selectByWrapper10() {
+    public List<Tb_1_Consumer> selectByWrapper10() {
         return consumerService.selectByWrapper10();
     }
 
     @RequestMapping("/selectByWrapper11")
-    public List<TbConsumer> selectByWrapper11() {
+    public List<Tb_1_Consumer> selectByWrapper11() {
         return consumerService.selectByWrapper11();
     }
 
     @RequestMapping("/condition")
-    public List<TbConsumer> condition(@RequestParam(value = "name", required = false) String name,
-                                      @RequestParam(value = "email", required = false) String email) {
+    public List<Tb_1_Consumer> condition(@RequestParam(value = "name", required = false) String name,
+                                         @RequestParam(value = "email", required = false) String email) {
         return consumerService.condition(name, email);
     }
 
     @RequestMapping("/selectByWrapperEntity")
-    public List<TbConsumer> selectByWrapperEntity() {
+    public List<Tb_1_Consumer> selectByWrapperEntity() {
         return consumerService.selectByWrapperEntity();
     }
 
     @RequestMapping("/selectByWrapperAllEq")
-    public List<TbConsumer> selectByWrapperAllEq() {
+    public List<Tb_1_Consumer> selectByWrapperAllEq() {
         return consumerService.selectByWrapperAllEq();
     }
 
@@ -120,17 +119,17 @@ public class TbConsumerController {
     }
 
     @RequestMapping("/selectCustomAnnotation")
-    public Map<String, List<TbConsumer>> selectCustomAnnotation() {
+    public Map<String, List<Tb_1_Consumer>> selectCustomAnnotation() {
         return consumerService.selectCustomAnnotation();
     }
 
     @RequestMapping("/selectLambdaQuery")
-    public List<TbConsumer> selectLambdaQuery() {
+    public List<Tb_1_Consumer> selectLambdaQuery() {
         return consumerService.selectLambdaQuery();
     }
 
     @RequestMapping("/selectPage")
-    public Page<TbConsumer> selectPage() {
+    public Page<Tb_1_Consumer> selectPage() {
         return consumerService.selectPage();
     }
 
@@ -145,7 +144,7 @@ public class TbConsumerController {
     }
 
     @RequestMapping("/insertConsumer")
-    public TbConsumer insertConsumer() {
+    public Tb_1_Consumer insertConsumer() {
         return consumerService.insertConsumer();
     }
 }
