@@ -21,11 +21,13 @@ import java.util.List;
 public class CustomHandler implements TypeHandler<List<String>> {
     @Override
     public void setParameter(PreparedStatement ps, int i, List<String> parameter, JdbcType jdbcType) throws SQLException {
+        // PreparedStatement预处理参数，将 List<String> 转为 JSON字符串
         ps.setString(i, JSON.toJSONString(parameter));
     }
 
     @Override
     public List<String> getResult(ResultSet rs, String columnName) throws SQLException {
+        // ResultSet 处理结果集：将 JSON字符串 转为 List<String>
         List<String> lists = JSONObject.parseArray(rs.getString(columnName), String.class);
         return lists;
     }

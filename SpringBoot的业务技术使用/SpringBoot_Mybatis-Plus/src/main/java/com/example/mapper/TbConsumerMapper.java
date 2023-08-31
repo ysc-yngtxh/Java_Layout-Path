@@ -3,25 +3,25 @@ package com.example.mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.example.entity.Consumer;
+import com.example.entity.TbConsumer;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
 /**
- * (Consumer)表数据库访问层
+ * (TbConsumer)表数据库访问层
  * @author 游家纨绔
  * @since 2023-08-28 22:28:21
  */
-public interface ConsumerMapper extends BaseMapper<Consumer> {
+public interface TbConsumerMapper extends BaseMapper<TbConsumer> {
 
     // 通过注解的方式使用SQL语句自定义CRUD条件的方法
     @Select("select * from consumer where username like #{username} " +
             "and (age < #{age} or #{notNull} is not null)")
-    List<Consumer> selectCustomAnnotationParam(@Param("username") String username,
-                                               @Param("age") Integer age,
-                                               @Param("notNull") String notNull);
+    List<TbConsumer> selectCustomAnnotationParam(@Param("username") String username,
+                                                 @Param("age") Integer age,
+                                                 @Param("notNull") String notNull);
 
     /**
      * ew 是mapper方法里的 @Param(Constants.WRAPPER) Wrapper queryWrapper对象
@@ -35,7 +35,7 @@ public interface ConsumerMapper extends BaseMapper<Consumer> {
      * 使用${ew.sqlSegment} 如果是连表查询且查询条件是连表的字段则需在service层拼接查询条件时字段前指定别名
      */
     @Select("select ${ew.sqlSelect} from consumer ${ew.customSqlSegment}")
-    List<Consumer> selectCustomAnnotationWrapper(@Param(Constants.WRAPPER) Wrapper<Consumer> wrapper);
+    List<TbConsumer> selectCustomAnnotationWrapper(@Param(Constants.WRAPPER) Wrapper<TbConsumer> wrapper);
 
 }
 
