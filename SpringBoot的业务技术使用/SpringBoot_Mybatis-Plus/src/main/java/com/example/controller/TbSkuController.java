@@ -19,8 +19,8 @@ public class TbSkuController {
     @Resource
     private TbSkuService tbSkuService;
 
-    @RequestMapping("/selectBatchIds")
-    public List<TbSku> selectBatchIds() {
-        return tbSkuService.selectBatchIds();
+    @RequestMapping("/selectById")
+    public TbSku selectById() {
+        return tbSkuService.selectById();
     }
 }

@@ -3,7 +3,7 @@
 <mapper namespace="com.example.mapper.TbOrderMapper">
 
     <resultMap id="TbOrderMap" type="com.example.entity.TbOrder">
-        <result property="orderId" column="order_id" jdbcType="INTEGER"/>
+        <id property="orderId" column="order_id" jdbcType="INTEGER"/>
         <result property="skuId" column="sku_id" jdbcType="INTEGER"/>
         <result property="num" column="num" jdbcType="INTEGER"/>
         <result property="buyPrice" column="buy_price" jdbcType="NUMERIC"/>

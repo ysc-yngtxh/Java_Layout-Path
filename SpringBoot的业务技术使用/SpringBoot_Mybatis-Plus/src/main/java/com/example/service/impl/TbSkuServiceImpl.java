@@ -23,8 +23,7 @@ public class TbSkuServiceImpl implements TbSkuService {
     /**
      * 根据Id集合查询。查询结果中menuList字段从数据库映射出来的是 List<String>类型
      */
-    public List<TbSku> selectBatchIds() {
-        List<Integer> list = Arrays.asList(18, 56, 98, 35);
-        return tbSkuMapper.selectBatchIds(list);
+    public TbSku selectById() {
+        return tbSkuMapper.selectById(1);
     }
 }

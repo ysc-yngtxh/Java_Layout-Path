@@ -20,8 +20,8 @@ public class TbOrderController {
     @Resource
     private TbOrderService tbOrderService;
 
-    @RequestMapping("/selectByOrderId")
-    public List<TbOrder> selectByOrderId() {
-        return tbOrderService.selectByOrderId();
+    @RequestMapping("/selectById")
+    public TbOrder selectById() {
+        return tbOrderService.selectById();
     }
 }

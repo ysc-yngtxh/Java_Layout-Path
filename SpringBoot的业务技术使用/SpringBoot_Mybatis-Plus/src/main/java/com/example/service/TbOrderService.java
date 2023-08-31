@@ -10,5 +10,5 @@ import java.util.List;
  * @since 2023-08-31 19:36:39
  */
 public interface TbOrderService {
-    List<TbOrder> selectByOrderId();
+    TbOrder selectById();
 }

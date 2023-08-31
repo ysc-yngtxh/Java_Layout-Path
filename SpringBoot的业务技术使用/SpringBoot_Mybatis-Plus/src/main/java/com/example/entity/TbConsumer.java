@@ -32,7 +32,7 @@ public class TbConsumer implements Serializable {
     @Serial
     private static final long serialVersionUID = 692869694057194050L;
 
-    // 主键Id
+    // 主键Id。当我们的主键Id字段不是 Id 时，应该添加上@TableId注解进行认为映射主键
     private Integer id;
     // 上级Id
     private Integer superiorId;

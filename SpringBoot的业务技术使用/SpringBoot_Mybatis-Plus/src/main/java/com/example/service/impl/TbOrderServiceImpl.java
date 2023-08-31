@@ -19,7 +19,7 @@ import java.util.List;
 public class TbOrderServiceImpl implements TbOrderService {
     private final TbOrderMapper tbOrderMapper;
 
-    public List<TbOrder> selectByOrderId() {
-        return tbOrderMapper.selectList(null);
+    public TbOrder selectById() {
+        return tbOrderMapper.selectById(1);
     }
 }

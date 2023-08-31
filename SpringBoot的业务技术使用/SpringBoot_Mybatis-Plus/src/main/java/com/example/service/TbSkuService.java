@@ -10,5 +10,5 @@ import java.util.List;
  * @since 2023-08-31 19:37:00
  */
 public interface TbSkuService {
-    List<TbSku> selectBatchIds();
+    TbSku selectById();
 }

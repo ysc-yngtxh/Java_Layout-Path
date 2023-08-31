@@ -3,7 +3,7 @@
 <mapper namespace="com.example.mapper.TbSkuMapper">
 
     <resultMap id="TbSkuMap" type="com.example.entity.TbSku">
-        <result property="id" column="id" jdbcType="INTEGER"/>
+        <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="image" column="image" jdbcType="VARCHAR"/>
         <result property="price" column="price" jdbcType="NUMERIC"/>
         <result property="inventory" column="inventory" jdbcType="INTEGER"/>
