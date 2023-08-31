@@ -1,5 +1,6 @@
 package com.example.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serial;
@@ -12,6 +13,7 @@ import java.util.Date;
  * @since 2023-08-31 19:36:39
  */
 @Data
+@TableName(value = "order", keepGlobalPrefix = true)
 public class TbOrder implements Serializable {
     @Serial
     private static final long serialVersionUID = -53428860068885420L;
@@ -34,5 +36,7 @@ public class TbOrder implements Serializable {
     private String updatedBy;
     // 逻辑删除
     private Integer deleteFlag;
+
+    // private TbSku sku;
 }
 

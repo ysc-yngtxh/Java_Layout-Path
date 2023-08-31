@@ -17,9 +17,9 @@ import java.util.List;
 public interface TbConsumerMapper extends BaseMapper<TbConsumer> {
 
     // 通过注解的方式使用SQL语句自定义CRUD条件的方法
-    @Select("select * from consumer where username like #{username} " +
+    @Select("select * from tb_consumer where user_name like #{user_name} " +
             "and (age < #{age} or #{notNull} is not null)")
-    List<TbConsumer> selectCustomAnnotationParam(@Param("username") String username,
+    List<TbConsumer> selectCustomAnnotationParam(@Param("user_name") String userName,
                                                  @Param("age") Integer age,
                                                  @Param("notNull") String notNull);
 
@@ -34,7 +34,7 @@ public interface TbConsumerMapper extends BaseMapper<TbConsumer> {
      *
      * 使用${ew.sqlSegment} 如果是连表查询且查询条件是连表的字段则需在service层拼接查询条件时字段前指定别名
      */
-    @Select("select ${ew.sqlSelect} from consumer ${ew.customSqlSegment}")
+    @Select("select ${ew.sqlSelect} from tb_consumer ${ew.customSqlSegment}")
     List<TbConsumer> selectCustomAnnotationWrapper(@Param(Constants.WRAPPER) Wrapper<TbConsumer> wrapper);
 
 }

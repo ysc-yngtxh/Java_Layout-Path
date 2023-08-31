@@ -10,6 +10,7 @@ import lombok.Getter;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * (TbSku)实体类
@@ -24,8 +25,7 @@ import java.util.Date;
 //            参数四：autoResultMap  表示是否自动构建ResultMap （设置了resultMap则无效）
 //            参数五：keepGlobalPrefix  表示该映射表名是否保留在配置文件中设置的全局表名前缀(true表示保留)
 //            参数六：excludeProperty 表示需要排除的属性字段。插入数据的时候会排除该字段数据
-@TableName(value = "consumer", resultMap = "ConsumerMap",
-        keepGlobalPrefix = true, excludeProperty = {"context"})
+@TableName(value = "sku", resultMap = "TbSkuMap", keepGlobalPrefix = true, excludeProperty = {"context"})
 public class TbSku implements Serializable {
     @Serial
     private static final long serialVersionUID = 436500863014955490L;
@@ -44,6 +44,9 @@ public class TbSku implements Serializable {
     private String title;
     // 是否上架
     private Integer shelves;
+    // 菜单
+    // TODO 通过注解@TableName的属性resultMap映射xml文件，并且使用自定义数据类型处理器CustomHandler进行 String转 List<String>
+    private List<String> menuList;
     // 创建时间
     private Date createDate;
     // 更新时间
@@ -54,6 +57,9 @@ public class TbSku implements Serializable {
     private String updatedBy;
     // 逻辑删除
     private Integer deleteFlag;
+    // 订单数据
+    // TODO 通过注解@TableName的属性resultMap映射xml文件，并且使用自定义数据类型处理器TbOrderStringHandler进行 String转 TbOrder
+    private TbOrder order;
 
     /**
      * 使用 @TableField(exist = false) ，表示该字段在数据库中不存在 ，所以不会插入数据库中

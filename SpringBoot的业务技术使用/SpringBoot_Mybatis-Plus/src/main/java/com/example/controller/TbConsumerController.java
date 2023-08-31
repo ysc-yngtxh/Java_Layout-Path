@@ -17,7 +17,7 @@ import java.util.Map;
  * @since 2023-08-28 22:28:21
  */
 @RestController
-@RequestMapping("/TbConsumer")
+@RequestMapping("/tbConsumer")
 @RequiredArgsConstructor
 public class TbConsumerController {
 

@@ -26,7 +26,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@JsonPropertyOrder({"id", "superiorId", "userName", "passWord", "alias", "age", "sex", "phone", "address", "email", "menuList", "deleteFlag", "createdDate", "updatedDate", "json"})
+@JsonPropertyOrder({"id", "superiorId", "userName", "passWord", "alias", "age", "sex", "phone", "address", "email", "deleteFlag", "createdDate", "updatedDate", "json"})
+@TableName(value = "consumer", keepGlobalPrefix = true)
 public class TbConsumer implements Serializable {
     @Serial
     private static final long serialVersionUID = 692869694057194050L;
@@ -51,8 +52,6 @@ public class TbConsumer implements Serializable {
     private String address;
     // 邮件
     private String email;
-    // 菜单
-    private List<String> menuList;
     // 逻辑删除
     private Integer deleteFlag;
     // 创建时间

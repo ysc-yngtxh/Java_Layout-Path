@@ -1,9 +1,12 @@
 package com.example.controller;
 
+import com.example.entity.TbSku;
 import com.example.service.TbSkuService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * (TbSku)表控制层
@@ -13,9 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("tbSku")
 public class TbSkuController {
-    /**
-     * 服务对象
-     */
     @Resource
     private TbSkuService tbSkuService;
+
+    @RequestMapping("/selectBatchIds")
+    public List<TbSku> selectBatchIds() {
+        return tbSkuService.selectBatchIds();
+    }
 }

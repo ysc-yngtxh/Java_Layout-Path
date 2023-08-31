@@ -1,9 +1,12 @@
 package com.example.controller;
 
+import com.example.entity.TbOrder;
 import com.example.service.TbOrderService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * 订单详情表(TbOrder)表控制层
@@ -13,9 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("tbOrder")
 public class TbOrderController {
-    /**
-     * 服务对象
-     */
+
     @Resource
     private TbOrderService tbOrderService;
+
+    @RequestMapping("/selectByOrderId")
+    public List<TbOrder> selectByOrderId() {
+        return tbOrderService.selectByOrderId();
+    }
 }

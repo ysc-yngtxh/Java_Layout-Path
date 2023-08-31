@@ -291,7 +291,7 @@ public class TbConsumerServiceImpl implements TbConsumerService {
         return tbConsumerMapper.selectList(lambdaQuery);
     }
 
-    // TODO 第三部分：分页查询
+    // TODO 第三部分：分页查询(必须注入Mybatis-Plus的分页插件，否则sql语句中不存在limit拼接或者无法获取分页总页数等数据)
     public Page<TbConsumer> selectPage() {
         QueryWrapper<TbConsumer> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("phone", "15623041568");

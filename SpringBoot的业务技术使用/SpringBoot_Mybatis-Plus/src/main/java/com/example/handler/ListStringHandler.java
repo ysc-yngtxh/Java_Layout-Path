@@ -18,7 +18,7 @@ import java.util.List;
  * @apiNote TODO
  */
 @Component
-public class CustomHandler implements TypeHandler<List<String>> {
+public class ListStringHandler implements TypeHandler<List<String>> {
     @Override
     public void setParameter(PreparedStatement ps, int i, List<String> parameter, JdbcType jdbcType) throws SQLException {
         // PreparedStatement预处理参数，将 List<String> 转为 JSON字符串
