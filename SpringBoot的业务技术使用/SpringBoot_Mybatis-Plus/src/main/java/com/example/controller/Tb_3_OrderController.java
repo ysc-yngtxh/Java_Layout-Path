@@ -29,4 +29,9 @@ public class Tb_3_OrderController {
     public List<Map<String, Object>> selectMaps() {
         return tb3OrderService.selectMaps();
     }
+
+    @RequestMapping("/updateByVersion")
+    public Integer update() {
+        return tb3OrderService.updateByVersion();
+    }
 }

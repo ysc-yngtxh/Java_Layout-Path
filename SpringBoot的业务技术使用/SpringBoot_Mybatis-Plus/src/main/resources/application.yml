@@ -6,9 +6,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    password: 131474
-    url: jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
-    username: root
+    password: mpw:tOuQTJfpXKEWbLY1fOJxqQ==
+    url: mpw:7rtYlSNgy+jVLRy6JLv8509gEPmSoMrwxM8kVPvD0kG2SfihsaKW436zUZLpdfPtBVp0mT9cwKLZgIetPFYWKquO4QfuXN+OuF4yZlU46KVXDWeV/KZQgyAMux4xbo5D8i1IsS67xEMSOFx2LVrQ1crL/7EuZ/bkw/N6hGRrhsTYZHzHfdtuJY/pXPhIyTvzu3R8nQLJu4wjrRRBLXF3uA==
+    username: mpw:Uwak4MyIBlTANPI/N9CasA==
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.core.toolkit.sql.SqlInjectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.entity.Tb_1_Consumer;
 import com.example.mapper.Tb_1_ConsumerMapper;
@@ -199,8 +200,8 @@ public class Tb_1_ConsumerServiceImpl implements Tb_1_ConsumerService {
 
     // TODO 第二部分：高级查询
     /**
-     * 校验传入参数不为空的时候，进行模糊查询
      * condition作用：当它的值为true的时候，这个方法才会执行
+     * 每个sql方法的都有重载方法的第一个入参为boolean condition，表示该条件是否加入最后生成的sql中
      */
     public List<Tb_1_Consumer> condition(String name, String email) {
         QueryWrapper<Tb_1_Consumer> queryWrapper = new QueryWrapper<>();

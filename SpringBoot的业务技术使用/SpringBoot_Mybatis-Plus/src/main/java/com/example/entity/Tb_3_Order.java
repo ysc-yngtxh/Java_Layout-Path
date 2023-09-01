@@ -1,10 +1,13 @@
 package com.example.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.Version;
+import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler;
 import com.baomidou.mybatisplus.extension.handlers.GsonTypeHandler;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
@@ -16,6 +19,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -61,9 +65,16 @@ public class Tb_3_Order implements Serializable {
     private List<String> menuList;
 
     // 创建时间
-    private Date createDate;
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createDate;
+
     // 更新时间
+    // 属性 fill 是用来做自动填充功能的，有四种生成策略：默认、插入、更新、插入更新.
+    // 这里设置的是在做更新操作时，通过实现MetaObjectHandler类，重写updateFill(MetaObject metaObject)方法
+    // 会在执行 update 语句的 set 里填充 updated_date=new Date()
+    @TableField(fill = FieldFill.UPDATE)
     private Date updatedDate;
+
     // 创建人
     private String createBy;
     // 更新人
@@ -73,6 +84,18 @@ public class Tb_3_Order implements Serializable {
     // @TableLogic注解是逻辑删除，加上这个注解在执行删除方法会变成修改。前端根据所加注解字段进行显隐即可达到逻辑删除效果。
     @TableLogic(value = "0", delval = "1")
     private Integer deleteFlag;
+
+    // 版本号
+    // @Version注解是用来标注该字段是乐观锁字段。乐观锁：读操作不会上锁，更新操作会通过版本号来进行上锁
+    // 乐观锁实现方式：取出记录时，获取当前 version
+    //              更新时，带上这个 version
+    //              执行更新时， set version = newVersion where version = oldVersion
+    //              如果 version 不对，就更新失败
+    // 支持的数据类型只有:int,Integer,long,Long,Date,Timestamp,LocalDateTime
+    // 整数类型下 newVersion = oldVersion + 1。newVersion 会回写到 entity 中
+    // 仅支持 updateById(id) 与 update(entity, wrapper) 方法
+    @Version
+    private Integer version;
 
     // sku数据
     // TODO @TableName(autoResultMap = true)开启映射注解,选择 FastjsonTypeHandler处理器(fastjson依赖)解析数据

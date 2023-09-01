@@ -13,4 +13,5 @@ import java.util.Map;
 public interface Tb_3_OrderService {
     Tb_3_Order selectById();
     List<Map<String, Object>> selectMaps();
+    Integer updateByVersion();
 }

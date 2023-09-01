@@ -36,6 +36,5 @@ public interface Tb_1_ConsumerMapper extends BaseMapper<Tb_1_Consumer> {
      */
     @Select("select ${ew.sqlSelect} from tb_consumer ${ew.customSqlSegment}")
     List<Tb_1_Consumer> selectCustomAnnotationWrapper(@Param(Constants.WRAPPER) Wrapper<Tb_1_Consumer> wrapper);
-
 }
 
