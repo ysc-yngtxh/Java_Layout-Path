@@ -6,7 +6,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler;
+import com.baomidou.mybatisplus.extension.handlers.GsonTypeHandler;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +18,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 订单详情表(Tb_3_Order)实体类
@@ -26,11 +29,12 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonPropertyOrder({"orderId", "skuId", "num", "buyPrice", "menuList", "createDate", "updatedDate", "createBy", "updatedBy", "deleteFlag", "consumerJson"})
 // @TableName 参数一：value 表示映射表名
 //            参数二：schema 属性用来指定模式名称。如果你使用的是 mysql 数据库，则指定数据库名称。
 //                  如果你使用的是 oracle，则为 schema，例如：schema="scott"，其中：scott 就是 oracle 中的 schema
 //            参数三：resultMap  表示返回自定义的映射结果(xml文件的resultMap标签对应Id)
-//            参数四：autoResultMap  表示是否自动构建ResultMap （设置了resultMap则无效）
+//            参数四：autoResultMap  表示是否自动构建ResultMap，适合实体字段中有使用typeHandler（设置了resultMap则无效）
 //            参数五：keepGlobalPrefix  表示该映射表名是否保留在配置文件中设置的全局表名前缀(true表示保留)
 //            参数六：excludeProperty 表示需要排除的属性字段。插入数据的时候会排除该字段数据
 @TableName(value = "order", autoResultMap = true, keepGlobalPrefix = true)
@@ -49,8 +53,8 @@ public class Tb_3_Order implements Serializable {
     // 购买价格
     private Double buyPrice;
     // 菜单
-    // TODO @TableName(autoResultMap = true)开启映射注解,选择FastjsonTypeHandler内置处理器解析数据
-    //  也可以选择JacksonTypeHandler内置处理器
+    // TODO @TableName(autoResultMap = true)开启映射注解,选择 FastjsonTypeHandler处理器(fastjson依赖)解析数据
+    //  也可以选择 JacksonTypeHandler(jackson-core依赖)处理器 或者 GsonTypeHandler内置处理器
     @TableField(value = "menu", typeHandler = FastjsonTypeHandler.class)
     private List<String> menuList;
     // 创建时间
@@ -66,9 +70,9 @@ public class Tb_3_Order implements Serializable {
     @TableLogic(value = "0", delval = "1")
     private Integer deleteFlag;
     // consumer数据
-    // TODO @TableName(autoResultMap = true)开启映射注解,选择FastjsonTypeHandler内置处理器解析数据
-    //  也可以选择JacksonTypeHandler内置处理器
-    @TableField(value = "consumer_json", typeHandler = JacksonTypeHandler.class)
-    private Tb_1_Consumer consumerJson;
+    // TODO @TableName(autoResultMap = true)开启映射注解,选择 FastjsonTypeHandler处理器(fastjson依赖)解析数据
+    //  也可以选择 JacksonTypeHandler(jackson-core依赖)处理器 或者 GsonTypeHandler内置处理器
+    @TableField(value = "sku_json", typeHandler = JacksonTypeHandler.class)
+    private Map<String, Object> skuJson;
 }
 

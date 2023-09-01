@@ -15,6 +15,6 @@
         <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
         <result property="updatedBy" column="updated_by" jdbcType="VARCHAR"/>
         <result property="deleteFlag" column="delete_flag" jdbcType="INTEGER"/>
-        <result property="order" column="order_json" jdbcType="VARCHAR" typeHandler="com.example.handler.TbOrderHandler"/>
+        <result property="orderJson" column="order_json" jdbcType="VARCHAR" typeHandler="com.example.handler.TbOrderHandler"/>
     </resultMap>
 </mapper>

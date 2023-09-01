@@ -27,7 +27,7 @@ import java.util.Date;
 //            参数二：schema 属性用来指定模式名称。如果你使用的是 mysql 数据库，则指定数据库名称。
 //                  如果你使用的是 oracle，则为 schema，例如：schema="scott"，其中：scott 就是 oracle 中的 schema
 //            参数三：resultMap  表示返回自定义的映射结果(xml文件的resultMap标签对应Id)
-//            参数四：autoResultMap  表示是否自动构建ResultMap （设置了resultMap则无效）
+//            参数四：autoResultMap  表示是否自动构建ResultMap，适合实体字段中有使用typeHandler （设置了resultMap则无效）
 //            参数五：keepGlobalPrefix  表示该映射表名是否保留在配置文件中设置的全局表名前缀(true表示保留)
 //            参数六：excludeProperty 表示需要排除的属性字段。插入数据的时候会排除该字段数据
 @TableName(value = "consumer", keepGlobalPrefix = true)
@@ -35,7 +35,7 @@ public class Tb_1_Consumer implements Serializable {
     @Serial
     private static final long serialVersionUID = 692869694057194050L;
 
-    // 主键Id。当我们的主键Id字段不是 Id 时，应该添加上@TableId注解进行认为映射主键。这里是 Id 值，则不需要
+    // 主键Id。当我们的主键Id字段不是 Id 时，应该添加上@TableId注解进行认为映射主键。这里是 Id值恰好对上，则不需要
     private Integer id;
     // 上级Id
     private Integer superiorId; // 这里驼峰字段，Mybatis-plus 会自动转为字段superior_id

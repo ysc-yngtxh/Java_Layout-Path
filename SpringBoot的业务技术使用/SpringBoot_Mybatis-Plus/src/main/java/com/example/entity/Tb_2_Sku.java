@@ -22,7 +22,7 @@ import java.util.List;
 //            参数二：schema 属性用来指定模式名称。如果你使用的是 mysql 数据库，则指定数据库名称。
 //                  如果你使用的是 oracle，则为 schema，例如：schema="scott"，其中：scott 就是 oracle 中的 schema
 //            参数三：resultMap  表示返回自定义的映射结果(xml文件的resultMap标签对应Id)
-//            参数四：autoResultMap  表示是否自动构建ResultMap （设置了resultMap则无效）
+//            参数四：autoResultMap  表示是否自动构建ResultMap，适合实体字段中有使用typeHandler （设置了resultMap则无效）
 //            参数五：keepGlobalPrefix  表示该映射表名是否保留在配置文件中设置的全局表名前缀(true表示保留)
 //            参数六：excludeProperty 表示需要排除的属性字段。插入数据的时候会排除该字段数据
 @TableName(value = "sku", resultMap = "TbSkuMap", keepGlobalPrefix = true, excludeProperty = {"context"})
@@ -61,7 +61,7 @@ public class Tb_2_Sku implements Serializable {
     private Integer deleteFlag;
     // 订单数据
     // TODO 通过注解@TableName的属性resultMap映射xml文件，并且使用自定义数据类型处理器TbOrderStringHandler进行 String转 Tb_3_Order
-    private Tb_3_Order order;
+    private Tb_3_Order orderJson;
 
     /**
      * 使用 @TableField(exist = false) ，表示该字段在数据库中不存在 ，所以不会插入数据库中

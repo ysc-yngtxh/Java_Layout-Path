@@ -6,6 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 订单详情表(Tb_3_Order)表控制层
  * @author 游家纨绔
@@ -20,5 +23,10 @@ public class Tb_3_OrderController {
     @RequestMapping("/selectById")
     public Tb_3_Order selectById() {
         return tb3OrderService.selectById();
+    }
+
+    @RequestMapping("/selectMaps")
+    public List<Map<String, Object>> selectMaps() {
+        return tb3OrderService.selectMaps();
     }
 }
