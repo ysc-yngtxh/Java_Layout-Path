@@ -46,17 +46,20 @@ public class Tb_3_Order implements Serializable {
     // @TableId参数：value映射数据库column列主键字段；type设置新增数据主键Id规则,有自增、UUID等
     @TableId(value = "order_id", type = IdType.AUTO)
     private Long orderId;
+
     // sku商品id
     private Long skuId;
     // 购买数量
     private Integer num;
     // 购买价格
     private Double buyPrice;
+
     // 菜单
     // TODO @TableName(autoResultMap = true)开启映射注解,选择 FastjsonTypeHandler处理器(fastjson依赖)解析数据
     //  也可以选择 JacksonTypeHandler(jackson-core依赖)处理器 或者 GsonTypeHandler内置处理器
     @TableField(value = "menu", typeHandler = FastjsonTypeHandler.class)
     private List<String> menuList;
+
     // 创建时间
     private Date createDate;
     // 更新时间
@@ -65,11 +68,13 @@ public class Tb_3_Order implements Serializable {
     private String createBy;
     // 更新人
     private String updatedBy;
+
     // 逻辑删除
     // @TableLogic注解是逻辑删除，加上这个注解在执行删除方法会变成修改。前端根据所加注解字段进行显隐即可达到逻辑删除效果。
     @TableLogic(value = "0", delval = "1")
     private Integer deleteFlag;
-    // consumer数据
+
+    // sku数据
     // TODO @TableName(autoResultMap = true)开启映射注解,选择 FastjsonTypeHandler处理器(fastjson依赖)解析数据
     //  也可以选择 JacksonTypeHandler(jackson-core依赖)处理器 或者 GsonTypeHandler内置处理器
     @TableField(value = "sku_json", typeHandler = JacksonTypeHandler.class)

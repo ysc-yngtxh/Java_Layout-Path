@@ -44,9 +44,11 @@ public class Tb_2_Sku implements Serializable {
     private String title;
     // 是否上架
     private Integer shelves;
+
     // 菜单
     // TODO 通过注解@TableName的属性resultMap映射xml文件，并且使用自定义数据类型处理器CustomHandler进行 String转 List<String>
     private List<String> menuList;
+
     // 创建时间
     private Date createDate;
     // 更新时间
@@ -55,12 +57,18 @@ public class Tb_2_Sku implements Serializable {
     private String createBy;
     // 更新人
     private String updatedBy;
+
     // 逻辑删除
     // @TableLogic注解是逻辑删除，加上这个注解在执行删除方法会变成修改。前端根据所加注解字段进行显隐即可达到逻辑删除效果。
     @TableLogic(value = "0", delval = "1")
     private Integer deleteFlag;
+
     // 订单数据
     // TODO 通过注解@TableName的属性resultMap映射xml文件，并且使用自定义数据类型处理器TbOrderStringHandler进行 String转 Tb_3_Order
+    //  这里有一个坑点：我的 Json字符串数据 中有一个menu属性，但是在Tb_3_Order实体类中对应的是menuList属性，
+    //               因为我这个字段的返回类型是Tb_3_Order，无法精准的映射字段属性，导致无法赋值。
+    //  解决：方法一、将映射字段一一对应
+    //       方法二、不使用实体类映射，使用 Map<String, Object>
     private Tb_3_Order orderJson;
 
     /**
