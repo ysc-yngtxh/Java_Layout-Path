@@ -11,6 +11,7 @@ spring:
        strict: false    # 严格匹配数据源,默认false,表示使用默认数据源。 设置为true表示未匹配到指定数据源时抛异常
        datasource:
          master:
+           # 注意：这里配置多数据源的 url 改为 jdbc-url
            url: jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
            username: root
            password: 131474
