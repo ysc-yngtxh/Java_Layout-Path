@@ -12,5 +12,5 @@ import java.util.List;
 public interface TbBrandService {
     List<TbBrand> selectAll();
     TbBrand selectByName();
-    int insertNameAndLetter();
+    void insertNameAndLetter();
 }

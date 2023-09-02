@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DynamicDatasourceApplication {
+public class MybatisPlusDynamicApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DynamicDatasourceApplication.class, args);
+        SpringApplication.run(MybatisPlusDynamicApplication.class, args);
     }
 
 }

@@ -17,6 +17,9 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = "com.example.mapper.springdb", sqlSessionTemplateRef = "springdbSqlSessionTemplate")
 public class DataSourceSpringDbConfig {
 
+    // application.yml文件配置好之后，我们创建两个配置类来加载配置信息，初始化数据源
+    // 1）类注解@MapperScan的属性basePackages配置的为对应DA层dao的位置
+    // 2）@Primary注解指定了主数据源
     @Primary
     @Bean(name = "springdbDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.springdb")

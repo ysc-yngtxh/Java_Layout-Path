@@ -29,11 +29,11 @@ public class TbBrandServiceImpl implements TbBrandService {
     }
 
     @Override
-    public int insertNameAndLetter() {
+    public void insertNameAndLetter() {
         TbBrand brand = new TbBrand();
         brand.setName("华为mate60 pro");
         brand.setImage("https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/pdp/phones/mate60-pro/img/performance/performance-feature-item-2@2x.webp");
         brand.setLetter("H");
-        return tbBrandMapper.insertNameAndLetter(brand);
+        tbBrandMapper.insertNameAndLetter(brand);
     }
 }
