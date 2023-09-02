@@ -20,14 +20,14 @@ import java.util.List;
 @Service("userService")
 public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserService {
 
-    @DS("master")
-    public List<User> findByStoryIds() {
+    // 类和方法上都没有@DS 注解，就会使用默认的数据源
+    public List<User> findByMasterIds() {
         List<Integer> ids = Arrays.asList(1, 3, 5, 8, 10);
         return baseMapper.selectBatchIds(ids);
     }
 
     @DS("slave_1")
-    public List<User> findByTestIds() {
+    public List<User> findSlave_1ByIds() {
         List<Integer> ids = Arrays.asList(1, 3, 5, 8, 10);
         return baseMapper.selectBatchIds(ids);
     }
