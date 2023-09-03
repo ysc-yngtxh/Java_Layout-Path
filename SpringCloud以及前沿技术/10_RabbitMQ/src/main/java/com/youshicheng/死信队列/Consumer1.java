@@ -2,7 +2,7 @@ package com.youshicheng.死信队列;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DeliverCallback;
-import com.youshicheng.utils.RabbitMqUtils;
+import com.youshicheng.RabbitMqUtils;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

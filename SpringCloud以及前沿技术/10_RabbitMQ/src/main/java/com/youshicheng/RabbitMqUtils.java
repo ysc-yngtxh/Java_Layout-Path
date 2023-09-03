@@ -1,4 +1,4 @@
-package com.youshicheng.utils;
+package com.youshicheng;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
