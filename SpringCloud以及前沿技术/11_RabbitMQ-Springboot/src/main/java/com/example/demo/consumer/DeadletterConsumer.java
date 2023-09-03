@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@Slf4j
-@Component
 /**
  * 基于死信队列 的延迟消息
  */
+@Slf4j
+@Component
 public class DeadletterConsumer {
 
     // 接收消息。这里监听的是死信队列，因为没有消费者，最终的消息都会流到死信中

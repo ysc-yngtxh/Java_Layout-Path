@@ -44,6 +44,7 @@ public class SendController {
                 , new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(new Date())
                 , ttlTime
                 , message);
+        // 第四个参数：对消息进行配置
         rabbitTemplate.convertAndSend("bootDirectExchange","bootDirectRoutingKeyC",message,msg->{
             // 发送消息的时候 延长时长
             msg.getMessageProperties().setExpiration( String.valueOf(ttlTime) );
@@ -52,7 +53,7 @@ public class SendController {
 
         /*这种情况下虽然只需要注册一个队列，便可在用户端设置延迟时长。但是，出现了一个很严重的问题！
           依次发起请求：http://localhost:8080/ttl/sendExpirationMsg/你好1/20000
-                     http://localhost:8080/ttl/sendExpirationMsg/你好2/2000
+                      http://localhost:8080/ttl/sendExpirationMsg/你好2/2000
               我们会发现死信队列中依次出现的是 '你好1'、'你好2'。这就很奇怪，因为'你好2'延迟时间明显短于'你好1'
            因为RabbitMq只会检查第一个消息是否过期，如果过期，则丢到死信队列。
            如果第一个消息的延时时长很长，而第二个消息的延时时长很短，第二个消息并不会优先得到执行

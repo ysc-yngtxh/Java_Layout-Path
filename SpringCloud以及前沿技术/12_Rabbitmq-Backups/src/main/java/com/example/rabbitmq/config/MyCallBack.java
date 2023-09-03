@@ -14,8 +14,8 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @Component
-public class MycallBack implements RabbitTemplate.ConfirmCallback, RabbitTemplate.ReturnsCallback {
-    // MycallBack 实现的是内部接口 ConfirmCallback 是交换机消息确认。ReturnCallback 是实现消息回退模式
+public class MyCallBack implements RabbitTemplate.ConfirmCallback, RabbitTemplate.ReturnsCallback {
+    // MyCallBack 实现的是内部接口 ConfirmCallback 是交换机消息确认。ReturnCallback 是实现消息回退模式
     // 通过实现 ConfirmCallback 接口，消息发送到 Exchange 后触发回调，确认是否正确到达 Exchange 中
     // 通过实现 ReturnCallback 接口，如果消息不可路由，通过其实现方法来让消息回退给生产者
 
@@ -41,7 +41,7 @@ public class MycallBack implements RabbitTemplate.ConfirmCallback, RabbitTemplat
      *    2.2、 交换机收到消息  ack = true
      *    2.3、 cause 失败的原因
      */
-    @Override// 注意：要想发布确认，不光要实现confirm方法，还需要在配置文件中spring.rabbitmq.publisher-confirm-type=correlated
+    @Override // 注意：要想发布确认，不光要实现confirm方法，还需要在配置文件中spring.rabbitmq.publisher-confirm-type=correlated
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
         // CorrelationData correlationData这个是发送端convertAndSend自己发送的东西
         String id = correlationData != null ? correlationData.getId() : "";
@@ -52,8 +52,6 @@ public class MycallBack implements RabbitTemplate.ConfirmCallback, RabbitTemplat
         }
 
     }
-
-
 
     /**
      * 当消息传递过程中不可达目的地时将消息返回给生产者
@@ -68,6 +66,4 @@ public class MycallBack implements RabbitTemplate.ConfirmCallback, RabbitTemplat
                 , returned.getRoutingKey()
         );
     }
-
-
 }

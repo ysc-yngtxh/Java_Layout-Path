@@ -14,7 +14,8 @@ public class DelayedConfig {
     @Bean("delayedExchange")
     public CustomExchange delayedExchange(){ // 这个表示自定义类型的交换机
         HashMap<String, Object> map = new HashMap<>(1);
-        map.put("x-delayed-type","direct");
+        // 定义交换机分发消息类型，direct、fanout、topic、header
+        map.put("x-delayed-type", "direct");
         // 交换机名称  交换机类型  是否持久化   是否自动删除  其他
         return new CustomExchange("delayedExchange", "x-delayed-message", true, false, map);
     }
@@ -25,7 +26,7 @@ public class DelayedConfig {
     }
     // 配置一个安装插件的交换机与队列的绑定
     @Bean
-    public Binding delayedBinding(@Qualifier("delayedExchange") CustomExchange directExchange,// 注意这里交换机类型
+    public Binding delayedBinding(@Qualifier("delayedExchange") CustomExchange directExchange, // 注意这里交换机类型
                                   @Qualifier("delayedQueue") Queue directQueue){
 
         return BindingBuilder.bind(directQueue).to(directExchange).with("delayedroutingkey").noargs();

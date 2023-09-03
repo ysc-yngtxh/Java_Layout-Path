@@ -21,10 +21,10 @@ public class RabbitMQConfig {
     @Bean("directQueueA")
     public Queue directQueueA(){
         HashMap<String, Object> map = new HashMap<>(3);
-        map.put("x-dead-letter-exchange", "deadExchange");  // 设置死信交换机
-        map.put("x-dead-letter-routing-key", "deadroutingkey");// 设置死信routing-key
+        map.put("x-dead-letter-exchange", "deadExchange");      // 设置死信交换机
+        map.put("x-dead-letter-routing-key", "deadroutingkey"); // 设置死信routing-key
         map.put("x-message-ttl", 10000); // 设置消息过期时间
-        // map.put("x-max-length", 10); // 设置消息队列的长度
+        // map.put("x-max-length", 10);  // 设置消息队列的长度
         // 参数1、队列名称  2、是否持久化   3、是否排外  4、如果队列空了是否自动删除   5、死信设置
         return new Queue("bootDirectQueueA", true, false, false, map);
     }
@@ -33,10 +33,10 @@ public class RabbitMQConfig {
     @Bean("directQueueB")
     public Queue directQueueB(){
         HashMap<String, Object> map = new HashMap<>(3);
-        map.put("x-dead-letter-exchange","deadExchange");  // 设置死信交换机
-        map.put("x-dead-letter-routing-key","deadroutingkey");// 设置死信routingkey
+        map.put("x-dead-letter-exchange","deadExchange");      // 设置死信交换机
+        map.put("x-dead-letter-routing-key","deadroutingkey"); // 设置死信routingkey
         map.put("x-message-ttl",40000); // 设置消息过期时间
-        // map.put("x-max-length",10); // 设置消息队列的长度
+        // map.put("x-max-length",10);  // 设置消息队列的长度
         // 参数1、队列名称  2、是否持久化   3、是否排外  4、如果队列空了是否自动删除   5、死信设置
         return new Queue("bootDirectQueueB",true,false,false,map);
     }
@@ -45,10 +45,10 @@ public class RabbitMQConfig {
     @Bean("directQueueC")
     public Queue directQueueC(){
         HashMap<String, Object> map = new HashMap<>(3);
-        map.put("x-dead-letter-exchange","deadExchange");  // 设置死信交换机
-        map.put("x-dead-letter-routing-key","deadroutingkey");// 设置死信routingkey
+        map.put("x-dead-letter-exchange","deadExchange");      // 设置死信交换机
+        map.put("x-dead-letter-routing-key","deadroutingkey"); // 设置死信routingkey
         // map.put("x-message-ttl",40000); // 设置消息过期时间
-        // map.put("x-max-length",10); // 设置消息队列的长度
+        // map.put("x-max-length",10);     // 设置消息队列的长度0
         // 参数1、队列名称  2、是否持久化   3、是否排外  4、如果队列空了是否自动删除   5、死信设置
         return new Queue("bootDirectQueueC",true,false,false,map);
     }

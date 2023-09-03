@@ -24,7 +24,7 @@ public class Consumer2 {
             DeliverCallback callback = (consumerTag, message) -> {
                 System.out.println("Consumer2接受的消息是：" + new String(message.getBody(), StandardCharsets.UTF_8));
             };
-            // 第二个参数为true：开启手动应答
+            // 第二个参数为true：开启自动应答
             channel.basicConsume(DEAD_QUEUE, true, callback, consumer -> {});
         } catch (IOException e) {
             e.printStackTrace();
