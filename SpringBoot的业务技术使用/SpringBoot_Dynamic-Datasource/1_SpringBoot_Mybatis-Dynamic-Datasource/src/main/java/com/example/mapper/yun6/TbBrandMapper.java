@@ -41,17 +41,13 @@ public interface TbBrandMapper {
     @ResultMap("selectResult")
     TbBrand selectByName(@Param("name") String name);
 
-    // @Select("select * from yun6.tb_brand where name=#{name}")
-    // @ResultMap("selectResult")
-    // TbBrand selectByName(@Param("name") String name);
-
-    /** @Options用法
-     * 其实就相当于我们在xml文件中 <insert></insert> 头部标签的属性配置
+    /**
+     * @Options用法 其实就相当于我们在xml文件中 <insert></insert> 头部标签的属性配置
      * useGeneratedKeys = true 表示使用id自增的方式插入
      * keyProperty = "id" 表示自增的主键对应实体类中的字段"id",会返回插入的id值
      * keyColumn = "id"   表示数据库中自增的字段名是"id"
      */
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    @Insert("insert into yun6.tb_brand(name, letter) values(#{brand.name}, #{brand.letter})")
-    int insertNameAndLetter(@Param("brand") TbBrand brand);
+    @Insert("insert into yun6.tb_brand(name, image, letter) values(#{brand.name}, #{brand.image}, #{brand.letter})")
+    void insertNameAndLetter(@Param("brand") TbBrand brand);
 }

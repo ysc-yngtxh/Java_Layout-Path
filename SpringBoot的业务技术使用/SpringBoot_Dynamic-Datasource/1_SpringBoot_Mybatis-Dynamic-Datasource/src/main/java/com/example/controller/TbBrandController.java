@@ -30,7 +30,7 @@ public class TbBrandController {
     }
 
     @RequestMapping("/insertNameAndLetter")
-    public void insertNameAndLetter(){
-        tbBrandService.insertNameAndLetter();
+    public TbBrand insertNameAndLetter(){
+        return tbBrandService.insertNameAndLetter();
     }
 }
