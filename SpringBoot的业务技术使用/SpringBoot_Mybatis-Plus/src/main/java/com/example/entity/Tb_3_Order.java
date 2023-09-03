@@ -65,6 +65,9 @@ public class Tb_3_Order implements Serializable {
     private List<String> menuList;
 
     // 创建时间
+    // 属性 fill 是用来做自动填充功能的，有四种生成策略：默认、插入、更新、插入更新.
+    // 这里设置的是在做更新操作时，通过实现MetaObjectHandler类，重写updateFill(MetaObject metaObject)方法
+    // 会在执行 update 语句的 set 里填充 create_date=LocalDateTime.now()
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createDate;
 

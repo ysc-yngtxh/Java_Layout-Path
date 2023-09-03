@@ -34,6 +34,7 @@ public class Tb_2_Sku implements Serializable {
     // @TableId参数：value映射数据库column列主键字段；type设置新增数据主键Id规则,有自增、UUID等
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
+
     // 图片
     private String image;
     // 价格

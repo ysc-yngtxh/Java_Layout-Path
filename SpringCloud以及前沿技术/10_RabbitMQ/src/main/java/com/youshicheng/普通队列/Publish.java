@@ -16,10 +16,11 @@ public class Publish {
 
     public static void main(String[] args) {
 
-        ConnectionFactory factory = new ConnectionFactory();//定义连接工厂
+        // TODO 在已经创建好队列情况下，创建生产连接，向名为"simple_queue"的队列中生产消息
+
+        ConnectionFactory factory = new ConnectionFactory(); // 定义连接工厂
         Connection connection = null;
         Channel channel = null;
-
         try{
             // 获取到连接
             connection = factory.newConnection();
@@ -38,9 +39,9 @@ public class Publish {
                       参数4：为具体的消息数据的字节数组
                 */
         } catch(Exception e){
-            e.printStackTrace();
+            throw new RuntimeException(e);
         } finally {
-            // 关闭通道和链接
+            // 关闭通道和连接
             if (channel != null) {
                 try{
                     channel.close();
