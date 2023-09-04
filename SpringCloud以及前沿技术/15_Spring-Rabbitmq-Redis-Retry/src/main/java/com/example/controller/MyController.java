@@ -31,7 +31,6 @@ public class MyController {
                 , new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(new Date())
                 , order.toString());
 
-
         CorrelationData data = new CorrelationData(order.getOrderId());
         rabbitTemplate.convertAndSend("OrderExchange"
                 , "Orderroutingkey"

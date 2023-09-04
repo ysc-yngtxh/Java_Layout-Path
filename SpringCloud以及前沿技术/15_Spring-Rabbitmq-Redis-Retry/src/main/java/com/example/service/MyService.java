@@ -11,6 +11,7 @@ import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -23,7 +24,6 @@ public class MyService {
 
     @RabbitListener(queues = "OrderQueue")
     public void process(String orders, Message message, Channel channel) throws Exception {
-
         try {
             //TODO 具体业务
             // spring_returned_message_correlation固定写法，获取 CorrelationData 的Id值
@@ -43,7 +43,7 @@ public class MyService {
             redisTemplate.opsForHash().put("order", msgId, orders);
             redisTemplate.expire("order", 60, TimeUnit.SECONDS);
             log.info(message.getMessageProperties().getDeliveryTag()+"");
-            // 手动确认消息消费。参数：1、消息标识ID  2、为了减少网络流量，手动确认可以被批处理，当该参数为 true 时，则可以一次性确认 delivery_tag 小于等于传入值的所有消息
+            // 手动确认消息消费。参数：1、消息通道标识Id  2、为了减少网络流量，手动确认可以被批处理，当该参数为 true 时，则可以一次性确认 delivery_tag 小于等于传入值的所有消息
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
 
         } catch (Exception e) {
@@ -71,18 +71,21 @@ public class MyService {
             redisTemplate.opsForHash().put("test", msgId, msg);
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);  // 确认消息已消费
             int i=1/0; // 这里模拟出现异常导致重试机制触发
+
         }
     }
 
     @Recover  // 注意这里方法的返回值类型一定要和上面的一致
     public void recover(Exception e){
-        log.error("达到最大重试次数，或抛出了一个没有指定进行重试的异常 {}", e);
-        log.error("没能手动确认成功————异常原因：{}", e.getMessage());
+        log.error("达到最大重试次数，或抛出了一个没有指定进行重试的异常 {}", e.getMessage());
+        log.error("消息确认成功了，消息才会移除，确认成功后不管后面是异常还是断开服务，消息已经被移除了。" +
+                "如果在确认之前抛出异常，消息不会移除也不会重试，监听程序会因为异常停止不再处理消息，" +
+                "如果此时断开服务，消息重新回到队列");
     }
 
 
     @RabbitListener(queues = "yscdeadQueue")
-    public void ysc(Message message){
+    public void ysc(Message message, Channel channel) throws IOException {
         log.info("死信中有数据：{}",message);
     }
 }

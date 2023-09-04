@@ -23,8 +23,8 @@ public class RabbitConfig {
     @Bean("OrderQueue")
     public Queue Orderqueue(){
         Map<String, Object> map = new HashMap<>(3);
-        map.put("x-dead-lettle-exchange","yscdeadExchange");
-        map.put("x-dead-lettle-routing-key","yscdeadroutingkey");
+        map.put("x-dead-letter-exchange","yscdeadExchange");
+        map.put("x-dead-letter-routing-key","yscdeadroutingkey");
         return new Queue("OrderQueue",true,false,false,map);
     }
     @Bean
@@ -44,8 +44,8 @@ public class RabbitConfig {
     @Bean("integrationQueue")
     public Queue queue(){
         Map<String, Object> map = new HashMap<>(3);
-        map.put("x-dead-lettle-exchange","yscdeadExchange");
-        map.put("x-dead-lettle-routing-key","yscdeadroutingkey");
+        map.put("x-dead-letter-exchange","yscdeadExchange");
+        map.put("x-dead-letter-routing-key","yscdeadroutingkey");
         return new Queue("integrationQueue",true,false,false,map);
     }
     @Bean
@@ -69,6 +69,4 @@ public class RabbitConfig {
                            @Qualifier("yscdeadQueue") Queue Queue){
         return BindingBuilder.bind(Queue).to(Exchange).with("yscdeadroutingkey");
     }
-
-
 }

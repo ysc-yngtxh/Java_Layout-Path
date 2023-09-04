@@ -38,7 +38,7 @@ public class AckConfig implements RabbitTemplate.ConfirmCallback, RabbitTemplate
     // 消息路由失败的回退处理
     @Override
     public void returnedMessage(ReturnedMessage returned) {
-        // 请注意!如果你使用了延迟队列插件，那么一定会调用该callback方法，因为数据并没有提交上去，而是提交在交换器中，过期时间到了才提交上去，
+        // 请注意!如果你使用了延迟队列插件，那么一定会调用该callback方法，因为数据并没有发布出去，而是提交在交换器中，过期时间到了才发布出去，
         // 并非是bug！你可以用if进行判断交换机名称来捕捉该报错
         if("integrationExchange".equals(returned.getExchange()) || "OrderExchange".equals(returned.getExchange())){
             return;
