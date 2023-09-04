@@ -52,12 +52,14 @@ public class ConfirmConfig {
     @Bean
     public Binding fanoutBinding(@Qualifier("fanoutExchange") FanoutExchange fanoutExchange,
                                 @Qualifier("fanoutQueue") Queue fanoutQueue){
-        return BindingBuilder.bind(fanoutQueue).to(fanoutExchange);  // 这里没有routingkey,因为使用的是广播(Fanout)类型交换机
+        // 这里没有routingkey,因为使用的是广播(Fanout)类型交换机，我对自己交换机类型下的所有队列开放进行广播，还需要什么路由key？
+        return BindingBuilder.bind(fanoutQueue).to(fanoutExchange);
     }
     // 绑定备份交换机和警告队列
     @Bean
     public Binding warningBinding(@Qualifier("fanoutExchange") FanoutExchange fanoutExchange,
                                  @Qualifier("warningQueue") Queue warningQueue){
-        return BindingBuilder.bind(warningQueue).to(fanoutExchange);  // 这里没有routingkey,因为使用的是广播(Fanout)类型交换机
+        // 这里没有routingkey,因为使用的是广播(Fanout)类型交换机，我对自己交换机类型下的所有队列开放进行广播，还需要什么路由key？
+        return BindingBuilder.bind(warningQueue).to(fanoutExchange);
     }
 }

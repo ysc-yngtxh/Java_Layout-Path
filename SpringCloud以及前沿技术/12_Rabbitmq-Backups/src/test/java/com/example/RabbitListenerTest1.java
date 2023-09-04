@@ -6,8 +6,12 @@ import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.ExchangeBuilder;
 import org.springframework.amqp.core.QueueBuilder;
 import org.springframework.amqp.rabbit.annotation.*;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.SerializerMessageConverter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -50,14 +54,15 @@ public class RabbitListenerTest1 {
 
     @RabbitListener(bindings = {  // bindings是交换机连接队列的规则
             @QueueBinding(
-                    exchange = @Exchange(value = "info", type= "direct"), // 交换机的名称和类型
+                    // 交换机的名称和类型
+                    exchange = @Exchange(value = "info", type= "direct"),
                     key = {"error", "work"}, // 交换机的key
                     value = @Queue(exclusive = "false")  // 这里没有给Queue的value值，表示是个暂时的队列
 
             )
     })
     public void receivel5(String message){
-        System.out.println("message5 = "+message);
+        System.out.println("message5 = " + message);
     }
 
     @RabbitListener(bindings = {  // bindings是交换机连接队列的规则
@@ -65,7 +70,6 @@ public class RabbitListenerTest1 {
                     exchange = @Exchange(value = "ect", type= "topic"), // 交换机的名称和类型
                     key = {"save.*"},  // 交换机的key
                     value = @Queue()   // 这里没有给Queue的value值，表示是个暂时的队列
-
             )
     })
     public void receivel6(String message){
@@ -74,14 +78,14 @@ public class RabbitListenerTest1 {
 
 
     // 使用@RabbitListener监听，不管有木有消费掉，反正队列中是没得了😭。
-    // 所以如果你不想被无端消费掉，就使用注入方法。不过这种就不能实时获取数据
+    // 所以如果你不想被无端消费掉，就只注册RabbitMQ不配置监听，等到需要消费的时候去进行手动消费
     @Bean("yscExchange")
     public DirectExchange confirmExchange(){
         return ExchangeBuilder.directExchange("ysc").durable(true).build();
     }
     @Bean("yscQueue")
     public org.springframework.amqp.core.Queue directQueue(){
-        return QueueBuilder.durable("yscQueue").build();
+        return QueueBuilder.durable("ysc").build();
     }
     @Bean
     public Binding directBinding(@Qualifier("yscExchange") DirectExchange yscExchange,
@@ -97,5 +101,13 @@ public class RabbitListenerTest1 {
     })
     public void confirm(String message){
         System.out.println("message1 = " + message);
+    }
+    @Bean
+    @Scope("prototype")
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+        RabbitTemplate template = new RabbitTemplate(connectionFactory);
+        template.setMandatory(true);
+        template.setMessageConverter(new SerializerMessageConverter());
+        return template;
     }
 }

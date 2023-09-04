@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.rabbitmq.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -37,14 +38,14 @@ class ApplicationTests {
         rabbitTemplate.convertAndSend("logs", "", "第三种,广播Fanout模型");
     }
 
-    // 4、生产者-交换机(广播)-路由-队列-消费者
+    // 4、生产者-交换机(direct)-路由-队列-消费者
     @Test
     public void textdirect(){
         rabbitTemplate.convertAndSend("info", "error", "第四种,路由Direct模型(error)");
         rabbitTemplate.convertAndSend("info", "work", "第四种,路由Direct模型(work)");
     }
 
-    // 4、生产者-交换机(广播)-动态路由-队列-消费者
+    // 4、生产者-交换机(topic)-动态路由-队列-消费者
     @Test
     public void texttopic(){
         rabbitTemplate.convertAndSend("ect", "save.user", "第五种,动态路由Topic模型");
@@ -59,13 +60,15 @@ class ApplicationTests {
     // 消费
     @Test
     public void ReceiveService(){
-        String receive  = (String)rabbitTemplate.receiveAndConvert("yscs");
-        System.out.println(receive);
+        Object received = rabbitTemplate.receiveAndConvert("ysc");
+        System.out.println("手动消费" + received);
     }
 
 
     @Test
     public void test2() {
+        // RabbitTemplate只允许设置一个ConfirmCallback方法.现在我们设置了两个，执行会报错
+        // 解决方法：设置RabbitTemplate的作用域@Scope("prototype")，这样每次bean都是新的
         rabbitTemplate.setConfirmCallback(new RabbitTemplate.ConfirmCallback() {
             @Override
             public void confirm(CorrelationData correlationData, boolean ack, String cause) {
@@ -80,5 +83,21 @@ class ApplicationTests {
         // 第一个参数 交换机名称  第二个参数 routingKey 也就是路由key 第三个参数 消息
         // 填写正确的交换机名即可  看见效果 如果想看见失败填写一个错误的交换机名称
         rabbitTemplate.convertAndSend("fanoutExchange", "", "什么鬼");
+    }
+
+
+
+    @Test
+    public void textString(){
+        rabbitTemplate.convertAndSend("cym", "cymKey", "游家纨绔");
+    }
+    @Test
+    public void textInteger(){
+        rabbitTemplate.convertAndSend("cym", "cymKey", 123);
+    }
+    @Test
+    public void textUser(){
+        User user = User.builder().id(123).name("游家纨绔").build();
+        rabbitTemplate.convertAndSend("cym", "cymKey", user);
     }
 }
