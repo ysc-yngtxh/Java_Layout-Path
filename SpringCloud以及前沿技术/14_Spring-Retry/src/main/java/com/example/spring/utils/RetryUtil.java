@@ -6,11 +6,8 @@ import org.springframework.remoting.RemoteAccessException;
 
 @Slf4j
 public class RetryUtil {
-
     /**
      * 重试方法
-     * @param param
-     * @return
      */
     public static boolean retryTask(String param){
         log.info("收到请求参数: {}", param);

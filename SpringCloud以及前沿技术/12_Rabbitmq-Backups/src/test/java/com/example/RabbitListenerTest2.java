@@ -37,7 +37,6 @@ public class RabbitListenerTest2 {
     }
 
     // 如果消息体类型不是简单类型，我们还需要在类上添加@RabbitListener注解指定要监听的队列。
-    // @RabbitListener(queues = "anotherQueue")
     @RabbitHandler
     public void handleMessage(@Payload User user) {
         System.out.println("Received User message: " + user);

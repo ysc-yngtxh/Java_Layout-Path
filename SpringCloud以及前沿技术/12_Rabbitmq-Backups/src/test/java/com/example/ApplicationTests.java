@@ -61,7 +61,7 @@ class ApplicationTests {
     @Test
     public void ReceiveService(){
         Object received = rabbitTemplate.receiveAndConvert("ysc");
-        System.out.println("手动消费" + received);
+        System.out.println("手动消费:" + received);
     }
 
 

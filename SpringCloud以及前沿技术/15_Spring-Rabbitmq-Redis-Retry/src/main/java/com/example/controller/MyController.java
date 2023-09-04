@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 @Slf4j
 @Controller
 public class MyController {
@@ -36,9 +35,9 @@ public class MyController {
         CorrelationData data = new CorrelationData(order.getOrderId());
         rabbitTemplate.convertAndSend("OrderExchange"
                 , "Orderroutingkey"
-                , JSON.toJSONString(order)  //这里对象要转为json格式String类型，并且序列化
+                , JSON.toJSONString(order)  // 这里对象要转为json格式String类型，并且序列化
                 , msg -> {
-                    //msg.getMessageProperties().setExpiration("10*1000");过期时间
+                    // msg.getMessageProperties().setExpiration("10*1000"); // 过期时间
                     msg.getMessageProperties().setDelay(10*1000);
                     return msg;
                 }
@@ -47,28 +46,23 @@ public class MyController {
     }
 
 
-    //redis重试机制
+    // redis重试机制
     @PostMapping("/retry")
     public ResponseEntity<String> retry(Order order){
 
         String orderId = order.getOrderId();
-        //String message = (String)redisTemplate.opsForHash().get("test", orderId);
+        // String message = (String)redisTemplate.opsForHash().get("test", orderId);
         String message = JSON.toJSONString(order);
         CorrelationData data = new CorrelationData(orderId);
         rabbitTemplate.convertAndSend("integrationExchange"
                 , "integrationroutingkey"
                 , message
                 , msg -> {
-                    //msg.getMessageProperties().setExpiration("10*1000");过期时间
-                    msg.getMessageProperties().setDelay(10*1000);//延迟时间，这里可以不做延迟时间的，但还是先写出来，怕以后忘了
+                    // msg.getMessageProperties().setExpiration("10*1000"); // 过期时间
+                    msg.getMessageProperties().setDelay(10*1000); // 延迟时间，这里可以不做延迟时间的，但还是先写出来，怕以后忘了
                     return msg;
                 }
                 , data);
         return ResponseEntity.status(HttpStatus.OK).body("成功访问");
     }
-
-
-
-
-
 }

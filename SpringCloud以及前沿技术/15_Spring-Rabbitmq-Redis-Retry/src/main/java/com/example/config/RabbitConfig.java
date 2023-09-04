@@ -38,7 +38,7 @@ public class RabbitConfig {
     public CustomExchange exchange(){
         HashMap<String, Object> map = new HashMap<>(1);
         map.put("x-delayed-type","direct");
-        //交换机名称  交换机类型  是否持久化   是否自动删除  其他
+        // 交换机名称  交换机类型  是否持久化   是否自动删除  其他
         return new CustomExchange("integrationExchange","x-delayed-message",true,false,map);
     }
     @Bean("integrationQueue")
@@ -55,7 +55,7 @@ public class RabbitConfig {
     }
 
 
-    //死信队列
+    // 死信队列
     @Bean("yscdeadExchange")
     public DirectExchange yscdeadexchange(){
         return new DirectExchange("yscdeadExchange");

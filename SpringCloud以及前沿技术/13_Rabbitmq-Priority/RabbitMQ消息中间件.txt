@@ -180,3 +180,20 @@ RabbitMQ消息中间件的地址：http://localhost:15672
    2、优先级队列
       RabbitMQ的优先级1~255
       一般来说设置10足够，因为优先级设置越大，越耗内存，占CPU就越高（设置优先级就需要排序）
+   3、异步处理
+      比如在秒杀活动里，当整点秒杀时间开始，会有大量的请求来进行秒杀，我们一般会通过缓存预减、内存标记来进行简单的预处理。
+      然后再利用RabbitMq去发送消息 rabbitTample.convertAndSend(...); 这个方法主要是异步处理的，也就是说只负责发送消息给队列
+      至于后续是否消费队列中的消息，可以在 @RabbitListener 监听方法中去进行处理。所以在Controller中发送消息后就可以返回结果给用户，
+      然后在前端做处理后返回秒杀成功，并给出是否查看订单的选项。这样就避免了消费消息时间过长，阻塞返回结果给用户，从而影响用户体验。
+   4、手动拒绝消费方法
+     basicNack 和 basicReject
+     basicReject: 一次只能拒绝一条消息，可以设置requeue
+     basicNack:   一次可以拒绝0~N 多条消息，可以设置requeue
+   5、标识Id 的区别
+     CorrelationData的id 和 message.getMessageProperties().getDeliveryTag()获取的消息id
+
+     CorrelationData 是实现接口 ConfirmCallback ，重写其confirm()方法的参数之一，是可自定义的id，为当前消息的唯一id
+     表示对象内部只有一个 id 属性，用来表示当前消息的唯一性；用来与 Redis 做交互，记录这条消息的唯一id
+     DeliveryTag 作为消息通道的标识ID，可通过deliveryTag参数来对消息进行确认和拒绝
+     也可以把它当做此消息处理通道的名字，回传告诉 rabbitmq 这个消息处理成功并清除此消息，每次接收消息+1。
+     消息进行确认和拒绝为什么要选择使用信道id 作为参数呢？因为确认跟拒绝消息 直接打交道的是信道啊😆

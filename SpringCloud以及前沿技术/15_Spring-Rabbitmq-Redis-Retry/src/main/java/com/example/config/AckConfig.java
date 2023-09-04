@@ -24,7 +24,7 @@ public class AckConfig implements RabbitTemplate.ConfirmCallback, RabbitTemplate
         rabbitTemplate.setReturnsCallback(this);
     }
 
-    // 消息确认的回调方法
+    // 消息发布确认的回调方法
     @Override
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
         String id = correlationData != null ? correlationData.getId() : "";
