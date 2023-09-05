@@ -4,6 +4,7 @@ import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.retry.annotation.Backoff;
@@ -11,6 +12,7 @@ import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -18,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class MyService {
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<Object, Object> redisTemplate;
 
     @RabbitListener(queues = "OrderQueue")
     public void process(String orders, Message message, Channel channel) throws Exception {
@@ -80,7 +82,10 @@ public class MyService {
     }
 
     @RabbitListener(queues = "yscdeadQueue")
-    public void ysc(Message message) {
+    public void ysc(Message message, Channel channel) throws IOException {
         log.info("死信中有数据：{}",message);
+        // 配置文件中已经设置了消息确认改为手动，因此当我消费完了就手动调用ack确认方法即可。
+        // 否则就会出现我虽然拿到了消息但并没有进行消费，造成死信队列的消息堆积
+        channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
     }
 }
