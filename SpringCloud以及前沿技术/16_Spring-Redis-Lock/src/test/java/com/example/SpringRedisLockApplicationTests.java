@@ -26,12 +26,12 @@ class SpringRedisLockApplicationTests {
        所以必须使用Redis中的分布式锁进行处理*/
     @Test
     public void test1() {
-        //redis中如果有K1值那么结果就为false，表示已经有锁。没有K1值结果为true，并创建K1缓存值,并获取锁
+        // redis中如果有K1值那么结果就为false，表示已经有锁。没有K1值结果为true，并创建K1缓存值,并获取锁
         Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", "V1");
         if (success) {
-            //缓存中key为order的值进行自增
+            // 缓存中key为order的值进行自增
             redisTemplate.opsForValue().increment("order");
-            //释放锁
+            // 释放锁
             redisTemplate.delete("K1");
         } else {
             log.error("有线程在使用，请稍后再试！");
@@ -41,13 +41,13 @@ class SpringRedisLockApplicationTests {
     /**上面的test1测试有缺陷：就是当前线程在自增缓存时候如果出现异常。这时候其他线程过来发现并没有释放锁，就只会走else。这不是我们想要的*/
     @Test
     public void test2() {
-        //redis中如果有K1值那么结果就为false，表示上锁。没有K1值结果为true，并创建K1缓存值,并获取锁  设置5秒锁的失效时间
+        // redis中如果有K1值那么结果就为false，表示上锁。没有K1值结果为true，并创建K1缓存值,并获取锁  设置5秒锁的失效时间
         Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", "V1", 5 , TimeUnit.SECONDS);
         if (success) {
-            //缓存中key为order的值进行自增
+            // 缓存中key为order的值进行自增
             redisTemplate.opsForValue().increment("order");
-            //Integer.parseInt("ysc");   这里模拟一下异常
-            //释放锁
+            // Integer.parseInt("ysc");   // 这里模拟一下异常
+            // 释放锁
             redisTemplate.delete("K1");
         } else {
             log.error("有线程在使用，请稍后再试！");

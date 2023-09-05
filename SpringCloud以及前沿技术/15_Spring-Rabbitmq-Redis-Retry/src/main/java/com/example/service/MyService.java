@@ -11,7 +11,6 @@ import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -20,7 +19,6 @@ public class MyService {
 
     @Autowired
     private RedisTemplate redisTemplate;
-
 
     @RabbitListener(queues = "OrderQueue")
     public void process(String orders, Message message, Channel channel) throws Exception {
@@ -51,7 +49,6 @@ public class MyService {
         }
     }
 
-
     @RabbitListener(queues = "integrationQueue")
     @Retryable(value = {Exception.class}, maxAttempts = 3, backoff = @Backoff(delay = 2000L, multiplier = 2))
     public void processHandler(String msg, Message message, Channel channel) throws Exception {
@@ -71,7 +68,6 @@ public class MyService {
             redisTemplate.opsForHash().put("test", msgId, msg);
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);  // 确认消息已消费
             int i=1/0; // 这里模拟出现异常导致重试机制触发
-
         }
     }
 
@@ -83,9 +79,8 @@ public class MyService {
                 "如果此时断开服务，消息重新回到队列");
     }
 
-
     @RabbitListener(queues = "yscdeadQueue")
-    public void ysc(Message message, Channel channel) throws IOException {
+    public void ysc(Message message) {
         log.info("死信中有数据：{}",message);
     }
 }
