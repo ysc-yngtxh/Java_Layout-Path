@@ -10,6 +10,7 @@ import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.scripting.support.ResourceScriptSource;
 
 import java.util.Collections;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -18,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 class SpringRedisLockApplicationTests {
 
     @Autowired
-    private RedisTemplate<String, String> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     private DefaultRedisScript<Boolean> redisScript;
 
@@ -26,9 +27,13 @@ class SpringRedisLockApplicationTests {
        所以必须使用Redis中的分布式锁进行处理*/
     @Test
     public void test1() {
-        // redis中如果有K1值那么结果就为false，表示已经有锁。没有K1值结果为true，并创建K1缓存值,并获取锁
+        /**
+         * setIfAbsent(K key, V value)方法表示的是
+         * 如果Redis中不存在key=K1值，就添加一个key=K1的数据，并设置其value=V1，返回一个true
+         * 如果存在，那么就不进行设置value或者value值覆盖，并返回一个 false
+         */
         Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", "V1");
-        if (success) {
+        if (Boolean.TRUE.equals(success)) {
             // 缓存中key为order的值进行自增
             redisTemplate.opsForValue().increment("order");
             // 释放锁
@@ -44,8 +49,8 @@ class SpringRedisLockApplicationTests {
     @Test
     public void test2() {
         /**
-         * setIfAbsent(K key, V value)方法表示的是
-         * 如果Redis中不存在key=K1值，就添加一个key=K1的数据，并设置其value=V1，返回一个true
+         * setIfAbsent(K key, V value, long timeout, TimeUnit unit)方法表示的是
+         * 如果Redis中不存在key=K1值，就添加一个key=K1的数据，并设置其value=V1，返回一个true，而且设置一个 5 秒的过期时间
          * 如果存在，那么就不进行设置value或者value值覆盖，并返回一个 false
          */
         // redis中如果有K1值那么结果就为false，表示上锁。没有K1值结果为true，并创建K1缓存值,并获取锁  设置5秒锁的失效时间
@@ -71,21 +76,35 @@ class SpringRedisLockApplicationTests {
     @Test
     public void test3() {
         initRedisScript();
-        // 这里的 value 值要设置为随机值，不要使用固定值。否则会出现线程不安全(当 A 线程上锁后被不知名原因阻塞到锁过期，B 线程拿到锁)
+        // 这里的 value 值要设置为随机值，不要使用固定值。
+        // 否则会出现线程不安全: 如果value值是固定的，那Lua脚本就只会走then语句.
+        // 因为后续线程无论是通过上一个线程正常释放锁去设置setIfAbsent()还是通过上一线程的锁自动过期去设置setIfAbsent()值，
+        // 这个值由于是固定的，所以在Lua脚本中的判断是一直相等的，所以value不能使用固定值
         String value = UUID.randomUUID().toString();
 
-        // redis中如果有K1值那么结果就为false，表示上锁。没有K1值结果为true，并创建K1缓存值,并获取锁  设置120秒锁的失效时间
-        Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", value, 120 , TimeUnit.SECONDS);
+        // redis中如果有K1值那么结果就为false，表示上锁。没有K1值结果为true，并创建K1缓存值,并获取锁  设置5秒锁的失效时间
+        Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", value, 5 , TimeUnit.SECONDS);
         if (Boolean.TRUE.equals(success)) {
-            // 缓存中key为order的值进行自增
-            redisTemplate.opsForValue().increment("order");
+            // 先判断库存是否充足
+            Object stock = redisTemplate.opsForValue().get("stock");
+            if (Objects.nonNull(stock) && (int)stock > 0) {
+                // 缓存中key为stock的库存进行自减
+                redisTemplate.opsForValue().increment("stock");
+            }
             /**
-             * 这里是通过给K1赋一个随机值value。先去获取到锁，然后再去判断锁的值是否一致，一致的话才会删除
+             * 这里使用的 Lua脚本 这里是通过给K1赋一个随机值value。先去获取到锁，然后再去判断锁的值是否一致，一致的话才会删除
              * 但是这里你又会想说，那这样要什么脚本嘛，可以自己写啊。这里我还不大懂，反正老师说，获取锁，判断值，删除三个操作不是原子性的。
              */
             redisTemplate.execute(redisScript, Collections.singletonList("K1"), value);
         } else {
             log.error("有线程在使用，请稍后再试！");
+            // 不能获取到锁
+            try {
+                Thread.sleep(1000); // 等待1秒
+                test3();  // 等待后再次执行方法
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -93,7 +112,7 @@ class SpringRedisLockApplicationTests {
     public void initRedisScript() {
         redisScript = new DefaultRedisScript<Boolean>();
         redisScript.setResultType(Boolean.class);
-        redisScript.setScriptSource(new ResourceScriptSource(new ClassPathResource("redis.lua")));
+        redisScript.setScriptSource(new ResourceScriptSource(new ClassPathResource("Decr.lua")));
     }
 
 }
