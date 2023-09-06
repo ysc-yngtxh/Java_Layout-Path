@@ -36,8 +36,8 @@ class SpringRedisLockApplicationTests {
         Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", "V1");
         if (Boolean.TRUE.equals(success)) {
             // 先判断库存是否充足
-            Object stock = redisTemplate.opsForValue().get("stock");
-            if (Objects.nonNull(stock) && (int) stock > 0) {
+            int stock = (int) redisTemplate.opsForValue().get("stock");
+            if ( stock > 0 ) {
                 // 缓存中key为stock的库存进行自减
                 redisTemplate.opsForValue().decrement("stock");
             }
@@ -45,11 +45,19 @@ class SpringRedisLockApplicationTests {
             redisTemplate.delete("K1");
         } else {
             log.error("有线程在使用，请稍后再试！");
+            try {
+                Thread.sleep(1000); // 等待1秒
+                test1();            // 等待后再次执行方法
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    /**上面的test1测试有缺陷：
-     * 就是当前线程在自减库存时候如果出现异常。这时候其他线程过来发现并没有释放锁(出现异常一直阻塞着,且阻塞时间不确定)，就只会走else。
+    /**
+     * 上面的test1()测试有一个很明显的缺陷：
+     * 就是当前线程A在自减库存时候如果出现异常，这时候其他线程过来发现并没有释放锁(因为异常一直被阻塞着,没办法往下去执行我们的删除锁逻辑)，
+     * 而且这个阻塞时间我们没法控制，可能线程A锁一直锁到我孩子都出生去打酱油了，其它线程只能干愣眼走else。
      */
     @Test
     public void test2() {
@@ -62,8 +70,8 @@ class SpringRedisLockApplicationTests {
         Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", "V1", 5 , TimeUnit.SECONDS);
         if (Boolean.TRUE.equals(success)) {
             // 先判断库存是否充足
-            Object stock = redisTemplate.opsForValue().get("stock");
-            if (Objects.nonNull(stock) && (int) stock > 0) {
+            int stock = (int) redisTemplate.opsForValue().get("stock");
+            if ( stock > 0 ) {
                 // 缓存中key为stock的库存进行自减
                 redisTemplate.opsForValue().decrement("stock");
             }
@@ -71,14 +79,20 @@ class SpringRedisLockApplicationTests {
             redisTemplate.delete("K1");
         } else {
             log.error("有线程在使用，请稍后再试！");
+            try {
+                Thread.sleep(1000); // 等待1秒
+                test2();            // 等待后再次执行方法
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     /**
      * 上面的test2测试还是有缺陷：虽然我们增加了锁的失效时间，避免了死锁的产生，但是会出现事务上的安全问题。
      *  比如：A线程在执行自减的时候，刚巧卡了(别问为什么 就是这么巧)，一直卡到锁自动过期时间到了。
-     *       然后这时候 B线程获取到锁准备走 if判断，而我的 A线程好死不死的开始动了，并且释放了锁，且这个是他娘的 B 线程的锁｡--（哭死）
-     *       由于释放了锁，因此C线程获取到了锁。然后 B线程执行 delete()方法删除了 C线程的锁。D 线程获取到了锁......
+     *       然后这时候 B线程获取到锁准备走 if判断，而我的 A线程开始执行删除释放了锁，且这个是他娘的 B线程的锁｡--（哭死）
+     *       由于释放了锁，因此C线程获取到了锁。然后 B线程执行 delete()方法删除了 C线程的锁。D线程获取到了锁......(循环♻️)
      */
     @Test
     public void test3() {
@@ -89,8 +103,8 @@ class SpringRedisLockApplicationTests {
         Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", value, 5, TimeUnit.SECONDS);
         if (Boolean.TRUE.equals(success)) {
             // 先判断库存是否充足
-            Object stock = redisTemplate.opsForValue().get("stock");
-            if (Objects.nonNull(stock) && (int) stock > 0) {
+            int stock = (int) redisTemplate.opsForValue().get("stock");
+            if ( stock > 0 ) {
                 // 缓存中key为stock的库存进行自减
                 redisTemplate.opsForValue().decrement("stock");
             }
@@ -117,7 +131,7 @@ class SpringRedisLockApplicationTests {
      * 虽然我们增加了锁值判断，但是if(redisTemplate.opsForValue().get("K1")==value)获取锁,判断值,删除锁这三个操作不是原子性操作
      * 比如： A 线程去获取锁redisTemplate.opsForValue().get("K1")，得到了锁值，然后这个时候锁的过期时间到了
      *       B 线程就通过setIfAbsent()方法重新设置锁值，但是线程A 获取的是原先的锁值，进行判断的话是相等的，可以进入 if判断
-     *       在 if判断中执行删除锁，然后删除掉的是 B线程的锁.显然这不是我想要的结果
+     *       在 if判断中执行删除锁，然后删除掉的是 B线程的锁. 然后又会出现 test2测试中出现当前线程删除下一线程锁的循环情况
      */
     @Test
     public void test4() {
@@ -129,8 +143,8 @@ class SpringRedisLockApplicationTests {
         Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", value, 5, TimeUnit.SECONDS);
         if (Boolean.TRUE.equals(success)) {
             // 先判断库存是否充足
-            Object stock = redisTemplate.opsForValue().get("stock");
-            if (Objects.nonNull(stock) && (int) stock > 0) {
+            int stock = (int) redisTemplate.opsForValue().get("stock");
+            if ( stock > 0 ) {
                 // 缓存中key为stock的库存进行自减
                 redisTemplate.opsForValue().decrement("stock");
             }
