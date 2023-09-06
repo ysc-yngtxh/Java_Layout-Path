@@ -21,7 +21,8 @@ class SpringRedisLockApplicationTests {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
-    private DefaultRedisScript<Boolean> redisScript;
+    private DefaultRedisScript<Boolean> redisScript1;
+    private DefaultRedisScript<Long> redisScript2;
 
     /**项目中使用Redis批量操作数据时遇到问题，因为数据量的不确定，且必须保证批量操作数据的事务性
        所以必须使用Redis中的分布式锁进行处理*/
@@ -34,8 +35,12 @@ class SpringRedisLockApplicationTests {
          */
         Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", "V1");
         if (Boolean.TRUE.equals(success)) {
-            // 缓存中key为order的值进行自增
-            redisTemplate.opsForValue().increment("order");
+            // 先判断库存是否充足
+            Object stock = redisTemplate.opsForValue().get("stock");
+            if (Objects.nonNull(stock) && (int) stock > 0) {
+                // 缓存中key为stock的库存进行自减
+                redisTemplate.opsForValue().decrement("stock");
+            }
             // 释放锁
             redisTemplate.delete("K1");
         } else {
@@ -44,21 +49,24 @@ class SpringRedisLockApplicationTests {
     }
 
     /**上面的test1测试有缺陷：
-     * 就是当前线程在自增缓存时候如果出现异常。这时候其他线程过来发现并没有释放锁(出现异常一直阻塞着)，就只会走else。
+     * 就是当前线程在自减库存时候如果出现异常。这时候其他线程过来发现并没有释放锁(出现异常一直阻塞着,且阻塞时间不确定)，就只会走else。
      */
     @Test
     public void test2() {
         /**
          * setIfAbsent(K key, V value, long timeout, TimeUnit unit)方法表示的是
-         * 如果Redis中不存在key=K1值，就添加一个key=K1的数据，并设置其value=V1，返回一个true，而且设置一个 5 秒的过期时间
+         * 如果Redis中不存在key=K1值，就添加一个key=K1的数据，并设置其value=V1，返回一个true，而且设置一个 5秒的过期时间
          * 如果存在，那么就不进行设置value或者value值覆盖，并返回一个 false
          */
         // redis中如果有K1值那么结果就为false，表示上锁。没有K1值结果为true，并创建K1缓存值,并获取锁  设置5秒锁的失效时间
         Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", "V1", 5 , TimeUnit.SECONDS);
         if (Boolean.TRUE.equals(success)) {
-            // 缓存中key为order的值进行自增
-            redisTemplate.opsForValue().increment("order");
-            // Integer.parseInt("ysc");   // 这里模拟一下异常
+            // 先判断库存是否充足
+            Object stock = redisTemplate.opsForValue().get("stock");
+            if (Objects.nonNull(stock) && (int) stock > 0) {
+                // 缓存中key为stock的库存进行自减
+                redisTemplate.opsForValue().decrement("stock");
+            }
             // 释放锁
             redisTemplate.delete("K1");
         } else {
@@ -66,53 +74,106 @@ class SpringRedisLockApplicationTests {
         }
     }
 
-
     /**
      * 上面的test2测试还是有缺陷：虽然我们增加了锁的失效时间，避免了死锁的产生，但是会出现事务上的安全问题。
-     *  比如：A线程在执行自增的时候，刚巧卡了(别问为什么这么巧)，一直卡到锁自动过期时间到了。
+     *  比如：A线程在执行自减的时候，刚巧卡了(别问为什么 就是这么巧)，一直卡到锁自动过期时间到了。
      *       然后这时候 B线程获取到锁准备走 if判断，而我的 A线程好死不死的开始动了，并且释放了锁，且这个是他娘的 B 线程的锁｡--（哭死）
-     *       由于释放了锁，因此C线程获取到了锁。然后 B 线程执行 delete()方法删除了锁。D 线程获取到了锁......
+     *       由于释放了锁，因此C线程获取到了锁。然后 B线程执行 delete()方法删除了 C线程的锁。D 线程获取到了锁......
      */
     @Test
     public void test3() {
-        initRedisScript();
         // 这里的 value 值要设置为随机值，不要使用固定值。
-        // 否则会出现线程不安全: 如果value值是固定的，那Lua脚本就只会走then语句.
-        // 因为后续线程无论是通过上一个线程正常释放锁去设置setIfAbsent()还是通过上一线程的锁自动过期去设置setIfAbsent()值，
-        // 这个值由于是固定的，所以在Lua脚本中的判断是一直相等的，所以value不能使用固定值
         String value = UUID.randomUUID().toString();
 
         // redis中如果有K1值那么结果就为false，表示上锁。没有K1值结果为true，并创建K1缓存值,并获取锁  设置5秒锁的失效时间
-        Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", value, 5 , TimeUnit.SECONDS);
+        Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", value, 5, TimeUnit.SECONDS);
         if (Boolean.TRUE.equals(success)) {
             // 先判断库存是否充足
             Object stock = redisTemplate.opsForValue().get("stock");
-            if (Objects.nonNull(stock) && (int)stock > 0) {
+            if (Objects.nonNull(stock) && (int) stock > 0) {
                 // 缓存中key为stock的库存进行自减
-                redisTemplate.opsForValue().increment("stock");
+                redisTemplate.opsForValue().decrement("stock");
             }
-            /**
-             * 这里使用的 Lua脚本 这里是通过给K1赋一个随机值value。先去获取到锁，然后再去判断锁的值是否一致，一致的话才会删除
-             * 但是这里你又会想说，那这样要什么脚本嘛，可以自己写啊。这里我还不大懂，反正老师说，获取锁，判断值，删除三个操作不是原子性的。
-             */
-            redisTemplate.execute(redisScript, Collections.singletonList("K1"), value);
+            // 判断当前线程通过 UUID的一个随机值是否还与我的锁值是相等的
+            // 如果不相等，说明我的锁值过期了，释放了锁，后续线程获取到了新锁，且这个新锁的值随机，这才造成的不相等。
+            // 因而不会进入 if判断中，避免去删除掉新锁，造成后续线程无锁执行
+            if (redisTemplate.opsForValue().get("K1") == value) {
+                // 能执行到 if判断里，说明我的锁还未过期。所以删除掉当前线程锁，让后续线程得以执行
+                redisTemplate.delete("K1");
+            }
         } else {
             log.error("有线程在使用，请稍后再试！");
-            // 不能获取到锁
             try {
                 Thread.sleep(1000); // 等待1秒
-                test3();  // 等待后再次执行方法
+                test3();            // 等待后再次执行方法
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    /*脚本位置*/
-    public void initRedisScript() {
-        redisScript = new DefaultRedisScript<Boolean>();
-        redisScript.setResultType(Boolean.class);
-        redisScript.setScriptSource(new ResourceScriptSource(new ClassPathResource("Decr.lua")));
+    /**
+     * 上面的test3测试还是有缺陷：
+     * 虽然我们增加了锁值判断，但是if(redisTemplate.opsForValue().get("K1")==value)获取锁,判断值,删除锁这三个操作不是原子性操作
+     * 比如： A 线程去获取锁redisTemplate.opsForValue().get("K1")，得到了锁值，然后这个时候锁的过期时间到了
+     *       B 线程就通过setIfAbsent()方法重新设置锁值，但是线程A 获取的是原先的锁值，进行判断的话是相等的，可以进入 if判断
+     *       在 if判断中执行删除锁，然后删除掉的是 B线程的锁.显然这不是我想要的结果
+     */
+    @Test
+    public void test4() {
+        initRedisDecrScript();
+        // 这里的 value 值要设置为随机值，不要使用固定值。
+        String value = UUID.randomUUID().toString();
+
+        // redis中如果有K1值那么结果就为false，表示上锁。没有K1值结果为true，并创建K1缓存值,并获取锁  设置5秒锁的失效时间
+        Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", value, 5, TimeUnit.SECONDS);
+        if (Boolean.TRUE.equals(success)) {
+            // 先判断库存是否充足
+            Object stock = redisTemplate.opsForValue().get("stock");
+            if (Objects.nonNull(stock) && (int) stock > 0) {
+                // 缓存中key为stock的库存进行自减
+                redisTemplate.opsForValue().decrement("stock");
+            }
+            // 这里使用的 Lua脚本，lua是不支持多线程的，保证获取锁,判断值,删除锁这三个操作是原子性操作。
+            redisTemplate.execute(redisScript1, Collections.singletonList("K1"), value);
+        } else {
+            log.error("有线程在使用，请稍后再试！");
+            try {
+                Thread.sleep(1000); // 等待1秒
+                test4();            // 等待后再次执行方法
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    /*脚本配置*/
+    public void initRedisDecrScript() {
+        redisScript1 = new DefaultRedisScript<Boolean>();
+        redisScript1.setResultType(Boolean.class);
+        redisScript1.setScriptSource(new ResourceScriptSource(new ClassPathResource("Decr.lua")));
+    }
+
+    /**
+     * 上面的test4测试还是有缺陷：
+     * 虽然我们增加了锁值判断的原子性，避免了在多线程情况里后续线程的一个循环无锁执行，但对于当前线程来说，操作是有风险的
+     * 比如：库存只剩一件了，按理来说只能被一个线程执行自减。现在A线程在执行自减的时候，又刚巧卡了(别问为什么 就是这么巧)，
+     *      一直卡到锁自动过期时间到了。B线程获取到了锁并进入了库存判断，由于我们 A线程执行自减的时候卡住了，还没自减完成，
+     *      所以 B线程通过了 库存>0 的判断，也要执行自减。那么最终的结果就会是 库存=-1。
+     * <p>
+     * 对于后续线程的执行确实能约束不造成影响，但无法保证的是一旦某个线程上锁时间过期，就很有可能使我们自减的数据偏离预期
+     */
+    @Test
+    public void test5() {
+        initRedisStockScript();
+        // 这里通过execute()方法执行 Lua脚本，可以保证我们脚本里所有步骤的一个原子性(脚本里的步骤是一个整体，不可再分)，
+        // 这样的话，我们 ①判断库存>0  ②操作库存自减  ③删除释放锁 这些步骤保证是一个原子操作，且lua是不支持多线程的
+        redisTemplate.execute(redisScript2, Collections.singletonList("stock"));
+    }
+    /*脚本配置*/
+    public void initRedisStockScript() {
+        redisScript2 = new DefaultRedisScript<Long>();
+        redisScript2.setResultType(Long.class);
+        redisScript2.setScriptSource(new ResourceScriptSource(new ClassPathResource("Stock.lua")));
     }
 
 }
