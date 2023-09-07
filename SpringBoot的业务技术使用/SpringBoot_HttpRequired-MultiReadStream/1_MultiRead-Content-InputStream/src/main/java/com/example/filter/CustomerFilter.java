@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 /**
- * @author youshicheng
+ * @author 游家纨绔
  * @dateTime 2023-04-29 16:29
  * @apiNote TODO 自定义过滤器
  */
@@ -32,7 +32,7 @@ public class CustomerFilter extends OncePerRequestFilter {
 
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, @NotNull HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         if (request.getContentType() != null && request.getContentType().contains(Constants.REQUEST_CONTEXT_TYPE)) {
             MultiReadHttpServletRequest multiRequest = new MultiReadHttpServletRequest(request);

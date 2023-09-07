@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * @author youshicheng
+ * @author 游家纨绔
  * @dateTime 2023-05-01 12:24
  * @apiNote TODO 拦截器配置类
  */

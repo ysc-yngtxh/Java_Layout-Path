@@ -95,6 +95,7 @@ public class StatementInterceptor implements Interceptor {
         MappedStatement statement = (MappedStatement) metaObject.getValue("delegate.mappedStatement");
 
         BoundSql boundSql = statementHandler.getBoundSql();
+        // 这里获取的是DTO实体类操作对象
         Object obj = boundSql.getParameterObject();
         String sql = boundSql.getSql();
         // 这里判断是 insert语句还是update语句：insert提供字符串拼接sql的方式；update使用工具JSqlParser解析的方式组装sql

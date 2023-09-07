@@ -101,7 +101,7 @@ public class I18nUtil{
      */
     public static String getMessage(String code, String lang) {
         Locale locale;
-        if (StringUtils.isEmpty(lang)) {
+        if (!StringUtils.hasText(lang)) {
             locale = Locale.US;
         } else {
             try {

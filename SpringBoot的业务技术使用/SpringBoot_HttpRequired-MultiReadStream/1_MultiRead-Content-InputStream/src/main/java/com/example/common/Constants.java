@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author youshicheng
+ * @author 游家纨绔
  * @dateTime 2023-05-04 21:50
  * @apiNote TODO 常量类
  */

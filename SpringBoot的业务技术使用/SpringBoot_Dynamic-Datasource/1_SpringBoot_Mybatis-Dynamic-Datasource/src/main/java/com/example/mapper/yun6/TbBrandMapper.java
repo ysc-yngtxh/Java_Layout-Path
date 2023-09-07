@@ -26,7 +26,7 @@ public interface TbBrandMapper {
     @Select("select * from yun6.tb_brand")
     @Results(id = "selectResult", value = {
             // 这种注解类型其实跟xml配置有异曲同工之妙，但是不符合企业开发规范，自己项目做着玩就行
-            @Result(column = "id", property = "id", jdbcType = JdbcType.INTEGER, id = true), // id = true表示是否为主键
+            @Result(column = "id", property = "id", jdbcType = JdbcType.INTEGER, id = true), // id=true表示是否为主键
             @Result(column = "name", property = "name", jdbcType = JdbcType.VARCHAR),
             @Result(column = "image", property = "image", jdbcType = JdbcType.INTEGER),
             @Result(column = "letter", property = "letter", jdbcType = JdbcType.INTEGER)

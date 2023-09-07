@@ -8,9 +8,12 @@ import org.springframework.util.StreamUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.ContentCachingRequestWrapper;
+import org.springframework.web.util.WebUtils;
+
+import java.nio.charset.Charset;
 
 /**
- * @author youshicheng
+ * @author 游家纨绔
  * @dateTime 2023-05-01 11:48
  * @apiNote TODO 测试拦截器
  */
@@ -23,7 +26,7 @@ public class TestInterceptor implements HandlerInterceptor {
 
         ContentCachingRequestWrapper requestWrapper = (ContentCachingRequestWrapper) request;
         // 获取缓存的数据
-        String user = new String(requestWrapper.getContentAsByteArray());
+        String user = requestWrapper.getParameter("userName");
         log.info("拦截器获取参数{}", user);
         return true;
     }

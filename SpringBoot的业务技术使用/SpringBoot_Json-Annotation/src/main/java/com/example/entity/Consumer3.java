@@ -63,7 +63,8 @@ public class Consumer3 implements Serializable {
     @JsonSerialize(using = GenderJsonSerializer.class)
     private Integer gender;
 
-    @JsonAnySetter  // 反序列化时实体对象不存在对应的属性时加上该 注解，不存在的属性都会放到Map中去
+    // 反序列化成实体对象Consumer3时有不对应的属性时加上该注解，不存在的属性不会丢弃而是会放到当前标注这个注解的Map中去
+    @JsonAnySetter
     private Map<String, String> properties;
 
     @JsonAnyGetter  // 序列化时Map加上该属性可以将map中的属性序列化为指定字符串

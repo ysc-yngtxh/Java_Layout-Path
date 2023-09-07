@@ -36,12 +36,11 @@ public class WxLocaleConfigs implements LocaleResolver,InitializingBean {
 
     /**
      * 从HttpServletRequest中获取Locale
-     *
      * @param httpServletRequest    httpServletRequest
      * @return                      语言Local
      */
     @Override
-    public Locale resolveLocale(HttpServletRequest httpServletRequest) {
+    public @NonNull Locale resolveLocale(HttpServletRequest httpServletRequest) {
         // 获取请求中的请求头Header参数
         // 这里有坑,不能使用getParameter()方法,因为LocaleResolver只实现了五种场景解析,可以看源码
         // 其中不包括参数解析,所以不要把请求语言放入参数中
@@ -86,7 +85,7 @@ public class WxLocaleConfigs implements LocaleResolver,InitializingBean {
     public WebMvcConfigurer localeInterceptor() {
         return new WebMvcConfigurer() {
             @Override
-            public void addInterceptors(InterceptorRegistry registry) {
+            public void addInterceptors(@NonNull InterceptorRegistry registry) {
                 LocaleChangeInterceptor localeInterceptor = new LocaleChangeInterceptor();
                 localeInterceptor.setParamName("X-Language");
                 registry.addInterceptor(localeInterceptor).order(-1);

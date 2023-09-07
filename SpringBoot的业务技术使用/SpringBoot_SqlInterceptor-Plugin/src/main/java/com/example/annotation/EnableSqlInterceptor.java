@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Documented
-@Import(SqlAnnotationConfig.class) // MyBatisSqlInterceptorConfiguration类 注入Spring 容器
+@Import(SqlAnnotationConfig.class) // SqlAnnotationConfig类 注入Spring 容器
 public @interface EnableSqlInterceptor {
 
 }

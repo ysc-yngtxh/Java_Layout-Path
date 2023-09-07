@@ -1,24 +1,23 @@
 package com.example.filter;
 
-import com.alibaba.fastjson2.JSONObject;
-import com.example.vo.User;
+import io.micrometer.core.instrument.util.IOUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StreamUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.ContentCachingResponseWrapper;
+import org.springframework.web.util.WebUtils;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
- * @author youshicheng
+ * @author 游家纨绔
  * @dateTime 2023-04-29 16:29
  * @apiNote TODO 自定义过滤器
  */
@@ -44,8 +43,8 @@ public class CustomerFilter extends OncePerRequestFilter {
             e.printStackTrace();
         } finally {
             /**
-             * ContentCachingResponseWrapper通过从响应输出流中读取响应主体来缓存响应主体。
-             * 因此，流变为空就会导致返回的视图都没有。ContentCachingResponseWrapper.copyBodyToResponse()应当将响应写回到输出流
+             * ContentCachingResponseWrapper通过从响应输出流中读取响应主体来缓存响应主体。因此，流变为空就会导致返回的视图都没有。
+             * ContentCachingResponseWrapper.copyBodyToResponse() 应当将响应写回到输出流
              */
             responseWrapper.copyBodyToResponse();
             log.info("========响应数据\n{}\n========", new String(requestWrapper.getContentAsByteArray()));
