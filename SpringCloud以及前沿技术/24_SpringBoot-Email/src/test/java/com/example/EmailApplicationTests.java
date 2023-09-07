@@ -77,7 +77,7 @@ class EmailApplicationTests {
         messageHelper.addAttachment(Objects.requireNonNull(zip.getFilename()), zip);
 
         // 设置邮件内容   cid:资源id     在内容中引用资源    后面true代表是html内容
-        messageHelper.setText("<h2 style='color:#f00;'>暴富通知：您已进入次元空间，完成升级究极体进化，未来可期！<br/><img src='cid:p01' alt='' style='width:200px;height:50px;'></h2>", true);
+        messageHelper.setText("<h2 style='color:#f00;'>暴富通知：您已进入次元空间，完成究极体升级进化，未来可期！<br/><img src='cid:p01' alt='' style='width:200px;height:50px;'></h2>", true);
 
         // 设置资源
         FileSystemResource resPng = new FileSystemResource(new File(rootPath + "/p.png"));
