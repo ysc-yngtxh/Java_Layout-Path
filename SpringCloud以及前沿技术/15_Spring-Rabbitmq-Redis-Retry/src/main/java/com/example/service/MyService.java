@@ -25,8 +25,8 @@ public class MyService {
     @RabbitListener(queues = "OrderQueue")
     public void process(String orders, Message message, Channel channel) throws Exception {
         try {
-            //TODO 具体业务
-            // spring_returned_message_correlation固定写法，获取 CorrelationData 的Id值
+            // TODO 具体业务
+            //  spring_returned_message_correlation固定写法，获取 CorrelationData 的Id值
             String msgId = (String)message.getMessageProperties().getHeaders().get("spring_returned_message_correlation");
             // 这里获取 Redis 的 key 为"order"的数据，并判断其数据中 key 部分是否包含 msgId
             if (redisTemplate.opsForHash().entries("order").containsKey(msgId)) {
