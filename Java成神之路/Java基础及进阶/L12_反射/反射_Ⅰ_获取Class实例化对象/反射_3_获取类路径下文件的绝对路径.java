@@ -33,7 +33,7 @@ public class 反射_3_获取类路径下文件的绝对路径 {
         System.out.println( URLDecoder.decode(paths, "UTF-8") ); // 解决中文乱码问题
 
         // 获取当前项目路径
-        System.err.println("path1: " + System.getProperty("User.dir"));
+        System.err.println("path1: " + System.getProperty("user.dir"));
 
         // 通过 File 获取当前项目路径
         File directory = new File(""); // 参数为空
