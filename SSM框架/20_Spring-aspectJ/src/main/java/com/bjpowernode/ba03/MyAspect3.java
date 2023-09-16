@@ -1,7 +1,6 @@
 package com.bjpowernode.ba03;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
@@ -60,7 +59,7 @@ public class MyAspect3 {
         System.out.println("环绕通知，在目标方法之前，输出时间："+new Date());
 
         //1、目标方法调用
-        if("李晶晶我喜欢你".equals(name)){
+        if ("曹玉敏我喜欢你".equals(name)) {
             result = pjp.proceed();
         }
         System.out.println("环绕通知：在目标方法之后，提交事务");

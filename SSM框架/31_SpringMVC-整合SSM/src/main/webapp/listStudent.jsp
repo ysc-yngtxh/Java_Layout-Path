@@ -18,7 +18,7 @@
     <script type="text/javascript" src="script/jquery-3.4.1.js"></script>
     <script>
         $(function(){
-            //在当前页面dom对象加载后，执行loadStudentData();
+            // 在当前页面dom对象加载后，执行loadStudentData();
             loadStudentData();
 
             $("#btnLoader").click(function(){

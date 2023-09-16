@@ -11,7 +11,7 @@ import java.util.Random;
 
 @Slf4j
 public class MyTenantLineHandler implements TenantLineHandler {
-    private final List<String> IGNORE_TENANT_TABLE = Arrays.asList("tb_consumer","tb_sku","tb_order");
+    private final List<String> IGNORE_TENANT_TABLE = Arrays.asList("tb_consumer", "tb_sku", "tb_order");
 
     /**
      * 获取租户ID 实际应该从用户信息中获取

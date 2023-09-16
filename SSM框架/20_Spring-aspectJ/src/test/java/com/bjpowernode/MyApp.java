@@ -19,7 +19,7 @@ public class MyApp {
         //从容器中获取目标
         SomeServiceImpl proxy = ac.getBean("Service1", SomeServiceImpl.class);
         //通过代理的对象执行方法，实现目标方法执行时，增强了功能
-        proxy.doSome("李晶晶我喜欢你",23);
+        proxy.doSome("曹玉敏我喜欢你", 23);
     }
 
     //ba02中的AspectJ，后置通知切面功能
@@ -29,7 +29,7 @@ public class MyApp {
         //从容器中获取目标
         OtherService proxy = (OtherService)ac.getBean("Service2");
         //通过代理的对象执行方法，实现目标方法执行时，增强了功能
-        String str = proxy.doOther("李晶晶我喜欢你",2020917);
+        String str = proxy.doOther("曹玉敏我喜欢你", 2020917);
         System.out.println("str="+str);
     }
 
@@ -40,7 +40,7 @@ public class MyApp {
         //从容器中获取目标
         OtherService proxy = (OtherService)ac.getBean("Service2");
         //通过代理的对象执行方法，实现目标方法执行时，增强了功能
-        proxy.student("李晶晶我喜欢你",2020917);
+        proxy.student("曹玉敏我喜欢你", 2020917);
     }
 
     //ba03中的AspectJ，环绕通知切面功能
@@ -50,7 +50,7 @@ public class MyApp {
         //从容器中获取目标
         FirstService proxy = (FirstService)ac.getBean("Service3");
         //通过代理的对象执行方法，实现目标方法执行时，增强了功能
-        String str = proxy.First("李晶晶我喜欢你",2020917);
+        String str = proxy.First("曹玉敏我喜欢你", 2020917);
         System.out.println("str="+str);
     }
 
@@ -61,7 +61,7 @@ public class MyApp {
         OutService proxy = (OutService)ac.getBean("Service4");
 
         System.out.println("proxy:"+proxy);
-        proxy.like("李晶晶，我喜欢你!",23);
+        proxy.like("曹玉敏，我喜欢你!", 23);
     }
 
     //cglib1包中没有接口是cglib代理(有接口默认是jdk代理，没有接口默认是cglib代理)
@@ -71,7 +71,7 @@ public class MyApp {
         CglibServiceImpl proxy = (CglibServiceImpl)ac.getBean("Service5");
 
         System.out.println("proxy:"+proxy);
-        proxy.like("李晶晶，我喜欢你!",23);
+        proxy.like("曹玉敏，我喜欢你!", 23);
     }
 
     //
@@ -81,6 +81,6 @@ public class MyApp {
         CglibByServiceImpl proxy = (CglibByServiceImpl)ac.getBean("Service6");
 
         System.out.println("proxy:"+proxy);
-        proxy.like("李晶晶，我喜欢你!",23);
+        proxy.like("曹玉敏，我喜欢你!", 23);
     }
 }
