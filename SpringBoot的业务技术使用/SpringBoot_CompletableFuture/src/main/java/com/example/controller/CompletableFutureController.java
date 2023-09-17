@@ -9,8 +9,10 @@ import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Time;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author 游家纨绔
@@ -38,12 +40,16 @@ public class CompletableFutureController {
 
     // 正常的串行程序执行
     @RequestMapping("/serial")
-    public Brand serial(){
+    public Brand serial() throws InterruptedException {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
 
         Brand brand = brandService.getOne(1);
+        // 延长查询时间，模拟数据量大或者远程调用耗时的场景
+        TimeUnit.MILLISECONDS.sleep(300);
         Courses courses = coursesService.getOne(1);
+        // 延长查询时间，模拟数据量大或者远程调用耗时的场景
+        TimeUnit.MILLISECONDS.sleep(200);
         brand.setCourses(courses);
 
         stopWatch.stop();
@@ -60,10 +66,22 @@ public class CompletableFutureController {
 
         CompletableFuture<Brand> cf1 = CompletableFuture.supplyAsync(() -> {
             Brand brand = brandService.getOne(1);
+            // 延长查询时间，模拟数据量大或者远程调用耗时的场景
+            try {
+                TimeUnit.MILLISECONDS.sleep(300);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             return brand;
         });
         CompletableFuture<Courses> cf2 = CompletableFuture.supplyAsync(() -> {
             Courses courses = coursesService.getOne(1);
+            // 延长查询时间，模拟数据量大或者远程调用耗时的场景
+            try {
+                TimeUnit.MILLISECONDS.sleep(200);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             return courses;
         });
         CompletableFuture<Brand> combine = cf1.thenCombine(cf2, (a, b) -> {
