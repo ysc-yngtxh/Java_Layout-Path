@@ -7,21 +7,21 @@ import java.util.concurrent.RecursiveTask;
 import java.util.stream.LongStream;
 
 public class ForkJoinDemo extends RecursiveTask<Long> {
+    private static final long serialVersionUID = 2947412188376658390L;
     /**
      * ForkJoin在Jdk1.7，并行执行任务！提高效率，大数据量
      * 大数据：Map Reduce(把大任务拆分为小任务)
-     */
-    /**
+     * </p>
      * 求和计算的任务！
      * 3000   6000(ForkJoin)  9000(Stream并行流)
-     *如何使用ForkJoin
+     * 如何使用ForkJoin
      *    1、forkJoinPool  通过它来执行
      *    2、计算任务forkJoinPoll,execute(ForkJoinTask task)
      *    3、计算类要继承ForkJoinTask
      */
     private Long start;
     private Long end;
-    private Long temp = 10000L;//临界值
+    private Long temp = 10000L; // 临界值
 
     public ForkJoinDemo(Long start, Long end) {
         this.start = start;
@@ -31,13 +31,13 @@ public class ForkJoinDemo extends RecursiveTask<Long> {
     //计算方法
     @Override
     protected Long compute() {
-        if ((end-start) < temp){
+        if((end-start) < temp) {
             long sum = 0L;
             for(Long i = start; i <= end; i++){
                 sum += i;
             }
             return sum;
-        }else{
+        } else {
             long middle = (start + end)/2L; // 中间值
             ForkJoinDemo task1 = new ForkJoinDemo(start, middle);
             task1.fork(); // 拆分任务，把任务压入线程队列

@@ -15,12 +15,12 @@ public class B关于Stream流式计算 {
      *       6、用户不能重复
      */
     public static void main(String[] args) {
-        User user1 = new User(1,"a1",21);
-        User user2 = new User(2,"b1",22);
-        User user3 = new User(3,"c1",23);
-        User user4 = new User(4,"d1",24);
-        User user5 = new User(6,"e1",25);
-        User user6 = new User(6,"e1",25);
+        User user1 = new User(1, "a1", 21);
+        User user2 = new User(2, "b1", 22);
+        User user3 = new User(3, "c1", 23);
+        User user4 = new User(4, "d1", 24);
+        User user5 = new User(6, "e1", 25);
+        User user6 = new User(6, "e1", 25);
         // Arrays.asList得到的List的长度是不可改变的，当你向这个List添加或删除一个元素时（例如 list.add("d");）程序就会抛出异常
         // 如果你的List只是用来遍历，就用Arrays.asList()。
         // 如果你的List还要添加或删除元素，还是乖乖地new一个java.util.ArrayList，然后一个一个的添加元素。
@@ -44,7 +44,7 @@ public class B关于Stream流式计算 {
                 .filter(user -> user.getId()%2==0)
                 .filter(user -> {return user.getAge()>23;})
                 .map(user -> {return user.getName().toUpperCase();})
-                .sorted((uu1,uu2) ->{return uu2.compareTo(uu1);})//E1 E1 D1
+                .sorted((uu1,uu2) ->{return uu2.compareTo(uu1);}) // E1 E1 D1
                 .distinct()//E1 D1
                 .skip(1)//D1
                 .limit(3)

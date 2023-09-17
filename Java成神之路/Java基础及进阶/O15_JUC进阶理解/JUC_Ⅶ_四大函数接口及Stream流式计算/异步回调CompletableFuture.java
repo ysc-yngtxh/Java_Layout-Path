@@ -1,5 +1,8 @@
 package O15_JUC进阶理解.JUC_Ⅶ_四大函数接口及Stream流式计算;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -40,7 +43,7 @@ public class 异步回调CompletableFuture {
         }, executorService);
         // 等待任务执行完成 get(): 如果完成则返回结果，否则就抛出具体的异常
         System.out.println("runAsync方法使用自定义线程池的结果 -> " + cfRunAsync2.get() + " -- 很明显无返回值");
-        // get(long timeout, TimeUnit unit): 最大时间等待返回结果，否则就抛出具体异常
+        // cfRunAsync2.get(long timeout, TimeUnit unit): 最大时间等待返回结果，否则就抛出具体异常
         System.out.println( "runAsync方法使用默认线程池在 1 秒时间内等待得到的结果 -> " + cfRunAsync2.get(1, TimeUnit.SECONDS) );
         // 用完线程池记得关闭
         executorService.shutdown();
@@ -55,7 +58,7 @@ public class 异步回调CompletableFuture {
         });
         // get(): 如果完成则返回结果，否则就抛出具体的异常
         System.out.println( "supplyAsync方法使用默认线程池的结果 -> " + cfSupplyAsync.get() );
-        // get(long timeout, TimeUnit unit): 最大时间等待返回结果，否则就抛出具体异常
+        // cfSupplyAsync.get(long timeout, TimeUnit unit): 最大时间等待返回结果，否则就抛出具体异常
         System.out.println( "supplyAsync方法使用默认线程池在 1 秒时间内等待得到的结果 -> " + cfSupplyAsync.get(1, TimeUnit.SECONDS) );
 
         // TODO 二、异步回调处理
@@ -78,17 +81,39 @@ public class 异步回调CompletableFuture {
             System.out.println("===执行有异常的异步回调===");
             int i = 10/0;
             return 2021;
-        });
-        CompletableFuture<Integer> cf2 = cfSupplyAsync1.whenComplete((result, e) -> {
+        }).whenComplete((result, error) -> { // whenComplete回调方法，对原任务执行的结果进行操作，不创建新对象
             // result:表示执行成功的返回值  e:表示执行失败的报错信息
             System.out.println("上个任务结果result：" + result);
-            System.out.println("上个任务抛出异常e：" + e);
-        }).exceptionally((e) -> {
+            System.out.println("上个任务抛出异常e：" + error);
+        });
+
+        CompletableFuture<Integer> cf2 = cfSupplyAsync1.whenComplete((result, error) -> {
+            // result:表示执行成功的返回值  e:表示执行失败的报错信息
+            System.out.println("上个任务结果result：" + result);
+            System.out.println("上个任务抛出异常e：" + error);
+        }).exceptionally((e) -> { // exceptionally返回一个新的CompletableFuture对象
             // exceptionally中可指定默认返回结果，如果出现异常，则返回默认的返回结果。它的作用相当于catch。
             System.out.println(e.getMessage());
             return 2333;
         });
         System.out.println( cf2.get() );
+
+
+        CompletableFuture<List<String>> future = CompletableFuture.supplyAsync(() -> {
+            List<String> list = new ArrayList<>();
+            list.add("语文");
+            list.add("数学");
+            return list;
+        });
+        // 使用handle()方法接收list数据和error异常,并且产生一个新的CompletableFuture对象
+        CompletableFuture<Integer> future2 = future.handle((list, error)-> {
+            // 如果报错，就打印出异常
+            Optional.ofNullable(error).ifPresent(e -> System.out.println(error.getMessage()));
+            // 如果不报错，返回一个包含Integer的全新的CompletableFuture
+            return list.size();
+            // 注意这里的两个CompletableFuture包含的返回类型不同
+        });
+        System.out.println( future2.get() );
 
         // TODO 三、多任务组合处理
         System.out.println("================================三、多任务组合处理==================================");
