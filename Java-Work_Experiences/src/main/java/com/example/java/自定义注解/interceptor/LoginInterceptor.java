@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
  * @date 2022/12/1 13:32
  */
 @SuppressWarnings("NullableProblems")
-public class loginInterceptor implements HandlerInterceptor {
+public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 

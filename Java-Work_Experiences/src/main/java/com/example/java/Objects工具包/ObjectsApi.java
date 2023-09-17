@@ -15,8 +15,8 @@ import java.util.Objects;
  * @description: TODO
  * @date 2022/11/28 23:45
  */
-public class objectsApi {
-    public static final Log log = LogFactory.get(objectsApi.class);
+public class ObjectsApi {
+    public static final Log log = LogFactory.get(ObjectsApi.class);
 
     /**
      * 自定义的Comparator实现类

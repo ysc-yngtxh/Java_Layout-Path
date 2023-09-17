@@ -22,8 +22,8 @@ import java.util.stream.Stream;
  * @description: TODO
  * @date 2022/11/28 15:54
  */
-public class streamApi {
-    public static final Log log = LogFactory.get(streamApi.class);
+public class StreamApi {
+    public static final Log log = LogFactory.get(StreamApi.class);
     public static void main(String[] args) {
         // TODO 1、anyMatch(), allMatch(), noneMatch()
         //        anyMatch：判断的条件里，任意一个元素成功，返回true

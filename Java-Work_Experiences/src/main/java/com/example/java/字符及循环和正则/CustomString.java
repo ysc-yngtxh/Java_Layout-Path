@@ -17,8 +17,8 @@ import java.util.regex.Pattern;
  * @description: TODO
  * @date 2022/11/27 23:44
  */
-public class customString {
-    public static final Log log = LogFactory.get(customString.class);
+public class CustomString {
+    public static final Log log = LogFactory.get(CustomString.class);
     public static void main(String[] args) {
 
         // TODO 判断字符串是否为空

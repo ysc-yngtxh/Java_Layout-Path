@@ -11,8 +11,8 @@ import lombok.SneakyThrows;
  * @description: TODO
  * @date 2022/11/29 23:03
  */
-public class stepBuilder {
-    public static final Log log = LogFactory.get(stepBuilder.class);
+public class StepBuilder {
+    public static final Log log = LogFactory.get(StepBuilder.class);
 
     @SneakyThrows
     public static void main(String[] args) {

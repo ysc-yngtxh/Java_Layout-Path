@@ -1,7 +1,7 @@
 package com.example.java;
 
 /**
- * Unit test for simple App.
+ * Unit Test for simple App.
  */
 public class AppTest {
 

@@ -6,7 +6,7 @@ package com.example.java.自定义注解.annotation;
  * @description: TODO
  * @date 2022/12/1 21:49
  */
-public enum whiteEnum {
+public enum WhiteEnum {
     ONELEVEL,
     TWOLEVEL,
     THREELEVEL,

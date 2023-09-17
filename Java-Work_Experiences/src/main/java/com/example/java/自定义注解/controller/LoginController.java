@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @date 2022/12/1 12:52
  */
 @Controller
-public class loginController {
+public class LoginController {
 
     // 登录接口
     @RequestMapping(value="/login/{id}", produces="text/json;charset=utf-8")

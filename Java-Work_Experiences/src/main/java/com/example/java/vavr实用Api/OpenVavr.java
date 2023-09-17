@@ -26,8 +26,8 @@ import static io.vavr.control.Validation.valid;
  * @description: TODO
  * @date 2022/11/27 0:45
  */
-public class openVavr {
-    public static final Log log = LogFactory.get(openVavr.class);
+public class OpenVavr {
+    public static final Log log = LogFactory.get(OpenVavr.class);
     static final String NAME_ERR = "Invalid Characters In Name: ";
     static final String AGE_ERR = "Age Must Be At Least 0";
 
@@ -45,7 +45,7 @@ public class openVavr {
         int errorSentinel = result.getOrElse(-2);
         log.info(String.valueOf(errorSentinel));
         log.info(String.valueOf(result.isFailure()));
-//        result.getOrElseThrow(() -> new ArithmeticException()); 会实现真正意义上的抛异常
+        // result.getOrElseThrow(() -> new ArithmeticException()); 会实现真正意义上的抛异常
 
 
         // TODO 3、验证Validation。

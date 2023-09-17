@@ -29,8 +29,8 @@ import java.util.stream.Stream;
  * @description: TODO
  * @date 2022/11/28 0:03
  */
-public class streamExApi {
-    public static final Log log = LogFactory.get(streamExApi.class);
+public class StreamExApi {
+    public static final Log log = LogFactory.get(StreamExApi.class);
     public static void main(String[] args) throws FileNotFoundException {
         List<User> users = Arrays.asList(
                 new User(null,null,null,0,null
