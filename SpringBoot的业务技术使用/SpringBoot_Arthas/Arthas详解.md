@@ -25,7 +25,7 @@
 2. #### 选择自己合适的下载方式(这里我是选择的手动安装)
    ![img](src/main/resources/static/img.png)
 
-3. #### 在启动 Arthas 前，需要启动一个 Java 运行的JVM进程。
+3. #### 在启动 Arthas 前，需要启动一个 Java 运行的JVM进程。执行ArthasDemo类中的 justRun() 方法
 
 4. #### 启动Arthas的第一种方式   
    [1]、 终端输入 java -jar arthas-boot.jar 
@@ -46,7 +46,7 @@
    [2]、 终端输入 java -jar arthas-boot.jar 进程pid （如果出现类似错误：也是使用 stop 命令）
         ![img_2](src/main/resources/static/img_2.png)
 
-6. #### 输入 dashboard，查看 JVM 运行时监控
+6. #### 执行 seeThread() 方法并重新启动Arthas。输入 dashboard，查看 JVM 运行时监控
    ![img_8](src/main/resources/static/img_8.png)
 
 7. #### 按 Ctrl + C 退出后。输入 thread 命令可以查看当前线程信息、线程的堆栈。
@@ -55,13 +55,13 @@
 8. #### 目标线程的序号是 17，运行下列命令查看 17 号线程对应的信息：
    ![img_10](src/main/resources/static/img_10.png)
 
-9. #### jad是最简单的class反编译为java文件的小工具，使用 jad 命令进行反编译查看线上文件（避免中文乱码：java -Dfile.encoding=UTF-8 -jar arthas-boot.jar）
+9. #### 执行ArthasDemo类中的 seeProductionCode() 方法并重新启动Arthas。jad是最简单的class反编译为java文件的小工具，使用 jad 命令进行反编译查看线上文件（避免中文乱码：java -Dfile.encoding=UTF-8 -jar arthas-boot.jar）
    ![img_11](src/main/resources/static/img_11.png)
 
 
 ### 四、Arthas进阶使用
 
-1. #### 方法的监测  
+1. #### 方法的监测（执行 printCarInfo() 方法）  
    [1]、watch 命令用于监测方法执行数据 [不需要记忆，可以使用 IDEA 插件生成命令]
    ![img_13](src/main/resources/static/img_13.png)
 
@@ -77,28 +77,44 @@
    [5]、monitor 命令用于方法执行监控。
    ![img_16](src/main/resources/static/img_16.png)
 
-2. #### 错误定位  
-   [1]、
+2. #### 错误定位（CPU 及内存飙高的原因）  
+   [1]、死循环的定位（执行 deadLoop() 方法）  
+   - 使用 dashboard 查看线程信息与内存信息：main() 线程的 CPU 使用率达到90%多，内存中的 nonheap 和 metaspace 使用率非常高。
+   ![img_17](src/main/resources/static/img_17.png)
 
-   [2]、
+   [2]、再使用 thread -n 3 查看当前 3 个最忙的线程
+   ![img_18](src/main/resources/static/img_18.png)
 
-   [3]、
+   [3]、死锁的定位（执行 deadLock() 方法）
+   - 利用 thread 全局查看线程信息：
+   ![img_19](src/main/resources/static/img_19.png)
 
-   [4]、
+   [4]、利用 thread -b 找出当前阻塞其他线程的线程：
+   ![img_20](src/main/resources/static/img_20.png)
 
-   [5]、
 
+3. #### 时空隧道（开启SpringBootArthasApplication启动类,并且启动Arthas监控）  
+   [1]、tt 命令生成方法执行数据的时空隧道，记录下指定方法每次调用的入参和返回信息，并能对这些不同的时间下调用进行观测。
+   - tt -t 类全限定名 方法名  （tt 命令保存调用指定类下方法的所有现场信息）
+     ![img_22](src/main/resources/static/img_22.png)  
+   
+   [2]、调用SpringBoot 的接口三次
+     ![img_21](src/main/resources/static/img_21.png)
 
-3. #### 时空隧道  
-   [1]、
+   [3]、终端会自动记录下每次调用方法的环境现场
+   ![img_23](src/main/resources/static/img_23.png)
 
-   [2]、
+   [4]、显示 tt 命令记录的时间片段
+   - tt -l
+     ![img_24](src/main/resources/static/img_24.png)
 
-   [3]、
+   [5]、查看某次方法的调用信息：
+   - tt -i 索引值
+     ![img_25](src/main/resources/static/img_25.png)
 
-   [4]、
-
-   [5]、
+   [6]、如果你的方法中逻辑改变并修改了代码，那么想要重新做一次方法现场记录，重头再来的流程比较繁琐，因此有以下命令支持
+   - tt -i 索引值 -p
+     ![img_26](src/main/resources/static/img_26.png)
 
 
 4. #### 生成火焰图

@@ -2,7 +2,6 @@ package com.example;
 
 import lombok.SneakyThrows;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
@@ -19,8 +18,9 @@ public class ArthasDemo {
         ArthasDemo demo = new ArthasDemo();
         // demo.justRun();
         // demo.seeThread();
-        // demo.seeProductionCode();
-        demo.printCarInfo();
+        demo.seeProductionCode();
+        // demo.printCarInfo();
+        // demo.deadLoop();
         // demo.deadLock();
     }
 
@@ -69,6 +69,15 @@ public class ArthasDemo {
         for (int i = 0; i < 1000; i++) {
             System.out.println(getCar("catName-" + i, Long.parseLong(i+"")));
             TimeUnit.SECONDS.sleep(1);
+        }
+    }
+
+    /**
+     * 死循环
+     */
+    private void deadLoop() {
+        while (true) {
+            System.out.println("this is in dead loop");
         }
     }
 

@@ -3,8 +3,7 @@ package com.example;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
+import lombok.ToString;
 
 /**
  * @author 游家纨绔
@@ -12,6 +11,7 @@ import java.math.BigDecimal;
  * @apiNote TODO
  */
 @Data
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class Car {
