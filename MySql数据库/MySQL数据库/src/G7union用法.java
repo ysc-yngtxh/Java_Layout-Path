@@ -15,7 +15,7 @@ union（可以将查询结果集相加）
              这里你可能会觉得第三种方法union操作比前两种复杂麻烦。但是如果两张不相干的的表中数据拼接在一起显示呢？
              select ename from emp
              union
-             select dname fron dept;   //虽然这个语句的意义不大，但是它却能通过union将两张不相干的表连接并将其查询的数据拼接在一起
+             select dname fron dept; // 虽然这个语句的意义不大，但是它却能通过union将两张不相干的表连接并将其查询的数据拼接在一起
 
              注意：通过union连接的表在select字段上的数量要一致
 

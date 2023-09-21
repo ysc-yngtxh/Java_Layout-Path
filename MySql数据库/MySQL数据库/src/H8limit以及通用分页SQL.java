@@ -1,6 +1,7 @@
 /**
  * @author 游家纨绔
- */ /*
+ */
+/*
 limit(重点之中的重点，以后分页查询全靠它了)
    1、limit是MySQL特有的，其他数据库中没有，不通用.(Oracle中有一个相同的机制，叫做rownum)
 
@@ -13,22 +14,22 @@ limit(重点之中的重点，以后分页查询全靠它了)
 
              案例：取出工资前5名的员工（思路：降序取前5个）
             select ename,sal from emp order by sal desc limit 0,5;
-            select ename,sal from emp order by sal desc limit 5;    //0也可不写，默认为0
+            select ename,sal from emp order by sal desc limit 5;    // 0也可不写，默认为0
 
    4、limit是SQL语句最后执行的一个环节：
-        select
+        SELECT
            ...    5
-        from
+        FROM
            ...    1
-        where
+        WHERE
            ...    2
-        group by
+        GROUP BY
            ...    3
-        having
+        HAVING
            ...    4
-        oder by
+        ODER BY
            ...    6
-        limit
+        LIMIT
            ...;   7
 
    5、案例：找出工资排名在第4到第9名的员工
@@ -47,8 +48,8 @@ limit(重点之中的重点，以后分页查询全靠它了)
               第pageNo页：(pageNo-1)*pageSize, pageSize
 
               java代码{
-                 int pageNo = 11;     //页码是11
-                 int pageSize = 10;  //每页显示10条
+                 int pageNo = 11;    // 页码是11
+                 int pageSize = 10;  // 每页显示10条
 
                  limit 10,10
               }

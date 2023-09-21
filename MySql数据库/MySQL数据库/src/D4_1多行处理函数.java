@@ -100,9 +100,8 @@
 
         案例：找出每个工作岗位的最高薪资
            select ename,job,max(sal) from emp group by job;  // 语法错误
-        注意：以上在MySQL当中，查询结果是有的，但是结果没有意义，因为ename是随机的。在Oracle数据库当中会报错。语法错误。
-        Oracle的语法规则比MySQL语法规则严谨
-        记住一条规则：当一条语句中有group by的话，select后面只能跟分组函数和参与分组的字段
+        注意：以上在MySQL8以及Oracle数据库中，语法错误。
+             记住一条规则：当一条语句中有group by的话，select后面只能跟分组函数和参与分组的字段
 
 
         案例：找出每个部门的不同工作岗位的最高薪资

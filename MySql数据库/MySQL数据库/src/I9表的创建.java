@@ -21,10 +21,10 @@
         CLOB       字符大对象 (Character Large OBject 存储较大文本，比如，可以存储4G的字符串)
 
         char和varchar怎么选择？
-                   在实际的开发中，当某个字段中的数据长度不发生改变的时候，是定长的，例如：性别、生日等都是采用char
-                   当一个字段的数据长度不确定，例如：简介、姓名等都是采用varchar
+            在实际的开发中，当某个字段中的数据长度不发生改变的时候，是定长的，例如：性别、生日等都是采用char
+            当一个字段的数据长度不确定，例如：简介、姓名等都是采用varchar
 
-               表名在数据库当中一般建议以：t_或者tbl_开始
+            表名在数据库当中一般建议以：t_或者tbl_开始
 
   3、创建学生表：
          学生信息包括：
@@ -43,13 +43,13 @@
               no bigint NOT NULL COMMENT '学号',
               name varchar(255) NOT NULL COMMENT '姓名',
               sex char(11) NOT NULL COMMENT '性别',
-              classno varchar(255) DEFAULT '' COMMENT '班级编号',
+              class_no varchar(255) DEFAULT '' COMMENT '班级编号',
               birth char(10) NOT NULL COMMENT '生日',
               time date NOT NULL COMMENT '入学时间',
               graduate tinyint(1) NOT NULL COMMENT '是否毕业',
               PRIMARY KEY (`id`)
-        ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='学生信息表';
-        //AUTO_INCREMENT=24表示的是自增将会从24开始，第一条数据的序号将会是24。date格式2022-02-21 18:12:13
+        ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COMMENT='学生信息表';
+        // AUTO_INCREMENT=24表示的是自增将会从24开始，第一条数据的序号将会是24。date格式2022-02-21 18:12:13
         +----------+--------------+------+-----+---------+----------------+
         | Field    | Type         | Null | Key | Default | Extra          |
         +----------+--------------+------+-----+---------+----------------+
@@ -57,7 +57,7 @@
         | no       | bigint(20)   | NO   |     | NULL    |                |
         | name     | varchar(255) | NO   |     | NULL    |                |
         | sex      | char(11)     | NO   |     | NULL    |                |
-        | classno  | varchar(255) | NO   |     |         |                |
+        | class_no | varchar(255) | NO   |     |         |                |
         | birth    | char(10)     | NO   |     | NULL    |                |
         | time     | date         | NO   |     | NULL    |                |
         | graduate | tinyint(1)   | NO   |     | NULL    |                |
@@ -65,8 +65,7 @@
 
    4、向表中插入数据
       insert语句插入数据
-            语法格式：
-         insert into 表名(字段名1，字段名2，字段名3,...) values(值1,值2,值3,...)
+            语法格式：insert into 表名(字段名1，字段名2，字段名3,...) values(值1,值2,值3,...)
                     要求：字段的数量和值的数量相同，并且数据类型要对应相同
 
              insert into t_student(no,name,sex,classno,birth) values(1,'zhangsan','1','gaosan1ban','1950-10-12');
@@ -76,7 +75,7 @@
              |    1 | zhangsan | 1    | gaosan1ban | 1950-10-12 |
              +------+----------+------+------------+------------+
 
-             insert into t_student(name) values('lisi');    //除name字段外，剩下的所有字段自动插入null
+             insert into t_student(name) values('lisi');    // 除name字段外，剩下的所有字段自动插入null
              +------+----------+------+------------+------------+
              | no   | name     | sex  | classno    | birth      |
              +------+----------+------+------------+------------+
@@ -87,11 +86,11 @@
                   当一条insert语句执行成功之后，表格当中必然会多一行记录。
                   即使多的这一行记录当中某些字段是null，后期也没有办法再执行insert语句插入数据了，只能使用update更新
 
-             drop table if exists t_student;   //当这个表存在的话删除
+             drop table if exists t_student;   // 当这个表存在的话删除
              create table t_student(
                 no bigint,
                 name varchar(255),
-                sex char(1) default 1,       //默认值是1
+                sex char(1) default 1,         // 默认值是1
                 classno varchar(255),
                 birth char(10)
              );
@@ -100,15 +99,15 @@
              +---------+--------------+------+-----+---------+-------+
              | no      | bigint(20)   | YES  |     | NULL    |       |
              | name    | varchar(255) | YES  |     | NULL    |       |
-             | sex     | char(1)      | YES  |     | 1       |       |     //这里的默认值是1
+             | sex     | char(1)      | YES  |     | 1       |       | // 这里的默认值是1
              | classno | varchar(255) | YES  |     | NULL    |       |
              | birth   | char(10)     | YES  |     | NULL    |       |
              +---------+--------------+------+-----+---------+-------+
 
-          //字段可以省略不写，但是后面的values对数量和顺序都有要求(要一一对应，不能少也不能多)
-          insert into t_student values(1,'jack','0','gaosan2ban','1986-10-23');
+          // 字段可以省略不写，但是后面的values对数量和顺序都有要求(要一一对应，不能少也不能多)
+          insert into t_student values(1, 'jack', '0', 'gaosan2ban', '1986-10-23');
 
-          //一次插入多行数据
+          // 一次插入多行数据
           insert into t_student
              (no,name,sex,classno,birth)
           values
@@ -124,17 +123,12 @@
           +------+----------+------+------------+------------+
 
   5、表的复制
-          语法：
-          create table 表名 as select语句;
-                  将查询结果当作表创建出来。
-
-                  例如：
-               create table t_student1 as select * from t_student;
+        语法：create table 表名 as select语句;
+             将查询结果当作表创建出来;
+        例如：create table t_student1 as select * from t_student;
 
   6、批量插入
-
       insert into t_student1 select * from t_student;
-
       +------+----------+------+------------+------------+
       | no   | name     | sex  | classno    | birth      |
       +------+----------+------+------------+------------+
@@ -150,13 +144,11 @@
       +------+----------+------+------------+------------+
 
   7、修改数据：update
-             语法格式：
-          update 表名 set 字段名1=值1，字段名2=值2...where 条件;
-
-              注意：没有条件整张表数据全部更新
+        语法格式：update 表名 set 字段名1=值1，字段名2=值2...where 条件;
+        注意：如果没有where条件,那么将会把整张表数据全部更新
 
               案例：将学号为1的classno修改为gaosan3ban,将sex修改为0
-              update t_student1 set classno='gaosan3ban',sex='0' where no=1;
+              update t_student1 set classno='gaosan3ban', sex='0' where no=1;
               +------+----------+------+------------+------------+
               | no   | name     | sex  | classno    | birth      |
               +------+----------+------+------------+------------+
@@ -171,25 +163,23 @@
               +------+----------+------+------------+------------+
 
               更新所有记录：
-              update t_student1 set classno='gaosan3ban',sex='0';
-             +------+----------+------+------------+------------+
-             | no   | name     | sex  | classno    | birth      |
-             +------+----------+------+------------+------------+
-             |    1 | zhangsan | 0    | gaosan3ban | 1950-10-12 |
-             |    1 | jack     | 0    | gaosan3ban | 1986-10-23 |
-             |    3 | rose     | 0    | gaosan3ban | 1952-12-14 |
-             |    4 | laotie   | 0    | gaosan3ban | 1955-12-14 |
-             |    1 | zhangsan | 0    | gaosan3ban | 1950-10-12 |
-             |    1 | jack     | 0    | gaosan3ban | 1986-10-23 |
-             |    3 | rose     | 0    | gaosan3ban | 1952-12-14 |
-             |    4 | laotie   | 0    | gaosan3ban | 1955-12-14 |
-             +------+----------+------+------------+------------+
+              update t_student1 set classno='gaosan3ban', sex='0';
+              +------+----------+------+------------+------------+
+              | no   | name     | sex  | classno    | birth      |
+              +------+----------+------+------------+------------+
+              |    1 | zhangsan | 0    | gaosan3ban | 1950-10-12 |
+              |    1 | jack     | 0    | gaosan3ban | 1986-10-23 |
+              |    3 | rose     | 0    | gaosan3ban | 1952-12-14 |
+              |    4 | laotie   | 0    | gaosan3ban | 1955-12-14 |
+              |    1 | zhangsan | 0    | gaosan3ban | 1950-10-12 |
+              |    1 | jack     | 0    | gaosan3ban | 1986-10-23 |
+              |    3 | rose     | 0    | gaosan3ban | 1952-12-14 |
+              |    4 | laotie   | 0    | gaosan3ban | 1955-12-14 |
+              +------+----------+------+------------+------------+
 
   8、删除数据
-            语法格式：
-               delete from 表名 where 条件;
-
-           注意：没有条件默认是全部删除
+        语法格式：delete from 表名 where 条件;
+        注意：如果没有where条件，默认是全部删除
 
            案例：删除学号1数据
            delete from t_student1 where no = 1;
@@ -202,17 +192,16 @@
            |    4 | laotie | 0    | gaosan3ban | 1955-12-14 |
            +------+--------+------+------------+------------+
 
-                  删除所有记录
-           delete from t_student1;       //删除大表比较慢，可回滚，能找回    //是把数据库中的表t1的数据删除，并不影响表结构。你还可以再往表中加数据。
+           删除表所有记录
+           delete from t_student1;    // 删除大表比较慢，可回滚，能找回
 
-           drop table t_student1;        //是把数据库中的表t1删除。数据和表结构同时删掉。
+           删除表所有数据
+           truncate table 表名；       // 表数据被截断，不可回滚，永久丢失。
 
-                 怎么删除大表
-                 truncate table 表名；     //表被截断，不可回滚，永久丢失。
+           删除表数据跟结构
+           drop table 表名;           // 是把数据库中指定的表数据和表结构同时删掉，不可回滚，永久丢失。
 
-
-
-  增删改查有一个术语：CRUD操作。。（以后就别说增删改查了，太low了）
+      增删改查有一个术语：CRUD操作。。（以后就别说增删改查了，太low了）
       Create(增)    Retrieve(检索)    Update(修改)     Delete(删除)
  */
 
