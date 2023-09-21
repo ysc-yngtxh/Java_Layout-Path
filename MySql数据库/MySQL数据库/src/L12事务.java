@@ -1,3 +1,6 @@
+/**
+ * @author 游家纨绔
+ */
 /*
 事务
 1、什么是事务？
@@ -18,8 +21,7 @@
          D:持久性：持久性说的是最终数据必须持久化到硬盘中，事务才算成功的都结束。
 
 3、关于事务之间的隔离性
-
-   事务隔离性存在级别：理论上隔离级别包括4个：
+     事务隔离性存在级别：理论上隔离级别包括4个：
 
        第一级别：读未提交(read uncommitted)
                  A事务读取B事务尚未提交的数据，此时如果B事务发生错误并执行回滚操作，那么A事务读取到的数据就是脏数据。
@@ -72,15 +74,15 @@
         +----+----------+
         |  1 | zs       |
         +----+----------+
-        rollback;       //回滚事务,清空历史操作。
-        select * from t_user;    //这里为什么回滚之后还会显示历史操作呢？，因为MySQL的自动提交功能
+        rollback;                // 回滚事务,清空历史操作。
+        select * from t_user;    // 这里为什么回滚之后还会显示历史操作呢？，因为MySQL的自动提交功能
         +----+----------+
         | id | username |
         +----+----------+
         |  1 | zs       |
         +----+----------+
 
-        start transaction;        //启动事务
+        start transaction;        // 启动事务
         insert into t_user(username) values('lisi');
         insert into t_user(username) values('wangwu');
         select * from t_user;
@@ -91,7 +93,7 @@
         |  2 | lisi     |
         |  3 | wangwu   |
         +----+----------+
-        rollback;     //因为关闭了自动提交，所以以上的语句都属于历史操作，会被rollback回滚事务清空
+        rollback;     // 因为关闭了自动提交，所以以上的语句都属于历史操作，会被rollback回滚事务清空
         +----+----------+
         | id | username |
         +----+----------+
@@ -99,7 +101,7 @@
         +----+----------+
         insert into t_user(username) values('zhaoliu');
         insert into t_user(username) values('qianqi');
-        commit;        //这里是提交事务，历史操作都被提交到硬盘文件中。
+        commit;        // 这里是提交事务，历史操作都被提交到硬盘文件中。
         select * from t_user;
         +----+----------+
         | id | username |
@@ -108,14 +110,14 @@
         |  4 | zhaoliu  |
         |  5 | qianqi   |
         +----+----------+
-        //这里的id是自动增加的主键，因为'lisi','wangwu'历史操作被回滚，所以没有2和3.属于auto_increment机制
+        // 这里的id是自动增加的主键，因为'lisi','wangwu'历史操作被回滚，所以没有2和3.属于auto_increment机制
 
 
 5、使用两个事务演示隔离级别
         第一：读未提交(read uncommitted)
-                      设置事务的全局隔离级别：
+                  设置事务的全局隔离级别：
                   set global transaction isolation level read uncommitted;
-                      查看事务的全局隔离级别：
+                  查看事务的全局隔离级别：
                   select @@global.transaction_isolation;
 
                       其实就是在历史操作期间，还未被提交到硬盘文件就能被读到的意思
@@ -126,10 +128,6 @@
 
          第三：可重复读(repeatable read)
          第四：可串行化
- */
-
-/**
- * @author 游家纨绔
  */
 public class L12事务 {
 }

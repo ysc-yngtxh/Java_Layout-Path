@@ -2,10 +2,9 @@
  * @author 游家纨绔
  */
 /*
-1、S门标准通用语言。标准的SQL、DB、DBMS分别代表的是什么，它们之间的关系？
+1、一门标准通用语言。标准的SQL、DB、DBMS分别代表的是什么，它们之间的关系？
      DB：
         DataBase (数据库，数据库实际上在硬盘上以文件的形式存在)
-
      DBMS：
         DataBase Management System (数据库管理系统，常见的有：MySQL Oracle DB2 Sybase SqlServer)
      SQL：
@@ -44,19 +43,19 @@
         use bjpowernode;   (这个不是SQL语句，属于MySQL命令)
 
       第五步：查看当前使用的数据库中有哪些表？
-      show tables;   (这个不是SQL语句，属于MySQL命令)
-      +---------------------+
-      | Tables_in_employees |
-      +---------------------+
-      | departments         |
-      | dept_emp            |
-      | dept_manager        |
-      | employees           |
-      | salaries            |
-      | titles              |
-      +---------------------+
+        show tables;   (这个不是SQL语句，属于MySQL命令)
+        +---------------------+
+        | Tables_in_employees |
+        +---------------------+
+        | departments         |
+        | dept_emp            |
+        | dept_manager        |
+        | employees           |
+        | salaries            |
+        | titles              |
+        +---------------------+
       第六步：初始化数据(类似导入sql脚本)
-      mysql> source D:\MySQL数据库管理系统\网上sql文件\employees.sql
+        mysql> source D:\MySQL数据库管理系统\网上sql文件\employees.sql
 
       第七步：查看有哪些表   show tables;
 
@@ -152,8 +151,6 @@
    drop：删除内容和定义，释放空间。（表结构和数据一同删除）
    truncate：删除内容，释放空间，但不删除定义。（表结构还在，数据删除）
    delete：删除内容，不删除定义，也不释放空间。
-
-
  */
 public class A1入门知识 {
 }

@@ -1,6 +1,7 @@
 /**
  * @author 游家纨绔
- */ /*
+ */
+/*
 union（可以将查询结果集相加）
 
    案例：找出和工作岗位是SALESMAN和MANAGER的员工

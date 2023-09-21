@@ -1,3 +1,7 @@
+
+/**
+ * @author 游家纨绔
+ */
 /*
 创建表：
 
@@ -65,44 +69,44 @@
 
    4、向表中插入数据
       insert语句插入数据
-            语法格式：insert into 表名(字段名1，字段名2，字段名3,...) values(值1,值2,值3,...)
-                    要求：字段的数量和值的数量相同，并且数据类型要对应相同
+          语法格式：insert into 表名(字段名1，字段名2，字段名3,...) values(值1,值2,值3,...)
+                  要求：字段的数量和值的数量相同，并且数据类型要对应相同
 
-             insert into t_student(no,name,sex,class_no,birth) values(1,'zhangsan','1','高三1班','1950-10-12');
-             +------+----------+------+------------+------------+
-             | no   | name     | sex  | class_no   | birth      |
-             +------+----------+------+------------+------------+
-             |    1 | zhangsan | 1    | 高三1班     | 1950-10-12 |
-             +------+----------+------+------------+------------+
+           insert into t_student(no,name,sex,class_no,birth) values(1,'zhangsan','1','高三1班','1950-10-12');
+           +------+----------+------+------------+------------+
+           | no   | name     | sex  | class_no   | birth      |
+           +------+----------+------+------------+------------+
+           |    1 | zhangsan | 1    | 高三1班     | 1950-10-12 |
+           +------+----------+------+------------+------------+
 
-             insert into t_student(name) values('lisi');    // 除name字段外，剩下的所有字段自动插入null
-             +------+----------+------+------------+------------+
-             | no   | name     | sex  | class_no   | birth      |
-             +------+----------+------+------------+------------+
-             |    1 | zhangsan | 1    | 高三1班     | 1950-10-12 |
-             | NULL | lisi     | NULL | NULL       | NULL       |
-             +------+----------+------+------------+------------+
-             ** 需要注意的地方：
-                  当一条insert语句执行成功之后，表格当中必然会多一行记录。
-                  即使多的这一行记录当中某些字段是null，后期也没有办法再执行insert语句插入数据了，只能使用update更新
+           insert into t_student(name) values('lisi');    // 除name字段外，剩下的所有字段自动插入null
+           +------+----------+------+------------+------------+
+           | no   | name     | sex  | class_no   | birth      |
+           +------+----------+------+------------+------------+
+           |    1 | zhangsan | 1    | 高三1班     | 1950-10-12 |
+           | NULL | lisi     | NULL | NULL       | NULL       |
+           +------+----------+------+------------+------------+
+           ** 需要注意的地方：
+                当一条insert语句执行成功之后，表格当中必然会多一行记录。
+                即使多的这一行记录当中某些字段是null，后期也没有办法再执行insert语句插入数据了，只能使用update更新
 
-             drop table if exists t_student;   // 当这个表存在的话删除
-             create table t_student(
-                no bigint,
-                name varchar(255),
-                sex char(1) default 1,         // 默认值是1
-                class_no varchar(255),
-                birth char(10)
-             );
-             +---------+--------------+------+-----+---------+-------+
-             | Field   | Type         | Null | Key | Default | Extra |
-             +---------+--------------+------+-----+---------+-------+
-             | no      | bigint(20)   | YES  |     | NULL    |       |
-             | name    | varchar(255) | YES  |     | NULL    |       |
-             | sex     | char(1)      | YES  |     | 1       |       | // 这里的默认值是1
-             | class_no| varchar(255) | YES  |     | NULL    |       |
-             | birth   | char(10)     | YES  |     | NULL    |       |
-             +---------+--------------+------+-----+---------+-------+
+           drop table if exists t_student;   // 当这个表存在的话删除
+           create table t_student(
+              no bigint,
+              name varchar(255),
+              sex char(1) default 1,         // 默认值是1
+              class_no varchar(255),
+              birth char(10)
+           );
+           +---------+--------------+------+-----+---------+-------+
+           | Field   | Type         | Null | Key | Default | Extra |
+           +---------+--------------+------+-----+---------+-------+
+           | no      | bigint(20)   | YES  |     | NULL    |       |
+           | name    | varchar(255) | YES  |     | NULL    |       |
+           | sex     | char(1)      | YES  |     | 1       |       | // 这里的默认值是1
+           | class_no| varchar(255) | YES  |     | NULL    |       |
+           | birth   | char(10)     | YES  |     | NULL    |       |
+           +---------+--------------+------+-----+---------+-------+
 
           // 字段可以省略不写，但是后面的values对数量和顺序都有要求(要一一对应，不能少也不能多)
           insert into t_student values(1, 'jack', '0', '高三2班', '1986-10-23');
@@ -136,7 +140,7 @@
       |    1 | jack     | 0    | 高三2班     | 1986-10-23 |
       |    3 | rose     | 1    | 高三2班     | 1952-12-14 |
       |    4 | laotie   | 1    | 高三2班     | 1955-12-14 |
-    
+
       |    1 | zhangsan | 1    | 高三1班     | 1950-10-12 |
       |    1 | jack     | 0    | 高三2班     | 1986-10-23 |
       |    3 | rose     | 1    | 高三2班     | 1952-12-14 |
@@ -203,10 +207,6 @@
 
       增删改查有一个术语：CRUD操作。。（以后就别说增删改查了，太low了）
       Create(增)    Retrieve(检索)    Update(修改)     Delete(删除)
- */
-
-/**
- * @author 游家纨绔
  */
 public class I9表的创建 {
 }

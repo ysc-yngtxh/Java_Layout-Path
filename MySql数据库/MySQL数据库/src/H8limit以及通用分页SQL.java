@@ -8,7 +8,7 @@ LIMIT(重点之中的重点，以后分页查询全靠它了)
    2、limit取结果集中的部分数据，这是它的作用
 
    3、语法机制：
-       LIMIT offset, count;
+       LIMIT offset,count;
              offset 参数指定要返回的第一行的偏移量,第一行的偏移量为0，而不是1。就跟数组的下标一样从 0 开始
              count  指定要返回的最大行数。
 

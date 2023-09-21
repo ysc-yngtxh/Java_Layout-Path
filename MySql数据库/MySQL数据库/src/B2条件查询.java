@@ -1,3 +1,6 @@
+/**
+ * @author 游家纨绔
+ */
 /*
 一、条件查询。
    语法格式：
@@ -90,10 +93,6 @@ System.out.println("============================================================
           select ename from emp where enamel like '%T';
 
           注意：模糊查询不需要和字段名个数一致
- */
-
-/**
- * @author 游家纨绔
  */
 public class B2条件查询 {
 }

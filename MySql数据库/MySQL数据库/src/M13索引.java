@@ -1,3 +1,6 @@
+/**
+ * @author 游家纨绔
+ */
 /*
 索引
 1、什么是索引？有什么用?
@@ -69,10 +72,6 @@
 8、索引什么时候失效？
      select ename from emp where ename like '%A%';
          模糊查询的时候，第一个通配符使用的是%，这个时候索引是失效的。
- */
-
-/**
- * @author 游家纨绔
  */
 public class M13索引 {
 }

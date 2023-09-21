@@ -1,3 +1,6 @@
+/**
+ * @author 游家纨绔
+ */
 /*
 子查询
    1、什么是子查询？子查询都可以出现在哪里？
@@ -67,10 +70,6 @@
             dept d
          ON
             e.deptno = d.deptno;
- */
-
-/**
- * @author 游家纨绔
  */
 public class F6子查询 {
 }

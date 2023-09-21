@@ -1,3 +1,6 @@
+/**
+ * @author 游家纨绔
+ */
 /*
 连接查询
 1、什么是连接查询？
@@ -238,10 +241,6 @@
               e.dephno = d.dephno
            where
               e.name is null;
- */
-
-/**
- * @author 游家纨绔
  */
 public class D4_3连接查询 {
 }
