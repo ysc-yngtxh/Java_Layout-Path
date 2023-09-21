@@ -144,6 +144,7 @@
               +-----------+-------------+
 
               查询所有字段：
+
               select * from emp;
                          注意：以后再Java开发，写语句在Java里，使用*号效率太低。所以只是在MySQL查询才使用*号
 
@@ -154,5 +155,5 @@
 
 
  */
-public class A1mysql入门知识 {
+public class A1入门知识 {
 }

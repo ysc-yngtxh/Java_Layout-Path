@@ -42,7 +42,7 @@ public class MyTenantLineHandler implements TenantLineHandler {
     @Override
     public boolean ignoreTable(String tableName) {
         // 排除表
-        log.info("==========================ignoreTable");
+        log.info("==========================ignoreTable By TenantId");
         return IGNORE_TENANT_TABLE.contains(tableName);
     }
 }

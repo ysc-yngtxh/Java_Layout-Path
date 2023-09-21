@@ -25,7 +25,7 @@ import java.util.List;
 //            参数四：autoResultMap  表示是否自动构建ResultMap，适合实体字段中有使用typeHandler （设置了resultMap则无效）
 //            参数五：keepGlobalPrefix  表示该映射表名是否保留在配置文件中设置的全局表名前缀(true表示保留)
 //            参数六：excludeProperty 表示需要排除的属性字段。插入数据的时候会排除该字段数据
-@TableName(value = "sku", resultMap = "TbSkuMap", keepGlobalPrefix = true, excludeProperty = {"context"})
+@TableName(value = "tb_sku", resultMap = "TbSkuMap", keepGlobalPrefix = true, excludeProperty = {"context"})
 public class Tb_2_Sku implements Serializable {
     @Serial
     private static final long serialVersionUID = 436500863014955490L;
