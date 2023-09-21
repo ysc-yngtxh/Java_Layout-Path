@@ -101,15 +101,15 @@
        -- condition条件表达式为true，则返回expr_if_true，否则返回expr_if_false
        select IF(del_flag=0, '显示', '删除') from tb_order
 
-     1.ifnull(expr1, expr2) 函数
+     2.ifnull(expr1, expr2) 函数
        -- expr1 为 NULL，IFNULL() 函数返回 expr1，否则返回 expr2
        select IFNULL(subject, order_no) from tb_order
 
-     1.nullif(expr1, expr2) 函数
+     3.nullif(expr1, expr2) 函数
        -- expr1 = expr2，NULLIF() 函数返回 NULL，否则返回 expr1
        select IF(del_flag=0, '显示', '删除') from tb_order
 
-     2.case 函数
+     4.case 函数
        [1]、写法一：(CASE)举例 order_no, (WHEN)当其值为 0 时, (THEN)输出'Monday'  ...  (ELSE)否则输出'Error', (END)结束
            select
                 CASE order_no

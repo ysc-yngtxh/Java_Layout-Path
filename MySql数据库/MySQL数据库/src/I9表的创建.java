@@ -17,8 +17,8 @@
         varchar    可变长字符串 (StringBuffer/StringBuilder)
         date       日期类型 (对应Java中的java.sql.Date类型)
         tinyint(1) 布尔类型(对应Java中的boolean,用1代表true,0代表false)
-        BLOB       二进制大对象 (Binary Large OBject 存储图片、视频等流媒体信息)
-        CLOB       字符大对象 (Character Large OBject 存储较大文本，比如，可以存储4G的字符串)
+        BLOB       二进制大对象 (Binary Large Object 存储图片、视频等流媒体信息)
+        CLOB       字符大对象 (Character Large Object 存储较大文本，比如，可以存储4G的字符串)
 
         char和varchar怎么选择？
             在实际的开发中，当某个字段中的数据长度不发生改变的时候，是定长的，例如：性别、生日等都是采用char
@@ -68,18 +68,18 @@
             语法格式：insert into 表名(字段名1，字段名2，字段名3,...) values(值1,值2,值3,...)
                     要求：字段的数量和值的数量相同，并且数据类型要对应相同
 
-             insert into t_student(no,name,sex,classno,birth) values(1,'zhangsan','1','gaosan1ban','1950-10-12');
+             insert into t_student(no,name,sex,class_no,birth) values(1,'zhangsan','1','高三1班','1950-10-12');
              +------+----------+------+------------+------------+
-             | no   | name     | sex  | classno    | birth      |
+             | no   | name     | sex  | class_no   | birth      |
              +------+----------+------+------------+------------+
-             |    1 | zhangsan | 1    | gaosan1ban | 1950-10-12 |
+             |    1 | zhangsan | 1    | 高三1班     | 1950-10-12 |
              +------+----------+------+------------+------------+
 
              insert into t_student(name) values('lisi');    // 除name字段外，剩下的所有字段自动插入null
              +------+----------+------+------------+------------+
-             | no   | name     | sex  | classno    | birth      |
+             | no   | name     | sex  | class_no   | birth      |
              +------+----------+------+------------+------------+
-             |    1 | zhangsan | 1    | gaosan1ban | 1950-10-12 |
+             |    1 | zhangsan | 1    | 高三1班     | 1950-10-12 |
              | NULL | lisi     | NULL | NULL       | NULL       |
              +------+----------+------+------------+------------+
              ** 需要注意的地方：
@@ -91,7 +91,7 @@
                 no bigint,
                 name varchar(255),
                 sex char(1) default 1,         // 默认值是1
-                classno varchar(255),
+                class_no varchar(255),
                 birth char(10)
              );
              +---------+--------------+------+-----+---------+-------+
@@ -100,26 +100,26 @@
              | no      | bigint(20)   | YES  |     | NULL    |       |
              | name    | varchar(255) | YES  |     | NULL    |       |
              | sex     | char(1)      | YES  |     | 1       |       | // 这里的默认值是1
-             | classno | varchar(255) | YES  |     | NULL    |       |
+             | class_no| varchar(255) | YES  |     | NULL    |       |
              | birth   | char(10)     | YES  |     | NULL    |       |
              +---------+--------------+------+-----+---------+-------+
 
           // 字段可以省略不写，但是后面的values对数量和顺序都有要求(要一一对应，不能少也不能多)
-          insert into t_student values(1, 'jack', '0', 'gaosan2ban', '1986-10-23');
+          insert into t_student values(1, 'jack', '0', '高三2班', '1986-10-23');
 
           // 一次插入多行数据
           insert into t_student
-             (no,name,sex,classno,birth)
+             (no,name,sex,class_no,birth)
           values
-             (3,'rose','1','gaosan2ban','1952-12-14'),
-             (4,'laotie','1','gaosan2ban','1955-12-14');
+             (3,'rose','1','高三2班','1952-12-14'),
+             (4,'laotie','1','高三2班','1955-12-14');
           +------+----------+------+------------+------------+
-          | no   | name     | sex  | classno    | birth      |
+          | no   | name     | sex  | class_no   | birth      |
           +------+----------+------+------------+------------+
-          |    1 | zhangsan | 1    | gaosan1ban | 1950-10-12 |
-          |    1 | jack     | 0    | gaosan2ban | 1986-10-23 |
-          |    3 | rose     | 1    | gaosan2ban | 1952-12-14 |
-          |    4 | laotie   | 1    | gaosan2ban | 1955-12-14 |
+          |    1 | zhangsan | 1    | 高三1班     | 1950-10-12 |
+          |    1 | jack     | 0    | 高三2班     | 1986-10-23 |
+          |    3 | rose     | 1    | 高三2班     | 1952-12-14 |
+          |    4 | laotie   | 1    | 高三2班     | 1955-12-14 |
           +------+----------+------+------------+------------+
 
   5、表的复制
@@ -130,51 +130,51 @@
   6、批量插入
       insert into t_student1 select * from t_student;
       +------+----------+------+------------+------------+
-      | no   | name     | sex  | classno    | birth      |
+      | no   | name     | sex  | class_no   | birth      |
       +------+----------+------+------------+------------+
-      |    1 | zhangsan | 1    | gaosan1ban | 1950-10-12 |
-      |    1 | jack     | 0    | gaosan2ban | 1986-10-23 |
-      |    3 | rose     | 1    | gaosan2ban | 1952-12-14 |
-      |    4 | laotie   | 1    | gaosan2ban | 1955-12-14 |
-
-      |    1 | zhangsan | 1    | gaosan1ban | 1950-10-12 |
-      |    1 | jack     | 0    | gaosan2ban | 1986-10-23 |
-      |    3 | rose     | 1    | gaosan2ban | 1952-12-14 |
-      |    4 | laotie   | 1    | gaosan2ban | 1955-12-14 |
+      |    1 | zhangsan | 1    | 高三1班     | 1950-10-12 |
+      |    1 | jack     | 0    | 高三2班     | 1986-10-23 |
+      |    3 | rose     | 1    | 高三2班     | 1952-12-14 |
+      |    4 | laotie   | 1    | 高三2班     | 1955-12-14 |
+    
+      |    1 | zhangsan | 1    | 高三1班     | 1950-10-12 |
+      |    1 | jack     | 0    | 高三2班     | 1986-10-23 |
+      |    3 | rose     | 1    | 高三2班     | 1952-12-14 |
+      |    4 | laotie   | 1    | 高三2班     | 1955-12-14 |
       +------+----------+------+------------+------------+
 
   7、修改数据：update
         语法格式：update 表名 set 字段名1=值1，字段名2=值2...where 条件;
         注意：如果没有where条件,那么将会把整张表数据全部更新
 
-              案例：将学号为1的classno修改为gaosan3ban,将sex修改为0
-              update t_student1 set classno='gaosan3ban', sex='0' where no=1;
+              案例：将学号为1的class_no修改为高三3班,将sex修改为0
+              update t_student1 set class_no='高三3班', sex='0' where no=1;
               +------+----------+------+------------+------------+
-              | no   | name     | sex  | classno    | birth      |
+              | no   | name     | sex  | class_no   | birth      |
               +------+----------+------+------------+------------+
-              |    1 | zhangsan | 0    | gaosan3ban | 1950-10-12 |
-              |    1 | jack     | 0    | gaosan3ban | 1986-10-23 |
-              |    3 | rose     | 1    | gaosan2ban | 1952-12-14 |
-              |    4 | laotie   | 1    | gaosan2ban | 1955-12-14 |
-              |    1 | zhangsan | 0    | gaosan3ban | 1950-10-12 |
-              |    1 | jack     | 0    | gaosan3ban | 1986-10-23 |
-              |    3 | rose     | 1    | gaosan2ban | 1952-12-14 |
-              |    4 | laotie   | 1    | gaosan2ban | 1955-12-14 |
+              |    1 | zhangsan | 0    | 高三3班     | 1950-10-12 |
+              |    1 | jack     | 0    | 高三3班     | 1986-10-23 |
+              |    3 | rose     | 1    | 高三2班     | 1952-12-14 |
+              |    4 | laotie   | 1    | 高三2班     | 1955-12-14 |
+              |    1 | zhangsan | 0    | 高三3班     | 1950-10-12 |
+              |    1 | jack     | 0    | 高三3班     | 1986-10-23 |
+              |    3 | rose     | 1    | 高三2班     | 1952-12-14 |
+              |    4 | laotie   | 1    | 高三2班     | 1955-12-14 |
               +------+----------+------+------------+------------+
 
               更新所有记录：
-              update t_student1 set classno='gaosan3ban', sex='0';
+              update t_student1 set class_no='高三3班', sex='0';
               +------+----------+------+------------+------------+
-              | no   | name     | sex  | classno    | birth      |
+              | no   | name     | sex  | class_no   | birth      |
               +------+----------+------+------------+------------+
-              |    1 | zhangsan | 0    | gaosan3ban | 1950-10-12 |
-              |    1 | jack     | 0    | gaosan3ban | 1986-10-23 |
-              |    3 | rose     | 0    | gaosan3ban | 1952-12-14 |
-              |    4 | laotie   | 0    | gaosan3ban | 1955-12-14 |
-              |    1 | zhangsan | 0    | gaosan3ban | 1950-10-12 |
-              |    1 | jack     | 0    | gaosan3ban | 1986-10-23 |
-              |    3 | rose     | 0    | gaosan3ban | 1952-12-14 |
-              |    4 | laotie   | 0    | gaosan3ban | 1955-12-14 |
+              |    1 | zhangsan | 0    | 高三3班     | 1950-10-12 |
+              |    1 | jack     | 0    | 高三3班     | 1986-10-23 |
+              |    3 | rose     | 0    | 高三3班     | 1952-12-14 |
+              |    4 | laotie   | 0    | 高三3班     | 1955-12-14 |
+              |    1 | zhangsan | 0    | 高三3班     | 1950-10-12 |
+              |    1 | jack     | 0    | 高三3班     | 1986-10-23 |
+              |    3 | rose     | 0    | 高三3班     | 1952-12-14 |
+              |    4 | laotie   | 0    | 高三3班     | 1955-12-14 |
               +------+----------+------+------------+------------+
 
   8、删除数据
@@ -184,22 +184,22 @@
            案例：删除学号1数据
            delete from t_student1 where no = 1;
            +------+--------+------+------------+------------+
-           | no   | name   | sex  | classno    | birth      |
+           | no   | name   | sex  | class_no   | birth      |
            +------+--------+------+------------+------------+
-           |    3 | rose   | 0    | gaosan3ban | 1952-12-14 |
-           |    4 | laotie | 0    | gaosan3ban | 1955-12-14 |
-           |    3 | rose   | 0    | gaosan3ban | 1952-12-14 |
-           |    4 | laotie | 0    | gaosan3ban | 1955-12-14 |
+           |    3 | rose   | 0    | 高三3班     | 1952-12-14 |
+           |    4 | laotie | 0    | 高三3班     | 1955-12-14 |
+           |    3 | rose   | 0    | 高三3班     | 1952-12-14 |
+           |    4 | laotie | 0    | 高三3班     | 1955-12-14 |
            +------+--------+------+------------+------------+
 
            删除表所有记录
-           delete from t_student1;    // 删除大表比较慢，可回滚，能找回
+           delete from t_student1;  // 删除大表比较慢，可回滚，能找回
 
            删除表所有数据
-           truncate table 表名；       // 表数据被截断，不可回滚，永久丢失。
+           truncate table 表名；     // 表数据被截断，不可回滚，永久丢失。
 
            删除表数据跟结构
-           drop table 表名;           // 是把数据库中指定的表数据和表结构同时删掉，不可回滚，永久丢失。
+           drop table 表名;         // 是把数据库中指定的表数据和表结构同时删掉，不可回滚，永久丢失。
 
       增删改查有一个术语：CRUD操作。。（以后就别说增删改查了，太low了）
       Create(增)    Retrieve(检索)    Update(修改)     Delete(删除)
