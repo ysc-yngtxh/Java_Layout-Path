@@ -1,4 +1,3 @@
-
 /**
  * @author 游家纨绔
  */
@@ -69,7 +68,7 @@
 
    4、向表中插入数据
       insert语句插入数据
-          语法格式：insert into 表名(字段名1，字段名2，字段名3,...) values(值1,值2,值3,...)
+          语法格式：INSERT INTO 表名(字段名1，字段名2，字段名3,...) VALUES(值1,值2,值3,...)
                   要求：字段的数量和值的数量相同，并且数据类型要对应相同
 
            INSERT INTO t_student(no,name,sex,class_no,birth) VALUES(1,'zhangsan','1','高三1班','1950-10-12');
