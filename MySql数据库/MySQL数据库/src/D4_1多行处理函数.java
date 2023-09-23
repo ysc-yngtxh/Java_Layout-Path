@@ -14,28 +14,28 @@
         记住：所有的分组函数都是对“某一组”数据进行操作的
 
         例：找出工资总和
-           select sum(sal) from emp;
+           SELECT SUM(sal) FROM emp;
         找出最高工资
-           select max(sal) from emp;
+           SELECT MAX(sal) FROM emp;
         找出最低工资
-           select min(sal) from emp;
+           SELECT MIN(sal) FROM emp;
         找出平均工资
-           select avg(sal) from emp;
+           SELECT AVG(sal) FROM emp;
         找出总人数
-           select count(*) from emp;       -- 不是统计某个字段中数据的个数，而是统计总记录条数（和某个字段无关）
-           select count(ename) from emp;   -- 表示统计comm字段中不为null的数据总数量
+           SELECT COUNT(*) FROM emp;       -- 不是统计某个字段中数据的个数，而是统计总记录条数（和某个字段无关）
+           SELECT COUNT(ename) FROM emp;   -- 表示统计comm字段中不为null的数据总数量
 
         分组函数自动忽略null
-           select sum(comm) from emp where is not null;
+           SELECT SUM(comm) FROM emp WHERE IS NOT NULL;
            -- 这么写意思是：不是null的津贴(comm)之和。但是不需要后面的where语法，因为分组函数自动忽略null
 
         例：计算每个员工的年薪
-           select ename,(sal+comm)*12 as yearsal from emp;
+           SELECT ename,(sal+comm)*12 AS yearsal FROM emp;
         注意：因为不是每个员工都有津贴(comm)的，有的员工津贴(comm)为null。但是所有的数据库这样规定，只要有null参与的运算结果一定是null
              但是如果计算出来的员工年薪为null的话，人家早跑了，所以，怎么办呢？--------——————链接到单行处理函数
 
         例：找出工资高于平均工资的员工
-           select ename,sal from emp where sal > avg(sal);
+           SELECT ename,sal FROM emp WHERE sal > AVG(sal);
         思考以上的错误信息：无效的使用了分组函数
         原因：SQL语句当中有一个语法规则，分组函数不可直接使用在where字句当中，why？--------——————链接到group by和 having
 
@@ -76,70 +76,70 @@
         当一条SQL语句没有group by的话，整张表的数据会自成一组。
 
         执行顺序：
-            select      5
+            SELECT      5
             ...
-            from        1
+            FROM        1
             ...
-            where       2
+            WHERE       2
             ...
-            group by    3
+            GROUP BY    3
             ...
-            having      4
+            HAVING      4
             ...
-            order by    6
+            ORDER BY    6
             ...
 
         找出工资高于平均工资的员工
-           select ename,sal from emp where sal > avg(sal);
+           SELECT ename,sal FROM emp WHERE sal > AVG(sal);
         TODO 注意：这样写是错误的。因为avg(sal)是属于分组函数，但是在执行where的时候，并没有执行分组语句group by.
 
-        第一步：select avg(sal) from emp;  // from后面其实有group by，只是缺省了。
-        第二步：select ename,sal from emp where sal > 表给的实际数据;
-        合成一步：select ename,sal from emp where sal > (select avg(sal) from emp); // 小括号优先级高，所以先执行小括号里的
+        第一步：SELECT AVG(sal) FROM emp;  // from后面其实有group by，只是缺省了。
+        第二步：SELECT ename,sal FROM emp WHERE sal > 表给的实际数据;
+        合成一步：SELECT ename,sal FROM emp WHERE sal > (SELECT AVG(sal) FROM emp); // 小括号优先级高，所以先执行小括号里的
 
 
         案例：找出每个工作岗位的最高薪资
-           select ename,job,max(sal) from emp group by job;  // 语法错误
+           SELECT ename,job,MAX(sal) FROM emp GROUP BY job;  // 语法错误
         注意：以上在MySQL8以及Oracle数据库中，语法错误。
              记住一条规则：当一条语句中有group by的话，select后面只能跟分组函数和参与分组的字段
 
 
         案例：找出每个部门的不同工作岗位的最高薪资
-           select deptno,job,max(sal) from emp group by deptno,job;
-        +-----------+-------------+-----------+
-        | deptno    | job         | sal       |
-        +-----------+-------------+-----------|
-        | 10        | CLERK       | 800.00    |
-        +-----------+-------------+-----------+
+           SELECT deptno,job,MAX(sal) FROM emp GROUP BY deptno,job;
+           +-----------+-------------+-----------+
+           | deptno    | job         | sal       |
+           +-----------+-------------+-----------|
+           | 10        | CLERK       | 800.00    |
+           +-----------+-------------+-----------+
 
-        +-----------+-------------+-----------+
-        | 20        | CLERK       | 5612.00   |
-        +-----------+-------------+-----------|
-        | 20        | PRESIDENT   | 5624.00   |
-        +-----------+-------------+-----------+
-        | 20        | MANAGER     | 3513.00   |
+           +-----------+-------------+-----------+
+           | 20        | CLERK       | 5612.00   |
+           +-----------+-------------+-----------|
+           | 20        | PRESIDENT   | 5624.00   |
+           +-----------+-------------+-----------+
+           | 20        | MANAGER     | 3513.00   |
 
-        +-----------+-------------+-----------|
-        | 30        | CLERK       | 4612.00   |
-        +-----------+-------------+-----------|
-        | 30        | PRESIDENT   | 6852.00   |
-        +-----------+-------------+-----------+
+           +-----------+-------------+-----------|
+           | 30        | CLERK       | 4612.00   |
+           +-----------+-------------+-----------|
+           | 30        | PRESIDENT   | 6852.00   |
+           +-----------+-------------+-----------+
 
         案例：找出每个部门的最高薪资，要求显示薪资大于2900的数据
-        第一步：找出每个部门的最高薪资    select dephno,max(sal) from emp group by dephno;
-        第二步：找出薪资大于2900的数据   select dephno,max(sal) from emp group by dephno having max(sal) > 2900;  //这种方式效率低
-        select dephno,max(sal) from emp where sal > 2900 group by dephno;   //效率较高，建议能够使用where过滤的尽量使用where
+        第一步：找出每个部门的最高薪资    SELECT dephno,MAX(sal) FROM emp GROUP BY dephno;
+        第二步：找出薪资大于2900的数据   SELECT dephno,MAX(sal) FROM emp GROUP BY dephno HAVING MAX(sal) > 2900;  // 这种方式效率低
+        SELECT dephno,MAX(sal) FROM emp WHERE sal > 2900 GROUP BY dephno;   // 效率较高，建议能够使用where过滤的尽量使用where
 
         案例：找出每个部门的平均薪资 ，并显示薪资大于2000的数据
-        第一步：找出每个部门的平均薪资    select dephno,avg(sal) from emp group by dephno;
-        第二步：薪资大于2000的数据       select dephno,avg(sal) from emp group by dephno having avg(sal) > 2000;
-                                     // avg(sal)是分组函数不能写进where语句，所以只能使用having
+        第一步：找出每个部门的平均薪资    SELECT dephno,AVG(sal) FROM emp GROUP BY dephno;
+        第二步：薪资大于2000的数据       SELECT dephno,AVG(sal) FROM emp GROUP BY dephno HAVING AVG(sal) > 2000;
+                                     // AVG(sal)是分组函数不能写进where语句，所以只能使用having
 
 三、with rollup
         GROUP BY中使用WITH ROLLUP：
         使用WITH ROLLUP关键字之后，在所有查询出的分组记录之后增加一条记录，该记录计算查询出的所有记录的总和，即统计记录数量。
 
-        select subject,avg(total_amount),sum(order_no) FROM t_order GROUP BY subject WITH ROLLUP
+        SELECT subject,AVG(total_amount),SUM(order_no) FROM t_order GROUP BY subject WITH ROLLUP
         +-----------+-------------------+---------------+
         | subject   | avg(total_amount) | sum(order_no) |
         +-----------+-------------------+---------------+
@@ -158,30 +158,30 @@
 
 四、其他的聚合函数(注意：以下函数可以在group by中使用)
    1、GROUP_CONCAT()	将组中的字符串连接返回一个字符串
-      [1]、select GROUP_CONCAT(name) from t_order
+      [1]、SELECT GROUP_CONCAT(name) FROM t_order
            -- 默认连接字符','  结果为  许致远,龙震南,朱杰宏,董晓明,许致远
-      [2]、select GROUP_CONCAT( CONCAT_WS('_', name, id) ) from t_order
+      [2]、SELECT GROUP_CONCAT( CONCAT_WS('_', name, id) ) FROM t_order
            -- 使用单行处理函数进行字符串拼接后再将组中字符串连接  结果为  许致远_1,龙震南_2,朱杰宏_3,董晓明_4,许致远_5
-      [3]、select GROUP_CONCAT(DISTINCT name) from t_order
+      [3]、SELECT GROUP_CONCAT(DISTINCT name) FROM t_order
            -- 去除组内重复数据  结果为  许致远,龙震南,朱杰宏,董晓明
-      [4]、select GROUP_CONCAT(DISTINCT name ORDER BY name DESC) from t_order
+      [4]、SELECT GROUP_CONCAT(DISTINCT name ORDER BY name DESC) FROM t_order
            -- 去除组内重复数据并倒序排序  结果为  龙震南,许致远,董晓明,朱杰宏
-      [5]、select GROUP_CONCAT(DISTINCT name ORDER BY name DESC SEPARATOR ';') from t_order
+      [5]、SELECT GROUP_CONCAT(DISTINCT name ORDER BY name DESC SEPARATOR ';') FROM t_order
            -- 去除组内重复数据并倒序排序而且使用';'作为连接字符  结果为  龙震南;许致远;董晓明;朱杰宏
 
    2、JSON_ARRAYAGG(expression)	用于将查询结果中的多个行合并为一个JSON数组。
-      [1]、select JSON_ARRAYAGG( province ) from t_order;
+      [1]、SELECT JSON_ARRAYAGG( province ) FROM t_order;
            -- 查询省份结果为: ["北京", "北京", "太原", "河南省", "湖北省", "湖北省"]
-      [2]、select JSON_ARRAYAGG( province ) from t_order group by province;
+      [2]、SELECT JSON_ARRAYAGG( province ) FROM t_order GROUP BY province;
            -- 查询去重省份结果为：["北京"]
                                ["太原"]
                                ["河南省"]
                                ["湖北省"]
 
    3、JSON_OBJECTAGG(key, value)	用于创建一个JSON对象，其中包含指定的键值对。
-      [1]、select JSON_OBJECTAGG(id, name) from t_order;
+      [1]、SELECT JSON_OBJECTAGG(id, name) FROM t_order;
            -- 查询结果为：{"1": "许致远", "2": "龙震南", "3": "朱杰宏"}
-      [2]、select JSON_OBJECTAGG(id, title) from tb_sku group by id
+      [2]、SELECT JSON_OBJECTAGG(id, title) FROM tb_sku GROUP BY id
            -- 查询结果为：{"1": "许致远"}
                         {"2": "龙震南"}
                         {"3": "朱杰宏"}

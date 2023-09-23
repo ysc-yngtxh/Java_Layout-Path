@@ -4,42 +4,42 @@
 /*
 一、条件查询。
    语法格式：
-      select
+      SELECT
                字段，字段...
-      from
+      FROM
                表名
-      where
+      WHERE
                条件;
 
-               执行顺序：先from，然后where，最后select
+               执行顺序：先FROM，然后WHERE，最后SELECT
 
 System.out.println("===========================================================================================================");
 
 二、条件查询中会用到的运算符：
       1、between...and...(是一个闭区间，取其范围内)
            查询员工工资在1100和3000之间的员工，包括1100和3000。
-                select ename,sal from emp where sal >= 1100 and sal <= 3000;
-                select ename,sal from emp where sal between 1100 and 3000;   //between...and...是闭区间[1100 ~ 3000]
+                SELECT ename,sal FROM emp WHERE sal >= 1100 AND sal <= 3000;
+                SELECT ename,sal FROM emp WHERE sal BETWEEN 1100 AND 3000;   // between...and...是闭区间[1100 ~ 3000]
 
       2、is null(在数据库当中null不是一个值，代表什么也没有，为空。空不是一个值，不能用等号衡量，必须使用is null或者is not null)
            查询哪些员工津贴为空。
-                select ename,sal,comm from emp where comm is null;
+                select ename,sal,comm from emp where comm IS NULL;
       3、is not null
 
       4、or(条件'或者'语句)
            查询工作岗位是MANAGER和SALESMAN的员工。
-                select ename,job from emp where job='MANAGER' or job='SALESMAN';
+                SELECT ename,job FROM emp WHERE job='MANAGER' OR job='SALESMAN';
                                注意：不能是and,如果是and，那么意思就变成了工作岗位即是MANAGER又是SALESMAN的员工
 
       5、and(条件'并且'语句)
             查询薪资大于1000的并且部门编号是20或30部门的员工
-                select ename,sal,depthno from emp where sal > 1000 and (deptno=20 or deptno=30);
+                selEct ename,sal,depthno FROM emp WHERE sal > 1000 AND (deptno=20 OR deptno=30);
                                注意：and的优先级比or的要高，不加小括号出来的表格式会是使部门编号30的所有员工显示出来
 
 
       6、in(语句会优先执行in()中的。确定条件查询中给定的值是否与列表中的值相匹配。)
               查询通过b表查到的id的数据，去匹配a表中的id然后得到结果
-                 SELECT * FROM a WHERE a.id IN (SELECT b.id FROM b)
+                 SELECT * FROM a WHERE a.id IN(SELECT b.id FROM b)
                    如果b表数据中某个id在a表中不存在，那这个结果会忽略(不会出现异常也不会显示为null)
                    +----+--------+                +----+---------+                +----+--------+
               a表  | id | user   |          b表    | id | phone   |         结果   | id | user   |
@@ -81,16 +81,16 @@ System.out.println("============================================================
       %代表任意多个字符，_代表任意1个字符。
 
       例：找出名字当中含有字母O的
-          select emane from emp where ename like '%O%';
+          SELECT emane FROM emp WHERE ename LIKE '%O%';
 
           找出名字当中第二个字母是A的
-          select ename from emp where enamel like '_A%';
+          SELECT ename FROM emp WHERE enamel LIKE '_A%';
 
           找出名字中有下划线的。
-          select ename from emp where enamel like '%\_%';    //通过\来转义_,就可以实现查找下划线
+          SELECT ename FROM emp WHERE enamel LIKE '%\_%';    // 通过\来转义_,就可以实现查找下划线
 
           找出名字中最后一个字母是T的
-          select ename from emp where enamel like '%T';
+          SELECT ename FROM emp WHERE enamel LIKE '%T';
 
           注意：模糊查询不需要和字段名个数一致
  */

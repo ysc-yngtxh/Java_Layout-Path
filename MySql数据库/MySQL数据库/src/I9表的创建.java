@@ -72,14 +72,14 @@
           语法格式：insert into 表名(字段名1，字段名2，字段名3,...) values(值1,值2,值3,...)
                   要求：字段的数量和值的数量相同，并且数据类型要对应相同
 
-           insert into t_student(no,name,sex,class_no,birth) values(1,'zhangsan','1','高三1班','1950-10-12');
+           INSERT INTO t_student(no,name,sex,class_no,birth) VALUES(1,'zhangsan','1','高三1班','1950-10-12');
            +------+----------+------+------------+------------+
            | no   | name     | sex  | class_no   | birth      |
            +------+----------+------+------------+------------+
            |    1 | zhangsan | 1    | 高三1班     | 1950-10-12 |
            +------+----------+------+------------+------------+
 
-           insert into t_student(name) values('lisi');    // 除name字段外，剩下的所有字段自动插入null
+           INSERT INTO t_student(name) VALUES('lisi');    // 除name字段外，剩下的所有字段自动插入null
            +------+----------+------+------------+------------+
            | no   | name     | sex  | class_no   | birth      |
            +------+----------+------+------------+------------+
@@ -109,12 +109,12 @@
            +---------+--------------+------+-----+---------+-------+
 
           // 字段可以省略不写，但是后面的values对数量和顺序都有要求(要一一对应，不能少也不能多)
-          insert into t_student values(1, 'jack', '0', '高三2班', '1986-10-23');
+          INSERT INTO t_student VALUES(1, 'jack', '0', '高三2班', '1986-10-23');
 
           // 一次插入多行数据
-          insert into t_student
+          INSERT INTO t_student
              (no,name,sex,class_no,birth)
-          values
+          VALUES
              (3,'rose','1','高三2班','1952-12-14'),
              (4,'laotie','1','高三2班','1955-12-14');
           +------+----------+------+------------+------------+
@@ -129,10 +129,10 @@
   5、表的复制
         语法：create table 表名 as select语句;
              将查询结果当作表创建出来;
-        例如：create table t_student1 as select * from t_student;
+        例如：create table t_student1 AS SELECT * FROM t_student;
 
   6、批量插入
-      insert into t_student1 select * from t_student;
+      INSERT INTO t_student1 SELECT * FROM t_student;
       +------+----------+------+------------+------------+
       | no   | name     | sex  | class_no   | birth      |
       +------+----------+------+------------+------------+
@@ -152,7 +152,7 @@
         注意：如果没有where条件,那么将会把整张表数据全部更新
 
               案例：将学号为1的class_no修改为高三3班,将sex修改为0
-              update t_student1 set class_no='高三3班', sex='0' where no=1;
+              UPDATE t_student1 SET class_no='高三3班', sex='0' WHERE no=1;
               +------+----------+------+------------+------------+
               | no   | name     | sex  | class_no   | birth      |
               +------+----------+------+------------+------------+
@@ -167,7 +167,7 @@
               +------+----------+------+------------+------------+
 
               更新所有记录：
-              update t_student1 set class_no='高三3班', sex='0';
+              UPDATE t_student1 SET class_no='高三3班', sex='0';
               +------+----------+------+------------+------------+
               | no   | name     | sex  | class_no   | birth      |
               +------+----------+------+------------+------------+
@@ -186,7 +186,7 @@
         注意：如果没有where条件，默认是全部删除
 
            案例：删除学号1数据
-           delete from t_student1 where no = 1;
+           DELETE FROM t_student1 WHERE no = 1;
            +------+--------+------+------------+------------+
            | no   | name   | sex  | class_no   | birth      |
            +------+--------+------+------------+------------+
@@ -205,7 +205,7 @@
            删除表数据跟结构
            drop table 表名;         // 是把数据库中指定的表数据和表结构同时删掉，不可回滚，永久丢失。
 
-      增删改查有一个术语：CRUD操作。。（以后就别说增删改查了，太low了）
+      增删改查有一个术语：CRUD操作。。。（以后就别说增删改查了，太low了）
       Create(增)    Retrieve(检索)    Update(修改)     Delete(删除)
  */
 public class I9表的创建 {

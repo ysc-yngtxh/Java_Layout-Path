@@ -42,7 +42,7 @@
           INNER JOIN
              salgrade s
           ON
-             e.sal between s.losal and s.hisal
+             e.sal BETWEEN s.losal AND s.hisal
           LEFT OUTER JOIN                         // inner和outer可以省略
              emp em
           ON

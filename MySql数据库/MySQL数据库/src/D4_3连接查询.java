@@ -127,7 +127,7 @@
            INNER JOIN
               salgrade s
            ON
-              e.sal between s.losal and s.hisal;
+              e.sal BETWEEN s.losal AND s.hisal;
 
 
         自连接   最大特点是： 一张表看作两张表

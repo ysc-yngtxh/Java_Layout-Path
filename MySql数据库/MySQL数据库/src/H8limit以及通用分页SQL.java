@@ -37,7 +37,7 @@ LIMIT(重点之中的重点，以后分页查询全靠它了)
 
    5、案例：找出工资排名在第4到第9名的员工
            SELECT ename,sal FROM emp ODER BY sal DESC LIMIT 3,6;
-           SELECT ename,sal FROM emp ODER BY sal DESC LIMIT 3 offset 6;
+           SELECT ename,sal FROM emp ODER BY sal DESC LIMIT 3 OFFSET 6;
 
    6、通用的标准分页sql
           每页显示3条记录：
