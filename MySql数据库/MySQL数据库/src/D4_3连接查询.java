@@ -32,22 +32,22 @@
            案例：找出每一个员工的部门名称，要求显示员工名和部门名
            emp表
            +-----------+-------------+
-           | ename     | dephno      |
+           ｜ ename    ｜ dephno      ｜
            +-----------+-------------+
-           | SMITH     | 20          |
-           | ALLEN     | 30          |
-           | WARD      | 20          |
-           | JONES     | 10          |
+           ｜ SMITH    ｜ 20          ｜
+           ｜ ALLEN    ｜ 30          ｜
+           ｜ WARD     ｜ 20          ｜
+           ｜ JONES    ｜ 10          ｜
            +-----------+-------------+
            dept表
            +-----------+-------------+-----------+
-           | dephno    | dname       | loc       |
-           +-----------+-------------+-----------|
-           | 10        | ACCOUNTING  | NEW YORK  |
-           | 20        | RESEARCH    | DALLAS    |
-           | 30        | SALES       | CHICAGO   |
-           | 40        | OPERATIONS  | BOSTON    |
-           +-----------+-------------+-----------|
+           ｜ dephno   ｜ dname      ｜ loc       ｜
+           +-----------+-------------+-----------｜
+           ｜ 10       ｜ ACCOUNTING ｜ NEW YORK  ｜
+           ｜ 20       ｜ RESEARCH   ｜ DALLAS    ｜
+           ｜ 30       ｜ SALES      ｜ CHICAGO   ｜
+           ｜ 40       ｜ OPERATIONS ｜ BOSTON    ｜
+           +-----------+-------------+-----------｜
 
            SELECT e.ename,d.dname FROM emp e,dept d;
            表别名的好处：第一：执行效率高(避免在两张表中查询到相同字段数据时，无法取出正确的需要的数据)。
@@ -55,27 +55,27 @@
 
            笛卡尔积现象：当这两张表进行连接查询的时候，没有任何条件进行限制，最终的查询结果条数是两张表记录条数的乘积(4 X 4)
            +-----------+-------------+
-           | ename     | dname       |
+           ｜ ename    ｜ dname       ｜
            +-----------+-------------+
-           | SMITH     | ACCOUNTING  |
-           | SMITH     | RESEARCH    |
-           | SMITH     | SALES       |
-           | SMITH     | OPERATIONS  |
+           ｜ SMITH    ｜ ACCOUNTING  ｜
+           ｜ SMITH    ｜ RESEARCH    ｜
+           ｜ SMITH    ｜ SALES       ｜
+           ｜ SMITH    ｜ OPERATIONS  ｜
 
-           | ALLEN     | ACCOUNTING  |
-           | ALLEN     | RESEARCH    |
-           | ALLEN     | SALES       |
-           | ALLEN     | OPERATIONS  |
+           ｜ ALLEN    ｜ ACCOUNTING  ｜
+           ｜ ALLEN    ｜ RESEARCH    ｜
+           ｜ ALLEN    ｜ SALES       ｜
+           ｜ ALLEN    ｜ OPERATIONS  ｜
 
-           | WARD      | ACCOUNTING  |
-           | WARD      | RESEARCH    |
-           | WARD      | SALES       |
-           | WARD      | OPERATIONS  |
+           ｜ WARD     ｜ ACCOUNTING  ｜
+           ｜ WARD     ｜ RESEARCH    ｜
+           ｜ WARD     ｜ SALES       ｜
+           ｜ WARD     ｜ OPERATIONS  ｜
 
-           | JONES     | ACCOUNTING  |
-           | JONES     | RESEARCH    |
-           | JONES     | SALES       |
-           | JONES     | OPERATIONS  |
+           ｜ JONES    ｜ ACCOUNTING  ｜
+           ｜ JONES    ｜ RESEARCH    ｜
+           ｜ JONES    ｜ SALES       ｜
+           ｜ JONES    ｜ OPERATIONS  ｜
            +-----------+-------------+
 
            怎么避免笛卡尔积现象？当然是加条件进行过滤
@@ -89,12 +89,12 @@
              WHERE
                 e.dephno = d.dephno;   // sql92语法，以后不用，作为了解
            +-----------+-------------+
-           | ename     | dname       |
+           ｜ ename    ｜ dname       ｜
            +-----------+-------------+
-           | SMITH     | RESEARCH    |
-           | ALLEN     | SALES       |
-           | WARD      | RESEARCH    |
-           | JONES     | ACCOUNTING  |
+           ｜ SMITH    ｜ RESEARCH    ｜
+           ｜ ALLEN    ｜ SALES       ｜
+           ｜ WARD     ｜ RESEARCH    ｜
+           ｜ JONES    ｜ ACCOUNTING  ｜
            +-----------+-------------+
 
 4、内连接
@@ -125,22 +125,22 @@
           案例：找出每个员工的工资等级，要求显示员工名、工资、工资等级
            emp表
            +-----------+-------------+
-           | ename     | sal         |
+           ｜ ename    ｜ sal         ｜
            +-----------+-------------+
-           | SMITH     | 800.00      |
-           | ALLEN     | 3000.00     |
-           | WARD      | 2005.00     |
-           | JONES     | 1080.00     |
+           ｜ SMITH    ｜ 800.00      ｜
+           ｜ ALLEN    ｜ 3000.00     ｜
+           ｜ WARD     ｜ 2005.00     ｜
+           ｜ JONES    ｜ 1080.00     ｜
            +-----------+-------------+
            salgrade表
            +-----------+-------------+-----------+
-           | grade     | losal       | hisal     |  // 工资等级   员工最低金额   员工最高金额
-           +-----------+-------------+-----------|
-           | 1         | 700         | 1200      |
-           | 2         | 1201        | 1400      |
-           | 3         | 1401        | 2000      |
-           | 4         | 2001        | 3000      |
-           +-----------+-------------+-----------|
+           ｜ grade    ｜ losal      ｜ hisal     ｜  // 工资等级   员工最低金额   员工最高金额
+           +-----------+-------------+-----------｜
+           ｜ 1        ｜ 700        ｜ 1200      ｜
+           ｜ 2        ｜ 1201       ｜ 1400      ｜
+           ｜ 3        ｜ 1401       ｜ 2000      ｜
+           ｜ 4        ｜ 2001       ｜ 3000      ｜
+           +-----------+-------------+-----------｜
 
            SELECT
               e.ename,e.sal,s.grade
@@ -156,13 +156,13 @@
           案例：找出每个员工的上级领导，要求显示员工名和对应的领导名
            emp表
            +-----------+-------------+-----------+
-           | empno     | ename       | mgr       |      // 员工编号       员工名       员工的上级领导编号
-           +-----------+-------------+-----------|
-           | 7839      | KING        | NULL      |
-           | 4563      | CLARK       | 7263      |
-           | 4135      | FORD        | 4563      |
-           | 7263      | WARD        | 7839      |
-           +-----------+-------------+-----------|
+           ｜ empno    ｜ ename       ｜ mgr      ｜      // 员工编号       员工名       员工的上级领导编号
+           +-----------+-------------+-----------｜
+           ｜ 7839     ｜ KING        ｜ NULL     ｜
+           ｜ 4563     ｜ CLARK       ｜ 7263     ｜
+           ｜ 4135     ｜ FORD        ｜ 4563     ｜
+           ｜ 7263     ｜ WARD        ｜ 7839     ｜
+           +-----------+-------------+-----------｜
            SELECT
               A.ename,B.ename
            FROM
@@ -190,13 +190,13 @@
       案例：找出每个员工的上级领导
            emp表
            +-----------+-------------+-----------+
-           | empno     | ename       | mgr       |   // 员工编号     员工名     员工的上级领导编号
-           +-----------+-------------+-----------|
-           | 7839      | KING        | NULL      |
-           | 4563      | CLARK       | 7263      |
-           | 4135      | FORD        | 4563      |
-           | 7263      | WARD        | 7839      |
-           +-----------+-------------+-----------|
+           ｜ empno     ｜ ename       ｜ mgr     ｜   // 员工编号     员工名     员工的上级领导编号
+           +-----------+-------------+-----------｜
+           ｜ 7839      ｜ KING        ｜ NULL    ｜
+           ｜ 4563      ｜ CLARK       ｜ 7263    ｜
+           ｜ 4135      ｜ FORD        ｜ 4563    ｜
+           ｜ 7263      ｜ WARD        ｜ 7839    ｜
+           +-----------+-------------+-----------｜
            SELECT
               A.ename '员工表',B.ename '领导表'
            FROM
@@ -210,22 +210,22 @@
       案例：找出哪个部门没有员工
            emp表
            +-----------+-------------+
-           | ename     | dephno      |
+           ｜ ename     ｜ dephno    ｜
            +-----------+-------------+
-           | SMITH     | 20          |
-           | ALLEN     | 30          |
-           | WARD      | 20          |
-           | JONES     | 10          |
+           ｜ SMITH     ｜ 20        ｜
+           ｜ ALLEN     ｜ 30        ｜
+           ｜ WARD      ｜ 20        ｜
+           ｜ JONES     ｜ 10        ｜
            +-----------+-------------+
            dept表
            +-----------+-------------+-----------+
-           | dephno    | dname       | loc       |
-           +-----------+-------------+-----------|
-           | 10        | ACCOUNTING  | NEW YORK  |
-           | 20        | RESEARCH    | DALLAS    |
-           | 30        | SALES       | CHICAGO   |
-           | 40        | OPERATIONS  | BOSTON    |
-           +-----------+-------------+-----------|
+           ｜ dephno    ｜ dname       ｜ loc     ｜
+           +-----------+-------------+-----------｜
+           ｜ 10        ｜ ACCOUNTING  ｜ NEW YORK｜
+           ｜ 20        ｜ RESEARCH    ｜ DALLAS  ｜
+           ｜ 30        ｜ SALES       ｜ CHICAGO ｜
+           ｜ 40        ｜ OPERATIONS  ｜ BOSTON  ｜
+           +-----------+-------------+-----------｜
            SELECT
               d.dept
            FROM
@@ -237,9 +237,93 @@
            WHERE
               e.name is null;
 
-        TODO MySQL中的left join *1 on *2 and *3 语句and后面不生效，而inner join *1 on *2 and *3语句 and生效
-
-
+        TODO MySQL中的 left join *1 on *2 and *3 语句and后面不生效，而 inner join *1 on *2 and *3 语句and生效
+         1、在 LEFT JOIN 中，条件中的 AND 连接条件会影响连接的结果集。
+            如果 AND 条件不满足，那么对应的左表记录会保持，并在右表中产生 NULL 值。
+            t_dict表
+            +----+-----------+---------------+--------------+----------+
+            ｜ id｜ dict_name ｜ dict_code    ｜ description ｜ del_flag｜
+            +----+-----------+---------------+--------------+----------+
+            ｜ 1 ｜ 支付方式   ｜ PAY_METHOD   ｜ 支付方式      ｜       0 ｜
+            ｜ 2 ｜ 订单状态   ｜ ORDER_STATUS ｜ 订单状态      ｜       0 ｜
+            +----+-------- --+---------------+--------------+----------+
+            t_dict_item表
+            +----+---------+-----------------+----------------+---------------+
+            ｜ id ｜dict_id｜ item_text      ｜ item_value     ｜ description  ｜
+            +----+---------+-----------------+----------------+---------------+
+            ｜ 1  ｜ 1     ｜ 支付宝           ｜ ZFB            ｜ 支付宝       ｜
+            ｜ 2  ｜ 1     ｜ 微信             ｜ WX             ｜ 微信        ｜
+            ｜ 3  ｜ 1     ｜ 银联             ｜ YL             ｜ 银联        ｜
+            ｜ 4  ｜ 2     ｜ 待付款           ｜ WAIT_BUYER_PAY ｜ 待付款       ｜
+            ｜ 5  ｜ 2     ｜ 交易成功         ｜ TRADE_SUCCESS  ｜ 交易成功      ｜
+            ｜ 6  ｜ 2     ｜ 订单取消成功      ｜ CANCEL_SUCCESS ｜ 订单取消成功  ｜
+            ｜ 7  ｜ 2     ｜ 退款成功         ｜ REFUD_SUCCESS  ｜ 退款成功      ｜
+            ｜ 8  ｜ 2     ｜ 退款失败         ｜ REFUD_FAIL     ｜ 退款失败      ｜
+            ｜ 9  ｜ 2     ｜ 订单已关闭       ｜ TRADE_CLOSED   ｜ 订单已关闭     ｜
+            +----+---------+-----------------+----------------+----------------+
+         2、假设有 左表t_dict 和 右表t_dict_item，语句 FROM t_dict LEFT JOIN t_dict_item ON condition1 AND condition2
+            首先查询出根据 condition1 (连接条件)满足的数据，然后根据 condition2 过滤掉右表的数据
+            在没有 WHERE 条件的情况下，使用 LEFT JOIN 连接，左表(主表)数据一定是全部都有的，condition2 过滤的是右表数据，
+            且右表过滤的数据在对应的左表存在的结果集中返回 NULL 值。
+                SELECT
+                	d.id, d.dict_name, d.dict_code,
+                	di.id AS di_id, di.dict_id, di.item_text, di.item_value, di.description
+                FROM t_dict AS d
+                	LEFT JOIN t_dict_item AS di
+                	ON d.id = di.dict_id
+                	AND di.item_text = '支付宝'
+            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+            ｜ id｜ dict_name   ｜ dict_code    ｜ di_id｜ dict_id｜ item_text ｜ item_value｜ description｜
+            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+            ｜ 1 ｜ 支付方式     ｜ PAY_METHOD   ｜ 1    ｜ 1       ｜ 支付宝    ｜ ZFB       ｜ 支付宝       ｜
+            ｜ 2 ｜ 订单状态     ｜ ORDER_STATUS ｜ NULL ｜ NULL    ｜ NULL     ｜ NULL      ｜ NULL        ｜
+            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+                SELECT
+                	d.id, d.dict_name, d.dict_code,
+                	di.id AS di_id, di.dict_id, di.item_text, di.item_value, di.description
+                FROM t_dict AS d
+                	LEFT JOIN t_dict_item AS di
+                	ON d.id = di.dict_id
+                	AND d.dict_name='支付方式'
+            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+            ｜ id｜ dict_name   ｜ dict_code    ｜ di_id｜ dict_id｜ item_text ｜ item_value｜ description｜
+            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+            ｜ 1 ｜ 支付方式     ｜ PAY_METHOD   ｜ 1    ｜ 1       ｜ 支付宝    ｜ ZFB       ｜ 支付宝       ｜
+            ｜ 1 ｜ 支付方式     ｜ PAY_METHOD   ｜ 2    ｜ 1       ｜ 微信      ｜ WX        ｜ 微信        ｜
+            ｜ 1 ｜ 支付方式     ｜ PAY_METHOD   ｜ 3    ｜ 1       ｜ 银联      ｜ YL        ｜ 银联        ｜
+            ｜ 2 ｜ 订单状态     ｜ ORDER_STATUS ｜ NULL ｜ NULL    ｜ NULL     ｜ NULL      ｜ NULL        ｜
+            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+         3、而在 INNER JOIN 中，条件中的 AND 连接条件只作用于连接的过程，不影响连接的结果集。
+            如果 AND 条件不满足，对应的记录会被排除在连接的结果中。
+                SELECT
+                	d.id, d.dict_name, d.dict_code,
+                	di.id AS di_id, di.dict_id, di.item_text, di.item_value, di.description
+                FROM t_dict AS d
+                	INNER JOIN t_dict_item AS di
+                	ON d.id = di.dict_id
+                	AND di.item_text = '支付宝'
+            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+            ｜ id｜ dict_name   ｜ dict_code   ｜ di_id ｜ dict_id｜ item_text ｜ item_value｜ description｜
+            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+            ｜ 1 ｜ 支付方式     ｜ PAY_METHOD   ｜ 1    ｜ 1       ｜ 支付宝    ｜ ZFB       ｜ 支付宝       ｜
+            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+         4、总结来说：
+            LEFT JOIN 中的 AND 连接条件会优先保留左表的记录，并根据条件从右表中匹配相应记录；不满足条件的左表产生 NULL 值。
+            INNER JOIN 中的 AND 连接条件会从连接的结果中排除不满足条件的记录。
+         5、如果你实在想用 LEFT JOIN 的方式去过滤，应当把 AND 的条件书写在 WHERE 语句中
+                SELECT
+                	d.id, d.dict_name, d.dict_code,
+                	di.id AS di_id, di.dict_id, di.item_text, di.item_value, di.description
+                FROM t_dict AS d
+                	LEFT JOIN t_dict_item AS di
+                	ON d.id = di.dict_id
+                WHERE
+                	di.item_text = '支付宝'
+            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+            ｜ id｜ dict_name   ｜ dict_code   ｜ di_id ｜ dict_id｜ item_text ｜ item_value｜ description｜
+            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+            ｜ 1 ｜ 支付方式     ｜ PAY_METHOD   ｜ 1    ｜ 1       ｜ 支付宝    ｜ ZFB       ｜ 支付宝       ｜
+            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
  */
 public class D4_3连接查询 {
 }

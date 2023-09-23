@@ -24,6 +24,7 @@
 
 3、导入数据
      第一步：登录MySQL管理系统
+        mysql -u root -p  (root为账号)
 
      第二步：查看有哪些数据库
         show databases;  (这个不是SQL语句，属于MySQL命令)
@@ -37,10 +38,10 @@
             +--------------------+
 
       第三步：创建属于我们自己的数据库
-        create database bjpowernode;  (这个不是SQL语句，属于MySQL命令)
+        create database 数据库名;  (这个不是SQL语句，属于MySQL命令)
 
-      第四步：使用bjpowernode数据库
-        use bjpowernode;   (这个不是SQL语句，属于MySQL命令)
+      第四步：使用指定数据库名
+        use 数据库名;   (这个不是SQL语句，属于MySQL命令)
 
       第五步：查看当前使用的数据库中有哪些表？
         show tables;   (这个不是SQL语句，属于MySQL命令)
