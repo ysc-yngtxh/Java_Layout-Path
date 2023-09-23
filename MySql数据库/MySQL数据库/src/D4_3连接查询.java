@@ -32,20 +32,16 @@
            案例：找出每一个员工的部门名称，要求显示员工名和部门名
            emp表
            +-----------+-------------+
-           ｜ ename    ｜ dephno      ｜
+           ｜ ename    ｜ dephno     ｜
            +-----------+-------------+
-           ｜ SMITH    ｜ 20          ｜
-           ｜ ALLEN    ｜ 30          ｜
-           ｜ WARD     ｜ 20          ｜
-           ｜ JONES    ｜ 10          ｜
+           ｜ SMITH    ｜ 20         ｜
+           ｜ JONES    ｜ 10         ｜
            +-----------+-------------+
            dept表
            +-----------+-------------+-----------+
            ｜ dephno   ｜ dname      ｜ loc       ｜
            +-----------+-------------+-----------｜
            ｜ 10       ｜ ACCOUNTING ｜ NEW YORK  ｜
-           ｜ 20       ｜ RESEARCH   ｜ DALLAS    ｜
-           ｜ 30       ｜ SALES      ｜ CHICAGO   ｜
            ｜ 40       ｜ OPERATIONS ｜ BOSTON    ｜
            +-----------+-------------+-----------｜
 
@@ -53,34 +49,20 @@
            表别名的好处：第一：执行效率高(避免在两张表中查询到相同字段数据时，无法取出正确的需要的数据)。
                        第二：可读性好
 
-           笛卡尔积现象：当这两张表进行连接查询的时候，没有任何条件进行限制，最终的查询结果条数是两张表记录条数的乘积(4 X 4)
+           笛卡尔积现象：当这两张表进行连接查询的时候，没有任何条件进行限制，最终的查询结果条数是两张表记录条数的乘积(2 X 2)
            +-----------+-------------+
            ｜ ename    ｜ dname       ｜
            +-----------+-------------+
            ｜ SMITH    ｜ ACCOUNTING  ｜
-           ｜ SMITH    ｜ RESEARCH    ｜
-           ｜ SMITH    ｜ SALES       ｜
            ｜ SMITH    ｜ OPERATIONS  ｜
 
-           ｜ ALLEN    ｜ ACCOUNTING  ｜
-           ｜ ALLEN    ｜ RESEARCH    ｜
-           ｜ ALLEN    ｜ SALES       ｜
-           ｜ ALLEN    ｜ OPERATIONS  ｜
-
-           ｜ WARD     ｜ ACCOUNTING  ｜
-           ｜ WARD     ｜ RESEARCH    ｜
-           ｜ WARD     ｜ SALES       ｜
-           ｜ WARD     ｜ OPERATIONS  ｜
-
            ｜ JONES    ｜ ACCOUNTING  ｜
-           ｜ JONES    ｜ RESEARCH    ｜
-           ｜ JONES    ｜ SALES       ｜
            ｜ JONES    ｜ OPERATIONS  ｜
            +-----------+-------------+
 
            怎么避免笛卡尔积现象？当然是加条件进行过滤
                   思考：避免了笛卡尔积现象，会减少记录的匹配次数吗？
-                             不会，次数还是16次，只不过显示的是有效记录。
+                       不会，次数还是16次，只不过显示的是有效记录。
            案例：找出每一个员工的部门名称，要求显示员工名和部门名
              SELECT
                 e.ename,d.dname
@@ -91,15 +73,11 @@
            +-----------+-------------+
            ｜ ename    ｜ dname       ｜
            +-----------+-------------+
-           ｜ SMITH    ｜ RESEARCH    ｜
-           ｜ ALLEN    ｜ SALES       ｜
-           ｜ WARD     ｜ RESEARCH    ｜
            ｜ JONES    ｜ ACCOUNTING  ｜
            +-----------+-------------+
 
 4、内连接
        等值连接  最大特点是：条件是等量关系。
-
            案例：查询每个员工的部门名称，要求显示员工名和部门名 。
            SQL92：(太老了，不常用)
                   SELECT
@@ -172,8 +150,6 @@
            ON
               A.mgr=B.empno;   // 这里无法查询出KING的上级领导，因为KING是大老板，没有上级领导，所以只有三组数据
 
-
-
 5、外连接
       什么是外连接，和内连接有什么区别？
       内连接：
@@ -218,14 +194,14 @@
            ｜ JONES     ｜ 10        ｜
            +-----------+-------------+
            dept表
-           +-----------+-------------+-----------+
-           ｜ dephno    ｜ dname       ｜ loc     ｜
-           +-----------+-------------+-----------｜
-           ｜ 10        ｜ ACCOUNTING  ｜ NEW YORK｜
-           ｜ 20        ｜ RESEARCH    ｜ DALLAS  ｜
-           ｜ 30        ｜ SALES       ｜ CHICAGO ｜
-           ｜ 40        ｜ OPERATIONS  ｜ BOSTON  ｜
-           +-----------+-------------+-----------｜
+           +-----------+-------------+---------+
+           ｜ dephno   ｜ dname      ｜ loc     ｜
+           +-----------+-------------+---------｜
+           ｜ 10       ｜ ACCOUNTING ｜ NEW YORK｜
+           ｜ 20       ｜ RESEARCH   ｜ DALLAS  ｜
+           ｜ 30       ｜ SALES      ｜ CHICAGO ｜
+           ｜ 40       ｜ OPERATIONS ｜ BOSTON  ｜
+           +-----------+-------------+---------｜
            SELECT
               d.dept
            FROM
@@ -262,39 +238,38 @@
             ｜ 9  ｜ 2     ｜ 订单已关闭       ｜ TRADE_CLOSED   ｜ 订单已关闭     ｜
             +----+---------+-----------------+----------------+----------------+
          2、假设有 左表t_dict 和 右表t_dict_item，语句 FROM t_dict LEFT JOIN t_dict_item ON condition1 AND condition2
-            首先查询出根据 condition1 (连接条件)满足的数据，然后根据 condition2 过滤掉右表的数据
-            在没有 WHERE 条件的情况下，使用 LEFT JOIN 连接，左表(主表)数据一定是全部都有的，condition2 过滤的是右表数据，
-            且右表过滤的数据在对应的左表存在的结果集中返回 NULL 值。
-                SELECT
-                	d.id, d.dict_name, d.dict_code,
-                	di.id AS di_id, di.dict_id, di.item_text, di.item_value, di.description
-                FROM t_dict AS d
-                	LEFT JOIN t_dict_item AS di
-                	ON d.id = di.dict_id
-                	AND di.item_text = '支付宝'
-            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
-            ｜ id｜ dict_name   ｜ dict_code    ｜ di_id｜ dict_id｜ item_text ｜ item_value｜ description｜
-            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
-            ｜ 1 ｜ 支付方式     ｜ PAY_METHOD   ｜ 1    ｜ 1       ｜ 支付宝    ｜ ZFB       ｜ 支付宝       ｜
-            ｜ 2 ｜ 订单状态     ｜ ORDER_STATUS ｜ NULL ｜ NULL    ｜ NULL     ｜ NULL      ｜ NULL        ｜
-            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
-                SELECT
-                	d.id, d.dict_name, d.dict_code,
-                	di.id AS di_id, di.dict_id, di.item_text, di.item_value, di.description
-                FROM t_dict AS d
-                	LEFT JOIN t_dict_item AS di
-                	ON d.id = di.dict_id
-                	AND d.dict_name='支付方式'
-            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
-            ｜ id｜ dict_name   ｜ dict_code    ｜ di_id｜ dict_id｜ item_text ｜ item_value｜ description｜
-            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
-            ｜ 1 ｜ 支付方式     ｜ PAY_METHOD   ｜ 1    ｜ 1       ｜ 支付宝    ｜ ZFB       ｜ 支付宝       ｜
-            ｜ 1 ｜ 支付方式     ｜ PAY_METHOD   ｜ 2    ｜ 1       ｜ 微信      ｜ WX        ｜ 微信        ｜
-            ｜ 1 ｜ 支付方式     ｜ PAY_METHOD   ｜ 3    ｜ 1       ｜ 银联      ｜ YL        ｜ 银联        ｜
-            ｜ 2 ｜ 订单状态     ｜ ORDER_STATUS ｜ NULL ｜ NULL    ｜ NULL     ｜ NULL      ｜ NULL        ｜
-            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
-         3、而在 INNER JOIN 中，条件中的 AND 连接条件只作用于连接的过程，不影响连接的结果集。
-            如果 AND 条件不满足，对应的记录会被排除在连接的结果中。
+            [1]、首先查询出根据 condition1 (连接条件)满足的数据，然后根据 condition2 过滤掉右表的数据
+            [2]、在没有 WHERE 条件的情况下，使用 LEFT JOIN 连接，左表(主表)数据一定是全部都有的，condition2 过滤的是右表数据，
+                 且右表过滤的数据在对应的左表存在的结果集中返回 NULL 值。
+            [3]、SELECT
+                	 d.id, d.dict_name, d.dict_code,
+                	 di.id AS di_id, di.dict_id, di.item_text, di.item_value, di.description
+                 FROM t_dict AS d
+                	 LEFT JOIN t_dict_item AS di
+                	 ON d.id = di.dict_id
+                	 AND di.item_text = '支付宝'
+                 +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+                 ｜ id｜ dict_name   ｜ dict_code    ｜ di_id｜ dict_id｜ item_text ｜ item_value｜ description｜
+                 +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+                 ｜ 1 ｜ 支付方式     ｜ PAY_METHOD   ｜ 1    ｜ 1       ｜ 支付宝    ｜ ZFB       ｜ 支付宝       ｜
+                 ｜ 2 ｜ 订单状态     ｜ ORDER_STATUS ｜ NULL ｜ NULL    ｜ NULL     ｜ NULL      ｜ NULL        ｜
+                 +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+            [4]、SELECT
+                	 d.id, d.dict_name, d.dict_code,
+                	 di.id AS di_id, di.dict_id, di.item_text, di.item_value, di.description
+                 FROM t_dict AS d
+                	 LEFT JOIN t_dict_item AS di
+                	 ON d.id = di.dict_id
+                	 AND d.dict_name='支付方式'
+                 +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+                 ｜ id｜ dict_name   ｜ dict_code    ｜ di_id｜ dict_id｜ item_text ｜ item_value｜ description｜
+                 +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+                 ｜ 1 ｜ 支付方式     ｜ PAY_METHOD   ｜ 1    ｜ 1       ｜ 支付宝    ｜ ZFB       ｜ 支付宝       ｜
+                 ｜ 1 ｜ 支付方式     ｜ PAY_METHOD   ｜ 2    ｜ 1       ｜ 微信      ｜ WX        ｜ 微信        ｜
+                 ｜ 1 ｜ 支付方式     ｜ PAY_METHOD   ｜ 3    ｜ 1       ｜ 银联      ｜ YL        ｜ 银联        ｜
+                 ｜ 2 ｜ 订单状态     ｜ ORDER_STATUS ｜ NULL ｜ NULL    ｜ NULL     ｜ NULL      ｜ NULL        ｜
+                 +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+         3、INNER JOIN 中，条件中 AND 连接条件只作用于连接的过程，不影响连接的结果集。如果 AND 条件不满足，对应的记录会被排除结果中。
                 SELECT
                 	d.id, d.dict_name, d.dict_code,
                 	di.id AS di_id, di.dict_id, di.item_text, di.item_value, di.description
@@ -302,11 +277,11 @@
                 	INNER JOIN t_dict_item AS di
                 	ON d.id = di.dict_id
                 	AND di.item_text = '支付宝'
-            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
-            ｜ id｜ dict_name   ｜ dict_code   ｜ di_id ｜ dict_id｜ item_text ｜ item_value｜ description｜
-            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
-            ｜ 1 ｜ 支付方式     ｜ PAY_METHOD   ｜ 1    ｜ 1       ｜ 支付宝    ｜ ZFB       ｜ 支付宝       ｜
-            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+                +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+                ｜ id｜ dict_name   ｜ dict_code   ｜ di_id ｜ dict_id｜ item_text ｜ item_value｜ description｜
+                +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+                ｜ 1 ｜ 支付方式     ｜ PAY_METHOD   ｜ 1    ｜ 1       ｜ 支付宝    ｜ ZFB       ｜ 支付宝       ｜
+                +----+--------------+--------------+-------+---------+-----------+------------+-------------+
          4、总结来说：
             LEFT JOIN 中的 AND 连接条件会优先保留左表的记录，并根据条件从右表中匹配相应记录；不满足条件的左表产生 NULL 值。
             INNER JOIN 中的 AND 连接条件会从连接的结果中排除不满足条件的记录。
@@ -319,11 +294,11 @@
                 	ON d.id = di.dict_id
                 WHERE
                 	di.item_text = '支付宝'
-            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
-            ｜ id｜ dict_name   ｜ dict_code   ｜ di_id ｜ dict_id｜ item_text ｜ item_value｜ description｜
-            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
-            ｜ 1 ｜ 支付方式     ｜ PAY_METHOD   ｜ 1    ｜ 1       ｜ 支付宝    ｜ ZFB       ｜ 支付宝       ｜
-            +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+                +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+                ｜ id｜ dict_name   ｜ dict_code   ｜ di_id ｜ dict_id｜ item_text ｜ item_value｜ description｜
+                +----+--------------+--------------+-------+---------+-----------+------------+-------------+
+                ｜ 1 ｜ 支付方式     ｜ PAY_METHOD   ｜ 1    ｜ 1       ｜ 支付宝    ｜ ZFB       ｜ 支付宝       ｜
+                +----+--------------+--------------+-------+---------+-----------+------------+-------------+
  */
 public class D4_3连接查询 {
 }
