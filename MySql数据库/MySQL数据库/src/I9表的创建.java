@@ -13,21 +13,36 @@
         );
 
   2、关于MySQL当中字段的数据类型，以下只说常见的
-        int        整数型 (java中的int)
-        bigint     长整型 (java中的long)
-        float      浮点型 (java中的float double)
-        char       定长字符串 (String)
-        varchar    可变长字符串 (StringBuffer/StringBuilder)
-        date       日期类型 (对应Java中的java.sql.Date类型)
-        tinyint(1) 布尔类型(对应Java中的boolean,用1代表true,0代表false)
-        BLOB       二进制大对象 (Binary Large Object 存储图片、视频等流媒体信息)
-        CLOB       字符大对象 (Character Large Object 存储较大文本，比如，可以存储4G的字符串)
+        [1]、整数类型：
+             int         整数型 (对应Java中的int)
+             bigint      长整型 (对应Java中的long)
+             tinyint(1)  布尔类型(对应Java中的boolean,用1代表true,0代表false)
+             smallint    整数型 (对应Java中的short)
+               字段如果设置为UNSIGNED类型: 只能存储正整数,不能用来储存负数；例如：tinyint 类型只能存储0到255的整数
+               字段如果不设置UNSIGNED类型: 存储该类型范围的整数；例如：tinyint 类型只能存储-128到127的整数
+               例如：无符号 `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '订单id',
+        [2]、浮点类型：
+             float       单精度浮点数 (对应Java中的float)
+             double      双精度浮点数 (对应Java中的double)
+        [3]、字符串类型：
+             char        固定长度字符串，最多 255 个字符 (对应Java中的String)
+             varchar     可变长度字符串，最多 65535 个字符 (对应Java中的StringBuffer/StringBuilder)
+             text        可变长度字符串，最多 65535 个字符，适合存储大段文本
+             BLOB        二进制大对象 (Binary Large Object 存储图片、视频等流媒体信息)
+             CLOB        字符大对象 (Character Large Object 存储较大文本，比如，可以存储4G的字符串)
+        [4]、日期和时间类型：
+             date        日期，格式为 ‘YYYY-MM-DD’ (对应Java中的java.sql.Date类型)
+             time        时间，格式为 ‘HH:MM:SS’
+             datetime    日期和时间，格式为 ‘YYYY-MM-DD HH:MM:SS’
+             timestamp   自动记录插入或修改数据的日期和时间.需要设置默认值为当前时间并且会根据当前时间戳更新
+               例如：`update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+
 
         char和varchar怎么选择？
             在实际的开发中，当某个字段中的数据长度不发生改变的时候，是定长的，例如：性别、生日等都是采用char
             当一个字段的数据长度不确定，例如：简介、姓名等都是采用varchar
 
-            表名在数据库当中一般建议以：t_或者tbl_开始
+        表名在数据库当中一般建议以：t_或者tbl_开始
 
   3、创建学生表：
          学生信息包括：
@@ -43,16 +58,16 @@
 
         create table t_students(
               id int NOT NULL AUTO_INCREMENT COMMENT '序号',
-              no bigint NOT NULL COMMENT '学号',
+              no bigint unsigned NOT NULL COMMENT '学号',
               name varchar(255) NOT NULL COMMENT '姓名',
               sex char(11) NOT NULL COMMENT '性别',
               class_no varchar(255) DEFAULT '' COMMENT '班级编号',
               birth char(10) NOT NULL COMMENT '生日',
-              time date NOT NULL COMMENT '入学时间',
+              time datetime NOT NULL COMMENT '入学时间',
               graduate tinyint(1) NOT NULL COMMENT '是否毕业',
               PRIMARY KEY (`id`)
-        ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COMMENT='学生信息表';
-        // AUTO_INCREMENT=24表示的是自增将会从24开始，第一条数据的序号将会是24。date格式2022-02-21 18:12:13
+        ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='学生信息表';
+        // AUTO_INCREMENT=1表示的是自增将会从1开始，第一条数据的id序号将会是1。datetime格式2023-09-25 14:30:00
         +----------+--------------+------+-----+---------+----------------+
         | Field    | Type         | Null | Key | Default | Extra          |
         +----------+--------------+------+-----+---------+----------------+
@@ -71,23 +86,20 @@
           语法格式：INSERT INTO 表名(字段名1，字段名2，字段名3,...) VALUES(值1,值2,值3,...)
                   要求：字段的数量和值的数量相同，并且数据类型要对应相同
 
-           INSERT INTO t_student(no,name,sex,class_no,birth) VALUES(1,'zhangsan','1','高三1班','1950-10-12');
+           INSERT INTO t_student(no,name,sex,class_no,birth) VALUES(1,'ZhangSan','1','高三1班','1950-10-12');
            +------+----------+------+------------+------------+
            | no   | name     | sex  | class_no   | birth      |
            +------+----------+------+------------+------------+
-           |    1 | zhangsan | 1    | 高三1班     | 1950-10-12 |
+           |    1 | ZhangSan | 1    | 高三1班     | 1950-10-12 |
            +------+----------+------+------------+------------+
 
            INSERT INTO t_student(name) VALUES('lisi');    // 除name字段外，剩下的所有字段自动插入null
            +------+----------+------+------------+------------+
            | no   | name     | sex  | class_no   | birth      |
            +------+----------+------+------------+------------+
-           |    1 | zhangsan | 1    | 高三1班     | 1950-10-12 |
+           |    1 | ZhangSan | 1    | 高三1班     | 1950-10-12 |
            | NULL | lisi     | NULL | NULL       | NULL       |
            +------+----------+------+------------+------------+
-           ** 需要注意的地方：
-                当一条insert语句执行成功之后，表格当中必然会多一行记录。
-                即使多的这一行记录当中某些字段是null，后期也没有办法再执行insert语句插入数据了，只能使用update更新
 
            drop table if exists t_student;   // 当这个表存在的话删除
            create table t_student(
@@ -115,35 +127,35 @@
              (no,name,sex,class_no,birth)
           VALUES
              (3,'rose','1','高三2班','1952-12-14'),
-             (4,'laotie','1','高三2班','1955-12-14');
+             (4,'LaoTie','1','高三2班','1955-12-14');
           +------+----------+------+------------+------------+
           | no   | name     | sex  | class_no   | birth      |
           +------+----------+------+------------+------------+
-          |    1 | zhangsan | 1    | 高三1班     | 1950-10-12 |
+          |    1 | ZhangSan | 1    | 高三1班     | 1950-10-12 |
           |    1 | jack     | 0    | 高三2班     | 1986-10-23 |
           |    3 | rose     | 1    | 高三2班     | 1952-12-14 |
-          |    4 | laotie   | 1    | 高三2班     | 1955-12-14 |
+          |    4 | LaoTie   | 1    | 高三2班     | 1955-12-14 |
           +------+----------+------+------------+------------+
 
   5、表的复制
         语法：create table 表名 as select语句;
              将查询结果当作表创建出来;
-        例如：create table t_student1 AS SELECT * FROM t_student;
+        例如：create table t_student20230925 AS SELECT * FROM t_student;
 
   6、批量插入
       INSERT INTO t_student1 SELECT * FROM t_student;
       +------+----------+------+------------+------------+
       | no   | name     | sex  | class_no   | birth      |
       +------+----------+------+------------+------------+
-      |    1 | zhangsan | 1    | 高三1班     | 1950-10-12 |
+      |    1 | ZhangSan | 1    | 高三1班     | 1950-10-12 |
       |    1 | jack     | 0    | 高三2班     | 1986-10-23 |
       |    3 | rose     | 1    | 高三2班     | 1952-12-14 |
-      |    4 | laotie   | 1    | 高三2班     | 1955-12-14 |
+      |    4 | LaoTie   | 1    | 高三2班     | 1955-12-14 |
 
-      |    1 | zhangsan | 1    | 高三1班     | 1950-10-12 |
+      |    1 | ZhangSan | 1    | 高三1班     | 1950-10-12 |
       |    1 | jack     | 0    | 高三2班     | 1986-10-23 |
       |    3 | rose     | 1    | 高三2班     | 1952-12-14 |
-      |    4 | laotie   | 1    | 高三2班     | 1955-12-14 |
+      |    4 | LaoTie   | 1    | 高三2班     | 1955-12-14 |
       +------+----------+------+------------+------------+
 
   7、修改数据：update
@@ -155,14 +167,14 @@
               +------+----------+------+------------+------------+
               | no   | name     | sex  | class_no   | birth      |
               +------+----------+------+------------+------------+
-              |    1 | zhangsan | 0    | 高三3班     | 1950-10-12 |
+              |    1 | ZhangSan | 0    | 高三3班     | 1950-10-12 |
               |    1 | jack     | 0    | 高三3班     | 1986-10-23 |
               |    3 | rose     | 1    | 高三2班     | 1952-12-14 |
-              |    4 | laotie   | 1    | 高三2班     | 1955-12-14 |
-              |    1 | zhangsan | 0    | 高三3班     | 1950-10-12 |
+              |    4 | LaoTie   | 1    | 高三2班     | 1955-12-14 |
+              |    1 | ZhangSan | 0    | 高三3班     | 1950-10-12 |
               |    1 | jack     | 0    | 高三3班     | 1986-10-23 |
               |    3 | rose     | 1    | 高三2班     | 1952-12-14 |
-              |    4 | laotie   | 1    | 高三2班     | 1955-12-14 |
+              |    4 | LaoTie   | 1    | 高三2班     | 1955-12-14 |
               +------+----------+------+------------+------------+
 
               更新所有记录：
@@ -170,14 +182,14 @@
               +------+----------+------+------------+------------+
               | no   | name     | sex  | class_no   | birth      |
               +------+----------+------+------------+------------+
-              |    1 | zhangsan | 0    | 高三3班     | 1950-10-12 |
+              |    1 | ZhangSan | 0    | 高三3班     | 1950-10-12 |
               |    1 | jack     | 0    | 高三3班     | 1986-10-23 |
               |    3 | rose     | 0    | 高三3班     | 1952-12-14 |
-              |    4 | laotie   | 0    | 高三3班     | 1955-12-14 |
-              |    1 | zhangsan | 0    | 高三3班     | 1950-10-12 |
+              |    4 | LaoTie   | 0    | 高三3班     | 1955-12-14 |
+              |    1 | ZhangSan | 0    | 高三3班     | 1950-10-12 |
               |    1 | jack     | 0    | 高三3班     | 1986-10-23 |
               |    3 | rose     | 0    | 高三3班     | 1952-12-14 |
-              |    4 | laotie   | 0    | 高三3班     | 1955-12-14 |
+              |    4 | LaoTie   | 0    | 高三3班     | 1955-12-14 |
               +------+----------+------+------------+------------+
 
   8、删除数据
@@ -190,9 +202,9 @@
            | no   | name   | sex  | class_no   | birth      |
            +------+--------+------+------------+------------+
            |    3 | rose   | 0    | 高三3班     | 1952-12-14 |
-           |    4 | laotie | 0    | 高三3班     | 1955-12-14 |
+           |    4 | LaoTie | 0    | 高三3班     | 1955-12-14 |
            |    3 | rose   | 0    | 高三3班     | 1952-12-14 |
-           |    4 | laotie | 0    | 高三3班     | 1955-12-14 |
+           |    4 | LaoTie | 0    | 高三3班     | 1955-12-14 |
            +------+--------+------+------------+------------+
 
            删除表所有记录
