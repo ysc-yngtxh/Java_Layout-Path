@@ -215,7 +215,7 @@
 
 6.TODO MySQL中的 left join *1 on *2 and *3 语句and后面不生效，而 inner join *1 on *2 and *3 语句and生效
        Ⅰ、在 LEFT JOIN 中，条件中的 AND 连接条件会影响连接的结果集。
-          如果 AND 条件不满足，那么对应的左表记录会保持，并在右表中产生 NULL 值。
+          如果 AND 条件不满足，那么对应的左表记录会保持，但在右表中产生 NULL 值。
           [1]、t_dict表
                +----+-----------+---------------+--------------+----------+
                ｜ id｜ dict_name ｜ dict_code    ｜ description ｜ del_flag｜
