@@ -27,7 +27,7 @@
 3、JDBC开发前的准备工作
 
        先从官网下载对应的驱动jar包，然后将其配置到环境变量classpath当中
-       classpath=.;D\...\mysql-connector-java.jar
+       classpath=D\...\mysql-connector-java.jar;
        以上配置是针对于文本编辑器的方式开发，使用idea工具的时候，不需要配置以上的环境变量。idea有自己的配置方式。
 
        idea工具要怎么进行配置呢？
