@@ -1,6 +1,9 @@
 import java.sql.*;
 import java.util.Scanner;
 
+/**
+ * @author 游家纨绔
+ */
 /*
 1、对比一下Statement和preparedStatement?
     -Statement存在SQL注入问题，preparedStatement解决了SQL注入问题
@@ -16,10 +19,6 @@ import java.util.Scanner;
     看一下代码程序，可以发现要进行拼接字符串到SQL语句中，而preparedStatement却无法做到，
     因为传值过程中会自动加上单引号，但是加上了单引号又不符合SQL语法。
     所以这个时候就需要使用到Statement…
- */
-
-/**
- * @author 游家纨绔
  */
 public class G7对比PreparedStatement和Statement {
     public static void main(String[] args) {

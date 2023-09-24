@@ -1,5 +1,8 @@
 import java.sql.*;
 
+/**
+ * @author 游家纨绔
+ */
 /*
 JDBC事务机制：
      1、JDBC中的事务是自动提交的，什么是自动提交？
@@ -13,22 +16,17 @@ JDBC事务机制：
                  conn.setAutoCommit(false);  开启事务
                  conn.commit();   提交事务
                  conn.rollback(); 回滚事务
+SQL脚本：
+     drop table if exists t_act;
+     create table t_act(
+         act_no bigint,
+         balance double(7,2)      注意：7表示有效数字的个数，2表示小数位的个数
+     );
+     insert into t_act(act_no,balance) values(111,20000);
+     insert into t_act(act_no,balance) values(222,0);
+     commit;
+     select * from t_act;
 */
-
-/**
- * SQL脚本：
- * drop table if exists t_act;
- * create table t_act(
- * actno bigint,
- * balance double(7,2)      注意：7表示有效数字的个数，2表示小数位的个数
- * );
- * insert into t_act(actno,balance) values(111,20000);
- * insert into t_act(actno,balance) values(222,0);
- * commit;
- * select * from t_act;
- *
- * @author 游家纨绔
- */
 public class I9JDBC事务自动提交机制的演示 {
     public static void main(String[] args) {
 
@@ -42,7 +40,7 @@ public class I9JDBC事务自动提交机制的演示 {
             // 将自动提交机制修改为手动修改
             conn.setAutoCommit(false);
 
-            String sql = "update t_act set balance=? where actno=?";
+            String sql = "update t_act set balance=? where act_no=?";
             ps = conn.prepareStatement(sql);
 
             ps.setDouble(1, 10000);

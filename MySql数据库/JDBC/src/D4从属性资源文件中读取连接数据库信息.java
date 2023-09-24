@@ -1,16 +1,15 @@
 import java.sql.*;
 import java.util.ResourceBundle;
 
+/**
+ * @author 游家纨绔
+ */
 /*
 1、将连接数据库的所有信息配置到配置文件
 
 2、处理查询结果集
-     //int executeUpdate(insert/delete/update)
-     //ResultSet executeQuery(select)
- */
-
-/**
- * @author 游家纨绔
+     // int executeUpdate(insert/delete/update)
+     // ResultSet executeQuery(select)
  */
 public class D4从属性资源文件中读取连接数据库信息 {
     public static void main(String[] args) {

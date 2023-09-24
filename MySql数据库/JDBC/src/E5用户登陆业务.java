@@ -3,6 +3,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * @author 游家纨绔
+ */
 /*
 实现功能：
         1、需求：
@@ -33,10 +36,6 @@ import java.util.Scanner;
        PreparedStatement是属于预编译的数据库操作对象
        PreparedStatement的原理是：预先对SQL语句的框架进行编译，然后再给SQL语句传"值"
 */
-
-/**
- * @author 游家纨绔
- */
 public class E5用户登陆业务 {
     public static void main(String[] args) {
 

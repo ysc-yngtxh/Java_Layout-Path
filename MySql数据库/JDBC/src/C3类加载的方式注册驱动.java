@@ -3,6 +3,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * @author 游家纨绔
+ */
 /*
 public class Driver extends com.mysql.cj.jdbc.Driver {
     public Driver() throws SQLException {
@@ -24,10 +27,6 @@ public class Driver extends com.mysql.cj.jdbc.Driver {
 
        所以，我们在第一步注册驱动的时候还有一种写法：即Class.forName("完整类名");
        这种方法也是我们最常用的方法
- */
-
-/**
- * @author 游家纨绔
  */
 public class C3类加载的方式注册驱动 {
     public static void main(String[] args) {

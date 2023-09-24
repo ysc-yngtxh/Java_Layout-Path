@@ -3,10 +3,11 @@ import util.DButil;
 import java.sql.*;
 
 /**
- * 1、在K11悲观锁和乐观锁的概念中加上断点在提交事务(conn.commit)语句上,然后debug运行
- * 2、debug运行后再到L12演示行级锁中运行，会发现本应输出的值1没有出现。
- *
  * @author 游家纨绔
+ */
+/*
+  1、在K11悲观锁和乐观锁的概念中加上断点在提交事务(conn.commit)语句上,然后debug运行
+  2、debug运行后再到L12演示行级锁中运行，会发现本应输出的值1没有出现。
  */
 public class K11演示行级锁 {
     public static void main(String[] args) {

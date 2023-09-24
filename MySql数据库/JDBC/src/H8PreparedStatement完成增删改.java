@@ -4,7 +4,6 @@ import java.sql.*;
  * PreparedStatement完成insert  delete  update
  * @author 游家纨绔
  */
-
 public class H8PreparedStatement完成增删改 {
     public static void main(String[] args) {
 

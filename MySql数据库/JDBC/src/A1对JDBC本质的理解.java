@@ -1,3 +1,6 @@
+/**
+ * @author 游家纨绔
+ */
 /*
 1、JDBC是什么？
     java DataBase Connectivity(Java语言连接数据库)
@@ -44,10 +47,6 @@
      MySQL驱动8的时候注册驱动com.mysql.cj.jdbc.Driver();
       url="jdbc:mysql://localhost:3306/数据库名?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC"
 
- */
-
-/**
- * @author 游家纨绔
  */
 public class A1对JDBC本质的理解 {
 }
