@@ -72,6 +72,11 @@
 8、索引什么时候失效？
      select ename from emp where ename like '%A%';
          模糊查询的时候，第一个通配符使用的是%，这个时候索引是失效的。
+
+9、创建表的时候建立索引
+
+10、建完表之后新增索引
+
  */
 public class M13索引 {
 }

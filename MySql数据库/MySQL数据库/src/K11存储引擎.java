@@ -2,7 +2,7 @@
  * @author 游家纨绔
  */
 /*
-存储引擎(整个内容纯属了解)
+存储引擎
   1、什么是存储引擎？
         存储引擎这个名字只有在MySQL中存在。(Oracle中有对应的机制，但是不叫作存储引擎。Oracle中没有特殊的名字，就是“表的存储方式”)
      MySQL支持很多存储引擎，每一个存储引擎都对应一种不同的存储方式。每一个存储引擎都有自己的优缺点，需要在合适的时机选择合适的存储引擎
@@ -14,13 +14,13 @@
        mysql5.5.36版本支持的存储引擎有9个
 
   3、常见的存储引擎
-               第一个：MyISAM
+              第一个: MyISAM
              Engine: MyISAM
             Support: YES
             Comment: MyISAM storage engine
        Transactions: NO
                  XA: NO
-         Savepoints: NO
+          Savepoint: NO
 
          MyISAM这种存储引擎不支持事务。
          MyISAM是MySQL最常用的存储引擎，但是这种存储引擎不是默认的。
@@ -31,13 +31,13 @@
                    优点：可被压缩，节省存储空间，并且可以转换为只读表，提高检索效率。
                    缺点：不支持事务
   ---------------------------------------------------------------------------------------------------
-              第二个：InnoDB
+             第二个: InnoDB
             Engine: InnoDB
            Support: DEFAULT
            Comment: Supports transactions, row-level locking, and foreign keys
       Transactions: YES
                 XA: YES
-        Savepoints: YES
+         Savepoint: YES
 
         表的结构存储在xxx.frm文件中
         数据存储在tablespace这样的表空间中(逻辑概念)，无法被压缩，无法转换成只读
@@ -46,13 +46,13 @@
 
         优点：支持事务、行级锁、外键等。这种引擎数据的安全存储得到保障。
   ---------------------------------------------------------------------------------------------------
-               第三个： MEMORY
+             第三个: MEMORY
             Engine: MEMORY
            Support: YES
            Comment: Hash based, stored in memory, useful for temporary tables
       Transactions: NO
                 XA: NO
-        Savepoints: NO
+         Savepoint: NO
          优点：因为所有数据和索引都是存储在内存当中的，查询速度快
          缺点：不支持事务。因为所有数据和索引都是存储在内存当中的，所以数据容易丢失（比如说断电数据全没了）。
 
