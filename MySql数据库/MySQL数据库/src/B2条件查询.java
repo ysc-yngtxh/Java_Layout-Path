@@ -12,29 +12,27 @@
                条件;
 
                执行顺序：先FROM，然后WHERE，最后SELECT
-
-System.out.println("===========================================================================================================");
-
+---------------------------------------------------------------------------------------------------------------
 二、条件查询中会用到的运算符：
       1、between...and...(是一个闭区间，取其范围内)
            查询员工工资在1100和3000之间的员工，包括1100和3000。
-                SELECT ename,sal FROM emp WHERE sal >= 1100 AND sal <= 3000;
-                SELECT ename,sal FROM emp WHERE sal BETWEEN 1100 AND 3000;   // between...and...是闭区间[1100 ~ 3000]
+              SELECT ename,sal FROM emp WHERE sal >= 1100 AND sal <= 3000;
+              SELECT ename,sal FROM emp WHERE sal BETWEEN 1100 AND 3000;  // between...and...是闭区间[1100 ~ 3000]
 
       2、is null(在数据库当中null不是一个值，代表什么也没有，为空。空不是一个值，不能用等号衡量，必须使用is null或者is not null)
            查询哪些员工津贴为空。
-                select ename,sal,comm from emp where comm IS NULL;
+               SELECT ename,sal,comm FROM emp WHERE comm IS NULL;
       3、is not null
 
       4、or(条件'或者'语句)
            查询工作岗位是MANAGER和SALESMAN的员工。
                 SELECT ename,job FROM emp WHERE job='MANAGER' OR job='SALESMAN';
-                               注意：不能是and,如果是and，那么意思就变成了工作岗位即是MANAGER又是SALESMAN的员工
+                注意：不能是and,如果是and，那么意思就变成了工作岗位即是MANAGER又是SALESMAN的员工
 
       5、and(条件'并且'语句)
             查询薪资大于1000的并且部门编号是20或30部门的员工
-                selEct ename,sal,depthno FROM emp WHERE sal > 1000 AND (deptno=20 OR deptno=30);
-                               注意：and的优先级比or的要高，不加小括号出来的表格式会是使部门编号30的所有员工显示出来
+                selEct ename,sal,depth_no FROM emp WHERE sal > 1000 AND (dept_no=20 OR dept_no=30);
+                注意：and的优先级比or的要高，不加小括号出来的表格式会是使部门编号30的所有员工显示出来
 
 
       6、in(语句会优先执行in()中的。确定条件查询中给定的值是否与列表中的值相匹配。)
@@ -73,15 +71,13 @@ System.out.println("============================================================
       9、not exists(就是不在这个范围内的数据)
 
       10、like(模糊查询)
-
-System.out.println("===========================================================================================================");
-
+---------------------------------------------------------------------------------------------------------------
 三、模糊查询like
     （在模糊查询当中，必须掌握两个特殊的符号，一个是%,一个是_）
       %代表任意多个字符，_代表任意1个字符。
 
       例：找出名字当中含有字母O的
-          SELECT emane FROM emp WHERE ename LIKE '%O%';
+          SELECT ename FROM emp WHERE ename LIKE '%O%';
 
           找出名字当中第二个字母是A的
           SELECT ename FROM emp WHERE enamel LIKE '_A%';
