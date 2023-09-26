@@ -74,5 +74,5 @@
        execute stmt;
        deallocate prepare stmt;
  */
-public class Q幂等性脚本 {
+public class Q17幂等性脚本 {
 }
