@@ -183,5 +183,5 @@
          第三：可重复读(repeatable read)
          第四：可串行化
  */
-public class L12_2事务原理 {
+public class L12_2MVCC及事务演示 {
 }
