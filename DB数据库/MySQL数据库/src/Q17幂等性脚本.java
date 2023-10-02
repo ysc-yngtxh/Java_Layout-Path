@@ -66,8 +66,8 @@
                                    and (index_name = @index)
                                    and (table_schema = @schema)
                             ) > 0,
-                          `select "索引已存在" as "是否存在"`,
-                          "alter table progress add unique index 'idx_unique_code' ('code','delete_flag') comment `删除标识、集合编码联合唯一索引` using btree;",
+                            `select "索引已存在" as "是否存在"`,
+                            "alter table progress add unique index 'idx_unique_code' ('code','delete_flag') comment `删除标识、集合编码联合唯一索引` using btree;"
                           )
                 );
        prepare stmt from @sql;
