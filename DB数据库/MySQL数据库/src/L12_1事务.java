@@ -80,9 +80,9 @@
             把修改操作 事务Id=101 的数据里 隐藏列roll_pointer 指向 undo log 中事务Id=100的数据地址。
 
    [5]、快照读和当前读
-        ①、快照读：读取的是记录数据的可见版本(有旧的版本)。不加锁,普通的select语句都是快照读,如：
+        ①、快照读：读取的是记录数据的可见版本(读取 undo log中的数据)。不加锁,普通的select语句都是快照读,如：
                   select * from core_user where id > 2;
-        ②、当前读：读取的是记录数据的最新版本，显式加锁的都是当前读
+        ②、当前读：读取的是记录数据的最新版本，显式加锁的都是当前读（读取实际表中数据）
                   select * from core_user where id > 2 for update;
                   select * from account where id > 2 lock in share mode;
 
@@ -90,7 +90,7 @@
         Read View 就是事务执行SQL语句时，产生的读视图。实际上在innodb中，每个SQL语句执行前都会得到一个Read View。
         主要是用来做可见性判断的，即判断当前事务可见哪个版本的数据~
 
-        Read view的重要属性
+        Read View的重要属性
            m_ids:          当前系统中那些活跃(未提交)的读写事务ID, 它数据结构为一个List。一旦事务提交，对应事务ID就会被剔除
            min_limit_id:   表示在生成ReadView时，当前系统中活跃的读写事务中最小的事务id，即m_ids中的最小值。
            max_limit_id:   表示生成ReadView时，系统中应该分配给下一个事务的id值，即m_ids中的id最大值 + 1
