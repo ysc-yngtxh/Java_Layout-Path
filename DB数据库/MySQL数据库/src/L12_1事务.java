@@ -6,8 +6,8 @@
        一个事务是一个完整的业务逻辑单元，不可再分。
 
        比如：银行账户转账，从账户向账户转账10000，需要执行两条update语句
-            update t_act set balance=balance-10000 where act_no='act-001';
-            update t_act set balance=balance+10000 where act_no='act-002';
+            UPDATE t_act SET balance=balance-10000 WHERE act_no='act-001';
+            UPDATE t_act SET balance=balance+10000 WHERE act_no='act-002';
           以上两条DML语句必须同时成功，或者同时失败，不允许出现一条成功，一条失败。
           要想保证以上的两条DML语句同时成功或者同时失败，那么就需要使用数据库的“事务机制”。
 ---------------------------------------------------------------------------------------------------------------
@@ -24,7 +24,7 @@
              读未提交存在脏读(Dirty Read)现象：表示读到了脏的数据。
 
      第二级别：读已提交(read committed)
-             [1]、大多数数据库使用默认隔离级别就是这个，比如 Oracle数据库（mysql不是）-- RC隔离级别
+             [1]、大多数数据库使用默认隔离级别就是这个，比如 Oracle数据库（Mysql不是）-- RC隔离级别
                   读已提交存在的问题是：在多重并发情况下，同一个事务中不可重复读
              [2]、不可重复读 指的是在一个事务内，当多次读取同一数据行(并非指的是一行数据)时，读取的结果可能会发生变化。
                   这是因为在事务执行过程中，其他事务对该数据行进行了更新(update、delete)操作，导致读取到了不同的数值。
@@ -38,6 +38,7 @@
                   这种隔离级别解决了：不可重复读问题     存在的问题是：读取到的数据有可能是虚幻的（幻读）
              [2]、可重复读 解决了不可重复读的问题，即在同一个事务中，多次读取同一数据行时，读取的结果始终保持一致。
                   它使用了共享锁（Shared Lock），即其他事务可以同时持有共享锁读取该数据行，但不能修改它，以确保读取的一致性。
+                  ⚠️：只有在事务下的 SELECT语句 会自动为查询的行添加共享锁；非事务下的 SELECT语句 没有锁机制。
              [3]、幻读 指的是在一个事务内，当多次执行同一个查询语句时，返回的结果集发生了变化。这是因为在事务执行过程中，
                   其他事务对相关数据进行了插入或删除操作(不可重复读是针对行级数据，幻读是针对表级数据)，导致查询结果发生了变化。
              [4]、幻读 举例 ---- 事务A执行两次统计数据总条数的操作：
@@ -49,14 +50,14 @@
                   可是由于可重复读策略，A事务中不管怎么查询，始终都无法查询到新增的数据，因此前后两次查询的结果是一致的，从而避免幻读。
                   但是对于真实的表而言，表中的数据是的的确确增加了。
              [5]、小曹这时候又会问：为了维护可重复读，通过持有共享锁方式读取数据时不是不允许修改数据吗？怎么还能新增数据呢？
-                  因为这个共享锁锁的是我们读取的数据行(行级锁)，读取这些数据行时是不允许进行修改的，但是没有表级锁不影响往表中新增数据
-             [6]、可重复读是如何避免幻读：MVCC、记录锁、间隙锁
+                  因为这个共享锁锁的是我们读取的数据行(行级锁)，读取这些数据行时是不允许进行修改的，但是又不是表级锁不影响往表中新增数据
+             [6]、可重复读是如何避免幻读：MVCC、临键锁Next-Key Lock(记录锁+间隙锁)
                   MySQL InnoDB存储引擎很大程度上避免幻读现象，避免方案有两种，但都没有完全解决幻读问题：
                   ①、针对快照读(普通 select 语句)，是通过 MVCC（多版本并发控制）方式解决部分幻读，因为可重复读隔离级别下，事务执行过程中看到的数据，
                      一直跟这个事务启动时看到的数据是一致的，即使中途有其他事务插入了一条数据，是查询不出来这条数据的，所以就很好的避免幻读问题。
-                  ②、针对当前读(select ... for update 等语句)，是通过 next-key lock（记录锁+间隙锁）方式解决了幻读，
-                     因为当执行 select ... for update 语句的时候，会加上 next-key lock，如果有其他事务在 next-key lock 锁范围内插入了一条记录，
-                     那么这个插入语句就会被阻塞，无法成功插入，所以就很好了避免幻读问题
+                  ②、针对当前读(select ... for update 等语句)，是通过 临键锁Next-Key Lock（记录锁[Record Lock] + 间隙锁[Gap Lock]）方式解决了幻读，
+                     因为当执行 select ... for update 语句的时候，会加上 临键锁Next-Key Lock，如果有其他事务在 Next-Key Lock临键锁 范围内插入了一条记录，
+                     那么这个插入语句就会被阻塞，无法成功插入，所以就很好了避免幻读问题。
 
      第四级别：序列化读/串行化读(serializable)
                通过事务得强制串行化执行，避免了幻读得问题，这个隔离级别会对读取得每一行数据加锁，可能导致大量的超时和锁征用得问题。
@@ -70,16 +71,14 @@
           可重复读 -------------- 可能产生幻读
           序列化 ---------------- 无
 
-         查看隔离级别： show variables like 'transaction_isolation';
-         +-----------------------+-----------------+
-         | Variable_name         | Value           |
-         +-----------------------+-----------------+
-         | transaction_isolation | REPEATABLE-READ |
-         +-----------------------+-----------------+
+                                                               +-----------------------+-----------------+
+                                                               | Variable_name         | Value           |
+    查看隔离级别：show variables like 'transaction_isolation';   +-----------------------+-----------------+
+                                                               | transaction_isolation | REPEATABLE-READ |
+                                                               +-----------------------+-----------------+
 ---------------------------------------------------------------------------------------------------------------
 4、演示事务
-    MySQL事务默认情况下是自动提交的（什么是自动提交？只要执行任意一条DML语句提交一次）怎么关闭自动提交？start transaction;
-
+    MySQL事务默认情况下是自动提交的（什么是自动提交？只要执行任意一条DML语句提交一次）怎么关闭自动提交？start transaction; 或 begin;
        像一些select into、update、delete等MySQL语句都是历史操作。
        并且每条语句执行完之后都会自动提交，提交到硬盘文件中。
 
@@ -87,20 +86,20 @@
        回滚事务语句：rollback; 清空历史操作。
 
         演示：
-        drop table if exists t_user;
-        create table t_user(
-           id int primary key auto_increment,
-           username varchar(255)
+        DROP TABLE IF EXISTS t_user;
+        CREATE TABLE t_user(
+           id INT PRIMARY KEY AUTO_INCREMENT,
+           username VARCHAR(255)
         );
-        insert into t_user(username) values('zs');
-        select * from t_user;
+        INSERT INTO t_user(username) VALUES('zs');
+        SELECT * FROM t_user;
         +----+----------+
         | id | username |
         +----+----------+
         |  1 | zs       |
         +----+----------+
         rollback;                // 回滚事务,清空历史操作。
-        select * from t_user;    // 这里为什么回滚之后还会显示历史操作呢？，因为MySQL的自动提交功能
+        SELECT * FROM t_user;    // 这里为什么回滚之后还会显示历史操作呢？，因为MySQL的自动提交功能
         +----+----------+
         | id | username |
         +----+----------+
@@ -108,9 +107,9 @@
         +----+----------+
 
         start transaction;        // 启动事务
-        insert into t_user(username) values('Lisi');
-        insert into t_user(username) values('WangWu');
-        select * from t_user;
+        INSERT INTO t_user(username) VALUES('Lisi');
+        INSERT INTO t_user(username) VALUES('WangWu');
+        SELECT * FROM t_user;
         +----+----------+
         | id | username |
         +----+----------+
@@ -124,10 +123,10 @@
         +----+----------+
         |  1 | zs       |
         +----+----------+
-        insert into t_user(username) values('ZhaoLiu');
-        insert into t_user(username) values('ZhaoPi');
+        INSERT INTO t_user(username) VALUES('ZhaoLiu');
+        INSERT INTO t_user(username) VALUES('ZhaoPi');
         commit;                   // 这里是提交事务，历史操作都被提交到硬盘文件中。
-        select * from t_user;
+        SELECT * FROM t_user;
         +----+----------+
         | id | username |
         +----+----------+
