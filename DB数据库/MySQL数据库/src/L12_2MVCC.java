@@ -104,17 +104,17 @@
         已提交读 隔离级别下的事务在每次查询的开始都会生成一个独立的 ReadView,也就是每次查询都会生成新的 ReadView
         可重复读 隔离级别则在第一次读的时候生成一个 ReadView，之后的读都复用之前的 ReadView。使用的是同一个 ReadView
 ---------------------------------------------------------------------------------------------------------------
-3、MVCC实现原理
-           事务A(RX_ID=100)                                事务B(RX_ID=101)
-              begin                                             begin
-   insert into core_user value(1, "孙权");
-   select * from core_user where id=1;
-                                                update core_user set name='曹操' where id=1;
-                                                                commit
-   select * from core_user where id=1;
-              commit
+3、MVCC实现原理分析（解决不可重复读问题）
+              事务A(TRX_ID=100)                                事务B(TRX_ID=101)
+                  begin                                             begin
+       insert into core_user value(1, "孙权");
+       select * from core_user where id=1;
+                                                    update core_user set name='曹操' where id=1;
+                                                                    commit
+       select * from core_user where id=1;
+                  commit
 
-   [1]、读已提交（RC隔离级别）：
+   [1]、读已提交（RC隔离级别）存在不可重复读问题分析历程：
          ①、A开启事务，在执行 INSERT语句 分配到唯一事务ID为100; B开启事务，在执行 UPDATE语句 分配到唯一事务ID为101
          ②、表数据 id=1的数据行中隐藏列 TRX_ID=100
                                     +--------+--------+--------------+-----+------+
@@ -133,8 +133,8 @@
                                     | creator_trx_id | 100     |
                                     +----------------+---------+
              然后回到undo log版本链，开始从undo log版本链中挑选可见的记录
-               min_limit_id(100) =< trx_id(100)[表数据隐藏列TRX_ID] < max_limit_id(102);
-               creator_trx_id = trx_id = 100;
+                min_limit_id(100) =< trx_id(100)[表数据隐藏列TRX_ID] < max_limit_id(102);
+                creator_trx_id = trx_id = 100;
              由此可得，trx_id=100的这个记录，当前事务是可见的。所以查到是name为孙权的记录
          ④、事务B进行修改操作，把name改为曹操。把原数据拷贝到undo log,然后对数据进行修改，标记事务ID和上一个数据版本在undo log的地址。
                                     +--------+--------+--------------+-----+------+
@@ -154,14 +154,14 @@
                                     | creator_trx_id | 100     |
                                     +----------------+---------+
              然后再次回到undo log版本链，从undo log版本链中挑选可见的记录
-               min_limit_id(100) =< trx_id(101)[表数据隐藏列TRX_ID] < max_limit_id(102);
-               trx_id=101 不属于 m_ids{100}集合。
+                min_limit_id(100) =< trx_id(101)[表数据隐藏列TRX_ID] < max_limit_id(102);
+                trx_id=101 不属于 m_ids{100}集合。
              因此，trx_id=101 这个记录，对于当前事务是可见的，事务A第二次执行查询操作的是name为曹操的记录。
 
         综上所述：在读已提交（RC）隔离级别下，同一个事务里，两个相同的查询，读取同一条记录（id=1），
                 却返回了不同的数据（第一次查出来是孙权，第二次查出来是曹操那条记录）。因此RC隔离级别，存在 不可重复读并发问题。
 
-   [2]、可重复读（RR隔离级别）：
+   [2]、可重复读（RR隔离级别）解决不可重复读问题分析：
          ①、A开启事务，在执行 INSERT语句 分配到唯一事务ID为100; B开启事务，在执行 UPDATE语句 分配到唯一事务ID为101
          ②、表数据 id=1的数据行中隐藏列 TRX_ID=100
                                     +--------+--------+--------------+-----+------+
@@ -180,8 +180,8 @@
                                     | creator_trx_id | 100     |
                                     +----------------+---------+
              然后回到undo log版本链，开始从undo log版本链中挑选可见的记录
-               min_limit_id(100) =< trx_id(100)[表数据隐藏列TRX_ID] < max_limit_id(102);
-               creator_trx_id = trx_id = 100;
+                min_limit_id(100) =< trx_id(100)[表数据隐藏列TRX_ID] < max_limit_id(102);
+                creator_trx_id = trx_id = 100;
              由此可得，trx_id=100的这个记录，当前事务是可见的。所以查到是name为孙权的记录
          ④、事务B进行修改操作，把name改为曹操。把原数据拷贝到undo log,然后对数据进行修改，标记事务ID和上一个数据版本在undo log的地址。
                                     +--------+--------+--------------+-----+------+
@@ -201,18 +201,52 @@
                                     | creator_trx_id | 100     |
                                     +----------------+---------+
              然后再次回到undo log版本链，从undo log版本链中挑选可见的记录
-               min_limit_id(100) =< trx_id(101)[表数据隐藏列TRX_ID] < max_limit_id(102);
-               m_ids{100,101}集合 包含 trx_id(101)
-               creator_trx_id(100) != trx_id(101)
+                min_limit_id(100) =< trx_id(101)[表数据隐藏列TRX_ID] < max_limit_id(102);
+                m_ids{100,101}集合 包含 trx_id(101)
+                creator_trx_id(100) != trx_id(101)
              所以，trx_id=101 这个记录对于当前事务是不可见的。这时候undo log版本链roll_pointer跳到下一个版本trx_id=100这个记录，
              再次校验 trx_id=100 这个版本是否可见，如果可见便返回查询数据，不可见便继续跳到下一版本：
-               min_limit_id(100) =< trx_id(100) < max_limit_id(102);
-               m_ids{100,101} 包含 trx_id(100)
-               creator_trx_id(100) 等于 trx_id(100)
+                min_limit_id(100) =< trx_id(100) < max_limit_id(102);
+                m_ids{100,101} 包含 trx_id(100)
+                creator_trx_id(100) 等于 trx_id(100)
              所以 trx_id=100 这个记录，对于当前事务是可见的。事务A第二次执行查询操作的是name为孙权的记录。
 
-       综上所述：在 可重复读（RR） 隔离级别下，同一个事务里，两个相同的查询，读取同一条记录（id=1），返回了相同的数据。
+       综上所述：在 可重复读（RR）隔离级别下，同一个事务里，两个相同的查询，读取同一条记录（id=1），返回了相同的数据。
                复用老的Read View副本，解决了不可重复读的问题。
+---------------------------------------------------------------------------------------------------------------
+4、MVCC解决的幻读问题
+   [1]、RR级别下，一个快照读的例子，不存在幻读问题
+                 事务A(TRX_ID=100)                                 事务B(TRX_ID=101)
+                      begin                                             begin
+        select count(*) from core_user where id>1;
+                                                         insert into core_user value(4, "刘备");
+                                                                        commit
+        select count(*) from core_user where id>1;
+                      commit
+
+   [2]、RR级别下，一个当前读的例子，不存在幻读问题
+                 事务A(TRX_ID=100)                                 事务B(TRX_ID=101)
+                      begin                                             begin
+select count(*) from core_user where id>1 lock in share mode;
+                                                         insert into core_user value(4, "刘备");
+
+           显然，事务B执行插入操作时，阻塞了~ 因为事务A在执行 select ... lock in share mode(当前读)时添加了共享锁，只能读取不能修改。
+        不仅在id = 2,3 这2条数据上加了记录锁，而且在id > 1 这个范围上也加了间隙锁。
+           因此，我们可以发现，RR隔离级别下，加锁的select, update, delete等语句，会使用记录锁 + 间隙锁，锁住索引记录之间的范围，
+        避免范围间插入记录，以避免产生幻影行记录，那就是说RR隔离级别解决了幻读问题
+
+   [3]、RR级别下，特殊场景，似乎存在幻读问题
+                 事务A(TRX_ID=100)                                 事务B(TRX_ID=101)
+                      begin                                             begin
+        select count(*) from core_user where id>1;
+                                                         insert into core_user value(4, "刘备");
+                                                                        commit
+        update core_user set name='张飞' where id=4;
+        select count(*) from core_user where id>1;
+                      commit
+
+    其实，上述流程中，多加了update core_user set name='张飞' where id=4;这步操作，
+    同一个事务，相同的sql，查出的结果集不同了，这个结果，就符合了幻读的定义~
  */
 public class L12_2MVCC {
 }
