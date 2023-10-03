@@ -107,7 +107,7 @@
 
      3.nullif(expr1, expr2) 函数
        -- expr1 = expr2，NULLIF() 函数返回 NULL，否则返回 expr1
-       SELECT IF(del_flag=0, '显示', '删除') FROM tb_order
+       SELECT NULLIF(0, 0) FROM tb_order
 
      4.case 函数
        [1]、写法一：(CASE)举例 order_no, (WHEN)当其值为 0 时, (THEN)输出'Monday'  ...  (ELSE)否则输出'Error', (END)结束

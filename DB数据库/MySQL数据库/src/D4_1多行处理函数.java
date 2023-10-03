@@ -157,17 +157,17 @@
         注意： 当使用ROLLUP时，不能同时使用ORDER BY子句进行结果排序，即ROLLUP和ORDER BY是互相排斥 的。
 ---------------------------------------------------------------------------------------------------------------
 四、其他的聚合函数(注意：以下函数可以在group by中使用)
-   1、GROUP_CONCAT()	将组中的字符串连接返回一个字符串
+   1、GROUP_CONCAT() 将组中的字符串连接返回一个字符串
       [1]、SELECT GROUP_CONCAT(name) FROM t_order
-           -- 默认连接字符','  结果为  许致远,龙震南,朱杰宏,董晓明,许致远
+           -- 默认连接字符','  结果为 [许致远,龙震南,朱杰宏,董晓明,许致远]
       [2]、SELECT GROUP_CONCAT( CONCAT_WS('_', name, id) ) FROM t_order
-           -- 使用单行处理函数进行字符串拼接后再将组中字符串连接  结果为  许致远_1,龙震南_2,朱杰宏_3,董晓明_4,许致远_5
+           -- 使用单行处理函数进行字符串拼接后再将组中字符串连接  结果为 [许致远_1,龙震南_2,朱杰宏_3,董晓明_4,许致远_5]
       [3]、SELECT GROUP_CONCAT(DISTINCT name) FROM t_order
-           -- 去除组内重复数据  结果为  许致远,龙震南,朱杰宏,董晓明
+           -- 去除组内重复数据  结果为 [许致远,龙震南,朱杰宏,董晓明]
       [4]、SELECT GROUP_CONCAT(DISTINCT name ORDER BY name DESC) FROM t_order
-           -- 去除组内重复数据并倒序排序  结果为  龙震南,许致远,董晓明,朱杰宏
+           -- 去除组内重复数据并倒序排序  结果为 [龙震南,许致远,董晓明,朱杰宏]
       [5]、SELECT GROUP_CONCAT(DISTINCT name ORDER BY name DESC SEPARATOR ';') FROM t_order
-           -- 去除组内重复数据并倒序排序而且使用';'作为连接字符  结果为  龙震南;许致远;董晓明;朱杰宏
+           -- 去除组内重复数据并倒序排序而且使用';'作为连接字符  结果为 [龙震南;许致远;董晓明;朱杰宏]
 
    2、JSON_ARRAYAGG(expression)	用于将查询结果中的多个行合并为一个JSON数组。
       [1]、SELECT JSON_ARRAYAGG( province ) FROM t_order;
