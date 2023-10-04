@@ -58,10 +58,10 @@
      第二种方式：外键唯一
                t_user_login(用户登陆表)                      t_user_detail(用互详细信息表)
                +-------------------------------------+     +--------------------------------------------------+
-                id（PK）        username      password        id（PK）     real_name    tel    user_id(fk+unique)
+                id（PK）       username      password        id（PK）    real_name    tel    user_id(fk+unique)
                +-------------------------------------+     +--------------------------------------------------+
-                 1               zs            123           1           张三         11111        2
-                 2               ls            456           1           李四         56491        1
+                 1               zs           123           1           张三         11111        2
+                 2               ls           456           1           李四         56491        1
 */
 public class O15数据库设计三范式 {
 }

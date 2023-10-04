@@ -47,42 +47,56 @@ MySQL作业题
 
 
 
+
+
+
+
+
      1、取得每个部门最高薪水的人员名称。
         SELECT
            e.dept_no, e.name, e.sal
         FROM
-           emp e,
-           (SELECT dept_no, MAX(sal) AS maxSal FROM emp GROUP BY dept_no) t
+           t_emp e,
+           (SELECT dept_no, MAX(sal) AS maxSal FROM t_emp GROUP BY dept_no) t
         WHERE
            e.dept_no=t.dept_no,
            e.sal=t.maxSal;
 
      2、哪些人的薪水在部门的平均薪水之上
-        SELECT e.name,e.sal
-        FROM emp e
-        INNER JOIN (SELECT dept_no, AVG(sal) AS avgSal from emp GROUP BY dept_no) t
-        ON e.sal>t.avgSal;
+        SELECT 
+           e.name, e.sal
+        FROM 
+           t_emp e
+        INNER JOIN 
+           (SELECT dept_no, AVG(sal) AS avgSal from t_emp GROUP BY dept_no) t
+        ON 
+           e.sal>t.avgSal;
 
      3、取得每个部门平均的薪水等级
-        SELECT e.dept_no, s.grade
-        FROM emp e
-        INNER JOIN sal_grade s
-        ON e.sal between loSal and hiSal
-        GROUP BY e.dept_no;
+        SELECT 
+           e.dept_no, s.grade
+        FROM 
+           t_emp e
+        INNER JOIN 
+           sal_grade s
+        ON 
+           e.sal between loSal and hiSal
+        GROUP BY 
+           e.dept_no;
 
      4、不准用（max），取得最高薪水（给出两种解决方案）
-        第一种：SELECT sal FROM emp ORDER BY sql DESC LIMIT 1;
-        第二种：SELECT sal FROM emp WHERE sal not in(SELECT a.sal FROM emp a INNER JOIN emp b ON a.sal<b.sal);
+        第一种：SELECT sal FROM t_emp ORDER BY sql DESC LIMIT 1;
+        第二种：SELECT sal FROM t_emp WHERE sal not in(SELECT a.sal FROM t_emp a INNER JOIN t_emp b ON a.sal<b.sal);
 
      5、取得平均薪水最高的部门的部门编号（给出两种解决方案）
-        第一种：SELECT dept_no, AVG(sal) as avgSal FROM emp GROUP BY dept_no ORDER BY avgSal DESC LIMIT 1;
-        第二种：SELECT dept_no, MAX(avgSal) FROM emp (SELECT dept_no,AVG(sal) AS avgSal FROM emp GROUP BY dept_no);
+        第一种：SELECT dept_no, AVG(sal) as avgSal FROM t_emp GROUP BY dept_no ORDER BY avgSal DESC LIMIT 1;
+        第二种：SELECT dept_no, MAX(avgSal) FROM t_emp (SELECT dept_no,AVG(sal) AS avgSal FROM t_emp GROUP BY dept_no);
 
      6、取得平均薪水最高的部门的部门名称
         SELECT
            d.d_name, e.AVG(sal) AS avgSal
         FROM
-           emp e
+           t_emp e
         INNER JOIN
            dept d
         ON
@@ -97,7 +111,7 @@ MySQL作业题
         SELECT
            d.d_name, AVG(e.sal) AS avgSal
         FROM
-           emp e
+           t_emp e
         INNER JOIN
            dept d
         ON
@@ -117,21 +131,18 @@ MySQL作业题
         SELECT
            name, sal
         FROM
-           emp
+           t_emp
         WHERE
-           sal > (SELECT
-                     MAX(sal)
-                  FROM
-                     emp                  // 嵌套里的语句是普通员工的最高薪水
-                  WHERE
-                     emp not in(select distinct mgr from emp where mgr is not null)
+           sal > (SELECT MAX(sal)
+                  FROM t_emp                  // 嵌套里的语句是普通员工的最高薪水
+                  WHERE t_emp not in(select distinct mgr from t_emp where mgr is not null)
                   )
 
      9、取得每个薪水级别有多少员工
         SELECT
            s.grade, COUNT(*)
         FROM
-           emp e
+           t_emp e
         INNER JOIN
            sal_grade s
         ON
@@ -143,18 +154,18 @@ MySQL作业题
          SELECT
             A.ename AS '员工名',B.ename AS '领导名'
          FROM
-            emp A
+            t_emp A
          LEFT OUTER JOIN
-            emp B
+            t_emp B
          ON
-            A.mgr=B.emp_no;
-         // 这里选用的是左外连接而没有选用自连接的原因是emp表中有一个mgr(领导)为null，选用了自连接就无法显示其领导为null的员工。
+            A.mgr=B.t_emp_no;
+         // 这里选用的是左外连接而没有选用自连接的原因是t_emp表中有一个mgr(领导)为null，选用了自连接就无法显示其领导为null的员工。
 
      11、求出部门名称中，带'S'字符的部门员工的工资合计、部门人数
          SELECT
             d.dept_no, d.d_name, d.loc, COUNT(e.ename), IFNULL(SUM(e.sal), 0)
          FROM
-            emp e
+            t_emp e
          RIGHT OUTER JOIN
             dept d
          ON
@@ -165,7 +176,7 @@ MySQL作业题
             d.dept_no,d.d_name,d.loc
 
      12、给员工加薪10%
-         UPDATE emp SET sal=sal*1.1;
+         UPDATE t_emp SET sal=sal*1.1;
 
      13、面试题
            有3个表 s(学生表),c(课程表),sc(学生选课表)
