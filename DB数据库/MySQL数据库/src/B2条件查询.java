@@ -76,7 +76,7 @@
       在模糊查询当中，必须掌握两个特殊的符号，一个是%,一个是_
       %代表任意多个字符，_代表任意1个字符。
 
-      例：(1)、找出名字当中含有字母O的
+      例：(1)、找出名字当中含有字母'O'的
               SELECT ename FROM emp WHERE ename LIKE '%O%';
           (2)、找出名字当中第二个字母是A的
               SELECT ename FROM emp WHERE enamel LIKE '_A%';

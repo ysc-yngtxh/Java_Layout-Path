@@ -3,19 +3,20 @@
  */
 /*
 一、排序（order by 升序，降序）
-     （1）按照工资升序，找出员工名和薪资
-              CREATE TABLE t_emp(
-                 `id` INT(20) PRIMARY KEY AUTO_INCREMENT COMMENT '主键Id',
-                 `emp_no` BIGINT(20) COMMENT '员工编号',
-                 `ename` VARCHAR(255) COMMENT '员工姓名',
-                 `mgr` BIGINT(20) COMMENT '领导编号',
-                 `sal` DOUBLE(10, 2) COMMENT '工资',
-                 `comm` DOUBLE(10, 2) COMMENT '津贴',
-                 `dept_no` BIGINT(20) COMMENT '部门编号',
-                 `job` VARCHAR(255) COMMENT '工作岗位',
-                 `province` VARCHAR(255) COMMENT '省份'
-              ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='员工信息表';
 
+      CREATE TABLE t_emp(
+         `id` INT(20) PRIMARY KEY AUTO_INCREMENT COMMENT '主键Id',
+         `emp_no` BIGINT(20) COMMENT '员工编号',
+         `ename` VARCHAR(255) COMMENT '员工姓名',
+         `mgr` BIGINT(20) COMMENT '领导编号',
+         `sal` DOUBLE(10, 2) COMMENT '工资',
+         `comm` DOUBLE(10, 2) COMMENT '津贴',
+         `dept_no` BIGINT(20) COMMENT '部门编号',
+         `job` VARCHAR(255) COMMENT '工作岗位',
+         `province` VARCHAR(255) COMMENT '省份'
+      ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='员工信息表';
+
+     （1）按照工资升序，找出员工名和薪资
               SELECT
                   ename,sal
               FROM
@@ -41,21 +42,20 @@
 二、去除重复记录(distinct)
       distinct只能出现在所有字段的最前面，去除的是所有的字段联合的重复数据
       应用场景
-        查询工作岗位: SELECT job FROM t_emp;
-                    +--------------+
-                    | job          |
-                    +--------------+
-                    | CLERK        |
-                    | PRESIDENT    | 我们可以发现工作岗位中出现了重复的PRESIDENT，我们如何去除重复的呢？
-                    | MANAGER      |
-                    | PRESIDENT    |
-                    +--------------+
+         查询工作岗位: SELECT job FROM t_emp;
+                     +--------------+
+                     | job          |
+                     +--------------+
+                     | CLERK        |
+                     | PRESIDENT    | 我们可以发现工作岗位中出现了重复的PRESIDENT，我们如何去除重复的呢？
+                     | MANAGER      |
+                     | PRESIDENT    |
+                     +--------------+
+         示例一：查询不同部门的工作岗位
+                SELECT DISTINCT dept_no,job FROM t_emp; // 这个SQL语句表达的意思是去除 (部门与工作岗位联合的) 重复数据
 
-        示例一：查询不同部门的工作岗位
-               SELECT DISTINCT dept_no,job FROM t_emp; // 这个SQL语句表达的意思是去除 (部门与工作岗位联合的) 重复数据
-
-        示例二：统计岗位的数量
-               SELECT COUNT(DISTINCT job) FROM t_emp;  // 这个SQL语句表达的意思是统计不重复岗位的数量
+         示例二：统计岗位的数量
+                SELECT COUNT(DISTINCT job) FROM t_emp;  // 这个SQL语句表达的意思是统计不重复岗位的数量
  */
 public class C3排序及去重 {
 }
