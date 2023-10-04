@@ -62,7 +62,7 @@
              通常写法：                     嵌套写法：
              SELECT                        SELECT
                 e.ename,d.d_name               e.ename,
-             FROM                             (SELECT d.d_name FROM dept d WHERE e.dept_no = d.dept_no) AS d_name
+             FROM                              (SELECT d.d_name FROM dept d WHERE e.dept_no = d.dept_no) AS d_name
                 emp e                      FROM
              JOIN                             emp e;
                 dept d
