@@ -272,8 +272,10 @@
                  select count(*) from core_user where id>1;
                                  commit
             ①、其实在这种场景中，上述流程只是在 事务A 中多加了 update core_user set name='张飞' where id=4; 这步操作。
-            ②、在 RR隔离级别下，事务A 第一次执行 SELECT 语句时生成了一个 ReadView 读视图。Read View对应的值：m_ids{100,101}、
-               max_limit_id=102、min_limit_id=100、creator_trx_id=100，且读取到的 id{2,3}数据行会被添加共享锁，执行结果为 2。
+            ②、在 RR隔离级别下，事务A 第一次执行 SELECT 语句时生成了一个 ReadView 读视图。
+               Read View对应的值： m_ids{100,101}、 max_limit_id=102、 min_limit_id=100、 creator_trx_id=100
+               读取到的 id{2,3}数据行中的隐藏列 TRX_ID=99，校验其可见性：trx_id(99)[表数据行的隐藏列TRX_ID] < min_limit_id(100);
+               所以 trx_id=99 的这些记录，对于当前事务是可见的。因此第一次 SELECT结果为 2，且读取到的 id{2,3}数据行会被添加上共享锁。
             ③、随后 事务B 向 core_user 表中新增一条记录并提交，而且插入的数据 id=4,name='刘备' 的记录隐藏列 TRX_ID=101。
                由于 事务B 已经提交，事务A 中的 ReadView 并不能阻止其执行 UPDATE或DELETE 语句来修改新插入的 id=4 记录。
                并且 事务A 修改 id=4 的这条数据行在此时是没有任何锁机制的，所以 事务A 在修改数据行时添加排他锁不会有任何阻塞。
