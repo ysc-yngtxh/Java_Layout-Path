@@ -36,7 +36,7 @@
                根据主键查询效率较高。尽量根据主键检索。
 ---------------------------------------------------------------------------------------------------------------
 5、查看sql语句的执行计划
-          explain select sno,sname from t_student where sname='zs1';
+          explain select sno,s_name from t_student where s_name='zs1';
               explain显示了mysql如何使用索引来处理select语句以及连接表。
               可以帮助选择更好的索引和写出更优化的查询语句
          (执行计划)
@@ -47,12 +47,12 @@
          +----+-------------+-----------+------------+------+---------------+------+---------+------+------+----------+-------------+
 
          给薪资sal字段添加索引：
-         create index sno_sname_index on t_student(sname);
-         explain select sno,sname from t_student where sname='zs1';
+         create index sno_name_index on t_student(s_name);
+         explain select sno,s_name from t_student where s_name='zs1';
          +----+-------------+-----------+------------+------+-----------------+-----------------+---------+-------+------+----------+-------------+
          | id | select_type | table     | partitions | type | possible_keys   | key             | key_len | ref   | rows | filtered | Extra       |
          +----+-------------+-----------+------------+------+-----------------+-----------------+---------+-------+------+----------+-------------+
-         |  1 | SIMPLE      | t_student | NULL       | ref  | sno_sname_index | sno_sname_index | 1023    | const |    1 |   100.00 | Using index |
+         |  1 | SIMPLE      | t_student | NULL       | ref  | sno_name_index  | sno_name_index  | 1023    | const |    1 |   100.00 | Using index |
          +----+-------------+-----------+------------+------+-----------------+-----------------+---------+-------+------+----------+-------------+
 ---------------------------------------------------------------------------------------------------------------
 6、索引的实现原理
@@ -60,7 +60,7 @@
          最终通过索引检索到数据之后，获取到关联的物理地址，通过物理地址定位表中的数据，效率是最高的
          select ename from emp where ename='SMITH';
          通过索引转换为：
-         select ename from emp where 物理地址 = x03;
+         select ename from emp where 物理地址 = 0x0123;
 ---------------------------------------------------------------------------------------------------------------
 7、索引的分类
          单一索引：给单个字段添加索引

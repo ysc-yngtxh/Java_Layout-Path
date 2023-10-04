@@ -218,10 +218,10 @@
        [1]、RR级别下，一个快照读的例子，不存在幻读问题
                             事务A(TRX_ID=100)                                     事务B(TRX_ID=101)
                                  begin                                                 begin
-                   select count(*) from core_user where id>1;
+                 select count(*) from core_user where id>1;
                                                                         insert into core_user value(4, "刘备");
                                                                                        commit
-                   select count(*) from core_user where id>1;
+                 select count(*) from core_user where id>1;
                                  commit
             ①、假设事务A
 
@@ -238,18 +238,18 @@
        [3]、RR级别下，特殊场景，似乎存在幻读问题
                             事务A(TRX_ID=100)                                     事务B(TRX_ID=101)
                                  begin                                                 begin
-                   select count(*) from core_user where id>1;
+                 select count(*) from core_user where id>1;
                                                                         insert into core_user value(4, "刘备");
                                                                                        commit
-                   update core_user set name='张飞' where id=4;
-                   select count(*) from core_user where id>1;
+                 update core_user set name='张飞' where id=4;
+                 select count(*) from core_user where id>1;
                                  commit
-
-            ①、其实，上述流程中，多加了update core_user set name='张飞' where id=4;这步操作，
-            ①、同一个事务，相同的sql，查出的结果集不同了，这个结果，就符合了幻读的定义~
-在 RR隔离级别下，事务A 第一次执行普通的 SELECT 语句时生成了一个 ReadView（且在 RR 下只会生成一个 ReadView），之后事务 B 向 user 表中新插入一条记录并提交。
-ReadView 并不能阻止事务 A 执行 UPDATE 或者 DELETE 语句来改动这个新插入的记录（由于事务 B 已经提交，因此改动该记录并不会造成阻塞），但是这样一来，这条新记录的 trx_id 隐藏列的值就变成了事务 A 的事务 id。之后 A 再使用普通的 SELECT 语句去查询这条记录时就可以看到这条记录了，也就可以把这条记录返回给客户端。
-因为这个特殊现象的存在，我们也可以认为 MVCC 并不能完全禁止幻读
+            ①、其实，上述流程中，只是多加了update core_user set name='张飞' where id=4;这步操作。
+            ②、在 RR隔离级别下，事务A 第一次执行普通的 SELECT 语句时生成了一个 ReadView（且在 RR 下只会生成一个 ReadView）。
+               之后事务B 向 core_user 表中新插入一条记录并提交，ReadView 并不能阻止事务A 执行 UPDATE 或者 DELETE 语句来改动这个新插入的记录
+               由于事务B 已经提交，因此改动该记录并不会造成阻塞。但是这样一来，这条新记录的 trx_id 隐藏列的值就变成了事务A 的事务id。
+               之后事务A 再使用普通的 SELECT 语句去查询这条记录时就可以看到这条记录了，也就可以把这条记录返回给客户端。
+            ③、因为这个特殊现象的存在，同一个事务，相同的sql，查出的结果集不同了，这个结果，就符合了幻读的定义。可以认为 MVCC 并不能完全禁止幻读
  */
 public class L12_2MVCC {
 }
