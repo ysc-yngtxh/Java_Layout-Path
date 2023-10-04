@@ -133,7 +133,7 @@
                                     | creator_trx_id | 100     |
                                     +----------------+---------+
              然后回到undo log版本链，开始从undo log版本链中挑选可见的记录
-                min_limit_id(100) =< trx_id(100)[表数据隐藏列TRX_ID] < max_limit_id(102);
+                min_limit_id(100) =< trx_id(100)[表数据行的隐藏列TRX_ID] < max_limit_id(102);
                 creator_trx_id = trx_id = 100;
              由此可得，trx_id=100的这个记录，当前事务是可见的。所以查到是name为孙权的记录
          ④、事务B进行修改操作，把name改为曹操。把原数据拷贝到undo log,然后对数据进行修改，标记事务ID和上一个数据版本在undo log的地址。
@@ -154,7 +154,7 @@
                                     | creator_trx_id | 100     |
                                     +----------------+---------+
              然后再次回到undo log版本链，从undo log版本链中挑选可见的记录
-                min_limit_id(100) =< trx_id(101)[表数据隐藏列TRX_ID] < max_limit_id(102);
+                min_limit_id(100) =< trx_id(101)[表数据行的隐藏列TRX_ID] < max_limit_id(102);
                 trx_id=101 不属于 m_ids{100}集合。
              因此，trx_id=101 这个记录，对于当前事务是可见的，事务A第二次执行查询操作的是name为曹操的记录。
 
@@ -180,7 +180,7 @@
                                     | creator_trx_id | 100     |
                                     +----------------+---------+
              然后回到undo log版本链，开始从undo log版本链中挑选可见的记录
-                min_limit_id(100) =< trx_id(100)[表数据隐藏列TRX_ID] < max_limit_id(102);
+                min_limit_id(100) =< trx_id(100)[表数据行的隐藏列TRX_ID] < max_limit_id(102);
                 creator_trx_id = trx_id = 100;
              由此可得，trx_id=100的这个记录，当前事务是可见的。所以查到是name为孙权的记录
          ④、事务B进行修改操作，把name改为曹操。把原数据拷贝到undo log,然后对数据进行修改，标记事务ID和上一个数据版本在undo log的地址。
@@ -201,7 +201,7 @@
                                     | creator_trx_id | 100     |
                                     +----------------+---------+
              然后再次回到undo log版本链，从undo log版本链中挑选可见的记录
-                min_limit_id(100) =< trx_id(101)[表数据隐藏列TRX_ID] < max_limit_id(102);
+                min_limit_id(100) =< trx_id(101)[表数据行的隐藏列TRX_ID] < max_limit_id(102);
                 m_ids{100,101}集合 包含 trx_id(101)
                 creator_trx_id(100) != trx_id(101)
              所以，trx_id=101 这个记录对于当前事务是不可见的。这时候undo log版本链roll_pointer跳到下一个版本trx_id=100这个记录，
@@ -235,7 +235,7 @@
                                       +----------------+---------+
                                       | creator_trx_id | 100     |
                                       +----------------+---------+
-            ②、读取到的 id{2,3}数据行中的隐藏列 TRX_ID=99，校验其可见性：trx_id(99)[表数据隐藏列TRX_ID] < min_limit_id(100);
+            ②、读取到的 id{2,3}数据行中的隐藏列 TRX_ID=99，校验其可见性：trx_id(99)[表数据行的隐藏列TRX_ID] < min_limit_id(100);
                所以 trx_id=99 的这些记录，对于当前事务是可见的。因此第一次 SELECT结果为 2，且读取到的 id{2,3}数据行会被添加上共享锁。
             ③、事务B 执行 INSERT语句，新增 id=4 的记录
                                       +--------+--------+--------------+-----+------+
@@ -245,7 +245,7 @@
                                       +--------+--------+--------------+-----+------+
             ④、事务A 第二次执行 SELECT 语句时生成了一个 ReadView副本(其实就是第一个ReadView)。
                然后读取符合 WHERE 条件的数据：id{2,3}数据行中的隐藏列 TRX_ID=99; id=4数据行中的隐藏列 TRX_ID=101
-               校验 TRX_ID=101 可见性：min_limit_id(100) =< trx_id(101)[表数据隐藏列TRX_ID] < max_limit_id(102);
+               校验 TRX_ID=101 可见性：min_limit_id(100) =< trx_id(101)[表数据行的隐藏列TRX_ID] < max_limit_id(102);
                                      m_ids{100,101} 包含 trx_id(101)
                                      creator_trx_id(100) 不等于 trx_id(101)
                因此，新增的 trx_id=101 的这条记录，对于当前事务是不可见的。所以第二次 SELECT结果还是为 2。
@@ -280,7 +280,7 @@
                这样一来，这条新记录的隐藏列 trx_id值 就变成了事务A 的事务id（trx_id=100）。
             ④、最后 事务A 第二次执行 SELECT 语句时生成了一个 ReadView副本(RR隔离级别下，同一事务从始至终只有一个ReadView)。
                然后读取符合 WHERE 条件的数据：id{2,3}数据行中的隐藏列 TRX_ID=99; id=4数据行中的隐藏列 TRX_ID=100
-               校验 TRX_ID=100 可见性：min_limit_id(100) =< trx_id(100)[表数据隐藏列TRX_ID] < max_limit_id(102);
+               校验 TRX_ID=100 可见性：min_limit_id(100) =< trx_id(100)[表数据行的隐藏列TRX_ID] < max_limit_id(102);
                                      m_ids{100,101} 包含 trx_id(100)
                                      creator_trx_id(100) 等于 trx_id(100)
                因此，新增的 id=4 数据行隐藏列 trx_id=100 的这条记录，对于当前事务是可见的。所以第二次 SELECT结果为 3。
