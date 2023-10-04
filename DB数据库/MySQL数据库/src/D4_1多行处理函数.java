@@ -33,12 +33,12 @@
                SELECT ename,(sal+comm)*12 AS yearSal FROM t_emp;
           TODO 注意：因为不是每个员工都有津贴(comm)的，有的员工津贴(comm)为null，但是只要有 null 参与的运算结果一定是 null。
                     这样规定的运算其实仔细想想就明白：null 表示的是不确定值，一个不确定值与任意值运算结果都会是不确定值 null。 
-                    但是如果计算出来的员工年薪为null的话，人家早跑了。所以，怎么办呢？----------- 链接到 单行处理函数(ifnull或case)
+                    但是如果计算出来的员工年薪为null的话，人家早跑了。所以，怎么办呢？--------- 链接到 单行处理函数(ifnull或case)
 
         示例三：找出工资高于平均工资的员工
                SELECT ename,sal FROM t_emp WHERE sal > AVG(sal);
           TODO 思考以上的错误信息：无效的使用了分组函数
-               原因：SQL语句当中有一个语法规则，分组函数不可直接使用在where字句当中，why？----------- 链接到 group by 和 having
+               原因：SQL语句当中有一个语法规则，分组函数不可直接使用在where字句当中，why？--------- 链接到 group by 和 having
 
         TODO SQL中的 count(1)、count(*) 与 count(列名) 到底有什么区别？
         count(列名)：只包括列名那一列，在统计结果的时候，会忽略列值为空
