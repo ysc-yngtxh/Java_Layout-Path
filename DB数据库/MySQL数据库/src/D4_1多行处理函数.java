@@ -6,12 +6,14 @@
 /*
 一、聚合函数(也叫做：多行处理函数:就是综合多行数据，然后再输出)
 
-        CREATE TABLE t_emp(                                              count  计数
-           `id` INT(20) PRIMARY KEY AUTO_INCREMENT COMMENT '主键Id',      sum    求和
-           `ename` VARCHAR(255) COMMENT '员工姓名',                        avg    平均值
-           `sal` DOUBLE(10, 2) COMMENT '工资',                            max    最大值
-           `comm` DOUBLE(10, 2) COMMENT '津贴',                           min    最小值
-           `dept_no` VARCHAR(255) COMMENT '部门',                         记住：所有的分组函数都是对"某一组"数据进行操作的
+        CREATE TABLE t_emp(                                            count  计数
+           `id` INT(20) PRIMARY KEY AUTO_INCREMENT COMMENT '主键Id',    sum    求和
+           `emp_no` BIGINT(20) COMMENT '员工编号',                       avg    平均值
+           `ename` VARCHAR(255) COMMENT '员工姓名',                      max    最大值
+           `mgr` BIGINT(20) COMMENT '领导编号',                          min    最小值
+           `sal` DOUBLE(10, 2) COMMENT '工资',                          记住：所有的分组函数都是对"某一组"数据进行操作的
+           `comm` DOUBLE(10, 2) COMMENT '津贴',
+           `dept_no` BIGINT(20) COMMENT '部门编号',
            `job` VARCHAR(255) COMMENT '工作岗位',
            `province` VARCHAR(255) COMMENT '省份'
         ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='员工信息表';

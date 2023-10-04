@@ -3,7 +3,7 @@
  */
 /*
 union（可以将查询结果集相加）
-   案例：找出和工作岗位是SALESMAN和MANAGER的员工
+   案例：找出和工作岗位是 SALESMAN 和 MANAGER 的员工
         第一种：SELECT ename,job FROM emp WHERE job = 'SALESMAN' OR job = 'MANAGER';
 
         第二种：SELECT ename,job FROM emp WHERE job IN('SALESMAN','MANAGER');

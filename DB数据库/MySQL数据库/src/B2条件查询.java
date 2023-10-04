@@ -3,15 +3,17 @@
  */
 /*
 一、条件查询
-     CREATE TABLE t_emp(                                              语法格式：
-        id INT(20) PRIMARY KEY AUTO_INCREMENT COMMENT '主键Id',           SELECT
-        ename VARCHAR(255) COMMENT '员工姓名',                                  字段1, 字段2, ...     3
-        sal DOUBLE(10, 2) COMMENT '工资',                                 FROM
-        comm DOUBLE(10, 2) COMMENT '津贴',                                      表名                 1
-        dept_no VARCHAR(255) COMMENT '部门',                              WHERE
-        job VARCHAR(255) COMMENT '工作岗位',                                    条件                  2
-        province VARCHAR(255) COMMENT '省份'
-     ) ENGINE=InnoDB AUTO_INCREMENT=1 CHARSET=utf8mb4 COMMENT='员工信息表';
+     CREATE TABLE t_emp(                                            语法格式：
+        `id` INT(20) PRIMARY KEY AUTO_INCREMENT COMMENT '主键Id',           SELECT
+        `emp_no` BIGINT(20) COMMENT '员工编号',                                 字段1, 字段2, ...     3
+        `ename` VARCHAR(255) COMMENT '员工姓名',                             FROM
+        `mgr` BIGINT(20) COMMENT '领导编号',                                    表名                 1
+        `sal` DOUBLE(10, 2) COMMENT '工资',                                 WHERE
+        `comm` DOUBLE(10, 2) COMMENT '津贴',                                   条件                  2
+        `dept_no` BIGINT(20) COMMENT '部门编号',
+        `job` VARCHAR(255) COMMENT '工作岗位',
+        `province` VARCHAR(255) COMMENT '省份'
+     ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='员工信息表';
 ---------------------------------------------------------------------------------------------------------------
 二、条件查询中会用到的运算符：
       1、between ... and ... (是一个闭区间，取其范围内)

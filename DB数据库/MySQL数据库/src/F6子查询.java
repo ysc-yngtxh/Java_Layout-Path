@@ -13,11 +13,11 @@
              WHERE
                 ...(select)
 ---------------------------------------------------------------------------------------------------------------
-   2、where子句中使用子查询
+   2、WHERE 子句中使用子查询
         案例：找出高于平均薪资的员工信息
              SELECT * FROM emp WHERE sal > (SELECT AVG(sal) FROM emp);
 ---------------------------------------------------------------------------------------------------------------
-   3、from后面嵌套子查询
+   3、FROM 后面嵌套子查询
         案例一：找出每个部门平均薪水的薪资等级。
                SELECT
                   t.*, s.grade
@@ -57,12 +57,12 @@
                      GROUP BY
                         e.dept_no;
 ---------------------------------------------------------------------------------------------------------------
-  4、在select后面嵌套子查询
+  4、在 SELECT 后面嵌套子查询
         案例：找出每个员工所在的部门名称，要求显示员工名和部门名
              通常写法：                     嵌套写法：
              SELECT                        SELECT
-                e.ename,d.d_name               e.ename,
-             FROM                              (SELECT d.d_name FROM dept d WHERE e.dept_no = d.dept_no) AS d_name
+                e.ename, d.d_name             e.ename,
+             FROM                             (SELECT d.d_name FROM dept d WHERE e.dept_no = d.dept_no) AS d_name
                 emp e                      FROM
              JOIN                             emp e;
                 dept d
