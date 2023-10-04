@@ -3,13 +3,13 @@
  */
 /*
 一、条件查询
-     CREATE TABLE t_emp(                                            语法格式：
-        `id` INT(20) PRIMARY KEY AUTO_INCREMENT COMMENT '主键Id',           SELECT
-        `emp_no` BIGINT(20) COMMENT '员工编号',                                 字段1, 字段2, ...     3
-        `ename` VARCHAR(255) COMMENT '员工姓名',                             FROM
-        `mgr` BIGINT(20) COMMENT '领导编号',                                    表名                 1
-        `sal` DOUBLE(10, 2) COMMENT '工资',                                 WHERE
-        `comm` DOUBLE(10, 2) COMMENT '津贴',                                   条件                  2
+     CREATE TABLE t_emp(                                               语法格式：
+        `id` INT(20) PRIMARY KEY AUTO_INCREMENT COMMENT '主键Id',              SELECT
+        `emp_no` BIGINT(20) COMMENT '员工编号',                                    字段1, 字段2, ...     3
+        `ename` VARCHAR(255) COMMENT '员工姓名',                                FROM
+        `mgr` BIGINT(20) COMMENT '领导编号',                                       表名                 1
+        `sal` DOUBLE(10, 2) COMMENT '工资',                                    WHERE
+        `comm` DOUBLE(10, 2) COMMENT '津贴',                                      条件                  2
         `dept_no` BIGINT(20) COMMENT '部门编号',
         `job` VARCHAR(255) COMMENT '工作岗位',
         `province` VARCHAR(255) COMMENT '省份'
