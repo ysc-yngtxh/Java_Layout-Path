@@ -220,7 +220,6 @@
              基本语法: ALTER TABLE 表名 ADD COLUMN 字段名 字段类型 [约束条件];
              # 约束条件可以不写  ①、默认规则: 新增到最后一列   ②、FIRST: 新增在第一列
                               ③、AFTER: 在某字段后        ④、BEFORE: 在某字段之前
-
              ALTER TABLE t_student ADD COLUMN age int(11) UNIQUE COMMENT '年龄';
              ALTER TABLE t_student ADD COLUMN age int(11) DEFAULT NULL COMMENT '年龄';
              ALTER TABLE t_student ADD COLUMN age int(11) DEFAULT NULL COMMENT '年龄' FIRST;
@@ -229,12 +228,12 @@
              ALTER TABLE t_student ADD COLUMN age int(11) DEFAULT NULL COMMENT '年龄' AFTER name BEFORE sex;
         [2]、创建表之后修改字段名
              # ALTER TABLE 表名 CHANGE 旧字段名 新字段名 新数据类型;
-             ALTER TABLE t_student CHANGE name user_name varchar(32) DEFAULT NULL COMMENT '姓名';
              ALTER TABLE t_student CHANGE name user_name varchar(32) UNIQUE COMMENT '姓名';
+             ALTER TABLE t_student CHANGE name user_name varchar(32) DEFAULT NULL COMMENT '姓名';
         [3]、创建表之后修改字段类型
              # ALTER TABLE 表名 MODIFY 字段名 数据类型;
-             ALTER TABLE t_student MODIFY name varchar(32) DEFAULT NULL COMMENT '姓名';
              ALTER TABLE t_student MODIFY name varchar(32) UNIQUE COMMENT '姓名';
+             ALTER TABLE t_student MODIFY name varchar(32) DEFAULT NULL COMMENT '姓名';
         [4]、创建表之后删除字段
              # ALTER TABLE 表名 DROP 字段名;
              ALTER TABLE t_student DROP name;
