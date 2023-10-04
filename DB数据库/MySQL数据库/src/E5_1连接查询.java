@@ -40,7 +40,7 @@
                          ｜ 10       ｜ ACCOUNTING ｜ NEW YORK  ｜
                          ｜ 40       ｜ OPERATIONS ｜ BOSTON    ｜
                          +-----------+-------------+-----------+
-              SELECT e.ename,d.d_name FROM emp e,dept d;
+              SELECT e.ename, d.d_name FROM emp e, dept d;
               表别名的好处：第一：执行效率高(避免在两张表中查询到相同字段数据时，无法取出正确的需要的数据)。
                           第二：可读性好
 
@@ -60,9 +60,9 @@
 
        案例二：找出每一个员工的部门名称，要求显示员工名和部门名
               SELECT                       +-----------+-------------+
-                 e.ename,d.d_name          ｜ ename    ｜ d_name      ｜
+                 e.ename, d.d_name         ｜ ename    ｜ d_name      ｜
               FROM                         +-----------+-------------+   sql92语法，以后不用，作为了解
-                 emp e,dept d              ｜ JONES    ｜ ACCOUNTING  ｜
+                 emp e, dept d             ｜ JONES    ｜ ACCOUNTING  ｜
               WHERE                        +-----------+-------------+
                  e.dept_no = d.dept_no;
 ---------------------------------------------------------------------------------------------------------------
@@ -71,7 +71,7 @@
               案例：查询每个员工的部门名称，要求显示员工名和部门名 。
               SQL92：(太老了，不常用)
                      SELECT
-                        e.ename,d.d_name
+                        e.ename, d.d_name
                      FROM
                         emp e,dept d
                      WHERE
@@ -79,7 +79,7 @@
 
               SQL99：(常用)                       语法：
                      SELECT                           SELECT
-                        e.ename,d.d_name                  ...
+                        e.ename, d.d_name                 ...
                      FROM                             FROM
                         emp e                             A
                      JOIN                             INNER JOIN   // inner可以省略的，带着inner目的是可读性好一些
@@ -102,13 +102,13 @@
                          +-----------+-------------+-----------+
                          ｜ grade    ｜ loSal      ｜ hiSal     ｜  // 工资等级   员工最低金额   员工最高金额
                          +-----------+-------------+-----------+
-              sal_grade表 ｜ 1        ｜ 700        ｜ 1200      ｜
+              sal_grade表｜ 1        ｜ 700        ｜ 1200      ｜
                          ｜ 2        ｜ 1201       ｜ 1400      ｜
                          ｜ 3        ｜ 1401       ｜ 2000      ｜
                          ｜ 4        ｜ 2001       ｜ 3000      ｜
                          +-----------+-------------+-----------+
                SELECT
-                  e.ename,e.sal,s.grade
+                  e.ename, e.sal, s.grade
                FROM
                   emp e
                INNER JOIN
@@ -127,7 +127,7 @@
                       ｜ 7263     ｜ WARD        ｜ 7839     ｜
                       +-----------+-------------+-----------｜
                SELECT
-                  A.ename,B.ename
+                  A.ename, B.ename
                FROM
                   emp A
                INNER JOIN
@@ -158,7 +158,7 @@
                   ｜ 7263      ｜ WARD    ｜ 7839  ｜
                   +-----------+----------+--------｜
            SELECT
-              A.ename '员工表',B.ename '领导表'
+              A.ename '员工表', B.ename '领导表'
            FROM
               emp A
            LEFT OUTER JOIN       // outer可以省略，写上去可读性更高
