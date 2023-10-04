@@ -18,9 +18,9 @@ MySQL作业题(表参考E5)
      12、给员工加薪10%
      13、面试题
                 有3个表 s(学生表),c(课程表),sc(学生选课表)
-           s(sno,sname) 代表 (学号，姓名)
-           c(cno,cname,cteacher) 代表 (课号，课名，教师)
-           sc(sno,cno,scgrade) 代表 (学号，课号，成绩)
+           s(sno,s_name) 代表 (学号，姓名)
+           c(cno,cname,c_teacher) 代表 (课号，课名，教师)
+           sc(sno,cno,sc_grade) 代表 (学号，课号，成绩)
            问题：
            1、找出没选过“黎明”老师的所有学生姓名
            2、列出2门以上（含2门）不及格学生姓名及平均成绩
@@ -32,19 +32,19 @@ MySQL作业题(表参考E5)
 
      1、取得每个部门最高薪水的人员名称。
         select
-           e.deptno,e.name,e.sal
+           e.dept_no,e.name,e.sal
         from
            emp e,
-           (select deptno,max(sal) as maxsal from emp group by deptno) t
+           (select dept_no,max(sal) as maxSal from emp group by dept_no) t
         where
-           e.deptno=t.deptno,
-           e.sal=t.maxsal;
+           e.dept_no=t.dept_no,
+           e.sal=t.maxSal;
 
      2、哪些人的薪水在部门的平均薪水之上
-        select e.name,e.sal from emp e,(select deptno,avg(sal) as avgsal from emp where group by deptno) t where e,sal>t.avgsal;
+        select e.name,e.sal from emp e,(select dept_no,avg(sal) as avgSal from emp where group by dept_no) t where e,sal>t.avgSal;
 
      3、取得每个部门平均的薪水等级
-        select e.deptno,s.grade from emp e inner join salgrade s on e.sal between losal and hisal group by e.deptno;
+        select e.dept_no,s.grade from emp e inner join salGrade s on e.sal between loSal and hiSal group by e.dept_no;
 
      4、不准用（max），取得最高薪水（给出两种解决方案）
           第一种：
@@ -54,28 +54,28 @@ MySQL作业题(表参考E5)
 
      5、取得平均薪水最高的部门的部门编号（给出两种解决方案）
           第一种：
-        select deptno,avg(sal) as avgsal from emp group by deptno order by avgsal desc limit 1;
+        select dept_no,avg(sal) as avgSal from emp group by dept_no order by avgSal desc limit 1;
           第二种：
-        select deptno,max(avgsal) from emp (select deptno,avg(sal) as avgsal from emp group by deptno);
+        select dept_no,max(avgSal) from emp (select dept_no,avg(sal) as avgSal from emp group by dept_no);
 
      6、取得平均薪水最高的部门的部门名称
-        select d.dname,e.avg(sal) as avgsal from emp e inner join dept d on e.deptno=d.depyno group by d.dname order by avgsal desc limit 1;
+        select d.d_name,e.avg(sal) as avgSal from emp e inner join dept d on e.dept_no=d.dept_no group by d.d_name order by avgsal desc limit 1;
 
      7、求平均薪水的级别最低的部门的部门名称
         select
-           d.dname,avg(e.sal) as avgsal
+           d.d_name,avg(e.sal) as avgSal
         from
            emp e
         inner join
            dept d
         on
-           e.deptno=d.deptno
+           e.dept_no=d.dept_no
         inner join
-           salgrade s
+           salGrade s
         on
-           avgsal between losal and hisal
+           avgSal between loSal and hiSal
         group by
-           d.dname
+           d.d_name
         order by
            grade asc
         limit
@@ -101,9 +101,9 @@ MySQL作业题(表参考E5)
         from
            emp e
         inner join
-           salgrade s
+           salGrade s
         on
-           sal between losal and hisal
+           sal between loSal and hiSal
          group by
             s.grade;
 
@@ -115,31 +115,31 @@ MySQL作业题(表参考E5)
         left outer join
            emp B
         on
-           A.mgr=B.empno;
+           A.mgr=B.emp_no;
         // 这里选用的是左外连接而没有选用自连接的原因是emp表中有一个mgr(领导)为null，选用了自连接就无法显示其领导为null的员工。
 
      11、求出部门名称中，带'S'字符的部门员工的工资合计、部门人数
         select
-           d.deptno,d.dname,d.loc,count(e.ename),ifnull(sum(e.sal),0)
+           d.dept_no,d.d_name,d.loc,count(e.ename),ifnull(sum(e.sal),0)
         from
            emp e
         right outer join
            dept d
         on
-           e.deptno=d.deptno
+           e.dept_no=d.dept_no
         where
-           d.dname like '%S%'
+           d.d_name like '%S%'
         group by
-           d.deptno,d.dname,d.loc
+           d.dept_no,d.d_name,d.loc
 
      12、给员工加薪10%
         update emp set sal=sal*1.1;
 
      13、面试题
                 有3个表 s(学生表),c(课程表),sc(学生选课表)
-           s(sno,sname) 代表 (学号，姓名)
-           c(cno,cname,cteacher) 代表 (课号，课名，教师)
-           sc(sno,cno,scgrade) 代表 (学号，课号，成绩)
+           s(sno,s_name) 代表 (学号，姓名)
+           c(cno,cname,c_teacher) 代表 (课号，课名，教师)
+           sc(sno,cno,sc_grade) 代表 (学号，课号，成绩)
            问题：
            1、找出没选过“黎明”老师的所有学生姓名
            2、列出2门以上（含2门）不及格学生姓名及平均成绩
