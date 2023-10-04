@@ -3,7 +3,6 @@
  */
 /*
 创建表：
-
   1、建表语句的语法格式：
         create table 表名(
             字段名1  数据类型,
@@ -81,42 +80,42 @@
         +----------+--------------+------+-----+---------+----------------+
 ---------------------------------------------------------------------------------------------------------------
   4、向表中插入数据
-      insert语句插入数据
+        insert语句插入数据
           语法格式：INSERT INTO 表名(字段名1, 字段名2, 字段名3, ...) VALUES(值1, 值2, 值3, ...)
-                  要求：字段的数量和值的数量相同，并且数据类型要对应相同
+          语法要求：字段的数量和值的数量相同，并且数据类型要对应相同
 
-           INSERT INTO t_student(no,name,sex,class_no,birth) VALUES(1,'ZhangSan','1','高三1班','1950-10-12');
-           +------+----------+------+------------+------------+
-           | no   | name     | sex  | class_no   | birth      |
-           +------+----------+------+------------+------------+
-           |    1 | ZhangSan | 1    | 高三1班     | 1950-10-12 |
-           +------+----------+------+------------+------------+
+          INSERT INTO t_student(no,name,sex,class_no,birth) VALUES(1,'ZhangSan','1','高三1班','1950-10-12');
+          +------+----------+------+------------+------------+
+          | no   | name     | sex  | class_no   | birth      |
+          +------+----------+------+------------+------------+
+          |    1 | ZhangSan | 1    | 高三1班     | 1950-10-12 |
+          +------+----------+------+------------+------------+
 
-           INSERT INTO t_student(name) VALUES('lisi');    // 除name字段外，剩下的所有字段自动插入null
-           +------+----------+------+------------+------------+
-           | no   | name     | sex  | class_no   | birth      |
-           +------+----------+------+------------+------------+
-           |    1 | ZhangSan | 1    | 高三1班     | 1950-10-12 |
-           | NULL | lisi     | NULL | NULL       | NULL       |
-           +------+----------+------+------------+------------+
+          INSERT INTO t_student(name) VALUES('lisi');    // 除name字段外，剩下的所有字段自动插入null
+          +------+----------+------+------------+------------+
+          | no   | name     | sex  | class_no   | birth      |
+          +------+----------+------+------------+------------+
+          |    1 | ZhangSan | 1    | 高三1班     | 1950-10-12 |
+          | NULL | lisi     | NULL | NULL       | NULL       |
+          +------+----------+------+------------+------------+
 
-           drop table if exists t_student;   // 当这个表存在的话删除
-           create table t_student(
-               no bigint,
-               name varchar(255),
-               sex char(1) default 1,        // 默认值是1
-               class_no varchar(255),
-               birth char(10)
-           ) engine=InnoDB charset=utf8mb4;
-           +---------+--------------+------+-----+---------+-------+
-           | Field   | Type         | Null | Key | Default | Extra |
-           +---------+--------------+------+-----+---------+-------+
-           | no      | bigint(20)   | YES  |     | NULL    |       |
-           | name    | varchar(255) | YES  |     | NULL    |       |
-           | sex     | char(1)      | YES  |     | 1       |       | // 这里的默认值是1
-           | class_no| varchar(255) | YES  |     | NULL    |       |
-           | birth   | char(10)     | YES  |     | NULL    |       |
-           +---------+--------------+------+-----+---------+-------+
+          drop table if exists t_student;   // 当这个表存在的话删除
+          create table t_student(
+              no bigint,
+              name varchar(255),
+              sex char(1) default 1,        // 默认值是1
+              class_no varchar(255),
+              birth char(10)
+          ) engine=InnoDB charset=utf8mb4;
+          +---------+--------------+------+-----+---------+-------+
+          | Field   | Type         | Null | Key | Default | Extra |
+          +---------+--------------+------+-----+---------+-------+
+          | no      | bigint(20)   | YES  |     | NULL    |       |
+          | name    | varchar(255) | YES  |     | NULL    |       |
+          | sex     | char(1)      | YES  |     | 1       |       | // 这里的默认值是1
+          | class_no| varchar(255) | YES  |     | NULL    |       |
+          | birth   | char(10)     | YES  |     | NULL    |       |
+          +---------+--------------+------+-----+---------+-------+
 
           // 字段可以省略不写，但是后面的values对数量和顺序都有要求(要一一对应，不能少也不能多)
           INSERT INTO t_student VALUES(1, 'jack', '0', '高三2班', '1986-10-23');
@@ -140,107 +139,108 @@
         例如：create table t_student20230925 AS SELECT * FROM t_student;
 ---------------------------------------------------------------------------------------------------------------
   6、批量插入
-      INSERT INTO t_student1 SELECT * FROM t_student;
-      +------+----------+------+------------+------------+
-      | no   | name     | sex  | class_no   | birth      |
-      +------+----------+------+------------+------------+
-      |    1 | ZhangSan | 1    | 高三1班     | 1950-10-12 |
-      |    1 | jack     | 0    | 高三2班     | 1986-10-23 |
-      |    3 | rose     | 1    | 高三2班     | 1952-12-14 |
-      |    4 | LaoTie   | 1    | 高三2班     | 1955-12-14 |
+        INSERT INTO t_student1 SELECT * FROM t_student;
+        +------+----------+------+------------+------------+
+        | no   | name     | sex  | class_no   | birth      |
+        +------+----------+------+------------+------------+
+        |    1 | ZhangSan | 1    | 高三1班     | 1950-10-12 |
+        |    1 | jack     | 0    | 高三2班     | 1986-10-23 |
+        |    3 | rose     | 1    | 高三2班     | 1952-12-14 |
+        |    4 | LaoTie   | 1    | 高三2班     | 1955-12-14 |
 
-      |    1 | ZhangSan | 1    | 高三1班     | 1950-10-12 |
-      |    1 | jack     | 0    | 高三2班     | 1986-10-23 |
-      |    3 | rose     | 1    | 高三2班     | 1952-12-14 |
-      |    4 | LaoTie   | 1    | 高三2班     | 1955-12-14 |
-      +------+----------+------+------------+------------+
+        |    1 | ZhangSan | 1    | 高三1班     | 1950-10-12 |
+        |    1 | jack     | 0    | 高三2班     | 1986-10-23 |
+        |    3 | rose     | 1    | 高三2班     | 1952-12-14 |
+        |    4 | LaoTie   | 1    | 高三2班     | 1955-12-14 |
+        +------+----------+------+------------+------------+
 ---------------------------------------------------------------------------------------------------------------
   7、修改数据：update
         语法格式：update 表名 set 字段名1=值1，字段名2=值2...where 条件;
         注意：如果没有where条件,那么将会把整张表数据全部更新
 
-              案例：将学号为1的class_no修改为高三3班,将sex修改为0
-              UPDATE t_student1 SET class_no='高三3班', sex='0' WHERE no=1;
-              +------+----------+------+------------+------------+
-              | no   | name     | sex  | class_no   | birth      |
-              +------+----------+------+------------+------------+
-              |    1 | ZhangSan | 0    | 高三3班     | 1950-10-12 |
-              |    1 | jack     | 0    | 高三3班     | 1986-10-23 |
-              |    3 | rose     | 1    | 高三2班     | 1952-12-14 |
-              |    4 | LaoTie   | 1    | 高三2班     | 1955-12-14 |
-              |    1 | ZhangSan | 0    | 高三3班     | 1950-10-12 |
-              |    1 | jack     | 0    | 高三3班     | 1986-10-23 |
-              |    3 | rose     | 1    | 高三2班     | 1952-12-14 |
-              |    4 | LaoTie   | 1    | 高三2班     | 1955-12-14 |
-              +------+----------+------+------------+------------+
+             案例：将学号为1的class_no修改为高三3班,将sex修改为0
+             UPDATE t_student1 SET class_no='高三3班', sex='0' WHERE no=1;
+             +------+----------+------+------------+------------+
+             | no   | name     | sex  | class_no   | birth      |
+             +------+----------+------+------------+------------+
+             |    1 | ZhangSan | 0    | 高三3班     | 1950-10-12 |
+             |    1 | jack     | 0    | 高三3班     | 1986-10-23 |
+             |    3 | rose     | 1    | 高三2班     | 1952-12-14 |
+             |    4 | LaoTie   | 1    | 高三2班     | 1955-12-14 |
+             |    1 | ZhangSan | 0    | 高三3班     | 1950-10-12 |
+             |    1 | jack     | 0    | 高三3班     | 1986-10-23 |
+             |    3 | rose     | 1    | 高三2班     | 1952-12-14 |
+             |    4 | LaoTie   | 1    | 高三2班     | 1955-12-14 |
+             +------+----------+------+------------+------------+
 
-              更新所有记录：
-              UPDATE t_student1 SET class_no='高三3班', sex='0';
-              +------+----------+------+------------+------------+
-              | no   | name     | sex  | class_no   | birth      |
-              +------+----------+------+------------+------------+
-              |    1 | ZhangSan | 0    | 高三3班     | 1950-10-12 |
-              |    1 | jack     | 0    | 高三3班     | 1986-10-23 |
-              |    3 | rose     | 0    | 高三3班     | 1952-12-14 |
-              |    4 | LaoTie   | 0    | 高三3班     | 1955-12-14 |
-              |    1 | ZhangSan | 0    | 高三3班     | 1950-10-12 |
-              |    1 | jack     | 0    | 高三3班     | 1986-10-23 |
-              |    3 | rose     | 0    | 高三3班     | 1952-12-14 |
-              |    4 | LaoTie   | 0    | 高三3班     | 1955-12-14 |
-              +------+----------+------+------------+------------+
+             更新所有记录：
+             UPDATE t_student1 SET class_no='高三3班', sex='0';
+             +------+----------+------+------------+------------+
+             | no   | name     | sex  | class_no   | birth      |
+             +------+----------+------+------------+------------+
+             |    1 | ZhangSan | 0    | 高三3班     | 1950-10-12 |
+             |    1 | jack     | 0    | 高三3班     | 1986-10-23 |
+             |    3 | rose     | 0    | 高三3班     | 1952-12-14 |
+             |    4 | LaoTie   | 0    | 高三3班     | 1955-12-14 |
+             |    1 | ZhangSan | 0    | 高三3班     | 1950-10-12 |
+             |    1 | jack     | 0    | 高三3班     | 1986-10-23 |
+             |    3 | rose     | 0    | 高三3班     | 1952-12-14 |
+             |    4 | LaoTie   | 0    | 高三3班     | 1955-12-14 |
+             +------+----------+------+------------+------------+
 ---------------------------------------------------------------------------------------------------------------
   8、删除数据
         语法格式：delete from 表名 where 条件;
         注意：如果没有where条件，默认是全部删除
 
-           案例：删除学号1数据
-           DELETE FROM t_student1 WHERE no = 1;
-           +------+--------+------+------------+------------+
-           | no   | name   | sex  | class_no   | birth      |
-           +------+--------+------+------------+------------+
-           |    3 | rose   | 0    | 高三3班     | 1952-12-14 |
-           |    4 | LaoTie | 0    | 高三3班     | 1955-12-14 |
-           |    3 | rose   | 0    | 高三3班     | 1952-12-14 |
-           |    4 | LaoTie | 0    | 高三3班     | 1955-12-14 |
-           +------+--------+------+------------+------------+
+             案例：删除学号1数据
+             DELETE FROM t_student1 WHERE no = 1;
+             +------+--------+------+------------+------------+
+             | no   | name   | sex  | class_no   | birth      |
+             +------+--------+------+------------+------------+
+             |    3 | rose   | 0    | 高三3班     | 1952-12-14 |
+             |    4 | LaoTie | 0    | 高三3班     | 1955-12-14 |
+             |    3 | rose   | 0    | 高三3班     | 1952-12-14 |
+             |    4 | LaoTie | 0    | 高三3班     | 1955-12-14 |
+             +------+--------+------+------------+------------+
 
-           删除表所有记录
-           delete from t_student1;  // 删除大表比较慢，可回滚，能找回
+             删除表所有记录
+             delete from t_student1;  // 删除大表比较慢，可回滚，能找回
 
-           删除表所有数据
-           truncate table 表名；     // 表数据被截断，不可回滚，永久丢失。
+             删除表所有数据
+             truncate table 表名；     // 表数据被截断，不可回滚，永久丢失。
 
-           删除表数据跟结构
-           drop table 表名;         // 是把数据库中指定的表数据和表结构同时删掉，不可回滚，永久丢失。
+             删除表数据跟结构
+             drop table 表名;         // 是把数据库中指定的表数据和表结构同时删掉，不可回滚，永久丢失。
 
-      增删改查有一个术语：CRUD操作。。。（以后就别说增删改查了，太low了）
-      Create(增)    Retrieve(检索)    Update(修改)     Delete(删除)
+        增删改查有一个术语：CRUD操作。。。（以后就别说增删改查了，太low了）
+        Create(增)    Retrieve(检索)    Update(修改)     Delete(删除)
 ---------------------------------------------------------------------------------------------------------------
-   9、创建表之后新增字段
-      基本语法: ALTER TABLE 表名 ADD COLUMN 字段名 字段类型 [约束条件];
-      # 约束条件可以不写,使用默认规则: 新增到最后一列    FIRST: 新增在第一列     AFTER: 在某字段后     BEFORE: 在某字段之前
+  9、创建表之后新增、修改、删除字段
+        [1]、创建表之后新增字段
+             基本语法: ALTER TABLE 表名 ADD COLUMN 字段名 字段类型 [约束条件];
+             # 约束条件可以不写  ①、默认规则: 新增到最后一列   ②、FIRST: 新增在第一列
+                              ③、AFTER: 在某字段后        ④、BEFORE: 在某字段之前
 
-        ALTER TABLE t_student ADD COLUMN age int(11) DEFAULT NULL COMMENT '年龄';
-        ALTER TABLE t_student ADD COLUMN age int(11) DEFAULT NULL COMMENT '年龄' FIRST;
-        ALTER TABLE t_student ADD COLUMN age int(11) DEFAULT NULL COMMENT '年龄' AFTER name;
-        ALTER TABLE t_student ADD COLUMN age int(11) DEFAULT NULL COMMENT '年龄' BEFORE name;
-        ALTER TABLE t_student ADD COLUMN age int(11) DEFAULT NULL COMMENT '年龄' AFTER name BEFORE sex;
----------------------------------------------------------------------------------------------------------------
-   10、创建表之后修改字段名
-       # ALTER TABLE 表名 CHANGE 旧字段名 新字段名 新数据类型;
-         ALTER TABLE t_student CHANGE name user_name varchar(32) DEFAULT NULL COMMENT '姓名';
----------------------------------------------------------------------------------------------------------------
-   11、创建表之后修改字段类型
-       # ALTER TABLE 表名 MODIFY  字段名  数据类型;
-         ALTER TABLE t_student MODIFY name varchar(32) DEFAULT NULL COMMENT '姓名';
----------------------------------------------------------------------------------------------------------------
-   12、创建表之后删除字段
-       # ALTER TABLE 表名  DROP 字段名;
-         ALTER TABLE t_student  DROP name;
----------------------------------------------------------------------------------------------------------------
-   13、创建表之后设置自增
-       # ALTER TABLE 表名  AUTO_INCREMENT = 预想的下一次插入数据的自增值;
-         ALTER TABLE t_student AUTO_INCREMENT = 10000;
+             ALTER TABLE t_student ADD COLUMN age int(11) UNIQUE COMMENT '年龄';
+             ALTER TABLE t_student ADD COLUMN age int(11) DEFAULT NULL COMMENT '年龄';
+             ALTER TABLE t_student ADD COLUMN age int(11) DEFAULT NULL COMMENT '年龄' FIRST;
+             ALTER TABLE t_student ADD COLUMN age int(11) DEFAULT NULL COMMENT '年龄' AFTER name;
+             ALTER TABLE t_student ADD COLUMN age int(11) DEFAULT NULL COMMENT '年龄' BEFORE name;
+             ALTER TABLE t_student ADD COLUMN age int(11) DEFAULT NULL COMMENT '年龄' AFTER name BEFORE sex;
+        [2]、创建表之后修改字段名
+             # ALTER TABLE 表名 CHANGE 旧字段名 新字段名 新数据类型;
+             ALTER TABLE t_student CHANGE name user_name varchar(32) DEFAULT NULL COMMENT '姓名';
+             ALTER TABLE t_student CHANGE name user_name varchar(32) UNIQUE COMMENT '姓名';
+        [3]、创建表之后修改字段类型
+             # ALTER TABLE 表名 MODIFY 字段名 数据类型;
+             ALTER TABLE t_student MODIFY name varchar(32) DEFAULT NULL COMMENT '姓名';
+             ALTER TABLE t_student MODIFY name varchar(32) UNIQUE COMMENT '姓名';
+        [4]、创建表之后删除字段
+             # ALTER TABLE 表名 DROP 字段名;
+             ALTER TABLE t_student DROP name;
+        [5]、创建表之后设置自增
+             # ALTER TABLE 表名 AUTO_INCREMENT = 预想的下一次插入数据的自增值;
+             ALTER TABLE t_student AUTO_INCREMENT = 10000;
  */
 public class I9表的创建 {
 }
