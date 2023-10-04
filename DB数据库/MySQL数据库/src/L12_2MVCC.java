@@ -23,7 +23,7 @@
         对于InnoDB存储引擎，每一行记录都有两个隐藏列 trx_id、roll_pointer，如果表中没有主键和非NULL唯一键时，则还会有第三个隐藏的主键列 row_id(不常用)
         trx_id       必须隐藏列  ①、表示当前数据事务的id，MySQL会为每个事务分配一个id，这个id是递增的
                                ②、当对表执行insert，delete，update语句时，才会为事务分配唯一的事务id，否则一个事务的事务id值为默认值，
-                               ③、这个默认值不固定，innodb使用当前事务的trx变量的地址转换成整数，然后在加上2的48次方计算得来的。
+                                  这个默认值不固定，innodb使用当前事务的trx变量的地址转换成整数，然后在加上2的48次方计算得来的。
         roll_pointer 必须隐藏列     这个隐藏列就相当于一个指针，指向这个事务之前的undo log，就是上一个事务Id指向的数据
         row_id       不是必须隐藏列  单调递增的行ID，不是必需的，占用6个字节。
 
@@ -104,7 +104,7 @@
         已提交读 隔离级别下的事务在每次查询的开始都会生成一个独立的 ReadView,也就是每次查询都会生成新的 ReadView
         可重复读 隔离级别则在第一次读的时候生成一个 ReadView，之后的读都复用之前的 ReadView。使用的是同一个 ReadView
 ---------------------------------------------------------------------------------------------------------------
-3、MVCC实现原理分析（解决不可重复读问题）
+3、MVCC实现原理（解决不可重复读问题分析）
               事务A(TRX_ID=100)                                事务B(TRX_ID=101)
                   begin                                             begin
        insert into core_user value(1, "孙权");
@@ -214,40 +214,42 @@
        综上所述：在 可重复读（RR）隔离级别下，同一个事务里，两个相同的查询，读取同一条记录（id=1），返回了相同的数据。
                复用老的Read View副本，解决了不可重复读的问题。
 ---------------------------------------------------------------------------------------------------------------
-4、MVCC解决的幻读问题
+4、MVCC解决幻读问题分析
        [1]、RR级别下，一个快照读的例子，不存在幻读问题
-                     事务A(TRX_ID=100)                                 事务B(TRX_ID=101)
-                          begin                                             begin
-            select count(*) from core_user where id>1;
-                                                             insert into core_user value(4, "刘备");
-                                                                            commit
-            select count(*) from core_user where id>1;
-                          commit
-               假设事务A
+                            事务A(TRX_ID=100)                                     事务B(TRX_ID=101)
+                                 begin                                                 begin
+                   select count(*) from core_user where id>1;
+                                                                        insert into core_user value(4, "刘备");
+                                                                                       commit
+                   select count(*) from core_user where id>1;
+                                 commit
+            ①、假设事务A
 
        [2]、RR级别下，一个当前读的例子，不存在幻读问题
-                     事务A(TRX_ID=100)                                 事务B(TRX_ID=101)
-                          begin                                             begin
-select count(*) from core_user where id>1 lock in share mode;
-                                                              insert into core_user value(4, "刘备");
-
-              显然，事务B执行插入操作时，阻塞了~ 因为事务A在执行 select ... lock in share mode(当前读)时添加了共享锁，只能读取不能修改。
-           不仅在id = 2,3 这2条数据上加了记录锁，而且在id > 1 这个范围上也加了间隙锁。
-              因此，我们可以发现，RR隔离级别下，加锁的select, update, delete等语句，会使用记录锁 + 间隙锁，锁住索引记录之间的范围，
-           避免范围间插入记录，以避免产生幻影行记录。
+                            事务A(TRX_ID=100)                                     事务B(TRX_ID=101)
+                                 begin                                                 begin
+       select count(*) from core_user where id>1 lock in share mode;
+                                                                         insert into core_user value(4, "刘备");
+            ①、显然,事务B执行插入操作时阻塞了~ 因为事务A在执行 select ... lock in share mode(当前读)时添加了共享锁，只能读取不能修改。
+               不仅在id = 2,3 这2条数据上加了记录锁，而且在id > 1 这个范围上也加了间隙锁。
+            ②、因此，我们可以发现，RR隔离级别下，加锁的select, update, delete等语句，会使用记录锁 + 间隙锁，锁住索引记录之间的范围，
+               避免范围间插入记录，以避免产生幻影行记录。
 
        [3]、RR级别下，特殊场景，似乎存在幻读问题
-                     事务A(TRX_ID=100)                                 事务B(TRX_ID=101)
-                          begin                                             begin
-            select count(*) from core_user where id>1;
-                                                             insert into core_user value(4, "刘备");
-                                                                            commit
-            update core_user set name='张飞' where id=4;
-            select count(*) from core_user where id>1;
-                          commit
+                            事务A(TRX_ID=100)                                     事务B(TRX_ID=101)
+                                 begin                                                 begin
+                   select count(*) from core_user where id>1;
+                                                                        insert into core_user value(4, "刘备");
+                                                                                       commit
+                   update core_user set name='张飞' where id=4;
+                   select count(*) from core_user where id>1;
+                                 commit
 
-        其实，上述流程中，多加了update core_user set name='张飞' where id=4;这步操作，
-        同一个事务，相同的sql，查出的结果集不同了，这个结果，就符合了幻读的定义~
+            ①、其实，上述流程中，多加了update core_user set name='张飞' where id=4;这步操作，
+            ①、同一个事务，相同的sql，查出的结果集不同了，这个结果，就符合了幻读的定义~
+在 RR隔离级别下，事务A 第一次执行普通的 SELECT 语句时生成了一个 ReadView（且在 RR 下只会生成一个 ReadView），之后事务 B 向 user 表中新插入一条记录并提交。
+ReadView 并不能阻止事务 A 执行 UPDATE 或者 DELETE 语句来改动这个新插入的记录（由于事务 B 已经提交，因此改动该记录并不会造成阻塞），但是这样一来，这条新记录的 trx_id 隐藏列的值就变成了事务 A 的事务 id。之后 A 再使用普通的 SELECT 语句去查询这条记录时就可以看到这条记录了，也就可以把这条记录返回给客户端。
+因为这个特殊现象的存在，我们也可以认为 MVCC 并不能完全禁止幻读
  */
 public class L12_2MVCC {
 }

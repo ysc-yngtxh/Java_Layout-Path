@@ -6,17 +6,17 @@
        一个事务是一个完整的业务逻辑单元，不可再分。
 
        比如：银行账户转账，从账户向账户转账10000，需要执行两条update语句
-            UPDATE t_act SET balance=balance-10000 WHERE act_no='act-001';
-            UPDATE t_act SET balance=balance+10000 WHERE act_no='act-002';
-          以上两条DML语句必须同时成功，或者同时失败，不允许出现一条成功，一条失败。
-          要想保证以上的两条DML语句同时成功或者同时失败，那么就需要使用数据库的“事务机制”。
+               UPDATE t_act SET balance=balance-10000 WHERE act_no='act-001';
+               UPDATE t_act SET balance=balance+10000 WHERE act_no='act-002';
+            以上两条DML语句必须同时成功，或者同时失败，不允许出现一条成功，一条失败。
+            要想保证以上的两条DML语句同时成功或者同时失败，那么就需要使用数据库的"事务机制"。
 ---------------------------------------------------------------------------------------------------------------
 2、事务的特性
-          事务包括四大特性：ACID
-         A:原子性：事务是最小的工作单元，不可再分
-         C:一致性：事务必须保证多条DML语句同时成功或者同时失败
-         I:隔离性：事务A与事务B之间具有隔离
-         D:持久性：持久性说的是最终数据必须持久化到硬盘中，事务才算成功的都结束。
+       事务包括四大特性：ACID
+          A -- 原子性: 事务是最小的工作单元，不可再分
+          C -- 一致性: 事务必须保证多条DML语句同时成功或者同时失败
+          I -- 隔离性: 事务A与事务B之间具有隔离
+          D -- 持久性: 持久性说的是最终数据必须持久化到硬盘中，事务才算成功的都结束。
 ---------------------------------------------------------------------------------------------------------------
 3、关于事务之间的隔离性（理论上隔离级别包括4个）
      第一级别：读未提交(read uncommitted)
@@ -60,17 +60,15 @@
                      那么这个插入语句就会被阻塞，无法成功插入，所以就很好了避免幻读问题。
 
      第四级别：序列化读/串行化读(serializable)
-               通过事务得强制串行化执行，避免了幻读得问题，这个隔离级别会对读取得每一行数据加锁，可能导致大量的超时和锁征用得问题。
+               通过事务得强制串行化执行，避免了幻读的问题，这个隔离级别会对读取得每一行数据加锁，可能导致大量的超时和锁征用得问题。
                实际上很少用这个隔离级别，只有在非常需要确保数据一致性的情况且没有并发的情况下才考虑使用这种方式
                效率低，需要事务排队
-
 
      总结：数据库的隔离级别：
           读未提交 -------------- 可能产生脏读，幻读，不可重复读
           读已提交(不可重复读) ---- 可能产生不可重复读，幻读
           可重复读 -------------- 可能产生幻读
           序列化 ---------------- 无
-
                                                                +-----------------------+-----------------+
                                                                | Variable_name         | Value           |
     查看隔离级别：show variables like 'transaction_isolation';   +-----------------------+-----------------+
@@ -79,62 +77,63 @@
 ---------------------------------------------------------------------------------------------------------------
 4、演示事务
     MySQL事务默认情况下是自动提交的（什么是自动提交？只要执行任意一条DML语句提交一次）怎么关闭自动提交？start transaction; 或 begin;
-       像一些select into、update、delete等MySQL语句都是历史操作。
-       并且每条语句执行完之后都会自动提交，提交到硬盘文件中。
+       像一些select、insert、update、delete等DQL、DML语句都是历史操作。
+       并且每条语句执行完之后都会自动提交（auto_commit），提交到硬盘文件中。
 
        提交事务语句：commit; 提交历史操作，并同步到硬盘文件中。
        回滚事务语句：rollback; 清空历史操作。
 
-        演示：
-        DROP TABLE IF EXISTS t_user;
-        CREATE TABLE t_user(
-           id INT PRIMARY KEY AUTO_INCREMENT,
-           username VARCHAR(255)
-        );
-        INSERT INTO t_user(username) VALUES('zs');
-        SELECT * FROM t_user;
-        +----+----------+
-        | id | username |
-        +----+----------+
-        |  1 | zs       |
-        +----+----------+
-        rollback;                // 回滚事务,清空历史操作。
-        SELECT * FROM t_user;    // 这里为什么回滚之后还会显示历史操作呢？，因为MySQL的自动提交功能
-        +----+----------+
-        | id | username |
-        +----+----------+
-        |  1 | zs       |
-        +----+----------+
+       演示事务：
+               DROP TABLE IF EXISTS t_user;
+               CREATE TABLE t_user(
+                  id INT PRIMARY KEY AUTO_INCREMENT,
+                  username VARCHAR(255)
+               );
+               INSERT INTO t_user(username) VALUES('zs');
 
-        start transaction;        // 启动事务
-        INSERT INTO t_user(username) VALUES('Lisi');
-        INSERT INTO t_user(username) VALUES('WangWu');
-        SELECT * FROM t_user;
-        +----+----------+
-        | id | username |
-        +----+----------+
-        |  1 | zs       |
-        |  2 | Lisi     |
-        |  3 | WangWu   |
-        +----+----------+
-        rollback;                 // 因为关闭了自动提交，所以以上的语句都属于历史操作，会被rollback回滚事务清空
-        +----+----------+
-        | id | username |
-        +----+----------+
-        |  1 | zs       |
-        +----+----------+
-        INSERT INTO t_user(username) VALUES('ZhaoLiu');
-        INSERT INTO t_user(username) VALUES('ZhaoPi');
-        commit;                   // 这里是提交事务，历史操作都被提交到硬盘文件中。
-        SELECT * FROM t_user;
-        +----+----------+
-        | id | username |
-        +----+----------+
-        |  1 | zs       |
-        |  4 | ZhaoLiu  |
-        |  5 | ZhaoPi   |
-        +----+----------+
-        // 这里的id是自动增加的主键，因为'Lisi','WangWu'历史操作被回滚，所以没有2和3.属于auto_increment机制
+               SELECT * FROM t_user;
+               +----+----------+
+               | id | username |
+               +----+----------+
+               |  1 | zs       |
+               +----+----------+
+               rollback;                // 回滚事务,清空历史操作。
+               SELECT * FROM t_user;    // 这里为什么回滚之后还会显示历史操作呢？，因为MySQL的自动提交功能
+               +----+----------+
+               | id | username |
+               +----+----------+
+               |  1 | zs       |
+               +----+----------+
+
+               start transaction;        // 启动事务
+               INSERT INTO t_user(username) VALUES('Lisi');
+               INSERT INTO t_user(username) VALUES('WangWu');
+               SELECT * FROM t_user;
+               +----+----------+
+               | id | username |
+               +----+----------+
+               |  1 | zs       |
+               |  2 | Lisi     |
+               |  3 | WangWu   |
+               +----+----------+
+               rollback;                 // 因为关闭了自动提交，所以以上的语句都属于历史操作，会被rollback回滚事务清空
+               +----+----------+
+               | id | username |
+               +----+----------+
+               |  1 | zs       |
+               +----+----------+
+               INSERT INTO t_user(username) VALUES('ZhaoLiu');
+               INSERT INTO t_user(username) VALUES('ZhaoPi');
+               commit;                   // 这里是提交事务，历史操作都被提交到硬盘文件中。
+               SELECT * FROM t_user;
+               +----+----------+
+               | id | username |
+               +----+----------+
+               |  1 | zs       |
+               |  4 | ZhaoLiu  |
+               |  5 | ZhaoPi   |
+               +----+----------+
+               // 这里的id是自动增加的主键，因为'Lisi','WangWu'历史操作被回滚，所以没有2和3.属于auto_increment机制
 ---------------------------------------------------------------------------------------------------------------
 5、使用两个事务演示隔离级别
         第一：读未提交(read uncommitted)
