@@ -3,13 +3,13 @@
  */
 /*
 一、条件查询
-     CREATE TABLE t_emp(                                          语法格式：
-        id INT(20) PRIMARY KEY AUTO_INCREMENT COMMENT '主键Id',        SELECT
-        ename VARCHAR(255) COMMENT '员工姓名',                               字段1, 字段2, ...     3
-        sal DOUBLE COMMENT '工资',                                     FROM
-        comm DOUBLE COMMENT '津贴',                                          表名                 1
-        dept_no VARCHAR(255) COMMENT '部门',                           WHERE
-        job VARCHAR(255) COMMENT '工作岗位',                                 条件                  2
+     CREATE TABLE t_emp(                                              语法格式：
+        id INT(20) PRIMARY KEY AUTO_INCREMENT COMMENT '主键Id',           SELECT
+        ename VARCHAR(255) COMMENT '员工姓名',                                  字段1, 字段2, ...     3
+        sal DOUBLE COMMENT '工资',                                        FROM
+        comm DOUBLE COMMENT '津贴',                                             表名                 1
+        dept_no VARCHAR(255) COMMENT '部门',                              WHERE
+        job VARCHAR(255) COMMENT '工作岗位',                                    条件                  2
         province VARCHAR(255) COMMENT '省份'
      ) ENGINE=InnoDB AUTO_INCREMENT=1 CHARSET=utf8mb4 COMMENT='员工信息表';
 ---------------------------------------------------------------------------------------------------------------
@@ -76,16 +76,12 @@
 
       例：(1)、找出名字当中含有字母O的
               SELECT ename FROM emp WHERE ename LIKE '%O%';
-
           (2)、找出名字当中第二个字母是A的
               SELECT ename FROM emp WHERE enamel LIKE '_A%';
-
           (3)、找出名字中有下划线的。
               SELECT ename FROM emp WHERE enamel LIKE '%\_%';    // 通过\来转义_,就可以实现查找下划线
-
           (4)、找出名字中最后一个字母是T的
               SELECT ename FROM emp WHERE enamel LIKE '%T';
-
           注意：模糊查询不需要和字段名个数一致
  */
 public class B2条件查询 {
