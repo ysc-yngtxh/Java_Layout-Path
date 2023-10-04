@@ -6,7 +6,7 @@
 /*
 一、单行处理函数（这里可以简单的理解为函数只处理单行字段，以此分类；那么后面就是分组函数或者叫聚集函数，意味处理多行字段，但是输出都是一行字段）
     
-    CREATE TABLE `tb_order` (
+    CREATE TABLE `tb_order`(
        `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '订单id',
        `subject` varchar(256) DEFAULT NULL COMMENT '订单标题',
        `order_no` varchar(50) DEFAULT NULL COMMENT '商户订单编号',
