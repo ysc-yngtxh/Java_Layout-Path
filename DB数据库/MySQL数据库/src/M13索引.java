@@ -34,25 +34,26 @@
    MyISAM存储引擎下还有一个全文索引
 ---------------------------------------------------------------------------------------------------------------
 3、建表时和建表之后添加、删除索引
-   [1]、创建表的时候建立索引
-        ①、普通索引：                      ②、联合索引：                       ③、唯一索引：
-            CREATE TABLE t_student(          CREATE TABLE t_student(            CREATE TABLE t_student(
-              id INT NOT NULL PRIMARY KEY,     id INT NOT NULL PRIMARY KEY,       id INT NOT NULL PRIMARY KEY,
-              no BIGINT(50) NULL,              no BIGINT(50) null,                no BIGINT(50) NULL,
-              name VARCHAR(20) NULL,           name VARCHAR(20) null,             name VARCHAR(20) NULL,
-              INDEX index_no(no)               KEY index_no_name(no,name)         UNIQUE INDEX index_no(no)
-            )                                )                                  )
-   [2]、建完表之后创建索引
+   [1]、添加索引语法：create index 索引名称 on 表名(字段名(length));  // 字段名(length)中的 length 表示将字段的指定长度作为前缀索引
+   [2]、创建表的时候建立索引
+        ①、普通索引：                       ②、联合索引：                       ③、唯一索引：
+            CREATE TABLE t_student(           CREATE TABLE t_student(            CREATE TABLE t_student(
+              id INT NOT NULL PRIMARY KEY,      id INT NOT NULL PRIMARY KEY,       id INT NOT NULL PRIMARY KEY,
+              no BIGINT(50) NULL,               no BIGINT(50) null,                no BIGINT(50) NULL,
+              name VARCHAR(20) NULL,            name VARCHAR(20) null,             name VARCHAR(20) NULL,
+              INDEX index_no(no)                KEY index_no_name(no,name)         UNIQUE INDEX index_no(no)
+            )                                 )                                  )
+   [3]、建完表之后创建索引
         ①、普通索引：CREATE INDEX index_name ON t_student(name);
         ②、联合索引：CREATE INDEX index_name_no ON t_student(name,no);
         ③、唯一索引：CREATE UNIQUE INDEX index_name ON t_student(name);
         ④、全文索引：CREATE FULLTEXT INDEX index_name ON t_student(name);
-   [3]、以修改表的方式添加索引
+   [4]、以修改表的方式添加索引
         ①、普通索引：ALTER TABLE t_student ADD INDEX index_name(name);
         ②、联合索引：ALTER TABLE t_student ADD INDEX index_name_no(name,no);
         ③、唯一索引：ALTER TABLE t_student ADD UNIQUE INDEX index_name(name);
         ④、全文索引：ALTER TABLE t_student ADD FULLTEXT index_name(name);
-   [4]、删除索引对象：drop index 索引名称 on 表名;
+   [5]、删除索引语法：drop index 索引名称 on 表名;
 ---------------------------------------------------------------------------------------------------------------
 5、使用 explain 命令查看sql语句的执行计划
    [1]、explain显示Mysql如何使用索引来处理 select语句 以及 连接表的，可以帮助我们 选择更好的索引和写出更优化的查询语句
@@ -124,7 +125,6 @@
 
    [7]、模糊查询的时候，第一个通配符使用的是%，这个时候索引是失效的。
         SELECT ename FROM emp WHERE ename LIKE '%A%';
----------------------------------------------------------------------------------------------------------------
 
  */
 public class M13索引 {
