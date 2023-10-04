@@ -235,7 +235,7 @@
             ②、因此，我们可以发现，RR隔离级别下，加锁的select, update, delete等语句，会使用记录锁 + 间隙锁，锁住索引记录之间的范围，
                避免范围间插入记录，以避免产生幻影行记录。
 
-       [3]、RR级别下，特殊场景，似乎存在幻读问题
+       [3]、RR级别下，特殊场景，MVCC似乎存在幻读问题
                             事务A(TRX_ID=100)                                     事务B(TRX_ID=101)
                                  begin                                                 begin
                  select count(*) from core_user where id>1;
@@ -245,9 +245,9 @@
                  select count(*) from core_user where id>1;
                                  commit
             ①、其实，上述流程中，只是多加了update core_user set name='张飞' where id=4;这步操作。
-            ②、在 RR隔离级别下，事务A 第一次执行普通的 SELECT 语句时生成了一个 ReadView（且在 RR 下只会生成一个 ReadView）。
+            ②、在 RR隔离级别下，事务A 第一次执行普通的 SELECT 语句时生成了一个 ReadView（且在 RR隔离级别下只会生成一个 ReadView）。
                之后事务B 向 core_user 表中新插入一条记录并提交，ReadView 并不能阻止事务A 执行 UPDATE 或者 DELETE 语句来改动这个新插入的记录
-               由于事务B 已经提交，因此改动该记录并不会造成阻塞。但是这样一来，这条新记录的 trx_id 隐藏列的值就变成了事务A 的事务id。
+               由于事务B 已经提交，因此修改该记录并不会造成阻塞。但是这样一来，这条新记录的隐藏列 trx_id值 就变成了事务A 的事务id。
                之后事务A 再使用普通的 SELECT 语句去查询这条记录时就可以看到这条记录了，也就可以把这条记录返回给客户端。
             ③、因为这个特殊现象的存在，同一个事务，相同的sql，查出的结果集不同了，这个结果，就符合了幻读的定义。可以认为 MVCC 并不能完全禁止幻读
  */

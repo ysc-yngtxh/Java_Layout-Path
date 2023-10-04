@@ -65,26 +65,26 @@
            如果有主键，则 select count（主键）的执行效率是最优的
 ---------------------------------------------------------------------------------------------------------------
 二、group by 和 having
-        group by : 按照某个字段或者某些字段进行分组。比如一张表里的工作类型，有重复的工作类型，也有不重复的工作类型。先进行分组，重复的为一组。
-        having   : having是对分组之后的数据进行再次过滤,需要注意的是只能操作分组数据
+        group by: 按照某个字段或者某些字段进行分组。比如一张表里的工作类型，有重复的工作类型，也有不重复的工作类型。先进行分组，重复的为一组。
+        having  : having是对分组之后的数据进行再次过滤,需要注意的是只能操作分组数据
 
-        注意：分组函数一般都会和group by联合使用，这也是为什么他被称为分组函数的原因
-             并且任何一个分组函数都是在group by语句执行结束之后才会执行的。
-             当一条SQL语句没有group by的话，整张表的数据会自成一组。
+        注意：分组函数一般都会和 group by 联合使用，这也是为什么他被称为 分组函数 的原因
+             并且任何一个 分组函数 都是在 group by语句 执行结束之后才会执行的。
+             当一条SQL语句没有 group by 的话，整张表的数据会自成一组。
 
         执行顺序：
-            SELECT      5
-               ...
-            FROM        1
-               ...
-            WHERE       2
-               ...
-            GROUP BY    3
-               ...
-            HAVING      4
-               ...
-            ORDER BY    6
-               ...
+               SELECT      5
+                  ...
+               FROM        1
+                  ...
+               WHERE       2
+                  ...
+               GROUP BY    3
+                  ...
+               HAVING      4
+                  ...
+               ORDER BY    6
+                  ...
 
         找出工资高于平均工资的员工
             SELECT ename,sal FROM t_emp WHERE sal > AVG(sal);
@@ -105,7 +105,7 @@
         案例二：找出每个部门的不同工作岗位的最高薪资
                SELECT dept_no,job,MAX(sal) FROM t_emp GROUP BY dept_no,job;
                +-----------+-------------+-----------+
-               | dept_no    | job         | sal       |
+               | dept_no   | job         | sal       |
                +-----------+-------------+-----------|
                | 10        | CLERK       | 800.00    |
                +-----------+-------------+-----------+
@@ -124,9 +124,11 @@
                +-----------+-------------+-----------+
 
         案例三：找出每个部门的最高薪资，要求显示薪资大于2900的数据
-               第一步：找出每个部门的最高薪资   SELECT dept_no,MAX(sal) FROM t_emp GROUP BY dept_no;
-               第二步：找出薪资大于2900的数据  SELECT dept_no,MAX(sal) FROM t_emp GROUP BY dept_no HAVING MAX(sal) > 2900;  // 这种方式效率低
-               SELECT dept_no,MAX(sal) FROM t_emp WHERE sal > 2900 GROUP BY dept_no;   // 效率较高，建议能够使用where过滤的尽量使用where
+              方式一：这种方式查询效率低
+                    第一步: 找出每个部门的最高薪资 SELECT dept_no,MAX(sal) FROM t_emp GROUP BY dept_no;
+                    第二步: 找出薪资大于2900的数据 SELECT dept_no,MAX(sal) FROM t_emp GROUP BY dept_no HAVING MAX(sal)>2900;
+              方式二：这种方式查询效率较高（能够使用 WHERE 语句过滤的，推荐使用 WHERE 语句）
+                     SELECT dept_no,MAX(sal) FROM t_emp WHERE sal > 2900 GROUP BY dept_no;
 
         案例四：找出每个部门的平均薪资，并显示薪资大于2000的数据
                第一步：找出每个部门的平均薪资  SELECT dept_no,AVG(sal) FROM t_emp GROUP BY dept_no;
@@ -134,8 +136,8 @@
                                           // AVG(sal)是分组函数不能写进where语句，所以只能使用having
 ---------------------------------------------------------------------------------------------------------------
 三、with rollup
-        GROUP BY中使用WITH ROLLUP：
-        使用WITH ROLLUP关键字之后，在所有查询出的分组记录之后增加一条记录，该记录计算查询出的所有记录的总和，即统计记录数量。
+        GROUP BY 中使用 WITH ROLLUP：
+        使用 WITH ROLLUP 关键字之后，在所有查询出的分组记录之后增加一条记录，该记录计算查询出的所有记录的总和，即统计记录数量。
 
         SELECT ename,AVG(sal),SUM(comm) FROM t_emp GROUP BY ename WITH ROLLUP
         +-----------+-------------------+---------------+
