@@ -23,11 +23,11 @@
                   t.*, s.grade
                FROM
                   (SELECT dept_no, AVG(sal) avgSal FROM emp GROUP BY dept_no) t
-                  JOIN
-                     salGrade s
-                  ON
-                     t.avgSal BETWEEN s.loSal AND s.hiSal;
-               // 使用子查询找出每个部门的平均薪水，然后将以上的查询结果(部门名称，平均薪水)当作临时表t，让t表和salGrade表连接
+               JOIN
+                  sal_grade s
+               ON
+                  t.avgSal BETWEEN s.loSal AND s.hiSal;
+               // 使用子查询找出每个部门的平均薪水，然后将以上的查询结果(部门名称，平均薪水)当作临时表t，让t表和sal_grade表连接
 
         案例二：找出每个部门平均的薪资等级。
                方法一：
@@ -37,10 +37,10 @@
                             FROM                                     FROM
                                emp e                                    (SELECT
                             JOIN                                            e.dept_no, AVG(s.grade)
-                               salGrade s                                FROM
+                               sal_grade s                                FROM
                             ON                                              emp e
                                e.sal BETWEEN loSal AND hiSal;            JOIN
-                                                                            salGrade s
+                                                                            sal_grade s
                                                                          ON
                                                                             e.sal BETWEEN s.loSal AND s.hiSal) t
                                                                      GROUP BY
@@ -51,7 +51,7 @@
                      FROM
                         emp e
                      JOIN
-                        salGrade s   // 这里就没有使用from嵌套子查询，因为 emp e表 与 salGrade s表 连接后需要查询的都在里面
+                        sal_grade s   // 这里就没有使用from嵌套子查询，因为 emp e表 与 sal_grade s表 连接后需要查询的都在里面
                      ON                 就没有必要强行嵌套子查询，这种方法查询效率更高
                         e.sal BETWEEN s.loSal AND s.hiSal
                      GROUP BY

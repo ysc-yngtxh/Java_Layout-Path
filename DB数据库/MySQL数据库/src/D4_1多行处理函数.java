@@ -9,8 +9,8 @@
         CREATE TABLE t_emp(                                              count  计数
            `id` INT(20) PRIMARY KEY AUTO_INCREMENT COMMENT '主键Id',      sum    求和
            `ename` VARCHAR(255) COMMENT '员工姓名',                        avg    平均值
-           `sal` DOUBLE COMMENT '工资',                                   max    最大值
-           `comm` DOUBLE COMMENT '津贴',                                  min    最小值
+           `sal` DOUBLE(10, 2) COMMENT '工资',                            max    最大值
+           `comm` DOUBLE(10, 2) COMMENT '津贴',                           min    最小值
            `dept_no` VARCHAR(255) COMMENT '部门',                         记住：所有的分组函数都是对"某一组"数据进行操作的
            `job` VARCHAR(255) COMMENT '工作岗位',
            `province` VARCHAR(255) COMMENT '省份'

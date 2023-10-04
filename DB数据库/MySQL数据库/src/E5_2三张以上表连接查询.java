@@ -22,7 +22,7 @@
            | 30        | SALES       | CHICAGO   |
            | 40        | OPERATIONS  | BOSTON    |
            +-----------+-------------+-----------+
-           salGrade s表
+           sal_grade s表
            +-----------+-------------+-----------+
            | grade     | loSal       | hiSal     |      // 工资等级   员工最低金额   员工最高金额
            +-----------+-------------+-----------+
@@ -40,7 +40,7 @@
               ON
                  e.dept_no = d.dept_no
               INNER JOIN
-                 salGrade s
+                 sal_grade s
               ON
                  e.sal BETWEEN s.loSal AND s.hiSal
               LEFT OUTER JOIN                         // inner和outer可以省略

@@ -6,8 +6,8 @@
      CREATE TABLE t_emp(                                              语法格式：
         id INT(20) PRIMARY KEY AUTO_INCREMENT COMMENT '主键Id',           SELECT
         ename VARCHAR(255) COMMENT '员工姓名',                                  字段1, 字段2, ...     3
-        sal DOUBLE COMMENT '工资',                                        FROM
-        comm DOUBLE COMMENT '津贴',                                             表名                 1
+        sal DOUBLE(10, 2) COMMENT '工资',                                 FROM
+        comm DOUBLE(10, 2) COMMENT '津贴',                                      表名                 1
         dept_no VARCHAR(255) COMMENT '部门',                              WHERE
         job VARCHAR(255) COMMENT '工作岗位',                                    条件                  2
         province VARCHAR(255) COMMENT '省份'

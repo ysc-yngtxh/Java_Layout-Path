@@ -5,13 +5,13 @@
 一、排序（order by 升序，降序）
      （1）按照工资升序，找出员工名和薪资
               CREATE TABLE t_emp(
-                 id INT(20) PRIMARY KEY AUTO_INCREMENT COMMENT '主键Id',
-                 ename VARCHAR(255) COMMENT '员工姓名',
-                 sal DOUBLE COMMENT '工资',
-                 comm DOUBLE COMMENT '津贴',
-                 dept_no VARCHAR(255) COMMENT '部门',
-                 job VARCHAR(255) COMMENT '工作岗位',
-                 province VARCHAR(255) COMMENT '省份'
+                 `id` INT(20) PRIMARY KEY AUTO_INCREMENT COMMENT '主键Id',
+                 `ename` VARCHAR(255) COMMENT '员工姓名',
+                 `sal` DOUBLE(10, 2) COMMENT '工资',
+                 `comm` DOUBLE(10, 2) COMMENT '津贴',
+                 `dept_no` VARCHAR(255) COMMENT '部门',
+                 `job` VARCHAR(255) COMMENT '工作岗位',
+                 `province` VARCHAR(255) COMMENT '省份'
               ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='员工信息表';
 
               SELECT
