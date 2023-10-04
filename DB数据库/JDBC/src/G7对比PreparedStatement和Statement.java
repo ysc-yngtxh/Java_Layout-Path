@@ -6,9 +6,9 @@ import java.util.Scanner;
  */
 /*
 1、对比一下Statement和preparedStatement?
-    -Statement存在SQL注入问题，preparedStatement解决了SQL注入问题
-    -Statement是编译一次执行一次。preparedStatement是编译一次，可执行N次。preparedStatement效率较高一些
-    -preparedStatement会在编译阶段做类型的安全检查
+    -- Statement 存在SQL注入问题，preparedStatement 解决了SQL注入问题
+    -- Statement 是编译一次执行一次。preparedStatement是编译一次，可执行N次。preparedStatement效率较高一些
+    -- preparedStatement 会在编译阶段做类型的安全检查
 
     综上所述：preparedStatement使用较多。只有极少数的情况下需要使用Statement
 
@@ -32,11 +32,16 @@ public class G7对比PreparedStatement和Statement {
         Statement stmt = null;
         ResultSet rs = null;
         try {
+            // 1、注册驱动
             Class.forName("com.mysql.cj.jdbc.Driver");
+            // 2、获取驱动
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bjpowernode?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC", "root", "131474");
+            // 3、获取预编译数据库操作对象
             stmt = conn.createStatement();
+            // 4、执行SQL语句
             String sql = "select name,age from t_student order by age " + keyword;
             rs = stmt.executeQuery(sql);
+            // 5、处理查询结果集
             while (rs.next()) {
                 System.out.println(rs.getString("name") + "\t" + rs.getString("age"));
             }

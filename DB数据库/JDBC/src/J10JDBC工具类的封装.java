@@ -1,4 +1,4 @@
-package util;
+import util.DBUtil;
 
 import java.sql.*;
 
@@ -13,10 +13,9 @@ public class J10JDBC工具类的封装 {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-
         try{
             //获取连接
-            conn = DButil.getConnection();
+            conn = DBUtil.getConnection();
 
             //获取预编译的数据库操作对象
             String sql = "select no,name,age from t_student where name like ?";
@@ -33,7 +32,7 @@ public class J10JDBC工具类的封装 {
             e.printStackTrace();
         } finally {
             //释放资源
-            DButil.close(conn,ps,rs);
+            DBUtil.close(conn,ps,rs);
         }
     }
 }

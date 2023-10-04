@@ -1,4 +1,4 @@
-import util.DButil;
+import util.DBUtil;
 
 import java.sql.*;
 
@@ -9,14 +9,14 @@ import java.sql.*;
   1、在K11悲观锁和乐观锁的概念中加上断点在提交事务(conn.commit)语句上,然后debug运行
   2、debug运行后再到L12演示行级锁中运行，会发现本应输出的值1没有出现。
  */
-public class K11演示行级锁 {
+public class L12演示行级锁 {
     public static void main(String[] args) {
 
         Connection conn = null;
         PreparedStatement ps = null;
 
         try {
-            conn = DButil.getConnection();
+            conn = DBUtil.getConnection();
 
             conn.setAutoCommit(false);
             String sql = "update t_student set age=? where name='wangzhuxian'";
@@ -36,7 +36,7 @@ public class K11演示行级锁 {
             }
             e.printStackTrace();
         } finally {
-            DButil.close(conn, ps, null);
+            DBUtil.close(conn, ps, null);
         }
     }
 }

@@ -7,30 +7,28 @@ import java.sql.Statement;
  * @author 游家纨绔
  */
 /*
-public class Driver extends com.mysql.cj.jdbc.Driver {
+public class Driver extends NonRegisteringDriver implements java.sql.Driver {
     public Driver() throws SQLException {
-        super();
     }
 
     static {
-        System.err.println("Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. "
-                + "The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.");
+        try {
+            DriverManager.registerDriver(new Driver());
+        } catch (SQLException var1) {
+            throw new RuntimeException("Can't register driver!");
+        }
     }
 }
-
-以上代码是jdbc中的com.mysql.jdbc.Driver类.我们可以发现，这个类继承了com.mysql.cj.jdbc.Driver类，且有一个静态代码块。
-而在学习javase反射机制的时候我们就了解到。
+以上代码是jdbc中的 com.mysql.cj.jdbc.Driver 类，且有一个静态代码块。
+而在学习 JavaSE反射机制 的时候我们就了解到。
       如果你只希望一个类的静态代码块执行，其他代码一律不执行
-       你可以使用：
-           Class.forName("完整类名");
-       这个方法的执行会导致类加载，类加载时，静态代码块执行
-
-       所以，我们在第一步注册驱动的时候还有一种写法：即Class.forName("完整类名");
-       这种方法也是我们最常用的方法
+      你可以使用：
+               Class.forName("完整类名");
+      这个方法的执行会导致类加载，类加载时，静态代码块执行。
+      所以，我们在第一步注册驱动的时候还有一种写法：即Class.forName("完整类名"); 这种方法也是我们用来注册数据库的常用方法
  */
 public class C3类加载的方式注册驱动 {
     public static void main(String[] args) {
-
         Connection conn = null;
         Statement stmt = null;
         try {

@@ -9,7 +9,6 @@ import java.sql.Statement;
  */
 public class B2JDBC编程六步概述 {
     public static void main(String[] args) {
-
         Connection conn = null;
         Statement stmt = null;
         try {
@@ -19,18 +18,18 @@ public class B2JDBC编程六步概述 {
             // 合并写法：DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
 
             // 2、获取连接
-                /*
-                url:统一资源定位符（网络中某个资源的绝对路径）
-                jdbc:mysql://localhost:3306/bjpowernode?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC 这就是URL
-                URL包括哪几部分?
-                   jdbc:mysql:   通信协议
-                   localhost：   IP地址
-                   3306:         MySQL数据库端口号
-                   bjpowernode： 具体的数据库实例名
-                   ?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC    这就是MySQL驱动8的新特性，加入了时区
+            /*
+              url:统一资源定位符（网络中某个资源的绝对路径）
+              jdbc:mysql://localhost:3306/bjpowernode?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC 这就是URL
+              URL包括哪几部分?
+                 jdbc:mysql:   通信协议
+                 localhost：   IP地址
+                 3306:         MySQL数据库端口号
+                 bjpowernode： 具体的数据库实例名
+                 ?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC    这就是MySQL驱动8的新特性，加入了时区
 
-                说明：localhost和127.0.0.1都是本机IP地址
-                */
+              说明：localhost和127.0.0.1都是本机IP地址
+            */
             String url = "jdbc:mysql://localhost:3306/bjpowernode?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
             String user = "root";
             String password = "131474";
@@ -51,8 +50,7 @@ public class B2JDBC编程六步概述 {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            // 6、释放资源
-            // 为了保证资源一定释放，在finally语句块中关闭资源，并且要遵循从小到大依次关闭
+            // 6、释放资源。为了保证资源一定释放，在finally语句块中关闭资源，并且要遵循从小到大依次关闭
             if (stmt != null) {
                 try {
                     stmt.close();

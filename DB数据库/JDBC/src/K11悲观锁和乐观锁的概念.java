@@ -1,4 +1,4 @@
-import util.DButil;
+import util.DBUtil;
 
 import java.sql.*;
 
@@ -13,14 +13,14 @@ import java.sql.*;
 这个程序开启一个事务，这个事务专门进行查询，并且使用行级锁/悲观锁，锁住相关的记录
 配合L12演示行级锁一起使用，方便理解
  */
-public class J10悲观锁和乐观锁的概念 {
+public class K11悲观锁和乐观锁的概念 {
     public static void main(String[] args) {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
 
         try {
-            conn = DButil.getConnection();
+            conn = DBUtil.getConnection();
 
             // 开启事务
             conn.setAutoCommit(false);
@@ -47,7 +47,7 @@ public class J10悲观锁和乐观锁的概念 {
             }
             e.printStackTrace();
         } finally {
-            DButil.close(conn, ps, rs);
+            DBUtil.close(conn, ps, rs);
         }
     }
 }
