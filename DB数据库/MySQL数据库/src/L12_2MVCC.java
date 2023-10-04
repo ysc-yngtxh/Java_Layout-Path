@@ -215,38 +215,39 @@
                复用老的Read View副本，解决了不可重复读的问题。
 ---------------------------------------------------------------------------------------------------------------
 4、MVCC解决的幻读问题
-   [1]、RR级别下，一个快照读的例子，不存在幻读问题
-                 事务A(TRX_ID=100)                                 事务B(TRX_ID=101)
-                      begin                                             begin
-        select count(*) from core_user where id>1;
-                                                         insert into core_user value(4, "刘备");
-                                                                        commit
-        select count(*) from core_user where id>1;
-                      commit
+       [1]、RR级别下，一个快照读的例子，不存在幻读问题
+                     事务A(TRX_ID=100)                                 事务B(TRX_ID=101)
+                          begin                                             begin
+            select count(*) from core_user where id>1;
+                                                             insert into core_user value(4, "刘备");
+                                                                            commit
+            select count(*) from core_user where id>1;
+                          commit
+               假设事务A
 
-   [2]、RR级别下，一个当前读的例子，不存在幻读问题
-                 事务A(TRX_ID=100)                                 事务B(TRX_ID=101)
-                      begin                                             begin
+       [2]、RR级别下，一个当前读的例子，不存在幻读问题
+                     事务A(TRX_ID=100)                                 事务B(TRX_ID=101)
+                          begin                                             begin
 select count(*) from core_user where id>1 lock in share mode;
-                                                         insert into core_user value(4, "刘备");
+                                                              insert into core_user value(4, "刘备");
 
-           显然，事务B执行插入操作时，阻塞了~ 因为事务A在执行 select ... lock in share mode(当前读)时添加了共享锁，只能读取不能修改。
-        不仅在id = 2,3 这2条数据上加了记录锁，而且在id > 1 这个范围上也加了间隙锁。
-           因此，我们可以发现，RR隔离级别下，加锁的select, update, delete等语句，会使用记录锁 + 间隙锁，锁住索引记录之间的范围，
-        避免范围间插入记录，以避免产生幻影行记录，那就是说RR隔离级别解决了幻读问题
+              显然，事务B执行插入操作时，阻塞了~ 因为事务A在执行 select ... lock in share mode(当前读)时添加了共享锁，只能读取不能修改。
+           不仅在id = 2,3 这2条数据上加了记录锁，而且在id > 1 这个范围上也加了间隙锁。
+              因此，我们可以发现，RR隔离级别下，加锁的select, update, delete等语句，会使用记录锁 + 间隙锁，锁住索引记录之间的范围，
+           避免范围间插入记录，以避免产生幻影行记录。
 
-   [3]、RR级别下，特殊场景，似乎存在幻读问题
-                 事务A(TRX_ID=100)                                 事务B(TRX_ID=101)
-                      begin                                             begin
-        select count(*) from core_user where id>1;
-                                                         insert into core_user value(4, "刘备");
-                                                                        commit
-        update core_user set name='张飞' where id=4;
-        select count(*) from core_user where id>1;
-                      commit
+       [3]、RR级别下，特殊场景，似乎存在幻读问题
+                     事务A(TRX_ID=100)                                 事务B(TRX_ID=101)
+                          begin                                             begin
+            select count(*) from core_user where id>1;
+                                                             insert into core_user value(4, "刘备");
+                                                                            commit
+            update core_user set name='张飞' where id=4;
+            select count(*) from core_user where id>1;
+                          commit
 
-    其实，上述流程中，多加了update core_user set name='张飞' where id=4;这步操作，
-    同一个事务，相同的sql，查出的结果集不同了，这个结果，就符合了幻读的定义~
+        其实，上述流程中，多加了update core_user set name='张飞' where id=4;这步操作，
+        同一个事务，相同的sql，查出的结果集不同了，这个结果，就符合了幻读的定义~
  */
 public class L12_2MVCC {
 }
