@@ -27,7 +27,7 @@
         roll_pointer 必须隐藏列     这个隐藏列就相当于一个指针，指向这个事务之前的undo log，就是上一个事务Id指向的数据
         row_id       不是必须隐藏列  单调递增的行ID，不是必需的，占用6个字节。
 
-   [3]、undo log日志
+   [3]、Undo Log日志
         ①、Undo：意为撤销或取消，undo即返回指定某个状态的操作。undo log顾名思义：回滚日志，用于记录数据被修改前的信息。
             undo log中主要保存了数据的基本信息，比如说：日志开始的位置、结束的位置，主键的长度、表id，日志编号、日志类型
            此外，undo log在记录日志时候也包含两个隐藏字段 trx_id 和 roll_pointer。
@@ -42,12 +42,12 @@
            当delete一条记录时(delete from core_user where id=1;)，undo log中会记录一条对应的insert记录(insert into core_user select * from core_user where id=1;)；
            当update一条记录时(update user set name="李四" where id=1; 修改之前name=张三)，undo log中会记录一条对应的update之前数据的记录(update user set name="张三" where id=1;)。
 
-        ④、undo log有什么用途呢？
+        ④、Undo Log有什么用途呢？
            （1）如果某些原因导致事务失败或回滚，可以借助该undo log进行回滚。事务回滚时，可以保证原子性和一致性。
            （2）用于MVCC快照读。
 
-   [4]、undo log版本链
-        undo log版本链是基于 undo log 实现的。
+   [4]、Undo Log版本链
+        Undo Log版本链是基于 Undo Log 实现的。
         多个事务并行操作某一行数据时，不同事务对该行数据的修改会产生多个版本，然后通过回滚指针(roll_pointer),连成一个链表,这个链表就称为版本链。
 
         ①、假设现在有一张core_user表，表里面插入一条数据，id为1，name为孙权：
@@ -235,7 +235,7 @@
                                       +----------------+---------+
                                       | creator_trx_id | 100     |
                                       +----------------+---------+
-            ②、读取到的 id{2,3}数据行中的隐藏列 TRX_ID=99 ，校验可见性：trx_id(99)[表数据隐藏列TRX_ID] < min_limit_id(100);
+            ②、读取到的 id{2,3}数据行中的隐藏列 TRX_ID=99，校验其可见性：trx_id(99)[表数据隐藏列TRX_ID] < min_limit_id(100);
                所以 trx_id=99 的这些记录，对于当前事务是可见的。因此第一次 SELECT结果为 2，且读取到的 id{2,3}数据行会被添加上共享锁。
             ③、事务B 执行 INSERT语句，新增 id=4 的记录
                                       +--------+--------+--------------+-----+------+
@@ -245,10 +245,10 @@
                                       +--------+--------+--------------+-----+------+
             ④、事务A 第二次执行 SELECT 语句时生成了一个 ReadView副本(其实就是第一个ReadView)。
                然后读取符合 WHERE 条件的数据：id{2,3}数据行中的隐藏列 TRX_ID=99; id=4数据行中的隐藏列 TRX_ID=101
-               校验可见性：min_limit_id(100) =< trx_id(101)[表数据隐藏列TRX_ID] < max_limit_id(102);
-                         m_ids{100,101} 包含 trx_id(101)
-                         creator_trx_id(100) 不等于 trx_id(101)
-               因此， trx_id=101 的这条记录，对于当前事务是不可见的。所以第二次 SELECT结果还是为 2。
+               校验 TRX_ID=101 可见性：min_limit_id(100) =< trx_id(101)[表数据隐藏列TRX_ID] < max_limit_id(102);
+                                     m_ids{100,101} 包含 trx_id(101)
+                                     creator_trx_id(100) 不等于 trx_id(101)
+               因此，新增的 trx_id=101 的这条记录，对于当前事务是不可见的。所以第二次 SELECT结果还是为 2。
 
 
        [2]、RR级别下，当前读(加锁 SELECT)的例子，不存在幻读问题
@@ -271,13 +271,20 @@
                  update core_user set name='张飞' where id=4;
                  select count(*) from core_user where id>1;
                                  commit
-            ①、其实，上述流程中，只是在 事务A 中多加了 update core_user set name='张飞' where id=4; 这步操作。
-            ②、在 RR隔离级别下，事务A 第一次执行 SELECT 语句时生成了一个 ReadView，读取到的 id{2,3} 数据行会被添加上共享锁。
-               之后 事务B 向 core_user 表中新插入一条记录并提交，ReadView 并不能阻止事务A 执行 UPDATE或DELETE 语句来修改新插入的记录。
-               由于 事务B 已经提交，且 事务A 修改id=4 的这条数据行在此时是没有任何锁机制的，因此会在修改时添加上排他锁，而且并不会造成阻塞。
-               这样一来，这条新记录的隐藏列 trx_id值 就变成了事务A 的事务id。
-               最后 事务A 第二次执行 SELECT 语句去查询这条记录时就可以看到这条记录了，也就可以把这条记录返回给客户端。
-            ③、因为这个特殊现象的存在。同一个事务，相同的sql，查出的结果集不同了，这个结果符合了幻读的定义。可以认为 MVCC并不能完全禁止幻读
+            ①、其实在这种场景中，上述流程只是在 事务A 中多加了 update core_user set name='张飞' where id=4; 这步操作。
+            ②、在 RR隔离级别下，事务A 第一次执行 SELECT 语句时生成了一个 ReadView 读视图。Read View对应的值：m_ids{100,101}、
+               max_limit_id=102、min_limit_id=100、creator_trx_id=100，且读取到的 id{2,3}数据行会被添加共享锁，执行结果为 2。
+            ③、随后 事务B 向 core_user 表中新增一条记录并提交，而且插入的数据 id=4,name='刘备' 的记录隐藏列 TRX_ID=101。
+               由于 事务B 已经提交，事务A 中的 ReadView 并不能阻止其执行 UPDATE或DELETE 语句来修改新插入的 id=4 记录。
+               并且 事务A 修改 id=4 的这条数据行在此时是没有任何锁机制的，所以 事务A 在修改数据行时添加排他锁不会有任何阻塞。
+               这样一来，这条新记录的隐藏列 trx_id值 就变成了事务A 的事务id（trx_id=100）。
+            ④、最后 事务A 第二次执行 SELECT 语句时生成了一个 ReadView副本(RR隔离级别下，同一事务从始至终只有一个ReadView)。
+               然后读取符合 WHERE 条件的数据：id{2,3}数据行中的隐藏列 TRX_ID=99; id=4数据行中的隐藏列 TRX_ID=100
+               校验 TRX_ID=100 可见性：min_limit_id(100) =< trx_id(100)[表数据隐藏列TRX_ID] < max_limit_id(102);
+                                     m_ids{100,101} 包含 trx_id(100)
+                                     creator_trx_id(100) 等于 trx_id(100)
+               因此，新增的 id=4 数据行隐藏列 trx_id=100 的这条记录，对于当前事务是可见的。所以第二次 SELECT结果为 3。
+            ⑤、因为这个特殊现象的存在。同一个事务，相同的sql，查出的结果集不同了，这个结果符合了幻读的定义。可以认为 MVCC并不能完全禁止幻读
  */
 public class L12_2MVCC {
 }
