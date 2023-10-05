@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * ThreadLocal和线程同步机制相比有什么优势呢？ThreadLocal和线程同步机制都是为了解决多线程中相同变量的访问冲突问题。
- *
  *  1、在同步机制中，通过对象的锁机制保证同一时间只有一个线程访问变量。
  *    这时该变量是多个线程共享的，使用同步机制要求程序慎密地分析什么时候对变量进行读写，
  *    什么时候需要锁定某个对象，什么时候释放对象锁等繁杂的问题，程序设计和编写难度相对较大。
@@ -35,7 +34,6 @@ public class Test {
         User user = THREAD_LOCAL.get();
         System.out.println("get数据，线程名：" + Thread.currentThread().getName() + "，数据为：" + user);
     }
-
 
     public static void main(String[] args) throws InterruptedException {
         setData(new User());
