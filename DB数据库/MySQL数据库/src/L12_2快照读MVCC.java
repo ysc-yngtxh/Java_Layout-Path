@@ -105,14 +105,14 @@
         可重复读 隔离级别则在第一次读的时候生成一个 ReadView，之后的读都复用之前的 ReadView，使用的是同一个 ReadView。
 ---------------------------------------------------------------------------------------------------------------
 3、MVCC实现原理（解决不可重复读问题分析）
-              事务A(TRX_ID=100)                                事务B(TRX_ID=101)
-                  begin                                             begin
-       insert into core_user value(1, "孙权");
-       select * from core_user where id=1;
-                                                    update core_user set name='曹操' where id=1;
-                                                                    commit
-       select * from core_user where id=1;
-                  commit
+                 事务A(TRX_ID=100)                                事务B(TRX_ID=101)
+                     begin                                             begin
+        insert into core_user value(1, "孙权");
+        select * from core_user where id=1;
+                                                       update core_user set name='曹操' where id=1;
+                                                                       commit
+        select * from core_user where id=1;
+                     commit
 
    [1]、读已提交（RC隔离级别）存在不可重复读问题分析历程：
          ①、A开启事务，在执行 INSERT语句 分配到唯一事务ID为100; B开启事务，在执行 UPDATE语句 分配到唯一事务ID为101
