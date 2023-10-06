@@ -11,7 +11,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 @Component
-// 实现接口FactoryBean，重写方法
+// 实现接口 FactoryBean，重写方法
 public class ServiceFactory implements FactoryBean<TestService>, ApplicationContextAware {
 
     /*
