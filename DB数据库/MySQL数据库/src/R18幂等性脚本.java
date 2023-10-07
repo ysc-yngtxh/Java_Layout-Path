@@ -37,10 +37,12 @@
             insert ignore into progress_20230925 select * from progress
 ---------------------------------------------------------------------------------------------------------------
     5、添加字段
-       set @table = `progress`
-       set @col = `workContent`
-       set @schema = `demo`
-       set @sql = (select if(
+       set @table = `progress`             -- 要操作的表名为progress
+       set @col = `workContent`            -- 要添加的列名为workContent
+       set @schema = `demo`                -- 表所在的数据库模式为demo
+       set @sql = (select if(              -- 设置变量@sql为子查询的结果
+                                              如果列不存在，则返回一个 alter table ... 语句，用于添加列。
+                                              如果列已存在，则返回数字1。
                               (select count(1)
                                from information_schema.columns
                                where (table_name = @table)
@@ -51,28 +53,38 @@
                               `select 1`
                             )
                   );
-       prepare stmt from @sql;
-       execute stmt;
-       deallocate prepare stmt;
+       prepare stmt from @sql;           -- 使用变量@sql的值来准备一个动态SQL语句，并将其分配给stmt
+       execute stmt;                     -- 执行准备好的动态SQL语句
+       deallocate prepare stmt;          -- 释放准备好的语句
+
+       整个脚本的作用是检查指定表progress中是否已经存在一个名为 workContent 的列，如果不存在，则添加该列。
+       添加列的语句是使用alter table ... 语句来执行的，意味着在date列之后添加一个名为 workContent 的200个字符长度的varchar类型列。
+       如果列已经存在，则执行 select 1 并返回结果为数字1。
 ---------------------------------------------------------------------------------------------------------------
     6、添加索引
-       set @table=`progress`
-       set @index=`idx_unique_code`
-       set @schema=`demo`
-       set @sql=(select if(
-                            (select count(1)
-                             from information_schema.statistics
-                             where (table_name = @table)
-                                   and (index_name = @index)
-                                   and (table_schema = @schema)
-                            ) > 0,
-                            `select "索引已存在" as "是否存在"`,
-                            "alter table progress add unique index 'idx_unique_code' ('code','delete_flag') comment `删除标识、集合编码联合唯一索引` using btree;"
+       set @table=`progress`             -- 要操作的表名为progress
+       set @index=`idx_unique_code`      -- 要创建的索引名称为idx_unique_code
+       set @schema=`demo`                -- 表所在的数据库模式为demo
+       set @sql=(select if(              -- 设置变量@sql为子查询的结果
+                                            如果索引已存在，则返回字符串'索引已存在'作为列名'是否存在'的值。
+                                            如果索引不存在，则返回一个 alter table ... 语句，用于添加唯一索引。
+                            ( select count(1)
+                              from information_schema.statistics
+                              where (table_name = @table)
+                                and (index_name = @index)
+                                and (table_schema = @schema)
+                             ) > 0,
+                             `select "索引已存在" as "是否存在"`,
+                             "alter table progress add unique index 'idx_unique_code' ('code','delete_flag') comment `删除标识、集合编码联合唯一索引` using btree;"
                           )
                 );
-       prepare stmt from @sql;
-       execute stmt;
-       deallocate prepare stmt;
+       prepare stmt from @sql;           -- 使用变量@sql的值来准备一个动态SQL语句，并将其分配给stmt
+       execute stmt;                     -- 执行准备好的动态SQL语句
+       deallocate prepare stmt;          -- 释放准备好的语句
+
+       整个脚本的作用是检查指定表中是否已经存在一个名为 idx_unique_code 的唯一索引，如果不存在，则创建该索引。
+       创建索引的语句会将 code 和 delete_flag 这两列作为联合唯一索引，并使用B树索引类型。
+       创建索引语句的注释为'删除标识、集合编码联合唯一索引'。如果索引已经存在，则输出 '索引已存在' 作为结果。
  */
-public class Q17幂等性脚本 {
+public class R18幂等性脚本 {
 }

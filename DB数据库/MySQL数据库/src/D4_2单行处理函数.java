@@ -69,81 +69,81 @@
 ---------------------------------------------------------------------------------------------------------------
   Ⅱ、数学函数
      1.round 四舍五入
-       SELECT ROUND(price) FROM tb_order;     -- 如果 price=123.556 结果为：124
-       SELECT ROUND(price, 2) FROM tb_order;  -- 如果 price=123.556 结果为：123.56
+          SELECT ROUND(price) FROM tb_order;     -- 如果 price=123.556 结果为：124
+          SELECT ROUND(price, 2) FROM tb_order;  -- 如果 price=123.556 结果为：123.56
 
      2.ceil 向上取整，返回 >= 该参数的最小整数（向上记住其实就是找比它大的整数就好）
-       SELECT CEIL(price) FROM tb_order;  -- 如果 price=123.009 结果为：124; 如果 price=-1.009 结果为：-1
+          SELECT CEIL(price) FROM tb_order;  -- 如果 price=123.009 结果为：124; 如果 price=-1.009 结果为：-1
 
      3.floor 向下取整，返回 <= 该参数的最大整数
-       SELECT FLOOR(price) FROM tb_order; -- 如果 price=123.009 结果为：123; 如果 price=-1.009 结果为：-2
+          SELECT FLOOR(price) FROM tb_order; -- 如果 price=123.009 结果为：123; 如果 price=-1.009 结果为：-2
 
      4.truncate 截断（其实就是截断小数点后面的几位，和round不同，简单的保留）
-       SELECT TRUNCATE(price, 2) FROM tb_order;  -- 如果 price=123.556 结果为：124.55  区别于四舍五入，纯粹的截取
+          SELECT TRUNCATE(price, 2) FROM tb_order;  -- 如果 price=123.556 结果为：124.55  区别于四舍五入，纯粹的截取
 
      5.mod取余
-       SELECT MOD(price, 3) FROM tb_order;  -- 如果 price=10 结果为：1
+          SELECT MOD(price, 3) FROM tb_order;  -- 如果 price=10 结果为：1
 ---------------------------------------------------------------------------------------------------------------
   Ⅲ、日期函数
      1.now 返回当前系统日期+时间
-       SELECT NOW();   -- 2023-09-20 14:00:00
+          SELECT NOW();   -- 2023-09-20 14:00:00
 
      2.curdate 返回当前系统日期，不包括时间
-       SELECT CURDATE();   -- 2023-09-20
+          SELECT CURDATE();   -- 2023-09-20
 
      3.curtime 返回当前时间，不包含日期
-       SELECT CURTIME();   -- 14:00:00
+          SELECT CURTIME();   -- 14:00:00
 
      4.year month monthname day hour minute second可以获取时间指定的部分，年、月、日、小时、分钟、秒
-       SELECT YEAR( NOW() );       -- 返回年：2023
-       SELECT MONTH( NOW() );      -- 返回月：9
-       SELECT MONTHNAME( NOW() );  -- 返回月份的英文名称：September
-       SELECT DAY( NOW() );        -- 返回日：20
-       SELECT HOUR( NOW() );       -- 返回小时：14
-       SELECT MINUTE( NOW() );     -- 返回分钟：30
-       SELECT SECOND( NOW() );     -- 返回秒：28
+          SELECT YEAR( NOW() );       -- 返回年：2023
+          SELECT MONTH( NOW() );      -- 返回月：9
+          SELECT MONTHNAME( NOW() );  -- 返回月份的英文名称：September
+          SELECT DAY( NOW() );        -- 返回日：20
+          SELECT HOUR( NOW() );       -- 返回小时：14
+          SELECT MINUTE( NOW() );     -- 返回分钟：30
+          SELECT SECOND( NOW() );     -- 返回秒：28
 
      5.str_to_date 将日期格式的字符转换成指定格式的日期
-       SELECT STR_TO_DATE('09-20-2023', '%m-%d-%Y');     -- 返回 2023-09-20
+          SELECT STR_TO_DATE('09-20-2023', '%m-%d-%Y');     -- 返回 2023-09-20
 
      6.date_format:将日期转换成字符
-       SELECT DATE_FORMAT('2023/09/20', '%Y年%m月%d日');  -- 返回 2023年09月20日
+          SELECT DATE_FORMAT('2023/09/20', '%Y年%m月%d日');  -- 返回 2023年09月20日
 ---------------------------------------------------------------------------------------------------------------
   Ⅳ、其它函数
      1.if(condition, expr_if_true, expr_if_false) 函数
-       -- condition条件表达式为true，则返回expr_if_true，否则返回expr_if_false
-       SELECT IF(del_flag=0, '显示', '删除') FROM tb_order
+          -- condition条件表达式为true，则返回expr_if_true，否则返回expr_if_false
+          SELECT IF(del_flag=0, '显示', '删除') FROM tb_order
 
      2.ifnull(expr1, expr2) 函数
-       -- expr1 为 NULL，IFNULL() 函数返回 expr1，否则返回 expr2
-       SELECT IFNULL(subject, order_no) FROM tb_order
+          -- expr1 为 NULL，IFNULL() 函数返回 expr1，否则返回 expr2
+          SELECT IFNULL(subject, order_no) FROM tb_order
 
      3.nullif(expr1, expr2) 函数
-       -- expr1 = expr2，NULLIF() 函数返回 NULL，否则返回 expr1
-       SELECT NULLIF(0, 0) FROM tb_order
+          -- expr1 = expr2，NULLIF() 函数返回 NULL，否则返回 expr1
+          SELECT NULLIF(0, 0) FROM tb_order
 
      4.case 函数
        [1]、写法一：(CASE)举例 order_no, (WHEN)当其值为 0 时, (THEN)输出'Monday'  ...  (ELSE)否则输出'Error', (END)结束
-           SELECT
-                CASE order_no
-                    WHEN 0 THEN 'Monday'
-                    WHEN 1 THEN 'Tuesday'
-                    WHEN 2 THEN 'Wednesday'
-                    ELSE 'Error'
-                END AS `orderName`
-            FROM
-                tb_order;
+            SELECT
+                 CASE order_no
+                     WHEN 0 THEN 'Monday'
+                     WHEN 1 THEN 'Tuesday'
+                     WHEN 2 THEN 'Wednesday'
+                     ELSE 'Error'
+                 END AS `orderName`
+             FROM
+                 tb_order;
 
        [2]、写法二：(CASE)举例, (WHEN)当 order_no = 0 时, (THEN)输出'Monday'  ...  (ELSE)否则输出'Error', (END)结束
-           SELECT
-                CASE
-                    WHEN order_no = 0 THEN 'Monday'
-                    WHEN order_no = 1 THEN 'Tuesday'
-                    WHEN order_no = 2 THEN 'Wednesday'
-                    ELSE 'Error'
-                END AS `orderName`
-            FROM
-                tb_order;
+            SELECT
+                 CASE
+                     WHEN order_no = 0 THEN 'Monday'
+                     WHEN order_no = 1 THEN 'Tuesday'
+                     WHEN order_no = 2 THEN 'Wednesday'
+                     ELSE 'Error'
+                 END AS `orderName`
+             FROM
+                 tb_order;
  */
 public class D4_2单行处理函数 {
 }
