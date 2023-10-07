@@ -24,7 +24,7 @@
         -- 自定义变量my_name
         declare my_name varchar(100);
         --  定义游标并输入结果集
-        declare album_curosr cursor for
+        declare album_cursor cursor for
                             -- 该sql为查询dindo_custom库中满足custom_form_表前缀，且不存在status字段的所有表名
                             SELECT distinct table_name FROM
                             information_schema.columns
