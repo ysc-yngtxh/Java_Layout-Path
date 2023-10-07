@@ -46,8 +46,8 @@
                               (select count(1)
                                from information_schema.columns
                                where (table_name = @table)
-                                     and (column_name = @col)
-                                     and (table_schema = @schema)
+                                 and (column_name = @col)
+                                 and (table_schema = @schema)
                               ) = 0,
                               "alter table progress add columns workContent varchar(200) default null comment `工作内容` after date;",
                               `select 1`
