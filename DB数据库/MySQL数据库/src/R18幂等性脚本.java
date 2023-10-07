@@ -37,16 +37,16 @@
             insert ignore into progress_20230925 select * from progress
 ---------------------------------------------------------------------------------------------------------------
     5、添加字段
+       set @schema = `demo`                -- 表所在的数据库模式为demo
        set @table = `progress`             -- 要操作的表名为progress
        set @col = `workContent`            -- 要添加的列名为workContent
-       set @schema = `demo`                -- 表所在的数据库模式为demo
        set @sql = (select if(              -- 设置变量@sql为子查询的结果
                                               如果列不存在，则返回一个 alter table ... 语句，用于添加列。
                                               如果列已存在，则返回数字1。
                               (select count(1)
                                from information_schema.columns
                                where (table_name = @table)
-                                     and (columns_name = @col)
+                                     and (column_name = @col)
                                      and (table_schema = @schema)
                               ) = 0,
                               "alter table progress add columns workContent varchar(200) default null comment `工作内容` after date;",
@@ -62,9 +62,9 @@
        如果列已经存在，则执行 select 1 并返回结果为数字1。
 ---------------------------------------------------------------------------------------------------------------
     6、添加索引
+       set @schema=`demo`                -- 表所在的数据库模式为demo
        set @table=`progress`             -- 要操作的表名为progress
        set @index=`idx_unique_code`      -- 要创建的索引名称为idx_unique_code
-       set @schema=`demo`                -- 表所在的数据库模式为demo
        set @sql=(select if(              -- 设置变量@sql为子查询的结果
                                             如果索引已存在，则返回字符串'索引已存在'作为列名'是否存在'的值。
                                             如果索引不存在，则返回一个 alter table ... 语句，用于添加唯一索引。
