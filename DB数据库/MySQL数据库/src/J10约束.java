@@ -44,8 +44,8 @@
                   unique(user_code, user_name)   // 这个语句表示的是(user_code, user_name)联合语句不重复
                );
                insert into t_user(id, user_code, user_name) values(1, '111', 'lisi');
-               insert into t_user(id, user_code, user_name) values(2, '111', 'wangwu');
-               insert into t_user(id, user_code, user_name) values(3, '222', 'wangwu');
+               insert into t_user(id, user_code, user_name) values(2, '111', 'wangWu');
+               insert into t_user(id, user_code, user_name) values(3, '222', 'wangWu');
 ---------------------------------------------------------------------------------------------------------------
   5、主键约束
          [1]、使用字段约束方式定义主键：
@@ -57,7 +57,7 @@
               );
               insert into t_user(id,username,email) values(1,'zs','zs.@123.com');
               insert into t_user(id,username,email) values(2,'ls','ls.@123.com');
-              insert into t_user(id,username,email) values(3,'ww','ww.@123.com');
+              insert into t_user(id,username,email) values(3,'www','www.@123.com');
          [2]、id是主键，因为添加了主键约束，主键字段中的数据不能为null，也不能重复
               主键相关术语：
                         -- 主键约束  primary key
