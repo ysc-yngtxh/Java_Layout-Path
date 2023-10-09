@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>Spring_Limiting-TokenBucket</artifactId>
+    <artifactId>SpringBoot_Limiting</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Spring_Limiting-TokenBucket</name>
     <description>Spring_Limiting-TokenBucket</description>
