@@ -18,7 +18,7 @@
     <context:component-scan base-package="com.example.java.自定义注解.controller"/>
     <!--定义切面类的bean-->
     <aop:aspectj-autoproxy proxy-target-class="true" />
-    <bean id="loginAspect" class="com.example.java.自定义注解.aspect.LoginAop"/>
+    <bean id="loginAspect" class="com.example.自定义注解.aspect.LoginAop"/>
 
 
     <!--声明 springmvc框架中的视图解析器，帮助开发人员设置视图文件的路径-->
@@ -51,7 +51,7 @@
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/login1"/>
             <!--声明拦截器对象-->
-            <bean class="com.example.java.自定义注解.interceptor.LoginInterceptor"/>
+            <bean class="com.example.自定义注解.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
