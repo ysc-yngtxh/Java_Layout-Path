@@ -8,10 +8,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 @EnableScheduling
 @SpringBootApplication
-public class SpringLimitingTokenBucketApplication {
+public class SpringTokenBucketApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringLimitingTokenBucketApplication.class, args);
+        SpringApplication.run(SpringTokenBucketApplication.class, args);
         // 为了方便测试这里定义1容量  1增长速率
         BucketUtil bucketUtil = new BucketUtil(5, 1);
         // 生成名为：bucket的令牌桶
