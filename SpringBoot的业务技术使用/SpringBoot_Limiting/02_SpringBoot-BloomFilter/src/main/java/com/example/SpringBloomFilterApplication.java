@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.filter.BloomFilter;
+import com.example.custom.CustomBloomFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -17,14 +17,14 @@ public class SpringBloomFilterApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringBloomFilterApplication.class, args);
 
-        BloomFilter filter = new BloomFilter(1000000, 5);
+        CustomBloomFilter filter = new CustomBloomFilter(1000000, 5);
         // 添加一些随机字符串到布隆过滤器
         for (int i = 0; i < 10000; i++) {
-            filter.addElement(BloomFilter.generateRandomString(10));
+            filter.addElement(CustomBloomFilter.generateRandomString(10));
         }
         // 检查一些随机字符串是否在布隆过滤器中
         for (int i = 0; i < 100; i++) {
-            String randomString = BloomFilter.generateRandomString(10);
+            String randomString = CustomBloomFilter.generateRandomString(10);
             if (filter.checkElement(randomString)) {
                 System.out.println(randomString + " may be in the filter.");
             } else {
