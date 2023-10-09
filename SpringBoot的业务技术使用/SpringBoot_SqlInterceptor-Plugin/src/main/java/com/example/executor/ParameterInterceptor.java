@@ -18,7 +18,7 @@ import java.util.Properties;
 
 /**
  * Mybatis 拦截器
- *
+ * </p>
  * @Intercepts：标识该类是一个拦截器,需要一个Signature(拦截点)参数数组。 通过Signature来指定拦截哪个对象里面的哪个方法，只有符合拦截点的条件才会进入到拦截器
  * @Signature：指明自定义拦截器需要拦截哪一个类型，哪一个方法；
  *       - type：定义拦截的类，拦截的类型具体有四种

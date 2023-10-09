@@ -1,12 +1,9 @@
 package com.example.executor;
 
-import com.example.advice.SqlEnum;
-import com.example.advice.SqlException;
 import com.example.annotation.IgnoreTenantId;
 import com.example.tenant.TenantContextHolder;
 import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.LongValue;
-import net.sf.jsqlparser.expression.NotExpression;
 import net.sf.jsqlparser.expression.operators.conditional.AndExpression;
 import net.sf.jsqlparser.expression.operators.relational.EqualsTo;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
