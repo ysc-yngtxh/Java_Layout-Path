@@ -10,6 +10,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.lang.reflect.Method;
+import java.util.Objects;
 
 /**
  * 令牌桶拦截器
@@ -27,7 +28,7 @@ public class BucketInterceptor implements HandlerInterceptor {
         Method method = handlerMethod.getMethod();
 
         BucketAnnotation methodAnnotation = method.getAnnotation(BucketAnnotation.class);
-        if (methodAnnotation!=null){
+        if ( Objects.nonNull(methodAnnotation) ){
         	// 在名为：bucket的令牌桶里取令牌 取到即放行 未取到即抛出异常
             if(BucketUtil.buckets.get("bucket").getToken()){
                 return true;

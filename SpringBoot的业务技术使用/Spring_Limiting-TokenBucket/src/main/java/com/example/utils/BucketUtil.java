@@ -1,10 +1,11 @@
 package com.example.utils;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import java.util.HashMap;
-import java.util.Objects;
 
+@Getter
 @EqualsAndHashCode
 public class BucketUtil {
 
@@ -33,10 +34,6 @@ public class BucketUtil {
     public BucketUtil(int maxCount, int createRate) {
         this.maxCount = maxCount;
         this.createRate = createRate;
-    }
-
-    public int getSize() {
-        return size;
     }
 
     public boolean isFull() {
