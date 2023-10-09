@@ -16,7 +16,7 @@ public class SpringBloomFilterApplication {
     //                 若存在，则继续执行后续的流程，先前往缓存中查询，缓存中没有的话再前往数据库中的查询。
     public static void main(String[] args) {
         SpringApplication.run(SpringBloomFilterApplication.class, args);
-        
+
         BloomFilter filter = new BloomFilter(1000000, 5);
         // 添加一些随机字符串到布隆过滤器
         for (int i = 0; i < 10000; i++) {
