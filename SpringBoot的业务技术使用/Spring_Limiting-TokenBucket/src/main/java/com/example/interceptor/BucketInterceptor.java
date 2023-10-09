@@ -1,6 +1,6 @@
 package com.example.interceptor;
 
-import com.example.exception.APIException;
+import com.example.exception.ApiException;
 import com.example.annotation.BucketAnnotation;
 import com.example.utils.BucketUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,7 +34,7 @@ public class BucketInterceptor implements HandlerInterceptor {
             }
             else{
             	// 抛出自定义异常
-                throw new APIException("不好意思，您被限流了");
+                throw new ApiException("不好意思，您被限流了");
             }
         }else {
             return true;
