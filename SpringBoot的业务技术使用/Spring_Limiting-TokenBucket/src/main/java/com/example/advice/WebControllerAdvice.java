@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class WebControllerAdvice {
 
     @ExceptionHandler(ApiException.class)
-    public ResponseEntity<String> APIExceptionHandler(ApiException e) {
+    public ResponseEntity<String> ApiExceptionHandler(ApiException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 }
