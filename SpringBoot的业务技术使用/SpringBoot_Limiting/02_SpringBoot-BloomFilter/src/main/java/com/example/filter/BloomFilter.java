@@ -1,9 +1,15 @@
-package com.example;
+package com.example.filter;
 
 import java.util.BitSet;
 import java.util.Random;
 
+// TODO 布隆过滤器的巨大用处就是，能够迅速判断一个元素是否在一个集合中
 public class BloomFilter {
+    // BitSet类：用于存储一个位序列。就是使用位来存储boolean信息，0表示假，1表示真。
+    //          位序列是比较省空间的，因为记录数据通过下标，比如：下标为96，对应值为1；那么就是说BitSet中存在'A'值
+    // 常见 BitSet 的应用是那些需要对海量数据进行一些统计工作的时候，比如日志分析等。
+    // 面试题中也常出现，比如：统计40亿个数据中没有出现的数据，将40亿个不同数据进行排序等。
+    // 又如：现在有1千万个随机数，随机数的范围在1到1亿之间。现在要求写出一种算法，将1到1亿之间没有在随机数中的数求出来(百度)。
     private BitSet filter;
     private int size;
     private int hashFunctions;
@@ -15,6 +21,7 @@ public class BloomFilter {
      * @param hashFunctions 布隆过滤器使用的哈希函数数量
      */
     public BloomFilter(int size, int hashFunctions) {
+        // 把bit位下标size位置设置为1（0为false，1为true）
         this.filter = new BitSet(size);
         this.size = size;
         this.hashFunctions = hashFunctions;
@@ -56,33 +63,8 @@ public class BloomFilter {
         StringBuilder builder = new StringBuilder();
         Random random = new Random();
         for (int i = 0; i < length; i++) {
-            builder.append((char) ('a' + random.nextInt(26)));
+            builder.append( (char) ('a' + random.nextInt(26)) );
         }
         return builder.toString();
-    }
-
-    /**
-     * 测试布隆过滤器
-     * @param args 命令行参数
-     */
-    public static void main(String[] args) {
-        int size = 1000000;
-        int hashFunctions = 5;
-        BloomFilter filter = new BloomFilter(size, hashFunctions);
-
-        // 添加一些随机字符串到布隆过滤器
-        for (int i = 0; i < 10000; i++) {
-            filter.addElement(generateRandomString(10));
-        }
-
-        // 检查一些随机字符串是否在布隆过滤器中
-        for (int i = 0; i < 100; i++) {
-            String randomString = generateRandomString(10);
-            if (filter.checkElement(randomString)) {
-                System.out.println(randomString + " may be in the filter.");
-            } else {
-                System.out.println(randomString + " is not in the filter.");
-            }
-        }
     }
 }
