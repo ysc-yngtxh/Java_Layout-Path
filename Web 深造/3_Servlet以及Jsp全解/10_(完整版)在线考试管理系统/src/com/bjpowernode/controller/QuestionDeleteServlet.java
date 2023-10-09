@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class QuestionDeleteServlet extends HttpServlet {
+    private static final long serialVersionUID = -6187211210478081173L;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -21,11 +23,11 @@ public class QuestionDeleteServlet extends HttpServlet {
         QuestionDao dao = new QuestionDao();
         int result = 0;
         PrintWriter out = null;
-        //1、调用请求对象读取请求头参数用户编号
+        // 1、调用请求对象读取请求头参数用户编号
         questionId = request.getParameter("questionId");
-        //2、调用Dao将用户编号填充到delete命令并发送到数据库服务器
+        // 2、调用Dao将用户编号填充到delete命令并发送到数据库服务器
         result = dao.delete(questionId);
-        //3、调用响应对象将处理结果以二进制写入到响应体，交给浏览器
+        // 3、调用响应对象将处理结果以二进制写入到响应体，交给浏览器
         response.setContentType("text/html;charset=utf-8");
         out = response.getWriter();
         if(result == 1){

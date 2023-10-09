@@ -12,6 +12,8 @@ import java.io.PrintWriter;
 import java.util.Date;
 
 public class UserAddServlet extends HttpServlet {
+    private static final long serialVersionUID = -3921769198819138521L;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }

@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class QuestionUpdateServlet extends HttpServlet {
+    private static final long serialVersionUID = 1642115984976104101L;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }

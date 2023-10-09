@@ -28,11 +28,11 @@ public class DBUtil {
 
     //-----------通过全局作用域对象得到Connection--------------start
     public Connection getCon(HttpServletRequest request){
-        //1、通过请求对象，得到全局作用域对象
+        // 1、通过请求对象，得到全局作用域对象
         ServletContext application = request.getServletContext();
-        //2、从全局作用域对象得到map
+        // 2、从全局作用域对象得到map
         Map map = (Map)application.getAttribute("key1");
-        //3、从map得到一个处于空闲状态Connection（拖鞋）
+        // 3、从map得到一个处于空闲状态Connection（拖鞋）
         Iterator it = map.keySet().iterator();
         while(it.hasNext()){
             conn = (Connection)it.next();
@@ -83,7 +83,7 @@ public class DBUtil {
         }
     }
 
-    //封装连接通道到创建细节
+    // 封装连接通道到创建细节
     public Connection getCon(){
         try{
             conn = DriverManager.getConnection(url,user,password);
@@ -93,7 +93,7 @@ public class DBUtil {
         return conn;
     }
 
-    //封装交通工具创建细节
+    // 封装交通工具创建细节
     public PreparedStatement createStatement(String sql){
         try{
             ps = getCon().prepareStatement(sql);

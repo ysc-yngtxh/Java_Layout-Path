@@ -13,7 +13,7 @@ public class QuestionDao {
 
     DBUtil util = new DBUtil();
 
-    //注册试题
+    // 注册试题
     public int add(Question question){
         String sql = "insert into question(title,optionA,optionB,optionC,optionD,answer) values(?,?,?,?,?,?)";
         PreparedStatement ps = util.createStatement(sql);
@@ -34,7 +34,7 @@ public class QuestionDao {
         return result;
     }
 
-    //查询试题
+    // 查询试题
     public List findAll(){
         List questionlist = new ArrayList();
         String sql = "select * from question";
@@ -61,7 +61,7 @@ public class QuestionDao {
         return questionlist;
     }
 
-    //删除试题
+    // 删除试题
     public int delete(String questionId){
         String sql = "delete from question where questionId=?";
         PreparedStatement ps = util.createStatement(sql);
@@ -77,7 +77,7 @@ public class QuestionDao {
         return result;
     }
 
-    //根据试题编号查询试题信息
+    // 根据试题编号查询试题信息
     public Question findById(String questionId){
         String sql = "select * from question where questionId=?";
         PreparedStatement ps = util.createStatement(sql);
@@ -111,7 +111,7 @@ public class QuestionDao {
         return question;
     }
 
-    //更新试题
+    // 更新试题
     public int update(Question question){
         String sql = "update question set title=?,optionA=?,optionB=?,optionC=?,optionD=?,answer=? where questionId=?";
         PreparedStatement ps = util.createStatement(sql);
@@ -133,7 +133,7 @@ public class QuestionDao {
         return result;
     }
 
-    //随机出题
+    // 随机出题
     public List rand(){
         List questionlist = new ArrayList();
         String sql = "select * from question order by rand() limit 0,4";

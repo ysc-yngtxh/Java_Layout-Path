@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class UserDeleteServlet extends HttpServlet {
+    private static final long serialVersionUID = 6095322129189295343L;
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }

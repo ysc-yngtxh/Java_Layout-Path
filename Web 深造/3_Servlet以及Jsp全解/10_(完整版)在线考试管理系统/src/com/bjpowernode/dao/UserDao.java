@@ -15,8 +15,8 @@ public class UserDao {
 
     private DBUtil util = new DBUtil();
 
-    //用户注册
-    //jdbc规范中，Connection创建与销毁最浪费时间
+    // 用户注册
+    // jdbc规范中，Connection创建与销毁最浪费时间，设计tcp协议的三次握手，四次挥手
     public int add(Users user, HttpServletRequest request){
         String sql = "insert into users(userName,password,sex,email) values(?,?,?,?)";
         PreparedStatement ps = util.createStatement(sql,request);
@@ -35,7 +35,7 @@ public class UserDao {
         return result;
     }
 
-    //查询所有用户新消息
+    // 查询所有用户新消息
     public List findAll(){
         List userList = new ArrayList();
         String sql = "select * from users";
@@ -60,7 +60,7 @@ public class UserDao {
         return userList;
     }
 
-    //根据用户编号删除用户信息
+    // 根据用户编号删除用户信息
     public int delete(String userId){
         String sql = "delete from users where userId=?";
         PreparedStatement ps = util.createStatement(sql);
@@ -76,7 +76,7 @@ public class UserDao {
         return result;
     }
 
-    //登陆验证
+    // 登陆验证
     public int login(String userName,String password){
         String sql = "select count(*) from users where userName=? and password=?";
         PreparedStatement ps = util.createStatement(sql);
