@@ -6,15 +6,15 @@
 
 
     <bean id="myStudent" class="com.bjpowernode.bao1.Student">
-        <property name="name" value="李四"/><!--相当于调用Student的setName("李四")-->
-        <property name="age" value="23"/><!--相当于调用Student的setAge(23)-->
+        <property name="name" value="李四"/>  <!-- 相当于调用Student的setName("李四") -->
+        <property name="age" value="23"/>    <!-- 相当于调用Student的setAge(23) -->
         <!--我们想一想，为什么在这里会调用set方法啊？
 
             我们看看正常情况下调用对象赋值步骤：
-            Student st = new Student();
-            st.setName("李四");
-            st.setAge(23);
-            懂了吧！spring框架在创建对象，调用其方法是万变不离其宗。
+               Student st = new Student();
+               st.setName("李四");
+               st.setAge(23);
+            懂了吧！Spring框架在创建对象，调用其方法是万变不离其宗。
         -->
         <property name="email" value="lisi@163.com"/>
         <!--注意思考!
