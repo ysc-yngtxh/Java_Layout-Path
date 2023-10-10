@@ -24,8 +24,7 @@ public class RedisBloomFilter<T> {
     private RedisTemplate<String, Object> redisTemplate;
  
     /** 
-     * 删除缓存的KEY 
-     * 
+     * 删除缓存的KEY
      * @param key KEY 
      */
     public void delete(String key) {
@@ -36,8 +35,7 @@ public class RedisBloomFilter<T> {
  
     /** 
      * 根据给定的布隆过滤器添加值，在添加一个元素的时候使用，批量添加的性能差 
-     * 
-     * @param bloomFilterHelper 布隆过滤器对象 
+     * @param bloomFilterHelper 布隆过滤器对象
      * @param key               KEY 
      * @param value             值 
      * @param <T>               泛型，可以传入任何类型的value 
@@ -51,8 +49,7 @@ public class RedisBloomFilter<T> {
  
     /** 
      * 根据给定的布隆过滤器添加值，在添加一批元素的时候使用，批量添加的性能好，使用pipeline方式(如果是集群下，请使用优化后RedisPipeline的操作) 
-     * 
-     * @param bloomFilterHelper 布隆过滤器对象 
+     * @param bloomFilterHelper 布隆过滤器对象
      * @param key               KEY 
      * @param valueList         值，列表 
      * @param <T>               泛型，可以传入任何类型的value 
@@ -75,8 +72,7 @@ public class RedisBloomFilter<T> {
  
     /** 
      * 根据给定的布隆过滤器判断值是否存在 
-     * 
-     * @param bloomFilterHelper 布隆过滤器对象 
+     * @param bloomFilterHelper 布隆过滤器对象
      * @param key               KEY 
      * @param value             值 
      * @param <T>               泛型，可以传入任何类型的value 

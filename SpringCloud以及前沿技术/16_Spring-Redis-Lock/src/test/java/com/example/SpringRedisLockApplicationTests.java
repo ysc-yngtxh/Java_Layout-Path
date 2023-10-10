@@ -2,7 +2,6 @@ package com.example;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -11,7 +10,6 @@ import org.springframework.scripting.support.ResourceScriptSource;
 
 import javax.annotation.Resource;
 import java.util.Collections;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -24,7 +22,7 @@ class SpringRedisLockApplicationTests {
     // 而我写的是RedisTemplate<String,Object>，根据类型，Spring容器中没有找到，所以就会报错了；
     // 如果用@Resource的这个注解是根据名称在Spring容器中寻找bean的，所以没有问题.
     @Resource
-    private RedisTemplate<String, Object> redisTemplate;
+    private RedisTemplate<Object, Object> redisTemplate;
 
     private DefaultRedisScript<Boolean> redisScript1;
     private DefaultRedisScript<Long> redisScript2;
@@ -40,11 +38,14 @@ class SpringRedisLockApplicationTests {
          */
         Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", "V1");
         if (Boolean.TRUE.equals(success)) {
+            log.info("上锁进来了吗？");
             // 先判断库存是否充足
+            if (redisTemplate.hasKey("stock")) {
             int stock = (int) redisTemplate.opsForValue().get("stock");
-            if ( stock > 0 ) {
-                // 缓存中key为stock的库存进行自减
-                redisTemplate.opsForValue().decrement("stock");
+                if (stock > 0) {
+                    // 缓存中key为stock的库存进行自减
+                    redisTemplate.opsForValue().decrement("stock");
+                }
             }
             // 释放锁
             redisTemplate.delete("K1");
@@ -74,11 +75,14 @@ class SpringRedisLockApplicationTests {
         // redis中如果有K1值那么结果就为false，表示上锁。没有K1值结果为true，并创建K1缓存值,并获取锁  设置5秒锁的失效时间
         Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", "V1", 5 , TimeUnit.SECONDS);
         if (Boolean.TRUE.equals(success)) {
+            log.info("上锁进来了吗？");
+            if (redisTemplate.hasKey("stock")) {
             // 先判断库存是否充足
-            int stock = (int) redisTemplate.opsForValue().get("stock");
-            if ( stock > 0 ) {
-                // 缓存中key为stock的库存进行自减
-                redisTemplate.opsForValue().decrement("stock");
+                int stock = (int) redisTemplate.opsForValue().get("stock");
+                if (stock > 0) {
+                    // 缓存中key为stock的库存进行自减
+                    redisTemplate.opsForValue().decrement("stock");
+                }
             }
             // 释放锁
             redisTemplate.delete("K1");
@@ -107,11 +111,14 @@ class SpringRedisLockApplicationTests {
         // redis中如果有K1值那么结果就为false，表示上锁。没有K1值结果为true，并创建K1缓存值,并获取锁  设置5秒锁的失效时间
         Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", value, 5, TimeUnit.SECONDS);
         if (Boolean.TRUE.equals(success)) {
-            // 先判断库存是否充足
-            int stock = (int) redisTemplate.opsForValue().get("stock");
-            if ( stock > 0 ) {
-                // 缓存中key为stock的库存进行自减
-                redisTemplate.opsForValue().decrement("stock");
+            log.info("上锁进来了吗？");
+            if (redisTemplate.hasKey("stock")) {
+                // 先判断库存是否充足
+                int stock = (int) redisTemplate.opsForValue().get("stock");
+                if ( stock > 0 ) {
+                    // 缓存中key为stock的库存进行自减
+                    redisTemplate.opsForValue().decrement("stock");
+                }
             }
             // 判断当前线程通过 UUID的一个随机值是否还与我的锁值是相等的
             // 如果不相等，说明我的锁值过期了，释放了锁，后续线程获取到了新锁，且这个新锁的值随机，这才造成的不相等。
@@ -147,11 +154,14 @@ class SpringRedisLockApplicationTests {
         // redis中如果有K1值那么结果就为false，表示上锁。没有K1值结果为true，并创建K1缓存值,并获取锁  设置5秒锁的失效时间
         Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", value, 5, TimeUnit.SECONDS);
         if (Boolean.TRUE.equals(success)) {
+            log.info("上锁进来了吗？");
+            if (redisTemplate.hasKey("stock")) {
             // 先判断库存是否充足
-            int stock = (int) redisTemplate.opsForValue().get("stock");
-            if ( stock > 0 ) {
-                // 缓存中key为stock的库存进行自减
-                redisTemplate.opsForValue().decrement("stock");
+                int stock = (int) redisTemplate.opsForValue().get("stock");
+                if (stock > 0) {
+                    // 缓存中key为stock的库存进行自减
+                    redisTemplate.opsForValue().decrement("stock");
+                }
             }
             // 这里使用的 Lua脚本，lua是不支持多线程的，保证获取锁,判断值,删除锁这三个操作是原子性操作。
             redisTemplate.execute(redisScript1, Collections.singletonList("K1"), value);

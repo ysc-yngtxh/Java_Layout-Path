@@ -18,9 +18,6 @@ import java.util.Random;
 @SpringBootTest
 class SpringBloomFilterApplicationTests {
 
-    @Autowired
-    private RedisBloomFilter<String> redisBloomFilter;
-
     // TODO 布隆过滤器的巨大用处就是，能够迅速判断一个元素是否在一个集合中。
     //  使用场景:
     //         缓存穿透：将所有可能存在的数据缓存放到布隆过滤器中，当黑客访问不存在的缓存时迅速返回避免缓存及DB挂掉。
@@ -52,7 +49,7 @@ class SpringBloomFilterApplicationTests {
      * @param length 字符串的长度
      * @return 随机字符串
      */
-    public static String generateRandomString(int length) {
+    public String generateRandomString(int length) {
         StringBuilder builder = new StringBuilder();
         Random random = new Random();
         for (int i = 0; i < length; i++) {
@@ -61,13 +58,17 @@ class SpringBloomFilterApplicationTests {
         return builder.toString();
     }
 
+
+    @Autowired
+    private RedisBloomFilter<String> redisBloomFilter;
     @Test
     void test2() {
         // TODO 测试Redis实现分布式布隆过滤器
         int expectedInsertions = 1000;
         double fpp = 0.1;
         redisBloomFilter.delete("bloom");
-        BloomFilterHelper<CharSequence> bloomFilterHelper = new BloomFilterHelper<>(Funnels.stringFunnel(Charset.defaultCharset()), expectedInsertions, fpp);
+        BloomFilterHelper<CharSequence> bloomFilterHelper =
+                new BloomFilterHelper<>(Funnels.stringFunnel(Charset.defaultCharset()), expectedInsertions, fpp);
         int j = 0;
         // 添加100个元素
         List<String> valueList = new ArrayList<>();
