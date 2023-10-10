@@ -7,10 +7,7 @@ import com.google.common.hash.Hashing;
 import java.nio.charset.Charset;
 
 /**
- * 布隆过滤器核心类 
- * 
- * @param <T> 
- * @author jack xu 
+ * TODO 布隆过滤器核心类
  */ 
 public class BloomFilterHelper<T> { 
     private int numHashFunctions; 

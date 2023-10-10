@@ -1,17 +1,19 @@
 package com.example.rediscloud;
 
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * TODO 这里在操作redis的位图bitmap，你可能只知道redis五种数据类型，string，list，hash，set，zset，
  *          没听过bitmap，但是不要紧，你可以说他是一种新的数据类型，也可以说不是，因为他的本质还是string；
- */ 
+ */
 public class RedisBloomFilter<T> {
 
     @Autowired
@@ -23,8 +25,7 @@ public class RedisBloomFilter<T> {
      * @param key KEY 
      */
     public void delete(String key) {
-        Boolean hasKey = redisTemplate.hasKey(key);
-        if (Boolean.TRUE.equals(hasKey)) {
+        if (Boolean.TRUE.equals(redisTemplate.hasKey(key))) {
             redisTemplate.delete(key);
         }
     }

@@ -458,8 +458,6 @@
           移除key值 则key里面的所有值都被移除：redisTemplate.delete(key);
           设置reids key的过期时间：redisTemplate.expire(key, time, TimeUnit.SECONDS);
           检测 是否 存在该键：redisTemplate.hasKey(key);
-
-
 */
 public class Redis概述 {
 }
