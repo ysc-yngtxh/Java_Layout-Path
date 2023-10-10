@@ -5,6 +5,7 @@ import com.example.rediscloud.RedisBloomFilter;
 import com.google.common.hash.Funnels;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.nio.charset.Charset;
@@ -15,9 +16,10 @@ import java.util.List;
 @SpringBootTest
 class SpringBloomFilterApplicationTests {
 
+    @Autowired
+    private RedisBloomFilter redisBloomFilter;
     @Test
     void contextLoads() {
-        RedisBloomFilter redisBloomFilter = new RedisBloomFilter();
         int expectedInsertions = 1000;
         double fpp = 0.1;
         redisBloomFilter.delete("bloom");

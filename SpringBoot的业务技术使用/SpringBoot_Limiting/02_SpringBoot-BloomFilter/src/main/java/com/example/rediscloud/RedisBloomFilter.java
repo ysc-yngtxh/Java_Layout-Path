@@ -14,10 +14,15 @@ import java.util.List;
  * TODO 这里在操作redis的位图bitmap，你可能只知道redis五种数据类型，string，list，hash，set，zset，
  *          没听过bitmap，但是不要紧，你可以说他是一种新的数据类型，也可以说不是，因为他的本质还是string；
  */
+@Component
 public class RedisBloomFilter<T> {
 
-    @Autowired
-    private RedisTemplate<String, T> redisTemplate;
+    // 因为RedisTemplate这个bean的key默认是Object类型的，在依赖注入的时候，想将key改为String类型，问题就出在了这里。
+    // @Autowired这个注解是根据类型来讲bean注入的 RedisTemplate<Object,Object>，
+    // 而我写的是RedisTemplate<String,Object>，根据类型，Spring容器中没有找到，所以就会报错了；
+    // 如果用@Resource的这个注解是根据名称在Spring容器中寻找bean的，所以没有问题.
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
  
     /** 
      * 删除缓存的KEY 
