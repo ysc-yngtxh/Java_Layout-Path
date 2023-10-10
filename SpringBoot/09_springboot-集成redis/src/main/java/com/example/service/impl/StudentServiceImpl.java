@@ -15,18 +15,17 @@ import java.util.concurrent.TimeUnit;
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
-    private RedisTemplate<Object,Object> redisTemplate;
-    //这一个类是redis依赖提供的，就在Maven的spring-data-redis
+    private RedisTemplate<Object, Object> redisTemplate;
+    // 这一个类是redis依赖提供的，就在Maven的spring-data-redis
 
     @Override
     public void put(String key, String value) {
-        redisTemplate.opsForValue().set(key,value);
+        redisTemplate.opsForValue().set(key, value);
     }
 
     @Override
     public String get(String count) {
         String query = (String) redisTemplate.opsForValue().get(count);
-
 
         Map<String, String> hashMap = new HashMap<>(2);
         hashMap.put("redis", "redis");
@@ -34,9 +33,6 @@ public class StudentServiceImpl implements StudentService {
         for (Map.Entry<String, String> keyValue : hashMap.entrySet()) {
             redisTemplate.opsForHash().put("key", keyValue.getKey(), keyValue.getValue());
         }
-
         return query;
     }
-
-
 }

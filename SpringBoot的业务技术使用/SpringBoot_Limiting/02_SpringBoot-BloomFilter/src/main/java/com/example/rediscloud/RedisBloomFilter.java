@@ -1,10 +1,10 @@
 package com.example.rediscloud;
 
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -20,17 +20,17 @@ public class RedisBloomFilter<T> {
     // @Autowired注解是根据类型来将bean注入的 RedisTemplate<Object, Object>，
     // 而我写的是RedisTemplate<String, Object>，根据类型，Spring容器中没有找到，所以就会报错了；
     // 如果用@Resource的这个注解是根据名称在Spring容器中寻找bean的，所以没有问题.
-    @Resource
-    private RedisTemplate<String, Object> redisTemplate;
+    // @Resource
+    // private RedisTemplate<String, Object> redisTemplate;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
  
     /** 
      * 删除缓存的KEY
      * @param key KEY 
      */
     public void delete(String key) {
-        if (Boolean.TRUE.equals(redisTemplate.hasKey(key))) {
-            redisTemplate.delete(key);
-        }
+        redisTemplate.delete(key);
     }
  
     /** 
