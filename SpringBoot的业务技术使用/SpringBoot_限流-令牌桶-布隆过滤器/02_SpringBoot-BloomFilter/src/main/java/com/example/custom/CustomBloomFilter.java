@@ -45,6 +45,7 @@ public class CustomBloomFilter {
      */
     public void addElement(String element) {
         for (int i = 0; i < this.hashFunctions; i++) {
+            int i1 = (element + i).hashCode();
             int hash = Math.abs( (element + i).hashCode() % this.size );
             this.filter.set(hash, true);
         }

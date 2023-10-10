@@ -52,11 +52,10 @@ class SpringBloomFilterApplicationTests {
             for (int j = 0; j < 10; j++) {
                 builder.append( (char) ('a' + new Random().nextInt(26)) );
             }
-            String randomString = builder.toString();
-            if (filter.checkElement(randomString)) {
-                System.out.println(randomString + " may be in the filter.");
+            if (filter.checkElement(builder.toString())) {
+                System.out.println(builder + " may be in the filter.");
             } else {
-                System.out.println(randomString + " is not in the filter.");
+                System.out.println(builder + " is not in the filter.");
             }
         }
     }
@@ -71,7 +70,7 @@ class SpringBloomFilterApplicationTests {
         // 期望的误判率
         double fpp = 0.02;
 
-        // 初始化一个存储string数据的布隆过滤器,默认误判率是0.03。Guava中官方类 BloomFilter
+        // 初始化一个存储string数据的布隆过滤器，默认误判率是0.03。Guava中官方类 BloomFilter
         BloomFilter<String> bf =
                 BloomFilter.create(Funnels.stringFunnel(Charsets.UTF_8), insertions, fpp);
         // 用于存放所有实际存在的key的 Set 对象，用于是否存在。设置初始容量为100W
@@ -92,7 +91,7 @@ class SpringBloomFilterApplicationTests {
         for (int i = 0; i < 10000; i++) {
             // 0-10000之间，可以被100整除的数有100个（100的倍数）
             String data = i % 100 == 0 ? lists.get(i / 100) : UUID.randomUUID().toString();
-            // 这里用了might,看上去不是很自信，所以如果布隆过滤器判断存在了,我们还要去sets中实锤
+            // 这里用了might，看上去不是很自信，所以如果布隆过滤器判断存在了，我们还要去sets中实锤
             if (bf.mightContain(data)) {
                 if (sets.contains(data)) {
                     rightNum++;
