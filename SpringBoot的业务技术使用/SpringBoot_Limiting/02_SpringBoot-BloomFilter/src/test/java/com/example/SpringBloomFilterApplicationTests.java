@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.custom.CustomBloomFilter;
 import com.example.rediscloud.BloomFilterHelper;
 import com.example.rediscloud.RedisBloomFilter;
 import com.google.common.hash.Funnels;
@@ -11,15 +12,58 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Slf4j
 @SpringBootTest
 class SpringBloomFilterApplicationTests {
 
     @Autowired
-    private RedisBloomFilter redisBloomFilter;
+    private RedisBloomFilter<String> redisBloomFilter;
+
+    // TODO 布隆过滤器的巨大用处就是，能够迅速判断一个元素是否在一个集合中。
+    //  使用场景:
+    //         缓存穿透：将所有可能存在的数据缓存放到布隆过滤器中，当黑客访问不存在的缓存时迅速返回避免缓存及DB挂掉。
+    //         解决原理：布隆过滤器 这种技术是在缓存之前再加一层屏障，里面存储数据库中存在的所有key，
+    //                 当业务系统进行查询请求的时候，首先去 布隆过滤器 中查询该key是否存在。
+    //                 若不存在，则说明数据库中也不存在该数据，因此缓存都不要查了，直接返回null。
+    //                 若存在，则继续执行后续的流程，先前往缓存中查询，缓存中没有的话再前往数据库中的查询。
     @Test
-    void contextLoads() {
+    void test1() {
+        // TODO 测试自定义布隆过滤器
+        CustomBloomFilter filter = new CustomBloomFilter(1000000, 5);
+        // 添加一些随机字符串到布隆过滤器
+        for (int i = 0; i < 10000; i++) {
+            filter.addElement(generateRandomString(10));
+        }
+        // 检查一些随机字符串是否在布隆过滤器中
+        for (int i = 0; i < 100; i++) {
+            String randomString = generateRandomString(10);
+            if (filter.checkElement(randomString)) {
+                System.out.println(randomString + " may be in the filter.");
+            } else {
+                System.out.println(randomString + " is not in the filter.");
+            }
+        }
+    }
+
+    /**
+     * 生成一个随机字符串
+     * @param length 字符串的长度
+     * @return 随机字符串
+     */
+    public static String generateRandomString(int length) {
+        StringBuilder builder = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            builder.append( (char) ('a' + random.nextInt(26)) );
+        }
+        return builder.toString();
+    }
+
+    @Test
+    void test3() {
+        // TODO 测试Redis实现分布式
         int expectedInsertions = 1000;
         double fpp = 0.1;
         redisBloomFilter.delete("bloom");

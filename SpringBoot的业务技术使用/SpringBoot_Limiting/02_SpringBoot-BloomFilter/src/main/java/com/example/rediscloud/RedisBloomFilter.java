@@ -1,7 +1,6 @@
 package com.example.rediscloud;
 
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
@@ -18,8 +17,8 @@ import java.util.List;
 public class RedisBloomFilter<T> {
 
     // 因为RedisTemplate这个bean的key默认是Object类型的，在依赖注入的时候，想将key改为String类型，问题就出在了这里。
-    // @Autowired这个注解是根据类型来讲bean注入的 RedisTemplate<Object,Object>，
-    // 而我写的是RedisTemplate<String,Object>，根据类型，Spring容器中没有找到，所以就会报错了；
+    // @Autowired注解是根据类型来将bean注入的 RedisTemplate<Object, Object>，
+    // 而我写的是RedisTemplate<String, Object>，根据类型，Spring容器中没有找到，所以就会报错了；
     // 如果用@Resource的这个注解是根据名称在Spring容器中寻找bean的，所以没有问题.
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
@@ -43,7 +42,7 @@ public class RedisBloomFilter<T> {
      * @param value             值 
      * @param <T>               泛型，可以传入任何类型的value 
      */ 
-    public <T> void add(BloomFilterHelper<T> bloomFilterHelper, String key, T value) { 
+    public <T> void add(BloomFilterHelper<T> bloomFilterHelper, String key, T value) {
         int[] offset = bloomFilterHelper.murmurHashOffset(value); 
         for (int i : offset) { 
             redisTemplate.opsForValue().setBit(key, i, true); 
@@ -58,7 +57,7 @@ public class RedisBloomFilter<T> {
      * @param valueList         值，列表 
      * @param <T>               泛型，可以传入任何类型的value 
      */ 
-    public <T> void addList(BloomFilterHelper<T> bloomFilterHelper, String key, List<T> valueList) {
+    public <T> void addList(BloomFilterHelper bloomFilterHelper, String key, List<T> valueList) {
         redisTemplate.executePipelined(new RedisCallback<Long>() {
             @Override 
             public Long doInRedis(RedisConnection connection) throws DataAccessException {
