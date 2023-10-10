@@ -4,6 +4,8 @@ import com.example.custom.CustomBloomFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Random;
+
 @SpringBootApplication
 public class SpringBloomFilterApplication {
 
@@ -17,19 +19,34 @@ public class SpringBloomFilterApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringBloomFilterApplication.class, args);
 
+        // TODO 测试自定义布隆过滤器
         CustomBloomFilter filter = new CustomBloomFilter(1000000, 5);
         // 添加一些随机字符串到布隆过滤器
         for (int i = 0; i < 10000; i++) {
-            filter.addElement(CustomBloomFilter.generateRandomString(10));
+            filter.addElement(generateRandomString(10));
         }
         // 检查一些随机字符串是否在布隆过滤器中
         for (int i = 0; i < 100; i++) {
-            String randomString = CustomBloomFilter.generateRandomString(10);
+            String randomString = generateRandomString(10);
             if (filter.checkElement(randomString)) {
                 System.out.println(randomString + " may be in the filter.");
             } else {
                 System.out.println(randomString + " is not in the filter.");
             }
         }
+    }
+
+    /**
+     * 生成一个随机字符串
+     * @param length 字符串的长度
+     * @return 随机字符串
+     */
+    public static String generateRandomString(int length) {
+        StringBuilder builder = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            builder.append( (char) ('a' + random.nextInt(26)) );
+        }
+        return builder.toString();
     }
 }

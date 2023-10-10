@@ -16,16 +16,16 @@ public class RabbitConfig {
     @Bean("OrderExchange")
     public CustomExchange OrderExChange(){
         HashMap<String, Object> map = new HashMap<>(1);
-        map.put("x-delayed-type","direct");
+        map.put("x-delayed-type", "direct");
         // 交换机名称  交换机类型  是否持久化   是否自动删除  其他
-        return new CustomExchange("OrderExchange","x-delayed-message",true,false,map);
+        return new CustomExchange("OrderExchange", "x-delayed-message", true, false, map);
     }
     @Bean("OrderQueue")
     public Queue Orderqueue(){
         Map<String, Object> map = new HashMap<>(3);
-        map.put("x-dead-letter-exchange","yscdeadExchange");
-        map.put("x-dead-letter-routing-key","yscdeadroutingkey");
-        return new Queue("OrderQueue",true,false,false,map);
+        map.put("x-dead-letter-exchange", "yscdeadExchange");
+        map.put("x-dead-letter-routing-key", "yscdeadroutingkey");
+        return new Queue("OrderQueue", true, false, false, map);
     }
     @Bean
     public Binding Orderbinding(@Qualifier("OrderExchange") CustomExchange integrationExchange,
@@ -37,16 +37,16 @@ public class RabbitConfig {
     @Bean("integrationExchange")
     public CustomExchange exchange(){
         HashMap<String, Object> map = new HashMap<>(1);
-        map.put("x-delayed-type","direct");
+        map.put("x-delayed-type", "direct");
         // 交换机名称  交换机类型  是否持久化   是否自动删除  其他
-        return new CustomExchange("integrationExchange","x-delayed-message",true,false,map);
+        return new CustomExchange("integrationExchange", "x-delayed-message", true, false, map);
     }
     @Bean("integrationQueue")
     public Queue queue(){
         Map<String, Object> map = new HashMap<>(3);
-        map.put("x-dead-letter-exchange","yscdeadExchange");
-        map.put("x-dead-letter-routing-key","yscdeadroutingkey");
-        return new Queue("integrationQueue",true,false,false,map);
+        map.put("x-dead-letter-exchange", "yscdeadExchange");
+        map.put("x-dead-letter-routing-key", "yscdeadroutingkey");
+        return new Queue("integrationQueue", true, false, false, map);
     }
     @Bean
     public Binding binding(@Qualifier("integrationExchange") CustomExchange integrationExchange,

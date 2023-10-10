@@ -12,18 +12,22 @@ import java.util.List;
  * TODO 这里在操作redis的位图bitmap，你可能只知道redis五种数据类型，string，list，hash，set，zset，
  *          没听过bitmap，但是不要紧，你可以说他是一种新的数据类型，也可以说不是，因为他的本质还是string；
  */ 
-public class RedisBloomFilter<T> { 
+public class RedisBloomFilter<T> {
+
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String, T> redisTemplate;
  
     /** 
      * 删除缓存的KEY 
      * 
      * @param key KEY 
-     */ 
-    public void delete(String key) { 
-        redisTemplate.delete(key); 
-    } 
+     */
+    public void delete(String key) {
+        Boolean hasKey = redisTemplate.hasKey(key);
+        if (Boolean.TRUE.equals(hasKey)) {
+            redisTemplate.delete(key);
+        }
+    }
  
     /** 
      * 根据给定的布隆过滤器添加值，在添加一个元素的时候使用，批量添加的性能差 
@@ -76,7 +80,7 @@ public class RedisBloomFilter<T> {
     public <T> boolean contains(BloomFilterHelper<T> bloomFilterHelper, String key, T value) { 
         int[] offset = bloomFilterHelper.murmurHashOffset(value); 
         for (int i : offset) { 
-            if (!redisTemplate.opsForValue().getBit(key, i)) { 
+            if (Boolean.FALSE.equals(redisTemplate.opsForValue().getBit(key, i))) {
                 return false; 
             } 
         } 

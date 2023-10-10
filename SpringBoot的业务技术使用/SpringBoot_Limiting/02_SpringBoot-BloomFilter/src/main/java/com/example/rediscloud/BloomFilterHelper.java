@@ -53,13 +53,13 @@ public class BloomFilterHelper<T> {
         if (p == 0) { 
             p = Double.MIN_VALUE; 
         } 
-        return (int) (-n * Math.log(p) / (Math.log(2) * Math.log(2))); 
+        return (int) ( -n * Math.log(p) / (Math.log(2) * Math.log(2)) );
     } 
  
     /** 
      * 计算hash方法执行次数 
      */ 
     private int optimalNumOfHashFunctions(long n, long m) { 
-        return Math.max(1, (int) Math.round((double) m / n * Math.log(2))); 
+        return Math.max(1, (int) Math.round( (double) m / n * Math.log(2) ));
     } 
 }
