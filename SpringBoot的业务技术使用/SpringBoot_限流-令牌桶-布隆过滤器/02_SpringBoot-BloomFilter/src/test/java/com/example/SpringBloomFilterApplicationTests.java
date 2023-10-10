@@ -111,7 +111,7 @@ class SpringBloomFilterApplicationTests {
 
 
 
-    // TODO 3、测试Redis实现分布式布隆过滤器
+    // TODO 3、Redis实现分布式布隆过滤器
     @Autowired
     private RedisBloomFilter<String> redisBloomFilter;
     @Test

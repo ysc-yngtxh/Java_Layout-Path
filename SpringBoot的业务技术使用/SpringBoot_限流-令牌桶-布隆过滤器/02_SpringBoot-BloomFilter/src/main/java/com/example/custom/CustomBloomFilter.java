@@ -67,8 +67,8 @@ public class CustomBloomFilter {
 
     // 1、布隆过滤器的默认容错率是0.03
     public static void main1(String[] args) {
-        int size=10000;
-        double fpp=0.0001;
+        int size = 10000;
+        double fpp = 0.0001;
 
         // 没有设置误判率的情况下，10000→312，误判率3.12%
         BloomFilter<CharSequence> bloomFilter =
@@ -88,16 +88,13 @@ public class CustomBloomFilter {
     // 2、测试容错率的变化，所需数组位数的变化
     // 容错率0.0001，所需位数191701
     public static void main(String[] args) {
-        // 1.创建符合条件的布隆过滤器
-        // 预期数据量10000，错误率0.0001
+        // 创建符合条件的布隆过滤器。预期数据量10000，错误率0.0001
         BloomFilter<CharSequence> bloomFilter =
                 BloomFilter.create( Funnels.stringFunnel(Charset.forName("utf-8")), 10000, 0.0001);
-        // 2.将一部分数据添加进去
         for (int i = 0; i < 5000; i++) {
             bloomFilter.put("" + i);
         }
         System.out.println("数据写入完毕");
-        // 3.测试结果输出
         for (int i = 0; i < 10000; i++) {
             if (bloomFilter.mightContain("" + i)) {
                 System.out.println(i + "存在");
