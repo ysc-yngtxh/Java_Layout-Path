@@ -13,7 +13,7 @@ import java.util.Random;
 /**
  * @author 游家纨绔
  * @dateTime 2023-10-10 00:09
- * @apiNote TODO 1、自定义实现布隆过滤器
+ * @apiNote TODO 自定义实现布隆过滤器
  */
 public class CustomBloomFilter {
     // BitSet类：用于存储一个位序列。就是使用位来存储boolean信息，0表示假，1表示真。

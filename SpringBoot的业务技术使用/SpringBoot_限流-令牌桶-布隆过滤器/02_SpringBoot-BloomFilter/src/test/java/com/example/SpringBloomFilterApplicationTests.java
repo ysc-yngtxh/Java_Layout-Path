@@ -3,16 +3,23 @@ package com.example;
 import com.example.custom.CustomBloomFilter;
 import com.example.rediscloud.BloomFilterHelper;
 import com.example.rediscloud.RedisBloomFilter;
+import com.google.common.base.Charsets;
+import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnels;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
 
 @Slf4j
 @SpringBootTest
@@ -25,17 +32,27 @@ class SpringBloomFilterApplicationTests {
     //              当业务系统进行查询请求的时候，首先去 布隆过滤器 中查询该key是否存在。
     //              若不存在，则说明数据库中也不存在该数据，因此缓存都不要查了，直接返回null。
     //              若存在，则继续执行后续的流程，先前往缓存中查询，缓存中没有的话再前往数据库中的查询。
+
+
+    // TODO 1、测试自定义布隆过滤器
     @Test
     void test1() {
-        // TODO 测试自定义布隆过滤器
         CustomBloomFilter filter = new CustomBloomFilter(1000000, 5);
         // 添加一些随机字符串到布隆过滤器
         for (int i = 0; i < 10000; i++) {
-            filter.addElement(generateRandomString(10));
+            StringBuilder builder = new StringBuilder();
+            for (int j = 0; j < 10; j++) {
+                builder.append( (char) ('a' + new Random().nextInt(26)) );
+            }
+            filter.addElement( builder.toString() );
         }
         // 检查一些随机字符串是否在布隆过滤器中
         for (int i = 0; i < 100; i++) {
-            String randomString = generateRandomString(10);
+            StringBuilder builder = new StringBuilder();
+            for (int j = 0; j < 10; j++) {
+                builder.append( (char) ('a' + new Random().nextInt(26)) );
+            }
+            String randomString = builder.toString();
             if (filter.checkElement(randomString)) {
                 System.out.println(randomString + " may be in the filter.");
             } else {
@@ -44,26 +61,61 @@ class SpringBloomFilterApplicationTests {
         }
     }
 
-    /**
-     * 生成一个随机字符串
-     * @param length 字符串的长度
-     * @return 随机字符串
-     */
-    public String generateRandomString(int length) {
-        StringBuilder builder = new StringBuilder();
-        Random random = new Random();
-        for (int i = 0; i < length; i++) {
-            builder.append( (char) ('a' + random.nextInt(26)) );
+
+
+    // TODO 2、Guava实现布隆过滤器（本地内存）
+    @Test
+    void test2() {
+        // 插入100W数据
+        int insertions = 1000000;
+        // 期望的误判率
+        double fpp = 0.02;
+
+        // 初始化一个存储string数据的布隆过滤器,默认误判率是0.03。Guava中官方类 BloomFilter
+        BloomFilter<String> bf =
+                BloomFilter.create(Funnels.stringFunnel(Charsets.UTF_8), insertions, fpp);
+        // 用于存放所有实际存在的key的 Set 对象，用于是否存在。设置初始容量为100W
+        Set<String> sets = new HashSet<>(insertions);
+        // 用于存放所有实际存在的key的 List 对象，用于取出。设置初始容量为100W
+        List<String> lists = new ArrayList<>(insertions);
+
+        // 插入随机字符串
+        for (int i = 0; i < insertions; i++) {
+            String uuid = UUID.randomUUID().toString();
+            bf.put(uuid);
+            sets.add(uuid);
+            lists.add(uuid);
         }
-        return builder.toString();
+
+        int rightNum = 0;
+        int wrongNum = 0;
+        for (int i = 0; i < 10000; i++) {
+            // 0-10000之间，可以被100整除的数有100个（100的倍数）
+            String data = i % 100 == 0 ? lists.get(i / 100) : UUID.randomUUID().toString();
+            // 这里用了might,看上去不是很自信，所以如果布隆过滤器判断存在了,我们还要去sets中实锤
+            if (bf.mightContain(data)) {
+                if (sets.contains(data)) {
+                    rightNum++;
+                    continue;
+                }
+                wrongNum++;
+            }
+        }
+
+        BigDecimal percent = new BigDecimal(wrongNum).divide(new BigDecimal(9900), 2, RoundingMode.HALF_UP);
+        BigDecimal bingo = new BigDecimal(9900 - wrongNum).divide(new BigDecimal(9900), 2, RoundingMode.HALF_UP);
+        log.info("在100W个元素中，判断100个实际存在的元素，布隆过滤器认为存在的：" + rightNum);
+        log.info("在100W个元素中，判断9900个实际不存在的元素，误认为存在的：" + wrongNum +
+                "，" + "命中率：" + bingo + "，误判率：" + percent);
     }
 
 
+
+    // TODO 3、测试Redis实现分布式布隆过滤器
     @Autowired
     private RedisBloomFilter<String> redisBloomFilter;
     @Test
-    void test2() {
-        // TODO 测试Redis实现分布式布隆过滤器
+    void test3() {
         int expectedInsertions = 1000;
         double fpp = 0.1;
         redisBloomFilter.delete("bloom");
