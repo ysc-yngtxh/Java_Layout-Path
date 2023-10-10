@@ -62,8 +62,8 @@ class SpringBloomFilterApplicationTests {
     }
 
     @Test
-    void test3() {
-        // TODO 测试Redis实现分布式
+    void test2() {
+        // TODO 测试Redis实现分布式布隆过滤器
         int expectedInsertions = 1000;
         double fpp = 0.1;
         redisBloomFilter.delete("bloom");
@@ -88,6 +88,4 @@ class SpringBloomFilterApplicationTests {
     }
     // 注意这里用的是addList，它的底层是pipelining管道，而add方法的底层是一个个for循环的setBit，这样的速度效率是很慢的，
     // 但是他能有返回值，知道是否插入成功，而pipelining是不知道的，所以具体选择用哪一种方法看你的业务场景，以及需要插入的速度决定；
-
-
 }
