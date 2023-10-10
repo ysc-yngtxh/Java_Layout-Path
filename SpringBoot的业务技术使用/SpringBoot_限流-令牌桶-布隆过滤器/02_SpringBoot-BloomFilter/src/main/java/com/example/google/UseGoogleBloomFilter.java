@@ -29,7 +29,8 @@ public class UseGoogleBloomFilter {
     public static void main(String[] args) {
 
         // 初始化一个存储string数据的布隆过滤器,默认误判率是0.03。Guava中官方类 BloomFilter
-        BloomFilter<String> bf = BloomFilter.create(Funnels.stringFunnel(Charsets.UTF_8), insertions, fpp);
+        BloomFilter<String> bf =
+                BloomFilter.create(Funnels.stringFunnel(Charsets.UTF_8), insertions, fpp);
 
         // 用于存放所有实际存在的key的 Set 对象，用于是否存在。设置初始容量为100W
         Set<String> sets = new HashSet<>(insertions);

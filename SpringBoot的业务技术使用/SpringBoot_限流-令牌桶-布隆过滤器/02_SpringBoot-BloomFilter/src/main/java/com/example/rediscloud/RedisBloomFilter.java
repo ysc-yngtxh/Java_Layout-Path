@@ -15,6 +15,7 @@ import java.util.List;
  */
 @Component
 public class RedisBloomFilter<T> {
+
     @Autowired
     private StringRedisTemplate redisTemplate;
  
