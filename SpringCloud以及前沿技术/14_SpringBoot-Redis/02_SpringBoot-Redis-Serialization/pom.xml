@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>02_SpringBoot-Redis-Lock</artifactId>
+    <artifactId>02_SpringBoot-Redis-Serialization</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>02_SpringBoot-Redis-Lock</name>
-    <description>02_SpringBoot-Redis-Lock</description>
+    <name>02_SpringBoot-Redis-Serialization</name>
+    <description>02_SpringBoot-Redis-Serialization</description>
     <properties>
         <java.version>17</java.version>
     </properties>
@@ -21,6 +21,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

@@ -3,9 +3,11 @@ package com.example;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.scripting.support.ResourceScriptSource;
 
@@ -17,18 +19,16 @@ import java.util.concurrent.TimeUnit;
 @SpringBootTest
 class SpringRedisLockApplicationTests {
 
-    // 因为RedisTemplate这个bean的key默认是Object类型的，在依赖注入的时候，想将key改为String类型，问题就出在了这里。
-    // @Autowired这个注解是根据类型来讲bean注入的 RedisTemplate<Object,Object>，
-    // 而我写的是RedisTemplate<String,Object>，根据类型，Spring容器中没有找到，所以就会报错了；
-    // 如果用@Resource的这个注解是根据名称在Spring容器中寻找bean的，所以没有问题.
-    @Resource
-    private RedisTemplate<Object, Object> redisTemplate;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     private DefaultRedisScript<Boolean> redisScript1;
     private DefaultRedisScript<Long> redisScript2;
 
-    /**项目中使用Redis批量操作数据时遇到问题，因为数据量的不确定，且必须保证批量操作数据的事务性
-     所以必须使用Redis中的分布式锁进行处理*/
+    /**
+     * 项目中使用Redis批量操作数据时，因为数据量的不确定，且必须保证批量操作数据的事务性，
+     * 所以必须使用Redis中的分布式锁进行处理，保证数据安全。
+     */
     @Test
     public void test1() {
         /**
@@ -41,7 +41,7 @@ class SpringRedisLockApplicationTests {
             log.info("上锁进来了吗？");
             // 先判断库存是否充足
             if (redisTemplate.hasKey("stock")) {
-                int stock = (int) redisTemplate.opsForValue().get("stock");
+                int stock = Integer.parseInt( redisTemplate.opsForValue().get("stock") );
                 if (stock > 0) {
                     // 缓存中key为stock的库存进行自减
                     redisTemplate.opsForValue().decrement("stock");
@@ -78,7 +78,7 @@ class SpringRedisLockApplicationTests {
             log.info("上锁进来了吗？");
             if (redisTemplate.hasKey("stock")) {
                 // 先判断库存是否充足
-                int stock = (int) redisTemplate.opsForValue().get("stock");
+                int stock = Integer.parseInt( redisTemplate.opsForValue().get("stock") );
                 if (stock > 0) {
                     // 缓存中key为stock的库存进行自减
                     redisTemplate.opsForValue().decrement("stock");
@@ -114,7 +114,7 @@ class SpringRedisLockApplicationTests {
             log.info("上锁进来了吗？");
             if (redisTemplate.hasKey("stock")) {
                 // 先判断库存是否充足
-                int stock = (int) redisTemplate.opsForValue().get("stock");
+                int stock = Integer.parseInt( redisTemplate.opsForValue().get("stock") );
                 if ( stock > 0 ) {
                     // 缓存中key为stock的库存进行自减
                     redisTemplate.opsForValue().decrement("stock");
@@ -157,7 +157,7 @@ class SpringRedisLockApplicationTests {
             log.info("上锁进来了吗？");
             if (redisTemplate.hasKey("stock")) {
                 // 先判断库存是否充足
-                int stock = (int) redisTemplate.opsForValue().get("stock");
+                int stock = Integer.parseInt( redisTemplate.opsForValue().get("stock") );
                 if (stock > 0) {
                     // 缓存中key为stock的库存进行自减
                     redisTemplate.opsForValue().decrement("stock");

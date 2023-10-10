@@ -17,21 +17,28 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  */
 @Configuration
 public class RedisConfig {
+    // 初始化一个 RedisTemplate<Object, Object> 对象
     @Bean
     @SuppressWarnings("all")
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        // 获取Redis的连接操作对象
         RedisTemplate<Object, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(redisConnectionFactory);
 
+        // 使用Jackson的序列化
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
         jackson2JsonRedisSerializer.setObjectMapper(new ObjectMapper());
 
         RedisSerializer stringSerializer = new StringRedisSerializer();
 
+        // 设置Redis的String数据类型key部分，序列化方式为 StringRedisSerializer
         template.setKeySerializer(stringSerializer);
+        // 设置Redis的String数据类型value部分，序列化方式为 Jackson2JsonRedisSerializer
         template.setValueSerializer(jackson2JsonRedisSerializer);
 
+        // 设置Redis的hash数据类型key部分，序列化方式为 StringRedisSerializer
         template.setHashKeySerializer(stringSerializer);
+        // 设置Redis的hash数据类型value部分，序列化方式为 Jackson2JsonRedisSerializer
         template.setHashValueSerializer(jackson2JsonRedisSerializer);
 
         return template;
