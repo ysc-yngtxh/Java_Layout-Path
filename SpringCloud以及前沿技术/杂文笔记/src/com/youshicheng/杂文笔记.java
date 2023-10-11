@@ -3,32 +3,11 @@ package com.youshicheng;
 public class 杂文笔记 {
 }
 /*
-一、悲观锁：比较悲观，当做写的操作的时候，会上锁保证只有一个线程对该数据做操作，
-          当没有获取到锁的情况下，则当前线程会变为阻塞状态，效率非常低。
-    乐观锁：比较乐观，也就是没有锁的概念，做写的操作的时候也就是不会上锁，采用阈值或者版本号比较的形式实现数据更新
-           如果更新不成功的情况下，则版本号可能发生了变化，则一直不断循环更新。当前线程是不会阻塞的，一直为运行状态，效率非常高。
-
-    事务流程：
-           Begin 开启事务
-           Update 操作
-           Commit或者回滚
-
-         我们采用编程事务的方式，只begin，当时不提交或者回滚，这个时候就会触发行锁机制，其他线程是不能对该数据做任何写的操作
-
-    清除行级锁：
-         select * from 表名.innodb_trx t
-         select t.trx_mysql_thread_id from 表名.innodb_trx t
-         kill 行级锁代号
-
-    乐观锁的适用场景：当要更新一条记录的时候，希望这条记录没有被人更新
-           实现方式：
-                  1、取出记录时，获取当前version
-                  2、更新时，带上这个version
-                  3、执行更新时 ，set version = newVersion where version = oldVersion
-                  4、如果version不对，就更新失败
-                  5、然后循环1-4操作，直至更新成功
-                  总结：乐观锁没有阻塞线程，只是一直循环操作直至成功
-            只有在操作数据的时候才会有行级锁，查询是没有的。
+一、分布式锁
+     1、数据库的排它锁
+     2、使用redis分布式锁，通过代码调用setnx命令：redisTemplate.opsForValue().setIfAbsent();
+     3、使用redission实现分布式锁
+     4、使用zookeeper实现分布式锁
 
 二、单例模式
      在Spring中，bean可以被定义为两种模式：prototype（多例）和singleton（单例）
