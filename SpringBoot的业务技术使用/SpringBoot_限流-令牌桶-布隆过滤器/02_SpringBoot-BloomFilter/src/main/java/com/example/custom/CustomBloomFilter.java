@@ -37,7 +37,7 @@ public class CustomBloomFilter {
 
     // 构造函数，初始化布隆过滤器
     public CustomBloomFilter(int size, int hashFunctions) {
-        // 把比特位 下标size位置 设置为1（0为false，1为true）
+        // 设置 位图BitSet 位大小
         this.filter = new BitSet(size);
         // size的大小需要根据实际情况选择，既要保证可以存储所有的数据，又要避免浪费空间。
         // 如果size太小，那么可能会导致哈希冲突的可能性增加，从而影响哈希表的性能和效率。
