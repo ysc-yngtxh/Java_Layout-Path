@@ -34,7 +34,14 @@ class SpringBloomFilterApplicationTests {
     //              若存在，则继续执行后续的流程，先前往缓存中查询，缓存中没有的话再前往数据库中的查询。
     //     分布式系统：在分布式系统中，可以使用布隆过滤器来判断一个元素是否存在于分布式缓存中，避免在所有节点上进行查询，减少网络负载
 
-
+    @Test
+    void qwer() {
+        System.out.println(100 >> 1);
+        System.out.println(~100);
+        System.out.println(100^1);
+        System.out.println(100 & (100 >> 1));
+        System.out.println(100 | (100 >> 1));
+    }
     // TODO 1、测试自定义布隆过滤器
     @Test
     void test1() {
@@ -48,9 +55,9 @@ class SpringBloomFilterApplicationTests {
             filter.addElement( builder.toString() );
         }
         // 检查一些随机字符串是否在布隆过滤器中
-        for (int i = 10000; i < 20000; i++) {
+        for (int m = 10000; m < 20000; m++) {
             StringBuilder builder = new StringBuilder();
-            for (int j = 0; j < 10; j++) {
+            for (int n = 0; n < 10; n++) {
                 builder.append( (char) ('a' + new Random().nextInt(26)) );
             }
             if (filter.checkElement(builder.toString())) {
