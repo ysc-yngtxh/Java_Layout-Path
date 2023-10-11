@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -34,14 +35,7 @@ class SpringBloomFilterApplicationTests {
     //              若存在，则继续执行后续的流程，先前往缓存中查询，缓存中没有的话再前往数据库中的查询。
     //     分布式系统：在分布式系统中，可以使用布隆过滤器来判断一个元素是否存在于分布式缓存中，避免在所有节点上进行查询，减少网络负载
 
-    @Test
-    void qwer() {
-        System.out.println(100 >> 1);
-        System.out.println(~100);
-        System.out.println(100^1);
-        System.out.println(100 & (100 >> 1));
-        System.out.println(100 | (100 >> 1));
-    }
+
     // TODO 1、测试自定义布隆过滤器
     @Test
     void test1() {
@@ -50,54 +44,74 @@ class SpringBloomFilterApplicationTests {
         for (int i = 0; i < 10000; i++) {
             StringBuilder builder = new StringBuilder();
             for (int j = 0; j < 10; j++) {
-                builder.append( (char) ('a' + new Random().nextInt(26)) );
+                builder.append( (char) ('a' + new Random().nextInt(26)) ); // 97 + 随机数 = ASCⅡ码
             }
             filter.addElement( builder.toString() );
         }
-        // 检查一些随机字符串是否在布隆过滤器中
-        for (int m = 10000; m < 20000; m++) {
+        // 测试生成随机字符串是否在布隆过滤器中
+        for (int m = 0; m < 10000; m++) {
             StringBuilder builder = new StringBuilder();
             for (int n = 0; n < 10; n++) {
-                builder.append( (char) ('a' + new Random().nextInt(26)) );
+                builder.append( (char) ('a' + new Random().nextInt(26)) ); // 97 + 随机数 = ASCⅡ码
             }
             if (filter.checkElement(builder.toString())) {
+                // 可以搜索打印日志，存在一些随机字符串
                 System.out.println(builder + " -- may be in the filter");
             } else {
                 System.out.println(builder + " -- is not in the filter");
             }
         }
-        // 布隆过滤器默认的误差率为 0.03
-        CustomBloomFilter.defaultFalsePositiveRate();
-        // 布隆过滤器设置误差率为 0.0001
-        CustomBloomFilter.setFalsePositiveRate();
     }
 
 
 
-    // TODO 2、Guava实现布隆过滤器（本地内存）
+    // TODO 2、Google的 Guava依赖 实现布隆过滤器（本地内存）
     @Test
     void test2() {
-        // 插入100W数据
-        int insertions = 1000000;
-        // 期望的误判率
-        double fpp = 0.02;
 
-        // 初始化一个存储string数据的布隆过滤器，默认误判率是0.03。Guava中官方类 BloomFilter
+        // 1、布隆过滤器默认的误差率为 0.03。10000 → 312，误判率：3.12%
+        BloomFilter<CharSequence> bloomFilter1 =
+                BloomFilter.create( Funnels.stringFunnel(StandardCharsets.UTF_8), 10000);
+        for (int m = 0; m < 10000; m++){
+            bloomFilter1.put("" + m);
+        }
+        List<Integer> list = new ArrayList<Integer>();
+        for(int n = 20000; n < 30000; n++){
+            if(bloomFilter1.mightContain("" + n)){
+                list.add(n);
+            }
+        }
+        System.out.println("布隆过滤器使用默认误差率时的误判数量：：：" + list.size());
+
+        // 2、布隆过滤器设置误差率为 0.0001
+        BloomFilter<CharSequence> bloomFilter2 =
+                BloomFilter.create( Funnels.stringFunnel(Charsets.UTF_8), 10000, 0.0001);
+        for (int i = 0; i < 10000; i++) {
+            bloomFilter2.put("" + i);
+        }
+        List<Integer> list1 = new ArrayList<Integer>();
+        for (int j = 10000; j < 20000; j++) {
+            if (bloomFilter2.mightContain("" + j)) {
+                list1.add(j);
+            }
+        }
+        System.err.println("布隆过滤器使用自定义误差率时的误判数量：：：" + list1.size());
+
+
+        // 3、检验误差值
         BloomFilter<String> bf =
-                BloomFilter.create(Funnels.stringFunnel(Charsets.UTF_8), insertions, fpp);
+                BloomFilter.create(Funnels.stringFunnel(Charsets.UTF_8), 1000000, 0.02);
         // 用于存放所有实际存在的key的 Set 对象，用于是否存在。设置初始容量为100W
-        Set<String> sets = new HashSet<>(insertions);
+        Set<String> sets = new HashSet<>(1000000);
         // 用于存放所有实际存在的key的 List 对象，用于取出。设置初始容量为100W
-        List<String> lists = new ArrayList<>(insertions);
-
+        List<String> lists = new ArrayList<>(1000000);
         // 插入随机字符串
-        for (int i = 0; i < insertions; i++) {
+        for (int i = 0; i < 1000000; i++) {
             String uuid = UUID.randomUUID().toString();
             bf.put(uuid);
             sets.add(uuid);
             lists.add(uuid);
         }
-
         // 真实存在的元素
         int rightNum = 0;
         // 误以为存在的元素
@@ -114,7 +128,6 @@ class SpringBloomFilterApplicationTests {
                 wrongNum++;
             }
         }
-
         BigDecimal percent = new BigDecimal(wrongNum).divide(new BigDecimal(9900), 2, RoundingMode.HALF_UP);
         BigDecimal bingo = new BigDecimal(9900 - wrongNum).divide(new BigDecimal(9900), 2, RoundingMode.HALF_UP);
         System.err.println("\n在100W个元素中，判断100个实际存在的元素，布隆过滤器认为存在的：" + rightNum);

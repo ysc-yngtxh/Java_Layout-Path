@@ -18,51 +18,53 @@ import java.util.Random;
  * @apiNote TODO 自定义实现布隆过滤器
  */
 public class CustomBloomFilter {
-    // BitSet类：用于存储一个位序列。就是使用位来存储boolean信息，0表示假，1表示真(数据存在)。
+    // BitSet类：用于存储一个位序列。就是使用位来存储boolean信息，0表示假，1表示真(数据存在)。且位图在插入值后不会被覆盖。
     //          位序列是比较省空间的，因为记录数据通过下标，比如：下标为97，对应值为1。那么就是说 BitSet 中存有'a'值
-    //             二进制比特位(bit)数据   ...   0   ...   1   ...  1    ...   0      0      1
-    //             二进制比特位(bit)下标   ...  100  ...   65  ...  48   ...   2      1      0
+    //             二进制比特位(bit)数据     1      0     0    ...   1   ...   1    ...    0   ...
+    //             二进制比特位(bit)下标     0      1     2    ...   48  ...   65   ...   100  ...
     //          上述表示 下标{0, 48, 65} 的比特位存有数据，对应ASCⅡ码（英文编码）数据 {空字符, 0, 'A'} 存在。
     // 常见 BitSet 的应用是那些需要对海量数据进行一些统计工作的时候，比如日志分析等。
     // 面试题中也常出现，比如：统计40亿个数据中没有出现的数据，将40亿个不同数据进行排序等。
     // 又如：现在有1千万个随机数，随机数的范围在1到1亿之间。现在要求写出一种算法，将1到1亿之间没有在随机数中的数求出来(百度)。
     private BitSet filter;
+    // size代表了整个 BitSet 所有位的大小
     private int size;
+    // 表示哈希函数数量，用来作为位数组大小（即 BitSet 中 hashFunctions 为一组代表一个元素，用来控制误差，也可以不使用这个变量）
     private int hashFunctions;
-    private Random random;
 
-    /**
-     * 构造函数，初始化布隆过滤器
-     * @param size 布隆过滤器的大小
-     * @param hashFunctions 布隆过滤器使用的哈希函数数量
-     */
+    // 构造函数，初始化布隆过滤器
     public CustomBloomFilter(int size, int hashFunctions) {
-        // 把bit位下标size位置设置为1（0为false，1为true）
+        // 把比特位 下标size位置 设置为1（0为false，1为true）
         this.filter = new BitSet(size);
+        // size的大小需要根据实际情况选择，既要保证可以存储所有的数据，又要避免浪费空间。
+        // 如果size太小，那么可能会导致哈希冲突的可能性增加，从而影响哈希表的性能和效率。
+        // 如果size太大，那么会浪费空间，并且可能会导致查找数据的时间增加。因此，需要根据实际情况选择合适的size值。
         this.size = size;
         this.hashFunctions = hashFunctions;
-        this.random = new Random();
     }
 
-    /**
-     * 添加元素到布隆过滤器
-     * @param element 要添加的元素
-     */
+    // 添加元素到布隆过滤器
     public void addElement(String element) {
+        /**
+         * 使用多个哈希函数将一个元素映射为多个不同的位。
+         *    1、当只使用一个哈希函数时，一个元素映射到一个位上，但是集合中元素数量较多时，很容易出现哈希冲突，导致误判率上升。
+         *    2、使用多个哈希函数可以增加元素被映射到不同位上。然后在检查元素时，各个位都对上，表示该元素存在；
+         *       但凡有一个位对不上，就表示不存在该元素。以此可以降低误判率。
+         *    需要注意的是，哈希函数的数量不能过多，否则会增加计算时间和空间消耗。
+         *    哈希函数的数量应根据实际情况进行选择，通常在保证误判率在可接受范围内的前提下，选择哈希函数的数量尽可能小。
+         */
         for (int i = 0; i < this.hashFunctions; i++) {
+            // 元素哈希值 取模 size，所得值只能是 [0 - size) 之内（取模余数必定小于分母）
             int hash = Math.abs( (element + i).hashCode() % this.size );
             this.filter.set(hash, true);
         }
     }
 
-    /**
-     * 检查元素是否存在于布隆过滤器
-     * @param element 要检查的元素
-     * @return 如果元素可能存在于布隆过滤器中，则返回 true，否则返回 false
-     */
+    // 检查元素是否存在于布隆过滤器
     public boolean checkElement(String element) {
+        // 使用多个哈希函数，检查元素；但凡有一个位没对上，返回 false
         for (int i = 0; i < this.hashFunctions; i++) {
-            int hash = Math.abs((element + i).hashCode() % this.size);
+            int hash = Math.abs( (element + i).hashCode() % this.size );
             if (!this.filter.get(hash)) {
                 return false;
             }
@@ -70,43 +72,23 @@ public class CustomBloomFilter {
         return true;
     }
 
-    // 1、布隆过滤器的默认容错率是0.03
-    public static void defaultFalsePositiveRate() {
-        // 没有设置误判率的情况下，10000 → 312，误判率：3.12%
-        // TODO 当布隆过滤器插入一个元素时，会使用多个哈希函数将该元素映射为多个不同的位，每个位都被置为1。
-        //  当查询一个元素时，同样会使用多个哈希函数将该元素映射为多个位，检查这些位是否都被置为1，若都为1，则认为该元素存在于集合中。
-        BloomFilter<CharSequence> bloomFilter =
-                BloomFilter.create( Funnels.stringFunnel(StandardCharsets.UTF_8), 10000);
-        for (int m = 0; m < 10000; m++){
-            bloomFilter.put("" + m);
-        }
-        List<Integer> list = new ArrayList<Integer>();
-        for(int n = 20000; n < 30000; n++){
-            if(bloomFilter.mightContain("" + n)){
-                list.add(n);
-            }
-        }
-        System.out.println("布隆过滤器使用默认误差率时的误判数量：：：" + list.size());
-    }
-
-    // 2、测试容错率的变化，所需数组位数的变化
-    // 容错率0.0001，所需位数191701
-    public static void setFalsePositiveRate() {
-        // 创建符合条件的布隆过滤器。预期数据量10000，错误率0.0001
-        BloomFilter<CharSequence> bloomFilter =
-                BloomFilter.create( Funnels.stringFunnel(Charsets.UTF_8), 10000, 0.0001);
-        for (int i = 0; i < 10000; i++) {
-            bloomFilter.put("" + i);
-        }
-        List<Integer> list1 = new ArrayList<Integer>();
-        for (int j = 10000; j < 20000; j++) {
-            if (bloomFilter.mightContain("" + j)) {
-                list1.add(j);
-            }
-        }
-        System.err.println("布隆过滤器使用自定义误差率时的误判数量：：：" + list1.size());
-    }
-    // 容错率0.01，所需位数95850
-    // 由此可见，误判率越低，则底层维护的数组越长，占用空间越大。
-    // 因此，误判率实际取值，根据服务器所能够承受的负载来决定，不是拍脑袋瞎想的。
+    /** 直接示例，便于理解
+     *  如果(添加、检查元素)不使用变量 hashFunctions 进行 for循环，不使用多个哈希函数将一个元素映射为多个不同的位。
+     *  就一个元素对应一个位的话。那么，我们的布隆过滤器就不存在什么误差值，只有哈希冲突 -- 即不同元素在计算取模后得到相同位。
+     *  但实际上 位图BitSet 不存在哈希冲突，因为 BitSet 标记上元素后也不会覆盖
+     *
+     *  但是这时候，我想设计一个可以控制误差值的布隆过滤器（添加一个 位图BitSet 的位数组大小）
+     *  例如：1、我添加两个元素：第一个元素 (element + i).hashCode() = 683125230；那么 683125230 % 1000000 = 125230
+     *                       所以，指定 hashFunctions=5 后进行 for 循环下标 [125230-125234] 的二进制位为 1。
+     *                       第二个元素 (element + i).hashCode() = 683125230；那么 683125230 % 1000000 = 125235
+     *                       for 循环下标 [125235-125239] 的二进制位为 1。综合：下标 [125230-125239] 的二进制位为 1
+     *       2、这时候检查元素：(element + i).hashCode() = 985125233；那么 985125233 % 1000000 = 125233
+     *                       指定 hashFunctions=5 后进行 for 循环最后下标 [125233-125237] 的二进制位为 1
+     *
+     *       3、①添加元素 a1[125230-125234]     ②添加元素 a2[125235-125239]    ③检查元素 a3[125233-125238]
+     *          可以看到 a3 并没有添加，但是由于 a1、a2下标的位包含了a3，所以在检查 a3 的时候会误以为存在，这就是误差值。
+     *
+     *  由此可见，误判率越低，则底层维护的数组越长，占用空间越大。
+     *  因此，误判率实际取值，根据服务器所能够承受的负载来决定，不是拍脑袋瞎想的。
+     */
 }
