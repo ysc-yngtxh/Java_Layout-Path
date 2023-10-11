@@ -3,12 +3,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example.java</groupId>
-    <artifactId>Java-Work_Experiences</artifactId>
+    <artifactId>Java_Work-Experiences</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <packaging>jar</packaging>
 
-    <name>Java-Work_Experiences</name>
+    <name>Java_Work-Experiences</name>
     <url>http://maven.apache.org</url>
 
     <properties>
