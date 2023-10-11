@@ -32,6 +32,7 @@ class SpringBloomFilterApplicationTests {
     //              当业务系统进行查询请求的时候，首先去 布隆过滤器 中查询该key是否存在。
     //              若不存在，则说明数据库中也不存在该数据，因此缓存都不要查了，直接返回null。
     //              若存在，则继续执行后续的流程，先前往缓存中查询，缓存中没有的话再前往数据库中的查询。
+    //     分布式系统：在分布式系统中，可以使用布隆过滤器来判断一个元素是否存在于分布式缓存中，避免在所有节点上进行查询，减少网络负载
 
 
     // TODO 1、测试自定义布隆过滤器
@@ -47,17 +48,21 @@ class SpringBloomFilterApplicationTests {
             filter.addElement( builder.toString() );
         }
         // 检查一些随机字符串是否在布隆过滤器中
-        for (int i = 0; i < 100; i++) {
+        for (int i = 10000; i < 20000; i++) {
             StringBuilder builder = new StringBuilder();
             for (int j = 0; j < 10; j++) {
                 builder.append( (char) ('a' + new Random().nextInt(26)) );
             }
             if (filter.checkElement(builder.toString())) {
-                System.out.println(builder + " may be in the filter.");
+                System.out.println(builder + " -- may be in the filter");
             } else {
-                System.out.println(builder + " is not in the filter.");
+                System.out.println(builder + " -- is not in the filter");
             }
         }
+        // 布隆过滤器默认的误差率为 0.03
+        CustomBloomFilter.defaultFalsePositiveRate();
+        // 布隆过滤器设置误差率为 0.0001
+        CustomBloomFilter.setFalsePositiveRate();
     }
 
 
@@ -86,7 +91,9 @@ class SpringBloomFilterApplicationTests {
             lists.add(uuid);
         }
 
+        // 真实存在的元素
         int rightNum = 0;
+        // 误以为存在的元素
         int wrongNum = 0;
         for (int i = 0; i < 10000; i++) {
             // 0-10000之间，可以被100整除的数有100个（100的倍数）
@@ -103,8 +110,8 @@ class SpringBloomFilterApplicationTests {
 
         BigDecimal percent = new BigDecimal(wrongNum).divide(new BigDecimal(9900), 2, RoundingMode.HALF_UP);
         BigDecimal bingo = new BigDecimal(9900 - wrongNum).divide(new BigDecimal(9900), 2, RoundingMode.HALF_UP);
-        log.info("在100W个元素中，判断100个实际存在的元素，布隆过滤器认为存在的：" + rightNum);
-        log.info("在100W个元素中，判断9900个实际不存在的元素，误认为存在的：" + wrongNum +
+        System.err.println("\n在100W个元素中，判断100个实际存在的元素，布隆过滤器认为存在的：" + rightNum);
+        System.err.println("\n在100W个元素中，判断9900个实际不存在的元素，误认为存在的：" + wrongNum +
                 "，" + "命中率：" + bingo + "，误判率：" + percent);
     }
 

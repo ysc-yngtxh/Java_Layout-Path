@@ -1,10 +1,12 @@
 package com.example.custom;
 
+import com.google.common.base.Charsets;
 import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnel;
 import com.google.common.hash.Funnels;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
@@ -45,7 +47,6 @@ public class CustomBloomFilter {
      */
     public void addElement(String element) {
         for (int i = 0; i < this.hashFunctions; i++) {
-            int i1 = (element + i).hashCode();
             int hash = Math.abs( (element + i).hashCode() % this.size );
             this.filter.set(hash, true);
         }
@@ -67,42 +68,40 @@ public class CustomBloomFilter {
     }
 
     // 1、布隆过滤器的默认容错率是0.03
-    public static void main1(String[] args) {
-        int size = 10000;
-        double fpp = 0.0001;
-
-        // 没有设置误判率的情况下，10000→312，误判率3.12%
+    public static void defaultFalsePositiveRate() {
+        // 没有设置误判率的情况下，10000 → 312，误判率3.12%
+        // TODO 当布隆过滤器插入一个元素时，会使用多个哈希函数将该元素映射为多个不同的位，每个位都被置为1。
+        //  当查询一个元素时，同样会使用多个哈希函数将该元素映射为多个位，检查这些位是否都被置为1，若都为1，则认为该元素存在于集合中。
         BloomFilter<CharSequence> bloomFilter =
-                BloomFilter.create( Funnels.stringFunnel(Charset.forName("utf-8")), 10000);
-        for (int m = 0; m < size; m++){
+                BloomFilter.create( Funnels.stringFunnel(StandardCharsets.UTF_8), 10000);
+        for (int m = 0; m < 10000; m++){
             bloomFilter.put("" + m);
         }
         List<Integer> list = new ArrayList<Integer>();
-        for(int n = size+10000; n < size+20000; n++){
+        for(int n = 20000; n < 30000; n++){
             if(bloomFilter.mightContain("" + n)){
                 list.add(n);
             }
         }
-        System.out.println("误判数量：：：" + list.size());
+        System.out.println("布隆过滤器使用默认误差率时的误判数量：：：" + list.size());
     }
 
     // 2、测试容错率的变化，所需数组位数的变化
     // 容错率0.0001，所需位数191701
-    public static void main(String[] args) {
+    public static void setFalsePositiveRate() {
         // 创建符合条件的布隆过滤器。预期数据量10000，错误率0.0001
         BloomFilter<CharSequence> bloomFilter =
-                BloomFilter.create( Funnels.stringFunnel(Charset.forName("utf-8")), 10000, 0.0001);
-        for (int i = 0; i < 5000; i++) {
+                BloomFilter.create( Funnels.stringFunnel(Charsets.UTF_8), 10000, 0.0001);
+        for (int i = 0; i < 10000; i++) {
             bloomFilter.put("" + i);
         }
-        System.out.println("数据写入完毕");
-        for (int i = 0; i < 10000; i++) {
-            if (bloomFilter.mightContain("" + i)) {
-                System.out.println(i + "存在");
-            } else {
-                System.out.println(i + "不存在");
+        List<Integer> list1 = new ArrayList<Integer>();
+        for (int j = 10000; j < 20000; j++) {
+            if (bloomFilter.mightContain("" + j)) {
+                list1.add(j);
             }
         }
+        System.err.println("布隆过滤器使用自定义误差率时的误判数量：：：" + list1.size());
     }
     // 容错率0.01，所需位数95850
     // 由此可见，误判率越低，则底层维护的数组越长，占用空间越大。
