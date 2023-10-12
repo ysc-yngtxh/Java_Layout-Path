@@ -65,9 +65,10 @@ public class LoginFilter extends ZuulFilter {
             }
         }
 
-        /*令牌桶限流
+        /** 令牌桶限流
              首先我们会有个桶，如果里面没有满那么就会以一定 固定的速率 会往里面放令牌，一个请求过来首先要从桶中获取令牌，
-             如果没有获取到，那么这个请求就拒绝，如果获取到那么就放行。
+             如果没有获取到，那么这个请求就拒绝，如果获取到那么就放行。*/
+        /*
         if(!RATE_LIMITER.tryAcquire()) {
             log.warn("访问量超载");
             // 指定当前请求未通过过滤
@@ -77,7 +78,7 @@ public class LoginFilter extends ZuulFilter {
             return false;
         }*/
 
-        //返回值目前是没有什么意义的，所以返回null就可以了
+        // 返回值目前是没有什么意义的，所以返回null就可以了
         return null;
     }
 }

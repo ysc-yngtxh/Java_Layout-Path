@@ -3,7 +3,7 @@ package com.youshicheng.controller;
 import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
-import com.youshicheng.Feign.UserClient;
+import com.youshicheng.feign.UserClient;
 import com.youshicheng.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +54,7 @@ public class MyController {
         // 这里可以直接将服务id写在url上，因为负载均衡在内部已经实现了上面两步得到地址
         // 这里的负载规则是采用轮询，随机，hash...等算法进行的
 
-        String url = "http://provice-service/user/" + id;
+        String url = "http://provider-service/user/" + id;
         User user = restTemplate.getForObject(url, User.class);
         return user;
     }
@@ -74,7 +74,7 @@ public class MyController {
             // 当我们在配置文件中进行配置，并且在类上加上全局降级处理注解的时候，我们在方法上就只需加@HystrixCommand就行了
     })
     public String ExceById(@PathVariable("id") Integer id) {
-        String url = "http://provice-service/user/" + id;
+        String url = "http://provider-service/user/" + id;
         String user = restTemplate.getForObject(url, String.class);
         return user;
     }
@@ -97,7 +97,7 @@ public class MyController {
         if (id % 2 == 0) {
             throw new RuntimeException("");
         }
-        String url = "http://provice-service/user/" + id;
+        String url = "http://provider-service/user/" + id;
         String user = restTemplate.getForObject(url, String.class);
         return user;
     }
@@ -113,7 +113,7 @@ public class MyController {
     @GetMapping("/ysc/{id}")
     public User query(@PathVariable("id") Integer id) {
         // 利用Feign工具，就不需要再写
-        // String url = "http://provice-service/user/" +id;
+        // String url = "http://provider-service/user/" +id;
         // String user = restTemplate.getForObject(url,String.class);
         return userClient.queryByIdLL(id);
     }

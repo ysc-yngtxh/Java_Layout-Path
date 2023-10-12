@@ -1,4 +1,4 @@
-package com.youshicheng.Feign;
+package com.youshicheng.feign;
 
 import com.youshicheng.pojo.User;
 import org.springframework.stereotype.Component;

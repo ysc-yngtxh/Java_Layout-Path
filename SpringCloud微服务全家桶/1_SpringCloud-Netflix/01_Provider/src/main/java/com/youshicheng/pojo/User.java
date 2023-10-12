@@ -20,6 +20,7 @@ public class User {
     @Id         // 属于通用mapper依赖的注解，用于标注主键
     // @KeySql  // 属于通用mapper依赖的注解，用于表示字段的自增
     private Integer id;
+
     private String username;  // 用户名
     private String password;  // 密码
     private String name;      // 姓名

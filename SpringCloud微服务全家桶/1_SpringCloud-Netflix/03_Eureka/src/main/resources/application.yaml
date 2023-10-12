@@ -1,3 +1,4 @@
+
 server:
   port: 10086
 
@@ -5,7 +6,7 @@ spring:
   application:
     name: eureka-server
 
-#注册自己
+# 注册自己
 eureka:
   client:
     fetch-registry: true  # 表示是否从Eureka Server获取注册的服务信息
@@ -17,10 +18,9 @@ eureka:
     prefer-ip-address: true
     ip-address: 127.0.0.1
 
-#开启了负载均衡
+# 开启了负载均衡
 ribbon:
   eager-load:
     enabled: true
 
-
-#打开Eureka视图页面http://127.0.0.1:10086
+# 打开Eureka视图页面http://127.0.0.1:10086
