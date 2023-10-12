@@ -10,17 +10,14 @@ import org.springframework.web.bind.annotation.*;
 /**
  * @author 游家纨绔
  */
-@Slf4j  //用于打印日志和设置日志级别
+@Slf4j  // 用于打印日志和设置日志级别
 @RestController
 @RequestMapping("/user")
 public class MyController {
-
-
-
     @Autowired
     private UserService userService;
 
-    @GetMapping("/{id}")  //method方法为get,且采用了RESTful风格
+    @GetMapping("/{id}")  // method方法为get,且采用了RESTful风格
     public User query(@PathVariable("id") Integer id){
         return userService.queryById(id);
     }

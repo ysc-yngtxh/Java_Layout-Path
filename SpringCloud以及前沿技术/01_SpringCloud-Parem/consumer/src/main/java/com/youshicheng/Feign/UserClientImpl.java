@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 /**
  * @author 游家纨绔
  */
-@Component  //注入spring容器
+@Component  // 注入spring容器
 public class UserClientImpl implements UserClient {
 
     @Override

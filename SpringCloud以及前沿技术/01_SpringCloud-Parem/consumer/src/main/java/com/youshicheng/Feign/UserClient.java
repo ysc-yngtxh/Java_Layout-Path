@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author 游家纨绔
  */
 @FeignClient(value = "provice-service",fallback = UserClientImpl.class)
-//这个注解启用Feign组件，value值是服务ip，fallback是启动熔断服务，这个时候UserClientImpl就是熔断后的降级处理
+// 这个注解启用Feign组件，value值是服务ip，fallback是启动熔断服务，这个时候UserClientImpl就是熔断后的降级处理
 public interface UserClient {
 
-    @GetMapping("/user/{id}")//这个注解是用来拼接服务IP的，告诉Feign你的服务提供者地址
+    @GetMapping("/user/{id}") // 这个注解是用来拼接服务IP的，告诉Feign你的服务提供者地址
     User queryByIdLL(@PathVariable("id") Integer id);
 
-    /*流程就相当于是先去执行FeginClinent中的http://provice-service/user/{id},
-    * 如果这个链接接口访问失败就会执行降级处理UserClientImpl.class中的queryByIdLL方法*/
+    /* 流程就相当于是先去执行FeginClinent中的 http://provice-service/user/{id},
+       如果这个链接接口访问失败就会执行降级处理 UserClientImpl.class 中的 queryByIdLL()方法*/
 
 }
 
