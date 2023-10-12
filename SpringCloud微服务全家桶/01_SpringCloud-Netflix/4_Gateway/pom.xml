@@ -6,28 +6,28 @@
         <artifactId>01_SpringCloud-Netflix</artifactId>
         <groupId>com.youshicheng</groupId>
         <version>1.0.0</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>config-server</artifactId>
-
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
+    <artifactId>4_Gateway</artifactId>
 
     <dependencies>
+        <!--我们可以在zuul依赖中看到web、hystrix、ribbon的依赖包-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config-server</artifactId>
+            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
         </dependency>
 
-        <!--注册中心Eureka依赖-->
+        <!--添加Eureka客户端依赖-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-    </dependencies>
 
+        <!--添加判断是否存在的一个依赖-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+    </dependencies>
 </project>
