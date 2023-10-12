@@ -11,6 +11,7 @@ eureka:
     instance:
         lease-expiration-duration-in-seconds: 90
         lease-renewal-interval-in-seconds: 30
+
 logging:
     level:
         com:
@@ -18,6 +19,7 @@ logging:
 
 mybatis:
     type-aliases-package: com.youshicheng.pojo
+
 spring:
     application:
         name: provider-service

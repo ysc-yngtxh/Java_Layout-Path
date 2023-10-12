@@ -8,8 +8,8 @@ import tk.mybatis.spring.annotation.MapperScan;
 /**
  * @author 游家纨绔
  */
-// 这个注解是用来响应注册中心Eureka
-// @EnableDiscoveryClient  如果注册中心不是Eureka，是其他的就用这个注解响应注册中心。当然Eureka也能用
+// 这个注解是用来指定使用 Eureka注册中心
+// 如果注册中心不是Eureka，使用其他注册中心怎么办？使用 @EnableDiscoveryClient 注解响应注册中心，相当于各种注册中心的统一注册。
 @EnableEurekaClient
 @SpringBootApplication
 @MapperScan("com.youshicheng.mapper")
