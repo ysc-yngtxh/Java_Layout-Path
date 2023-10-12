@@ -20,17 +20,17 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 @RestController
 @RequestMapping("/user")
-@DefaultProperties(defaultFallback = "ExceByIdAll")//全局降级
+@DefaultProperties(defaultFallback = "ExceByIdAll") // 全局降级
 public class MyController {
 
     @Autowired
     private RestTemplate restTemplate;
 
     // @Autowired
-    // private DiscoveryClient discoveryClient; //这里的是第二种情况下一个接口对象
+    // private DiscoveryClient discoveryClient; // 这里的是第二种情况下一个接口对象
 
     // @Autowired
-    // private RibbonLoadBalancerClient client;这里是第三种情况的内部实现对象
+    // private RibbonLoadBalancerClient client; // 这里是第三种情况的内部实现对象
 
     @GetMapping("/{id}")
     public User queryById(@PathVariable("id") Integer id) {
