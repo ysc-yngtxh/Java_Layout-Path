@@ -114,7 +114,7 @@ public class MyController {
     public User query(@PathVariable("id") Integer id) {
         // 利用Feign工具，就不需要再写
         // String url = "http://provider-service/user/" +id;
-        // String user = restTemplate.getForObject(url,String.class);
+        // String user = restTemplate.getForObject(url, String.class);
         return userClient.queryByIdLL(id);
     }
 

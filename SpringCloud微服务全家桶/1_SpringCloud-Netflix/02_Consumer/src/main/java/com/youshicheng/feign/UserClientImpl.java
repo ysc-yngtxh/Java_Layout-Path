@@ -13,7 +13,7 @@ public class UserClientImpl implements UserClient {
     public User queryByIdLL(Integer id) {
         User user = new User();
         user.setId(id);
-        user.setName("未知用户");
+        user.setUserName("未知用户");
         return user;
     }
 }
