@@ -5,17 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.youshicheng</groupId>
-    <artifactId>01_SpringCloud-Netflix</artifactId>
+    <artifactId>1_SpringCloud-Netflix</artifactId>
     <version>1.0.0</version>
     <modules>
-        <module>1_Provider</module>
-        <module>2_Consumer</module>
-        <module>3_Eureka</module>
-        <module>4_Gateway</module>
-        <module>5_Config</module>
-        <module>5_Config/config-server</module>
-        <module>5_Config/config-client</module>
-        <module>5_Config/config-client2</module>
+        <module>01_Provider</module>
+        <module>02_Consumer</module>
+        <module>03_Eureka</module>
+        <module>04_Gateway</module>
+        <module>05_Config</module>
+        <module>05_Config/config-server</module>
+        <module>05_Config/config-client</module>
+        <module>05_Config/config-client2</module>
     </modules>
 
     <packaging>pom</packaging>
