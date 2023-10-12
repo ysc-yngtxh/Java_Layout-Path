@@ -13,9 +13,9 @@ import tk.mybatis.spring.annotation.MapperScan;
 @EnableEurekaClient
 @SpringBootApplication
 @MapperScan("com.youshicheng.mapper")
-public class ProviceApplication {
+public class ProviderApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ProviceApplication.class, args);
+        SpringApplication.run(ProviderApplication.class, args);
     }
 
 
