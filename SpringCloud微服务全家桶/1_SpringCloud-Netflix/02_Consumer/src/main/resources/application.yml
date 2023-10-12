@@ -1,30 +1,30 @@
 
 
-#设置端口号
+# 设置端口号
 server:
   port: 8080
 
-#设置日志级别
+# 设置日志级别
 logging:
   level:
     com:
       youshicheng: debug
 
-#设置Eureka
+# 设置Eureka
 spring:
   application:
-    name: CONSUMER-SERVICE
+    name: consumer-service
 eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:10086/eureka/
 
-#设置ribbon
+# 设置ribbon
 ribbon:
-  ConnectTimeout: 3000 #请求连接的超时时间
-  ReadTimeout: 3000 #请求处理的超时时间
+  ConnectTimeout: 3000 # 请求连接的超时时间
+  ReadTimeout: 3000    # 请求处理的超时时间
 
-#设置hystrix的超时时长
+# 设置hystrix的超时时长
 hystrix:
   command:
     default:
@@ -32,8 +32,6 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 1000
-
-
 
 feign:
   hystrix:
