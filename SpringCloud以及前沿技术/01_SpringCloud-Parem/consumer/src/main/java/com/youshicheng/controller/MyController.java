@@ -35,7 +35,7 @@ public class MyController {
     @GetMapping("/{id}")
     public User queryById(@PathVariable("id") Integer id) {
 
-        // 第一种情况：只有提供者和消费者
+        // 第一种情况：只有提供者和消费者 -- 直连方式
         // String url = "http://localhost:8088/user/"+id;
 
         // 第二种情况：有提供者和消费者，还有注册中心Eureka
