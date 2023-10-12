@@ -4,6 +4,8 @@ import com.example.funnel.FunnelRateLimiter;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.concurrent.TimeUnit;
+
 @SpringBootTest
 class SpringFunnelApplicationTests {
 
@@ -24,7 +26,7 @@ class SpringFunnelApplicationTests {
                 denyCount++;
             }
             System.out.println("访问权限：" + isAllow);
-            Thread.sleep(1000);
+            TimeUnit.SECONDS.sleep(1);
         }
         System.out.println("报告：");
         System.out.println("漏斗容量：" + capacity);

@@ -4,9 +4,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 漏斗限流算法
  * @author 游家纨绔
- * @date 2023/10/12
+ * @date 2023/10/12 00:00
+ * @apiNote TODO 漏斗限流算法
  */
 public class FunnelRateLimiter {
     private Map<String, Funnel> funnelMap = new ConcurrentHashMap<>();
