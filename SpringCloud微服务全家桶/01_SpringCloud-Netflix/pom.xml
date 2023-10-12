@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.youshicheng</groupId>
-    <artifactId>01_SpringCloud-Parem</artifactId>
+    <artifactId>01_SpringCloud-Netflix</artifactId>
     <version>1.0.0</version>
     <modules>
-        <module>provice</module>
+        <module>provider</module>
         <module>consumer</module>
         <module>Eureka</module>
         <module>gateway</module>
@@ -68,7 +68,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.22</version>
+            <version>1.18.30</version>
         </dependency>
     </dependencies>
 
@@ -80,6 +80,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>
