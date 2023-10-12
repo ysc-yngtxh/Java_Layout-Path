@@ -1,0 +1,32 @@
+package com.example.funnel;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+/**
+ * 漏斗限流算法
+ * @author 游家纨绔
+ * @date 2023/10/12
+ */
+public class FunnelRateLimiter {
+    private Map<String, Funnel> funnelMap = new ConcurrentHashMap<>();
+
+    /**
+     * 根据给定的漏斗参数检查是否允许访问
+     * @param username   用户名
+     * @param action     操作
+     * @param capacity   漏斗容量
+     * @param allowQuota 每单个单位时间允许的流量
+     * @param perSecond  单位时间（秒）
+     * @return 是否允许访问
+     */
+    public boolean isActionAllowed(String username, String action, int capacity, int allowQuota, int perSecond) {
+        String key = "funnel:" + action + ":" + username;
+        if (!funnelMap.containsKey(key)) {
+            funnelMap.put(key, new Funnel(capacity, allowQuota, perSecond));
+        }
+        Funnel funnel = funnelMap.get(key);
+        return funnel.watering(1);
+    }
+}
+
