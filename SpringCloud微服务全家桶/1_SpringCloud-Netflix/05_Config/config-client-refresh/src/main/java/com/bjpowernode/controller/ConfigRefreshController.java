@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RefreshScope
 @RestController
-public class ConfigBusController {
+public class ConfigRefreshController {
 
     @Value("${my.args.int}")
     private int i;

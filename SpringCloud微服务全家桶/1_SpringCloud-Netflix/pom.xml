@@ -15,7 +15,7 @@
         <module>05_Config</module>
         <module>05_Config/config-server</module>
         <module>05_Config/config-client</module>
-        <module>05_Config/config-client2</module>
+        <module>05_Config/config-client-refresh</module>
     </modules>
 
     <packaging>pom</packaging>
