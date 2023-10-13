@@ -18,8 +18,7 @@ public class UserService {
     private UserMapper userMapper;;
 
     public User queryById(Integer id){
-        /*
-        try {
+        /*try {
             TimeUnit.SECONDS.sleep(2);   // 模拟用户访问超时，这个时候就触发了Hystrix的服务降级
         } catch (InterruptedException e) {
             e.printStackTrace();

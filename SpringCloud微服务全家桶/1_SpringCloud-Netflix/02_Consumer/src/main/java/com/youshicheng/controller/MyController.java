@@ -20,7 +20,7 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 @RestController
 @RequestMapping("/user")
-@DefaultProperties(defaultFallback = "ExceByIdAll") // 全局降级
+@DefaultProperties(defaultFallback = "ExcelByIdAll") // 全局降级
 public class MyController {
 
     @Autowired
@@ -42,14 +42,14 @@ public class MyController {
         //           在第一种情况下，要书写准确的 IP地址和端口。在集群的众多的服务下，费时费力地手动去更改，极其影响效率。
         //           所以我们需要一个注册中心去动态的获取IP地址和端口(但是拉取的服务是个集群，需要手动选择)
         // 根据服务id获取实例
-        // List<ServiceInstance> instances = discoveryClient.getInstances("provice-service");
+        // List<ServiceInstance> instances = discoveryClient.getInstances("provider-service");
         // 从实例中取出ip和端口
         // ServiceInstance instance = instances.get(0);
         // String url = "http://" + instance.getHost()+ ":" + instance.getPort() + "/user/" +id;
 
         // 第三种情况：有提供者和消费者，还有注册中心Eureka，还加上一个负载均衡ribbon(用于服务集群的分配)
         // 根据服务id获取实例
-        // ServiceInstance instance = client.choose("provice-service");
+        // ServiceInstance instance = client.choose("provider-service");
         // String url = "http://" + instance.getHost()+ ":" + instance.getPort() + "/user/" +id;
         // 这里可以直接将服务id写在url上，因为负载均衡在内部已经实现了上面两步得到地址
         // 这里的负载规则是采用轮询，随机，hash...等算法进行的
@@ -60,12 +60,12 @@ public class MyController {
     }
 
     // 降级实例
-    @GetMapping("/exce/{id}")
-    // @HystrixCommand(fallbackMethod = "ExceByIdAll")
-    /* HystrixCommand注解是表示当前这个ExceById()方法出现异常时，会执行ExceByIdAll方法，这个就叫做服务降级。
+    @GetMapping("/excel/{id}")
+    // @HystrixCommand(fallbackMethod = "ExcelByIdAll")
+    /* HystrixCommand注解是表示当前这个ExcelByIdAll()方法出现异常时，会执行ExcelByIdAll方法，这个就叫做服务降级。
        但是一定要注意，原方法和降级方法的返回值要是一样的*/
     /* 这样写是单独的给一个方法写一个降级处理。但是如果控制层有很多的方法，那就要一个一个的去写降级方法，太繁琐。
-       所以我们可以在类上加注解 @DefaultProperties(defaultFallback = "ExceByIdAll")，去指定全局的降级方法*/
+       所以我们可以在类上加注解 @DefaultProperties(defaultFallback = "ExcelByIdAll")，去指定全局的降级方法*/
     @HystrixCommand(commandProperties = {
             @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "1800")
             // 这个注解表示的是手动设置超时时长，可以去hystrix包下的HystrixCommandProperties方法中看到
@@ -73,27 +73,27 @@ public class MyController {
             // 但是这种注解还是只针对于当前方法有效，我们要向进行全局超时时长配置，就需要去我们的配置文件中进行配置
             // 当我们在配置文件中进行配置，并且在类上加上全局降级处理注解的时候，我们在方法上就只需加@HystrixCommand就行了
     })
-    public String ExceById(@PathVariable("id") Integer id) {
+    public String ExcelById(@PathVariable("id") Integer id) {
         String url = "http://provider-service/user/" + id;
         String user = restTemplate.getForObject(url, String.class);
         return user;
     }
 
-    public String ExceByIdAll() {
+    public String ExcelByIdAll() {
         return "温馨提示：不好意思，服务器太拥挤了";
     }
 
     // 断路器实例
-    @GetMapping("/cound/{id}")
+    @GetMapping("/count/{id}")
     @HystrixCommand(commandProperties = {
-            //断路器的请求阈值
+            // 断路器的请求阈值
             @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),
-            //断路器的休眠窗口
+            // 断路器的休眠窗口
             @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "10000"),
-            //断路器的错误阈值百分比
+            // 断路器的错误阈值百分比
             @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "60")
     })
-    public String ExceCound(@PathVariable("id") Integer id) {
+    public String ExcelCount(@PathVariable("id") Integer id) {
         if (id % 2 == 0) {
             throw new RuntimeException("");
         }
@@ -117,5 +117,4 @@ public class MyController {
         // String user = restTemplate.getForObject(url, String.class);
         return userClient.queryByIdLL(id);
     }
-
 }

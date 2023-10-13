@@ -13,7 +13,6 @@ eureka:
     register-with-eureka: false # 表示是否将自己注册到Eureka Server
     service-url:
       defaultZone: http://127.0.0.1:10086/eureka/
-
   instance:
     prefer-ip-address: true
     ip-address: 127.0.0.1
@@ -23,4 +22,4 @@ ribbon:
   eager-load:
     enabled: true
 
-# 打开Eureka视图页面http://127.0.0.1:10086
+# 打开Eureka视图页面 http://127.0.0.1:10086

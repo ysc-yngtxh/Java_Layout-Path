@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 /**
  * @author 游家纨绔
  */
-@FeignClient(value = "provider-service",fallback = UserClientImpl.class)
+@FeignClient(value = "provider-service", fallback = UserClientImpl.class)
 // 这个注解启用Feign组件，value值是服务ip，fallback是启动熔断服务，这个时候UserClientImpl就是熔断后的降级处理
 public interface UserClient {
 

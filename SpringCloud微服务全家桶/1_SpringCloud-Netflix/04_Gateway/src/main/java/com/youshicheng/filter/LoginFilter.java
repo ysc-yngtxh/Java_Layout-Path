@@ -59,7 +59,7 @@ public class LoginFilter extends ZuulFilter {
             ctx.setResponseStatusCode(HttpStatus.FORBIDDEN.value());
             // 把提示信息显示到 页面
             try {
-                ctx.getResponse().getWriter().print("token is invoild");
+                ctx.getResponse().getWriter().print("token is invalid");
             } catch (IOException e) {
                 e.printStackTrace();
             }
