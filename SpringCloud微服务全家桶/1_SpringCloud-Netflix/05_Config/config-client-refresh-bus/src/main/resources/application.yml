@@ -13,7 +13,7 @@ spring:
       name: config_application  # 要加载的配置文件主体命名
       label: master             # 要加载的配置，所在分支命名，默认为null，相当于master
       profile: default          # 要加载的配置的profile是什么，默认default
-      # 上述配置组装文件就是：config_application.yml
+                                # 上述配置组装文件就是：config_application.yml
   rabbitmq:
     host: localhost
     username: guest
