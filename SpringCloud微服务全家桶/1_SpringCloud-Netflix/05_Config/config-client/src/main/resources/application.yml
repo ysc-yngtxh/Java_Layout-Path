@@ -16,12 +16,16 @@ spring:
       profile: dev
 
 # 这些热刷新配置信息可以写在远程仓库的配置中心，但也可以写在客户端
-# management:
-#   endpoints:
-#     enabled-by-default: true
-#     web:
-#       exposure:
-#         include:
-#           - info
-#           - health
-#           - refresh  # 热刷新服务   只处理POST请求。实现Spring容器热刷新
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include:
+          - info
+          - health
+          - refresh  # 热刷新服务   只处理POST请求。实现Spring容器热刷新
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
