@@ -2,6 +2,7 @@ package com.bjpowernode;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
 public class ConfigClientApplication {
@@ -22,5 +23,4 @@ public class ConfigClientApplication {
  * 路由Controller的api接口：http://localhost:9000/test 可以发现能获取远程仓库里配置文件信息
  * 并且修改远程仓库里的i值或者str值后，使用post方式 http://localhost:9001/actuator/refresh 刷新后
  * 路由Controller的api接口：http://localhost:9000/test 中的数据发生了改变，并且没有重启服务，完美！！！
- *
  */

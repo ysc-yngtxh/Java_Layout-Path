@@ -12,15 +12,15 @@ import org.springframework.cloud.config.server.EnableConfigServer;
   在本地缓存，并将下载的配置发送给Config Client
 */
 @SpringBootApplication
-public class Application {
+public class ConfigServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(Application.class,args);
+        SpringApplication.run(ConfigServiceApplication.class,args);
     }
 }
 /**
  * 步骤：
  *     1、查看在Eureka服务中是否有Config Server服务
  *     2、打开 http://localhost:8888/test_config/default/master    default运行版本
- *       或者 http://localhost:8888/test_config/dev/master         dev测试版本
+ *        或者 http://localhost:8888/test_config/dev/master        dev测试版本
  *     3、就可以在控制台上看到从仓库中下载文件到本地的详细地址
  */
