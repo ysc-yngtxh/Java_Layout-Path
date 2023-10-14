@@ -119,14 +119,13 @@
                http://localhost:xxxx/actuator/refresh 岂不是要点击十万次
                这个时候 Spring Cloud bus 闪亮登场！！！  
 
-      4、依靠 Spring Cloud Config + Spring Cloud Bus 实现全局热刷新。
+## 八、热刷新 + Bus（依靠 Spring Cloud Config + Spring Cloud Bus 实现全局热刷新）
+         依赖  spring-cloud-Starter-bus-amqp 是基于RabbitMq实现的一个消息流资源依赖。可以基于事件，实现消息的自动收发。
+      当 服务/actuator/bus-refresh 被调用的时候，自动发消息到RabbitMq上。所有客户端自动处理此消息，热刷新应用。
+      使用topic交换器，配合#路由键，做的广播消息处理。
+      每个客户端启动的时候，在MQ上，自动创建一个队列并监听。绑定在同一个交换器，且路由键是#
 
-            依赖  spring-cloud-Starter-bus-amqp 是基于RabbitMq实现的一个消息流资源依赖。可以基于事件，实现消息的自动收发。
-         当 服务/actuator/bus-refresh 被调用的时候，自动发消息到RabbitMq上。所有客户端自动处理此消息，热刷新应用。
-         使用topic交换器，配合#路由键，做的广播消息处理。
-         每个客户端启动的时候，在MQ上，自动创建一个队列并监听。绑定在同一个交换器，且路由键是#
-
-      5、BUS热刷新：
+      BUS热刷新：
          开启BUS热刷新后，可以基于MQ实现全局和局部热刷新。
          使用方式：
              全局：
@@ -135,7 +134,7 @@
                 POST请求 - http://ip:port/actuator/bus-refresh/目的地
                 目的地语法 - 服务命名：端口号。  服务命名和端口号支持通配符 '*'
                              如：service*:808*;  service*:8080;  service:808*;
-
+  
          注意：只有yml文件进行了以下配置的服务，Bus热刷新才会生效。没有配置的项目启动后Bus热刷新并不会生效。
                  management:
                    endpoints:
