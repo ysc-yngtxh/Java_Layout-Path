@@ -102,14 +102,14 @@
              ②、在 Config-Server服务 中设置官方仓库中的仓库路径
              ③、依次启动 Eureka-Server、Config-Server、Config-Client 等服务
              ④、然后在启动Config Client服务时，发现配置文件中并没有书写port端口，但是系统启动服务后分配的端口的是配置仓库文件中port端口
-             ⑤、输入 http://localhost:8899(9999)/actuator(注意：只能GET访问) 查看自己服务是否启动成功
+             ⑤、输入 http://localhost:8899(9999)/actuator(注意：只能是GET请求) 查看自己服务是否启动成功
 
 ## 七、热刷新  
       1、概念：不重启的前提下，刷新应用。Spring Cloud Config中的热刷新，是不重启Spring应用，刷新Spring容器。 
               Spring Cloud Config组件是支持热刷新的。
   
-      2、做法：①、配置文件有相应的热刷新配置。完成热刷新配置后重启，去输入http://localhost:9999/actuator(注意：只能GET访问)查看自己热刷新是否启动成功
-                 info 和 health 自带的，如果有我们配置的 refresh 就表示热刷新配置成功
+      2、做法：①、完成热刷新配置后重启，去输入 http://localhost:9999/actuator(注意：只能是GET请求)
+                 查看自己热刷新是否启动成功：info 和 health 自带的，如果有我们配置的 refresh 就表示热刷新配置成功
               ②、每次在gitee上修改配置文件内容完后，都需要http://localhost:xxxx/actuator/refresh访问下去刷新(注意：只能POST访问)
               ③、刷新完后再去访问服务地址：http://localhost:xxxx/test。可以发现没有重启服务就能获取到修改后的值  
 
@@ -134,7 +134,6 @@
                 POST请求 - http://ip:port/actuator/bus-refresh/目的地
                 目的地语法 - 服务命名：端口号。  服务命名和端口号支持通配符 '*'
                              如：service*:808*;  service*:8080;  service:808*;
-  
          注意：只有yml文件进行了以下配置的服务，Bus热刷新才会生效。没有配置的项目启动后Bus热刷新并不会生效。
                  management:
                    endpoints:
