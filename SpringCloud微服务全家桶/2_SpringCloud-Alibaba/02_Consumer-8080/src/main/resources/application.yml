@@ -25,6 +25,7 @@ logging:
         com:
             example: debug
 
+# MyBatis引用的实体类自定义别名，避免在xml文件中使用又长又臭的完全限定名
 mybatis:
     type-aliases-package: com.example.pojo
 
