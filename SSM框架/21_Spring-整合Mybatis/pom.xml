@@ -5,10 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.bjpowernode</groupId>
-  <artifactId>21_Spring-mybatis</artifactId>
+  <artifactId>21_Spring-Mybatis</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>21_Spring-整合mybatis</name>
+  <name>21_Spring-整合Mybatis</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 

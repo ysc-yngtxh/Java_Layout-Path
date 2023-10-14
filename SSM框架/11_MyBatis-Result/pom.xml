@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.bjpowernode</groupId>
-  <artifactId>11_MyBatis-result</artifactId>
+  <artifactId>11_MyBatis-Result</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <properties>
