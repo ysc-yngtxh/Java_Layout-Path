@@ -1,7 +1,7 @@
 package com.example.service;
 
-import com.youshicheng.mapper.UserMapper;
-import com.youshicheng.pojo.User;
+import com.example.mapper.UserMapper;
+import com.example.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

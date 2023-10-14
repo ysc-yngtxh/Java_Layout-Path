@@ -1,7 +1,7 @@
 package com.example.controller;
 
-import com.youshicheng.pojo.User;
-import com.youshicheng.service.UserService;
+import com.example.pojo.User;
+import com.example.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
