@@ -8,10 +8,10 @@
         <version>2.3.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.bjpowernode.springboot</groupId>
-    <artifactId>28_springboot-if</artifactId>
+    <groupId>com.example</groupId>
+    <artifactId>26_SpringBoot-thymeleaf</artifactId>
     <version>1.0.0</version>
-    <name>28_springboot-if</name>
+    <name>26_SpringBoot-thymeleaf</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -19,19 +19,19 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
+        <!--springboot框架集成Thymeleaf的起步依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+
+        <!--springboot框架web项目起步依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!--springboot框架测试起步依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -46,6 +46,7 @@
     </dependencies>
 
     <build>
+        <!--springboot打包编译插件-->
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

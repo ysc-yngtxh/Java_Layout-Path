@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>29_Spring-Vue-axios</artifactId>
+    <artifactId>31_SpringBoot-Vue-Axios</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>29_Spring-Vue-axios</name>
-    <description>29_Spring-Vue-axios</description>
+    <name>31_SpringBoot-Vue-Axios</name>
+    <description>31_SpringBoot-Vue-Axios</description>
     <properties>
         <java.version>17</java.version>
     </properties>

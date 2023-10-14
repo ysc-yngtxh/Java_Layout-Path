@@ -8,10 +8,10 @@
         <version>2.3.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.example</groupId>
-    <artifactId>09_springboot-redis</artifactId>
+    <groupId>com.bjpowernode.springboot</groupId>
+    <artifactId>28_SpringBoot-if</artifactId>
     <version>1.0.0</version>
-    <name>09_springboot-redis</name>
+    <name>28_SpringBoot-if</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -19,13 +19,19 @@
     </properties>
 
     <dependencies>
-        <!--springboot框架的web项目依赖-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!--springboot框架的测试依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -37,17 +43,10 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
-        <!--springboot集成redis的起步依赖-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <!--springboot的打包编译插件-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

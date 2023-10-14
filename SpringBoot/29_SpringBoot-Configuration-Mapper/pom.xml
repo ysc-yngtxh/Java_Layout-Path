@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.cn.youshicheng</groupId>
-	<artifactId>02_SpringBoot-Configuration-Mapper</artifactId>
+	<artifactId>29_SpringBoot-Configuration-Mapper</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<name>${project.artifactId}</name>
 	<description>Demo project for Spring Boot</description>
