@@ -24,9 +24,6 @@ logging:
         com:
             example: debug
 
-mybatis:
-    type-aliases-package: com.example.pojo
-
 management:
     endpoints:
         web:

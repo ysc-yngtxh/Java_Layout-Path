@@ -1,12 +1,11 @@
 package com.example.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
 import java.util.Date;
 
 /**
@@ -15,11 +14,10 @@ import java.util.Date;
 @Data               // 属于Lombok依赖的注解，提供类的set,get，toString方法
 @AllArgsConstructor // 属于Lombok依赖的注解，提供类的全参构造
 @NoArgsConstructor  // 属于Lombok依赖的注解，提供类的无参构造
-@Table(name="tb_consumer")  // 属于通用mapper依赖的注解，用于表示连接的是哪张表
+@TableName("tb_consumer")  // 属于通用mapper依赖的注解，用于表示连接的是哪张表
 public class User {
  
-    @Id         // 属于通用mapper依赖的注解，用于标注主键
-    // @KeySql  // 属于通用mapper依赖的注解，用于表示字段的自增
+    @TableId         // 属于MybatisPlus依赖的注解，用于标注主键
     private Integer id; // 主键Id
 
     private Integer superiorId; // 上级Id
@@ -34,7 +32,4 @@ public class User {
     private Integer deleteFlag; // 逻辑删除
     private Date createdDate;   // 创建时间
     private Date updatedDate;   // 更新时间
-
-    @Transient  // 代表的是瞬时的，不会持久化到数据库，也不会参与SQL语句的执行
-    private String note;      // 备注
 }
