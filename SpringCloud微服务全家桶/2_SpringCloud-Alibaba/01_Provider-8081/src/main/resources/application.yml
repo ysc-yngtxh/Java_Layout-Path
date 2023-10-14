@@ -4,6 +4,11 @@ server:
 spring:
     application:
         name: nacos-producer
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: 131474
+        url: jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC
+        username: root
     cloud:
         nacos:
             discovery:
@@ -13,12 +18,6 @@ spring:
                 username: nacos
                 # nacos登陆密码
                 password: nacos
-
-    datasource:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        password: 131474
-        url: jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC
-        username: root
 
 logging:
     level:
