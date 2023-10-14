@@ -13,3 +13,23 @@ spring:
                 username: nacos
                 # nacos登陆密码
                 password: nacos
+
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: 131474
+        url: jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC
+        username: root
+
+logging:
+    level:
+        com:
+            example: debug
+
+mybatis:
+    type-aliases-package: com.example.pojo
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: '*'
