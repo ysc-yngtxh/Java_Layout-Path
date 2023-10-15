@@ -20,13 +20,13 @@ public class MyController {
     @Autowired
     private RestTemplate restTemplate;
 
-    // 固定的Ip、端口 -- 直连方式
+    // 直连方式 -- 固定的Ip、端口
     @GetMapping("/{id}")
     public User query(@PathVariable("id") Integer id){
         return restTemplate.getForObject("http://localhost:8081/user/"+id, User.class);
     }
 
-    // 动态Ip、端口 -- 微服务方式
+    // 微服务方式 -- 动态Ip、端口
     @GetMapping("/template/{id}")
     public User queryTemplate(@PathVariable("id") Integer id){
         return restTemplate.getForObject("http://nacos-provider/user/"+id, User.class);

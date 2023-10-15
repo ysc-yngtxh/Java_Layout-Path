@@ -14,7 +14,8 @@ public class SpringCloudConsumerApplication {
     }
 
     @Bean
-    @LoadBalanced  // 微服务方式以负载均衡的方式进行接口调用
+    // 接口调用需要微服务方式的：需要以负载均衡的方式调用(添加@LoadBalanced注解)；接口调用是直连方式的：则不需要负载均衡
+    @LoadBalanced
     public RestTemplate restTemplate(){
         return new RestTemplate();
     }
