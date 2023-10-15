@@ -13,6 +13,8 @@ spring:
                 username: nacos
                 # nacos登陆密码
                 password: nacos
+                # 是否设置为临时实例：默认为true，表示当前服务注册到Nacos中为临时实例
+                # ephemeral: false
 
 logging:
     level:

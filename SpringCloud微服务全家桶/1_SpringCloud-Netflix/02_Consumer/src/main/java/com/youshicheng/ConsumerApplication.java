@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
  * @author 游家纨绔
  */
 // @EnableCircuitBreaker   // 这个注解是用来实现Hystrix的注解,用来开启熔断
-// @EnableDiscoveryClient  // 这个是实现注册中心Eureka的注解
+// @EnableDiscoveryClient  // 这个是实现注册中心(Eureka等一系列注册中心)的注解
 // @SpringBootApplication
 @SpringCloudApplication  // 一个标准的服务是由以上三种注解的，但是这个注解涵盖以上三个注解
 @EnableFeignClients      // 启动Feign，这里的RestTemplate可以删除的

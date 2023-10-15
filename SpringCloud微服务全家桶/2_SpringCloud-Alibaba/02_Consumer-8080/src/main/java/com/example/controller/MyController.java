@@ -26,7 +26,7 @@ public class MyController {
     private RestTemplate restTemplate;
 
     @Autowired
-    private DiscoveryClient discoveryClient;
+    private DiscoveryClient discoveryClient;  // 注册中心客户端对象
 
     // 直连方式 -- 固定的Ip、端口
     @GetMapping("/{id}")
