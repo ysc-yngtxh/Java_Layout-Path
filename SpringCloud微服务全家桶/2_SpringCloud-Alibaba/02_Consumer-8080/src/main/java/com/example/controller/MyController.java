@@ -1,13 +1,13 @@
 package com.example.controller;
 
 import com.example.pojo.User;
-import com.example.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * @author 游家纨绔
@@ -16,11 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 public class MyController {
-    @Autowired
-    private UserService userService;
 
-    @GetMapping("/{id}")  // method方法为get,且采用了RESTful风格
+    @Autowired
+    private RestTemplate restTemplate;
+
+    // 直接通过路径访问，固定的Ip、端口
+    @GetMapping("/{id}")
     public User query(@PathVariable("id") Integer id){
-        return userService.queryById(id);
+        return restTemplate.getForObject("http://localhost:8081/user/"+id, User.class);
+    }
+
+    // 动态Ip、端口
+    @GetMapping("/template/{id}")
+    public User queryTemplate(@PathVariable("id") Integer id){
+        return restTemplate.getForObject("http://nacos-provider/user/"+id, User.class);
     }
 }

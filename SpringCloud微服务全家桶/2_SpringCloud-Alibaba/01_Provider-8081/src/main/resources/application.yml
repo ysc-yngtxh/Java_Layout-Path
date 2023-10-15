@@ -3,7 +3,7 @@ server:
     port: 8081
 spring:
     application:
-        name: nacos-producer
+        name: nacos-provider
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
         password: 131474
