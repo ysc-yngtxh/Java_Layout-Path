@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor  // 属于Lombok依赖的注解，提供类的无参构造
 public class User {
 
-    private Integer id; // 主键Id
+    private Integer id;         // 主键Id
     private Integer superiorId; // 上级Id
     private String userName;    // 用户名
     private String passWord;    // 密码

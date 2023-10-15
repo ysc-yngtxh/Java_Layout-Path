@@ -20,8 +20,8 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-        <!--老版SpringCloud 不用加负载均衡依赖，默认使用的是Ribbon。
-            新版的SpringCloud 微服务方式调用接口需要加上负载均衡-->
+        <!--旧版Alibaba-Nacos-Discovery 默认是集成了Ribbon的，新版Alibaba-Nacos-Discovery 移除了 Ribbon，
+            所以使用微服务方式调用接口，需要添加 Spring Cloud Loadbalancer 作为客户端的负载均衡组件。-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
