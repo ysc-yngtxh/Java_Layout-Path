@@ -3,11 +3,16 @@ package com.example.controller;
 import com.example.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author 游家纨绔
@@ -20,6 +25,9 @@ public class MyController {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private DiscoveryClient discoveryClient;
+
     // 直连方式 -- 固定的Ip、端口
     @GetMapping("/{id}")
     public User query(@PathVariable("id") Integer id){
@@ -30,5 +38,25 @@ public class MyController {
     @GetMapping("/template/{id}")
     public User queryTemplate(@PathVariable("id") Integer id){
         return restTemplate.getForObject("http://nacos-provider/user/"+id, User.class);
+    }
+
+    @GetMapping("/discovery")
+    public List<String> discoveryHandle(){
+        // 获取注册中心所有服务名称
+        List<String> services = discoveryClient.getServices();
+        for (String serviceName : services) {
+            // 获取指定微服务名称的所有微服务实例
+            List<ServiceInstance> instances = discoveryClient.getInstances(serviceName);
+            for (ServiceInstance instance : instances) {
+                HashMap<String, Object> map = new HashMap<>();
+                map.put("serviceName", serviceName);
+                map.put("serviceId", instance.getServiceId());
+                map.put("serviceHost", instance.getHost());
+                map.put("servicePort", instance.getPort());
+                map.put("uri", instance.getUri());
+                System.out.println(map);
+            }
+        }
+        return services;
     }
 }

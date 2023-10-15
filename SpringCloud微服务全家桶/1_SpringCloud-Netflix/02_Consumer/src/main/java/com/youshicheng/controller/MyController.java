@@ -27,10 +27,10 @@ public class MyController {
     private RestTemplate restTemplate;
 
     // @Autowired
-    // private DiscoveryClient discoveryClient; // 这里的是第二种情况下一个接口对象
+    // private DiscoveryClient discoveryClient; // 这里的是第二种情况下一个接口对象 -- Eureka注册中心对象
 
     // @Autowired
-    // private RibbonLoadBalancerClient client; // 这里是第三种情况的内部实现对象
+    // private RibbonLoadBalancerClient client; // 这里是第三种情况的内部实现对象 -- Ribbon负载均衡对象
 
     @GetMapping("/{id}")
     public User queryById(@PathVariable("id") Integer id) {
