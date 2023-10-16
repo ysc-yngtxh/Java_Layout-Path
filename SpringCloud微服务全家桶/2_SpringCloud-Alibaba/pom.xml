@@ -9,9 +9,9 @@
     <name>${project.artifactId}</name>
     <description>${project.artifactId}</description>
     <modules>
-        <module>01_Provider-8081</module>
-        <module>02_Consumer-8080</module>
-        <module>03_Cluster-8850-8860-8870</module>
+        <module>01_Alibaba-Provider</module>
+        <module>02_Alibaba-Consumer</module>
+        <module>03_NacosCluster-8850-8860-8870</module>
         <module>04_Provider-Config</module>
     </modules>
 

@@ -9,22 +9,16 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <artifactId>02_Consumer-8080</artifactId>
+    <artifactId>01_Alibaba-Provider</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>02_Consumer-8080</name>
-    <description>02_Consumer-8080</description>
+    <name>01_Alibaba-Provider</name>
+    <description>01_Alibaba-Provider</description>
 
     <dependencies>
-        <!--注册到nacos的客户端-->
+        <!--nacos注册客户端依赖-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-        <!--旧版Alibaba-Nacos-Discovery 默认是集成了Ribbon的，新版Alibaba-Nacos-Discovery 移除了 Ribbon，
-            所以使用微服务方式调用接口，需要添加 Spring Cloud Loadbalancer 作为客户端的负载均衡组件。-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -34,6 +28,16 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.5.3.2</version>
         </dependency>
     </dependencies>
 
@@ -53,4 +57,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

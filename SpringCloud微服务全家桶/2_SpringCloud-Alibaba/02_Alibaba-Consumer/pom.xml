@@ -8,14 +8,11 @@
         <version>1.0.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <artifactId>03_Cluster-8850-8860-8870</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>03_Cluster-8850-8860-8870</name>
-    <description>03_Cluster-8850-8860-8870</description>
 
-    <properties>
-        <java.version>17</java.version>
-    </properties>
+    <artifactId>02_Alibaba-Consumer</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>02_Alibaba-Consumer</name>
+    <description>02_Alibaba-Consumer</description>
 
     <dependencies>
         <!--注册到nacos的客户端-->
@@ -45,8 +42,15 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>
