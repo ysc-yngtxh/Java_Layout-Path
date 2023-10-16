@@ -98,3 +98,8 @@
    2、作为注册中心，这些Server集群间是存在数据一致性问题的，它们采用的模式是不同的。
       Zookeeper(CP)、Eureka(AP)、Consul(AP)、Nacos(默认AP，也支持CP)
    ![img.png_6](01_Provider-8081/src/main/resources/static/img_10.png)
+
+## 二、OpenFeign
+    由于Spring Cloud Netflix对Feign不再进行维护，所以 Spring Cloud 推出 OpenFeign 作为对指定的微服务进行消费、访问的组件。
+    OpenFeign具有负载均衡功能 ，老版本的SpringCloud所集成的OpenFeign默认采用了Ribbon负载均衡器。同样Netflix已经不再维护Ribbon，
+    所以 Spring Cloud 采用自行研发的 Spring Cloud loadbalancer 作为负载均衡器。
