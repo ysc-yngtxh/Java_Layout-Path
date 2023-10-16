@@ -1,4 +1,16 @@
 
 spring:
   application:
-    name:
+    name: provider_config-dev
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        username: nacos
+        password: nacos
+        # 默认指定的config配置文件类型为properties，现在更改为yaml或者yml。注意拼接的Nacos文件名要一致
+        file-extension: yml
+
+  config:
+    import:
+      - optional:nacos:${spring.application.name}.${spring.cloud.nacos.config.file-extension}
