@@ -14,14 +14,18 @@
 - > 外置数据库Mysql：进入nacos文件 ../nacos/conf/application.properties 配置编辑外置MySQL来存储配置数据
   > ![img.png_3](01_Alibaba-Provider/src/main/resources/static/img_6.png)
 #### 2. 启动Nacos命令
-    ①、Windows系统使用命令提示符窗口：启动Nacos命令：sh startup.sh -m standalone（standalone代表着单机模式运行，非集群模式）
-                                  启动Nacos命令：sh startup.sh（集群模式，使用这种方式启动）
-                                  关闭Nacos命令：sh shutdown.sh
-       也可以直接点击 startup.cmd 启动Nacos（非集群模式），点击 shutdown.cmd 关闭Nacos服务
-    ②、Mac系统在Nacos的bin文件夹下进入终端，启动Nacos命令：sh startup.sh -m standalone(standalone代表着单机模式运行，非集群模式)
-                                        启动Nacos命令：sh startup.sh（集群模式，使用这种方式启动）
-                                        关闭Nacos命令：sh shutdown.sh
-    ③、访问Nacos地址：http://localhost:8848/nacos
+- > ①、Windows系统使用命令提示符窗口：  
+    >>  启动Nacos命令：sh startup.sh -m standalone（standalone代表着单机模式运行，非集群模式）  
+        启动Nacos命令：sh startup.sh（集群模式，使用这种方式启动）  
+        关闭Nacos命令：sh shutdown.sh  
+        也可以直接点击 startup.cmd 启动Nacos（非集群模式），点击 shutdown.cmd 关闭Nacos服务     
+  >
+  > ②、Mac系统在Nacos的bin文件夹下进入终端：  
+    >>  启动Nacos命令：sh startup.sh -m standalone(standalone代表着单机模式运行，非集群模式)  
+        启动Nacos命令：sh startup.sh（集群模式，使用这种方式启动）  
+        关闭Nacos命令：sh shutdown.sh   
+  > 
+  > ③、访问Nacos地址：http://localhost:8848/nacos
 #### 3. 注册表缓存
 - > 服务在启动后，当发生调用时会自动从 Nacos注册中心 下载并缓存注册表到本地，将服务的实例信息缓存在消费者端。  
   > 简单来说：只要微服务方式调用过一次，http://nacos-provider/user/ 就会缓存到消费端为 http://localhost:8081/user/  
@@ -85,12 +89,12 @@
 - > 现如今，在微服务体系中，一个系统往往被拆分为多个服务，每个服务都有自己的配置文件，然后每个系统往往还会准备开发环境、测试环境、正式环境
     那么如果引入Nacos作为配置中心后，如何有效的进行配置文件的管理和不同环境间的隔离区分呢？
   >
-  > 1、首先就是通过配置注册Nacos地址做隔离，比如：A服务注册nacos1中心，B服务注册nacos2中心  
-    2、Nacos引入了命名空间(Namespace)的概念来进行多环境配置和服务的管理及隔离，不同命名空间的服务之间是无法调用的。
-       需要注意的是：需要提前在Nacos中新建好命名空间，而且这里引用的是 命名空间ID，而不是命名空间名称
-       如：spring.cloud.nacos.discovery.namespace=c37aadfa-936b-4d3a-84ca-975caf1d31ed  
-    3、Nacos的配置管理还可以通过group来进行分组的。
-       spring.cloud.nacos.discovery.group=My_Group
+  >> 1、首先就是通过配置注册Nacos地址做隔离，比如：A服务注册nacos1中心，B服务注册nacos2中心  
+  >> 2、Nacos引入了命名空间(Namespace)的概念来进行多环境配置和服务的管理及隔离，不同命名空间的服务之间是无法调用的。
+  >>    需要注意的是：需要提前在Nacos中新建好命名空间，而且这里引用的是 命名空间ID，而不是命名空间名称
+  >>    如：spring.cloud.nacos.discovery.namespace=c37aadfa-936b-4d3a-84ca-975caf1d31ed  
+  >> 3、Nacos的配置管理还可以通过group来进行分组的。
+  >>    spring.cloud.nacos.discovery.group=My_Group
 -  > ##### 创建实例测试
    > ![img.png_6](01_Alibaba-Provider/src/main/resources/static/img_8.png)
      ![img.png_6](01_Alibaba-Provider/src/main/resources/static/img_9.png)
@@ -104,10 +108,17 @@
 
 ## 二、OpenFeign
 -  #### 1、概述：  
-   > 由于Spring Cloud Netflix对Feign不再进行维护，所以 Spring Cloud 推出 OpenFeign 作为对指定的微服务进行消费、访问的组件。
-     OpenFeign具有负载均衡功能 ，老版本的SpringCloud所集成的OpenFeign默认采用了Ribbon负载均衡器。同样Netflix已经不再维护Ribbon，
-     所以 Spring Cloud 采用自行研发的 Spring Cloud loadbalancer 作为负载均衡器。  
+   - > 由于Spring Cloud Netflix对Feign不再进行维护，所以 Spring Cloud 推出 OpenFeign 作为对指定的微服务进行消费、访问的组件。
+       OpenFeign具有负载均衡功能 ，老版本的SpringCloud所集成的OpenFeign默认采用了Ribbon负载均衡器。同样因为Netflix已经不再维护Ribbon，
+       所以 OpenFeign也弃用了 Ribbon，随后Spring Cloud 采用自行研发的 Spring Cloud LoadBalancer 作为负载均衡器。  
    #### 2、远程调用的底层实现技术：  
-   > Feign 的远程调用底层实现技术默认采用的是JDK的 URLConnection，同时还支持 HttpClient 与OkHttp。
-     由于JDK的 URLConnection 不支持连接池，通信效率很低，所以生产中是不会使用该默认实现的。
-     所以在 Spring Cloud OpenFeign 中直接将默认实现变为了 HttpClient，同时也支持 OkHttp。
+   - > Feign 的远程调用底层实现技术默认采用的是JDK的 URLConnection，同时还支持 HttpClient 与OkHttp。
+       由于JDK的 URLConnection 不支持连接池，通信效率很低，所以生产中是不会使用该默认实现的。
+       所以在 Spring Cloud OpenFeign 中直接将默认实现变为了 HttpClient，同时也支持 OkHttp。  
+       在单例情况或者需要自定义的使用 HttpClient，其他情况使用 okHttp。URLConnection效率不高。  
+   
+   -  > Spring Cloud LoadBalancer负载均衡策略默认使用的是 轮询。可以通过自定义配置更换策略为 随机。  
+        但Spring Cloud LoadBalancer也就这两种策略，所以大厂里使用的是 Dubbo 来集成到 SpringCloud。经典白学！！！ 
+
+   -  > RPC，全称Remote Procedure Call，中文译为远程过程调用。通俗地讲，使用RPC进行通信，调用远程函数就像调用本地函数一样。
+        Dubbo 底层使用谷歌的 grpc 通信，用于淘宝的架构体系，经过双十一检测，性能高还稳定。而gRPC，则是RPC的一种，它是免费且开源的，由谷歌出品。
