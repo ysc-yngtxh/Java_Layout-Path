@@ -3,12 +3,23 @@ server:
   port: 8085
 
 spring:
+  application:
+    name: nacos-consumer-openfeign
   cloud:
     nacos:
       discovery:
         server-addr: localhost:8848
         username: nacos
         password: nacos
+
+    openfeign:
+      client:
+        config:
+          default:
+            # openFeign连接超时
+            connect-timeout: 1
+            # openFeign读取超时
+            read-timeout: 11
 
 logging:
   level:

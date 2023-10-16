@@ -1,7 +1,7 @@
 package com.example.controller;
 
 import com.example.pojo.User;
-import com.example.service.UserService;
+import com.example.openfeign.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Slf4j  // 用于打印日志和设置日志级别
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/consumer")
 public class MyController {
 
     @Autowired

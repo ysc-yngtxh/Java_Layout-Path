@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Slf4j  // 用于打印日志和设置日志级别
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/consumer")
 public class MyController {
 
     @Autowired

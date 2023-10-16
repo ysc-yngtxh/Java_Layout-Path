@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RefreshScope
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/config")
 public class MyController {
 
     @Autowired
