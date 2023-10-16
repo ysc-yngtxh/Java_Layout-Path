@@ -27,16 +27,19 @@
   > 
   > ③、访问Nacos地址：http://localhost:8848/nacos
 #### 3. 注册表缓存
-- > 服务在启动后，当发生调用时会自动从 Nacos注册中心 下载并缓存注册表到本地，将服务的实例信息缓存在消费者端。  
-  > 简单来说：只要微服务方式调用过一次，http://nacos-provider/user/ 就会缓存到消费端为 http://localhost:8081/user/  
-  > 所以即使Nacos发生宕机，消费端仍可以通过已经缓存的提供者信息来调用接口。只不过此时不能再有服务进行注册，且缓存的注册列表信息无法更新。
+- > 1️⃣、服务在启动后，当发生调用时会自动从 Nacos注册中心 下载并缓存注册表到本地，将服务的实例信息缓存在消费者端。  
+  > 2️⃣、简单来说：只要微服务方式调用过一次，http://nacos-provider/user/ 就会缓存到消费端为 http://localhost:8081/user/  
+  > 3️⃣、所以即使Nacos发生宕机，消费端仍可以通过已经缓存的提供者信息来调用接口。只不过此时不能再有服务进行注册，且缓存的注册列表信息无法更新。
 #### 4. 临时实例与持久实例
-- > 临时实例：默认情况。服务实例仅会注册在Nacos内存，不会持久化到Nacos磁盘。其健康监测机制为Client模式，即Client主动向Server上报其健康状态。默认心跳间隔为5秒。
+- > 1️⃣、临时实例：  
+  > 默认情况。服务实例仅会注册在Nacos内存，不会持久化到Nacos磁盘。其健康监测机制为Client模式，即Client主动向Server上报其健康状态。默认心跳间隔为5秒。
   >         在15秒内Server未收到Client心跳，则会将其标记为"不健康"状态；在30秒内若收到了Client心跳，则重新恢复"健康"状态，否则该实例将从Server端内存清除。  
   > 
-  > 持久实例：服务实例不仅会注册到Nacos内存，同时也会被持久化到Nacos磁盘。其健康监测机制为Server模式，即Server会主动去检测Client的健康状态，
+  > 2️⃣、持久实例：  
+  > 服务实例不仅会注册到Nacos内存，同时也会被持久化到Nacos磁盘。其健康监测机制为Server模式，即Server会主动去检测Client的健康状态，
   > 默认每20秒检测一次。健康检测失败后服务实例会被标记为"不健康"状态，但不会被清除，因为其是持久化在磁盘的。
-  > ![img.png_3](01_Alibaba-Provider/src/main/resources/static/img_2.png)
+  >
+  >![img.png_3](01_Alibaba-Provider/src/main/resources/static/img_2.png)
 
 - > ```
   > 注册服务对Nacos实例配置
@@ -100,11 +103,12 @@
      ![img.png_6](01_Alibaba-Provider/src/main/resources/static/img_9.png)
 #### 8. Nacos Config配置中心
 - > 1、配置中心中的配置数据一般都是持久化在第三方服务器的，例如存放到DBMS、、Git远程库等。由于这些配置中心Server中根本就不存放数据，
-     所以它们的集群中就不存在数据一致性问题。但像Zookeeper，其作为配置中心，配置数据是存放在自己本地的。所以该集群中的节点是存在数据一致性问题的。
-     Zookeeper集群对于数据一致性采用的是CP模式。  
-  2、作为注册中心，这些Server集群间是存在数据一致性问题的，它们采用的模式是不同的。
-     Zookeeper(CP)、Eureka(AP)、Consul(AP)、Nacos(默认AP，也支持CP)
-   ![img.png_6](01_Alibaba-Provider/src/main/resources/static/img_10.png)
+       所以它们的集群中就不存在数据一致性问题。但像Zookeeper，其作为配置中心，配置数据是存放在自己本地的。所以该集群中的节点是存在数据一致性问题的。
+       Zookeeper集群对于数据一致性采用的是CP模式。  
+    2、作为注册中心，这些Server集群间是存在数据一致性问题的，它们采用的模式是不同的。
+       Zookeeper(CP)、Eureka(AP)、Consul(AP)、Nacos(默认AP，也支持CP)
+  >
+  >![img.png_6](01_Alibaba-Provider/src/main/resources/static/img_10.png)
 
 ## 二、OpenFeign
 -  #### 1、概述：  
@@ -120,5 +124,5 @@
    -  > Spring Cloud LoadBalancer负载均衡策略默认使用的是 轮询。可以通过自定义配置更换策略为 随机。  
         但Spring Cloud LoadBalancer也就这两种策略，所以大厂里使用的是 Dubbo 来集成到 SpringCloud。经典白学！！！ 
 
-   -  > RPC，全称Remote Procedure Call，中文译为远程过程调用。通俗地讲，使用RPC进行通信，调用远程函数就像调用本地函数一样。
+   -  > RPC -- 全称Remote Procedure Call，中文译为远程过程调用。通俗地讲，使用RPC进行通信，调用远程函数就像调用本地函数一样。  
         Dubbo 底层使用谷歌的 grpc 通信，用于淘宝的架构体系，经过双十一检测，性能高还稳定。而gRPC，则是RPC的一种，它是免费且开源的，由谷歌出品。
