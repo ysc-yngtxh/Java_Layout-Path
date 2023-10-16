@@ -1,0 +1,16 @@
+
+server:
+  port: 8085
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+
+logging:
+  level:
+    com:
+      example: debug

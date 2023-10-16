@@ -8,7 +8,7 @@
         <version>1.0.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <artifactId>05_Consumer-Openfeign</artifactId>
+    <artifactId>05_Consumer-OpenFeign</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>05_Consumer-Openfeign</name>
     <description>05_Consumer-Openfeign</description>
@@ -17,6 +17,11 @@
     </properties>
 
     <dependencies>
+        <!--Spring Cloud OpenFeign依赖-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
         <!--注册到nacos的客户端-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>

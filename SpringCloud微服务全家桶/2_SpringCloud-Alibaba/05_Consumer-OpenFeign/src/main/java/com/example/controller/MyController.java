@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.pojo.User;
+import com.example.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -28,6 +29,9 @@ public class MyController {
     @Autowired
     private DiscoveryClient discoveryClient;  // 注册中心客户端对象
 
+    @Autowired
+    private UserService userService;
+
     // 直连方式 -- 固定的Ip、端口
     @GetMapping("/{id}")
     public User query(@PathVariable("id") Integer id){
@@ -38,6 +42,12 @@ public class MyController {
     @GetMapping("/template/{id}")
     public User queryTemplate(@PathVariable("id") Integer id){
         return restTemplate.getForObject("http://nacos-provider/user/"+id, User.class);
+    }
+
+    // 伪客户端OpenFeign方式
+    @GetMapping("/openfeign/{id}")
+    public User queryOpenFeign(@PathVariable("id") Integer id){
+        return userService.queryById(id);
     }
 
     @GetMapping("/discovery")
