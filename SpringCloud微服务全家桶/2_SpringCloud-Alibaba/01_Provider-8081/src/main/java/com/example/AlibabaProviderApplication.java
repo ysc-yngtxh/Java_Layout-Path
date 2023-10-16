@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan(basePackages = "com.example.mapper")
-public class SpringCloudProviderApplication {
+public class AlibabaProviderApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringCloudProviderApplication.class, args);
+        SpringApplication.run(AlibabaProviderApplication.class, args);
     }
 
 }

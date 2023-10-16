@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-public class SpringCloudConsumerApplication {
+public class AlibabaConsumerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringCloudConsumerApplication.class, args);
+        SpringApplication.run(AlibabaConsumerApplication.class, args);
     }
 
     @Bean

@@ -88,9 +88,9 @@
        如：spring.cloud.nacos.discovery.namespace=c37aadfa-936b-4d3a-84ca-975caf1d31ed
     3、Nacos的配置管理还可以通过group来进行分组的。
        spring.cloud.nacos.discovery.group=My_Group
-   #### 创建实例测试
-   ![img.png_6](01_Provider-8081/src/main/resources/static/img_8.png)
-   ![img.png_6](01_Provider-8081/src/main/resources/static/img_9.png)
+   > ##### 创建实例测试
+   > ![img.png_6](01_Provider-8081/src/main/resources/static/img_8.png)
+     ![img.png_6](01_Provider-8081/src/main/resources/static/img_9.png)
 #### 8. 配置中心
    1、配置中心中的配置数据一般都是持久化在第三方服务器的，例如存放到DBMS、、Git远程库等。由于这些配置中心Server中根本就不存放数据，
      所以它们的集群中就不存在数据一致性问题。但像Zookeeper，其作为配置中心，配置数据是存放在自己本地的。所以该集群中的节点是存在数据一致性问题的。

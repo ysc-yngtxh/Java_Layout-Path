@@ -12,6 +12,7 @@
         <module>01_Provider-8081</module>
         <module>02_Consumer-8080</module>
         <module>03_Cluster-8850-8860-8870</module>
+        <module>04_Provider-Config</module>
     </modules>
 
     <packaging>pom</packaging>
