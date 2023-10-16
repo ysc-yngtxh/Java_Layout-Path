@@ -54,3 +54,46 @@
      ```
    - ![img.png_6](01_Provider-8081/src/main/resources/static/img_5.png)
 #### 5. Nacos集群搭建
+   - ```
+     ①、在各个nacos的解压目录nacos/的conf目录下，将配置文件cluster.conf.example复制一份，重命名为cluster.conf文件，每行配置成ip:port。（请配置3个或3个以上节点）
+         注意：端口不要连号，因为nacos内部会使用设置端口的下一个端口值，如果连号，启动会失败。
+              192.168.2.103:8850
+              192.168.2.103:8860
+              192.168.2.103:8870
+     ②、并且各个nacos配置文件application.properties改相应端口：server.port=xxxx
+     ③、启动各个nacos服务，注意：不要使用 非集群模式 启动 -- sh startup.sh
+     ④、nacos集群启动后，服务注册到指定的nacos中，可同时注册到集群中多个nacos中心
+              spring:
+                  cloud:
+                      nacos:
+                          discovery:
+                              server-addr: 192.168.2.103:8850,192.168.2.103:8860,192.168.2.103:8870
+                                  - 192.168.2.103:8850 这种写法不生效，暂时不清楚原因
+                                  - 192.168.2.103:8860 这种写法不生效，暂时不清楚原因
+                                  - 192.168.2.103:8870 这种写法不生效，暂时不清楚原因
+     ```
+     ![img.png_6](01_Provider-8081/src/main/resources/static/img_4.png)
+#### 6. Nacos的CAP模式
+   - CAP即：Consistency（一致性）、Availability（可用性）、Partition tolerance（分区容忍性）
+     这三个性质对应了分布式系统的三个指标：而CAP理论说的就是：一个分布式系统，不可能同时做到这三点。
+   - 默认情况下，Nacos Discovery集群的数据一致性采用的是AP模式。但其也支持CP模式，需要进行转换。
+   - 若要转换为CP的，可以提交PUT请求，完成AP到CP的转换：http://localhost:8848/nacos/v1/ns/operator/switches?entry=serverMode&value=CP
+#### 7. 服务隔离
+    现如今，在微服务体系中，一个系统往往被拆分为多个服务，每个服务都有自己的配置文件，然后每个系统往往还会准备开发环境、测试环境、正式环境
+    那么如果引入Nacos作为配置中心后，如何有效的进行配置文件的管理和不同环境间的隔离区分呢？
+
+    1、首先就是通过配置注册Nacos地址做隔离，比如：A服务注册nacos1中心，B服务注册nacos2中心
+    2、Nacos引入了命名空间(Namespace)的概念来进行多环境配置和服务的管理及隔离，不同命名空间的服务之间是无法调用的。
+       需要注意的是：需要提前在Nacos中新建好命名空间，而且这里引用的是 命名空间ID，而不是命名空间名称
+       如：spring.cloud.nacos.discovery.namespace=c37aadfa-936b-4d3a-84ca-975caf1d31ed
+    3、Nacos的配置管理还可以通过group来进行分组的。
+       spring.cloud.nacos.discovery.group=My_Group
+   #### 创建实例测试
+   ![img.png_6](01_Provider-8081/src/main/resources/static/img_8.png)
+   ![img.png_6](01_Provider-8081/src/main/resources/static/img_9.png)
+#### 8. 配置中心
+   1、配置中心中的配置数据一般都是持久化在第三方服务器的，例如存放到DBMS、、Git远程库等。由于这些配置中心Server中根本就不存放数据，
+     所以它们的集群中就不存在数据一致性问题。但像Zookeeper，其作为配置中心，配置数据是存放在自己本地的。所以该集群中的节点是存在数据一致性问题的。
+     Zookeeper集群对于数据一致性采用的是CP模式。
+   2、作为注册中心，这些Server集群间是存在数据一致性问题的，它们采用的模式是不同的。
+      Zookeeper(CP)、Eureka(AP)、Consul(AP)、Nacos(默认AP，也支持CP)
