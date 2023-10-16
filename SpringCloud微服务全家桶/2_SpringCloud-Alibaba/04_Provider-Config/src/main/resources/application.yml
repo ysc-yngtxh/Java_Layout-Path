@@ -1,16 +1,37 @@
 
+## 旧版的Spring Cloud会使用 bootstrap.properties 文件作为Nacos Config的客户端。
+## 但新版Spring Cloud里并不主动加载 bootstrap.properties 文件了。
+
 spring:
   application:
-    name: provider_config-dev
+    name: provider_config
   cloud:
     nacos:
       config:
-        server-addr: 127.0.0.1:8848
+        server-addr: localhost:8848
         username: nacos
         password: nacos
+        group: DEFAULT_GROUP
         # 默认指定的config配置文件类型为properties，现在更改为yaml或者yml。注意拼接的Nacos文件名要一致
         file-extension: yml
-
+        # 同一个group中的不同服务可以共享以下 "共享配置"
+        shared-configs[0]:
+          data-id: shared_config.yml
+          group: DEFAULT_GROUP
+          refresh: true
+        # 不同group中的不同服务可以共享以下 "扩展配置"
+        extension-configs[0]:
+          data-id: extension_config.yml
+          group: DEFAULT_GROUP
+          refresh: true
+        extension-configs[1]:
+          data-id: extension_config-two.yml
+          group: DEFAULT_GROUP
+          refresh: true
+        ##### 加载顺序：共享配置 > 扩展配置([1]覆盖[0]) > 当前服务配置； 后加载的会将先加载的配置进行覆盖
+  profiles:
+    active: dev
   config:
     import:
-      - optional:nacos:${spring.application.name}.${spring.cloud.nacos.config.file-extension}
+      # 原型对应上Nacos的配置文件名称，也就是Data Id。所以应该为：provider_config-dev.yml
+      - optional:nacos:${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
