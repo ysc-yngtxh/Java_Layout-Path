@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @dateTime 2023-10-15 00:24
  * @apiNote TODO
  */
-@FeignClient(value = "nacos-provider", path = "/user")
+@FeignClient(value = "nacos-provider", path = "/provider")
 public interface UserService {
 
     @GetMapping("/{id}")

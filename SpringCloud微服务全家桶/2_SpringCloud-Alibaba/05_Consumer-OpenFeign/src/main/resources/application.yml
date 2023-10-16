@@ -11,11 +11,18 @@ spring:
         server-addr: localhost:8848
         username: nacos
         password: nacos
-
+    # OpenFeign相关配置
     openfeign:
       client:
         config:
+          # 配置全局(其他所有的提供者服务配置)
           default:
+            # openFeign连接超时
+            connect-timeout: 1
+            # openFeign读取超时
+            read-timeout: 11
+          # 配置局部(指定的提供者服务配置)
+          nacos-provider:
             # openFeign连接超时
             connect-timeout: 1
             # openFeign读取超时

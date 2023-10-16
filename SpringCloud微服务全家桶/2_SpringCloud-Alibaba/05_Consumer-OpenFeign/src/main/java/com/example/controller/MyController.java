@@ -35,13 +35,14 @@ public class MyController {
     // 直连方式 -- 固定的Ip、端口
     @GetMapping("/{id}")
     public User query(@PathVariable("id") Integer id){
-        return restTemplate.getForObject("http://localhost:8081/user/"+id, User.class);
+        // TODO 测试直连方式的时候，需要把启动类中的 RestTemplate 注解@LoadBalanced删除掉
+        return restTemplate.getForObject("http://localhost:8081/provider/"+id, User.class);
     }
 
     // 微服务方式 -- 动态Ip、端口
     @GetMapping("/template/{id}")
     public User queryTemplate(@PathVariable("id") Integer id){
-        return restTemplate.getForObject("http://nacos-provider/user/"+id, User.class);
+        return restTemplate.getForObject("http://nacos-provider/provider/"+id, User.class);
     }
 
     // 伪客户端OpenFeign方式

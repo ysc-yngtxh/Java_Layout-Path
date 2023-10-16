@@ -17,7 +17,6 @@ import java.util.List;
 /**
  * @author 游家纨绔
  */
-@Slf4j  // 用于打印日志和设置日志级别
 @RestController
 @RequestMapping("/provider")
 public class MyController {
@@ -25,7 +24,7 @@ public class MyController {
     @Autowired
     private UserServiceImpl userService;
 
-    @GetMapping("/{id}")  // method方法为get,且采用了RESTful风格
+    @GetMapping("/{id}")
     public User query(@PathVariable("id") Integer id){
         return userService.queryById(id);
     }
