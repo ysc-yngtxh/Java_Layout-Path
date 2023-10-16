@@ -1,17 +1,17 @@
 
 ## 一、获取对应项目版本号
 #### 1、Spring官网Https://spring.io 可以看到 SpringBoot3.0.x、3.1.x版本对应 SpringCloud2022.0.x版本，且当前最新SpringCloud最新版本为 2022.0.4
-   ![img_1](01_Provider-8081/src/main/resources/static/img.png)
+   ![img_1](01_Alibaba-Provider/src/main/resources/static/img.png)
 
 #### 2、GitHub搜索alibaba，进入 spring-cloud-alibaba 的文档版本说明。适配 SpringBoot 3.0 版本及以上的 Spring Cloud Alibaba 版本为 2022.0.0.0
-   ![img.png_2](01_Provider-8081/src/main/resources/static/img_1.png)
+   ![img.png_2](01_Alibaba-Provider/src/main/resources/static/img_1.png)
 
 ## 二、Nacos（ http://localhost:8848/nacos ）
 #### 1. 配置Nacos文件
    - 用户鉴权：进入nacos文件 ../nacos/conf/application.properties 配置编辑鉴权信息。具体规则也可参考官网：https://nacos.io/zh-cn/docs/v2/guide/user/auth.html
-     ![img.png_3](01_Provider-8081/src/main/resources/static/img_7.png)
+     ![img.png_3](01_Alibaba-Provider/src/main/resources/static/img_7.png)
    - 外置数据库Mysql：进入nacos文件 ../nacos/conf/application.properties 配置编辑外置MySQL来存储配置数据
-     ![img.png_3](01_Provider-8081/src/main/resources/static/img_6.png)
+     ![img.png_3](01_Alibaba-Provider/src/main/resources/static/img_6.png)
 #### 2. 启动Nacos命令
     ①、Windows系统使用命令提示符窗口：启动Nacos命令：sh startup.sh -m standalone（standalone代表着单机模式运行，非集群模式）
                                   启动Nacos命令：sh startup.sh（集群模式，使用这种方式启动）
@@ -30,7 +30,7 @@
      在15秒内Server未收到Client心跳，则会将其标记为"不健康"状态；在30秒内若收到了Client心跳，则重新恢复"健康"状态，否则该实例将从Server端内存清除。
    - 持久实例：服务实例不仅会注册到Nacos内存，同时也会被持久化到Nacos磁盘。其健康监测机制为Server模式，即Server会主动去检测Client的健康状态，
      默认每20秒检测一次。健康检测失败后服务实例会被标记为"不健康"状态，但不会被清除，因为其是持久化在磁盘的。
-   ![img.png_3](01_Provider-8081/src/main/resources/static/img_2.png)
+   ![img.png_3](01_Alibaba-Provider/src/main/resources/static/img_2.png)
    - ```
      注册服务对Nacos实例配置
      spring:
@@ -39,7 +39,7 @@
                   discovery:
                       ephemeral: false  # 是否设置为临时实例：默认为true，表示当前服务注册到Nacos中为临时实例
      ```
-   - ![img.png_4](01_Provider-8081/src/main/resources/static/img_3.png)
+   - ![img.png_4](01_Alibaba-Provider/src/main/resources/static/img_3.png)
    - ```
      还有就是一旦注册了持久实例，无法通过停掉服务的方式(不健康状态自动清除临时实例)，或者是Nacos界面的方式手动点击删除。
      需要通过一下CURL命令才能进行删除持久实例 -- 注意配置数据需要对应上.具体参考官网 https://nacos.io/zh-cn/docs/v2/guide/user/open-api.html
@@ -52,7 +52,7 @@
      -d 'password=nacos' \
      -X DELETE 'http://127.0.0.1:8848/nacos/v2/ns/instance'
      ```
-   - ![img.png_6](01_Provider-8081/src/main/resources/static/img_5.png)
+   - ![img.png_6](01_Alibaba-Provider/src/main/resources/static/img_5.png)
 #### 5. Nacos集群搭建
    - ```
      ①、在各个nacos的解压目录nacos/的conf目录下，将配置文件cluster.conf.example复制一份，重命名为cluster.conf文件，每行配置成ip:port。（请配置3个或3个以上节点）
@@ -72,7 +72,7 @@
                                   - 192.168.2.103:8860 这种写法不生效，暂时不清楚原因
                                   - 192.168.2.103:8870 这种写法不生效，暂时不清楚原因
      ```
-     ![img.png_6](01_Provider-8081/src/main/resources/static/img_4.png)
+     ![img.png_6](01_Alibaba-Provider/src/main/resources/static/img_4.png)
 #### 6. Nacos的CAP模式
    - CAP即：Consistency（一致性）、Availability（可用性）、Partition tolerance（分区容忍性）
      这三个性质对应了分布式系统的三个指标：而CAP理论说的就是：一个分布式系统，不可能同时做到这三点。
@@ -89,15 +89,15 @@
     3、Nacos的配置管理还可以通过group来进行分组的。
        spring.cloud.nacos.discovery.group=My_Group
    > ##### 创建实例测试
-   > ![img.png_6](01_Provider-8081/src/main/resources/static/img_8.png)
-     ![img.png_6](01_Provider-8081/src/main/resources/static/img_9.png)
+   > ![img.png_6](01_Alibaba-Provider/src/main/resources/static/img_8.png)
+     ![img.png_6](01_Alibaba-Provider/src/main/resources/static/img_9.png)
 #### 8. Nacos Config配置中心
    1、配置中心中的配置数据一般都是持久化在第三方服务器的，例如存放到DBMS、、Git远程库等。由于这些配置中心Server中根本就不存放数据，
      所以它们的集群中就不存在数据一致性问题。但像Zookeeper，其作为配置中心，配置数据是存放在自己本地的。所以该集群中的节点是存在数据一致性问题的。
      Zookeeper集群对于数据一致性采用的是CP模式。  
    2、作为注册中心，这些Server集群间是存在数据一致性问题的，它们采用的模式是不同的。
       Zookeeper(CP)、Eureka(AP)、Consul(AP)、Nacos(默认AP，也支持CP)
-   ![img.png_6](01_Provider-8081/src/main/resources/static/img_10.png)
+   ![img.png_6](01_Alibaba-Provider/src/main/resources/static/img_10.png)
 
 ## 二、OpenFeign
     由于Spring Cloud Netflix对Feign不再进行维护，所以 Spring Cloud 推出 OpenFeign 作为对指定的微服务进行消费、访问的组件。

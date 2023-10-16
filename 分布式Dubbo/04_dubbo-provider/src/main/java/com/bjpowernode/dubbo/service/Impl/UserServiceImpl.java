@@ -11,7 +11,7 @@ public class UserServiceImpl implements UserService {
     public User queryUserById(Integer id) {
         User user = new User();
         user.setId(id);
-        user.setUsername("李晶晶");
+        user.setUsername("曹玉敏");
         return user;
     }
 
