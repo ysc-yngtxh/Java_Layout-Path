@@ -15,8 +15,8 @@ public class 流_5_FileInputStream文件复制 {
         FileInputStream fis = null;
         FileOutputStream fos = null;
         try {
-            fis = new FileInputStream(System.getProperty("User.dir") + "/Java基础及进阶/idea快捷键.java");
-            fos = new FileOutputStream(System.getProperty("User.dir") + "/idea快捷键.java");
+            fis = new FileInputStream(System.getProperty("User.dir") + "/Java基础及进阶/idea快捷键.md");
+            fos = new FileOutputStream(System.getProperty("User.dir") + "/idea快捷键.md");
 
             // 一边读一边写
             byte[] bytes = new  byte[1024 * 1024];

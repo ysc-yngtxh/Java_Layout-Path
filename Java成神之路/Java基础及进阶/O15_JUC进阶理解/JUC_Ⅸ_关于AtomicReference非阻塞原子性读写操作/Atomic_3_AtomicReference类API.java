@@ -9,8 +9,8 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class Atomic_3_AtomicReference类API {
     /**
-     * AtomicReference 类是Java在java.util.concurrent.atomic包下Atomic相关的原子操作类
-     * atomic包下原子更新基本数据类型还包括AtomicInteger、AtomicLong、AtomicBoolean三个类
+     * AtomicReference 类是Java在 java.util.concurrent.atomic 包下Atomic相关的原子操作类
+     * atomic 包下原子更新基本数据类型还包括 AtomicInteger、AtomicLong、AtomicBoolean 三个类
      * 这里我们只做分析 AtomicReference类的 Api；其他的三个类有兴趣自己去了解～
      */
     public static void main(String[] args) {

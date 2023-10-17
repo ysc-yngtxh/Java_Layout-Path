@@ -41,7 +41,7 @@ public class 流_12_File概述 {
         }
 
 
-        File f3 = new File("idea快捷键.java");
+        File f3 = new File("idea快捷键.md");
         // 获取绝对路径
         System.out.println("绝对路径" + f3.getAbsolutePath());
         System.out.println(f3.getAbsoluteFile());

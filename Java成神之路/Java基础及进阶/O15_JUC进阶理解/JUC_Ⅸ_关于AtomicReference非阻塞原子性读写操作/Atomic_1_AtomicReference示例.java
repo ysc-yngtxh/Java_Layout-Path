@@ -16,7 +16,7 @@ public class Atomic_1_AtomicReference示例 {
      * AtomicReference类提供了对象引用的非阻塞原子性读写操作，并且提供了其他一些高级的用法
      * <p>
      *     对象的引用其实是一个4字节的数字，代表着在JVM堆内存中的引用地址，对一个4字节数字的读取操作和写入操作本身就是原子性的操作，
-     * 通常情况下，我们对对象引用的操作一般都是获取该引用或者重新赋值（写入操作），我们也没有办法对对象引用的4字节数字进行加减乘除运算**，
+     * 通常情况下，我们对对象引用的操作一般都是获取该引用或者重新赋值（写入操作），我们也没有办法对对象引用的4字节数字进行加减乘除运算，
      * 那么为什么JDK要提供AtomicReference类用于支持引用类型的原子性操作呢？
      */
 
@@ -24,8 +24,7 @@ public class Atomic_1_AtomicReference示例 {
     static volatile DebitCard debitCard = new DebitCard("ZhangSan", 0);
 
     // 定义AtomicReference并且初始值为DebitCard("ZhangSan", 0)
-    private static AtomicReference<DebitCard> debitCardRef
-            = new AtomicReference<>(new DebitCard("ZhangSan", 0));
+    private static AtomicReference<DebitCard> debitCardRef = new AtomicReference<>(new DebitCard("ZhangSan", 0));
 
     public static void main(String[] args) throws InterruptedException {
         for (int i = 0; i < 10; i++) {
