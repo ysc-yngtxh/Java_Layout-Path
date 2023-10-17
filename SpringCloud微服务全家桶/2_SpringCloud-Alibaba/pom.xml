@@ -13,6 +13,8 @@
         <module>02_Alibaba-Consumer</module>
         <module>03_NacosCluster-8850-8860-8870</module>
         <module>04_Provider-Config</module>
+        <module>05_Consumer-OpenFeign</module>
+        <module>06_Gateway</module>
     </modules>
 
     <packaging>pom</packaging>

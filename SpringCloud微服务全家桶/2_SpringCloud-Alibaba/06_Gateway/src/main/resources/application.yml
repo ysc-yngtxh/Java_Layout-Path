@@ -1,0 +1,12 @@
+
+server:
+  port: 8085
+
+logging:
+  level:
+    com:
+      example: debug
+
+spring:
+  cloud:
+    gateway:
