@@ -1,12 +1,16 @@
-package com.example.config;
+package com.example.router;
 
 import lombok.Data;
 import org.springframework.cloud.gateway.handler.predicate.AbstractRoutePredicateFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.server.ServerWebExchange;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 /**
@@ -17,8 +21,8 @@ import java.util.function.Predicate;
 @Component
 public class AuthRoutePredicateFactory extends AbstractRoutePredicateFactory<AuthRoutePredicateFactory.Config> {
 
-    public AuthRoutePredicateFactory(Class<Config> configClass) {
-        super(configClass);
+    public AuthRoutePredicateFactory() {
+        super(Config.class);
     }
 
     @Override
@@ -27,13 +31,25 @@ public class AuthRoutePredicateFactory extends AbstractRoutePredicateFactory<Aut
             // 获取到请求中的所有header
             HttpHeaders headers = exchange.getRequest().getHeaders();
             // 一个请求头可以包含多个值
-            List<String> pwds = headers.get(config.userName);
+            List<String> userNameArrays = headers.get(config.userName);
+            if (CollectionUtils.isEmpty(userNameArrays)) {
+                return false;
+            }
+            List<String> userNameList = userNameArrays.stream()
+                    .map(name -> Arrays.asList(name.split(",")))
+                    .flatMap(Collection::stream)
+                    .toList();
             // 只要请求头中指定的多个密码值中包含了配置文件中指定的密码，就可以通过
-            if (pwds.contains(config.passWord)) {
+            if (userNameList.contains(config.passWord)) {
                 return true;
             }
             return false;
         };
+    }
+
+    @Override
+    public List<String> shortcutFieldOrder() {
+        return Arrays.asList("userName", "passWord");
     }
 
     @Data

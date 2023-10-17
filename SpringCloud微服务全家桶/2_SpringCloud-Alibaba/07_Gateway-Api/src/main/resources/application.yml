@@ -1,0 +1,18 @@
+server:
+    port: 8087
+
+spring:
+    cloud:
+        gateway:
+            routes:
+              # TODO 请求头中的认证信息校验路由
+              - id: my_route             # 自定义的路由名称
+                uri: https://taobao.com
+                predicates:              # 以下predicates断言为true，则 localhost:8086 跳转 localhost:8081
+                  - Auth=ysc, 123
+
+              # TODO 请求参数中的Token校验路由
+              - id: my_route2            # 自定义的路由名称
+                uri: https://taobao.com
+                predicates:              # 以下predicates断言为true，则 localhost:8086 跳转 localhost:8081
+                  - Token=小妖盖
