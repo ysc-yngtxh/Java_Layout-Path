@@ -19,7 +19,7 @@ public class B关于Stream流式计算 {
         User user2 = new User(2, "b1", 22);
         User user3 = new User(3, "c1", 23);
         User user4 = new User(4, "d1", 24);
-        User user5 = new User(6, "e1", 25);
+        User user5 = new User(5, "e1", 25);
         User user6 = new User(6, "e1", 25);
         // Arrays.asList得到的List的长度是不可改变的，当你向这个List添加或删除一个元素时（例如 list.add("d");）程序就会抛出异常
         // 如果你的List只是用来遍历，就用Arrays.asList()。

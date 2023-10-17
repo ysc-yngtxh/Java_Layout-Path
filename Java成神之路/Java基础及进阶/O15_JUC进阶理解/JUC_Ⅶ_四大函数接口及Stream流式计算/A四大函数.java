@@ -53,7 +53,7 @@ public class A四大函数 {
         };
         */
         Consumer consumer = (str) -> {System.out.println(str);};
-        consumer.accept( "youshicheng" );
+        consumer.accept( "YouShiCheng" );
 
         /*
         Supplier supplier = new Supplier() {

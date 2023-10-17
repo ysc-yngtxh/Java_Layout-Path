@@ -148,6 +148,6 @@
        WebFlux 并不是 Spring MVC 的替代，它主要应用还是在异步非阻塞编程模型上。如果你的项目并不是该模型 或者你的应用目前本身已经足够应付当前情况，是不需要去切换成 WebFlux 的。  
 
 ## 四、Spring Cloud Gateway网关
-- > Spring Cloud Gateway 建立在 Spring Boot、Spring WebFlux 和 Project Reactor 之上，依赖中集成了Spring WebFlux。 
-  > 因此，当您使用 Spring Cloud Gateway 时，您知道的许多熟悉的同步库（例如 Spring 数据和 Spring 安全性）和模式可能不适用。
-  > 简单来说：它不适用于传统的 Servlet 容器或作为 WAR 构建，并且跟SpringMVC会有冲突。
+- > Spring Cloud Gateway 建立在 Spring Boot、Spring WebFlux 和 Project Reactor 之上，依赖中集成了Spring WebFlux。   
+  > 因此，当您使用 Spring Cloud Gateway 时，您知道的许多熟悉的同步库（例如 Spring 数据和 Spring 安全性）和模式可能不适用。  
+  > 简单来说：它不适用于传统的 Servlet 容器或作为 WAR 构建，并且跟SpringMVC会有冲突。  
