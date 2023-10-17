@@ -9,9 +9,11 @@
 ## 二、Nacos（ http://localhost:8848/nacos ）
 #### 1. 配置Nacos文件
 - > 用户鉴权：进入nacos文件 ../nacos/conf/application.properties 配置编辑鉴权信息。具体规则也可参考官网：https://nacos.io/zh-cn/docs/v2/guide/user/auth.html
+  >
   > ![img.png_3](01_Alibaba-Provider/src/main/resources/static/img_7.png)
   
 - > 外置数据库Mysql：进入nacos文件 ../nacos/conf/application.properties 配置编辑外置MySQL来存储配置数据
+  >
   > ![img.png_3](01_Alibaba-Provider/src/main/resources/static/img_6.png)
 #### 2. 启动Nacos命令
 - > ①、Windows系统使用命令提示符窗口：  
@@ -84,10 +86,10 @@
   > ```
   > ![img.png_6](01_Alibaba-Provider/src/main/resources/static/img_4.png)
 #### 6. Nacos的CAP模式
-- > CAP即：Consistency（一致性）、Availability（可用性）、Partition tolerance（分区容忍性）  
-    这三个性质对应了分布式系统的三个指标：而CAP理论说的就是：一个分布式系统，不可能同时做到这三点。  
-    默认情况下，Nacos Discovery集群的数据一致性采用的是AP模式。但其也支持CP模式，需要进行转换。  
-    若要转换为CP的，可以提交PUT请求，完成AP到CP的转换：http://localhost:8848/nacos/v1/ns/operator/switches?entry=serverMode&value=CP
+- > 1、CAP即：Consistency（一致性）、Availability（可用性）、Partition tolerance（分区容忍性）  
+    2、这三个性质对应了分布式系统的三个指标：而CAP理论说的就是：一个分布式系统，不可能同时做到这三点。  
+       默认情况下，Nacos Discovery集群的数据一致性采用的是AP模式。但其也支持CP模式，需要进行转换。  
+    3、若要转换为CP的，可以提交PUT请求，完成AP到CP的转换：http://localhost:8848/nacos/v1/ns/operator/switches?entry=serverMode&value=CP
 #### 7. 服务隔离
 - > 现如今，在微服务体系中，一个系统往往被拆分为多个服务，每个服务都有自己的配置文件，然后每个系统往往还会准备开发环境、测试环境、正式环境
     那么如果引入Nacos作为配置中心后，如何有效的进行配置文件的管理和不同环境间的隔离区分呢？
