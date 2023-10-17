@@ -12,7 +12,7 @@ import java.util.function.Predicate;
 /**
  * @author 游家纨绔
  * @dateTime 2023-10-17 22:27
- * @apiNote TODO
+ * @apiNote TODO 自定义路由断言规则
  */
 @Component
 public class AuthRoutePredicateFactory extends AbstractRoutePredicateFactory<AuthRoutePredicateFactory.Config> {
