@@ -5,6 +5,10 @@ import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
 /**
  * @author 游家纨绔
  * @dateTime 2023-10-17 11:02
@@ -12,11 +16,15 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class GatewayConfig {
+
+    // TODO 使用代码Api的方式，也能进行Spring Cloud Gateway的路由配置。
+    //  application.yml路由方式的优先级是大于 代码Api方式的。
+    //  其实也好理解：毕竟注册到Nacos后，使用Nacos修改配置文件的路由规则会更方便
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("path_route", r -> r.path("/tb")
-                        .uri("http://taobao.com"))
+                        .uri("https://gitee.com/"))
                 .route("host_route", r -> r.host("*.myhost.org")
                         .uri("http://httpbin.org"))
                 .route("rewrite_route", r -> r.host("*.rewrite.org")

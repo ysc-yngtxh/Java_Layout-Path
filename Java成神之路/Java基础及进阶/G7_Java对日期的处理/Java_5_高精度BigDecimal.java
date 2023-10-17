@@ -14,9 +14,9 @@ public class Java_5_高精度BigDecimal {
     public static void main(String[] args) {
 
         // 这个100不是普通的100，是精度极高的100
-        BigDecimal v1= new BigDecimal(100.00);
+        BigDecimal v1= new BigDecimal("100.00");
         // 精度极高的200
-        BigDecimal v2= new BigDecimal(200.12);
+        BigDecimal v2= new BigDecimal("200.12");
 
         // 求和
         // v1 + v2;这样不行，v1和v2都是引用，不能直接使用+求和
