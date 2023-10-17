@@ -1,0 +1,16 @@
+server:
+  port: 8086
+
+logging:
+  level:
+    com:
+    example: debug
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: my_route
+          uri: https://baidu.com
+          predicates:
+            - Path=/**

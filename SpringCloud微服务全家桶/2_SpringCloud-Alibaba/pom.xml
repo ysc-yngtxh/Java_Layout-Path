@@ -14,7 +14,7 @@
         <module>03_NacosCluster-8850-8860-8870</module>
         <module>04_Provider-Config</module>
         <module>05_Consumer-OpenFeign</module>
-        <module>06_Gateway</module>
+        <module>06_SpringCloud-Gateway</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -34,10 +34,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
