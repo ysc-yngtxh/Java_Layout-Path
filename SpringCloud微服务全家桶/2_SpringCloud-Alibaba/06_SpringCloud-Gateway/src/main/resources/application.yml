@@ -13,4 +13,4 @@ spring:
         - id: my_route
           uri: https://baidu.com
           predicates:
-            - Path=/**
+            - Path=/baidu

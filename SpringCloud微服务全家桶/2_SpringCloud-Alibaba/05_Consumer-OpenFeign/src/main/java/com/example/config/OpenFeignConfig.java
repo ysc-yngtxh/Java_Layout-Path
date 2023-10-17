@@ -15,7 +15,7 @@ import org.springframework.core.env.Environment;
  */
 public class OpenFeignConfig {
 
-    // 设置负载均衡策略
+    // 设置LoadBalancer负载均衡策略
     @Bean
     public ReactorLoadBalancer<ServiceInstance> reactorLoadBalancer(Environment e, LoadBalancerClientFactory factory) {
         // 获取负载均衡客户端名称，即提供者服务名称
