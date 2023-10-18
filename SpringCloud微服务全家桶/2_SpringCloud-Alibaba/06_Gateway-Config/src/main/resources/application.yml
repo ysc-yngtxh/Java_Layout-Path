@@ -109,7 +109,7 @@ spring:
 #            # 比如：我翻墙访问海外网站，我在武汉发起请求通过上海服务器代理请求，这个时候XForwardedRemoteAddr表示的就是上海的网络地址
 #            - XForwardedRemoteAddr=192.168.1.1/24, 192.168.0.105
 
-        # TODO 13、AddRequestHeader网关过滤器工厂
+        # TODO 13、AddRequestHeader添加请求头Header网关过滤器工厂
 #        - id: my_route-13
 #          uri: http://localhost:8081
 #          predicates:
@@ -119,14 +119,26 @@ spring:
 #            - AddRequestHeader=X-Request-Color, red
 #            - AddRequestHeader=X-Request-Color, blue
 
-        # TODO 14、AddRequestHeadersIfNotPresent网关过滤器工厂
-        - id: my_route-14
+        # TODO 14、AddRequestHeadersIfNotPresent添加请求头Header网关过滤器工厂
+#        - id: my_route-14
+#          uri: http://localhost:8081
+#          predicates:
+#            - Path=/**
+#          filters:
+#            # 添加请求头Header属性 X-Request-Color=blue和City:湖北
+#            # IfNotPresent直译：如果不显示。所以前一条属性添加成功，后一条 X-Request-Color:red, City:北京 不会添加到请求头header
+#            - AddRequestHeadersIfNotPresent=X-Request-Color:blue, City:湖北
+#            - AddRequestHeadersIfNotPresent=X-Request-Color:red, City:北京
+
+        # TODO 15、AddRequestParameter添加请求参数网关过滤器工厂
+        - id: my_route-15
           uri: http://localhost:8081
           predicates:
             - Path=/**
           filters:
-            # 添加请求头Header属性 X-Request-Color=blue
-            - AddRequestHeadersIfNotPresent=X-Request-Color:blue, City:hubei
-            - AddRequestHeadersIfNotPresent=X-Request-Color:red, City:beijing
+            # 添加请求参数 color=blue、red 和 city=武汉
+            - AddRequestParameter=color, red
+            - AddRequestParameter=color, blue
+            - AddRequestParameter=city, 武汉
 
 

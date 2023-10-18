@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Enumeration;
+import java.util.Map;
 
 /**
  * @author 游家纨绔
@@ -42,6 +43,16 @@ public class MyController {
                     builder.append(nextName).append(": ").append(nextElement).append("<br/>");
                 }
             }
+        }
+        return builder.toString();
+    }
+
+    @GetMapping("/param")
+    public String ParamHandler(HttpServletRequest request) {
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        StringBuilder builder = new StringBuilder();
+        for (String key : parameterMap.keySet()) {
+
         }
         return builder.toString();
     }

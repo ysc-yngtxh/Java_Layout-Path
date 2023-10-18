@@ -37,11 +37,14 @@ java.util.Map接口中常用方法：
 
               Set set = map1.entrySet();
 
-              set集合对象
-              1=zhangsan   [注意：Map集合通过entrySet()方法转换成的这个Set集合，Set集合中元素的类型是Map.Entry<K,V>]
-              2=lisi        [Map.Entry和String一样，都是一种类型的名字，只不过：Map.Entry是静态内部类，是Map中的静态内部类]
-              3=wangwu
-              4=zhaoliu
+              Set集合对象
+              1=ZhangSan   [注意：Map集合通过entrySet()方法转换成的这个Set集合，Set集合中元素的类型是Map.Entry<K,V>]
+              2=lisi       [Map.Entry和String一样，都是一种类型的名字，只不过：Map.Entry是静态内部类，是Map中的静态内部类]
+              3=WangWu
+              4=ZhaoLiu
+
+        效率比较：对于 keySet() 其实是遍历了2次，一次是转为iterator，一次就从HashMap中取出Key所对应的Value。
+                而 entrySet() 只是遍历了第一次，他把Key和Value都放到了Entry中，所以就快了。
 
 
  */
