@@ -109,15 +109,17 @@ spring:
 #            # 比如：我翻墙访问海外网站，我在武汉发起请求通过上海服务器代理请求，这个时候XForwardedRemoteAddr表示的就是上海的网络地址
 #            - XForwardedRemoteAddr=192.168.1.1/24, 192.168.0.105
 
-        # TODO 13、AddRequestHeader添加请求头Header网关过滤器工厂
+        # TODO 13、AddRequestHeader、AddResponseHeader添加请求头Header网关过滤器工厂
 #        - id: my_route-13
 #          uri: http://localhost:8081
 #          predicates:
 #            - Path=/**
 #          filters:
-#            # 添加请求头Header属性 X-Request-Color=blue
+#            # 添加请求头Header属性 X-Request-Color=[red,blue]
 #            - AddRequestHeader=X-Request-Color, red
 #            - AddRequestHeader=X-Request-Color, blue
+#            # 添加响应头Header属性 X-Response-Red=YSC
+#            - AddResponseHeader=X-Response-Red, YSC
 
         # TODO 14、AddRequestHeadersIfNotPresent添加请求头Header网关过滤器工厂
 #        - id: my_route-14
@@ -131,14 +133,26 @@ spring:
 #            - AddRequestHeadersIfNotPresent=X-Request-Color:red, City:北京
 
         # TODO 15、AddRequestParameter添加请求参数网关过滤器工厂
-        - id: my_route-15
+#        - id: my_route-15
+#          uri: http://localhost:8081
+#          predicates:
+#            - Path=/**
+#          filters:
+#            # 添加请求参数 color=red 和 city=[Wuhan,Beijing]
+#            - AddRequestParameter=color, red
+#            - AddRequestParameter=city, Wuhan
+#            - AddRequestParameter=city, Beijing
+
+        # TODO 16、CircuitBreaker断路器网关过滤器工厂(需要添加依赖：spring-cloud-starter-circuitbreaker-reactor-resilience4j)
+        - id: my_route-16
           uri: http://localhost:8081
           predicates:
             - Path=/**
           filters:
-            # 添加请求参数 color=blue、red 和 city=武汉
-            - AddRequestParameter=color, red
-            - AddRequestParameter=color, blue
-            - AddRequestParameter=city, 武汉
+            # 添加请求参数 color=red 和 city=[Wuhan,Beijing]
+            - name: CircuitBreaker
+              args:
+                name: myCircuitBreaker
+                fallbackUri: forward:/fallback
 
 
