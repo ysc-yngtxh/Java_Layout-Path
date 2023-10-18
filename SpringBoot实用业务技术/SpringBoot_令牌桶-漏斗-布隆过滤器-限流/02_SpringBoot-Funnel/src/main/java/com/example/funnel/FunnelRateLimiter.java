@@ -16,14 +16,14 @@ public class FunnelRateLimiter {
      * @param username   用户名
      * @param action     操作
      * @param capacity   漏斗容量
-     * @param allowQuota 每单个单位时间允许的流量
+     * @param allowQuota 每 {perSecond} 秒内水滴的流量
      * @param perSecond  单位时间（秒）
      * @return 是否允许访问
      */
     public boolean isActionAllowed(String username, String action, int capacity, int allowQuota, int perSecond) {
         String key = "funnel:" + action + ":" + username;
         if (!funnelMap.containsKey(key)) {
-            funnelMap.put(key, new Funnel(capacity, allowQuota, perSecond));
+            funnelMap.put(key, new Funnel(capacity, (double)allowQuota/(1000*perSecond)));
         }
         Funnel funnel = funnelMap.get(key);
         return funnel.watering(1);

@@ -17,21 +17,22 @@ class SpringFunnelApplicationTests {
     @Test
     void contextLoads() throws InterruptedException {
         FunnelRateLimiter limiter = new FunnelRateLimiter();
-        int testAccessCount = 30;
-        int capacity = 5;
-        int allowQuota = 5;
-        int perSecond = 30;
-        int allowCount = 0;
-        int denyCount = 0;
+        int testAccessCount = 30;  // 测试次数
+        int capacity = 5;          // 漏斗容量
+        int allowQuota = 5;        // 单位时间内水滴流量
+        int perSecond = 30;        // 单位时间（秒）
+        int allowCount = 0;        // 允许访问次数
+        int denyCount = 0;         // 拒绝访问次数
         for (int i = 0; i < testAccessCount; i++) {
-            boolean isAllow = limiter.isActionAllowed("dadiyang", "doSomething", 5, 5, 30);
+            // 调用漏斗算法，判断当前循环是否允许访问（每一次循环可当成一次请求）
+            boolean isAllow = limiter.isActionAllowed("小曹", "提交订单", 5, 5, 30);
             if (isAllow) {
                 allowCount++;
             } else {
                 denyCount++;
             }
             System.out.println("访问权限：" + isAllow);
-            TimeUnit.SECONDS.sleep(1);
+            TimeUnit.SECONDS.sleep(5); // 睡眠1秒
         }
         System.out.println("报告：");
         System.out.println("漏斗容量：" + capacity);
