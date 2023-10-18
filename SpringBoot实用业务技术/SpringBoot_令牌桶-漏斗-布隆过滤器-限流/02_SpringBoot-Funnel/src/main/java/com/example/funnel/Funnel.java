@@ -8,14 +8,15 @@ package com.example.funnel;
 class Funnel {
 
     int capacity;     // 漏斗容量
-    double leakingRate;// 漏嘴流水速率（）
+    double leakingRate;// 漏嘴流水速率（double/ms）
     int leftQuota;    // 漏斗剩余空间
     long leakingTs;   // 上一次漏水时间
-    long fullTs;      // 漏斗空了的时间
 
-    public Funnel(int capacity, double leakingRate) {
+    public Funnel(int capacity, int allowQuota, int perSecond) {
         this.capacity = capacity;
-        this.leakingRate = leakingRate;
+        // 每 {perSecond} 秒内水滴的流量 / {perSecond}的毫秒数 = 每毫秒漏嘴流水流量(流水速率)
+        this.leakingRate = (double)allowQuota/(1000*perSecond);
+        // 漏斗剩余空间为0，即初始化为漏斗一开始是满的
         this.leftQuota = 0;
         this.leakingTs = System.currentTimeMillis();
     }

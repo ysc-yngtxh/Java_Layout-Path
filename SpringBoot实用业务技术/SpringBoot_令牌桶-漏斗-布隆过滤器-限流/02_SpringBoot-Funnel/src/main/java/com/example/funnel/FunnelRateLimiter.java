@@ -23,7 +23,7 @@ public class FunnelRateLimiter {
     public boolean isActionAllowed(String username, String action, int capacity, int allowQuota, int perSecond) {
         String key = "funnel:" + action + ":" + username;
         if (!funnelMap.containsKey(key)) {
-            funnelMap.put(key, new Funnel(capacity, (double)allowQuota/(1000*perSecond)));
+            funnelMap.put(key, new Funnel(capacity, allowQuota, perSecond));
         }
         Funnel funnel = funnelMap.get(key);
         return funnel.watering(1);
