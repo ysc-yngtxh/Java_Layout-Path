@@ -37,11 +37,19 @@ spring:
             - Between=2023-10-16T18:00:00.000+08:00[Asia/Shanghai], 2023-10-17T18:00:00.000+08:00[Asia/Shanghai]
 
         # TODO 5、请求头Cookie路由
-        - id: my_route-5             # 自定义的路由名称
+        - id: my_route-5_1           # 自定义的路由名称
           uri: https://tmall.com
           predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 https://tmall.com
             # 请求头中Cookie携带的数据 HuBei_WuHan=BeiJing 才能访问
             - Cookie=HuBei_WuHan, BeiJing
+        - id: my_route-5_2           # 自定义的路由名称
+          uri: https://tmall.com
+          predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 https://tmall.com
+            # Cookie展开写法，请求头中Cookie携带的数据 HongShan=ShangHai 才能访问
+            - name: Cookie
+              args:
+                name: HongShan
+                regexp: ShangHai
 
         # TODO 6、请求头Header路由
         - id: my_route-6             # 自定义的路由名称

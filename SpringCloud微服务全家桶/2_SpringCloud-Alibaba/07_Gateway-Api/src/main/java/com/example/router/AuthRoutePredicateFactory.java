@@ -47,8 +47,10 @@ public class AuthRoutePredicateFactory extends AbstractRoutePredicateFactory<Aut
         };
     }
 
+    // 支持断言路由的重写方法
     @Override
     public List<String> shortcutFieldOrder() {
+        // 相当于Cookie的展开写法
         return Arrays.asList("userName", "passWord");
     }
 

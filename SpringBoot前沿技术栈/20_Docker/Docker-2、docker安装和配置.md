@@ -105,7 +105,7 @@
 
   ```
   # 查看docker有哪些容器
-  docker images
+  docker ps
   
   # 搜索有哪些ubuntu版本
   docker search ubuntu
