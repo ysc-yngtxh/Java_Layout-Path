@@ -9,6 +9,11 @@ import java.util.concurrent.TimeUnit;
 @SpringBootTest
 class SpringFunnelApplicationTests {
 
+    /** 在处理突发的大流量请求时候，令牌桶算法效率是优于漏斗算法的。
+     * 因为在一瞬间大量请求过来，漏斗算法也还是只会根据自己的水滴恒定速率处理请求，你再怎么急请求量再怎么大也得给我乖乖排队。
+     * 并且就算你排队了，一旦队列容量满了，后续请求也会直接丢弃。
+     * 而令牌桶算法可以在一瞬间把桶里的令牌都消耗掉，支持一瞬间处理大量请求。所以面对这种场景下，令牌桶算法相对来说比较优秀。
+     */
     @Test
     void contextLoads() throws InterruptedException {
         FunnelRateLimiter limiter = new FunnelRateLimiter();

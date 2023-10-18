@@ -14,7 +14,7 @@
         <module>03_NacosCluster-8850-8860-8870</module>
         <module>04_Provider-Config</module>
         <module>05_Consumer-OpenFeign</module>
-        <module>06_Gateway-Config</module>
+        <module>06_Gateway-Yaml</module>
         <module>07_Gateway-Api</module>
     </modules>
 

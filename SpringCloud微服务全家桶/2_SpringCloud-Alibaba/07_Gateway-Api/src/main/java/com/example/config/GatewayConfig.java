@@ -32,7 +32,7 @@ public class GatewayConfig {
                 // .route("hystrix_fallback_route", r -> r.host("*.hystrixfallback.org")
                 //         .filters(f -> f.hystrix(c -> c.setName("slowcmd").setFallbackUri("forward:/hystrixfallback")))
                 //         .uri("http://httpbin.org"))
-                // .route("limit_route", r -> r
+                // .route("limit_route", r -> route
                 //         .host("*.limited.org").and().path("/anything/**")
                 //         .filters(f -> f.requestRateLimiter(c -> c.setRateLimiter(redisRateLimiter())))
                 //         .uri("http://httpbin.org"))

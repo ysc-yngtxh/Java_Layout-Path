@@ -8,10 +8,10 @@
         <version>1.0.0</version>
     </parent>
     <groupId>org.example</groupId>
-    <artifactId>06_Gateway-Config</artifactId>
+    <artifactId>06_Gateway-Yaml</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>06_SpringCloud-Gateway</name>
-    <description>06_SpringCloud-Gateway</description>
+    <name>06_Gateway-Yaml</name>
+    <description>06_Gateway-Yaml</description>
     <properties>
         <java.version>17</java.version>
     </properties>
