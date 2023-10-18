@@ -32,7 +32,7 @@ class SpringFunnelApplicationTests {
                 denyCount++;
             }
             System.out.println("访问权限：" + isAllow);
-            TimeUnit.SECONDS.sleep(5); // 睡眠1秒
+            TimeUnit.SECONDS.sleep(1);
         }
         System.out.println("报告：");
         System.out.println("漏斗容量：" + capacity);
@@ -42,5 +42,4 @@ class SpringFunnelApplicationTests {
         System.out.println("允许次数=" + allowCount);
         System.out.println("拒绝次数=" + denyCount);
     }
-
 }
