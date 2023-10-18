@@ -2,17 +2,14 @@ package com.example.controller;
 
 import com.example.pojo.User;
 import com.example.service.impl.UserServiceImpl;
-import lombok.extern.slf4j.Slf4j;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.Enumeration;
 
 /**
  * @author 游家纨绔
@@ -27,5 +24,25 @@ public class MyController {
     @GetMapping("/{id}")
     public User query(@PathVariable("id") Integer id){
         return userService.queryById(id);
+    }
+
+    @GetMapping("/header")
+    public String HeaderHandler(HttpServletRequest request) {
+        Enumeration<String> headerNames = request.getHeaderNames();
+        StringBuilder builder = new StringBuilder();
+        while (headerNames.hasMoreElements()) {
+            String nextName = headerNames.nextElement();
+            Enumeration<String> headers = request.getHeaders(nextName);
+            while (headers.hasMoreElements()) {
+                String nextElement = headers.nextElement();
+                if (nextName.equalsIgnoreCase("X-Request-Color") || nextName.equalsIgnoreCase("City")) {
+                    builder.append("<span style=\"color:blue\">").append(nextName).append(": ")
+                            .append(nextElement).append("</span><br/>");
+                } else {
+                    builder.append(nextName).append(": ").append(nextElement).append("<br/>");
+                }
+            }
+        }
+        return builder.toString();
     }
 }
