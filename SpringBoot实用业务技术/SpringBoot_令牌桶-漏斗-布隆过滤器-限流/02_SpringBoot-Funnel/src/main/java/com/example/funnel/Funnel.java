@@ -47,7 +47,7 @@ class Funnel {
 
     boolean watering(int quota){
         makeSpace();
-        // 判断剩余空间是否足够
+        // 判断剩余空间是否足够（就算剩余空间占满了容器，也能正常限流。不用担心剩余空间满了就填满，正常执行保证限流就行）
         if(this.leftQuota >= quota){
             this.leftQuota -= quota;
             return true;
