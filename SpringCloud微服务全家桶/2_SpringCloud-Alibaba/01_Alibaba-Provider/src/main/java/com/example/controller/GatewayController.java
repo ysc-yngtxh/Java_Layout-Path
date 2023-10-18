@@ -65,9 +65,4 @@ public class GatewayController {
         sb.append("</br>");
         return sb.toString();
     }
-
-    @GetMapping("/fallback")
-    public String fallbackHandler() {
-        return "This is the Gateway Fallback.";
-    }
 }

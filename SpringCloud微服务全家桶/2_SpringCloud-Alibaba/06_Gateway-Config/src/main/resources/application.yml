@@ -82,7 +82,7 @@ spring:
 #            # 请求参数Query携带的数据 color=gr.开头的字符串 才能访问
 #            - Query=color, gr.+
 
-        # TODO 10、权重Weight路由。权重占比高的uri大概率被访问
+        # TODO 10、权重占比高的uri大概率被访问，权重Weight路由。
 #        - id: my_route-10_1          # 自定义的路由名称
 #          uri: https://im.qq.com/
 #          predicates:
@@ -94,14 +94,14 @@ spring:
 #            # 权重为8
 #            - Weight=group1, 8
 
-        # TODO 11、RemoteAddr客户端访问地址
+        # TODO 11、RemoteAddr客户端访问地址路由
 #        - id: my_route-11            # 自定义的路由名称
 #          uri: https://im.qq.com/
 #          predicates:
 #            # 客户端访问地址，相当于服务访问白名单
 #            - RemoteAddr=192.168.1.1/24, 192.168.0.105
 
-        # TODO 12、XForwardedRemoteAddr客户端访问地址
+        # TODO 12、XForwardedRemoteAddr客户端访问地址路由
 #        - id: my_route-12            # 自定义的路由名称
 #          uri: https://im.qq.com/
 #          predicates:
@@ -144,15 +144,44 @@ spring:
 #            - AddRequestParameter=city, Beijing
 
         # TODO 16、CircuitBreaker断路器网关过滤器工厂(需要添加依赖：spring-cloud-starter-circuitbreaker-reactor-resilience4j)
-        - id: my_route-16
+#        - id: my_route-16
+#          uri: http://localhost:8081
+#          predicates:
+#            - Path=/**
+#          filters:
+#            - # 将端口为8081的服务关闭，模拟服务故障。这个时候Spring Cloud Gateway会将服务重定向到本服务的接口 /fallback
+#            - name: CircuitBreaker
+#              args:
+#                name: myCircuitBreaker
+#                fallbackUri: forward:/fallback
+
+        # TODO 17、PrefixPath添加前缀路径网关过滤器工厂
+#        - id: my_route-17
+#          uri: http://localhost:8081
+#          predicates:
+#            - Path=/**
+#          filters:
+#            # 明面上我们访问路径 http://localhost:8086/5，实际上自动会添加前缀路径 http://localhost:8086/provider/5
+#            - PrefixPath=/provider
+
+        # TODO 18、StripPrefix跳过前缀路径网关过滤器工厂
+#        - id: my_route-18
+#          uri: http://localhost:8081
+#          predicates:
+#            - Path=/ooo/xxx/**
+#          filters:
+#            # 表示明面上访问路径 http://localhost:8086/ooo/xxx/provider/5，
+#            # 现在需要跳过两个前缀路径，即跳过/ooo/xxx。所以实际访问路径为 http://localhost:8086/provider/5
+#            - StripPrefix=2
+
+        # TODO 19、StripPrefix跳过前缀路径网关过滤器工厂
+        - id: my_route-19
           uri: http://localhost:8081
           predicates:
             - Path=/**
           filters:
-            # 添加请求参数 color=red 和 city=[Wuhan,Beijing]
-            - name: CircuitBreaker
-              args:
-                name: myCircuitBreaker
-                fallbackUri: forward:/fallback
+            # 表示明面上访问路径 http://localhost:8086/red/provider/5，
+            # 现在会替换掉/red路径为/provider。所以实际访问路径为 http://localhost:8086/provider/5
+            - RewritePath=/red, /provider
 
 

@@ -1,7 +1,6 @@
 package com.example.controller;
 
 import com.example.pojo.User;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -19,7 +18,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/consumer")
-public class MyController {
+public class ConsumerController {
 
     @Autowired
     private RestTemplate restTemplate;
