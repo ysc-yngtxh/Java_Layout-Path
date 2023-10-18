@@ -27,6 +27,7 @@ public class BucketInterceptor implements HandlerInterceptor {
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         Method method = handlerMethod.getMethod();
 
+        // 加有@BucketAnnotation注解的接口，才会被进行限流
         BucketAnnotation methodAnnotation = method.getAnnotation(BucketAnnotation.class);
         if ( Objects.nonNull(methodAnnotation) ){
         	// 在名为：bucket的令牌桶里取令牌 取到即放行 未取到即抛出异常
