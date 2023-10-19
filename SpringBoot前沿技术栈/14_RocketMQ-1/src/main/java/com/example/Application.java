@@ -1,13 +1,13 @@
-package com.example.rocketmq;
+package com.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RocketMqApplication {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(RocketMqApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
 }

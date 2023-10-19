@@ -42,7 +42,7 @@
   <dependency>
       <groupId>org.apache.rocketmq</groupId>
       <artifactId>rocketmq-client</artifactId>
-      <version>4.8.0</version>
+      <version>5.1.3</version>
   </dependency>
   ```
    ### 2、RocketMQ 优势  
@@ -54,7 +54,7 @@
      ⑤、支持 Consumer 端 Tag 过滤，减少不必要的网络传输（即过滤由MQ完成，而不是由消费者完成。RabbitMQ 和 Kafka 不支持）  
      ⑥、支持重复消费（RabbitMQ 不支持，Kafka 支持）  
 
-### 三、RocketMQ 基本概念
+### 三、RocketMQ 基本组成以及工作流程
    #### RocketMQ主要有四大核心组成部分：NameServer、Broker、Producer以及Consumer四部分。
    - #### 1. NameServer：是整个 RocketMQ 的“大脑” ，它是 RocketMQ 的服务注册中心，所以 RocketMQ 需要先启动 NameServer 再启动 Rocket 中的 Broker。
       
@@ -75,6 +75,44 @@
        ⑤、消费者在订阅某个主题的消息之前从 NameServer 获取 Broker 服务器地址列表（有可能是集群），
           但是消费者选择从 Broker 中 订阅消息，订阅规则由 Broker 配置决定  
 
+
+### 四、RocketMQ 基本概念
+    1、消息模型（Message Model）
+       RocketMQ主要由 Producer、Broker、Consumer 三部分组成，其中Producer 负责生产消息，Consumer 负责消费消息，Broker 负责存储消息。
+       Broker 在实际部署过程中对应一台服务器，每个 Broker 可以存储多个Topic的消息，每个Topic的消息也可以分片存储于不同的 Broker。
+       Message Queue 用于存储消息的物理地址，每个Topic中的消息地址存储于多个 Message Queue 中。ConsumerGroup 由多个Consumer 实例构成。
+
+    2、消息（Message）
+        消息系统所传输信息的物理载体，生产和消费数据的最小单位，每条消息必须属于一个主题。
+        RocketMQ中每个消息拥有唯一的Message ID，且可以携带具有业务标识的Key。系统提供了通过Message ID和Key查询消息的功能。
+
+    3、主题（Topic）
+       表示一类消息的集合，每个主题包含若干条消息，每条消息只能属于一个主题，是RocketMQ进行消息订阅的基本单位。
+       比如一个电商系统可以分为：交易消息、物流消息等，一条消息必须有一个 Topic 。
+
+    4、标签（Tag）
+        为消息设置的标志，用于同一主题下区分不同类型的消息。来自同一业务单元的消息，可以根据不同业务目的在同一主题下设置不同标签。
+        比如交易消息又可以分为：交易创建消息、交易完成消息等，一条消息可以没有 Tag 。标签能够有效地保持代码的清晰度和连贯性，并优化RocketMQ提供的查询系统。
+
+    5、生产者组（Producer Group）
+       同一类Producer的集合，这类Producer发送同一类消息且发送逻辑一致。如果发送的是事务消息且原始生产者在发送之后崩溃，
+       则Broker服务器会联系同一生产者组的其他生产者实例以提交或回溯消费。
+
+    6、消费者组（Consumer Group）
+       同一类Consumer的集合，这类Consumer通常消费同一类消息且消费逻辑一致。消费者组使得在消息消费方面，实现负载均衡和容错的目标变得非常容易。
+       要注意的是，消费者组的消费者实例必须订阅完全相同的Topic。RocketMQ 支持两种消息模式：集群消费（Clustering）和广播消费（Broadcasting）。
+
+    7、支持拉（pull）和推（push）两种消息模式
+       pull其实就是消费者主动从MQ中去拉消息，而push则像rabbit MQ一样，是MQ给消费者推送消息。但是RocketMQ的push其实是基于pull来实现的。
+       它会先由一个业务代码从MQ中pull消息，然后再由业务代码push给特定的应用/消费者。其实底层就是一个pull模式
+
+    8、消费模式
+       集群消费（Clustering）模式下，相同Consumer Group的每个Consumer实例平均分摊消息。
+       广播消费（Broadcasting）模式下，相同Consumer Group的每个Consumer实例都接收全量的消息。
+
+    9、消费顺序
+        普通顺序消费（Normal Ordered Message）模式下，消费者通过同一个消费队列收到的消息是有顺序的，不同消息队列收到的消息则可能是无顺序的。
+        严格顺序消息（Strictly Ordered Message）模式下，消费者收到的所有消息均是有顺序的。
 
 
 2. NameServer与zookeeper的区别  
