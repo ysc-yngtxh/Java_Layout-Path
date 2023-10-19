@@ -50,7 +50,6 @@ public class MQConfig {
     @Value("${rocketmq.consumer.consumeMessageBatchMaxSize:1}")
     private int consumeMessageBatchMaxSize;      // TODO 一次消费消息的条数，默认为1条
 
-
     @Bean
     public DefaultMQPushConsumer getRocketMQConsumer() throws Exception {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(groupName);
@@ -69,7 +68,7 @@ public class MQConfig {
             String[] topicTagsArr = topics.split(";");
             for (String topicTags : topicTagsArr) {
                 String[] topicTag = topicTags.split("~");
-                consumer.subscribe(topicTag[0],topicTag[1]);
+                consumer.subscribe(topicTag[0], topicTag[1]);
             }
             consumer.start();
         }catch (Exception e){

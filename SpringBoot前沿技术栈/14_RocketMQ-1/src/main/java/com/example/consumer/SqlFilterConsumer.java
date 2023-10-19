@@ -50,6 +50,7 @@ public class SqlFilterConsumer {
         producer.shutdown();
 
 
+
         // 实例化消费者 -- 消费组(SqlFilterConsumer)
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("SqlFilterConsumer");
         // 设置NameServer的地址
