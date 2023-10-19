@@ -35,8 +35,8 @@
     Queue：消息队列，用来保存消息，供消费者消费。
 
 ## 二、消息流程：
-                              (Channel信道)                                       (Channel信道)
-    消息生产者--->Exchange交换器-------------->Queue消息队列------>Connection通道连接--------------->消费者
+                               (Channel信道)                                            (Channel信道)
+    消息生产者--->Exchange交换器--------------->Queue消息队列----------->Connection通道连接--------------->消费者
                         (Binding绑定交换器和队列的规则)
     交换器有四种策略：
                   Direct：生产者在生产消息的同时会有一个key产生，交换器会根据消息中的key的内容精准匹配，将消息发送给key完全一致的队列。
@@ -87,8 +87,8 @@
                     支持在spring框架中生产端使用
           第二种方式：map.put("x-message-ttl",10000);
                     支持在spring、springboot中使用，但是有个很明显的缺陷：当延迟需求很多时，要重复地去声明新队列，维护很麻烦
-          第三种方式：rabbitTemplate.convertAndSend("bootDirectExchange","bootDirectRoutingKeyC",message,msg->{
-                         //发送消息的时候 延长时长
+          第三种方式：rabbitTemplate.convertAndSend("bootDirectExchange", "bootDirectRoutingKeyC", message, msg -> {
+                         // 发送消息的时候 延长时长
                          msg.getMessageProperties().setExpiration(ttlTime);
                          return msg;
                     });
@@ -100,9 +100,9 @@
           最后再重新启动，使插件生效。
           打开http://localhost:15672可以后台管理页面Exchange项的Type下拉，能找到 x-delayed-message 类型表示安装成功！
 
-                                    (Binding绑定)
-                                    (Channel信道)                                       (Channel信道)
-          消息生产者--->Exchange交换器-------------->Queue消息队列------>Connection通道连接--------------->消费者
+                                     (Binding绑定)
+                                     (Channel信道)                                       (Channel信道)
+          消息生产者--->Exchange交换器--------------->Queue消息队列------>Connection通道连接--------------->消费者
 
           死信队列的延迟是在队列中进行的，而基于插件的延迟队列是在交换机中实现的
 
@@ -110,18 +110,18 @@
     1、在生产环境中由于一些不明原因，导致 rabbitmq 重启，在 RabbitMQ 重启期间生产者消息投递失败， 导致消息丢失，需要手动处理和恢复。
        于是，我们开始思考，如何才能进行 RabbitMQ 的消息可靠投递呢？ 特别是在这样比较极端的情况，RabbitMQ 集群不可用的时候，
        无法投递的消息该如何处理呢？
-                                             (Binding绑定)
-                                             (Channel信道)                                       (Channel信道)
-           消息生产者----------->Exchange交换器-------------->Queue消息队列------>Connection通道连接--------------->消费者
+                                              (Binding绑定)
+                                              (Channel信道)                                       (Channel信道)
+           消息生产者----------->Exchange交换器--------------->Queue消息队列------>Connection通道连接--------------->消费者
               ||                   ||
               || (发送消息备份)      ||(当交换机收到消息，从缓存中清除已收到的消息)
               ||                   ||
              缓存 ===================
-        (定时任务对未成功发布
-        的消息进行定时投递)
+     【定时任务对未成功发布
+        的消息进行定时投递】
     2、Confirm模式————如果因为交换机故障，实现发布确认步骤：
           ①、配置文件：
-                    #使用这个即可 confirm模式 ，发布交换机成功后会触发回调方法
+                    # 使用这个即可 confirm模式 ，发布交换机成功后会触发回调方法
                     spring.rabbitmq.publisher-confirm-type=correlated
           ②、创建一个类去实现 RabbitTemplate.ConfirmCallback 接口，重写Confirm方法
               Ⅰ、引用注入RabbitTemplate
@@ -131,7 +131,7 @@
           此时生产者是不知道消息被丢弃这个事件的。那么如何让无法路由的消息帮我们处理一下？最起码通知我一声，我好自己处理啊。
           通过设置mandatory参数可以在当消息传递过程中不可达目的地时将消息返回给生产者
           ①、配置文件：
-                    #开启回退消息配置
+                    # 开启回退消息配置
                     spring.rabbitmq.publisher-returns=true
           ②、创建一个类去实现 RabbitTemplate.ReturnsCallback 接口，重写Returned 方法
               Ⅰ、引用注入RabbitTemplate

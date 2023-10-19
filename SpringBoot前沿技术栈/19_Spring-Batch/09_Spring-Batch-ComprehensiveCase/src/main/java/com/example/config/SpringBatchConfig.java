@@ -67,7 +67,7 @@ public class SpringBatchConfig {
         MyBatisBatchItemWriter<Employee> itemWriter = new MyBatisBatchItemWriter<>();
         itemWriter.setSqlSessionFactory(sqlSessionFactory); // 需要指定sqlSession工厂
         // 指定要操作sql语句的路径id：EmployeeDao.xml定义的sql语句id
-        itemWriter.setStatementId("com.example.dao.EmployeeDao.saveTemp");  // 操作sql
+        itemWriter.setStatementId("com.example.mapper.EmployeeDao.saveTemp");  // 操作sql
         return itemWriter;
     }
     @Bean
@@ -104,7 +104,7 @@ public class SpringBatchConfig {
         System.out.println("----------MyBatisPagingItemReader开始-----from: " + from + "  -----to:" + to + "  -----每片数量:" + range);
         MyBatisPagingItemReader<Employee> itemReader = new MyBatisPagingItemReader<Employee>();
         itemReader.setSqlSessionFactory(sqlSessionFactory);
-        itemReader.setQueryId("com.example.dao.EmployeeDao.selectTemp");
+        itemReader.setQueryId("com.example.mapper.EmployeeDao.selectTemp");
         // 通过分页来读取数据(还有通过游标来读取数据的方式)，表示每读取1000条数据为一页。
         itemReader.setPageSize(PAGESIZE);
         Map<String, Object> map = new HashMap<>();
@@ -119,7 +119,7 @@ public class SpringBatchConfig {
     public MyBatisBatchItemWriter<Employee> dbToDBItemWriter(){
         MyBatisBatchItemWriter<Employee> itemWriter = new MyBatisBatchItemWriter<>();
         itemWriter.setSqlSessionFactory(sqlSessionFactory);
-        itemWriter.setStatementId("com.example.dao.EmployeeDao.save");  // 操作sql
+        itemWriter.setStatementId("com.example.mapper.EmployeeDao.save");  // 操作sql
         return itemWriter;
     }
     // 文件分区处理器-处理分区

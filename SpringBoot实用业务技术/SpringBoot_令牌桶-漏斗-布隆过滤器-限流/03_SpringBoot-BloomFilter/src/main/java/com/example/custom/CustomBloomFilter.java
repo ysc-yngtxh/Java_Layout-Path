@@ -1,16 +1,6 @@
 package com.example.custom;
 
-import com.google.common.base.Charsets;
-import com.google.common.hash.BloomFilter;
-import com.google.common.hash.Funnel;
-import com.google.common.hash.Funnels;
-
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.BitSet;
-import java.util.List;
-import java.util.Random;
 
 /**
  * @author 游家纨绔
