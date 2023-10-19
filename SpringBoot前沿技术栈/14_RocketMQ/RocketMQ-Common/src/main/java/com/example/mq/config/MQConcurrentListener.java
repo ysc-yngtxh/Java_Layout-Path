@@ -19,12 +19,12 @@ import java.util.Map;
  * @dateTime 2023-10-20 00:00
  * @apiNote TODO 并发消息监听器
  */
-public class MQListenerConcurrently implements MessageListenerConcurrently {
+public class MQConcurrentListener implements MessageListenerConcurrently {
 
     @Autowired
     private Map<String, MQHandler> mqHandlerMap;
 
-    public MQListenerConcurrently(Map<String, MQHandler> mqHandlerMap) {
+    public MQConcurrentListener(Map<String, MQHandler> mqHandlerMap) {
         this.mqHandlerMap = mqHandlerMap;
     }
 

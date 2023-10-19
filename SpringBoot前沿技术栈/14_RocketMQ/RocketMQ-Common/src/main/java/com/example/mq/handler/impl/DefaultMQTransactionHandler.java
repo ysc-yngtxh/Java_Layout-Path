@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DefaultMQTransactionHandler implements MQTransactionHandler {
+
     @Override
     public LocalTransactionState executeLocalTransaction(Message message, Object obj) {
         return null;

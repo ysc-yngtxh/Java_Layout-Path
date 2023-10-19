@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.example.vo.BaseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serial;
 
@@ -14,6 +15,8 @@ import java.io.Serial;
  * @apiNote TODO 订单表(RocketOrder)实体类
  */
 @Data
+// 不加该注解的影响：子类对象A和对象B属性值一致，但其继承的父类对象属性值不一致，在比较的时候 Objects.equals(A,B) 结果为 true。
+@EqualsAndHashCode(callSuper = true)  // 将其父类属性也进行比较
 @TableName("ROCKET_ORDER")
 public class RocketOrder extends BaseEntity {
 

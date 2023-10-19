@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DefaultMQHandler implements MQHandler {
+
     @Override
     public ConsumeConcurrentlyStatus handle(String tag, MessageExt messageExt) {
         return null;

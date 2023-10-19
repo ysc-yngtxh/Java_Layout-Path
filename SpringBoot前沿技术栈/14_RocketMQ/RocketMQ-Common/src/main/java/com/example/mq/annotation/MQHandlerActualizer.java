@@ -18,6 +18,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 @Service
 public @interface MQHandlerActualizer {
+
     /**
      * 消息主题
      */

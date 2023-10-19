@@ -81,7 +81,7 @@ public class MQConfig {
     // TODO 并发消息侦听器(如果对顺序消费有需求则使用MessageListenerOrderly 有序消息侦听器)
     @Bean
     public MessageListenerConcurrently getMessageListenerConcurrently() {
-        return new MQListenerConcurrently(mqHandlerMap);
+        return new MQConcurrentListener(mqHandlerMap);
     }
 
 
