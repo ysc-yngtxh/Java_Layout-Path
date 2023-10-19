@@ -122,19 +122,19 @@ public class MQConfig {
         return producer;
     }
 
-    //事务消息生产者（rocketmq支持柔性事务）
+    // 事务消息生产者（rocketmq支持柔性事务）
     @Bean("transaction")
     public TransactionMQProducer getTransactionMQProducer() {
-        //初始化事务消息基本与普通消息生产者一致
+        // 初始化事务消息基本与普通消息生产者一致
         TransactionMQProducer producer = new TransactionMQProducer("transaction_" + this.groupName);
         producer.setNamesrvAddr(this.pNamesrvAddr);
         producer.setMaxMessageSize(this.maxMessageSize);
         producer.setSendMsgTimeout(this.sendMsgTimeout);
         producer.setRetryTimesWhenSendFailed(this.retryTimesWhenSendFailed);
 
-        //添加事务消息处理线程池
+        // 添加事务消息处理线程池
         producer.setExecutorService(executor);
-        //添加事务消息监听
+        // 添加事务消息监听
         producer.setTransactionListener(mqTransactionListener);
         try {
             producer.start();

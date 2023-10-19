@@ -18,18 +18,19 @@ import java.util.Map;
  * @apiNote TODO 事务消息监听器
  */
 public class MQTransactionListener implements TransactionListener {
+
     @Autowired
     private Map<String, MQTransactionHandler> mqTransactionHandlerMap;
 
     @Override
-    public LocalTransactionState executeLocalTransaction(Message message, Object o) {
-        MQTransactionHandler mqTransactionHandler = getListener(message.getTopic(),message.getTags());
-        return mqTransactionHandler.executeLocalTransaction(message,o);
+    public LocalTransactionState executeLocalTransaction(Message message, Object obj) {
+        MQTransactionHandler mqTransactionHandler = getListener(message.getTopic(), message.getTags());
+        return mqTransactionHandler.executeLocalTransaction(message, obj);
     }
 
     @Override
     public LocalTransactionState checkLocalTransaction(MessageExt messageExt) {
-        MQTransactionHandler mqTransactionHandler = getListener(messageExt.getTopic(),messageExt.getTags());
+        MQTransactionHandler mqTransactionHandler = getListener(messageExt.getTopic(), messageExt.getTags());
         return mqTransactionHandler.checkLocalTransaction(messageExt);
     }
 

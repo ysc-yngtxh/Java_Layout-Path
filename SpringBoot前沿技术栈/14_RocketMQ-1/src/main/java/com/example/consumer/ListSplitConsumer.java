@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class ListSplitConsumer implements Iterator<List<Message>> {
     private static final String NAME_SERVER_ADDR = "localhost:9876";
-    private final int SIZE_LIMIT = 1024 * 1024 * 4;
+    private final int SIZE_LIMIT = 1024 * 1024 * 4;  // 4MB
     private final List<Message> messages;
     private int currIndex;
 

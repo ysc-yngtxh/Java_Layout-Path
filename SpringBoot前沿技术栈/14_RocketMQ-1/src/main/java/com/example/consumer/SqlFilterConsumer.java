@@ -39,7 +39,7 @@ public class SqlFilterConsumer {
                     "TagA" /* Tag */,
                     ("Hello RocketMQ " + i).getBytes(StandardCharsets.UTF_8) /* Message body */
             );
-            // 发送消息时，通过putUserProperty来设置消息的属性
+            // TODO 发送消息时，通过putUserProperty来设置消息的属性
             msg.putUserProperty("a", String.valueOf(i));
             // 发送消息到一个Broker
             SendResult sendResult = producer.send(msg);
