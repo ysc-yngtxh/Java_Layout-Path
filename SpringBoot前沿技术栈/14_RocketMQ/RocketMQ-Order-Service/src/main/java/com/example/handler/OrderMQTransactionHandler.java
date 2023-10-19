@@ -22,9 +22,6 @@ public class OrderMQTransactionHandler implements MQTransactionHandler {
     @Autowired
     private RocketOrderService orderService;
 
-    @Autowired
-    private RocketOrderMapper orderMapper;
-
     @Override
     public LocalTransactionState executeLocalTransaction(Message message, Object o) {
         //执行本地事务
@@ -33,7 +30,7 @@ public class OrderMQTransactionHandler implements MQTransactionHandler {
             String body = new String(message.getBody());
             RocketOrder order = JSONObject.parseObject(body, RocketOrder.class);
             // 执行本地事务
-            orderMapper.insert(order);
+            orderService.save(order);
             state = LocalTransactionState.COMMIT_MESSAGE;
         }catch (Exception e){
             state = LocalTransactionState.ROLLBACK_MESSAGE;
@@ -48,7 +45,7 @@ public class OrderMQTransactionHandler implements MQTransactionHandler {
         String body = new String(messageExt.getBody());
         RocketOrder tempOrder = JSONObject.parseObject(body, RocketOrder.class);
         // 如果数据存在，则事务提交成功
-        RocketOrder order = orderMapper.selectById(tempOrder.getOrderId());
+        RocketOrder order = orderService.getById(tempOrder.getOrderId());
         if (order != null){
             state = LocalTransactionState.COMMIT_MESSAGE;
         }else{

@@ -25,9 +25,6 @@ public class RocketOrderController {
     @Autowired
     private RocketOrderService orderService;
 
-    @Autowired
-    private RocketOrderMapper orderMapper;
-
     /**
      * 新增订单
      **/
@@ -43,7 +40,7 @@ public class RocketOrderController {
     public Result getOrders(@PathVariable Integer userId) {
         QueryWrapper<RocketOrder> pointsQueryWrapper = new QueryWrapper<>();
         pointsQueryWrapper.lambda().eq(RocketOrder::getUserId,userId);
-        return Result.success(orderMapper.selectList(pointsQueryWrapper));
+        return Result.success(orderService.list(pointsQueryWrapper));
     }
 }
 
