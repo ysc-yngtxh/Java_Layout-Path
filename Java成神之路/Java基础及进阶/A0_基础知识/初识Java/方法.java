@@ -51,8 +51,7 @@ public class 方法{
 		sumInt(888, 555);        // 方法.可以省略，但sumInt()必须要在类中找到
 		A.M();                   // 这里调用的是外界A类的函数，所以不能省类名.
 		System.out.println();
-		
-		
+
 		System.out.println("100以内的所有素数");
 		int count = 0;                  // count表示的是控制台一行的输出值个数；
 		for(int i = 2; i <= 100; i++){  // 素数只能被1和自身整除，所以最小的素数是2
@@ -74,7 +73,6 @@ public class 方法{
 		}
 	}
 }
-
 
 class A{
 	public static void M() {

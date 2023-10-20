@@ -22,7 +22,7 @@ public class Producer1_Sync {
             // 创建消息，并指定Topic，Tag和消息体
             Message msg = new Message(
                     "TopicSync" /* Topic */,
-                    "TagA" /* Tag */,
+                    "TagA"      /* Tag */,
                     ("Hello RocketMQ " + i).getBytes(RemotingHelper.DEFAULT_CHARSET) /* Message body */
             );
             // 发送消息到一个Broker

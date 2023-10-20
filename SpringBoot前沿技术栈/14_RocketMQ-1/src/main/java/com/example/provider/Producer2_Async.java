@@ -27,7 +27,7 @@ public class Producer2_Async {
         final CountDownLatch2 countDownLatch = new CountDownLatch2(messageCount);
         for (int i = 0; i < messageCount; i++) {
             final int index = i;
-            // 创建消息，并指定Topic，Tag和消息体
+            // 创建消息，并指定Topic，Tag和消息Key与消息体
             Message msg = new Message("TopicAsync",
                     "TagA",
                     "OrderID188",

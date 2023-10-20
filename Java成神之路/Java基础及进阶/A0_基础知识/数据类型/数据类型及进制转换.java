@@ -28,8 +28,8 @@ package A0_基础知识.数据类型;
            long                         8                                           0
            float                        4                                           0
            double                       8                                           0
-           boolean                      1                【true,false】            false
-           char                         2                  【0~65535】             \u0000
+           boolean                      1               【true, false】            false
+           char                         2                 【0~65535】              \u0000
      
       6、计算机在任何情况下都只能识别二进制
      
@@ -44,11 +44,11 @@ package A0_基础知识.数据类型;
                 0 1 2 3 4 5 6 7 10 11 12 13 14 15 16 17 20
 
       8、字节(byte) 
-         1 Byte = 8 bit 【1个字节=8个比特位】一个比特位表示一个二进制位：1或0
-         1 KB = 1024Byte
-         1 MB = 1024KB
-         1 GB = 1024MB
-         1 TB = 1024GB
+           1 Byte = 8 bit 【1个字节=8个比特位】一个比特位表示一个二进制位：1或0
+           1 KB = 1024 Byte
+           1 MB = 1024 KB
+           1 GB = 1024 MB
+           1 TB = 1024 GB
       
       9、整数型当中的byte类型，占用一个字节，所以byte类型的数据占用8个比特位。
                 那么byte类型的取值范围是多少？

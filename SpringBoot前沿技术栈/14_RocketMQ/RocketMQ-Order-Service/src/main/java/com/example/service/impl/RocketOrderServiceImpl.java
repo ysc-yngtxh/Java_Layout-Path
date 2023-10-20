@@ -27,7 +27,7 @@ public class RocketOrderServiceImpl extends ServiceImpl<RocketOrderMapper, Rocke
 
     @Autowired
     @Qualifier("defaultProvider")
-    private DefaultMQProducer producer;
+    private DefaultMQProducer producer;  // 获取Common包中的普通生产者Bean
 
     @Autowired
     private TransactionMQProducer transactionMQProducer;
