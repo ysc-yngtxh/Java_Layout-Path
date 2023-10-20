@@ -8,7 +8,6 @@ public class While{
 		}
 		System.out.println(i); // 0
 		
-		
 		int a = 10;
 		do {                       // do while循环结构体
 			System.out.println(a); // 10 11 12 13 14 15 16 17 18 19

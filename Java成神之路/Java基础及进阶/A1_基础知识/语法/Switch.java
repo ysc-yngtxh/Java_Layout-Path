@@ -17,7 +17,6 @@ import java.util.Scanner;
     6、switch后面和case后面只能是int或者string类型的数据，不能是探测其他类型。
                   *当然byte，short,char也可以直接写到switch和case后面，因为它们可以进行自动类型转换  
                    byte，short,char可以自动转换成int类型 
-                   
  */
 public class Switch{
 	public static void main(String[] args) {
@@ -26,9 +25,9 @@ public class Switch{
 		System.out.println("请输入数字：");
 		int c = a.nextInt();
 		switch(c) {
-		case 1:case 0:                     //case合并
+		case 1:case 0:                     // case合并
 			System.out.println("星期一");
-			                               //没有break;被称为case穿透
+			                               // 没有 break; 被称为case穿透
 		case 2:
 			System.out.println("星期二");
 			break;
