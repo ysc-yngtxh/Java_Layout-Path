@@ -1,7 +1,7 @@
 ## 1、IO流，什么是IO？
-&emsp;&emsp;&emsp;&emsp;I:Input  
-&emsp;&emsp;&emsp;&emsp;O:Output  
-&emsp;&emsp;&emsp;&emsp;通过IO可以完成硬盘文件的读和写
+> #### &emsp;&emsp;&emsp;&emsp;I：Input  
+> #### &emsp;&emsp;&emsp;&emsp;O：Output  
+> #### &emsp;&emsp;&emsp;&emsp;通过IO可以完成硬盘文件的读和写
 ## 2、IO流的分类
       一种方式是按照流的方向进行分类：
           以内存作为参照物，
@@ -81,4 +81,3 @@
     对象专属流：
     java.io.ObjectInputStream
     java.io.ObjectOutputStream
-*/
