@@ -3,7 +3,7 @@ package O15_JUC并发.JUC并发Ⅴ_阻塞队列;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-public class D超时等待API {
+public class 阻塞队列4_超时等待API {
 
     public static void main(String[] args) {
         test();

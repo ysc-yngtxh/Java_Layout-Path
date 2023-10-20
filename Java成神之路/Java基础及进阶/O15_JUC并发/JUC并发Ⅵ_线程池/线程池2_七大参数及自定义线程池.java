@@ -3,7 +3,7 @@ package O15_JUC并发.JUC并发Ⅵ_线程池;
 
 import java.util.concurrent.*;
 
-public class B七大参数及自定义线程池 {
+public class 线程池2_七大参数及自定义线程池 {
     /**
 
        public ThreadPoolExecutor(

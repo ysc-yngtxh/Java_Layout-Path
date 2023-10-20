@@ -2,7 +2,7 @@ package O15_JUC并发.JUC并发Ⅴ_阻塞队列;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
-public class A抛出异常API {
+public class 阻塞队列1_抛出异常API {
     /**
      * 什么时候使用队列？多线程并发处理，线程池！
      * 四组API

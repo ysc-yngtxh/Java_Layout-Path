@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * @dateTime 2023-08-22 19:05
  * @apiNote TODO
  */
-public class Atomic_3_AtomicReference类API {
+public class Atomic3_AtomicReference类API {
     /**
      * AtomicReference 类是Java在 java.util.concurrent.atomic 包下Atomic相关的原子操作类
      * atomic 包下原子更新基本数据类型还包括 AtomicInteger、AtomicLong、AtomicBoolean 三个类

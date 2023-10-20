@@ -2,7 +2,7 @@ package O15_JUC并发.JUC并发Ⅴ_阻塞队列;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
-public class B不抛出异常API {
+public class 阻塞队列2_不抛出异常API {
 
     public static void main(String[] args) {
         test();

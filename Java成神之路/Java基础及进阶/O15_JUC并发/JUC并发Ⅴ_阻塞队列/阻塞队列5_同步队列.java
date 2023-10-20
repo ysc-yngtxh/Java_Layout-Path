@@ -4,7 +4,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.TimeUnit;
 
-public class E同步队列 {
+public class 阻塞队列5_同步队列 {
     /**
      * 同步队列
      * 和其他的BlockingQueue不一样，SynchronousQueue不存储元素(就是说，这个队列中最多只能有一个元素)

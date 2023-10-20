@@ -5,7 +5,7 @@ package O15_JUC并发.JUC并发Ⅸ_关于AtomicReference非阻塞原子性读写
  * @dateTime 2023-08-22 18:36
  * @apiNote TODO
  */
-public class Atomic_2_CAS无锁算法 {
+public class Atomic2_CAS无锁算法 {
     /**
      * Atomic包下的类是无锁操作，无锁的实现就得益于CAS算法
      * 一、CAS是Compare And Swap的简称，即比较并交换的意思。CAS是一种无锁算法，其算法思想如下：

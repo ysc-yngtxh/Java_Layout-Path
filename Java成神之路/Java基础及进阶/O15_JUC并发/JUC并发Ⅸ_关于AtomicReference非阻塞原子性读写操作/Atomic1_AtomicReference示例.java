@@ -10,7 +10,7 @@ import static java.util.concurrent.ThreadLocalRandom.current;
  * @dateTime 2023-08-21 07:06
  * @apiNote TODO
  */
-public class Atomic_1_AtomicReference示例 {
+public class Atomic1_AtomicReference示例 {
 
     /**
      * AtomicReference类提供了对象引用的非阻塞原子性读写操作，并且提供了其他一些高级的用法

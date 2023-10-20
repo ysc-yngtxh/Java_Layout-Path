@@ -4,7 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class A池化技术 {
+public class 线程池1_池化技术 {
     /**
      * 池化技术
      *    程序的运行，本质：占用系统的资源！优化资源的使用--池化技术

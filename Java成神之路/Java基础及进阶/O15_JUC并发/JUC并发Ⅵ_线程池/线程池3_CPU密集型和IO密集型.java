@@ -2,7 +2,7 @@ package O15_JUC并发.JUC并发Ⅵ_线程池;
 
 import java.util.concurrent.*;
 
-public class CPU密集型和IO密集型 {
+public class 线程池3_CPU密集型和IO密集型 {
     /**
      * CPU密集型，IO密集型(调优)
      * 池的最大大小(线程)到底该如何设置

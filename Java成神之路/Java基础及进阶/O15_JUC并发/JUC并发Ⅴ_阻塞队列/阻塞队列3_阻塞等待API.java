@@ -2,7 +2,7 @@ package O15_JUC并发.JUC并发Ⅴ_阻塞队列;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
-public class C阻塞等待API {
+public class 阻塞队列3_阻塞等待API {
 
     public static void main(String[] args) {
         test();
