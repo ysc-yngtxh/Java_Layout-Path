@@ -55,8 +55,7 @@ package A0_基础知识.初识Java;
          - 变量名，方法名：首字母小写，后面每个单词首字母大写
          - 常量名：全部大写
 */
-public class 常识 // IdentifierTest01是类名，可以修改但必须和源文件名相同。
-{
+public class 常识 {
 	public static void main(String[] arge) {
 		
 	}
