@@ -64,22 +64,22 @@ public class ListSplitConsumer implements Iterator<List<Message>> {
 
     public static void main(String[] args) {
         // 把大的消息分裂成若干个小的消息
-        ListSplitConsumer splitter = new ListSplitConsumer(messages);
-        while (splitter.hasNext()) {
-            try {
-                List<Message> listItem = splitter.next();
-                // 实例化消息生产者 -- 生产组(please_rename_unique_group_name)
-                DefaultMQProducer producer = new DefaultMQProducer("please_rename_unique_group_name");
-                // 设置NameServer的地址
-                producer.setNamesrvAddr(NAME_SERVER_ADDR);
-                // 启动Producer实例
-                producer.start();
-                // 发送消息
-                producer.send(listItem);
-            } catch (Exception e) {
-                e.printStackTrace();
-                // 处理error
-            }
-        }
+        // ListSplitConsumer splitter = new ListSplitConsumer(messages);
+        // while (splitter.hasNext()) {
+        //     try {
+        //         List<Message> listItem = splitter.next();
+        //         // 实例化消息生产者 -- 生产组(please_rename_unique_group_name)
+        //         DefaultMQProducer producer = new DefaultMQProducer("please_rename_unique_group_name");
+        //         // 设置NameServer的地址
+        //         producer.setNamesrvAddr(NAME_SERVER_ADDR);
+        //         // 启动Producer实例
+        //         producer.start();
+        //         // 发送消息
+        //         producer.send(listItem);
+        //     } catch (Exception e) {
+        //         e.printStackTrace();
+        //         // 处理error
+        //     }
+        // }
     }
 }

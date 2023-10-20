@@ -13,10 +13,9 @@ import java.util.concurrent.TimeUnit;
  * 2、发送异步消息：异步消息通常用在对响应时间敏感的业务场景，即发送端不能容忍长时间地等待Broker的响应。
  */
 public class Producer2_Async {
-
     public static void main(String[] args) throws Exception {
-        // 实例化消息生产者 -- 生产组(please_rename_unique_group_name)
-        DefaultMQProducer producer = new DefaultMQProducer("please_rename_unique_group_name");
+        // 实例化消息生产者 -- 生产组(Async_Provider_Group)
+        DefaultMQProducer producer = new DefaultMQProducer("Async_Provider_Group");
         // 设置NameServer的地址
         producer.setNamesrvAddr("localhost:9876");
         // 启动Producer实例
@@ -37,11 +36,13 @@ public class Producer2_Async {
             producer.send(msg, new SendCallback() {
                 @Override
                 public void onSuccess(SendResult sendResult) {
+                    // 发送消息成功的回调函数
                     System.out.printf("%-10d OK %s %n", index, sendResult.getMsgId());
                 }
 
                 @Override
                 public void onException(Throwable e) {
+                    // 发送消息失败的回调函数
                     System.err.printf("%-10d Error %s %n", index, e);
                     e.printStackTrace();
                 }
