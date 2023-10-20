@@ -28,7 +28,7 @@ package A0_基础知识.数据类型;
            long                         8                                           0
            float                        4                                           0
            double                       8                                           0
-           boolean                      1                【true,false】            flase
+           boolean                      1                【true,false】            false
            char                         2                  【0~65535】             \u0000
      
       6、计算机在任何情况下都只能识别二进制
