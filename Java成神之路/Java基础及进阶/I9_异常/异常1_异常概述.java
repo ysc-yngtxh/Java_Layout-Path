@@ -21,10 +21,7 @@ package I9_异常;
             RuntimeException：运行时异常。（编写程序时可以预先处理也可以不做处理）
                                **运行时异常的特点是Java编译器不会检查它，也就是说，当程序中可能出现这类异常，
                                  即使没有用try-catch语句捕获它，也没有用throws子句声明抛出它，也会编译通过。
-
-
             ***再次强调：所有异常都是发生在运行阶段
-
  */
 public class 异常1_异常概述 {
     public static void main(String[] args) {
