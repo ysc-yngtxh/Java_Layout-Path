@@ -6,7 +6,7 @@
  */
 public class 数据类型Boolean{
 	public static void main(String[] args) {
-		boolean S=false;
+		boolean S = false;
 		if(S) {
 			System.out.println("恭喜你，登陆成功！");
 		}else {

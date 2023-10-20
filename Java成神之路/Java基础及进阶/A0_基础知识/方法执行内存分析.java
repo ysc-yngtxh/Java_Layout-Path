@@ -1,25 +1,25 @@
 public class 方法执行内存分析{
 	public static void main(String[] args) {
-		int a=10;
-		int b=20;
-		int retValue=sumInt(a,b);
+		int a = 10;
+		int b = 20;
+		int retValue = sumInt(a, b);
 		method(a);
-		System.out.println("retValue="+retValue);        //10
-		System.out.println("a="+a);                      //10
+		System.out.println("retValue = " + retValue);        // 10
+		System.out.println("a = " + a);                      // 10
 	}
-	public static int sumInt(int i,int j) {
-		int result=i+j;
-		int num=3;
-		int retValue=divide(result,num);
+	public static int sumInt(int i, int j) {
+		int result = i + j;
+		int num = 3;
+		int retValue = divide(result, num);
 		return retValue;
 	}
-	public static int divide(int x,int y) {
-		int z=x/y;
+	public static int divide(int x, int y) {
+		int z = x/y;
 		return z;
 	}
 	public static void method(int a) {
 		a++;
-		System.out.println("a="+a);                      //11
+		System.out.println("a = " + a);                     // 11
 	}
 }
 /*此程序的运行过程
