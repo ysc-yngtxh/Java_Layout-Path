@@ -1,4 +1,0 @@
-package P16_23种设计模式.A工厂模式;
-
-public interface Car {
-}
