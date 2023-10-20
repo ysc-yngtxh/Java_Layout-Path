@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 public class RocketOrderServiceImpl extends ServiceImpl<RocketOrderMapper, RocketOrder> implements RocketOrderService {
 
     @Autowired
-    @Qualifier("default")
+    @Qualifier("defaultProvider")
     private DefaultMQProducer producer;
 
     @Autowired
@@ -43,12 +43,12 @@ public class RocketOrderServiceImpl extends ServiceImpl<RocketOrderMapper, Rocke
             this.save(order);
             Message message = new Message("points","default", JSON.toJSONString(order).getBytes());
             try {
-                SendResult sendResult = producer.send(message);//同步消息
+                SendResult sendResult = producer.send(message); // 同步消息
                 System.out.println("发送状态：" + sendResult.getSendStatus() +
-                        ",消息ID：" + sendResult.getMsgId() +
-                        ",队列:" + sendResult.getMessageQueue().getQueueId());
-//                producer.sendOneway(message);//单向消息
-//                producer.send(message, new SendCallback() {//异步消息
+                        ", 消息ID：" + sendResult.getMsgId() +
+                        ", 队列：" + sendResult.getMessageQueue().getQueueId());
+//                producer.sendOneway(message); // 单向消息
+//                producer.send(message, new SendCallback() { // 异步消息
 //                    @Override
 //                    public void onSuccess(SendResult sendResult) {
 //
@@ -63,8 +63,8 @@ public class RocketOrderServiceImpl extends ServiceImpl<RocketOrderMapper, Rocke
                 e.printStackTrace();
             }
         } else {
-            //事务消息
-            Message message = new Message("points","transaction", JSON.toJSONString(order).getBytes());
+            // 事务消息
+            Message message = new Message("points", "transaction", JSON.toJSONString(order).getBytes());
             try {
                 transactionMQProducer.sendMessageInTransaction(message, null);
             } catch (MQClientException e) {

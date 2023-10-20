@@ -35,7 +35,7 @@ public class PointsMQHandler implements MQHandler {
         System.out.println("消息监听："  + "Points为订单" + orderId + "添加积分");
         // 查询该订单是否已经生成对应积分（rocketMQ可能会重复发送消息，需实现幂等）
         QueryWrapper<RocketPoints> pointsQueryWrapper = new QueryWrapper<>();
-        pointsQueryWrapper.lambda().eq(RocketPoints::getOrderId,orderId);
+        pointsQueryWrapper.lambda().eq(RocketPoints::getOrderId, orderId);
         RocketPoints tempPoints = pointsService.getOne(pointsQueryWrapper);
         if (tempPoints != null) {
             // 该订单已经生成积分

@@ -1,6 +1,8 @@
 package com.example.mq.config;
 
 import com.example.mq.handler.MQHandler;
+import com.example.mq.listener.MQConcurrentListener;
+import com.example.mq.listener.MQTransactionListener;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
@@ -77,7 +79,7 @@ public class MQConfig {
         return consumer;
     }
 
-    // TODO 并发消息侦听器(如果对顺序消费有需求则使用MessageListenerOrderly 有序消息侦听器)
+    // TODO 并发消息侦听器(如果对顺序消费有需求则使用 MessageListenerOrderly 有序消息侦听器)
     @Bean
     public MessageListenerConcurrently getMessageListenerConcurrently() {
         return new MQConcurrentListener(mqHandlerMap);
@@ -106,7 +108,7 @@ public class MQConfig {
             new ThreadPoolExecutor.AbortPolicy());              // TODO 执行任务的线程池
 
     // 普通消息生产者
-    @Bean("default")
+    @Bean("defaultProvider")
     public DefaultMQProducer getDefaultMQProducer() {
         DefaultMQProducer producer = new DefaultMQProducer(this.groupName);
         producer.setNamesrvAddr(this.pNamesrvAddr);

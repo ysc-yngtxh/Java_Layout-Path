@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 /**
  * @author 游家纨绔
  * @dateTime 2023-10-20 00:00
- * @apiNote TODO 消息处理类标注（根据topic和tag区分不同消息处理类）
+ * @apiNote TODO 消息处理类注解（根据topic和tag区分不同消息处理类）
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

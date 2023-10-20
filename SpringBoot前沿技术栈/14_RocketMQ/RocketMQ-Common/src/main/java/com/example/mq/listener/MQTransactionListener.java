@@ -1,4 +1,4 @@
-package com.example.mq.config;
+package com.example.mq.listener;
 
 import com.example.mq.annotation.MQHandlerActualizer;
 import com.example.mq.handler.MQTransactionHandler;

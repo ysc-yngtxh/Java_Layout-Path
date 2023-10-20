@@ -1,4 +1,4 @@
-package com.example.mq.config;
+package com.example.mq.listener;
 
 import com.example.mq.annotation.MQHandlerActualizer;
 import com.example.mq.handler.MQHandler;
@@ -38,7 +38,7 @@ public class MQConcurrentListener implements MessageListenerConcurrently {
         // TODO 判断该消息是否重复消费（RocketMQ不保证消息不重复，如果你的业务需要保证严格的不重复消息，需要你自己在业务端去重）
         // TODO 获取该消息重试次数
         int reconsume = messageExt.getReconsumeTimes();
-        if(reconsume ==3){ // 消息已经重试了3次，需做告警处理，已经相关日志
+        if(reconsume ==3){ // 消息已经重试了3次，需做告警处理，以及相关日志
             return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
         }
         // TODO 处理对应的业务逻辑

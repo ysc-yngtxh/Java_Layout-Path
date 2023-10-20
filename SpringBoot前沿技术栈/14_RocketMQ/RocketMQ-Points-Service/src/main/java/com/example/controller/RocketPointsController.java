@@ -24,7 +24,7 @@ public class RocketPointsController {
     @GetMapping("/{orderId}")
     public RocketPoints getPointsByOrderId(@PathVariable String orderId) {
         QueryWrapper<RocketPoints> pointsQueryWrapper = new QueryWrapper<>();
-        pointsQueryWrapper.lambda().eq(RocketPoints::getOrderId,orderId);
+        pointsQueryWrapper.lambda().eq(RocketPoints::getOrderId, orderId);
         return pointsService.getOne(pointsQueryWrapper);
     }
 }

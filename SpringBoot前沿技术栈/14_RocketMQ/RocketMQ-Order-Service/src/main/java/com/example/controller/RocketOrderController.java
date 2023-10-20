@@ -39,7 +39,7 @@ public class RocketOrderController {
     @GetMapping("/{userId}")
     public Result getOrders(@PathVariable Integer userId) {
         QueryWrapper<RocketOrder> pointsQueryWrapper = new QueryWrapper<>();
-        pointsQueryWrapper.lambda().eq(RocketOrder::getUserId,userId);
+        pointsQueryWrapper.lambda().eq(RocketOrder::getUserId, userId);
         return Result.success(orderService.list(pointsQueryWrapper));
     }
 }
