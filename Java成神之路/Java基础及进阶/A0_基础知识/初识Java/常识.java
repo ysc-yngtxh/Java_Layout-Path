@@ -1,4 +1,4 @@
-package A0_基础知识.初始Java;
+package A0_基础知识.初识Java;
 
 /*
 一、dos窗口常见指令:

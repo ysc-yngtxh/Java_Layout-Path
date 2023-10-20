@@ -6,7 +6,7 @@ package A0_基础知识.数据类型;
         char类型因为只含有两个字节，而一个中文也占两个字节，所以char类型可以赋值一个中文字符，但不能赋值一串中文
         赋值一串中文是String类型
  */
-public class 数据类型Char{
+public class 数据类型字符型 {
 	public static void main(String[] args) {
 		char c1 = 'n';
 		// 普通的n字符

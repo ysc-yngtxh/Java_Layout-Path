@@ -6,7 +6,7 @@ package A0_基础知识.数据类型;
   
       布尔类型在实际开发当中非常重要，经常使用在逻辑运算和条件控制语句当中。
  */
-public class 数据类型Boolean{
+public class 数据类型布尔型 {
 	public static void main(String[] args) {
 		boolean S = false;
 		if(S) {

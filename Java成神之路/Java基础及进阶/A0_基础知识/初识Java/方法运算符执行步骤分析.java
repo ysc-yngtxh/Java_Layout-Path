@@ -1,4 +1,4 @@
-package A0_基础知识.初始Java;
+package A0_基础知识.初识Java;
 
 public class 方法运算符执行步骤分析 {
 	public static void main(String[] args) {

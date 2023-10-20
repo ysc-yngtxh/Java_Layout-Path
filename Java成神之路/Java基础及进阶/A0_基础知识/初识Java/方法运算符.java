@@ -1,4 +1,4 @@
-package A0_基础知识.初始Java;
+package A0_基础知识.初识Java;
 
 /*
 关于Java编程中运算符
