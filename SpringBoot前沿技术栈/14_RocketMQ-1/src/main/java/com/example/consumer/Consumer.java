@@ -6,6 +6,7 @@ import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
+import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.MessageExt;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class Consumer {
         String groupConsumer = null;
         String topic = null;
         System.err.println("请输入数字，选择合适的消费组、主题：\n[1] Provider1_Sync、[2] Provider2_ASync、" +
-                "[3] Provider3_Oneway、[4] Provider4_DelayMessage、[5] Provider5_ListMessage、");
+                "[3] Provider3_Oneway、[4] Provider4_Order、[5] Provider5_DelayMessage、[6] Provider6_ListMessage");
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
             int nextInt = scanner.nextInt();
@@ -41,11 +42,16 @@ public class Consumer {
                         break;
                     }
                     case 4 -> {
+                        groupConsumer = "Order_Provider_Group";
+                        topic = "TopicOrder";
+                        break;
+                    }
+                    case 5 -> {
                         groupConsumer = "DelayMessage_Provider_Group";
                         topic = "TestDelay";
                         break;
                     }
-                    case 5 -> {
+                    case 6 -> {
                         groupConsumer = "ListMessage_Provider_Group";
                         topic = "TopicList";
                         break;
@@ -87,8 +93,8 @@ public class Consumer {
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
                 // MessageExt：是一个消息接收通配符，不管发送的是String还是对象，都可接收，当然也可以像上面明确指定类型（我建议还是指定类型较方便）
                 // System.out.printf：支持使用字符信息的格式化
-                System.out.printf("%s Receive New Messages: %s %n",
-                        Thread.currentThread().getName(), msgs);
+                System.out.printf("%s 接收新消息: %s %n",
+                        Thread.currentThread().getName(), msgs.stream().map(MessageExt::getBody).map(String::new).toList());
                 // 标记该消息已经被成功消费
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
