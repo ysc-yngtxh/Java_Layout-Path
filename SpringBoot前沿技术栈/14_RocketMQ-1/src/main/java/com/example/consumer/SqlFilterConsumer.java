@@ -35,9 +35,9 @@ public class SqlFilterConsumer {
         for (int i = 0; i < 100; i++) {
             // 创建消息，并指定Topic，Tag和消息体
             Message msg = new Message(
-                    "TopicTest" /* Topic */,
-                    "TagA" /* Tag */,
-                    ("Hello RocketMQ " + i).getBytes(StandardCharsets.UTF_8) /* Message body */
+                    "TopicTest",
+                    "TagA",
+                    ("Hello RocketMQ " + i).getBytes(StandardCharsets.UTF_8)
             );
             // TODO 发送消息时，通过putUserProperty来设置消息的属性
             msg.putUserProperty("a", String.valueOf(i));

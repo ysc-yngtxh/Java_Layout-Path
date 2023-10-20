@@ -15,7 +15,7 @@ public class Producer4_DelayMessage {
       producer.start();
       for (int i = 0; i < 100; i++) {
           // 创建消息，并指定Topic和消息体（Tag可以不指定）
-          Message message = new Message("TestTopic", ("Hello scheduled message " + i).getBytes());
+          Message message = new Message("TestDelay", ("Hello scheduled message " + i).getBytes());
           // 设置延时等级3，这个消息将在 10s(等级3) 之后发送(只支持固定的几个时间,不支持自定义时间)
           message.setDelayTimeLevel(3);
           // 发送消息

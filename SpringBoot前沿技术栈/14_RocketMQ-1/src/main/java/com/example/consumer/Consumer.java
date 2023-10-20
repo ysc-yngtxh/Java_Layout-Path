@@ -17,8 +17,9 @@ public class Consumer {
 
     public static void main(String[] args) throws MQClientException {
         String groupConsumer = null;
-        System.out.println("请输入数字，选择合适的消费组：\n[1] Sync_Provider_Group、[2] ASync_Provider_Group、" +
-                "[3] Oneway_Provider_Group、[4] DelayMessage_Provider_Group、[5] ListMessage_Provider_Group、");
+        String topic = null;
+        System.err.println("请输入数字，选择合适的消费组、主题：\n[1] Provider1_Sync、[2] Provider2_ASync、" +
+                "[3] Provider3_Oneway、[4] Provider4_DelayMessage、[5] Provider5_ListMessage、");
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
             int nextInt = scanner.nextInt();
@@ -26,32 +27,37 @@ public class Consumer {
                 switch (nextInt) {
                     case 1 -> {
                         groupConsumer = "Sync_Provider_Group";
+                        topic = "TopicSync";
                         break;
                     }
                     case 2 -> {
                         groupConsumer = "Async_Provider_Group";
+                        topic = "TopicAsync";
                         break;
                     }
                     case 3 -> {
                         groupConsumer = "Oneway_Provider_Group";
+                        topic = "TopicOneway";
                         break;
                     }
                     case 4 -> {
                         groupConsumer = "DelayMessage_Provider_Group";
+                        topic = "TestDelay";
                         break;
                     }
                     case 5 -> {
                         groupConsumer = "ListMessage_Provider_Group";
+                        topic = "TopicList";
                         break;
                     }
                 }
                 // 调用相应消费组的消息进行消费
-                Consumption(groupConsumer);
+                Consumption(groupConsumer, topic);
             }
         }
     }
 
-    private static void Consumption(String groupConsumer) throws MQClientException {
+    private static void Consumption(String groupConsumer, String Topic) throws MQClientException {
         // 实例化Push消费者 -- 消费组
         DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer(groupConsumer);
         // 实例化Push消费者，虽然API是过时的，但我们也需要去了解。
@@ -71,7 +77,7 @@ public class Consumer {
         pushConsumer.setNamesrvAddr(NAME_SERVER_ADDR);
 
         // 订阅一个或者多个Topic，以及Tag来过滤需要消费的消息
-        pushConsumer.subscribe("TopicTest", "*");
+        pushConsumer.subscribe(Topic, "*");
         // TODO Tag是一个简单而有用的设计，其可以来选择您想要的消息。
         // consumer.subscribe("TopicTest", "TagA || TagB || TagC");
 

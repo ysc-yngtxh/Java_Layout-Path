@@ -28,7 +28,7 @@ public class Producer2_Async {
         for (int i = 0; i < messageCount; i++) {
             final int index = i;
             // 创建消息，并指定Topic，Tag和消息体
-            Message msg = new Message("TopicTest",
+            Message msg = new Message("TopicAsync",
                     "TagA",
                     "OrderID188",
                     "Hello world".getBytes(RemotingHelper.DEFAULT_CHARSET));
