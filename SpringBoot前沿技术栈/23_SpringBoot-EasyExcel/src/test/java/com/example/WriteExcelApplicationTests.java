@@ -196,7 +196,7 @@ public class WriteExcelApplicationTests {
         // 1. 将图片上传到oss 或者其他存储网站: https://www.aliyun.com/product/oss ，然后直接放链接
         // 2. 使用: https://github.com/coobird/thumbnailator 或者其他工具压缩图片
 
-        String imagePath = System.getProperty("user.dir") + "/src/provider/resources/static/下载.jpeg";
+        String imagePath = System.getProperty("user.dir") + "/src/test/resources/static/下载.jpeg";
         try (InputStream inputStream = FileUtils.openInputStream(new File(imagePath))) {
             List<WriteDemo4> list =  ListUtils.newArrayList();
             WriteDemo4 writeDemo = new WriteDemo4();

@@ -16,7 +16,7 @@
 //import com.xxl.rpc.remoting.invoker.route.LoadBalance;
 //import com.xxl.rpc.remoting.net.NetEnum;
 //import com.xxl.rpc.remoting.net.impl.servlet.server.ServletServerHandler;
-//import com.xxl.rpc.remoting.provider.XxlRpcProviderFactory;
+//import com.xxl.rpc.remoting.test.XxlRpcProviderFactory;
 //import com.xxl.rpc.serialize.Serializer;
 //import org.quartz.*;
 //import org.quartz.Trigger.TriggerState;
@@ -93,7 +93,7 @@
 //    }
 //
 //
-//    // ---------------------- admin rpc provider (no server version) ----------------------
+//    // ---------------------- admin rpc test (no server version) ----------------------
 //    private static ServletServerHandler servletServerHandler;
 //    private void initRpcProvider(){
 //        // init
