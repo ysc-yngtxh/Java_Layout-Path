@@ -23,22 +23,10 @@ import java.util.List;
 /**
  * @author 游家纨绔
  * @dateTime 2023-10-21 18:09
- * @apiNote TODO 发送同步消息
+ * @apiNote TODO 顺序消息消费
  */
 @SpringBootTest(classes = Demo4_OrderMessage.class)
 public class Demo4_OrderMessage {
-    /**
-     * Broker里的每一个主题(Topic)消息默认读队列4个、写队列4个。
-     * <p>
-     * 同一主题(Topic)不考虑标签(Tag)情况下，每次生产者发送消息写入的可能不是一个队列。
-     * 消费者订阅 pushConsumer.subscribe(Topic, "*"); 去消费这个主题数据，该先去消费默认四个队列中的哪个队列呢？
-     * <p>
-     * 假设：同一主题下，生产消息的依次写入，存储队列为[2, 3, 1, 0]；但是消费时多线程轮询方式读取，消费队列是[0, 1, 2, 3]，
-     * 就会造成一个读取数据顺序错误，从而造成业务混乱。
-     * <p>
-     * 方案：将多线程读取方式换为单线程
-     * 4、顺序发送消息：发送时要确保有序。如何保证有序？
-     */
     private static final List<MsgModel> msgModelList = Arrays.asList(
             new MsgModel("华为meta60pro", 1, "下单"),
             new MsgModel("华为meta60pro", 1, "付款"),
@@ -48,11 +36,11 @@ public class Demo4_OrderMessage {
             new MsgModel("华为问界M7", 2, "物流")
     );
 
-
+    // 思路参考：RocketMQ详解.md 中的 【四、RocketMQ 基本概念】
     @Test
     public void OrderMessage() throws Exception {
-        // 实例化消息生产者 -- 生产组(Order_Provider_Group)
-        DefaultMQProducer producer = new DefaultMQProducer("Order_Provider_Group");
+        // 实例化消息生产者 -- 生产组(Order_Group)
+        DefaultMQProducer producer = new DefaultMQProducer("Order_Group");
         // 设置NameServer的地址
         producer.setNamesrvAddr("localhost:9876");
         // 启动Producer实例
@@ -99,7 +87,7 @@ public class Demo4_OrderMessage {
     // 消费消息
     public static void main(String[] args) throws MQClientException {
         // 实例化消息Push消费者 -- 消费组
-        DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("Order_Provider_Group");
+        DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("Order_Group");
         // 设置NameServer的地址
         pushConsumer.setNamesrvAddr("localhost:9876");
 

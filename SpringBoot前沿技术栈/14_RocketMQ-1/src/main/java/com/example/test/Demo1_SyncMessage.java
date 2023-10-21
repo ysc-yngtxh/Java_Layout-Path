@@ -28,8 +28,8 @@ public class Demo1_SyncMessage {
     // 发送同步消息：这种可靠性同步地发送方式使用的比较广泛，比如：重要的消息通知，短信通知。
     @Test
     public void SyncMessage() throws Exception {
-        // 实例化消息生产者 -- 生产组(Sync_Provider_Group)
-        DefaultMQProducer producer = new DefaultMQProducer("Sync_Provider_Group");
+        // 实例化消息生产者 -- 生产组(Sync_Group)
+        DefaultMQProducer producer = new DefaultMQProducer("Sync_Group");
         producer.setNamesrvAddr("localhost:9876"); // 设置NameServer的地址
         // 启动Producer实例
         producer.start();
@@ -55,9 +55,9 @@ public class Demo1_SyncMessage {
     // 消费消息
     public static void main(String[] args) throws MQClientException {
         // 实例化消息Push消费者 -- 消费组
-        DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("Sync_Provider_Group");
+        DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("Sync_Group");
         // 实例化Push消费者，虽然API是过时的，但我们也需要去了解。
-        DefaultMQPullConsumer pullConsumer = new DefaultMQPullConsumer("Sync_Provider_Group");
+        DefaultMQPullConsumer pullConsumer = new DefaultMQPullConsumer("Sync_Group");
         // TODO
         //  1、Push是MQ主动推送消息给客户端
         //     优点：及时性好；

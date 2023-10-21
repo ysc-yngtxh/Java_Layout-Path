@@ -25,8 +25,8 @@ public class Demo5_OnewayMessage {
     // 单向发送消息：主要用在不特别关心发送结果的场景，这种方式吞吐量很大，但是有消息丢失的风险。例如日志发送--丢就丢了不重要。
     @Test
     public void OnewayMessage() throws Exception {
-        // 实例化消息生产者 -- 生产组(Oneway_Provider_Group)
-        DefaultMQProducer producer = new DefaultMQProducer("Oneway_Provider_Group");
+        // 实例化消息生产者 -- 生产组(Oneway_Group)
+        DefaultMQProducer producer = new DefaultMQProducer("Oneway_Group");
         // 设置NameServer的地址
         producer.setNamesrvAddr("localhost:9876");
         // 启动Producer实例
@@ -45,7 +45,7 @@ public class Demo5_OnewayMessage {
     // 消费消息
     public static void main(String[] args) throws MQClientException {
         // 实例化消息Push消费者 -- 消费组
-        DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("Oneway_Provider_Group");
+        DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("Oneway_Group");
         // 设置NameServer的地址
         pushConsumer.setNamesrvAddr("localhost:9876");
 

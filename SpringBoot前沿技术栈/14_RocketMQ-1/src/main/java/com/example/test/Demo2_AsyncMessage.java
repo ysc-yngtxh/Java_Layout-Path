@@ -30,8 +30,8 @@ public class Demo2_AsyncMessage {
     // 发送异步消息：异步消息通常用在对响应时间敏感的业务场景，即发送端不能容忍长时间地等待Broker的响应。
     @Test
     public void AsyncMessage() throws Exception {
-        // 实例化消息生产者 -- 生产组(Async_Provider_Group)
-        DefaultMQProducer producer = new DefaultMQProducer("Async_Provider_Group");
+        // 实例化消息生产者 -- 生产组(Async_Group)
+        DefaultMQProducer producer = new DefaultMQProducer("Async_Group");
         producer.setNamesrvAddr("localhost:9876");    // 设置NameServer的地址
         producer.start();                             // 启动Producer实例
         producer.setRetryTimesWhenSendAsyncFailed(0); // 设置重试次数
@@ -76,7 +76,7 @@ public class Demo2_AsyncMessage {
     // 消费消息
     public static void main(String[] args) throws MQClientException {
         // 实例化消息Push消费者 -- 消费组
-        DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("Async_Provider_Group");
+        DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("Async_Group");
         // 设置NameServer的地址
         pushConsumer.setNamesrvAddr("localhost:9876");
 

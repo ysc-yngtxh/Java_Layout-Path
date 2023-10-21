@@ -27,7 +27,7 @@ public class Demo6_DelayMessage {
     @Test
     public void DelayMessage() throws Exception {
         // 实例化一个生产者来产生延时消息
-        DefaultMQProducer producer = new DefaultMQProducer("DelayMessage_Provider_Group");
+        DefaultMQProducer producer = new DefaultMQProducer("DelayMessage_Group");
         // 启动生产者
         producer.start();
         for (int i = 0; i < 10; i++) {
@@ -46,7 +46,7 @@ public class Demo6_DelayMessage {
     // 消费消息
     public static void main(String[] args) throws MQClientException {
         // 实例化消息Push消费者 -- 消费组
-        DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("DelayMessage_Provider_Group");
+        DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("DelayMessage_Group");
         // 设置NameServer的地址
         pushConsumer.setNamesrvAddr("localhost:9876");
 

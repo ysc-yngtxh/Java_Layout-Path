@@ -27,8 +27,8 @@ public class Demo3_ListMessage {
     // 发送集合消息
     @Test
     public void ListMessage() throws Exception {
-        // 实例化消息生产者 -- 生产组(ListMessage_Provider_Group)
-        DefaultMQProducer producer = new DefaultMQProducer("ListMessage_Provider_Group");
+        // 实例化消息生产者 -- 生产组(ListMessage_Group)
+        DefaultMQProducer producer = new DefaultMQProducer("ListMessage_Group");
         // 设置NameServer的地址
         producer.setNamesrvAddr("localhost:9876");
         // 启动Producer实例
@@ -49,7 +49,7 @@ public class Demo3_ListMessage {
     // 消费消息
     public static void main(String[] args) throws MQClientException {
         // 实例化消息Push消费者 -- 消费组
-        DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("ListMessage_Provider_Group");
+        DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("ListMessage_Group");
         // 设置NameServer的地址
         pushConsumer.setNamesrvAddr("localhost:9876");
 
