@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.example</groupId>
-        <artifactId>14_RocketMQ</artifactId>
+        <artifactId>15_RocketMQ-zhenghe</artifactId>
         <version>1.0.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>RocketMQ-Points-Service</artifactId>
+    <artifactId>RocketMQ-Order-Service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <description>${project.artifactId}</description>
@@ -25,14 +25,14 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version>
-        </dependency>
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>

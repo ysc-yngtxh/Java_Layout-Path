@@ -5,39 +5,26 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.4</version>
+        <version>3.1.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
     <artifactId>14_RocketMQ</artifactId>
-    <version>1.0.0</version>
+    <version>0.0.1-SNAPSHOT</version>
     <name>14_RocketMQ</name>
     <description>14_RocketMQ</description>
-
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>RocketMQ-Common</module>
-        <module>RocketMQ-Order-Service</module>
-        <module>RocketMQ-Points-Service</module>
-    </modules>
-
     <properties>
         <java.version>17</java.version>
-        <rocketmq-client-version>5.1.3</rocketmq-client-version>
-        <mybatis-plus-version>3.5.2</mybatis-plus-version>
     </properties>
-
     <dependencies>
-        <!--RocketMQ客户端依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-client</artifactId>
             <version>5.1.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -47,17 +34,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.2</version>
         </dependency>
     </dependencies>
 
