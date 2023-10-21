@@ -80,7 +80,8 @@
     1、消息模型（Message Model）
        RocketMQ主要由 Producer、Broker、Consumer 三部分组成，其中Producer 负责生产消息，Consumer 负责消费消息，Broker 负责存储消息。
        Broker 在实际部署过程中对应一台服务器，每个 Broker 可以存储多个Topic的消息，每个Topic的消息也可以分片存储于不同的 Broker。
-       Message Queue 用于存储消息的物理地址，每个Topic中的消息地址存储于多个 Message Queue 中。ConsumerGroup 由多个Consumer 实例构成。
+       相当于发送一次消息，这些消息截取分片了
+       Message Queue用于存储消息的物理地址，每个Topic中的消息地址存储于多个 Message Queue 中。ConsumerGroup 由多个Consumer 实例构成。
 
     2、消息（Message）
         消息系统所传输信息的物理载体，生产和消费数据的最小单位，每条消息必须属于一个主题。

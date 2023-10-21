@@ -9,6 +9,7 @@ import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.MessageExt;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,11 +17,11 @@ public class Consumer {
 
     private static final String NAME_SERVER_ADDR = "localhost:9876";
 
-    public static void main(String[] args) throws MQClientException {
+    public static void main(String[] args) throws Exception {
         String groupConsumer = null;
         String topic = null;
         System.err.println("请输入数字，选择合适的消费组、主题：\n[1] Provider1_Sync、[2] Provider2_ASync、" +
-                "[3] Provider3_Oneway、[4] Provider4_Order、[5] Provider5_DelayMessage、[6] Provider6_ListMessage");
+                "[3] Provider3_List、[4] Provider4_Order、[5] Provider5_Oneway、[6] Provider6_Delay");
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNext()) {
             int nextInt = scanner.nextInt();
@@ -37,8 +38,8 @@ public class Consumer {
                         break;
                     }
                     case 3 -> {
-                        groupConsumer = "Oneway_Provider_Group";
-                        topic = "TopicOneway";
+                        groupConsumer = "ListMessage_Provider_Group";
+                        topic = "TopicList";
                         break;
                     }
                     case 4 -> {
@@ -47,13 +48,13 @@ public class Consumer {
                         break;
                     }
                     case 5 -> {
-                        groupConsumer = "DelayMessage_Provider_Group";
-                        topic = "TestDelay";
+                        groupConsumer = "Oneway_Provider_Group";
+                        topic = "TopicOneway";
                         break;
                     }
                     case 6 -> {
-                        groupConsumer = "ListMessage_Provider_Group";
-                        topic = "TopicList";
+                        groupConsumer = "DelayMessage_Provider_Group";
+                        topic = "TestDelay";
                         break;
                     }
                 }
@@ -63,7 +64,7 @@ public class Consumer {
         }
     }
 
-    private static void Consumption(String groupConsumer, String Topic) throws MQClientException {
+    private static void Consumption(String groupConsumer, String Topic) throws MQClientException, IOException {
         // 实例化Push消费者 -- 消费组
         DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer(groupConsumer);
         // 实例化Push消费者，虽然API是过时的，但我们也需要去了解。
@@ -102,5 +103,6 @@ public class Consumer {
         // 启动消费者实例
         pushConsumer.start();
         System.out.printf("Consumer Started.%n");
+        System.in.read();
     }
 }

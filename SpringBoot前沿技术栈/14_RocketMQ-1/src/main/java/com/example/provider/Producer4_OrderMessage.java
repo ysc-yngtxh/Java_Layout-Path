@@ -34,26 +34,25 @@ public class Producer4_OrderMessage {
         producer.setNamesrvAddr("localhost:9876");
         // 启动Producer实例
         producer.start();
-        // 根据消息数量实例化倒计时计算器（JUC）
-        final CountDownLatch2 countDownLatch = new CountDownLatch2(10);
         // 发送顺序消息，发送时要确保有序，并且要发到同一个队列下面去
         msgModelList.forEach(msgModel -> {
-            Message msg = new Message(
-                    "TopicOrder"  /* Topic */,
-                    "TagOrder"    /* Tag */,
-                    msgModel.toString().getBytes(StandardCharsets.UTF_8) /* Message body */
-            );
+            Message msg = new Message("TopicOrder", "TagOrder", msgModel.toString().getBytes(StandardCharsets.UTF_8));
             // 发相同的订单号去相同的队列
             try {
+                // TODO 发送消息存储到 Broker，在Broker里的每一个主题(Topic)消息默认读队列4个、写队列4个。[可以自定义队列数]
+                //  循环发送的消息虽然都是相同主题，但是循环发送的消息并不是存放在一条写队列中，而是分别写入存储在4条写队列里。
                 producer.send(msg, new MessageQueueSelector() {
+                    // TODO producer.send()第一个参数：发送的消息（存入队列中的数据）
+                    //      producer.send()第二个参数：选择当前写入的数据存入哪个写队列
+                    //      producer.send()第三个参数：用于回调给producer.send()第二个参数中重写select()方法参数
                     @Override
                     public MessageQueue select(List<MessageQueue> list, Message message, Object obj) {
-                        // List<MessageQueue> list：表示该主题下的队列数，默认读队列数是4，写队列数为4（生产者是写队列）
-                        // Message message：就是执行producer.send()第一个参数，回调到这里
-                        // Object obj：就是producer.send()第三个参数，回调到这里
-                        System.out.println(message);
+                        // List<MessageQueue> list：表示该主题下的队列集合，默认读队列数是4，写队列数为4（生产者是写队列）
+                        // Message message：就是执行producer.send()第一个参数(写入的消息)回调到这里
+                        // Object obj：就是producer.send()第三个参数回调到这里
+                        System.out.println(new String(message.getBody(), StandardCharsets.UTF_8));
                         System.out.println(obj);
-                        // 在这里选择队列
+                        // 通常obj是一条消息的标识，将标识通过哈希算法得到的值，然后取队列数的模。最后得到的就是当前消息应当分配的队列
                         int hashCode = obj.toString().hashCode();
                         // 4(哈希算法得到的数) % 4(队列数) = 0
                         // 5(哈希算法得到的数) % 4(队列数) = 1
@@ -64,12 +63,10 @@ public class Producer4_OrderMessage {
                         return list.get(i);
                     }
                 }, msgModel.getOrderSn());
-                countDownLatch.countDown();
             } catch (MQClientException | InterruptedException | MQBrokerException | RemotingException e) {
                 throw new RuntimeException(e);
             }
         });
-        countDownLatch.await(5, TimeUnit.SECONDS);
         // 如果不再发送消息，关闭Producer实例。
         producer.shutdown();
         System.out.println("发送完成");

@@ -15,14 +15,16 @@ public class Producer1_SyncMessage {
         producer.setNamesrvAddr("localhost:9876"); // 设置NameServer的地址
         // 启动Producer实例
         producer.start();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             // 创建消息，并指定Topic，Tag和消息体（也可以不指定Tag）
             Message msg = new Message(
-                    "TopicSync" /* Topic */,
-                    "TagA"      /* Tag */,
-                    ("Hello RocketMQ " + i).getBytes(RemotingHelper.DEFAULT_CHARSET) /* Message body */
+                    "TopicSync" /* Topic主题 */,
+                    "TagA"      /* Tag标签 */,
+                    ("Hello RocketMQ " + i).getBytes(RemotingHelper.DEFAULT_CHARSET) /* 消息体 */
             );
-            SendResult sendResult = producer.send(msg); // 发送消息到一个Broker
+            // TODO 发送消息存储到 Broker，在Broker里的每一个主题(Topic)消息默认读队列4个、写队列4个。[可以自定义队列数]
+            //  循环发送的消息虽然都是相同主题，但是循环10次发送的消息并不是存放在一条写队列中，而是分别写入存储在4条写队列里。
+            SendResult sendResult = producer.send(msg);
             System.out.printf("%s%n", sendResult);      // 通过sendResult返回消息是否成功送达
         }
         // 如果不再发送消息，关闭Producer实例。

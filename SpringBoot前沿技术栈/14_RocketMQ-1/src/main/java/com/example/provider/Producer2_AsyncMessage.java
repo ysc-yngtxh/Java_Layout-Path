@@ -7,6 +7,7 @@ import org.apache.rocketmq.common.CountDownLatch2;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
 
+import javax.crypto.spec.PSource;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -25,15 +26,18 @@ public class Producer2_AsyncMessage {
         for (int i = 0; i < 10; i++) {
             final int index = i;
             // 创建消息，并指定Topic，Tag和消息Key与消息体
-            Message msg = new Message("TopicAsync",
-                    "TagA",
-                    "OrderID188",
-                    ("Hello world"+1).getBytes(RemotingHelper.DEFAULT_CHARSET));
-            // SendCallback接收异步返回结果的回调
+            Message msg = new Message(
+                    "TopicAsync" /* Topic主题 */,
+                    "TagA"       /* Tag标签 */,
+                    "OrderID188" /* 消息Key */,
+                    ("Hello world"+1).getBytes(RemotingHelper.DEFAULT_CHARSET)/* 消息体 */);
+            // TODO 发送消息存储到 Broker，在Broker里的每一个主题(Topic)消息默认读队列4个、写队列4个。[可以自定义队列数]
+            //  循环发送的消息虽然都是相同主题，但是循环10次发送的消息并不是存放在一条写队列中，而是分别写入存储在4条写队列里。
             producer.send(msg, new SendCallback() {
+                // TODO SendCallback接收异步返回结果的回调
                 @Override
                 public void onSuccess(SendResult sendResult) {
-                    // 发送消息成功的回调函数
+                    // 发送消息成功的回调函数，可以在这里处理业务逻辑
                     System.out.printf("%-10d OK %s %n", index, sendResult.getMsgId());
                 }
                 @Override
@@ -44,8 +48,9 @@ public class Producer2_AsyncMessage {
                 }
             });
         }
-        // 等待5s
-        countDownLatch.await(5, TimeUnit.SECONDS);
+        System.out.println("异步发送消息，那么我这里先执行，不管MQ有没有执行完！");
+        // 等待3s
+        countDownLatch.await(3, TimeUnit.SECONDS);
         // 如果不再发送消息，关闭Producer实例。
         producer.shutdown();
     }
