@@ -16,7 +16,17 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 4、顺序发送消息：
+ *    Broker里的每一个主题(Topic)消息默认读队列4个、写队列4个。
+ *
+ *    同一主题(Topic)不考虑标签(Tag)情况下，每次生产者发送消息写入的可能不是一个队列。
+ *    消费者订阅 pushConsumer.subscribe(Topic, "*"); 去消费这个主题数据，该先去消费默认四个队列中的哪个队列呢？
+ *
+ *    假设：生产消息的依次写入，存储队列为[2, 3, 1, 0]；但是消费时轮询方式读取，消费队列是[0, 1, 2, 3]，
+ *         就会造成一个读取数据顺序错误，从而造成业务混乱。
+ *
+ *    方案：将同一月的
+ * 4、顺序发送消息：发送时要确保有序。如何保证有序？
+ *
  */
 public class Producer4_OrderMessage {
     private static final List<MsgModel> msgModelList = Arrays.asList(
@@ -34,12 +44,13 @@ public class Producer4_OrderMessage {
         producer.setNamesrvAddr("localhost:9876");
         // 启动Producer实例
         producer.start();
+        // 正常发送消息，选择的队列是根据MQ规则来着，不是顺序存储四个写队列的
         // 发送顺序消息，发送时要确保有序，并且要发到同一个队列下面去
         msgModelList.forEach(msgModel -> {
             Message msg = new Message("TopicOrder", "TagOrder", msgModel.toString().getBytes(StandardCharsets.UTF_8));
             // 发相同的订单号去相同的队列
             try {
-                // TODO 发送消息存储到 Broker，在Broker里的每一个主题(Topic)消息默认读队列4个、写队列4个。[可以自定义队列数]
+                // TODO 发送消息存储到Broker，在Broker里的每一个主题(Topic)消息默认读队列4个、写队列4个。[可以自定义队列数]
                 //  循环发送的消息虽然都是相同主题，但是循环发送的消息并不是存放在一条写队列中，而是分别写入存储在4条写队列里。
                 producer.send(msg, new MessageQueueSelector() {
                     // TODO producer.send()第一个参数：发送的消息（存入队列中的数据）

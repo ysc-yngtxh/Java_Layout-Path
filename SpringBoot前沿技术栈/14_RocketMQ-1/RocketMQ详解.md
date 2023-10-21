@@ -80,20 +80,19 @@
     1、消息模型（Message Model）
        RocketMQ主要由 Producer、Broker、Consumer 三部分组成，其中Producer 负责生产消息，Consumer 负责消费消息，Broker 负责存储消息。
        Broker 在实际部署过程中对应一台服务器，每个 Broker 可以存储多个Topic的消息，每个Topic的消息也可以分片存储于不同的 Broker。
-       相当于发送一次消息，这些消息截取分片了
        Message Queue用于存储消息的物理地址，每个Topic中的消息地址存储于多个 Message Queue 中。ConsumerGroup 由多个Consumer 实例构成。
 
     2、消息（Message）
-        消息系统所传输信息的物理载体，生产和消费数据的最小单位，每条消息必须属于一个主题。
-        RocketMQ中每个消息拥有唯一的Message ID，且可以携带具有业务标识的Key。系统提供了通过Message ID和Key查询消息的功能。
+       消息系统所传输信息的物理载体，生产和消费数据的最小单位，每条消息必须属于一个主题。
+       RocketMQ中每个消息拥有唯一的Message ID，且可以携带具有业务标识的Key。系统提供了通过Message ID和Key查询消息的功能。
 
     3、主题（Topic）
        表示一类消息的集合，每个主题包含若干条消息，每条消息只能属于一个主题，是RocketMQ进行消息订阅的基本单位。
        比如一个电商系统可以分为：交易消息、物流消息等，一条消息必须有一个 Topic 。
 
     4、标签（Tag）
-        为消息设置的标志，用于同一主题下区分不同类型的消息。来自同一业务单元的消息，可以根据不同业务目的在同一主题下设置不同标签。
-        比如交易消息又可以分为：交易创建消息、交易完成消息等，一条消息可以没有 Tag 。标签能够有效地保持代码的清晰度和连贯性，并优化RocketMQ提供的查询系统。
+       为消息设置的标志，用于同一主题下区分不同类型的消息。来自同一业务单元的消息，可以根据不同业务目的在同一主题下设置不同标签。
+       比如交易消息又可以分为：交易创建消息、交易完成消息等，一条消息可以没有 Tag 。标签能够有效地保持代码的清晰度和连贯性，并优化RocketMQ提供的查询系统。
 
     5、生产者组（Producer Group）
        同一类Producer的集合，这类Producer发送同一类消息且发送逻辑一致。如果发送的是事务消息且原始生产者在发送之后崩溃，
@@ -103,18 +102,28 @@
        同一类Consumer的集合，这类Consumer通常消费同一类消息且消费逻辑一致。消费者组使得在消息消费方面，实现负载均衡和容错的目标变得非常容易。
        要注意的是，消费者组的消费者实例必须订阅完全相同的Topic。RocketMQ 支持两种消息模式：集群消费（Clustering）和广播消费（Broadcasting）。
 
-    7、支持拉（pull）和推（push）两种消息模式
-       pull其实就是消费者主动从MQ中去拉消息，而push则像rabbit MQ一样，是MQ给消费者推送消息。但是RocketMQ的push其实是基于pull来实现的。
-       它会先由一个业务代码从MQ中pull消息，然后再由业务代码push给特定的应用/消费者。其实底层就是一个pull模式
+    7、支持拉（Pull）和推（Push）两种消息模式
+       Pull其实就是消费者主动从MQ中去拉消息，Push 表面看似MQ推送消息。
+       而在 Push 消费时，消费者是在不断轮询 Broker，询问是否有新消息可供消费。一旦有新消息到达，马上拉取该消息。
+       也就是说 Push 模式内部使用了 Pull 消息的模式，这样就可以立即消费到最新的消息。
+         那么 Push 模式或 Pull 模式如何进行消息的查询？
+               能够想到的比较笨的方法是，每隔一定的时间（如1ms）就向 Broker 发送一个查询请求，如果没有新消息则立刻返回。
+           可想而知这种方法非常浪费网络资源。
+               RocketMQ 为了提高网络性能，在拉取消息时如果没有新消息，不会马上返回，而是会将该查询请求挂起一段时间，然后再重试查询。
+           如果一直没有新消息，直到轮询时间超过设定的阈值才会返回。
+               根据轮询设定的超时阈值大小的不同，RocketMQ 有两种轮询方式，分别为长轮询（默认）和短轮询。
+           短轮询：longPollingEnable=false，轮询时间为 shortPollingTimeMills ，默认为 1s
+           长轮询：longPollingEnable=true，轮询时间为 5s。
+           拉取请求挂起时间：受 DefaultMQPullConsumer 的 brokerSuspendMaxTimeMillis 控制，默认push模式固定15s，pull模式固定20s。
 
     8、消费模式
        集群消费（Clustering）模式下，相同Consumer Group的每个Consumer实例平均分摊消息。
        广播消费（Broadcasting）模式下，相同Consumer Group的每个Consumer实例都接收全量的消息。
 
     9、消费顺序
-        普通顺序消费（Normal Ordered Message）模式下，消费者通过同一个消费队列收到的消息是有顺序的，不同消息队列收到的消息则可能是无顺序的。
-        严格顺序消息（Strictly Ordered Message）模式下，消费者收到的所有消息均是有顺序的。
-
+       普通顺序消费（Normal Ordered Message）模式下，消费者通过同一个消费队列收到的消息是有顺序的，不同消息队列收到的消息则可能是无顺序的。
+       严格顺序消息（Strictly Ordered Message）模式下，消费者收到的所有消息均是有顺序的。
+> ![img_6](src/main/resources/static/img_8.png)
 
 2. NameServer与zookeeper的区别  
    Name Server和ZooKeeper的作用大致是相同的，从宏观上来看，Name Server做的东西很少，就是保存一些运行数据，

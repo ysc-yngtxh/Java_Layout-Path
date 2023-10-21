@@ -4,18 +4,76 @@ import org.apache.rocketmq.client.consumer.DefaultMQPullConsumer;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
+import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyContext;
+import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
+import org.apache.rocketmq.client.consumer.listener.MessageListenerOrderly;
 import org.apache.rocketmq.client.exception.MQClientException;
-import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.MessageExt;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Consumer {
-
     private static final String NAME_SERVER_ADDR = "localhost:9876";
+
+    public static void Consumption(String groupConsumer, String Topic) throws MQClientException {
+        // 实例化消息Push消费者 -- 消费组
+        DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer(groupConsumer);
+        // 实例化Push消费者，虽然API是过时的，但我们也需要去了解。
+        DefaultMQPullConsumer pullConsumer = new DefaultMQPullConsumer(groupConsumer);
+        // TODO
+        //  1、Push是MQ主动推送消息给客户端
+        //     优点：及时性好；
+        //     缺点：客户端没有做好流控，一旦服务端推送大量消息到客户端时，就会导致客户端消息堆积甚至崩溃。
+        //  2、Pull是客户端主动到服务端拉取数据
+        //     优点：可以依据自己的消费能力进行消费；
+        //     缺点：拉取的频率需要用户自己控制，拉取频繁容易造成服务端和客户端的压力，拉取间隔长又容易造成消费不及时。
+        //  3、Push模式也是基于Pull模式的，只是客户端内部封装了API。
+        //     一般场景下，上游消息生产量小或者均速的时候，选择Push模式；
+        //     在特殊场景下，例如电商大促，抢优惠券等场景可以选择Pull模式
+
+        // 设置NameServer的地址
+        pushConsumer.setNamesrvAddr(NAME_SERVER_ADDR);
+
+        // 订阅一个或者多个Topic，以及Tag来过滤需要消费的消息
+        pushConsumer.subscribe(Topic, "*");
+        // TODO Tag是一个简单而有用的设计，其可以来选择您想要的消息。
+        // consumer.subscribe("TopicTest", "TagA || TagB || TagC");
+
+        if(!"TopicOrder".equals(Topic)) {
+            // pushConsumer.registerMessageListener() 注册消息监听器
+            // MessageListenerConcurrently 并发模式，多线程的。相当于多线程去处理从broker拉取回来的消息
+            pushConsumer.registerMessageListener(new MessageListenerConcurrently() {
+                @Override
+                public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
+                    // MessageExt：是一个消息接收通配符，不管发送的是String还是对象，都可接收，当然也可以像上面明确指定类型（我建议还是指定类型较方便）
+                    // System.out.printf：支持使用字符信息的格式化
+                    System.out.printf("%s 接收新消息: %s %n",
+                            Thread.currentThread().getName(), msgs.stream().map(MessageExt::getBody).map(String::new).toList());
+                    // 标记该消息已经被成功消费
+                    return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+                }
+            });
+        } else {
+            // pushConsumer.registerMessageListener() 注册消息监听器
+            // MessageListenerOrderly 顺序模式，单线程的。单线程去处理从broker拉取回来的消息
+            pushConsumer.registerMessageListener(new MessageListenerOrderly() {
+                @Override
+                public ConsumeOrderlyStatus consumeMessage(List<MessageExt> list, ConsumeOrderlyContext consumeOrderlyContext) {
+                    // MessageExt：是一个消息接收通配符，不管发送的是String还是对象，都可接收，当然也可以像上面明确指定类型（我建议还是指定类型较方便）
+                    // System.out.printf：支持使用字符信息的格式化
+                    System.out.printf("%s 接收新消息: %s %n",
+                            Thread.currentThread().getName(), list.stream().map(MessageExt::getBody).map(String::new).toList());
+                    // 标记该消息已经被成功消费
+                    return ConsumeOrderlyStatus.SUCCESS;
+                }
+            });
+        }
+        // 启动消费者实例
+        pushConsumer.start();
+        System.out.printf("Consumer Started.%n");
+    }
 
     public static void main(String[] args) throws Exception {
         String groupConsumer = null;
@@ -62,47 +120,5 @@ public class Consumer {
                 Consumption(groupConsumer, topic);
             }
         }
-    }
-
-    private static void Consumption(String groupConsumer, String Topic) throws MQClientException, IOException {
-        // 实例化Push消费者 -- 消费组
-        DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer(groupConsumer);
-        // 实例化Push消费者，虽然API是过时的，但我们也需要去了解。
-        DefaultMQPullConsumer pullConsumer = new DefaultMQPullConsumer(groupConsumer);
-        // TODO
-        //  1、Push是MQ主动推送消息给客户端
-        //     优点：及时性好；
-        //     缺点：客户端没有做好流控，一旦服务端推送大量消息到客户端时，就会导致客户端消息堆积甚至崩溃。
-        //  2、Pull是客户端主动到服务端拉取数据
-        //     优点：可以依据自己的消费能力进行消费；
-        //     缺点：拉取的频率需要用户自己控制，拉取频繁容易造成服务端和客户端的压力，拉取间隔长又容易造成消费不及时。
-        //  3、Push模式也是基于Pull模式的，只是客户端内部封装了API。
-        //     一般场景下，上游消息生产量小或者均速的时候，选择Push模式；
-        //     在特殊场景下，例如电商大促，抢优惠券等场景可以选择Pull模式
-
-        // 设置NameServer的地址
-        pushConsumer.setNamesrvAddr(NAME_SERVER_ADDR);
-
-        // 订阅一个或者多个Topic，以及Tag来过滤需要消费的消息
-        pushConsumer.subscribe(Topic, "*");
-        // TODO Tag是一个简单而有用的设计，其可以来选择您想要的消息。
-        // consumer.subscribe("TopicTest", "TagA || TagB || TagC");
-
-        // 注册回调实现类来处理从broker拉取回来的消息
-        pushConsumer.registerMessageListener(new MessageListenerConcurrently() {
-            @Override
-            public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
-                // MessageExt：是一个消息接收通配符，不管发送的是String还是对象，都可接收，当然也可以像上面明确指定类型（我建议还是指定类型较方便）
-                // System.out.printf：支持使用字符信息的格式化
-                System.out.printf("%s 接收新消息: %s %n",
-                        Thread.currentThread().getName(), msgs.stream().map(MessageExt::getBody).map(String::new).toList());
-                // 标记该消息已经被成功消费
-                return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
-            }
-        });
-        // 启动消费者实例
-        pushConsumer.start();
-        System.out.printf("Consumer Started.%n");
-        System.in.read();
     }
 }
