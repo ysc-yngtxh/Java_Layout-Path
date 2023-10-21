@@ -22,8 +22,8 @@ public class Producer3_ListMessage {
         list.add(new Message("TopicList", "TagA", ("Hello TagA").getBytes(StandardCharsets.UTF_8)));
         list.add(new Message("TopicList", "TagB", ("Hello TagB").getBytes(StandardCharsets.UTF_8)));
         list.add(new Message("TopicList", "TagC", ("Hello TagC").getBytes(StandardCharsets.UTF_8)));
-        // TODO 发送 Collection集合 消息到Broker。发送的 Collection集合 消息会被存储在同一个队列里。
-        //  可以这么理解：每执行一次send()方法，相当于重新选择队列写入存储消息。
+        // TODO 发送 Collection集合 消息到Broker。发送的 Collection集合 消息被存储在同一个队列里。
+        //  可以这么理解：每执行一次send()方法，相当于重新在MQ规则下选择队列再写入存储消息。
         SendResult sendResult = producer.send(list);
         // 通过sendResult返回消息是否成功送达
         System.out.printf("%s%n", sendResult);

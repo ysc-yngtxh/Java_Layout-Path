@@ -18,7 +18,8 @@ public class Producer6_DelayMessage {
           Message message = new Message("TestDelay", ("Hello scheduled message " + i).getBytes());
           // 设置延时等级3，这个消息将在 10s(等级3) 之后发送(只支持固定的几个时间,不支持自定义时间)
           message.setDelayTimeLevel(3);
-          // 发送消息
+          // TODO 发送消息存储到 Broker，在Broker里的每一个主题(Topic)消息默认读队列4个、写队列4个。[可以自定义队列数]
+          //  循环发送的消息虽然都是相同主题，但是循环发送的消息并不是存放在一条写队列中，而是分别写入存储在4条写队列里。
           producer.send(message);
       }
        // 关闭生产者

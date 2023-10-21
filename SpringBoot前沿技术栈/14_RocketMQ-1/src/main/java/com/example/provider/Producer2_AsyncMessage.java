@@ -47,6 +47,7 @@ public class Producer2_AsyncMessage {
                     e.printStackTrace();
                 }
             });
+            System.out.printf("循环第%s次完毕！！！%n", i);
         }
         System.out.println("异步发送消息，那么我这里先执行，不管MQ有没有执行完！");
         // 等待3s
