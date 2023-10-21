@@ -21,13 +21,13 @@ import java.util.UUID;
  * @dateTime 2023-10-21 23:03
  * @apiNote TODO 重试与死信
  */
-@SpringBootTest(classes = Demo8_Retry_Dead.class)
-public class Demo8_Retry_Dead {
+@SpringBootTest(classes = Demo8_Retry_DeadMessage.class)
+public class Demo8_Retry_DeadMessage {
 
     /**
      * 重试时间间隔： 10s 30s 1m 2m 3m 4m 5m 6m 7m 8m 9m 10m 20m 30m 1h 2h
      * 默认重试16次(并发模式)、顺序模式下(Integer.MAX_VALUE)次
-     * 如果重试都失败 -- 会变成死信消息，放到一个死信主题(%DLQ%Retry_Provider_Group)
+     * 如果重试都失败 -- 会变成死信消息，放到一个死信主题(%DLQ%Retry_Provider_Group) 【 %DLQ% 为固定写法 】
      */
     @Test
     public void retryProvider() throws Exception {
@@ -61,7 +61,7 @@ public class Demo8_Retry_Dead {
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext context) {
                 System.out.printf("%s 接收队列的新消息: %s %n",
                         Thread.currentThread().getName(), list.stream().map(MessageExt::getBody).map(String::new).toList());
-                // TODO 业务报错了，比如可以在cache中返回 RECONSUME_LATER ，就会进行重试
+                // TODO 业务报错了，比如可以在cache中返回 RECONSUME_LATER ，就会进行重试，重试达到上限该消息变为死信
                 return ConsumeConcurrentlyStatus.RECONSUME_LATER;
             }
         });
