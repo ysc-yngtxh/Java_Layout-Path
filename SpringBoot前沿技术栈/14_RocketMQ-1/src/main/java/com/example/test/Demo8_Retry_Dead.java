@@ -26,8 +26,8 @@ public class Demo8_Retry_Dead {
 
     /**
      * 重试时间间隔： 10s 30s 1m 2m 3m 4m 5m 6m 7m 8m 9m 10m 20m 30m 1h 2h
-     * 默认重试16次
-     * 重试16次(并发模式)、顺序模式下(Integer.MAX_VALUE)次都失败 -- 会变成死信消息，放到一个死信主题(%DLQ%Retry_Provider_Group)
+     * 默认重试16次(并发模式)、顺序模式下(Integer.MAX_VALUE)次
+     * 如果重试都失败 -- 会变成死信消息，放到一个死信主题(%DLQ%Retry_Provider_Group)
      */
     @Test
     public void retryProvider() throws Exception {
@@ -59,9 +59,8 @@ public class Demo8_Retry_Dead {
         pushConsumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext context) {
-                System.out.printf("%s 接收队列%s的新消息: %s %n",
-                        Thread.currentThread().getName(), list.stream().map(MessageExt::getQueueId).toList(),
-                        list.stream().map(MessageExt::getBody).map(String::new).toList());
+                System.out.printf("%s 接收队列的新消息: %s %n",
+                        Thread.currentThread().getName(), list.stream().map(MessageExt::getBody).map(String::new).toList());
                 // TODO 业务报错了，比如可以在cache中返回 RECONSUME_LATER ，就会进行重试
                 return ConsumeConcurrentlyStatus.RECONSUME_LATER;
             }
@@ -81,9 +80,6 @@ public class Demo8_Retry_Dead {
         pushConsumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext context) {
-                System.out.printf("%s 接收队列%s的新消息: %s %n",
-                        Thread.currentThread().getName(), list.stream().map(MessageExt::getQueueId).toList(),
-                        list.stream().map(MessageExt::getBody).map(String::new).toList());
                 System.out.println("记录到特别的文件中或者mysql通知人工处理");
                 // 因为消息进入到了死信中，所以可以在这里 记录到特别的文件中、mysql通知人工处理
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
@@ -116,7 +112,6 @@ public class Demo8_Retry_Dead {
                     }
                     return ConsumeConcurrentlyStatus.RECONSUME_LATER; // 重试
                 }
-                // 因为消息进入到了死信中，所以可以在这里 记录到特别的文件中、mysql通知人工处理
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
         });
