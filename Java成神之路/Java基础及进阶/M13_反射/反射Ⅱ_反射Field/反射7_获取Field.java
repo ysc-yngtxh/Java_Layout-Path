@@ -4,12 +4,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 /*
-Field翻译为字段，其实就是属性/成员
+  Field翻译为字段，其实就是属性/成员
  */
-
 public class 反射7_获取Field {
     public static void main(String[] args) throws Exception{
-
         // 获取整个类
         Class<?> studentClass = Class.forName("M13_反射.反射Ⅱ_反射Field.Student");
 

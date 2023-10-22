@@ -13,7 +13,6 @@ public class String类13_split方法 {
         // 04
         // 29
 
-
         String[] ysc ="name=zhangsan & password=123 & age=20".split("&");
         for (int i = 0; i < ysc.length; i++) {
             System.out.println(ysc[i]);

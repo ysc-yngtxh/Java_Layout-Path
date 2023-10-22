@@ -5,7 +5,6 @@ import java.lang.reflect.Modifier;
 
 public class 反射13_Constructor {
     public static void main(String[] args) throws Exception{
-
         StringBuilder s = new StringBuilder();
         Class<?> vipClass =Class.forName("M13_反射.反射Ⅳ_反射Constructor.Vip");
 
@@ -15,8 +14,7 @@ public class 反射13_Constructor {
                 .append(" {\n");
 
         Constructor<?>[] constructors = vipClass.getDeclaredConstructors();
-        for (Constructor<?> constructor: constructors
-        ) {
+        for (Constructor<?> constructor: constructors) {
             s.append("\t");  //  "\t"是制表符，即每个类下代码前的空格
             s.append(Modifier.toString(constructor.getModifiers())).append(" ");
             s.append(vipClass.getSimpleName()).append("(");
@@ -31,11 +29,9 @@ public class 反射13_Constructor {
             if (parameterTypes.length > 0) {
                 s.deleteCharAt(s.length() - 1);
             }
-
             s.append(") {}\n");
         }
         s.append("}");
         System.out.println(s);
-
     }
 }

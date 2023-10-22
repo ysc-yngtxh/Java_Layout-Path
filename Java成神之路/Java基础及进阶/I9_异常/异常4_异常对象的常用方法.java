@@ -4,17 +4,16 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 /*
-异常对象有两个非常重要的方法：
-     获取异常简单的描述信息：
-         String msg = exception.getMessage();
+  异常对象有两个非常重要的方法：
+       获取异常简单的描述信息：
+           String msg = exception.getMessage();
+       打印异常追踪的堆栈信息：
+           exception.printStackTrace();
 
-     打印异常追踪的堆栈信息：
-         exception.printStackTrace();
-
-我们以后查看异常的追踪信息，我们应该怎么看，可以快速的调试程序？
-           1、异常信息追踪信息，从上往下一行一行看
-           2、但是需要注意的是：SUN公司写的代码就不用看了
-           3、主要问题是出现在自己编写的代码上
+  我们以后查看异常的追踪信息，我们应该怎么看，可以快速的调试程序？
+       1、异常信息追踪信息，从上往下一行一行看
+       2、但是需要注意的是：SUN公司写的代码就不用看了
+       3、主要问题是出现在自己编写的代码上
  */
 public class 异常4_异常对象的常用方法 {
     public static void main(String[] args) {
@@ -30,7 +29,6 @@ public class 异常4_异常对象的常用方法 {
         // Java后台打印异常堆栈追踪信息的时候，采用了异步线程的方式打印的
         e.printStackTrace();
         System.out.println("=========================================================================================");
-
 
         try{
             m1();
@@ -50,7 +48,9 @@ public class 异常4_异常对象的常用方法 {
     }
 
     private static void m2() throws FileNotFoundException {
-        new FileInputStream("C:\\Program Files\\Java\\jdk1.8.0_131\\bin\\jar"); // 没有文件后缀，系统无法访问
-        // new FileInputStream("C:\\Program Files\\Java\\jdk1.8.0_131\\bin\\jar.exe");这个是正确的文件地址
+        // 路径错误，系统无法访问
+        new FileInputStream(System.getProperty("user.dir") + "Java基础及进阶/I9_异常/异常4_异常对象的常用方法.java");
+        // 这个是正确的文件地址
+        // new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/I9_异常/异常4_异常对象的常用方法.java");
     }
 }

@@ -3,13 +3,12 @@ package M13_反射.反射Ⅱ_反射Field;
 import java.lang.reflect.Field;
 
 /*
-通过反射机制访问一个Java对象的属性
+  通过反射机制访问一个Java对象的属性
       给属性赋值set
       获取属性的值get
  */
 public class 反射9_通过反射机制访问对象属性 {
     public static void main(String[] args) throws Exception{
-
         Class<?> studentClass = Class.forName("M13_反射.反射Ⅱ_反射Field.Student");
         Student obj = new Student("1级"); // obj就是student对象，(底层调用无参构造方法)
 

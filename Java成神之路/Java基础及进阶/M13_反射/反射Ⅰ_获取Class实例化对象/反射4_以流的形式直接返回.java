@@ -6,7 +6,6 @@ import java.util.Properties;
 
 public class 反射4_以流的形式直接返回 {
     public static void main(String[] args) throws URISyntaxException {
-
         // 获取一个文件的绝对路径
         String path = Thread.currentThread()
                 .getContextClassLoader()
@@ -55,11 +54,5 @@ public class 反射4_以流的形式直接返回 {
                 }
             }
         }
-
-
-
-
-
-
     }
 }

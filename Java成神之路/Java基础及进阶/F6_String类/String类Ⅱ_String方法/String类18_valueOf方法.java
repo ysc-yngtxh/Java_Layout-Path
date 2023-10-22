@@ -1,5 +1,12 @@
 package F6_String类.String类Ⅱ_String方法;
 
+class  Customer{
+    // 重写toString()方法
+    // @Override
+    // public String toString() {
+    //     return "我是湖北武汉人，我要年薪百万！";
+    // }
+}
 public class String类18_valueOf方法 {
     public static void main(String[] args) {
 
@@ -19,14 +26,7 @@ public class String类18_valueOf方法 {
            如果Customer类中没有重写toString()方法
            String s =String.valueOf(new Customer());
            System.out.println(s);
-           输出：F6_String类.String类Ⅱ_String方法.Customer@1540e19d
+           输出：F6_String类.String类Ⅱ_String方法.Customer@77556fd
          */
-    }
-}
-class  Customer{
-    // 重写toString()方法
-    @Override
-    public String toString() {
-        return "我是湖北武汉人，我要年薪百万！";
     }
 }

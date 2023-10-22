@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.util.Properties;
 
 /*
-获取class能干什么？
-     通过Class的newInstance()方法来实例化对象
-     注意：newInstance()方法内部实际上调用了无参构造方法，必须保证无参构造方法存在才可以
+  获取class能干什么？
+       通过Class的newInstance()方法来实例化对象
+       注意：newInstance()方法内部实际上调用了无参构造方法，必须保证无参构造方法存在才可以
 
-有三种方法实例化对象
+  有三种方法实例化对象
      第一种：(new对象方式)
            User User = new User();  通过new类方法实例化对象
 
@@ -27,7 +27,6 @@ import java.util.Properties;
  */
 public class 反射2_实例化对象 {
     public static void main(String[] args) {
-
         // 第一种方式
         // 这不是用反射机制，创建对象
         User user = new User();
@@ -40,7 +39,6 @@ public class 反射2_实例化对象 {
         try {
             // 通过反射机制获取Class，通过Class来实例化对象
             Class<?> c = Class.forName("M13_反射.反射Ⅰ_获取Class实例化对象.实例化对象2.User");  // c代表User类型1
-
             System.out.println(c);
 
             // newInstance()这个方法会调用User这个类的无参构造方法，完成对象的创建
@@ -82,13 +80,7 @@ public class 反射2_实例化对象 {
             Object obj2 = c2.newInstance();
             System.out.println(obj2);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
             if (fis != null) {

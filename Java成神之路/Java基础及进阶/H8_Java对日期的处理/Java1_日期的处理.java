@@ -7,15 +7,13 @@ import java.util.Date;
 
 public class Java1_日期的处理 {
     public static void main(String[] args) throws ParseException {
-
         Date nowTime = new Date();
-        System.out.println(nowTime);//Tue May 26 17:53:04 CST 2020
+        System.out.println(nowTime); // Tue May 26 17:53:04 CST 2020
 
         System.out.println(LocalDateTime.now());
 
         // java.util.Date类的toString()方法已经重写
         // 输出的应该不是一个对象的内存地址，应该是一个日期字符串。
-
 
         /*
           yyyy     年（年是四位）

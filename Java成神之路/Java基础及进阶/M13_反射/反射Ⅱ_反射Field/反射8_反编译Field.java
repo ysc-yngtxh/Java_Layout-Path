@@ -6,7 +6,6 @@ import java.lang.reflect.Modifier;
 
 public class 反射8_反编译Field {
     public static void main(String[] args) throws Exception{
-
         // 创建这个是为了拼接字符串
         StringBuilder s = new StringBuilder();
 
@@ -29,6 +28,5 @@ public class 反射8_反编译Field {
         }
         s.append("}");
         System.out.println(s);
-
     }
 }
