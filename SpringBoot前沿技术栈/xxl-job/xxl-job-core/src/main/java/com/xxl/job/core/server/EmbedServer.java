@@ -227,7 +227,7 @@ public class EmbedServer {
 
         @Override
         public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-            logger.error(">>>>>>>>>>> xxl-job test netty_http server caught exception", cause);
+            logger.error(">>>>>>>>>>> xxl-job message netty_http server caught exception", cause);
             ctx.close();
         }
 
@@ -235,7 +235,7 @@ public class EmbedServer {
         public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
             if (evt instanceof IdleStateEvent) {
                 ctx.channel().close();      // beat 3N, close if idle
-                logger.debug(">>>>>>>>>>> xxl-job test netty_http server close an idle channel.");
+                logger.debug(">>>>>>>>>>> xxl-job message netty_http server close an idle channel.");
             } else {
                 super.userEventTriggered(ctx, evt);
             }

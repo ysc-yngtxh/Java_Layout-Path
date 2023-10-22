@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 public class UserController {
 
-    @RequestMapping("/test")
-    // 权限注解，即：访问这个接口前需要当前用户有'test'权限
-    @PreAuthorize("hasAuthority('test')")
+    @RequestMapping("/message")
+    // 权限注解，即：访问这个接口前需要当前用户有'message'权限
+    @PreAuthorize("hasAuthority('message')")
     public @ResponseBody String test(){
         return "Hello World";
     }

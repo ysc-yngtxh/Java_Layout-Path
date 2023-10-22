@@ -1,6 +1,6 @@
-package com.example.test;
+package com.example.message;
 
-import com.example.domain.MsgModel;
+import com.example.entity.MsgModel;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyStatus;

@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 
 /**
- * email util test
+ * email util message
  *
  * @author xuxueli 2017-12-22 17:16:23
  */

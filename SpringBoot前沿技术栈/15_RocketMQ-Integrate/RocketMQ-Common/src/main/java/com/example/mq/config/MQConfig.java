@@ -46,7 +46,7 @@ public class MQConfig {
     @Value("${rocketmq.consumer.consumeThreadMax:64}")
     private int consumeThreadMax;                // TODO 最大线程数
 
-    @Value("${rocketmq.consumer.topics:test~*}")
+    @Value("${rocketmq.consumer.topics:message~*}")
     private String topics;                       // TODO 消费者监听主题，多个主题以分号隔开（topic~tag;topic~tag）
 
     @Value("${rocketmq.consumer.consumeMessageBatchMaxSize:1}")

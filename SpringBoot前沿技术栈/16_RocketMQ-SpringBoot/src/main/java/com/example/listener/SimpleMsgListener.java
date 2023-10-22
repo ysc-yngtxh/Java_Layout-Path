@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
  */
 @Component
 @RocketMQMessageListener(topic = "bootTestTopic",   // 主题
-        consumerGroup = "boot-test-consumer-group") // 消费者组
+        consumerGroup = "boot-message-consumer-group") // 消费者组
 public class SimpleMsgListener implements RocketMQListener<MessageExt> {
 
     // 这个重写方法就是消费者消费消息的方法。没有返回值(消费状态)。

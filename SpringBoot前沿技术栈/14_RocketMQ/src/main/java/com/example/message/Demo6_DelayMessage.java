@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.message;
 
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
@@ -6,57 +6,54 @@ import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
-import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author 游家纨绔
  * @dateTime 2023-10-21 18:09
- * @apiNote TODO 发送集合消息
+ * @apiNote TODO 发送延时消息
  */
-@SpringBootTest(classes = Demo3_ListMessage.class)
-public class Demo3_ListMessage {
-
-    // 发送集合消息
+@SpringBootTest(classes = Demo6_DelayMessage.class)
+public class Demo6_DelayMessage {
+    /**
+     * 4、发送延时消息：对应场景 -- 规定时间内是否支付（外卖15min内是否支付、电影票3min内是否支付）
+     *    在start版本中 延时消息一共分为18个等级分别为 1s 5s 10s 30s 1m 2m 3m 4m 5m 6m 7m 8m 9m 10m 20m 30m 1h 2h
+     */
     @Test
-    public void ListMessage() throws Exception {
-        // 实例化消息生产者 -- 生产组(ListMessage_Group)
-        DefaultMQProducer producer = new DefaultMQProducer("ListMessage_Group");
-        // 设置NameServer的地址
-        producer.setNamesrvAddr("localhost:9876");
-        // 启动Producer实例
+    public void DelayMessage() throws Exception {
+        // 实例化一个生产者来产生延时消息
+        DefaultMQProducer producer = new DefaultMQProducer("DelayMessage_Group");
+        // 启动生产者
         producer.start();
-        ArrayList<Message> list = new ArrayList<>();
-        list.add(new Message("TopicList", "TagA", ("Hello TagA").getBytes(StandardCharsets.UTF_8)));
-        list.add(new Message("TopicList", "TagB", ("Hello TagB").getBytes(StandardCharsets.UTF_8)));
-        list.add(new Message("TopicList", "TagC", ("Hello TagC").getBytes(StandardCharsets.UTF_8)));
-        // TODO 发送 Collection集合 消息到Broker。发送的 Collection集合 消息被存储在同一个队列里。
-        //  可以这么理解：每执行一次send()方法，相当于重新在MQ规则下选择队列再写入存储消息。
-        SendResult sendResult = producer.send(list);
-        // 通过sendResult返回消息是否成功送达
-        System.out.printf("%s%n", sendResult);
-        // 如果不再发送消息，关闭Producer实例。
+        for (int i = 0; i < 10; i++) {
+            // 创建消息，并指定Topic和消息体（Tag可以不指定）
+            Message message = new Message("TestDelay", ("Hello scheduled message " + i).getBytes());
+            // 设置延时等级3，这个消息将在 10s(等级3) 之后发送(只支持固定的几个时间,不支持自定义时间)
+            message.setDelayTimeLevel(3);
+            // TODO 发送消息存储到 Broker，在Broker里的每一个主题(Topic)消息默认读队列4个、写队列4个。[可以自定义队列数]
+            //  循环发送的消息虽然都是相同主题，但是循环发送的消息并不是存放在一条写队列中，而是分别写入存储在4条写队列里。
+            producer.send(message);
+        }
+        // 关闭生产者
         producer.shutdown();
     }
 
     // 消费消息
     public static void main(String[] args) throws MQClientException {
         // 实例化消息Push消费者 -- 消费组
-        DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("ListMessage_Group");
+        DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("DelayMessage_Group");
         // 设置NameServer的地址
         pushConsumer.setNamesrvAddr("localhost:9876");
 
         // 订阅一个或者多个Topic，以及Tag来过滤需要消费的消息
-        // pushConsumer.subscribe("TopicList", "*");
+        pushConsumer.subscribe("TestDelay", "*");
         // TODO Tag是一个简单而有用的设计，其可以来选择您想要的消息。
-        pushConsumer.subscribe("TopicTest", "TagA || TagB || TagC");
+        // pushConsumer.subscribe("TopicTest", "TagA || TagB || TagC");
 
         // pushConsumer.registerMessageListener() 注册消息监听器
         // MessageListenerConcurrently 并发模式，多线程的。相当于多线程去处理从broker拉取回来的消息

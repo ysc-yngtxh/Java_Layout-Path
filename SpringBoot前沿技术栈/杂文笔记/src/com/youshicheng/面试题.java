@@ -7,7 +7,7 @@ public class 面试题 {
 
 /*
 一、关于JVM的自增算法及方法的参数传递机制
-           public static void test(String[] args) {
+           public static void message(String[] args) {
               int i = 1;
               i = i++;
               System.out.println(i);
@@ -35,7 +35,7 @@ public class 面试题 {
 
 
           public class Exam {
-               public static void test(String[] args) {
+               public static void message(String[] args) {
                    int i = 1;
                    String str = "hello";
                    Integer num = 200;

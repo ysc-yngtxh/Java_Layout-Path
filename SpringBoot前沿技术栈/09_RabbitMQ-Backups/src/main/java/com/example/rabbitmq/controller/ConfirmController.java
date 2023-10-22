@@ -37,5 +37,5 @@ public class ConfirmController {
         //  然后删除 @Bean("confirmExchange")方法里的备份交换机配置。重新执行，即可实现退回消息
     }
 
-    // 还有一部分  RabbitMq 的 demo 在 test 包里
+    // 还有一部分  RabbitMq 的 demo 在 message 包里
 }

@@ -17,7 +17,7 @@ public class UserController {
         return "hello world!";
     }
 
-    @RequestMapping("/test")
+    @RequestMapping("/message")
     public String test(){
         return "Hello World";
     }

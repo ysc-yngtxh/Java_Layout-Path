@@ -1270,7 +1270,7 @@ public final class CronExpression implements Serializable, Cloneable {
                             mon++;
                             if(mon > 12) { 
                                 mon = 1;
-                                tmon = 3333; // ensure test of mon != tmon further below fails
+                                tmon = 3333; // ensure message of mon != tmon further below fails
                                 cl.add(Calendar.YEAR, 1);
                             }
                             day = 1;
@@ -1511,7 +1511,7 @@ public final class CronExpression implements Serializable, Cloneable {
             int year = cl.get(Calendar.YEAR);
             t = -1;
 
-            // test for expressions that never generate a valid fire date,
+            // message for expressions that never generate a valid fire date,
             // but keep looping...
             if (year > MAX_YEAR) {
                 return null;

@@ -15,7 +15,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * admin api test
+ * admin api message
  *
  * @author xuxueli 2017-07-28 22:14:52
  */

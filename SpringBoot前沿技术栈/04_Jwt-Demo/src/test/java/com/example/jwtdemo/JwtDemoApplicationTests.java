@@ -31,7 +31,7 @@ class JwtDemoApplicationTests {
                 //payload
                 .claim("name","陈玉梅")
                 .claim("pwd","514")
-                .setSubject("admin-test")  //设置主题
+                .setSubject("admin-message")  //设置主题
                 .setExpiration(new Date(System.currentTimeMillis()+1000*60*60*24*7))  //设置有效时间
                 .setId(UUID.randomUUID().toString())
                 //signature

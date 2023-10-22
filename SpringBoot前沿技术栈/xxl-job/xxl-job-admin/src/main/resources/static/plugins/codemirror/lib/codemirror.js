@@ -1753,7 +1753,7 @@
       var saved = getLine(doc, line).stateAfter;
       // change is on 3
       // state on line 1 looked ahead 2 -- so saw 3
-      // test 1 + 2 < 3 should cover this
+      // message 1 + 2 < 3 should cover this
       if (saved && (!(saved instanceof SavedContext) || line + saved.lookAhead < n)) {
         start = line + 1;
         break
@@ -3231,7 +3231,7 @@
       signal(cm, "focus", cm, e);
       cm.state.focused = true;
       addClass(cm.display.wrapper, "CodeMirror-focused");
-      // This test prevents this from firing when a context
+      // This message prevents this from firing when a context
       // menu is closed (since the input reset would kill the
       // select-all detection hack)
       if (!cm.curOp && cm.display.selForContextMenu != cm.doc.sel) {
@@ -4607,7 +4607,7 @@
   }
 
   // Used by replaceSelections to allow moving the selection to the
-  // start or around the replaced test. Hint may be "start" or "around".
+  // start or around the replaced message. Hint may be "start" or "around".
   function computeReplacedSel(doc, changes, hint) {
     var out = [];
     var oldPrev = Pos(doc.first, 0), newPrev = oldPrev;

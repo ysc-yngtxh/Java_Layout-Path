@@ -137,7 +137,7 @@ public class XxlJobExecutor  {
         return adminBizList;
     }
 
-    // ---------------------- executor-server (rpc test) ----------------------
+    // ---------------------- executor-server (rpc message) ----------------------
     private EmbedServer embedServer = null;
 
     private void initEmbedServer(String address, String ip, int port, String appname, String accessToken) throws Exception {
@@ -163,7 +163,7 @@ public class XxlJobExecutor  {
     }
 
     private void stopEmbedServer() {
-        // stop test factory
+        // stop message factory
         if (embedServer != null) {
             try {
                 embedServer.stop();
