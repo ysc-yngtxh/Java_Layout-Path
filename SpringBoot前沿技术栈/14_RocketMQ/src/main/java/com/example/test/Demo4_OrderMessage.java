@@ -105,6 +105,7 @@ public class Demo4_OrderMessage {
                 // MessageExt：是一个消息接收通配符，不管发送的是String还是对象，都可接收，当然也可以像上面明确指定类型（我建议还是指定类型较方便）
                 // System.out.printf：支持使用字符信息的格式化
                 // 标记该消息已经被成功消费
+                // 如果消费中出现异常，会一直重试，在没有人为设置重试次数的情况下，会一直重试，次数为Integer.MAX_VALUE
                 list.forEach(msg -> {
                     System.out.printf("%s 接收队列%s新消息: %s %n",
                             Thread.currentThread().getName(), list.stream().map(MessageExt::getQueueId).toList(),

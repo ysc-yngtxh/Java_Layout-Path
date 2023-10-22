@@ -75,8 +75,6 @@ public class Demo8_Retry_DeadMessage {
         pushConsumer.setNamesrvAddr("localhost:9876");
         // TODO 注意这里订阅的主题应该是死信主题：%DLQ%Retry_Dead_Group
         pushConsumer.subscribe("%DLQ%Retry_Dead_Group", "*");
-        // 设置重试次数
-        pushConsumer.setMaxReconsumeTimes(2);
         pushConsumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext context) {
@@ -95,8 +93,6 @@ public class Demo8_Retry_DeadMessage {
         // 设置NameServer的地址
         pushConsumer.setNamesrvAddr("localhost:9876");
         pushConsumer.subscribe("Retry_Dead_Group", "*");
-        // 设置重试次数
-        pushConsumer.setMaxReconsumeTimes(2);
         pushConsumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext context) {
