@@ -56,7 +56,5 @@ package A1_基础知识.初识Java;
          - 常量名：全部大写
 */
 public class 常识 {
-	public static void main(String[] arge) {
-		
-	}
+
 }

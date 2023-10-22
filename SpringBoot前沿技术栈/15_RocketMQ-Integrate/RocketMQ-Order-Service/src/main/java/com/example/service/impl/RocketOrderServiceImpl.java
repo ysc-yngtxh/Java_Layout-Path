@@ -9,6 +9,7 @@ import com.example.utils.SnowFlakeUtils;
 import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
+import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.client.producer.TransactionMQProducer;
 import org.apache.rocketmq.common.message.Message;
@@ -47,18 +48,18 @@ public class RocketOrderServiceImpl extends ServiceImpl<RocketOrderMapper, Rocke
                 System.out.println("发送状态：" + sendResult.getSendStatus() +
                         ", 消息ID：" + sendResult.getMsgId() +
                         ", 队列：" + sendResult.getMessageQueue().getQueueId());
-//                producer.sendOneway(message); // 单向消息
-//                producer.send(message, new SendCallback() { // 异步消息
-//                    @Override
-//                    public void onSuccess(SendResult sendResult) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onException(Throwable throwable) {
-//
-//                    }
-//                });
+               // producer.sendOneway(message); // 单向消息
+               // producer.send(message, new SendCallback() { // 异步消息
+               //     @Override
+               //     public void onSuccess(SendResult sendResult) {
+               //
+               //     }
+               //
+               //     @Override
+               //     public void onException(Throwable throwable) {
+               //
+               //     }
+               // });
             } catch (RemotingException | MQBrokerException | InterruptedException | MQClientException e) {
                 e.printStackTrace();
             }
