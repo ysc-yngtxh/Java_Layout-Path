@@ -1,74 +1,84 @@
 package B2_抽象类;
 /*
- * B2_抽象类（abstract）
- * 1、类和类之间具有共同特征，将这些共同特征提取出来，形成的就是抽象类。
- *    类本身是不存在的，所以抽象类无法创建对象《无法实例化》
- * 2、抽象类也属于引用类型
- * 3、抽象类怎么定义？
- *    abstract class 类名{
- *    }
- *
- * 4、抽象类是无法实例化，无法创建对象的，所以抽象类是用来被子类继承的
- *    因为抽象类中只有常量和抽象方法，但没有方法体。所以抽象类创建自己的对象是没有意义的
- *
- * 5、不可以在抽象类中加上关键字final，因为final类不能被继承。
- *
- * 6、抽象类的子类可以是抽象类
- *
- * 7、抽象类虽然无法实例，但是有构造方法，构造方法是供子类使用的
- *
- * 8、抽象类关联到一个概念：抽象方法
- *            抽象方法表示没有实现的方法，没有方法体的方法。例如：public abstract void doSome();
- *            抽象方法特点是：
- *                           1、没有方法体，以分号结尾
- *                           2、前面修饰符列表中有abstract关键字
- *
- *   总结一下：抽象类相当于是被继承类的父类，不提供实例化的能力(如果能实例化那我干嘛还要一个继承的抽象类？直接自己实现方法不是更好吗？)
- *           可以这么理解：抽象类具备正常类的所有的能力，只是不能实例化，多了一个没有方法体的抽象方法给被继承类去重写。
- *                      抽象类中的非抽象方法不用重写，其他方法(即抽象方法)必须重写
- */
+ 抽象类（abstract）
+ 1、类和类之间具有共同特征，将这些共同特征提取出来，形成的就是抽象类。
+    类本身是不存在的，所以抽象类无法创建对象《无法实例化》
+ 2、抽象类也属于引用类型
+ 3、抽象类怎么定义？
+    abstract class 类名{
+    }
 
-abstract class A{
-    A(){
+ 4、抽象类是无法实例化，无法创建对象的，所以抽象类是用来被子类继承的
+
+ 5、不可以在抽象类中加上关键字final，因为final类不能被继承。
+
+ 6、抽象类的子类也可以是抽象类
+
+ 7、抽象类虽然无法实例，但是有构造方法，构造方法是供子类使用的
+
+ 8、抽象类关联到一个概念：抽象方法
+       抽象方法表示没有实现的方法，没有方法体的方法。例如：public abstract void doSome();
+       抽象方法特点是：
+                     1️⃣、没有方法体，以分号结尾
+                     2️⃣、前面修饰符列表中有abstract关键字
+
+9、问题：为什么抽象类不能实例化却有构造器？
+        抽象类是可以被继承的，那么其子类在实例化后怎么去调用父类的变量或者方法呢？
+        就只能通过父类的构造器，通过 super 关键字进行调用。
+        所以抽象类必须要有构造器，而抽象类的构造器通常用于初始化抽象类中的成员变量，不做实例化使用。
+
+10、总结：抽象类具备正常Java类的所有的能力，只是不能实例化，并且多了一个没有方法体的抽象方法给继承类去重写。
+         抽象类中的非抽象方法(正常方法)不用重写，其他方法(即抽象方法)必须重写。
+
+ */
+abstract class A {
+    // 这个是构造方法，不是方法体
+    A() {
         System.out.println("A,无参构造函数");
-    }  // 这个是构造方法，不是方法体
+    }
 }
 class B extends A{
-    B(){
+    B() {
         System.out.println("A,无参构造函数");
     }
 }
 
-abstract class Animal{
-    private int qwer;
-    public Animal() {
+
+abstract class Animal {              // 动物类
+    private int data;
+    public Animal(int data) {
+        this.data = data;
     }
 
-    public Animal(int qwer) {
-        this.qwer = qwer;
-    }
-
-    // 动物类
+    // 抽象方法
     public abstract void move();
 
-    public void abc(){
+    // 正常方法体
+    public void abc() {
         System.out.println("ff");
     };
 }
-class Bird extends Animal{      // 鸟儿类
-    public void move(){                          //必须要将父类的抽象方法进行方法覆盖，否则Bird继承Animal的构造体中肯定有public abstract void move();
-        System.out.println("鸟儿在飞翔");  // 但是有abstract的抽象方法必是抽象类，但Bird类不是抽象类，因此在编译时会不通过，所以要进行方法覆盖
+class Bird extends Animal {          // 小鸟类
+    public Bird(int data) {          // 父类没有无参构造器只有有参构造器，因此子类必须通过 super 赋值 data 值，完成父类构造
+        super(data);
+    }
+    public void move() {             // 必须要将父类的抽象方法进行方法覆盖
+        System.out.println("鸟儿在飞翔");
     }
 }
-abstract class Cat extends Animal{
-    public void move(){
+abstract class Cat extends Animal {  // 小猫类
+    public Cat(int data) {           // 父类没有无参构造器只有有参构造器，因此子类必须通过 super 赋值 data 值，完成父类构造
+        super(data);
+    }
+    public void move() {             // 必须要将父类的抽象方法进行方法覆盖
         System.out.println("猫在吃鱼");
     }
 }
 
+
 public class 抽象类1_抽象类 {
     public static void main(String[] args) {
-        Animal a = new Bird();
+        Animal a = new Bird(10);   // 多态：父类引用指向子类对象
         a.move();
         // Animal a = new Cat(); // 为什么无法创建Cat对象，记住：抽象类不能创建对象。
     }

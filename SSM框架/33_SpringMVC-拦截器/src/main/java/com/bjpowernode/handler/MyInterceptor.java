@@ -31,11 +31,11 @@ public class MyInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         btime = System.currentTimeMillis();
         System.out.println("拦截器的MyInterceptor的preHandle()");
-        return true;//当返回值为true，表示验证成功，放行请求，执行后续程序
-
-        //当返回值为false，拦截请求，给浏览器一个反馈
-      //request.getRequestDispatcher("/tip.jsp").forward(request,response);
-      //return false;
+        return true;
+        // 当返回值为true，表示验证成功，放行请求，执行后续程序
+        // 当返回值为false，拦截请求，给浏览器一个反馈
+        // request.getRequestDispatcher("/tip.jsp").forward(request,response);
+        // return false;
     }
 
     /**
