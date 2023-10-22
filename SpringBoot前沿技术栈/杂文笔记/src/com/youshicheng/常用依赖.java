@@ -21,8 +21,8 @@ public class 常用依赖 {
  *         </dependency>
  *         <dependency>
  *             <groupId>org.springframework.boot</groupId>
- *             <artifactId>spring-boot-starter-message</artifactId>
- *             <scope>message</scope>
+ *             <artifactId>spring-boot-starter-test</artifactId>
+ *             <scope>test</scope>
  *         </dependency>
  *
  *         <dependency>

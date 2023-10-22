@@ -50,7 +50,7 @@ public class MyController {
     public ResponseEntity<String> retry(Order order){
 
         String orderId = order.getOrderId();
-        // String message = (String)redisTemplate.opsForHash().get("message", orderId);
+        // String message = (String)redisTemplate.opsForHash().get("test", orderId);
         String message = JSON.toJSONString(order);
         CorrelationData data = new CorrelationData(orderId);
         rabbitTemplate.convertAndSend("integrationExchange"

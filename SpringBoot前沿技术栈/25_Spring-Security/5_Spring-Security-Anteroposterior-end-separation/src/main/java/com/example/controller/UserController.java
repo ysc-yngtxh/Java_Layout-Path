@@ -24,9 +24,9 @@ public class UserController {
         return "hello world!";
     }
 
-    @RequestMapping("/message")
+    @RequestMapping("/test")
     // 权限注解，即：访问这个接口前需要当前用户有'message'权限
-    @PreAuthorize("hasAuthority('message')")
+    @PreAuthorize("hasAuthority('test')")
     public @ResponseBody String test(){
         return "Hello World";
     }

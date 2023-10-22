@@ -34,6 +34,6 @@ spring:
   devtools:   #java热部署
     restart:
       enabled: true
-      additional-paths: src/message/java     #热部署路径
+      additional-paths: src/test/java     #热部署路径
       #classpath\u76EE\u5F55\u4E0B\u7684WEB-INF\u6587\u4EF6\u5939\u5185\u5BB9\u4FEE\u6539\u4E0D\u91CD\u542F
       #exclude: WEB-INF/**

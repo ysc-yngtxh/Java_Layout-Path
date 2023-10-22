@@ -61,13 +61,13 @@ public class MyService {
         if (msg != null) {
             // 说明redis中即将要删除的数据存入到了rabbitmq的队列中
             log.info("redis中即将要删除的数据：{}", msgId);
-            redisTemplate.opsForHash().delete("message", msgId);
+            redisTemplate.opsForHash().delete("test", msgId);
             // TODO 更新数据库。。。
-            if (redisTemplate.opsForHash().entries("message").containsKey(msgId) && "数据库中数据更新好了".equals(null) ) {
+            if (redisTemplate.opsForHash().entries("test").containsKey(msgId) && "数据库中数据更新好了".equals(null) ) {
 
             }
             // 添加到redis。参数1、Key 2、HashKey（相当于redis根据Key取出的Map中的key） 3、value
-            redisTemplate.opsForHash().put("message", msgId, msg);
+            redisTemplate.opsForHash().put("test", msgId, msg);
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);  // 确认消息已消费
             int i=1/0; // 这里模拟出现异常导致重试机制触发
         }

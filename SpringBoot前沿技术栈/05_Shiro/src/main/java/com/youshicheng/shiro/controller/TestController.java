@@ -88,7 +88,7 @@ public class TestController {
 
    */
     @RequiresRoles(value="admin")
-    @RequestMapping("/admin/message")
+    @RequestMapping("/admin/test")
     public @ResponseBody String adminTest(){
         Subject subject = SecurityUtils.getSubject();
         String[] roles = {"admin"};
@@ -113,7 +113,7 @@ public class TestController {
     }
 
     @RequiresRoles(value={"user"})
-    @RequestMapping("/user/message")
+    @RequestMapping("/user/test")
     public @ResponseBody String userTest(){
         Subject subject = SecurityUtils.getSubject();
         String[] roles = {"user"};
