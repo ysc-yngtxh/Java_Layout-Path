@@ -6,17 +6,17 @@ package C3_Object类;
  *     第二种方法：去查阅Java的类库的帮助文档
  *
  * 目前为止我们只需要知道这几个方法即可：
- *      protected Object clone()    //负责对象克隆
- *      int hashCode()              //获取对象哈希值的一个方法
- *      boolean equals(Object obj)  //判断两个对象是否相等
- *      String toString()           //将对象转换成字符串形式
- *      protected void finalize()   //垃圾回收器负责调用的方法
+ *      protected Object clone()    // 负责对象克隆
+ *      int hashCode()              // 获取对象哈希值的一个方法
+ *      boolean equals(Object obj)  // 判断两个对象是否相等
+ *      String toString()           // 将对象转换成字符串形式
+ *      protected void finalize()   // 垃圾回收器负责调用的方法
  *
  * 1、toString()方法
  *    以后所有类的toString()方法需要重写的。
  *    重写规则，越简单越明了就好·
  *
- *    System.out.println(引用)；这里会自动调用“引用”的toString（）方法。
+ *    System.out.println(引用); 这里会自动调用“引用”的toString（）方法。
  *
  *    String类是SUN写的，toString方法已经重写了
  *
@@ -33,13 +33,8 @@ package C3_Object类;
  *    以后判断两个字符串是否相等，最好不要使用==，要调用字符串对象的equals方法。
  *
  * 3、finalize()方法
- *
- *
  * */
-
 public class Object类1_源码及帮助文档 {
-    public static void main(String[] args){
-    }
 }
 
 

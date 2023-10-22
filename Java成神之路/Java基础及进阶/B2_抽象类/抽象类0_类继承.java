@@ -16,7 +16,6 @@ class Person {  // 正常的Java类
     public final void finalMethod() {
         // 这是一个 final 方法，子类将无法重写它
     }
-
     public void methodToBeOverridden() {
         // 这是一个可被重写的方法
     }
@@ -27,6 +26,7 @@ class Child extends Person {
         // 这是重写父类中可被重写的方法的实现
     }
 }
+
 
 public class 抽象类0_类继承 {
 

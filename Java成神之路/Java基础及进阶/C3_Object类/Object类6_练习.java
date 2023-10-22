@@ -1,17 +1,5 @@
 package C3_Object类;
 
-public class Object类6_练习 {
-    public static void main(String[] args) {
-        User u1 = new User("游诗成", new Address("武汉", "江夏区", "111111"));
-        User u2 = new User("游诗成", new Address("武汉", "江夏区", "111111"));
-        System.out.println(u1.equals(u2));   //true
-
-        User u3=new User("游诗成", new Address("武汉", "江岸区", "111222"));
-        System.out.println(u1.equals(u3));   //false
-    }
-
-}
-
 class User{
     String name;     // 用户名
     Address addr;    // 用户的地址
@@ -34,30 +22,38 @@ class User{
         return false;
     }
 }
-
 class Address{
-    String city;        // 城市
-    String street;      // 街道
-    String zipcode;     // 邮编
+    String city,street,zipcode;  // 城市, 街道, 邮编
     public Address(){}
     public Address(String city, String street, String zipcode){
         this.city = city;
         this.street = street;
         this.zipcode = zipcode;
     }
-
     @Override
     public boolean equals(Object obj) {
-        if(null == obj  ||  !(obj instanceof Address)) {
+        if(null == obj || !(obj instanceof Address)) {
             return false;
         }
         if(this == obj) {
             return true;
         }
         Address a = (Address)obj;
-        if(this.city.equals(a.city)  &&  this.street.equals(a.street)  &&  this.zipcode.equals(a.zipcode)){
+        if(this.city.equals(a.city) && this.street.equals(a.street) && this.zipcode.equals(a.zipcode)){
             return true;
         }
         return false;
     }
+}
+
+public class Object类6_练习 {
+    public static void main(String[] args) {
+        User u1 = new User("游诗成", new Address("武汉", "江夏区", "111111"));
+        User u2 = new User("游诗成", new Address("武汉", "江夏区", "111111"));
+        System.out.println(u1.equals(u2));   // true
+
+        User u3 = new User("游诗成", new Address("武汉", "江岸区", "111222"));
+        System.out.println(u1.equals(u3));   // false
+    }
+
 }

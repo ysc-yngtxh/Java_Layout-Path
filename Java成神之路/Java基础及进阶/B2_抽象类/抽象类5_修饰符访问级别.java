@@ -17,11 +17,11 @@ class son extends PageInternal{}
 
 public class 抽象类5_修饰符访问级别 {
     /**
-        修饰符	     当前类  当前类所在包下的其他类   子类  其他包下的类
-        public        √	            √	          √	      √
-        protected     √	            √	          √	      ×
-        缺省           √	            √	          ×	      ×
-        private       √	            ×	          ×	      ×
+        修饰符	     当前类   同一个包中的类    子类(不同包)  所有类
+        public        √	          √	            √	       √
+        protected     √	          √	            √	       ×
+        缺省           √	          √             ×	       ×        [缺省的同包子类可以访问]
+        private       √	          ×	            ×	       ×
      */
     public static void main(String[] args) {
         // TODO 同一个包下（不能访问到被private修饰的属性）

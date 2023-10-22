@@ -20,16 +20,22 @@ package C3_Object类;
  *      static{
  *         ...
  *      }
- *      静态代码块正在类加载时刻执行，并且只执行一次。
- *      这是一个SUN准备的类加载时机
- *      finalize（）方法同样也是SUN为程序员准备的一个时机
- *      这个时机是垃圾回收时机
+ *      静态代码块是在类加载时刻自动执行，并且只执行一次。这是一个SUN准备的类加载时机。
+ *      finalize()方法同样也是SUN为程序员准备的一个时机，这个时机是垃圾回收时机
  *
  *   7、提示：
  *      Java中的垃圾回收器是不会轻易启动的
- *      垃圾太少或者时间未到,种种条件下，有可能启动，也有可能不启动
+ *      垃圾太少或者时间未到，种种条件下，有可能启动，也有可能不启动
  * */
-
+/*
+ * 项目开发中有这样的业务需求：所有对象在JVM中被释放的时候，请记录一下施放时间！！！
+ * 记录对象被释放的时间点，这个负责记录的代码写在finalize（）方法中
+ */
+class Person{
+    protected void finalize() throws Throwable{
+        System.out.println("即将被销毁");
+    }
+}
 public class Object类4_Finalize {
     public static void main(String[] args) {
         for(int i = 0; i < 1000; i++){
@@ -38,17 +44,7 @@ public class Object类4_Finalize {
             if (i % 2 == 0) {
                 System.gc();
             }
-
         }
-    }
-}
-/*
- * 项目开发中有这样的业务需求：所有对象在JVM中被释放的时候，请记录一下施放时间！！！
- * 记录对象被释放的时间点，这个负责记录的代码写在finalize（）方法中
- */
-class Person{
-    protected void finalize() throws Throwable{
-        System.out.println("即将被销毁");
     }
 }
 

@@ -8,20 +8,8 @@ package C3_Object类;
  * 3、其实SUN公司开发Java语言的时候，建议所有的子类都去重写toString()方法。
  *    toString()方法应该是一个简洁的，详实的，易阅读的。
  */
-public class Object类2_toString {
-    public static void main(String[] args) {
-        MyTime t1 = new MyTime(1997,4,29);
-		/*
-		  String s1 = t1.toString();
-		  System.out.println(s1);
-		 */
-        System.out.println(t1.toString());
-    }
-}
 class MyTime{
-    int year;
-    int month;
-    int day;
+    int year,month,day;
     public MyTime(){
 
     }
@@ -35,5 +23,15 @@ class MyTime{
         return this.year + "/" + this.month + "/" + this.day;
     }
 }
-// 以后写一个类都是要重写toString()方法的
 
+
+public class Object类2_toString {
+    public static void main(String[] args) {
+        MyTime t1 = new MyTime(1997,4,29);
+		/*
+		  String s1 = t1.toString();
+		  System.out.println(s1);
+		 */
+        System.out.println(t1.toString());
+    }
+}
