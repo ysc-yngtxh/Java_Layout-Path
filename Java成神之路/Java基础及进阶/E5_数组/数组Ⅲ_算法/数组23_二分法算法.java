@@ -2,7 +2,7 @@ package E5_数组.数组Ⅲ_算法;
 
 /*
   不使用二分法只能挨个比较进行查找
-     public class 数组12_二分法算法 {
+     public class 数组23_二分法算法 {
          public static void main(String[] args) {
              int[] arr = {11, 12, 16, 10, 8, 9, 12};
              int index = arraySearch(arr, 12);
@@ -34,14 +34,14 @@ package E5_数组.数组Ⅲ_算法;
 
       3、二分法查找算法是基于排序的基础之上。(没有排序的数据是无法查找的)
 */
-public class 数组12_二分法算法 {
+public class 数组23_二分法算法 {
     public static void main(String[] args) {
         int[] arr = {100, 200, 300, 235, 600, 1000, 2000, 9999};
         int index = binarySear(arr, 600);
         System.out.println(index == -1 ? "该元素不存在!" : "该元素下标是:" + index);
     }
     private static int binarySear(int[] arr, int ele) {
-        int begin = 0;           // 开始下标
+        int begin = 0;            // 开始下标
         int end = arr.length-1;   // 结束下标
         while (begin <= end) {
             int mid = (begin + end)/2; // 中间下标

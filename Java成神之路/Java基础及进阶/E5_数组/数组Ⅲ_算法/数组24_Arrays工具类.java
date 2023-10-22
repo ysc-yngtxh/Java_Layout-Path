@@ -2,7 +2,7 @@ package E5_数组.数组Ⅲ_算法;
 
 import java.util.Arrays;
 
-public class 数组13_Arrays工具类 {
+public class 数组24_Arrays工具类 {
     public static void main(String[] args) {
         // java.util.Arrays;  工具类中有哪些方法，我们开发的时候要参考API帮助文档,不要死记硬背
         int[] arr = {3, 6, 4, 5, 12, 1, 2, 32, 5, 5};
