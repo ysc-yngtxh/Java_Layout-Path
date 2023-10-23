@@ -3,11 +3,10 @@ package N14_注解.注解Ⅲ_反射注解;
 import java.lang.reflect.Method;
 
 /**
-只允许该注解可以标注类，方法
+  只允许该注解可以标注类，方法
  */
 public class 注解4_反射注解 {
     public static void main(String[] args) throws Exception{
-
         // 获取这个类
         Class<?> c = Class.forName("N14_注解.注解Ⅲ_反射注解.MyAnnotationTest");
         // 判断这个类型上是否有这个@MyAnnotation注解
@@ -20,8 +19,8 @@ public class 注解4_反射注解 {
         }
 
         // 判断String类上面是否存在这个注解
-        Class stringClass = Class.forName("java.lang.String");
-        System.out.println(stringClass.isAnnotationPresent(MyAnnotation.class));  //false
+        Class<?> stringClass = Class.forName("java.lang.String");
+        System.out.println(stringClass.isAnnotationPresent(MyAnnotation.class));  // false
 
 
         // 通过反射机制获取注解对象属性的值
