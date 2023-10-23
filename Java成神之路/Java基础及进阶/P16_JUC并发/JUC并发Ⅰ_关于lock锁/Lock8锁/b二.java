@@ -4,15 +4,12 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 情况二：一个类中两个方法都加上了synchronized关键字，也就是说共用一把锁。
- *  *       这个时候在main方法中创建两对象，并分别执行A和B线程，先打印出来的是 "发短信" 还是 "打电话" ？
+ *        这个时候在main方法中创建两对象，并分别执行A和B线程，先打印出来的是 "发短信" 还是 "打电话" ？
  */
 public class b二 {
-
     public static void main(String[] args) {
-
         Test2 test1 = new Test2();
         Test2 test2 = new Test2();
-
         new Thread(test1::Send, "A").start();
 
         try {
@@ -24,7 +21,6 @@ public class b二 {
         new Thread(test2::Call, "B").start();
     }
 }
-
 class Test2{
     public synchronized void Send(){
         try {
@@ -34,7 +30,6 @@ class Test2{
         }
         System.out.println("发短信");
     }
-
     public synchronized void Call(){
         System.out.println("打电话");
     }

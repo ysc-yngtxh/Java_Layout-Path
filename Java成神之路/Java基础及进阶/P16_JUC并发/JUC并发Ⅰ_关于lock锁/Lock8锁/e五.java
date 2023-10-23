@@ -6,15 +6,10 @@ import java.util.concurrent.TimeUnit;
  * 情况五：一个类中都加上static synchronized关键字，这个时候我在main方法中创建一个对象，先打印出来的是 "发短信" 还是 "打电话" ？
  */
 public class e五 {
-
     public static void main(String[] args) {
-
         Test5 test5 = new Test5();
-
         // 使用Test5的静态方法 Send()
-        new Thread(() -> {
-            Test5.Send();
-        }, "A").start();
+        new Thread(() -> Test5.Send(), "A").start();
 
         try {
             TimeUnit.SECONDS.sleep(1);  // 睡眠，不再使用Thread.sleep()
@@ -23,22 +18,18 @@ public class e五 {
         }
 
         // 使用Test5的静态方法 Call()
-        new Thread(() -> {
-            test5.Call();
-        }, "B").start();
+        new Thread(() -> test5.Call(), "B").start();
     }
 }
-
 class Test5{
     public static synchronized void Send(){
         try {
-            TimeUnit.SECONDS.sleep(2);  //睡眠，不再使用Thread.sleep()
+            TimeUnit.SECONDS.sleep(2);  // 睡眠，不再使用Thread.sleep()
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         System.out.println("发短信");
     }
-
     public static synchronized void Call(){
         System.out.println("打电话");
     }

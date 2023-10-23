@@ -8,11 +8,8 @@ import java.util.concurrent.TimeUnit;
  *       并且这个时候A线程在执行时会睡眠2秒。这个时候执行main方法，先打印出来的是 "发短信" 还是 "打电话" ？
  */
 public class a一 {
-
     public static void main(String[] args) {
-
         Test1 test = new Test1();
-
         new Thread(test::Send, "A").start();
 
         try {
@@ -24,7 +21,6 @@ public class a一 {
         new Thread(test::Call, "B").start();
     }
 }
-
 class Test1{
     public synchronized void Send(){
         try {
@@ -34,10 +30,9 @@ class Test1{
         }
         System.out.println("发短信");
     }
-
     public synchronized void Call(){
         System.out.println("打电话");
     }
 }
 
-// 回答：先打印的是”发短信“。因为两个线程共用一把锁的情况下，线程时需要排队的，在已知A线程先启动，B线程只有等待。
+// 回答：先打印的是”发短信“。因为两个线程共用一把类锁的情况下，线程时需要排队的，在已知A线程先启动，B线程只有等待。

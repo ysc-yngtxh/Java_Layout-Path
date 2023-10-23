@@ -7,12 +7,9 @@ import java.util.concurrent.TimeUnit;
  *        先打印出来的是 "发短信" 还是 "打电话" ？
  */
 public class d四 {
-
     public static void main(String[] args) {
-
         Test4 test1 = new Test4();
         Test4 test2 = new Test4();
-
         new Thread(test1::Send, "A").start();
 
         try {
@@ -24,7 +21,6 @@ public class d四 {
         new Thread(test2::Call, "B").start();
     }
 }
-
 class Test4{
     public synchronized void Send(){
         try {
@@ -34,7 +30,6 @@ class Test4{
         }
         System.out.println("发短信");
     }
-
     public void Call(){
         System.out.println("打电话");
     }

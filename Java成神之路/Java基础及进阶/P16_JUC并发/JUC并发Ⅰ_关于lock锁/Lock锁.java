@@ -21,7 +21,6 @@ public class Lock锁 {
      */
     public static void main(String[] args) {
         Dataes data = new Dataes();
-
         new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 try {
@@ -51,12 +50,10 @@ public class Lock锁 {
                 }
             }
         }, "C").start();
-
     }
 }
 
 class Dataes {
-
     private int num = 1;
     Lock lock = new ReentrantLock(); // 创建lock锁，相当于Synchronized关键字
     Condition condition1 = lock.newCondition(); // 获得lock锁的监听器

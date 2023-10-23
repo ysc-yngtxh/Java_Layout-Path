@@ -7,7 +7,6 @@ package O15_练习题;
  * @date 2022/11/04 22:24
  */
 public class User {
-
     private String id;
     private String user;
     private String name;

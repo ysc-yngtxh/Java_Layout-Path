@@ -2,10 +2,8 @@ package L12_线程.线程Ⅲ_线程安全.线程8_synchronized面试题;
 
 /*
   面试题：
-    MyClass方法中一个有synchronized，一个没有
+    MyClass方法中一个有synchronized，一个没有synchronized
     doOther方法的执行需不需要等doSome方法的结束？
-
-    不需要，因为doOther方法没有synchronized
  */
 public class Exam01 {
     public static void main(String[] args) throws InterruptedException {
@@ -50,3 +48,5 @@ class MyClass{
         System.out.println("doOther over");
     }
 }
+
+// 不需要，只有t1线程在执行synchronized方法期间持有对象锁，而t2线程方法没有synchronized并不需要获取对象锁，所以不会被阻塞。

@@ -13,7 +13,6 @@ public class Callable线程实现 {
          *     所以我们要通过这个FutureTask来实现Callable接口，获取返回值和抛出的异常。
          *     (可以理解FutureTask为Callable的适配类，Callable通过FutureTask去关联Runnable接口，来实现线程的操作)
          */
-
         FutureTask<Integer> task = new FutureTask<>(demo);
 
         new Thread(task, "A").start();
@@ -23,9 +22,6 @@ public class Callable线程实现 {
         // 但是这一步会产生阻塞，因为它会去等待结果的返回。如果Demo类中的Call()方法被睡眠了或者其他异常，等待时间过长就会阻塞
         Integer o = task.get();
         System.out.println(o);
-
-
-
     }
 }
 

@@ -26,8 +26,7 @@ public class Test {
         List<User> Users = Arrays.asList(user1, user2, user3, user4);
 
         Map<String, List<User>> collect = Users.stream()
-                .collect(groupingBy(O15_练习题.User::getDate));
-
+                .collect(groupingBy(User::getDate));
 
 //        collect
 //                .stream().map(obj -> {
@@ -36,11 +35,8 @@ public class Test {
 //                        }
 //                ).collect(Collectors.toList());
 
-//        collect.forEach(User->
-//        {
+//        collect.forEach(User -> {
             System.out.println(user1);
 //        });
-
     }
-
 }

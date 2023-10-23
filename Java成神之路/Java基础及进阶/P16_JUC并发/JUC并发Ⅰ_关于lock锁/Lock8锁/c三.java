@@ -6,11 +6,8 @@ import java.util.concurrent.TimeUnit;
  * 情况二：一个类中一个有synchronized关键字，一个没有。这个时候执行main方法，先打印出来的是 "发短信" 还是 "打电话" ？
  */
 public class c三 {
-
     public static void main(String[] args) {
-
         Test3 test3 = new Test3();
-
         new Thread(test3::Send, "A").start();
 
         try {
@@ -22,7 +19,6 @@ public class c三 {
         new Thread(test3::Call, "B").start();
     }
 }
-
 class Test3{
     public synchronized void Send(){
         try {
@@ -32,13 +28,12 @@ class Test3{
         }
         System.out.println("发短信");
     }
-
     public void Call(){
         System.out.println("打电话");
     }
 }
 
 /**
- * 回答：因为同在一个类中，一个方法加上了Synchronized关键字，就相当于这个类对象线程同步
- *      所以，先打印的是"发短信"
+ * 回答：只有A线程在执行synchronized方法期间持有对象锁，而B线程方法没有synchronized并不需要获取对象锁，不会被阻塞。
+ *      所以，先打印的是"打电话"
  */

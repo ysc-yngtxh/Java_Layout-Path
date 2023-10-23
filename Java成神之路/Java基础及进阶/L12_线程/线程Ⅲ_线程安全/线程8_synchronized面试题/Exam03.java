@@ -4,8 +4,6 @@ package L12_线程.线程Ⅲ_线程安全.线程8_synchronized面试题;
   面试题：
     MyClass中两方法都有synchronized，且，在主方法中创建两个MyClass2对象
     doOther方法的执行需不需要等doSome方法的结束？
-
-    不需要，因为MyClass是有两把锁，没有共享的对象。谁也不影响谁
  */
 public class Exam03 {
     public static void main(String[] args) throws InterruptedException {
@@ -52,3 +50,5 @@ class MyClass2 {
         System.out.println("doOther over");
     }
 }
+
+// 不需要，虽然MyClass中实现的对象锁，但是没有共享的对象，谁也不影响谁

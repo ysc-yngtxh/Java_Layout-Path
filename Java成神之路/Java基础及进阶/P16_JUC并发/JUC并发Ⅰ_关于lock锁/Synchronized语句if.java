@@ -8,7 +8,7 @@ public class Synchronized语句if{
     */
     public static void main(String[] args) {
         Data data = new Data();
-        new Thread(()->{
+        new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 try {
                     data.demo1();
@@ -16,9 +16,9 @@ public class Synchronized语句if{
                     e.printStackTrace();
                 }
             }
-        },"A").start();
+        }, "A").start();
 
-        new Thread(()->{
+        new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 try {
                     data.demo2();
@@ -26,9 +26,9 @@ public class Synchronized语句if{
                     e.printStackTrace();
                 }
             }
-        },"B").start();
+        }, "B").start();
 
-        new Thread(()->{
+        new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 try {
                     data.demo1();
@@ -36,9 +36,9 @@ public class Synchronized语句if{
                     e.printStackTrace();
                 }
             }
-        },"C").start();
+        }, "C").start();
 
-        new Thread(()->{
+        new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 try {
                     data.demo2();
@@ -46,15 +46,12 @@ public class Synchronized语句if{
                     e.printStackTrace();
                 }
             }
-        },"D").start();
-
+        }, "D").start();
     }
 }
 
 class Data{
-
-    int num=0;
-
+    int num = 0;
     public synchronized void demo1() throws InterruptedException {
         if(num == 0){
             this.wait();
@@ -63,7 +60,6 @@ class Data{
         System.out.println(Thread.currentThread().getName() + "---num值---" + num);
         this.notifyAll();
     }
-
     public synchronized void demo2() throws InterruptedException {
         if(num != 0){
             this.wait();

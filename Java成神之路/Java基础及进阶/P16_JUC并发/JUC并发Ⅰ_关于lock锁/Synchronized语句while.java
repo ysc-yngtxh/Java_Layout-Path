@@ -7,6 +7,25 @@ public class Synchronized语句while {
      */
     public static void main(String[] args) {
         Datas data = new Datas();
+        new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    data.demo1();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "A").start();
+
+        new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    data.demo2();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "B").start();
 
         new Thread(() -> {
             for (int i = 0; i < 10; i++) {
@@ -16,9 +35,9 @@ public class Synchronized语句while {
                     e.printStackTrace();
                 }
             }
-        },"A").start();
+        }, "C").start();
 
-        new Thread(()->{
+        new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 try {
                     data.demo2();
@@ -26,35 +45,12 @@ public class Synchronized语句while {
                     e.printStackTrace();
                 }
             }
-        },"B").start();
-
-        new Thread(()->{
-            for (int i = 0; i < 10; i++) {
-                try {
-                    data.demo1();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        },"C").start();
-
-        new Thread(()->{
-            for (int i = 0; i < 10; i++) {
-                try {
-                    data.demo2();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        },"D").start();
-
+        }, "D").start();
     }
 }
 
-class Datas{
-
+class Datas {
     int num = 0;
-
     public synchronized void demo1() throws InterruptedException {
         while (num == 0){
             this.wait();
@@ -63,7 +59,6 @@ class Datas{
         System.out.println(Thread.currentThread().getName() + "---num值---" + num);
         this.notifyAll();
     }
-
     public synchronized void demo2() throws InterruptedException {
         while(num != 0){
             this.wait();
