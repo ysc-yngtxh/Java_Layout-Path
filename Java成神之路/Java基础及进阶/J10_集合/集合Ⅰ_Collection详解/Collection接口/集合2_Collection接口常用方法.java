@@ -3,7 +3,8 @@ package J10_集合.集合Ⅰ_Collection详解.Collection接口;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/*关于java.util.Collection接口中的常用方法：
+/*
+  关于java.util.Collection接口中的常用方法：
       1、Collection中能存放什么元素？
           没有使用“泛型”之前，Collection中可以存储Object的所有子类型
           使用了“泛型”之后，Collection中只能存储某个具体的类型
@@ -18,12 +19,9 @@ import java.util.Collection;
            boolean isEmpty()  判断该集合中元素的个数是否为空
            Object[] toArray()  调用这个方法可以把集合转换成数组
 */
-
 public class 集合2_Collection接口常用方法 {
     public static void main(String[] args) {
-
         Collection<Object> c = new ArrayList<>();
-
         c.add(100); // 自动装箱（Java5的新特性），实际上放进去了
         // 一个对象的内存地址。Integer x = new Integer();
         c.add(3.14); // 自动装箱
@@ -76,9 +74,7 @@ public class 集合2_Collection接口常用方法 {
             Object o = obj[i];
             System.out.println(o);
         }
-
     }
-
     private static class Student {
     }
 }

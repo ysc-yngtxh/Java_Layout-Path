@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /*
-深入Collection集合的contains方法：
-    boolean contains(Object o)判断集合中是否包含某个对象o
-    如果包含返回true，如果不包含返回false
+  深入Collection集合的contains方法：
+      boolean contains(Object o)判断集合中是否包含某个对象o
+      如果包含返回true，如果不包含返回false
 
-    contains方法是用来判断集合中是否包含某个元素的方法。
-    那么他在底层是怎么判断集合中是否包含某个元素的呢？
-        调用了equals方法进行比对
-        equals方法返回true，就表示包含这个元素
+      contains方法是用来判断集合中是否包含某个元素的方法。
+      那么他在底层是怎么判断集合中是否包含某个元素的呢？
+          调用了equals方法进行比对
+          equals方法返回true，就表示包含这个元素
  */
 public class 集合3_contains方法详解 {
     public static void main(String[] args) {
@@ -44,42 +44,9 @@ public class 集合3_contains方法详解 {
 
 class User{
     private String name;
-
     public User() {
     }
-
     public User(String name) {
         this.name = name;
     }
 }
-    /*
-
-    // Object类的equals方法，比较的是对象的内存地址
-    public boolean equals(Object obj){
-         return (this == obj);
-    }
-
-
-    // String类的equals方法，比较的是对象的内容。
-    public boolean equals(Object anObject) {
-        if (this == anObject) {
-            return true;
-        }
-        if (anObject instanceof String) {
-            String anotherString = (String)anObject;
-            int n = value.length;
-            if (n == anotherString.value.length) {
-                char v1[] = value;
-                char v2[] = anotherString.value;
-                int i = 0;
-                while (n-- != 0) {
-                    if (v1[i] != v2[i])
-                        return false;
-                    i++;
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-    */

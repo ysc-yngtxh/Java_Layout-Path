@@ -14,7 +14,6 @@ import java.util.Iterator;
     hasNext()和next()交替使用；
     remove()
 
-
     boolean hasNext = it.hasNext();
     这个方法返回true，便是还有元素可以迭代。这个方法返回false便是没有更多的元素可以迭代了
 
@@ -43,7 +42,7 @@ public class 集合4_迭代器 {
         // 第一步：获取集合对象的迭代器对象Iterator
         Iterator<Object> it = c.iterator();
         // 第二步：通过以上获取的迭代器对象开始迭代/遍历集合
-        while(it.hasNext()){
+        while(it.hasNext()) {
             System.out.println(it.next());
             // 存进去什么类型，取出来的就是什么类型。只不过在输出的时候会转换成字符串，因为这里println调用了toString()方法
         }

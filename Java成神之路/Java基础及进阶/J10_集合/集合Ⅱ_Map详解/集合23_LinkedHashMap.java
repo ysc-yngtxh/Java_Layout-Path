@@ -10,17 +10,25 @@ import java.util.Map;
  * @date 2022/08/13 19:10
  */
 public class 集合23_LinkedHashMap {
+    /**
+     * LinkedHashMap
+     * 1、Key和Value都允许空
+     * 2、Key重复会覆盖、Value允许重复
+     * 3、有序 -- 指的是存进去的数据跟取出来的数据顺序是一样的
+     * 4、非线程安全
+     */
     public static void main(String[] args) {
-
-        Map<String, String> m = new LinkedHashMap<>();
-        m.put("A", "1");
-        m.put("B", "2");
-        m.put("C", "3");
-        m.put("D", "4");
-        m.put("E", "5");
-        m.put(null, "6");
-        m.put(null, "6");
-        m.put("", "6");
-        System.out.println(m);
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("A", "1");
+        map.put("B", "2");
+        map.put("D", "4");
+        map.put("C", "3");
+        map.put("E", "5");
+        map.put(null, "6");
+        map.put(null, "6");
+        map.put("", "6");
+        map.put("", "");
+        map.put(" ", "");
+        System.out.println(map);
     }
 }

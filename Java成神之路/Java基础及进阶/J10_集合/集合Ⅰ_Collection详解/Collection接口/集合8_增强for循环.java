@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /*
-1、JDK5.0之后推出了一个新特性：叫做增强for循环，或者叫做foreach
-2、foreach有一个缺点：没有下标。在需要下标的循环中不建议使用增强for循环
+  1、JDK5.0之后推出了一个新特性：叫做增强for循环，或者叫做foreach
+  2、foreach有一个缺点：没有下标。在需要下标的循环中不建议使用增强for循环
  */
 public class 集合8_增强for循环 {
     public static void main(String[] args) {
@@ -17,13 +17,6 @@ public class 集合8_增强for循环 {
         for (int i = 0; i < a.length; i++) {
             System.out.println(a[i]);
         }
-
-        /*
-        增强for循环语法
-        for (数据类型 变量名: 数组或集合) {
-            System.out.println(变量名);
-        }
-        */
 
         // 遍历数组（增强for循环）
         for(int data : a){
@@ -50,8 +43,7 @@ public class 集合8_增强for循环 {
         }
 
         // 使用foreach
-        for (String s: list
-             ) {
+        for (String s: list) {
             System.out.println(s);
         }
     }

@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /*
-关于集合元素的remove
+  关于集合元素的remove
     重点：当集合的结构发生改变时，迭代器必须重新获取，如果还是用以前老的迭代器，会出现异常：java.util.ConcurrentModificationException
 
     重点：在迭代集合元素的过程中，不能调用集合对象的remove方法，删除元素：
@@ -37,7 +37,6 @@ public class 集合6_迭代器与集合中的remove区别 {
         System.out.println(c.size());
     }
 }
-
 /*
   什么时候使用迭代器迭代，什么时候使用for循环遍历?
      1、for循环每次遍历都需要访问list长度，故可以在循环遍历中操作元素（增删）

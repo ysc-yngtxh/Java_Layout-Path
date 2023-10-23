@@ -1,7 +1,7 @@
 package J10_集合.集合Ⅰ_Collection详解.List接口;
 
 /*
-链表类
+  链表类
  */
 public class 集合12_简单实现链表模型 {
     public static void main(String[] args) {
@@ -12,7 +12,7 @@ public class 集合12_简单实现链表模型 {
         System.out.println(Link.size());
     }
 
-    //头节点
+    // 头节点
     Node header;
     int size = 0;
     public int size(){
@@ -24,13 +24,13 @@ public class 集合12_简单实现链表模型 {
         // 创建一个新的节点对象
         // 让之前单链表的末尾节点next指向新节点对象。
         // 有可能这个元素是第一个，也可能是第二个，也可能是第三个
-        if (header == null){
+        if (header == null) {
             // 说明还没有节点,new一个新的节点作为头节点对象
-            header = new Node(data,null);
-        }else{
+            header = new Node(data, null);
+        } else {
             // 说明头节点不是空，已经存在。这时候应该找出末尾节点，让当前的末尾节点的next是新节点
             Node currentLastNode = findLast(header);
-            currentLastNode.next = new Node(data,null);
+            currentLastNode.next = new Node(data, null);
         }
         size++;
     }
@@ -59,7 +59,6 @@ public class 集合12_简单实现链表模型 {
         return 1;
     }
 
-
     /**
      * 单链表中的节点
      *   节点是单向链表中基本的单元
@@ -73,12 +72,9 @@ public class 集合12_简单实现链表模型 {
         // 下一个节点的内存地址
         Node next;
         public Node(){}
-        public Node(Object data,Node next){
+        public Node(Object data, Node next){
             this.data = data;
             this.next = next;
         }
     }
-
 }
-
-

@@ -6,19 +6,19 @@ import java.util.HashSet;
 import java.util.List;
 
 /*
-ArrayList集合：是非线程安全的
+  ArrayList集合：是非线程安全的
     1、默认初始化容量是10
     2、集合底层是Object[]
     3、构造方法：
           new ArrayList();
           new ArrayList(20);
     4、ArrayList集合的扩容
-       增长到原来的1.5倍。
-       ArrayList集合底层是数组
-          尽可能少的扩容。因为数组扩容效率比较低，建议在使用ArrayList集合的时候预估计元素的个数，给定一个初始化容量
+          增长到原来的1.5倍。
+          ArrayList集合底层是数组
+             尽可能少的扩容。因为数组扩容效率比较低，建议在使用ArrayList集合的时候预估计元素的个数，给定一个初始化容量
     5、数组优点：
-         检索效率比较高。
-         (每个元素占用空间大小相同，内存地址是连续的，知道首元素内存地址，然后知道下标，通过数学表达式计算出元素的内存地址，所以检索效果高)
+          检索效率比较高。
+          (每个元素占用空间大小相同，内存地址是连续的，知道首元素内存地址，然后知道下标，通过数学表达式计算出元素的内存地址，所以检索效果高)
     6、数组缺点：
           随即增删元素效率比较低
           另外数组无法存储大数据量( 很难找到一块非常巨大的连续的内存空间)
@@ -31,14 +31,13 @@ ArrayList集合：是非线程安全的
  */
 public class 集合10_ArrayList集合初始化容量及扩容 {
     public static void main(String[] args) {
-
         // 默认初始化容量10
         List<Object> list = new ArrayList<>();
-        System.out.println(list.size()); // 0
+        System.out.println(list.size());  // 0
 
         // 指定初始化容量20
         List<Object> list2 = new ArrayList<>(100); // ArrayList集合扩容
-        System.out.println(list2.size());//0
+        System.out.println(list2.size()); // 0
         // 集合的size()方法是获取当前集合中元素的个数。不是获取集合的容量
 
         // 创建一个HashSet集合
@@ -54,7 +53,6 @@ public class 集合10_ArrayList集合初始化容量及扩容 {
         for (int i = 0; i < list3.size(); i++) {
             System.out.println(list3.get(i));
         }
-
 
         System.out.println(10 >> 1);   // 5
         // 右移1位   即00001010-->00000101
