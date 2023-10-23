@@ -49,6 +49,7 @@ import java.util.Set;
           为什么无序？因为不一定挂到哪个单向链表上
           不可重复是怎么保证的？equals方法来保证HashMap集合的key不可重复
           如果key重复了，value会覆盖
+          HashMap集合的key和value都是可以为null的
 
           放在HashMap集合的key部分元素其实就是放到HashMap集合中了
           所以HashMap集合中的元素也需要同时重写hashCode()+equals()方法

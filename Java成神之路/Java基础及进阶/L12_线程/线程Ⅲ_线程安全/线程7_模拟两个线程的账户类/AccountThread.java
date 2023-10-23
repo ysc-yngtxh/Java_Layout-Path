@@ -14,7 +14,13 @@ public class AccountThread extends Thread {
         // 假设取款5000
         double money = 5000;
         // 取款
-        act.withdraw(money);
-        System.out.println("账户" + act.getAction()+ "取款" + money + "成功，余额" + act.getBalance());
+        boolean few = act.withdraw(money);
+        String success = "账户" + act.getAction() + "取款" + money + "成功，剩余金额" + act.getBalance();
+        String fail = "账户" + act.getAction() + "取款" + money + "失败，剩余金额" + act.getBalance();
+        if (few) {
+            System.out.println(success);
+        } else {
+            System.err.println(fail);
+        }
     }
 }

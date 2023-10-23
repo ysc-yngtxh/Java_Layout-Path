@@ -10,8 +10,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /*
-定时器：
-    定时器作用：
+  定时器：
+    作用：
         间隔特定的时间，执行特定的程序。
         每周要进行银行账户的总帐操作。
         每天要进行数据的备份操作。
@@ -25,7 +25,6 @@ import java.util.TimerTask;
  */
 public class 线程13_定时器 {
     public static void main(String[] args) throws ParseException {
-
         // 创建定时器对象
         Timer timer = new Timer();
         // Timer timer = new Timer(true);  // 守护线程的方式
@@ -34,10 +33,8 @@ public class 线程13_定时器 {
         timer.schedule(new LongTimeTask(), new Date(), 1000*10);
     }
 }
-
 // 编写一个定时任务类
 class LongTimeTask extends TimerTask {
-
     // 一个定时的日志
     @Override
     @SuppressWarnings("CallToPrintStackTrace")

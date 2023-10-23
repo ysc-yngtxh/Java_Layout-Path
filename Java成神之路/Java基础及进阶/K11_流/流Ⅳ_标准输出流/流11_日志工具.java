@@ -8,7 +8,6 @@ import java.util.Date;
 
 public class 流11_日志工具 {
     public static void main(String[] args) {
-
         // 测试工具类是否好用
         Logger.log("调用了System类的gc()方法，建议启动垃圾回收");
         Logger.log("调用了UserService的doSome()方法");
@@ -28,14 +27,12 @@ class Logger{
             System.setOut(out);
             // 日期当前时间
             Date nowTime = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm-ss SS");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SS");
             String s = sdf.format(nowTime);
 
-            System.out.println(s + ":" + msg);
+            System.out.println(s + " : " + msg);
         } catch(FileNotFoundException e) {
             e.printStackTrace();
         }
-
-
     }
 }

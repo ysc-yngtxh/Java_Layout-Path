@@ -8,13 +8,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /*
-java.io.DataOutputStream:数据专属的流
-  这个流可以将数据连同数据的类型一同写入文件
-  注意：这个文件不是普通文本文件。（这个文件用记事本打不开）bytes
+  java.io.DataOutputStream：数据专属的流
+    这个流可以将数据连同数据的类型一同写入文件
+    注意：这个文件不是普通文本文件。（这个文件用记事本打不开）bytes
 
-java.io.DataInputStream:数据字节输入流
-  DataOutputStream写的文件，只能使用DataInputStream去读，并且读的时候你需要提前知道写入的顺序。
-  读的顺序需要和写的顺序一致，才可以正常取出数据
+  java.io.DataInputStream：数据字节输入流
+    DataOutputStream写的文件，只能使用DataInputStream去读，并且读的时候你需要提前知道写入的顺序。
+    读的顺序需要和写的顺序一致，才可以正常取出数据
  */
 public class 流9_数据流 {
     public static void main(String[] args) {
@@ -68,8 +68,6 @@ public class 流9_数据流 {
             System.out.println(c1);
 
             dos.flush();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -88,7 +86,5 @@ public class 流9_数据流 {
                 }
             }
         }
-
-
     }
 }

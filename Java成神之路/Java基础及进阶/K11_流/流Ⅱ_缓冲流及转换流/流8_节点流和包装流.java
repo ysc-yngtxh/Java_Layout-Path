@@ -14,23 +14,22 @@ public class 流8_节点流和包装流 {
         FileInputStream fis = null;
         try{
             // 字节流
-            fis = new FileInputStream(System.getProperty("User.dir") + "/Java基础及进阶/K11_流/A1iO流概述.java");
+            fis = new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/IO流概述.md");
 
-            // 通过转换流转换（InputStreamReader将字节流转换成字符流）
+            // 通过isr转换流转换（InputStreamReader将字节流转换成字符流）fis是isr的节点流
             InputStreamReader isr = new InputStreamReader(fis);
 
             // 这个构造方法只能传一个字符流，不能传FileInputStream字节流
-            // isr是节点流，br是包装流
+            // isr是br1的节点流，br1是包装流
             BufferedReader br1 = new BufferedReader(isr);
 
-            // *****br2就是转换流，包装流合并后的套娃程序
+            // br2是通过转换流、包装流合并后的套娃程序
             BufferedReader br2 = new BufferedReader(
                     new InputStreamReader(
-                            new FileInputStream(System.getProperty("User.dir") + "/Java基础及进阶/K11_流/A1iO流概述.java")));
-
+                            new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/IO流概述.md")));
 
             String s = null;
-            while( (s = br1.readLine()) != null){ // 这里包装流类型是String类型
+            while( (s = br1.readLine()) != null) { // 这里包装流类型是String类型
                 System.out.println(s);
             }
 
@@ -44,9 +43,6 @@ public class 流8_节点流和包装流 {
 
             // 刷新
             out.flush();
-
-        } catch(FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -58,6 +54,5 @@ public class 流8_节点流和包装流 {
                 }
             }
         }
-
     }
 }

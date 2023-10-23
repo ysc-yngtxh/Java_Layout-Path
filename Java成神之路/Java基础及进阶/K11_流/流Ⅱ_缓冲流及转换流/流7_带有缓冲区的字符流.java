@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /*
-BufferedReader:
+  BufferedReader:
        带有缓冲区的字符输入流
        使用这个流的时候不需要自定义char数组，或者说不需要自定义byte数组，自带缓冲
        读取时候是一行一行的读，效率比FileInputStream高
@@ -15,7 +15,7 @@ public class 流7_带有缓冲区的字符流 {
     public static void main(String[] args)  {
         FileReader fr = null;
         try{
-            fr = new FileReader(System.getProperty("User.dir") + "/Java基础及进阶/K11_流/A1iO流概述.java");
+            fr = new FileReader(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/IO流概述.md");
             // 当一个流的构造方法中需要一个流的时候，这个被传进来的流叫做：节点流
             // 外部负责包装的这个流，叫做：包装流。还有一个名字叫做：处理流
             // 像当前这个程序来说：FileReader就是一个节点流。BufferedReader就是包装流/处理流
@@ -30,9 +30,6 @@ public class 流7_带有缓冲区的字符流 {
             while((s2 = br.readLine()) != null){
                 System.out.println(s2);
             }
-
-        } catch(FileNotFoundException e){
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -45,6 +42,5 @@ public class 流7_带有缓冲区的字符流 {
                 }
             }
         }
-
     }
 }

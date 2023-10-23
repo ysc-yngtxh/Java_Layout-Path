@@ -1,6 +1,10 @@
 package K11_流.流Ⅴ_File类;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class 流14_目录拷贝 {
     public static void main(String[] args) {
@@ -10,7 +14,7 @@ public class 流14_目录拷贝 {
     }
     // 复制文件夹方法
     public static void copyDir(File srcDir, File targetDir) {
-        if (!targetDir.exists()) { // 如果目标路径不存在
+        if (!targetDir.exists()) { // 如果目标文件不存在
             targetDir.mkdir();     // 则创建之
         }
         File[] files = srcDir.listFiles(); // 列举目录下所有文件（包含子目录）存放至数组

@@ -1,16 +1,14 @@
 package K11_流.流Ⅳ_标准输出流;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 
 /*
-java.io.PrintStream:标准的字节输出流。默认输出到控制台
+  java.io.PrintStream：标准的字节输出流。默认输出到控制台
  */
 public class 流10_标准输出流 {
     public static void main(String[] args) {
-
         // 联合起来写
         System.out.println("Hello World!");
 
@@ -29,7 +27,7 @@ public class 流10_标准输出流 {
             System.in
             System.exit(0)
             System.arraycopy()
-            System.getProperty("User.dir")
+            System.getProperty("user.dir")
          */
 
         // 标准输出流不再指向控制台，指向“log”文件
@@ -47,13 +45,10 @@ public class 流10_标准输出流 {
 
             // 刷新流
             fos.flush();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (fos == null) {
+            if (fos != null) {
                 try {
                     fos.close();
                 } catch (IOException e) {
