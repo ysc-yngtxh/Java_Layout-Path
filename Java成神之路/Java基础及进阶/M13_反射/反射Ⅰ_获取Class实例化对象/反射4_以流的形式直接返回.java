@@ -13,12 +13,15 @@ public class 反射4_以流的形式直接返回 {
                 .toURI()
                 .getPath();
         FileInputStream reader = null;
+        // FileReader isr = null;
         try{
             reader = new FileInputStream(path);
+            // isr = new FileReader(path);
             Properties pro = new Properties();
             pro.load(reader);
+            // pro.load(isr);
             String value1 = pro.getProperty("className1");
-            System.out.println(value1);
+            System.out.println("使用字节流当然会乱码啊！改用字符流即可！ -- " + value1);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

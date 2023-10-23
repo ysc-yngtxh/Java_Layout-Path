@@ -12,7 +12,7 @@ public class 反射3_获取类路径下文件的绝对路径 {
         /*
            Thread.currentThread()  当前线程对象
            getContextClassLoader() 是线程对象的方法，可以获取当前线程的类加载器对象
-           getResource()          【获取资源】这是类加载器对象的方法，当前线程的类加载器默认从类的根路径下加载资源
+           getResource()          【获取资源】这是类加载器对象的方法，当前线程的类加载器默认从类的根路径下加载资源(.class文件)
            toURI()                 解决中文乱码问题
            getPath()               该方法返回此抽象路径名的路径名字符串的形式。
          */

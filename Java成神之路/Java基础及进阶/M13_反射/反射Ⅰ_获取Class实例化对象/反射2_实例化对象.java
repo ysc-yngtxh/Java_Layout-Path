@@ -46,11 +46,7 @@ public class 反射2_实例化对象 {
             Object obj = c.newInstance();   // 这种方法在JDK9之后就过时了，改为 c.getDeclaredConstructor().newInstance();
             System.out.println(obj);
 
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
 

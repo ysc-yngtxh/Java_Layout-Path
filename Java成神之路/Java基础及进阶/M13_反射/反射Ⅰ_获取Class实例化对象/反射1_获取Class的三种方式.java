@@ -4,7 +4,6 @@ import java.util.Date;
 
 /*
   要操作一个类的字节码，需要首先获取到这个类的字节码，怎么获取java.lang.Class实例？
-
   ClassNotFoundException是一个类没找到的异常，父类是Exception，编译时异常，需要上抛或者try,catch
 
   三种方式：
@@ -28,7 +27,6 @@ public class 反射1_获取Class的三种方式 {
             Class<?> c2 = Class.forName("java.lang.Integer"); // c2代表Integer类型
             Class<?> c3 = Class.forName("java.lang.System");  // c3代表System类型
             c4 = Class.forName("java.util.Date");             // c4代表Date类型
-
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
