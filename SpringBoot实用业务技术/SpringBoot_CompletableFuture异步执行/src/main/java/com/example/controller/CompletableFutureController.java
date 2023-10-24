@@ -95,6 +95,4 @@ public class CompletableFutureController {
 
         return brand;
     }
-
 }
-

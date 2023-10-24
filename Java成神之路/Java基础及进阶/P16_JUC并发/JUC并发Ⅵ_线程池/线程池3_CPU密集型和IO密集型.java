@@ -1,6 +1,10 @@
 package P16_JUC并发.JUC并发Ⅵ_线程池;
 
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class 线程池3_CPU密集型和IO密集型 {
     /**
@@ -24,9 +28,10 @@ public class 线程池3_CPU密集型和IO密集型 {
         );
 
         try {
-            for (int i = 1; i <= 9; i++) { // 最大线程数 = 阻塞队列数 + 最大线程池大小
-                threadPoolExecutor.execute(()->{
-                    System.out.println(Thread.currentThread().getName()+"--OK"); // 运行可以发现同步线程数最大值是5
+            for (int i = 1; i <= 9; i++) { // 最大任务数 = 阻塞队列数 + 最大线程池大小
+                threadPoolExecutor.execute(() -> {
+                    // 运行可以发现同步线程数最大值是5
+                    System.out.println(Thread.currentThread().getName()+"--OK");
                 });
             }
         } catch (Exception e) {

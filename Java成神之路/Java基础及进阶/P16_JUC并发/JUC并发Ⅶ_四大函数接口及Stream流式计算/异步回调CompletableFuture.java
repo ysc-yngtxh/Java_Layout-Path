@@ -51,7 +51,7 @@ public class 异步回调CompletableFuture {
         /**
          * supplyAsync 是创建带有返回值的异步任务。
          * 它有两个方法，一个是使用默认线程池（ForkJoinPool.commonPool()）的方法(如下)，一个是带有自定义线程池的重载方法
-        */
+         */
         CompletableFuture<Integer> cfSupplyAsync = CompletableFuture.supplyAsync( () -> {
             System.out.println("Hello World!");
             return 2021;
@@ -141,7 +141,7 @@ public class 异步回调CompletableFuture {
 
         /**
          * applyToEither、acceptEither和runAfterEither
-         * applyToEither 会将先完成任务的执行结果作为所提供函数的参数，且该方法有返回值；
+         * applyToEither 会将先完成任务的执行结果作为所提供函数的参数，后执行完的CompletableFuture结果不管，且该方法有返回值；
          * acceptEither 同样将先完成任务的执行结果作为方法入参，但是无返回值；
          * runAfterEither 没有入参，也没有返回值。
          */

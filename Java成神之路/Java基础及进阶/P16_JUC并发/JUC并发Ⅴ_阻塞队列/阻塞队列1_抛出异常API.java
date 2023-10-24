@@ -34,6 +34,4 @@ public class 阻塞队列1_抛出异常API {
         System.out.println(queue.remove());
         //System.out.println(queue.remove()); // 队列已空，再取就会抛异常NoSuchElementException
     }
-
-
 }

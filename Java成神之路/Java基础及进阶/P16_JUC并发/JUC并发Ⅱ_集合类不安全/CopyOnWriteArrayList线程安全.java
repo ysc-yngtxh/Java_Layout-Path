@@ -5,18 +5,18 @@ import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CopyOnWriteArrayList线程安全 {
-
-    /*并发下ArrayList是不安全的，如何解决呢？
-    public static void main(String[] args) {
-        List<String> list = new ArrayList<>();
-
-        for (int i = 0; i < 10; i++) {
-            new Thread(()->{
-                list.add(UUID.randomUUID().toString().substring(0,5));
-                System.out.println(list);
-            },String.valueOf(i)).start();
-        }
-        //会出现java.util.ConcurrentModificationException异常，并发修改异常
+    /*
+      并发下ArrayList是不安全的，如何解决呢？
+         public static void main(String[] args) {
+             List<String> list = new ArrayList<>();
+             for (int i = 0; i < 10; i++) {
+                 new Thread(() -> {
+                     list.add(UUID.randomUUID().toString().substring(0,5));
+                     System.out.println(list);
+                 }, String.valueOf(i)).start();
+             }
+         }
+         // 会出现java.util.ConcurrentModificationException异常，并发修改异常
 
      方案一：Collections.SynchronizedList(new ArrayList())
      方案二：使用Vector集合,我们可以查看源码发现Vector是有Synchronized关键字的
@@ -26,11 +26,9 @@ public class CopyOnWriteArrayList线程安全 {
             再将原容器的引用指向新的容器。这样做的好处是我们可以对CopyOnWrite容器进行并发的读，而不需要加锁，
             因为当前容器不会添加任何元素(但是在写入的时候还是会加一个Lock锁)。所以CopyOnWrite容器也是一种读写分离的思想，读和写不同的容器。
     }*/
-
     public static void main(String[] args) {
         List<String> list = new CopyOnWriteArrayList<>();
-
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             new Thread(() -> {
                 list.add( UUID.randomUUID().toString().substring(0, 5) );
                 System.out.println(list);

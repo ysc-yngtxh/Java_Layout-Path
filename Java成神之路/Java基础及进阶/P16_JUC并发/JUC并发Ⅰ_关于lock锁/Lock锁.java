@@ -22,6 +22,16 @@ public class Lock锁 {
     public static void main(String[] args) {
         Dataes data = new Dataes();
         new Thread(() -> {
+            for (int i = 0; i < 5; i++) {
+                try {
+                    data.demo0();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "Y").start();
+
+        new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 try {
                     data.demo1();
@@ -56,9 +66,27 @@ public class Lock锁 {
 class Dataes {
     private int num = 1;
     Lock lock = new ReentrantLock(); // 创建lock锁，相当于Synchronized关键字
-    Condition condition1 = lock.newCondition(); // 获得lock锁的监听器
+    Condition condition0 = lock.newCondition(); // 获得lock锁的监听器
+    Condition condition1 = lock.newCondition();
     Condition condition2 = lock.newCondition();
     Condition condition3 = lock.newCondition();
+
+    public void demo0() throws InterruptedException {
+        try {
+            while (num != 1) {
+                // 线程等待
+                condition0.await();
+            }
+            if (lock.tryLock()) { // 尝试加锁，就算尝试失败也不会被阻塞
+                System.out.println(Thread.currentThread().getName() + "---demo0正在尝试获取锁...");
+                lock.unlock();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock(); // 解锁
+        }
+    }
 
     public void demo1() throws InterruptedException {
         // 启动线程
@@ -68,14 +96,14 @@ class Dataes {
                 // 线程等待
                 condition1.await();
             }
-            System.out.println(Thread.currentThread().getName() + "---AAAAA");
+            System.out.println(Thread.currentThread().getName() + "---demo1");
             num = 2;
             // condition1.signalAll(); // 唤醒所有线程
             condition2.signal(); // 唤醒指定线程
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            lock.unlock();// 解锁
+            lock.unlock(); // 解锁
         }
     }
 
@@ -87,7 +115,7 @@ class Dataes {
                 // 线程等待
                 condition2.await();
             }
-            System.out.println(Thread.currentThread().getName() + "---BBBBB");
+            System.out.println(Thread.currentThread().getName() + "---demo2");
             num = 3;
             // condition2.signalAll(); // 唤醒所有线程
             condition3.signal(); // 唤醒指定线程
@@ -106,7 +134,7 @@ class Dataes {
                 // 线程等待
                 condition3.await();
             }
-            System.out.println(Thread.currentThread().getName() + "---CCCCC");
+            System.out.println(Thread.currentThread().getName() + "---demo3");
             num = 1;
             // condition3.signalAll(); // 唤醒所有线程
             condition1.signal(); // 唤醒指定线程

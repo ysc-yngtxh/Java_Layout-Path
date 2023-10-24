@@ -23,7 +23,7 @@ public class A四大函数 {
      */
     public static void main(String[] args) {
         /*
-        Function = new Function<String,String>() {
+        Function = new Function<String, String>() {
             @Override
             public String apply(String str) {
                 return str;

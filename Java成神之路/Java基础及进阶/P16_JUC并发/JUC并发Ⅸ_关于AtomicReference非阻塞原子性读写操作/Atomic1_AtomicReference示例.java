@@ -76,7 +76,7 @@ public class Atomic1_AtomicReference示例 {
                     // 基于AtomicReference的当前值创建一个新的DebitCard
                     DebitCard newDC = new DebitCard(dc.getAccount(), dc.getAmount() + 10);
                     // 基于CAS算法更新AtomicReference的当前值
-                    if(debitCardRef.compareAndSet(dc,newDC)){
+                    if(debitCardRef.compareAndSet(dc, newDC)){
                         // 更新成功
                         System.out.println("使用 AtomicReference 打印的金额" + newDC);
                     }

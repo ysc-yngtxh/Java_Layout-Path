@@ -2,6 +2,7 @@ package P16_JUC并发.JUC并发Ⅳ_读写锁;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -24,17 +25,13 @@ public class ReadWriteLock读写锁 {
         // 写入
         for (int i = 0; i < 5; i++) {
             final int temp = i;
-            new Thread(() -> {
-                myCache.put(temp + "", temp + "");
-            }, String.valueOf(i)).start();
+            new Thread(() -> myCache.put(temp + "", temp), String.valueOf(i)).start();
         }
 
         // 读取
         for (int i = 0; i < 10; i++) {
             final int temp = i;
-            new Thread(() -> {
-                myCache.get(temp + "");
-            }, String.valueOf(i)).start();
+            new Thread(() -> myCache.get(temp + ""), String.valueOf(i)).start();
         }
     }
 }
@@ -46,9 +43,9 @@ class MyCache{
 
     // 存。写入的时候，只希望同时只有一个线程写
     public void put(String key, Object value){
-        /*System.out.println(Thread.currentThread().getName()+"写入"+key);
-        map.put(key,value);
-        System.out.println(Thread.currentThread().getName()+"写入完成");*/
+        // System.out.println(Thread.currentThread().getName()+"写入"+key);
+        // map.put(key,value);
+        // System.out.println(Thread.currentThread().getName()+"写入完成");
 
         // 当不使用'写锁'的时候，我们在运行时发现：比如写入1时会插入其他线程，然后才写入完成。这就很尴尬了啊，线程不安全了呀
         readWriteLock.writeLock().lock();

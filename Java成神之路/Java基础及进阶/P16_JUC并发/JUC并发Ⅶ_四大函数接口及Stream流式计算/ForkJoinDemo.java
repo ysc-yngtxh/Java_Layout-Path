@@ -28,7 +28,7 @@ public class ForkJoinDemo extends RecursiveTask<Long> {
         this.end = end;
     }
 
-    //计算方法
+    // 计算方法
     @Override
     protected Long compute() {
         if((end-start) < temp) {
