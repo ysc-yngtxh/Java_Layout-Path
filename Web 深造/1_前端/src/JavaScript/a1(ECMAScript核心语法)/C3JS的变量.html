@@ -41,43 +41,39 @@
             var k = undefined;
             alert("k =" + k);
 
-            var a,b,c=200;  <!--a,b没赋值没定义。c赋值为200-->
-            alert("a="+a);
-            alert("b="+b);
-            alert("c="+c);
-            a=false;
+            var a,b,c = 200;  <!--a,b没赋值没定义。c赋值为200-->
+            alert("a=" + a);
+            alert("b=" + b);
+            alert("c=" + c);
+            a = false;
             alert(a);
-            a="abc";
+            a = "abc";
             alert(a);
-            a=1.2;
+            a = 1.2;
             alert(a);
         </script>
-
 
         <script type="text/javascript">
-            /*全局变量*/
+            // 全局变量
             var username = "jack";
             function accessUsername(){
-                /*局部变量*/
+                // 局部变量
                 var username = "lisi";
-                /*就近原则：访问局部变量*/
-                alert("username=" +username);
+                // 就近原则：访问局部变量
+                alert("username=" + username);
             }
-            /*调用函数*/
+            // 调用函数
             accessUsername();
-            /*访问全局变量*/
-            alert("username="+username);
+            // 访问全局变量
+            alert("username=" + username);
 
-            function myfun(){
-                /*当一个变量声明的时候没有使用var关键字，那么不管这个变量是在哪儿声明的，都是全局变量*/
-                myname="youshicheng";
+            function myfun() {
+                // 当一个变量声明的时候没有使用var关键字，那么不管这个变量是在哪儿声明的，都是全局变量
+                myname = "youshicheng";
             }
             myfun();
-            alert("myname=" +myname);
+            alert("myname=" + myname);
         </script>
-
-
-
 
 <!--JS的函数初步-->
         <!--
@@ -100,17 +96,17 @@
         -->
 
         <script type="text/javascript">
-            function sum(a,b){
+            function sum(a, b){
                 alert(a + b);
-                //return(a + b);
+                // return(a + b);
             }
             <!--函数必须调用才能执行-->
-            sum(10,20);
+            sum(10, 20);
 
             setHello = function(username){
-                alert("hello" +username);
+                alert("hello" + username);
             }
-            setHello("陈嘉琪");
+            setHello("曹玉敏");
 
            /*
                java中的方法有重载机制，JS中的函数能重载吗？
@@ -119,19 +115,19 @@
                重载的含义：
                    方法名或者函数名一样，形参不同
            */
-            var retValue = sum(1,2);
+            var retValue = sum(1, 2);
             alert(retValue);
 
-            var retValue2 = sum("jack");  /*jack赋值给a变量，b变量没有赋值系统默认赋值undefined*/
-            alert(retValue2);             /*输出jackundefined*/
+            var retValue2 = sum("jack");  // jack赋值给a变量，b变量没有赋值系统默认赋值undefined
+            alert(retValue2);             // 输出jackundefined
 
-            var retValue3 = sum();        /*当a,b变量都没有赋值*/
-            alert(retValue3);             /*输出NaN(NaN是一个具体存在的值，该值表示不是数字。Not a Number)*/
+            var retValue3 = sum();        // 当a,b变量都没有赋值*/
+            alert(retValue3);             // 输出NaN(NaN是一个具体存在的值，该值表示不是数字。Not a Number)
 
-            var retValue4 = sum(1,2,3);   /*当赋了三个值的情况下，只会取前两个值，后面的值会忽略掉*/
+            var retValue4 = sum(1,2,3);   // 当赋了三个值的情况下，只会取前两个值，后面的值会忽略掉
             alert(retValue4);
 
-            /*在JS当中，函数的名字不能重名，当函数重名的时候，后声明的函数会将之前声明的同名函数覆盖*/
+            /*在JS当中，函数的名字不能重名，当函数重名的时候，后声明的函数会将之前声明的同名函数覆盖
             function text1(username){
                 alert("text1");
             }
@@ -144,7 +140,7 @@
         </script>
 
         <input type="button" value="hello" onclick="setHello('游诗成')"/>
-        <input type="button" value="求和" onclick="sum(56,20)"/>
+        <input type="button" value="求和" onclick="sum(56, 20)"/>
 
 </body>
 </html>

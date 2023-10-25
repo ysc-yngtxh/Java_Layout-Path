@@ -12,8 +12,8 @@
       Java的目标程序以.class形式存在，不能使用文本编译器打开，不是脚本语言。
 
       以后会学习一个叫做JSP的技术，JSP和JS有啥区别？
-          JSP:Java Server Pages(隶属于Java语言，运行在JVM当中)
-          JS:JavaScript(运行在浏览器上)
+          JSP：Java Server Pages(隶属于Java语言，运行在JVM当中)
+          JS：JavaScript(运行在浏览器上)
  */
 
 window.alert("hello js!");

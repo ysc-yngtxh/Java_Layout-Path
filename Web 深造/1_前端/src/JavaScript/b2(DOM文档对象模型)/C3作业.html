@@ -1,13 +1,13 @@
 <!--
-表单验证
-    (1)用户名不能为空
-    (2)用户名必须在6-14位之间
-    (3)用户名只能由数字和字母组成，不能含有其他符号(正则表达式)
-    (4)密码和确认密码一致，邮箱地址合法
-    (5)统一失去焦点验证
-    (6)错误提示信息统一在span标签中提示，并且要求字体12号，红色
-    (7)文本框再次获得焦点后，清空错误提示信息，如果文本框中数据不合法要求清空文本框的value
-    (8)最终表单中所有项均合法方可提交
+  表单验证
+      (1)用户名不能为空
+      (2)用户名必须在6-14位之间
+      (3)用户名只能由数字和字母组成，不能含有其他符号(正则表达式)
+      (4)密码和确认密码一致，邮箱地址合法
+      (5)统一失去焦点验证
+      (6)错误提示信息统一在span标签中提示，并且要求字体12号，红色
+      (7)文本框再次获得焦点后，清空错误提示信息，如果文本框中数据不合法要求清空文本框的value
+      (8)最终表单中所有项均合法方可提交
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -108,53 +108,53 @@
         </form>
 
         <script type="text/javascript">
-            window.onload=function(){
+            window.onload = function(){
 <!--用户名验证-->
-                //获取username文本框对象
+                // 获取username文本框对象
                 var usernameElt = document.getElementById("username");
-                //获取username的span标签
+                // 获取username的span标签
                 var usernameEltspan = document.getElementById("usernameEltspan");
-                //给用户名文本框绑定blur事件
-                usernameElt.onblur=function(){
-                    //获取用户名
+                // 给用户名文本框绑定blur事件
+                usernameElt.onblur = function() {
+                    // 获取用户名
                     var username = usernameElt.value;
-                    //去除前后空白
-                    username =username.trim();
-                    //判断用户名是否合法
+                    // 去除前后空白
+                    username = username.trim();
+                    // 判断用户名是否合法
                     if (username === "") {
                         usernameEltspan.innerText = "用户名不能为空"
-                    }else {
+                    } else {
                         if(username.length<6 || username.length>14){
-                            usernameEltspan.innerText="用户名长度必须在[6-14]之间";
+                            usernameEltspan.innerText = "用户名长度必须在[6-14]之间";
                         }else {
-                            //用户名的正则表达式
+                            // 用户名的正则表达式
                             var regElt = /^[a-zA-Z0-9]{6,14}$/;
                             if(regElt.test(username)){
-                                usernameEltspan.innerText = "";   /*用户名最终合法*/
+                                usernameEltspan.innerText = "";   // 用户名最终合法
                             }else{
                                 usernameEltspan.innerText = "用户名中含有特殊字符"
                             }
                         }
                     }
                 };
-                //给username这个文本框绑定获得焦点事件
-                usernameElt.onfocus=function(){
+                // 给username这个文本框绑定获得焦点事件
+                usernameElt.onfocus = function() {
                     if(usernameEltspan.innerText !== ""){
                         usernameElt.value = "";
                     }
-                    //清空span
+                    // 清空span
                     usernameEltspan.innerText = "";
                 };
 
 <!--密码验证-->
-                //获取确认密码框对象
+                // 获取确认密码框对象
                 var userped = document.getElementById("userped");
-                //获取确认密码的span标签
+                // 获取确认密码的span标签
                 var ped = document.getElementById("ped");
-                //给确认密码文本框绑定blur事件
+                // 给确认密码文本框绑定blur事件
                 userped.onblur = function(){
                     if(document.getElementById("userpwd").value !== userped.value){
-                        ped.innerText="密码不一致，请重新确认密码";
+                        ped.innerText = "密码不一致，请重新确认密码";
                     }
                 };
                 //给确认密码文本框绑定获得焦点事件
@@ -166,24 +166,24 @@
                 };
 
 <!--邮箱验证-->
-                //获取邮箱对象
+                // 获取邮箱对象
                 var email = document.getElementById("email");
-                //获取邮箱的span标签
+                // 获取邮箱的span标签
                 var emailElt = document.getElementById("emailElt");
-                //给邮箱文本框绑定blur事件
+                // 给邮箱文本框绑定blur事件
                 email.onblur = function(){
                     if(email.value === ""){
                         emailElt.innerText = "邮箱内容不能为空"
                     }else{
                         var emailElt1 = /^[\w][\w\d_]*@\w+\.[A-Za-z]+$/;
                         if(emailElt1.test(email.value)){
-                            emailElt.innerText = "";    /*邮箱格式正确*/
+                            emailElt.innerText = "";    // 邮箱格式正确
                         }else{
                             emailElt.innerText = "邮箱格式错误";
                         }
                     }
                 };
-                //给邮箱文本框绑定获得焦点事件
+                // 给邮箱文本框绑定获得焦点事件
                 email.onfocus = function(){
                     if(emailElt.innerText !== ""){
                         email.value = "";
@@ -192,7 +192,7 @@
                 };
 
 
-                //给提交按钮绑定鼠标单击事件
+                // 给提交按钮绑定鼠标单击事件
                 var submitBtn = document.getElementById("submitBtn");
                 submitBtn.onclick = function(){
                     usernameElt.focus();
@@ -205,7 +205,7 @@
                     email.blur();
 
                     //当所有表单项都是合法的时候，提交表单
-                    if(usernameEltspan.innerText==="" && ped.innerText==="" && emailElt.innerText===""){
+                    if(usernameEltspan.innerText==="" && ped.innerText==="" && emailElt.innerText==="") {
                         //获取表单对象
                         var userForm = document.getElementById("userForm");
                         //提交表单
@@ -214,6 +214,5 @@
                 }
             };
         </script>
-
 </body>
 </html>

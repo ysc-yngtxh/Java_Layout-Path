@@ -1,11 +1,11 @@
-                           <!--
-                                1、设置和获取文本框的value
-                                     a、在事件句柄上输出文本框里的value，即用户输入的信息
-                                     b、将第一个文本框中的value赋值到第二个文本框中
-                                     c、blur事件，失去焦点事件
+<!--
+                        1、设置和获取文本框的value
+                             a、在事件句柄上输出文本框里的value，即用户输入的信息
+                             b、将第一个文本框中的value赋值到第二个文本框中
+                             c、blur事件，失去焦点事件
 
-                                2、DOM编程-innerHTML和innerText操作div和span
-                            -->
+                        2、DOM编程-innerHTML和innerText操作div和span
+                    -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,15 +27,15 @@
 <!--设置和获取文本框的value-->
 <!--注意：浏览器可能部分功能无法显现。如需了解，请自行创建html文件，拷贝进去运行-->
          <script type="text/javascript">
-             //1、第一步是将页面加载完毕后执行事件
+             // 1、第一步是将页面加载完毕后执行事件
              window.onload=function(){
-                 //2、第二步获取提交按钮对象
+                 // 2、第二步获取提交按钮对象
                  var user = document.getElementById("username");
-                 //3、第三步操作事件句柄
-                 user.onclick=function(){
-                     //4、在事件句柄上输出文本框里的value，即用户输入的信息
+                 // 3、第三步操作事件句柄
+                 user.onclick = function() {
+                     // 4、在事件句柄上输出文本框里的value，即用户输入的信息
                      alert(document.getElementById("btn").value);
-                     //修改文本框
+                     // 修改文本框
                      document.getElementById("btn").value="游诗成";
                  }
              }
@@ -47,8 +47,8 @@
          <script type="text/javascript">
              window.onload=function(){
                  var brn1 = document.getElementById("brn");
-                 brn1.onclick=function(){
-                     document.getElementById("username2").value=document.getElementById("username1").value;
+                 brn1.onclick = function() {
+                     document.getElementById("username2").value = document.getElementById("username1").value;
                  }
              }
          </script>
@@ -67,11 +67,11 @@
                        innerText即使后面是一段HTML代码，也只是将其当作普通的字符串来看待
          -->
          <script type="text/javascript">
-             window.onload=function(){
+             window.onload = function() {
                  var bnn1 = document.getElementById("bnn");
-                 bnn1.onclick=function(){
+                 bnn1.onclick = function() {
                      var divElt = document.getElementById("div1");
-                     //divElt.innerHTML = "dfsdghdASDASDF";                          输出结果为dfsdghdASDASDF
+                     //divElt.innerHTML = "dfsdghdASDASDF";                         输出结果为dfsdghdASDASDF
                      //divElt.innerHTML = "<font color='red'>用户名不能为空</font>";  输出结果为用户名不能为空
                      divElt.innerText = "<font color='red'>用户名不能为空</font>";  //输出结果为<font color='red'>用户名不能为空</font>
                  }

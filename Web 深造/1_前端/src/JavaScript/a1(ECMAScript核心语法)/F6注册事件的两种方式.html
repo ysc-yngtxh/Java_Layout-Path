@@ -33,21 +33,20 @@
         <input type="button" value="hello3" id="mybtn1"/>
         <input type="button" value="hello4" id="mybtn2"/>
         <script type="text/javascript">
-            function doSome(){
+            function doSome() {
                 alert("do Some!");
             }
-            //注册事件的第二种方式：是使用纯JS代码完成事件的注册
-            //第一步：先获取这个按钮对象(document是全部小写，内置对象，可以直接用，document就代表整个HTML页面)
+            // 注册事件的第二种方式：是使用纯JS代码完成事件的注册
+            // 第一步：先获取这个按钮对象(document是全部小写，内置对象，可以直接用，document就代表整个HTML页面)
             var btnObj = document.getElementById("mybtn");
-            //第二步：给按钮对象的onclick属性赋值
-            btnObj.onclick=doSome;//注意：千万别加小括号。这行代码的含义是：将回调函数doSome注册到click事件上
+            // 第二步：给按钮对象的onclick属性赋值
+            btnObj.onclick = doSome; // 注意：千万别加小括号。这行代码的含义是：将回调函数doSome注册到click事件上
 
-            var mybtn1 =document.getElementById("mybtn1");
-            //这个函数没有名字，叫做匿名函数，这个匿名函数也是一个回调函数
-            mybtn1.onclick=function(){
+            var mybtn1 = document.getElementById("mybtn1");
+            // 这个函数没有名字，叫做匿名函数，这个匿名函数也是一个回调函数
+            mybtn1.onclick = function(){
                 alert("text...");
             }
-
             document.getElementById("mybtn2").onclick=function(){
                 alert('text1...');
             }
@@ -60,7 +59,7 @@
                 所以当注册事件的id在回调函数的下方时候，注册事件无法执行，因为id并没有加载完毕,回调函数取用id时候发现内存中并无此数据，所以执行失败。
                 在此情况下，我们添加了load事件，用来解决此尴尬的问题。
             */
-            window.onload=function(){    //load事件表示页面全部元素加载完毕之后才会发生
+            window.onload = function() {    // load事件表示页面全部元素加载完毕之后才会发生
                 document.getElementById("btn").onclick=function(){
                     alert("唉，失去后才知道那是弥足珍贵的东西...");
                 }
@@ -68,19 +67,16 @@
         </script>
         <input type="button" value="游诗成" id="btn"/>
 
-
 <!--将文本框修改为复选框-->
         <script type="text/javascript">
             window.onload=function(){
-                document.getElementById("btr").onclick=function(){
-                    var mytext=document.getElementById("mytext");
-                    mytext.type="checkbox";
+                document.getElementById("btr").onclick = function(){
+                    var mytext = document.getElementById("mytext");
+                    mytext.type = "checkbox";
                 }
             }
         </script>
         <input type="text" id="mytext"/>
         <input type="button" value="将文本框修改为复选框" id="btr"/>
-
-
 </body>
 </html>

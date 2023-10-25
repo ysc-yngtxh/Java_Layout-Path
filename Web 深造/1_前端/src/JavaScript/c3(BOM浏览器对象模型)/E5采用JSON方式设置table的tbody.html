@@ -6,7 +6,7 @@
 </head>
 <body>
         <script type="text/javascript">
-            var date ={
+            var date = {
                 "total":3,
                 "emps":[
                     {"empno":7369,"ename":"SMITH1","sal":800.0},
@@ -15,18 +15,18 @@
                 ]
             };
 
-            //利用拼接html将JSON里的数据导入到table里的tbody
-            window.onload=function(){
-                document.getElementById("displayBtn").onclick=function(){
+            // 利用拼接html将JSON里的数据导入到table里的tbody
+            window.onload = function() {
+                document.getElementById("displayBtn").onclick = function(){
                     var emps = date.emps;
                     var html = "";
                     for(var i=0;i<emps.length;i++){
                         var emp = emps[i];
-                        html+="<tr align='center'>";
-                        html+="<td>"+emp.empno+"</td>";
-                        html+="<td>"+emp.ename+"</td>";
-                        html+="<td>"+emp.sal+"</td>";
-                        html+="</tr>";
+                        html += "<tr align='center'>";
+                        html += "<td>" + emp.empno + "</td>";
+                        html += "<td>" + emp.ename + "</td>";
+                        html += "<td>" + emp.sal + "</td>";
+                        html += "</tr>";
                     }
                     document.getElementById("emptbody").innerHTML = html;
                     document.getElementById("count").innerHTML = date.total;
