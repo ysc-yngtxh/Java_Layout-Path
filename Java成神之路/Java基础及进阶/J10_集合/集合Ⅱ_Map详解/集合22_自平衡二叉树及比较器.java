@@ -26,7 +26,7 @@ import java.util.TreeSet;
 
            Comparator接口的设计符合OCP原则
  */
-public class 集合22_自平衡二叉树 {
+public class 集合22_自平衡二叉树及比较器 {
     public static void main(String[] args) {
         // 创建TreeSet集合的时候，需要使用这个比较器
         // TreeSet<WuGui> t = new TreeSet<>(new WuGuiComparator); 第一种写法，传进Comparator对象，但要有WuGuiComparator类

@@ -35,11 +35,11 @@ public class 集合21_TreeSet {
         // 创建一个TreeSet集合
         TreeSet<person> tr1 = new TreeSet<>();
         // 添加person元素
-        tr1.add(new person("youpeng",20));
-        tr1.add(new person("youshicheng",23));
-        tr1.add(new person("youting",30));
-        tr1.add(new person("youhuan",27));
-        tr1.add(new person("youshichena",23));
+        tr1.add(new person("youpeng", 20));
+        tr1.add(new person("youshicheng", 23));
+        tr1.add(new person("youting", 30));
+        tr1.add(new person("youhuan", 27));
+        tr1.add(new person("youshichena", 23));
         for (person s1 : tr1) {
             System.out.println(s1);
         }

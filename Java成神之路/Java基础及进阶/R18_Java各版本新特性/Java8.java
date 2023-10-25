@@ -5,7 +5,6 @@ package R18_Java各版本新特性;
  * @dateTime 2023-08-22 08:49
  * @apiNote TODO
  */
-
 public class Java8 {
 /*
 Java8新特性
@@ -17,8 +16,8 @@ Java8新特性
          public void Test(){
             Comparator<Integer> com = new Comparator<Integer>(){
                 @Override
-                public int compare(Integer o1,Integer o2){
-                    return Integer.compare(o1,o2);
+                public int compare(Integer o1, Integer o2){
+                    return Integer.compare(o1, o2);
                 }
          };
 
@@ -36,13 +35,13 @@ Java8新特性
            右侧：Lambda表达式中所需执行的功能，即Lambda体
        Lambda表达式需要"函数式接口"的支持，函数式接口指的是接口中只有一个抽象方法的接口，可以使用注解@FunctionalInterface修饰，检查是否是函数式接口。
 二、Java内置的四大核心函数式接口
-       Consumer<T>:消费者接口
+       Consumer<T>：消费者接口
            void accept(T t);
-       Supplier<T>:供给型接口           Math.random() * 100      表示产生0-100的随机数
-            T get();                  Math.random() * (100+1)  表示产生1-100的随机数
-       Function<T,R>:函数型接口
+       Supplier<T>：供给型接口           Math.random() * 100      表示产生0-100的随机数
+            T get();                   Math.random() * (100+1)  表示产生1-100的随机数
+       Function<T,R>：函数型接口
             R apply(T t);
-       Predicate<T>:断言型接口
+       Predicate<T>：断言型接口
             boolean Test(T t);
 三、方法引用：若Lambda体中的内容有方法已经实现了，我们可以使用"方法引用"
             (可以理解为方法引用是是 Lambda表达式得另一种表现形式)
@@ -90,5 +89,4 @@ Java8新特性
                 .forEach(System.out::println);
     }
  */
-
 }
