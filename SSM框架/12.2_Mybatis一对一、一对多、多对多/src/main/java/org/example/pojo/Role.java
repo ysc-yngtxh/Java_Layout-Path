@@ -11,7 +11,7 @@ public class Role implements Serializable {
     private String role_name;
     private String role_desc;
 
-    private List<User> list; // 一个角色对应多个用户: 一对多
+    private List<User> userList; // 一个角色对应多个用户: 一对多
 
     @Override
     public String toString() {
@@ -19,7 +19,7 @@ public class Role implements Serializable {
                 "id=" + id +
                 ", role_name='" + role_name + '\'' +
                 ", role_desc='" + role_desc + '\'' +
-                ", list=" + list +
+                ", userList=" + userList +
                 '}';
     }
 }

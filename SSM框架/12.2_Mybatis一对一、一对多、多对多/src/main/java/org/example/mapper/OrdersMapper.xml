@@ -20,7 +20,7 @@
                 2. 一对多: collection
 
             # association 标签
-                1. property : 属性名(Orders实体类中对应的属性名)
+                1. property : 属性名(Orders实体类中对应的属性名user)
                 2. javaType : 此属性的类型
 
                子标签 : 设置user和结果集之间的映射
@@ -35,7 +35,6 @@
 
     <!--
         1. 直接写resultType=orders, 返回类型=orders
-
         2. 要写成 resultMap : 结果集映射
              指定查询结果集 跟 javabean (orders) 之间的映射关系
     -->

@@ -14,7 +14,7 @@ public class User implements Serializable {
     private String sex;
     private String address;
 
-    private List<Orders> list; // 一个用户可以拥有多个订单
+    private List<Orders> orderList; // 一个用户可以拥有多个订单
 
     @Override
     public String toString() {
@@ -24,7 +24,7 @@ public class User implements Serializable {
                 ", birthday='" + birthday + '\'' +
                 ", sex='" + sex + '\'' +
                 ", address='" + address + '\'' +
-                ", list=" + list +
+                ", orderList=" + orderList +
                 '}';
     }
 }
