@@ -12,12 +12,12 @@ LIMIT(重点之中的重点，以后分页查询全靠它了)
                offset 参数指定要返回的第一行的偏移量,第一行的偏移量为0，而不是1。就跟数组的下标一样从 0 开始
                count  指定要返回的最大行数。
 
-         LIMIT N,M ----> 相当于 LIMIT M offset N , 从第 N 条记录开始, 返回 M 条记录
+         LIMIT N,M ----> 相当于 LIMIT M offset N , 从第 N+1 条记录开始, 返回 M 条记录
 
          案例：取出工资前5名的员工（思路：降序取前5个）
-              SELECT ename,sal FROM emp ORDER BY sal DESC LIMIT 0,5;
+              SELECT ename,sal FROM emp ORDER BY sal DESC LIMIT 0,5;          // 表示从数据下标0开始，取5条数据
               SELECT ename,sal FROM emp ORDER BY sal DESC LIMIT 5;            // LIMIT第一个参数默认为 0，可以省略不写
-              SELECT ename,sal FROM emp ORDER BY sal DESC LIMIT 0 offset 5;   // 另一种写法
+              SELECT ename,sal FROM emp ORDER BY sal DESC LIMIT 5 offset 0;   // 另一种写法
 
    4、LIMIT是SQL语句最后执行的一个环节：
          SELECT
@@ -37,7 +37,7 @@ LIMIT(重点之中的重点，以后分页查询全靠它了)
 
    5、案例：找出工资排名在第4到第9名的员工
            SELECT ename,sal FROM emp ODER BY sal DESC LIMIT 3,6;
-           SELECT ename,sal FROM emp ODER BY sal DESC LIMIT 3 OFFSET 6;
+           SELECT ename,sal FROM emp ODER BY sal DESC LIMIT 6 OFFSET 3;
 
    6、通用的标准分页sql
           每页显示3条记录：
@@ -54,7 +54,8 @@ LIMIT(重点之中的重点，以后分页查询全靠它了)
              int pageNo = 11;    // 页码是11
              int pageSize = 10;  // 每页显示10条
 
-             limit 100,10
+             limit (11-1)*10, 10
+             limit 10 offset (11-1)*10
           }
  */
 public class H8limit以及通用分页SQL {

@@ -1,4 +1,4 @@
-package com.bjpowernode.dao;
+package com.example.dao;
 
 public class Student {
 

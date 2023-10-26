@@ -19,7 +19,7 @@
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/springdb?useSSL=false"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/springdb?useSSL=false&amp;allowPublicKeyRetrieval=true"/>
                 <property name="username" value="root"/>
                 <property name="password" value="131474"/>
             </dataSource>

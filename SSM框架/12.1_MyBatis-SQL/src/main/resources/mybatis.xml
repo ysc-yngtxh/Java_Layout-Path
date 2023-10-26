@@ -2,7 +2,6 @@
 <!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
-
 <configuration>
 
     <!--指定properties文件的位置，从类路径根开始找文件-->
@@ -13,7 +12,7 @@
         <!--setting：设置mybatis输出日志-->
         <setting name="logImpl" value="STDOUT_LOGGING"/>
         <!--开启mybatis的二级缓存-->
-<!--        <setting name="cacheEnabled" value="true"/>-->
+        <setting name="cacheEnabled" value="true"/>
     </settings>
 
     <!--配置插件-->
@@ -59,9 +58,9 @@
     <mappers>
         <!--
             一个mapper标签指定一个文件的位置。
-            从类路径开始的路径信息。 target/clasess(类路径)
+            从类路径开始的路径信息。 target/class(类路径)
         -->
-        <mapper resource="com/bjpowernode/dao/StudentDao.xml"/>
+        <mapper resource="com/example/dao/StudentDao.xml"/>
 
         <!--当你的sql映射文件特别的多，一百多个，一个个的写mapper文件太繁琐了-->
         <!--使用包名确定sql映射文件位置。
@@ -71,8 +70,7 @@
                2、mapper文件和dao接口需要在同一目录下
         -->
         <!--
-        <package name="com.bjpowernode.dao"/>
+        <package name="com.example"/>
         -->
     </mappers>
-
 </configuration>

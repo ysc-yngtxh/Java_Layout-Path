@@ -1,4 +1,4 @@
-package com.bjpowernode.exception;
+package com.example.exception;
 
 /**
  * @author 游家纨绔

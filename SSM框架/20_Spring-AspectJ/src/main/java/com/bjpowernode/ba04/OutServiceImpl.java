@@ -1,4 +1,4 @@
-package com.bjpowernode.ba04;
+package com.example.ba04;
 
 public class OutServiceImpl implements OutService {
 

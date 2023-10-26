@@ -32,6 +32,7 @@
             <!--这后面还有映射属性没写，但是我加了autoMapping="true"可以自动映射(必须是同名)-->
         </association>
     </resultMap>
+
     <!--
         1. 直接写resultType=orders, 返回类型=orders
 
@@ -45,5 +46,4 @@
                 on o.uid = u.id
         where o.id = #{id}
     </select>
-
 </mapper>

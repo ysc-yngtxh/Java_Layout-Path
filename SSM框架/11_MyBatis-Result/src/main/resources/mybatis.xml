@@ -5,7 +5,6 @@
 
 <configuration>
 
-
     <settings>
         <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
@@ -15,7 +14,7 @@
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/springdb?useSSL=false"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/springdb?useSSL=false&amp;allowPublicKeyRetrieval=true"/>
                 <property name="username" value="root"/>
                 <property name="password" value="131474"/>
             </dataSource>
@@ -23,6 +22,6 @@
     </environments>
 
     <mappers>
-        <mapper resource="com/bjpowernode/dao/StudentDao.xml"/>
+        <mapper resource="com/example/dao/StudentDao.xml"/>
     </mappers>
 </configuration>

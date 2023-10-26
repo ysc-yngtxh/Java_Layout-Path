@@ -1,7 +1,7 @@
-package com.bjpowernode.handler;
+package com.example.handler;
 
-import com.bjpowernode.exception.AgeException;
-import com.bjpowernode.exception.NameException;
+import com.example.exception.AgeException;
+import com.example.exception.NameException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;

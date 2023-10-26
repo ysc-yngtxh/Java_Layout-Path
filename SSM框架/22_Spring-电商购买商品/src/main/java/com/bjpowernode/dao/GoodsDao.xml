@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.bjpowernode.dao.GoodsDao">
-    <select id="selectGoods" resultType="com.bjpowernode.domain.Goods">
+<mapper namespace="com.example.dao.GoodsDao">
+    <select id="selectGoods" resultType="com.example.domain.Goods">
         select id,name,amount,price from goods where id=#{id}
     </select>
 

@@ -18,8 +18,8 @@
     <!--
         singleton：单例模式，在整个Spring IoC容器中，使用singleton定义的Bean将只有一个实例
         prototype：原型模式，每次通过容器的getBean方法获取prototype定义的Bean时，都将产生一个新的Bean实例-->
-    <bean id="someService" class="com.bjpowernode.dao.SomeServiceImpl"/>
-    <bean id="someServiceBy" class="com.bjpowernode.dao.SomeServiceImpl" scope="prototype"/><!--这有两条bean标签，表示创建了两个对象-->
+    <bean id="someService" class="com.example.dao.SomeServiceImpl"/>
+    <bean id="someServiceBy" class="com.example.dao.SomeServiceImpl" scope="prototype"/><!--这有两条bean标签，表示创建了两个对象-->
 
     <!--spring能创建一个非自定义类的对象吗？可以创建一个存在的某个类的对象-->
     <bean id="mydate" class="java.util.Date"/>

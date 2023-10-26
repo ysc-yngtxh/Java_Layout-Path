@@ -1,4 +1,4 @@
-package com.bjpowernode.vo;
+package com.example.vo;
 
 public class Student {
 

@@ -1,4 +1,4 @@
-package com.bjpowernode.utill;
+package com.example.utill;
 
 import java.util.Date;
 

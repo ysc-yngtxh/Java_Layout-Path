@@ -1,8 +1,8 @@
-package com.bjpowernode;
+package com.example;
 
-import com.bjpowernode.Service.StudentService;
-import com.bjpowernode.dao.StudentDao;
-import com.bjpowernode.domain.Student;
+import com.example.Service.StudentService;
+import com.example.dao.StudentDao;
+import com.example.domain.Student;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

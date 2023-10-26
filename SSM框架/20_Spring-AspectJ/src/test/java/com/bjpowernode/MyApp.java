@@ -1,11 +1,11 @@
-package com.bjpowernode;
+package com.example;
 
-import com.bjpowernode.ba01.SomeServiceImpl;
-import com.bjpowernode.ba02.OtherService;
-import com.bjpowernode.ba03.FirstService;
-import com.bjpowernode.ba04.OutService;
-import com.bjpowernode.cglib1.CglibServiceImpl;
-import com.bjpowernode.jdk.CglibByServiceImpl;
+import com.example.ba01.SomeServiceImpl;
+import com.example.ba02.OtherService;
+import com.example.ba03.FirstService;
+import com.example.ba04.OutService;
+import com.example.cglib1.CglibServiceImpl;
+import com.example.jdk.CglibByServiceImpl;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

@@ -1,4 +1,4 @@
-package com.bjpowernode.cglib1;
+package com.example.cglib1;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;

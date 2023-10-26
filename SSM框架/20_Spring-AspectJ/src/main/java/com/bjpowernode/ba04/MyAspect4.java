@@ -1,4 +1,4 @@
-package com.bjpowernode.ba04;
+package com.example.ba04;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;

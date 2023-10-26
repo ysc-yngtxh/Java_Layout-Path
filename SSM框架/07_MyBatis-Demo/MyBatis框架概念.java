@@ -123,7 +123,7 @@
       4、多个参数：使用Java对象作为接口中方法的参数
          接口：List<Student> selectMultiObject(Student student);
          mapper文件：
-              <select id="selectMultiObject" resultType="com.bjpowernode.domain.Student">
+              <select id="selectMultiObject" resultType="com.example.domain.Student">
                   select id,name,email,age from student where name=#{name} or age=#{age}
               </select>
 
@@ -206,7 +206,7 @@
          key: 一般使用，做多级目录
          例如：jdbc.mysql.driver  , jdbc.driver.mydriver
               jdbc.driver=com.mysql.cj.jdbc.Driver
-              jdbc.url=jdbc:mysql://localhost:3306/springdb?useSSL=false
+              jdbc.url=jdbc:mysql://localhost:3306/springdb?useSSL=false&amp;allowPublicKeyRetrieval=true
               jdbc.user=root
               jdbc.passwd=131474
      2)、在mybatis的主配置文件，使用<property>指定文件的位置
@@ -221,7 +221,7 @@
                    1、mapper文件名称需要和接口名称一样，区分大小写的一样
                    2、mapper文件和dao接口需要在同一目录下
             -->
-            <package name="com.bjpowernode.dao"/>
+            <package name="com.example.dao"/>
         </mappers>
 
 第七章：pageHelper
@@ -279,9 +279,9 @@
                                     <setting name="cacheEnabled" value="true"/>  <!--开启mybatis的二级缓存-->
                                 </settings>
               ③、在mapper.xml中开启方法: 添加"cache"标签
-                   <mapper namespace="com.bjpowernode.dao.StudentDao">
+                   <mapper namespace="com.example.dao.StudentDao">
                        <cache></cache>  <!--xml中二级缓存分开关-->
-      例如：在 12_MyBatis-sql 模块中 TestMyBatis 类的 testtwo() 方法里连续两次去查询 Id为1006 的数据，
+      例如：在 12_MyBatis-sql 模块中 TestMyBatis 类的 testTwo() 方法里连续两次去查询 Id为1006 的数据，
            这次是两次相同的查询,不同的SqlSession,获取的同一个Mapper,只有第一次查询的时候日志显示向数据库发送了sql语句,
            其他两次都没有发送sql语句,说明其他两次都是从缓存中获取的数据
 

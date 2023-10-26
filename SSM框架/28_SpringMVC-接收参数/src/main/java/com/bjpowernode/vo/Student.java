@@ -1,4 +1,4 @@
-package com.bjpowernode.vo;
+package com.example.vo;
 
 /**
  * @author 游家纨绔

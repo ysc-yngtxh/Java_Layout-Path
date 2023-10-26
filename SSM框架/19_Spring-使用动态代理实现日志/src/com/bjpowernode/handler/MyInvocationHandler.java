@@ -1,6 +1,6 @@
-package com.bjpowernode.handler;
+package com.example.handler;
 
-import com.bjpowernode.utill.ServiceTools;
+import com.example.utill.ServiceTools;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

@@ -1,4 +1,4 @@
-package com.bjpowernode.domain;
+package com.example.domain;
 
 public class Student {
 

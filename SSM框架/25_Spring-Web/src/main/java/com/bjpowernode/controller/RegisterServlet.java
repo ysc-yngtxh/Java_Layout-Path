@@ -1,7 +1,7 @@
-package com.bjpowernode.controller;
+package com.example.controller;
 
-import com.bjpowernode.Service.StudentService;
-import com.bjpowernode.domain.Student;
+import com.example.Service.StudentService;
+import com.example.domain.Student;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.context.WebApplicationContext;

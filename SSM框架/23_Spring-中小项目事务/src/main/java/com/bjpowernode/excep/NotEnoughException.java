@@ -1,4 +1,4 @@
-package com.bjpowernode.excep;
+package com.example.excep;
 
 
 //自定义的运行时异常

@@ -1,6 +1,6 @@
-package com.bjpowernode.ba03;
+package com.example.ba03;
 
-import com.bjpowernode.ba02.Student;
+import com.example.ba02.Student;
 
 public class FirstServiceImpl implements FirstService {
 

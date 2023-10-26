@@ -1,4 +1,4 @@
-package com.bjpowernode.ba02;
+package com.example.ba02;
 
 /**
  * @author 游家纨绔

@@ -1,8 +1,8 @@
-package com.bjpowernode.controller;
+package com.example.controller;
 
-import com.bjpowernode.exception.AgeException;
-import com.bjpowernode.exception.MyUserException;
-import com.bjpowernode.exception.NameException;
+import com.example.exception.AgeException;
+import com.example.exception.MyUserException;
+import com.example.exception.NameException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;

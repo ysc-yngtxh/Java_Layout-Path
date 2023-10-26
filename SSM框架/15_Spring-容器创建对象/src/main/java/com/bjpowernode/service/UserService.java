@@ -1,6 +1,6 @@
-package com.bjpowernode.service;
+package com.example.service;
 
-import com.bjpowernode.domain.SysUser;
+import com.example.domain.SysUser;
 
 public interface UserService {
 

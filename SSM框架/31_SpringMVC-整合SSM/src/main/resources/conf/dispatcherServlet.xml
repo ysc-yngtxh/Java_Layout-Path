@@ -12,7 +12,7 @@
 
     <!--springmvc配置文件，声明controller和其他web相关的对象-->
     <!--声明组件扫描器-->
-    <context:component-scan base-package="com.bjpowernode.controller"/>
+    <context:component-scan base-package="com.example.controller"/>
 
     <!--声明 springmvc框架中的视图解析器，帮助开发人员设置视图文件的路径-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

@@ -13,11 +13,11 @@
     <!--设置别名-->
     <typeAliases>
         <!--实体类所在的包名-->
-        <package name="com.bjpowernode.domain"/>
+        <package name="com.example.domain"/>
     </typeAliases>
 
     <!--sql mapper(sql映射文件的位置)-->
     <mappers>
-        <package name="com.bjpowernode.dao"/>
+        <package name="com.example.dao"/>
     </mappers>
 </configuration>

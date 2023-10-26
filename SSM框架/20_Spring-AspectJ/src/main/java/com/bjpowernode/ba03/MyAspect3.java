@@ -1,4 +1,4 @@
-package com.bjpowernode.ba03;
+package com.example.ba03;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

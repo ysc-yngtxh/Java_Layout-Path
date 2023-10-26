@@ -1,6 +1,6 @@
-package com.bjpowernode.dao;
+package com.example.dao;
 
-import com.bjpowernode.domain.Sale;
+import com.example.domain.Sale;
 
 public interface SaleDao {
 

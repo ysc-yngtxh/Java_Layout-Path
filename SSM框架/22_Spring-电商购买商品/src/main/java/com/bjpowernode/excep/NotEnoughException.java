@@ -1,4 +1,4 @@
-package com.bjpowernode.excep;
+package com.example.excep;
 
 
 /**

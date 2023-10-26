@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <bean id="myschool" class="com.bjpowernode.dao.School">
+    <bean id="myschool" class="com.example.dao.School">
         <property name="name" value="湖北大学"/>
         <property name="addrerss" value="计算机科学与技术"/>
     </bean>

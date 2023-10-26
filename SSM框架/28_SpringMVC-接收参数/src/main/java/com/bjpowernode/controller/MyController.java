@@ -1,6 +1,6 @@
-package com.bjpowernode.controller;
+package com.example.controller;
 
-import com.bjpowernode.vo.Student;
+import com.example.vo.Student;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <bean id="myStudent" class="com.bjpowernode.dao.Student" autowire="byType">
+    <bean id="myStudent" class="com.example.dao.Student" autowire="byType">
         <property name="name" value="李晶晶"/>
         <property name="age" value="23"/>
     </bean>

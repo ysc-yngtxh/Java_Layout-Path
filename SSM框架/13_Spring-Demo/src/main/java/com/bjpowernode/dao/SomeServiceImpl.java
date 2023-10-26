@@ -1,6 +1,6 @@
-package com.bjpowernode.dao;
+package com.example.dao;
 
-import com.bjpowernode.service.SomeService;
+import com.example.service.SomeService;
 
 /**
  * @author 游家纨绔

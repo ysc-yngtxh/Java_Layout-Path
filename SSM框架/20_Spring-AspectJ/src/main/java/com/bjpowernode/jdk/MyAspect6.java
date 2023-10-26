@@ -1,4 +1,4 @@
-package com.bjpowernode.jdk;
+package com.example.jdk;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;

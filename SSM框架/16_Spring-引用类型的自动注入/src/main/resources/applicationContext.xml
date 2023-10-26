@@ -5,20 +5,20 @@
 
 
     <!--byName-->
-    <bean id="myStudent" class="com.bjpowernode.dao.Student" autowire="byName">
+    <bean id="myStudent" class="com.example.dao.Student" autowire="byName">
         <property name="name" value="李晶晶"/>
         <property name="age" value="23"/>
         <!--
             <property name="school" ref="school"/>
             本来正常情况下是要写引用类型的set注入的，但是spring语句方便
-            1、直接加上 autowire="byName",自己会在class="com.bjpowernode.domain.Student"
+            1、直接加上 autowire="byName",自己会在class="com.exampleain.Student"
                这个类中寻找引用类型的引用school。
             2、然后我们在其它bean语句的id中找到对应的引用类型的引用。
             这种语句就叫做：引用类型的自动注入(byName)
         -->
     </bean>
 
-    <bean id="school" class="com.bjpowernode.dao.School">
+    <bean id="school" class="com.example.dao.School">
         <property name="name" value="武汉纺织大学外经贸学院"/>
         <property name="addrerss" value="商英"/>
     </bean>
@@ -26,13 +26,13 @@
 
 
     <!--byType-->
-<!--<bean id="myStudent" class="com.bjpowernode.domain.Student" autowire="byType">
+<!--<bean id="myStudent" class="com.exampleain.Student" autowire="byType">
         <property name="name" value="李晶晶"/>
         <property name="age" value="23"/>
 
             <property name="school" ref="myschool"/>
             本来正常情况下是要写引用类型的set注入的，但是spring语句方便
-            1、直接加上 autowire="byType",自己会在class="com.bjpowernode.domain.Student"
+            1、直接加上 autowire="byType",自己会在class="com.exampleain.Student"
                这个类中寻找引用类型的类型School。
             2、然后我们在其它bean语句的id中找到对应的引用类型的引用。
             这种语句就叫做：引用类型的自动注入(byType)
@@ -40,7 +40,7 @@
             这里我为什么要选择注释掉呢？因为在byType中，在xml配置文件中声明bean只能有一个符合条件的，多余一个会使其在运行时出现错误。
     </bean>
 
-    <bean id="myschool" class="com.bjpowernode.dao.School">
+    <bean id="myschool" class="com.example.School">
         <property name="name" value="湖北大学"/>
         <property name="addrerss" value="计算机科学与技术"/>
     </bean>-->

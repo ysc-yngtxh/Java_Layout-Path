@@ -3,11 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--
-实体类的映射文件
-namespace 指定接口的类全名
+    实体类的映射文件
+    namespace 指定接口的类全名
 -->
 <mapper namespace="org.example.mapper.RoleMapper">
-
     <resultMap id="myrole" type="org.example.pojo.Role" autoMapping="true">
         <id property="id" column="id"/>
         <result property="role_desc" column="role_desc"/>

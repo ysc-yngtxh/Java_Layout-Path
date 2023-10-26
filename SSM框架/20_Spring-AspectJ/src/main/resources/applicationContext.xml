@@ -5,25 +5,25 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
     <!--组件扫描器：将包bao1下的@Component注入容器并创建对象bean-->
-    <context:component-scan base-package="com.bjpowernode.ba01"/>
+    <context:component-scan base-package="com.example.ba01"/>
 
     <!--直接在配置文件中创建bean对象，把对象交给spring容器，由spring容器统一创建，管理对象-->
     <!--声明目标对象-->
-    <bean id="Service2" class="com.bjpowernode.ba02.OtherServiceImpl"/>
+    <bean id="Service2" class="com.example.ba02.OtherServiceImpl"/>
     <!--声明切面类对象-->
-    <bean id="OmyAspect" class="com.bjpowernode.ba02.MyAspect2"/>
+    <bean id="OmyAspect" class="com.example.ba02.MyAspect2"/>
 
-    <bean id="Service3" class="com.bjpowernode.ba03.FirstServiceImpl"/>
-    <bean id="FmyAspect" class="com.bjpowernode.ba03.MyAspect3"/>
+    <bean id="Service3" class="com.example.ba03.FirstServiceImpl"/>
+    <bean id="FmyAspect" class="com.example.ba03.MyAspect3"/>
 
-    <bean id="Service4" class="com.bjpowernode.ba04.OutServiceImpl"/>
-    <bean id="TmyAspect" class="com.bjpowernode.ba04.MyAspect4"/>
+    <bean id="Service4" class="com.example.ba04.OutServiceImpl"/>
+    <bean id="TmyAspect" class="com.example.ba04.MyAspect4"/>
 
-    <bean id="Service5" class="com.bjpowernode.cglib1.CglibServiceImpl"/>
-    <bean id="CmyAspect" class="com.bjpowernode.cglib1.MyAspect5"/>
+    <bean id="Service5" class="com.example.cglib1.CglibServiceImpl"/>
+    <bean id="CmyAspect" class="com.example.cglib1.MyAspect5"/>
 
-    <bean id="Service6" class="com.bjpowernode.jdk.CglibByServiceImpl"/>
-    <bean id="CBmyAspect" class="com.bjpowernode.jdk.MyAspect6"/>
+    <bean id="Service6" class="com.example.jdk.CglibByServiceImpl"/>
+    <bean id="CBmyAspect" class="com.example.jdk.MyAspect6"/>
 
     <!--声明自动代理生成器：使用aspectJ框架内部的功能，创建目标对象的代理对象。
         创建代理对象是在内存中实现的，修改目标对象的的内存中的结构。

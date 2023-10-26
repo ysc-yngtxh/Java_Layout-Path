@@ -1,4 +1,4 @@
-package com.bjpowernode.ba01;
+package com.example.ba01;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -32,7 +32,7 @@ public class MyAspect1 {
      *    如果有参数，参数不是自定义的，有几个参数类型可以使用
      */
 
-    @Before(value="execution(public void com.bjpowernode.ba01.SomeServiceImpl.doSome(String,Integer))")
+    @Before(value="execution(public void com.example.ba01.SomeServiceImpl.doSome(String,Integer))")
     public void myBefore1(){
         //就是你切面要执行的功能代码
         System.out.println("1==前置通知，切面功能：在目标方法之前输出执行时间"+ new Date());
@@ -59,7 +59,7 @@ public class MyAspect1 {
      * <p>
      *     注意：当你要使用参数时，方法括号里的参数不能再使用...  而是要使用其参数类型
      */
-    @Before(value="execution(void com.bjpowernode.ba01.SomeServiceImpl.doSome(String,Integer))")
+    @Before(value="execution(void com.example.ba01.SomeServiceImpl.doSome(String,Integer))")
     public void myBefore4(JoinPoint jp){
         //获取方法的完整定义
         System.out.println("方法的签名(定义)="+jp.getSignature());

@@ -1,4 +1,4 @@
-package com.bjpowernode.dao;
+package com.example.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  *        位置：：在类的上面
  *
  * @Component(value="myStudent")  等同于
- *        <bean id="myStudent" class="com.bjpowernode.bao.Student"/>
+ *        <bean id="myStudent" class="com.example.bao.Student"/>
  *
  *
  *    spring中和@Component功能一致，创建对象的注解还有：

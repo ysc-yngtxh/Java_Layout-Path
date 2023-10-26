@@ -13,9 +13,7 @@ import org.junit.Test;
 /**
  * Unit test for simple App.
  */
-
 public class AppTest {
-
 
     /**
      * 一对一查询模型
@@ -24,13 +22,13 @@ public class AppTest {
      */
     @Test
     public void shouldAnswerWithTrue(){
-        //获取SqlSession对象
+        // 获取SqlSession对象
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         OrdersMapper mapper = sqlSession.getMapper(OrdersMapper.class);
-        //执行SQL语句，使用SqlSession类的方法
+        // 执行SQL语句，使用SqlSession类的方法
         Orders order = mapper.OrderWithUser(1);
         System.out.println(order.toString());
-        //关闭
+        // 关闭
         sqlSession.close();
     }
 
@@ -41,14 +39,14 @@ public class AppTest {
      */
     @Test
     public void shou(){
-        //获取SqlSession对象
+        // 获取SqlSession对象
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-        //执行SQL语句，使用SqlSession类的方法
+        // 执行SQL语句，使用SqlSession类的方法
         // 查询用户id=41的用户以及拥有的订单
         User user = mapper.UserWithOrders(41);
         System.out.println(user.toString());
-        //关闭
+        // 关闭
         sqlSession.close();
     }
 
@@ -60,24 +58,24 @@ public class AppTest {
      */
     @Test
     public void show(){
-        //获取SqlSession对象
+        // 获取SqlSession对象
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         RoleMapper mapper = sqlSession.getMapper(RoleMapper.class);
-        //执行SQL语句，使用SqlSession类的方法
-        //查询角色id=1的角色以及对应的用户
+        // 执行SQL语句，使用SqlSession类的方法
+        // 查询角色id=1的角色以及对应的用户
         Role role = mapper.RoleWithUsers(1);
         System.out.println(role.toString());
-        //关闭
+        // 关闭
         sqlSession.close();
     }
 
     /*总结：
-         1. 一对一配置：使用<resultMap>+<association>做配置
+         1. 一对一配置：使用<resultMap> + <association>做配置
                       association:
                       property：关联的实体类属性名
                       javaType：关联的实体类型（别名）
 
-         2. 一对多配置：使用<resultMap>+<collection>做配置
+         2. 一对多配置：使用<resultMap> + <collection>做配置
                       collection：
                       property：关联的集合属性名
                       ofType：关联的集合元素类型（别名）

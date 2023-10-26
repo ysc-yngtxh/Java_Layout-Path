@@ -1,7 +1,7 @@
-package com.bjpowernode.Service;
+package com.example.Service;
 
-import com.bjpowernode.domain.Student;
-import com.bjpowernode.dao.StudentDao;
+import com.example.domain.Student;
+import com.example.dao.StudentDao;
 
 import java.util.List;
 

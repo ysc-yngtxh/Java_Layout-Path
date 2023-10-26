@@ -3,13 +3,16 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
+
   <display-name>Archetype Created Web Application</display-name>
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>com.bjpowernode.controller.HelloServlet</servlet-class>
+        <servlet-class>com.example.controller.HelloServlet</servlet-class>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>HelloServlet</servlet-name>
         <url-pattern>/hello</url-pattern>
     </servlet-mapping>
+
 </web-app>

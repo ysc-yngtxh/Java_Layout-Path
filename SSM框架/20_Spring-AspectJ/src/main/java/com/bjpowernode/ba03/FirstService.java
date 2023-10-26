@@ -1,4 +1,4 @@
-package com.bjpowernode.ba03;
+package com.example.ba03;
 
 public interface FirstService {
 

@@ -4,8 +4,8 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.bjpowernode</groupId>
-  <artifactId>12_MyBatis-SQL</artifactId>
+  <groupId>com.example</groupId>
+  <artifactId>12.1_MyBatis-SQL</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <properties>
@@ -26,23 +26,21 @@
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis</artifactId>
-      <version>3.5.9</version>
+      <version>3.5.13</version>
     </dependency>
     <!--MySQL驱动-->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.28</version>
+      <version>8.0.33</version>
     </dependency>
     <!--pageHelper-->
     <dependency>
       <groupId>com.github.pagehelper</groupId>
       <artifactId>pagehelper</artifactId>
-      <version>5.3.0</version>
+      <version>5.3.2</version>
     </dependency>
-
   </dependencies>
-
 
   <build>
     <resources>
@@ -52,7 +50,7 @@
           <include>**/*.properties</include>
           <include>**/*.xml</include>
         </includes>
-        <filtering>false</filtering>  <!--filetering选项false不启用过滤器，#.properties已经起到了过滤器的作用-->
+        <filtering>false</filtering>  <!--filtering选项false不启用过滤器，#.properties已经起到了过滤器的作用-->
       </resource>
     </resources>
   </build>

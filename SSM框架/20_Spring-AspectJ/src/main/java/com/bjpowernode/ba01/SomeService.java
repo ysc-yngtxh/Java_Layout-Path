@@ -1,4 +1,4 @@
-package com.bjpowernode.ba01;
+package com.example.ba01;
 
 public interface SomeService {
 

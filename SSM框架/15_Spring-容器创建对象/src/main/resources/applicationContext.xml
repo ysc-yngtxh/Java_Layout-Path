@@ -4,9 +4,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <bean id="mysqlDao" class="com.bjpowernode.dao.UserDaoImpl"/>
+    <bean id="mysqlDao" class="com.example.dao.UserDaoImpl"/>
 
-    <bean id="userService" class="com.bjpowernode.service.impl.UserServiceImpl">
+    <bean id="userService" class="com.example.service.impl.UserServiceImpl">
         <property name="dao" ref="mysqlDao"/>
     </bean>
 </beans>

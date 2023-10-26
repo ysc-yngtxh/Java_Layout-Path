@@ -1,7 +1,7 @@
-package com.bjpowernode;
+package com.example;
 
-import com.bjpowernode.dao.SomeServiceImpl;
-import com.bjpowernode.service.SomeService;
+import com.example.dao.SomeServiceImpl;
+import com.example.service.SomeService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

@@ -1,8 +1,8 @@
-package com.bjpowernode;
+package com.example;
 
-import com.bjpowernode.handler.MyInvocationHandler;
-import com.bjpowernode.service.SomeService;
-import com.bjpowernode.service.SomeServiceImpl;
+import com.example.handler.MyInvocationHandler;
+import com.example.service.SomeService;
+import com.example.service.SomeServiceImpl;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;

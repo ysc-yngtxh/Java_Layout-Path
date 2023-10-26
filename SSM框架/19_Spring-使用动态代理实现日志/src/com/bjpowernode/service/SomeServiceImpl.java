@@ -1,4 +1,4 @@
-package com.bjpowernode.service;
+package com.example.service;
 
 //service类的代码不修改，也能够增加 输出时间，事务
 public class SomeServiceImpl implements SomeService{

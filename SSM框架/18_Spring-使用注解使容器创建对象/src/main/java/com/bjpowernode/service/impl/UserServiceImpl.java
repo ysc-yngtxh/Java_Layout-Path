@@ -1,8 +1,8 @@
-package com.bjpowernode.service.impl;
+package com.example.service.impl;
 
-import com.bjpowernode.dao.UserDao;
-import com.bjpowernode.domain.SysUser;
-import com.bjpowernode.service.UserService;
+import com.example.dao.UserDao;
+import com.example.domain.SysUser;
+import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

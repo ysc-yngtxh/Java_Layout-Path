@@ -1,7 +1,7 @@
-package com.bjpowernode;
+package com.example;
 
-import com.bjpowernode.domain.SysUser;
-import com.bjpowernode.service.UserService;
+import com.example.domain.SysUser;
+import com.example.service.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

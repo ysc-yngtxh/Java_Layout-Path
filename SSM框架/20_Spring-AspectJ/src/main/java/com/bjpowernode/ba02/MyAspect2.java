@@ -1,4 +1,4 @@
-package com.bjpowernode.ba02;
+package com.example.ba02;
 
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;

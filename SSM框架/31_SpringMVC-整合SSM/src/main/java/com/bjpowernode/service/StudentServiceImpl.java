@@ -1,7 +1,7 @@
-package com.bjpowernode.service;
+package com.example.service;
 
-import com.bjpowernode.dao.StudentDao;
-import com.bjpowernode.domain.Student;
+import com.example.dao.StudentDao;
+import com.example.domain.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

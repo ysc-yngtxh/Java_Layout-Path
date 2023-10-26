@@ -1,4 +1,4 @@
-package com.bjpowernode.jdk;
+package com.example.jdk;
 
 public class CglibByServiceImpl implements CglibService{
 

@@ -1,6 +1,6 @@
-package com.bjpowernode.Service;
+package com.example.Service;
 
-import com.bjpowernode.domain.Student;
+import com.example.domain.Student;
 
 import java.util.List;
 

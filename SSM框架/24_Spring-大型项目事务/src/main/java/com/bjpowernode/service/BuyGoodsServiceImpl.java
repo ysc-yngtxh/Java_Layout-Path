@@ -1,10 +1,10 @@
-package com.bjpowernode.service;
+package com.example.service;
 
-import com.bjpowernode.dao.GoodsDao;
-import com.bjpowernode.dao.SaleDao;
-import com.bjpowernode.domain.Goods;
-import com.bjpowernode.domain.Sale;
-import com.bjpowernode.excep.NotEnoughException;
+import com.example.dao.GoodsDao;
+import com.example.dao.SaleDao;
+import com.example.domain.Goods;
+import com.example.domain.Sale;
+import com.example.excep.NotEnoughException;
 import org.springframework.transaction.annotation.Transactional;
 
 public class BuyGoodsServiceImpl implements BuyGoodsService {

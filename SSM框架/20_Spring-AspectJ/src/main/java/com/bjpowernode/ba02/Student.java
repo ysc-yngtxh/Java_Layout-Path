@@ -1,4 +1,4 @@
-package com.bjpowernode.ba02;
+package com.example.ba02;
 
 public class Student {
     private String name;

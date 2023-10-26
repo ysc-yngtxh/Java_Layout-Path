@@ -1,4 +1,4 @@
-package com.bjpowernode;
+package com.example;
 
 /*
 一、spring的第一个核心功能  ioc
@@ -183,7 +183,7 @@ package com.bjpowernode;
           举例：
               execution(public * *(..))  表示任意公共方法
               execution(* set*(..))      表示一个以“set”开始的方法
-              execution(* com.bjpowernode.Service.*.*(..))    表示在Service包下任意类中的任意方法和任意参数
+              execution(* com.example.Service.*.*(..))    表示在Service包下任意类中的任意方法和任意参数
               execution(* *..Service..*.*(..))                表示所有包中的Service包下的所有包任意方法和任意参数
 
 三、把mybatis框架和spring集成在一起，像一个框架一样使用

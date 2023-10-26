@@ -1,6 +1,6 @@
-package com.bjpowernode.dao;
+package com.example.dao;
 
-import com.bjpowernode.domain.SysUser;
+import com.example.domain.SysUser;
 
 public interface UserDao {
 
