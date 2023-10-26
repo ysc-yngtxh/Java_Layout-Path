@@ -1,13 +1,13 @@
 package com.example.shangjia;
 
-import com.example.factory.UsbKingFactorys;
-import com.example.service.UsbSells;
+import com.example.factory.UsbKingFactory;
+import com.example.service.UsbSell;
 
 // TaoBao是一个商家，代理金士顿U盘的销售
-public class TaoBao implements UsbSells {
+public class TaoBao implements UsbSell {
 
     // 声明 商家代理的厂家具体是谁
-    private UsbKingFactorys factory = new UsbKingFactorys();
+    private UsbKingFactory factory = new UsbKingFactory();
 
     // 实现销售U盘功能
     @Override

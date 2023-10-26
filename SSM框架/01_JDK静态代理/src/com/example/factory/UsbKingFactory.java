@@ -1,12 +1,12 @@
 package com.example.factory;
 
-import com.example.service.UsbSells;
+import com.example.service.UsbSell;
 
 /**
  * @author 游家纨绔
  */
 // 目标类：金士顿 -- 厂家，不接受用户的单独购买
-public class UsbKingFactory implements UsbSells {
+public class UsbKingFactory implements UsbSell {
     @Override
     public float sell(int amount) {
         System.out.println("目标类中的方法调用，UsbKingFactory中的sell");

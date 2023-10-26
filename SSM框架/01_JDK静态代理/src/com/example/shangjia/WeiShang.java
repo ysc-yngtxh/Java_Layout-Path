@@ -1,12 +1,12 @@
 package com.example.shangjia;
 
-import com.example.factory.UsbKingFactorys;
-import com.example.service.UsbSells;
+import com.example.factory.UsbKingFactory;
+import com.example.service.UsbSell;
 
-public class WeiShang implements UsbSells {
+public class WeiShang implements UsbSell {
 
     // 代理的是，金士顿，定义目标厂家类
-    private UsbKingFactorys factor = new UsbKingFactorys();
+    private UsbKingFactory factor = new UsbKingFactory();
 
     @Override
     public float sell(int amount) {

@@ -1,9 +1,9 @@
 package com.example.shangjia;
 
 import com.example.factory.UsbSanFactory;
-import com.example.service.UsbSells;
+import com.example.service.UsbSell;
 
-public class WeiShangSanDi implements UsbSells {
+public class WeiShangSanDi implements UsbSell {
 
     // 代理的是 闪迪，定义目标厂家类
     private UsbSanFactory factory = new UsbSanFactory();

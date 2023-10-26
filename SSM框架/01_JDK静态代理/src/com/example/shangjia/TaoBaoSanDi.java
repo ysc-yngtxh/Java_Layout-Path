@@ -1,9 +1,9 @@
 package com.example.shangjia;
 
 import com.example.factory.UsbSanFactory;
-import com.example.service.UsbSells;
+import com.example.service.UsbSell;
 
-public class TaoBaoSanDi implements UsbSells {
+public class TaoBaoSanDi implements UsbSell {
 
     private UsbSanFactory factorys = new UsbSanFactory();
 
