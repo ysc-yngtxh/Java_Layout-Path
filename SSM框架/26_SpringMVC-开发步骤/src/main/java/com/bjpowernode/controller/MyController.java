@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MyController {
 
-    //处理用户提交的请求，springMvc中是使用方法来处理的。方法是自定义的，可以有多种返回值，参数，方法名称自定义
+    // 处理用户提交的请求，springMvc中是使用方法来处理的。方法是自定义的，可以有多种返回值，参数，方法名称自定义
     /**
      * 准备使用doSome方法处理some.do请求。
      * @RequestMapping:请求映射，作用是把一个请求地址和一个方法绑定在一起。
@@ -31,24 +31,23 @@ public class MyController {
      * Model: 数据，请求处理完成后，要显示给用户的数据
      * View:视图 ，比如jsp等等
      */
-
-    @RequestMapping(value= {"/test/some.do","/test/first.do"})//里面的value是一个数组结构
+    @RequestMapping(value= {"/test/some.do", "/test/first.do"})// 里面的value是一个数组结构
     public ModelAndView doSome(){
-        //处理some.do请求了。相当于servlet调用处理完成了
+        // 处理some.do请求了。相当于servlet调用处理完成了
         ModelAndView mv = new ModelAndView();
-        //添加数据，框架在请求的最后把数据放入到request作用域
-        //request.setAttribute("msg","欢迎使用SpringMvc做web开发");
+        // 添加数据，框架在请求的最后把数据放入到request作用域
+        // request.setAttribute("msg","欢迎使用SpringMvc做web开发");
         mv.addObject("msg","欢迎使用SpringMvc做web开发");
         mv.addObject("fun","执行的是doSome方法");
 
-        //指定视图，指定视图的完整路径
-        //框架对视图执行的forward操作，request.getRequestDispatcher("/show,jsp").forward(...)
-        //mv.setViewName("/WEB-INF/view/show.jsp");这是没有声明视图解析器时
+        // 指定视图，指定视图的完整路径
+        // 框架对视图执行的forward操作，request.getRequestDispatcher("/show,jsp").forward(...)
+        // mv.setViewName("/WEB-INF/view/show.jsp");这是没有声明视图解析器时
 
-        //当配置了视图解析器后，可以使用逻辑名称(文件名)，指定视图。框架会使用视图解析器的前缀+逻辑名称+后缀 组成完成路径
+        // 当配置了视图解析器后，可以使用逻辑名称(文件名)，指定视图。框架会使用视图解析器的前缀+逻辑名称+后缀 组成完成路径
         mv.setViewName("show");
 
-        //返回mv
+        // 返回mv
         return mv;
     }
 

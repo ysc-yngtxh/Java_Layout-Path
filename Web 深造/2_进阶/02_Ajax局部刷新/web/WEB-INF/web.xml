@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>BmiAjaxServlet</servlet-name>
-        <servlet-class>com.bjpowernode.controller.BmiAjaxServlet</servlet-class>
+        <servlet-class>com.example.controller.BmiAjaxServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BmiAjaxServlet</servlet-name>

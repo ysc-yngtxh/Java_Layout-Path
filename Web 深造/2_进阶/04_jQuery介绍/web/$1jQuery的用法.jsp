@@ -12,7 +12,7 @@
 
     <script type="text/javascript" src="scripts/jquery-3.4.1.js"></script>
     <script type="text/javascript">
-        function $(domo){  //这里的$只是一个函数名，写这样的函数就是用来减少程序员多次重复写代码的繁琐性
+        function $(domo){  // 这里的$只是一个函数名，写这样的函数就是用来减少程序员多次重复写代码的繁琐性
             var dom = document.getElementById(domo).value;
             return dom;
         }
@@ -35,9 +35,9 @@
           <tr>
               <td>
                   <input type="text" id="two" value="你的提示文字"
-                         onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
-                         onBlur="if(!value){value=defaultValue;this.style.color='#999'}"
-                         style="color:#999999"/>
+                         onFocus = "if(value === defaultValue){value=''; this.style.color='#000'}"
+                         onBlur = "if(!value){value=defaultValue; this.style.color='#999'}"
+                         style = "color:#999999"/>
                   <%--这种写法的提示字，用户在输入value时提示字会消失，体验更好哦!--%>
               </td>
               <td><input type="button" value="点击按钮2" onclick="fun2()"/></td>

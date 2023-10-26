@@ -25,13 +25,14 @@
       }
 
       $(function(){
-        loadDataAjax();//这一步的作用是全局加载完后，直接显示省份信息，就不需要按钮点击后才显示。这样做用户体验会更好。
+        // 这一步的作用是全局加载完后，直接显示省份信息，就不需要按钮点击后才显示。这样做用户体验会更好。
+        loadDataAjax();
 
         $("#btn").click(function(){
           loadDataAjax()
         })
 
-        //给省份的select绑定一个change事件，当select内容发生变化时，触发事件
+        // 给省份的select绑定一个change事件，当select内容发生变化时，触发事件
         $("#province").change(function(){
           var  obj = $("#province>option:selected");
           var provinceId = obj.val();

@@ -23,77 +23,77 @@
     <script type="text/javascript">
         $(function(){
             $("#btn1").click(function(){
-                //无参调用形式，读取数组中第一个dom对象的value属性值
+                // 无参调用形式，读取数组中第一个dom对象的value属性值
                 var text = $(":text").val();
                 alert(text)
             })
             $("#btn2").click(function(){
-                //有参形式调用，对数组中所有dom对象的value属性值进行统一赋值
+                // 有参形式调用，对数组中所有dom对象的value属性值进行统一赋值
                 var text = $(":text").val("三国演义");
             })
             $("#btn3").click(function(){
-                //获取div，text()无参数，获取dom对象的文本值，连接成一个字符串
+                // 获取div，text()无参数，获取dom对象的文本值，连接成一个字符串
                 alert($("div").text());
             })
             $("#btn4").click(function(){
-                //设置div的文本值
+                // 设置div的文本值
                 $("div").text("新的div内容");
             })
             $("#btn5").click(function(){
-                //读取指定属性的值
+                // 读取指定属性的值
                 alert($("img").attr("src"));
             })
             $("#btn6").click(function(){
-                //设置指定属性的值
-                $("img").attr("src","img/timg2.jpg");
+                // 设置指定属性的值
+                $("img").attr("src", "img/timg2.jpg");
             })
             $("#btn7").click(function(){
-                //删除父和子对象
+                // 删除父和子对象
                 $("select").remove();
             })
             $("#btn8").click(function(){
-                //删除子对象
+                // 删除子对象
                 $("select").empty();
             })
             $("#btn9").click(function(){
-                //使用append，增加dom对象的提交按钮
-                //$("#fatcher").append("<input type='button' value='我是增加的按钮'/>");
-                //使用append，增加dom对象的动态表格
+                // 使用append，增加dom对象的提交按钮
+                // $("#fatcher").append("<input type='button' value='我是增加的按钮'/>");
+                // 使用append，增加dom对象的动态表格
                 $("#fatcher").append("<table border='1' align='center'><tr><td>第一列</td><td>第二列</td></tr></tabble>");
             })
             $("#btn10").click(function(){
-                //使用html()函数，获取数组中第一个dom对象的文本值
-                alert($("span").html());//我是MySQL<b>数据库</b>
+                // 使用html()函数，获取数组中第一个dom对象的文本值
+                alert($("span").html()); // 我是MySQL<b>数据库</b>
             })
             $("#btn11").click(function(){
-                //使用html(有参数)：设置dom对象的文本值
+                // 使用html(有参数)：设置dom对象的文本值
                 $("span").html("我是新的<b>数据</b>");
             })
             $("#btn12").click(function(){
-                //循环普通数组，非dom数组
+                // 循环普通数组，非dom数组
                 var arr = [11,12,13];
-                $.each(arr,function(i,n){
-                    alert("循环变量"+i+"===数组成员"+n)
+                $.each(arr, function(i,n){
+                    alert("循环变量" + i + "===数组成员" + n)
                 })
             })
             $("#btn13").click(function(){
-                //循环json，非dom数组
-                var json = {"name":"游诗成","age":23};
-                $.each(json,function(i,n){
-                    alert("i是key="+i+",n是值="+n)
+                // 循环json，非dom数组
+                var json = {"name":"游诗成", "age":23};
+                $.each(json, function(i,n){
+                    alert("i是key=" + i + ",n是值=" + n)
                 })
             })
             $("#btn14").click(function(){
-                //循环dom数组
-                var domArray = $(":text");//dom数组
-                $.each(domArray,function(i,n){  //n是数组中的dom对象
-                    alert("i="+i+",n="+n.value)
+                // 循环dom数组
+                var domArray = $(":text"); // dom数组
+                $.each(domArray, function(i,n){  // n是数组中的dom对象
+                    alert("i=" + i + ",n=" + n.value)
                 })
             })
             $("#btn15").click(function(){
-                //循环jQuery对象，jQuery对象就是dom数组
+                // 循环jQuery对象，jQuery对象就是dom数组
                 $(":text").each(function(i,n){
-                    alert("i="+i+",n="+n.value)
+                    alert("i=" + i + ",n=" + n.value)
                 })
             })
         })

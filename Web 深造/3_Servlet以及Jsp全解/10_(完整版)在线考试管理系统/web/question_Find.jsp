@@ -1,5 +1,5 @@
-<%@ page import="com.bjpowernode.dao.QuestionDao" %>
-<%@ page import="com.bjpowernode.entity.Question" %>
+<%@ page import="com.example.dao.QuestionDao" %>
+<%@ page import="com.example.entity.Question" %>
 <%@ page import="java.util.List" %>
 
 <%--

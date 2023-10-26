@@ -1,5 +1,5 @@
-<%@ page import="com.bjpowernode.dao.UserDao" %>
-<%@ page import="com.bjpowernode.entity.Users" %>
+<%@ page import="com.example.dao.UserDao" %>
+<%@ page import="com.example.entity.Users" %>
 <%@ page import="java.util.List" %>
 <%--
   Created by IntelliJ IDEA.

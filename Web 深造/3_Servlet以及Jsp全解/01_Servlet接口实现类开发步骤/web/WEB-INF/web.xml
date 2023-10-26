@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>A1Servlet</servlet-name>
-        <servlet-class>com.bjpowernode.controller.A1Servlet</servlet-class>
+        <servlet-class>com.example.controller.A1Servlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>A1Servlet</servlet-name>
@@ -16,7 +16,7 @@
 
     <servlet>
         <servlet-name>B2Servlet</servlet-name>
-        <servlet-class>com.bjpowernode.controller.B2Servlet</servlet-class>
+        <servlet-class>com.example.controller.B2Servlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>B2Servlet</servlet-name>
@@ -26,7 +26,7 @@
 
     <servlet>
         <servlet-name>C3Servlet</servlet-name>
-        <servlet-class>com.bjpowernode.controller.C3Servlet</servlet-class>
+        <servlet-class>com.example.controller.C3Servlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>C3Servlet</servlet-name>
@@ -36,7 +36,7 @@
 
     <servlet>
         <servlet-name>D4Servlet</servlet-name>
-        <servlet-class>com.bjpowernode.controller.D4Servlet</servlet-class>
+        <servlet-class>com.example.controller.D4Servlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>D4Servlet</servlet-name>
@@ -46,7 +46,7 @@
 
     <servlet>
         <servlet-name>E5Servlet</servlet-name>
-        <servlet-class>com.bjpowernode.controller.E5Servlet</servlet-class>
+        <servlet-class>com.example.controller.E5Servlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>E5Servlet</servlet-name>
@@ -56,7 +56,7 @@
 
     <servlet>
         <servlet-name>F6Servlet</servlet-name>
-        <servlet-class>com.bjpowernode.controller.F6Servlet</servlet-class>
+        <servlet-class>com.example.controller.F6Servlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>F6Servlet</servlet-name>
@@ -66,7 +66,7 @@
 
     <servlet>
         <servlet-name>G7Servlet</servlet-name>
-        <servlet-class>com.bjpowernode.controller.G7Servlet</servlet-class>
+        <servlet-class>com.example.controller.G7Servlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>G7Servlet</servlet-name>

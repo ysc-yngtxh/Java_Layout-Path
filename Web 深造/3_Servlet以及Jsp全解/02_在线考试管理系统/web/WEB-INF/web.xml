@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>UserAddServlet</servlet-name>
-        <servlet-class>com.bjpowernode.controller.UserAddServlet</servlet-class>
+        <servlet-class>com.example.controller.UserAddServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -17,7 +17,7 @@
 
     <servlet>
         <servlet-name>UserDeleteServlet</servlet-name>
-        <servlet-class>com.bjpowernode.controller.UserDeleteServlet</servlet-class>
+        <servlet-class>com.example.controller.UserDeleteServlet</servlet-class>
     </servlet>
 
 
@@ -29,11 +29,11 @@
 
     <servlet>
         <servlet-name>UserFindServlet</servlet-name>
-        <servlet-class>com.bjpowernode.controller.UserFindServlet</servlet-class>
+        <servlet-class>com.example.controller.UserFindServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.bjpowernode.controller.LoginServlet</servlet-class>
+        <servlet-class>com.example.controller.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -55,13 +55,13 @@
 
     <!--注册监听器接口实现类-->
     <listener>
-        <listener-class>com.bjpowernode.listener.OneListener</listener-class>
+        <listener-class>com.example.listener.OneListener</listener-class>
     </listener>
 
     <!--过滤器注册-->
     <filter>
         <filter-name>OneFilter</filter-name>
-        <filter-class>com.bjpowernode.filter.OneFilter</filter-class>
+        <filter-class>com.example.filter.OneFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>OneFilter</filter-name>

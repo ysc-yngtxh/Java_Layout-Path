@@ -22,12 +22,12 @@
       */
       $(document).ready(function(){
         alert("Hello jQuery");
-      })//标准写法
+      }) // 标准写法
 
-      $( function(){
+      $(function(){
            alert("Hello jQuery");
          }
-      )//简写，效果一样
+      ) // 简写，效果一样
     </script>
   </head>
   <body>

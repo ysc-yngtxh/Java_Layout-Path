@@ -6,19 +6,19 @@
 
     <servlet>
         <servlet-name>OneServlet</servlet-name>
-        <servlet-class>com.bjpowernode.controllerr.OneServlet</servlet-class>
+        <servlet-class>com.example.controllerr.OneServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>TwoServlet</servlet-name>
-        <servlet-class>com.bjpowernode.controllerr.TwoServlet</servlet-class>
+        <servlet-class>com.example.controllerr.TwoServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ThreeServlet</servlet-name>
-        <servlet-class>com.bjpowernode.controllerr.ThreeServlet</servlet-class>
+        <servlet-class>com.example.controllerr.ThreeServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>FourServlet</servlet-name>
-        <servlet-class>com.bjpowernode.controllerr.FourServlet</servlet-class>
+        <servlet-class>com.example.controllerr.FourServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>FourServlet</servlet-name>

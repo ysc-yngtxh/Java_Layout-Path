@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.bjpowernode.controller.Student" %>
+<%@ page import="com.example.controller.Student" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>  <%--导包--%>
 

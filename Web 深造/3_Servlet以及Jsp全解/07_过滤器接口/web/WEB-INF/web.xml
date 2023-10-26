@@ -7,7 +7,7 @@
     <!--将过滤器类文件路径交给Tomcat-->
     <filter>
         <filter-name>OneFilter</filter-name>
-        <filter-class>com.bjpowernode.filter.OneFilter</filter-class>
+        <filter-class>com.example.filter.OneFilter</filter-class>
     </filter>
     <!--通知Tomcat在调用何种资源文件时需要被当前过滤器拦截-->
     <filter-mapping>

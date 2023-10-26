@@ -26,7 +26,7 @@ public class MyController {
      *                       post请求方式：RequestMethod.POST
      */
 
-    //这里就可以省略 "/test" ,而在类上面定义模块的名称，比如 "user"... 这样子会更方便调用和管理
+    // 这里就可以省略 "/test" ,而在类上面定义模块的名称，比如 "user"... 这样子会更方便调用和管理
     @RequestMapping(value= "/some.do",method= RequestMethod.GET)
     public ModelAndView doSome(HttpServletRequest request, /**参数在方法的形参中*/
                                HttpServletResponse response,
@@ -34,9 +34,9 @@ public class MyController {
 
         ModelAndView mv = new ModelAndView();
 
-        //在浏览器页面的地址栏上加入参数 ?name=*** 可以在页面上得到显示
-        mv.addObject("msg","欢迎使用SpringMvc做web开发  "+request.getParameter("name"));
-        mv.addObject("fun","执行的是doSome方法");
+        // 在浏览器页面的地址栏上加入参数 ?name=*** 可以在页面上得到显示
+        mv.addObject("msg", "欢迎使用SpringMvc做web开发：" + request.getParameter("name"));
+        mv.addObject("fun", "执行的是doSome方法");
         mv.setViewName("show");
         return mv;
     }
@@ -46,10 +46,9 @@ public class MyController {
     public ModelAndView doOther(HttpServletRequest request,
                                 HttpServletResponse response,
                                 HttpSession session){
-
         ModelAndView mv = new ModelAndView();
-        mv.addObject("msg","欢迎使用SpringMvc做web开发");
-        mv.addObject("fun","执行的是doOther方法");
+        mv.addObject("msg", "欢迎使用SpringMvc做web开发");
+        mv.addObject("fun", "执行的是doOther方法");
 
         mv.setViewName("other");
 

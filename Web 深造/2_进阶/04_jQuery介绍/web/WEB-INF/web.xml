@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>QueryJsonServlet</servlet-name>
-        <servlet-class>com.bjpowernode.controller.QueryJsonServlet</servlet-class>
+        <servlet-class>com.example.controller.QueryJsonServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>QueryJsonServlet</servlet-name>

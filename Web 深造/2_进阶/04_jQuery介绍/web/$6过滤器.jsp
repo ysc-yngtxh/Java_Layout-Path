@@ -18,11 +18,11 @@
 
     <script type="text/javascript" src="scripts/jquery-3.4.1.js"></script>
     <script type="text/javascript">
-        //$(document).ready(函数):当页面中的dom对象加载成功后，会执行ready()。相当于是onLoad()
+        // $(document).ready(函数):当页面中的dom对象加载成功后，会执行ready()。相当于是onLoad()
         $(function(){
-            //当页面dom对象加载后，给对象绑定事件，因为此时button对象已经在内存中创建好了，才能使用
+            // 当页面dom对象加载后，给对象绑定事件，因为此时button对象已经在内存中创建好了，才能使用
             $("#btn1").click(function(){
-                //过滤器
+                // 过滤器
                 var obj = $("div:first");
                 obj.css("background","red")
             })
@@ -47,7 +47,7 @@
                 obj.css("background","yellow")
             })
 
-            //表单过滤器
+            // 表单过滤器
             $("#btn6").click(function(){
                 var obj = $(":text:enabled")
                 obj.val("hello")
@@ -55,8 +55,8 @@
 
             $("#btn7").click(function(){
                 var obj = $(":checkbox:checked");
-                for(var i=0;i<obj.length;i++){
-                    //alert( obj[i].value );这里的obj为什么不是jQuery对象呢？本来的(obj)是jQuery对象，但是jQuery数组(obj[i])就转变为dom对象
+                for(var i=0; i<obj.length; i++){
+                    // alert( obj[i].value );这里的obj为什么不是jQuery对象呢？本来的(obj)是jQuery对象，但是jQuery数组(obj[i])就转变为dom对象
                     alert( $(obj[i]).val() );
                 }
             })

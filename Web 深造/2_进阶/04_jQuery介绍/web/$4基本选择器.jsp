@@ -26,29 +26,29 @@
     <script type="text/javascript" src="scripts/jquery-3.4.1.js"></script>
     <script type="text/javascript">
         function fun1(){
-            //id选择器
+            // id选择器
             var obj = $("#one");
-            obj.css("background","red");
+            obj.css("background", "red");
         }
         function fun2(){
-            //样式选择器
+            // 样式选择器
             var obj = $(".two");
-            obj.css("background","green");
+            obj.css("background", "green");
         }
         function fun3(){
-            //标签选择器
-            var obj = $("div");//数组有3个对象
-            obj.css("background","blue");
+            // 标签选择器
+            var obj = $("div"); // 数组有3个对象
+            obj.css("background", "blue");
         }
         function fun4(){
-            //所有选择器
+            // 所有选择器
             var obj = $("*");
-            obj.css("background","pink");
+            obj.css("background", "pink");
         }
         function fun5(){
-            //组合选择器
+            // 组合选择器
             var obj = $("#one,.two,span");
-            obj.css("background","orange");
+            obj.css("background", "orange");
         }
     </script>
 

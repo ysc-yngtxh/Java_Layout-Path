@@ -1,4 +1,4 @@
-<%@ page import="com.bjpowernode.entity.Student" %><%--
+<%@ page import="com.example.entity.Student" %><%--
   Created by IntelliJ IDEA.
   User: 游诗成
   Date: 2020/8/19

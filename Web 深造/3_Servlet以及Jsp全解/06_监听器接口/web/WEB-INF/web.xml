@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>OneServlet</servlet-name>
-        <servlet-class>com.bjpowernode.controler.OneServlet</servlet-class>
+        <servlet-class>com.example.controler.OneServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>OneServlet</servlet-name>
@@ -15,6 +15,6 @@
 
     <!--注册监听器接口实现类-->
     <listener>
-        <listener-class>com.bjpowernode.listener.OneListener</listener-class>
+        <listener-class>com.example.listener.OneListener</listener-class>
     </listener>
 </web-app>
