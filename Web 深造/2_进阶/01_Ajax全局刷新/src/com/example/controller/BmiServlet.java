@@ -40,9 +40,9 @@ public class BmiServlet extends HttpServlet {
         msg = "您好:" + strName + "先生/女士，您的bmi值是:" + bmi + "," + msg;
 
         // 把数据存入到request(利用请求转发做输出)
-        // request.setAttribute("msg",msg);
+        request.setAttribute("msg", msg);
         // 转发到新的页面
-        // request.getRequestDispatcher("/result.jsp").forward(request,response);
+        request.getRequestDispatcher("/result.jsp").forward(request, response);
 
         // 使用HttpServletResponse输出数据(利用响应体直接做输出流)
         response.setContentType("text/html;charset=utf-8");
@@ -59,7 +59,5 @@ public class BmiServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doPost(req, resp);
-
     }
-
 }

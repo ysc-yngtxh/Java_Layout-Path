@@ -440,10 +440,8 @@
          5、过滤器防止用户恶意登陆行为
                 比如用户直接在地址栏里输入文件名，用于跳过登录验证
 
-*/
 
-public class Servlet接口实现类开发步骤 {
-    /*Idea的牛逼之处：
+    Idea的牛逼之处：
            自动生成我们所需要的包名及Servlet接口实现类，并且还在web包下的WEB-INF包中的web.xml进行配置servlet信息注册
            步骤如下：
            鼠标在src上，右键点击New-->Create New Servlet-->在Name上填写接口实现类的文件名，在package上填写你所要创建的包名
@@ -460,5 +458,4 @@ public class Servlet接口实现类开发步骤 {
      Run-->Edit Configurations-->Tomcat server-->server
      -->on "Update" action 和 on frame deactivation都选上Update classes and resources
      (表示的意思是动态资源和静态资源更新后会立即生效，不用再进行重启Tomcat。直接在浏览器界面进行刷新，可以实现资源的更新)
-     */
-}
+

@@ -13,9 +13,9 @@
 <body>
       <p>全局刷新计算bmi</p>
       <form action="/myWeb/bmi" method="get">
-        姓名:<input type="text" name="name"/><br>
-        体重(公斤):<input type="text" name="w"/><br>
-        身高(米):<input type="text" name="h"/><br>
+        <input type="text" name="name" placeholder="姓名"/><br>
+        <input type="text" name="w" placeholder="体重(公斤)"/><br>
+        <input type="text" name="h" placeholder="身高(米)"/><br>
         <input type="submit" value="提交"/>
       </form>
 </body>
