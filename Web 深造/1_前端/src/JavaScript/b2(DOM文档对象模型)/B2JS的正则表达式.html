@@ -77,58 +77,54 @@
                   false：字符串格式匹配失败
 
         -->
-        <script type="text/javascript">
-            window.onload = function(){
-                document.getElementById("email").onkeydown = function(event){
-                    if(event.keyCode === 13){
-                        alert("正在验证...");
-                    }
-                };
-                document.getElementById("btn").onclick = function() {
-                    var email = document.getElementById("email").value;
-                    var emailRegExp = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-                    var ok = emailRegExp.test(email);
-                    if(ok){
-                        document.getElementById("emailError").innerText = "邮箱地址合法";
-                    } else{
-                        document.getElementById("emailError").innerText = "邮箱地址不合法";
-                    }
 
-                    document.getElementById("email").onfocus = function() {
-                        document.getElementById("emailError").innerText = "邮箱地址正在修改";
-                    }
-                }
-
-            }
-        </script>
+        <!--验证邮箱-->
         <input type="text" id="email"/>
-                <span id="emailError" style="color:red;font-size:12px;"></span><br>
-        <input type="button" value="验证邮箱" id="btn"/><br>
-
-<!--去除字符串的前后空白-->
-        <script type="text/javascript">
-
-                // 低版本的IE浏览器不支持字符串的trim()函数，怎么办？
-                // 可以自己对String类扩展一个全新的trim()函数
-                String.prototype.trim=function(){
-                        // alert("扩展之后的trim方法");
-                        // 在当前的方法中的this代表的就是当前字符串
-                        return this.replace(/^\s+/,"").replace(/\s+$/,"");
-                };
-
-                // 如今各版本浏览器都支持trim方法,所以现如今也不需要扩展以上trim方法,直接写程序即可
-                window.onload = function(){
-                        document.getElementById("brn").onclick = function(){
-                                // 获取用户名
-                                var username = document.getElementById("username").value;
-                                // 去除前后空白
-                                username = username.trim();
-                                // 测试
-                                alert("<--" + username + "-->");
-                        }
-                }
-        </script>
+                <span id="emailError" style="color:red;font-size:12px;"></span>
+        <input type="button" value="验证邮箱" id="btn"/><br><br>
+        <!--去除字符串的前后空白-->
         <input type="text" id="username"/>
         <input type="button" value="获取用户名" id="brn"/>
+
+        <script type="text/javascript">
+            document.getElementById("email").onfocus = function () {
+                document.getElementById("emailError").innerText = "邮箱地址正在修改";
+            }
+            document.getElementById("email").onkeydown = function (event) {
+                if (event.keyCode === 13) {
+                    alert("正在验证......");
+                }
+            };
+            document.getElementById("btn").onclick = function () {
+                var email = document.getElementById("email").value;
+                var emailRegExp = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+                var ok = emailRegExp.test(email);
+                if (ok) {
+                    document.getElementById("emailError").innerText = "邮箱地址合法";
+                } else {
+                    document.getElementById("emailError").innerText = "邮箱地址不合法";
+                }
+            }
+
+            // 低版本的IE浏览器不支持字符串的trim()函数，怎么办？
+            // 可以自己对String类扩展一个全新的trim()函数
+            String.prototype.trim = function () {
+                // alert("扩展之后的trim方法");
+                // 在当前的方法中的this代表的就是当前字符串
+                return this.replace(/^\s+/, "").replace(/\s+$/, "");
+            };
+
+            // 如今各版本浏览器都支持trim方法,所以现如今也不需要扩展以上trim方法,直接写程序即可
+            window.onload = function() {
+                document.getElementById("brn").onclick = function() {
+                     // 获取用户名
+                     var username = document.getElementById("username").value;
+                     // 去除前后空白
+                     username = username.trim();
+                     // 测试
+                     alert("<--" + username + "-->");
+                }
+            }
+        </script>
 </body>
 </html>

@@ -7,11 +7,11 @@
 <body>
         <script type="text/javascript">
             var date = {
-                "total":3,
-                "emps":[
-                    {"empno":7369,"ename":"SMITH1","sal":800.0},
-                    {"empno":7356,"ename":"SMITH2","sal":3150.0},
-                    {"empno":7149,"ename":"SMITH3","sal":3240.0}
+                "total": 3,
+                "emps": [
+                    {"empno":7369, "ename":"SMITH1", "sal":800.0},
+                    {"empno":7356, "ename":"SMITH2", "sal":3150.0},
+                    {"empno":7149, "ename":"SMITH3", "sal":3240.0}
                 ]
             };
 
@@ -20,7 +20,7 @@
                 document.getElementById("displayBtn").onclick = function(){
                     var emps = date.emps;
                     var html = "";
-                    for(var i=0;i<emps.length;i++){
+                    for(var i=0; i<emps.length; i++){
                         var emp = emps[i];
                         html += "<tr align='center'>";
                         html += "<td>" + emp.empno + "</td>";

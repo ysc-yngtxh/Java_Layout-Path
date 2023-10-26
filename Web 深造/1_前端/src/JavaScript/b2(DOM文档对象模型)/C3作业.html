@@ -124,14 +124,14 @@
                     if (username === "") {
                         usernameEltspan.innerText = "用户名不能为空"
                     } else {
-                        if(username.length<6 || username.length>14){
+                        if(username.length<6 || username.length>14) {
                             usernameEltspan.innerText = "用户名长度必须在[6-14]之间";
                         }else {
                             // 用户名的正则表达式
                             var regElt = /^[a-zA-Z0-9]{6,14}$/;
-                            if(regElt.test(username)){
+                            if(regElt.test(username)) {
                                 usernameEltspan.innerText = "";   // 用户名最终合法
-                            }else{
+                            } else {
                                 usernameEltspan.innerText = "用户名中含有特殊字符"
                             }
                         }
@@ -152,12 +152,12 @@
                 // 获取确认密码的span标签
                 var ped = document.getElementById("ped");
                 // 给确认密码文本框绑定blur事件
-                userped.onblur = function(){
+                userped.onblur = function() {
                     if(document.getElementById("userpwd").value !== userped.value){
                         ped.innerText = "密码不一致，请重新确认密码";
                     }
                 };
-                //给确认密码文本框绑定获得焦点事件
+                // 给确认密码文本框绑定获得焦点事件
                 userped.onfocus = function(){
                     if(ped.innerText !== ""){
                         userped.value = "";
@@ -171,21 +171,21 @@
                 // 获取邮箱的span标签
                 var emailElt = document.getElementById("emailElt");
                 // 给邮箱文本框绑定blur事件
-                email.onblur = function(){
+                email.onblur = function() {
                     if(email.value === ""){
                         emailElt.innerText = "邮箱内容不能为空"
                     }else{
                         var emailElt1 = /^[\w][\w\d_]*@\w+\.[A-Za-z]+$/;
-                        if(emailElt1.test(email.value)){
+                        if(emailElt1.test(email.value)) {
                             emailElt.innerText = "";    // 邮箱格式正确
-                        }else{
+                        } else {
                             emailElt.innerText = "邮箱格式错误";
                         }
                     }
                 };
                 // 给邮箱文本框绑定获得焦点事件
-                email.onfocus = function(){
-                    if(emailElt.innerText !== ""){
+                email.onfocus = function() {
+                    if(emailElt.innerText !== "") {
                         email.value = "";
                     }
                     emailElt.innerText = "";
@@ -194,7 +194,7 @@
 
                 // 给提交按钮绑定鼠标单击事件
                 var submitBtn = document.getElementById("submitBtn");
-                submitBtn.onclick = function(){
+                submitBtn.onclick = function() {
                     usernameElt.focus();
                     usernameElt.blur();
 
