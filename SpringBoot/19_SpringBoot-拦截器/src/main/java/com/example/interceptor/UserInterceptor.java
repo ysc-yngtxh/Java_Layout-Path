@@ -16,18 +16,17 @@ public class UserInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("===springboot拦截器启动===");
 
-        //编写业务拦截的规则
-        //从session中获取用户的信息
+        // 编写业务拦截的规则
+        // 从session中获取用户的信息
         User user = (User) request.getSession().getAttribute("user");
 
-        //判断用户是否登录
+        // 判断用户是否登录
         if(null == user){
-            //未登录
-            response.sendRedirect(request.getContextPath()+"/user/error");
-            //sendRedirect重定向；forward请求转发
+            // 未登录
+            response.sendRedirect(request.getContextPath() + "/user/error");
+            // sendRedirect重定向；forward请求转发
             return false;
         }
-
         return true;
     }
 

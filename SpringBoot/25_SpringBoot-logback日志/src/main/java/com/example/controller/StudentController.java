@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @Slf4j
 public class StudentController {
-
     @Autowired
     private StudentService studentService;
 
@@ -27,9 +26,8 @@ public class StudentController {
         log.warn("查询当前学生总人数");
         log.error("查询当前学生总人数");
 
-
         Integer studentCount = studentService.queryStudentCount();
 
-        return "学生总人数为："+studentCount;
+        return "学生总人数为：" + studentCount;
     }
 }

@@ -19,9 +19,8 @@ public class MyServlet extends HttpServlet {
         resp.getWriter().flush();
         resp.getWriter().close();
 
-        //还需要在配置文件中进行字符集配置
+        // 还需要在配置文件中进行字符集配置
     }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req, resp);

@@ -5,11 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Application {
-
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
-
 }
 /**
  * thymeleaf是实现前后端分离的一种工具，选用的是HTML文件

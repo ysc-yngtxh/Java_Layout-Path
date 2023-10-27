@@ -69,10 +69,10 @@
 七、redis的五种数据结构
     程序是用来处理数据的，redis是用来存储数据的；程序处理完的数据要存储到redis中，不同特点的数据要存储在redis中不同类型的数据结构中
         1、string 单key:单value
-        2、list   单key:多有序value
-        3、set    单key:多无序value
-        4、hash   单key:对象(属性：值)
-        5、zset   单key:多有序value
+        2、list   单key:多有序value   和Java中的LinkedList比较类似。增删效率高。
+        3、set    单key:多无序value   相当于java中的HashSet 用在一些去重的场景：例如每个用户只能参与一次活动、一个用户只能中奖一次等等
+        4、hash   单key:对象(属性：值) 相当于hashmap
+        5、zset   单key:多有序value   一方面它是一个 set，保证了内部 value 的唯一性，另一方面它可以给每个 value 赋予一个 score，代表这个 value 的排序权重。
 
 八、redis中的操作命令：
     1、redis中有关key的操作命令
@@ -435,22 +435,22 @@
 
 十五、Redis在SpringBoot中的命令
      在String类型中的操作：
-          1,将String类型存入到Redis当中：redisTemplate.opsForValue().set(key, value, long, TimeUnit.SECONDS);
-          2,从redis当中取出String类型的数据：redisTemplate.opsForValue().get(key);
+          1、将String类型存入到Redis当中：redisTemplate.opsForValue().set(key, value, long, TimeUnit.SECONDS);
+          2、从redis当中取出String类型的数据：redisTemplate.opsForValue().get(key);
      在List类型中的操作：
           1、从当前的数据 向右添加：redisTemplate.opsForList().rightPush(key, integer);
           2、从当前的数据 向左添加：redisTemplate.opsForList().leftPush(key, integer);
-          3,从redis中取出list数据：redisTemplate.opsForList().range(key, 0, 10);
-          4.获取redis中list的长度：redisTemplate.opsForList().size(key);
+          3、从redis中取出list数据：redisTemplate.opsForList().range(key, 0, 10);
+          4、获取redis中list的长度：redisTemplate.opsForList().size(key);
      在Hash类型中的操作：
-          1.将hash存放到redis当中：redisTemplate.opsForHash().put(key, hashkey, Value);这里的key表示存入redis的key,hashKey表示存入的Map集合中的Key
+          1、将hash存放到redis当中：redisTemplate.opsForHash().put(key, hashkey, Value);这里的key表示存入redis的key,hashKey表示存入的Map集合中的Key
           2、检测 是否 存在该键：redisTemplate.opsForHash().hasKey(key, key1);
-          3.将hash从redis当中取出来 根据具体的key取出具体的值：redisTemplate.opsForHash().get(key, key1);
-          4.将key中所有的值都取出来：redisTemplate.opsForHash().entries(key);
-          5.根据具体的key移除具体的值：redisTemplate.opsForHash().delete(key, key1);
+          3、将hash从redis当中取出来 根据具体的key取出具体的值：redisTemplate.opsForHash().get(key, key1);
+          4、将key中所有的值都取出来：redisTemplate.opsForHash().entries(key);
+          5、根据具体的key移除具体的值：redisTemplate.opsForHash().delete(key, key1);
      在Set类型中的操作：
-          1.set数据存入redis中：redisTemplate.opsForSet().add(key, object);
-          2.从redis当中将set数据取出来：redisTemplate.opsForSet().members(key);
+          1、set数据存入redis中：redisTemplate.opsForSet().add(key, object);
+          2、从redis当中将set数据取出来：redisTemplate.opsForSet().members(key);
 
      五种数据类型中通用操作：
           自增：redisTemplate.opsForValue().increment(key);

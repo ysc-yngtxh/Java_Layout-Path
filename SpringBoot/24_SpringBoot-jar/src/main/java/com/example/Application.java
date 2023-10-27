@@ -8,13 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class Application {
-
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
-
 }
-
 /*
   SpringBoot打jar包部署到Tomcat流程
     1、保证项目能正常执行
@@ -25,7 +22,6 @@ public class Application {
     6、回车可以看见springboot的大Logo
     7、最后在浏览器中输入地址名，注意：端口号要写上你修改后的端口号
 */
-
 
 /**
     比较war包与jar包的区别：

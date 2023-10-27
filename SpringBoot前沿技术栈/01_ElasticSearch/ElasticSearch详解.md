@@ -154,11 +154,11 @@
                "match_all": {}
              },
              "sort": [
-             {
-               "name.kyName": {
-                 "order": "asc"
+               {
+                 "name.kyName": {
+                   "order": "asc"
+                 }
                }
-             }
              ]
            }
    index: true表示字段会被索引，默认是true。false表示字段不会被索引
@@ -259,7 +259,7 @@
          }
    
          我的索引库中只有一个apple手机的信息，但是这里，我去查询appla。按理说词条是错误的查询不到
-         但是结果还是能得到apple手机信息。这种纠错查询挺牛逼的。
+         但是结果还是能得到apple手机信息。_source表示显示的字段
  
    Ⅴ、范围查询(range)
          GET /ysc/_search

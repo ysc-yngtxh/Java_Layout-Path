@@ -17,30 +17,29 @@ import java.util.UUID;
 @SpringBootTest
 class JwtDemoApplicationTests {
 
-    private String signature = "csaydgcaisdyc";//加盐
+    private String signature = "csaydgcaisdyc"; // 加盐
 
 
     @Test
     void contextLoads() {
-        //获取jwt对象
+        // 获取jwt对象
         JwtBuilder jwtBuilder = Jwts.builder();
         String jwtToken = jwtBuilder
-                //Header
+                // Header
                 .setHeaderParam("tpy","JWT")
                 .setHeaderParam("alg","HS256")
-                //payload
+                // payload
                 .claim("name","陈玉梅")
                 .claim("pwd","514")
-                .setSubject("admin-test")  //设置主题
-                .setExpiration(new Date(System.currentTimeMillis()+1000*60*60*24*7))  //设置有效时间
+                .setSubject("admin-test")  // 设置主题
+                .setExpiration(new Date(System.currentTimeMillis()+1000*60*60*24*7))  // 设置有效时间
                 .setId(UUID.randomUUID().toString())
-                //signature
+                // signature
                 .signWith(SignatureAlgorithm.HS256,signature)
-                .compact(); //将所有信息紧凑起来
+                .compact(); // 将所有信息紧凑起来
 
         log.info(jwtToken);
     }
-
 
 
     @Test
@@ -64,5 +63,4 @@ class JwtDemoApplicationTests {
         Md5Hash md5Hash = new Md5Hash("514","MD5",1024);
         System.out.println(md5Hash);
     }
-
 }

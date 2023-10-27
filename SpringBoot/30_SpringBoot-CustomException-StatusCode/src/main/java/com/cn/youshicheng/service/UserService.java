@@ -24,7 +24,7 @@ public class UserService {
         user.setId(id);
         // select  根据实体类查询，返回一个List类型
         List<User> select = userMapper.select(user);
-        if(select.isEmpty()){
+        if(select.isEmpty()) {
             throw new LyException(UserEnum.NO_URL);
         }
         return select;
@@ -33,7 +33,7 @@ public class UserService {
     public User queryUser2(Integer id){
         // selectByPrimaryKey  根据主键查询，返回实体类型
         User users = userMapper.selectByPrimaryKey(id);
-        if(users==null){
+        if(users == null){
             throw new LyException(UserEnum.NO_URL);
         }
         return users;
@@ -45,7 +45,7 @@ public class UserService {
         Example.Criteria criteria = example.createCriteria();
         // 默认排序
         example.setOrderByClause("age DESC");
-        // 查询  selectByExample 能应付大部分的查询条件
+        // 查询 selectByExample 能应付大部分的查询条件
         List<User> users = userMapper.selectByExample(example);
         if(users.isEmpty()){
             throw new LyException(UserEnum.NO_URL);

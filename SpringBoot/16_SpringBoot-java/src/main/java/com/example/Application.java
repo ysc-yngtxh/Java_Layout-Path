@@ -18,13 +18,13 @@ public class Application {
          * 它其实相当于原来Spring容器中启动容器ClasspathXmlApplicationContext
          */
 
-        //获取Springboot容器
+        // 获取Springboot容器
         ConfigurableApplicationContext applicatioinContext = SpringApplication.run(Application.class, args);
 
-        //从spring容器中获取指定bean对象
+        // 从spring容器中获取指定bean对象
         StudentService studentService = (StudentService) applicatioinContext.getBean("studentServiceImpl");
 
-        //调用业务方法
+        // 调用业务方法
         String sayHello = studentService.sayHello();
 
         System.out.println(sayHello);

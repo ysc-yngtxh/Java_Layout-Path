@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class MyController {
 
-
     // @Reference是dubbo的注解，和@Autowired 和@Resource 一样都是表示注入。
     // 他一般注入的是分布式的远程服务的对象，用于标记这个服务具体使用了提供者的哪个接口实现，需要dubbo配置使用。
-    @Reference(interfaceName = "com.bjpowernode.springboot.service.StudentService",version="1.0.0",check=false)
+    @Reference(interfaceName = "com.example.service.StudentService", version="1.0.0", check=false)
     private StudentService studentService;
 
     @RequestMapping("/student/detail/{id}")
@@ -26,7 +25,7 @@ public class MyController {
         Student student = studentService.queryStudentById(id);
 
         model.addAttribute("student",student);
-        return "studentDetail"; //这个返回值是视图
+        return "studentDetail"; // 这个返回值是视图
     }
 
     @GetMapping("/student/all/count")

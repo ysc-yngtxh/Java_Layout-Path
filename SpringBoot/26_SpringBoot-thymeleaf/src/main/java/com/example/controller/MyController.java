@@ -17,27 +17,25 @@ public class MyController {
     public String userDetail1(Model model){
         User user = new User();
         user.setId(1001);
-        user.setUsername("李晶晶");
+        user.setUsername("曹玉敏");
         user.setAge(21);
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "message";
     }
 
     @RequestMapping("/url")
     public String userDetail2(Model model, String username){
-        model.addAttribute("id",1001);
+        model.addAttribute("id", 1001);
         return "url";
     }
 
     @RequestMapping("/test")
-    public @ResponseBody String userDetail3(Model model,String username){
-
-        return "请求路径/test,参数username:"+username;
+    public @ResponseBody String userDetail3(Model model, String username){
+        return "请求路径/test,参数username:" + username;
     }
 
     @RequestMapping("/text/{id}")
     public @ResponseBody String userDetail3(@PathVariable("id") Integer id){
-
-        return "ID="+id;
+        return "ID=" + id;
     }
 }

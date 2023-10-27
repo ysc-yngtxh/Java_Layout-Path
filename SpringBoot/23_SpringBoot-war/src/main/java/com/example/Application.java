@@ -10,21 +10,17 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  */
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {
-
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-
-        //参数为当前springboot启动类
-        //构造新资源
+        // 参数为当前springboot启动类
+        // 构造新资源
         return builder.sources(Application.class);
     }
 }
-
-
 /*
    SpringBoot打war包部署到Tomcat流程
      1、确保项目能正常执行

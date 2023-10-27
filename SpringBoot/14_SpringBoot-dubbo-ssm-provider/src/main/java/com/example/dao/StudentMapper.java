@@ -18,6 +18,6 @@ public interface StudentMapper {
 
     int updateByPrimaryKey(Student record);
 
-    //获取学生总人数
+    // 获取学生总人数
     Integer selectAllStudentCount();
 }

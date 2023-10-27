@@ -16,18 +16,16 @@ public class MyController {
 
     @RequestMapping(value = "/user/detail")
     public @ResponseBody Object userDetail(){
-
-        Map<String,Object> retMap = new HashMap<String,Object>();
-        retMap.put("id",1001);
-        retMap.put("username","lisi");
+        Map<String, Object> retMap = new HashMap();
+        retMap.put("id", 1001);
+        retMap.put("username", "lisi");
         return retMap;
     }
 
     @RequestMapping(value = "/user/page/detail")
     public String userPageDetail(Model model){
-
-        model.addAttribute("id",1001);
-        model.addAttribute("username","wangwu");
+        model.addAttribute("id", 1001);
+        model.addAttribute("username", "wangwu");
         return "userDetail";
     }
 }

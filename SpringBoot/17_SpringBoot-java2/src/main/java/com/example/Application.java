@@ -16,15 +16,15 @@ public class Application implements CommandLineRunner {
     private StudentService studentService;
 
     public static void main(String[] args) {
-        //springboot启动程序，会初始化spring容器
+        // springboot启动程序，会初始化spring容器
         SpringApplication.run(Application.class, args);
     }
 
-    //重写CommandLineRunner类中的run方法
+    // 重写CommandLineRunner类中的run方法
     @Override
     public void run(String... args) throws Exception {
 
-        //调用业务方法
+        // 调用业务方法
         String sayHello = studentService.sayHello("World");
 
         System.out.println(sayHello);
