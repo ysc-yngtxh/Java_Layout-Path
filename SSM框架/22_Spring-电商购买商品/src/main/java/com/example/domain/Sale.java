@@ -1,7 +1,6 @@
 package com.example.domain;
 
 public class Sale {
-
     private Integer id;
     private Integer gid;
     private Integer nums;

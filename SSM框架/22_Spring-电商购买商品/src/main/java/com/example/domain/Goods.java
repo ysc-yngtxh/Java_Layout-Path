@@ -1,7 +1,6 @@
 package com.example.domain;
 
 public class Goods {
-
     private Integer id;
     private String name;
     private Integer amount;

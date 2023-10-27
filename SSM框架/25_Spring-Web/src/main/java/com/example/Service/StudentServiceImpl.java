@@ -12,7 +12,7 @@ public class StudentServiceImpl implements StudentService {
 
     private StudentDao studentDao;
 
-    //使用set注入，赋值
+    // 使用set注入，赋值
     public void setStudentDao(StudentDao studentDao) {
         this.studentDao = studentDao;
     }

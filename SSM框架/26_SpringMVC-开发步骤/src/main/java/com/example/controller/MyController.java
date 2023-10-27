@@ -11,10 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
  * 位置：在类的上面
  * 和spring中讲的Service,@Component
  */
-
 @Controller
 public class MyController {
-
     // 处理用户提交的请求，springMvc中是使用方法来处理的。方法是自定义的，可以有多种返回值，参数，方法名称自定义
     /**
      * 准备使用doSome方法处理some.do请求。
@@ -31,7 +29,7 @@ public class MyController {
      * Model: 数据，请求处理完成后，要显示给用户的数据
      * View:视图 ，比如jsp等等
      */
-    @RequestMapping(value= {"/test/some.do", "/test/first.do"})// 里面的value是一个数组结构
+    @RequestMapping(value= {"/test/some.do", "/test/first.do"}) // 里面的value是一个数组结构
     public ModelAndView doSome(){
         // 处理some.do请求了。相当于servlet调用处理完成了
         ModelAndView mv = new ModelAndView();
@@ -53,7 +51,6 @@ public class MyController {
 
     @RequestMapping(value = {"/test/other.do","/test/second.do"})
     public ModelAndView doOther(){
-
         ModelAndView mv = new ModelAndView();
         mv.addObject("msg","欢迎使用SpringMvc做web开发");
         mv.addObject("fun","执行的是doOther方法");

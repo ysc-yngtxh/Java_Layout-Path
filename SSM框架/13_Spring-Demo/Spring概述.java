@@ -332,7 +332,7 @@ package com.example;
 五、Spring的启动过程
     1、做的是javase项目有main方法的，执行代码是执行main方法的。
        在main里面创建的容器对象
-       ApplicationContext ac = new ClassPathXmlAppllicationContext("applllicationContext.xml")
+       ApplicationContext ac = new ClassPathXmlAppllicationContext("applicationContext.xml")
 
     2、web项目是在tomcat服务器上运行的。对于一个web应用，其部署在web容器中，web容器提供其一个全局的上下文环境，这个上下文就是ServletContext，
         其为后面的spring IoC容器提供宿主环境；web项目中容器对象只需要创建一次，把容器对象放入到全局作用域ServletContext中
@@ -363,8 +363,6 @@ package com.example;
            初始化完毕后，spring以与servlet的名字相关(此处不是简单的以servlet名为Key，而是通过一些转换，具体可自行查看源码)的属性为属性Key，
            也将其存到ServletContext中，以便后续使用。这样每个servlet就持有自己的上下文，即拥有自己独立的bean空间，
            同时各个servlet共享相同的bean，即根上下文定义的那些bean。
-
-
  */
 public class Spring概述 {
 }

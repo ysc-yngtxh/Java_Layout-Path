@@ -7,5 +7,4 @@
     <insert id="insertSale">
         insert into sale(gid,nums) values(#{gid},#{nums})
     </insert>
-
 </mapper>

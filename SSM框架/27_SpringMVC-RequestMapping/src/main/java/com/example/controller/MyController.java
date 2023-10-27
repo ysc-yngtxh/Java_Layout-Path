@@ -28,7 +28,7 @@ public class MyController {
 
     // 这里就可以省略 "/test" ,而在类上面定义模块的名称，比如 "user"... 这样子会更方便调用和管理
     @RequestMapping(value= "/some.do",method= RequestMethod.GET)
-    public ModelAndView doSome(HttpServletRequest request, /**参数在方法的形参中*/
+    public ModelAndView doSome(HttpServletRequest request, // 参数在方法的形参中
                                HttpServletResponse response,
                                HttpSession session){
 
@@ -40,7 +40,6 @@ public class MyController {
         mv.setViewName("show");
         return mv;
     }
-
 
     @RequestMapping(value = "/other.do",method = RequestMethod.POST)
     public ModelAndView doOther(HttpServletRequest request,

@@ -29,18 +29,18 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>6.0.11</version>
+      <version>5.3.30</version>
     </dependency>
     <!--做spring事务用到的-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-tx</artifactId>
-      <version>6.0.6</version>
+      <version>5.3.30</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
-      <version>6.0.6</version>
+      <version>5.3.30</version>
     </dependency>
     <!--mybatis依赖-->
     <dependency>
@@ -52,7 +52,7 @@
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-spring</artifactId>
-      <version>3.0.2</version>
+      <version>3.0.0</version>
     </dependency>
     <!--MySQL驱动-->
     <dependency>
@@ -70,7 +70,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-aspects</artifactId>
-      <version>6.0.9</version>
+      <version>5.3.30</version>
     </dependency>
   </dependencies>
 

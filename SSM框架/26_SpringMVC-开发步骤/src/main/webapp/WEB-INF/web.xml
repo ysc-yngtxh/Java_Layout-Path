@@ -10,7 +10,6 @@
         为什么要创建DispatcherServlet对象的实例呢？
           因为DispatcherServlet在他的创建过程中，会同时创建SpringMvc容器对象，
           读取springMvc的配置文件，把这个配置文件中的对象都创建好，当用户发起请求时就可以直接使用对象了
-
     -->
     <servlet>
         <servlet-name>springmvc</servlet-name>

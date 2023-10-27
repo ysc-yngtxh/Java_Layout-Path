@@ -50,9 +50,9 @@
            通过load-on-start标签指定的1，创建DispatcherServlet对象，
            DispatcherServlet他的父类是继承httpServlet的，他是一个Servlet，在被创建时,会执行init()方法。
            在init()方法中
-             //创建容器，读取配置文件
+             // 创建容器，读取配置文件
              WebApplicationContext ac = new ClassPathXmlApplicationContext("springmvc.xml");
-             //把容器对象放入到ServletContext中
+             // 把容器对象放入到ServletContext中
              getServletContext().setAttribute(key,ac);
  
            上面创建容器的作用：创建@controller注解所在的类的对象，创建MyController对象，
