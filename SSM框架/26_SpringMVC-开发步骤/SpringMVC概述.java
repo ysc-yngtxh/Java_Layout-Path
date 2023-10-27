@@ -323,8 +323,5 @@
            初始化完毕后，spring以与servlet的名字相关(此处不是简单的以servlet名为Key，而是通过一些转换，具体可自行查看源码)的属性为属性Key，
            也将其存到ServletContext中，以便后续使用。这样每个servlet就持有自己的上下文，即拥有自己独立的bean空间，
            同时各个servlet共享相同的bean，即根上下文定义的那些bean。
-
-
-
 */
 

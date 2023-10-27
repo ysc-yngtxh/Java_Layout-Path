@@ -12,7 +12,7 @@ public interface StudentMapper {
 
     int insertSelective(Student record);
 
-    // 返回一个key为name值Map集合
+    // 返回一个key为name值，value为Map的Map集合；相当于Map<String, Map>
     @MapKey("name")
     Map<String, Student> selectByPrimaryKeyMap(Integer id);
 
@@ -24,7 +24,7 @@ public interface StudentMapper {
      *   selectByPrimaryKeyMap返回类型是Map，所以语句结果的value值只能强转成Map类型,通过get("xxx")方式获取
      *   selectByPrimaryKeyStudent返回类型是Student，语句结果的value值可以通过Student实体类get方法获取详细属性值
      * 这里的爆红不影响项目启动，只是我们安装的箭头插件提示*/
-    @MapKey("name")
+    @MapKey("name") // 返回一个key为name值，value为Student对象的Map集合；相当于Map<String, Student>
     Map<String, Student> selectByPrimaryKeyStudent(Integer id);
 
 

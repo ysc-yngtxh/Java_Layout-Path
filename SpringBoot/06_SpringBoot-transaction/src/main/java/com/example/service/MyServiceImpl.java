@@ -15,9 +15,7 @@ public class MyServiceImpl implements MyService {
 
     @Override
     public int queryStudentById(Student student) {
-
         int i = studentMapper.updateByPrimaryKeySelective(student);
-
         return i;
     }
 

@@ -15,21 +15,21 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MyController {
 
-    @Autowired//Spring注入
+    @Autowired  // Spring注入
     private School school;
 
-    @Autowired  //Spring注入
+    @Autowired  // Spring注入
     private Abc abc;
 
     @RequestMapping(value="/say")
     public @ResponseBody String say(){
-        return "school.name="+school.getName()+"-----school.websit="+school.getWebsit();
+        return "school.name=" + school.getName() + "-----school.websit=" + school.getWebsit();
     }
 
     @RequestMapping(value="/solo")
     public ModelAndView solo(){
         ModelAndView mv = new ModelAndView();
-        mv.addObject("message","Hello,SpringBoot");
+        mv.addObject("message", "Hello,SpringBoot");
         mv.setViewName("solo");
         return mv;
     }
@@ -37,6 +37,7 @@ public class MyController {
     @RequestMapping(value="/index")
     public String index(Model model){
         model.addAttribute("message","Hello World");
-        return "solo";//返回值是一个是视图
+        // 返回值是一个是视图
+        return "solo";
     }
 }

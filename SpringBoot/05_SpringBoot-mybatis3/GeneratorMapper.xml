@@ -22,21 +22,21 @@
         </jdbcConnection>
 
         <!--生成model类，targetPackage指定model类的包名，targetProject指定生成的model放在idea的哪个工程下面-->
-        <javaModelGenerator targetPackage="com.bjpowernode.springboot.domain"
+        <javaModelGenerator targetPackage="com.example.springboot.domain"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="false"/>
         </javaModelGenerator>
 
         <!--生成mybatis的Mapper.xml文件，targetPackage指定mapper.xml文件的包名。targetProject指定生成的mapper.xml放在idea的哪个工程下面-->
-        <sqlMapGenerator targetPackage="com.bjpowernode.springboot.dao"
+        <sqlMapGenerator targetPackage="com.example.springboot.dao"
                          targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
         <!--生成mybatis的mapper接口类文件，targetPackage指定mapper接口类的包名。targetProject指定生成的mapper接口放在idea的哪个工程下面-->
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="com.bjpowernode.springboot.dao"
+                             targetPackage="com.example.springboot.dao"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>

@@ -10,9 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @MapperScan(basePackages = "com.example.dao")
 public class Application {
-
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
-
 }

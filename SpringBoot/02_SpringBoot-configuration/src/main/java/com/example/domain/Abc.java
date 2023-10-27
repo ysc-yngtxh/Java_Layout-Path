@@ -4,9 +4,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "abc")  //这里是将配置文件中的key值前缀写出来
+@ConfigurationProperties(prefix = "abc")  // 这里是将配置文件中的key值前缀写出来
 public class Abc {
-    private String name;  //所以这里就可以不用写前缀的
+    private String name;  // 所以这里就可以不用写前缀的
     private String websit;
 
     public String getName() {

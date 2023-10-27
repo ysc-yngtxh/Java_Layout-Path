@@ -5,16 +5,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestController   //这个注解相当于@Controller和@ResponseBody
+@RestController   // 这个注解相当于@Controller和@ResponseBody
 public class MyController {
-
-    @RequestMapping(value="/student/detail/{id}/{name}")  //RESTful只是一种风格，不是要求也不是规范。
+    @RequestMapping(value="/student/detail/{id}/{name}")  // RESTful只是一种风格，不是要求也不是规范。
     public Object query(@PathVariable("id") Integer id,
                         @PathVariable("name") String name){
 
-        Map<String,Object> retMap = new HashMap<>();
-        retMap.put("id",id);
-        retMap.put("name",name);
+        Map<String, Object> retMap = new HashMap<>();
+        retMap.put("id", id);
+        retMap.put("name", name);
         return "retMap";
     }
 
@@ -22,9 +21,9 @@ public class MyController {
     public Object query1(@PathVariable("id") Integer id,
                          @PathVariable("name") String name){
 
-        Map<String,Object> retMap = new HashMap<>();
-        retMap.put("id",id);
-        retMap.put("name",name);
+        Map<String, Object> retMap = new HashMap<>();
+        retMap.put("id", id);
+        retMap.put("name", name);
         return "retMap";
     }
 
