@@ -24,12 +24,11 @@ public class MyController {
      *      doSome(strName,Integer.valueOf(strAge))
      *      框架会提供类型转换的功能，能把String转为int,long,float,double等类型
      */
-    @RequestMapping(value= "/doSome.do",method=RequestMethod.GET)
-    public ModelAndView doSome(String name,Integer age){
-
+    @RequestMapping(value= "/doSome.do", method=RequestMethod.GET)
+    public ModelAndView doSome(String name, Integer age){
         ModelAndView mv = new ModelAndView();
-        mv.addObject("myname",name);
-        mv.addObject("myage",age);
+        mv.addObject("myname", name);
+        mv.addObject("myage", age);
         mv.setViewName("show");
         return mv;
     }
@@ -39,12 +38,11 @@ public class MyController {
      *             request.setCharacterEncoding("utf-8");
      *             但是在框架中，我们选用过滤器的方式进行改变字符编码
      */
-    @RequestMapping(value= "/doOther.do",method= RequestMethod.POST)
-    public ModelAndView doOther(String name,Integer age){
-
+    @RequestMapping(value= "/doOther.do", method= RequestMethod.POST)
+    public ModelAndView doOther(String name, Integer age){
         ModelAndView mv = new ModelAndView();
-        mv.addObject("myname",name);
-        mv.addObject("myage",age);
+        mv.addObject("myname", name);
+        mv.addObject("myage", age);
         mv.setViewName("show");
         return mv;
     }
@@ -60,13 +58,14 @@ public class MyController {
      *        位置：在处理器方法的形参定义的前面
      */
     @RequestMapping(value= "/First.do")
-    public ModelAndView First(@RequestParam(value="rname",required = false) String name,
-                              @RequestParam(value="rage",required = false) Integer age){
+    public ModelAndView First(@RequestParam(value="rname", required = false) String name,
+                              @RequestParam(value="rage", required = false) Integer age){
 
         ModelAndView mv = new ModelAndView();
-        mv.addObject("myname",name);
-        mv.addObject("myage",age);
-        mv.setViewName("show");//show是视图文件的逻辑名称
+        mv.addObject("myname", name);
+        mv.addObject("myage", age);
+        // show是视图文件的逻辑名称
+        mv.setViewName("show");
         return mv;
     }
 
@@ -78,12 +77,12 @@ public class MyController {
      */
     @RequestMapping("/Out.do")
     public ModelAndView Out(Student MyStudent){
-
         ModelAndView mv = new ModelAndView();
-        mv.addObject("myname",MyStudent.getName());
-        mv.addObject("myage",MyStudent.getAge());
-        mv.addObject("mystudent",MyStudent);
-        mv.setViewName("show");//show是视图文件的逻辑名称
+        mv.addObject("myname", MyStudent.getName());
+        mv.addObject("myage", MyStudent.getAge());
+        mv.addObject("mystudent", MyStudent);
+        // show是视图文件的逻辑名称
+        mv.setViewName("show");
         return mv;
     }
 }

@@ -22,7 +22,7 @@ public class GIobalExceptionHandler {
      */
     @ExceptionHandler(value= NameException.class)
     public ModelAndView doNameException(Exception exception){
-        //处理NameException的异常
+        // 处理NameException的异常
         /**
          * 异常发生处理逻辑
          *   1、需要把异常记录下来，记录到数据库，日志文件。
@@ -31,8 +31,8 @@ public class GIobalExceptionHandler {
          *   3、给用户友好的提示
          */
         ModelAndView mv = new ModelAndView();
-        mv.addObject("msg","姓名必须是zs,其他用户不能访问");
-        mv.addObject("e",exception);
+        mv.addObject("msg", "姓名必须是zs,其他用户不能访问");
+        mv.addObject("e", exception);
         mv.setViewName("nameError");
         return mv;
     }
@@ -46,7 +46,7 @@ public class GIobalExceptionHandler {
         return mv;
     }
 
-    //处理其他异常，NameException,AgeException以外的不知类型的异常
+    // 处理其他异常，NameException,AgeException以外的不知类型的异常
     @ExceptionHandler
     public ModelAndView doOtherException(Exception exception) {
         ModelAndView mv = new ModelAndView();

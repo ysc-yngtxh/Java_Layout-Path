@@ -4,7 +4,6 @@ package com.example.vo;
  * @author 游家纨绔
  */
 public class Student {
-
     private String name;
     private Integer age;
 

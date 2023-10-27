@@ -51,7 +51,7 @@ public class MyInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mv) throws Exception {
         System.out.println("拦截器的MyInterceptor的postHandle()");
-        //对原来的dosome执行结果，需要调整
+        // 对原来的dosome执行结果，需要调整
         if(mv != null){
             mv.addObject("myDate",new Date());
             mv.setViewName("other");

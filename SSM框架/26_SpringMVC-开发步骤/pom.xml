@@ -9,7 +9,7 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>26_SpringMVC-开发步骤 Maven Webapp</name>
+  <name>26_SpringMVC-开发步骤</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 

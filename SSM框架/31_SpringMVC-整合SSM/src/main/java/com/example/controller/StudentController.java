@@ -17,33 +17,32 @@ import java.util.List;
 @Controller
 @RequestMapping("/student")
 public class StudentController {
-
     @Resource
     private StudentService service;
 
-    //注册学生
+    // 注册学生
     @RequestMapping(value = "/addStudent.do")
     public ModelAndView addStudent(Student student){
         String tips = "注册失败";
-        //调用service处理student
+        // 调用service处理student
         int nums = service.addStudent(student);
-        if (nums>0){
-            //注册成功
-            tips= "学生 【"+student.getName()+"】注册成功";
+        if (nums > 0){
+            // 注册成功
+            tips= "学生 【" + student.getName() + "】注册成功";
         }
-        //添加数据
+        // 添加数据
         ModelAndView mv = new ModelAndView();
-        mv.addObject("tips",tips);
-        //指定结果页面
+        mv.addObject("tips", tips);
+        // 指定结果页面
         mv.setViewName("result");
         return mv;
     }
 
-    //处理查询学生，响应Ajax
+    // 处理查询学生，响应Ajax
     @RequestMapping("/queryStudent.do")
     @ResponseBody
     public List<Student> queryStudent(){
-        //参数检查，简单的数据处理
+        // 参数检查，简单的数据处理
         List<Student> students = service.findStudents();
         return students;
     }
@@ -55,14 +54,14 @@ public class StudentController {
      */
     @RequestMapping(value="/doForward.do")
     public ModelAndView doSome(){
-        //处理some.do请求了，相当于service调用处理完成了
+        // 处理some.do请求了，相当于service调用处理完成了
         ModelAndView mv = new ModelAndView();
-        mv.addObject("msg","欢迎使用springmvc做web开发");
-        mv.addObject("fun","执行的是doSome方法");
-        //显示转发
-        //mv.setViewName("show");
-        mv.setViewName("forward:/hello.jsp");//请求转发
-        //这种写法方式与视图解析器最大的区别就是可以访问不在/WEB-INF/view/包下的资源文件
+        mv.addObject("msg", "欢迎使用springmvc做web开发");
+        mv.addObject("fun", "执行的是doSome方法");
+        // 显示转发
+        // mv.setViewName("show");
+        mv.setViewName("forward:/hello.jsp"); // 请求转发
+        // 这种写法方式与视图解析器最大的区别就是可以访问不在/WEB-INF/view/包下的资源文件
         return mv;
     }
 
@@ -82,7 +81,7 @@ public class StudentController {
         ModelAndView mv = new ModelAndView();
         mv.addObject("myname",name);
         mv.addObject("myage",age);
-        //重定向
+        // 重定向
         mv.setViewName("redirect:/hello.jsp");
         return mv;
     }

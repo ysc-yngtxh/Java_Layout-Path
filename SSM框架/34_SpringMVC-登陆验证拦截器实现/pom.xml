@@ -9,7 +9,7 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>34_SpringMVC-登陆验证拦截器实现 Maven Webapp</name>
+  <name>34_SpringMVC-登陆验证拦截器实现</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 

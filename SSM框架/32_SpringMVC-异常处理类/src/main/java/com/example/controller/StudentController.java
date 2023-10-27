@@ -12,22 +12,21 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class StudentController {
-
     @RequestMapping(value="/some.do")
     public ModelAndView doSome(String name,Integer age) throws MyUserException {
         ModelAndView mv = new ModelAndView();
-      //try{
-            //根据请求参数抛出异常
-            if(!"zs".equals(name)){
-                throw new NameException("姓名不正确！！！");
-            }
-            if(age==null || age>80){
-                throw new AgeException("年龄比较大！！！");
-            }
+        // try{
+              // 根据请求参数抛出异常
+              if(!"zs".equals(name)){
+                  throw new NameException("姓名不正确！！！");
+              }
+              if(age==null || age>80){
+                  throw new AgeException("年龄比较大！！！");
+              }
 
-      //}catch(Exception e){
-      //    e.printStackTrace();
-      //}
+        // }catch(Exception e){
+        //    e.printStackTrace();
+        // }
         mv.addObject("myname",name);
         mv.addObject("myage",age);
         mv.setViewName("show");

@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author 游家纨绔
- */ //拦截器类：拦截用户的请求
+ */
+// 拦截器类：拦截用户的请求
 public class MyInterceptor2 implements HandlerInterceptor {
 
 

@@ -11,11 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class StudentController {
 
     @RequestMapping(value="/some.do")
-    public ModelAndView doSome(String name,Integer age) {
+    public ModelAndView doSome(String name, Integer age) {
         System.out.println("===执行MyController中的doSome()方法===");
         ModelAndView mv = new ModelAndView();
-        mv.addObject("myname",name);
-        mv.addObject("myage",age);
+        mv.addObject("myname", name);
+        mv.addObject("myage", age);
         mv.setViewName("show");
         return mv;
     }

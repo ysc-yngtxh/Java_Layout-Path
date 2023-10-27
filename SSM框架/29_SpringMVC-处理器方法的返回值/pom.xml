@@ -5,11 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.example</groupId>
-  <artifactId>29_SpringMVC-processor</artifactId>
+  <artifactId>29_SpringMVC-Processor</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>29_SpringMVC-处理器方法的返回值 Maven Webapp</name>
+  <name>29_SpringMVC-处理器方法的返回值</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 

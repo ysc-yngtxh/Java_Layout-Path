@@ -17,18 +17,16 @@ public class MyInterceptor implements HandlerInterceptor {
         System.out.println("拦截器的MyInterceptor的preHandle()");
 
         String loginName = "";
-        //从session中获取name的值
+        // 从session中获取name的值
         Object attr = request.getSession().getAttribute("name");
-        if(attr!=null){
+        if(attr != null){
             loginName = (String)attr;
         }
-        //判断登陆的账户，是否符合要求
+        // 判断登陆的账户，是否符合要求
         if(!"zs".equals(loginName)){
-            request.getRequestDispatcher("/tip.jsp").forward(request,response);
+            request.getRequestDispatcher("/tip.jsp").forward(request, response);
             return false;
         }
         return true;
     }
-
-
 }
