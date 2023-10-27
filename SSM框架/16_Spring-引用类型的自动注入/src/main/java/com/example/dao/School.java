@@ -3,7 +3,7 @@ package com.example.dao;
 public class School {
 
     private String name;
-    private String addrerss;
+    private String address;
 
     public String getName() {
         return name;
@@ -13,19 +13,19 @@ public class School {
         this.name = name;
     }
 
-    public String getAddrerss() {
-        return addrerss;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddrerss(String addrerss) {
-        this.addrerss = addrerss;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Override
     public String toString() {
         return "School{" +
                 "name='" + name + '\'' +
-                ", addrerss='" + addrerss + '\'' +
+                ", address='" + address + '\'' +
                 '}';
     }
 }

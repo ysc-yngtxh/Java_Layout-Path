@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <!--spring-tatal表示主配置文件：包含其他的配置文件的，主配置文件一般是不定义对象的。
+    <!--spring-total表示主配置文件：包含其他的配置文件的，主配置文件一般是不定义对象的。
         语法：<import resource="其他配置文件的路径"/>
         关键字："classpath:" 表示类路径(class文件所在的位置)，
               在spring的配置文件中要指定其他文件的位置，需要使用classpath，告诉spring到哪儿去加载读取

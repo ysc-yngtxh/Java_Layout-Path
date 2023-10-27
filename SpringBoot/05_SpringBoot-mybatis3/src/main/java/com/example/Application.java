@@ -10,14 +10,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @MapperScan(basePackages = "com.example.dao")
 public class Application {
-
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
-
 }
-
-
 /**
  *
  * 在有的公司里，是不允许java包下出现配置文件的(.xml)。
@@ -26,5 +22,4 @@ public class Application {
  * 但是，遇到不允许我们在java包下出现配置文件时候，我们可以将xml文件放到resources创建的mapper包下
  *    然后在我们的application配置文件中指定MyBatis映射文件的路径
  *    mybatis.mapper-locations=classpath:mapper/*.xml
- *
  */

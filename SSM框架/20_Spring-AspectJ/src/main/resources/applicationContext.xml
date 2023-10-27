@@ -4,20 +4,22 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!--第一种方式注入Bean-->
     <!--组件扫描器：将包bao1下的@Component注入容器并创建对象bean-->
-    <context:component-scan base-package="com.example.ba01"/>
+    <context:component-scan base-package="com.example.bao1"/>
 
+    <!--第二种方式注入Bean-->
     <!--直接在配置文件中创建bean对象，把对象交给spring容器，由spring容器统一创建，管理对象-->
     <!--声明目标对象-->
-    <bean id="Service2" class="com.example.ba02.OtherServiceImpl"/>
+    <bean id="Service2" class="com.example.bao2.OtherServiceImpl"/>
     <!--声明切面类对象-->
-    <bean id="OmyAspect" class="com.example.ba02.MyAspect2"/>
+    <bean id="OmyAspect" class="com.example.bao2.MyAspect2"/>
 
-    <bean id="Service3" class="com.example.ba03.FirstServiceImpl"/>
-    <bean id="FmyAspect" class="com.example.ba03.MyAspect3"/>
+    <bean id="Service3" class="com.example.bao3.FirstServiceImpl"/>
+    <bean id="FmyAspect" class="com.example.bao3.MyAspect3"/>
 
-    <bean id="Service4" class="com.example.ba04.OutServiceImpl"/>
-    <bean id="TmyAspect" class="com.example.ba04.MyAspect4"/>
+    <bean id="Service4" class="com.example.bao4.OutServiceImpl"/>
+    <bean id="TmyAspect" class="com.example.bao4.MyAspect4"/>
 
     <bean id="Service5" class="com.example.cglib1.CglibServiceImpl"/>
     <bean id="CmyAspect" class="com.example.cglib1.MyAspect5"/>
@@ -37,5 +39,4 @@
         proxy-target-class="true"：告诉框架，要使用jdk动态代理
     -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
-
 </beans>

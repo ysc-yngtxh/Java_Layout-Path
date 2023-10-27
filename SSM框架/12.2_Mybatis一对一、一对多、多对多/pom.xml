@@ -5,11 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.example</groupId>
-  <artifactId>13.1_MyBatis-Association-Collection</artifactId>
+  <artifactId>12.2_MyBatis-Association-Collection</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>13.1_MyBatis一对一、一对多、多对多</name>
+  <name>12.2_MyBatis一对一、一对多、多对多</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 

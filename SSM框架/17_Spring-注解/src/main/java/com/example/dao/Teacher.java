@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component("myTeacher")
 public class Teacher {
 
-    @Value("晶儿妹妹")
+    @Value("敏敏妹妹")
     private String name;
     @Value("2020915")
     private String date;

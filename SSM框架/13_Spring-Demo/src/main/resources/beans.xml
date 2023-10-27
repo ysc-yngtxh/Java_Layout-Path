@@ -6,12 +6,12 @@
     <!--告诉spring创建对象
         声明bean，就是告诉spring要创建某个类的对象
         id：对象的自定义名称，唯一值。spring通过这个名称找到对象
-        class:类的全限定名称(不能是接口，因为spring是反射机制创建对象，必须使用类)
+        class：类的全限定名称(不能是接口，因为spring是反射机制创建对象，必须使用类)
 
         spring就完成 SomeService someService = new SomeServiceImpl();
         spring是把创建好的对象放入到map中，spring框架有一个map存放对象的
             springMap.put(id的值 ,对象);
-            例如 springMap.put("someService",new SomeServiceImpl());
+            例如 springMap.put("someService", new SomeServiceImpl());
 
         一个bean标签声明一个对象
     -->

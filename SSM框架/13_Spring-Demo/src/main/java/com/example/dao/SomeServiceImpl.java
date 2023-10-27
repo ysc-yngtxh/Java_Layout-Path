@@ -7,7 +7,7 @@ import com.example.service.SomeService;
  */
 public class SomeServiceImpl implements SomeService {
 
-    //对象的创建就会调用其构造方法
+    // 对象的创建就会调用其构造方法
     public SomeServiceImpl() {
         System.out.println("SomeServiceImpl的无参数构造方法");
     }

@@ -23,46 +23,42 @@ public class MyTest {
      */
     @Test
     public void test02(){
-        //使用spring容器创建的对象
-        //1、指定spring配置文件的名称
+        // 使用spring容器创建的对象
+        // 1、指定spring配置文件的名称
         String config = "beans.xml";
-        //2、创建表示spring容器的对象，ApplicationContext
-        //ApplicationContext就是表示spring容器，通过容器获取对象了
-        //ClassPathXmlApplicationContext:表示从类路径中加载spring的配置文件
-        ApplicationContext ac = new ClassPathXmlApplicationContext(config);//对象是在这条语句创建了
+        // 2、创建表示spring容器的对象 -- ApplicationContext
+        // ApplicationContext就是表示spring容器，通过容器获取对象了
+        // ClassPathXmlApplicationContext:表示从类路径中加载spring的配置文件
+        ApplicationContext ac = new ClassPathXmlApplicationContext(config); // 对象是在这条语句创建了
 
-        //从容器中获取某个对象，你要调用对象的方法
-        //getBean("配置文件中的bean的id值")
+        // 从容器中获取某个对象，你要调用对象的方法
+        // getBean("配置文件中的bean的id值")
         SomeService service = (SomeService)ac.getBean("someService");
 
-        //使用spring创建好的对象
+        // 使用spring创建好的对象
         service.doSome();
     }
 
-    /**
-     *
-     */
     @Test
     public void test03(){
         String config = "beans.xml";
         ApplicationContext ac = new ClassPathXmlApplicationContext(config);
-        //使用spring提供的方法，获取容器中定义的对象的数量
+        // 使用spring提供的方法，获取容器中定义的对象的数量
         int nums = ac.getBeanDefinitionCount();
-        System.out.println("容器中定义的对象数量"+nums);
-        //容器中每个定义的对象的名称
-        String names[] = ac.getBeanDefinitionNames();
-        for (String name:names
-             ) {
+        System.out.println("容器中定义的对象数量" + nums);
+        // 容器中每个定义的对象的名称
+        String[] names = ac.getBeanDefinitionNames();
+        for (String name : names) {
             System.out.println(name);
         }
     }
 
-    //获取一个非自定义的类对象
+    // 获取一个非自定义的类对象
     @Test
     public void test04(){
         String config = "beans.xml";
         ApplicationContext ac = new ClassPathXmlApplicationContext(config);
         Date my = (Date)ac.getBean("mydate");
-        System.out.println("Date:"+my);
+        System.out.println("Date:" + my);
     }
 }

@@ -3,7 +3,6 @@ package com.example.cglib1;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 
-
 /**
  * @Aspect：是aspectj框架中的注解。
  *    作用：表示当前类是切面类
@@ -13,16 +12,13 @@ import org.aspectj.lang.annotation.*;
  *         2、不会改变目标方法的执行结果
  *         3、不会影响目标方法的执行
  */
-
 @Aspect
 public class MyAspect5 {
-
     @Before(value="execution(* *..CglibServiceImpl.like(String,Integer))")
     public void MyText1(JoinPoint jp){
-        Object args[] = jp.getArgs();
-        for (Object arg:args
-             ) {
-            System.out.println("参数："+arg);
+        Object[] args = jp.getArgs();
+        for (Object arg : args) {
+            System.out.println("参数：" + arg);
         }
         System.out.println("来，看看喜欢李晶晶的前置通知是怎么做的。");
     }

@@ -4,7 +4,7 @@ public class Student {
 
     private String name;
     private int age;
-    //声明一个引用类型
+    // 声明一个引用类型
     private School school;
 
     public Student() {

@@ -15,7 +15,6 @@ import javax.annotation.Resource;
  * @Component(value="myStudent")  等同于
  *        <bean id="myStudent" class="com.example.bao.Student"/>
  *
- *
  *    spring中和@Component功能一致，创建对象的注解还有：
  *        1、@Repository(用在持久层的上面)：放在dao的实现类上面，表示创建dao对象，dao对象是能访问数据库的
  *        2、@Service(用在业务层的上面)：放在service的实现类上面，创建service对象，service对象是做业务处理，可以有事务等功能的。
@@ -24,7 +23,7 @@ import javax.annotation.Resource;
  *        @Repository, @Service, @Controller 是给项目的对象分层的。当你不确定类的功能时，可以使用@Component
  */
 
-//也可以省略value：@Component("myStudent")
+// 也可以省略value：@Component("myStudent")
 /*还有不指定对象名称:@Component
    由spring提供默认名称：类名的首字母小写
    即在MyApp中 Student service = (Student) ac.getBean("student");
@@ -32,7 +31,6 @@ import javax.annotation.Resource;
 */
 @Component(value="myStudent")
 public class Student {
-
     /**
      * @Value:简单类型的属性赋值
      *     属性：value是String类型的，表示简单类型的属性值
@@ -40,12 +38,10 @@ public class Student {
      *          2、在set方法的上面
      *     注意：加上属性赋值前提是要有 @Component("myStudent")。在获取到对象后才能进行赋值
      */
-    @Value("游诗成")//或者加在set方法上
+    @Value("游诗成")   // 或者加在set方法上
     private String name;
-    @Value("2020915")//或者加在set方法上
+    @Value("2020915") // 或者加在set方法上
     private int age;
-
-
 
     /**
      * 引用类型(spring框架提供)
@@ -65,8 +61,8 @@ public class Student {
      *      4、如果Spring框架没有找到一个匹配的Bean，那么它就会抛出一个错误。
      */
     @Autowired
-    //@Autowired(required = false)
-    @Qualifier("mySchool")//本来默认使用的是byType自动注入，加上这条语句就成了byName自动注入
+    // @Autowired(required = false)
+    @Qualifier("mySchool") // 本来默认使用的是byType自动注入，加上这条语句就成了byName自动注入
     private School school;
 
 
@@ -77,20 +73,20 @@ public class Student {
      *            使用的也是自动注入原理，支持byName,byType，默认是byName
      *    位置：1、在属性定义的上面，无需set方法.
      */
-    @Resource//默认使用byName：先使用byName自动注入，如果byName赋值失败，再使用byType
-    //@Resource(name="myTeacher") 这种写法表示只使用byName方式，需要增加一个属性name,name的值是bean的id(名称)
+    @Resource // 默认使用byName：先使用byName自动注入，如果byName赋值失败，再使用byType
+    // @Resource(name="myTeacher") // 这种写法表示只使用byName方式，需要增加一个属性name,name的值是bean的id(名称)
     private Teacher teacher;
 
     public Student() {
         System.out.println("Student的无参构造");
     }
 
-    //@Value("游诗成")
+    // @Value("游诗成")
     public void setName(String name) {
         this.name = name;
     }
 
-    //@Value("2020915")
+    // @Value("2020915")
     public void setAge(int age) {
         this.age = age;
     }
