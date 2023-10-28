@@ -5,6 +5,7 @@ import com.example.service.MyService;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -14,7 +15,7 @@ public class MyController {
     @Autowired
     private MyService myService;
 
-    // @Transactional
+    @Transactional
     @RequestMapping("/student")
     public @ResponseBody Object student(Integer id, String name) {
         Student student1 = new Student();
