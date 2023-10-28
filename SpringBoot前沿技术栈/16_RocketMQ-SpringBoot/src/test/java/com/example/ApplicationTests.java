@@ -25,7 +25,7 @@ class ApplicationTests {
     void contextLoads1() {
         // 1、同步消息  参数（主题、消息体）
         rocketMQTemplate.syncSend("bootTestTopic", "我是bootTest的一个同步消息");
-        // 消费者通过第一个参数字符中的 : 进行分割  前面的是主题，后面的是Tag标签
+        // 消费者通过第一个参数字符中的 : 进行分割 -- 前面的是主题，后面的是Tag标签
         rocketMQTemplate.syncSend("bootTestTopic:Tag", "我是bootTest的一个带有Tag的同步消息");
 
         // 2、异步消息

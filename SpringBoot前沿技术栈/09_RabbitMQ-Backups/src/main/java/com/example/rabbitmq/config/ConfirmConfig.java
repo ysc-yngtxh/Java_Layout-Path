@@ -18,7 +18,7 @@ public class ConfirmConfig {
     @Bean("confirmExchange")
     public DirectExchange confirmExchange(){
         return ExchangeBuilder.directExchange("confirmExchange").durable(true)
-                .withArgument("alternate-exchange","fanoutExchange").build();
+                .withArgument("alternate-exchange", "fanoutExchange").build();
     }
     // 队列
     @Bean("confirmQueue")

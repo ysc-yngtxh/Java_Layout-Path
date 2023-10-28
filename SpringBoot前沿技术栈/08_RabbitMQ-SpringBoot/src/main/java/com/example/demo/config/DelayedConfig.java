@@ -19,11 +19,13 @@ public class DelayedConfig {
         // 交换机名称  交换机类型  是否持久化   是否自动删除  其他
         return new CustomExchange("delayedExchange", "x-delayed-message", true, false, map);
     }
+
     // 安装插件的队列
     @Bean("delayedQueue")
     public Queue delayedQueue(){
         return new Queue("delayedQueue");
     }
+
     // 配置一个安装插件的交换机与队列的绑定
     @Bean
     public Binding delayedBinding(@Qualifier("delayedExchange") CustomExchange directExchange, // 注意这里交换机类型

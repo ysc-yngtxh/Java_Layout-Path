@@ -19,7 +19,7 @@ public class DeadletterConsumer {
 
     // 接收消息。这里监听的是死信队列，因为没有消费者，最终的消息都会流到死信中
     @RabbitListener(queues = "deadQueue")
-    public void receive(Message message , Channel channel){
+    public void receive(Message message, Channel channel){
         String msg = new String(message.getBody());
         log.info("当前时间：{},发送一条消息给两个TTL队列：{}"
                 ,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(new Date())

@@ -19,10 +19,10 @@ public class DelayedComsumer {
 
     // 接收消息。这里监听的是基于插件的队列，这里当做是消费者
     @RabbitListener(queues = "delayedQueue")
-    public void receive(Message message , Channel channel){
+    public void receive(Message message, Channel channel){
         String msg = new String(message.getBody());
         log.info("当前时间：{},发送一条消息给两个TTL队列：{}"
-                ,new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(new Date())
-                ,msg);
+                , new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(new Date())
+                , msg);
     }
 }

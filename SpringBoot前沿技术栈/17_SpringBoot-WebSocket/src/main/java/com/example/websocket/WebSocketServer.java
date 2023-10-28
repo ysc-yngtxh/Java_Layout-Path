@@ -24,16 +24,16 @@ import java.util.concurrent.CopyOnWriteArraySet;
 @Component
 @ServerEndpoint("/api/websocket/{sid}")
 public class WebSocketServer {
-    //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
+    // 静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static int onlineCount = 0;
 
-    //concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
+    // concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
     private static CopyOnWriteArraySet<WebSocketServer> webSocketSet = new CopyOnWriteArraySet<WebSocketServer>();
 
-    //与某个客户端的连接会话，需要通过它来给客户端发送数据
+    // 与某个客户端的连接会话，需要通过它来给客户端发送数据
     private Session session;
 
-    //接收sid
+    // 接收sid
     private String sid = "";
 
     /**
@@ -41,7 +41,7 @@ public class WebSocketServer {
      即在引用@Autowired注解下的对象时会报空指针
      方法一：新增一个ApplicationContext类型的属性，再提供一个静态的修改属性值的方法。
             最后再在启动类上获取容器对象，将容器对象赋值给WebSocketServer
-           从而IdevService devService = context.getBean(IdevService.class);获得引用
+            从而IdevService devService = context.getBean(IdevService.class);获得引用
 
      方法二：提供一个工具类去实现ApplicationContextAware接口，并且加上一个懒加载注解@Lazy,
            重写其setApplicationContext方法，赋值给私有属性，而且提供一个静态的属性get方法
@@ -60,9 +60,9 @@ public class WebSocketServer {
     @OnOpen
     public void onOpen(Session session, @PathParam("sid") String sid) {
         this.session = session;
-        webSocketSet.add(this); //加入set中
+        webSocketSet.add(this); // 加入set中
         this.sid = sid;
-        addOnlineCount(); //在线数加1
+        addOnlineCount(); // 在线数加1
         try {
             sendMessage("conn_success");
             log.info("有新窗口开始监听:" + sid + ",当前在线人数为:" + getOnlineCount());
@@ -76,24 +76,23 @@ public class WebSocketServer {
      */
     @OnClose
     public void onClose() {
-        webSocketSet.remove(this); //从set中删除
-        subOnlineCount(); //在线数减1
-        //断开连接情况下，更新主板占用情况为释放
+        webSocketSet.remove(this); // 从set中删除
+        subOnlineCount(); // 在线数减1
+        // 断开连接情况下，更新主板占用情况为释放
         log.info("释放的sid为：" + sid);
-        //这里写你 释放的时候，要处理的业务
+        // 这里写你 释放的时候，要处理的业务
         log.info("有一连接关闭！当前在线人数为" + getOnlineCount());
 
     }
 
     /**
      * 收到客户端消息后调用的方法
-     *
      * @ Param message 客户端发送过来的消息
      */
     @OnMessage
     public void onMessage(String message, Session session) {
         log.info("收到来自窗口" + sid + "的信息:" + message);
-        //群发消息
+        // 群发消息
         for (WebSocketServer item : webSocketSet) {
             try {
                 item.sendMessage(message);
@@ -117,7 +116,7 @@ public class WebSocketServer {
      * 实现服务器主动推送
      */
     public void sendMessage(String message) throws IOException {
-        for (WebSocketServer webSocket: webSocketSet) {
+        for (WebSocketServer webSocket : webSocketSet) {
             log.info("【websocket消息】广播消息, message={}", message);
             try {
                 webSocket.session.getBasicRemote().sendText(message);
@@ -135,7 +134,7 @@ public class WebSocketServer {
 
         for (WebSocketServer item : webSocketSet) {
             try {
-                //这里可以设定只推送给这个sid的，为null则全部推送
+                // 这里可以设定只推送给这个sid的，为null则全部推送
                 if (sid == null) {
                     // item.sendMessage(message);
                 } else if (item.sid.equals(sid)) {

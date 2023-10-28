@@ -66,6 +66,4 @@ public class ShiroConfig {
     public MyRealm myRealm(){
         return new MyRealm();
     }
-
-
 }

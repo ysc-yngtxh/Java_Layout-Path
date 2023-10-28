@@ -57,7 +57,7 @@ public class Demo1_SyncMessage {
         // 实例化消息Push消费者 -- 消费组
         DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("Sync_Group");
         // 实例化Push消费者，虽然API是过时的，但我们也需要去了解。
-        DefaultMQPullConsumer pullConsumer = new DefaultMQPullConsumer("Sync_Group");
+        // DefaultMQPullConsumer pullConsumer = new DefaultMQPullConsumer("Sync_Group");
         // TODO
         //  1、Push是MQ主动推送消息给客户端
         //     优点：及时性好；

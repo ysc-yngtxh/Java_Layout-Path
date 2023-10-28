@@ -14,7 +14,7 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
-    //3、ShiroFilterFactoryBean   shiro过滤工厂(请求都在这儿过滤)
+    // 3、ShiroFilterFactoryBean   shiro过滤工厂(请求都在这儿过滤)
     @Bean
     public ShiroFilterFactoryBean factoryBean(@Qualifier("defaultWebSecurityManager") DefaultWebSecurityManager defaultWebSecurityManager) {
 

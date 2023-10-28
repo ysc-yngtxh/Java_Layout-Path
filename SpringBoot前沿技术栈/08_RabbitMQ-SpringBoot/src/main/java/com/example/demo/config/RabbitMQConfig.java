@@ -33,24 +33,24 @@ public class RabbitMQConfig {
     @Bean("directQueueB")
     public Queue directQueueB(){
         HashMap<String, Object> map = new HashMap<>(3);
-        map.put("x-dead-letter-exchange","deadExchange");      // 设置死信交换机
-        map.put("x-dead-letter-routing-key","deadroutingkey"); // 设置死信routingkey
-        map.put("x-message-ttl",40000); // 设置消息过期时间
-        // map.put("x-max-length",10);  // 设置消息队列的长度
+        map.put("x-dead-letter-exchange", "deadExchange");      // 设置死信交换机
+        map.put("x-dead-letter-routing-key", "deadroutingkey"); // 设置死信routingkey
+        map.put("x-message-ttl", 40000); // 设置消息过期时间
+        // map.put("x-max-length", 10);  // 设置消息队列的长度
         // 参数1、队列名称  2、是否持久化   3、是否排外  4、如果队列空了是否自动删除   5、死信设置
-        return new Queue("bootDirectQueueB",true,false,false,map);
+        return new Queue("bootDirectQueueB", true, false, false, map);
     }
 
     // 配置一个普通队列B  TTL不配置 延迟队列时长掌握在生产者手里
     @Bean("directQueueC")
     public Queue directQueueC(){
         HashMap<String, Object> map = new HashMap<>(3);
-        map.put("x-dead-letter-exchange","deadExchange");      // 设置死信交换机
-        map.put("x-dead-letter-routing-key","deadroutingkey"); // 设置死信routingkey
-        // map.put("x-message-ttl",40000); // 设置消息过期时间
-        // map.put("x-max-length",10);     // 设置消息队列的长度0
+        map.put("x-dead-letter-exchange", "deadExchange");      // 设置死信交换机
+        map.put("x-dead-letter-routing-key", "deadroutingkey"); // 设置死信routingkey
+        // map.put("x-message-ttl", 40000); // 设置消息过期时间
+        // map.put("x-max-length", 10);     // 设置消息队列的长度0
         // 参数1、队列名称  2、是否持久化   3、是否排外  4、如果队列空了是否自动删除   5、死信设置
-        return new Queue("bootDirectQueueC",true,false,false,map);
+        return new Queue("bootDirectQueueC", true, false, false, map);
     }
 
     // 配置一个普通队列和普通交换机的绑定
@@ -95,7 +95,7 @@ public class RabbitMQConfig {
     // 配置一个Direct类型的死信交换机
     @Bean("deadExchange")
     public DirectExchange deadExchange(){
-        return new DirectExchange("deadExchange",true,false);
+        return new DirectExchange("deadExchange", true, false);
     }
 
     // 配置一个死信队列

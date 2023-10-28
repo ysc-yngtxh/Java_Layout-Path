@@ -18,7 +18,7 @@ public class BasicConnection {
 
     public static void main(String[] args) {
         // TODO 首先需要自定义连接，创建我们需要的 MQ队列，以供我们生产者与消费者需要
-        //  IP、端口，账号信息等都有默认的，可以不写，也可以自定义到想要的地址和账号中
+        // IP、端口，账号信息等都有默认的，可以不写，也可以自定义到想要的地址和账号中
 
         Connection connection = null;
         Channel channel = null;
@@ -32,7 +32,7 @@ public class BasicConnection {
             factory.setUsername("guest");
             factory.setPassword("guest");
 
-            connection = factory.newConnection(); // 通过工厂获取连接
+            connection = factory.newConnection();    // 通过工厂获取连接
             channel = connection.createChannel();    // 从连接中创建通道，使用通道才能完成消息相关的操作
             channel.queueDeclare(QUEUE_NAME, false, false, false, null); // 声明(创建)队列
               /*

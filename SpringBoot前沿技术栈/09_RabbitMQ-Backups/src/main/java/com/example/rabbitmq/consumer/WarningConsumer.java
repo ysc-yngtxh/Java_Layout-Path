@@ -13,6 +13,6 @@ public class WarningConsumer {
     @RabbitListener(queues = "warningQueue")
     public void warning(Message message){
         String msg = new String(message.getBody());
-        log.info("报警发现不可用路由：{}",msg);
+        log.info("报警发现不可用路由：{}", msg);
     }
 }

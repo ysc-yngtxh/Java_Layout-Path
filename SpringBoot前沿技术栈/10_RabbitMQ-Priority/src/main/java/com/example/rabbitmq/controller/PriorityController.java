@@ -19,10 +19,10 @@ public class PriorityController {
     @GetMapping("/priority/{message}")
     public void send(@PathVariable String message){
         for(int i = 1; i < 11; i++){
-            CorrelationData data = new CorrelationData(i+"");
+            CorrelationData data = new CorrelationData(i + "");
             if (i == 5) {
                 rabbitTemplate.convertAndSend("priorityExchange"
-                        ,"priorityroutingkey"
+                        , "priorityroutingkey"
                         , message + i
                         , msg -> {
                             msg.getMessageProperties().setPriority(5);
@@ -31,7 +31,7 @@ public class PriorityController {
                         , data);
             } else {
                 rabbitTemplate.convertAndSend("priorityExchange"
-                        ,"priorityroutingkey"
+                        , "priorityroutingkey"
                         , message + i
                         , msg -> {
                             msg.getMessageProperties().setPriority(1);

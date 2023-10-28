@@ -19,7 +19,7 @@ public class SystemController {
     @Resource
     private WebSocketServer webSocket;
 
-    //推送数据接口
+    // 推送数据接口
     @ResponseBody
     @RequestMapping("/push/{cid}")
     public Map<String, Object> pushToWeb(@PathVariable String cid, @PathParam("message") String message) {
@@ -44,7 +44,7 @@ public class SystemController {
         String msg = "";
         int a = 0;
         for (int i = 0; i <= 100; i++) {
-            msg = String .valueOf(a);
+            msg = String.valueOf(a);
             TimeUnit.SECONDS.sleep(1);
             webSocket.sendMessage(msg);
             a = a+1;

@@ -22,8 +22,8 @@ public class ConfirmController {
     @GetMapping("/sendMessage/{message}")
     public void sendConfirm(@PathVariable String message){
         CorrelationData correlationData1 = new CorrelationData("1");
-        rabbitTemplate.convertAndSend("confirmExchange","confirmroutingkey",message,correlationData1);
-        log.info("发送消息内容：{}",message);
+        rabbitTemplate.convertAndSend("confirmExchange", "confirmroutingkey", message, correlationData1);
+        log.info("发送消息内容：{}", message);
 
         // 当我们的路由出现问题的时候，正常来说：消息路由不到队列无法被处理就会调用 returnedMessage()方法被退回。
         // 但是由于我们声明的confirmExchange交换机的时候关联了备份交换机fanoutExchange
@@ -31,7 +31,7 @@ public class ConfirmController {
         // 因此，我备份交换机和其下的所有队列都得到消息了，就不用退回了，也就没有执行 returnedMessage()方法
         CorrelationData correlationData2 = new CorrelationData("2");
         rabbitTemplate.convertAndSend("confirmExchange", "confirmroutingkey2", message, correlationData2);
-        log.info("发送消息内容：{}",message);
+        log.info("发送消息内容：{}", message);
 
         // TODO 如果想让程序执行 returnedMessage()方法，先删除服务器里的 confirmExchange交换机(因为绑定过备份交换机，避免又走备份)
         //  然后删除 @Bean("confirmExchange")方法里的备份交换机配置。重新执行，即可实现退回消息

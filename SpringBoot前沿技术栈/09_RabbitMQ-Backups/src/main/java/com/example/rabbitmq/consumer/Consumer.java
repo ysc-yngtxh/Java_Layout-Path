@@ -12,6 +12,6 @@ public class Consumer {
     @RabbitListener(queues = "confirmQueue")
     public void sendMessage(Message message) {
         String msg = new String(message.getBody());
-        log.info("接收到的消息：{}",msg);
+        log.info("接收到的消息：{}", msg);
     }
 }

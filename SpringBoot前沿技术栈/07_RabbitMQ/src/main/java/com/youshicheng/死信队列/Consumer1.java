@@ -36,7 +36,7 @@ public class Consumer1 {
             map.put("x-dead-letter-exchange", DEAD_EXCHANGE); // 设置死信交换器(x-dead-letter-exchange是固定写法)
             map.put("x-dead-letter-routing-key", "lisi"); // 设置死信routing-key(x-dead-letter-routing-key是固定写法)
             map.put("x-max-length", 6); // 设置正常队列的长度限制.正常队列只能积压6个，超过6条的会成为死信(x-max-length是固定写法)
-            // map.put("x-message-ttl",10000); // 一旦超过10秒没被消费就会成为死信
+            // map.put("x-message-ttl", 10000); // 过10秒没被消费就一旦超会成为死信
             channel.queueDeclare(NORMAL_QUEUE, false, false, false, map);
             // 声明死信队列
             channel.queueDeclare(DEAD_QUEUE, false, false, false, null);
@@ -56,7 +56,7 @@ public class Consumer1 {
                     // 这里做消息拒绝   message.getEnvelope().getDeliveryTag(): 消息id。
                     // requeue表示消息是否重回队列: 如果requeue=false表示消息不重回队列并且丢到死信，如果为requeue=true则消息重回队列
                     channel.basicReject(message.getEnvelope().getDeliveryTag(), false);
-                } else{
+                } else {
                     System.out.println("Consumer1接受的消息是：" + msg);
                     // 这里做应答处理  message.getEnvelope().getDeliveryTag(): 消息id。
                     // multiple表示是否一次消费多条消息，false表示只确认该序列号对应的消息，true则表示确认该序列号对应的消息以及比该序列号小的所有消息

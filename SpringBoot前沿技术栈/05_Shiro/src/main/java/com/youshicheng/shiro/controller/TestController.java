@@ -17,39 +17,38 @@ public class TestController {
 
     @RequestMapping("/")
     public String index(){
-
         return "login";
     }
 
     @RequestMapping("/login")
     public String login(String username, String password, Model model){
-        //获取权限操作对象，利用这个对象来完成登陆操作
+        // 获取权限操作对象，利用这个对象来完成登陆操作
         Subject subject = SecurityUtils.getSubject();
-        //登出，进入这个请求用户一定是要完成用户登录功能。因此我们就先登出，否则Shiro会有缓存不能重新登陆
+        // 登出，进入这个请求用户一定是要完成用户登录功能。因此我们就先登出，否则Shiro会有缓存不能重新登陆
         subject.logout();
-        //用户是否认证过(是否登陆过)，进入if表示用户没有认证过需要进行认证
+        // 用户是否认证过(是否登陆过)，进入if表示用户没有认证过需要进行认证
         if(!subject.isAuthenticated()){
-            //创建用户认证时的身份令牌,并设置我们从页面中传递过来的账号和密码
-            UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username,password);
+            // 创建用户认证时的身份令牌,并设置我们从页面中传递过来的账号和密码
+            UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, password);
 
             System.out.println("流程会走到这里吗？");
             try {
                 subject.login(usernamePasswordToken);
             } catch(UnknownAccountException e){
-                //e.printStackTrace();
-                model.addAttribute("errorMessage","账号错误！");
+                // e.printStackTrace();
+                model.addAttribute("errorMessage", "账号错误！");
                 return "login";
             } catch (LockedAccountException e){
-                //e.printStackTrace();
-                model.addAttribute("errorMessage","账号被锁定！");
+                // e.printStackTrace();
+                model.addAttribute("errorMessage", "账号被锁定！");
                 return "login";
             } catch (IncorrectCredentialsException e){
-                //e.printStackTrace();
-                model.addAttribute("errorMessage","密码错误！");
+                // e.printStackTrace();
+                model.addAttribute("errorMessage", "密码错误！");
                 return "login";
             } catch (AuthenticationException e){
-                //e.printStackTrace();
-                model.addAttribute("errorMessage","认证失败！");
+                // e.printStackTrace();
+                model.addAttribute("errorMessage", "认证失败！");
                 return "login";
             }
         }
@@ -59,20 +58,18 @@ public class TestController {
     @RequestMapping("/logout")
     public String logout(){
         Subject subject = SecurityUtils.getSubject();
-        //登陆当前帐号，清空shiro当前用户的缓存，否则无法重新登陆
+        // 登陆当前帐号，清空shiro当前用户的缓存，否则无法重新登陆
         subject.logout();
         return "redirect:/";
     }
 
     @RequestMapping("/success")
     public String loginSuccess(){
-
         return "success";
     }
 
     @RequestMapping("/noPermission")
     public String noPermission(){
-
         return "noPermission";
     }
 
@@ -92,23 +89,22 @@ public class TestController {
     public @ResponseBody String adminTest(){
         Subject subject = SecurityUtils.getSubject();
         String[] roles = {"admin"};
-        subject.checkRoles(roles);//验证当前用户是否拥有指定的角色
+        subject.checkRoles(roles); // 验证当前用户是否拥有指定的角色
         return "/admin/test请求";
     }
 
     @RequestMapping("/admin/test1")
     public @ResponseBody String adminTest1(){
-
         return "/admin/test1请求";
     }
 
-    //@RequiresPermissions 用于判断当前用户是否有指定的一个或多个权限用法与@RequiresRoles 相同
+    // @RequiresPermissions 用于判断当前用户是否有指定的一个或多个权限用法与@RequiresRoles 相同
     @RequiresPermissions(value="admin:add")
     @RequestMapping("/admin/test2")
     public @ResponseBody String adminTest2(){
         Subject subject = SecurityUtils.getSubject();
         String[] permission = {"admin:add"};
-        subject.checkPermissions(permission);//验证当前用户是否拥有指定的权限
+        subject.checkPermissions(permission); // 验证当前用户是否拥有指定的权限
         return "/admin/test2请求";
     }
 
@@ -117,14 +113,14 @@ public class TestController {
     public @ResponseBody String userTest(){
         Subject subject = SecurityUtils.getSubject();
         String[] roles = {"user"};
-        subject.checkRoles(roles);//验证当前用户是否拥有指定的角色
+        subject.checkRoles(roles); // 验证当前用户是否拥有指定的角色
         return "/user/test请求";
     }
 
     @ExceptionHandler(ShiroException.class)
     public String permissionError(Throwable throwable){
-        //转向到没有权限的视图页面，可以利用参数throwable将错误信息写入到浏览器中
-        //实际工作中应该根据参数的类型来判断具体是什么异常，然后根据不同的异常来为用户提供不同的提示信息
+        // 转向到没有权限的视图页面，可以利用参数throwable将错误信息写入到浏览器中
+        // 实际工作中应该根据参数的类型来判断具体是什么异常，然后根据不同的异常来为用户提供不同的提示信息
         return "noPermission";
     }
 }

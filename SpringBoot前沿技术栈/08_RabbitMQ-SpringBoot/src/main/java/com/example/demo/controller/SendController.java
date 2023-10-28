@@ -27,8 +27,8 @@ public class SendController {
                 , new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(new Date())
                 , message);
 
-        rabbitTemplate.convertAndSend("bootDirectExchange", "bootDirectRoutingKeyA", "消息来自ttl为10s的队列："+message);
-        rabbitTemplate.convertAndSend("bootDirectExchange", "bootDirectRoutingKeyB", "消息来自ttl为40s的队列："+message);
+        rabbitTemplate.convertAndSend("bootDirectExchange", "bootDirectRoutingKeyA", "消息来自ttl为10s的队列：" + message);
+        rabbitTemplate.convertAndSend("bootDirectExchange", "bootDirectRoutingKeyB", "消息来自ttl为40s的队列：" + message);
 
         /*这里随便访问一下：http://localhost:8080/ttl/sendMsg/你好
           可以发现在死信队列中会依次出现directQueueA、directQueueB，间隔时间30s。
@@ -39,13 +39,13 @@ public class SendController {
 
     // 开始发消息  消息延迟
     @GetMapping("/sendExpirationMsg/{message}/{ttlTime}")
-    public void sendMsg(@PathVariable String message,@PathVariable Integer ttlTime){
+    public void sendMsg(@PathVariable String message, @PathVariable Integer ttlTime){
         log.info("当前时间：{},发送一条时长{}毫秒TTL信息给队列directQueueC：{}"
                 , new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(new Date())
                 , ttlTime
                 , message);
         // 第四个参数：对消息进行配置
-        rabbitTemplate.convertAndSend("bootDirectExchange","bootDirectRoutingKeyC",message,msg->{
+        rabbitTemplate.convertAndSend("bootDirectExchange", "bootDirectRoutingKeyC", message, msg -> {
             // 发送消息的时候 延长时长
             msg.getMessageProperties().setExpiration( String.valueOf(ttlTime) );
             return msg;
@@ -62,7 +62,7 @@ public class SendController {
 
     // 开始发消息 基于插件的    消息  以及  延迟的时间
     @GetMapping("/sendDelayMsg/{message}/{delayTime}")
-    public void sendDelayMsg(@PathVariable String message,@PathVariable Integer delayTime) {
+    public void sendDelayMsg(@PathVariable String message, @PathVariable Integer delayTime) {
         log.info("当前时间：{},发送一条时长{}毫秒信息给延迟队列delayerQueue：{}"
                 , new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(new Date())
                 , delayTime
