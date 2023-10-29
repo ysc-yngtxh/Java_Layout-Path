@@ -36,7 +36,8 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService(){
         InMemoryUserDetailsManager userDetailsManager = new InMemoryUserDetailsManager(
                 User.withUsername("admin").password("admin").authorities("admin").build(),
-                User.withUsername("manager").password("manager").authorities("manager").build());
+                User.withUsername("manager").password("manager").authorities("manager").build()
+        );
         return userDetailsManager;
     }
 }

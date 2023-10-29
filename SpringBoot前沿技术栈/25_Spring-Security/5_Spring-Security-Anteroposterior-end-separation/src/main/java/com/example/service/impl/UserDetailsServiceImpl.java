@@ -68,7 +68,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         // 如果没有查询到用户就抛出异常
         Optional.ofNullable(sysUser)
-                .orElseThrow(()->new RuntimeException("用户名不存在!!!"));
+                .orElseThrow(() -> new RuntimeException("用户名不存在!!!"));
 
         List<SysRole> userByRole = sysRoleMapper.findUserByRole(username);
 
@@ -79,6 +79,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
          */
 
         return new LoginUser(sysUser, userByRole.stream().map(SysRole::getName).toList());
-
     }
 }

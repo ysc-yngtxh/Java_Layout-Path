@@ -64,7 +64,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         // 如果没有查询到用户就抛出异常
         Optional.ofNullable(user)
-                .orElseThrow(()->new RuntimeException("用户名不存在!!!"));
+                .orElseThrow(() -> new RuntimeException("用户名不存在!!!"));
 
         List<String> permsssion = user.getPermssion();
 
@@ -75,6 +75,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
          */
 
         return new LoginUser(user, permsssion);
-
     }
 }

@@ -89,4 +89,9 @@ public class JwtUtil {
                 .parseClaimsJws(jwt)
                 .getBody();
     }
+
+    public static void main(String[] args) {
+        String jwt = createJwt("6", JWT_TTL);
+        System.out.println(jwt);
+    }
 }

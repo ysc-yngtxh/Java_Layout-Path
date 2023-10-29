@@ -18,21 +18,21 @@ public class UserController {
     // TODO 这里的接口是在用户登录后使用的，我们可以逐个访问，根据不同用户的相应权限，允已放行
 
     @RequestMapping("/sayHello")
-    // 权限注解，即：访问这个接口前需要当前用户有'test123'权限
+    // 权限注解，即：访问这个接口前需要当前用户有 'test123' 权限
     @PreAuthorize("hasAuthority('test123')")
     public @ResponseBody String Hello(){
         return "hello world!";
     }
 
     @RequestMapping("/test")
-    // 权限注解，即：访问这个接口前需要当前用户有'message'权限
+    // 权限注解，即：访问这个接口前需要当前用户有 'message' 权限
     @PreAuthorize("hasAuthority('test')")
     public @ResponseBody String test(){
         return "Hello World";
     }
 
     @RequestMapping("/role")
-    // 权限注解，即：访问这个接口前需要当前用户有'vip1'角色
+    // 权限注解，即：访问这个接口前需要当前用户有 'vip1' 角色
     @PreAuthorize("hasRole('vip1')")
     public @ResponseBody String role(){
         return "关关雎鸠，在河之洲;";

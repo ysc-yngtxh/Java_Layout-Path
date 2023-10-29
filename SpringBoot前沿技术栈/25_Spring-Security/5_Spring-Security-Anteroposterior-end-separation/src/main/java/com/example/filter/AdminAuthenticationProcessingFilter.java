@@ -43,7 +43,7 @@ public class AdminAuthenticationProcessingFilter extends AbstractAuthenticationP
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         // TODO 这里需要注意：SpringSecurity不支持JSON的数据类型进行认证。但是现在大都是前后端分离的项目。
         //        所以只有当你的认证用户数据是JSON类型的，并且设置了以上构造方法的登录接口路径，才会进入到这里尝试认证。
         //        否则，就是进入到 UsernamePasswordAuthenticationFilter 中的 attemptAuthentication() 方法

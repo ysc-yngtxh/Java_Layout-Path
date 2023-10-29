@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -35,7 +36,6 @@ public class SecurityConfig {
     // 当我们不加加密方式时，spring security默认的加密方式就是将用户密码前加上{noop}。所以我们从数据库的密码要是{noop}xxxxx的形式
     @Bean
     public PasswordEncoder passwordEncoder() {
-
         return new BCryptPasswordEncoder();
     }
 
@@ -43,7 +43,6 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         AuthenticationManager authenticationManager = authenticationConfiguration.getAuthenticationManager();
         return authenticationManager;
-
     }
 
     @Bean
@@ -89,7 +88,7 @@ public class SecurityConfig {
                 // 需要注意的是，我们在登录后(登陆前可被视为游客)，这个key为JSESSIONID,value为该session的id将会被重新创建，而这个创建则是被指定为Spring Security来创建这个session
                 // 原因就在于，我们登陆后所需要的是否认证都是通过这个由Spring Security来创建的key为JSESSIONID的session来判断
                 // 如果存在表明该用户已经进行过认证，可以放行访问; 如果不存在就会跳转到登陆页面，需要用户进行登录认证
-                // 所以这里不通过Session获取SecurityContext的设置我们暂时不需要，毕竟我们这个需要通过session来获取
+                // 所以这里不通过Session获取SecurityContext的设置我们暂时不需要，毕竟我们这个需要通过session来获取(前后端不分离，就先注释)
                 // 这里我们前后端项目没有分离，所以需要通过JSESSIONID来建立一个会话连接;当我们做前后端分离的项目就可以设置 不通过Session获取SecurityContext
                 // .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 // .and()
@@ -116,7 +115,7 @@ public class SecurityConfig {
                 // 这个设置必须有，否则这个表单登陆设置不起作用(如果没有，就不是面向所有人的)
                 .permitAll()
                 // 成功登录处理器
-                // .successHandler((req,resp,authentication)->{
+                // .successHandler((req, resp, authentication) -> {
                 //             Object principal = authentication.getPrincipal();
                 //             resp.setContentType("application/json;charset=utf-8");
                 //             PrintWriter out = resp.getWriter();
@@ -126,6 +125,8 @@ public class SecurityConfig {
                 //         });
                 // 登录成功后跳转的路径
                 // .successForwardUrl("/toMain")
+
+                // defaultSuccessUrl(String SuccessUrl)、defaultSuccessUrl(String SuccessUrl, boolean alwaysUse)
                 // 重载方法一：当只有一个参数时，表示一开始用户访问路径不是登录路径时，在登陆后跳转到访问路径。
                 //           但是一开始用户访问登陆路径时，那么登陆跳转的就是该方法的参数路径/toMain。
                 // 重载方法二：当存在两个参数，且第二个参数值为true时，表示无论用户在登陆前方法的是哪个路径，在登陆后跳转的路径始终都是/toMain

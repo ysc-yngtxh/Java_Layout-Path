@@ -55,7 +55,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         userInfo.getCurrentSysUserInfo().setToken(jwt);
         // 使用三个参数的构造方法，用以表示为通过认证
         return new UsernamePasswordAuthenticationToken(userInfo, password, userInfo.getAuthorities());
-
     }
 
     @Override

@@ -33,7 +33,7 @@ public class DemoDataListener<T> implements ReadListener<T> {
     public void invokeHead(Map<Integer, ReadCellData<?>> headMap, AnalysisContext context) {
         Map<Integer, String> stringMap = ConverterUtils.convertToStringMap(headMap, context);
         log.info("解析到一条表头数据:{}", JSON.toJSONString(stringMap));
-        // 如果想转成 Map<Integer,String>
+        // 如果想转成 Map<Integer, String>
         // 方案1： 不要implements ReadListener 而是 extends AnalysisEventListener
         // 方案2： 调用 ConverterUtils.convertToStringMap(headMap, context) 自动会转换
     }
@@ -107,7 +107,7 @@ public class DemoDataListener<T> implements ReadListener<T> {
         // 如果是某一个单元格的转换异常 能获取到具体行号
         // 如果要获取头的信息 配合invokeHeadMap使用
         if (exception instanceof ExcelDataConvertException excelDataConvertException) {
-            log.error("第{}行，第{}列解析异常，数据为:{}"
+            log.error("第{}行，第{}列解析异常，异常数据为:{}"
                     , excelDataConvertException.getRowIndex()
                     , excelDataConvertException.getColumnIndex()
                     , excelDataConvertException.getCellData().getStringValue()

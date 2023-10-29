@@ -152,7 +152,7 @@ public class WriteExcelApplicationTests {
                 // 这里注意表头 head 可以每次都变，我这里为了方便 所以用的同一个class,实际上可以一直变
                 WriteSheet writeSheet = EasyExcel.writerSheet(i, "模板" + i).head(WriteDemo1.class).build();
                 // 分页去数据库查询数据 这里可以去数据库查询每一页的数据
-                List<WriteDemo1 > data = data();
+                List<WriteDemo1> data = data();
                 excelWriter.write(data, writeSheet);
             }
         }

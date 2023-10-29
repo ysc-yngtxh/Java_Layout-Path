@@ -68,7 +68,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (ObjectUtil.isNull(user1)) {
             throw new RuntimeException("用户名或者密码错误!!!");
         }
-        //TODO 查询对应的权限信息
+        // TODO 查询对应的权限信息
 
         // 把数据封装成UserDetails返回
         /**
@@ -83,6 +83,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
          *  3、如果正确就把UserDetails中的权限信息设置到Authentication中。
          **/
         return new LoginUser(user1);
-
     }
 }

@@ -6,7 +6,7 @@ import com.alibaba.excel.converters.WriteConverterContext;
 import com.alibaba.excel.enums.CellDataTypeEnum;
 import com.alibaba.excel.metadata.data.WriteCellData;
 
-public class CustomStringStringConverter implements Converter<String> {
+public class CustomStringConverter implements Converter<String> {
     @Override
     public Class<?> supportJavaTypeKey() {
         return String.class;
@@ -32,5 +32,4 @@ public class CustomStringStringConverter implements Converter<String> {
     public WriteCellData<?> convertToExcelData(WriteConverterContext<String> context) {
         return new WriteCellData<>(context.getValue());
     }
-
 }

@@ -3,7 +3,7 @@ package com.example.pojo.write;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.format.DateTimeFormat;
 import com.alibaba.excel.annotation.format.NumberFormat;
-import com.example.converter.CustomStringStringConverter;
+import com.example.converter.CustomStringConverter;
 import lombok.Data;
 
 import java.util.Date;
@@ -19,7 +19,7 @@ public class WriteDemo3 {
     /**
      * 我想所有的 字符串起前面加上"自定义："三个字
      */
-    @ExcelProperty(value = "字符串标题", converter = CustomStringStringConverter.class)
+    @ExcelProperty(value = "字符串标题", converter = CustomStringConverter.class)
     private String string;
 
     /**

@@ -125,7 +125,6 @@ public class SecurityConfig {
                                 // .anyRequest().authenticated()
                                 // TODO 注意：这里设置成url权限认证处理
                                 .anyRequest().access(urlAuthorizationManager)
-
                 )
 
                 // 自动登录 - cookie储存方式

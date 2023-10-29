@@ -31,5 +31,4 @@ public class SayHelloController {
         String encode = BCrypt.hashpw(password, "$2$10$shichengqwertyuioplkjhgfdsa");
         System.out.println(encode);
     }
-
 }

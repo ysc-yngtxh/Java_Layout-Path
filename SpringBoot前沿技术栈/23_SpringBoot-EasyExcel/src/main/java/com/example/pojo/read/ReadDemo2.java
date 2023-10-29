@@ -4,7 +4,7 @@ import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.format.DateTimeFormat;
 import com.alibaba.excel.annotation.format.NumberFormat;
-import com.example.converter.CustomStringStringConverter;
+import com.example.converter.CustomStringConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,7 +40,7 @@ public class ReadDemo2 {
     private Double doubleData;
 
     // 我自定义转换器，不管Excel传过来什么 。我给他加上 "自定义："
-    @ExcelProperty(value = "转换", converter = CustomStringStringConverter.class)
+    @ExcelProperty(value = "转换", converter = CustomStringConverter.class)
     private String string;
 
     // 这里用string 去接日期才能格式化年月日

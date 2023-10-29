@@ -29,7 +29,6 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
         return modelAndView;
-
     }
 
     @RequestMapping(value = "/user/login", method = RequestMethod.POST)

@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2023/2/26 15:17
  */
 @Configuration
-//@ComponentScan(basePackages = "com.example.xxljob")
+// @ComponentScan(basePackages = "com.example.xxljob")
 public class XxlJobConfig {
     private final Logger logger = LoggerFactory.getLogger(XxlJobConfig.class);
 

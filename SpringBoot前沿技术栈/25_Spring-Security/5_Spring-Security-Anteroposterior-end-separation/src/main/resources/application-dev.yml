@@ -78,8 +78,8 @@ logging:
     com:
       example: debug
 
-#安全认证
-auth:
+# 安全认证
+security:
   # token过期时间（分钟）
   tokenExpireTime: 60
   # 用户选择保存登录状态对应token过期时间（天）

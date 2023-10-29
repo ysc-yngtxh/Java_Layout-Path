@@ -27,7 +27,7 @@ public class LoginController {
     // 这里需要注意的是，如果我在Controller层中不去定义"/"路径，那么当我访问 http://localhost:8080 的时候，
     // spring boot找不到对应路径"/"的资源访问，就会去访问默认欢迎资源文件index.html
     // 但现在我加上了"/"路径，那么一开始的页面就将会是login.html
-    @RequestMapping({"/toLoginForm","/"})
+    @RequestMapping({"/toLoginForm", "/"})
     public String toLoginForm() {
         return "login";
     }
