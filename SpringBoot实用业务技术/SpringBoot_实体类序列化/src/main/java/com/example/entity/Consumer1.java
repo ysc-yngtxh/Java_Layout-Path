@@ -36,7 +36,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * NON_ABSENT：注解的字段为 null 的不序列化（包括 Optional 类、AtomicReference 类）
  * NON_EMPTY ：注解的字段为 null 或 为空 不序列化
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)    // 实际效果就是返回给前端的的 Json 字符串中 值为 null 的字段不显示
+@JsonInclude(JsonInclude.Include.NON_NULL)    // 实际效果就是返回给前端的 Json 字符串中 值为 null 的字段不显示
 // @JsonIgnoreProperties 可以 忽略指定属性 的 序列化 和 反序列化
 @JsonIgnoreProperties({"age", "deleteFlag"})
 // @JsonPropertyOrder 可以指定json映射名称属性在 json 字符串中的顺序
