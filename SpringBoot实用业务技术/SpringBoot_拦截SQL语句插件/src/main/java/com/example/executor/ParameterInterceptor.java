@@ -19,7 +19,7 @@ import java.util.Properties;
 /**
  * Mybatis 拦截器
  *
- * @Intercepts：标识该类是一个拦截器,需要一个Signature(拦截点)参数数组。 通过Signature来指定拦截哪个对象里面的哪个方法，只有符合拦截点的条件才会进入到拦截器
+ * @Intercepts：标识该类是一个拦截器,需要一个Signature(拦截点)参数数组。通过Signature来指定拦截哪个对象里面的哪个方法，只有符合拦截点的条件才会进入到拦截器
  * @Signature：指明自定义拦截器需要拦截哪一个类型，哪一个方法；
  *       - type：定义拦截的类，拦截的类型具体有四种
  *              (1)、Executor：        拦截执行器的方法 -- 针对Sql是 查询/更新/插入/删除 的拦截
@@ -39,7 +39,7 @@ public class ParameterInterceptor implements Interceptor {
     private static final Logger log = LoggerFactory.getLogger(ParameterInterceptor.class);
 
     // 每一次 CRUD 操作都会经过mybatis拦截器，拦截器对象有以上四个，并且依次顺序执行
-    // 每经过一个拦截器对象就会调用插件的plugin方法，也就是说该方法会调用4次。根据 @Intercepts 注解来决定是否进行拦截处理
+    // 每经过一个拦截器对象就会调用插件的plugin方法，也就是该方法会调用4次。根据 @Intercepts 注解来决定是否进行拦截处理
     @Override
     public Object plugin(Object target) {
         log.info("ParameterInterceptor Plugin >>>>>>> {}", target);
