@@ -62,8 +62,8 @@ public class WxLocaleConfigs implements LocaleResolver,InitializingBean {
     }
 
     /**
-     * 用于实现Locale的切换。比如SessionLocaleResolver获取Locale的方式是从session中读取，但如果
-     * 用户想要切换其展示的样式(由英文切换为中文)，那么这里的setLocale()方法就提供了这样一种可能
+     * 用于实现Locale的切换。比如SessionLocaleResolver获取Locale的方式是从session中读取，
+     * 但如果用户想要切换其展示的样式(由英文切换为中文)，那么这里的setLocale()方法就提供了这样一种可能
      * 显式调用LocaleResolver.setLocale()来修改用户的区域
      * @param request               HttpServletRequest
      * @param httpServletResponse   HttpServletResponse

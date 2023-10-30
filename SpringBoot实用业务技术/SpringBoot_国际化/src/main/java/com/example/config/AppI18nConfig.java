@@ -5,7 +5,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
@@ -16,7 +15,7 @@ import java.util.Arrays;
  * @date 2023/3/9 23:24
  */
 @Configuration
-public class appI18nConfig implements InitializingBean {
+public class AppI18nConfig implements InitializingBean {
 
     /**
      * InitializingBean是Spring提供的拓展性接口，InitializingBean接口为bean提供了属性初始化后的处理方法，
@@ -25,13 +24,13 @@ public class appI18nConfig implements InitializingBean {
      *              构造方法 > postConstruct > afterPropertiesSet > init11方法。
      */
 
-    private static appI18nConfig appI18nConfig;
+    private static AppI18nConfig appI18nConfig;
 
-    public static appI18nConfig getAppConfig() {
+    public static AppI18nConfig getAppConfig() {
         return appI18nConfig;
     }
 
-    public appI18nConfig() {
+    public AppI18nConfig() {
         System.out.println("构造方法执行");
     }
 
@@ -51,15 +50,15 @@ public class appI18nConfig implements InitializingBean {
     }
 
     @Bean(initMethod = "init11")
-    public appI18nConfig test() {
-        return new appI18nConfig();
+    public AppI18nConfig test() {
+        return new AppI18nConfig();
     }
 
     @Value("${xxl.job.i18n}")
     private String i18n;
 
     @Value("${spring.messages.basename}")
-    private String basename;
+    private String baseName;
 
     public String getI18n() {
         if (!Arrays.asList("zh_CN", "zh_TC", "en").contains(i18n)) {
@@ -68,7 +67,7 @@ public class appI18nConfig implements InitializingBean {
         return i18n;
     }
 
-    public String getBasename(){
-        return basename;
+    public String getBaseName(){
+        return baseName;
     }
 }
