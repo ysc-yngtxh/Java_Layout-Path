@@ -45,9 +45,7 @@ public class G7对比PreparedStatement和Statement {
             while (rs.next()) {
                 System.out.println(rs.getString("name") + "\t" + rs.getString("age"));
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }

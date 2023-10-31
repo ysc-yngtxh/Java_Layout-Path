@@ -40,7 +40,7 @@ public class D4从属性资源文件中读取连接数据库信息 {
 
             // 5、处理查询结果集
             /*
-              Boolean flag= rs.next();     // rs.next()方法相当于一个动作，从表中一行一行的取数据，如果取到数据，返回结果true
+              Boolean flag = rs.next();    // rs.next()方法相当于一个动作，从表中一行一行的取数据，如果取到数据，返回结果true
               System.out.println(rs.next());
             */
             while (rs.next()) {

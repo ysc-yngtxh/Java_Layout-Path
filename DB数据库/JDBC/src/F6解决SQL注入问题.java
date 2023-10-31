@@ -34,7 +34,7 @@ public class F6解决SQL注入问题 {
             } else {
                 System.out.println("用户登陆信息有误");
             }
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         } finally {
             // 6、释放资源

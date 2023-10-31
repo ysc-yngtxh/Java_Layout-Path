@@ -38,14 +38,12 @@ import java.util.Scanner;
 */
 public class E5用户登陆业务 {
     public static void main(String[] args) {
-
         // 初始化界面
         Map<String, String> userLoginInfo = initUI();
         // 验证用户名和密码
         boolean loginSuccess = login(userLoginInfo);
         // 最后输出结果
         System.out.println(loginSuccess ? "登陆成功" : "登陆失败");
-
     }
 
     /**
