@@ -51,8 +51,8 @@ public class Tb1_ConsumerServiceImpl implements Tb1_ConsumerService {
      */
     public List<Tb1_Consumer> selectByMap() {
         Map<String, Object> columnMap = new HashMap<>();
-        // columnMap.put("user_name","三体");  // 必须与数据库中的对应，如果没有会报错
-        columnMap.put("age", 73);             // 键是数据库中的列 where age= 27
+        // columnMap.put("user_name", "三体");  // 必须与数据库中的对应，如果没有会报错
+        columnMap.put("age", 73);              // 键是数据库中的列 where age= 27
         return consumerMapper.selectByMap(columnMap);
     }
 

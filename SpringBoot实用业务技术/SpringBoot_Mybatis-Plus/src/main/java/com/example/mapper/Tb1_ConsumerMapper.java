@@ -34,7 +34,7 @@ public interface Tb1_ConsumerMapper extends BaseMapper<Tb1_Consumer> {
      *
      * 使用${ew.sqlSegment} 如果是连表查询且查询条件是连表的字段则需在service层拼接查询条件时字段前指定别名
      */
-    @Select("select ${ew.sqlSelect} from tb_consumer ${ew.customSqlSegment}")
+    @Select("select ${ew.sqlSelect} from tb_consumer  ${ew.customSqlSegment}")
     List<Tb1_Consumer> selectCustomAnnotationWrapper(@Param(Constants.WRAPPER) Wrapper<Tb1_Consumer> wrapper);
 }
 

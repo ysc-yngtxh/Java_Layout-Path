@@ -7,10 +7,10 @@ package com.example.funnel;
  */
 class Funnel {
 
-    int capacity;     // 漏斗容量
+    int capacity;      // 漏斗容量
     double leakingRate;// 漏嘴流水速率（double/ms）
-    int leftQuota;    // 漏斗剩余空间
-    long leakingTs;   // 上一次漏水时间
+    int leftQuota;     // 漏斗剩余空间
+    long leakingTs;    // 上一次漏水时间
 
     public Funnel(int capacity, int allowQuota, int perSecond) {
         this.capacity = capacity;

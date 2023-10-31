@@ -26,8 +26,8 @@ spring:
 #           username: ENC(xxxxx)
 #           password: ENC(xxxxx)
 #           driver-class-name: ENC(xxxxx)
-         #......省略
-         #以上会配置一个默认库master，一个组slave下有两个子库slave_1,slave_2
+         # ......省略
+         # 以上会配置一个默认库master，一个组slave下有两个子库slave_1,slave_2
 
 mybatis-plus:
   configuration:
