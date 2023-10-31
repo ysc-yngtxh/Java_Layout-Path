@@ -3,9 +3,9 @@ package A1_基础知识.初识Java;
 /*
 关于Java编程中运算符
       一、算术运算符：++出现变量后，先做赋值运算，再进行自加1操作。
-           int m = 20;                         int  m = 20;                  int e = 20;                              int s=20;
-           int n = m++;                        int n = ++m;                  System.out.println(e++); // 20           System.out.println(++s);//21
-           System.out.println(n); // 20        System.out.println(n); // 21  System.out.println(e); // 21             System.out.println(s);//21
+           int m = 20;                      int  m = 20;                  int e = 20;                              int s=20;
+           int n = m++;                     int n = ++m;                  System.out.println(e++); // 20           System.out.println(++s);//21
+           System.out.println(n); // 20     System.out.println(n); // 21  System.out.println(e);   // 21             System.out.println(s);//21
       二、关系运算符：【关系运算符的运算结果一定是布尔类型】
                  <         小于
                  >         大于

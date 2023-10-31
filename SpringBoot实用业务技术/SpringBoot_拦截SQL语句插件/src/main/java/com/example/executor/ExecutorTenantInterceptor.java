@@ -148,7 +148,7 @@ public class ExecutorTenantInterceptor implements Interceptor {
                 plainSelect.setWhere(new AndExpression(where
                         , CCJSqlParserUtil.parseCondExpression("tenant_id = " + tenant)));
             }
-            /*// 重新new一个查询Sql语句对象
+            // 重新new一个查询Sql语句对象
             BoundSql newBoundSql = new BoundSql(statements.getConfiguration(), select.toString(),
                     boundSql.getParameterMappings(), boundSql.getParameterObject());
             // 从旧的Sql对象中获取属性映射字段，放入到新的Sql对象中
@@ -163,8 +163,7 @@ public class ExecutorTenantInterceptor implements Interceptor {
             args[0] = newStatement;
             if (args.length == 6) {
                 args[5] = newStatement.getBoundSql(parameter);
-            }*/
-            ReflectUtil.setFieldValue(boundSql, "sql", select.toString());
+            }
         }
 
         // TODO 第三部分：使目标代理对象程序继续往后执行
