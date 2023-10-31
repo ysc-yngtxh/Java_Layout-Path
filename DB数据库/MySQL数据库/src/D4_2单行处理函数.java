@@ -20,21 +20,21 @@
   
   Ⅰ、字符函数
      1、length 获取参数值的字节个数（每个英文一个字节；中文需要看编码，utf8编码一个中文3个字节）
-        SELECT LENGTH(name) FROM tb_order;  -- 比如 name='游家纨绔‘ ，那么返回数据为 12; name='yjwk‘ ，那么返回数据为 4
+        SELECT LENGTH(name) FROM tb_order;  -- 比如 name='游家纨绔' ，那么返回数据为 12; name='yjwk' ，那么返回数据为 4
 
      2、concat 拼接字符串
         [1]、SELECT CONCAT(name, alias) FROM tb_order;
-             -- 比如 name='游家纨绔‘，alias='小游'，返回结果为 ‘游家纨绔小游’
+             -- 比如 name='游家纨绔'，alias='小游'，返回结果为 ‘游家纨绔小游’
         [2]、SELECT CONCAT_WS("_", name, alias, status) FROM tb_order;
              -- 比如 name='游家纨绔‘，alias='小游'，status='PLEASE_PAY' 返回结果为 ‘游家纨绔_小游_PLEASE_PAY’
 
      3.upper、lower 将字符变为大写/小写
-        [1]、SELECT LOWER(name) FROM tb_order;  -- 比如 name='YouShiCheng‘ 返回结果为 ‘youshicheng’
-        [2]、SELECT UPPER(name) FROM tb_order;  -- 比如 name='YouShiCheng‘ 返回结果为 ‘YOUSHICHENG’
+        [1]、SELECT LOWER(name) FROM tb_order;  -- 比如 name='YouShiCheng' 返回结果为 ‘youshicheng’
+        [2]、SELECT UPPER(name) FROM tb_order;  -- 比如 name='YouShiCheng' 返回结果为 ‘YOUSHICHENG’
 
      4.substr、substring 从下标pos开始往后截取字符输出，索引从1开始（两种写法都可）
-        [1]、SELECT SUBSTR(name, 1, 2) FROM tb_order;     -- 比如 name='齐天大圣孙悟空‘ 返回结果为 ‘齐天’
-        [2]、SELECT SUBSTRING(name, 1, 2) FROM tb_order;  -- 比如 name='齐天大圣孙悟空‘ 返回结果为 ‘齐天’
+        [1]、SELECT SUBSTR(name, 1, 2) FROM tb_order;     -- 比如 name='齐天大圣孙悟空' 返回结果为 ‘齐天’
+        [2]、SELECT SUBSTRING(name, 1, 2) FROM tb_order;  -- 比如 name='齐天大圣孙悟空' 返回结果为 ‘齐天’
 
      5.instr 查询子串在主串中第一次出现的下标,找不到返回0
         SELECT INSTR(name, '孙') FROM tb_order;
@@ -111,15 +111,15 @@
 ---------------------------------------------------------------------------------------------------------------
   Ⅳ、其它函数
      1.if(condition, expr_if_true, expr_if_false) 函数
-          -- condition条件表达式为true，则返回expr_if_true，否则返回expr_if_false
+          -- 当condition条件表达式为true，则返回expr_if_true，否则返回expr_if_false
           SELECT IF(del_flag=0, '显示', '删除') FROM tb_order
 
      2.ifnull(expr1, expr2) 函数
-          -- expr1 为 NULL，IFNULL() 函数返回 expr1，否则返回 expr2
+          -- 当expr1 为 NULL，IFNULL() 函数返回 expr1，否则返回 expr2
           SELECT IFNULL(subject, order_no) FROM tb_order
 
      3.nullif(expr1, expr2) 函数
-          -- expr1 = expr2，NULLIF() 函数返回 NULL，否则返回 expr1
+          -- 当expr1 = expr2，NULLIF() 函数返回 NULL，否则返回 expr1
           SELECT NULLIF(0, 0) FROM tb_order
 
      4.case 函数

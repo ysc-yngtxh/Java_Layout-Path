@@ -132,7 +132,7 @@
               方式二：这种方式查询效率较高（能够使用 WHERE 语句过滤的，推荐使用 WHERE 语句）
                      SELECT dept_no,MAX(sal) FROM t_emp WHERE sal > 2900 GROUP BY dept_no;
 
-        案例四：找出每个部门的平均薪资，并显示薪资大于2000的数据
+        案例四：找出每个部门的平均薪资，并显示平均薪资大于2000的数据
                第一步：找出每个部门的平均薪资  SELECT dept_no,AVG(sal) FROM t_emp GROUP BY dept_no;
                第二步：薪资大于2000的数据     SELECT dept_no,AVG(sal) FROM t_emp GROUP BY dept_no HAVING AVG(sal) > 2000;
                                           // AVG(sal)是分组函数不能写进where语句，所以只能使用having

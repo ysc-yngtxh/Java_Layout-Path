@@ -7,7 +7,7 @@
         `id` INT(20) PRIMARY KEY AUTO_INCREMENT COMMENT '主键Id',              SELECT
         `emp_no` BIGINT(20) COMMENT '员工编号',                                    字段1, 字段2, ...     3
         `ename` VARCHAR(255) COMMENT '员工姓名',                                FROM
-        `mgr` BIGINT(20) COMMENT '领导编号',                                       表名                 1
+        `mgr` BIGINT(20) COMMENT '领导编号',                                       表名                  1
         `sal` DOUBLE(10, 2) COMMENT '工资',                                    WHERE
         `comm` DOUBLE(10, 2) COMMENT '津贴',                                      条件                  2
         `dept_no` BIGINT(20) COMMENT '部门编号',
