@@ -7,9 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.Version;
-import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler;
-import com.baomidou.mybatisplus.extension.handlers.GsonTypeHandler;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
@@ -25,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 订单详情表(Tb_3_Order)实体类
+ * 订单详情表(Tb3_Order)实体类
  * @author 游家纨绔
  * @since 2023-08-31 19:36:39
  */
@@ -42,7 +40,7 @@ import java.util.Map;
 //            参数五：keepGlobalPrefix  表示该映射表名是否保留在配置文件中设置的全局表名前缀(true表示保留)
 //            参数六：excludeProperty 表示需要排除的属性字段。插入数据的时候会排除该字段数据
 @TableName(value = "order", autoResultMap = true, keepGlobalPrefix = true)
-public class Tb_3_Order implements Serializable {
+public class Tb3_Order implements Serializable {
     @Serial
     private static final long serialVersionUID = -53428860068885420L;
 
@@ -94,7 +92,7 @@ public class Tb_3_Order implements Serializable {
     //              更新时，带上这个 version
     //              执行更新时， set version = newVersion where version = oldVersion
     //              如果 version 不对，就更新失败
-    // 支持的数据类型只有:int,Integer,long,Long,Date,Timestamp,LocalDateTime
+    // 支持的数据类型只有:int、Integer、long、Long、Date、Timestamp、LocalDateTime
     // 整数类型下 newVersion = oldVersion + 1。newVersion 会回写到 entity 中
     // 仅支持 updateById(id) 与 update(entity, wrapper) 方法
     @Version

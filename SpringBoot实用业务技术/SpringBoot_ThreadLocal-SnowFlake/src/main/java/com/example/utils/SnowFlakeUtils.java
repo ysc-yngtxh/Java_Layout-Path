@@ -59,9 +59,9 @@ public class SnowFlakeUtils {
     private static final long DATACENTER_LEFT = SEQUENCE_BIT + MACHINE_BIT;
     private static final long TIMESTMP_LEFT = DATACENTER_LEFT + DATACENTER_BIT;
 
-    private static long datacenterId = 7;   // 数据中心
-    private static long machineId = 7;      // 机器标识
-    private static long sequence = 0L;      // 序列号
+    private static long datacenterId = 7;   // 数据中心，默认值7
+    private static long machineId = 7;      // 机器标识，默认值7
+    private static long sequence = 0L;      // 序列号，默认值0
     private static long lastStmp = -1L;     // 上一次时间戳
 
     public SnowFlakeUtils(long datacenterId, long machineId) {
@@ -115,7 +115,5 @@ public class SnowFlakeUtils {
         for (int i = 0; i < (1 << 12); i++) {
             System.out.println(SnowFlakeUtils.nextId());
         }
-        System.err.println(-1L<<12);
-        System.err.println(~(-1L<<12));
     }
 }
