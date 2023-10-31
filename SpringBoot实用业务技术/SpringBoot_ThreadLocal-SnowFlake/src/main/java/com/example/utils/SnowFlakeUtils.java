@@ -48,9 +48,9 @@ public class SnowFlakeUtils {
      *         -1L<<12补码：1111 1111 1111 1111 1111 0000 0000 0000
      *                原码：0000 0000 0000 0000 0000 1111 1111 1111 --> (2^12)+(2^11)+...+1=4095
      */
-    private static final long MAX_SEQUENCE = ~(-1L << SEQUENCE_BIT);
-    private static final long MAX_DATACENTER_NUM = ~(-1L << DATACENTER_BIT);
-    private static final long MAX_MACHINE_NUM = ~(-1L << MACHINE_BIT);
+    private static final long MAX_SEQUENCE = ~(-1L << SEQUENCE_BIT);         // 序列号最大值  -- 4095
+    private static final long MAX_DATACENTER_NUM = ~(-1L << DATACENTER_BIT); // 数据中心最大值 -- 31
+    private static final long MAX_MACHINE_NUM = ~(-1L << MACHINE_BIT);       // 机器标识最大值 -- 31
 
     /**
      * 每一部分向左的位移
@@ -83,7 +83,6 @@ public class SnowFlakeUtils {
         if (currStmp < lastStmp) {
             throw new RuntimeException("Clock moved backwards.  Refusing to generate id");
         }
-
         if (currStmp == lastStmp) {
             // 相同毫秒内，序列号自增
             sequence = (sequence + 1) & MAX_SEQUENCE;
