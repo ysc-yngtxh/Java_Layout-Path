@@ -47,7 +47,7 @@ public class OptionalApi {
                 .map(Models::getModelView)
                 .map(ModelView::getAddress)
                 .orElseGet(() -> "空值");
-//              .orElse("空值"); 这里要不为空值的话，最后应该返回的地址address的值
+             // .orElse("空值"); 这里要不为空值的话，最后应该返回的地址address的值
         log.debug(stringOptional);
 
 

@@ -50,7 +50,7 @@ public class OpenVavr {
 
         // TODO 3、验证Validation。
         // 通常情况下程序遇到错误未做处理就会终止。然而，Validation会继续处理，并将程序错误累积，最终最为一个整体处理。
-        User user = new User(1L, "youshicheng", "coogle@163.com", 25);
+        User user = new User(1L, "YouShiCheng", "google@163.com", 25);
         String invalidChars = user.getName().replaceAll("[a-zA-Z]", "");
         Validation<String, String> objects1 = invalidChars.isEmpty() ?
                 valid(user.getName())
@@ -61,7 +61,7 @@ public class OpenVavr {
         // 这里只会做校验处理，所以当没有遇到错误时并不会返回po类数据，因此对象为空(而且我们业务处理一般只需要错误信息即可)
         log.info(users.isInvalid() ? users.getError().toString() : users.get().toString());
 
-        User user1 = new User(1L, "youshicheng😃--97", "coogle@163.com", -1);
+        User user1 = new User(1L, "YouShiCheng😃--97", "google@163.com", -1);
         String invalidChars1 = user1.getName().replaceAll("[a-zA-Z]", "");
         Validation<Seq<String>, User> users1 = Validation.combine(
                 invalidChars1.isEmpty() ? valid(user1.getName())
@@ -87,34 +87,34 @@ public class OpenVavr {
         int input = 4;
         String output = Match(input).of(
                 Case($(1), "one"),
-                Case($(is(2)), "two"),//写法效果是一样的的
+                Case($(is(2)), "two"), // 写法效果是一样的的
                 Case($(3), "three"),
-                Case($(), "other......"));  //除开1、2、3的其他情况会走这里
+                Case($(), "other......"));  // 除开1、2、3的其他情况会走这里
         log.info(output);
 
         int i = 5;
         String s = Match(i).of(
-                Case($(isIn(2, 4, 6, 8)),"Even Single Digit"),
-                Case($(isIn(1, 3, 5, 7, 9)),"Odd Single Digit"),
-                Case($(),"Out of range"));
+                Case($(isIn(2, 4, 6, 8)), "Even Single Digit"),
+                Case($(isIn(1, 3, 5, 7, 9)), "Odd Single Digit"),
+                Case($(), "Out of range"));
         log.info(s);
         String s1 = Match(i).of(
-                Case($(instanceOf(Integer.class)),"Integer matched"),
-                Case($(),"not int"));
+                Case($(instanceOf(Integer.class)), "Integer matched"),
+                Case($(), "not int"));
         log.info(s1);
 
         // allOf表示的 and
         Integer i1 = 3;
         String s2 = Match(i1).of(
-                Case($(allOf(isNotNull(),isIn(1,2,3,null))),"Number found"),
-                Case($(),"Not found"));
+                Case($(allOf(isNotNull(),isIn(1,2,3,null))), "Number found"),
+                Case($(), "Not found"));
         log.info(s2);
 
         // anyOf 表示的是 or
         Integer year = 1990;
         String s3 = Match(year).of(
-                Case($(anyOf(isIn(1990, 1991, 1992), is(1986))),"Age match"),
-                Case($(),"No age match"));
+                Case($(anyOf(isIn(1990, 1991, 1992), is(1986))), "Age match"),
+                Case($(), "No age match"));
         log.info(s3);
     }
 }

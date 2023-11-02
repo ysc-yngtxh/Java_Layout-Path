@@ -146,9 +146,32 @@ public class TestMyBatis {
         sqlSession.close();
     }
 
-    // mybatis中的二级缓存
+    // 手动清除一级缓存
     @Test
     public void testTwo(){
+        // 获取session
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+        // 获取StudentDao的mapper
+        StudentDao dao = sqlSession.getMapper(StudentDao.class);
+
+        // 第一次查询Id为1006的数据
+        Student stu1 = dao.selectIdOne(1006);
+        System.out.println(stu1);
+        System.out.println("----------------------分割线-----------------------");
+
+        // 手动清除一级缓存
+        sqlSession.clearCache();
+
+        // 第二次查询Id为1006的数据
+        Student stu2 = dao.selectIdOne(1006);
+        System.out.println(stu2);
+
+        sqlSession.close();
+    }
+
+    // mybatis中的二级缓存
+    @Test
+    public void testThree(){
         // 获取session
         SqlSession sqlSession1 = MyBatisUtils.getSqlSession();
         // 获取StudentDao的mapper

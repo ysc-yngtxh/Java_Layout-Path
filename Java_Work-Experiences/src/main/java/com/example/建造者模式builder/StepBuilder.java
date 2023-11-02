@@ -16,7 +16,7 @@ public class StepBuilder {
 
     @SneakyThrows
     public static void main(String[] args) {
-        // 使用setp builder形成固定样式的链式编程
+        // 使用step builder形成固定样式的链式编程
         User build = UserBuilder.builder().withId(1L).withName("Ysc").withEmail("SDA").withAge(56).build();
         log.warn(build.toString());
 

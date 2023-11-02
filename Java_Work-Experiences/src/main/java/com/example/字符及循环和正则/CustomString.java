@@ -41,12 +41,12 @@ public class CustomString {
         // 第二种写法
         Pattern p = Pattern.compile(regex);
         boolean matches = p.matcher("+8612345678952").matches();
-        System.out.println(matches1+"\n"+matches2+"\n"+matches3+"\n"+matches);
+        System.out.println(matches1 + "\n" + matches2 + "\n" + matches3 + "\n" + matches);
 
 
         // TODO 区别迭代器、for循环、增强for循环、list.foreach()、stream.foreach()
         // 原生语法跳出当前循环使用continue
-        List<Integer> list = Lists.newArrayList(1,2,3,4,5,6);
+        List<Integer> list = Lists.newArrayList(1, 2, 3, 4, 5, 6);
         Iterator<Integer> it = list.iterator();
         while (it.hasNext()) {
             Integer next = it.next();
@@ -60,17 +60,17 @@ public class CustomString {
         }
         for (int i = 0; i < 5; i++) {
             if (i == 2) {
-                continue; //跳出本次循环
+                continue; // 跳出本次循环
             } else if (i == 4) {
-                break;    //跳出整个循环
+                break;    // 跳出整个循环
             }
             System.out.println(i);;
         }
-        for (String k: Arrays.asList("123","456","789")) {
+        for (String k : Arrays.asList("123", "456", "789")) {
             if ("123".equals(k)) {
-                continue; //跳出本次循环
+                continue; // 跳出本次循环
             } else if ("789".equals(k)){
-                break;    //跳出整个循环
+                break;    // 跳出整个循环
             }
             System.out.println(k);
         }
@@ -80,16 +80,16 @@ public class CustomString {
             if ("ysq".equals(a)) {
                 return;
             }
-            System.out.println(a+"--List");
+            System.out.println(a + "--List");
         });
-        Arrays.asList("ysc","ysq","jack").stream().forEach(a -> {
+        Arrays.asList("ysc", "ysq", "jack").stream().forEach(a -> {
             if ("ysq".equals(a)) {
                 return;
             }
-            System.out.println(a+"--stream");
+            System.out.println(a + "--stream");
         });
         // 这种写法目前不清楚优势在哪儿(网上说不建议使用，那咱就当是见识)
-        for (Iterator<String> itt = Arrays.asList("ysc","ysq","jack").iterator(); itt.hasNext();) {
+        for (Iterator<String> itt = Arrays.asList("ysc", "ysq", "jack").iterator(); itt.hasNext();) {
             String next = itt.next();
             System.out.println(next);
         }
@@ -100,7 +100,7 @@ public class CustomString {
                     if (k == 4) {
                         break case2;
                     }
-                    System.out.println(i+"--"+j+"--"+k);
+                    System.out.println(i + "--" + j + "--" + k);
                 }
             }
         }

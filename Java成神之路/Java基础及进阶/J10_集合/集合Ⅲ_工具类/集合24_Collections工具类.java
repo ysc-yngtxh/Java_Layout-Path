@@ -44,7 +44,7 @@ public class 集合24_Collections工具类 {
         wuGui2s.add(new WuGui2(5000));
         wuGui2s.add(new WuGui2(400));
         wuGui2s.add(new WuGui2(8000));
-        // 注意：对List集合中元素排序，需要保证List集合中的元素实现了：Comparable接口
+        // TODO 注意：对List集合中元素排序，需要保证List集合中的元素实现了：Comparable接口
         Collections.sort(wuGui2s);
         System.out.println(wuGui2s);
         // Collections.sort(list集合, 比较器对象); // 这种方式也可以排序

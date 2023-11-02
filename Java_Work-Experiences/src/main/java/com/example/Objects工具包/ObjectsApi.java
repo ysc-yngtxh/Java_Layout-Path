@@ -23,7 +23,7 @@ public class ObjectsApi {
      */
     public static class Comp implements Comparator<Integer> {
         /**
-         * 如果t1的值大返回111，相等返回100，否则返回222
+         * 如果t1的值大于t2，返回111；相等返回100；否则返回222
          */
         @Override
         public int compare(Integer t1, Integer t2) {
