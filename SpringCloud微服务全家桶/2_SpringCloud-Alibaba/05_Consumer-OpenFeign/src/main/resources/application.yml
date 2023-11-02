@@ -44,6 +44,4 @@ spring:
         response:
           # 开启响应压缩
           enabled: true
-      # 开启熔断降级
-      circuitbreaker:
-        enabled: true
+
