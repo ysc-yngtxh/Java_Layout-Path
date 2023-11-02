@@ -26,12 +26,12 @@ public class StreamApi {
     public static final Log log = LogFactory.get(StreamApi.class);
     public static void main(String[] args) {
         // TODO 1、anyMatch(), allMatch(), noneMatch()
-        //        anyMatch：判断的条件里，任意一个元素成功，返回true
-        //        allMatch：判断条件里的元素，所有的都是，返回true
-        //        noneMatch：与allMatch相反，判断条件里的元素，所有的都不是，返回true
+        //         anyMatch：判断的条件里，任意一个元素成功，返回true
+        //         allMatch：判断条件里的元素，所有的都是，返回true
+        //         noneMatch：与allMatch相反，判断条件里的元素，所有的都不是，返回true
         List<String> list = Arrays.asList("hello", "si");
-        boolean isValid = list.stream().anyMatch(element -> element.contains("h")); // true
-        boolean isValidOne = list.stream().allMatch(element -> element.contains("h")); // false
+        boolean isValid = list.stream().anyMatch(element -> element.contains("h"));     // true
+        boolean isValidOne = list.stream().allMatch(element -> element.contains("h"));  // false
         boolean isValidTwo = list.stream().noneMatch(element -> element.contains("h")); // false
         System.out.println(isValid + "\n" + isValidOne + "\n" + isValidTwo);
 
@@ -48,8 +48,8 @@ public class StreamApi {
         List<User> users = Arrays.asList(
                 new User(1L, null, null, 0, null
                         , new Models(new ModelView("WUHAN"), null), null)
-                , new User(1L, "YOUSHICHENG", "google@163.com", 25, null
-                        , new Models(new ModelView("SHENZHEN"), null), null));
+                , new User(1L, "YouShiCheng", "google@163.com", 25, null
+                        , new Models(new ModelView("ShenZhen"), null), null));
         // 第一个例子中，为每个组创建了Person集合；
         Map<Models, List<User>> peopleByGender = users.stream()
                 .collect(Collectors.groupingBy(User::getModels, Collectors.toList()));
@@ -72,7 +72,7 @@ public class StreamApi {
         Stream<Integer> stream2 = Stream.of(2, 4, 6);
         Stream<Integer> stream3 = Stream.of(7, 8, 9);
         Stream<Integer> resultingStream1 = Stream.concat(stream1, stream2);
-        //Stream<Integer> resultingStream2 = Stream.concat(Stream.concat(stream1, stream2), stream3);
+        // Stream<Integer> resultingStream2 = Stream.concat(Stream.concat(stream1, stream2), stream3);
         // 当合并的流比较多的时候，以上写法就不优雅了
         /**
          * ①、首先创建包含四个流的新流，其结果为Stream<Stream<Integer>>。

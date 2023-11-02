@@ -33,15 +33,15 @@ public class StreamExApi {
     public static final Log log = LogFactory.get(StreamExApi.class);
     public static void main(String[] args) throws FileNotFoundException {
         List<User> users = Arrays.asList(
-                new User(null,null,null,0,null
+                new User(null, null, null, 0, null
                         ,new Models(new ModelView("WUHAN"),null),null)
-                ,new User(1L,"YOUSHICHENG","google@163.com",25,null
+                ,new User(1L, "YouShiCheng", "google@163.com", 25, null
                         ,new Models(new ModelView("SHENZHEN"),null),null));
         // TODO 1、简单使用StreamEx映射name属性输出为List(不需要collect)
         List<String> userNames = StreamEx.of(users)
                 .map(User::getName)
                 .toList();
-        log.info("TODO-1"+userNames.toString());
+        log.info("TODO-1" + userNames.toString());
 
         // TODO 2、StreamEx分组(不需要collect)
         Map<Models, List<User>> modelsUsers = StreamEx.of(users)
@@ -65,7 +65,7 @@ public class StreamExApi {
         }
 
         // TODO 6、通过IntStreamEx流将数据业务处理再转为short数组
-        short[] src = {1,2,3};
+        short[] src = {1, 2, 3};
         short[] ints = IntStreamEx.of(src)
                 .map(x -> x * 2)
                 .toShortArray();
@@ -89,7 +89,7 @@ public class StreamExApi {
 
         // TODO 9、StreamEx读文件
         BufferedReader bf =
-                new BufferedReader(new FileReader("/Users/youshicheng/IDEA/java-layout-path/Java-Work_Experiences/src/main/java/com/example/java/vo/User.java"));
+                new BufferedReader(new FileReader(System.getProperty("user.dir") + "/src/main/java/com/example/vo/User.java"));
         StreamEx.ofLines(bf)
                 .remove(String::isEmpty)
                 .forEach(System.out::println);

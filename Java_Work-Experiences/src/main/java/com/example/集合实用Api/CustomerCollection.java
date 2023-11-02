@@ -21,8 +21,7 @@ import java.util.stream.Stream;
  * @description: TODO
  * @date 2022/11/26 14:54
  */
-public class
-CustomerCollection {
+public class CustomerCollection {
     public static final Log log = LogFactory.get(CustomerCollection.class);
 
     public static void main(String[] args) {
@@ -56,7 +55,7 @@ CustomerCollection {
 
         // TODO 集合引用小问题
         /**
-         *为什么要用List list = new ArrayList(),而不用ArrayList list = new ArrayList()呢?
+         * 为什么要用List list = new ArrayList(),而不用ArrayList list = new ArrayList()呢?
          */
         // 1、问题就在于List接口有多个实现类，现在你用的是ArrayList，也许哪一天你需要换成其它的实现类，如LinkedList或者Vector等等，
         //    这时你只要改变这一行就行了： List list = new LinkedList(); 其它使用了list地方的代码根本不需要改动。

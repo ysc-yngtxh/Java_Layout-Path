@@ -31,7 +31,7 @@ public class OrderPipeline implements Pipeline {
      */
     @Override
     public void addHead(Handler... handlers) {
-        // (handler1,handler2...)
+        // (handler1, handler2...)
         HandlerNode next = head.getNext();
         for (Handler handler : handlers) {
             HandlerNode handlerNode = new HandlerNode();
@@ -51,7 +51,7 @@ public class OrderPipeline implements Pipeline {
     @Override
     public void addTail(Handler... handlers) {
         HandlerNode node = tail;
-        for (Handler handler:handlers) {
+        for (Handler handler : handlers) {
             HandlerNode handlerNode = new HandlerNode();
             handlerNode.setHandler(handler);
 

@@ -51,12 +51,12 @@ public class OptionalApi {
         log.debug(stringOptional);
 
 
-        // TODO orElse()与orElseGet()的区别(orElse的性能高，建议使用)
+        // TODO orElse()与orElseGet()的区别(orElseGet的性能高，建议使用)
         User user1 = null;
-        // ofNullable()里的值为null,返回orElse中的值
+        // ofNullable()里的值为null,返回orElse中的值。使用orElse()方法时，无论 Optional 对象是否为空，都会执行默认值的计算。
         User one = Optional.ofNullable(user1)
                 .orElse(new User(1L, "one", "qwer@163.com", 25));
-        // 区别于orElse()方法，当ofNullable()里的值不为null时候，orElse还是会创建对象，而orElseGet不会，比较节约资源提高性能
+        // 区别于orElse()方法，使用orElseGet()方法时，只有在 Optional 对象为空时才会执行 Supplier 的计算。比较节约资源提高性能
         User two = Optional.ofNullable(user1)
                 .orElseGet(() -> new User(1L, "two", "qwer@163.com", 25));
         log.info(one.toString());
@@ -89,7 +89,7 @@ public class OptionalApi {
         boolean present = Optional.ofNullable(user2).isPresent();
         log.debug(String.valueOf(present));
         // TODO 判断是否有值, 如果值存在则执行块.注意：这里是if不是is
-        User user5 = new User("ysc",25);
+        User user5 = new User("ysc", 25);
         Optional.ofNullable(user5).ifPresent(u -> log.debug(u.toString()));
 
         // TODO 为空返回一个异常
