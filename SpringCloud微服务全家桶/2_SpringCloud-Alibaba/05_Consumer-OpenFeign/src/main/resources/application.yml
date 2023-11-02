@@ -26,13 +26,13 @@ spring:
             # openFeign连接超时
             connect-timeout: 1
             # openFeign读取超时
-            read-timeout: 11
+            read-timeout: 1
           # 配置局部(指定的提供者服务配置)
           nacos-provider:
             # openFeign连接超时
             connect-timeout: 1
             # openFeign读取超时
-            read-timeout: 11
+            read-timeout: 1
       # 请求与响应压缩配置
       compression:
         request:
@@ -44,3 +44,6 @@ spring:
         response:
           # 开启响应压缩
           enabled: true
+      # 开启熔断降级
+      circuitbreaker:
+        enabled: true

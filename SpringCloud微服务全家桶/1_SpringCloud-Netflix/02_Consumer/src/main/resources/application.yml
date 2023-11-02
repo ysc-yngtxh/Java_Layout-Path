@@ -33,6 +33,7 @@ hystrix:
           thread:
             timeoutInMilliseconds: 1000
 
+# 开启熔断降级
 feign:
   hystrix:
     enabled: true

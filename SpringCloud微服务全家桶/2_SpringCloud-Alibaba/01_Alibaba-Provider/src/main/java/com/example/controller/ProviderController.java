@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author 游家纨绔
  */
@@ -19,7 +21,8 @@ public class ProviderController {
     private UserServiceImpl userService;
 
     @GetMapping("/{id}")
-    public User query(@PathVariable("id") Integer id){
+    public User query(@PathVariable("id") Integer id) throws InterruptedException {
+        // TimeUnit.SECONDS.sleep(8);
         return userService.queryById(id);
     }
 }

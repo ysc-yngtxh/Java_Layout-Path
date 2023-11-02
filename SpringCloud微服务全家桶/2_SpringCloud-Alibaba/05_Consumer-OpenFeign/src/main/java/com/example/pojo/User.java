@@ -27,4 +27,6 @@ public class User {
     private Integer deleteFlag; // 逻辑删除
     private Date createdDate;   // 创建时间
     private Date updatedDate;   // 更新时间
+
+    private transient String backup;
 }
