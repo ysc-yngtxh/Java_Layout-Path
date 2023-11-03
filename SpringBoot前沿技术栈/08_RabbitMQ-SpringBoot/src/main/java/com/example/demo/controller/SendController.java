@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +25,6 @@ public class SendController {
         log.info("当前时间：{},发送一条消息给两个TTL队列：{}"
                 , new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(new Date())
                 , message);
-
         rabbitTemplate.convertAndSend("bootDirectExchange", "bootDirectRoutingKeyA", "消息来自ttl为10s的队列：" + message);
         rabbitTemplate.convertAndSend("bootDirectExchange", "bootDirectRoutingKeyB", "消息来自ttl为40s的队列：" + message);
 
@@ -35,6 +33,16 @@ public class SendController {
           虽然延迟队列很好用，但是想想，如果延迟队列需求很多，那是不是也要声明需要新的对列。
           所以，为了优化延迟队列，我们可以选择在生产者上加延迟时间，想延迟多久用户决定。
         */
+    }
+
+    // 手动消费延迟队列中的消息
+    @GetMapping("/receive")
+    public void receive() {
+        log.info("当前时间：{},手动消费延迟队列中的消息：{}"
+                , new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(new Date())
+                );
+        Object received = rabbitTemplate.receiveAndConvert("bootDirectQueueB");
+        System.out.println(received);
     }
 
     // 开始发消息  消息延迟
