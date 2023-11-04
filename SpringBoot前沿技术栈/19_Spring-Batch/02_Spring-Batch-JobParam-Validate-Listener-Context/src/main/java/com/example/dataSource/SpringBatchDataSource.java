@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 
 @Setter
 @Configuration
-@ConfigurationProperties(prefix = "spring.datasource") // 需要set方法，将pProperties中的key值注入到相应的字段之中
+@ConfigurationProperties(prefix = "spring.datasource") // 需要set方法，将Properties中的key值注入到相应的字段之中
 public class SpringBatchDataSource {
 
     private String driverClassName;
