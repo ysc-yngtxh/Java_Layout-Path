@@ -31,5 +31,4 @@ public class SpringBootZhCnApplication {
      *
      *       variant：个人把这个理解为类别，比如有四川话，湖南话等等，但都是中文。
      */
-
 }
