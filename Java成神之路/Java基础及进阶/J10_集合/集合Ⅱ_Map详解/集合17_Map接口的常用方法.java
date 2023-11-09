@@ -30,10 +30,10 @@ import java.util.Set;
               map集合对象
               key      value
               ---------------
-              1         zhangsan
+              1         zhangSan
               2         lisi
-              3         wangwu
-              4         zhaoliu
+              3         wangWu
+              4         zhaoLiu
 
               Set set = map.entrySet();
 

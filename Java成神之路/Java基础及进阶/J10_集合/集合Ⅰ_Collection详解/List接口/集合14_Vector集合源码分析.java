@@ -66,9 +66,5 @@ public class 集合14_Vector集合源码分析 {
         for (int i = 0; i < mylist.size(); i++) {
             System.out.println(mylist.get(i));
         }
-
-
-
-
     }
 }

@@ -10,8 +10,8 @@ import java.util.Properties;
      因为控制线程安全有其他更好的方案
 
   2、Hashtable的key可以为null吗？
-       Hashtable的key和value不允许null的
-       HashMap集合的key和value都是可以为null的
+       Hashtable的key和value不允许null的,且都可以为空
+       HashMap集合的key和value都是可以为null的,且都可以为空
 
   3、Hashtable集合初始化容量11
      Hashtable集合扩容，原容量*2+1
@@ -27,10 +27,12 @@ public class 集合20_Hashtable {
         Map<Object, Object> map = new HashMap<>();
         map.put(null, "100");
         map.put(100, "null");
-        System.out.println(map.get(null));
-        System.out.println(map.get(100));
+        map.put("", "null");
+        map.put("200", "");
+        System.out.println(map);
 
         Map<Object, Object> map2 = new Hashtable<>();
+        map2.put("", "游诗成");
         map2.put(null, "游诗成");
         map2.put(222, "null");
         map2.put(333, "曹玉敏");

@@ -14,7 +14,7 @@ public class 集合23_LinkedHashMap {
      * LinkedHashMap
      * 1、Key和Value都允许空
      * 2、Key重复会覆盖、Value允许重复
-     * 3、有序 -- 指的是存进去的数据跟取出来的数据顺序是一样的
+     * 3、有序 -- 指的是存进去的数据跟取出来的数据顺序是一样的[这与HashMap最大的区别]
      * 4、非线程安全
      */
     public static void main(String[] args) {
