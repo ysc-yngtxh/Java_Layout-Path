@@ -23,7 +23,7 @@ public class Semaphore辅助类 {
     public static void main(String[] args) {
         // 停车场同时可以容纳3辆车
         Semaphore semaphore = new Semaphore(3);
-        // 模拟100辆车进入停车场
+        // 模拟10辆车进入停车场
         for (int i = 0; i < 10; i++) {
             Thread thread = new Thread(new Runnable() {
                 public void run() {

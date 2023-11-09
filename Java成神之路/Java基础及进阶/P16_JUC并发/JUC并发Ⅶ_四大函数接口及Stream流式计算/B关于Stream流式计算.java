@@ -61,7 +61,7 @@ public class B关于Stream流式计算 {
                     System.out.println("stream accumulator: x1:" + x1 + "  x2:" + x2);
                     return x1 - x2;
                 },
-                (x1, x2) -> { //不会执行到这里
+                (x1, x2) -> { // 不会执行到这里
                     System.out.println("stream combiner: x1:" + x1 + "  x2:" + x2);
                     return x1 * x2;
                 });

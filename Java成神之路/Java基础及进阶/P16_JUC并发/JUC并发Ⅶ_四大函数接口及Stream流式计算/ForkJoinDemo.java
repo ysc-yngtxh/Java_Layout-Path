@@ -11,7 +11,7 @@ public class ForkJoinDemo extends RecursiveTask<Long> {
     /**
      * ForkJoin在Jdk1.7，并行执行任务！提高效率，大数据量
      * 大数据：Map Reduce(把大任务拆分为小任务)
-     * </p>
+     *
      * 求和计算的任务！
      * 3000   6000(ForkJoin)  9000(Stream并行流)
      * 如何使用ForkJoin
