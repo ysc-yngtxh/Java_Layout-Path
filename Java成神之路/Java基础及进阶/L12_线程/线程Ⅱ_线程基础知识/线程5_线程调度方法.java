@@ -30,7 +30,7 @@ package L12_线程.线程Ⅱ_线程基础知识;
                      class MyThread1 extends Thread {
                         public void doSome(){
                            MyThread2 t = new MyThread2()
-                           t.join();  // t线程先执行，直到t线程结束，主线程才可以继续。
+                           t.join();  // t线程先执行，主线程阻塞。直到t线程结束，主线程才可以继续执行。
                         }
                      }
                      class MyThread2 extends Thread{}
