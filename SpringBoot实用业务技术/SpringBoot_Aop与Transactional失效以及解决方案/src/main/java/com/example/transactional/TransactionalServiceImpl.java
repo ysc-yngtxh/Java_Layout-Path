@@ -18,12 +18,17 @@ public class TransactionalServiceImpl implements TransactionalService {
     @Override
     @Transactional
     public void saveUser() {
-        YSC++;
-        throw new RuntimeException("故意抛异常，制造回滚");
+        try {
+            YSC++;
+            int i = YSC / 0;
+        } catch (Exception e) {
+            System.out.println("saveUser()方法故意抛异常，制造回滚");
+        }
+        System.out.println(YSC);
     }
 
     @Override
-    @Transactional
+    // @Transactional
     public void saveSigUser() {
         System.out.println("执行saveSigUser()方法...");
         try {
@@ -32,6 +37,7 @@ public class TransactionalServiceImpl implements TransactionalService {
             System.out.println(YSC);
         }
         this.saveUser();
+        System.out.println(YSC);
     }
 
     @Override

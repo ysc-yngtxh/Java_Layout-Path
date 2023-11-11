@@ -33,6 +33,13 @@ class SpringBootAopTransactionalApplicationTests {
         } catch (Exception e) {
             System.out.println("出错了...");
         }
-        System.out.println(transactionalService.YSC);
+    }
+    @Test
+    void contextLoads4() {
+        try {
+            transactionalService.saveUser();
+        } catch (Exception e) {
+            System.out.println("出错了...");
+        }
     }
 }

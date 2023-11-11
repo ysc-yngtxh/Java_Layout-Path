@@ -18,9 +18,19 @@
       表示将该类自动发现扫描组件。个人理解相当于，如果扫描到有@Component、@Controller、@Service等这些注解的类，
       并注册为Bean，可以自动收集所有的Spring组件，包括@Configuration类。
   
-4. 具体参考：https://blog.csdn.net/qq_33591903/article/details/119843446
+  4. 具体参考：https://blog.csdn.net/qq_33591903/article/details/119843446
 
-## 二、事务不生效
+## 二、事务注解详解
+     默认遇到throw new RuntimeException(“…”); 会回滚
+     需要捕获的throw new Exception(“…”);      不会回滚
+
+     @Transactional(rollbackFor=Exception.class)指定异常回滚
+     @Transactional(noRollbackFor=Exception.class)指定异常不回滚
+
+     如果有事务,那么加入事务,没有的话新建一个(不写的情况下) -- 传播级别
+     @Transactional(propagation=Propagation.REQUIRED)
+
+## 三、事务不生效
   1. ### 访问权限问题  
      方法的访问权限被定义成了private，这样会导致事务失效，Spring 要求被代理方法必须是public的。
  
@@ -68,7 +78,7 @@
      但有个很致命的问题是：不支持事务。如果只是单表操作还好，不会出现太大的问题。但如果需要跨多张表操作，由于其不支持事务，数据极有可能会出现不完整的情况。  
      此外，myisam 还不支持行锁和外键。
  
-## 三、事务不回滚
+## 四、事务不回滚
   7. ### 抛出检查异常
      ```
      @Slf4j
@@ -92,7 +102,8 @@
   8. ### 业务方法本身捕获了异常
      Spring是否进行回滚是根据你是否抛出异常决定的，所以如果你自己try...catch...捕获了异常，Spring 也无能为力。
 
-## 四、编程式事务
+
+## 五、编程式事务
    基于@Transactional注解的，主要讲的是它的事务问题，我们把这种事务叫做：声明式事务。
    
    其实，spring还提供了另外一种创建事务的方式，即通过手动编写代码实现的事务，我们把这种事务叫做：编程式事务。例如：
