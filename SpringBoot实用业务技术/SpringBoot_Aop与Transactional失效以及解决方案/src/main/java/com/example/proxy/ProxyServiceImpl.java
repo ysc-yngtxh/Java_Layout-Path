@@ -28,7 +28,7 @@ public class ProxyServiceImpl implements ProxyService {
         System.out.println("调用useAllInterface()方法");
         // AopContext.currentProxy() 是 Spring 框架中的一个静态方法，用于获取当前正在执行的代理对象。
         // 这个方法是在组件内部调用的，目的是让当前组件能够访问自己的代理对象，从而在方法内部调用目标方法或其他切入点。
-        // 将 currentProxy 强制转换为 proxyService 类型。这个时候saveUser()方法的切面编程是会生效执行
+        // 将 currentProxy 强制转换为 proxyService 类型。这个时候useInterface()方法的切面编程是会生效执行
         ProxyService currentProxy = (ProxyService) AopContext.currentProxy();
         currentProxy.useInterface();
     }

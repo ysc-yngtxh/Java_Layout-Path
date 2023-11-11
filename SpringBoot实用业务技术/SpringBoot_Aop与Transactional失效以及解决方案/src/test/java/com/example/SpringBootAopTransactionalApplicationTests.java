@@ -1,7 +1,7 @@
 package com.example;
 
 import com.example.proxy.ProxyService;
-import com.example.transactional.TransactionalServiceImpl;
+import com.example.transactional.service.StudentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +12,7 @@ class SpringBootAopTransactionalApplicationTests {
     @Autowired
     private ProxyService proxyService;
     @Autowired
-    private TransactionalServiceImpl transactionalService;
+    private StudentService studentService;
 
     @Test
     void contextLoads() {
@@ -28,18 +28,13 @@ class SpringBootAopTransactionalApplicationTests {
 
     @Test
     void contextLoads3() {
-        try {
-            transactionalService.saveSigUser();
-        } catch (Exception e) {
-            System.out.println("出错了...");
-        }
+        // 使用直接对象，事务不生效
+        studentService.saveSigUser();
     }
+
     @Test
     void contextLoads4() {
-        try {
-            transactionalService.saveUser();
-        } catch (Exception e) {
-            System.out.println("出错了...");
-        }
+        // 使用代理对象，事务生效
+        studentService.saveAllUser();
     }
 }

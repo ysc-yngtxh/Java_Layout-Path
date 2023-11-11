@@ -63,7 +63,7 @@
      简单理解，就是saveUser()方法中调用this.doInsert(),这里的this是被真实对象，所以会直接走doInsert的业务逻辑，而不会走切面逻辑，所以事务失败。  
      解决方案：    
             方案一：解决方法可以是直接在启动类中添加@Transactional注解saveUser()  
-            方案二：@EnableAspectJAutoProxy(exposeProxy = true)在启动类中添加，会由Cglib代理实现。
+            方案二：@EnableAspectJAutoProxy(exposeProxy = true)在启动类中添加
  
   4. ### 未被 spring 管理  
      使用 spring 事务的前提是：对象要被 spring 管理，需要创建 bean 实例。  
