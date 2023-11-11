@@ -15,7 +15,7 @@ class SpringBootAopTransactionalApplicationTests {
     private StudentService studentService;
 
     @Test
-    void contextLoads() {
+    void contextLoads1() {
         // Aop切面逻辑没有执行
         proxyService.useSigInterface();
     }
