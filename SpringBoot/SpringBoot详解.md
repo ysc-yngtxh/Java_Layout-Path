@@ -24,8 +24,8 @@
      默认遇到throw new RuntimeException(“…”); 会回滚
      需要捕获的throw new Exception(“…”);      不会回滚
 
-     @Transactional(rollbackFor=Exception.class)指定异常回滚
-     @Transactional(noRollbackFor=Exception.class)指定异常不回滚
+     @Transactional(rollbackFor=Exception.class)  : 指定异常回滚
+     @Transactional(noRollbackFor=Exception.class): 指定异常不回滚
 
      如果有事务,那么加入事务,没有的话新建一个(不写的情况下) -- 传播级别
      @Transactional(propagation=Propagation.REQUIRED)
