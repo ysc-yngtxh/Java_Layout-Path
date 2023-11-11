@@ -7,6 +7,7 @@
     <!--第一种方式注入Bean-->
     <!--组件扫描器：将包bao1下的@Component注入容器并创建对象bean-->
     <context:component-scan base-package="com.example.bao1"/>
+    <context:component-scan base-package="com.example.proxy"/>
 
     <!--第二种方式注入Bean-->
     <!--直接在配置文件中创建bean对象，把对象交给spring容器，由spring容器统一创建，管理对象-->
@@ -39,4 +40,7 @@
         proxy-target-class="true"：告诉框架，要使用jdk动态代理
     -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!--暴露代理，是为了使用AopContext.currentProxy()方法-->
+    <aop:aspectj-autoproxy expose-proxy="true"/>
 </beans>

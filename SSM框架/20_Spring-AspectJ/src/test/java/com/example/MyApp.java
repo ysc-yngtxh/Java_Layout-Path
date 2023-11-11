@@ -6,6 +6,7 @@ import com.example.bao3.FirstService;
 import com.example.bao4.OutService;
 import com.example.cglib1.CglibServiceImpl;
 import com.example.jdk.CglibByServiceImpl;
+import com.example.proxy.proxyServiceImpl;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -80,5 +81,25 @@ public class MyApp {
 
         System.out.println("proxy:" + proxy);
         proxy.like("曹玉敏，我喜欢你!", 23);
+    }
+
+    // 控制台的结果没有切面编程的打印。因为Aop是基于动态代理实现的，这里this调用直接对象，Aop不生效
+    @Test
+    public void text08(){
+        ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+        proxyServiceImpl proxy = (proxyServiceImpl) ac.getBean("Service7");
+
+        System.out.println("proxy:" + proxy);
+        proxy.saveSigUser();
+    }
+
+    // 获取当前执行程序的代理对象，通过代理对象调用，Aop生效（需要在xml文件中开启expose-proxy）
+    @Test
+    public void text09(){
+        ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+        proxyServiceImpl proxy = (proxyServiceImpl) ac.getBean("Service7");
+
+        System.out.println("proxy:" + proxy);
+        proxy.saveAllUser();
     }
 }

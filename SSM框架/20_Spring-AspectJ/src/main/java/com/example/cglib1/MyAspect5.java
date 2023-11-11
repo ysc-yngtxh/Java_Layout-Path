@@ -20,6 +20,6 @@ public class MyAspect5 {
         for (Object arg : args) {
             System.out.println("参数：" + arg);
         }
-        System.out.println("来，看看喜欢李晶晶的前置通知是怎么做的。");
+        System.out.println("来，看看喜欢曹玉敏的前置通知是怎么做的。");
     }
 }
