@@ -35,6 +35,7 @@
      ```
      @Service
      public class DefaultTransactionService implement Service {
+     
           public void saveUser() throws Exception {
               // do something
               doInsert();
@@ -45,7 +46,6 @@
               User user = new User();
               UserService.insert(user);
               throw new IOException();
-          
           }
      }
      ```
@@ -112,7 +112,7 @@
    在spring中为了支持编程式事务，专门提供了一个类：TransactionTemplate，在它的execute方法中，就实现了事务的功能。
    ```
    
-   相较于@Transactional注解声明式事务，更建议大家使用，基于TransactionTemplate的编程式事务。主要原因如下：
+   相较于@Transactional注解声明式事务，更建议大家使用，基于TransactionTemplate的编程式事务。主要原因如下：  
    ①、避免由于spring aop问题，导致事务失效的问题。
    ②、能够更小粒度的控制事务的范围，更直观。
 

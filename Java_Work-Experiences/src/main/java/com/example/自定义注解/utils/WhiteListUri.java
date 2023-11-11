@@ -53,10 +53,10 @@ public class WhiteListUri {
         System.out.println("getFieldsAnnotatedWith:" + fields);
 
         // 获取特定参数对应的方法
-        Set<Method> someMethods = reflections.getMethodsWithParameter(long.class);//long类型参数的方法
+        Set<Method> someMethods = reflections.getMethodsWithParameter(long.class);// long类型参数的方法
         System.out.println("getMethodsMatchParams:" + someMethods);
 
-        Set<Method> voidMethods = reflections.getMethodsReturn(void.class);//无返回值的方法
+        Set<Method> voidMethods = reflections.getMethodsReturn(void.class);// 无返回值的方法
         System.out.println( "getMethodsReturn:" + voidMethods);
 
         // 获取资源文件
@@ -64,7 +64,7 @@ public class WhiteListUri {
     }
 
 
-    //TODO 获取自定义注解在Controller层上的路径名集合，进而处理是否白名单
+    // TODO 获取自定义注解在Controller层上的路径名集合，进而处理是否白名单
     public static List<String> getWhiteUrls(String packageName) {
 
         // TODO 使用反射依赖包
@@ -72,8 +72,8 @@ public class WhiteListUri {
         // 设置扫描的包的路径
         Reflections reflections = new Reflections(
                 new ConfigurationBuilder()
-                        .setUrls(ClasspathHelper.forPackage(packageName))// 指定路径URL
-                        .setScanners(new MethodParameterNamesScanner()) // 指定添加方法参数扫描工具
+                        .setUrls(ClasspathHelper.forPackage(packageName)) // 指定路径URL
+                        .setScanners(new MethodParameterNamesScanner())   // 指定添加方法参数扫描工具
         );
 
         // 扫描指定包带有@LoginRequired注解的方法集合

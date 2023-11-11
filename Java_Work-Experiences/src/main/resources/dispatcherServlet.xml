@@ -15,9 +15,9 @@
 
     <!--springmvc配置文件，声明controller和其他web相关的对象-->
     <!--声明组件扫描器-->
-    <context:component-scan base-package="com.example.java.自定义注解.controller"/>
+    <context:component-scan base-package="com.example.自定义注解.controller"/>
     <!--定义切面类的bean-->
-    <aop:aspectj-autoproxy proxy-target-class="true" />
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
     <bean id="loginAspect" class="com.example.自定义注解.aspect.LoginAop"/>
 
 
