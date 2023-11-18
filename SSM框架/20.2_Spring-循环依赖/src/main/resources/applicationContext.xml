@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Setter方法注入方式 在 Spring 中是不会产生循环依赖问题的，这主要是靠 三级缓存 机制-->
+    <!--
+    <bean id="userService" class="com.example.service.UserService">
+        <property name="orderService" ref="orderService"/>
+    </bean>
+
+    <bean id="orderService" class="com.example.service.OrderService">
+        <property name="userService" ref="userService"/>
+    </bean>
+    -->
+
+
+    <!-- 构造器注入 发生在 实例化阶段，而 Spring 解决循环依赖问题依靠的 三级缓存 在 属性注入阶段
+         也就是说调用构造函数时还未能放入三级缓存中，所以无法解决 构造器注入 的循环依赖问题。-->
+    <bean id="userService" class="com.example.service.UserService">
+        <constructor-arg name="orderService" ref="orderService"/>
+    </bean>
+
+    <bean id="orderService" class="com.example.service.OrderService">
+        <constructor-arg name="userService" ref="userService"/>
+    </bean>
+
+    <!-- 多例下，Setter方式注入也会存在循环依赖问题无法解决 -->
+    <!--
+    <bean id="userService" class="com.example.service.UserService" scope="prototype">
+        <property name="orderService" ref="orderService"/>
+    </bean>
+
+    <bean id="orderService" class="com.example.service.OrderService" scope="prototype">
+        <property name="userService" ref="userService"/>
+    </bean>
+    -->
+</beans>

@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 // 暴露代理，方便获取当前代理对象。
-@EnableAspectJAutoProxy(exposeProxy = true)
+@EnableAspectJAutoProxy(exposeProxy = true) // 开启spring注解aop配置的支持
 @SpringBootApplication
 @MapperScan("com.example.transactional.dao")
 public class SpringBootAopTransactionalApplication {
