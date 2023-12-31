@@ -15,7 +15,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * @author 游诗成
@@ -53,10 +52,10 @@ public class SecurityConfig {
         return provider;
     }
 
-/**    @Bean
+/** @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeHttpRequests().requestMatchers("/toMain","/user/login").permitAll()
+                .authorizeHttpRequests().requestMatchers("/toMain", "/user/login").permitAll()
                 .anyRequest().authenticated()
                 // 首先，因为在配置类中注入了 SecurityFilterChain 类型的Bean,所以没有Spring Security默认的登陆界面了。
                 // 但是如果在 securityFilterChain 方法中加上 .and().formLogin() 就可以显示默认界面了
