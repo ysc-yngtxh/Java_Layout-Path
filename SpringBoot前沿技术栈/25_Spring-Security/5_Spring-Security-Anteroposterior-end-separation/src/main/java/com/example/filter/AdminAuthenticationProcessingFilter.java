@@ -63,7 +63,7 @@ public class AdminAuthenticationProcessingFilter extends AbstractAuthenticationP
 
             // 提供子类可以配置放入身份验证请求的详细信息属性的内容。
             // 参数：wrappedRequest – 正在为其创建身份验证请求
-            //      authRequest – 应该设置其详细信息的身份验证请求对象
+            //      authRequest    – 应该设置其详细信息的身份验证请求对象
             authRequest.setDetails(authenticationDetailsSource.buildDetails(wrappedRequest));
         } catch (Exception e) {
             throw new AuthenticationServiceException(e.getMessage());

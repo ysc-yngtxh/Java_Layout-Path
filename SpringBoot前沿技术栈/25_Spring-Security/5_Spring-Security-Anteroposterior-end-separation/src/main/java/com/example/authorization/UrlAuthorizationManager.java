@@ -50,7 +50,7 @@ public class UrlAuthorizationManager implements AuthorizationManager<RequestAuth
         // 获取当前用户访问路径
         HttpServletRequest request = requestAuthorizationContext.getRequest();
         String requestURI = request.getRequestURI();
-        // 获取当前用户拥有权限
+        // 获取当前用户拥有权限（即该用户的角色 【在Spring Security中，权限跟角色放在一起】）
         Collection<? extends GrantedAuthority> authorities = authentication.get().getAuthorities();
         List<String> list = authorities.stream().map(GrantedAuthority::getAuthority).toList();
 
@@ -59,7 +59,7 @@ public class UrlAuthorizationManager implements AuthorizationManager<RequestAuth
         List<Long> roleIds = sysRoles.stream().map(SysRole::getId).toList();
         boolean isAuthorizationUrl= false;
         if (roleIds.size() > 0) {
-            // 获取菜单Id
+            // 根据角色Id进而获取菜单Id
             List<SysRoleMenu> sysRoleMenus = sysRoleMenuMapper.selectList(Wrappers.<SysRoleMenu>lambdaQuery().in(SysRoleMenu::getRoleId, roleIds));
             List<Long> menuIds = sysRoleMenus.stream().map(SysRoleMenu::getMenuId).distinct().toList();
             // 获取该用户能访问的所有路径

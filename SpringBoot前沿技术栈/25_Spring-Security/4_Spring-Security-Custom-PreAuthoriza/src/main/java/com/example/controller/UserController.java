@@ -29,4 +29,3 @@ public class UserController {
         return "无丝竹之乱耳，无案牍之劳形;";
     }
 }
-

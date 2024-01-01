@@ -45,7 +45,6 @@ public class SecurityConfig {
 
     private final UserDetailsServiceImpl userDetailsService;
 
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -55,7 +54,6 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         AuthenticationManager authenticationManager = authenticationConfiguration.getAuthenticationManager();
         return authenticationManager;
-
     }
 
     @Bean

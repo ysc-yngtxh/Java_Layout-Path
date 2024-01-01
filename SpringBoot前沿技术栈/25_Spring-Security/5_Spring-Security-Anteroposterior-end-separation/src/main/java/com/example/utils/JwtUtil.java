@@ -20,7 +20,7 @@ public class JwtUtil {
 
     // 有效期为
     public static final Long JWT_TTL = 60 * 60 * 1000L;
-    //设置密钥明文
+    // 设置密钥明文
     public static final String JWT_KEY = "youshicheng";
 
     public static String getUUID() {
@@ -31,7 +31,7 @@ public class JwtUtil {
      * 生成jwt token
      */
     public static String createJwt(String Subject) {
-        JwtBuilder builder = getJwtBuilder(getUUID(), Subject, null); //设置过期时间
+        JwtBuilder builder = getJwtBuilder(getUUID(), Subject, null); // 设置过期时间
         return builder.compact();
     }
 
@@ -39,7 +39,7 @@ public class JwtUtil {
      * 生成jwt token
      */
     public static String createJwt(String Subject, Long ttlMilis) {
-        JwtBuilder builder = getJwtBuilder(getUUID(), Subject, ttlMilis); //设置过期时间
+        JwtBuilder builder = getJwtBuilder(getUUID(), Subject, ttlMilis); // 设置过期时间
         return builder.compact();
     }
 
@@ -47,7 +47,7 @@ public class JwtUtil {
      * 生成jwt token
      */
     public static String createJwt(String id, String Subject, Long ttlMilis) {
-        JwtBuilder builder = getJwtBuilder(id, Subject, ttlMilis); //设置过期时间
+        JwtBuilder builder = getJwtBuilder(id, Subject, ttlMilis); // 设置过期时间
         return builder.compact();
     }
 
@@ -62,12 +62,12 @@ public class JwtUtil {
         long expMillis = nowMillis + ttlMilis;
         Date expDate = new Date(expMillis);
         return Jwts.builder()
-                .setId(uuid)          //唯一的Id
-                .setSubject(Subject)  //主题
-                .setIssuer("ysc")     //签发者
-                .setIssuedAt(now)     //签发时间
-                .signWith(sigbatureAlgorithm, secreKey)  //签名算法和密钥
-                .setExpiration(expDate);  //过期时间
+                .setId(uuid)          // 唯一的Id
+                .setSubject(Subject)  // 主题
+                .setIssuer("ysc")     // 签发者
+                .setIssuedAt(now)     // 签发时间
+                .signWith(sigbatureAlgorithm, secreKey)  // 签名算法和密钥
+                .setExpiration(expDate);  // 过期时间
     }
 
     /**
