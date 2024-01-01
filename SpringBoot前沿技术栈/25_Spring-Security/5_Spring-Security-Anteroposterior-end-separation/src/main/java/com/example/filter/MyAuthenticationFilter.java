@@ -102,7 +102,6 @@ public class MyAuthenticationFilter extends OncePerRequestFilter {
             // 记录响应的消息体
             logResponseBody(wrappedRequest, wrappedResponse, usedTimes);
         }
-
     }
 
     public static Map<String, String> URL_MAPPING_MAP = new HashMap<>();

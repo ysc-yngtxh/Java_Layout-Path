@@ -133,7 +133,7 @@ public class SecurityConfig {
                 .and().headers().frameOptions().disable()
                 // 禁用form表单提交的方式
                 .and().formLogin().disable()
-                ;
+        ;
         return http.build();
     }
 }

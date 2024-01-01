@@ -26,14 +26,14 @@ public class LoginController {
 
     private final ResponseResult<SysUser> responseResult;
 
-    // @Value("${security.saveLoginTime}")
+    @Value("${security.saveLoginTime}")
     private String time;
 
 
     @PostMapping("/find/user")
     @ResponseBody
-    public ResponseEntity<ResponseResult<SysUser>> findBtUser(@RequestBody User user){
-        System.out.println("========="+time);
+    public ResponseEntity<ResponseResult<SysUser>> findBtUser(@RequestBody(required = false) User user){
+        System.out.println("=========" + time);
         MyAuthorizationProperties properties = new MyAuthorizationProperties();
         System.out.println(properties.getTokenExpireTime());
         return ResponseEntity.ok()

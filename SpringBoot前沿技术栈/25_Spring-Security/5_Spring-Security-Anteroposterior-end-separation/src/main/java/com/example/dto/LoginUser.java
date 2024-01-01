@@ -46,7 +46,6 @@ public class LoginUser implements UserDetails {
         return authorityList;
     }
 
-
     @Override
     public String getPassword() {
         return currentSysUserInfo.getPassword();

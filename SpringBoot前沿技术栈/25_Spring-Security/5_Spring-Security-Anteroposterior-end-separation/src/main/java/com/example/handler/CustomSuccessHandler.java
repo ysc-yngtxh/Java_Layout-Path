@@ -36,7 +36,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         String jwtToken = loginUser.getCurrentSysUserInfo().getToken();
         // 把完整的用户信息存入Redis,使用userId作为key
         redisCache.setCacheObject("login:" + userId, loginUser);
-        ResponseResult<String> result = new ResponseResult<>(200,"登录成功！",jwtToken);
+        ResponseResult<String> result = new ResponseResult<>(200, "登录成功！", jwtToken);
         WebUtil.renderText(response, JSON.toJSONString(result));
     }
 }

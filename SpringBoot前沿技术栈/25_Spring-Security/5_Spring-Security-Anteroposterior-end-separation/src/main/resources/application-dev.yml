@@ -40,7 +40,7 @@ management:
 # mybatis-plus相关配置
 mybatis-plus:
   # xml扫描，多个目录用逗号或者分号分隔（告诉 Mapper 所对应的 XML 文件位置）
-  mapper-locations: classpath:**/*Mapper.xml
+#  mapper-locations: classpath:**/*Mapper.xml
   # 以下配置均有默认值,可以不设置
   global-config:
     #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
@@ -93,7 +93,7 @@ security:
     - /api/system/user/getCurrentUserInfo
     - /index
     - /logout
-    - /**/*.js
-    - /**/*.css
-    - /**/*.png
-    - /**/*.ico
+#    - /*/*.js
+#    - /*/*.css
+#    - /*/*.png
+#    - /*/*.ico
