@@ -18,6 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -28,6 +30,8 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 import java.io.IOException;
 import java.util.Objects;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 /**
  * @author 游诗成
@@ -86,13 +90,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // 关闭csrf
-                .csrf().disable()
-                // 关闭cors
-                .cors().disable()
+                // 关闭csrf. Spring Security6.2新写法
+                .csrf(AbstractHttpConfigurer::disable)
+                // 关闭cors. Spring Security6.2新写法
+                .cors(AbstractHttpConfigurer::disable)
                 // 不创建会话 - 即通过前端传token到后台过滤器中验证是否存在访问权限
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
+                .sessionManagement((sessions) -> sessions
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
 
                 // 见名知意。添加过滤器在某某过滤器之前。这里我们添加在BasicAuthenticationFilter之前的过滤器myAuthenticationFilter
                 .addFilterBefore(myAuthenticationFilter, BasicAuthenticationFilter.class)
@@ -101,12 +106,12 @@ public class SecurityConfig {
 
 
                 // 配置异常处理器
-                .exceptionHandling()
-                // 登录前访问需要认证的路径出现认证异常的，被认证异常返回
-                .authenticationEntryPoint(authenticationEntryPoint())
-                // 登录后去访问该认证用户没有权限的路径时，被鉴权异常返回
-                .accessDeniedHandler(accessDeniedHandler())
-                .and()
+                .exceptionHandling((exception) -> exception
+                        // 登录前访问需要认证的路径出现认证异常的，被认证异常返回
+                        .authenticationEntryPoint(authenticationEntryPoint())
+                        // 登录后去访问该认证用户没有权限的路径时，被鉴权异常返回
+                        .accessDeniedHandler(accessDeniedHandler())
+                )
 
 
                 // 设置哪些路径可以直接访问不需要认证(permitAll()表示允许所有人访问)
@@ -114,8 +119,7 @@ public class SecurityConfig {
                         authorized
                                 // 通过配置文件进行配置SpringSecurity的忽略路径
                                 .requestMatchers(myAuthorizationProperties.getIgnoreUrls().toArray(new String[10])).permitAll()
-                                // 其余的都需要认证校验(拦截)
-                                // .anyRequest().authenticated()
+                                // 定义一个需要admin权限的路径/**
                                 // .requestMatchers("/**").hasAuthority("admin")
                                 // OPTIONS(选项)：查找适用于一个特定网址资源的通讯选择。 在不需执行具体的涉及数据传输的动作情况下，
                                 // 允许客户端来确定与资源相关的选项以及 / 或者要求， 或是一个服务器的性能
@@ -128,11 +132,13 @@ public class SecurityConfig {
                 )
 
                 // 自动登录 - cookie储存方式
-                .rememberMe()
+                .rememberMe(withDefaults())
                 // 防止iframe 造成跨域
-                .and().headers().frameOptions().disable()
+                .headers((header) -> header
+                        .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
+                )
                 // 禁用form表单提交的方式
-                .and().formLogin().disable()
+                .formLogin(AbstractHttpConfigurer::disable)
         ;
         return http.build();
     }

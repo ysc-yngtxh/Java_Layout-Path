@@ -11,7 +11,7 @@ spring:
 
   # 配置数据源
   datasource:
-    url: jdbc:mysql://localhost:3306/sys?serverTimezone=UTC&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false # MySQL在高版本需要指明是否进行SSL连接 解决则加上 &useSSL=false
+    url: jdbc:mysql://localhost:3306/sys?serverTimezone=UTC&allowMultiQueries=true&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true # MySQL在高版本需要指明是否进行SSL连接 解决则加上 &useSSL=false
     name: mysql
     username: root
     password: 131474
@@ -89,11 +89,11 @@ security:
   # 错误超过次数后多少分钟后才能继续登录（分钟）
   loginAfterTime: 10
   ignoreUrls:
-    - /login
+    - /toLogin
     - /api/system/user/getCurrentUserInfo
     - /index
     - /logout
-#    - /*/*.js
-#    - /*/*.css
-#    - /*/*.png
-#    - /*/*.ico
+    - /*/*.js
+    - /*/*.css
+    - /*/*.png
+    - /*/*.ico

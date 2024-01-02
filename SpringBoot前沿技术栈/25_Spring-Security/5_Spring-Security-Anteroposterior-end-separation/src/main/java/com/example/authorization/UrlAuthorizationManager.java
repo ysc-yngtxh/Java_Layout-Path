@@ -58,7 +58,7 @@ public class UrlAuthorizationManager implements AuthorizationManager<RequestAuth
         List<SysRole> sysRoles = sysRoleMapper.selectList(Wrappers.<SysRole>lambdaQuery().in(SysRole::getName, list));
         List<Long> roleIds = sysRoles.stream().map(SysRole::getId).toList();
         boolean isAuthorizationUrl= false;
-        if (roleIds.size() > 0) {
+        if (!roleIds.isEmpty()) {
             // 根据角色Id进而获取菜单Id
             List<SysRoleMenu> sysRoleMenus = sysRoleMenuMapper.selectList(Wrappers.<SysRoleMenu>lambdaQuery().in(SysRoleMenu::getRoleId, roleIds));
             List<Long> menuIds = sysRoleMenus.stream().map(SysRoleMenu::getMenuId).distinct().toList();
