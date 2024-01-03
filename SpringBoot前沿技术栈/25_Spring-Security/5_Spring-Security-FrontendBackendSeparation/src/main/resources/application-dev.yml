@@ -3,11 +3,11 @@ server:
   port: 8085
   servlet:
     #    context-path: /api
-    application-display-name: Anteroposterior end separation dev
+    application-display-name: Front-end Back-end Separation
 
 spring:
   application:
-    name: Anteroposterior end separation dev
+    name: Front-end Back-end Separation
 
   # 配置数据源
   datasource:

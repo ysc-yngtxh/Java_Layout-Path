@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>5_Spring-Security-Anteroposterior-end-separation</artifactId>
+    <artifactId>5_Spring-Security-FrontendBackendSeparation</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>5_Spring-Security-Anteroposterior-end-separation</name>
-    <description>5_Spring-Security-Anteroposterior-end-separation</description>
+    <name>5_Spring-Security-FrontendBackendSeparation</name>
+    <description>5_Spring-Security-FrontendBackendSeparation</description>
     <properties>
         <java.version>17</java.version>
     </properties>
