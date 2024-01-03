@@ -29,6 +29,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -90,11 +91,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // 关闭csrf. Spring Security6.2新写法
+                // 关闭csrf,前后端分离不需要. Spring Security6.2新写法
                 .csrf(AbstractHttpConfigurer::disable)
-                // 关闭cors. Spring Security6.2新写法
+                // 关闭cors跨域. Spring Security6.2新写法
                 .cors(AbstractHttpConfigurer::disable)
-                // 不创建会话 - 即通过前端传token到后台过滤器中验证是否存在访问权限
+                // 禁用httpBasic，因为我们传输数据用的是post，而且请求体是JSON
+                .httpBasic(AbstractHttpConfigurer::disable)
+                // 不创建会话 - 即通过前端传token到后台过滤器中验证是否存在访问权限。 Spring Security6.2新写法
                 .sessionManagement((sessions) -> sessions
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
@@ -117,8 +120,12 @@ public class SecurityConfig {
                 // 设置哪些路径可以直接访问不需要认证(permitAll()表示允许所有人访问)
                 .authorizeHttpRequests(authorized ->
                         authorized
-                                // 通过配置文件进行配置SpringSecurity的忽略路径
-                                .requestMatchers(myAuthorizationProperties.getIgnoreUrls().toArray(new String[10])).permitAll()
+                                // 通过配置文件进行配置Spring Security的放行路径
+                                // 这里需要注意的是：转成String类型的数组，需要指定转成数组的容量，不能超出也不能少于实际元素个数，
+                                // 否则数组超出的容量部分会替换为null，Spring Security在匹配放行路径时会出现空指针异常。
+                                .requestMatchers(myAuthorizationProperties.getIgnoreUrls().toArray(new String[8])).permitAll()
+                                // 同上述放行路径写法效果一样，但保留以上写法是为了谨记在设置数组容量过大时出现的空指针异常，为此花了两天才定位到BUG。难顶！！！
+                                //.requestMatchers(Arrays.toString(myAuthorizationProperties.getIgnoreUrls().toArray())).permitAll()
                                 // 定义一个需要admin权限的路径/**
                                 // .requestMatchers("/**").hasAuthority("admin")
                                 // OPTIONS(选项)：查找适用于一个特定网址资源的通讯选择。 在不需执行具体的涉及数据传输的动作情况下，
