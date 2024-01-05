@@ -8,15 +8,19 @@
         <version>1.0.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <artifactId>04_Provider-Config</artifactId>
+    <artifactId>04_Provider-NacosConfig</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>04_Provider-Config</name>
-    <description>04_Provider-Config</description>
+    <name>04_Provider-NacosConfig</name>
+    <description>04_Provider-NacosConfig</description>
     <properties>
         <java.version>17</java.version>
     </properties>
     <dependencies>
-        <!--注册到nacos配置中心的客户端-->
+        <!--注册到 nacos配置中心的客户端
+            这里你可能会感到困惑，为什么已经有了注册到 nacos客户端 的依赖，现在又需要一个注册到 nacos配置中心客户端 依赖？
+            实际上，nacos客户端依赖 是用于消费者服务去拉取提供者服务的门庭，
+            而 nacos配置中心客户端依赖 则是用于将服务自身的配置文件持久化到第三方服务器————Nacos
+        -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
