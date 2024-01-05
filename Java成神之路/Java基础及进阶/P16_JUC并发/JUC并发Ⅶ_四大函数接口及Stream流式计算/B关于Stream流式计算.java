@@ -41,12 +41,12 @@ public class B关于Stream流式计算 {
              min：返回流中元素最小值
         */
         list.stream()
-                .filter(user -> user.getId()%2==0)
-                .filter(user -> {return user.getAge()>23;})
+                .filter(user -> user.getId()%2 == 0)
+                .filter(user -> {return user.getAge() > 23;})
                 .map(user -> {return user.getName().toUpperCase();})
-                .sorted((uu1,uu2) ->{return uu2.compareTo(uu1);}) // E1 E1 D1
-                .distinct()//E1 D1
-                .skip(1)//D1
+                .sorted((uu1,uu2) -> {return uu2.compareTo(uu1);}) // E1 E1 D1
+                .distinct() // E1 D1
+                .skip(1)    // D1
                 .limit(3)
                 .forEach(System.out::println);
 

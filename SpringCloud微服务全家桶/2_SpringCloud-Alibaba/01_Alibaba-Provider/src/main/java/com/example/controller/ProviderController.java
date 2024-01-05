@@ -25,4 +25,9 @@ public class ProviderController {
         // TimeUnit.SECONDS.sleep(8);
         return userService.queryById(id);
     }
+
+    @GetMapping("/time")
+    public String numberTime() {
+        return "请求访问时间！！！";
+    }
 }

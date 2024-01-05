@@ -1,4 +1,4 @@
-package com.example.router;
+package com.example.routerFactory;
 
 import lombok.Data;
 import org.springframework.cloud.gateway.handler.predicate.AbstractRoutePredicateFactory;
