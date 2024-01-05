@@ -1,10 +1,10 @@
 package com.example.handler;
 
 import org.springframework.boot.web.error.ErrorAttributeOptions;
-import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
+import org.springframework.boot.web.reactive.error.DefaultErrorAttributes;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.reactive.function.server.ServerRequest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,8 +17,8 @@ import java.util.Map;
 @Component
 public class CustomErrorAttribute extends DefaultErrorAttributes {
     @Override
-    public Map<String, Object> getErrorAttributes(WebRequest webRequest, ErrorAttributeOptions options) {
-        // return super.getErrorAttributes(webRequest, options);
+    public Map<String, Object> getErrorAttributes(ServerRequest request, ErrorAttributeOptions options) {
+        // return super.getErrorAttributes(request, options);
         Map<String, Object> map = new HashMap<>();
         map.put("status", HttpStatus.NOT_FOUND);
         map.put("msg", "对不起，没有找到您要的资源");
