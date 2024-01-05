@@ -6,13 +6,17 @@ spring:
         gateway:
             routes:
               # TODO 请求头中的认证信息校验路由
-              - id: my_route             # 自定义的路由名称
+              - id: my_route             # 自定义的路由名称，无特殊含义
                 uri: https://taobao.com
-                predicates:              # 以下predicates断言为true，则 localhost:8086 跳转 localhost:8081
+                predicates:
+                  # 以下自定义的predicates断言为true，则 localhost:8087 跳转 https://taobao.com
+                  # 需要注意的：自定义的认证路由断言的名称与我们的断言处理逻辑文件名称前缀要保持一致【Auth -> AuthRoutePredicateFactory】
                   - Auth=ysc, 123
 
               # TODO 请求参数中的Token校验 路由
               - id: my_route2            # 自定义的路由名称
                 uri: https://taobao.com
-                predicates:              # 以下predicates断言为true，则 localhost:8086 跳转 localhost:8081
+                predicates:
+                  # 以下predicates断言为true，则 localhost:8087 跳转 https://taobao.com
+                  # 需要注意的：自定义的认证路由断言的名称与我们的断言处理逻辑文件名称前缀要保持一致【Token -> TokenRoutePredicateFactory】
                   - Token=小妖盖

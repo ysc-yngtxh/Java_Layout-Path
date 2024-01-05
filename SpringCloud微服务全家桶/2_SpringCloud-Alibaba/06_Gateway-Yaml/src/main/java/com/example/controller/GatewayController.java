@@ -12,9 +12,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GatewayController {
 
-    // 降级服务接口
-    @RequestMapping("/fallback")
+    @RequestMapping("/test")
+    public String test() {
+        return "Hello World.";
+    }
+
+    // 降级服务接口1
+    @RequestMapping("/fallback1")
     public String fallbackHandler() {
-        return "This is the Gateway Fallback.";
+        return "This is the Gateway Fallback1.";
+    }
+
+    // 降级服务接口2
+    @RequestMapping("/fallback2")
+    public String fallbackHandler2() {
+        return "This is the Gateway Fallback2.";
     }
 }

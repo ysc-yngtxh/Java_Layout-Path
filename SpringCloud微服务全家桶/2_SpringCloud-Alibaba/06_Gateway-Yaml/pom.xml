@@ -31,6 +31,7 @@
         <!--            <artifactId>spring-boot-starter-web</artifactId>-->
         <!--        </dependency>-->
 
+        <!--网关请求服务降级所需依赖-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>

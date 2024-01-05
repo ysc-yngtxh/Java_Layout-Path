@@ -10,13 +10,12 @@ import org.springframework.web.server.ServerWebExchange;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Predicate;
 
 /**
  * @author 游家纨绔
  * @dateTime 2023-10-17 22:27
- * @apiNote TODO 自定义路由断言规则
+ * @apiNote TODO Auth自定义路由断言规则
  */
 @Component
 public class AuthRoutePredicateFactory extends AbstractRoutePredicateFactory<AuthRoutePredicateFactory.Config> {

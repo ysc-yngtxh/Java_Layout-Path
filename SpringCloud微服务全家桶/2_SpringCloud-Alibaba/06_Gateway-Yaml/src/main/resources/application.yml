@@ -144,16 +144,16 @@ spring:
 #            - AddRequestParameter=city, Beijing
 
         # TODO 16、CircuitBreaker断路器网关过滤器工厂(需要添加依赖：spring-cloud-starter-circuitbreaker-reactor-resilience4j)
-#        - id: my_route-16
-#          uri: http://localhost:8081
-#          predicates:
-#            - Path=/**
-#          filters:
-#            - # 将端口为8081的服务关闭，模拟服务故障。这个时候Spring Cloud Gateway会将服务重定向到本服务的接口 /fallback
-#            - name: CircuitBreaker
-#              args:
-#                name: myCircuitBreaker
-#                fallbackUri: forward:/fallback
+        - id: my_route-16
+          uri: http://localhost:8081
+          predicates:
+            - Path=/info/**
+          filters:
+            # 将端口为8081的服务关闭，模拟服务故障。这个时候Spring Cloud Gateway会将服务重定向到本服务的接口 /fallback
+            - name: CircuitBreaker
+              args:
+                name: myCircuitBreaker
+                fallbackUri: forward:/fallback1
 
         # TODO 17、PrefixPath添加前缀路径网关过滤器工厂
 #        - id: my_route-17
@@ -174,14 +174,22 @@ spring:
 #            # 现在需要跳过两个前缀路径，即跳过/ooo/xxx。所以实际访问路径为 http://localhost:8086/provider/5
 #            - StripPrefix=2
 
-        # TODO 19、StripPrefix跳过前缀路径网关过滤器工厂
+        # TODO 19、RewritePath跳过前缀路径网关过滤器工厂
 #        - id: my_route-19
 #          uri: http://localhost:8081
 #          predicates:
 #            - Path=/**
 #          filters:
-#            # 表示明面上访问路径 http://localhost:8086/red/provider/5，
-#            # 现在会替换掉/red路径为/provider。所以实际访问路径为 http://localhost:8086/provider/5
+#            # 表示明面上访问路径 http://localhost:8086/red/5，
+#            # 现在会将路径/red替换掉为/provider。所以实际访问路径为 http://localhost:8086/provider/5
 #            - RewritePath=/red, /provider
+#            - RewritePath=/blue, /provider
 
-
+      # TODO 20、default-filters默认的网关过滤器，对以上所有的路由生效
+      default-filters:
+        # 这里配置的默认过滤器是服务降级，也可以配置上述所有的其他类型的过滤器工厂
+        # 请求路径服务降级优先选择这里设置的默认过滤器，但是请求路径为 /info/** 时，局部的服务降级会优先选择 转为16、CircuitBreaker断路器网关过滤器工厂
+        - name: CircuitBreaker
+          args:
+            name: myCircuitBreaker
+            fallbackUri: forward:/fallback2
