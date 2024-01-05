@@ -1,10 +1,13 @@
-package com.example.filterFactory;
+package com.example.factory.filter;
 
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractNameValueGatewayFilterFactory;
+import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
+
+import java.util.Map;
 
 /**
  * @author 游家纨绔
@@ -17,6 +20,12 @@ public class AddHeaderGatewayFilterFactory extends AbstractNameValueGatewayFilte
     @Override
     public GatewayFilter apply(NameValueConfig config) {
         return (exchange, chain) -> {
+            // 使用ServerWebExchange工具类获取到uri变量的Map集合
+            Map<String, String> uriVariables = ServerWebExchangeUtils.getUriTemplateVariables(exchange);
+            // 需要注意的是，变量名称要与 yml文件中的变量名称 对应好，否则获取不到对应数据
+            System.out.println("segment值为：" + uriVariables.get("segment"));
+            System.out.println("bean值为：" + uriVariables.get("bean"));
+
             // 使用mutate()方法复制原始请求（exchange.getRequest()），
             // 然后使用header()方法，将指定的名称（config.getName()）和值（config.getValue()）添加为请求的一个新头部。
             ServerHttpRequest changedRequest = exchange.getRequest()
