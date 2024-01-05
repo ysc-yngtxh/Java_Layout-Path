@@ -20,3 +20,13 @@ spring:
                   # 以下predicates断言为true，则 localhost:8087 跳转 https://taobao.com
                   # 需要注意的：自定义的认证路由断言的名称与我们的断言处理逻辑文件名称前缀要保持一致【Token -> TokenRoutePredicateFactory】
                   - Token=小妖盖
+
+              # TODO 请求参数中的Token校验 路由
+              - id: my_route3            # 自定义的路由名称
+                uri: http://localhost:8081
+                predicates:
+                  - Path=/header
+                filters:
+                  # localhost:8087/header 跳转 localhost:8081/header 可以发现其打印出的header中有 ner-color=red
+                  # 需要注意的：自定义的认证路由过滤的名称与我们的过滤逻辑文件名称前缀要保持一致【AddHeader -> AddHeaderGatewayFilterFactory】
+                  - AddHeader=ner-color, red
