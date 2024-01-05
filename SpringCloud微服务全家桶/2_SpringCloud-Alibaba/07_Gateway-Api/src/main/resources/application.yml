@@ -38,7 +38,7 @@ spring:
                   - Path=/provider/**
                 filters:
                   # localhost:8087/header 跳转 localhost:8081/header 可以发现其打印出的header中有 ner-color=red
-                  # 需要注意的：自定义的认证路由过滤的名称与我们的过滤逻辑文件名称前缀要保持一致【AddHeader -> AddHeaderGatewayFilterFactory】
+                  # 需要注意的：自定义的认证路由过滤的名称与我们的过滤逻辑文件名称前缀要保持一致【One -> OneGatewayFilterFactory】
                   - One=oneFilter, 111
                   - Two=twoFilter, 222
                   - Three=threeFilter, 333

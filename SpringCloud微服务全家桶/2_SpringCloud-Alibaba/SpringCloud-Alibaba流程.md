@@ -148,15 +148,17 @@
        WebFlux 并不是 Spring MVC 的替代，它主要应用还是在异步非阻塞编程模型上。如果你的项目并不是该模型 或者你的应用目前本身已经足够应付当前情况，是不需要去切换成 WebFlux 的。  
 
 ## 四、Spring Cloud Gateway网关
-  1、Spring Cloud GetWay 作为Spring Cloud生态系统的网关，目标是为了代替zuul。
+
+ 1、Spring Cloud GetWay 作为Spring Cloud生态系统的网关，目标是为了代替zuul。
 - >  1️⃣、Spring Cloud GetWay 是基于webFlux框架实现的，而WebFlux框架底层则使用了高性能的Reactor模式通信框架Netty。  
      因此，当您使用 Spring Cloud Gateway 时，您知道的许多熟悉的同步库（例如 Spring 数据和 Spring 安全性）和模式可能不适用。  
-     简单来说：它不能和传统的Servlet容器一起使用（与SpringMVC框架有冲突），也不能打包成一个WAR包。
+     简单来说：它不能和传统的Servlet容器一起使用（与SpringMVC框架有冲突），也不能打包成一个WAR包。  
      2️⃣、Spring Cloud Gateway的目标，提供统一的路由方式，基于Filter链的方式提供了网关基本的功能，例如：安全，监控/指标，和限流。  
      3️⃣、Zuul：使用的是同步阻塞式的 API，不支持长连接，比如 websockets。  
      Spring Cloud Gateway 提供了异步非阻塞支持，提供了抽象负载均衡，提供了抽象流控，并默认实现了RedisRateLimiter。底层使用了高性能的通信框架Netty。
 
-  2、Spring Cloud Gateway 由三部分组成：
+ 2、Spring Cloud Gateway 由三部分组成：
 - >  1️⃣、Filter（过滤器）： 使用它拦截和修改请求，并且对上游的响应，进行二次处理。  
      2️⃣、Route（路由）： 一个Route模块由一个 ID，一个目标 URI，一组断言和一组过滤器定义。如果断言为真，则路由匹配，目标URI会被访问。  
      3️⃣、Predicate（断言）： 这是一个 Java 8 的 Predicate，可以使用它来匹配来自 HTTP 请求的任何内容，例如 headers 或参数。断言的输入类型是一个 ServerWebExchange。
+    ![img_11.png_11](01_Alibaba-Provider/src/main/resources/static/img_11.png)

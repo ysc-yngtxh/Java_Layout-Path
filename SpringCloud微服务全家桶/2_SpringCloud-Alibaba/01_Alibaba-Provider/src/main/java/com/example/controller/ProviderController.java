@@ -28,6 +28,6 @@ public class ProviderController {
 
     @GetMapping("/time")
     public String numberTime() {
-        return "请求访问时间！！！";
+        return "到达目标服务器的时间：" + System.currentTimeMillis();
     }
 }
