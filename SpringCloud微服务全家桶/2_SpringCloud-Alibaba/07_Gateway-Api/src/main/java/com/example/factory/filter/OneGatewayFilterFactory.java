@@ -24,7 +24,8 @@ public class OneGatewayFilterFactory extends AbstractNameValueGatewayFilterFacto
             stopWatch.start();
             log.info(config.getName() + "-" + config.getValue() + " - pre 开始执行的时间：" + System.currentTimeMillis());
             return chain.filter(exchange).then(
-                    // post-filter 在发出代理请求之后，再运行“post”过滤器逻辑。
+                    // 在执行完代理请求之后，再运行这时候的“post”过滤器逻辑。
+                    // post-filter
                     Mono.fromRunnable(() -> { // 创建一个Mono对象，它表示一个延迟执行的任务。
                         stopWatch.stop();
                         log.info(config.getName() + "-" + config.getValue() + " - post 执行时间(毫秒):" + System.currentTimeMillis());

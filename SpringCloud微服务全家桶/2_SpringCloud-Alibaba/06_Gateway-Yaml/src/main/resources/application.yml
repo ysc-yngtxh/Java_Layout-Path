@@ -186,10 +186,10 @@ spring:
 #            - RewritePath=/blue, /provider
 
       # TODO 20、default-filters默认的网关过滤器，对以上所有的路由生效
-      default-filters:
-        # 这里配置的默认过滤器是服务降级，也可以配置上述所有的其他类型的过滤器工厂
-        # 请求路径服务降级优先选择这里设置的默认过滤器，但是请求路径为 /info/** 时，局部的服务降级会优先选择 转为16、CircuitBreaker断路器网关过滤器工厂
-        - name: CircuitBreaker
-          args:
-            name: myCircuitBreaker
-            fallbackUri: forward:/fallback2
+#      default-filters:
+#        # 这里配置的默认过滤器是服务降级，也可以配置上述所有的其他类型的过滤器工厂
+#        # 请求路径服务降级优先选择这里设置的默认过滤器，但是请求路径为 /info/** 时，局部的服务降级会优先选择 转为16、CircuitBreaker断路器网关过滤器工厂
+#        - name: CircuitBreaker
+#          args:
+#            name: myCircuitBreaker
+#            fallbackUri: forward:/fallback2

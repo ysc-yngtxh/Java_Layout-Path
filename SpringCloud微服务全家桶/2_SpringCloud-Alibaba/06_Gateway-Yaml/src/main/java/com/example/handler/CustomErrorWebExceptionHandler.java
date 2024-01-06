@@ -28,6 +28,10 @@ import java.util.Map;
 @Component
 @Order(-1)
 public class CustomErrorWebExceptionHandler extends AbstractErrorWebExceptionHandler {
+
+    // AbstractErrorWebExceptionHandler是一个抽象类，用于自定义异常的处理方式。
+    // 它是Spring Webflux模块中的异常处理器，用于处理在Web请求处理过程中产生的异常。
+    // 通过继承该类并实现其抽象方法，可以自定义异常处理的行为，例如定义错误响应的格式、错误码等。
     public CustomErrorWebExceptionHandler(ErrorAttributes errorAttributes
                                         , ApplicationContext applicationContext
                                         , ServerCodecConfigurer serverCodecConfigurer) {

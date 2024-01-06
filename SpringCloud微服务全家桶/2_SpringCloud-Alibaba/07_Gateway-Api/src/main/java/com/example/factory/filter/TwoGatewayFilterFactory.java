@@ -20,6 +20,7 @@ public class TwoGatewayFilterFactory extends AbstractNameValueGatewayFilterFacto
             // pre-filter
             log.info(config.getName() + "-" + config.getValue() + " - pre 开始执行");
             return chain.filter(exchange).then(
+                    // post-filter
                     Mono.fromRunnable(() -> {
                         log.info(config.getName() + "-" + config.getValue()
                                 + " - post 执行完毕。");
