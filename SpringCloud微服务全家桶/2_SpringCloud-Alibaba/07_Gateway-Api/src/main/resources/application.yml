@@ -3,24 +3,8 @@ server:
 
 
 spring:
-  application:
-    name: gateway
   cloud:
-    # 网关 gateway 注册到注册中心
-    nacos:
-      discovery:
-        server-addr: localhost:8848
-        username: nacos
-        password: nacos
     gateway:
-      # 开启 gateway 在注册中心进行发现其他服务的功能，默认为 false
-      discovery:
-        locator:
-          enabled: true
-      # 将 503状态码转换为 404
-      loadbalancer:
-        use404: true
-
       routes:
         # TODO 请求头中的认证信息校验路由
         - id: my_route             # 自定义的路由名称，无特殊含义
@@ -40,7 +24,7 @@ spring:
 
         # TODO 添加请求Header参数过滤
         - id: my_route3            # 自定义的路由名称
-          uri: http://localhost:8081
+          uri: http://localhost:8082
           predicates:
             # 请求路径 /red/{segment}/blue/{bean}，其中{segment}、{bean}表示变量，用以匹配任意字符路径。
             # 并且变量字符没有硬性规定，{...}中可以是任意字符

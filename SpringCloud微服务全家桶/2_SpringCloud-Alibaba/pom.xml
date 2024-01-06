@@ -16,6 +16,7 @@
         <module>05_Consumer-OpenFeign</module>
         <module>06_Gateway-Yaml</module>
         <module>07_Gateway-Api</module>
+        <module>08_Gateway-Nacos</module>
     </modules>
 
     <packaging>pom</packaging>

@@ -1,0 +1,28 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: nacos-gateway
+  cloud:
+    # 网关 gateway 注册到注册中心
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+    gateway:
+      # 开启 gateway 在注册中心进行发现其他服务的功能，默认为 false
+      discovery:
+        locator:
+          enabled: true
+      # 将 503状态码转换为 404
+#      loadbalancer:
+#        use404: true
+      routes:
+        # TODO 添加请求Header参数过滤
+        - id: my_route3            # 自定义的路由名称
+          uri: lb://nacos-consumer
+          predicates:
+            - Path=/consumer/**
+
