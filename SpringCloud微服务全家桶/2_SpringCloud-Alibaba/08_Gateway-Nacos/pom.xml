@@ -45,6 +45,14 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+
+		<!--
+		    因为Spring Gateway集成了Spring Webflux，因此不能使用Web依赖。但是使用HTML文件进行前端交互就需要thymeleaf依赖
+		-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
