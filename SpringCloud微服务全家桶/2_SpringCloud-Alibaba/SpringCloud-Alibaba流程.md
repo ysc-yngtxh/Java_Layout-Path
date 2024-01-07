@@ -173,3 +173,31 @@
 - > 在 07_Gateway-Api 项目中的 OneGatewayFilterFactory、TwoGatewayFilterFactory、ThreeGatewayFilterFactory
   > 都是先进行的 pre预逻辑处理，然后代理请求执行完毕后，才会去执行 post过滤器逻辑
   ![img_12.png_12](01_Alibaba-Provider/src/main/resources/static/img_12.png)
+
+## 五、Sentinel流量防卫兵
+ 1、简介  
+
+       Sentinel 是面向分布式、多语言异构化服务架构的流量治理组件，主要以流量为切入点，
+    从流量控制、流量路由、熔断降级、系统自适应保护等多个维度来帮助用户保障微服务的稳定性。
+ 
+ 2、介绍
+
+    在Sentinel之前其实就有Hystrix做熔断降级的事情，出现新的事物肯定是原来的东西有不足的地方。
+    1️⃣、那Hystrix有什么不足之处呢？
+        ①、Hystrix常用的线程池隔离会造成线程上下切换的overhead比较大。
+        ②、Hystrix没有监控平台，需要我们自己搭建。
+        ③、Hystrix支持的熔断降级维度较少，不够细粒，而且缺少管理控制台。
+    2️⃣、Sentinel有哪些组成部分？
+        ①、核心库（Java 客户端）不依赖任何框架/库，能够运行于所有 Java 运行时环境，同时对 Dubbo / Spring Cloud 等框架也有较好的支持。
+        ②、控制台（Dashboard）基于 Spring Boot 开发，打包后可以直接运行，不需要额外的 Tomcat 等应用容器。
+    3️⃣、Sentinel有哪些特征？
+        ①、丰富的应用场景: 
+               Sentinel承接了阿里巴巴近十年的双十一大促流量的核心场景,例如秒杀(即突发流量控制在系统容量可以承受的范围),
+               消息削峰填谷,集群流量控制,实时熔断下游不可用应用等
+        ②、完美的实时监控:
+               Sentinel同事提供实时的监控功能,您可以在控制台看到接入应用的单台机器秒级数据,甚至500台一下规模的集群的汇总运行情况
+        ③、广泛的开源生态:
+               Sentinel提供开箱即用的与其他框架/库的整合模块,例如与SpringCloud,Dubbo,gRPC的整合,
+               您只需要引入响应的依赖并进行简单的配置即可快速接入Sentinel.
+        ④、完美的SPI扩展点:
+               Sentinel提供简单易用的,完美的SPI扩展接口,可以通过实现扩展接口来快速定制逻辑,例如定制规则管理,适配动态数据源等.

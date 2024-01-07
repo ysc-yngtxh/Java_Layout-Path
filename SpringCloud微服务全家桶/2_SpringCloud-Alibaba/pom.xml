@@ -17,6 +17,7 @@
         <module>06_Gateway-Yaml</module>
         <module>07_Gateway-Api</module>
         <module>08_Gateway-Nacos</module>
+        <module>09_Sentinel</module>
     </modules>
 
     <packaging>pom</packaging>
