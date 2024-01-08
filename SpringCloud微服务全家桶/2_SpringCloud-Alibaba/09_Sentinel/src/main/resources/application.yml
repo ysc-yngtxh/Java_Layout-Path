@@ -1,0 +1,15 @@
+
+server:
+  port: 9201
+
+spring:
+  application:
+    name: cloud-sentinel
+  cloud:
+    sentinel:
+      # 取消控制台懒加载
+      eager:
+        true
+      transport:
+        # 控制台地址
+        dashboard: 127.0.0.1:8010
