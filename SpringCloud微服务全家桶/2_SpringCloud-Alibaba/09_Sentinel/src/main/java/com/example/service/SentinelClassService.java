@@ -5,5 +5,7 @@ package com.example.service;
  * @dateTime 2024-01-08 12:46
  * @apiNote TODO
  */
-public class SentinelClassService {
+public interface SentinelClassService {
+
+    String selectClassById(Integer id);
 }

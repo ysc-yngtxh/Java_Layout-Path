@@ -7,5 +7,5 @@ package com.example.service;
  */
 public interface SentinelMethodService {
 
-    String selectUserById(Integer Id);
+    String selectMethodById(Integer id);
 }
