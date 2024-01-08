@@ -1,10 +1,10 @@
 
 server:
-  port: 9201
+  port: 9299
 
 spring:
   application:
-    name: cloud-sentinel
+    name: cloud-sentinel-feign
   cloud:
     sentinel:
       # 取消控制台懒加载

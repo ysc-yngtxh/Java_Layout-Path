@@ -14,11 +14,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class SentinelClassServiceImpl implements SentinelClassService {
 
-    public static final String RESOURCE_NAME = "selectClassById";
+    public static final String RESOURCE_CLASS = "selectClassById";
 
     @Override
     // 注意：注解方式埋点不支持 private 方法。
-    @SentinelResource(value = RESOURCE_NAME, blockHandler = "selectClassByIdBlockHandler",
+    @SentinelResource(blockHandler = "selectClassByIdBlockHandler",
             blockHandlerClass = BlockClassHandler.class, fallbackClass = FallbackClassHandler.class,
             fallback = "selectClassByIdFallbackHandler")
     public String selectClassById(Integer id) {
