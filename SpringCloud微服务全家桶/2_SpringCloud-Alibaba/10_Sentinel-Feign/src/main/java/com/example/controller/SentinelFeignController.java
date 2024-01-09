@@ -13,8 +13,10 @@ public class SentinelFeignController {
     @Autowired
     private EchoService echoService;
 
+    public static final String SENTINEL_FEIGN_BY_ID = "sentinelFeignById";
+
     @GetMapping("/sentinelFeign/{id}")
-    @SentinelResource(value = "sentinelFeignById")
+    @SentinelResource(value = SENTINEL_FEIGN_BY_ID)
     public String sentinelFeignById(@PathVariable Integer id){
         return echoService.echo(id);
     }

@@ -246,5 +246,11 @@
 
   - ![img_14.png_14](01_Alibaba-Provider/src/main/resources/static/img_14.png)
   - ![img_16.png_16](01_Alibaba-Provider/src/main/resources/static/img_16.png)
+
+  ```
+  注意点：
+        在Sentinel仪表盘中手动配置流控、熔断等规则，其对应资源的服务要是宕机等原因被重启，那么这些在仪表盘中定义的规则会被清除，
+    并不会在重启后继续生效。如果想实现那种持久化的规则，则需要在代码里去实现规则。
+  ```
   
   
