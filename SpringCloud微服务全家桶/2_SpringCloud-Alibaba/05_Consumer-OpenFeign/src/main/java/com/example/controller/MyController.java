@@ -45,7 +45,7 @@ public class MyController {
         return restTemplate.getForObject("http://nacos-provider/provider/"+id, User.class);
     }
 
-    // 伪客户端OpenFeign方式
+    // OpenFeign方式 -- 伪客户端
     @GetMapping("/openfeign/{id}")
     public User queryOpenFeign(@PathVariable("id") Integer id){
         return userService.queryById(id);

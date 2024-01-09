@@ -16,7 +16,7 @@ public class SentinelMethodServiceImpl implements SentinelMethodService {
     public static final String RESOURCE_METHOD = "selectMethodById";
 
     @Override
-    // 注意：注解方式埋点不支持 private 方法。
+    // 注意：注解方式埋点不支持 private 方法。这里的value属性为资源名，主要在Sentinel仪表盘的簇点链路显示，也可不定义
     @SentinelResource(value = RESOURCE_METHOD, blockHandler = "selectMethodByIdBlockHandler",
             fallback = "selectMethodByIdFallback")
     public String selectMethodById(Integer id) {

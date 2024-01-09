@@ -149,7 +149,7 @@
 
 ## 四、Spring Cloud Gateway网关
 
- 1、Spring Cloud GetWay 作为Spring Cloud生态系统的网关，目标是为了代替zuul。
+#### 1、Spring Cloud GetWay 作为Spring Cloud生态系统的网关，目标是为了代替zuul。
 - >  1️⃣、Spring Cloud GetWay 是基于webFlux框架实现的，而WebFlux框架底层则使用了高性能的Reactor模式通信框架Netty。  
      因此，当您使用 Spring Cloud Gateway 时，您知道的许多熟悉的同步库（例如 Spring 数据和 Spring 安全性）和模式可能不适用。  
      简单来说：它不能和传统的Servlet容器一起使用（与SpringMVC框架有冲突），也不能打包成一个WAR包。  
@@ -157,12 +157,12 @@
      3️⃣、Zuul：使用的是同步阻塞式的 API，不支持长连接，比如 websockets。  
      Spring Cloud Gateway 提供了异步非阻塞支持，提供了抽象负载均衡，提供了抽象流控，并默认实现了RedisRateLimiter。底层使用了高性能的通信框架Netty。
 
- 2、Spring Cloud Gateway 由三部分组成：
+#### 2、Spring Cloud Gateway 由三部分组成：
 - >  1️⃣、Filter（过滤器）： 使用它拦截和修改请求，并且对上游的响应，进行二次处理。  
      2️⃣、Route（路由）： 一个Route模块由一个 ID，一个目标 URI，一组断言和一组过滤器定义。如果断言为真，则路由匹配，目标URI会被访问。  
      3️⃣、Predicate（断言）： 这是一个 Java 8 的 Predicate，可以使用它来匹配来自 HTTP 请求的任何内容，例如 headers 或参数。断言的输入类型是一个 ServerWebExchange。
- 
- 3、Spring Cloud Gateway 它是如何工作的:   
+
+#### 3、Spring Cloud Gateway 它是如何工作的:   
 
 - > 客户端向Spring Cloud Gateway发出请求。如果网关处理程序映射确定请求与路由匹配，则将其发送给网关Web处理程序。
     该处理程序通过特定于该请求的过滤器链运行请求。过滤器用虚线分隔的原因是，过滤器可以在发送代理请求之前和之后运行逻辑。
@@ -175,12 +175,12 @@
   ![img_12.png_12](01_Alibaba-Provider/src/main/resources/static/img_12.png)
 
 ## 五、Sentinel流量防卫兵
- 1、简介  
+#### 1、简介  
 
        Sentinel 是面向分布式、多语言异构化服务架构的流量治理组件，主要以流量为切入点，
     从流量控制、流量路由、熔断降级、系统自适应保护等多个维度来帮助用户保障微服务的稳定性。
- 
- 2、介绍
+
+#### 2、介绍
 
     在Sentinel之前其实就有Hystrix做熔断降级的事情，出现新的事物肯定是原来的东西有不足的地方。
     1️⃣、那Hystrix有什么不足之处呢？
@@ -201,3 +201,50 @@
                您只需要引入响应的依赖并进行简单的配置即可快速接入Sentinel.
         ④、完美的SPI扩展点:
                Sentinel提供简单易用的,完美的SPI扩展接口,可以通过实现扩展接口来快速定制逻辑,例如定制规则管理,适配动态数据源等.
+
+#### 3、启动
+    
+ ```
+ 启动Sentinel控制台需要JDK版本为1.8及以上版本。在Sentinel控制jar包所在目录中打开cmd窗口，执行启动命令:
+ java -Dserver.port=8888 
+ -Dsentinel.dashboard.auth.username=sentinel  # 这一段设置登陆Sentinel账号密码，可以不写，默认用户名和密码就是sentinel
+ -Dsentinel.dashboard.auth.password=123456
+ -jar sentinel-dashboard-1.8.6.jar
+ ```
+
+#### 4、Sentinel的使用  
+    @SentinelResource 注解用来标识资源是否被限流、降级。    
+    @SentinelResource 还提供了其它额外的属性如 blockHandler，blockHandlerClass，fallback 用于表示限流或降级的操作
+ 
+   
+  ```application.yml
+  配置控制台信息
+  spring:
+    cloud:
+      sentinel:
+        transport:
+          port: 8719
+          dashboard: localhost:8080
+  
+      这里的 spring.cloud.sentinel.transport.port 端口配置会在应用对应的机器上启动一个 Http Server，
+  该Server会与 Sentinel控制台做交互。比如 Sentinel控制台添加了一个限流规则，会把规则数据push给这个Http Server接收，
+  Http Server 再将规则注册到 Sentinel 中。
+      这里的 spring.cloud.sentinel.transport.dashboard 设置就是Sentinel仪表盘路径
+  ```
+  - ![img_15.png_15](01_Alibaba-Provider/src/main/resources/static/img_15.png)
+
+  - ![img_13.png_13](01_Alibaba-Provider/src/main/resources/static/img_13.png)
+
+  - ```
+    当然，以上这种还需要手动操作的话，体验是不理想的，因此，我们可以在配置上去取消懒加载。
+    这样就可以在启动服务和Sentinel时，保证仪表盘内显示对应服务配置
+    spring:
+      cloud:
+        sentinel:
+          eager: true
+    ```
+
+  - ![img_14.png_14](01_Alibaba-Provider/src/main/resources/static/img_14.png)
+  - ![img_16.png_16](01_Alibaba-Provider/src/main/resources/static/img_16.png)
+  
+  

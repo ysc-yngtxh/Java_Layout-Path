@@ -13,6 +13,11 @@ spring:
       transport:
         # 控制台地址
         dashboard: 127.0.0.1:8010
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
 
 # 开启Sentinel对Feign的支持
 feign:
