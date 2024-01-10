@@ -15,6 +15,11 @@ public class SentinelFeignController {
 
     public static final String SENTINEL_FEIGN_BY_ID = "sentinelFeignById";
 
+    @GetMapping("/customException")
+    public String customException() {
+        return "自定义Sentinel的异常处理逻辑！！！";
+    }
+
     @GetMapping("/sentinelFeign/{id}")
     @SentinelResource(value = SENTINEL_FEIGN_BY_ID)
     public String sentinelFeignById(@PathVariable Integer id){

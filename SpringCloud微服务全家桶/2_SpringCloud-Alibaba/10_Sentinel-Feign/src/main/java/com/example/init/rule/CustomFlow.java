@@ -3,9 +3,6 @@ package com.example.init.rule;
 import com.alibaba.csp.sentinel.slots.block.RuleConstant;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
-import com.example.service.impl.DefaultHandlerServiceImpl;
-import com.example.service.impl.SentinelClassServiceImpl;
-import com.example.service.impl.SentinelMethodServiceImpl;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -25,25 +22,13 @@ public class CustomFlow implements CommandLineRunner {
     public void run(String... args) throws Exception {
         List<FlowRule> rules = new ArrayList<>();
         // FlowRule流量控制规则
-        FlowRule rule = new FlowRule("/getDefaultHandler"); // URL资源限流
-        FlowRule rule1 = new FlowRule(DefaultHandlerServiceImpl.DEFINITION_BLOCK_RULE);
-        FlowRule rule2 = new FlowRule(SentinelMethodServiceImpl.RESOURCE_METHOD);
-        FlowRule rule3 = new FlowRule(SentinelClassServiceImpl.RESOURCE_CLASS);
+        FlowRule rule = new FlowRule("/customException"); // URL资源限流
         // 限流阈值
         rule.setCount(1);
-        rule1.setCount(1);
-        rule2.setCount(2);
-        rule3.setCount(2);
         // 限流阈值类型，QPS 模式（1）或并发线程数模式（0）
         rule.setGrade(RuleConstant.FLOW_GRADE_QPS);
-        rule1.setGrade(RuleConstant.FLOW_GRADE_QPS);
-        rule2.setGrade(RuleConstant.FLOW_GRADE_QPS);
-        rule3.setGrade(RuleConstant.FLOW_GRADE_QPS);
         // 流控针对的调用来源，若为 default 则不区分调用来源
         rule.setLimitApp("default");
-        rule1.setLimitApp("default");
-        rule2.setLimitApp("default");
-        rule3.setLimitApp("default");
         // 调用关系限流策略：直接、链路、关联
         // rule.setStrategy(0);
         // 流量控制效果(直接拒绝、Warm Up、匀速排队)
@@ -51,9 +36,6 @@ public class CustomFlow implements CommandLineRunner {
         // 是否集群限流
         // rule.setClusterMode(false);
         rules.add(rule);
-        rules.add(rule1);
-        rules.add(rule2);
-        rules.add(rule3);
         FlowRuleManager.loadRules(rules);
     }
 }
