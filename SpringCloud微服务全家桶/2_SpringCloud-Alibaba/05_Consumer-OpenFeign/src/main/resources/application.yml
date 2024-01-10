@@ -24,15 +24,15 @@ spring:
           # 配置全局(其他所有的提供者服务配置)
           default:
             # openFeign连接超时
-            connect-timeout: 1
+            connect-timeout: 1000
             # openFeign读取超时
-            read-timeout: 1
+            read-timeout: 3000
           # 配置局部(指定的提供者服务配置)
           nacos-provider:
             # openFeign连接超时
-            connect-timeout: 1
+            connect-timeout: 1000
             # openFeign读取超时
-            read-timeout: 1
+            read-timeout: 1000
       # 请求与响应压缩配置
       compression:
         request:
