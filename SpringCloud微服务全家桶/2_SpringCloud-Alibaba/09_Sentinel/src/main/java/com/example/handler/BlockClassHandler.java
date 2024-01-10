@@ -5,7 +5,7 @@ import com.alibaba.csp.sentinel.slots.block.BlockException;
 /**
  * @author 游家纨绔
  * @dateTime 2024-01-08 14:32
- * @apiNote TODO Sentinel类级限流
+ * @apiNote TODO Sentinel的 Class方式 限流
  */
 public class BlockClassHandler {
 
@@ -14,6 +14,6 @@ public class BlockClassHandler {
     // 注意：降级逻辑方法一定要是静态方法。因为我们是没有注入容器的，所以Sentinel要想执行降级逻辑方法，是需要通过静态方法访问
     public static String selectClassByIdBlockHandler(Integer Id, BlockException ex) {
         System.out.println("selectClassByIdBlockHandler异常信息：" + ex.getMessage());
-        return "{code:500, msg:" + Id + "服务流量控制处理}";
+        return "{code:500, msg:" + Id + " -- 服务流量限流处理}";
     }
 }

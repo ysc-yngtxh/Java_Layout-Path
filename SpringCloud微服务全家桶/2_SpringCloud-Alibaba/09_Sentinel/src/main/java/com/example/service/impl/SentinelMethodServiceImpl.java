@@ -26,17 +26,17 @@ public class SentinelMethodServiceImpl implements SentinelMethodService {
     }
 
 
-    // Sentinel方法级限流，超出流量限制的请求会进入到blockHandler的方法。
+    // Sentinel的 Method方式 限流，超出流量限制的请求会进入到blockHandler的方法。
     // 注意细节，一定要跟原函数的返回值和形参一致，并且形参最后要加个BlockException参数，否则会报错，FlowException: null
     public String selectMethodByIdBlockHandler(Integer Id, BlockException ex) {
         System.out.println("selectMethodByIdBlockHandler异常信息：" + ex.getMessage());
-        return "{code:500, msg:" + Id + "服务流量控制处理}";
+        return "{code:500, msg:" + Id + " -- 服务流量限流处理}";
     }
 
 
-    // Sentinel方法级降级，服务熔断降级处理，函数签名与原函数一致或加一个 Throwable 类型的参数
+    // Sentinel的 Method方式 降级，服务熔断降级处理，函数签名与原函数一致或加一个 Throwable 类型的参数
     public String selectMethodByIdFallback(Integer Id, Throwable throwable) {
         System.out.println("selectMethodByIdFallback异常信息：" + throwable.getMessage());
-        return "{code: 500, msg: " + Id + "服务熔断降级处理}";
+        return "{code: 500, msg: " + Id + " -- 服务熔断降级处理}";
     }
 }

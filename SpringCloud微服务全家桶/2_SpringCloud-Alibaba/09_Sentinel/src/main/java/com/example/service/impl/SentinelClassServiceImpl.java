@@ -22,9 +22,8 @@ public class SentinelClassServiceImpl implements SentinelClassService {
     //      fallback是针对方法出现异常了，则会进入fallback方法。
     //  若 blockHandler 和 fallback 都进行了配置，则被限流降级而抛出BlockException时只会进入 blockHandler 处理逻辑。
     //  若未配置 blockHandler、fallback 和 defaultFallback，则被限流降级时会将 BlockException 直接抛出。
-    @SentinelResource(blockHandler = "selectClassByIdBlockHandler",
-            blockHandlerClass = BlockClassHandler.class, fallbackClass = FallbackClassHandler.class,
-            fallback = "selectClassByIdFallbackHandler")
+    @SentinelResource(blockHandler = "selectClassByIdBlockHandler", blockHandlerClass = BlockClassHandler.class,
+            fallbackClass = FallbackClassHandler.class, fallback = "selectClassByIdFallbackHandler")
     public String selectClassById(Integer id) {
         if (id == 2) {
             throw new RuntimeException("出异常了啊！");
