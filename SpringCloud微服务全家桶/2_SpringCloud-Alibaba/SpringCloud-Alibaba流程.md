@@ -252,5 +252,23 @@
         在Sentinel仪表盘中手动配置流控、熔断等规则，其对应资源的服务要是宕机等原因被重启，那么这些在仪表盘中定义的规则会被清除，
     并不会在重启后继续生效。如果想实现那种持久化的规则，则需要在代码里去实现规则。
   ```
-  
+
+#### 5、Sentinel不同限流方式的差异
+ > ##### 基于 URL资源 作为限流
+  - ![img_17.png_17](01_Alibaba-Provider/src/main/resources/static/img_17.png)
+
+> ##### 基于 资源名称 作为限流
+  - ![img_18.png_18](01_Alibaba-Provider/src/main/resources/static/img_18.png)
+
+> ##### 结合以上两种结果：
+> ##### 1、接口URL限流超过阈值时的行为：  
+> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;当某个接口的访问超过了设定的阈值，Sentinel 会按照其默认的策略进行处理。对于限流超过阈值的情况，请求会抛出BlockException异常，
+> Sentinel 捕获到该异常后，执行 BlockExceptionHandler 的实现类 DefaultBlockExceptionHandler 逻辑，默认的行为是返回状态码 429，并输出“Blocked by Sentinel (flow limiting)”，表示请求过于频繁。
+> 当然，我们也可以自定义限流时的状态码以及输出资源格式，只需要通过重写BlockExceptionHandler抽象类的抽象方法并注入容器即可。
+> ##### 2、在所需资源上只定义 @SentinelResource 的 value 属性：
+> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;在所需资源上只定义 @SentinelResource 的value属性，blockHandler、fallback等注解属性未被配置，这意味着你只是为该方法定义了一个资源名称。
+> Sentinel 会根据这个名称来识别这个资源，并进行相应的流量控制。但这种情况下，当访问该资源被限流时，由于未定义该资源的异常处理逻辑，默认的行为是直接报错 500。
+> 
+> ##### Tips：简单理解就是，在接口URL资源上可以不需要自己定义异常处理逻辑，当然也可以重写。而通过@SentinelResource注解定义的资源则必须配置异常处理逻辑。
+> ##### 想一想也是，万一你服务原本有几千条接口，这时候突然要集成Sentinel实现流量防卫，那岂不要一个一个的配置接口异常处理逻辑，猝死！
   

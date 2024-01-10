@@ -1,1 +1,8 @@
 
+xxl:
+  job:
+    i18n: zh_CN
+
+spring:
+  messages:
+    basename: i18n/messages

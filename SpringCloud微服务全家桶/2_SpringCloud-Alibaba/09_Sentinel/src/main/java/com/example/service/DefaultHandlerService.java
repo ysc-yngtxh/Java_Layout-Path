@@ -6,5 +6,7 @@ package com.example.service;
  * @apiNote TODO
  */
 public interface DefaultHandlerService {
-    String defaultBlockRule(Integer id);
+    String defaultBlockRule();
+
+    String definitionBlockRule();
 }

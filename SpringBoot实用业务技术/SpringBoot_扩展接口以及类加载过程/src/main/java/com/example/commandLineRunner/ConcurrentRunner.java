@@ -1,12 +1,14 @@
 package com.example.commandLineRunner;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
 /**
  * @author 游家纨绔
  * @dateTime 2023-11-07 18:20
  * @apiNote TODO
  */
+@Component
 public class ConcurrentRunner implements CommandLineRunner {
     /*
       这个接口也只有一个方法：run(String… args)，触发时机为整个项目启动完毕后，自动执行。
