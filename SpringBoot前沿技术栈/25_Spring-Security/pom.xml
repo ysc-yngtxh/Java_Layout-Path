@@ -8,14 +8,27 @@
         <version>3.1.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.example</groupId>
     <artifactId>25_Spring-Security</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <description>${project.artifactId}</description>
+
     <properties>
         <java.version>17</java.version>
     </properties>
+
+    <modules>
+        <module>1_Spring-Security-Demo</module>
+        <module>2.0_Spring-Security-InMemoryUserDetailsManager</module>
+        <module>2_Spring-Security-formLogin</module>
+        <module>3_Spring-Security-Authorization</module>
+        <module>4_Spring-Security-Custom-PreAuthoriza</module>
+        <module>5_Spring-Security-FrontendBackendSeparation</module>
+    </modules>
+    <packaging>pom</packaging>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
