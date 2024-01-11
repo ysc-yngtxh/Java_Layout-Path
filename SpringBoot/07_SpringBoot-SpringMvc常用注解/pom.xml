@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>07_springboot-springmvc</artifactId>
+    <artifactId>07_SpringBoot-SpringMvc</artifactId>
     <version>1.0.0</version>
     <name>07_SpringBoot-SpringMvc常用注解</name>
     <description>07_SpringBoot-SpringMvc常用注解</description>
