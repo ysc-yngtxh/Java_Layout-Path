@@ -50,7 +50,5 @@ public class ConsumerController {
         PageVo info = PageVo.info(consumerListPage, countAll);
         return ResponseEntity.ok(ResponseVo.success(200, info, "分页数据返回成功"));
     }
-
-
 }
 

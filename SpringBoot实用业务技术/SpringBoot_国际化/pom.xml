@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>SpringBoot_ZH_CN</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot_ZH_CN</name>
-    <description>SpringBoot_ZH_CN</description>
+    <name>SpringBoot_国际化</name>
+    <description>SpringBoot_国际化</description>
     <properties>
         <java.version>17</java.version>
     </properties>

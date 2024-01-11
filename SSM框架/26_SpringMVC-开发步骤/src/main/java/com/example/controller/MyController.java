@@ -39,7 +39,7 @@ public class MyController {
         mv.addObject("fun","执行的是doSome方法");
 
         // 指定视图，指定视图的完整路径
-        // 框架对视图执行的forward操作，request.getRequestDispatcher("/show,jsp").forward(...)
+        // 框架对视图执行的forward操作，request.getRequestDispatcher("/show.jsp").forward(...)
         // mv.setViewName("/WEB-INF/view/show.jsp");这是没有声明视图解析器时
 
         // 当配置了视图解析器后，可以使用逻辑名称(文件名)，指定视图。框架会使用视图解析器的前缀+逻辑名称+后缀 组成完成路径

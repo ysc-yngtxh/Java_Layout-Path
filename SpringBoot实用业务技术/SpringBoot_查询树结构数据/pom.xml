@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>SpringBoot_TreeBuilder</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot_TreeBuilder</name>
-    <description>SpringBoot_TreeBuilder</description>
+    <name>SpringBoot_查询树结构数据</name>
+    <description>SpringBoot_查询树结构数据</description>
     <properties>
         <java.version>17</java.version>
     </properties>

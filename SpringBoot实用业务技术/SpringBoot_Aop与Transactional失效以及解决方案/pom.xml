@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>SpringBoot_Aop-Transactional</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot_Aop-Transactional</name>
-    <description>SpringBoot_Aop-Transactional</description>
+    <name>SpringBoot_Aop与Transactional失效以及解决方案</name>
+    <description>SpringBoot_Aop与Transactional失效以及解决方案</description>
     <properties>
         <java.version>17</java.version>
     </properties>

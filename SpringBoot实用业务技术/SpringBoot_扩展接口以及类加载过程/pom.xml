@@ -11,8 +11,8 @@
   <groupId>com.example</groupId>
   <artifactId>SpringBoot_Expand-Interface</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>SpringBoot_Expand-Interface</name>
-  <description>SpringBoot_Expand-Interface</description>
+  <name>SpringBoot_扩展接口以及类加载过程</name>
+  <description>SpringBoot_扩展接口以及类加载过程</description>
   <properties>
     <java.version>17</java.version>
   </properties>

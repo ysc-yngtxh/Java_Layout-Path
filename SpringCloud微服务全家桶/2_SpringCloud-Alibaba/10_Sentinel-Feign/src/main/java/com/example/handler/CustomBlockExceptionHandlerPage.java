@@ -22,7 +22,7 @@ public class CustomBlockExceptionHandlerPage implements BlockExceptionHandler {
         String msg = "";
 
         if (e instanceof FlowException) {
-            msg = "/resourcePage";
+            msg = "page.html";
         } else if (e instanceof DegradeException) {
             msg = "/resourcePage";
         } else if (e instanceof SystemBlockException) {
@@ -32,7 +32,6 @@ public class CustomBlockExceptionHandlerPage implements BlockExceptionHandler {
             msg = "/**";
         } else if (e instanceof AuthorityException) {
             msg = "/**";
-
         }
 
         httpServletRequest.getRequestDispatcher(msg)

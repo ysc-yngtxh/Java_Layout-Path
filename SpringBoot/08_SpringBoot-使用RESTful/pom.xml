@@ -11,8 +11,8 @@
     <groupId>com.bjpowernode.springboot</groupId>
     <artifactId>08_springboot-restful</artifactId>
     <version>1.0.0</version>
-    <name>08_springboot-restful</name>
-    <description>Demo project for Spring Boot</description>
+    <name>08_SpringBoot-使用RESTful</name>
+    <description>08_SpringBoot-使用RESTful</description>
 
     <properties>
         <java.version>1.8</java.version>

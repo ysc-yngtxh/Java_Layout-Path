@@ -11,8 +11,8 @@
 	<groupId>com.example</groupId>
 	<artifactId>SpringBoot_Json-Annotation</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SpringBoot_Json-Annotation</name>
-	<description>SpringBoot_Json-Annotation</description>
+	<name>SpringBoot_实体类序列化</name>
+	<description>SpringBoot_实体类序列化</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
