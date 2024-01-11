@@ -254,11 +254,11 @@
   ```
 
 #### 5、Sentinel不同限流方式的差异
- > ##### 基于 URL资源 作为限流
-  - ![img_17.png_17](01_Alibaba-Provider/src/main/resources/static/img_17.png)
+ > ##### 第一种情况：基于 URL资源 作为限流
+ > - ![img_17.png_17](01_Alibaba-Provider/src/main/resources/static/img_17.png)
 
-> ##### 基于 资源名称 作为限流
-  - ![img_18.png_18](01_Alibaba-Provider/src/main/resources/static/img_18.png)
+ > ##### 第二种情况：基于 资源名称 作为限流
+ > - ![img_18.png_18](01_Alibaba-Provider/src/main/resources/static/img_18.png)
 
 > ##### 结合以上两种结果：
 > ##### 1、接口URL限流超过阈值时的行为：  
