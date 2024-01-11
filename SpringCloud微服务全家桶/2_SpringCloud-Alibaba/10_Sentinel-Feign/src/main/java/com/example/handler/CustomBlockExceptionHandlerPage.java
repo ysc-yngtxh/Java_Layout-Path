@@ -9,38 +9,33 @@ import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowException;
 import com.alibaba.csp.sentinel.slots.system.SystemBlockException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.stereotype.Component;
-
-import java.io.PrintWriter;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-01-10 17:00
- * @apiNote TODO 自定义熔断降级异常处理(返回响应流)
+ * @dateTime 2024-01-11 10:33
+ * @apiNote TODO 自定义熔断降级异常处理(跳转到页面)
  */
-public class CustomBlockExceptionHandler implements BlockExceptionHandler {
+public class CustomBlockExceptionHandlerPage implements BlockExceptionHandler {
     @Override
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, BlockException e) throws Exception {
-        httpServletResponse.setStatus(429);
 
-        PrintWriter out = httpServletResponse.getWriter();
-        String msg = "Blocked by Sentinel - ";
+        String msg = "";
 
         if (e instanceof FlowException) {
-            msg += "Flow Exception";
+            msg = "/resourcePage";
         } else if (e instanceof DegradeException) {
-            msg += "Degrade Exception";
+            msg = "/resourcePage";
         } else if (e instanceof SystemBlockException) {
-            msg += "System Block Exception";
+            // 实际服务没有定义/**路径，工作业务自己补充
+            msg = "/**";
         } else if (e instanceof ParamFlowException) {
-            msg += "ParamFlow Exception";
+            msg = "/**";
         } else if (e instanceof AuthorityException) {
-            msg += "Authority Exception";
-            httpServletResponse.setStatus(401);
+            msg = "/**";
+
         }
 
-        out.print(msg);
-        out.flush();
-        out.close();
+        httpServletRequest.getRequestDispatcher(msg)
+                .forward(httpServletRequest,httpServletResponse);
     }
 }
