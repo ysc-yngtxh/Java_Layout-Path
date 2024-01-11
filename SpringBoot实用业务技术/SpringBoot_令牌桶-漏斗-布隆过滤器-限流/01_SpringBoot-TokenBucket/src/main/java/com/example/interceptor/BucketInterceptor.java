@@ -33,15 +33,15 @@ public class BucketInterceptor implements HandlerInterceptor {
         	// 在名为：bucket的令牌桶里取令牌 取到即放行 未取到即抛出异常
             if(BucketUtil.buckets.get("bucket").getToken()){
                 return true;
-            }
-            else{
+            } else {
             	// 抛出自定义异常
                 throw new ApiException("不好意思，您被限流了");
             }
-        }else {
+        } else {
             return true;
         }
     }
+
     // 接口调用之后，返回之前 使用
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
