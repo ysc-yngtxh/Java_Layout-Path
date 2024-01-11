@@ -19,12 +19,12 @@ public class MySellHandler implements InvocationHandler {
         Object res = null;
         // 向厂家发送订单，告诉厂家，我买了U盘，厂家发货
         // float price = factory.sell(amount);  // 厂家的价格
-        res = method.invoke(target, args);//执行目标方法
+        res = method.invoke(target, args); // 执行目标方法
 
         // 商家 需要加价，也就是代理要增加价格
         // price = price+25; // 增强功能，代理类在完成目标类方法调用后，增强了功能。
         if (res != null) {
-            Float price = (Float)res;
+            float price = (Float)res;
             price = price+25;
             res = price;
         }

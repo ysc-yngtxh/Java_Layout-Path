@@ -1,4 +1,4 @@
-import com.example.factory.UsbKingFactory;
+import com.example.service.impl.UsbKingFactory;
 import com.example.handler.MySellHandler;
 import com.example.service.UsbSell;
 
