@@ -18,6 +18,7 @@
 	<modules>
 		<module>1_SpringBoot-StaticLocal-Properties</module>
 		<module>2_SpringBoot-StaticLocal-Config</module>
+		<module>3_SpringBoot-Properties-Config</module>
 	</modules>
 	<packaging>pom</packaging>
 
