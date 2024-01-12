@@ -19,6 +19,7 @@
 		<module>1_SpringBoot-StaticLocal-Properties</module>
 		<module>2_SpringBoot-StaticLocal-Config</module>
 		<module>3_SpringBoot-Properties-Config</module>
+		<module>4_SpringBoot-Templates-Controller</module>
 	</modules>
 	<packaging>pom</packaging>
 

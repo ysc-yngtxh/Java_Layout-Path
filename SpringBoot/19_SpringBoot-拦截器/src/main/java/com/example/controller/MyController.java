@@ -22,8 +22,6 @@ public class  MyController {
         user.setId(1001);
         user.setUsername("zhangsan");
         request.getSession().setAttribute("user",user);
-        Reflect
-
         return "LOGIN SUCCESS";
     }
 
