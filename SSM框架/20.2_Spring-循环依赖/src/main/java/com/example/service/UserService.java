@@ -12,10 +12,10 @@ public class UserService {
         this.orderService = orderService;
     }
 
-    public UserService(OrderService orderService) {
-        this.orderService = orderService;
+    public UserService() {
     }
 
-    public UserService() {
+    public UserService(OrderService orderService) {
+        this.orderService = orderService;
     }
 }
