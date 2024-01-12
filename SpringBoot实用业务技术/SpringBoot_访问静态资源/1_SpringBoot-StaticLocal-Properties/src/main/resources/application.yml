@@ -1,13 +1,10 @@
 
-spring:
-  web:
-    resources:
-      # 官方默认配置 static-locations=classpath:/static, classpath:/public, classpath:/resources, classpath:/META-INF/resources
-      static-locations: classpath:/static
-  mvc:
-    # 添加静态资源文件包访问路径前缀
-    static-path-pattern: /resource/prefix/**
+server:
+  port: 8080
 
-  # 上述配置解析：
-  # spring.web.resources.static-locations=classpath:/static 表示默认的四种静态文件包只保留classpath:/static。
-  # spring.mvc.static-path-pattern: /resource/prefix/** 表示为只剩下的classpath:/static资源文件包访问路径添加前缀
+spring:
+  profiles:
+    # 定义具体使用哪种配置（dev、production）
+    # dev配置：相当于是使用了全部的默认四种静态文件包，并在访问这些静态包资源路径前添加了前缀
+    # production配置：相当于只使用 classpath:/static 这一个包作为静态资源包，也添加了访问路径前缀
+    active: production
