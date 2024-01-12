@@ -22,6 +22,7 @@ public class TemplatesController {
         // TODO 有一个细节需要注意：
         //  当你在配置文件中 spring.thymeleaf.prefix=classpath:/templates 时，这里return返回的视图得加斜杠"/login"。
         //  但这样配置 spring.thymeleaf.prefix=classpath:/templates/，就可以直接返回视图名称即可，否则报错。
+        //  最好是在配置文件后面加上斜杠“/”，因为不加上就无法访问到默认欢迎文件index.html了
         return "login";
     }
 
