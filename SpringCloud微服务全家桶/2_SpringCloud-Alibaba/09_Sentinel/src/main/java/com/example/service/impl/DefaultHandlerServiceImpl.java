@@ -25,6 +25,7 @@ public class DefaultHandlerServiceImpl implements DefaultHandlerService {
     //                     blockHandler属性是针对流控设置，超出规则，则会进入blockHandler方法。
     //                     fallback属性是针对方法出现异常了，则会进入fallback方法。
     //  这里只配置 value属性，未配置 blockHandler、fallback等属性，当访问该资源被限流时，直接报错500。
+    //  资源名definitionBlockRule 与接口/getDefinitionBlockRule资源为两个资源
     @SentinelResource(value = DEFINITION_BLOCK_RULE)
     public String definitionBlockRule() {
         return "定义了 definitionBlockRule 在业务层的资源名！！！";

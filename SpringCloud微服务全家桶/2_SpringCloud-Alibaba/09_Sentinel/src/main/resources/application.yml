@@ -20,8 +20,3 @@ spring:
         # 控制台仪表盘地址
         dashboard: 127.0.0.1:8010
 
-
-# 开启Sentinel对Feign的支持
-feign:
-  sentinel:
-    enabled: true
