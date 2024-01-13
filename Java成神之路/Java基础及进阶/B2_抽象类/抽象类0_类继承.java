@@ -13,6 +13,12 @@ package B2_抽象类;
              3、一个子类的直接父类是唯一的，但是一个父类可以拥有多个子类
  */
 class Person {  // 正常的Java类
+    static {
+        System.out.println("这里是静态代码块");
+    }
+    {
+        System.out.println("这里是构造代码块");
+    }
     public final void finalMethod() {
         // 这是一个 final 方法，子类将无法重写它
     }
