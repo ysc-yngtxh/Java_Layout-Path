@@ -3,8 +3,10 @@ package com.example.annocationi;
 import com.example.handler.CustomBlockExceptionHandlerPage;
 import org.springframework.context.annotation.Import;
 
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * @author 游家纨绔
@@ -12,6 +14,9 @@ import java.lang.annotation.RetentionPolicy;
  * @apiNote TODO 定义熔断降级异常处理是否开启
  */
 @Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+// 可选择 自定义熔断降级异常处理 模式
+// 返回响应流：CustomBlockExceptionHandler、    跳转到页面：CustomBlockExceptionHandlerPage）
 @Import(CustomBlockExceptionHandlerPage.class)
 public @interface EnableCustomBlockExceptionHandlerPage {
 

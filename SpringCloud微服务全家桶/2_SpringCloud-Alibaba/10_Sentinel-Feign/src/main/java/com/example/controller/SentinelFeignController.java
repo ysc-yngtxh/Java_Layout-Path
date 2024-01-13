@@ -15,13 +15,6 @@ public class SentinelFeignController {
     @Autowired
     private EchoService echoService;
 
-    @RequestMapping("/resourcePage")
-    public ModelAndView resourcePage() {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("page");
-        return mv;
-    }
-
     // 自定义URL资源异常处理逻辑
     @GetMapping("/customException")
     @ResponseBody
