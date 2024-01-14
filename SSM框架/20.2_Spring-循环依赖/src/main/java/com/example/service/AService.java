@@ -1,0 +1,21 @@
+package com.example.service;
+
+/**
+ * @author 游家纨绔
+ * @dateTime 2023-11-11 22:10
+ * @apiNote TODO
+ */
+public class AService {
+    private BService bService;
+
+    public void setUserService(BService bService) {
+        this.bService = bService;
+    }
+
+    public AService() {
+    }
+
+    public AService(BService bService) {
+        this.bService = bService;
+    }
+}

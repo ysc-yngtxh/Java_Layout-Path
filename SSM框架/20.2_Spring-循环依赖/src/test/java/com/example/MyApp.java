@@ -7,6 +7,6 @@ public class MyApp {
     @Test
     public void test() {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        System.out.println(context.getBean("orderService"));
+        System.out.println(context.getBean("AService"));
     }
 }
