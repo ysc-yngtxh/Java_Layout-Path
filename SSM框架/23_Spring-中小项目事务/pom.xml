@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.example</groupId>
-  <artifactId>23_Spring-medium</artifactId>
+  <artifactId>23_Spring-Medium</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <name>23_Spring-中小项目事务</name>
