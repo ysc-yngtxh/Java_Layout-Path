@@ -18,4 +18,8 @@ public class AService {
     public AService(BService bService) {
         this.bService = bService;
     }
+
+    public void testProxy(){
+        System.out.println("测试Aop切面");
+    }
 }
