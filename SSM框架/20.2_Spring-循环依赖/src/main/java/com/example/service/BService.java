@@ -8,7 +8,7 @@ package com.example.service;
 public class BService {
     private AService aService;
 
-    public void setOrderService(AService aService) {
+    public void setaService(AService aService) {
         this.aService = aService;
     }
 
