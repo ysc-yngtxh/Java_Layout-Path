@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  */
 @Aspect
 @Component
-public class TestAop {
+public class CAop {
 
     @Before(value = "execution(* *..AService.testProxy())")
     public void proxy(){
