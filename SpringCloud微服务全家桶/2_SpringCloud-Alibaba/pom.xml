@@ -19,6 +19,7 @@
         <module>08_Gateway-Nacos</module>
         <module>09_Sentinel</module>
         <module>10_Sentinel-Feign</module>
+        <module>11_Sentinel-Entry</module>
     </modules>
 
     <packaging>pom</packaging>
