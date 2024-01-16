@@ -25,7 +25,7 @@ public class SentinelClassServiceImpl implements SentinelClassService {
     //  若只配置 value属性，未配置 blockHandler、fallback等属性，当访问该资源被限流时，直接报错500。
     //  注意：注解方式埋点不支持 private 方法。所以注解里属性对应的类方法一定不能是私有方法的。
     @SentinelResource(blockHandler = "selectClassByIdBlockHandler", blockHandlerClass = BlockClassHandler.class,
-            fallbackClass = FallbackClassHandler.class, fallback = "selectClassByIdFallbackHandler")
+                      fallbackClass = FallbackClassHandler.class, fallback = "selectClassByIdFallbackHandler")
     public String selectClassById(Integer id) {
         if (id == 2) {
             throw new RuntimeException("出异常了啊！");
