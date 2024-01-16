@@ -2,7 +2,6 @@
 server:
   port: 9299
 
-
 spring:
   application:
     name: cloud-sentinel-feign

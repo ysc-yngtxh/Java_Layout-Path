@@ -4,6 +4,11 @@ server:
     context-path: /
 
 spring:
+  sql:
+    init:
+      schema-locations: classpath:/sql/tb_consumer.sql
+      mode: always
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: mpw:tOuQTJfpXKEWbLY1fOJxqQ==

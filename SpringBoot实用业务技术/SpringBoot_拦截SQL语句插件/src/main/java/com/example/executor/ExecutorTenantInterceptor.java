@@ -1,6 +1,5 @@
 package com.example.executor;
 
-import cn.hutool.core.util.ReflectUtil;
 import com.example.annotation.IgnoreTenantId;
 import com.example.tenant.TenantContextHolder;
 import net.sf.jsqlparser.expression.Expression;

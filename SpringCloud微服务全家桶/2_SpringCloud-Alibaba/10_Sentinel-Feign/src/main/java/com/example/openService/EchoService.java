@@ -1,7 +1,7 @@
 package com.example.openService;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.example.handler.EchoFallbackHandler;
+import com.example.openService.fallback.EchoFallbackHandler;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

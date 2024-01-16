@@ -1,4 +1,4 @@
-package com.example.handler;
+package com.example.openService.fallback;
 
 import com.example.openService.EchoService;
 import org.springframework.stereotype.Component;
