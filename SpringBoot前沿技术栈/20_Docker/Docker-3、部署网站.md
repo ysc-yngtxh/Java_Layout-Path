@@ -114,11 +114,11 @@
     > docker run -d -p 8080:8080 --name docker-springboot docker-springboot:1.0.0
     >
     > - -d : 作为守护进程
-    > - -p 8080:8080 : 第一个8080是指镜像的端口为3306；第二个8080是容器里运行环境开放的端口
+    > - -p 8080:8080 : 第一个8080是指镜像的端口为8080；第二个8080是容器里运行环境开放的端口
     > - --name docker-springboot : 表示取的运行容器的名字
     > - docker-springboot:1.0.0 : 就是容器运行的来源镜像
 
-    *项目成功运行，我们现在来测试一下吧。这里的path路径被我使用switchHosts做了域名映射（192.168.75.128 docker)*
+    *项目成功运行，我们现在来测试一下吧。这里的path路径被我使用switchHosts做了域名映射（192.168.2.128 docker)*
      
        - ![输入图片说明](image/image.png)
 
