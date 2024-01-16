@@ -82,10 +82,11 @@
 
   - #### 1.4.1 上传我们的SpringBoot项目并进行Dockerfile配置
 
-    > 新建一个目录  
+    > 新建一个目录
+      注意：一开始路径是~，我们想要进入docker路径需要先 cd / 回车一下
       mkdir /opt/dockerfiles
     >
-    > 将我们的SpringBoot项目上传到服务器，可以通过Xshell直接拖进我们想存放的目录下，并在该目录下进行启动容器步骤配置  
+    > 将我们的SpringBoot项目上传到服务器，可以通过Xshell直接拖进我们想存放的目录/dockerfiles下，并在该目录下进行启动容器步骤配置  
      vim dockerfile
     ```
     # 指定基础镜像：仓库是java，tag是17.0.8
@@ -138,7 +139,7 @@
 - ### 1.5 命令
   ```
   # 删除镜像
-  docker rmi [image镜像名]
+  docker rmi [image镜像名]:[版本号.可不写，默认就是latest]
   
   # 启动容器运行
   docker start [container容器名]
@@ -152,4 +153,7 @@
   
   # 查看所有(包括启动失败)的容器
   docker ps -a
+  
+  # 删除文件
+  rm -rf [文件名]
   ```
