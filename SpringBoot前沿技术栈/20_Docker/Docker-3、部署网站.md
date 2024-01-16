@@ -74,7 +74,7 @@
 
      > 查看构建完成的jdk17镜像：docker images
 
-     - ![输入图片说明](src/main/resources/static/image1.png)
+     - ![输入图片说明](image/image1.png)
 
 ***
 
@@ -107,7 +107,7 @@
     docker images
     ```
     
-     - ![输入图片说明](src/main/resources/static/image1.png)
+     - ![输入图片说明](image/image1.png)
 
   - #### 1.4.3 运行镜像docker-springboot，并取名容器名为docker-springboot
     > docker run -d -p 8080:8080 --name docker-springboot docker-springboot:1.0.0
@@ -119,7 +119,7 @@
 
     *项目成功运行，我们现在来测试一下吧。这里的path路径被我使用switchHosts做了域名映射（192.168.75.128 docker)*
      
-       - ![输入图片说明](src/main/resources/static/image.png)
+       - ![输入图片说明](image/image.png)
 
   - #### 1.4.4 进入容器目录
     ```
@@ -131,7 +131,7 @@
     # 进入docker-springboot容器目录：方法二
     docker exec -it 容器Id /bin/bash
     ```
-     - ![输入图片说明](src/main/resources/static/image2.png)
+     - ![输入图片说明](image/image2.png)
 
 ***
 
