@@ -56,7 +56,7 @@ public class 杂文笔记 {
            }
 
            
-Arrays.asList()方法可以将数组转化为集合，也可以往里面添加数据。
+      Arrays.asList()方法可以将数组转化为集合，也可以往里面添加数据。
             stream().map(Category::getName).collect(Collectors.toList())
             首先是在流Stream()中创建一个管道，取出Category中的所有getName,然后到collect的List集合中进行遍历。
 
