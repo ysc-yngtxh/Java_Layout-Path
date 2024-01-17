@@ -37,8 +37,8 @@ public class CustomDegrade implements CommandLineRunner {
         rule.setSlowRatioThreshold(0.2);
         // 指定熔断时长（在熔断时间内任何请求都无法访问该资源）
         rule.setTimeWindow(10);
-        // 指定最小请求数（至少有五个以上的请求才可能触发熔断）
-        rule.setMinRequestAmount(5);
+        // 指定最小请求数（至少有三个以上的请求才可能触发熔断）
+        rule.setMinRequestAmount(3);
         // 指定统计时长
         rule.setStatIntervalMs(1000);
         rules.add(rule);
