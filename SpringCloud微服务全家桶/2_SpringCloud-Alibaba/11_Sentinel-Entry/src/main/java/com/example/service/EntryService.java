@@ -8,5 +8,5 @@ package com.example.service;
 public interface EntryService {
 
     String getHandler();
-    String getList();
+    String getList(Integer num);
 }

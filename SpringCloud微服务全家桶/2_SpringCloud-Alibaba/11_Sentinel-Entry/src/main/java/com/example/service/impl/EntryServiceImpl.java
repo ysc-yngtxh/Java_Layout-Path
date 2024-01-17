@@ -5,7 +5,10 @@ import com.alibaba.csp.sentinel.SphU;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.example.service.EntryService;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author 游家纨绔
@@ -18,35 +21,42 @@ public class EntryServiceImpl implements EntryService {
     public static final String GET_HANDLER = "handler";
     public static final String GET_LIST = "list";
 
+    // 该GET_HANDLER资源具有流控规则
     @SentinelResource(value = GET_HANDLER, blockHandler = "getHandlerBlockHandler")
     public String getHandler() {
         return "定义了 getHandler 在业务层的资源名！！！";
     }
 
-    public String getHandlerBlockHandler(Integer Id, BlockException ex) {
+    public String getHandlerBlockHandler(BlockException ex) {
         System.out.println("getHandlerBlockHandler异常信息：" + ex.getMessage());
-        return "{code:500, msg:" + Id + " -- 服务流量限流处理}";
+        return "{code: 500, msg: 服务流量限流处理}";
     }
 
 
 
+    // 该GET_LIST资源既有自身的熔断规则，又有GET_HANDLER资源的流控规则
     @SentinelResource(value = GET_LIST, fallback = "getListFallback")
-    public String getList() {
+    @SneakyThrows
+    public String getList(Integer num) {
+        // 三种控制资源规则的方式
+        //    1、通过Sentinel控制台  2、通过代码API设置(Flow,DegradeRule)  3、通过资源实体Entry
         Entry entry = null;
         try {
             entry = SphU.entry(GET_HANDLER);
         } catch (BlockException e) {
-            return "定义了 getList 在业务层的资源名！！！";
+            return "getList 在业务层出现异常，出现了限流规则";
         } finally {
             if (entry != null) {
                 entry.exit();
             }
         }
+        // 这里通过获取请求参数设置睡眠时间，用以触发熔断机制
+        TimeUnit.SECONDS.sleep(num);
         return "定义了 getList 在业务层的资源名！！！";
     }
 
-    public String getListFallback(Integer Id, Throwable throwable) {
+    public String getListFallback(Integer num, Throwable throwable) {
         System.out.println("getListFallback异常信息：" + throwable.getMessage());
-        return "{code: 500, msg: " + Id + " -- 服务熔断降级处理}";
+        return "{code: 500, msg: 服务熔断降级处理}";
     }
 }

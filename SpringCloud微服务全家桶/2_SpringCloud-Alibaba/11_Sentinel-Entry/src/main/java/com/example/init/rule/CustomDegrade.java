@@ -32,13 +32,13 @@ public class CustomDegrade implements CommandLineRunner {
         // 异常数：异常请求数量作为闸门
         rule.setGrade(RuleConstant.DEGRADE_GRADE_RT);
         // 指定最大RT（最大的超时时间）
-        rule.setCount(2);
+        rule.setCount(1);
         // 指定比例阈值
         rule.setSlowRatioThreshold(0.2);
         // 指定熔断时长（在熔断时间内任何请求都无法访问该资源）
         rule.setTimeWindow(10);
-        // 指定最小请求数（至少有两个以上的请求才可能触发熔断）
-        rule.setMinRequestAmount(2);
+        // 指定最小请求数（至少有五个以上的请求才可能触发熔断）
+        rule.setMinRequestAmount(5);
         // 指定统计时长
         rule.setStatIntervalMs(1000);
         rules.add(rule);

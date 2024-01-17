@@ -4,6 +4,7 @@ import com.example.service.EntryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -21,7 +22,7 @@ public class SentinelController {
 
     @GetMapping("/getList")
     @ResponseBody
-    public String getList() {
-        return entryService.getList();
+    public String getList(@RequestParam Integer num) {
+        return entryService.getList(num);
     }
 }
