@@ -130,7 +130,7 @@
         Dubbo 底层使用谷歌的 grpc 通信，用于淘宝的架构体系，经过双十一检测，性能高还稳定。而gRPC，则是RPC的一种，它是免费且开源的，由谷歌出品。
 
 ## 三、Reactor简介 -- WebFlux
-- >  Reactor是一种完全基于Reactive Streams规范的、全新的库。
+- >  Reactor是一种完全基于Reactive Streams规范的、全新的类库。
 - > 1️⃣、响应式编程  
        响应式编程，Reactive Programming，是一种新的编程范式、编程思想。  
        响应式编程最早由.Net平台上的Reactive eXtensions(Rx)库来实现。后来被迁移到了Java平台，产生了著名的RxJava。  
@@ -138,10 +138,10 @@
     2️⃣、Reactive Streams  
        Reactive Streams是响应式编程的规范，定义了响应式编程的相关接口。只要符合该规范的库，就称为Reactive响应式编程库。  
     3️⃣、RxJava2  
-       RxJava2是一个响应式编程库，产生于Reactive Streams规范之后。但由于其是在RxJava基础之上进行的开发，  
+       RxJava2是一个响应式编程类库，产生于Reactive Streams规范之后。但由于其是在RxJava基础之上进行的开发，  
        所以在设计时不仅遵循了Reactive Streams规范，同时为了兼容RxJava，使得RxJava2在使用时非常不方便。  
     4️⃣、Reactor  
-       Reactor是一种全新的响应式编程库，完全遵循Reactive Streams规范，又与RxJava没有任何关系。所以，其使用时非常方便、直观。  
+       Reactor是一种全新的响应式编程类库，完全遵循Reactive Streams规范，又与RxJava没有任何关系。所以，其使用时非常方便、直观。  
     5️⃣、WebFlux  
        SpringMVC 构建于 Servlet API 之上，同步阻塞I/O模型, 认为应用会阻塞当前线程，所以一个Request对应一个Thread，需要有一个含有大量线程的线程池  
        Spring WebFlux 构建于 Reactive Streams Adapters 之上，异步非阻塞I/O模型，认为应用不会阻塞当前线程，所以只是需要一个包含少数固定线程数的线程池 (event loop workers) 来处理请求  
