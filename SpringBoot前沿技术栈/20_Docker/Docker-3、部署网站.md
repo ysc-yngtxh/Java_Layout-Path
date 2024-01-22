@@ -98,7 +98,7 @@
     # 暴露服务端口
     EXPOSE 8080
     # 容器启动时要执行的命令--启动Java命令
-    CMD ["java", "-jar", "/app.jar"]
+    CMD ["java", "-jar", "/app.jar", "-Dfile.encoding=utf-8"]
     ```
   - #### 1.4.2 构建名为docker-springboot的镜像
     ```
