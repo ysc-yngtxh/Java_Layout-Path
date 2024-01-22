@@ -8,7 +8,7 @@ package L12_线程.线程Ⅰ_实现线程;
 class MyRunnable implements Runnable {
     public void run(){
         for (int i = 0; i < 100; i++) {
-            System.out.println("分支线程--->" + i);
+            System.out.println("分支线程1--->" + i);
         }
     }
 }
@@ -23,7 +23,7 @@ public class 线程2_实现线程的第二种方式 {
         // 启动线程
         t1.start();
         for (int i = 0; i < 100; i++) {
-            System.out.println("主线程 ---> " + i);
+            System.out.println("主线程1 ---> " + i);
         }
 
         // 使用匿名内部类实现线程
@@ -31,13 +31,13 @@ public class 线程2_实现线程的第二种方式 {
             @Override
             public void run() {
                 for (int i = 0; i < 100; i++) {
-                    System.out.println("分支线程 ---> " + i);
+                    System.out.println("分支线程2 ---> " + i);
                 }
             }
         });
         t2.start();
         for (int i = 0; i < 100; i++) {
-            System.out.println("主线程 ---> " + i);
+            System.out.println("主线程2 ---> " + i);
         }
     }
 }
