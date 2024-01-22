@@ -1,4 +1,57 @@
 
+## 一、Reactive 
+    Reactive 直接翻译的意思式反应式，反应性。
+
+    举个例子：在 Excel 里，C 单元格上设置函数 Sum(A+B)，当你改变单元格 A 或者单元格 B 的数值时，
+            单元格 C 的值同时也会发生变化。这种行为就是 Reactive。
+
+    在计算机编程领域，Reactive 一般指的是 Reactive programming。
+    指的是一种面向数据流并传播事件的异步编程范式（asynchronous programming paradigm）。
+
+
+## 二、Reactive Streams 规范
+   - ### Publisher（定义了发布者的方法）
+     ```
+     public interface Publisher<T> {    
+        public void subscribe(Subscriber<? super T> s);
+     }
+     ```
+
+   - ### Subscriber（定义了订阅者的方法）
+     ```
+     publicinterface Subscriber<T> {
+        public void onSubscribe(Subscription s);
+        public void onNext(T t);
+        public void onError(Throwable t);
+        public void onComplete();
+     }
+     ```
+
+   - ### Subscription（定义了连接发布者和订阅者的方法）
+     ```
+     public interface Subscription {  
+        public void request(long n);  
+        public void cancel();
+     }
+     ```
+
+- ### Processor（定义了处理器）
+     ```
+     public interface Processor<T, R> extends Subscriber<T>, Publisher<R> {
+     
+     }
+     ```
+
+
+
+
+
+
+
+
+
+
+
 
 
 一、Spring的事件机制是Spring框架中的一个重要特性，基于观察者模式实现，它可以实现应用程序中的解耦，提高代码的可维护性和可扩展性。

@@ -10,10 +10,10 @@
 	</parent>
 
 	<groupId>com.example</groupId>
-	<artifactId>SpringBoot_Flow</artifactId>
+	<artifactId>1_SpringBoot_CustomReactive</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SpringBoot_Flow</name>
-	<description>SpringBoot_Flow</description>
+	<name>1_SpringBoot_CustomReactive</name>
+	<description>1_SpringBoot_CustomReactive</description>
 
 	<properties>
 		<java.version>17</java.version>

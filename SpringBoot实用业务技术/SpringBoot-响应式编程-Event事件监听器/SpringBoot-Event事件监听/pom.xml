@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot-Event</artifactId>
+    <artifactId>SpringBoot-EventListener</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>SpringBoot-Event事件监听</name>
     <description>SpringBoot-Event事件监听</description>

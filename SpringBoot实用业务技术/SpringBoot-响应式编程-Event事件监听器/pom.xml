@@ -16,7 +16,8 @@
     <description>SpringBoot-响应式编程-Event事件监听器</description>
 
     <modules>
-        <module>SpringBoot-Event</module>
+        <module>1_SpringBoot_CustomReactive</module>
+        <module>SpringBoot-Event事件监听</module>
     </modules>
     <packaging>pom</packaging>
     <properties>

@@ -87,10 +87,10 @@ public class 线程池2_七大参数及自定义线程池 {
 
         /*
           线程池提交任务的两种方式：execute与submit的区别
-              execute：只能提交 Runnable 类型的任务，无返回值，如果遇到异常会直接抛出。
-              submit：既可以提交 Runnable 类型的任务，也可以提交 Callable 类型的任务，如果遇到异常不会直接抛出。
-                     提交 Callable 类型的任务时会有一个类型为Future的返回值，但当任务类型为 Runnable 时，返回值为null。
-                     并且只有在使用Future的get方法获取返回值时，才会抛出异常。
+             execute：只能提交 Runnable 类型的任务，无返回值，如果遇到异常会直接抛出。
+             submit：既可以提交 Runnable 类型的任务，也可以提交 Callable 类型的任务，如果遇到异常不会直接抛出。
+                    提交 Callable 类型的任务时会有一个类型为Future的返回值，但当任务类型为 Runnable 时，返回值为null。
+                    并且只有在使用Future的get方法获取返回值时，才会抛出异常。
          */
         Callable<String> callable = new Callable<String>() {
             @Override

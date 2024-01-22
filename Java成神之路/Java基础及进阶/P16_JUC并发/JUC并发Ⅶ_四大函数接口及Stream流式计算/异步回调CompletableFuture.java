@@ -31,7 +31,8 @@ public class 异步回调CompletableFuture {
             }
             System.out.println(Thread.currentThread().getName() + " ---- runAsync1 => Void");
         });
-        // 等待任务执行完成 get(): 如果完成则返回结果，否则就抛出具体的异常
+        System.out.println("CompletableFuture并不会阻塞当前线程，会先执行吗？");
+        // 等待任务的get()方法执行完成: 如果完成则返回结果，否则就抛出具体的异常
         System.out.println("runAsync方法使用默认线程池的结果 -> " + cfRunAsync1.get() + " -- 很明显无返回值");
         // get(long timeout, TimeUnit unit): 最大时间等待返回结果，否则就抛出具体异常
         System.out.println( cfRunAsync1.get(1, TimeUnit.SECONDS) );
