@@ -10,39 +10,62 @@
 
 
 ## 二、Reactive Streams 规范
-   - ### Publisher（定义了发布者的方法）
+   - ### Publisher（数据发布者）
      ```
      public interface Publisher<T> {    
+        // 通过此方法将数据发布出去
         public void subscribe(Subscriber<? super T> s);
      }
      ```
 
-   - ### Subscriber（定义了订阅者的方法）
+   - ### Subscriber（数据订阅者）
      ```
      publicinterface Subscriber<T> {
+        // 订阅成功的回调方法，用于初始化Subscription，并且表明开始接受订阅数据了
         public void onSubscribe(Subscription s);
+     
+        // 接收下一项订阅数据的回调方法
         public void onNext(T t);
+     
+        // 在Publisher和Subscriber遇到不可恢复的错误时调用此方法，Subscriber不再接收订阅信息
         public void onError(Throwable t);
+     
+        // 当接收完所有的订阅数据，并且发布者已经关闭后会回调此方法
         public void onComplete();
      }
      ```
 
-   - ### Subscription（定义了连接发布者和订阅者的方法）
+   - ### Subscription（发布者和订阅者之间的订阅关系）
      ```
-     public interface Subscription {  
-        public void request(long n);  
+     public interface Subscription { 
+        // 用于向数据发布者请求n个数据项 
+        public void request(long n); 
+      
+        // 取消消息订阅，订阅者将不再接收数据
         public void cancel();
      }
      ```
 
-- ### Processor（定义了处理器）
+- ### Processor（数据处理器）
      ```
      public interface Processor<T, R> extends Subscriber<T>, Publisher<R> {
-     
+        它是一个空接口，但是它继承了Publisher和Subscriber，所以它既能发布数据也能订阅数据。
+        基于这个特性，它可以充当数据转换的角色，先从数据发布者那接收数据项，然后经过处理后再发布给最终的数据订阅者。
      }
      ```
+- ### Reactive Streams 规范强调使用非阻塞异步方式而不是阻塞同步方式?
+   - 同步方式一般通过多线程来提高性能，但系统可创建的线程数是有限的，且线程多以后造成线程切换开销。  
+   - 同步方式很难进一步提升资源利用率。  
+   - 同步调用依赖的系统出现问题时，自身稳定性也会受到影响
+
+## 三、JDK的Reactive Streams 规范的实现（Java 9 Flow）
+   - 发布-订阅者模式（观察者模式）
+   - (Publisher发布者发布 一个或多个Subscriber订阅者消费,每个订阅者被Subscription管理)的流式控制组件
 
 
+
+## 四、Spring的Reactive Streams 规范的实现（Reactor 框架）
+   
 
 
 

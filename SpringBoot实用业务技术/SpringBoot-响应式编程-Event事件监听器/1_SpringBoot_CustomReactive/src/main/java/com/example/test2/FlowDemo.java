@@ -1,4 +1,4 @@
-package com.example;
+package com.example.test2;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -30,19 +30,22 @@ public class FlowDemo {
         public void onError(Throwable ex) {
             ex.printStackTrace();
         }
-        public void onComplete() {}
+        public void onComplete() {
+            System.out.println("Application Over");
+        }
     }
 
     public static void main(String[] args) {
-        SampleSubscriber subscriber = new SampleSubscriber<>(200L, o -> {
+        SampleSubscriber<Boolean> subscriber = new SampleSubscriber<>(200L, o -> {
             System.out.println("hello ....." + o);
         });
         ExecutorService executor = Executors.newFixedThreadPool(1);
-        SubmissionPublisher<Boolean> submissionPublisher = new SubmissionPublisher(executor, Flow.defaultBufferSize());
+        SubmissionPublisher<Boolean> submissionPublisher =
+                new SubmissionPublisher<>(executor, Flow.defaultBufferSize());
         submissionPublisher.subscribe(subscriber);
         submissionPublisher.submit(true);
         submissionPublisher.submit(true);
-        submissionPublisher.submit(true);
+        submissionPublisher.submit(false);
         executor.shutdown();
     }
 }
