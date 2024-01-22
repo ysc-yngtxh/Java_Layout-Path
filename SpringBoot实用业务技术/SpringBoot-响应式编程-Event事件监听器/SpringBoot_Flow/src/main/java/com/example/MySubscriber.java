@@ -8,6 +8,7 @@ class MySubscriber<T> implements Subscriber<T> {
     
     @Override
     public void onSubscribe(Subscription subscription) {
+        System.out.println("onSubscribe");
         this.subscription = subscription;
         subscription.request(1); // 向数据源请求1个数据项
     }
