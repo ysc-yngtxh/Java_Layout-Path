@@ -58,9 +58,17 @@
    - 同步方式很难进一步提升资源利用率。  
    - 同步调用依赖的系统出现问题时，自身稳定性也会受到影响
 
+- ### 背压（Backpressure）
+     &emsp;&emsp;&emsp;所谓的背压（Backpressure）通俗的讲就是数据接收者的压力，传统模式下，发布者只关心数据的创造与发布，
+     而当数据发布速率远高于数据接收速率的时候，数据接收者缓冲区将被填满，无法再接收数据。
+     发布者并不关心这些，依旧不断地发送数据，所以就造成了IO阻塞。基于响应式模型实现的Flow API可以很好地解决这个问题。
+     在Java 9的Flow API定义中，Subscriber会将Publisher发布的数据缓冲在Subscription中，其长度默认为256。  
+
+     &emsp;&emsp;&emsp;假如当这个缓冲区都被填满后，Publisher将会停止发送数据，直到Subscriber接收了数据Subscription有空闲位置的时候，Publisher才会继续发布数据，而非一味地发个不停。
+
 ## 三、JDK的Reactive Streams 规范的实现（Java 9 Flow）
-   - 发布-订阅者模式（观察者模式）
-   - (Publisher发布者发布 一个或多个Subscriber订阅者消费,每个订阅者被Subscription管理)的流式控制组件
+   - 发布-订阅者模式（观察者模式）  
+       Publisher发布者发布 一个或多个Subscriber订阅者消费,每个订阅者被Subscription管理的流式控制组件
 
 
 

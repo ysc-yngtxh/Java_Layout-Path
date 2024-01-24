@@ -10,6 +10,11 @@ public class ForkJoinDemo extends RecursiveTask<Long> {
     private static final long serialVersionUID = 2947412188376658390L;
     /**
      * ForkJoin在Jdk1.7，并行执行任务！提高效率，大数据量
+     * ForkJoinPool是线程池的一种实现，因此它使用了线程池技术。
+     * ForkJoinPool基于Java的Executor框架，它使用一个线程池来管理任务的执行。
+     * 通过使用线程池，ForkJoinPool可以复用已经创建的线程，避免了频繁地创建和销毁线程的开销，提高了任务的执行效率。
+     * 同时，ForkJoinPool还支持任务的并行执行和任务之间的合并，这些功能都是通过线程池实现的。
+     *
      * 大数据：Map Reduce(把大任务拆分为小任务)
      *
      * 求和计算的任务！

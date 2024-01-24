@@ -74,7 +74,7 @@ class Abc{
 interface Flyable{
     void fly();
 }
-class pig extends Abc implements Flyable{
+class Pig extends Abc implements Flyable{
     public void fly(){
         System.out.println("先谋生再谋爱！");
     }
@@ -86,7 +86,7 @@ public class 抽象类3_接口类 {
         MyMath m = new MyMathImpl2();
         System.out.println( m.sum(59,12) );
 
-        Flyable f = new pig();
+        Flyable f = new Pig();
         f.fly();
     }
 

@@ -123,6 +123,7 @@ public class SecurityConfig {
                                 // 通过配置文件进行配置Spring Security的放行路径
                                 // 这里需要注意的是：转成String类型的数组，需要指定转成数组的容量，不能超出也不能少于实际元素个数，
                                 // 否则数组超出的容量部分会替换为null，Spring Security在匹配放行路径时会出现空指针异常。
+                                // 可以写成 toArray(new String[0]) 的方式，这样创建数组，可以确保返回的新数组会进行自动扩容，其大小与集合的大小相同
                                 .requestMatchers(myAuthorizationProperties.getIgnoreUrls().toArray(new String[8])).permitAll()
                                 // 同上述放行路径写法效果一样，但保留以上写法是为了谨记在设置数组容量过大时出现的空指针异常，为此花了两天才定位到BUG。难顶！！！
                                 //.requestMatchers(Arrays.toString(myAuthorizationProperties.getIgnoreUrls().toArray())).permitAll()
