@@ -1,4 +1,4 @@
-package O15_练习题;
+package O15_泛型及练习题;
 
 public class A一百以内的素数 {
     public static void main(String[] args) {

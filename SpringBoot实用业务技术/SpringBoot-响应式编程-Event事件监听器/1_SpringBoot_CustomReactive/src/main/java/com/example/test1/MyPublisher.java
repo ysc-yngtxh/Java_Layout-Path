@@ -14,8 +14,6 @@ import java.util.concurrent.Flow;
 import java.util.concurrent.Flow.Subscriber;
 import java.util.concurrent.Flow.Subscription;
 import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -23,22 +21,24 @@ import java.util.concurrent.atomic.AtomicReference;
  * @dateTime 2024-01-22 17:45
  * @apiNote TODO 自定义的发布者实现类
  */
-public class MyPublisher<T> implements Flow.Publisher<T> {
+public class MyPublisher<T> implements Flow.Publisher<T>,AutoCloseable {
     // 定义FJ线程池
-    private final ExecutorService executor = ForkJoinPool.commonPool(); // daemon-based
+    private final ExecutorService executor = ForkJoinPool.commonPool();
     // 是否被订阅,因为这个发布者只能被一个人订阅
-    private boolean subscribed; // true after first subscribe
-    // 定义接收消息的阻塞队列
+    private boolean subscribed;
+    // 定义接收消息的具有原子性的阻塞队列
     private AtomicReference<BlockingQueue<T>> queue;
-
+    private Subscriber<? super T> subscriber;
+    // 无参构造函数
     public MyPublisher() {
         queue = new AtomicReference<>(new ArrayBlockingQueue<>(Flow.defaultBufferSize()));
     }
-
+    // 有参构造函数
     public MyPublisher(int capacity) {
         queue = new AtomicReference<>(new ArrayBlockingQueue<>(capacity));
     }
 
+    // 提交消息方法
     public void submit(T item) {
         try {
             // 阻塞等待直到队列有空位
@@ -53,12 +53,21 @@ public class MyPublisher<T> implements Flow.Publisher<T> {
     // 订阅方法
     @Override
     public synchronized void subscribe(Subscriber<? super T> subscriber) {
+        this.subscriber = subscriber;
         if (subscribed)
-            subscriber.onError(new IllegalStateException()); // only one allowed
+            subscriber.onError(new IllegalStateException());
         else {
             // 订阅成功
             subscribed = true;
             subscriber.onSubscribe(new MySubscription<>(this, subscriber, executor));
+        }
+    }
+
+    // 实现AutoCloseable类重写close()方法
+    @Override
+    public synchronized void close() throws Exception {
+        if (queue.get().isEmpty()) {
+            subscriber.onComplete();
         }
     }
 
@@ -72,25 +81,20 @@ public class MyPublisher<T> implements Flow.Publisher<T> {
         // 线程池
         private final ExecutorService executor;
         // 结果
-        private CompletableFuture<Void> future; // to allow cancellation
+        private CompletableFuture<Void> future;
         // 是否完成
         private boolean completed;
-        // 阻塞队列中元素个数
-        private int size;
-        // 在阻塞队列中取出的消息数
-        private int count;
 
         // 构造方法
         MySubscription(MyPublisher<T> publisher,
                        Subscriber<? super T> subscriber,
                        ExecutorService executor) {
             this.publisher = publisher;
-            this.size = publisher.queue.get().size();
             this.subscriber = (MySubscriber<? super T>) subscriber;
             this.executor = executor;
         }
 
-        // request
+        // 订阅者请求消费方法
         @Override
         @SneakyThrows
         public void request(long n) {
@@ -108,7 +112,6 @@ public class MyPublisher<T> implements Flow.Publisher<T> {
                             try {
                                 if (!publisher.queue.get().isEmpty()) {
                                     subscriber.onNext(publisher.queue.get().take());
-                                    count++;
                                 }
                             } catch (InterruptedException e) {
                                 // 中断当前线程
@@ -122,19 +125,15 @@ public class MyPublisher<T> implements Flow.Publisher<T> {
 
                     // toArray(new String[0]) 的写法不是为了最终返回一个容量为0的数组，
                     // 而是这样创建数组，可以确保返回的新数组会进行自动扩容，其大小与集合的大小相同
-                    CompletableFuture<Void> allFutures = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
-                    allFutures.join(); // 等待所有任务完成
-
-                    // 检查是否所有任务都已完成，并执行subscriber.onComplete()
-                    if (size == count) {
-                        subscriber.onComplete();
-                    }
+                    // CompletableFuture<Void> allFutures = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
+                    // 形成阻塞，等待所有任务完成，主线程才会继续往下执行
+                    // allFutures.join();
                 }
             }
         }
 
 
-        // 取消
+        // 取消订阅方法
         @Override
         public void cancel() {
             completed = true;

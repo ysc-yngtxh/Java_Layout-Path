@@ -19,8 +19,8 @@ public class FlowApiTest {
         //    并且Subscription功能实现的BufferedSubscription类默认使用的是FJ线程池，
         //    当我们提交完成后submit 方法结束后，任务就给到了 FJ线程池(默认线程池) 或者 自己的线程池 里执行。
         SubmissionPublisher<String> publisher = new SubmissionPublisher<>();
-        SubmissionPublisher<String> publisher1 =
-                new SubmissionPublisher<>(Executors.newFixedThreadPool(1), Flow.defaultBufferSize());
+        // SubmissionPublisher<String> publisher1 =
+        //         new SubmissionPublisher<>(Executors.newFixedThreadPool(1), Flow.defaultBufferSize());
         // 2. 创建一个订阅者，用于接收发布者的消息
         Subscriber<String> subscriber = new Subscriber<>() {
             private Subscription subscription;
@@ -36,7 +36,7 @@ public class FlowApiTest {
                 // 接收发布者发布的消息
                 System.out.println("【订阅者】接收消息 <------ " + item);
                 // 接收后再次请求一个数据
-                this.subscription.request(1);
+                // this.subscription.request(1);
                 // 如果不想再接收数据，也可以直接调用 cancel，表示不再接收了
                 // this.subscription.cancel();
             }
@@ -58,6 +58,7 @@ public class FlowApiTest {
         };
         // 3. 发布者和订阅者需要建立关系
         publisher.subscribe(subscriber);
+
         // 4. 发布者开始发布数据
         for (int i = 0; i < 10; i++) {
             String message = "hello flow api " + i;
@@ -65,8 +66,10 @@ public class FlowApiTest {
             // 提交数据到发布者，并通过异步调用其onNext方法，将给定项目发布到每个当前订阅者
             publisher.submit(message);
         }
+
         // 5. 发布结束后，关闭发布者。除非已经关闭，否则会向当前订阅者发出onComplete信号，并禁止后续尝试发布
         publisher.close();
+
         // main线程延迟关闭，不然订阅者还没接收完消息，线程就被关闭了
         Thread.currentThread().join(2000);
     }

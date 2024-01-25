@@ -1,4 +1,4 @@
-package O15_练习题;
+package O15_泛型及练习题;
 
 /**
  * @author 游家纨绔
