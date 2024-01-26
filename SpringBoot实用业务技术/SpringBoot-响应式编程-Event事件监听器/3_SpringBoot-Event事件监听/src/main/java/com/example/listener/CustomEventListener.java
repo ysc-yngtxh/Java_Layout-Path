@@ -1,7 +1,6 @@
 package com.example.listener;
 
 import com.example.event.TestEvent;
-import com.example.event.UserChangePasswordEvent;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
@@ -32,9 +31,9 @@ public class CustomEventListener {
     // 	    * AFTER_ROLLBACK + AFTER_COMPLETION是可以同时生效的
     // fallbackExecution()：表明若没有事务的时候，对应的event是否需要执行，默认值为false表示，没事务就不执行了。
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT,
-            value = { UserChangePasswordEvent.class })
-    public void messageListener(UserChangePasswordEvent event) {
+                                value = { TestEvent.class })
+    public void messageListener(TestEvent event) {
         System.out.println("收到事件:" + event);
-        System.out.println("开始执行业务操作给用户发送短信。用户userId为：" + event.getUserId());
+        System.out.println("开始执行业务操作给用户发送短信。用户userId为：" + event.getMessage());
     }
 }

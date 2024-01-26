@@ -26,6 +26,7 @@ public class FlowApiTest {
             private Subscription subscription;
             @Override
             public void onSubscribe(Subscription subscription) {
+                System.out.println("onSubscribe 开始订阅");
                 // 通过 Subscription 和发布者保持订阅关系，并用它来给发布者反馈
                 this.subscription = subscription;
                 // 请求一个数据
@@ -61,14 +62,14 @@ public class FlowApiTest {
 
         // 4. 发布者开始发布数据
         for (int i = 0; i < 10; i++) {
-            String message = "hello flow api " + i;
+            String message = "hello flow api " ;
             System.out.println("【发布者】发布消息 ------> " + message);
             // 提交数据到发布者，并通过异步调用其onNext方法，将给定项目发布到每个当前订阅者
-            publisher.submit(message);
+            // publisher.submit(message);
         }
 
         // 5. 发布结束后，关闭发布者。除非已经关闭，否则会向当前订阅者发出onComplete信号，并禁止后续尝试发布
-        publisher.close();
+        // publisher.close();
 
         // main线程延迟关闭，不然订阅者还没接收完消息，线程就被关闭了
         Thread.currentThread().join(2000);
