@@ -37,7 +37,7 @@ public class FlowApiTest {
                 // 接收发布者发布的消息
                 System.out.println("【订阅者】接收消息 <------ " + item);
                 // 接收后再次请求一个数据
-                // this.subscription.request(1);
+                this.subscription.request(1);
                 // 如果不想再接收数据，也可以直接调用 cancel，表示不再接收了
                 // this.subscription.cancel();
             }
@@ -62,10 +62,10 @@ public class FlowApiTest {
 
         // 4. 发布者开始发布数据
         for (int i = 0; i < 10; i++) {
-            String message = "hello flow api " ;
+            String message = "hello flow api " + i;
             System.out.println("【发布者】发布消息 ------> " + message);
             // 提交数据到发布者，并通过异步调用其onNext方法，将给定项目发布到每个当前订阅者
-            // publisher.submit(message);
+            publisher.submit(message);
         }
 
         // 5. 发布结束后，关闭发布者。除非已经关闭，否则会向当前订阅者发出onComplete信号，并禁止后续尝试发布
