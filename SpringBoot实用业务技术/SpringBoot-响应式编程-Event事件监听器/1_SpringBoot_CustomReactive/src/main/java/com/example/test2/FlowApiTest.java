@@ -69,7 +69,7 @@ public class FlowApiTest {
         }
 
         // 5. 发布结束后，关闭发布者。除非已经关闭，否则会向当前订阅者发出onComplete信号，并禁止后续尝试发布
-        // publisher.close();
+        publisher.close();
 
         // main线程延迟关闭，不然订阅者还没接收完消息，线程就被关闭了
         Thread.currentThread().join(2000);
