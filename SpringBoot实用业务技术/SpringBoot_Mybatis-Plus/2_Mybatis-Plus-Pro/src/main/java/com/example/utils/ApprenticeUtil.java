@@ -66,6 +66,7 @@ public class ApprenticeUtil {
             if (Modifier.isFinal(field.getModifiers())) {
                 continue;
             }
+            // 打破封装
             field.setAccessible(true);
             try {
                 Object obj = field.get(entity);
