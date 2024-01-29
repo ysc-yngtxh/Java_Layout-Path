@@ -1,6 +1,6 @@
 package O15_泛型及练习题.泛型;
 
-public class GenericExample {
+public class 泛型2_示例 {
     public static void main(String[] args) {
         Double[] num = {1.11, 2.22, 3.33, 4.44, 5.55, 6.66};
         String[] str = {"Hello", "World", "你好", "世界"};

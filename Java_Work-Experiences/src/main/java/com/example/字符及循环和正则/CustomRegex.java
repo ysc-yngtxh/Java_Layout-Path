@@ -42,25 +42,28 @@ public class CustomRegex {
         Pattern p3 = Pattern.compile("(\\w+)%(\\d+)");
         Matcher m3 = p3.matcher("ab%12-cd%34");
         /** groupCount()返回此匹配器模式中的捕获分组数*/
-        System.out.println("groupCount()3 -- " + m3.groupCount());  // 2
+        System.out.println("groupCount()3 -- " + m3.groupCount());    // 2
 
         /** regionStart()报告此匹配器区域的开始索引。*/
-        System.out.println(m3.regionStart());  // 0
+        System.out.println("regionStart()3 -- " + m3.regionStart());  // 0
 
         /** regionEnd()报告此匹配器区域的结束索引*/
-        System.out.println(m3.regionEnd());    // 11
+        System.out.println("regionEnd()3 -- " + m3.regionEnd());      // 11
 
-        /** find()表示在字符某部分匹配上其模式就会返回true，同时匹配位置会记录到当前位置，再次调用时从该处匹配下一个。
+        /** find()用于在目标字符串中查找与正则表达式模式匹配的子字符串，匹配上返回true，否则为false。再次调用会从该处匹配下一个。
          * find(int start)重置此匹配器，然后尝试查找匹配该模式，从指定的位置开始查找下一个匹配的子串。
          * 如果上述重载方法匹配成功，则可以通过 start、end 和 group 方法获取更多信息。否则无法使用start、end 和 group 方法*/
-        if (m3.find(1)) {
-            /** group()返回当前查找而获得的与组匹配的所有子串内容*/
-            System.out.println("group()3 -- " + m3.group());      // b%12
+        if (m3.find(1)) {  // b%12
+            /** (\\w+)为一个分组，(\\d+)为另一个分组。可以理解每一个(...)中的正则为一个分组
+             *  group()返回当前查找而获得的与组匹配的所有子串内容
+             *  group(int group)返回指定的分组子串内容 */
+            System.out.println("group()3 -- " + m3.group(2));      // 12
 
             /** start()返回当前匹配子串的第一个字符在目标字符串中的索引下标位置*/
             System.out.println("start()3 -- " + m3.start());      // 0。开始索引的下标值
 
-            /** start(int group)返回当前匹配的指定组中的子串的第一个字符在目标字符串中的索引下标位置*/
+            /** (\\w+)为一个分组，(\\d+)为另一个分组。可以理解每一个(...)中的正则为一个分组
+             *  start(int group)返回当前匹配的指定组中的子串的第一个字符在目标字符串中的索引下标位置*/
             System.out.println("start(arg)3 -- " + m3.start(2));  // 3。匹配的第二个分组开始索引的下标值
 
             /** end()返回当前匹配的子串的最后一个字符的下一个位置在目标字符串中的索引下标位置*/
@@ -91,6 +94,8 @@ public class CustomRegex {
           * 并将从上次匹配结束后到本次匹配结束后之间的字符串添加到一个StringBuffer对象中，最后返回其字符串表示形式。*/
         StringBuffer sb = new StringBuffer();
         while (m5.find()){
+            // 注意⚠️：在使用appendReplacement()方法前要使用find()方法查找目标字符串在正则模式下所匹配的子字符串是否存在。
+            //        只有存在我们使用appendReplacement()方法才能进行去内容替换。
             m5.appendReplacement(sb, "_"+m5.group(0).toLowerCase());
             System.out.println("appendReplacement -- " + sb);
         }
