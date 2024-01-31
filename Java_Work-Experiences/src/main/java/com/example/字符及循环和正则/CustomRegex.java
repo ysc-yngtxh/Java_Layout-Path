@@ -42,7 +42,7 @@ public class CustomRegex {
         Pattern p3 = Pattern.compile("(\\w+)%(\\d+)");
         Matcher m3 = p3.matcher("ab%12-cd%34");
         /** 在正则表达式中，一个(...)定义了一个组
-         *  (\w+)%(\d+)是第0组 group(0)，(\\w+)是第一组 group(1)，(\\d+)是第二组 group(2)。
+         *  (\w+)%(\d+)是第0组 group(0)， (\\w+)是第一组 group(1)， (\\d+)是第二组 group(2)。
          *  groupCount()返回此匹配器模式中的捕获分组数*/
         System.out.println("groupCount()3 -- " + m3.groupCount());    // 2
 
@@ -57,7 +57,7 @@ public class CustomRegex {
          *  如果上述重载方法匹配成功，则可以通过 start、end 和 group 方法获取更多信息。否则无法使用start、end 和 group 方法*/
         if (m3.find(1)) {  // b%12
             /** 在正则表达式中，一个(...)定义了一个组
-             *  (\w+)%(\d+)是第0组 group(0)，(\\w+)是第一组 group(1)，(\\d+)是第二组 group(2)。
+             *  (\w+)%(\d+)是第0组 group(0)， (\\w+)是第一组 group(1)， (\\d+)是第二组 group(2)。
              *  group()返回当前查找而获得的与组匹配的所有子串内容
              *  group(int group)返回指定的分组子串内容 */
             System.out.println("group()3 -- " + m3.group(2));      // 12
@@ -66,7 +66,7 @@ public class CustomRegex {
             System.out.println("start()3 -- " + m3.start());      // 0。开始索引的下标值
 
             /** 在正则表达式中，一个(...)定义了一个组
-             *  (\w+)%(\d+)是第0组 group(0)，(\\w+)是第一组 group(1)，(\\d+)是第二组 group(2)。
+             *  (\w+)%(\d+)是第0组 group(0)， (\\w+)是第一组 group(1)， (\\d+)是第二组 group(2)。
              *  start(int group)返回当前匹配的指定组中的子串的第一个字符在目标字符串中的索引下标位置*/
             System.out.println("start(arg)3 -- " + m3.start(2));  // 3。匹配的第二个分组开始索引的下标值
 
