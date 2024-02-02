@@ -16,8 +16,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 // 可选择 自定义熔断降级异常处理 模式
-// 返回响应流：CustomBlockExceptionHandler、    跳转到页面：CustomBlockExceptionHandlerPage）
+//    1、返回响应流：CustomBlockExceptionHandler
+//    2、跳转到页面：CustomBlockExceptionHandlerPage）
 @Import(CustomBlockExceptionHandlerPage.class)
-public @interface EnableCustomBlockExceptionHandlerPage {
+public @interface EnableCustomBlockException {
 
 }

@@ -134,7 +134,7 @@ class ESApplicationTests1 {
         // 这种写法同上 request.create(true) 一个意思
         request.opType(DocWriteRequest.OpType.CREATE);
         // 客户端发送请求
-        IndexResponse indexResponse = client.index(request,RequestOptions.DEFAULT);
+        IndexResponse indexResponse = client.index(request, RequestOptions.DEFAULT);
 
         System.out.println(indexResponse.toString());
         System.out.println(indexResponse.status());

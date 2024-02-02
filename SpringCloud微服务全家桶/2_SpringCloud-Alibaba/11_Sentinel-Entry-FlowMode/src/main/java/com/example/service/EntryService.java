@@ -9,4 +9,5 @@ public interface EntryService {
 
     String getHandler();
     String getList(Integer num);
+    String getInfo();
 }

@@ -49,7 +49,7 @@ public class 数组5_数组中存储引用数据类型 {
             if (anis[i] instanceof Cat){
                 Cat cat = (Cat)anis[i];
                 cat.catchMouse();
-            }else if (anis[i] instanceof Bird){
+            } else if (anis[i] instanceof Bird){
                 Bird bird = (Bird)anis[i];
                 bird.sing();
             }

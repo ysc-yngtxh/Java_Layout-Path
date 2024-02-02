@@ -1,0 +1,25 @@
+# 应用服务 WEB 访问端口
+server:
+  port: 8080
+
+# Elasticsearch搜索引擎
+spring:
+  application:
+    name: elasticsearch-demo
+  data:
+    elasticsearch:
+      # 启用Spring Data Elasticsearch的存储库。
+      repositories:
+        enabled: true
+  elasticsearch:
+    # Elasticsearch的连接URI为 “localhost:9200”
+    uris: localhost:9200
+    # 连接Elasticsearch时使用的用户名为 “elastic”
+    username: elastic
+    # 连接Elasticsearch时使用的密码为 “Z*h-KkWj6FGdy2gYUQpC”
+    password: Z*h-KkWj6FGdy2gYUQpC
+    # 连接ElasticSearch超时时间
+    connection-timeout: 5000
+
+
+

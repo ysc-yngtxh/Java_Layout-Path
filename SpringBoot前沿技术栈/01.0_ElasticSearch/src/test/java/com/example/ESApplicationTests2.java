@@ -41,6 +41,7 @@ import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.junit.jupiter.api.Test;
@@ -55,6 +56,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -92,10 +94,20 @@ public class ESApplicationTests2 {
     // 请求的返回值也是一个 JSON 字符串，这个 JSON 字符串也需要我们自己手动去解析，这种可以算是弱类型的请求和响应
     @Test
     void tst() throws IOException {
-        URL url = new URL("http://localhost:9200/shop/_search?pretty");
+        URL url = new URL("http://localhost:9200/shop/_search");
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
         con.setRequestProperty("content-type", "application/json;charset=utf-8");
+        // 包装Basic信息
+        String username = "elastic";
+        String password = "Z*h-KkWj6FGdy2gYUQpC";
+        String auth = username + ":" + password;  // elastic:Z*h-KkWj6FGdy2gYUQpC
+        // 对其进行加密
+        byte[] rel = Base64.encodeBase64(auth.getBytes());
+        // 注意不要使用数组工具类的toString方法：Arrays.toString(rel)。这种转类型只是将数组
+        String res = new String(rel);
+        // 设置Basic认证
+        con.setRequestProperty("Authorization", "Basic " + res);
         // 允许输出流/允许参数
         con.setDoOutput(true);
         // 获取输出流，就是获取请求路径的一个输出
@@ -120,11 +132,12 @@ public class ESApplicationTests2 {
     }
 
 
-    // 获取ES操作对象。(可以注入到springboot容器中，方便我们可以使用)
+    // 获取ES操作对象。(可以把ElasticsearchClient对象注入到springboot容器中，方便我们可以使用)
     private static ElasticsearchClient elasticsearchClient() {
         // 基本凭证提供者(用户名、密码)
         CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
-        credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials("elastic", "elastic"));
+        credentialsProvider.setCredentials(AuthScope.ANY,
+                new UsernamePasswordCredentials("elastic", "Z*h-KkWj6FGdy2gYUQpC"));
 
         // 创建低级客户端
         RestClientBuilder builder = RestClient.builder(new HttpHost("localhost", 9200))

@@ -7,14 +7,14 @@ public class 数组4_main方法Args参数 {
         // 在不写入情况下结果为0
         // 通过测试得出：args不是null，JVM默认传递过来的这个数组对象的长度默认为0.
 
-       /*
+        /*
          String[] args 数组是留给用户的，用户可以在控制台上输入参数，这个参数自动会被转换为 "String[] args"
          比如在DOS命令提示符窗口上，可以这样运行程序：
             javac 数组4_main方法Args参数.java ----> java 数组4_main方法Args参数 abc def xyz
 
             那么这个时候JVM会自动将 "abc def xyz" 通过空格的方式进行分离，分离完成后，自动放到 "String[] args"数组里。
          把abc def xyz转换成字符串数组：{"abc", "def", "xyz"}
-       */
+        */
 
        /*
          在IDEA上如何测试呢？

@@ -27,11 +27,11 @@ public class 数组6_数组的扩容与拷贝 {
         }
 
         // 数组中如果存储的元素是引用，可以拷贝吗？当然可以。
-        String[] strs = {"hello", "world!", "study", "java", "mysql", "jdbc", "oracle"};
-        String[] newstrs = new String[20];
-        System.arraycopy(strs, 0, newstrs, 0, strs.length);
-        for (int i = 0; i < newstrs.length; i++) {
-            System.out.println(newstrs[i]);
+        String[] str = {"hello", "world!", "study", "java", "mysql", "jdbc", "oracle"};
+        String[] newstr = new String[20];
+        System.arraycopy(str, 0, newstr, 0, str.length);
+        for (int i = 0; i < newstr.length; i++) {
+            System.out.println(newstr[i]);
         }
 
         // 还有数组拷贝的是对象地址

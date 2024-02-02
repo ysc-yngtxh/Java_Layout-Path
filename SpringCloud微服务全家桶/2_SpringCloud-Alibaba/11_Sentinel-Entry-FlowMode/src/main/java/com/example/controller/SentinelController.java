@@ -13,16 +13,24 @@ public class SentinelController {
     @Autowired
     private EntryService entryService;
 
-    // 自定义URL资源异常处理逻辑
+    // 定义了流控规则的接口 /getHandler
     @GetMapping("/getHandler")
     @ResponseBody
     public String getHandler() {
         return entryService.getHandler();
     }
 
+    // 仅定义了熔断规则的接口 /getList，在业务逻辑中又通过资源实体获取了 /getHandler的流控资源
     @GetMapping("/getList")
     @ResponseBody
     public String getList(@RequestParam Integer num) {
         return entryService.getList(num);
+    }
+
+    //
+    @GetMapping("/getInfo")
+    @ResponseBody
+    public String getInfo() {
+        return entryService.getInfo();
     }
 }

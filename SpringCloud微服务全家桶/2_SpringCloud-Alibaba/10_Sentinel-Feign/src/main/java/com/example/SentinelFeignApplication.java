@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.annocationi.EnableCustomBlockExceptionHandlerPage;
+import com.example.annocationi.EnableCustomBlockException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClients;
@@ -11,7 +11,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 @LoadBalancerClients
 // 自定义的注解：可选择开启跳转页面、返回响应流这两种模式
-@EnableCustomBlockExceptionHandlerPage
+@EnableCustomBlockException
 public class SentinelFeignApplication {
 
     public static void main(String[] args) {
