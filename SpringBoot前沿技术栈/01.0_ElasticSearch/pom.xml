@@ -21,12 +21,33 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jakarta.json</groupId>
+            <artifactId>jakarta.json-api</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+
         <!--使用新版ES8 API Client就引入这个依赖-->
         <dependency>
             <groupId>co.elastic.clients</groupId>
             <artifactId>elasticsearch-java</artifactId>
-            <version>8.7.1</version>
+            <version>8.11.4</version>
+            <!--elasticsearch-rest-client的版本确实是7.15.2，而不是我指定的8.11.4
+                因此需要忽略该依赖下集成的elasticsearch-rest-client-->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.elasticsearch.client</groupId>
+                    <artifactId>elasticsearch-rest-client</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+        <!--手动指明elasticsearch-rest-client的版本与elasticsearch-java版本一致，否则会报错-->
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-client</artifactId>
+            <version>8.11.4</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -53,12 +74,6 @@
             <artifactId>fastjson</artifactId>
             <version>2.0.32</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.json</groupId>
-            <artifactId>jakarta.json-api</artifactId>
-            <version>2.1.1</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 

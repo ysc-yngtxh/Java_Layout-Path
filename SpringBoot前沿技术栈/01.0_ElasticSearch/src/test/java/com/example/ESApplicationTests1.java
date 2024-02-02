@@ -127,12 +127,12 @@ class ESApplicationTests1 {
         request.source(JSON.toJSONString(user), XContentType.JSON);
 
         /*
-          为true则表示创建一个索引，如果id重复，索引操作失败
-          为false则表示更新索引
+          方法参数为true则表示创建一个索引，如果id重复，索引操作失败
+          方法参数为false则表示更新索引
          */
         request.create(true);
         // 这种写法同上 request.create(true) 一个意思
-        request.opType(DocWriteRequest.OpType.CREATE);
+        // request.opType(DocWriteRequest.OpType.CREATE);
         // 客户端发送请求
         IndexResponse indexResponse = client.index(request, RequestOptions.DEFAULT);
 
@@ -148,7 +148,7 @@ class ESApplicationTests1 {
     @Test
     void testIsExists() throws IOException {
         // GetIndexRequest表示获取索引请求，GetRequest表示获取文档请求
-        GetRequest getRequest = new GetRequest("user","1000");
+        GetRequest getRequest = new GetRequest("user", "1000");
         // 不获取返回的_source的上下文了
         /*getRequest.fetchSourceContext(new FetchSourceContext(false));
         getRequest.storedFields("_none_");*/
@@ -177,13 +177,13 @@ class ESApplicationTests1 {
     // 更新文档的信息 PUT /user/_doc/1000
     @Test
     void testPutDocument() throws IOException {
-        UpdateRequest updateRequest = new UpdateRequest("user","1000");
+        UpdateRequest updateRequest = new UpdateRequest("user", "1000");
         updateRequest.timeout("1s");  // timeout用于请求超时设置
 
-        User user = new User(1012,"狂神说","20000",18,new Date());
+        User user = new User(1012, "狂神说", "20000", 18, new Date());
         updateRequest.doc(JSON.toJSONString(user), XContentType.JSON);
 
-        UpdateResponse updateResponse = client.update(updateRequest,RequestOptions.DEFAULT);
+        UpdateResponse updateResponse = client.update(updateRequest, RequestOptions.DEFAULT);
         System.out.println(updateResponse.status());  // 打印文档的内容
 
         // 关闭 ES 客户端
@@ -194,10 +194,10 @@ class ESApplicationTests1 {
     // 删除文档的信息
     @Test
     void testDeleteDocument() throws IOException {
-        DeleteRequest deleteRequest = new DeleteRequest("user","1000");
+        DeleteRequest deleteRequest = new DeleteRequest("user", "1000");
         deleteRequest.timeout("1s"); // timeout用于请求超时设置
 
-        DeleteResponse delete = client.delete(deleteRequest,RequestOptions.DEFAULT);
+        DeleteResponse delete = client.delete(deleteRequest, RequestOptions.DEFAULT);
         System.out.println(delete.status()); // 打印文档的内容
 
         // 关闭 ES 客户端
@@ -212,19 +212,19 @@ class ESApplicationTests1 {
         bulkRequest.timeout("10s");  // timeout用于请求超时设置
 
         ArrayList<User> userList = new ArrayList<>();
-        userList.add(new User(999,"游诗成","4520",3,new Date()));
-        userList.add(new User(1000,"邵荣珍","2454",3,new Date()));
-        userList.add(new User(1001,"陈嘉琪","45000",3,new Date()));
-        userList.add(new User(1002,"李晶晶","54000",3,new Date()));
-        userList.add(new User(1003,"张宝丹","25400",3,new Date()));
-        userList.add(new User(1004,"李安琪","20521",3,new Date()));
-        userList.add(new User(1005,"邱淑贞","20000",3,new Date()));
-        userList.add(new User(1006,"王祖贤","404040",3,new Date()));
-        userList.add(new User(1007,"翁美玲","4040",3,new Date()));
-        userList.add(new User(1008,"小透明","75027",3,new Date()));
-        userList.add(new User(1009,"赵丽颖","457",24,new Date()));
-        userList.add(new User(1010,"游鹏","075",24,new Date()));
-        userList.add(new User(1011,"宁航","78",24,new Date()));
+        userList.add(new User(999, "游诗成", "4520", 3, new Date()));
+        userList.add(new User(1000, "邵荣珍", "2454", 3, new Date()));
+        userList.add(new User(1001, "陈嘉琪", "45000", 3, new Date()));
+        userList.add(new User(1002, "李晶晶", "54000", 3, new Date()));
+        userList.add(new User(1003, "张宝丹", "25400", 3, new Date()));
+        userList.add(new User(1004, "李安琪", "20521", 3, new Date()));
+        userList.add(new User(1005, "邱淑贞", "20000", 3, new Date()));
+        userList.add(new User(1006, "王祖贤", "404040", 3, new Date()));
+        userList.add(new User(1007, "翁美玲", "4040", 3, new Date()));
+        userList.add(new User(1008, "小透明", "75027", 3, new Date()));
+        userList.add(new User(1009, "赵丽颖", "457", 24, new Date()));
+        userList.add(new User(1010, "游鹏", "075", 24, new Date()));
+        userList.add(new User(1011, "宁航", "78", 24, new Date()));
 
         for (int i = 0; i < userList.size(); i++) {  // 请求体，响应体内容都是JSON格式
             bulkRequest.add(
@@ -280,7 +280,7 @@ class ESApplicationTests1 {
         // 搜索构建器
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 
-        TermQueryBuilder title = QueryBuilders.termQuery("name","成");
+        TermQueryBuilder title = QueryBuilders.termQuery("name", "成");
         sourceBuilder.query(title);
         sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
 
@@ -302,10 +302,10 @@ class ESApplicationTests1 {
             // 解析高亮的字段
             // 获取高亮字段
             Map<String, HighlightField> highlightFields = hit.getHighlightFields();
-            System.out.println("=========="+highlightFields);
+            System.out.println("==========" + highlightFields);
 
             HighlightField name = highlightFields.get("name");
-            System.out.println("==name=="+name);
+            System.out.println("==name==" + name);
 
             System.out.println(hit.getSourceAsMap());  // 原本的结果
 
@@ -356,12 +356,12 @@ class ESApplicationTests1 {
         // 搜索构建器
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
         // 模糊查询
-        MatchQueryBuilder matchQueryBuilder = QueryBuilders.matchQuery("name","李");
+        MatchQueryBuilder matchQueryBuilder = QueryBuilders.matchQuery("name", "李");
         // 将查询条件交给构建器
         sourceBuilder.query(matchQueryBuilder);
         sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
         // 进行排序
-        sourceBuilder.sort("id",SortOrder.ASC);
+        sourceBuilder.sort("id", SortOrder.ASC);
         // 进行分页
         sourceBuilder.from(0);
         sourceBuilder.size(5);
@@ -380,7 +380,7 @@ class ESApplicationTests1 {
         // 构建器交给文档对象
         searchRequest.source(sourceBuilder);
         // 返回响应
-        SearchResponse response = client.search(searchRequest,RequestOptions.DEFAULT);
+        SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
 
         // 解析结果
         for (SearchHit searchHit : response.getHits().getHits()){

@@ -75,8 +75,8 @@ public class ESApplicationTests2 {
     // TODO 从 ElasticSearch7.17 这个版本开始，原先的 Java 高级客户端. Java High Level REST Client 废弃了，不支持了。
     //  现在的客户端叫做 Elasticsearch Java API Client。
 
-    //  TODO 必须要熟悉 ElasticSearch 的查询脚本，建议先在 Kibana 中把操作脚本写好，然后再翻译成 Java 代码，
-    //   或者直接拷贝到 Java 代码中，非常不建议上来就整 Java 代码，那样很容易出错。
+    // TODO 必须要熟悉 ElasticSearch 的查询脚本，建议先在 Kibana 中把操作脚本写好，然后再翻译成 Java 代码，
+    //  或者直接拷贝到 Java 代码中，非常不建议上来就整 Java 代码，那样很容易出错。
 
     /**
      * Elasticsearch Java API Client 是 Elasticsearch 的官方 Java API，
@@ -104,7 +104,7 @@ public class ESApplicationTests2 {
         String auth = username + ":" + password;  // elastic:Z*h-KkWj6FGdy2gYUQpC
         // 对其进行加密
         byte[] rel = Base64.encodeBase64(auth.getBytes());
-        // 注意不要使用数组工具类的toString方法：Arrays.toString(rel)。这种转类型只是将数组
+        // 注意不要使用数组工具类的toString方法：Arrays.toString(rel)
         String res = new String(rel);
         // 设置Basic认证
         con.setRequestProperty("Authorization", "Basic " + res);
@@ -162,9 +162,9 @@ public class ESApplicationTests2 {
         boolean acknowledged = response.acknowledged();
         boolean shardsAcknowledged = response.shardsAcknowledged();
         String index = response.index();
-        log.info("创建索引状态:{}", acknowledged);
-        log.info("已确认的分片:{}", shardsAcknowledged);
-        log.info("索引名称:{}", index);
+        log.warn("创建索引状态:{}", acknowledged);
+        log.warn("已确认的分片:{}", shardsAcknowledged);
+        log.warn("索引名称:{}", index);
     }
 
     /**
@@ -193,7 +193,7 @@ public class ESApplicationTests2 {
     void deleteIndex() throws IOException {
         ElasticsearchClient elasticsearchClient = elasticsearchClient();
         DeleteIndexResponse deleteIndexResponse = elasticsearchClient.indices().delete(s -> s.index("products"));
-        log.info("删除索引操作结果：{}", deleteIndexResponse.acknowledged());
+        log.error("删除索引操作结果：{}", deleteIndexResponse.acknowledged());
     }
 
     /**
@@ -204,24 +204,25 @@ public class ESApplicationTests2 {
         ElasticsearchClient elasticsearchClient = elasticsearchClient();
         // 1、流利地使用 DSL
         User user = new User(1, "王五", "28", 26, new Date());
+        User user1 = new User(33, "钱六", "21", 27, new Date());
         IndexResponse indexResponse = elasticsearchClient.index(s -> s
                 // 索引
                 .index("users")
                 // ID
                 .id(user.getId().toString())
                 // 文档
-                .document(user)
+                .document(user).document(user1)
         );
-        log.info("result:{}", indexResponse.result().jsonValue());
+        log.error("result: {}", indexResponse.result().jsonValue());
 
 
         // 2、您还可以将使用 DSL 创建的对象分配给变量。 Java API 客户端类为此有一个静态 of() 方法，该方法使用 DSL 语法创建一个对象。
         IndexRequest<User> request = IndexRequest.of(i -> i
                 .index("users")
-                .id(user.getId().toString())
-                .document(user));
+                .id(user1.getId().toString())
+                .document(user1));
         IndexResponse response = elasticsearchClient.index(request);
-        log.info("Indexed with version " + response.version());
+        log.error("Indexed with version " + response.version());
 
 
         // 3、使用经典构建器
@@ -230,7 +231,7 @@ public class ESApplicationTests2 {
         indexReqBuilder.id(user.getId().toString());
         indexReqBuilder.document(user);
         IndexResponse responseTwo = elasticsearchClient.index(indexReqBuilder.build());
-        log.info("Indexed with version " + responseTwo.version());
+        log.error("Indexed with version " + responseTwo.version());
     }
 
     /**
@@ -240,18 +241,18 @@ public class ESApplicationTests2 {
     void getDocument() throws IOException {
         ElasticsearchClient elasticsearchClient = elasticsearchClient();
         GetResponse<User> getResponse = elasticsearchClient.get(s -> s.index("users").id("123456"), User.class);
-        log.info("getResponse:{}", getResponse.source());
+        log.error("getResponse: {}", getResponse.source());
 
         // Reading a domain object
         if (getResponse.found()) {
             User user = getResponse.source();
             assert user != null;
-            log.info("user name={}", user.getName());
+            log.error("user name={}", user.getName());
         }
 
         // 判断文档是否存在
         BooleanResponse booleanResponse = elasticsearchClient.exists(s -> s.index("users").id("123456"));
-        log.info("判断Document是否存在:{}", booleanResponse.value());
+        log.error("判断Document是否存在: {}", booleanResponse.value());
     }
 
     /**
@@ -281,8 +282,8 @@ public class ESApplicationTests2 {
     @Test
     void deleteDocument() throws IOException {
         ElasticsearchClient elasticsearchClient = elasticsearchClient();
-        DeleteResponse deleteResponse = elasticsearchClient.delete(s -> s.index("users").id("123456"));
-        log.info("删除文档操作结果:{}", deleteResponse.result());
+        DeleteResponse deleteResponse = elasticsearchClient.delete(s -> s.index("users").id("33"));
+        log.info("删除文档操作结果: {}", deleteResponse.result());
     }
 
 
@@ -422,16 +423,16 @@ public class ESApplicationTests2 {
         int maxAge = 30;
         // byName、byMaxAge：分别为各个条件创建查询
         Query byName = MatchQuery.of(m -> m
-                        .field("name")
-                        .query(searchText)
-                )
-                // MatchQuery是一个查询变体，我们必须将其转换为 Query 联合类型
-                ._toQuery();
+                          .field("name")
+                          .query(searchText)
+                       )
+                       // MatchQuery是一个查询变体，我们必须将其转换为 Query 联合类型
+                       ._toQuery();
         Query byMaxAge = RangeQuery.of(m -> m
-                .field("age")
-                // Elasticsearch 范围查询接受大范围的值类型。我们在这里创建最高价格的 JSON 表示。
-                .gte(JsonData.of(maxAge))
-        )._toQuery();
+                             .field("age")
+                             // Elasticsearch 范围查询接受大范围的值类型。我们在这里创建最高价格的 JSON 表示。
+                             .gte(JsonData.of(maxAge))
+                         )._toQuery();
         SearchResponse<User> response = elasticsearchClient.search(s -> s
                         .index("users")
                         .query(q -> q
@@ -676,7 +677,7 @@ public class ESApplicationTests2 {
         LongTermsAggregate longTermsAggregate = response.aggregations()
                 .get("groupName")
                 .lterms();
-        log.info("multiTermsAggregate:{}", longTermsAggregate.buckets());
+        log.info("multiTermsAggregate: {}", longTermsAggregate.buckets());
     }
 
 
