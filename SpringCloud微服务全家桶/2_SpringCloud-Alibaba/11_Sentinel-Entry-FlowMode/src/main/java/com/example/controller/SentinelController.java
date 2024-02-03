@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.service.EntryService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +28,10 @@ public class SentinelController {
         return entryService.getList(num);
     }
 
-    //
+    // 流控来源： default、自定义、other
+    // default：不区分调用来源，即任何来源都可以匹配流控规则
+    // 自定义：只有符合指定的自定义流控来源时，其资源才能匹配流控规则
+    // other：同一个资源有多个流控来源时，表示除开已经设置好的其他流控来源
     @GetMapping("/getInfo")
     @ResponseBody
     public String getInfo() {
