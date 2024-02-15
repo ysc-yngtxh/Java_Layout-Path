@@ -21,12 +21,14 @@ public class SentinelController {
         return entryService.getHandler();
     }
 
+
     // 仅定义了熔断规则的接口 /getList，在业务逻辑中又通过资源实体获取了 /getHandler的流控资源
     @GetMapping("/getList")
     @ResponseBody
     public String getList(@RequestParam Integer num) {
         return entryService.getList(num);
     }
+
 
     // 流控来源： default、自定义、other
     // default：不区分调用来源，即任何来源都可以匹配流控规则
@@ -35,6 +37,10 @@ public class SentinelController {
     @GetMapping("/getInfo")
     @ResponseBody
     public String getInfo() {
+        // 请求该接口时可选择性的带上参数name值：
+        // DepartRequestOriginParser类中实现重写parseOrigin()方法，有自定义的根据参数返回请求来源的逻辑
+        // 不带name请求参数：即该接口请求来源为parseOrigin()方法的返回值“ysc”
+        // 带name请求参数：即返回相应的参数作为请求来源
         return entryService.getInfo();
     }
 }
