@@ -1,4 +1,4 @@
-package com.example.优化IF.函数式接口加Map;
+package com.example.优化IF.策略模式加函数式接口;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
