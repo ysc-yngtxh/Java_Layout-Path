@@ -21,6 +21,7 @@
         <module>10_Sentinel-Feign</module>
         <module>11_Sentinel-Entry-FlowMode</module>
         <module>12_Sentinel-Authorization-ParamMode</module>
+        <module>13_Sentinel-Gateway-Route</module>
     </modules>
 
     <packaging>pom</packaging>
