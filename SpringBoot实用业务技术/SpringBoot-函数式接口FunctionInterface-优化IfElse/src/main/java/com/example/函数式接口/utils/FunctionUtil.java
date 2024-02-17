@@ -1,8 +1,8 @@
-package com.example.utils;
+package com.example.函数式接口.utils;
 
-import com.example.interfacepage.BranchHandler;
-import com.example.interfacepage.PresentOrElseHandler;
-import com.example.interfacepage.ThrowExceptionFunction;
+import com.example.函数式接口.interfaces.BranchHandler;
+import com.example.函数式接口.interfaces.PresentOrElseHandler;
+import com.example.函数式接口.interfaces.ThrowExceptionFunction;
 
 /**
  * @author 游家纨绔

@@ -1,6 +1,6 @@
-package com.example.function;
+package com.example.函数式接口;
 
-import com.example.utils.FunctionUtil;
+import com.example.函数式接口.utils.FunctionUtil;
 
 /**
  * @author 游家纨绔
@@ -10,6 +10,8 @@ import com.example.utils.FunctionUtil;
 public class FunctionExample {
 
     public static void main(String[] args) {
+        // TODO 这种函数式接口优化IF，实际上并没有消除，只是封装起来显得更优雅
+
         // FunctionUtil.isTrue(true).throwMessage("this a err1");
         FunctionUtil.isTrue(false).throwMessage("this a err2");
 
