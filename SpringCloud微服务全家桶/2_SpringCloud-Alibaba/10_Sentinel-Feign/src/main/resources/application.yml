@@ -19,11 +19,15 @@ spring:
         port: 8719
         # 控制台仪表盘地址
         dashboard: 127.0.0.1:8010
+      # 关闭URL资源
+#     filter:
+#       enabled: false
     nacos:
       discovery:
         server-addr: localhost:8848
         username: nacos
         password: nacos
+
 
 
 # 开启Sentinel对Feign的支持

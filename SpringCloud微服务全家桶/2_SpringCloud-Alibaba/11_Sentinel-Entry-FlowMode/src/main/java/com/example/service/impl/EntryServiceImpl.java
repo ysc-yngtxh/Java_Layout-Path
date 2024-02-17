@@ -33,7 +33,6 @@ public class EntryServiceImpl implements EntryService {
     }
 
 
-
     // 该`GET_LIST`资源既有自身的熔断规则，又通过资源实体获取了`GET_HANDLER`资源的流控规则
     @SentinelResource(value = GET_LIST, fallback = "getListFallback")
     @SneakyThrows
@@ -60,12 +59,10 @@ public class EntryServiceImpl implements EntryService {
     }
 
 
-
     @SentinelResource(value = GET_INFO, blockHandler = "getHandlerBlockHandler2")
     public String getInfo() {
         return "定义了 getInfo 在业务层的资源名！！！";
     }
-
     public String getHandlerBlockHandler2(BlockException ex) {
         System.out.println("getHandlerBlockHandler2异常信息：" + ex.getMessage());
         return "{code: 500, msg: 服务流量限流处理}";

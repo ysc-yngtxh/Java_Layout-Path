@@ -21,7 +21,7 @@ import java.util.List;
 @Component
 public class CustomParam implements CommandLineRunner {
 
-    // TODO 定义热点规则：
+    // TODO 定义热点规则
     @Override
     public void run(String... args) throws Exception {
         List<ParamFlowRule> rules = new ArrayList<>();

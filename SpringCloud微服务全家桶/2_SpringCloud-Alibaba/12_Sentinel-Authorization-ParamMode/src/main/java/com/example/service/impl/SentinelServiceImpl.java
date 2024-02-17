@@ -15,7 +15,6 @@ public class SentinelServiceImpl implements SentinelService {
 
     public static final String GET_HANDLER = "handler";
     public static final String GET_LIST = "list";
-    public static final String GET_INFO = "info";
 
     // 该`GET_HANDLER`资源具有授权规则
     @SentinelResource(value = GET_HANDLER, blockHandler = "getHandlerBlockHandler")

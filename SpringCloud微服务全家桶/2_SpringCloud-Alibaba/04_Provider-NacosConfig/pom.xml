@@ -30,11 +30,13 @@
 <!--            <groupId>org.springframework.cloud</groupId>-->
 <!--            <artifactId>spring-cloud-starter-bootstrap</artifactId>-->
 <!--        </dependency>-->
+
         <!--注册到nacos的客户端-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
+
         <!--旧版Alibaba-Nacos-Discovery 默认是集成了Ribbon的，新版Alibaba-Nacos-Discovery 移除了 Ribbon，
             所以使用微服务方式调用接口，需要添加 Spring Cloud Loadbalancer 作为客户端的负载均衡组件。-->
         <dependency>

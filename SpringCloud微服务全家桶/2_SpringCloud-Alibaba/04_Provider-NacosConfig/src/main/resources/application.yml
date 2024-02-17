@@ -4,8 +4,8 @@
 ## 使用Spring Cloud时，Spring在还未初始化完成时会自动载入META-INF/spring.factories文件配置，
 ## 此时连接 Nacos 需要的配置只能通过在优先加载的配置文件中寻找，因此会选择 bootstrap.properties 文件作为Nacos的配置文件
 ## 旧版的 spring-cloud-starter-alibaba-nacos-config 模块包括了 spring-cloud-starter-bootstrap 依赖
-## 必须使用使用 bootstrap.properties 来进行配置Nacos
-## 但新版spring-cloud-starter-alibaba-nacos-config 模块剔除了 spring-cloud-starter-bootstrap 依赖
+## 必须使用 bootstrap.properties 来进行配置Nacos
+## 但新版 spring-cloud-starter-alibaba-nacos-config 模块剔除了 spring-cloud-starter-bootstrap 依赖
 ## Spring Cloud里并不主动加载 bootstrap.properties 文件了。但是必须要配置 spring.config.import: 支持导入多种途径的配置文件
 
 spring:
@@ -13,6 +13,7 @@ spring:
     name: provider_config
   cloud:
     nacos:
+      # 注意⚠️：添加nacos配置中心的客户端依赖的，这里的discovery换成config
       config:
         server-addr: localhost:8848
         username: nacos
