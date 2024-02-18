@@ -18,7 +18,7 @@
         <module>07_Gateway-Api</module>
         <module>08_Gateway-Nacos</module>
         <module>09_Sentinel</module>
-        <module>10_Sentinel-Feign</module>
+        <module>10_Sentinel-OpenFeign</module>
         <module>11_Sentinel-Entry-FlowMode</module>
         <module>12_Sentinel-Authorization-ParamMode</module>
         <module>13_Sentinel-Gateway-Route</module>

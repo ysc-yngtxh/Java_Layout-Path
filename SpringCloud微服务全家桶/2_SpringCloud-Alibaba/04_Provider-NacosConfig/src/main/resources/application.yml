@@ -13,7 +13,7 @@ spring:
     name: provider_config
   cloud:
     nacos:
-      # 注意⚠️：添加nacos配置中心的客户端依赖的，这里的discovery换成config
+      # 注意⚠️：添加nacos配置中心的客户端依赖的，这里的 discovery 换成 config
       config:
         server-addr: localhost:8848
         username: nacos
