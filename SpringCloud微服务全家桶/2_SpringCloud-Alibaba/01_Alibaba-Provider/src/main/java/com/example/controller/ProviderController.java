@@ -5,9 +5,13 @@ import com.example.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -21,8 +25,13 @@ public class ProviderController {
     private UserServiceImpl userService;
 
     @GetMapping("/{id}")
-    public User query(@PathVariable("id") Integer id) throws InterruptedException {
+    public User query(@PathVariable("id") Integer id
+            , @RequestHeader(value = "Authorization", required = false) String authorization) throws InterruptedException {
         // TimeUnit.SECONDS.sleep(8);
+        if (!Objects.isNull(authorization)) {
+            String decode = URLDecoder.decode(authorization, StandardCharsets.UTF_8);
+            System.out.println(decode);
+        }
         return userService.queryById(id);
     }
 

@@ -1,6 +1,7 @@
 package com.example.pojo;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.Date;
 @Data               // 属于Lombok依赖的注解，提供类的set,get，toString方法
 @AllArgsConstructor // 属于Lombok依赖的注解，提供类的全参构造
 @NoArgsConstructor  // 属于Lombok依赖的注解，提供类的无参构造
+@Builder
 public class User {
 
     private Integer id;         // 主键Id

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @dateTime 2023-10-15 00:24
  * @apiNote TODO
  */
-@FeignClient(value = "nacos-provider", path = "/provider")
+@FeignClient(value = "nacos-provider", path = "/provider", fallback = UserServiceImpl.class)
 // 这个注解启用Feign组件，value值是服务ip，fallback是启动熔断服务，这个时候UserServiceImpl就是熔断后的降级处理
 public interface UserService {
 

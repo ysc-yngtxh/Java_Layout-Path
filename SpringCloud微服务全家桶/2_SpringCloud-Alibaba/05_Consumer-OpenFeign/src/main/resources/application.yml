@@ -19,6 +19,9 @@ spring:
 
     # OpenFeign相关配置
     openfeign:
+      # 开启熔断机制（需要添加断路器circuitbreaker依赖）
+      circuitbreaker:
+        enabled: true
       client:
         config:
           # 配置全局(其他所有的提供者服务配置)
@@ -44,4 +47,3 @@ spring:
         response:
           # 开启响应压缩
           enabled: true
-
