@@ -34,6 +34,7 @@ spring:
         - id: my_route             # 自定义的路由名称
           # 这里算是yml文件配置式全局过滤器实现负载均衡
           # Gateway想要实现负载均衡的功能，那么这里跳转的路径写法不再是http://localhost:**** 而得是 lb://服务实例名称
+          # ⚠️：这里的 lb://** 是固定写法，是loadBalancer负载均衡的缩写
           uri: lb://nacos-consumer
           predicates:
             - Path=/consumer/**

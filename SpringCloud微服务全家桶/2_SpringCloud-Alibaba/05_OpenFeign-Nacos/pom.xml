@@ -8,7 +8,7 @@
         <version>1.0.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <artifactId>05_Consumer-OpenFeign</artifactId>
+    <artifactId>05_OpenFeign-Nacos</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>05_Consumer-Openfeign</name>
     <description>05_Consumer-Openfeign</description>
