@@ -1,4 +1,4 @@
-package com.example.annocationi;
+package com.example.annocation;
 
 import com.example.handler.CustomBlockExceptionHandlerPage;
 import org.springframework.context.annotation.Import;

@@ -34,7 +34,8 @@ public class CustomBlockExceptionHandlerPage implements BlockExceptionHandler {
             msg = "/**";
         }
 
+        // 请求转发
         httpServletRequest.getRequestDispatcher(msg)
-                .forward(httpServletRequest,httpServletResponse);
+                .forward(httpServletRequest, httpServletResponse);
     }
 }

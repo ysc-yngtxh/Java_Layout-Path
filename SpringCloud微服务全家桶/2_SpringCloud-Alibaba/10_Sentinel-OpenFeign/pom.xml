@@ -9,7 +9,7 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>10_Sentinel-Feign</artifactId>
+    <artifactId>10_Sentinel-OpenFeign</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>10_Sentinel-Feign</name>
     <description>10_Sentinel-Feign</description>
