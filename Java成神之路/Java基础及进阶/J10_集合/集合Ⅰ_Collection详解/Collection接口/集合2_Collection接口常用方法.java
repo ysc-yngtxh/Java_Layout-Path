@@ -2,6 +2,7 @@ package J10_集合.集合Ⅰ_Collection详解.Collection接口;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /*
   关于java.util.Collection接口中的常用方法：
@@ -74,6 +75,18 @@ public class 集合2_Collection接口常用方法 {
             Object o = obj[i];
             System.out.println(o);
         }
+
+
+        // 以下示例我们使用双括号初始化创建了一个ArrayList，并添加了三个元素。
+        List<String> names = new ArrayList<String>() {{
+            // 注意，双括号初始化实际上是创建了ArrayList的匿名子类，并在该子类的实例化代码块中进行了元素添加。
+            add("Alice");
+            add("Bob");
+            add("Charlie");
+        }};
+        // TODO 尽管双括号初始化可以方便地初始化集合，但也存在一些问题和潜在的陷阱：
+        //      双括号初始化会导致额外的内存开销，因为它实际上创建了一个匿名子类。此外，它还可能与一些静态分析工具产生冲突，因为它需要对子类进行解析。
+        // 因此，尽管双括号初始化在某些情况下可能很方便，但在实际的生产代码中，最好考虑使用更简洁和可读性更好的初始化方式，如使用普通的add()方法逐个添加元素。
     }
     private static class Student {
     }

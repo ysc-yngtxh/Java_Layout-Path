@@ -21,6 +21,7 @@ package D4_匿名内部类;
  */
 class Test {
     static String country;   // 静态变量
+
     // 该类在类的内部，所以被称为内部类
     // 由于前面有static，所以称为“静态内部类”
     static class Inner1 {
@@ -28,6 +29,7 @@ class Test {
     }
 
     int age;  // 实例变量
+
     // 该类在类的内部，所以被称为内部类
     // 没有static叫做实例内部类
     class Inner2{

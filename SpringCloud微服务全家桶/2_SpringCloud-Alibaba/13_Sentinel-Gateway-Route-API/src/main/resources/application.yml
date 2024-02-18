@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: Sentinel-Gateway
+    name: sentinel-gateway
   cloud:
     nacos:
       discovery:
@@ -36,3 +36,14 @@ spring:
       # 关闭URL资源。 Sentinel 网关流控默认的粒度是 route 维度以及自定义 API 分组维度，默认不支持 URL 粒度。
       filter:
         enabled: false
+
+      # 自定义异常返回接口（同API方式。如两种方式都存在，API方式优先级高）
+      scg:
+        fallback:
+          mode: response  # 响应流模式
+          content-type: 'application/json'
+          response-status: 429
+          response-body: '{"msg": "访问量过大", "status": "429"}'
+
+#          mode: redirect  # 重定向模式
+#          redirect: https://baidu.com

@@ -10,7 +10,7 @@
 	</parent>
 
 	<groupId>com.example</groupId>
-	<artifactId>13_Sentinel-Gateway-Route</artifactId>
+	<artifactId>13_Sentinel-Gateway-Route-API</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>13_Sentinel-Gateway-Route</name>
 	<description>13_Sentinel-Gateway-Route</description>
@@ -35,7 +35,7 @@
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
 		</dependency>
-		<!--网关请求服务降级所需依赖-->
+		<!--网关请求服务降级所需依赖：断路器-->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
