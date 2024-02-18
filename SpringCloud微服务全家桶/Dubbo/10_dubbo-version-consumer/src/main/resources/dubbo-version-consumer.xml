@@ -10,6 +10,6 @@
     <dubbo:registry address="zookeeper://localhost:2181"/>
 
     <!--引用远程接口服务-->
-    <dubbo:reference id="userService" interface="com.bjpowernode.dubbo.service.UserService" version="1.0.0"/>
-    <dubbo:reference id="userService2" interface="com.bjpowernode.dubbo.service.UserService" version="2.0.0"/>
+    <dubbo:reference id="userService" interface="com.example.dubbo.service.UserService" version="1.0.0"/>
+    <dubbo:reference id="userService2" interface="com.example.dubbo.service.UserService" version="2.0.0"/>
 </beans>

@@ -1,7 +1,7 @@
-package com.bjpowernode.dubbo.controller;
+package com.example.dubbo.controller;
 
-import com.bjpowernode.dubbo.domain.User;
-import com.bjpowernode.dubbo.service.UserService;
+import com.example.dubbo.domain.User;
+import com.example.dubbo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

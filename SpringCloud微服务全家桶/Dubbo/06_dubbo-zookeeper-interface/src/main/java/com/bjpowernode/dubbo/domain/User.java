@@ -1,4 +1,4 @@
-package com.bjpowernode.dubbo.domain;
+package com.example.dubbo.domain;
 
 import java.io.Serializable;
 

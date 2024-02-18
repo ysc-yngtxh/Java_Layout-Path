@@ -19,7 +19,7 @@
         ref:接口引用的实现类在spring容器中的标识
         registry:如果不使用注册中心，则值为：N/A
     -->
-    <dubbo:service interface="com.bjpowernode.dubbo.service.UserService" ref="userService" registry="N/A"/>
+    <dubbo:service interface="com.example.dubbo.service.UserService" ref="userService" registry="N/A"/>
 
     <!--将接口的实现类加载到spring容器中-->
     <bean id="userService" class="com.bjpowernode.dubbo.service.UserServiceImpl"/>

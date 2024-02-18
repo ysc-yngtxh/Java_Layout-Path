@@ -9,7 +9,7 @@
     <dubbo:application name="02_dubbo-link2"/>
 
     <dubbo:reference id="userService"
-                     interface="com.bjpowernode.dubbo.service.UserService"
+                     interface="com.example.dubbo.service.UserService"
                      url="dubbo://localhost:20880"
                      registry="N/A"/>
 

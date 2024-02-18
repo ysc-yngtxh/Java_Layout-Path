@@ -1,7 +1,7 @@
-package com.bjpowernode.dubbo.service.Impl;
+package com.example.dubbo.service.Impl;
 
-import com.bjpowernode.dubbo.domain.User;
-import com.bjpowernode.dubbo.service.UserService;
+import com.example.dubbo.domain.User;
+import com.example.dubbo.service.UserService;
 
 /**
  * @author 游家纨绔

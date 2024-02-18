@@ -14,8 +14,8 @@
 
     <!--暴露服务-->
     <!--不管是否一个接口有多个实现类，只要服务提供者暴露接口服务的时候指定了版本号，哪作为消费者引用远程接口服务的时候就必须指定版本号-->
-    <dubbo:service interface="com.bjpowernode.dubbo.service.UserService" ref="userServiceImpl" version="1.0.0"/>
-    <dubbo:service interface="com.bjpowernode.dubbo.service.UserService" ref="userServiceImpl2" version="2.0.0"/>
+    <dubbo:service interface="com.example.dubbo.service.UserService" ref="userServiceImpl" version="1.0.0"/>
+    <dubbo:service interface="com.example.dubbo.service.UserService" ref="userServiceImpl2" version="2.0.0"/>
 
     <!--将接口的实现类加载到spring容器中-->
     <bean id="userServiceImpl" class="com.bjpowernode.dubbo.service.Impl.UserServiceImpl"/>

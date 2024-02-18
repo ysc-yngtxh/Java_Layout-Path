@@ -1,6 +1,6 @@
-package com.bjpowernode.dubbo.service;
+package com.example.dubbo.service;
 
-import com.bjpowernode.dubbo.domain.User;
+import com.example.dubbo.domain.User;
 
 /**
  * @author 游家纨绔
