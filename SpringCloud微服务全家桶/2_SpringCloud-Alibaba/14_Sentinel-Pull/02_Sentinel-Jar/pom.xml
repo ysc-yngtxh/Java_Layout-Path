@@ -22,7 +22,7 @@
     </properties>
 
     <dependencies>
-        <!--引入自定义的jar包，实现Sentinel的pull模式-->
+        <!--引入模块01_Sentinel-Pull的jar包，实现Sentinel的pull模式-->
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>01_Sentinel-Pull</artifactId>
