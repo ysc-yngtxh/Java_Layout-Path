@@ -7,8 +7,7 @@ spring:
   cloud:
     sentinel:
       # 取消控制台懒加载，这样就可以在访问Sentinel控制台的时候，不需要通过访问资源，就能在控制台显示资源信息
-      eager:
-        true
+      eager: true
       transport:
         # 启动一个与Dashboard通信的进程，默认端口为8719
         # 这里的 spring.cloud.sentinel.transport.port 端口配置会在应用对应的机器上启动一个 Http Server，
@@ -18,3 +17,22 @@ spring:
         port: 8719
         # 控制台仪表盘地址
         dashboard: 127.0.0.1:8010
+
+      # 配置Sentinel在Nacos中的数据源配置
+      datasource:
+        flows:  # 这个是自定义的名称，可随意取名
+          nacos:
+            server-addr: localhost:8848
+            username: nacos
+            password: nacos
+            rule-type: flow
+            data-id: ${spring.application.name}-flow-rules
+            data-type: json
+        degrades: # 这个是自定义的名称，可随意取名
+          nacos:
+            server-addr: localhost:8848
+            username: nacos
+            password: nacos
+            rule-type: degrade
+            data-id: ${spring.application.name}-degrade-rules
+            data-type: json
