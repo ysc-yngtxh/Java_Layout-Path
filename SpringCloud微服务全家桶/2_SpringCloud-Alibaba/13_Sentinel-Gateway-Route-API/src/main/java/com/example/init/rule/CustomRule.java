@@ -1,4 +1,4 @@
-package com.example.init.api;
+package com.example.init.rule;
 
 import com.alibaba.csp.sentinel.adapter.gateway.common.SentinelGatewayConstants;
 import com.alibaba.csp.sentinel.adapter.gateway.common.api.ApiDefinition;
@@ -21,14 +21,14 @@ import java.util.Set;
  * @apiNote TODO 定义API与Route规则
  */
 @Component
-public class CustomApi implements CommandLineRunner {
+public class CustomRule implements CommandLineRunner {
 
     // TODO Sentinel 网关流控默认的粒度是 route 维度以及自定义 API 分组维度，默认不支持 URL 粒度。
     //      若通过 Spring Cloud Alibaba 接入，请将 spring.cloud.sentinel.filter.enabled 配置项置为 false
     //      若在网关流控控制台上看到了 URL 资源，就是此配置项没有置为 false。
 
     // TODO route 维度：即对yml文件中Gateway网关设置的路由规则所满足的请求进行限流
-    //      API 分组维度：通过对网关访问其他服务的API接口进行分组，并将满足这些分组的请求进行限流
+    //      API 分组维度：即通过对网关访问其他服务的API接口进行分组，并将满足这些分组的请求进行限流
     @Override
     public void run(String... args) throws Exception {
         Set<GatewayFlowRule> rules = new HashSet<>();
@@ -38,8 +38,12 @@ public class CustomApi implements CommandLineRunner {
 
         // 设置Route限流规则：即对yml文件中Gateway网关设置的路由规则所满足的请求进行限流
         GatewayFlowRule routeRule = GeneralRules("my_route-1");
-        // 设置API限流规则：即对设置的API分组进行限流
+        // 设置API限流规则：即通过对网关访问其他服务的API接口进行分组，并将满足这些分组的请求进行限流
         GatewayFlowRule apiRule = GeneralRules("some_customized_api");
+
+        // ⚠️：需要注意的是，尽量将各个规则放入同一个Set中。
+        //     我之前有点想当然了，创建了两个规则类，执行了两遍 GatewayRuleManager.loadRules(rules);
+        //     结果就是其中的一个规则类覆盖了另一个规则类，导致最终的流控规则只有一个生效。
 
         rules.add(apiRule);
         rules.add(routeRule);

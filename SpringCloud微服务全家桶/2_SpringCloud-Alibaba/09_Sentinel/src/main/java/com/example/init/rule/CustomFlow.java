@@ -45,9 +45,9 @@ public class CustomFlow implements CommandLineRunner {
         rule2.setLimitApp("default");
         rule3.setLimitApp("default");
         // 调用关系限流策略：直接、链路、关联
-        // rule.setStrategy(0);
+        // rule.setStrategy(RuleConstant.STRATEGY_DIRECT);
         // 流量控制效果(直接拒绝、Warm Up、匀速排队)
-        // rule.setControlBehavior(0);
+        // rule.setControlBehavior(RuleConstant.CONTROL_BEHAVIOR_DEFAULT);
         // 是否集群限流
         // rule.setClusterMode(false);
         rules.add(rule);

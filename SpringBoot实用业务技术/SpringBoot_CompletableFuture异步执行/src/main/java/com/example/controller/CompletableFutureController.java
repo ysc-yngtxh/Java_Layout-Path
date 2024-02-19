@@ -35,7 +35,7 @@ public class CompletableFutureController {
 
     // TODO 使用 CompletableFuture 的应用场景：
     //   1、在一个接口中调用多个已存在的查询，这个时候可以整合在一起并进行优化查询时间
-    //   2、需要分别调用多个RPC接口，无先后顺序关系，数据处理是需要同时依赖两多个接口的返回数据
+    //   2、需要分别调用多个RPC接口，无先后顺序关系，数据处理是需要同时依赖多个接口的返回数据
 
     // 正常的串行程序执行
     @RequestMapping("/serial")
