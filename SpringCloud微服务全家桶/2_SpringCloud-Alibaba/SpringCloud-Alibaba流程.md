@@ -333,3 +333,10 @@
 >         从 1.6.0 版本开始，Sentinel 提供了 Spring Cloud Gateway 的适配模块，可以提供两种资源维度的限流：  
 >         route 维度：即在 Spring 配置文件中配置的路由条目，资源名为对应的 routeId  
 >         自定义 API 维度：用户可以利用 Sentinel 提供的 API 来自定义一些 API 分组  
+ 
+
+#### 11、动态规则：  
+>   1、简介  
+>         从 1.6.0 版本开始，Sentinel 提供了 Spring Cloud Gateway 的适配模块，可以提供两种资源维度的限流：  
+>         route 维度：即在 Spring 配置文件中配置的路由条目，资源名为对应的 routeId  
+>         自定义 API 维度：用户可以利用 Sentinel 提供的 API 来自定义一些 API 分组  

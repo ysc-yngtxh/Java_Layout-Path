@@ -1,9 +1,9 @@
 server:
-  port: 9800
+  port: 9900
 
 spring:
   application:
-    name: Sentinel-Pull
+    name: sentinel-push
   cloud:
     sentinel:
       # 取消控制台懒加载，这样就可以在访问Sentinel控制台的时候，不需要通过访问资源，就能在控制台显示资源信息
