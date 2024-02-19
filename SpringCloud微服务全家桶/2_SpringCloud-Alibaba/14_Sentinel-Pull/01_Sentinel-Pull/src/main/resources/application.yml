@@ -12,7 +12,7 @@ spring:
                 true
             transport:
                 # 启动一个与Dashboard通信的进程，默认端口为8719
-                # 这里的 spring.cloud.sentinel.transport.port 端口配置会在应用对应的机器上启动一个 Http Server，
+                # 这里的 spring.cloud.dynamic.transport.port 端口配置会在应用对应的机器上启动一个 Http Server，
                 # 该Server会与 Sentinel控制台做交互。比如 Sentinel控制台添加了一个限流规则，会把规则数据push给这个Http Server接收，
                 # Http Server 再将规则注册到 Sentinel 中。
                 # 理解以下两个端口：8010相当于Sentinel的前端服务；8719相当于Sentinel的后端服务
