@@ -21,6 +21,13 @@
 		<spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
 	</properties>
 
+	<modules>
+		<module>01_Sentinel-Pull</module>
+		<module>02_Sentinel-Jar</module>
+	</modules>
+
+	<packaging>pom</packaging>
+
 	<dependencies>
 		<!-- SpringBoot Web -->
 		<dependency>

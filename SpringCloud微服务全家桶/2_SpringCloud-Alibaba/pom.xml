@@ -21,7 +21,9 @@
         <module>10_Sentinel-OpenFeign</module>
         <module>11_Sentinel-Entry-FlowMode</module>
         <module>12_Sentinel-Authorization-ParamMode</module>
-        <module>13_Sentinel-Gateway-Route</module>
+        <module>13_Sentinel-Gateway-Route-API</module>
+        <module>14_Sentinel-Pull</module>
+        <module>15_Sentinel-Push</module>
     </modules>
 
     <packaging>pom</packaging>

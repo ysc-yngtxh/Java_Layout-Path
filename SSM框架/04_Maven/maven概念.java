@@ -242,6 +242,28 @@
      2、我们的程序有需要把一些文件放在src/main/java目录中，当我在执行Java程序时i，需要用到src/main/java目录中的文件。
         需要告诉maven在 mvn compile src/main/java目录下的程序时，需要把文件一同拷贝到target/classes目录中。
         此时就需要在<build>中加入<resources>
+
+第六部分：Maven内置属性
+   内置属性：如 ${basedir} 表示项目根目录 即包含了pom.xml文件的目录 ${version} 表示项目版本
+
+   pom属性：
+          ${project.build.sourcedirectory} : 项目构建输出目录，默认为src/main/java
+          ${project.build.testSourceDirectory} : 项目的测试源码目录，默认为src/test/java/
+          ${project.build.directory} ：项目构建输出目录，默认为target/
+          ${project.outputDirectory} ：项目测试代码编写输出目录。默认为target/test-calsses
+          ${project.groupId} : 项目的groupId
+          ${project.artifactId}
+          ${project.version}
+          ${project.build.finalName} :  项目打包输出文件的名称， 默认为 ${project.artifactId} - ${project.version}
+
+   setting属性：用户使用以setting开头的属性引用setting.xml文件中属性的值
+               如：${setting.localRepository} 指向用户本地仓库的地址
+
+   Java系统属性：可使用 mvn help:system 查看所有java系统属性
+               举例 ： ${user.home} 指向用户目录，
+
+   环境变量属性：可使用 mvn help:system 查看所有java系统属性
+               举例：${env.JAVA_HOME} 指代了JAVA_HOME环境变量的值
  */
 public class maven概念 {
 }
