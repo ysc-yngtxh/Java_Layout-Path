@@ -28,23 +28,23 @@ public class FileDataSourceInit implements InitFunc {
             ruleFileDir.mkdirs();
         }
 
-        // 读写流控规则
+        // 动态读写流控规则
         FlowRule flowRule = new FlowRule();
         flowRule.readWriteRuleFileFlow(ruleFileDir.getPath());
 
-        // 读写熔断规则
+        // 动态读写熔断规则
         FallbackRule fallbackRule = new FallbackRule();
         fallbackRule.readWriteRuleFileFlow(ruleFileDir.getPath());
 
-        // 读写热点规则
+        // 动态读写热点规则
         ParamRule paramRule = new ParamRule();
         paramRule.readWriteRuleFileFlow(ruleFileDir.getPath());
 
-        // 读写授权规则
+        // 动态读写授权规则
         AuthorizationRule authorizationRule = new AuthorizationRule();
         authorizationRule.readWriteRuleFileFlow(ruleFileDir.getPath());
 
-        // 读写系统规则
+        // 动态读写系统规则
         SystemerRule systemerRule = new SystemerRule();
         systemerRule.readWriteRuleFileFlow(ruleFileDir.getPath());
     }
