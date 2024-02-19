@@ -13,6 +13,7 @@ import com.alibaba.fastjson.TypeReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 /**
@@ -21,10 +22,19 @@ import java.util.List;
  * @apiNote TODO
  */
 public class FileDataSourceInit implements InitFunc {
+    public static void main(String[] args) throws URISyntaxException {
+        String path = FileDataSourceInit.class.getClassLoader().getResource("").toURI().getPath();
+        System.out.println(path);
+        String substring = path.substring(0, path.indexOf("/target"));
+        System.out.println(substring);
+    }
     @Override
     public void init() throws Exception {
+        // 获取该子模块项目路径
+        String path = FileDataSourceInit.class.getClassLoader().getResource("").toURI().getPath();
+        String substring = path.substring(0, path.indexOf("/target"));
         // 在当前工程根目录下创建/rules目录
-        File ruleFileDir = new File(System.getProperty("user.dir") + "/2_SpringCloud-Alibaba/14_Sentinel-Pull/rules");
+        File ruleFileDir = new File(substring + "/rules");
         // 创建目录
         if (!ruleFileDir.exists()) {
             ruleFileDir.mkdirs();

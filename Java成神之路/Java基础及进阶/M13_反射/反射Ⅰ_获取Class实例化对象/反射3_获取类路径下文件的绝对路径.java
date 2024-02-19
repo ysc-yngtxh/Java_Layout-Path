@@ -29,12 +29,30 @@ public class 反射3_获取类路径下文件的绝对路径 {
                 .getPath();
         System.out.println( URLDecoder.decode(paths, "UTF-8") ); // 解决中文乱码问题
 
-        // 获取当前项目路径
+        String paths1 = Thread.currentThread()
+                .getContextClassLoader()
+                .getResource("")
+                .getPath();
+        System.out.println( URLDecoder.decode(paths1, "UTF-8") ); // 解决中文乱码问题
+
+        // 获取当前工程项目路径
         System.err.println("path1: " + System.getProperty("user.dir"));
 
-        // 通过 File 获取当前项目路径
+        // 通过 File 获取当前工程项目路径
         File directory = new File(""); // 参数为空
         String courseFile = directory.getCanonicalPath();
         System.out.println("path2: " + courseFile);
+
+        // 获取当前工程下的子模块项目路径
+        String paths2 = 反射3_获取类路径下文件的绝对路径.class
+                .getClassLoader()
+                .getResource("")
+                .toURI()
+                .getPath();
+        // 这里没有模块，因此只能获取到工程项目路径下的 ../out/production/Java成神之路/
+        System.out.println(paths2);
+        // 这里没有模块项目，所以没有target目录，因此会报错
+        String substring = paths2.substring(0, paths2.indexOf("/target"));
+        System.out.println(substring);
     }
 }
