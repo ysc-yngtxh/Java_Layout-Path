@@ -14,7 +14,7 @@ public class CustomEventListener {
     @Async
     // 注意：一般建议都需要指定此值，否则默认可以处理所有类型的事件，范围太广了
     @EventListener(classes = TestEvent.class)
-    public void listener(TestEvent event) {
+    public void listener(TestEvent<String> event) {
         log.info("监听到数据1：{}", event.getMessage());
     }
 
@@ -32,7 +32,7 @@ public class CustomEventListener {
     // fallbackExecution()：表明若没有事务的时候，对应的event是否需要执行，默认值为false表示，没事务就不执行了。
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT,
                                 value = { TestEvent.class })
-    public void messageListener(TestEvent event) {
+    public void messageListener(TestEvent<String> event) {
         System.out.println("收到事件:" + event);
         System.out.println("开始执行业务操作给用户发送短信。用户userId为：" + event.getMessage());
     }

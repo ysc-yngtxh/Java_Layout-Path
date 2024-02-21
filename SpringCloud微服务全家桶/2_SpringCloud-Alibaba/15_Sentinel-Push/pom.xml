@@ -21,6 +21,7 @@
     </properties>
 
     <dependencies>
+        <!--Sentinel的规则数据集成到Nacos中所需依赖-->
         <dependency>
             <groupId>com.alibaba.csp</groupId>
             <artifactId>sentinel-datasource-nacos</artifactId>
