@@ -336,7 +336,103 @@
  
 
 #### 11、动态规则：  
->   1、简介  
->         从 1.6.0 版本开始，Sentinel 提供了 Spring Cloud Gateway 的适配模块，可以提供两种资源维度的限流：  
->         route 维度：即在 Spring 配置文件中配置的路由条目，资源名为对应的 routeId  
->         自定义 API 维度：用户可以利用 Sentinel 提供的 API 来自定义一些 API 分组  
+>   原始模式:  
+>>    通过在客户端中通过代码的方式定义规则，并直接更新到内存中；  
+>>    通过 Sentinel控制台页面 手动添加规则     
+> 
+>   Pull模式:  
+>>    客户端主动向本地文件数据源定时轮询文件的变更，读取规则。  
+>>    Sentinel控制台页面手动通过 API 将规则推送至客户端并更新到内存中，接着注册的写数据源会将新的规则保存到本地文件数据源中  
+>>    这样我们既可以在应用本地直接修改文件来更新规则，也可以通过 Sentinel 控制台推送规则。  
+>>    优点：实现方法简单，不引入新的依赖；规则持久化；  
+>>    缺点：不保证一致性；实时性不保证，拉取过于频繁也可能会有性能问题。   
+> 
+>   Push模式:  
+>>    规则中心统一推送，客户端通过注册监听器的方式时刻监听变化，比如使用 Nacos、Zookeeper 等配置中心。  
+>>    这种方式有更好的实时性和一致性保证。生产环境下一般采用 push 模式的数据源。   
+>>    优点：规则持久化；一致性；快速  
+>>    缺点：引入第三方依赖 
+> 
+> Sentinel的Push模式是比较推荐在生产环境中使用的。但是，官方提供的Push模式功能是有缺陷的：  
+> 通俗地讲：我们修改Nacos配置文件中的规则数据，能够实时读取到Sentinel上；  
+>          而通过Dashboard页面手动修改规则，却不能实时的持久化写到Nacos配置文件里  
+> 因此我们需要对Sentinel源码进行改造，实现Sentinel Dashboard与Nacos的双向一致。
+
+
+#### 12、源码改造：  
+>  原因：参考动态规则中的Push模式    
+    1、 需要添加以下两个Nacos依赖  
+        <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-api</artifactId>
+            <version>1.4.2</version>
+        </dependency>  
+        <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-client</artifactId>
+            <version>1.4.2</version>
+        </dependency>  
+    2、sentinel-dashboard 项目test目录下 com.alibaba.csp.sentinel.dashboard.rule.nacos包  
+        即为Sentinel为我们提供的自定义配置集成Nacos代码示例。  
+    3、将代码示例拷贝到 src.main.java/com.alibaba.csp.sentinel.dashboard.rule 下。 
+
+```java
+@Configuration
+public class NacosConfig {
+
+    @Value("${nacos.serverAddr}")
+    private String serverAddr;
+    @Value("${nacos.username}")
+    private String username;
+    @Value("${nacos.password}")
+    private String password;
+
+    // 生成一个转换器实例：将流控规则实体列表转换为Json串
+    @Bean
+    public Converter<List<FlowRuleEntity>, String> flowRuleEntityEncoder() {
+        return JSON::toJSONString;
+    }
+
+    // 生成一个转换器实例：将Json串转换为流控规则实体列表
+    @Bean
+    public Converter<String, List<FlowRuleEntity>> flowRuleEntityDecoder() {
+        return s -> JSON.parseArray(s, FlowRuleEntity.class);
+    }
+
+    // 创建Nacos配置中心服务器
+    @Bean
+    public ConfigService nacosConfigService() throws Exception {
+        Properties properties = new Properties();
+        properties.put(PropertyKeyConst.SERVER_ADDR, serverAddr);
+        properties.put(PropertyKeyConst.USERNAME, username);
+        properties.put(PropertyKeyConst.PASSWORD, password);
+        return ConfigFactory.createConfigService(properties);
+    }
+}
+```
+
+```java
+在sentinel dashboard项目中的V2/FlowControllerV2中修改注入名称
+public class FlowControllerV2 {
+
+    // 这里注入的应用名称要更改为 flowRuleNacosProvider
+    @Autowired
+    @Qualifier("flowRuleNacosProvider")
+    private DynamicRuleProvider<List<FlowRuleEntity>> ruleProvider;
+    // 这里注入的应用名称要更改为 flowRuleNacosPublisher
+    @Autowired
+    @Qualifier("flowRuleNacosPublisher")
+    private DynamicRulePublisher<List<FlowRuleEntity>> rulePublisher;
+
+}
+```
+
+```javascript
+resources/app/scripts/directives/sidebar/sidebar.html
+
+<li ui-sref-active="active" ng-if="entry.appType==0">
+    // 这里的dashboard.flowV1 改为 dashboard.flow
+    <a ui-sref="dashboard.flow({app: entry.app})">
+    <i class="glyphicon glyphicon-filter"></i>&nbsp;&nbsp;流控规则 V2</a>
+</li>
+```

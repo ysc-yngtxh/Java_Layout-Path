@@ -28,6 +28,7 @@ spring:
             rule-type: flow
             data-id: ${spring.application.name}-flow-rules
             data-type: json
+            group-id: SENTINEL_GROUP
         degrades: # 这个是自定义的名称，可随意取名
           nacos:
             server-addr: localhost:8848
@@ -36,3 +37,4 @@ spring:
             rule-type: degrade
             data-id: ${spring.application.name}-degrade-rules
             data-type: json
+            group-id: SENTINEL_GROUP
