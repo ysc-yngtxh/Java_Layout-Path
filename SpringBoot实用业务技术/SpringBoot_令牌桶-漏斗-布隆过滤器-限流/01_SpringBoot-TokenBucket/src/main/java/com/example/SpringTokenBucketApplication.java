@@ -18,7 +18,7 @@ public class SpringTokenBucketApplication {
 		BucketUtil.buckets.put("bucket", bucketUtil);
 	}
 
-	@Scheduled(fixedRate = 1000)// 定时1s
+	@Scheduled(fixedRate = 1000) // 定时1s
 	public void timer() {
 		if (BucketUtil.buckets.containsKey("bucket")){
 			// 名为：bucket的令牌桶 开始不断生成令牌

@@ -411,7 +411,7 @@
                 application.setAttribute("key1",200); //更新共享数据
                 application.removeAttribute("key1");  //删除共享数据
 
-十三、Servlet规范扩展---------------Filter接口(过滤器接口)
+    十三、Servlet规范扩展---------------Filter接口(过滤器接口)
           1、介绍：
                  1)来自于Servlet规范下接口，在Tomcat中存在于servlet-api-jar
                  2)Filter接口实现类由开发人员负责提供，Http服务器不负责提供
