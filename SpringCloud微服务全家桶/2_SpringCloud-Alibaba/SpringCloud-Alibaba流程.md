@@ -374,7 +374,10 @@
         </dependency>  
     2、sentinel-dashboard 项目test目录下 com.alibaba.csp.sentinel.dashboard.rule.nacos包  
         即为Sentinel为我们提供的自定义配置集成Nacos代码示例。  
-    3、将代码示例拷贝到 src.main.java/com.alibaba.csp.sentinel.dashboard.rule 下。 
+    3、将代码示例拷贝到 src.main.java/com.alibaba.csp.sentinel.dashboard.rule 下。
+    4、以下源码改造只是针对流控规则，还有熔断、热点、授权、系统规则可参考其改造写法
+    5、改造完成后将 sentine-dashboard 项目打成jar包(也可以通过源码的启动类直接启动项目),
+       运行启动后Sentinel动态规则中的Push模式将会实现Sentinel Dashboard与Nacos的双向一致。
 
 ```java
 @Configuration
