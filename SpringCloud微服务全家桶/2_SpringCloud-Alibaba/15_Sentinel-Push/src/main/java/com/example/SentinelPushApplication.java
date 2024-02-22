@@ -19,5 +19,6 @@ public class SentinelPushApplication {
     //            <groupId>com.alibaba.csp</groupId>
     //            <artifactId>sentinel-datasource-nacos</artifactId>
     //          </dependency>
+    //        无法实现Sentinel Dashboard与Nacos的双向一致
 
 }
