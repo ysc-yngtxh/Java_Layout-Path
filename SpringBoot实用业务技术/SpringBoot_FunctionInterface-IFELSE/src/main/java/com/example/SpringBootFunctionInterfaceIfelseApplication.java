@@ -4,8 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootFunctionInterfaceIfElseApplication {
+public class SpringBootFunctionInterfaceIfelseApplication {
+
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootFunctionInterfaceIfElseApplication.class, args);
+        SpringApplication.run(SpringBootFunctionInterfaceIfelseApplication.class, args);
     }
+
 }
