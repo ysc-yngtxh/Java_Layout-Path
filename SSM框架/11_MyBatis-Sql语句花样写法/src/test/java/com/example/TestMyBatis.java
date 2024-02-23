@@ -169,7 +169,7 @@ public class TestMyBatis {
         sqlSession.close();
     }
 
-    // mybatis中的二级缓存
+    // 通过xml文件定义SQL语句，开启mybatis中的二级缓存场景
     @Test
     public void testThree(){
         // 获取session
@@ -189,6 +189,30 @@ public class TestMyBatis {
         StudentDao dao2 = sqlSession2.getMapper(StudentDao.class);
         // 第二次查询Id为1006的数据
         Student stu2 = dao2.selectIdTwo(1);
+        System.out.println(stu2);
+        sqlSession2.close();
+    }
+
+    // 通过注解方式定义SQL语句，开启mybatis中的二级缓存的场景
+    @Test
+    public void testThree2(){
+        // 获取session
+        SqlSession sqlSession1 = MyBatisUtils.getSqlSession();
+        // 获取StudentDao的mapper
+        StudentDao dao1 = sqlSession1.getMapper(StudentDao.class);
+        // 第一次查询Id为1006的数据
+        Student stu1 = dao1.selectIdThree(1);
+        System.out.println(stu1);
+        sqlSession1.close();
+
+        System.out.println("----------------------分割线-----------------------");
+
+        // 获取session
+        SqlSession sqlSession2 = MyBatisUtils.getSqlSession();
+        // 获取StudentDao的mapper
+        StudentDao dao2 = sqlSession2.getMapper(StudentDao.class);
+        // 第二次查询Id为1006的数据
+        Student stu2 = dao2.selectIdThree(1);
         System.out.println(stu2);
         sqlSession2.close();
     }

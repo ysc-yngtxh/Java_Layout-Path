@@ -1,12 +1,19 @@
 package com.example.controller;
 
+import com.example.handler.CsvResultHandler;
 import com.example.domain.Student;
 import com.example.service.StudentService;
+import org.apache.ibatis.cursor.Cursor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.net.URISyntaxException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -25,9 +32,20 @@ public class StudentController {
     }
 
     @RequestMapping("/student")
-    public @ResponseBody Map<String, Student> queryStudentByIdStudent(Integer id){
-        Map<String, Student> student = studentService.queryStudentByIdStudent(id);
-        String email = student.get("游诗成").getEmail();
-        return student;
+    public @ResponseBody Map<String, Student> queryStudentByIdStudent(Integer id) {
+        Map<String, Student> map = studentService.queryStudentByIdStudent(id);
+        String email = map.get("游诗成").getEmail();
+        return map;
+    }
+
+    @RequestMapping("/streamingQuery")
+    public @ResponseBody void streamingQuery() {
+        studentService.streamingQuery();
+    }
+
+    @RequestMapping("/csvResultHandler")
+    public @ResponseBody void CsvResultHandler() throws URISyntaxException {
+        // 调用Mapper方法，开始流式查询
+        studentService.selectStudent();
     }
 }

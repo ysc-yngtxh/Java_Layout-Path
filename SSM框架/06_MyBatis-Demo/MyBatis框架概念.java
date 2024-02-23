@@ -271,9 +271,13 @@
 
       开启步骤：①、使用mybatis二级缓存的实体类必须实现Serializable接口
                   public class Student implements Serializable{}
-              ②、接口开启方法: Ⅰ、使用@CacheNamespace注解,通过注解开启二级缓存的分开关。
+              ②、接口开启方法: Ⅰ、注解模式的Sql 接口方法，使用@CacheNamespace注解,通过注解开启二级缓存的分开关。
                                  @CacheNamespace
-                                 public class StudentDao{}
+                                 public class StudentDao{
+                                    @ResultType(Student.class)
+                                    @Select("select * from student where id=#{id}")
+                                    Student selectIdThree(Integer id);
+                                 }
                              Ⅱ、或者在mybatis.xml配置文件中（注意：这两种开启方法不可以同时存在）
                                 <settings>
                                     <setting name="cacheEnabled" value="true"/>  <!--开启mybatis的二级缓存-->

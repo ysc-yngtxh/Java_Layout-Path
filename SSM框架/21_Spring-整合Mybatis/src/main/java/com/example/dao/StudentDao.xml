@@ -8,6 +8,7 @@
         insert into student values(#{id},#{name},#{email},#{age})
     </insert>
 
+    <cache></cache>
     <select id="selectStudents" resultType="com.example.domain.Student">
         select id,name,email,age from student order by id desc
     </select>

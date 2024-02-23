@@ -26,6 +26,6 @@ public class TestApp {
                Object:方法执行后的返回值
          */
         // 表达的意思就是  执行target对象sayHello,参数是李四
-        Object ret = method.invoke(target,"李四");
+        Object ret = method.invoke(target, "李四");
     }
 }

@@ -92,7 +92,7 @@
     </select>
 
     <!--根据ID查询的二级缓存-->
-    <cache/>
+    <!--<cache/> &lt;!&ndash;开启二级缓存&ndash;&gt;-->
     <select id="selectIdTwo" parameterType="Integer" resultType="com.example.domain.Student">
         select * from student where id=#{id}
     </select>

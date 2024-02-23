@@ -20,10 +20,10 @@ public class TestMyBatis {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         StudentDao dao = sqlSession.getMapper(StudentDao.class);
         /**
-         * com.sun.proxy.$Proxy2：jdk的动态代理
+         * 可以发现这里打印出的 dao=com.sun.proxy.$Proxy6：即为jdk的动态代理
          * System.out.println("dao=" + dao.getClass().getName());
          */
-        // 调用dao的方法，执行数据库的操作
+        // StudentDao类是接口，无法实例化，我们却能通过“接口对象dao”调用方法，很明显这里是jdk动态代理的对象执行数据库的操作
         List<Student> students = dao.selectStudents();
         for (Student stu : students) {
             System.out.println("学生=" + stu);

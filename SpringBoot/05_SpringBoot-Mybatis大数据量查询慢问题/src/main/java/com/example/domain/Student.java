@@ -1,6 +1,8 @@
 package com.example.domain;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
     private Integer id;
 
     private String name;
@@ -8,6 +10,16 @@ public class Student {
     private String email;
 
     private Integer age;
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                '}';
+    }
 
     public Integer getId() {
         return id;

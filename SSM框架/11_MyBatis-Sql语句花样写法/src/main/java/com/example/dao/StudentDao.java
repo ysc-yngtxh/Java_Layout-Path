@@ -2,13 +2,16 @@ package com.example.dao;
 
 import com.example.domain.Student;
 import org.apache.ibatis.annotations.CacheNamespace;
+import org.apache.ibatis.annotations.ResultType;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.cache.impl.PerpetualCache;
 
 import java.util.List;
 
 /**
  * @author 游家纨绔
  */
-// @CacheNamespace
+@CacheNamespace(implementation = PerpetualCache.class)
 public interface StudentDao {
 
     // 动态SQL，使用Java对象作为参数
@@ -31,4 +34,9 @@ public interface StudentDao {
 
     // mybatis二级缓存
     Student selectIdTwo(Integer id);
+
+    // mybatis二级缓存
+    @ResultType(Student.class)
+    @Select("select * from student where id=#{id}")
+    Student selectIdThree(Integer id);
 }

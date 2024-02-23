@@ -34,6 +34,7 @@ public class MyApp {
         System.out.println("nums=" + nums);
     }
 
+    // Mybatis的二级缓存
     @Test
     @Transactional
     public void test03(){
@@ -42,7 +43,7 @@ public class MyApp {
 
         List<Student> students = service.queryStudents();
         List<Student> students2 = service.queryStudents();
-        for (Student stu : students) {
+        for (Student stu : students2) {
             System.out.println(stu);
         }
     }
