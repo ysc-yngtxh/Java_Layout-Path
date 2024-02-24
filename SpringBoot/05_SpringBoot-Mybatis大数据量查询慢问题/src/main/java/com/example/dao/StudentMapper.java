@@ -3,23 +3,15 @@ package com.example.dao;
 import com.example.domain.Student;
 import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.ResultType;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.cursor.Cursor;
 import org.apache.ibatis.mapping.ResultSetType;
 import org.apache.ibatis.session.ResultHandler;
 
-import java.util.List;
 import java.util.Map;
 
 public interface StudentMapper {
-    int deleteByPrimaryKey(Integer id);
-    int insert(Student record);
-    int insertSelective(Student record);
-    int updateByPrimaryKeySelective(Student record);
-    int updateByPrimaryKey(Student record);
-
 
     // 返回一个key为name值，value为Map的Map集合；相当于Map<String, Map>
     @MapKey("name")
