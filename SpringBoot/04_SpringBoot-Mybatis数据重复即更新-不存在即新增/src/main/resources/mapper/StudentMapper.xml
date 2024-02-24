@@ -2,6 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace=".dao.StudentDao">
 
+    <!--TODO 在实际开发中插入时可能存在数据重复问题，需要忽略或替换掉重复的数据
+            （依据某个字段，比如Primary Key或Unique Key来确定是否重复）-->
+
     <!--不存在则插入，存在则更新
         INSERT INTO student(`id`, `name`, `email`, `age`)
         VALUES(?, ?, ?, ?)
