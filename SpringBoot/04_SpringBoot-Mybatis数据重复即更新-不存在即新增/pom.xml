@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>04_SpringBoot-Mybatis2</artifactId>
     <version>1.0.0</version>
-    <name>04_SpringBoot-Mybatis数据重复即更新</name>
-    <description>04_SpringBoot-Mybatis数据重复即更新</description>
+    <name>04_SpringBoot-Mybatis数据重复即更新-不存在即新增</name>
+    <description>04_SpringBoot-Mybatis数据重复即更新-不存在即新增</description>
 
     <properties>
         <java.version>1.8</java.version>
