@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface StudentService {
     int addStudent(Student student);
-    List<Student> queryStudents();
+    List<Student> selectStudents();
 }

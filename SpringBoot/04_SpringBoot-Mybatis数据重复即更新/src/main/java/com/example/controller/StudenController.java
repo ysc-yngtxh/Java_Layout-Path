@@ -21,4 +21,11 @@ public class StudenController {
         Student student = studentService.queryStudentById(id);
         return student;
     }
+
+    // 这里体现了Mybatis的一级缓存
+    @RequestMapping("/cache")
+    public @ResponseBody Object cache(Integer id){
+        Student student = studentService.queryStudentByIdCache(id);
+        return student;
+    }
 }

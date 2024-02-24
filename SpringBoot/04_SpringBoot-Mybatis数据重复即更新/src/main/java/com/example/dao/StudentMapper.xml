@@ -9,25 +9,30 @@
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="age" jdbcType="INTEGER" property="age" />
   </resultMap>
+
   <sql id="Base_Column_List">
     id, name, email, age
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from student
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from student
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.example.domain.Student">
-    insert into student (id, name, email, 
+    insert into student (id, name, email,
       age)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
       #{age,jdbcType=INTEGER})
   </insert>
+
   <insert id="insertSelective" parameterType="com.example.domain.Student">
     insert into student
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -59,6 +64,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.example.domain.Student">
     update student
     <set>
@@ -74,6 +80,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.example.domain.Student">
     update student
     set name = #{name,jdbcType=VARCHAR},

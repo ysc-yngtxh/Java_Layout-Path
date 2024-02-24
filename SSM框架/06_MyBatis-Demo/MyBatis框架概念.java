@@ -188,10 +188,10 @@
      dao.selectFor(list)
 
      <foreach collection="" item="" open="" close="" separator=""></foreach>
-     collection:表示接口中的方法参数的类型，如果是数组使用array，如果是list集合使用list
-     item:自定义的，表示数组和集合成员的变量
-     open:循环开始时的字符
-     separator:集合成员之间的分隔符
+     collection: 表示接口中的方法参数的类型，如果是数组使用array，如果是list集合使用list
+     item: 自定义的，表示数组和集合成员的变量
+     open: 循环开始时的字符
+     separator: 集合成员之间的分隔符
 
   4、sql代码片段，就是复用一些语法
      步骤：
@@ -253,18 +253,17 @@
       什么时候清空一级缓存?
            当我们执行添加,修改,删除操作的时候mybatis会自动清空一级缓存,准确的来说是我们执行commit()事务提交的时候清空
 
-      *****
-      需要注意的是：使用我们自己写的原生mybatis，一级缓存在同一个方法中是可以得到体现的，但是使用官方的mybatis则在同一个方法中并不会。
+  ⚠️ 需要注意的是：使用我们自己写的原生mybatis，一级缓存在同一个方法中是可以得到体现的，但是使用官方的mybatis则在同一个方法中并不会。
                  其原因就是官方的mybatis会在一级缓存中获取SqlSession时候加入一个事务判断机制，为的是避免在多线程情况下造成的数据不安全
             SqlSession是MyBatis工作的最顶层API会话接口，所有的数据库操作都经由它来实现，由于它就是一个会话，即一个SqlSession应该仅存活于一个业务请求中，
             也可以说SqlSession对应这一次数据库会话，它不是永久存活的，每次访问数据库都需要创建它。因此，SqlSession并不是线程安全，
             每次创建一个SqlSession会话，都会伴随创建一个专属SqlSession的连接管理对象，如果SqlSession共享，就会出现事务问题。
             所以，官方的mybatis获取SqlSessionUtils.getSqlSession()时候执行一个sessionHolder()方法，在这个方法里判断是否执行的方法是事务性的，
-            如果加了 @Transactional，则会把sqlSession暂存在threadLocal中，则当第二次执行相同的mapper ，sql，参数的时候就会取threadLocal中去取有没有，
+            如果加了 @Transactional，则会把sqlSession暂存在ThreadLocal中，则当第二次执行相同的mapper、sql、参数的时候就会去ThreadLocal中去取有没有，
             如果没有，那么直接返回SqlSession为null,那么当第二次执行相同的mapper就会新建一个新的SqlSession
 
-            总结：spring集成mybatis,如果不开启事务，则每一个请求，都会开启一个sqlSession，执行完成后，sqlSession就会close，则在并发的请求下，虽然mapper是单例，但是能保证线程安全，
-                 当用了事务之后，当执行完方法后，sqlSeesion才会close，所以一个请求中多次调用，第二次调用可以从缓存中读取
+   总结：Spring集成Mybatis,如果不开启事务，则每一个Mapper方法，都会开启一个sqlSession，执行完成后，sqlSession就会close，则在并发的请求下，虽然mapper是单例，但是能保证线程安全，
+        当用了事务之后，当执行完方法后，sqlSeesion才会close，所以一个请求中多次调用，第二次调用可以从缓存中读取
 
    2、二级缓存是Mapper级别的,一个Mapper有着一个缓存区,就是说不管几个SqlSession只要他们获取的是同一个Mapper,
       缓存数据就会是共享的,不过二级缓存需要我们自己去开启。

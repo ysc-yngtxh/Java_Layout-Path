@@ -1,10 +1,7 @@
 package com.example.domain;
 
-import org.apache.ibatis.annotations.CacheNamespace;
-
 import java.io.Serializable;
 
-// @CacheNamespace
 public class Student implements Serializable {
     private Integer id;
     private String name;

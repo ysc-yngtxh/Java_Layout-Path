@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace=".dao.StudentDao">
+
+    <!--不存在则插入，存在则更新
+        INSERT INTO student(`id`, `name`, `email`, `age`)
+        VALUES(?, ?, ?, ?)
+        ON DUPLICATE KEY UPDATE
+        id = ?, name = ?, email = ?;-->
+    <insert id="insertDuplicateKeyUpdate">
+        INSERT INTO student(`id`, `name`, `email`, `age`)
+        VALUES (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+        #{email,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER})
+        ON DUPLICATE KEY UPDATE
+        <trim prefix="" suffixOverrides=",">
+            <if test="id != null and id != ''">
+                id = #{id},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="age != null and age != ''">
+                age = #{age}
+            </if>
+        </trim>
+    </insert>
+
+
+    <!--不存在则插入，存在则更新(批量插入)
+        INSERT INTO student(`id`, `name`, `email`, `age`)
+        VALUES(?, ?, ?, ?), (?, ?, ?, ?)
+        ON DUPLICATE KEY UPDATE
+        id = ?, name = ?, email = ?,
+        id = ?, name = ?, email = ?;-->
+    <insert id="insertDuplicateKeyUpdateForeach">
+        INSERT INTO student(`id`, `name`, `email`, `age`)
+        VALUES
+        <foreach collection="students" item="item" separator=",">
+            (
+            #{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+            #{email,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}
+            )
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        <trim prefix="" suffixOverrides=",">
+            <foreach collection="students" separator="," item="item">
+                <if test="id != null and id != ''">
+                    id = #{id},
+                </if>
+                <if test="name != null and name != ''">
+                    name = #{name},
+                </if>
+                <if test="email != null and email != ''">
+                    email = #{email},
+                </if>
+                <if test="age != null and age != ''">
+                    age = #{age}
+                </if>
+            </foreach>
+        </trim>
+    </insert>
+
+
+    <!--先删除旧数据再插入最新的数据
+        REPLACE INTO student(`id`, `name`, `email`, `age`) VALUES ( ?, ?, ?, ? )-->
+    <insert id="insertReplaceInto">
+        REPLACE INTO student(`id`, `name`, `email`, `age`)
+        VALUES
+            (
+                #{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+                #{email,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}
+            )
+    </insert>
+
+
+    <!--避免重复插入（存在则忽略）
+        INSERT IGNORE INTO student(`id`, `name`, `email`, `age`) VALUES ( ?, ?, ?, ? )-->
+    <insert id="insertIgnoreInto" parameterType="java.util.List">
+        INSERT IGNORE INTO student(`id`, `name`, `email`, `age`)
+        VALUES
+            (
+                #{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+                #{email,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}
+            )
+    </insert>
+</mapper>
+
