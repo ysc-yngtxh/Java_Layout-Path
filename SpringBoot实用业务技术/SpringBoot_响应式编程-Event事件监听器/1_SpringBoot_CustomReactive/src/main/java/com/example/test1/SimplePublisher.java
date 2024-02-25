@@ -41,19 +41,19 @@
 //     boolean isSubscriber;
 //     Thread owner;
 //     volatile Throwable closedException;
-//     final Executor executor;
+//     final Executor interceptor;
 //     final int maxBufferCapacity;
 //     // 初始缓冲区容量，即发布者能发布消息的上限
 //     static final int INITIAL_CAPACITY = 32;
 //
 //     // 发布者有参构造方法
-//     public SimplePublisher(Executor executor, int maxBufferCapacity) {
-//         if (executor == null)
+//     public SimplePublisher(Executor interceptor, int maxBufferCapacity) {
+//         if (interceptor == null)
 //             throw new NullPointerException();
 //         if (maxBufferCapacity <= 0)
 //             throw new IllegalArgumentException("capacity must be positive");
 //         this.lock = new ReentrantLock();
-//         this.executor = executor;
+//         this.interceptor = interceptor;
 //         this.maxBufferCapacity = maxBufferCapacity;
 //     }
 //
@@ -72,7 +72,7 @@
 //         AtomicReference<Object[]> array = new AtomicReference<>(new Object[Math.min(max, INITIAL_CAPACITY)]);
 //         // 创建订阅主题
 //         SimpleSubscription<T> subscription =
-//                 new SimpleSubscription<T>(subscriber, executor, array, max);
+//                 new SimpleSubscription<T>(subscriber, interceptor, array, max);
 //         lock.lock();
 //         try {
 //             // 判断是否已经被订阅。如果没有，则将订阅标识标记为true，并且记录第一个订阅者的线程赋值给成员变量owner
@@ -237,7 +237,7 @@
 //         AtomicInteger ctl = new AtomicInteger(0);   // ctl是一个位掩码变量，原子运行状态标志
 //         AtomicReference<Object[]> array;   // 这里就是用以存放消息的数组
 //         final Flow.Subscriber<? super T> subscriber;
-//         Executor executor;
+//         Executor interceptor;
 //         Thread waiter;
 //         Throwable pendingError;
 //         SimpleSubscription<T> next;
@@ -257,10 +257,10 @@
 //
 //         static final long INTERRUPTED = -1L; // 超时与中断哨兵
 //
-//         SimpleSubscription(Flow.Subscriber<? super T> subscriber, Executor executor,
+//         SimpleSubscription(Flow.Subscriber<? super T> subscriber, Executor interceptor,
 //                            AtomicReference<Object[]> array, int maxBufferCapacity) {
 //             this.subscriber = subscriber;
-//             this.executor = executor;
+//             this.interceptor = interceptor;
 //             this.array = array;
 //             this.maxCapacity = maxBufferCapacity;
 //         }
@@ -306,7 +306,7 @@
 //                     try {
 //                         Executor e;
 //                         ConsumerTask<T> task = new ConsumerTask<T>(this);
-//                         if ((e = executor) != null)   // skip if disabled on error
+//                         if ((e = interceptor) != null)   // skip if disabled on error
 //                             e.execute(task);
 //                     } catch (RuntimeException | Error e) {
 //                         ctl.getAndSet(ERROR | CLOSED);
@@ -325,7 +325,7 @@
 //                 try {
 //                     Executor e;
 //                     ConsumerTask<T> task = new ConsumerTask<T>(this);
-//                     if ((e = executor) != null)   // skip if disabled on error
+//                     if ((e = interceptor) != null)   // skip if disabled on error
 //                         e.execute(task);
 //                 } catch (RuntimeException | Error ex) {
 //                     ctl.getAndSet(ERROR | CLOSED);
@@ -349,7 +349,7 @@
 //                             if (ex == null)
 //                                 ex = pendingError;
 //                             pendingError = null;  // detach
-//                             executor = null;      // suppress racing start calls
+//                             interceptor = null;      // suppress racing start calls
 //                             Thread w;
 //                             waiting.set(0);
 //                             if ((w = waiter) != null)
@@ -495,7 +495,7 @@
 //                 try {
 //                     Executor e;
 //                     ConsumerTask<T> task = new ConsumerTask<T>(this);
-//                     if ((e = executor) != null)   // skip if disabled on error
+//                     if ((e = interceptor) != null)   // skip if disabled on error
 //                         e.execute(task);
 //                 } catch (RuntimeException | Error ex) {
 //                     ctl.getAndSet(ctl.get() | (ERROR | CLOSED));
@@ -511,7 +511,7 @@
 //          */
 //         final void awaitSpace(long nanos) {
 //             if (!isReleasable()) {
-//                 ForkJoinPool.helpAsyncBlocker(executor, this);
+//                 ForkJoinPool.helpAsyncBlocker(interceptor, this);
 //                 if (!isReleasable()) {
 //                     timeout = nanos;
 //                     try {

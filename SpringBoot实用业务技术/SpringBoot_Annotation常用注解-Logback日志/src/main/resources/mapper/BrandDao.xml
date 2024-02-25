@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.BrandDao">
+
+    <resultMap type="com.example.entity.Brand" id="BrandMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="brandName" column="brand_name" jdbcType="VARCHAR"/>
+        <result property="racking" column="racking" jdbcType="INTEGER"/>
+        <result property="deleteFlag" column="delete_flag" jdbcType="INTEGER"/>
+        <result property="remack" column="remack" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BrandMap">
+        select
+          id,brand_name,racking,delete_flag,remack
+        from brand
+        where id = #{id}
+    </select>
+</mapper>
+
