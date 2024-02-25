@@ -18,6 +18,7 @@
 
     <!--sql mapper(sql映射文件的位置)-->
     <mappers>
+        <!--<package name="com.example.mapper.StudentMapper.xml"/>-->
         <package name="com.example.mapper"/>
     </mappers>
 </configuration>

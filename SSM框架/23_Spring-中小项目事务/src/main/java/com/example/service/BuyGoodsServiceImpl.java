@@ -31,8 +31,7 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
      *           NullPointerException.class, NotEnoughException.class
      *       }
      * )
-     *
-     *       rollbackFor:表示发生指定的异常一定回滚。
+     * rollbackFor:表示发生指定的异常才会回滚。
      *    处理逻辑是：
      *      1)、spring框架会首先检查方法抛出的异常是不是在rollbackFor的属性值中
      *          如果异常在rollbackFor列表中，不管是什么类型的异常，一定回滚。
@@ -41,7 +40,7 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
      */
     // 使用的是事务控制的默认值，默认的传播行为是REQUIRED,默认的隔离级别DEFAULT
     // 默认抛出运行时异常，回滚事务
-    @Transactional
+    @Transactional  // 使用该注解需要先到xml文件中进行事务配置
     @Override
     public void buy(Integer goodsId, Integer nums) {
         //记录销售信息，向sale表添加记录

@@ -17,10 +17,10 @@ import javax.annotation.Resource;
  *
  *    spring中和@Component功能一致，创建对象的注解还有：
  *        1、@Repository(用在持久层的上面)：放在dao的实现类上面，表示创建dao对象，dao对象是能访问数据库的
- *        2、@Service(用在业务层的上面)：放在service的实现类上面，创建service对象，service对象是做业务处理，可以有事务等功能的。
+ *        2、@service(用在业务层的上面)：放在service的实现类上面，创建service对象，service对象是做业务处理，可以有事务等功能的。
  *        3、@Controller(用在控制器的上面)：放在控制器(处理器)类的上面，创建控制器对象的，控制器对象，能够接受用户提交的参数，显示请求的处理结果
  *        以上三个注解的使用语法和@Component一样的。都能创建对象，但是这三个注解还有额外的功能。
- *        @Repository, @Service, @Controller 是给项目的对象分层的。当你不确定类的功能时，可以使用@Component
+ *        @Repository, @service, @Controller 是给项目的对象分层的。当你不确定类的功能时，可以使用@Component
  */
 
 // 也可以省略value：@Component("myStudent")

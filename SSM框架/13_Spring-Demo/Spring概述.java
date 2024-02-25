@@ -111,10 +111,10 @@ package com.example;
                         @Resource: 来自jdk中的注解，spring框架提供了对这个注解的功能支持，可以使用他给引用类型赋值.和@Autowired类似
                         
                         @Repository: (用在持久层的上面)：放在dao的实现类上面，表示创建dao对象，dao对象是能访问数据库的
-                        @Service: (用在业务层的上面)：放在service的实现类上面，创建service对象，service对象是做业务处理，可以有事务等功能的。
+                        @service: (用在业务层的上面)：放在service的实现类上面，创建service对象，service对象是做业务处理，可以有事务等功能的。
                         @Controller: (用在控制器的上面)：放在控制器(处理器)类的上面，创建控制器对象的，控制器对象，能够接受用户提交的参数，显示请求的处理结果
                       以上三个注解的使用语法和@Component一样的。都能创建对象，但是这三个注解还有额外的功能。
-                      @Repository, @Service, @Controller 是给项目的对象分层的。当你不确定类的功能时，可以使用@Component
+                      @Repository, @service, @Controller 是给项目的对象分层的。当你不确定类的功能时，可以使用@Component
 
 二、aop
    1、动态代理
@@ -183,8 +183,8 @@ package com.example;
           举例：
               execution(public * *(..))  表示任意公共方法
               execution(* set*(..))      表示一个以“set”开始的方法
-              execution(* com.example.Service.*.*(..))    表示在Service包下任意类中的任意方法和任意参数
-              execution(* *..Service..*.*(..))                表示所有包中的Service包下的所有包任意方法和任意参数
+              execution(* com.example.service.*.*(..))    表示在Service包下任意类中的任意方法和任意参数
+              execution(* *..service..*.*(..))                表示所有包中的Service包下的所有包任意方法和任意参数
 
 三、把mybatis框架和spring集成在一起，像一个框架一样使用
     用的技术是：ioc
@@ -197,20 +197,27 @@ package com.example;
 
     
     Spring-集成mybatis的实现步骤：
-    1、新建maven项目
-    2、加入maven的依赖
-       1)、spring依赖
-       2)、mybatis依赖
-       3)、mysql驱动
-       4)、spring的事务的依赖
-       5)、mybatis和spring集成的依赖：mybatis官方体用的，用来在spring项目中创建mybatis的SqlSessionFactory,dao对象的
-    3、创建实体类
-    4、创建dao接口和mapper文件
-    5、创建mybatis主配置文件
-    6、创建spring的配置文件：声明mybatis的对象交给spring创建
-       1)、数据源
-       2)、SqlSessionFactory
-       3)、Dao对象
+      1、新建maven项目
+      2、加入maven的依赖
+         1)、spring依赖
+         2)、mybatis依赖
+         3)、mysql驱动
+         4)、spring的事务的依赖
+         5)、mybatis和spring集成的依赖：mybatis官方体用的，用来在spring项目中创建mybatis的SqlSessionFactory,dao对象的
+      3、创建实体类
+      4、创建dao接口和mapper文件
+      5、创建mybatis主配置文件
+      6、创建spring的配置文件：声明mybatis的对象交给spring创建
+         1)、数据源
+         2)、SqlSessionFactory
+         3)、Dao对象
+
+    ⚠️Spring整合MyBatis时，会使用 SqlSessionTemplate 作为 SqlSession 的实现类，
+   默认情况下会自动创建一个 SqlSessionTemplate对象，并将其注入到 Mapper代理对象 中。
+      这个SqlSessionTemplate对象会在每次执行Mapper方法时，自动获取当前线程上下文中的SqlSession对象，然后调用相应的Mapper方法。
+   因此，SqlSession对象不是每次执行Mapper方法都会创建，而是在需要时从线程上下文中获取。
+      这样做的好处是可以确保每个线程都使用独立的SqlSession对象，从而保证线程安全性。
+
 
 四、spring的事务处理
     1、什么是事务？

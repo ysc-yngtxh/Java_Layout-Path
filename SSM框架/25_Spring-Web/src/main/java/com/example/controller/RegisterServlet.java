@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.Service.StudentService;
+import com.example.service.StudentService;
 import com.example.domain.Student;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
