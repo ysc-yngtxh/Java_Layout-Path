@@ -8,5 +8,5 @@ public interface StudentService {
     Student queryStudentById(Integer id);
 
     // 测试mybatis的一级缓存
-    Student queryStudentByIdCache(Integer id);
+    Student queryStudentByIdCacheL1(Integer id);
 }

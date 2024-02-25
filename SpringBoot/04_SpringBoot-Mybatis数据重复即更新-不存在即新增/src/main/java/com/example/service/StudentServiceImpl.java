@@ -29,7 +29,7 @@ public class StudentServiceImpl implements StudentService {
     // 如果没有，那么直接返回SqlSession为null,那么当第二次执行相同的mapper就会新建一个新的SqlSession
     @Override
     @Transactional
-    public Student queryStudentByIdCache(Integer id) {
+    public Student queryStudentByIdCacheL1(Integer id) {
         Student student = studentMapper.selectByPrimaryKey(id);
         Student student1 = studentMapper.selectByPrimaryKey(id);
         return student;
