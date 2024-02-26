@@ -21,8 +21,7 @@
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>D:/IDEA/springboot-logback.log</File>
         <encoder>
-            <pattern>%date %-5p %thread %logger{60} [%file : %line] %msg%n
-            </pattern>
+            <pattern>%date %-5p %thread %logger{60} [%file : %line] %msg%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--添加.gz 历史日志会启用压缩 大大缩小日志文件所占空间-->
@@ -31,9 +30,10 @@
         </rollingPolicy>
     </appender>
 
-    <logger name="com.bipowernode.springboot.dao" level="DEBUG"/>
+    <logger name="com.example" level="DEBUG"/>
 
-    <root level="INFO"><!--根的级别是最高的，这里指定了”INFO“,所以只有当前级别或大于此级别的日志信息才能输出-->
+    <!--根的级别是最高的，这里指定了”INFO“,所以只有当前级别或大于此级别的日志信息才能输出-->
+    <root level="INFO">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
     </root>

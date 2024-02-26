@@ -29,7 +29,7 @@ public class 流5_FileInputStream文件复制 {
             fos.flush();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             if (fis != null) {
                 try {
                     fis.close();

@@ -1,5 +1,8 @@
 package com.example.controller;
 
+import com.alibaba.cloud.nacos.NacosConfigManager;
+import com.alibaba.cloud.nacos.NacosConfigProperties;
+import com.alibaba.nacos.api.config.annotation.NacosConfigurationProperties;
 import com.example.pojo.User;
 import com.example.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,10 @@ public class MyController {
 
     @Autowired
     private UserServiceImpl userService;
+    @Autowired
+    private NacosConfigManager nacosConfigManager;
+    @Autowired
+    private NacosConfigProperties nacosConfigProperties;
 
     // 这里获取的是Nacos注册中心的配置文件中的属性值，当我们在Nacos的配置文件中修改属性值，这里会自动刷新为最新的值。
     // 必须和注解@RefreshScope搭配，才会实现自动刷新，数据一致。

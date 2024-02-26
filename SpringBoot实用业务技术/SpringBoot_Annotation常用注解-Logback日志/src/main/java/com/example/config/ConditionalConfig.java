@@ -11,8 +11,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Arrays;
-
 @Configuration
 // @ConditionalOnProperty: 可以作用于方法或者类上，在application.properties 或 application.yml 文件中
 //                         custom.application.enable 为 true 才会加载 ConditionalConfig 这个 Bean，
