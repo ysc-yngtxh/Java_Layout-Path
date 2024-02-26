@@ -2,12 +2,15 @@ package com.example;
 
 import com.example.vo.User;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
-class ThreadLocalApplicationTests {
+public class A_ThreadLocal {
+    private final Logger log = LoggerFactory.getLogger(A_ThreadLocal.class);
     /**
      * ThreadLocal和线程同步机制相比有什么优势呢？ThreadLocal和线程同步机制都是为了解决多线程中相同变量的访问冲突问题。
      *  1、在同步机制中，通过对象的锁机制保证同一时间只有一个线程访问变量。
@@ -19,18 +22,13 @@ class ThreadLocalApplicationTests {
      *    因为每一个线程都拥有自己的变量副本，从而也就没有必要对该变量进行同步了。
      *    ThreadLocal提供了线程安全的共享对象，在编写多线程代码时，可以把不安全的变量封装进ThreadLocal。
      *
-     *  3、由于ThreadLocal中可以持有任何类型的对象，低版本JDK所提供的get()返回的是Object对象，需要强制类型转换。
-     *    但JDK 5.0通过泛型很好的解决了这个问题，在一定程度地简化ThreadLocal的使用。
-     *
-     *  4、概括起来说，对于多线程资源共享的问题，同步机制采用了“以时间换空间”的方式，而ThreadLocal采用了“以空间换时间”的方式。
+     *  3、概括起来说，对于多线程资源共享的问题，同步机制采用了“以时间换空间”的方式，而ThreadLocal采用了“以空间换时间”的方式。
      *    前者仅提供一份变量，让不同的线程排队访问，而后者为每一个线程都提供了一份变量，因此可以同时访问而互不影响。
      */
 
-    private static final ThreadLocal<User> THREAD_LOCAL = new ThreadLocal<>();
-
+    private static final java.lang.ThreadLocal<User> THREAD_LOCAL = new java.lang.ThreadLocal<>();
     private static void setData(User user) {
         System.out.println("set数据，线程名：" + Thread.currentThread().getName());
-        THREAD_LOCAL.set(user);
     }
 
     private static void getAndPrintData() {
@@ -40,7 +38,9 @@ class ThreadLocalApplicationTests {
     }
 
     @Test
-    void contextLoads() throws InterruptedException {setData(new User());
+    void contextLoads() throws InterruptedException {
+        setData(new User());
+
         Runnable A = () -> {
             for (int i = 0; i < 5; i++) {
                 // 方法入口处，设置一个变量和当前线程绑定
