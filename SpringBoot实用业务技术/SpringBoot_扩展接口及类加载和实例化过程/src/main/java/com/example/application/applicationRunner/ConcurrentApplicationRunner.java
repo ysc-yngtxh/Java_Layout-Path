@@ -1,4 +1,4 @@
-package com.example.applicationRunner;
+package com.example.application.applicationRunner;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -17,6 +17,6 @@ public class ConcurrentApplicationRunner implements ApplicationRunner {
      */
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        System.out.println("项目启动完毕后，自动执行");
+        System.out.println("项目启动完毕后，自动执行ApplicationRunner");
     }
 }

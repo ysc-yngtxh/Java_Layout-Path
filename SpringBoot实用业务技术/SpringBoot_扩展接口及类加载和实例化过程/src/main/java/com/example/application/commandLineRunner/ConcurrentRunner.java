@@ -1,4 +1,4 @@
-package com.example.commandLineRunner;
+package com.example.application.commandLineRunner;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -17,6 +17,6 @@ public class ConcurrentRunner implements CommandLineRunner {
      */
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("项目启动完毕后，自动执行");
+        System.out.println("项目启动完毕后，自动执行CommandLineRunner");
     }
 }

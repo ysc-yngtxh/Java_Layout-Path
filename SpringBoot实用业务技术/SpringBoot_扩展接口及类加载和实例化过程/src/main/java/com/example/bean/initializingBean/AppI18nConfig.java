@@ -1,10 +1,12 @@
-package com.example.initializingBean;
+package com.example.bean.initializingBean;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
@@ -14,7 +16,7 @@ import java.util.Arrays;
  * @description: TODO
  * @date 2023/3/9 23:24
  */
-@Configuration
+@Component
 public class AppI18nConfig implements InitializingBean {
 
     /**
@@ -22,6 +24,9 @@ public class AppI18nConfig implements InitializingBean {
      * 它只有一个afterPropertiesSet方法，凡是继承该接口的类，在bean的属性初始化后都会执行该方法。
      * 执行顺序优先级：构造方法、注解postConstruct，实现InitializingBean方法afterPropertiesSet，bean初始化init方法
      *              构造方法 > postConstruct > afterPropertiesSet > init11方法。
+     *
+     * 启动后可以在控制台看到当前类被初始化了两次。即构造方法、注解postConstruct、重写方法afterPropertiesSet 执行了两次
+     * 原因在于注册该类的@Bean标注的方法test，new了当前对象，相当于再初始化了一次
      */
 
     private static AppI18nConfig appI18nConfig;
@@ -31,7 +36,7 @@ public class AppI18nConfig implements InitializingBean {
     }
 
     public AppI18nConfig() {
-        System.out.println("构造方法执行");
+        System.out.println("InitializingBean构造方法执行");
     }
 
     @PostConstruct
@@ -69,5 +74,11 @@ public class AppI18nConfig implements InitializingBean {
 
     public String getBaseName(){
         return baseName;
+    }
+
+    // 销毁
+    @PreDestroy
+    public void preDestory() {
+        System.out.println("InitializingBean执行了销毁方法");
     }
 }

@@ -29,7 +29,7 @@ public class ScopeFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         // 开启Scope
         Scope.beginScope();
-        //
+        // 登录态通过Cookie模拟
         try {
             Cookie[] cookies = request.getCookies();
             String loginUser = "unknownUser";
@@ -42,7 +42,7 @@ public class ScopeFilter extends OncePerRequestFilter {
                 }
             }
 
-            // 设置该 Request 上下文对用的登陆用户
+            // 设置该 Request 上下文中的登陆用户
             AuthScope.setLoginUser(loginUser);
 
             filterChain.doFilter(request, response);

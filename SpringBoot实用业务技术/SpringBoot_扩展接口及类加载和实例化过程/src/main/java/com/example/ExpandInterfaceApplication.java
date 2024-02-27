@@ -1,6 +1,7 @@
 package com.example;
 
-import com.example.excutor.Cat;
+import com.example.application.aplicationContextInitializer.MyApplicationContextInitializer;
+import com.example.bean.beanPostProcessor.MyBeanPostProcess;
 import com.example.excutor.Mouse;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +10,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ExpandInterfaceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ExpandInterfaceApplication.class, args);
+        SpringApplication springApplication = new SpringApplication(ExpandInterfaceApplication.class);
+        // ApplicationContextInitializer接口扩展生效配置
+        springApplication.addInitializers(new MyApplicationContextInitializer());
+        springApplication.run(args);
+        // 初始化Mouse
         Mouse mouse = new Mouse();
+        MyBeanPostProcess myBeanPostProcess = new MyBeanPostProcess();
     }
 }

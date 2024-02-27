@@ -1,4 +1,4 @@
-package com.example.applicationContextAware;
+package com.example.application.applicationContextAware;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -11,7 +11,9 @@ public class ApplicationContextRegister implements ApplicationContextAware {
 
     /*
       简单地说，ApplicationContextAware接口是用来获取框架自动初始化的ioc容器对象的。
-     */
+      只要继承的ApplicationContextAware接口的类，其重写的setApplicationContext可以获取Spring上下文对象
+      还不理解去看 WebSocket 那章笔记
+    */
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) {
         APPLICATION_CONTEXT = applicationContext;
