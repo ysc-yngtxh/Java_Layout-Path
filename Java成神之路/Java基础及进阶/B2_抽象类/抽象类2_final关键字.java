@@ -46,7 +46,10 @@ class B extends A{
 }
 */     // 编译错误
 
+import A1_基础知识.初识Java.方法;
+
 class T{
+    int abc = 12;
     public final void doSome(){
         System.out.println("class T doSome...");
     }
@@ -61,7 +64,7 @@ class Y extends T{
     }
 }
 
-class person{
+class person extends T{
     int a;
     public person(){
     }
@@ -69,11 +72,14 @@ class person{
         this.a=b;
     }
 }
+
 public class 抽象类2_final关键字 {
+    // 多态：就是指一个引用（类型）在不同的情况下的多种状态。
+    //      也可以理解为，多态是指通过指向父类的指针，来调用在不同子类中实现的方法。
     public static void main(String[] args) {
         T c = new Y();   // 多态，父类引用子类对象
 
-        // c.dOoSome();不能被调用，T类引用中没有dOoSome()方法
+        // c.dOoSome();    // 不能被调用，T类引用中没有dOoSome() 方法
 
         if(c instanceof Y){
             Y d1 = (Y)c;

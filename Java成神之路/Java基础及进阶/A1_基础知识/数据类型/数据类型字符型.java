@@ -37,7 +37,7 @@ public class 数据类型字符型 {
 		char c6 = '中';
 		System.out.println(c6);
 		// JDK中自带的native ascⅡ.exe命令，可以将文字转换成unicode编码形式
-		// 在DOS命令行中输入native ascⅡ，回车，人后输入文字之后即可得到unicode编码
+		// 在DOS命令行中输入native2ascii，回车，然后输入文字之后即可得到unicode编码。JDK9之后就没有了该命令
 		
 		char c7 = '\u4e2d';
 		System.out.println(c7);
