@@ -10,7 +10,7 @@ package E5_数组.数组Ⅰ_详解;
                 int[] array = new int[5];
                 // 这里的5表示数组的元素个数，初始化一个5个长度的int类型数据，每个元素 默认值0.
 
-                String[] names=new String[6];
+                String[] names = new String[6];
                 // 初始化6个长度的String类型数组，每个元素默认值null。
  2、每个类型的默认值。
          数据类型            默认值

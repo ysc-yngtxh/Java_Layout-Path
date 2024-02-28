@@ -68,7 +68,7 @@ class MyMath{
 public class 匿名内部类概述 {
     public static void main(String[] args) {
         MyMath mm = new MyMath();
-        // 这里看起来是new了一个接口Compute。但是实际上并不是接口可以new了，后面的{}代表了对接口的实现。
+        // 这里看起来是new了一个接口Compute。但是实际上并不是接口可以new了，后面的{}代表了对接口的实现。其实不就是通过多态嘛
         mm.mysum(new Compute() {
             public int sum(int a, int b){
                 return a + b;

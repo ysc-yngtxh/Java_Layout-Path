@@ -19,7 +19,8 @@ class MyTime{
         this.month = month;
         this.day = day;
     }
-    public String toString(){                      //如果不去重写这个toString()方法,输出结果是一个以十六进制的字符串。
+    // 如果不去重写这个toString()方法,输出结果是一个以十六进制的字符串。
+    public String toString(){
         return this.year + "/" + this.month + "/" + this.day;
     }
 }

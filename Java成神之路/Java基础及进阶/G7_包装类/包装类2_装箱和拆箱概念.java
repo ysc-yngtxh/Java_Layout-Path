@@ -5,14 +5,14 @@ package G7_包装类;
 
          基本数据类型                      包装类型
     ------------------------------------------------------------
-           byte                 java.lang.Byte(父类是Number)
-           short                java.lang.Short(父类是Number)
-           int                  java.lang.Integer(父类是Number)
-           long                 java.lang.Long(父类是Number)
-           float                java.lang.Float(父类是Number)
-           double               java.lang.Double(父类是Number)
-           boolean              java.lang.Boolean(父类是Object)
-           char                 java.lang.Character(父类是Object)
+           byte                 java.lang.Byte      (父类是Number)
+           short                java.lang.Short     (父类是Number)
+           int                  java.lang.Integer   (父类是Number)
+           long                 java.lang.Long      (父类是Number)
+           float                java.lang.Float     (父类是Number)
+           double               java.lang.Double    (父类是Number)
+           boolean              java.lang.Boolean   (父类是Object)
+           char                 java.lang.Character (父类是Object)
 
   2、以上8种包装类中，重点以 java.lang.Integer 为代表进行学习，其他类型照葫芦画瓢就行
 

@@ -21,7 +21,7 @@ public class 异常7_异常在实际开发中的使用 {
     }
 }
 
-class MyException extends Exception{
+class MyException extends Exception {
     public MyException() {
     }
     public MyException(String message) {

@@ -19,10 +19,10 @@ public class Java1_日期的处理 {
           yyyy     年（年是四位）
           MM       月（月是两位）
           dd       日
-          HH       时+
+          HH       时
           mm       分
           ss       秒
-          SS       毫秒(毫秒3位，最高999.1000毫秒表示1秒)
+          SSS      毫秒(毫秒3位，最高999.1000毫秒表示1秒)
          */
         // SimpleDateFormat是java.text包下的。专门负责日期格式化
         // Date类型转换成日期字符串String

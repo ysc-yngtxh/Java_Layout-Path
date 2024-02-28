@@ -30,9 +30,9 @@ public class 异常4_异常对象的常用方法 {
         e.printStackTrace();
         System.out.println("=========================================================================================");
 
-        try{
+        try {
             m1();
-        }catch(FileNotFoundException f){
+        } catch(FileNotFoundException f) {
             // 打印异常堆栈追踪信息
             // 在实际的开发中建议使用这个，养成好习惯
             f.printStackTrace();

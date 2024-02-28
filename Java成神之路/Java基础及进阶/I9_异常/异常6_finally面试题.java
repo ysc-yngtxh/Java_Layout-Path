@@ -2,7 +2,7 @@ package I9_异常;
 
 public class 异常6_finally面试题 {
     public static void main(String[] args) {
-        int  result = m();
+        int result = m(100);
         System.out.println(result);
     }
 
@@ -12,8 +12,7 @@ public class 异常6_finally面试题 {
      *     2、return语句一旦执行，整个方法必须结束
      */
 
-    public static int m() {
-        int i = 100;
+    public static int m(int i) {
         try {
             return i;
         } finally {

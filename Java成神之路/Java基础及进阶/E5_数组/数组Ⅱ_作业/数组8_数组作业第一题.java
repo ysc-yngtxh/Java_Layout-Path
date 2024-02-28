@@ -73,7 +73,7 @@ class MyStack{
         // 程序能走到这里，说明栈没满
         // 向栈中加1个元素，栈帧向上移动一个位置
         elements[++index] = obj;
-        // 再声明一次，所有System.out.println（）方法执行时，如果输出引用的话，自动调用toString()方法
+        // 再声明一次，所有System.out.println()方法执行时，如果输出引用的话，自动调用toString()方法
         System.out.println("压栈" + obj +"成功，栈帧指向" + index);
     }
 

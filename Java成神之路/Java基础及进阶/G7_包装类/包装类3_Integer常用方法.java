@@ -17,7 +17,7 @@ public class 包装类3_Integer常用方法 {
     public static void main(String[] args) {
         // 900是基本数据类型
         // x是包装类型
-        // 基本数据类型 -->（自动转换）-->包装类型：自动装箱
+        // 基本数据类型 -->（自动转换）--> 包装类型：自动装箱
         Integer x = 900; // 等同于Integer x= new Integer(900);
         System.out.println(x);
 
@@ -57,7 +57,7 @@ public class 包装类3_Integer常用方法 {
         int n = m.intValue();
         System.out.println(n);
         Integer t = new Integer("123");
-        // Integer t=new Integer("中文");
+        // Integer t = new Integer("中文");
         // 当Integer方法里面""不是数字而出现的是字符串的时候，虽然能通过编译，但运行会报错
 
         System.out.println("-----------------------------------------------------------------------------------------");
