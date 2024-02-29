@@ -10,7 +10,7 @@ import java.util.List;
      将对象放到集合当中，序列化集合
 
   提示：
-     参与序列化的ArrayList集合以及集合当中的元素User都需要实现java.io.Serializable接口
+     参与序列化的ArrayList集合以及集合当中的元素User都需要实现 java.io.Serializable接口
  */
 public class 流16_序列化多个对象 {
     public static void main(String[] args) throws Exception{

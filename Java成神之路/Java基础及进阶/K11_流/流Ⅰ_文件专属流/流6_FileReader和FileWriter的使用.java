@@ -1,6 +1,5 @@
 package K11_流.流Ⅰ_文件专属流;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;

@@ -56,7 +56,7 @@ public class 流14_目录拷贝 {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             // 关闭
             try {
                 if (fos != null) {

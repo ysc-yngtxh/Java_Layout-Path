@@ -22,7 +22,7 @@ public class 流7_带有缓冲区的字符流 {
             BufferedReader br = new BufferedReader(fr);  // 传的参数只能是字符流的构造方法
 
             // 读一行
-            String s1 = br.readLine();// readLine()是读文件一行的方法
+            String s1 = br.readLine(); // readLine()是读文件一行的方法
             System.out.println(s1);
 
             // 读到文件结束
