@@ -48,8 +48,8 @@ public class 反射4_以流的形式直接返回 {
             System.out.println(value2);
         } catch (IOException e) {
             e.printStackTrace();
-        } finally{
-            if(in!=null){
+        } finally {
+            if(in != null){
                 try {
                     in.close();
                 } catch (IOException e) {

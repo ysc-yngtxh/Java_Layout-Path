@@ -10,7 +10,7 @@ public class User {
      * password  密码
      * true表示登陆成功，false表示登陆失败
      */
-    public boolean login(String name,String password){
+    public boolean login(String name, String password){
         if("admin".equals(name) && "123".equals(password)){
             return true;
         }

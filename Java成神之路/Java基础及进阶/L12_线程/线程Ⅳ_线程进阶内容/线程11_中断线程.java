@@ -14,7 +14,8 @@ import com.sun.org.slf4j.internal.LoggerFactory;
      此时调用该线程的interrupt()方法，那么该线程将抛出一个InterruptedException中断异常,从而提早地终结被阻塞状态。
      如果线程没有被阻塞，这时调用interrupt()将不起作用，直到执行到wait(),sleep(),join()时,才马上会抛出异常。
 
-     线程A在执行sleep, wait, join时，线程B调用线程A的interrupt方法,的确这一个时候A会有 InterruptedException 异常抛出来。但这其实是在sleep,wait,join这些方法内部会不断检查中断状态的值,而自己抛出的InterruptedException。
+     线程A在执行sleep, wait, join时，线程B调用线程A的interrupt方法,的确这一个时候A会有 InterruptedException 异常抛出来。
+     但这其实是在sleep,wait,join这些方法内部会不断检查中断状态的值,而自己抛出的InterruptedException。
   如果线程A正在执行一些指定的操作时如值,for,while,if,调用方法等,不会去检查中断状态,则线程A不会抛出 InterruptedException,而会一直执行着自己的操作。
 
   注意:

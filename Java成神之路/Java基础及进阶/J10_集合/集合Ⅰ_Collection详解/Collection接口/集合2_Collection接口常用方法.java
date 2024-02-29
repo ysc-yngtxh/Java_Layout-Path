@@ -66,7 +66,7 @@ public class 集合2_Collection接口常用方法 {
         c.add("abc");
         c.add("def");
         c.add(100);
-        c.add("helloworld!");
+        c.add("helloWorld!");
 
         // 转换成数组(了解，使用的不多)
         Object[] obj = c.toArray();

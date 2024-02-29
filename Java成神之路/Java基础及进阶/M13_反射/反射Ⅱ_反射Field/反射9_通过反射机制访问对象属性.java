@@ -47,5 +47,8 @@ public class 反射9_通过反射机制访问对象属性 {
         // TODO 可以发现通过反射得到的 bounds值 与通过 Student对象 得到的 bounds值 不一样，自己去理解
         System.out.println("通过反射得到的 bounds值 >>>>>>>>>> " + boundsField.get(obj));
         System.out.println("通过Student对象得到的 bounds值 >>>>>>>>>> " + obj.getBounds());
+
+        // 当你通过对象直接获取这个final字段的值时，你可能看到的是被缓存的值，而不是内存中的实际值。
+        // 而当你通过反射获取这个字段的值时，你看到的是内存中的实际值，不受缓存的影响。
     }
 }
