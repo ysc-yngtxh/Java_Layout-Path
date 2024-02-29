@@ -18,8 +18,9 @@ public class Account {
             假设t1,t2,t3,t4,t5有五个线程
             你只希望t1,t2,t3排队，t4,t5不需要排队，、
             你一定要在（）写一个t1,t2,t3共享的对象，而这个对象是对t4,t5不共享的
+
+        synchronized（"abc")  "abc"在字符串常量池当中，所以是对所有线程共享的对象
     */
-        // synchronized（"abc")  "abc"在字符串常量池当中，是对所有线程共享的对象
         synchronized (this) {
             double before = this.getBalance();
             double after;
