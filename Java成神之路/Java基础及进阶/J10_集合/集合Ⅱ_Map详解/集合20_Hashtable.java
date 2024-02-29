@@ -7,7 +7,7 @@ import java.util.Properties;
 
 /*
   1、Hashtable集合底层也是哈希表数据结构，是线程安全的，其中所有的方法都带有synchronized关键字，效率较低，现在使用较少了，
-     因为控制线程安全有其他更好的方案
+     因为控制线程安全有其他更好的方案。比如：ConcurrentHashMap
 
   2、Hashtable的key可以为null吗？
        Hashtable的key和value不允许null的,且都可以为空

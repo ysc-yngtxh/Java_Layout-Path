@@ -72,7 +72,7 @@ public class 集合17_Map接口的常用方法 {
 
         System.out.println("=========================================================================================");
 
-        // 第二种方式：Set<Map.Entry<K,V>> entrySet()。这个方法是把Map集合直接全部转换成Set集合
+        // 第二种方式：Set<Map.Entry<K,V>> entrySet()。这个方法是把Map集合直接全部转换成Set集合，效率比KeySet高
         Set<Map.Entry<Integer,String>> set = map.entrySet();
         // 遍历Set集合，每一次取出一个Node
 
