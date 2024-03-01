@@ -3,8 +3,8 @@ package P16_JUC并发.JUC并发Ⅰ_关于lock锁.Lock8锁;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 情况二：一个类中两个方法都加上了synchronized关键字，也就是说共用一把锁。
- *        这个时候在main方法中创建两对象，并分别执行A和B线程，先打印出来的是 "发短信" 还是 "打电话" ？
+ * 情况二：类中两个方法都加上了synchronized关键字，创建两对象各自进行方法调用，也就是说并不共用同一个锁。
+ *        这个时候在main方法中，并分别执行A和B线程，先打印出来的是 "发短信" 还是 "打电话" ？
  */
 public class b二 {
     public static void main(String[] args) {

@@ -3,7 +3,7 @@ package P16_JUC并发.JUC并发Ⅰ_关于lock锁.Lock8锁;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 情况六：一个类中都加上static synchronized关键字
+ * 情况六：类中方法都加上static synchronized关键字
  *       这个时候我在main方法中创建两对象，并分别去执行A和B线程。。。 先打印出来的是 "发短信" 还是 "打电话" ？
  */
 public class f六 {

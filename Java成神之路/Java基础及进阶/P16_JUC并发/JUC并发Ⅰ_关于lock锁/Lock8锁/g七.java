@@ -3,7 +3,7 @@ package P16_JUC并发.JUC并发Ⅰ_关于lock锁.Lock8锁;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 情况七：一个类中两方法，一方法被static synchronized修饰，一个方法被synchronized修饰。
+ * 情况七：类中两方法，一方法被static synchronized修饰，一个方法被synchronized修饰。
  *        这个时候我在main方法中创建一个对象，执行A和B线程。。。先打印出来的是 "发短信" 还是 "打电话" ？
  */
 public class g七 {

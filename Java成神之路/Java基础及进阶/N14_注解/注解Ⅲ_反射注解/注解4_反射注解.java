@@ -28,7 +28,7 @@ public class 注解4_反射注解 {
         Method doSomeMethod = c.getDeclaredMethod("doSome");
         // 判断该方法上是否存在这个注解
         if(doSomeMethod.isAnnotationPresent(MyAnnotation.class)){
-            //获 取类注解对象要转型而获取方法对象则不需要转型
+            // 获取类注解对象要转型而获取方法对象则不需要转型
             MyAnnotation myAnnotation = doSomeMethod.getAnnotation(MyAnnotation.class);
             System.out.println(myAnnotation.username());
             System.out.println(myAnnotation.password());

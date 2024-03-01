@@ -3,7 +3,7 @@ package P16_JUC并发.JUC并发Ⅰ_关于lock锁.Lock8锁;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 情况二：一个类中一个有synchronized关键字，一个没有。这个时候执行main方法，先打印出来的是 "发短信" 还是 "打电话" ？
+ * 情况二：类中两方法：一个有synchronized关键字，一个没有。这个时候执行main方法，先打印出来的是 "发短信" 还是 "打电话" ？
  */
 public class c三 {
     public static void main(String[] args) {
