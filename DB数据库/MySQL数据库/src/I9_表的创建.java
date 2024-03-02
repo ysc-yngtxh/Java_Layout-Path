@@ -24,9 +24,17 @@
         [4]、日期和时间类型：
              date        日期，格式为 'YYYY-MM-DD' (对应Java中的java.sql.Date类型)
              time        时间，格式为 'HH:MM:SS'
-             datetime    日期和时间，格式为 'YYYY-MM-DD HH:MM:SS'
-             timestamp   自动记录插入或修改数据的日期和时间.需要设置默认值为当前时间并且会根据当前时间戳更新
-             例如创建表字段update_time： `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+             datetime    客户端插入的时间不做任何改变，基本上是原样输入和输出。
+             timestamp   把客户端插入的时间从当前时区转化为UTC（世界标准时间）进行存储。查询时，将其又转化为客户端当前时区进行返回。
+
+             timestamp所能存储的时间范围为：‘1970-01-01 00:00:01.000000’ 到 ‘2038-01-19 03:14:07.999999’。
+             datetime所能存储的时间范围为：‘1000-01-01 00:00:00.000000’ 到 ‘9999-12-31 23:59:59.999999’。
+             datetime和timestamp都表示日期和时间，格式都为 'YYYY-MM-DD HH:MM:SS'。
+             总结：datetime和timestamp除了存储范围和存储方式不一样，没有太大区别。当然，对于跨时区的业务，TIMESTAMP更为合适。
+
+        对于创建表时间字段：`update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+                         DEFAULT CURRENT_TIMESTAMP 表示创建时获取当前时间戳
+                         ON UPDATE CURRENT_TIMESTAMP 表示根据当前时间戳更新
 
         char和varchar怎么选择？
             在实际的开发中，当某个字段中的数据长度不发生改变的时候，是定长的，例如：性别、生日等都是采用char
@@ -51,7 +59,7 @@
               class_no varchar(255) DEFAULT '' COMMENT '班级编号',
               birth char(10) NOT NULL COMMENT '生日',
               time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '入学时间',
-              update_time timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+              update_time timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
               graduate tinyint(1) DEFAULT 1 COMMENT '是否毕业',
               PRIMARY KEY (`id`)
         ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='学生信息表';
@@ -209,5 +217,5 @@
              # ALTER TABLE 表名 AUTO_INCREMENT = 预想的下一次插入数据的自增值;
              ALTER TABLE t_student AUTO_INCREMENT = 10000;
  */
-public class I9表的创建 {
+public class I9_表的创建 {
 }

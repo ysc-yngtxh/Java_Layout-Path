@@ -58,5 +58,5 @@ LIMIT(重点之中的重点，以后分页查询全靠它了)
              limit 10 offset (11-1)*10
           }
  */
-public class H8limit以及通用分页SQL {
+public class H8_limit以及通用分页SQL {
 }

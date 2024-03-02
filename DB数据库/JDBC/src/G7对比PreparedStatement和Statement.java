@@ -49,5 +49,4 @@ public class G7对比PreparedStatement和Statement {
             e.printStackTrace();
         }
     }
-
 }

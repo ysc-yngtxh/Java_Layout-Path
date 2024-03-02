@@ -26,19 +26,19 @@
                            SELECT COUNT(ename) FROM t_emp; -- 表示统计comm字段中不为 null 的数据总数量
 
         分组函数自动忽略null
-               SELECT SUM(comm) FROM t_emp WHERE IS NOT NULL;
+               SELECT SUM(comm) FROM t_emp WHERE comm IS NOT NULL;
                -- 这么写意思是：不是null的津贴(comm)之和。但是不需要后面的where语法，因为分组函数自动忽略null
 
         示例二：计算每个员工的年薪
                SELECT ename,(sal+comm)*12 AS yearSal FROM t_emp;
           TODO 注意：因为不是每个员工都有津贴(comm)的，有的员工津贴(comm)为null，但是只要有 null 参与的运算结果一定是 null。
                     这样规定的运算其实仔细想想就明白：null 表示的是不确定值，一个不确定值与任意值运算结果都会是不确定值 null。 
-                    但是如果计算出来的员工年薪为null的话，人家早跑了。所以，怎么办呢？--------- 链接到 单行处理函数(ifnull或case)
+                    但是如果计算出来的员工年薪为null的话，人家早跑了。所以，怎么办呢？--------- 链接到章节 单行处理函数(ifnull或case)
 
         示例三：找出工资高于平均工资的员工
                SELECT ename,sal FROM t_emp WHERE sal > AVG(sal);
           TODO 思考以上的错误信息：无效的使用了分组函数
-               原因：SQL语句当中有一个语法规则，分组函数不可直接使用在where字句当中，why？--------- 链接到 group by 和 having
+               原因：SQL语句当中有一个语法规则，分组函数不可直接使用在where字句当中，why？--------- 链接到下面 group by 和 having
 
         TODO SQL中的 count(1)、count(*) 与 count(列名) 到底有什么区别？
         count(列名)：只包括列名那一列，在统计结果的时候，会忽略列值为空
@@ -93,7 +93,7 @@
        TODO 注意：这种写法是错误的。因为 AVG(sal) 是属于分组函数，但是按照上述SQL的执行顺序来说，
                  执行 WHERE 语句的时候还没有执行过分组语句group by。因此 WHERE 中的 AVG(sal) 分组函数是无法得到结果的。
 
-            第一步：SELECT AVG(sal) FROM t_emp;  // FROM 后面其实有group by，只是缺省了。
+            第一步：SELECT AVG(sal) FROM t_emp;  // FROM 后面其实有group by sal，只是缺省了。
             第二步：SELECT ename,sal FROM t_emp WHERE sal > 表给的实际数据;
             合成一步：SELECT ename,sal FROM t_emp WHERE sal > (SELECT AVG(sal) FROM t_emp); // 小括号优先级高，所以先执行小括号里的
 

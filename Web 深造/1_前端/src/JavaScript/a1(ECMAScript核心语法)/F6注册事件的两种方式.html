@@ -47,7 +47,7 @@
             mybtn1.onclick = function(){
                 alert("text...");
             }
-            document.getElementById("mybtn2").onclick=function(){
+            document.getElementById("mybtn2").onclick = function(){
                 alert('text1...');
             }
         </script>
@@ -60,7 +60,8 @@
                 在此情况下，我们添加了load事件，用来解决此尴尬的问题。
             */
             window.onload = function() {    // load事件表示页面全部元素加载完毕之后才会发生
-                document.getElementById("btn").onclick=function(){
+                document.getElementById("btn").onclick = function(){
+                        console.log("123")
                     alert("唉，失去后才知道那是弥足珍贵的东西...");
                 }
             }
@@ -69,10 +70,10 @@
 
 <!--将文本框修改为复选框-->
         <script type="text/javascript">
-            window.onload=function(){
+            window.onload = function(){
                 document.getElementById("btr").onclick = function(){
                     var mytext = document.getElementById("mytext");
-                    mytext.type = "checkbox";
+                    mytext.type = "radio";
                 }
             }
         </script>

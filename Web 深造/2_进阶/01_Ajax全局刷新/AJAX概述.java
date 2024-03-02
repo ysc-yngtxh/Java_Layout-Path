@@ -31,7 +31,7 @@
             xmlHttp.onreadystatechange = function(){
                  处理请求的状态变化
                  if(xmlHttp.readyState == 4 && xmlHttp.status == 200){
-                     //可以处理服务器端的数据，更新当前页面
+                     // 可以处理服务器端的数据，更新当前页面
                      var data = xmlHttp.responseText;
                      document.getElementById("name").value=data;
                  }

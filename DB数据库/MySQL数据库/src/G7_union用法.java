@@ -19,7 +19,8 @@ union（可以将查询结果集相加）
             注意：通过union连接的表在select字段上的数量要一致
 
    两次面试被问到：union 和 union all 的区别
-        union会将查询结果集进行去重处理，就是重复的字段会被去除掉，而union all不会被去除。
+        union会将查询结果集进行去重处理，去除重复行是基于所有选择的列数据都相同的情况。
+        而union all不会被去除。
  */
-public class G7union用法 {
+public class G7_union用法 {
 }

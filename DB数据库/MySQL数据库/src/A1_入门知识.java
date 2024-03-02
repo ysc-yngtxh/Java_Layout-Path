@@ -123,9 +123,9 @@
            (5)、查询所有字段: SELECT * FROM emp;
                注意：以后再Java开发，写语句在Java里，使用 * 号效率太低。所以只是在MySQL查询才使用 * 号
 
-     drop:     删除内容和定义，释放空间。（表结构和数据一同删除）
-     truncate: 删除内容，释放空间，但不删除定义。（表结构还在，数据删除）
-     delete:   删除内容，不删除定义，也不释放空间。
+     delete   用于删除表中的特定行。              delete from 表名 where 条件;
+     truncate 用于删除表中的所有行，但不删除表本身。truncate table 表名称;
+     drop     用于删除整个表，包括其结构和数据。   drop table 表名称;
  */
-public class A1入门知识 {
+public class A1_入门知识 {
 }

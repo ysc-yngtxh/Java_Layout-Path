@@ -228,5 +228,5 @@ SHOW CREATE PROCEDURE mypro1;
 删除存储过程“mypro1”
 drop PROCEDURE mypro1;
  */
-public class Q17存储过程 {
+public class R18_存储过程 {
 }
