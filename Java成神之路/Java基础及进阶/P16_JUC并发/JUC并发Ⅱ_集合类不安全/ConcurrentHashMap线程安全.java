@@ -1,6 +1,5 @@
 package P16_JUC并发.JUC并发Ⅱ_集合类不安全;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -27,11 +26,10 @@ public class ConcurrentHashMap线程安全 {
         方案一：使用集合Properties,他是继承于Hashtable的，都是线程安全的集合
         方案二：Map<Object,String> map = Collections.synchronizedMap(new HashMap<>())
         方案二：Map<String,String> map = new ConcurrentHashMap<>();
-               ConcurrentHashMap<>()集合类似原理
-    }*/
+     */
     public static void main(String[] args) {
         Map<Object,String> map = new ConcurrentHashMap<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             new Thread(() -> {
                 map.put( Thread.currentThread().getName(), UUID.randomUUID().toString().substring(0, 5) );
                 System.out.println(Thread.currentThread().getName() + "---" + map);

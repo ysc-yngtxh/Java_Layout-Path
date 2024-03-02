@@ -105,6 +105,6 @@ public class 阻塞队列1_抛出异常API {
         // 自动移除此队列中的所有元素。
         queue.clear();
 
-         System.out.println("队列元素：" + queue);
+        System.out.println("队列元素：" + queue);
     }
 }

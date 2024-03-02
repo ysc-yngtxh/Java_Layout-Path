@@ -29,7 +29,7 @@ public class ReadWriteLock读写锁 {
         MyCache myCache = new MyCache();
 
         // 写入
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             final int temp = i;
             new Thread(() -> myCache.put(temp + "", temp), String.valueOf(i)).start();
         }
@@ -39,6 +39,8 @@ public class ReadWriteLock读写锁 {
             final int temp = i;
             new Thread(() -> myCache.get(temp + ""), String.valueOf(i)).start();
         }
+
+        System.out.println("主线程执行完毕！！！");
     }
 }
 

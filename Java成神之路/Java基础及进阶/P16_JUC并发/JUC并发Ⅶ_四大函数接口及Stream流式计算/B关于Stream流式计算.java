@@ -56,17 +56,20 @@ public class B关于Stream流式计算 {
         List<Integer> lists = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24);
 
         // Stream<String> stream = list.stream(); // 获取一个顺序流
-        Integer v2 = lists.stream().reduce(0,
+        Integer v2 = lists.stream().reduce( 0,
+                // 这个 lambda 表达式定义了如何将流中的元素累积起来。它接收两个参数 x1 和 x2，分别代表当前的累积值和流中的下一个元素。
                 (x1, x2) -> {
                     System.out.println("stream accumulator: x1:" + x1 + "  x2:" + x2);
                     return x1 - x2;
                 },
-                (x1, x2) -> { // 不会执行到这里
+                // 这个 lambda 表达式通常用于并行流，当流被分割成多个子流并行处理时，每个子流都会有一个自己的累加器函数。
+                // 然而，由于这段代码中的流不是并行流，组合器函数实际上不会被执行。
+                (x1, x2) -> {
                     System.out.println("stream combiner: x1:" + x1 + "  x2:" + x2);
                     return x1 * x2;
                 });
         // (0-1, 0-2, 0-3, 0-4, 0-5, 0-6, 0-7, 0-8, 0-9, ......)
-        System.out.println(v2);
+        System.out.println("获取一个顺序流 " + v2);
 
         // Stream<String> parallelStream = list.parallelStream(); // 获取一个并行流
         // 经过测试，当元素个数小于24时，并行时线程数等于元素个数，当大于等于24时，并行时线程数为16
@@ -79,7 +82,7 @@ public class B关于Stream流式计算 {
                     System.out.println("parallelStream combiner: x1:" + x1 + "  x2:" + x2);
                     return x1 * x2;
                 });
-        System.out.println(v3);
+        System.out.println("获取一个并行流 " + v3);
 
         /**
          * 使用Arrays 中的 stream() 方法，将数组转成流

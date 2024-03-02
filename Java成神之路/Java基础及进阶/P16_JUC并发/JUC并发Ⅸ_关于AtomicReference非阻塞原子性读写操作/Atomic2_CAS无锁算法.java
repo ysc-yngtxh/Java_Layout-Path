@@ -10,7 +10,8 @@ public class Atomic2_CAS无锁算法 {
      * Atomic包下的类是无锁操作，无锁的实现就得益于CAS算法
      * 一、CAS是Compare And Swap的简称，即比较并交换的意思。CAS是一种无锁算法，其算法思想如下：
      *
-     *    CAS的函数公式：compareAndSwap(V, E, N) -- 其中 V 表示要更新的变量，E 表示预期值，N 表示期望更新的值。
+     *    CAS的函数公式：compareAndSwap(V, E, N) --
+     *        其中 V 表示要更新的变量(从主内存中读取的字)，E 表示预期值(来自于对内存位置（V）之前的读取)，N 表示期望更新的值。
      *        调用compareAndSwap函数来更新变量V，如果V的值等于预期值E，那么将其更新为N，
      *        如果V的值不等于期望值E，则说明有其它线程更新了这个变量，此时不会执行更新操作，而是重新读取该变量的值再次尝试调用compareAndSwap来更新。
      *

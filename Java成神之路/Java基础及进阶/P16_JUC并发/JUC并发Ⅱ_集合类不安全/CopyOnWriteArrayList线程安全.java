@@ -6,7 +6,17 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CopyOnWriteArrayList线程安全 {
     /*
-      并发下ArrayList是不安全的，如何解决呢？
+      并发下ArrayList是不安全的。
+      具体来说，ArrayList的add操作不是原子性的，它包含两个步骤：先设置元素值，然后增加size的值。
+      在多线程环境下，如果两个线程同时执行add操作，可能会出现一个线程覆盖另一个线程的值的情况，导致数据不一致。
+
+      例如：当列表为空，size等于0时，线程A执行完elementData[size] = e后挂起，此时size仍然等于0。
+           然后线程B执行elementData[size] = e，因为size仍然等于0，所以线程B将元素存放在下标为0的位置，覆盖了线程A的数据。
+           接着，线程B和线程A都增加size的值，导致size等于2，但实际上只有一个元素被添加到了列表中。
+
+      此外，ArrayList的默认数组大小为10，当添加第10个元素时，会进行数组扩容，这个扩容操作也不是线程安全的。
+      如果在多线程环境下，一个线程正在扩容，而另一个线程同时尝试访问或修改列表，就可能导致异常。
+
          public static void main(String[] args) {
              List<String> list = new ArrayList<>();
              for (int i = 0; i < 10; i++) {
@@ -28,7 +38,7 @@ public class CopyOnWriteArrayList线程安全 {
     }*/
     public static void main(String[] args) {
         List<String> list = new CopyOnWriteArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             new Thread(() -> {
                 list.add( UUID.randomUUID().toString().substring(0, 5) );
                 System.out.println(list);

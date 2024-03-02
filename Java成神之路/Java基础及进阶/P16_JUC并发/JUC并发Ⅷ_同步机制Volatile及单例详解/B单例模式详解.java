@@ -15,11 +15,11 @@ package P16_JUC并发.JUC并发Ⅷ_同步机制Volatile及单例详解;
  *
  * 实现单例模式的思路
  *     1.构造私有:
- *          如果要保证一个类不能多次被实例化，那么我肯定要阻止对象 被new 出来，所以需要把类的所有构造方法私有化。
+ *         如果要保证一个类不能多次被实例化，那么我肯定要阻止对象 被new 出来，所以需要把类的所有构造方法私有化。
  *     2.以静态方法返回实例。
  *         因为外界就不能通过new来获得对象，所以我们要通过提供类的方法来让外界获取对象实例。
  *     3.确保对象实例只有一个。
- *         只对类进行一次实例化，以后都直接获取第一次实例化的对象。     
+ *         只对类进行一次实例化，以后都直接获取第一次实例化的对象。
  */
 @SuppressWarnings({"NonAsciiCharacters", "InstantiationOfUtilityClass"})
 public class B单例模式详解 {
@@ -67,11 +67,11 @@ class LazyMan{
     }
 
     public static void main(String[] args) {
-        new Thread(() -> {
-            for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
+            new Thread(() -> {
                 System.out.println( Thread.currentThread().getName() + "--" + LazyMan.getInstance() );
-            }
-        }, "a").start();
+            }, "a").start();
+        }
 
         new Thread(() -> {
             System.out.println( Thread.currentThread().getName() + "--" + LazyMan.getInstance() );
@@ -114,11 +114,11 @@ class Singleton{
     }
 
     public static void main(String[] args) {
-        new Thread(() -> {
-            for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
+            new Thread(() -> {
                 System.out.println( Singleton.getInstance() );
-            }
-        }).start();
+            }).start();
+        }
 
         System.out.println( Singleton.getInstance().getStr() );
     }

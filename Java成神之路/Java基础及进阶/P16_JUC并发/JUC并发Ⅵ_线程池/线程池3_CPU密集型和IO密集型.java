@@ -15,7 +15,8 @@ public class 线程池3_CPU密集型和IO密集型 {
      */
     public static void main(String[] args) {
         // 获取当前用户CPU的核数
-        System.out.println( Runtime.getRuntime().availableProcessors() );
+        int availabledProcessors = Runtime.getRuntime().availableProcessors();
+        System.out.println( availabledProcessors );
 
         ExecutorService threadPoolExecutor = new ThreadPoolExecutor(
                 Runtime.getRuntime().availableProcessors() * 10,  // 根据用户的CPU核数来设置核心线程池大小
@@ -28,7 +29,7 @@ public class 线程池3_CPU密集型和IO密集型 {
         );
 
         try {
-            for (int i = 1; i <= 9; i++) { // 最大任务数 = 阻塞队列数 + 最大线程池大小
+            for (int i = 1; i <= availabledProcessors*10/2; i++) { // 最大任务数 = 阻塞队列数 + 最大线程池大小
                 threadPoolExecutor.execute(() -> {
                     // 运行可以发现同步线程数最大值是5
                     System.out.println(Thread.currentThread().getName()+"--OK");
