@@ -128,6 +128,12 @@
         SELECT * FROM t_student WHERE id=1 OR height='175' OR address='成都';
         注意：如果使用了or关键字，那么它前面和后面的字段都要加索引，不然所有的索引都会失效，这是一个大坑。
 
+        分析索引失效原因：
+        假如不用索引：一次全表扫描完事
+        使用索引：height走的索引，address不走索引所以成本就是全表扫描，最后还需要merge求并集。
+                结果： 全表扫描 + 索引扫描 + merge
+        很明显直接进行全表扫描操作更少，因此MySQL在这种情况下不走索引直接全表扫描也就可以理解了。
+
    [2]、not in和not exists关键字;
         SELECT * FROM t_student WHERE id NOT IN(173, 174, 175, 176);
         SELECT * FROM t_student WHERE height NOT IN(173, 174, 175, 176);
