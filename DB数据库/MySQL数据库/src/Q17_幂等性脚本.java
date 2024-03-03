@@ -37,54 +37,61 @@
             insert ignore into progress_20230925 select * from progress
 ---------------------------------------------------------------------------------------------------------------
     5、添加字段
-       set @schema = `demo`                -- 表所在的数据库模式为demo
-       set @table = `progress`             -- 要操作的表名为progress
-       set @col = `workContent`            -- 要添加的列名为workContent
-       set @sql = (select if(              -- 设置变量@sql为子查询的结果
-                                              如果列不存在，则返回一个 alter table ... 语句，用于添加列。
-                                              如果列已存在，则返回数字1。
-                              (select count(1)
-                               from information_schema.columns
-                               where (table_name = @table)
-                                 and (column_name = @col)
-                                 and (table_schema = @schema)
-                              ) = 0,
-                              "alter table progress add columns workContent varchar(200) default null comment `工作内容` after date;",
-                              `select 1`
-                            )
-                  );
-       prepare stmt from @sql;           -- 使用变量@sql的值来准备一个动态SQL语句，并将其分配给stmt
-       execute stmt;                     -- 执行准备好的动态SQL语句
-       deallocate prepare stmt;          -- 释放准备好的语句
+       SET @schema = 'caoyumin';    -- 表所在的数据库模式为caoyumin
+       SET @table = 'brand';        -- 要操作的表名为brand
+       SET @col = 'age';            -- 要创建的字段名称为age
+       SET @sql = (
+           SELECT
+               CASE
+                   WHEN (SELECT count(1) FROM information_schema.COLUMNS WHERE table_schema = @schema AND table_name = @table AND column_name = @col) = 0
+       			   THEN
+                       CONCAT('ALTER TABLE ', @TABLE, ' ADD COLUMN ', @col, ' VARCHAR(200) DEFAULT NULL COMMENT "工作内容" AFTER remark;')
+                   ELSE
+                       'SELECT 1'
+               END
+           );
+       prepare stmt from @sql;    -- 使用变量@sql的值来准备一个动态SQL语句，并将其分配给stmt
+       execute stmt;              -- 执行准备好的动态SQL语句
+       deallocate prepare stmt;   -- 释放准备好的语句
 
-       整个脚本的作用是检查指定表progress中是否已经存在一个名为 workContent 的列，如果不存在，则添加该列。
-       添加列的语句是使用alter table ... 语句来执行的，意味着在date列之后添加一个名为 workContent 的200个字符长度的varchar类型列。
+       这段SQL代码的目的是在一个名为caoyumin的数据库中的brand表添加一个名为age的列。这个列的数据类型是varchar(200)，默认值为null，并且有一个注释为工作内容。
+       如果不存在，则添加该列。添加列的语句是使用alter table ... 语句来执行的，意味着在remark列之后添加一个名为 age 的200个字符长度的varchar类型列。
        如果列已经存在，则执行 select 1 并返回结果为数字1。
 ---------------------------------------------------------------------------------------------------------------
     6、添加索引
-       set @schema=`demo`                -- 表所在的数据库模式为demo
-       set @table=`progress`             -- 要操作的表名为progress
-       set @index=`idx_unique_code`      -- 要创建的索引名称为idx_unique_code
-       set @sql=(select if(              -- 设置变量@sql为子查询的结果
-                                            如果索引已存在，则返回字符串'索引已存在'作为列名'是否存在'的值。
-                                            如果索引不存在，则返回一个 alter table ... 语句，用于添加唯一索引。
-                            ( select count(1)
-                              from information_schema.statistics
-                              where (table_name = @table)
-                                and (index_name = @index)
-                                and (table_schema = @schema)
-                             ) > 0,
-                             `select "索引已存在" as "是否存在"`,
-                             "alter table progress add unique index 'idx_unique_code' ('code','delete_flag') comment `删除标识、集合编码联合唯一索引` using btree;"
-                          )
-                );
-       prepare stmt from @sql;           -- 使用变量@sql的值来准备一个动态SQL语句，并将其分配给stmt
-       execute stmt;                     -- 执行准备好的动态SQL语句
-       deallocate prepare stmt;          -- 释放准备好的语句
+       set @schema = 'caoyumin';        -- 表所在的数据库模式为caoyumin
+       set @table = 'brand';            -- 要操作的表名为brand
+       set @index = 'idx_unique_code';  -- 要创建的索引名称为idx_unique_code
+       set @sql = (
+           SELECT
+               CASE
+                   WHEN (SELECT COUNT(1) FROM information_schema.statistics WHERE table_schema = @schema AND table_name = @table AND index_name = @index) = 0
+       			   THEN
+                       CONCAT('ALTER TABLE ', @table, ' ADD UNIQUE INDEX ', @index, ' (`brand_name`, `delete_flag`) COMMENT "删除标识、集合编码联合唯一索引" USING BTREE;')
+                   ELSE
+                       'select "索引已存在"'
+               END
+           );
+       prepare stmt from @sql;
+       execute stmt;
+       deallocate prepare stmt;
 
        整个脚本的作用是检查指定表中是否已经存在一个名为 idx_unique_code 的唯一索引，如果不存在，则创建该索引。
-       创建索引的语句会将 code 和 delete_flag 这两列作为联合唯一索引，并使用B树索引类型。
+       创建索引的语句会将 brand_name 和 delete_flag 这两列作为联合唯一索引，并使用B树索引类型。
        创建索引语句的注释为'删除标识、集合编码联合唯一索引'。如果索引已经存在，则输出 '索引已存在' 作为结果。
+
+
+       这种是IF函数写法：if(condition, expr_if_true, expr_if_false)
+                      -- 当condition条件表达式为true，则返回expr_if_true，否则返回expr_if_false
+       set @sql = (
+           SELECT
+               IF(
+                   (SELECT COUNT(1) FROM information_schema.statistics WHERE table_schema = @schema AND table_name = @table AND index_name = @index) = 0
+                   , CONCAT('ALTER TABLE ', @table, ' ADD UNIQUE INDEX ', @index, ' (`brand_name`, `delete_flag`) COMMENT "删除标识、集合编码联合唯一索引" USING BTREE;')
+                   , 'select "索引已存在"'
+                 )
+           );
+
  */
 public class Q17_幂等性脚本 {
 }
