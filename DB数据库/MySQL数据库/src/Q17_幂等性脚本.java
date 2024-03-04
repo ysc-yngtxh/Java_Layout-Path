@@ -76,12 +76,12 @@
        execute stmt;
        deallocate prepare stmt;
 
-       整个脚本的作用是检查指定表中是否已经存在一个名为 idx_unique_code 的唯一索引，如果不存在，则创建该索引。
-       创建索引的语句会将 brand_name 和 delete_flag 这两列作为联合唯一索引，并使用B树索引类型。
-       创建索引语句的注释为'删除标识、集合编码联合唯一索引'。如果索引已经存在，则输出 '索引已存在' 作为结果。
+       整个脚本的作用是检查指定表中是否已经存在一个名为 idx_unique_code 的唯一索引，
+       如果不存在，则创建该索引。创建索引的语句会将 brand_name 和 delete_flag 这两列作为联合唯一索引，并使用B树索引类型。创建索引语句的注释为'删除标识、集合编码联合唯一索引'。
+       如果已经存在，则输出 '索引已存在' 作为结果。
 
 
-       这种是IF函数写法：if(condition, expr_if_true, expr_if_false)
+       还有IF函数写法：if(condition, expr_if_true, expr_if_false)
                       -- 当condition条件表达式为true，则返回expr_if_true，否则返回expr_if_false
        set @sql = (
            SELECT

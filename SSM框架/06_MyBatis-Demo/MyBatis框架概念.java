@@ -7,12 +7,12 @@
       数据访问层：就是访问数据库，执行对数据的查询、修改、删除等等的
 
       三层对应的包
-         界面层：controller包(servlet)
-         业务逻辑层：servlet包(XXXService类)
-         数据访问层：；dao包(XXXDao类)
+         界面层：   controller包（servlet）
+         业务逻辑层：servlet包（XXXService类）
+         数据访问层：dao包（XXXDao类）
 
       三层种类的交互
-         用户使用界面层-->业务逻辑层-->数据访问层(持久层)-->数据库(mysql)
+         用户使用界面层 --> 业务逻辑层 --> 数据访问层(持久层) --> 数据库(mysql)
 
       三层对应的处理框架
          界面层--servlet--SpringMVC(框架)
@@ -51,7 +51,7 @@
       7、创建使用mybatis类，
          通过mybatis访问数据库
   二、mybatis提供了哪些功能：；
-      1、提供了创建Connection,Statement,ResultSet的能力，不用开发人员创建这些对象了
+      1、提供了创建Connection、Statement、ResultSet的能力，不用开发人员创建这些对象了
       2、提供了执行SQL语句的能力，不用你执行SQL
       3、提供了循环SQL，把SQL的结果转为Java对象，List集合的能力
          while(rs.next()){
@@ -60,17 +60,17 @@
            stu.setName(rs.getString("name"));
            stu.setEmail(rs.getString("email"));
            stu.setAge(rs.getInt("age"));
-           //从数据库取出数据转为Student对象，封装到List集合
+           // 从数据库取出数据转为Student对象，封装到List集合
            student.add(stu);
          }
-      4、提供了关闭资源的能力，不用你关闭Conection,Statement,ResultSet
+      4、提供了关闭资源的能力，不用你手动关闭Conection、Statement、ResultSet
 
       开发人员做的是：提供SQL语句
       最后是：开发人员提供SQL语句--mybatis处理SQL--开发人员得到List集合或Java对象(表中的数据)
 
       总结：
       mybatis是一个SQL映射框架，提供的数据库的操作能力。增强的JDBC,
-      使用mybatis让开发人员集中精神写sql就可以了，不必关心Connection,Statement,ResultSet的创建、销毁、SQL的执行。
+      使用mybatis让开发人员集中精神写sql就可以了，不必关心Connection、Statement、ResultSet的创建、销毁、SQL的执行。
 
 第三章
   一、主要类的介绍

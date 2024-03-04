@@ -239,7 +239,7 @@
      
      1、默认没有使用resources的时候，maven执行编译代码时，会把src/main/resources目录中的文件拷贝到target/classes目录中。
         对于src/main/java目录下的非Java文件不处理，不拷贝到target/classes目录中
-     2、我们的程序有需要把一些文件放在src/main/java目录中，当我在执行Java程序时i，需要用到src/main/java目录中的文件。
+     2、我们的程序有需要把一些文件放在src/main/java目录中，当我在执行Java程序时，需要用到src/main/java目录中的文件。
         需要告诉maven在 mvn compile src/main/java目录下的程序时，需要把文件一同拷贝到target/classes目录中。
         此时就需要在<build>中加入<resources>
 
