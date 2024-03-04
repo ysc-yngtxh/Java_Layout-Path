@@ -29,10 +29,10 @@ import java.util.Properties;
  * @Signature：指明自定义拦截器需要拦截哪一个类型，哪一个方法；
  *       - type：定义拦截的类，拦截的类型具体有四种
  *              (1)、Executor：        拦截执行器的方法 -- 针对Sql是 查询/更新/插入/删除 的拦截
- *              (2)、ParameterHandler：拦截参数的处理器 -- 针对Sql的参数拦截
- *              (3)、ResultHandler：   拦截结果集的处理器 -- 针对Sql返回结果拦截
- *              (4)、StatementHandler：拦截Sql语法构建的处理器 -- 针对Sql的构建拦截
- *           ** Executor 执行器中是包含有三种处理器 ParameterHandler、ResultHandler、StatementHandler
+ *              (2)、StatementHandler：拦截Sql语法构建的处理器 -- 针对Sql的构建拦截
+ *              (3)、ParameterHandler：拦截参数的处理器 -- 针对Sql的参数拦截
+ *              (4)、ResultHandler：   拦截结果集的处理器 -- 针对Sql返回结果拦截
+ *           ** Executor 执行器中是包含有三种处理器 StatementHandler、ParameterHandler、ResultHandler
  *              我们自己在自定义Mybatis拦截器的时候，可以选择针对性的处理器进行拦截使用即可
  *              当上述三种处理器满足不了需求，就可以使用 Executor 直接定义处理流程。毕竟三种处理器能做的，Executor都能做
  *       - method：在定义拦截类的基础之上，再定义拦截的方法（可以在拦截器中预览需要的方法）

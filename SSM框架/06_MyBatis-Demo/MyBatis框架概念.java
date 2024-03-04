@@ -55,13 +55,13 @@
       2、提供了执行SQL语句的能力，不用你执行SQL
       3、提供了循环SQL，把SQL的结果转为Java对象，List集合的能力
          while(rs.next()){
-           Student stu = new Student();
-           stu.setId(rs.getInt("id"));
-           stu.setName(rs.getString("name"));
-           stu.setEmail(rs.getString("email"));
-           stu.setAge(rs.getInt("age"));
-           // 从数据库取出数据转为Student对象，封装到List集合
-           student.add(stu);
+             Student stu = new Student();
+             stu.setId(rs.getInt("id"));
+             stu.setName(rs.getString("name"));
+             stu.setEmail(rs.getString("email"));
+             stu.setAge(rs.getInt("age"));
+             // 从数据库取出数据转为Student对象，封装到List集合
+             student.add(stu);
          }
       4、提供了关闭资源的能力，不用你手动关闭Conection、Statement、ResultSet
 

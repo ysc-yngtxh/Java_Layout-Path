@@ -35,7 +35,7 @@
 
 
     <insert id="insertStudent" useGeneratedKeys="true" keyProperty="id">
-        insert into student values(#{id},#{name},#{email},#{age})
+        insert into student values(#{id}, #{name}, #{email}, #{age})
     </insert>
     <!--
         useGeneratedKeys = true 这个表示插入数据之后返回一个自增的主键id给你对应实体类中的主键属性。
