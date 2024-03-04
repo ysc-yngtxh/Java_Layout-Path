@@ -75,7 +75,9 @@ public class MyApp {
     //      这样做的好处是可以确保每个线程都使用独立的SqlSession对象，从而保证线程安全性。
 
     // 因为我们的Mapper代理对象和Service都已交给Spring容器管理，因此我们两个查询方法所获取Mapper代理对象是同一个。
-    // 但是每执行完一个Mapper方法，都会关闭掉sqlSession，所以一级缓存就没有任何数据，因此第二个查询就只能再重新查询数据库。
+    // 但是每执行完一个Mapper方法，都会关闭掉SqlSession。
+    // 因为如果 SqlSession 在使用完毕后不被关闭，那么它将持续占用数据库连接和其他相关资源，这可能会导致资源耗尽，特别是当并发请求较多时。
+    // 因此SqlSession都被关闭掉了，一级缓存自然就没有任何数据，因此第二个查询就只能再重新查询数据库。
     // 可以通过添加事务注解Transactional，来保证两个查询方法在彻底执行完之前不关闭sqlSession，这样第二个查询就能获取一级缓存数据
     @Test
     @Transactional

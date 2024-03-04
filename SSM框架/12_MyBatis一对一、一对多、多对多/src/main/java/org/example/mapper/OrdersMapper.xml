@@ -8,7 +8,7 @@
 
     <!--type:java类型的全限定名称
         autoMapping = true 自动映射: 当java实体类的属性名和mysql结果集的字段名一致, 自动映射-->
-    <resultMap id="myorder" type="org.example.pojo.Orders" autoMapping="true">
+    <resultMap id="myOrder" type="org.example.pojo.Orders" autoMapping="true">
         <!--id标签 : 主键字段映射(必须要写)    result标签: 非主键字段映射 (同名可不写,推荐写)-->
         <id property="id" column="id"/>
         <result property="ordertime" column="ordertime"/>
@@ -38,7 +38,7 @@
         2. 要写成 resultMap : 结果集映射
              指定查询结果集 跟 javabean (orders) 之间的映射关系
     -->
-    <select id="OrderWithUser" resultMap="myorder">
+    <select id="OrderWithUser" resultMap="myOrder">
         select *
         from orders o
             inner join user u

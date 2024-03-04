@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.dao.StudentDao">
+    <!--
+        parameterType：dao接口中方法参数的数据类型
+          parameterType他的值是Java的数据类型全限定名称或者是mybatis定义的别名
+          例如：parameterType="java.lang.Integer"
+               parameterType="int"
+
+          注意：parameterType不是强制的，mybatis通过反射机制能够发现接口参数的数据类型。
+               所以可以没有。一般我们也不写
+
+          使用#{}之后，mybatis执行SQL是使用的jdbc中的PreparedStatement对象
+          由mybatis执行下面的代码：
+              1、mybatis创建Connection,PreparedStatement对象
+                 String sql = "select id,name,email,age from student where id=?";
+                 PreparedStatement ps = conn.prepareStatement(sql);
+                 ps.setInt(1,1001);
+              2、执行SQL封装为resultType="com.example.Student"这个对象
+                 ResultSet rs = ps.executeQuery();
+                 Student student = null;
+                 while(rs.next()){
+                    // 从数据库取表的一行数据，存到一个Java对象属性中
+                    student = new Student();
+                    student.setId(rs.getInt("id"));
+                    student.setName(rs.getString("name"));
+                    student.setEmail(rs.getString("email"));
+                    student.setAge(rs.getInt("age"));
+                 }
+                 return student; // 赋给了dao方法调用的返回值
+    -->
+    <select id="selectStudents" parameterType="int" resultType="com.example.domain.Student">
+        select id,name,email,age from student where id=#{studentId}
+    </select>
+
+    <!--多个参数，使用@Param命名-->
+    <select id="selectMultiParam" resultType="com.example.domain.Student">
+        select id,name,email,age from student where name=#{myName} or age=#{myAge}
+    </select>
+
+    <!--
+        多个参数，使用Java对象作为传参值。MyBatis 会使用反射机制来解析这个对象的属性，可以使用 #{} 语法直接来引用这些属性。
+        适用对象语法：#{属性名,javaType=类型名称,jdbcType=数据类型}
+        javaType:指Java中的属性数据类型
+        jdbcType:在数据库中的数据类型
+        例如： #{name, javaType=java.lang.String, jdbcType=VARCHAR}
+
+        我们使用的简化方式：#{属性名}，javaType,jdbcType的值mybatis反射能获取，不用提供
+    -->
+    <!--
+    <select id="selectMultiObject" resultType="com.example.Student">
+        select id,name,email,age from student where
+        name=#{name, javaType=java.lang.String, jdbcType=VARCHAR}
+        or age=#{age, javaType=java.lang.Integer, jdbcType=INTEGER}
+    </select>
+    -->
+    <select id="selectMultiObject" resultType="com.example.domain.Student">
+        select id,name,email,age from student
+        where name=#{name} or age=#{age}
+    </select>
+</mapper>

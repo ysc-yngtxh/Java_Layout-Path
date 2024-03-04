@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.mapper.UserMapper">
 
-    <resultMap id="myuser" type="org.example.pojo.User" autoMapping="true">
+    <resultMap id="myUser" type="org.example.pojo.User" autoMapping="true">
         <id property="id" column="id"/>
         <!--这后面还有映射属性没写，但是我加了autoMapping="true"可以自动映射(必须是同名)-->
 
@@ -25,7 +25,7 @@
         </collection>
     </resultMap>
 
-    <select id="UserWithOrders" resultMap="myuser">
+    <select id="UserWithOrders" resultMap="myUser">
         select u.*, o.id as oid, o.uid, o.ordertime, o.money
         from user u
             inner join orders o

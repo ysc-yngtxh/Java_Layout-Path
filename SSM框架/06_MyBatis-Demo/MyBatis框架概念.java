@@ -120,7 +120,8 @@
                  select * from student where name=#{myname} or age=#{myage}
              </select>
 
-      4、多个参数：使用Java对象作为接口中方法的参数
+      4、多个参数：使用Java对象作为接口中方法的参数。
+                 MyBatis 会使用反射机制来解析这个对象的属性，可以直接使用 #{} 语法来引用这些属性。
          接口：List<Student> selectMultiObject(Student student);
          mapper文件：
               <select id="selectMultiObject" resultType="com.example.domain.Student">
@@ -188,7 +189,10 @@
      dao.selectFor(list)
 
      <foreach collection="" item="" open="" close="" separator=""></foreach>
-     collection: 表示接口中的方法参数的类型，如果是数组使用array，如果是list集合使用list
+     collection: 表示遍历的是集合<List>或者数组<Array>，该属性的值应该与传递给Mapper方法的参数名称相对应。
+                 当传递一个单一的集合<List>或数组<Array>作为参数给 Mapper 方法时，
+                 MyBatis 会默认将这个参数视为一个名为 "list" 集合或者 "array" 数组，
+                 除非使用 @Param 注解在传参上指定一个不同的名称。
      item: 自定义的，表示数组和集合成员的变量
      open: 循环开始时的字符
      separator: 集合成员之间的分隔符
@@ -238,20 +242,20 @@
        </plugins>
    三、PageHelper对象
         加入PageHelper的方法，分页。
-        pageNum:第几页，从1开始
-        pageSize:一页中有多少行数据
+        pageNum: 第几页，从1开始
+        pageSize: 一页中有多少行数据
         PageHelper.startPage(pageNum:1 , pageSize:3);
 
 第八、面试常问的：MyBatis的二级缓存是怎么回事？
    1、一级缓存Mybatis自己是默认开启的,是不需要我们去管的,不过一级缓存是SqlSession级别的,在操作数据库的时候我们需要创建SqlSession对象,
       SqlSession自己有个结构是HashMap的缓存区,每一个SqlSession都有自己的缓存区.
 
-      例如：在 12_MyBatis-sql 模块中 TestMyBatis 类的 testone() 方法里连续两次去查询 Id为1006 的数据，
+      例如：在 12_MyBatis-sql 模块中 TestMyBatis 类的 testone() 方法里连续两次去查询 Id为16 的数据，
            使用同一个SqlSession进行了两次一样的查询,可以从控制台信息中看到第一次查询的时候显示发送了sql语句,
            而第二次查询则没有显示发送sql语句,说明是从缓存中获取的数据,而不是数据库
 
       什么时候清空一级缓存?
-           当我们执行添加,修改,删除操作的时候mybatis会自动清空一级缓存,准确的来说是我们执行commit()事务提交的时候清空
+           MyBatis 在执行增、删、改操作时，或者当 SqlSession 关闭时，会自动清空一级缓存，以确保数据的准确性和一致性。
 
   ⚠️ 需要注意的是：使用我们自己写的原生mybatis，一级缓存在同一个方法中是可以得到体现的，但是使用官方的mybatis则在同一个方法中并不会。
                  其原因就是官方的mybatis会在一级缓存中获取SqlSession时候加入一个事务判断机制，为的是避免在多线程情况下造成的数据不安全
@@ -262,8 +266,9 @@
             如果加了 @Transactional，则会把sqlSession暂存在ThreadLocal中，则当第二次执行相同的mapper、sql、参数的时候就会去ThreadLocal中去取有没有，
             如果没有，那么直接返回SqlSession为null,那么当第二次执行相同的mapper就会新建一个新的SqlSession
 
-   总结：Spring集成Mybatis,如果不开启事务，则每一个Mapper方法，都会开启一个sqlSession，执行完成后，sqlSession就会close，则在并发的请求下，虽然mapper是单例，但是能保证线程安全，
-        当用了事务之后，当执行完方法后，sqlSeesion才会close，所以一个请求中多次调用，第二次调用可以从缓存中读取
+   总结：Spring集成Mybatis，如果不开启事务，则每一个Mapper方法，都会开启一个sqlSession，执行完成后，sqlSession就会close，
+        则在并发的请求下，虽然mapper是单例，但是能保证线程安全。
+        当用了事务之后，当执行完所有方法后，sqlSeesion才会close，所以一个请求中多次调用，第二次调用可以从缓存中读取
 
    2、二级缓存是Mapper级别的,一个Mapper有着一个缓存区,就是说不管几个SqlSession只要他们获取的是同一个Mapper,
       缓存数据就会是共享的,不过二级缓存需要我们自己去开启。
@@ -284,6 +289,7 @@
               ③、在mapper.xml中开启方法: 添加"cache"标签
                    <mapper namespace="com.example.dao.StudentDao">
                        <cache></cache>  <!--xml中二级缓存分开关-->
+
       例如：在 12_MyBatis-sql 模块中 TestMyBatis 类的 testTwo() 方法里连续两次去查询 Id为1006 的数据，
            这次是两次相同的查询,不同的SqlSession,获取的同一个Mapper,只有第一次查询的时候日志显示向数据库发送了sql语句,
            其他两次都没有发送sql语句,说明其他两次都是从缓存中获取的数据
@@ -294,7 +300,6 @@
                        （当然还需要keyproperty指明数据库中返回的主键id给实体类中的哪个属性）。
         keyproperty = 主键，这样就可以解决在主键自增的情况下获取主键。
         一般来说，加上这两个设置后。#{id}就可以删掉
-
 */
 public class MyBatis框架概念 {
 
