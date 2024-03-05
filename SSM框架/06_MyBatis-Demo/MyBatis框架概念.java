@@ -80,11 +80,11 @@
       2、SqlSessionFactoryBuilder：创建SqlSessionFactory对象
          SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
          //创建SqlSessionFactory对象
-         SqlSessionFactory factory = builder.build(in);
+         SqlSessionFactory target = builder.build(in);
 
       3、SqlSessionFactory:重量级对象，程序创建一个对象耗时较长，使用资源比较多。在整个项目中有一个就足够用了
          SqlSessionFactory接口：接口实现类：DefaultSqlSessionFactory
-         SqlSessionFactory作用：获取SqlSession对象。SqlSession sqlSession = factory.openSession();
+         SqlSessionFactory作用：获取SqlSession对象。SqlSession sqlSession = target.openSession();
 
          openSession()方法说明：
          1)、openSession():无参数的，获取是非自动提交事务的SqlSession对象

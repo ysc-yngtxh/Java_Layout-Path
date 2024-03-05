@@ -1,4 +1,4 @@
-package com.example.factory;
+package com.example.interfaces.impl;
 
 import com.example.service.UsbSell;
 
@@ -6,7 +6,7 @@ import com.example.service.UsbSell;
  * @author 游家纨绔
  */
 // 目标类：闪迪厂家，不接受用户的单独购买
-public class UsbSanFactory implements UsbSell {
+public class UsbSanDiFactory implements UsbSell {
     @Override
     public float sell(int amount) {
         System.out.println("闪迪 目标类中的方法调用，UsbKingFactory中的sell");

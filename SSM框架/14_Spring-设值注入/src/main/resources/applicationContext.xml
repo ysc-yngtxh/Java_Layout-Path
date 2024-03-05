@@ -35,14 +35,31 @@
     <bean id="mySchool" class="com.example.domain.School">
         <property name="name" value="湖北武汉"/>
         <property name="address" value="华中科技大学"/>
+        <property name="arrayList" >  <!--List标签：注入集合-->
+            <list>
+                <value>hello</value>
+                <value>你好</value>
+                <value>1234</value>
+            </list>
+        </property>
+        <property name="arrays" >  <!--Array标签：注入数组-->
+            <array>
+                <value>笨笨</value>
+            </array>
+        </property>
+        <property name="hashMap" >  <!--Map标签：注入Map类型的集合-->
+            <map>
+                <entry key="小朋友" value="小曹"/>
+            </map>
+        </property>
     </bean>
 
 
     <!--使用name表示构造方法的形参名-->
     <bean id="myStudentByIn1" class="com.example.domain.Student">
-        <constructor-arg name="myname" value="张三"/>
-        <constructor-arg name="myage" value="26"/>
-        <constructor-arg name="myschool" ref="mySchool"/>
+        <constructor-arg name="myName" value="张三"/>
+        <constructor-arg name="myAge" value="26"/>
+        <constructor-arg name="mySchool" ref="mySchool"/>
     </bean>
 
     <!--使用index表示构造方法的形参名-->

@@ -1,12 +1,12 @@
-package com.example.shangjia;
+package com.example.intensification.weishang;
 
-import com.example.factory.UsbSanFactory;
+import com.example.interfaces.impl.UsbSanDiFactory;
 import com.example.service.UsbSell;
 
 public class WeiShangSanDi implements UsbSell {
 
     // 代理的是 闪迪，定义目标厂家类
-    private UsbSanFactory factory = new UsbSanFactory();
+    private UsbSanDiFactory factory = new UsbSanDiFactory();
     @Override
     public float sell(int amount) {
         // 调用目标方法

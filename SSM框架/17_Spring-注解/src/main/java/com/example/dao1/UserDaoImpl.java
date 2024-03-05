@@ -1,4 +1,4 @@
-package com.example.dao;
+package com.example.dao1;
 
 import com.example.domain.SysUser;
 import org.springframework.stereotype.Repository;

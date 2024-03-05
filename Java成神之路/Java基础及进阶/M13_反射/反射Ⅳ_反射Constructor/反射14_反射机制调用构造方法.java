@@ -19,11 +19,11 @@ public class 反射14_反射机制调用构造方法 {
         // TODO JDK9以及9之后：通过反射机制调用构造方法的方式获取对象
         // 第一步：先获取到这个有参数的构造方法
         Constructor<?> con = c.getDeclaredConstructor(int.class, String.class, String.class, boolean.class);
-        // 第二步：调用构造方法new对象
+        // 第二步：想要调用构造方法，就相当于是new对象
         Object newObj = con.newInstance(110, "游诗成", "1997-03-22", true);
         System.out.println(newObj);
 
-        //获取无参数构造方法
+        // 调用无参构造方法
         Constructor<?> con1 = c.getDeclaredConstructor();
         Object newObj1 = con1.newInstance();
         System.out.println(newObj1);

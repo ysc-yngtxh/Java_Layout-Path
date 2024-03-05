@@ -20,10 +20,10 @@ public class Student {
     }
 
     // Student的有参构造方法
-    public Student(String myname, int myage, School myschool) {
-        this.name = myname;
-        this.age = myage;
-        this.school = myschool;
+    public Student(String myName, int myAge, School mySchool) {
+        this.name = myName;
+        this.age = myAge;
+        this.school = mySchool;
     }
 
     public String getName() {

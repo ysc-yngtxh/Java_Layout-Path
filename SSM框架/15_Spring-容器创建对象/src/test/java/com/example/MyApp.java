@@ -18,5 +18,4 @@ public class MyApp {
         user.setAge(23);
         service.addUser(user);
     }
-
 }

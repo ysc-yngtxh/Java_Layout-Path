@@ -119,7 +119,7 @@
                  ③Proxy类：核心的对象，创建代理对象。之前创建对象都是new类的构造方法()
                            现在我们是使用Proxy类的方法，代替new的使用
                     方法：静态方法  newProxyInstance()
-                    作用是：创建代理对象，等同于静态代理中的TaoBao taobao = new TaoBao();
+                    作用是：创建代理对象，等同于静态代理中的TaoBao taobao = new TaoBaoKing();
 
                     参数：
                         Ⅰ、ClassLoader loader类加载器，负责向内存中加载对象的。使用反射获取对象的ClassLoader

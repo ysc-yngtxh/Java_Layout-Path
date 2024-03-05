@@ -1,9 +1,9 @@
-package com.example.shangjia;
+package com.example.intensification.weishang;
 
-import com.example.factory.UsbKingFactory;
+import com.example.interfaces.impl.UsbKingFactory;
 import com.example.service.UsbSell;
 
-public class WeiShang implements UsbSell {
+public class WeiShangKing implements UsbSell {
 
     // 代理的是，金士顿，定义目标厂家类
     private UsbKingFactory factor = new UsbKingFactory();

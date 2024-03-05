@@ -16,10 +16,9 @@ public class MySellHandler implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        Object res = null;
         // 向厂家发送订单，告诉厂家，我买了U盘，厂家发货
-        // float price = factory.sell(amount);  // 厂家的价格
-        res = method.invoke(target, args); // 执行目标方法
+        // float price = target.sell(amount);  // 厂家的价格
+        Object res = method.invoke(target, args); // 执行目标方法
 
         // 商家 需要加价，也就是代理要增加价格
         // price = price+25; // 增强功能，代理类在完成目标类方法调用后，增强了功能。

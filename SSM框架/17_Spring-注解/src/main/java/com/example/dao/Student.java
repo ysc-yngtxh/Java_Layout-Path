@@ -46,10 +46,10 @@ public class Student {
     /**
      * 引用类型(spring框架提供)
      * @Autowired：spring框架提供的注解，实现引用类型的赋值。使用的是自动注入原理，支持byName,byType
-     * @Autowired:默认使用的是byType自动注入。
-     *      属性：required=,是一个boolean类型的的，默认是true
-     *           required=true:表示引用类型赋值失败，程序报错，并终止执行
-     *           required=false:引用类型如果赋值失败，程序正常执行，引用类型是null
+     * @Autowired：默认使用的是byType自动注入。
+     *      属性：required 是一个boolean类型的的，默认是true
+     *           required=true：表示引用类型赋值失败，程序报错，并终止执行
+     *           required=false：引用类型如果赋值失败，程序正常执行，引用类型是null
      *           常用的也是默认的required=true，便于调试
      *
      *      位置：1、在属性定义的上面，无需set方法，推荐使用
@@ -59,6 +59,7 @@ public class Student {
      *      2、当Spring框架找到一个带有@Autowired注解的变量时，它会查找一个与这个变量类型匹配的Bean。
      *      3、如果Spring框架找到了一个匹配的Bean，那么它就会将这个Bean注入到这个变量中。
      *      4、如果Spring框架没有找到一个匹配的Bean，那么它就会抛出一个错误。
+     *      5、最后通过反射进行相应属性赋值或者方法调用（反射是不需要setter方法或者构造方法就可以进行属性赋值的）
      */
     @Autowired
     // @Autowired(required = false)

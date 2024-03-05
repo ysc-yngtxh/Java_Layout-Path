@@ -18,9 +18,9 @@
 	if ( typeof module === "object" && typeof module.exports === "object" ) {
 
 		// For CommonJS and CommonJS-like environments where a proper `window`
-		// is present, execute the factory and get jQuery.
+		// is present, execute the target and get jQuery.
 		// For environments that do not have a `window` with a `document`
-		// (such as Node.js), expose a factory as module.exports.
+		// (such as Node.js), expose a target as module.exports.
 		// This accentuates the need for the creation of a real `window`.
 		// e.g. var jQuery = require("jquery")(window);
 		// See ticket #14549 for more info.
@@ -3795,7 +3795,7 @@ jQuery.extend( {
 			// the master Deferred
 			master = jQuery.Deferred(),
 
-			// subordinate callback factory
+			// subordinate callback target
 			updateFunc = function( i ) {
 				return function( value ) {
 					resolveContexts[ i ] = this;
@@ -4994,7 +4994,7 @@ function on( elem, types, selector, data, fn, one ) {
 }
 
 /*
- * Helper functions for managing events -- not part of the public interface.
+ * Helper functions for managing events -- not part of the public interfaces.
  * Props to Dean Edwards' addEvent library for many of the ideas.
  */
 jQuery.event = {

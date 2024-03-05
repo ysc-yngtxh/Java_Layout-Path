@@ -57,7 +57,7 @@ package com.example;
             [1]、简单类型的set注入
                 <bean id="XX" class="YYY">
                     <property name="属性名称" value="此属性的值"/>
-                    一个property只能给一个属性赋值
+                       一个property只能给一个属性赋值
                     <property......>
                 </bean>
             [2]、引用类型的set注入：spring调用类的set方法

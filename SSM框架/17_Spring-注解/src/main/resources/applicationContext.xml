@@ -17,14 +17,15 @@
             2、给这个新的约束文件起个命名空间的名称
       -->
     <context:component-scan base-package="com.example.dao"/>
+    <context:component-scan base-package="com.example.dao1"/>
+    <context:component-scan base-package="com.example.service"/>
 
     <!--指定多个包的三种方式-->
     <!--第一种方式：使用多次组件扫描器，指定不同的包-->
-    <context:component-scan base-package="com.example.dao1"/>
-    <context:component-scan base-package="com.example.dao2"/>
+    <context:component-scan base-package="com.example.**"/>
 
     <!--第二种方式：使用分隔符(;或,)分隔多个包名-->
-    <context:component-scan base-package="com.example.dao1;com.example.dao2"/>
+    <context:component-scan base-package="com.example.**;com.example.**"/>
 
     <!--第三种方式：指定父包-->
     <context:component-scan base-package="com.example"/>

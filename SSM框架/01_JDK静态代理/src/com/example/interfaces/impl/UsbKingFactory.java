@@ -1,4 +1,4 @@
-package com.example.factory;
+package com.example.interfaces.impl;
 
 import com.example.service.UsbSell;
 
