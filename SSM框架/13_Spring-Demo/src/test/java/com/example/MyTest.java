@@ -58,7 +58,7 @@ public class MyTest {
     public void test04(){
         String config = "beans.xml";
         ApplicationContext ac = new ClassPathXmlApplicationContext(config);
-        Date my = (Date)ac.getBean("mydate");
+        Date my = (Date)ac.getBean("myDate");
         System.out.println("Date:" + my);
     }
 }

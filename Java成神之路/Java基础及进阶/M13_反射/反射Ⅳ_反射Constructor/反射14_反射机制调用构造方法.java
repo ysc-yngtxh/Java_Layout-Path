@@ -13,10 +13,10 @@ public class 反射14_反射机制调用构造方法 {
 
         // 使用反射机制怎么创建对象
         Class<?> c = Class.forName("M13_反射.反射Ⅳ_反射Constructor.Vip");
-        Object obj = c.newInstance();   // 调用无参构造方法,这种方法适用于JDK8，已过时
+        Object obj = c.newInstance();   // TODO 这种通过class实例获取对象的方式只适用于到JDK8，到了JDK9就过时了
         System.out.println(obj);
 
-        // 使用反射机制调用有参构造方法
+        // TODO JDK9以及9之后：通过反射机制调用构造方法的方式获取对象
         // 第一步：先获取到这个有参数的构造方法
         Constructor<?> con = c.getDeclaredConstructor(int.class, String.class, String.class, boolean.class);
         // 第二步：调用构造方法new对象

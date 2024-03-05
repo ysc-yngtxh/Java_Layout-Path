@@ -18,14 +18,14 @@ public class 反射3_获取类路径下文件的绝对路径 {
          */
         String path = Thread.currentThread()
                 .getContextClassLoader()
-                .getResource("classinfo.properties")
+                .getResource("classInfo.properties")
                 .toURI()
                 .getPath();
         System.out.println(path);
 
         String paths = Thread.currentThread()
                 .getContextClassLoader()
-                .getResource("classinfo.properties")
+                .getResource("classInfo.properties")
                 .getPath();
         System.out.println( URLDecoder.decode(paths, "UTF-8") ); // 解决中文乱码问题
 

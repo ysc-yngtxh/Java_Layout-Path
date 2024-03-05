@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!--告诉spring创建对象
         声明bean，就是告诉spring要创建某个类的对象
@@ -13,16 +14,15 @@
             springMap.put(id的值 ,对象);
             例如 springMap.put("someService", new SomeServiceImpl());
 
-        一个bean标签声明一个对象
-    -->
-    <!--
-        singleton：单例模式，在整个Spring IoC容器中，使用singleton定义的Bean将只有一个实例
+        一个bean标签声明一个对象-->
+
+    <!--singleton：单例模式，在整个Spring IoC容器中，使用singleton定义的Bean将只有一个实例
         prototype：原型模式，每次通过容器的getBean方法获取prototype定义的Bean时，都将产生一个新的Bean实例-->
     <bean id="someService" class="com.example.dao.SomeServiceImpl"/>
     <bean id="someServiceBy" class="com.example.dao.SomeServiceImpl" scope="prototype"/><!--这有两条bean标签，表示创建了两个对象-->
 
     <!--spring能创建一个非自定义类的对象吗？可以创建一个存在的某个类的对象-->
-    <bean id="mydate" class="java.util.Date"/>
+    <bean id="myDate" class="java.util.Date"/>
 </beans>
 <!--
     spring的配置文件

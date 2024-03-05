@@ -53,11 +53,11 @@ public class 反射2_实例化对象 {
         System.out.println("=========================================================================================");
 
         // 第三种方式
-        // 通过Io流读取classinfo.properties配置文件
+        // 通过Io流读取classInfo.properties配置文件
         FileInputStream fis = null;
         try {
             // 创建输入流对象。
-            fis = new FileInputStream(System.getProperty("User.dir") + "/Java基础及进阶/M13_反射/反射Ⅰ_获取Class实例化对象/实例化对象2/classinfo.properties");
+            fis = new FileInputStream(System.getProperty("User.dir") + "/Java基础及进阶/M13_反射/反射Ⅰ_获取Class实例化对象/实例化对象2/classInfo.properties");
             // 创建属性类对象Map
             Properties pro = new Properties();
             // 加载

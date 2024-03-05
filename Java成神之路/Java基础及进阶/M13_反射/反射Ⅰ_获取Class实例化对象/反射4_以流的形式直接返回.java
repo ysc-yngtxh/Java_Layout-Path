@@ -9,7 +9,7 @@ public class 反射4_以流的形式直接返回 {
         // 获取一个文件的绝对路径
         String path = Thread.currentThread()
                 .getContextClassLoader()
-                .getResource("classinfo.properties")
+                .getResource("classInfo.properties")
                 .toURI()
                 .getPath();
         FileInputStream reader = null;
@@ -41,7 +41,7 @@ public class 反射4_以流的形式直接返回 {
         // 通过流来返回，其实就是将获取路径和创建流对象两行代码合并
         InputStream in = null;
         try{
-            in = Thread.currentThread().getContextClassLoader().getResourceAsStream("classinfo.properties");
+            in = Thread.currentThread().getContextClassLoader().getResourceAsStream("classInfo.properties");
             Properties pro1 = new Properties();
             pro1.load(in);
             String value2 = pro1.getProperty("className3");
