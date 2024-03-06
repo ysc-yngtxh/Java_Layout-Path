@@ -20,6 +20,7 @@
 
 ## 三、Spring的一二三级缓存是什么？
    ```
+   注意：这里的Bean流程与类的实例化流程是有区别的。
    /** 第一级缓存，存放可用的成品Bean。缓存的是已经实例化、属性注入、初始化后的 Bean 对象。 */
    private final Map<String, Object> singletonObjects = new ConcurrentHashMap<>(256);
 

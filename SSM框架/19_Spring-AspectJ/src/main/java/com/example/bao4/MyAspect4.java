@@ -2,10 +2,13 @@ package com.example.bao4;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 
 import java.util.Date;
-
 
 /**
  * @author 游家纨绔
@@ -74,6 +77,6 @@ public class MyAspect4 {
         return result;
     }
 
-    // 在我自己做的总结概述中，我们发现当我们环绕通知没有返回值时，会影响到后置通知的 returning="res" 的参数值(为null)
+    // 在我自己做的总结概述中，发现当我们环绕通知没有返回值时，会影响到后置通知的 returning="res" 的参数值(为null)
     // 说明，在执行环绕通知时，把目标方法的返回值'挪用'到自己身上了。所以，后置通知上目标方法的返回值要看环绕通知的返回值的'脸色'
 }

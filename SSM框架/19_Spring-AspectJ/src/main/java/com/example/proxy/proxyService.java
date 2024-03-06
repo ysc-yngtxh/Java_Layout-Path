@@ -11,6 +11,5 @@ public interface proxyService {
 
     void saveSigUser();
 
-
     void saveAllUser();
 }

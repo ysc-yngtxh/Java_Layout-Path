@@ -4,7 +4,7 @@ import com.example.bao1.SomeServiceImpl;
 import com.example.bao2.OtherService;
 import com.example.bao3.FirstService;
 import com.example.bao4.OutService;
-import com.example.cglib1.CglibServiceImpl;
+import com.example.cglib.CglibServiceImpl;
 import com.example.jdk.CglibByServiceImpl;
 import com.example.proxy.proxyServiceImpl;
 import org.junit.Test;
@@ -64,7 +64,7 @@ public class MyApp {
         proxy.like("曹玉敏，我喜欢你!", 23);
     }
 
-    // cglib1包中没有接口是cglib代理(有接口默认是jdk代理，没有接口默认是cglib代理)
+    // cglib包中没有接口是cglib代理(有接口默认是jdk代理，没有接口默认是cglib代理)
     @Test
     public void text06(){
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");

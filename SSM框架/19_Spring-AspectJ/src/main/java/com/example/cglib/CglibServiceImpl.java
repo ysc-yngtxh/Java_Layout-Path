@@ -1,4 +1,4 @@
-package com.example.cglib1;
+package com.example.cglib;
 
 public class CglibServiceImpl {
     public String like(String name, Integer time) {

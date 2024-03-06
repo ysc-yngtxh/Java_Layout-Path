@@ -22,8 +22,8 @@
     <bean id="Service4" class="com.example.bao4.OutServiceImpl"/>
     <bean id="TmyAspect" class="com.example.bao4.MyAspect4"/>
 
-    <bean id="Service5" class="com.example.cglib1.CglibServiceImpl"/>
-    <bean id="CmyAspect" class="com.example.cglib1.MyAspect5"/>
+    <bean id="Service5" class="com.example.cglib.CglibServiceImpl"/>
+    <bean id="CmyAspect" class="com.example.cglib.MyAspect5"/>
 
     <bean id="Service6" class="com.example.jdk.CglibByServiceImpl"/>
     <bean id="CBmyAspect" class="com.example.jdk.MyAspect6"/>

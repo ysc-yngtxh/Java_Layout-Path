@@ -22,9 +22,9 @@ import java.util.Map;
 @Component
 public class AnnotationScannerConfigurer implements BeanDefinitionRegistryPostProcessor {
 
-	// TODO 1、Spring中的每个bean的创建是依赖一个对应的BeanDefintion实例，该实例保存了bean对象创建必要的信息，
+	// TODO 1、Spring中的每个bean的创建是依赖一个对应的BeanDefinition实例，该实例保存了bean对象创建必要的信息，
 	//         比如bean的class类型，是否是抽象类、属性信息等。
-	//      2、BeanDefinitionRegistry是一个接口，bean定义信息的注册中心，用于注册、删除、管理BeanDefintion。
+	//      2、BeanDefinitionRegistry是一个接口，bean定义信息的注册中心，用于注册、删除、管理BeanDefinition。
 	//         如果外部想要添加Bean的定义信息，创建新的Bean, 怎么办？ 当然是可以通过Spring提供的扩展接口BeanDefinitionRegistryPostProcessor实现，
 	//         比较典型的一个案例是mybatis-spring，就是通过实现该接口，添加mybatis相关的bean。
 	//      3、所以，BeanDefinitionRegistryPostProcessor就是bean定义注册中心的后置处理器，
