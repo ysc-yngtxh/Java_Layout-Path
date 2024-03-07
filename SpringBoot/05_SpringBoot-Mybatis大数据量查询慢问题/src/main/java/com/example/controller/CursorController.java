@@ -23,12 +23,14 @@ public class CursorController {
         studentService.streamingQuery1();
     }
 
+
     // 启动项目时添加 JVM内存参数 -Xmx50M 来进行模拟。
     // 数据库中有10W条数据，使用游标查询Cursor可以保持正常执行。
     @RequestMapping("/streamingQuery2")
     public @ResponseBody void streamingQuery2() {
         studentService.streamingQuery2();
     }
+
 
     // 我们可以通过在启动项目时添加 JVM内存参数 -Xmx50M 来进行模拟。
     // 数据库中有10W条数据，使用这个方法就会出现OOM(内存溢出)。
