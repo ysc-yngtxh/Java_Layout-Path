@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.net.URISyntaxException;
 import java.util.Map;
 
 @Controller
@@ -30,16 +29,5 @@ public class StudentController {
         Map<String, Student> map = studentService.queryStudentByIdStudent(id);
         String email = map.get("游诗成").getEmail();
         return map;
-    }
-
-    @RequestMapping("/streamingQuery")
-    public @ResponseBody void streamingQuery() {
-        studentService.streamingQuery();
-    }
-
-    @RequestMapping("/csvResultHandler")
-    public @ResponseBody void CsvResultHandler() throws URISyntaxException {
-        // 调用Mapper方法，开始流式查询
-        studentService.selectStudent();
     }
 }

@@ -20,7 +20,7 @@ public interface StudentMapper {
     /** 区别于 selectByPrimaryKeyMap 查询语句，即xml文件中返回值不同就会导致取value都能取到，
      * selectByPrimaryKeyMap 查询语句结果的value值无法通过Student实体类get方法获取详细属性值,除非强转成Map类型,通过get属性的方式获取
      * selectByPrimaryKeyStudent 查询语句结果的value值是可以通过Student实体类get方法获取详细属性值：比如 getName()
-     *
+     * <p>
      * 简单思考一下就知道：
      *   selectByPrimaryKeyMap返回类型是Map，所以语句结果的value值只能强转成Map类型,通过get("xxx")方式获取
      *   selectByPrimaryKeyStudent返回类型是Student，语句结果的value值可以通过Student实体类get方法获取详细属性值
@@ -41,7 +41,7 @@ public interface StudentMapper {
     //  ⚠️：实现流式查询需要在配置文件中的数据库连接的url后添加：useCursorFetch=true
 
     // 流式查询的第一种写法：指定Mapper方法的返回值为 Cursor 类型，这个查询方法就会被 MyBatis 定义为一个流式查询。
-    //                   且Cursor迭代会进行多次查询，每次查询的数据量为一个。
+    //                   且Cursor迭代会进行多次查询，每次查询的数据量为一个。因此又叫做游标查询
     @ResultType(Student.class)
     @Select("SELECT * FROM `student`")
     // FORWARD_ONLY：结果集的游标只能向下滚动     fetchSize：表示要从数据库中每次检索的行数
@@ -56,8 +56,10 @@ public interface StudentMapper {
     @Options(resultSetType = ResultSetType.FORWARD_ONLY, fetchSize = Integer.MIN_VALUE)
     Cursor<Student> streamingQuery2();
 
-    /** streamingQuery2() 效率以及性能是优于 streamingQuery1() ，
-     * 因为指定了Cursor每次从数据库中读取的数据量，减少了迭代次数*/
+    /**
+     * streamingQuery2() 效率以及性能是优于 streamingQuery1() ，
+     * 因为指定了Cursor每次从数据库中读取的数据量，减少了迭代次数
+     */
 
 
 

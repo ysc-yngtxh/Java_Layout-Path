@@ -9,7 +9,9 @@ public interface StudentService {
 
     Map<String, Student> queryStudentByIdStudent(Integer id);
 
-    void streamingQuery();
+    void streamingQuery1();
+
+    void streamingQuery2();
 
     void selectStudent();
 }

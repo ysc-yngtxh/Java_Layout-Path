@@ -15,7 +15,7 @@
             Mysql中有两种方式可以实现：①、replace into     ②、on duplicate key update(推荐)-->
 
     <!--REPLACE INTO student(`id`, `name`, `email`, `age`) VALUES ( 1, "XiaoCao", "123@163.com", 25 )
-        它的功能是替代，即：如果有重复(主键或者唯一索引重复)的话就先删除，然后再插入；如果没有重复的则新增
+        REPLACE INTO的功能是替代，即：如果有重复(主键或者唯一索引重复)的话就先删除，然后再插入；如果没有重复的则新增
         下列是数据库中数据：
                        1, "XiaoZhang", "123@163.com", 25
                        2, "XiaoYou",   "123@163.com", 26
@@ -84,9 +84,9 @@
               #{item.email,jdbcType=VARCHAR}, #{item.age,jdbcType=INTEGER})
         </foreach>
         ON DUPLICATE KEY UPDATE
-            id = values(`id`),
-            name = values(`name`),
-            email = values(`email`),
-            age = values(`age`)
+            id = VALUES(`id`),
+            name = VALUES(`name`),
+            email = VALUES(`email`),
+            age = VALUES(`age`)
     </insert>
 </mapper>
