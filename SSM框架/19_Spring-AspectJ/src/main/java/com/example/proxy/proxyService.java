@@ -7,6 +7,8 @@ package com.example.proxy;
  */
 public interface proxyService {
 
+    void saveRpc();
+
     void saveUser();
 
     void saveSigUser();

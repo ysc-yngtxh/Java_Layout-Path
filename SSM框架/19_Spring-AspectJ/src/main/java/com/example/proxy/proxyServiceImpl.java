@@ -1,6 +1,8 @@
 package com.example.proxy;
 
+import com.example.jdk.JdkService;
 import org.springframework.aop.framework.AopContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,6 +12,17 @@ import org.springframework.stereotype.Service;
  */
 @Service(value = "Service7")
 public class proxyServiceImpl implements proxyService {
+    // TODO 一旦代理对象创建完成，Spring会将其注册到容器中，替代原来的目标对象。
+    //      这意味着，当其他Bean需要注入目标类的实例时，实际上注入的是代理对象。
+    //      代理对象的target是指向目标对象的
+    @Autowired
+    private JdkService jdkService;
+    public void saveRpc() {
+        String like = jdkService.like("123", 1);
+        System.out.println("saveUser方法执行..." + like);
+    }
+
+
     @Override
     public void saveUser() {
         System.out.println("saveUser方法执行...");

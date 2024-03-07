@@ -211,7 +211,7 @@
             8)、写jsp页面
             
        31_SpringMVC-整合SSM  发起命令请求流程
-           index.xml--addStudent.jsp--student/addStudent.do(service的发昂发，调用dao的方法)--result.jsp
+           index.xml--addStudent.jsp--student/addStudent.do(service的方法，调用dao的方法)--result.jsp
 
 三、异常处理：
     Springmvc框架采用的是统一，全局的异常处理。

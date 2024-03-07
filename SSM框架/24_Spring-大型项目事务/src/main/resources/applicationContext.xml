@@ -81,7 +81,7 @@
             <!--使用通配符，指定很多的方法-->
             <tx:method name="add*" propagation="REQUIRES_NEW"/>
             <!--指定修改方法-->
-            <tx:method name="modify*"/>
+            <tx:method  name="modify*"/>
             <!--指定删除方法-->
             <tx:method name="remove*"/>
             <!--指定查询方法-->
@@ -96,7 +96,7 @@
             expression:切入点表达式，指定哪些类要使用事务，aspectJ会创建代理对象
         -->
         <aop:pointcut id="servicePt" expression="execution(* *..service..*.*(..))"/>
-        <!--配置增强器：关联adivce和pointcut
+        <!--配置增强器：关联advice和pointcut
             advice-ref：通知，上面aop:advice哪里的配置
             pointcut-ref：切入点表达式的id
         -->

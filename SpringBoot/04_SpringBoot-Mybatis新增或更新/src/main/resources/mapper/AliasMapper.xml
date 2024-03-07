@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.dao.StudentMapper">
+
+    <insert id="insertOrUpdateOneUserInfo">
+        <selectKey keyProperty="count" resultType="int" order="BEFORE">
+            select count(*) as count from `student` where id = #{id}
+        </selectKey>
+        <!-- 如果大于0则更新 -->
+        <if test="count>0">
+            UPDATE  `student`
+            <set >
+                <if test="id != null and id != ''">
+                    id = #{id},
+                </if>
+                <if test="name != null and name != ''">
+                    name = #{name},
+                </if>
+                <if test="email != null and email != ''">
+                    email = #{email},
+                </if>
+                <if test="age != null and age != ''">
+                    age = #{age}
+                </if>
+            </set>
+            WHERE id = #{id}
+        </if>
+        <!-- 如果等于0则保存 -->
+        <if test="count==0">
+            INSERT IGNORE INTO `student`(`id`, `name`, `email`, `age`)
+            VALUES
+            (
+              #{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+              #{email,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}
+            )
+        </if>
+    </insert>
+</mapper>
+

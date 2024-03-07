@@ -36,7 +36,7 @@ public class AppI18nConfig implements InitializingBean {
     }
 
     public AppI18nConfig() {
-        System.out.println("InitializingBean构造方法执行");
+        System.out.println("InitializingBean实现类的构造方法执行");
     }
 
     @PostConstruct

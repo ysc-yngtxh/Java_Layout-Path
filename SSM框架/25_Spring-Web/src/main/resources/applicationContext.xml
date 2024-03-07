@@ -46,6 +46,6 @@
 
     <!--声明service-->
     <bean id="studentService" class="com.example.service.StudentServiceImpl">
-        <property name="studentMapper" ref="studentMapper"/>
+        <property name="studentDao" ref="studentDao"/>
     </bean>
 </beans>

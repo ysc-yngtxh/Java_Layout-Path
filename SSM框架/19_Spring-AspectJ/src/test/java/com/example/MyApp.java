@@ -5,7 +5,7 @@ import com.example.bao2.OtherService;
 import com.example.bao3.FirstService;
 import com.example.bao4.OutService;
 import com.example.cglib.CglibServiceImpl;
-import com.example.jdk.CglibByServiceImpl;
+import com.example.jdk.JdkByServiceImpl;
 import com.example.proxy.proxyServiceImpl;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -18,6 +18,7 @@ public class MyApp {
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         // 从容器中获取目标
         SomeServiceImpl proxy = ac.getBean("Service1", SomeServiceImpl.class);
+        System.err.println("Spring识别到目标类进行了增强功能Aop，因此这里获取到的目标类是代理对象，而不是实例对象。\n且代理对象是在目标对象属性注入之后、初始化之前 创建的 " + proxy);
         // 通过代理的对象执行方法，实现目标方法执行时，增强了功能
         proxy.doSome("曹玉敏我喜欢你", 23);
     }
@@ -28,6 +29,7 @@ public class MyApp {
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         // 从容器中获取目标
         OtherService proxy = (OtherService) ac.getBean("Service2");
+        System.err.println("Spring识别到目标类进行了增强功能Aop，因此这里获取到的目标类是代理对象，而不是实例对象。\n且代理对象是在目标对象属性注入之后、初始化之前 创建的 " + proxy);
         // 通过代理的对象执行方法，实现目标方法执行时，增强了功能
         String str = proxy.doOther("曹玉敏我喜欢你", 2020917);
         System.out.println("str=" + str);
@@ -39,6 +41,7 @@ public class MyApp {
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         // 从容器中获取目标
         OtherService proxy = (OtherService) ac.getBean("Service2");
+        System.err.println("Spring识别到目标类进行了增强功能Aop，因此这里获取到的目标类是代理对象，而不是实例对象。\n且代理对象是在目标对象属性注入之后、初始化之前 创建的 " + proxy);
         // 通过代理的对象执行方法，实现目标方法执行时，增强了功能
         proxy.student("曹玉敏我喜欢你", 2020917);
     }
@@ -49,6 +52,7 @@ public class MyApp {
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         // 从容器中获取目标
         FirstService proxy = (FirstService) ac.getBean("Service3");
+        System.err.println("Spring识别到目标类进行了增强功能Aop，因此这里获取到的目标类是代理对象，而不是实例对象。\n且代理对象是在目标对象属性注入之后、初始化之前 创建的 " + proxy);
         // 通过代理的对象执行方法，实现目标方法执行时，增强了功能
         String str = proxy.First("曹玉敏我喜欢你", 2020917);
         System.out.println("str=" + str);
@@ -59,8 +63,7 @@ public class MyApp {
     public void text05(){
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         OutService proxy = (OutService) ac.getBean("Service4");
-
-        System.out.println("proxy:" + proxy);
+        System.err.println("Spring识别到目标类进行了增强功能Aop，因此这里获取到的目标类是代理对象，而不是实例对象。\n且代理对象是在目标对象属性注入之后、初始化之前 创建的 " + proxy);
         proxy.like("曹玉敏，我喜欢你!", 23);
     }
 
@@ -69,17 +72,15 @@ public class MyApp {
     public void text06(){
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         CglibServiceImpl proxy = (CglibServiceImpl) ac.getBean("Service5");
-
-        System.out.println("proxy:" + proxy);
+        System.err.println("Spring识别到目标类进行了增强功能Aop，因此这里获取到的目标类是代理对象，而不是实例对象。\n且代理对象是在目标对象属性注入之后、初始化之前 创建的 " + proxy);
         proxy.like("曹玉敏，我喜欢你!", 23);
     }
 
     @Test
     public void text07(){
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
-        CglibByServiceImpl proxy = (CglibByServiceImpl) ac.getBean("Service6");
-
-        System.out.println("proxy:" + proxy);
+        JdkByServiceImpl proxy = (JdkByServiceImpl) ac.getBean("Service6");
+        System.err.println("Spring识别到目标类进行了增强功能Aop，因此这里获取到的目标类是代理对象，而不是实例对象。\n且代理对象是在目标对象属性注入之后、初始化之前 创建的 " + proxy);
         proxy.like("曹玉敏，我喜欢你!", 23);
     }
 
@@ -88,8 +89,7 @@ public class MyApp {
     public void text08(){
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         proxyServiceImpl proxy = (proxyServiceImpl) ac.getBean("Service7");
-
-        System.out.println("proxy:" + proxy);
+        System.err.println("Spring识别到目标类进行了增强功能Aop，因此这里获取到的目标类是代理对象，而不是实例对象。\n且代理对象是在目标对象属性注入之后、初始化之前 创建的 " + proxy);
         proxy.saveSigUser();
     }
 
@@ -98,8 +98,15 @@ public class MyApp {
     public void text09(){
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         proxyServiceImpl proxy = (proxyServiceImpl) ac.getBean("Service7");
-
-        System.out.println("proxy:" + proxy);
+        System.err.println("Spring识别到目标类进行了增强功能Aop，因此这里获取到的目标类是代理对象，而不是实例对象。\n且代理对象是在目标对象属性注入之后、初始化之前 创建的 " + proxy);
         proxy.saveAllUser();
+    }
+
+    @Test
+    public void text10(){
+        ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+        proxyServiceImpl proxy = (proxyServiceImpl) ac.getBean("Service7");
+
+        proxy.saveRpc();
     }
 }

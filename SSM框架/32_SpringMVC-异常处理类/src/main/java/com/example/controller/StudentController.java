@@ -1,8 +1,8 @@
 package com.example.controller;
 
-import com.example.exception.AgeException;
+import com.example.exception.custom.AgeException;
 import com.example.exception.MyUserException;
-import com.example.exception.NameException;
+import com.example.exception.custom.NameException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,8 +23,7 @@ public class StudentController {
               if(age==null || age>80){
                   throw new AgeException("年龄比较大！！！");
               }
-
-        // }catch(Exception e){
+        // } catch(Exception e){
         //    e.printStackTrace();
         // }
         mv.addObject("myname",name);

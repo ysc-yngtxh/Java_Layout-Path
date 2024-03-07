@@ -25,7 +25,7 @@
     <bean id="Service5" class="com.example.cglib.CglibServiceImpl"/>
     <bean id="CmyAspect" class="com.example.cglib.MyAspect5"/>
 
-    <bean id="Service6" class="com.example.jdk.CglibByServiceImpl"/>
+    <bean id="Service6" class="com.example.jdk.JdkByServiceImpl"/>
     <bean id="CBmyAspect" class="com.example.jdk.MyAspect6"/>
 
     <!--声明自动代理生成器：使用aspectJ框架内部的功能，创建目标对象的代理对象。

@@ -12,6 +12,6 @@ public class MyApp {
         ApplicationContext ac = new ClassPathXmlApplicationContext(config);
 
         BuyGoodsService service = ac.getBean("buyService", BuyGoodsService.class);
-        service.buy(1001, 10);
+        service.buy(11, 10);
     }
 }
