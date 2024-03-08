@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Lazy(false)
-public class ApplicationContextRegister implements ApplicationContextAware {
+public class SpringContextHolder implements ApplicationContextAware {
     private static ApplicationContext APPLICATION_CONTEXT;
 
     @Override

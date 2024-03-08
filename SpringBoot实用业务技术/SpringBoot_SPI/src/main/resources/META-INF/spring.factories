@@ -1,4 +1,4 @@
 
-com.example.spi.Robot=\
-com.example.spi.Bumblebee,\
-com.example.spi.OptimusPrime
+com.example.spi.spring.Robot=\
+com.example.spi.spring.Bumblebee,\
+com.example.spi.spring.OptimusPrime

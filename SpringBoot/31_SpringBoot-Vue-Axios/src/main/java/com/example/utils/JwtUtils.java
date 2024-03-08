@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class JwtUtils {
 
-    private static final long EXPIRE_TIME = 7*24*60*60*1000;//Token存活时间:七天
+    private static final long EXPIRE_TIME = 7*24*60*60*1000; // Token存活时间:七天
 
     private static final String salt = "csaydgcaisdyc";
 

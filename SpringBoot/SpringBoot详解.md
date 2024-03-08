@@ -7,8 +7,8 @@
    
     1. @EnableAutoConfiguration：自动配置  
         此注解自动载入应用程序所需的所有Bean——这依赖于Spring Boot在类路径中的查找。  
-        该注解组合了@Import注解，@Import注解导入了EnableAutoConfigurationImportSelector类，
-        它使用SpringFactoriesLoader.loaderFactoryNames方法来扫描具有META-INF/spring.factories文件的jar包。
+        该注解组合了@Import注解，@Import注解导入了 AutoConfigurationImportSelector 类，
+        它使用 SpringFactoriesLoader.loaderFactoryNames 方法来扫描具有META-INF/spring.factories文件的jar包。
         而spring.factories里声明了有哪些自动配置.
      
     2. @SpringBootConfiguration：配置文件  

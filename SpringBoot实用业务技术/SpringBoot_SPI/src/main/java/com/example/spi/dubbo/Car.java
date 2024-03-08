@@ -1,4 +1,4 @@
-package com.example.spi;
+package com.example.spi.dubbo;
 
 import com.alibaba.dubbo.common.extension.SPI;
 
@@ -8,6 +8,6 @@ import com.alibaba.dubbo.common.extension.SPI;
  * @apiNote TODO
  */
 @SPI  // TODO 注意⚠️：只有使用 Dubbo SPI 时才需要该@SPI注解
-public interface Robot {
+public interface Car {
     void sayHello();
 }

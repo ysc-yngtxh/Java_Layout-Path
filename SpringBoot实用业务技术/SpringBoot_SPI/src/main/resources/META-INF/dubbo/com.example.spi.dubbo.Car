@@ -1,0 +1,3 @@
+
+bus = com.example.spi.dubbo.Bus
+motorcycle = com.example.spi.dubbo.Motorcycle

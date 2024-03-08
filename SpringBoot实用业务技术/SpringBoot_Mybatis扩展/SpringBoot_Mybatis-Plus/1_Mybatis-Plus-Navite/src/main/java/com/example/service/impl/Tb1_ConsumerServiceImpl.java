@@ -200,7 +200,7 @@ public class Tb1_ConsumerServiceImpl implements Tb1_ConsumerService {
     // TODO 第二部分：高级查询
     /**
      * condition作用：当它的值为true的时候，这个方法才会执行
-     * 每个sql方法的都有重载方法的第一个入参为boolean condition，表示该条件是否加入最后生成的sql中
+     * 每个sql方法的都有重载方法的第一个入参为boolean dependency，表示该条件是否加入最后生成的sql中
      */
     public List<Tb1_Consumer> condition(String name, String email) {
         QueryWrapper<Tb1_Consumer> queryWrapper = new QueryWrapper<>();

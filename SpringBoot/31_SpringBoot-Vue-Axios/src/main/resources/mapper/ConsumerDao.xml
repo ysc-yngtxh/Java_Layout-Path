@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.ConsumerDao">
 
-    <resultMap type="com.example.entity.Consumer" id="ConsumerMap">
+    <resultMap type="Consumer" id="ConsumerMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="username" column="username" jdbcType="VARCHAR"/>
         <result property="password" column="password" jdbcType="VARCHAR"/>
@@ -15,7 +15,8 @@
         insert into consumer(username, password, alias, age, sex, phone, address, delete_flag)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.username}, #{entity.password}, #{entity.alias}, #{entity.age}, #{entity.sex}, #{entity.phone}, #{entity.address}, #{entity.deleteFlag})
+            (#{entity.username}, #{entity.password}, #{entity.alias}, #{entity.age},
+             #{entity.sex}, #{entity.phone}, #{entity.address}, #{entity.deleteFlag})
         </foreach>
         on duplicate key update
         username = values(username),

@@ -1,4 +1,4 @@
-package com.example.spi;
+package com.example.spi.spring;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,7 @@ public class Bumblebee implements Robot {
     private final Logger log = LoggerFactory.getLogger(Bumblebee.class);
     @Override
     public void sayHello() {
-        log.debug("Hello, I am Bumblebee.");
-        System.out.println("Hello, I am Bumblebee.");
+        log.debug("Hello, I am Cat.");
+        System.out.println("Hello, I am Cat.");
     }
 }
