@@ -26,8 +26,10 @@ package N14_注解.注解Ⅰ_注解概论;
          用来标注“注解类型”的注解，称为“元注解”(按住Ctrl点击下方程序中的@Override,可以看到元注解)
 
      常见的元注解有哪些？
-         Target
-         Retention
+         @Target
+         @Retention
+         @Inherited
+         @Documented
 
      关于Target注解：
          这是一个元注解，用来标注“注解类型”的“N14_注解”
@@ -39,6 +41,14 @@ package N14_注解.注解Ⅰ_注解概论;
          @Retention(RetentionPolicy.SOURCE)   表示该注解只被保留在Java源文件中。
          @Retention(RetentionPolicy.CLASS)    表示该注解被保存在class文件中
          @Retention(RetentionPolicy.RUNTIME)  表示该注解被保存在class文件中，并且可以被反射机制读取
+
+     关于Inherited注解：
+         @Inherited   表示该注解可以被继承。
+                      比如自己定义一个@MyAnnotation注解，然后在A类上添加该@MyAnnotation注解
+                      B类去继承A类，但不在B类上添加@MyAnnotation注解，那么B类也可以使用@MyAnnotation注解。
+
+     关于Documented注解：
+         @Documented   表示该注解可以被javadoc工具提取成文档。
  */
 public class 注解1_定义注解 {
     @Override
