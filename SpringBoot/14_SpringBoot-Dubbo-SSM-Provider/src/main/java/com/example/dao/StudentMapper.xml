@@ -1,33 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="StudentMapper">
+<mapper namespace="com.example.dao.StudentMapper">
 
-  <resultMap id="BaseResultMap" type="Student">
+  <resultMap id="BaseResultMap" type="com.example.domain.Student">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="age" jdbcType="INTEGER" property="age" />
   </resultMap>
+
   <sql id="Base_Column_List">
     id, name, email, age
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from student
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from student
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="Student">
+
+  <insert id="insert" parameterType="com.example.domain.Student">
     insert into student (id, name, email, 
       age)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{age,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="Student">
+
+  <insert id="insertSelective" parameterType="com.example.domain.Student">
     insert into student
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -58,7 +63,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="Student">
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.domain.Student">
     update student
     <set>
       <if test="name != null">
@@ -73,7 +79,8 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="Student">
+
+  <update id="updateByPrimaryKey" parameterType="com.example.domain.Student">
     update student
     set name = #{name,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},

@@ -1,13 +1,13 @@
 package org.example;
 
 import org.apache.ibatis.session.SqlSession;
-import org.example.mapper.OrdersMapper;
-import org.example.mapper.RoleMapper;
-import org.example.mapper.UserMapper;
-import org.example.pojo.Orders;
-import org.example.pojo.Role;
-import org.example.pojo.User;
-import org.example.utils.MyBatisUtils;
+import com.example.mapper.OrdersMapper;
+import com.example.mapper.RoleMapper;
+import com.example.mapper.UserMapper;
+import com.example.pojo.Orders;
+import com.example.pojo.Role;
+import com.example.pojo.User;
+import com.example.utils.MyBatisUtils;
 import org.junit.Test;
 
 /**

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.StudentMapper">
 
-  <resultMap id="BaseResultMap" type="com.example.domain.Student" >
+  <resultMap id="BaseResultMap" type="Student" >
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="email" jdbcType="VARCHAR" property="email" />
@@ -20,7 +20,7 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
-  <select id="selectByPrimaryKeyStudent" parameterType="java.lang.Integer" resultType="com.example.domain.Student">
+  <select id="selectByPrimaryKeyStudent" parameterType="java.lang.Integer" resultType="Student">
     select
     <include refid="Base_Column_List" />
     from student

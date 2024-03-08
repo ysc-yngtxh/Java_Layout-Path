@@ -3,7 +3,7 @@
 
 <mapper namespace="com.example.dao.StudentMapper">
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="com.example.domain.Student">
+    <select id="selectByPrimaryKey" parameterType="int" resultType="Student">
         SELECT id,name,email,age
         FROM student
         WHERE id = #{id,jdbcType=INTEGER}

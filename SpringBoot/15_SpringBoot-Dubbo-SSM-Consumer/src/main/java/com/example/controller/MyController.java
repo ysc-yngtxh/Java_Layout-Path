@@ -33,5 +33,4 @@ public class MyController {
         Integer allStudentCount = studentService.queryAllStudentCount();
         return "学生总人数为："+allStudentCount;
     }
-
 }

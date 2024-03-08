@@ -5,8 +5,8 @@
     <title>循环遍历复杂集合</title>
 </head>
 <body>
-       <div th:each="myListMap:${myList}">
-           <div th:each="myListMapObj:${myListMap}">
+       <div th:each="myListMap : ${myList}">
+           <div th:each="myListMapObj : ${myListMap}">
                Map集合的key:<span th:text="${myListMapObj.key}"></span>
                <div th:each="myListMapObjList:${myListMapObj.value}">
                    <span th:text="${myListMapObjList.id}"></span>

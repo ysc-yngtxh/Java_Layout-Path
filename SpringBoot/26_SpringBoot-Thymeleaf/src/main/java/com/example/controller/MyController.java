@@ -25,7 +25,7 @@ public class MyController {
     @RequestMapping("/user/detail")
     public String userDetail1(Model model){
         User user = new User();
-        user.setId(1001);
+        user.setId(11);
         user.setUsername("曹玉敏");
         user.setAge(21);
         model.addAttribute("user", user);
@@ -34,7 +34,7 @@ public class MyController {
 
     @RequestMapping("/url")
     public String userDetail2(Model model, String username){
-        model.addAttribute("id", 1001);
+        model.addAttribute("id", 11);
         return "url";
     }
 

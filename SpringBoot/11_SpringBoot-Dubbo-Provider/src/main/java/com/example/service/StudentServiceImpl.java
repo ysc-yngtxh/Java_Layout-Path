@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class StudentServiceImpl implements StudentService {
 
     @Override
-    public Integer quetyAllStudedntCount(String count) {
+    public Integer queryAllStudentCount(String count) {
         // 调用数据持久层
         return 1250;
     }

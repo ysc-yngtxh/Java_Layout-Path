@@ -9,9 +9,10 @@
         <setting name="logImpl" value="STDOUT_LOGGING"/>
     </settings>
 
-    <!--resultMap中的type类型写了就必须加上这个，否则报错-->
+
+    <!--设置别名：通过这个别名，我们在XML文件中的paramType、resultType参数上不用写全限定类名，只需要别名即可-->
     <typeAliases>
-        <package name="org/example/pojo"/>
+        <package name="com.example.pojo"/>
     </typeAliases>
 
     <environments default="online">

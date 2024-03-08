@@ -16,7 +16,7 @@ public class MyController {
 
     @RequestMapping(value = "/user/detail")
     public @ResponseBody Object userDetail(){
-        Map<String, Object> retMap = new HashMap();
+        Map<String, Object> retMap = new HashMap<>();
         retMap.put("id", 1001);
         retMap.put("username", "lisi");
         return retMap;
