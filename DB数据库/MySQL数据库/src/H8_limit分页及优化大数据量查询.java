@@ -72,8 +72,9 @@ LIMIT(重点之中的重点，以后分页查询全靠它了)
                   所以，Ⓑ语句走的是索引查询的分页；Ⓐ语句走的是全表查询的分页。因此，第二条比第一条查询速度快很多
              缺点：只适用于id递增的情况。
              提供id非递增的写法：
-               SELECT * FROM `user_operation_log`
-                   WHERE id IN(SELECT t.id FROM (SELECT id FROM `user_operation_log` LIMIT 1000000, 10) AS t);
+                  注意：某些 mysql 版本不支持在 in 子句中使用 limit，所以采用了多个嵌套select
+                  SELECT * FROM `user_operation_log`
+                      WHERE id IN(SELECT t.id FROM (SELECT id FROM `user_operation_log` LIMIT 1000000, 10) AS t);
 
           Ⅱ、采用 id 限定方式
              这种方法要求更高些，id必须是连续递增，而且还得计算id的范围，然后使用 between

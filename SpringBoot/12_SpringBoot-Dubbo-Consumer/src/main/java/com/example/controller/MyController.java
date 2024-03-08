@@ -20,7 +20,7 @@ public class MyController {
     @RequestMapping(value="/student/count")
     public @ResponseBody Object query1(){
 
-        Integer allStudedntCount = studentService.quetyAllStudedntCount("count");
-        return "学生总人数为：" + allStudedntCount;
+        Integer allStudentCount = studentService.quetyAllStudedntCount("count");
+        return "学生总人数为：" + allStudentCount;
     }
 }
