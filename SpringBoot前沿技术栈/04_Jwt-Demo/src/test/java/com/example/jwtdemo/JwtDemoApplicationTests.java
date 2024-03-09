@@ -26,16 +26,16 @@ class JwtDemoApplicationTests {
         JwtBuilder jwtBuilder = Jwts.builder();
         String jwtToken = jwtBuilder
                 // Header
-                .setHeaderParam("tpy","JWT")
-                .setHeaderParam("alg","HS256")
+                .setHeaderParam("tpy", "JWT")
+                .setHeaderParam("alg", "HS256")
                 // payload
-                .claim("name","陈玉梅")
-                .claim("pwd","514")
+                .claim("name" ,"陈玉梅")
+                .claim("pwd", "514")
                 .setSubject("admin-test")  // 设置主题
                 .setExpiration(new Date(System.currentTimeMillis()+1000*60*60*24*7))  // 设置有效时间
                 .setId(UUID.randomUUID().toString())
                 // signature
-                .signWith(SignatureAlgorithm.HS256,signature)
+                .signWith(SignatureAlgorithm.HS256, signature)
                 .compact(); // 将所有信息紧凑起来
 
         log.info(jwtToken);

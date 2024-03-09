@@ -52,57 +52,45 @@
 ***
 
 ## 一、Elasticsearch也是基于Lucene的全文检索库，本质也是存储数据，很多的概念与MySQL类似
-
-### 1. **对比关系**
-
-&emsp;&emsp;&emsp;&emsp;索引集(indices)-------Databases数据库
-
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;类型(type)-----------------表(从6.0.0开始单个索引中只能有一个类型，7.0.0以后将不建议使用，8.0.0 以后完全不支持,现在统一用'_doc')
-
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;文档(Document)----------Row行(类比字段类型,是否主键等)
-
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;字段(Field)----------low列(类比字段)
-
-### 2. **每个Elasticsearch索引都有自己的 分片(number_of_shards) 和 副本(number_of_replicas)**
-
-&emsp;&emsp;&emsp;&emsp;分片：数据拆分后的各个部分（比如"我是中国人"，进行分词后就会有"我","是","中国人","中国","国人"，那么就会有五个分片）
-
-&emsp;&emsp;&emsp;&emsp;副本：每个分片的复制（就是"我","是","中国人","中国","国人"的备份，避免主分片出现异常错误，可以在副本中检索）
-
-### 3. **Elasticsearch 集群有多个节点组成，形成分布式集群。那么，什么是节点呢？**
-
-&emsp;&emsp;&emsp;&emsp;节点（Node），就是一个 Elasticsearch 应用实例。大家都知道 Elasticsearch 源代码是 Java 写的，那么节点就是一个 Java 进程。
-
-&emsp;&emsp;&emsp;&emsp;所以类似 Spring 应用一样，一台服务器或者本机可以运行多个节点，只要对应的端口不同即可。但生产服务器中，
-
-&emsp;&emsp;&emsp;&emsp;一般一台服务器运行一个 Elasticsearch 节点。（通俗讲就是启动一个elasticsearch就有一个节点）
-
-### 4. **要注意的是:Elasticsearch本身就是分布式的，因此即便你只有一个节点，Elasticsearch默认也会对你的数据进行主分片和副本分片操作，当你向集群添加新数据时，数据也会在新加入的节点中进行平衡。**
-
-&emsp;&emsp;&emsp;&emsp;比如：节点indexA索引的主分片为5，副本为1(复制一份主分片)，则表示一共有10块分片。
-
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;这个时候再启动一个节点indexB，那么10块分片会均匀分布。(例如：indexA节点主分片有3块分片，副本分片4块，indexB节点3块分片)
-
-### 5. **索引状态**
-
-&emsp;&emsp;&emsp;&emsp;Green 主分片与副本分片都正常
-
-&emsp;&emsp;&emsp;&emsp;Yellow 主分片正常，副本分片不正常
-
-&emsp;&emsp;&emsp;&emsp;Red 有主分片不正常，可能某个分片容量超过了磁盘大小等
-
-### 6. **为了能将搜索细化到底，可以使用ik分词器，可以下载解压后放入Elasticsearch包下的plugins包内，并重启Elasticsearch**
-
-   - ```
-      POST _analyze               
-      {  
-      "analyzer": "ik_max_word",  
-      "text": "我是中国人"  
-      }  
-      analyzer: "ik_max_word"  最细的分法  
-      analyzer: "ik_smart"     稍粗略的分法
-      ```  
-      - ![ES原理图片](src/main/resources/static/image-0.jpg)
+    1. 对比关系
+       索引集(indices)-------Databases数据库
+       
+             类型(type)-----------------表
+             (从6.0.0开始单个索引中只能有一个类型，7.0.0以后将不建议使用，8.0.0 以后完全不支持,现在统一用'_doc')
+       
+                   文档(Document)----------Row行(类比字段类型,是否主键等)
+           
+                         字段(Field)----------low列(类比字段)
+    
+    2. 每个Elasticsearch索引都有自己的 分片(number_of_shards) 和 副本(number_of_replicas)
+       分片：数据拆分后的各个部分（比如"我是中国人"，进行分词后就会有"我","是","中国人","中国","国人"，那么就会有五个分片）
+       副本：每个分片的复制（就是"我","是","中国人","中国","国人"的备份，避免主分片出现异常错误，可以在副本中检索）
+    
+    3. Elasticsearch 集群有多个节点组成，形成分布式集群。那么，什么是节点呢？
+       节点（Node），就是一个 Elasticsearch 应用实例。大家都知道 Elasticsearch 源代码是 Java 写的，那么节点就是一个 Java 进程。
+       所以类似 Spring 应用一样，一台服务器或者本机可以运行多个节点，只要对应的端口不同即可。
+       但生产服务器中，一般一台服务器运行一个 Elasticsearch 节点。（通俗讲就是启动一个elasticsearch就有一个节点）
+    
+    4. 要注意的是：Elasticsearch本身就是分布式的，因此即便你只有一个节点，Elasticsearch默认也会对你的数据进行主分片和副本分片操作，当你向集群添加新数据时，数据也会在新加入的节点中进行平衡。**
+       比如：节点indexA索引的主分片为5，副本为1(复制一份主分片)，则表示一共有10块分片。
+            这个时候再启动一个节点indexB，那么10块分片会均匀分布。(例如：indexA节点主分片有3块分片，副本分片4块，indexB节点3块分片)
+    
+    5. 索引状态
+       Green 主分片与副本分片都正常
+       Yellow 主分片正常，副本分片不正常
+       Red 有主分片不正常，可能某个分片容量超过了磁盘大小等
+    
+    6. 为了能将搜索细化到底，可以使用ik分词器，可以下载解压后放入Elasticsearch包下的plugins包内，并重启Elasticsearch
+        ```
+          POST _analyze               
+          {  
+          "analyzer": "ik_max_word",  
+          "text": "我是中国人"  
+          }  
+          analyzer: "ik_max_word"  最细的分法  
+          analyzer: "ik_smart"     稍粗略的分法
+        ```  
+   - ![ES原理图片](src/main/resources/static/image-0.jpg)
 
 ## 二、CURL语法
 
@@ -143,8 +131,7 @@
      }
    }
    
-   type: text(可分词)、keyword(不可分词)、long、integer、short、double、
-         float、date、boolean、binary......
+   type: text(可分词)、keyword(不可分词)、long、integer、short、double、float、date、boolean、binary......
    fields: 实现一个字段多种数据类型，例如上述name是全文检索可以进行分词的，但是我们也可以对其进行排序或者聚合等，
            很奇怪：正常的不是说es中进行过滤、排序、聚合的字段,不能被分词嘛，怎么name又可以进行排序或者聚合等呢？
            因为其中kyName可以理解为附加名，不设置的话默认是keyword。我们通过name.kyName作为排序条件：
@@ -170,7 +157,7 @@
    ```
 ### 2. **查看映射关系（_mapping）**
  
-   &emsp;`GET /索引名/_mapping`
+   - `GET /索引名/_mapping`
 
 ### 3. **新增(更新)数据（POST）其实使用PUT也有一样的效果，学了就能理解**
   - ```
@@ -199,7 +186,7 @@
    ```
 
 ### 5. **删除索引（DELETE）**
-   &emsp;`DELETE /索引库名/_doc/id值 # 根据id删除`
+   - `DELETE /索引库名/_doc/id值 # 根据id删除`
 
 
 ### 6. **查询索引（GET）**

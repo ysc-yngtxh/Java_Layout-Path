@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.io.Serial;
 
 /**
- * @author youshicheng
+ * @author example
  * @dateTime 2023-05-08 16:31
  * @apiNote TODO 自定义异常
  */

@@ -63,7 +63,7 @@ public class SpringBatchConfig {
         return new FlatFileItemWriterBuilder<User>()
                 .name("userFlatItemWriter")
                 // 输出位置
-                .resource(new PathResource("/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/25_Spring-Batch-ItemWriter/FlatFileItemWriter.txt"))
+                .resource(new PathResource("/Users/example/IDEA/java-layout-path/SpringCloud以及前沿技术/25_Spring-Batch-ItemWriter/FlatFileItemWriter.txt"))
                 .formatted()
                 // 输出数据形式
                 .format("id: %s, 姓名: %s, 年龄: %s")
@@ -92,7 +92,7 @@ public class SpringBatchConfig {
         return new JsonFileItemWriterBuilder<User>()
                 .name("userJsonItemWriter")
                 // 输出位置
-                .resource(new PathResource("/Users/youshicheng/IDEA/java-layout-path/SpringCloud以及前沿技术/25_Spring-Batch-ItemWriter/JsonFileItemWriter.json"))
+                .resource(new PathResource("/Users/example/IDEA/java-layout-path/SpringCloud以及前沿技术/25_Spring-Batch-ItemWriter/JsonFileItemWriter.json"))
                 // json对象调度器--将user对象缓存json格式，输出文档中
                 .jsonObjectMarshaller(new JacksonJsonObjectMarshaller<>())
                 .build();

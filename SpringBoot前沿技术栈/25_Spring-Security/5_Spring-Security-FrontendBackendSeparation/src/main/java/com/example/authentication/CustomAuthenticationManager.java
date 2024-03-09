@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 /**
- * @author youshicheng
+ * @author example
  * @dateTime 2023-05-12 19:55
  * @apiNote TODO 自定义认证管理器
  */

@@ -11,7 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 /**
- * @author youshicheng
+ * @author example
  * @description TODO 登录逻辑
  * @create 2023-04-16 下午12:14
  */

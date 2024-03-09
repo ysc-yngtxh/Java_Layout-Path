@@ -38,7 +38,7 @@
        MySql 8.0.21
        ElasticSearch 7.16.2
        Canal-deployer 1.1.5（Canal服务器）
-       Canal-adaper 1.1.5 （Canal适配器）
+       Canal-adapter 1.1.5 （Canal适配器）
 
    二、配置mysql
        canal的原理是基于mysql binlog技术，所以一定需要开启mysql的binlog写入功能，建议配置binlog模式为row

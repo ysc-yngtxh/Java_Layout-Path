@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * @author youshicheng
+ * @author example
  * @description TODO 自定义的实现Details类
  * @create 2023-04-16 上午10:38
  */

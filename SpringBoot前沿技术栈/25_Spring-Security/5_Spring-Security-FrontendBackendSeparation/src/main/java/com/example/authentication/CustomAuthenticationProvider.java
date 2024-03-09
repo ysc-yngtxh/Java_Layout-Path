@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import java.util.Random;
 
 /**
- * @author youshicheng
+ * @author example
  * @dateTime 2023-05-12 19:58
  * @apiNote TODO 自定义认证提供者
  */

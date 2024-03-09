@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * @author youshicheng
+ * @author example
  * @dateTime 2023-05-08 17:08
  * @apiNote TODO 异常枚举
  */

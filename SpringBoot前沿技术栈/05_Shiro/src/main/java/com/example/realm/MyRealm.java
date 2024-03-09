@@ -1,4 +1,4 @@
-package com.youshicheng.shiro.realm;
+package com.example.realm;
 
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -18,8 +18,6 @@ public class MyRealm extends AuthorizingRealm {
     /**
      * 用户授权的方法，当用户认证通过每次访问需要授权的请求时都需要执行这段代码来完成授权操作
      * 这里应该查询数据库来获取当前用户的所有角色和权限，并设置到shiro中
-     * @param principals
-     * @return
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {

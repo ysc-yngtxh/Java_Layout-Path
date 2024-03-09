@@ -1,4 +1,4 @@
-package com.youshicheng;
+package com.example;
 
 public class 杂文笔记 {
 }

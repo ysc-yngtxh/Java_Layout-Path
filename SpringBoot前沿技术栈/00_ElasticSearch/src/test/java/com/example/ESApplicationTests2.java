@@ -132,7 +132,7 @@ public class ESApplicationTests2 {
     }
 
 
-    // 获取ES操作对象。(可以把ElasticsearchClient对象注入到springboot容器中，方便我们可以使用)
+    // 获取ES操作对象。(可以把ElasticsearchClient对象注入到SpringBoot容器中，方便我们可以使用)
     private static ElasticsearchClient elasticsearchClient() {
         // 基本凭证提供者(用户名、密码)
         CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
@@ -379,7 +379,7 @@ public class ESApplicationTests2 {
     @Test
     void searchOne() throws IOException {
         ElasticsearchClient elasticsearchClient = elasticsearchClient();
-        String searchText = "LiuYiHu";
+        String searchText = "阿旺";
         SearchResponse<User> response = elasticsearchClient.search(s -> s
                         // 我们要搜索的索引的名称
                         .index("users")
@@ -408,7 +408,7 @@ public class ESApplicationTests2 {
         for (Hit<User> hit : hits) {
             User user = hit.source();
             assert user != null;
-            log.info("Found userId " + user.getId() + ", name " + user.getName());
+            log.info("users " + user);
         }
     }
 

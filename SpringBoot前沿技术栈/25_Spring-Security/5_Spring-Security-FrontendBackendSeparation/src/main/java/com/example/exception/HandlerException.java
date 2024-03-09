@@ -1,7 +1,7 @@
 package com.example.exception;
 
 /**
- * @author youshicheng
+ * @author example
  * @dateTime 2023-05-08 16:49
  * @apiNote TODO 全局异常处理
  */

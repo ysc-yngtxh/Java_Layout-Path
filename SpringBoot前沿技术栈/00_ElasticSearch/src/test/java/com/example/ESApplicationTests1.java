@@ -43,6 +43,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -133,8 +134,8 @@ class ESApplicationTests1 {
         request.create(true);
         // 这种写法同上 request.create(true) 一个意思
         // request.opType(DocWriteRequest.OpType.CREATE);
-        // 客户端发送请求
-        IndexResponse indexResponse = client.index(request, RequestOptions.DEFAULT);
+        // 客户端发送请求。这里可能会报错：原因在于加入依赖是ElasticSearch7，但客户端是8。导致版本冲突引起的报错
+       IndexResponse indexResponse = client.index(request, RequestOptions.DEFAULT);
 
         System.out.println(indexResponse.toString());
         System.out.println(indexResponse.status());

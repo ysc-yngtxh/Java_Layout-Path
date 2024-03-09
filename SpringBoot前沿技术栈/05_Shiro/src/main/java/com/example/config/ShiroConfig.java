@@ -1,6 +1,7 @@
-package com.youshicheng.shiro.config;
+package com.example.config;
 
-import com.youshicheng.shiro.realm.MyRealm;
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
+import com.example.realm.MyRealm;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -15,7 +16,7 @@ public class ShiroConfig {
 
     // 配置一个Shiro的过滤器bean,这个bean将配置shiro相关的一个规则的拦截
     @Bean
-    public ShiroFilterFactoryBean shiroFiter(SecurityManager securityManager){
+    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager){
         // 创建过滤器配置Bean
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
@@ -24,7 +25,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setUnauthorizedUrl("/noPermission"); // 配置没有权限时转向的请求地址
 
         // 权限拦截
-        Map<String,String> filterChainMap = new LinkedHashMap<>();
+        Map<String, String> filterChainMap = new LinkedHashMap<>();
 
         /*添加shiro的内置过滤器
          *    anon:无需认证就可以访问
@@ -33,16 +34,16 @@ public class ShiroConfig {
          *    user:必须拥有 记住我 功能才能用
          *    perms:拥有对某个资源的权限才能访问
          * */
-        filterChainMap.put("/login","anon");    // 配置登录请求不需要认证 anon表示某个请求不需要认证
-        filterChainMap.put("/logout","logout"); // 配置登录的请求，登出后会请求当前用户的内存
+        filterChainMap.put("/login", "anon");    // 配置登录请求不需要认证 anon表示某个请求不需要认证
+        filterChainMap.put("/logout", "logout"); // 配置登录的请求，登出后会请求当前用户的内存
 
         // 这后面注释的代码都是可以通过加注解的方式实现
-        // filterChainMap.put("/admin/**","authc");配置一个user开头的所有的请求需要登陆 authc表示需要登录认证
-        // filterChainMap.put("/user/**","authc");配置一个user开头的所有的请求需要登陆 authc表示需要登录认证
+        // filterChainMap.put("/admin/**", "authc");配置一个user开头的所有的请求需要登陆 authc表示需要登录认证
+        // filterChainMap.put("/user/**", "authc");配置一个user开头的所有的请求需要登陆 authc表示需要登录认证
 
         // authc,roles[admin] 表示所有以admin开头的请求需要有admin的角色才可以使用
-        // filterChainMap.put("/admin/**","authc,roles[admin]");
-        // filterChainMap.put("/user/**","authc,roles[admin]");
+        // filterChainMap.put("/admin/**", "authc, roles[admin]");
+        // filterChainMap.put("/user/**", "authc, roles[admin]");
 
         // 配置剩余的所有请求全部需要进行登录认证(注意：这个必须写在最后面)：可选的配置
         // filterChainMap.put("/**","authc");
@@ -65,5 +66,11 @@ public class ShiroConfig {
     @Bean
     public MyRealm myRealm(){
         return new MyRealm();
+    }
+
+    //*** 千万别忘了加 bean, 否则页面无法正常的显示shiro标签权限 !!! ***//
+    @Bean
+    public ShiroDialect shiroDialect(){
+        return new ShiroDialect();
     }
 }
