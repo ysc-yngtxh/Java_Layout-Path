@@ -5,18 +5,31 @@
     可以通过@SpringBootApplication(exclude={想要关闭的自动配置的类名.class})来关闭特定的自动配置，
     其中 @ComponentScan 让Spring Boot扫描到 Configuration类, 并把它加入到程序上下文。
    
-    1. @EnableAutoConfiguration：自动配置  
-        此注解自动载入应用程序所需的所有Bean——这依赖于Spring Boot在类路径中的查找。  
-        该注解组合了@Import注解，@Import注解导入了 AutoConfigurationImportSelector 类，
-        它使用 SpringFactoriesLoader.loaderFactoryNames 方法来扫描具有META-INF/spring.factories文件的jar包。
-        而spring.factories里声明了有哪些自动配置.
+     
+    1. @ComponentScan：组件扫描器
+        @ComponentScan注解默认会扫描当前配置类(启动类)所在的包及其子包。
+        也可以指定 @ComponentScan(basePackages="com.example")
+        个人理解相当于：扫描启动类所在包以及子包中带有 @Component、@Service、@Repository、@Controller 等注解的类，
+                     并将这些类注册为 Spring 容器管理的 bean。
+                     不用我们自己去手动配置 <context:component-scan base-package="**"/> 组件扫描器。
      
     2. @SpringBootConfiguration：配置文件  
-        等同于Spring的XML配置文件；使用Java代码可以检查类型安全。  
-     
-    3. @ComponentScan：自动扫描  
-        表示将该类自动发现扫描组件。个人理解相当于，如果扫描到有@Component、@Controller、@Service等这些注解的类，
-        并注册为Bean，可以自动收集所有的Spring组件，包括@Configuration类。
+        本质上是一个@Configuration注解，表明该类是一个配置类。
+        而@Configuration又被@Component注解修饰，代表任何加了@Configuration注解的配置类，都会被注入进Spring容器中。
+
+    3. @EnableAutoConfiguration：自动配置  
+        此注解自动载入应用程序所需的所有Bean——这依赖于Spring Boot在类路径中的查找。  
+        该注解组合了 @AutoConfigurationPackage、@Import 等子注解，
+        ①、@AutoConfigurationPackage注解会将标注的类，即主配置类(启动类)，返回主配置类所在的包路径，
+           一方面用来指定 @ComponentScan组件扫描器的扫描范围（@ComponentScan注解默认就能扫描到主配置类所在的包路径）；
+           另一方面确保Spring Boot的自动配置类(spring.factories)能够扫描到用户自定义的配置类(启动类所在包以及子包下的Bean)。
+           这些自动配置类可能依赖于用户定义的Bean，而这些Bean是通过@ComponentScan扫描到的。
+           如果没有@AutoConfigurationPackage，那么自动配置类可能无法找到这些用户定义的Bean，从而导致自动配置失败。
+           另外，@AutoConfigurationPackage还允许通过spring.factories文件注册额外的自动配置类，
+           这为用户提供了更灵活的方式来扩展或覆盖默认的自动配置。
+        ②、@Import注解导入了 AutoConfigurationImportSelector 类，
+           它使用 SpringFactoriesLoader.loaderFactoryNames 方法来扫描具有META-INF/spring.factories文件的jar包。
+           而spring.factories里声明了有哪些自动配置. 
     
     4. 具体参考：https://blog.csdn.net/qq_33591903/article/details/119843446
 
@@ -35,8 +48,9 @@
        方法的访问权限被定义成了private，这样会导致事务失效，Spring 要求被代理方法必须是public的。
    
     2. 方法使用 final 或 static关键字    
-       Spring 事务的源码，可能会知道 spring 事务底层使用了 aop，也就是通过 jdk 动态代理(默认)或者 cglib，帮我们生成了代理类，
-       在代理类中实现的事务功能。但如果某个方法用 final 修饰了，那么在它的代理类中，就无法重写该方法，而添加事务功能。  
+       Spring框架中通过代理模式来管理事务，即在运行时为参与事务的方法创建代理对象，以便在方法调用前后添加事务相关的逻辑。
+       因此 Spring 事务底层使用了 aop，也就是通过 jdk 动态代理(默认)或者 cglib，帮我们生成了代理类，在代理类中实现的事务功能。
+       如果某个方法用 final 修饰了，那么在它的代理类中，就无法重写该方法，而添加事务功能。  
        如果一个方法被定义为static，意味着它属于类而不是对象。在Spring框架中，事务的处理是通过织入到对象的代理中，
        对代理对象的方法进行事务的切入。由于静态方法属于类，而不是对象，因此无法通过代理对象来对静态方法进行事务的切入，
        这同样可能导致@Transactional注解不起作用，事务无法正确地开启、提交或回滚。

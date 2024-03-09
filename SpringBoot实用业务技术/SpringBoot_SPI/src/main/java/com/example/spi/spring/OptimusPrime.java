@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * @apiNote TODO
  */
 @Configuration
-@ConditionalOnClass(EnableCustomDependency.class)
+@ConditionalOnClass({EnableCustomDependency.class})
 public class OptimusPrime implements Robot {
     private final Logger log = LoggerFactory.getLogger(OptimusPrime.class);
     @Override

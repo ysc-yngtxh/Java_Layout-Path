@@ -12,7 +12,7 @@ public class Bumblebee implements Robot {
     private final Logger log = LoggerFactory.getLogger(Bumblebee.class);
     @Override
     public void sayHello() {
-        log.debug("Hello, I am Cat.");
-        System.out.println("Hello, I am Cat.");
+        log.debug("Hello, I am Bumblebee.");
+        System.out.println("Hello, I am Bumblebee.");
     }
 }

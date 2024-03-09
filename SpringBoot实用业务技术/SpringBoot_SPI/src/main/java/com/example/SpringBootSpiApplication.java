@@ -22,8 +22,9 @@ public class SpringBootSpiApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(SpringBootSpiApplication.class, args);
-        boolean isCustomTemplate = Arrays.stream(context.getBeanDefinitionNames()).collect(Collectors.toList()).contains("customTemplate");
-        System.out.println(isCustomTemplate);
+        List<String> collect = Arrays.stream(context.getBeanDefinitionNames())
+                .collect(Collectors.toList());
+        System.out.println("customTemplate是否存在：" + collect.contains("customTemplate"));
     }
 
     // TODO SPI 全称为“Service Provider Interface”，是一种服务发现机制。

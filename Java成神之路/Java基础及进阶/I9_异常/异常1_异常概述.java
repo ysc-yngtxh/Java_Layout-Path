@@ -25,7 +25,6 @@ package I9_异常;
              1️⃣、Exception的直接子类：在编译时期抛出的异常，在编译期间检查程序是否可能会出现问题，如果可能会有，则预先防范：捕获 声明。
                                     从程序语法角度讲是必须进行处理的异常，如果不处理，程序就不能编译通过
                                     例如：NumberFormatException ：数值类型的格式错误；
-                                         NullPointerException ：对某个 null 的对象调用方法或字段；
 
              2️⃣、RuntimeException：描述的是程序设计错误，例如，错误的类型转换、访问一个越界数组或数值错误。
                                    运行时异常通常是由Java虚拟机抛出的。
@@ -33,6 +32,7 @@ package I9_异常;
                                    即使没有用try-catch语句捕获它，也没有用throws子句声明抛出它，也会编译通过。
                                    例如：ArithmeticException：整数除以0。数学运算异常 非法的数学运算。
                                         IndexOutOfBoundsException ：数组索引越界。
+                                        NullPointerException ：对某个 null 的对象调用方法或字段；
  */
 public class 异常1_异常概述 {
     public static void main(String[] args) {
