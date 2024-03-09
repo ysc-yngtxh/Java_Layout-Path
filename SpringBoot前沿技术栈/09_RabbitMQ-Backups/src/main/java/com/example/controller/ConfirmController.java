@@ -1,4 +1,4 @@
-package com.example.rabbitmq.controller;
+package com.example.controller;
 
 
 import lombok.extern.slf4j.Slf4j;

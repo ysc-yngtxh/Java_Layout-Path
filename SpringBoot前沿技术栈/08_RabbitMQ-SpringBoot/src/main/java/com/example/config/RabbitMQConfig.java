@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Qualifier;

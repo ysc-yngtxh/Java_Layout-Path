@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.rabbitmq.entity.User;
+import com.example.entity.User;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
