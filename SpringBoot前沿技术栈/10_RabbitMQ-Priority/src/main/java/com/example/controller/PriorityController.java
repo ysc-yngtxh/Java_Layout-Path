@@ -1,4 +1,4 @@
-package com.example.rabbitmq.controller;
+package com.example.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
@@ -22,7 +22,7 @@ public class PriorityController {
             CorrelationData data = new CorrelationData(i + "");
             if (i == 5) {
                 rabbitTemplate.convertAndSend("priorityExchange"
-                        , "priorityroutingkey"
+                        , "priorityRoutingKey"
                         , message + i
                         , msg -> {
                             msg.getMessageProperties().setPriority(5);
@@ -31,7 +31,7 @@ public class PriorityController {
                         , data);
             } else {
                 rabbitTemplate.convertAndSend("priorityExchange"
-                        , "priorityroutingkey"
+                        , "priorityRoutingKey"
                         , message + i
                         , msg -> {
                             msg.getMessageProperties().setPriority(1);

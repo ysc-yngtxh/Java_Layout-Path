@@ -1,7 +1,7 @@
 package com.example.spring;
 
-import com.example.spring.service.RetryService;
-import com.example.spring.utils.RetryUtil;
+import com.example.service.RetryService;
+import com.example.utils.RetryUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -47,7 +47,7 @@ class SpringRetryApplicationTests {
         retryTemplate.setRetryPolicy(retryPolicy);
         retryTemplate.setBackOffPolicy(backOffPolicy);
 
-        Boolean excute = retryTemplate.execute(
+        Boolean execute = retryTemplate.execute(
                 retryContext -> {
                     boolean b = RetryUtil.retryTask("abc");
                     log.info("调用结果: {}", b);
@@ -57,7 +57,7 @@ class SpringRetryApplicationTests {
                     log.info("已经达到最大重试次数或抛出了不重试的异常");
                     return false;
                 });
-        log.info("执行结果: {}", excute);
+        log.info("执行结果: {}", execute);
     }
 
 

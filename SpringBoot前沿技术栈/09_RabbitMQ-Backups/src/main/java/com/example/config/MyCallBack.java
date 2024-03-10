@@ -27,7 +27,7 @@ public class MyCallBack implements RabbitTemplate.ConfirmCallback, RabbitTemplat
     @PostConstruct  // 被注解的方法将在bean创建并且注入完成，在执行初始化方法之前调用。原理：后处理器
     public void init() {
         rabbitTemplate.setConfirmCallback(this);  // 指定 ConfirmCallback
-        rabbitTemplate.setReturnsCallback(this);  // 指定 ReturnsCallback
+        // rabbitTemplate.setReturnsCallback(this);  // 指定 ReturnsCallback
     }
 
     /**
@@ -35,20 +35,20 @@ public class MyCallBack implements RabbitTemplate.ConfirmCallback, RabbitTemplat
      * 1、发消息 交换机接收到了  回调
      *    1.1、 correlationData  保存回调消息的ID及相关信息
      *    1.2、 交换机收到消息  ack = true
-     *    1.3、 cause null
-     * 2、发消息  交换机接收失败了  回调
-     *    2.1、 correlationData  保存回调消息的ID及相关信息
-     *    2.2、 交换机收到消息  ack = true
-     *    2.3、 cause 失败的原因
+     *    1.3、 cause 失败的原因
+     * 2、当生产者将信道设置为Confirm模式时，所有在该信道上发布的消息都会被分配一个唯一的ID。
+     *    当消息被投递到所有匹配的队列后，RabbitMQ的Broker会发送一个包含消息唯一ID的确认信息给生产者。
+     *    这确保了生产者知道消息已经正确地到达了目的队列。
      */
-    @Override // 注意：要想发布确认，不光要实现confirm方法，还需要在配置文件中spring.rabbitmq.publisher-confirm-type=correlated
+    // 注意：要想发布确认，不光要实现confirm方法，还需要在配置文件中spring.rabbitmq.publisher-confirm-type=correlated
+    @Override
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
         // CorrelationData correlationData这个是发送端convertAndSend自己发送的东西
         String id = correlationData != null ? correlationData.getId() : "";
         if (ack) {
-            log.info("交换机已经收到Id为:{}的消息",id);
+            log.info("交换机已经收到Id为：{}的消息", id);
         } else {
-            log.info("交换机还未收到Id为:{}的消息，由于原因:{}",id,cause);
+            log.info("交换机还未收到Id为：{}的消息，由于原因:{}", id, cause);
         }
     }
 
@@ -58,7 +58,7 @@ public class MyCallBack implements RabbitTemplate.ConfirmCallback, RabbitTemplat
      */
     @Override
     public void returnedMessage(ReturnedMessage returned) {
-        log.error("消息:{}，被交换机{}退回，退回原因：{}，路由Key{}"
+        log.error("消息:{}，被交换机{}退回。退回原因：{}，路由Key{}"
                 , new String(returned.getMessage().getBody())
                 , returned.getExchange()
                 , returned.getReplyText()

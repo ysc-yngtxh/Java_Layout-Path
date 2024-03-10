@@ -12,7 +12,6 @@ import java.util.concurrent.TimeoutException;
 
 /**
  * 消费者
- *
  * @author 游家纨绔
  */
 public class Consumer {

@@ -17,8 +17,8 @@ public class ConfirmConfig {
     // 交换机
     @Bean("confirmExchange")
     public DirectExchange confirmExchange(){
-        return ExchangeBuilder.directExchange("confirmExchange").durable(true)
-                .withArgument("alternate-exchange", "fanoutExchange").build();
+        return ExchangeBuilder.directExchange("confirmExchange").durable(true).build();
+                // .withArgument("alternate-exchange", "fanoutExchange").build();
     }
     // 队列
     @Bean("confirmQueue")
@@ -29,7 +29,7 @@ public class ConfirmConfig {
     @Bean
     public Binding queueBinding(@Qualifier("confirmExchange") DirectExchange directExchange,
                                 @Qualifier("confirmQueue") Queue directQueue){
-        return BindingBuilder.bind(directQueue).to(directExchange).with("confirmroutingkey");
+        return BindingBuilder.bind(directQueue).to(directExchange).with("confirmRoutingKey");
     }
 
 
@@ -51,15 +51,15 @@ public class ConfirmConfig {
     // 绑定备份交换机和备份队列
     @Bean
     public Binding fanoutBinding(@Qualifier("fanoutExchange") FanoutExchange fanoutExchange,
-                                @Qualifier("fanoutQueue") Queue fanoutQueue){
-        // 这里没有routingkey,因为使用的是广播(Fanout)类型交换机，我对自己交换机类型下的所有队列开放进行广播，还需要什么路由key？
+                                 @Qualifier("fanoutQueue") Queue fanoutQueue){
+        // 这里没有routingKey,因为使用的是广播(Fanout)类型交换机，我对自己交换机类型下的所有队列开放进行广播，还需要什么路由key？
         return BindingBuilder.bind(fanoutQueue).to(fanoutExchange);
     }
     // 绑定备份交换机和警告队列
     @Bean
     public Binding warningBinding(@Qualifier("fanoutExchange") FanoutExchange fanoutExchange,
-                                 @Qualifier("warningQueue") Queue warningQueue){
-        // 这里没有routingkey,因为使用的是广播(Fanout)类型交换机，我对自己交换机类型下的所有队列开放进行广播，还需要什么路由key？
+                                  @Qualifier("warningQueue") Queue warningQueue){
+        // 这里没有routingKey,因为使用的是广播(Fanout)类型交换机，我对自己交换机类型下的所有队列开放进行广播，还需要什么路由key？
         return BindingBuilder.bind(warningQueue).to(fanoutExchange);
     }
 }

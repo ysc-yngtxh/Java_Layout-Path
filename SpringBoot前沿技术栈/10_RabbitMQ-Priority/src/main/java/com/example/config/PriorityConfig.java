@@ -1,12 +1,12 @@
-package com.example.rabbitmq.config;
+package com.example.config;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.*;
-import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.core.Queue;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +33,6 @@ public class PriorityConfig {
     @Bean
     public Binding queueBinding(@Qualifier("priorityExchange") DirectExchange directExchange,
                                 @Qualifier("priorityQueue") Queue directQueue){
-        return BindingBuilder.bind(directQueue).to(directExchange).with("priorityroutingkey");
+        return BindingBuilder.bind(directQueue).to(directExchange).with("priorityRoutingKey");
     }
 }

@@ -50,7 +50,7 @@
        1、测试redis服务的性能：
           redis-benchmark
        2、查看redis服务是否正常运行
-          ping  如果正常---pong
+          ping  [主机地址(域名不包含端口)] 如果正常---pong
        3、查看redis服务器的统计信息：
           info  查看redis服务的所有统计信息
           info  [信息段]查看redis服务器的指定的统计信息，如：Replication[集群]
@@ -96,8 +96,8 @@
          e、设置key的最大生存时间：expire key seconds
                                例如：；expire k1 20  (时间单位是秒)
          f、查看指定key的数据类型：type key
-         g、重命名key:;rename key1 key2
-         h、删除指定的key:del key [key key...]
+         g、重命名key：rename key1 key2
+         h、删除指定的key：del key [key key...]
                       返回值是实际删除的key的数量
     2、redis中有关string类型数据的操作命令(单key:单value)
          a、将string类型的数据设置到redis中：set 键 值
@@ -451,6 +451,9 @@
      在Set类型中的操作：
           1、set数据存入redis中：redisTemplate.opsForSet().add(key, object);
           2、从redis当中将set数据取出来：redisTemplate.opsForSet().members(key);
+     在ZSet类型中的操作：
+          1、zset数据存入redis中：redisTemplate.opsForZSet().add(key, value, score); 区别于Set类型多一个score
+          2、从redis当中将set数据取出来：redisTemplate.opsForSet().members(key); 与Set类型没区别
 
      五种数据类型中通用操作：
           自增：redisTemplate.opsForValue().increment(key);

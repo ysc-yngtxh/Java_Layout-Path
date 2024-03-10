@@ -141,9 +141,10 @@ class SpringRedisLockApplicationTests {
     /**
      * 上面的test3测试还是有缺陷：
      * 虽然我们增加了锁值判断，但是if(redisTemplate.opsForValue().get("K1")==value)获取锁,判断值,删除锁这三个操作不是原子性操作
-     * 比如： A 线程去执行获取锁 redisTemplate.opsForValue().get("K1") 这一步，得到了锁值，然后这个时候锁的过期时间到了
-     *       B 线程就通过setIfAbsent()方法重新设置锁值，但是线程A 获取的是原先的锁值，进行判断的话是相等的，可以进入 if判断
-     *       在 if判断中执行删除锁，然后删除掉的是 B线程的锁. 然后又会出现 test2测试中出现当前线程删除下一线程锁的循环情况
+     * 比如： A 线程去执行获取锁 redisTemplate.opsForValue().get("K1") 这一步，得到了锁值后并进行判断为true，
+     *       还没执行if中的删除锁操作时，锁的过期时间到了。
+     *       于是 B 线程就通过setIfAbsent()方法重新设置锁值，设置好了之后 A 线程再执行删除锁操作，
+     *       然后删除掉的实际是 B线程的锁. 接着就又会出现 test2测试中出现当前线程删除下一线程锁的循环情况
      */
     @Test
     public void test4() {

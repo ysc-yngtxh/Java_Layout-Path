@@ -1,6 +1,6 @@
-package com.example.spring.service;
+package com.example.service;
 
-import com.example.spring.utils.RetryUtil;
+import com.example.utils.RetryUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.remoting.RemoteAccessException;
 import org.springframework.retry.annotation.Backoff;

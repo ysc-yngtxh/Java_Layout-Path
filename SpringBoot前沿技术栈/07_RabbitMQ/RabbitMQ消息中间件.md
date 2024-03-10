@@ -35,8 +35,8 @@
     Queue：消息队列，用来保存消息，供消费者消费。
 
 ## 二、消息流程：
-                               (Channel信道)                                            (Channel信道)
-    消息生产者--->Exchange交换器--------------->Queue消息队列----------->Connection通道连接--------------->消费者
+                                (Channel信道)                                             (Channel信道)
+    消息生产者 ---> Exchange交换器 ------------> Queue消息队列 ----------> Connection通道连接 -------------> 消费者
                         (Binding绑定交换器和队列的规则)
     交换器有四种策略：
                   Direct：生产者在生产消息的同时会有一个key产生，交换器会根据消息中的key的内容精准匹配，将消息发送给key完全一致的队列。
@@ -59,15 +59,15 @@
          ②、队列达到最大程度 "x-max-length"（队列满了，无法再添加数据到mq中。通过消费者声明死信交换机的x-max-length为队列设置长度）
          ③、消息被拒绝（basic.reject 或 basic.nack） 并且 requeue=false
 
-                                 (Binding绑定)
-                                 (Channel信道)                                       (Channel信道)
-       消息生产者--->Exchange交换器-------------->Queue消息队列------>Connection通道连接--------------->消费者c1
-                                                   ||
-                                                   \/
-                                                死信交换器
-                                                   ||
-                                                   \/
-                                                 死信队列------>Connection通道连接--------------->消费者c2
+                                    (Binding绑定)
+                                    (Channel信道)                                         (Channel信道)
+       消息生产者 ---> Exchange交换器 --------------> Queue消息队列 ------> Connection通道连接 -----------> 消费者c1
+                                                       ||
+                                                       \/
+                                                    死信交换器
+                                                       ||
+                                                       \/
+                                                     死信队列 ------> Connection通道连接 -------> 消费者c2
     3、延迟队列（"x-message-ttl"）
        ①、概念
            给队列设置过期时间，将消息加入队列，过期时间之后消息自动进入死信队列，监听死信队列，进行消费操作即可实现延迟队列
@@ -85,7 +85,7 @@
        ④、延时队列写法
           第一种方式：AMQP.BasicProperties properties = new AMQP.BasicProperties().builder().expiration("10000").build();
                     支持在spring框架中生产端使用
-          第二种方式：map.put("x-message-ttl",10000);
+          第二种方式：map.put("x-message-ttl", 10000);
                     支持在spring、springboot中使用，但是有个很明显的缺陷：当延迟需求很多时，要重复地去声明新队列，维护很麻烦
           第三种方式：rabbitTemplate.convertAndSend("bootDirectExchange", "bootDirectRoutingKeyC", message, msg -> {
                          // 发送消息的时候 延长时长
@@ -116,7 +116,7 @@
               ||                   ||
               || (发送消息备份)      ||(当交换机收到消息，从缓存中清除已收到的消息)
               ||                   ||
-             缓存 ===================
+             缓存(Redis) =============
      【定时任务对未成功发布
         的消息进行定时投递】
     2、Confirm模式————如果因为交换机故障，实现发布确认步骤：
@@ -125,7 +125,7 @@
                     spring.rabbitmq.publisher-confirm-type=correlated
           ②、创建一个类去实现 RabbitTemplate.ConfirmCallback 接口，重写Confirm方法
               Ⅰ、引用注入RabbitTemplate
-              Ⅱ、使用 @PostConstruct 注解，定义方法指定ConfirmCallback：  rabbitTemplate.setConfirmCallback(this)
+              Ⅱ、使用 @PostConstruct 注解，定义方法指定ConfirmCallback：rabbitTemplate.setConfirmCallback(this)
     3、回退消息————如果队列发生故障（即消息无法路由到队列）
              在仅开启了生产者确认机制的情况下，交换机接收到消息后，会直接给消息生产者发送确认消息，如果发现消息不可路由，那么消息会被直接丢弃，
           此时生产者是不知道消息被丢弃这个事件的。那么如何让无法路由的消息帮我们处理一下？最起码通知我一声，我好自己处理啊。
@@ -135,7 +135,7 @@
                     spring.rabbitmq.publisher-returns=true
           ②、创建一个类去实现 RabbitTemplate.ReturnsCallback 接口，重写Returned 方法
               Ⅰ、引用注入RabbitTemplate
-              Ⅱ、使用 @PostConstruct 注解，定义方法指定ReturnsCallback：  rabbitTemplate.setReturnsCallback(this)
+              Ⅱ、使用 @PostConstruct 注解，定义方法指定ReturnsCallback：rabbitTemplate.setReturnsCallback(this)
     4、备份交换机
          ①、概念：
                 有了mandatory参数和回退消息，我们获得了对无法投递消息的感知能力，有机会在生产者的消息无法被投递时发现并处理。但有时候，
