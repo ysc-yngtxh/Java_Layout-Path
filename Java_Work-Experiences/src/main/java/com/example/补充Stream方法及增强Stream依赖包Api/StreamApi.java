@@ -48,8 +48,8 @@ public class StreamApi {
         List<User> users = Arrays.asList(
                 new User(1L, null, null, 0, null
                         , new Models(new ModelView("WUHAN"), null), null)
-                , new User(1L, "YouShiCheng", "google@163.com", 25, null
-                        , new Models(new ModelView("ShenZhen"), null), null));
+                , new User(2L, "YouShiCheng", "google@163.com", 25, null
+                        , new Models(new ModelView("shenzhen"), null), null));
         // 第一个例子中，为每个组创建了Person集合；
         Map<Models, List<User>> peopleByGender = users.stream()
                 .collect(Collectors.groupingBy(User::getModels, Collectors.toList()));

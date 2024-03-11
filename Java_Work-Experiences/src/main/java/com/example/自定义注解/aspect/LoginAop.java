@@ -19,7 +19,6 @@ import java.lang.reflect.Method;
 // @Component
 public class LoginAop {
 
-
     /**
      * 这里有个问题啊，你会发现切面Controller类中的方法没生效(切面Service层就不会有这问题)：
      *     1、Spring与SpringMVC是2个不同的父子容器， @Aspect如果被spring容器加载的话，

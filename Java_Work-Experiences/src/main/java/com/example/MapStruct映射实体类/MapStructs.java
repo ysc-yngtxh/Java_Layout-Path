@@ -10,12 +10,11 @@ import org.mapstruct.factory.Mappers;
 
 /**
  * @author 游家纨绔
- * @version 1.0
  * @description: TODO
  * @date 2022/11/30 17:29
  */
-@Mapper
-// @Mapping(componentModel = "spring")  这个注解表示把该接口注入到Spring容器中，就不需要下面的实例对象mapStruct mapStr = Mappers.getMapper(MapStructs.class);
+// @Mapper
+@Mapper(componentModel = "spring")  //这个注解表示把该接口注入到Spring容器中，就不需要下面的实例对象mapStruct mapStr = Mappers.getMapper(MapStructs.class);
 public interface MapStructs {
     // 这里是获取mapStruct实例对象
     MapStructs mapStr = Mappers.getMapper(MapStructs.class);

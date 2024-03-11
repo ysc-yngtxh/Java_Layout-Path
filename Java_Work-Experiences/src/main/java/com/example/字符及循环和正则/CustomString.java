@@ -31,5 +31,7 @@ public class CustomString {
         String item = "%s，你会一直喜欢我吗?";
         String format = String.format(Locale.ROOT, item, "叶诗琪");
         log.debug(format);
+
+        System.out.printf("%s，你会一直喜欢我吗?%n", "叶诗琪");
     }
 }

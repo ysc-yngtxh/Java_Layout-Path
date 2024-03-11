@@ -6,6 +6,9 @@ import com.example.vo.ModelView;
 import com.example.vo.Models;
 import com.example.vo.User;
 import com.example.vo.Users;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
@@ -15,10 +18,15 @@ import java.util.Date;
  * @description: TODO
  * @date 2022/11/30 17:48
  */
-public class Test {
-    public static final Log log = LogFactory.get(Test.class);
+@Component
+public class MapstructTest {
+    public static final Log log = LogFactory.get(MapstructTest.class);
 
-    public static void main(String[] args) {
+    @Autowired
+    private MapStructs mapStructs;
+
+    @Test
+    public void extracted() {
         User user = User.builder().id(123L).name("小娘皮叶诗琪").email("google@163.com").date(new Date()).build();
         Users users = MapStructs.mapStr.toUsers(user);
         log.error(users.toString());
@@ -36,6 +44,10 @@ public class Test {
                 .build();
         Users users2 = MapStructs.mapStr.toUsers2(user2);
         log.error(users2.toString());
+
+        // 我们这里只是测试示例，并没有Spring容器环境，因此 mapStructs对象为null
+        Users users3 = mapStructs.toUsers(user2);
+        log.error(users3.toString());
     }
 
 }

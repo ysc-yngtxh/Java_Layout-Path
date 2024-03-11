@@ -1,7 +1,7 @@
 package com.example.java;
 
 /**
- * Unit Test for simple App.
+ * Unit MapstructTest for simple App.
  */
 public class AppTest {
 

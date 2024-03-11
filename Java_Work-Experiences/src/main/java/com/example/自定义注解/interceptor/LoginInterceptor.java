@@ -22,10 +22,11 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
+        // 常用的 @RequestMapping 标注的方法会对应的 handler 类型为 HandlerMethod
         if(HandlerMethod.class.equals(handler.getClass())) {  // handler instanceof HandlerMethod
             HandlerMethod handl = (HandlerMethod) handler;
             LoginRequired annotation = handl.getMethod().getAnnotation(LoginRequired.class);
-            String str = ResourceBundle.getBundle("infoclass").getString("white.open");
+            String str = ResourceBundle.getBundle("infoClass").getString("white.open");
             if (Objects.nonNull(annotation)) {
                 // 获取注解上的值
                 String value = annotation.value();
@@ -40,7 +41,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         if (Objects.nonNull(login)) {
             return true;
         }
-        response.setContentType ("text/html; charset=UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
         // response.setCharacterEncoding("utf-8"); 使用这个还是乱码
         response.getWriter().print("没登陆，请先登录再访问!!!");
         return false;
