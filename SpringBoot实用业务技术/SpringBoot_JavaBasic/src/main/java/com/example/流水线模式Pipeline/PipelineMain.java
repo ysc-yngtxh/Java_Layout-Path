@@ -17,6 +17,8 @@ public class PipelineMain {
         orderPipeline.addHead(handler3);
         orderPipeline.start();
 
+        System.out.println("===============================");
+
         orderPipeline.addTail(handler1, handler2, handler3);
         orderPipeline.start();
     }

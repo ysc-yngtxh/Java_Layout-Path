@@ -6,6 +6,7 @@ import com.example.vo.ModelView;
 import com.example.vo.Models;
 import com.example.vo.User;
 import com.google.common.collect.ImmutableMap;
+import lombok.SneakyThrows;
 import one.util.streamex.DoubleStreamEx;
 import one.util.streamex.EntryStream;
 import one.util.streamex.IntStreamEx;
@@ -92,6 +93,7 @@ public class StreamExApi {
         log.info("TODO-8"+nonNullRoles.toString());
     }
     @Test
+    @SneakyThrows
     public void test3() {
         // TODO 9、StreamEx读文件
         BufferedReader bf =
