@@ -32,34 +32,27 @@ public class Result<T> implements Serializable {
     }
 
     public static <T> Result<T> success() {
-        Result response = new Result(200, "操作成功");
-        return response;
+        return new Result<T>(200, "操作成功");
     }
     public static <T> Result<T> success(String message) {
-        Result response = new Result(200, message);
-        return response;
+        return new Result<T>(200, message);
     }
     public static <T> Result<T> success(T date) {
-        Result response = new Result(200, "操作成功", date);
-        return response;
+        return new Result<T>(200, "操作成功", date);
     }
     public static <T> Result<T> success(String message, T date) {
-        Result response = new Result(200, message, date);
-        return response;
+        return new Result<T>(200, message, date);
     }
 
     public static <T> Result<T> failed() {
-        Result response = new Result(500, "操作失败");
-        return response;
+        return new Result<T>(500, "操作失败");
     }
 
     public static <T> Result<T> failed(Integer code, String message, T date) {
-        Result response = new Result(code, message, date);
-        return response;
+        return new Result<T>(code, message, date);
     }
 
     public static <T> Result<T> failed(Integer code, String message) {
-        Result response = new Result(code, message);
-        return response;
+        return new Result<T>(code, message);
     }
 }

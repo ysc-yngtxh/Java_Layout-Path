@@ -23,8 +23,8 @@ public class SayHelloController {
     // 测试SpringSecurity加盐值的加密算法
     public static void main(String[] args) {
         // 使用BcryptPasswordEncoder加密,需要注意的是，这样加密的话，盐值是随机的，最终结果每次都会不一样
-        BCryptPasswordEncoder bcyencoder = new BCryptPasswordEncoder();
-        System.out.println(bcyencoder.encode("123456"));
+        BCryptPasswordEncoder bcyEncoder = new BCryptPasswordEncoder();
+        System.out.println(bcyEncoder.encode("123456"));
 
         // 所以应该通过自己制定盐值的方法来生成加密(盐值有规则：不想看规则的就--长度不下于28位，开头以'$2$10$'[不是必须的开头，但万能])
         String password = "123456";

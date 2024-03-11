@@ -28,6 +28,8 @@ public class Demo6_DelayMessage {
     public void DelayMessage() throws Exception {
         // 实例化一个生产者来产生延时消息
         DefaultMQProducer producer = new DefaultMQProducer("DelayMessage_Group");
+        // 设置NameServer的地址
+        producer.setNamesrvAddr("localhost:9876");
         // 启动生产者
         producer.start();
         for (int i = 0; i < 10; i++) {

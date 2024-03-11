@@ -58,7 +58,8 @@ class ReadExcelApplicationTests {
                         log.info("读取到一条数据{}", JSON.toJSONString(readDemo2Data));
                     }
                 })).doReadAll();
-        // TODO 这里打印结果你会发现数据重复了，并不是什么 bug，而是官方提供的监听器逻辑会使多工作表 Excel 在每一张工作表解析完都会去执行doAfterAllAnalysed()方法
+        // TODO 这里打印结果你会发现数据重复了，并不是什么 bug。
+        //  而是官方提供的监听器逻辑会使多工作表 Excel 在每一张工作表解析完都会去执行doAfterAllAnalysed()方法
     }
 
     // 使用匿名内部类监听器来对数据解析和读取，重写其方法逻辑。且此时由于没有加上sheet()方法，表示读取全部表格数据

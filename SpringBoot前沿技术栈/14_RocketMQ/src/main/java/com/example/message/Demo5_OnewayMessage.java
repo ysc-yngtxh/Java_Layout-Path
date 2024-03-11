@@ -52,7 +52,7 @@ public class Demo5_OnewayMessage {
         // 订阅一个或者多个Topic，以及Tag来过滤需要消费的消息
         pushConsumer.subscribe("TopicOneway", "*");
         // TODO Tag是一个简单而有用的设计，其可以来选择您想要的消息。
-        // pushConsumer.subscribe("TopicTest", "TagA || TagB || TagC");
+        // pushConsumer.subscribe("TopicOneway", "TagA || TagB || TagC");
 
         // pushConsumer.registerMessageListener() 注册消息监听器
         // MessageListenerConcurrently 并发模式，多线程的。相当于多线程去处理从broker拉取回来的消息

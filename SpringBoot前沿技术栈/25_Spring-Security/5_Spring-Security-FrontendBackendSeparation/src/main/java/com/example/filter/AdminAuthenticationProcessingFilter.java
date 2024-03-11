@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
  * <p> 自定义用户密码校验过滤器 </p>
  *
  * @author : zhengqing
- * @description :
+ * @description : 这里主要是为了让请求在过滤器执行到认证管理器
  * @date : 2023/05/12 15:32
  */
 @Slf4j
@@ -54,7 +54,7 @@ public class AdminAuthenticationProcessingFilter extends AbstractAuthenticationP
             // 将前端传递的数据转换成jsonBean数据格式
             SysUser sysUser = JSONObject.parseObject(wrappedRequest.getJsonToJsonStr(wrappedRequest), SysUser.class);
             // 使用UsernamePasswordAuthenticationToken的静态方法unauthenticated()，而不使用三个参数的构造方法
-            // 可以通过源码发现区别在于：三个参数的构造方法设置认证通过，unauthenticated()设置认证没通过
+            // 可以通过源码发现区别在于：三个参数的构造方法设置认证过，unauthenticated()设置未认证过的
             authRequest =
                     UsernamePasswordAuthenticationToken.unauthenticated(sysUser.getUserName(), sysUser.getPassword());
 
@@ -65,6 +65,7 @@ public class AdminAuthenticationProcessingFilter extends AbstractAuthenticationP
         } catch (Exception e) {
             throw new AuthenticationServiceException(e.getMessage());
         }
+        // 调用认证管理器的authenticate()方法进行实际的认证处理，并将结果返回。
         return this.getAuthenticationManager().authenticate(authRequest);
     }
 }

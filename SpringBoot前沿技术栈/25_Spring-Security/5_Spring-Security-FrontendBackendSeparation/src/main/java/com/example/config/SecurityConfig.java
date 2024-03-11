@@ -97,7 +97,7 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 // 禁用httpBasic，因为我们传输数据用的是post，而且请求体是JSON
                 .httpBasic(AbstractHttpConfigurer::disable)
-                // 不创建会话 - 即通过前端传token到后台过滤器中验证是否存在访问权限。 Spring Security6.2新写法
+                // 不创建会话(无状态) - 即通过前端传token到后台过滤器中验证是否存在访问权限。 Spring Security6.2新写法
                 .sessionManagement((sessions) -> sessions
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
@@ -109,11 +109,12 @@ public class SecurityConfig {
 
 
                 // 配置异常处理器
-                .exceptionHandling((exception) -> exception
-                        // 登录前访问需要认证的路径出现认证异常的，被认证异常返回
-                        .authenticationEntryPoint(authenticationEntryPoint())
-                        // 登录后去访问该认证用户没有权限的路径时，被鉴权异常返回
-                        .accessDeniedHandler(accessDeniedHandler())
+                .exceptionHandling(exception ->
+                        exception
+                                // 登录前访问需要认证的路径出现认证异常的，被认证异常返回
+                                .authenticationEntryPoint(authenticationEntryPoint())
+                                // 登录后去访问该认证用户没有权限的路径时，被鉴权异常返回
+                                .accessDeniedHandler(accessDeniedHandler())
                 )
 
 

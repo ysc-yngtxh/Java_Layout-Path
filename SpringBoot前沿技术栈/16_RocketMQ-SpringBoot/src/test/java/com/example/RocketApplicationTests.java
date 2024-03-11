@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
-class ApplicationTests {
+class RocketApplicationTests {
 
     @Autowired
     private RocketMQTemplate rocketMQTemplate;

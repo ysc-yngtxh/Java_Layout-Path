@@ -20,7 +20,7 @@ public class JwtUtil {
 
     // 有效期为
     public static final Long JWT_TTL = 60 * 60 * 1000L;
-    //设置密钥明文
+    // 设置密钥明文
     public static final String JWT_KEY = "example";
 
     public static String getUUID() {
@@ -31,29 +31,29 @@ public class JwtUtil {
      * 生成jwt token
      */
     public static String createJwt(String Subject) {
-        JwtBuilder builder = getJwtBuilder(Subject, null, getUUID()); //设置过期时间
+        JwtBuilder builder = getJwtBuilder(Subject, null, getUUID()); // 设置过期时间
         return builder.compact();
     }
 
     /**
      * 生成jwt token
      */
-    public static String createJwt(String Subject, Long ttlMilis) {
-        JwtBuilder builder = getJwtBuilder(Subject, ttlMilis, getUUID()); //设置过期时间
+    public static String createJwt(String Subject, Long ttlMillis) {
+        JwtBuilder builder = getJwtBuilder(Subject, ttlMillis, getUUID()); // 设置过期时间
         return builder.compact();
     }
 
     /**
      * 生成jwt token
      */
-    public static String createJwt(String id, String Subject, Long ttlMilis) {
-        JwtBuilder builder = getJwtBuilder(Subject, ttlMilis, id); //设置过期时间
+    public static String createJwt(String id, String Subject, Long ttlMillis) {
+        JwtBuilder builder = getJwtBuilder(Subject, ttlMillis, id); //设置过期时间
         return builder.compact();
     }
 
     private static JwtBuilder getJwtBuilder(String Subject, Long ttlMilis, String uuid) {
-        SignatureAlgorithm sigbatureAlgorithm = SignatureAlgorithm.HS256;
-        SecretKey secreKey = generalKey();
+        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
+        SecretKey secretKey = generalKey();
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
         if (ttlMilis == null) {
@@ -62,12 +62,12 @@ public class JwtUtil {
         long expMillis = nowMillis + ttlMilis;
         Date expDate = new Date(expMillis);
         return Jwts.builder()
-                .setId(uuid)         //唯一的Id
-                .setSubject(Subject)  //主题
-                .setIssuer("ysc")    //签发者
-                .setIssuedAt(now)     //签发时间
-                .signWith(sigbatureAlgorithm, secreKey)  //签名算法和密钥
-                .setExpiration(expDate);  //过期时间
+                .setId(uuid)          // 唯一的Id
+                .setSubject(Subject)  // 主题
+                .setIssuer("ysc")     // 签发者
+                .setIssuedAt(now)     // 签发时间
+                .signWith(signatureAlgorithm, secretKey)  // 签名算法和密钥
+                .setExpiration(expDate);  // 过期时间
     }
 
     /**

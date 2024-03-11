@@ -5,7 +5,7 @@ public class 杂文笔记 {
 /*
 一、分布式锁
      1、数据库的排它锁
-     2、使用redis分布式锁，通过代码调用setnx命令：redisTemplate.opsForValue().setIfAbsent();
+     2、使用redis分布式锁，通过代码调用setnx命令：redisTemplate.opsForValue().setIfAbsent(); 看门狗机制
      3、使用redission实现分布式锁
      4、使用zookeeper实现分布式锁
 

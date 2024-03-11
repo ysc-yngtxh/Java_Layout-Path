@@ -54,6 +54,7 @@ public class Demo7_SqlFilterMessage {
         // 设置NameServer的地址
         consumer.setNamesrvAddr("localhost:9876");
         // TODO 订阅Topic 通过发送消息时设置的属性来进行过滤，使用SQL表达式筛选消息。
+        //      需要在broker.conf文件中添加属性 enablePropertyFilter=true；重启broker服务
         consumer.subscribe("TopicSqlFilter", MessageSelector.bySql("a between 0 and 3"));
         // pushConsumer.registerMessageListener() 注册消息监听器
         // MessageListenerConcurrently 并发模式，多线程的。相当于多线程去处理从broker拉取回来的消息

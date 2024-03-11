@@ -1,5 +1,6 @@
-package com.example.websocket;
+package com.example.controller;
 
+import com.example.websocket.WebSocketServer;
 import jakarta.annotation.Resource;
 import jakarta.websocket.server.PathParam;
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-@Controller("web_Socket_system")
+@Controller
 @RequestMapping("/api/socket")
 public class SystemController {
 

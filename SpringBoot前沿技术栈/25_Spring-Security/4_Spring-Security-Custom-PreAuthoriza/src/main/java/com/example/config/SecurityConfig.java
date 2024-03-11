@@ -69,7 +69,7 @@ public class SecurityConfig {
     public AuthenticationEntryPoint authenticationEntryPoint(){
         return new AuthenticationEntryPoint() {
             @Override
-            public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+            public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) {
                 if (Objects.nonNull(authException)) {
                     ResponseResult<Void> result =
                             new ResponseResult<>(HttpStatus.UNAUTHORIZED.value(), "用户认证失败请查询登录", null);

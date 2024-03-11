@@ -38,7 +38,7 @@ public class PictureController {
 
         String endpoint = "http://oss-cn-shenzhen.aliyuncs.com";
         String accessKeyId = "LTAI5tMGA97nbLGRdSVBqZxQcym";
-        String accessKeySecret = "VPBZ6qcRNlFdJ5PE2eFlOQ87y0XKIOysc"; // 这里密钥有点问题，需要更改
+        String accessKeySecret = "VPBZ6qcRNlFdJ5PE2eFlOQ87y0XKIO"; // 这里密钥有点问题，需要更改
         OSS ossClient = new OSSClientBuilder().build(
                 endpoint          // 地域节点
                 , accessKeyId     // 访问密钥 ID
@@ -51,7 +51,7 @@ public class PictureController {
         ossClient.putObject(
                 "ysc-test0322"  // 列表名
                 , reFileName    // 文件名
-                , file.getInputStream()  //文件流
+                , file.getInputStream()  // 文件流
                 , objectMetadata  //设置响应体参数
         );
 
