@@ -6,6 +6,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +25,8 @@ import java.util.stream.Stream;
 public class CustomerCollection {
     public static final Log log = LogFactory.get(CustomerCollection.class);
 
-    public static void main(String[] args) {
+    @Test
+    public void test1() {
         // 1、使用集合工具类(返回结果为true：表示添加成功；反之失败)
         List<Object> objectArrayList = new ArrayList<>();
         boolean address = Collections.addAll(objectArrayList, "address", "1234");
@@ -34,8 +36,10 @@ public class CustomerCollection {
 
         // 3、使用Stream流
         List<Object> collect = Stream.of("address", "1234").collect(Collectors.toList());
-
-        // 4、ImmutableList是一个不可变、线程安全的列表集合(静态方法、集合元素类型保持一致)
+    }
+    @Test
+    public void test2() {
+        // ImmutableList是一个不可变、线程安全的列表集合(静态方法、集合元素类型保持一致)
         ImmutableList<String> immutableList1 = ImmutableList.of("address", "1234");
         // ImmutableList是一个不可变、线程安全的列表集合(静态内部类、集合元素类型可不相同)
         ImmutableList<Object> immutableList2 = ImmutableList.builder().add("address").add(123).build();
@@ -52,7 +56,9 @@ public class CustomerCollection {
         // 创建集合对象(可变集合)
         List<String> arrayList = Lists.newArrayList("123", "456");
         Map<String, Integer> hashMap = Maps.newHashMap(ImmutableMap.of("name", 25));
-
+    }
+    @Test
+    public void test3() {
         // TODO 集合引用小问题
         /**
          * 为什么要用List list = new ArrayList(),而不用ArrayList list = new ArrayList()呢?
@@ -62,7 +68,7 @@ public class CustomerCollection {
         // 2、假设你开始用ArrayList list = new ArrayList(), 这下你有的改了，特别是如果你使用了ArrayList实现类特有的方法和属性。
         // 3、这样的好处是为了代码的可维护性，可复用性，可扩展性以及灵活性，再者就是这符合了里氏代换原则和开闭原则。
 
-        // 集合拆分
+        // 集合拆分partition
         List<String> arrayList1 = Lists.newArrayList("123", "456", "789"
                 , "101112", "131415", "161718", "192021", "222324", "252627", "282930");
         List<List<String>> partition = Lists.partition(arrayList1, 2);

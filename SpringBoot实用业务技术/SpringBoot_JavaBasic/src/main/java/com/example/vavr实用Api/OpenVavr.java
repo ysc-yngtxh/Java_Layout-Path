@@ -8,6 +8,7 @@ import io.vavr.Tuple2;
 import io.vavr.collection.Seq;
 import io.vavr.control.Try;
 import io.vavr.control.Validation;
+import org.junit.jupiter.api.Test;
 
 import static com.google.common.base.Predicates.instanceOf;
 import static io.vavr.API.$;
@@ -22,7 +23,6 @@ import static io.vavr.control.Validation.valid;
 
 /**
  * @author 游家纨绔
- * @version 1.0
  * @description: TODO
  * @date 2022/11/27 0:45
  */
@@ -31,7 +31,8 @@ public class OpenVavr {
     static final String NAME_ERR = "Invalid Characters In Name: ";
     static final String AGE_ERR = "Age Must Be At Least 0";
 
-    public static void main(String[] args) {
+    @Test
+    public void test1() {
         // TODO 1、元组(引用元素时从1开始，而不是0。),元组中就可以存进不同类型的数据
         Tuple2<String, Integer> java8 = Tuple.of("Java", 8);
         String element1 = java8._1; // 第一个元素
@@ -39,15 +40,16 @@ public class OpenVavr {
         log.info(element1);
         log.info(String.valueOf(element2));
 
-
         // TODO 2、Try用来包装可能产生异常的代码块，这样就不用显式的通过try-catch来处理异常
         Try<Integer> result = Try.of(() -> 1 / 0);
         int errorSentinel = result.getOrElse(-2);
         log.info(String.valueOf(errorSentinel));
         log.info(String.valueOf(result.isFailure()));
         // result.getOrElseThrow(() -> new ArithmeticException()); 会实现真正意义上的抛异常
+    }
 
-
+    @Test
+    public void test2() {
         // TODO 3、验证Validation。
         // 通常情况下程序遇到错误未做处理就会终止。然而，Validation会继续处理，并将程序错误累积，最终最为一个整体处理。
         User user = new User(1L, "YouShiCheng", "google@163.com", 25);
@@ -64,10 +66,10 @@ public class OpenVavr {
         User user1 = new User(1L, "YouShiCheng😃--97", "google@163.com", -1);
         String invalidChars1 = user1.getName().replaceAll("[a-zA-Z]", "");
         Validation<Seq<String>, User> users1 = Validation.combine(
-                invalidChars1.isEmpty() ? valid(user1.getName())
-                        : Validation.invalid(NAME_ERR + invalidChars1),
-                user1.getAge() < 0 ? Validation.invalid(AGE_ERR)
-                        : valid(user1.getAge()))
+                        invalidChars1.isEmpty() ? valid(user1.getName())
+                                : Validation.invalid(NAME_ERR + invalidChars1),
+                        user1.getAge() < 0 ? Validation.invalid(AGE_ERR)
+                                : valid(user1.getAge()))
                 .ap(User::new);
         // 返回所有错误信息
         log.info(String.valueOf(users1.getError().size()));
@@ -81,7 +83,10 @@ public class OpenVavr {
             }
             log.info(error.toString());
         }
+    }
 
+    @Test
+    public void test3() {
         // TODO 4、模式匹配Pattern Matching
         // 在Vavr中我们通过Match方法替换switch块。每个条件检查都通过Case方法调用来替换。 $()来替换条件并完成表达式计算得到结果。
         int input = 4;

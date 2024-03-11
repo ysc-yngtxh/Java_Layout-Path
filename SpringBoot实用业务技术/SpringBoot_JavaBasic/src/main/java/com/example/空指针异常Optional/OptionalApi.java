@@ -5,6 +5,7 @@ import cn.hutool.log.LogFactory;
 import com.example.vo.ModelView;
 import com.example.vo.Models;
 import com.example.vo.User;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,7 +20,9 @@ import java.util.Optional;
  */
 public class OptionalApi {
     public static final Log log = LogFactory.get(OptionalApi.class);
-    public static void main(String[] args) throws Exception{
+
+    @Test
+    public void test1() {
         User user = new User();
         Models models = null;
         ModelView modelView = null;
@@ -39,7 +42,9 @@ public class OptionalApi {
         } else {
             log.debug("User为空");
         }
-
+    }
+    @Test
+    public void test2() {
         // TODO 使用optional来处理空指针(简约)
         User users = new User();
         String stringOptional = Optional.ofNullable(users)
@@ -47,9 +52,8 @@ public class OptionalApi {
                 .map(Models::getModelView)
                 .map(ModelView::getAddress)
                 .orElseGet(() -> "空值");
-             // .orElse("空值"); 这里要不为空值的话，最后应该返回的地址address的值
+        // .orElse("空值"); 这里要不为空值的话，最后应该返回的地址address的值
         log.debug(stringOptional);
-
 
         // TODO orElse()与orElseGet()的区别(orElseGet的性能高，建议使用)
         User user1 = null;
@@ -60,7 +64,9 @@ public class OptionalApi {
         User two = Optional.ofNullable(user1)
                 .orElseGet(() -> new User(1L, "two", "qwer@163.com", 25));
         log.info(one.toString());
-
+    }
+    @Test
+    public void test3() {
         // TODO map()与flatMap()方法的区别
         //  对象实例的属性本身就为Optional包装过的类型，那么就要使用flatMap方法
         //  map映射的是返回类型，flatMap映射的是返回类型中Optional包装过的泛型类
@@ -82,8 +88,9 @@ public class OptionalApi {
                 .flatMap(User::getModelsOptional)
                 .orElse(new Models(new ModelView("大大"), null));
         System.out.println(orElse);
-
-
+    }
+    @Test
+    public void test4() {
         // TODO 判断是否有值
         User user2 = null;
         boolean present = Optional.ofNullable(user2).isPresent();
@@ -101,5 +108,4 @@ public class OptionalApi {
                 .stream().filter(Objects::nonNull).forEach(System.out::println);
 
     }
-
 }

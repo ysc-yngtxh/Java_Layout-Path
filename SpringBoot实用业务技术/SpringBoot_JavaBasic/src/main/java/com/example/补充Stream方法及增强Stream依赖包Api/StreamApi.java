@@ -7,6 +7,7 @@ import com.example.vo.ModelView;
 import com.example.vo.Models;
 import com.example.vo.User;
 import com.google.common.collect.Lists;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -24,7 +25,14 @@ import java.util.stream.Stream;
  */
 public class StreamApi {
     public static final Log log = LogFactory.get(StreamApi.class);
-    public static void main(String[] args) {
+    List<User> users = Arrays.asList(
+            new User(1L, null, null, 0, null
+                    , new Models(new ModelView("WUHAN"), null), null)
+            , new User(2L, "YouShiCheng", "google@163.com", 25, null
+                    , new Models(new ModelView("shenzhen"), null), null));
+
+    @Test
+    public void test1() {
         // TODO 1、anyMatch(), allMatch(), noneMatch()
         //         anyMatch：判断的条件里，任意一个元素成功，返回true
         //         allMatch：判断条件里的元素，所有的都是，返回true
@@ -42,14 +50,12 @@ public class StreamApi {
          */
         List<Integer> integers = Arrays.asList(1, 1, 1);
         Integer reduced1 = integers.stream().reduce(23, (a, b) -> a + b);
-        Integer reduced2 = integers.stream().reduce(23, Integer::sum);  //同上效果一样
+        Integer reduced2 = integers.stream().reduce(23, Integer::sum);  // 同上效果一样
+    }
 
+    @Test
+    public void test2() {
         // TODO 3、分组 groupingBy
-        List<User> users = Arrays.asList(
-                new User(1L, null, null, 0, null
-                        , new Models(new ModelView("WUHAN"), null), null)
-                , new User(2L, "YouShiCheng", "google@163.com", 25, null
-                        , new Models(new ModelView("shenzhen"), null), null));
         // 第一个例子中，为每个组创建了Person集合；
         Map<Models, List<User>> peopleByGender = users.stream()
                 .collect(Collectors.groupingBy(User::getModels, Collectors.toList()));
@@ -66,7 +72,10 @@ public class StreamApi {
         Map<Models, Double> averageAgeByGender = users.stream()
                 .collect(Collectors.groupingBy(User::getModels, Collectors.averagingInt(User::getAge)));
         log.info(averageAgeByGender.toString());
+    }
 
+    @Test
+    public void test3() {
         // TODO 4、合并两个流的话，可以使用静态方法Stream.concat()
         Stream<Integer> stream1 = Stream.of(1, 3, 5);
         Stream<Integer> stream2 = Stream.of(2, 4, 6);
@@ -104,7 +113,10 @@ public class StreamApi {
         Integer sum2 = items.stream()
                 .mapToInt(Integer::intValue)
                 .sum();
+    }
 
+    @Test
+    public void test4() {
         // TODO 7、flatMap (对流扁平化处理)
         List<List<String>> lists = Lists.newArrayList(Arrays.asList("AB", "Amla", "Faf"), Arrays.asList("Virat", "Dhoni", "Jadeja"));
         // 以下两种写法都可以。flatMap其实就相当于将List<List<String>>转为List<String>，将外层的List元素全部依次放入List<String>中

@@ -18,12 +18,12 @@ import java.util.Date;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class SpringBootJavaBasicApplicationTests {
-
 	public static final Log log = LogFactory.get(SpringBootJavaBasicApplicationTests.class);
 
 	@Autowired
 	private MapStructExample mapStructExample;
 
+	// 测试Mapstruct功能
 	@Test
 	public void mapStructs() {
 		User user = User.builder().id(123L).name("小娘皮叶诗琪").email("google@163.com").date(new Date()).build();
@@ -44,7 +44,7 @@ class SpringBootJavaBasicApplicationTests {
 		Users users2 = MapStructExample.mapStr.toUsers2(user2);
 		log.error(users2.toString());
 
-		// 我们这里只是测试示例，并没有Spring容器环境，因此 mapStructs对象为null
+		// 这里通过注入的依赖，调用方法
 		Users users3 = mapStructExample.toUsers(user2);
 		log.error(users3.toString());
 	}

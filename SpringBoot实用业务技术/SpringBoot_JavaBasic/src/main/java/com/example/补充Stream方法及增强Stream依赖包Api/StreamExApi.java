@@ -10,6 +10,7 @@ import one.util.streamex.DoubleStreamEx;
 import one.util.streamex.EntryStream;
 import one.util.streamex.IntStreamEx;
 import one.util.streamex.StreamEx;
+import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -30,17 +31,19 @@ import java.util.stream.Stream;
  */
 public class StreamExApi {
     public static final Log log = LogFactory.get(StreamExApi.class);
-    public static void main(String[] args) throws FileNotFoundException {
-        List<User> users = Arrays.asList(
-                new User(null, null, null, 0, null
-                        ,new Models(new ModelView("WUHAN"),null),null)
-                ,new User(1L, "YouShiCheng", "google@163.com", 25, null
-                        ,new Models(new ModelView("SHENZHEN"),null),null));
+    List<User> users = Arrays.asList(
+            new User(null, null, null, 0, null
+                    ,new Models(new ModelView("WUHAN"),null),null)
+            ,new User(1L, "YouShiCheng", "google@163.com", 25, null
+                    ,new Models(new ModelView("SHENZHEN"),null),null));
+
+    @Test
+    public void test1() {
         // TODO 1、简单使用StreamEx映射name属性输出为List(不需要collect)
         List<String> userNames = StreamEx.of(users)
                 .map(User::getName)
                 .toList();
-        log.info("TODO-1" + userNames.toString());
+        log.info("TODO-1" + userNames);
 
         // TODO 2、StreamEx分组(不需要collect)
         Map<Models, List<User>> modelsUsers = StreamEx.of(users)
@@ -62,7 +65,9 @@ public class StreamExApi {
         for (String line : StreamEx.of(users).map(User::getName).nonNull()) {
             System.out.println(line);
         }
-
+    }
+    @Test
+    public void test2() {
         // TODO 6、通过IntStreamEx流将数据业务处理再转为short数组
         short[] src = {1, 2, 3};
         short[] ints = IntStreamEx.of(src)
@@ -79,13 +84,15 @@ public class StreamExApi {
 
         // TODO 8、通过ofKeys()方法，将Map里的所有key取出来，并通过Predicate断言函数方法进行过滤
         Set<String> nonNullRoles = StreamEx.ofKeys(
-                ImmutableMap.of("first", new Models()
-                        ,"second", new Models(new ModelView("HUBEI"),null)
-                        ,"null", new Models())
+                        ImmutableMap.of("first", new Models()
+                                ,"second", new Models(new ModelView("HUBEI"),null)
+                                ,"null", new Models())
                         , Objects::nonNull)
                 .toSet();
         log.info("TODO-8"+nonNullRoles.toString());
-
+    }
+    @Test
+    public void test3() {
         // TODO 9、StreamEx读文件
         BufferedReader bf =
                 new BufferedReader(new FileReader(System.getProperty("user.dir") + "/src/main/java/com/example/vo/User.java"));
@@ -111,7 +118,9 @@ public class StreamExApi {
                 .append("--end")
                 .toList();
         log.info(stringList.toString());
-
+    }
+    @Test
+    public void test4() {
         /** ========================================StreamEx与EntryStream分割线=====================================*/
 
         // TODO 12、首先通过flatMapValues方法将value值List<User>扁平化为User类型，再通过invert方法将key、value值对调
