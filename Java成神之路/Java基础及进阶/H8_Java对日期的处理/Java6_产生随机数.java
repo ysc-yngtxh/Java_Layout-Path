@@ -1,5 +1,6 @@
 package H8_Java对日期的处理;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -44,6 +45,12 @@ public class Java6_产生随机数 {
         // 这段代码表示的是在字符串s中取出一个
         char a = s.charAt(random.nextInt(s.length()));
         System.out.println(a);
+
+        // 随机取一个double类型数据，并格式化为保留两位小数
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        String format = decimalFormat.format(new Random().nextDouble());
+        double parseDouble = Double.parseDouble(format);
+        System.out.printf("%.2f%n", parseDouble);
     }
 
     // 编写方法用来判断数组中是否包含某个元素

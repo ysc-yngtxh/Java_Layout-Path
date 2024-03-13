@@ -32,14 +32,14 @@ public class 泛型2_示例 {
     static class Generic02 {
         // 只有声明了<T>方法才表示这是一个泛型方法
         // 泛型方法与普通方法区别在于：无需指定类泛型
-        public <T> void toGeneric02(T[] arr) {
+        public static <T> void toGeneric02(T[] arr) {
             T t = arr[arr.length - 1];
         }
     }
 
     static class Generic03 {
         // <T> T 表示这是一个泛型方法，且返回T类型数据，无需指定类泛型
-        public <T> T toGeneric03(T[] arr) {
+        public static <T> T toGeneric03(T[] arr) {
             return arr[arr.length - 1];
         }
     }

@@ -1,7 +1,7 @@
 package com.example.bean.beanDefinitionRegistryPostProcessor;
 
 import com.example.annotation.AutoDiscoverClass;
-import com.example.excutor.Category;
+import com.example.executor.Category;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanDefinition;

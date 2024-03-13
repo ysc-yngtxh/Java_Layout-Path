@@ -39,7 +39,7 @@ public class AckConfig implements RabbitTemplate.ConfirmCallback, RabbitTemplate
     public void returnedMessage(ReturnedMessage returned) {
         // 请注意!如果你使用了延迟队列插件，那么一定会调用该callback方法，因为数据并没有发布出去，而是提交在交换器中，过期时间到了才发布出去，
         // 并非是bug！你可以用if进行判断交换机名称来捕捉该报错
-        if("integrationExchange".equals(returned.getExchange()) || "OrderExchange".equals(returned.getExchange())){
+        if("integrationExchange".equals(returned.getExchange()) || "orderExchange".equals(returned.getExchange())){
             return;
         }
         log.error("消息:{}，被交换机{}退回，退回原因：{}，路由{}"

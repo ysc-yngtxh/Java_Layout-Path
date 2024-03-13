@@ -69,9 +69,9 @@
 - > ```
   > ①、在各个nacos的解压目录nacos/的conf目录下，将配置文件cluster.conf.example复制一份，重命名为cluster.conf文件，每行配置成ip:port。（请配置3个或3个以上节点）
   >     注意：端口不要连号，因为nacos内部会使用设置端口的下一个端口值，如果连号，启动会失败。
-  >          192.168.2.103:8850
-  >          192.168.2.103:8860
-  >          192.168.2.103:8870
+  >          192.168.2.101:8850
+  >          192.168.2.101:8860
+  >          192.168.2.101:8870
   > ②、并且各个nacos配置文件application.properties改相应端口：server.port=xxxx
   > ③、启动各个nacos服务，注意：不要使用 非集群模式 启动 -- sh startup.sh
   > ④、nacos集群启动后，服务注册到指定的nacos中，可同时注册到集群中多个nacos中心
@@ -79,10 +79,10 @@
   >              cloud:
   >                  nacos:
   >                      discovery:
-  >                          server-addr: 192.168.2.103:8850,192.168.2.103:8860,192.168.2.103:8870
-  >                              - 192.168.2.103:8850 这种写法不生效，暂时不清楚原因
-  >                              - 192.168.2.103:8860 这种写法不生效，暂时不清楚原因
-  >                              - 192.168.2.103:8870 这种写法不生效，暂时不清楚原因
+  >                          server-addr: 192.168.2.101:8850,192.168.2.101:8860,192.168.2.101:8870
+  >                              - 192.168.2.101:8850 这种写法不生效，暂时不清楚原因
+  >                              - 192.168.2.101:8860 这种写法不生效，暂时不清楚原因
+  >                              - 192.168.2.101:8870 这种写法不生效，暂时不清楚原因
   > ```
   > ![img.png_6](01_Alibaba-Provider/src/main/resources/static/img_4.png)
 #### 6. Nacos的CAP模式
@@ -374,10 +374,10 @@
         </dependency>  
     2、sentinel-dashboard 项目test目录下 com.alibaba.csp.sentinel.dashboard.rule.nacos包  
         即为Sentinel为我们提供的自定义配置集成Nacos代码示例。  
-    3、将代码示例拷贝到 src.main.java/com.alibaba.csp.sentinel.dashboard.rule 下。
-    4、以下源码改造只是针对流控规则，还有熔断、热点、授权、系统规则可参考其改造写法
-    5、改造完成后将 sentine-dashboard 项目打成jar包(也可以通过源码的启动类直接启动项目),
-       运行启动后Sentinel动态规则中的Push模式将会实现Sentinel Dashboard与Nacos的双向一致。
+    3、将代码示例拷贝到 src.main.java/com.alibaba.csp.sentinel.dashboard.rule 下。  
+    4、以下源码改造只是针对流控规则，还有熔断、热点、授权、系统规则可参考其改造写法   
+    5、改造完成后将 sentinel-dashboard 项目打成jar包(也可以通过源码的启动类直接启动项目),
+       运行启动后Sentinel动态规则中的Push模式将会实现Sentinel Dashboard与Nacos的双向一致。  
 
 ```java
 @Configuration

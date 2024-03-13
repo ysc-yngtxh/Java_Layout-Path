@@ -12,18 +12,19 @@
         <module>01_Alibaba-Provider</module>
         <module>02_Alibaba-Consumer</module>
         <module>03_NacosCluster-8850-8860-8870</module>
-        <module>04_Provider-NacosConfig</module>
-        <module>05_OpenFeign-Nacos</module>
-        <module>06_Gateway-Yaml</module>
-        <module>07_Gateway-Api</module>
-        <module>08_Gateway-Nacos</module>
-        <module>09_Sentinel</module>
-        <module>10_Sentinel-OpenFeign</module>
-        <module>11_Sentinel-Entry-FlowMode</module>
-        <module>12_Sentinel-Authorization-ParamMode</module>
-        <module>13_Sentinel-Gateway-Route-API</module>
-        <module>14_Sentinel-Pull</module>
-        <module>15_Sentinel-Push</module>
+        <module>04_NacosConfig-Bootstrap</module>
+        <module>05_Provider-NacosConfig</module>
+        <module>06_OpenFeign-Nacos</module>
+        <module>07_Gateway-Yaml</module>
+        <module>08_Gateway-Api</module>
+        <module>09_Gateway-Nacos</module>
+        <module>10_Sentinel</module>
+        <module>11_Sentinel-OpenFeign</module>
+        <module>12_Sentinel-Entry-FlowMode</module>
+        <module>13_Sentinel-Authorization-ParamMode</module>
+        <module>14_Sentinel-Gateway-Route-API</module>
+        <module>15_Sentinel-Pull</module>
+        <module>16_Sentinel-Push</module>
     </modules>
 
     <packaging>pom</packaging>

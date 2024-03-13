@@ -2,7 +2,7 @@ package com.example;
 
 import com.example.application.aplicationContextInitializer.MyApplicationContextInitializer;
 import com.example.bean.beanPostProcessor.MyBeanPostProcess;
-import com.example.excutor.Mouse;
+import com.example.executor.Mouse;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
