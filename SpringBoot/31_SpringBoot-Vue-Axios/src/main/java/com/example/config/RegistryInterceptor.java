@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @apiNote TODO 注册拦截器
  */
 @Configuration
-public class UserRegistry implements WebMvcConfigurer {
+public class RegistryInterceptor implements WebMvcConfigurer {
 
     String[] addPath = {
             "/user/**"

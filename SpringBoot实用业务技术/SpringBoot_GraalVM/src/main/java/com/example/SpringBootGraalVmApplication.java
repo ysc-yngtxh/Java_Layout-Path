@@ -55,7 +55,7 @@ public class SpringBootGraalVmApplication {
      *        <groupId>org.graalvm.buildtools</groupId>
      *        <artifactId>native-maven-plugin</artifactId>
      *    </plugin>
-     * 6、使用终端的方式进行Maven命令构建：mvn -Pnative native:compile  （构建时间较长）
+     * 6、使用终端的方式(IDEA构建报错)进行Maven命令构建：mvn -Pnative native:compile  （构建时间较长）
      * 7、在该SpringBoot项目的target目录下生成一个exe文件(80.5MB)，可无需Java环境即可运行，且运行速度极快。
      */
 }

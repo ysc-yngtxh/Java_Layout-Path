@@ -3,12 +3,11 @@ package com.example.interceptor;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.components.SpringContextHolder;
 import com.example.dao.ConsumerDao;
-import com.example.entity.Consumer;
+import com.example.entity.TbConsumer;
 import com.example.utils.JwtUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.util.StringUtils;
-import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,9 +24,10 @@ public class UserInterceptor implements HandlerInterceptor {
         if (StringUtils.hasText(authorization)) {
             // 获取该用户密码
             String username = JwtUtils.getUsername(authorization);
-            ConsumerDao consumerDao = (ConsumerDao) SpringContextHolder
-                                                   .getApplicationContext().getBean("consumerDao");
-            String pwd = consumerDao.selectOne(new LambdaQueryWrapper<Consumer>().eq(Consumer::getUsername, username)).getPassword();
+            ConsumerDao consumerDao = (ConsumerDao) SpringContextHolder.getApplicationContext()
+                                                                       .getBean("consumerDao");
+            String pwd = consumerDao.selectOne(new LambdaQueryWrapper<TbConsumer>()
+                                               .eq(TbConsumer::getUserName, username)).getPassWord();
             return JwtUtils.verifyToken(authorization, pwd);
         }
         return false;
