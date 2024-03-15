@@ -53,6 +53,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+
+		<!--Netty 无法访问本机 MacOS DNS 解析器，因此显式提供此本机库。-->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-resolver-dns-native-macos</artifactId>
+			<version>4.1.106.Final</version> <!--版本号自己切-->
+			<classifier>osx-aarch_64</classifier>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -63,5 +71,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
