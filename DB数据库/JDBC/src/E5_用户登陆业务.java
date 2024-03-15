@@ -1,4 +1,8 @@
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -36,7 +40,7 @@ import java.util.Scanner;
        PreparedStatement 是属于预编译的数据库操作对象
        PreparedStatement 的原理是：预先对SQL语句的框架进行编译，然后再给SQL语句传"值"
 */
-public class E5用户登陆业务 {
+public class E5_用户登陆业务 {
     public static void main(String[] args) {
         // 初始化界面
         Map<String, String> userLoginInfo = initUI();
@@ -125,6 +129,5 @@ public class E5用户登陆业务 {
         userLoginInfo.put("loginPwd", loginPwd);
 
         return userLoginInfo;
-
     }
 }

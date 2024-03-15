@@ -1,13 +1,17 @@
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * @author 游家纨绔
  */
 /*
-  联合  E5用户登陆业务  思考
+  联合  E5_用户登陆业务  思考
   解决SQL语句注入问题的关键是： 用户提供的信息中即使含有SQL语句的关键字，但是这些关键字并没有参与编译，不起作用
  */
-public class F6解决SQL注入问题 {
+public class F6_解决SQL注入问题 {
     public static void main(String[] args) {
         // 这里不做实现功能，只是简明扼要的分析SQL语句注入问题
         Connection conn = null;

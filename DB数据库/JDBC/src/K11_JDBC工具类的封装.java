@@ -7,7 +7,7 @@ import java.sql.*;
  *     第一：测试DBUtil是否好用
  *     第二：模糊查询怎么写？
  */
-public class J10JDBC工具类的封装 {
+public class K11_JDBC工具类的封装 {
     public static void main(String[] args) {
 
         Connection conn = null;

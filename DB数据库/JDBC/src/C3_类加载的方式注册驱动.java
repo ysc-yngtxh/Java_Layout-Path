@@ -27,7 +27,7 @@ public class Driver extends NonRegisteringDriver implements java.sql.Driver {
       这个方法的执行会导致类加载，类加载时，静态代码块执行。
       所以，我们在第一步注册驱动的时候还有一种写法：即Class.forName("完整类名"); 这种方法也是我们用来注册数据库的常用方法
  */
-public class C3类加载的方式注册驱动 {
+public class C3_类加载的方式注册驱动 {
     public static void main(String[] args) {
         Connection conn = null;
         Statement stmt = null;
@@ -38,7 +38,10 @@ public class C3类加载的方式注册驱动 {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // 2、获取连接
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bjpowernode?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC", "root", "131474");
+            conn = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/bjpowernode?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC"
+                    , "root"
+                    , "131474");
 
             // 3、获取数据库操作对象
             stmt = conn.createStatement();
@@ -48,9 +51,7 @@ public class C3类加载的方式注册驱动 {
             int count = stmt.executeUpdate(sql);
             System.out.println(count == 1 ? "新增成功" : "新增失败");
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
             // 6、释放资源

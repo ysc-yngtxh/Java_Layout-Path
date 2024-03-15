@@ -46,5 +46,5 @@
      MySQL驱动8的时候注册驱动 com.mysql.cj.jdbc.Driver();
      url="jdbc:mysql://localhost:3306/数据库名?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC"
  */
-public class A1对JDBC本质的理解 {
+public class A1_JDBC本质的理解 {
 }

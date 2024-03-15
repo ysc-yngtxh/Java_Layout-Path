@@ -13,7 +13,7 @@ import java.sql.*;
 这个程序开启一个事务，这个事务专门进行查询，并且使用行级锁/悲观锁，锁住相关的记录
 配合L12演示行级锁一起使用，方便理解
  */
-public class K11悲观锁和乐观锁的概念 {
+public class L12_悲观锁和乐观锁的概念 {
     public static void main(String[] args) {
         Connection conn = null;
         PreparedStatement ps = null;

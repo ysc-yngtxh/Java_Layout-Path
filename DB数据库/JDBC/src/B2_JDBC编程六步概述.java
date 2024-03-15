@@ -7,7 +7,7 @@ import java.sql.Statement;
 /**
  * @author 游家纨绔
  */
-public class B2JDBC编程六步概述 {
+public class B2_JDBC编程六步概述 {
     public static void main(String[] args) {
         Connection conn = null;
         Statement stmt = null;

@@ -28,7 +28,7 @@ SQL脚本：
        commit;
        select * from t_act;
 */
-public class I9JDBC事务自动提交机制的演示 {
+public class I9_JDBC事务自动提交机制的演示 {
     public static void main(String[] args) {
 
         Connection conn = null;

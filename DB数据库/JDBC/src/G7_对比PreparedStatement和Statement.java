@@ -20,7 +20,7 @@ import java.util.Scanner;
     因为传值过程中会自动加上单引号，但是加上了单引号又不符合SQL语法。
     所以这个时候就需要使用到Statement…
  */
-public class G7对比PreparedStatement和Statement {
+public class G7_对比PreparedStatement和Statement {
     public static void main(String[] args) {
         // 用户在控制台输入desc就是降序，输入asc就是升序
         Scanner s = new Scanner(System.in);
