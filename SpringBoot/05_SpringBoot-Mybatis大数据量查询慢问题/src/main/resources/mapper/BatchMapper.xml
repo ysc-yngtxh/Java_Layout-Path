@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.BatchMapper">
+
+  <insert id="batchInsert" useGeneratedKeys="true">
+      insert into student (name, email, age)
+      values(#{name},#{email},#{age})
+  </insert>
+
+  <insert id="insertForeach" parameterType="java.util.List" useGeneratedKeys="true">
+      # foreach 遇到数量大，性能瓶颈。表的列数较多（超过20），建议遍历100个就ok了，不要太高。
+      insert into student (name, email, age) values
+      <foreach collection="list" item="item" index="index" separator=",">
+          <trim prefix="(" suffix=")" suffixOverrides=",">
+              <if test="item.name != null and item.name != ''">
+                  #{item.name},
+              </if>
+              <if test="item.email != null and item.email != ''">
+                  #{item.email},
+              </if>
+              <if test="item.age != null and item.age != ''">
+                  #{item.age}
+              </if>
+          </trim>
+      </foreach>
+  </insert>
+</mapper>

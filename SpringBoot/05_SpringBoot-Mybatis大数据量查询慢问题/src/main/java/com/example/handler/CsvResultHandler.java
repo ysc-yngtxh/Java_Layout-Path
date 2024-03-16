@@ -2,10 +2,10 @@ package com.example.handler;
 
 import com.example.domain.Student;
 import org.apache.ibatis.session.ResultContext;
-import org.apache.ibatis.session.ResultHandler;  
-  
-import java.io.BufferedWriter;  
-import java.io.FileWriter;  
+import org.apache.ibatis.session.ResultHandler;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;  
   
 public class CsvResultHandler implements ResultHandler<Student> {

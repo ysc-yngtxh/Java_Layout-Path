@@ -2,6 +2,7 @@ package P16_JUC并发.JUC并发Ⅵ_线程池;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class 线程池1_池化技术 {
@@ -27,6 +28,7 @@ public class 线程池1_池化技术 {
         ExecutorService executorService1 = Executors.newSingleThreadExecutor(); // Single单例线程
         ExecutorService executorService2 = Executors.newFixedThreadPool(5); // 固定线程，5个线程
         ExecutorService executorService3 = Executors.newCachedThreadPool(); // 可伸缩线程，随用户需要去扩展线程数
+        ExecutorService executorService4 = Executors.newScheduledThreadPool(3);
 
         try {
             // 可以在运行后发现线程启动最多只有一个
@@ -62,6 +64,7 @@ public class 线程池1_池化技术 {
             executorService1.shutdown();
             executorService2.shutdown();
             executorService3.shutdown();
+            executorService4.shutdown();
         }
     }
 }
