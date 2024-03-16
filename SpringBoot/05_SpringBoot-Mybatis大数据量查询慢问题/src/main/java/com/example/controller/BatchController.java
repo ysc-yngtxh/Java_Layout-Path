@@ -26,16 +26,6 @@ import java.util.concurrent.TimeUnit;
 @Controller
 public class BatchController {
 
-    ExecutorService threadPoolExecutor = new ThreadPoolExecutor(
-            Runtime.getRuntime().availableProcessors() * 10,  // 根据用户的CPU核数来设置核心线程池大小
-            Runtime.getRuntime().availableProcessors() * 30,  // 根据用户的CPU核数来设置最大核心线程池大小
-            3,                                   // 超时时间,超过核心线程的线程在此时间后会被释放
-            TimeUnit.SECONDS,                    // 超时单位
-            new LinkedBlockingDeque<>(3),        // 阻塞队列
-            Executors.defaultThreadFactory(),    // 线程工厂。创建线程的，一般不动
-            new ThreadPoolExecutor.AbortPolicy() // 拒绝策略
-    );
-
     @Autowired
     private BatchService batchService;
 
@@ -74,7 +64,7 @@ public class BatchController {
     }
 
     // TODO 总结：
-    // 1. 小数据量，使用foreach性能是优于批处理方式。
+    // 1. 小数据量，使用foreach(多值插入)性能是优于批处理方式。
     // 2. 大数据量，使用批处理方式，不使用foreach进行多值插入，效率更高。
     //    因为 多值插入(多value值) 也是需要在Mybatis中进行解析(参数对应换位符)
     //    IO操作，在Mysql服务器还是要解析其 多值插入 语句。

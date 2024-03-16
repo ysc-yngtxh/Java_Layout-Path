@@ -1,6 +1,8 @@
 package P16_JUC并发.JUC并发Ⅲ_常用辅助类;
 
+import java.util.Random;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 public class CountDownLatch辅助类 {
     /**
