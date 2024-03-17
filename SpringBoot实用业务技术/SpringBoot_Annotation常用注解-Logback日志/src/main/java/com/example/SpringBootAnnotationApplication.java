@@ -6,10 +6,16 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.stereotype.Indexed;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
 import java.util.Map;
 
+@EnableAsync // 开启异步支持
+@RestController
 @SpringBootApplication
 @MapperScan("com.example.dao")
 public class SpringBootAnnotationApplication {
@@ -35,5 +41,11 @@ public class SpringBootAnnotationApplication {
 
         System.out.println(Test01.HELLO + " " + Test01.WORLD);
     }
+
+    @RequestMapping("/test")
+    public void test() {
+
+    }
+
 
 }

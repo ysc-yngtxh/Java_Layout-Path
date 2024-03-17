@@ -5,9 +5,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Indexed;
 
-// 定义Spring IOC容器中Bean的执行顺序的优先级：值越小执行顺序优先级越高
-@Order(-1)
+// 可以在@Component、@Service、@Controller、@Repository注解中发现其子注解：@Indexed
+// @Indexed注解：随着项目越来越复杂，那么@ComponentScan需要扫描加载的Class会越来越多，在系统启动的时候会造成性能损耗。
+//              所以在系统编译的时候会收集所有被@Indexed注解修饰的类，然后将这些类信息记录在MATE-INF/spring.components文件中，
+//              那么系统启动的时候就只需要读取一个该文件中的内容就不用再遍历所有的目录了，提升效率。
+// 使用：只需在pom文件中添加 spring-context-indexer 依赖。
+@Order(-1) // 定义Spring IOC容器中Bean的执行顺序的优先级：值越小执行顺序优先级越高
 @Configuration
 public class SpringConfig {
 

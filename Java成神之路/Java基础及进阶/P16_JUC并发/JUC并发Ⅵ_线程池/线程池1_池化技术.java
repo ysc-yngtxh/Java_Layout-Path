@@ -3,6 +3,7 @@ package P16_JUC并发.JUC并发Ⅵ_线程池;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 public class 线程池1_池化技术 {
@@ -27,8 +28,8 @@ public class 线程池1_池化技术 {
         // 不建议使用这种形式去创建线程池
         ExecutorService executorService1 = Executors.newSingleThreadExecutor(); // Single单例线程
         ExecutorService executorService2 = Executors.newFixedThreadPool(5); // 固定线程，5个线程
-        ExecutorService executorService3 = Executors.newCachedThreadPool(); // 可伸缩线程，随用户需要去扩展线程数
-        ExecutorService executorService4 = Executors.newScheduledThreadPool(3);
+        ExecutorService executorService3 = Executors.newCachedThreadPool();// 可伸缩线程，随用户需要去扩展线程数
+        ScheduledExecutorService executorService4 = Executors.newScheduledThreadPool(3);
 
         try {
             // 可以在运行后发现线程启动最多只有一个
@@ -39,7 +40,7 @@ public class 线程池1_池化技术 {
             }
 
             TimeUnit.SECONDS.sleep(2);
-            System.out.println("====================");
+            System.out.println("==========2==========");
 
             // 可以在运行后发现线程启动最多有五个
             for (int i = 1; i <= 10; i++) {
@@ -49,7 +50,7 @@ public class 线程池1_池化技术 {
             }
 
             TimeUnit.SECONDS.sleep(2);
-            System.out.println("====================");
+            System.out.println("==========3==========");
 
             // 可以在运行后发现线程启动最多有十个
             for (int i = 1; i <= 10; i++) {
@@ -57,6 +58,15 @@ public class 线程池1_池化技术 {
                     System.out.println(Thread.currentThread().getName() + "--OK");
                 });
             }
+
+            System.out.println("===========4=========");
+
+            // 定时(延时)执行线程任务
+            ScheduledFuture<String> schedule = executorService4.schedule(() -> {
+                return "call";
+            }, 10, TimeUnit.SECONDS);
+            System.out.println(schedule.get());
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
