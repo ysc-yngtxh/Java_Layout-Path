@@ -11,10 +11,6 @@ public class FunctionExample {
 
     public static void main(String[] args) {
         // TODO 这种函数式接口优化IF，实际上并没有消除，只是封装起来显得更优雅
-
-        // FunctionUtil.isTrue(true).throwMessage("this a err1");
-        FunctionUtil.isTrue(false).throwMessage("this a err2");
-
         FunctionUtil.isTrueOrFalse(true).trueOrFalseHandler(
                 () -> {
                     System.out.println("this is true");
@@ -30,5 +26,8 @@ public class FunctionExample {
                     System.out.println("空字符串");
                 }
         );
+
+        // FunctionUtil.isTrue(true).throwMessage("this a err1");
+        FunctionUtil.isTrue(false).throwMessage("this a err2");
     }
 }

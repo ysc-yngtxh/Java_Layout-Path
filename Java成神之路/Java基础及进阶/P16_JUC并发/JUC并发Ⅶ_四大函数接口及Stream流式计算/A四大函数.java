@@ -9,18 +9,30 @@ import java.util.function.Supplier;
 public class A四大函数 {
     /**
      * 四大函数接口都可以使用Lambda表达式来书写
-     *      1、Function  函数型接口
-     *          工具类：有一个输入的值，还有输出的值
+     *      1、Function<T, R>  函数型接口
+     *          工具类：接收一个T类型参数,返回一个R类型结果
      *
-     *      2、Predicate  断言式接口
-     *          工具类：有一个输入值，返回值是一个布尔类型
+     *      2、Predicate<T>  断言式接口
+     *          工具类：接收一个T类型参数,返回一个Boolean类型结果
      *
-     *      3、Consumer  消费型接口
-     *          工具类：有一个输入值，没有返回值，里面是你想实现的代码
+     *      3、Consumer<T>  消费型接口
+     *          工具类：接收一个T类型参数，不返回值
      *
-     *      4、Supplier  供给型接口
-     *          工具类：没有参数输入值，有返回值
+     *      4、Supplier<T>  供给型接口
+     *          工具类：不接受参数，返回一个T类型的结果
      */
+    /**
+     * Java8中对于接收两个参数的场景提供了相关的函数式接口。如下：
+     *      1、BiFunction<T, U, R>
+     *          工具类：接收一个T类型和一个U类型参数，返回一个R类型结果
+     *
+     *      2、BiConsumer<T, U>
+     *          工具类：接收一个T类型和一个U类型参数,不返回值
+     *
+     *      3、BiPredicate<T, U>
+     *          工具类：接收一个T类型和一个U类型参数返回一个Boolean类型结果
+     */
+
     public static void main(String[] args) {
         /*
         Function = new Function<String, String>() {

@@ -53,7 +53,7 @@ class Test {
 
 
 // 负责计算的接口
-interface Compute{
+interface Compute {
     // 抽象方法
     int sum(int a, int b);
 }
@@ -74,5 +74,12 @@ public class 匿名内部类概述 {
                 return a + b;
             }
         }, 100, 200);
+
+        // 以下两种写法同样能够实现相同的功能，使用的是Lambda表达式方式
+        // mm.mysum((a,b) -> {
+        //     return a + b;
+        // }, 100, 200);
+        //
+        // mm.mysum(Integer::sum, 100, 200);
     }
 }

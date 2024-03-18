@@ -15,7 +15,7 @@ class PageInternal{
 }
 class son extends PageInternal{}
 
-public class 抽象类5_修饰符访问级别 {
+public class 抽象类6_修饰符访问级别 {
     /**
         修饰符	     当前类   同一个包中的类    子类(不同包)  所有类
         public        √	          √	            √	       √

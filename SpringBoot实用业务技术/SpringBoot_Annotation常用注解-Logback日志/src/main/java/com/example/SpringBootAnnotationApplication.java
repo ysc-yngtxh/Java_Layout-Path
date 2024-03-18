@@ -41,11 +41,4 @@ public class SpringBootAnnotationApplication {
 
         System.out.println(Test01.HELLO + " " + Test01.WORLD);
     }
-
-    @RequestMapping("/test")
-    public void test() {
-
-    }
-
-
 }

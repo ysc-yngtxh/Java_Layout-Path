@@ -10,13 +10,6 @@ import com.example.函数式接口.interfaces.ThrowExceptionFunction;
  * @apiNote TODO
  */
 public class FunctionUtil {
-    public static ThrowExceptionFunction isTrue(boolean b) {
-        return (message) -> {
-            if (b) {
-                throw new RuntimeException(message);
-            }
-        };
-    }
 
     public static BranchHandler isTrueOrFalse(boolean b) {
         return (trueHandler, falseHandler) -> {
@@ -34,6 +27,14 @@ public class FunctionUtil {
                 action.accept(obj);
             } else {
                 falseHandler.run();
+            }
+        };
+    }
+
+    public static ThrowExceptionFunction isTrue(boolean b) {
+        return (message) -> {
+            if (b) {
+                throw new RuntimeException(message);
             }
         };
     }
