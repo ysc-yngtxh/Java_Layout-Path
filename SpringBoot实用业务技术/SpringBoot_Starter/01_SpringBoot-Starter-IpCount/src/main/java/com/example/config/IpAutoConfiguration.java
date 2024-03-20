@@ -17,6 +17,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @apiNote TODO
  */
 @Data
+// 这里你肯定会很奇怪，为什么我使用了Spring的SPI机制将当前类注入到了Spring容器中，却还是需要加上@Configuration注解呢？
+// 原因就在于：不加上@Configuration，那么这个类就只是一个普通的Bean，而不是一个配置Bean，就无法将@Bean标注的类注入Spring
 @Configuration
 @ConfigurationProperties("tools.ip")
 public class IpAutoConfiguration implements WebMvcConfigurer {

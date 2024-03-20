@@ -18,7 +18,7 @@ import java.util.Properties;
            再用newInstance()这个方法会调用User这个类的无参构造方法，完成对象的创建
 
      第三种：(灵活多变方式)
-           通过Io流读取classinfo.properties配置文件
+           通过Io流读取classInfo.properties配置文件
            调用Properties对象的Load方法将文件中的数据加载到Map集合中
            通过key获取value.即你实例化对象的地址名。然后再通过反射机制实例化对象
 

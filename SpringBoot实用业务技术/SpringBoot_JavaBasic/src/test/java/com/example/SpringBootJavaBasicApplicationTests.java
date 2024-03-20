@@ -26,6 +26,7 @@ class SpringBootJavaBasicApplicationTests {
 	// 测试Mapstruct功能
 	@Test
 	public void mapStructs() {
+		// 方式一：通过Mapper实例对象的方式
 		User user = User.builder().id(123L).name("小娘皮叶诗琪").email("google@163.com").date(new Date()).build();
 		Users users = MapStructExample.mapStr.toUsers(user);
 		log.error(users.toString());
@@ -44,7 +45,7 @@ class SpringBootJavaBasicApplicationTests {
 		Users users2 = MapStructExample.mapStr.toUsers2(user2);
 		log.error(users2.toString());
 
-		// 这里通过注入的依赖，调用方法
+		// 方式二：这里通过注入的依赖，调用方法
 		Users users3 = mapStructExample.toUsers(user2);
 		log.error(users3.toString());
 	}

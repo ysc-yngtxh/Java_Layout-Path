@@ -10,11 +10,11 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
-public class ResponseVo {
+public class ResponseVo<T> {
 
     private Integer code;
 
-    private Object data;
+    private T data;
 
     private String message;
 
@@ -23,10 +23,10 @@ public class ResponseVo {
         this.message = message;
     }
 
-    public static ResponseVo success(Integer code, Object data, String message){
-        return new ResponseVo(code, data, message);
+    public static <T> ResponseVo<T> success(Integer code, T data, String message){
+        return new ResponseVo<>(code, data, message);
     }
-    public static ResponseVo fail(Integer code, String message){
-        return new ResponseVo(code, message);
+    public static <T> ResponseVo<T> fail(Integer code, String message){
+        return new ResponseVo<>(code, message);
     }
 }

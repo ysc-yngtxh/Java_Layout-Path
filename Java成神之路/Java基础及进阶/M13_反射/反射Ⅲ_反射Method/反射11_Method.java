@@ -35,9 +35,9 @@ public class 反射11_Method {
             s.append(method1.getReturnType().getName() + " ");
             s.append(method1.getName() + "(");
             // 参数列表
-            Class[] parameterTypes1 = method1.getParameterTypes();
+            Class<?>[] parameterTypes1 = method1.getParameterTypes();
             if (parameterTypes1.length != 0) {
-                for (Class parameterType2:parameterTypes1) {
+                for (Class<?> parameterType2 : parameterTypes1) {
                     s.append(parameterType2.getSimpleName() + ",");
                 }
                 // 删除指定下标位置上的字符(删除多余的逗号,)

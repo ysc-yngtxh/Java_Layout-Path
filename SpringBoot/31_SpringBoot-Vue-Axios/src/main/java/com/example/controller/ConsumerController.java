@@ -41,7 +41,7 @@ public class ConsumerController {
     }
 
     @GetMapping("/selectPage")
-    public ResponseEntity<ResponseVo> queryPage(@RequestParam Integer page, @RequestParam Integer size) {
+    public ResponseEntity<?> queryPage(@RequestParam Integer page, @RequestParam Integer size) {
         List<TbConsumer> tbConsumerListPage = consumerService.queryPage(page, size);
         if (CollectionUtils.isEmpty(tbConsumerListPage)) {
             return ResponseEntity.ok(ResponseVo.fail(400, "输入页数超过拥有数据分页页数"));

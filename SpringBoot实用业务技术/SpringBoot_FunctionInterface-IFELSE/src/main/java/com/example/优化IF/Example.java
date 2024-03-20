@@ -88,7 +88,5 @@ public class Example implements CommandLineRunner {
         //        Map+函数式接口通过Map.get(key)来代替 if-else的业务分派，避免策略模式带来的类增多、难以俯视整个业务逻辑的问题。
         String result = queryGrantTypeService.getResult(resourceType);
         logger.info("查询" + resourceType + "的派发方式为：" + result);
-
-
     }
 }

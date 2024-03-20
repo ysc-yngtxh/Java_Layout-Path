@@ -44,20 +44,20 @@ public class 线程池2_七大参数及自定义线程池 {
                 TimeUnit.SECONDS,             // 超时单位
                 new LinkedBlockingDeque<>(3), // 阻塞队列
                 Executors.defaultThreadFactory(),    // 线程工厂。创建线程的，一般不动
-                new ThreadPoolExecutor.AbortPolicy() // 拒绝策略(有四种拒绝策略)
-                // new ThreadPoolExecutor.CallerRunsPolicy()    // 哪里来的就哪里去
-                // new ThreadPoolExecutor.DiscardPolicy()       // 队列满了，就丢掉任务，不会抛异常
-                // new ThreadPoolExecutor.DiscardOldestPolicy() // 队列满了，尝试和最早的队列进行竞争，也不会抛出异常
-
-                /*
-                  这里要注意一下：
-                     1、当你的排队策略为有界队列，并且配置的拒绝策略是ThreadPoolExecutor.AbortPolicy，
-                        当线程池的线程数量已经达到了maximumPoolSize的时候，你再向它提交任务，就会抛出ThreadPoolExecutor.AbortPolicy异常。
-                        从而引发java.util.concurrent.RejectedExecutionException
-                     2、线程池显式的调用了shutdown()之后，再向线程池提交任务的时候，如果你配置的拒绝策略是ThreadPoolExecutor.AbortPolicy的话，
-                        这个异常就被会抛出来。从而引发java.util.concurrent.RejectedExecutionException
-                */
+                new ThreadPoolExecutor.AbortPolicy() // 拒绝策略(有四种拒绝策略)。
+                // new ThreadPoolExecutor.AbortPolicy()         // 如果线程队列已满，丢弃任务并抛出RejectedExecutionException异常。
+                // new ThreadPoolExecutor.DiscardPolicy()       // 如果线程队列已满，则后续提交的任务都会被丢弃，不抛出异常。
+                // new ThreadPoolExecutor.DiscardOldestPolicy() // 丢弃队列最前面的任务，然后重新提交被拒绝的任务。
+                // new ThreadPoolExecutor.CallerRunsPolicy()    // 由调用线程处理该任务。比如主线程(main)调用线程池执行任务，
+                                                                // 如果线程队列已满，那么就会由主线程直接运行该任务。
         );
+
+       /* 引发java.util.concurrent.RejectedExecutionException的场景：
+         1、当你的排队策略为有界队列，并且配置的拒绝策略是 ThreadPoolExecutor.AbortPolicy，
+            当线程池的线程数量已经达到了maximumPoolSize的时候，你再向它提交任务，就会抛出ThreadPoolExecutor.AbortPolicy异常。
+            从而引发java.util.concurrent.RejectedExecutionException
+         2、线程池显式的调用了shutdown()之后，再向线程池提交任务的时候，如果你配置的拒绝策略是ThreadPoolExecutor.AbortPolicy的话，
+            这个异常就被会抛出来。从而引发java.util.concurrent.RejectedExecutionException */
 
         /**
          * 一、线程基本规则
