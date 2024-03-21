@@ -20,9 +20,7 @@ class WindowsApplicationTests {
     @Test
     @SneakyThrows
     void contextLoads() {
-        FixedWindowRateLimiter fixedWindowRateLimiter
-                = new FixedWindowRateLimiter(1000, 5);
-
+        FixedWindowRateLimiter fixedWindowRateLimiter = new FixedWindowRateLimiter(1000, 5);
         for (int i = 0; i < 10; i++) {
             if (fixedWindowRateLimiter.tryAcquire()) {
                 System.out.println("执行任务");
@@ -32,6 +30,7 @@ class WindowsApplicationTests {
             }
         }
     }
+
 
     // 滑动窗口算法：在固定窗口的基础上，进行了一定的升级改造。
     // 它的算法的核心在于将时间窗口进行了更精细的分片，将固定窗口分为多个小块，每次仅滑动一小块的时间。
@@ -56,5 +55,4 @@ class WindowsApplicationTests {
             TimeUnit.MILLISECONDS.sleep(10);
         }
     }
-
 }

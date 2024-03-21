@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.Tb2_SkuMapper">
 
-    <resultMap id="TbSkuMap" type="com.example.entity.Tb2_Sku">
+    <resultMap id="TbSkuMap" type="Tb2_Sku">
         <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="image" column="image" jdbcType="VARCHAR"/>
         <result property="price" column="price" jdbcType="NUMERIC"/>

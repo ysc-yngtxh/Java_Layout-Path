@@ -19,8 +19,8 @@ import javax.sql.DataSource;
 public class DataSourceSpringDbConfig {
 
     // application.yml文件配置好之后，我们创建两个配置类来加载配置信息，初始化数据源
-    // 1）类注解@MapperScan的属性basePackages配置的为对应DA层dao的位置
-    // 2）@Primary注解修改优先权，表示发现相同类型bean，优先使用该方法。
+    //   1）类注解@MapperScan的属性basePackages配置的为对应DA层dao的位置
+    //   2）@Primary注解修改优先权，表示发现相同类型bean，优先使用该方法。
     @Primary
     @Bean(name = "springdbDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.springdb") // 指向yml配置文件中的数据库配置

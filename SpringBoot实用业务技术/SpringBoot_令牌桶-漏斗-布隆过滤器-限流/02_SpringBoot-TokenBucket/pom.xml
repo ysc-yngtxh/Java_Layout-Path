@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>01_SpringBoot-TokenBucket</artifactId>
+	<artifactId>02_SpringBoot-TokenBucket</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>01_SpringBoot-TokenBucket</name>
-	<description>01_SpringBoot-TokenBucket</description>
+	<name>02_SpringBoot-TokenBucket</name>
+	<description>02_SpringBoot-TokenBucket</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

@@ -26,6 +26,8 @@ public class Lock锁 {
      * 在资源竞争不是很激烈的情况下，Synchronized的性能要优于ReentrantLock，
      * 但是在资源竞争很激烈的情况下，Synchronized的性能会下降几十倍，但是ReentrantLock的性能能维持常态；
      * 严格来说在单线程Synchronized比Lock锁要效率高的，但是Lock的API方便呀！😁😁😁
+     *
+     * 有关 AQS 的一些原理跟机制：https://cloud.tencent.com/developer/article/2378820
      */
     public static void main(String[] args) {
         Dataes data = new Dataes();

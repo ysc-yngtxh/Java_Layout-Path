@@ -32,8 +32,8 @@ public class Tb2_SkuController {
     }
 
     @RequestMapping("/deleteLogic")
-    public Tb2_Sku deleteLogic(@RequestParam(required = false) Integer Id) {
+    public Tb2_Sku deleteLogic(@RequestParam(required = false) Integer id) {
         tb2SkuService.deleteLogic();
-        return tb2SkuService.selectById(Id);
+        return tb2SkuService.selectById(id);
     }
 }

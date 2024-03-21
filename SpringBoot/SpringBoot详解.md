@@ -33,7 +33,42 @@
     
     4. 具体参考：https://blog.csdn.net/qq_33591903/article/details/119843446
 
-## 二、事务注解详解
+
+## 二、Spring中主要使用的设计模式：
+
+    1、单例模式（Singleton Pattern）：
+          在Spring中，bean的默认作用域就是单例的。 这意味着在整个Spring IoC容器中，一个bean定义对应一个对象实例。
+          这有助于减少内存消耗并提高性能。
+    
+    2、工厂模式（Factory Pattern）：
+          Spring通过BeanFactory和ApplicationContext接口实现了工厂模式。
+          这些工厂类负责创建并管理bean的生命周期。它们通过读取配置文件或注解来创建bean的实例，并在需要时提供给调用者。
+    
+    3、代理模式（Proxy Pattern）：
+          Spring的AOP（面向切面编程）功能就是基于代理模式实现的。AOP通过代理对象来增强目标对象的功能，而无需修改目标对象的代码。
+          Spring提供了JDK动态代理和CGLIB等字节码生成技术来实现代理。
+    
+    4、观察者模式（Observer Pattern）：
+          Spring的事件机制是基于观察者模式实现的。
+          当某个事件发生时，Spring容器会通知所有注册的观察者（监听器），从而实现了事件驱动编程。
+    
+    5、模板方法模式（Template Method Pattern）：
+          Spring提供了许多模板类，如JdbcTemplate、HibernateTemplate等，用于简化数据库操作。
+          这些模板类定义了数据库操作的通用流程，而将具体实现留给子类来完成。
+    
+    6、适配器模式（Adapter Pattern）：
+          Spring框架中使用了适配器模式来适配不同的类或接口，使得它们能够协同工作。
+          例如，在MVC模块中，HandlerAdapter就充当了适配器的角色，将不同的处理器（Handler）适配到统一的调用接口上。
+    
+    7、策略模式（Strategy Pattern）：
+          Spring中的资源访问接口Resource的设计就是一种典型的策略模式。
+          不同的资源访问策略（如文件访问、数据库访问等）可以通过实现相同的Resource接口来统一处理。
+    
+    8、装饰器模式（Decorator Pattern）：
+          Spring中的某些功能也使用了装饰器模式，比如配置DataSource时，可能需要根据不同的需求来切换不同的数据源。
+          装饰器模式允许我们在不修改原有对象的情况下，动态地给对象添加一些职责。
+
+## 三、事务注解详解
      默认遇到throw new RuntimeException(“…”); 会回滚
      需要捕获的throw new Exception(“…”);      不会回滚
 
@@ -43,7 +78,7 @@
      如果有事务,那么加入事务,没有的话新建一个(不写的情况下) -- 传播级别
      @Transactional(propagation=Propagation.REQUIRED)
 
-## 三、事务不生效
+## 四、事务不生效
     1. 访问权限问题  
        方法的访问权限被定义成了private，这样会导致事务失效，Spring 要求被代理方法必须是public的。
    
@@ -92,7 +127,7 @@
        但有个很致命的问题是：不支持事务。如果只是单表操作还好，不会出现太大的问题。但如果需要跨多张表操作，由于其不支持事务，数据极有可能会出现不完整的情况。  
        此外，myisam 还不支持行锁和外键。
  
-## 四、事务不回滚
+## 五、事务不回滚
     1. 抛出检查异常
        ```
        @Slf4j
@@ -117,7 +152,7 @@
        Spring是否进行回滚是根据你是否抛出异常决定的，所以如果你自己try...catch...捕获了异常，Spring 也无能为力。
   
 
-## 五、编程式事务
+## 六、编程式事务
     基于@Transactional注解的，主要讲的是它的事务问题，我们把这种事务叫做：声明式事务。
     
     其实，spring还提供了另外一种创建事务的方式，即通过手动编写代码实现的事务，我们把这种事务叫做：编程式事务。例如：

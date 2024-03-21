@@ -37,7 +37,6 @@ public class C_ThreadPoolThreadLocal {
             ExecutorService executor = ScopeThreadPoolExecutor.newFixedThreadPool(10);
             executor.execute(r);
             executor.submit(r);
-
         } finally {
             Scope.endScope();
         }

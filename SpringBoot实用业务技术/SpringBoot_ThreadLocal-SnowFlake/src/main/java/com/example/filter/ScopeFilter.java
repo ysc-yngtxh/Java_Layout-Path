@@ -25,8 +25,9 @@ public class ScopeFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-                                    FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request
+                                  , HttpServletResponse response
+                                  , FilterChain filterChain) throws ServletException, IOException {
         // 开启Scope
         Scope.beginScope();
         // 登录态通过Cookie模拟

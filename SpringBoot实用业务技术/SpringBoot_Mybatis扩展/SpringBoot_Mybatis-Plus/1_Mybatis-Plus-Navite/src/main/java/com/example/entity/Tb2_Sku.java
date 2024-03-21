@@ -25,13 +25,14 @@ import java.util.List;
 //            参数四：autoResultMap  表示是否自动构建ResultMap，适合实体字段中有使用typeHandler （设置了resultMap则无效）
 //            参数五：keepGlobalPrefix  表示该映射表名是否保留在配置文件中设置的全局表名前缀(true表示保留)
 //            参数六：excludeProperty 表示需要排除的属性字段。插入数据的时候会排除该字段数据
-@TableName(value = "tb_sku", resultMap = "TbSkuMap", keepGlobalPrefix = true, excludeProperty = {"context"})
+@TableName(value = "sku", resultMap = "TbSkuMap", keepGlobalPrefix = true, excludeProperty = {"context"})
 public class Tb2_Sku implements Serializable {
     @Serial
     private static final long serialVersionUID = 436500863014955490L;
 
     // 主键Id。当我们的主键Id字段不是 Id 时，应该添加上@TableId注解进行认为映射主键
     // @TableId参数：value映射数据库column列主键字段；type设置新增数据主键Id规则,有自增、UUID等
+    // 并且这里作为局部的Id生成策略，会覆盖掉application.properties中的全局Id生成策略
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 

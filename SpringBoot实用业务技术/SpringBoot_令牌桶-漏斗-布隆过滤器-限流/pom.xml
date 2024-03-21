@@ -10,9 +10,10 @@
     <description>SpringBoot_令牌桶-漏斗-布隆过滤器-限流</description>
 
     <modules>
-        <module>01_SpringBoot-TokenBucket</module>
-        <module>02_SpringBoot-Funnel</module>
-        <module>03_SpringBoot-BloomFilter</module>
+        <module>01_SpringBoot-FixedOrSlideWindowRateLimiter</module>
+        <module>02_SpringBoot-TokenBucket</module>
+        <module>03_SpringBoot-Funnel</module>
+        <module>04_SpringBoot-BloomFilter</module>
     </modules>
     <packaging>pom</packaging>
 

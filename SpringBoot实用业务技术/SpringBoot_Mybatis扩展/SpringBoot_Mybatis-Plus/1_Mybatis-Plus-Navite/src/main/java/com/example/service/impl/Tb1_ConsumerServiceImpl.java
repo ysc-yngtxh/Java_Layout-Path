@@ -174,7 +174,7 @@ public class Tb1_ConsumerServiceImpl implements Tb1_ConsumerService {
     /**
      * 条件构造器查询
      * 需求10： 名字中包含雨并且年龄小于40   只查询id,name两个字段
-     * name like '%月%' and age<40
+     * select id,name from *** where like '%月%' and age<40
      */
     public List<Tb1_Consumer> selectByWrapper10() {
         QueryWrapper<Tb1_Consumer> queryWrapper = new QueryWrapper<>();
@@ -185,7 +185,7 @@ public class Tb1_ConsumerServiceImpl implements Tb1_ConsumerService {
 
     /**
      * 条件构造器查询
-     * 需求11： 名字中包含月并且年龄小于40  并且排除created_date、updated_date两个字段
+     * 需求11： 名字中包含'月'并且年龄小于40  并且排除created_date、updated_date两个字段
      * select id,username,age,email from Tb1_Consumer where like '%月%' and age<40
      */
     public List<Tb1_Consumer> selectByWrapper11() {
