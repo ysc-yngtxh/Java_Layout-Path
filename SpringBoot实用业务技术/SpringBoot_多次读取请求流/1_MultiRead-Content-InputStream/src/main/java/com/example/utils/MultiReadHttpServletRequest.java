@@ -139,7 +139,6 @@ public class MultiReadHttpServletRequest extends HttpServletRequestWrapper {
             while ((str = reader.readLine()) != null){
                 stringBuilder.append(str);
             }
-
         } catch (IOException e) {
             log.debug("请求参数转换错误!",e);
         }

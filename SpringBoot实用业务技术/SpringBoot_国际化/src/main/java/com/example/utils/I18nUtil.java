@@ -42,7 +42,8 @@ public class I18nUtil{
         try {
             // build I18nUtil prop
             String i18n = AppI18nConfig.getAppConfig().getI18n();
-            // MessageFormat在和String的format方法同样都是字符串格式化方法，但在性能上MessageFormat更加优秀
+            // MessageFormat的format函数能够先分析消息的指定位置，并直接在这些位置插入相应的值。
+            // 这种方式比采用正则表达式查找占位符的方法（如String.format）更高效，性能更优秀。
             String i18nFile = MessageFormat.format("i18n/messages_{0}.properties", i18n);
             // String format = String.format("i18n/messages_%s.properties", i18n);
 

@@ -6,9 +6,12 @@ import com.example.entity.Consumer1;
 import com.example.entity.Consumer2;
 import com.example.entity.Consumer3;
 import com.example.entity.Supplier;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -105,11 +108,8 @@ public class JsonAnnotationController {
     }
 
     @RequestMapping("/consumer3")
-    public Consumer3 test3(@RequestBody(required = false) Consumer3 param) {
-
-        System.out.println("参数转成对象" + param);
-
-        // 反序列化：这里的属性gender必须替换成 Integer 类型，因为走的是阿里的反序列化，没有走嵌入自定义的代码逻辑
+    public Consumer3 test3(@RequestBody(required = false) Consumer3 param) throws JsonProcessingException {
+        // 反序列化
         String jsonString = """
                 {
                 	"consumerId": 3,
@@ -120,13 +120,21 @@ public class JsonAnnotationController {
                 	"supplier": {
                  		"id": 11
                  	},
-                	"gender": 1,
+                	"gender": "男",
                 	"title": "标题",
+                	"product": "产品",
                 	"propertiesJson": {"id": 1, "user": "ysc"}
                 }
                 """;
-        Consumer3 parseObject = JSONObject.parseObject(jsonString, Consumer3.class);
-        System.out.println("反序列化: " + parseObject);
+        // 这里使用的是Jackson的非序列化方法
+        ObjectMapper objectMapper = new ObjectMapper();
+        Consumer3 jacksonParse = objectMapper.readValue(jsonString, Consumer3.class);
+        System.out.println("Jackson非序列化：" + jacksonParse);
+        // 这里使用的是FastJson的非序列化方法会报错。
+        // 因为我们的 gender 属性字段上标注的注解是基于Jackson的，所以需要使用Jackson进行反序列化。
+        // 使用FastJson并不会走我们自定义的反序列化逻辑
+        Consumer3 fastJsonParse = JSONObject.parseObject(jsonString, Consumer3.class);
+        System.out.println("FastJson2非序列化：" + fastJsonParse);
 
         // 序列化
         Consumer3 consumer3 = Consumer3.builder()
@@ -140,7 +148,7 @@ public class JsonAnnotationController {
                 .properties( Map.of("title", "标题") )
                 .propertiesJson( Map.of("id", "1", "user", "ysc") )
                 .build();
-        System.out.println("序列化: " + JSON.toJSONString(consumer3));
+        System.out.println("序列化: " + objectMapper.writer().writeValueAsString(consumer3));
         return consumer3;
     }
 }

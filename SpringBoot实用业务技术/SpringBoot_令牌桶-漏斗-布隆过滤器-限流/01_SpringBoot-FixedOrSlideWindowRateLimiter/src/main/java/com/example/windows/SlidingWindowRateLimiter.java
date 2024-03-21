@@ -19,10 +19,10 @@ public class SlidingWindowRateLimiter {
     // 请求总数
     private int totalCount;
 
-    // 当前窗口下标
+    // 分片窗口下标
     private int shardId;
 
-    // 每个小窗口大小，毫秒
+    // 每个分片窗口大小，毫秒
     private long tinyWindowSize;
 
     // 窗口右边界

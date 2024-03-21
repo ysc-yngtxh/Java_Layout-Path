@@ -25,7 +25,7 @@ class SpringFunnelApplicationTests {
         int denyCount = 0;         // 拒绝访问次数
         for (int i = 0; i < testAccessCount; i++) {
             // 调用漏斗算法，判断当前循环是否允许访问（每一次循环可当成一次请求）
-            boolean isAllow = limiter.isActionAllowed("小曹", "提交订单", 5, 5, 30);
+            boolean isAllow = limiter.isActionAllowed("小曹", "提交订单", 5, 5, 10);
             if (isAllow) {
                 allowCount++;
             } else {

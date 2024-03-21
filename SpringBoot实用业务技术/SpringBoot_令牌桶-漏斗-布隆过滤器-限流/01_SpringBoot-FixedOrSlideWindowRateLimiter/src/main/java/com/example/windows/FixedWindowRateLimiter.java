@@ -10,11 +10,10 @@ public class FixedWindowRateLimiter {
     private long windowSize;
     // 允许通过请求数
     private int maxRequestCount;
-
-    // 当前窗口通过的请求计数
-    private AtomicInteger count = new AtomicInteger(0);
     // 窗口右边界
     private long windowBorder;
+    // 当前窗口通过的请求计数
+    private AtomicInteger count = new AtomicInteger(0);
 
     public FixedWindowRateLimiter(long windowSize, int maxRequestCount) {
         this.windowSize = windowSize;
@@ -25,7 +24,7 @@ public class FixedWindowRateLimiter {
     public synchronized boolean tryAcquire() {
         long currentTime = System.currentTimeMillis();
         if (windowBorder < currentTime) {
-            log.info("window  reset");
+            log.info("window reset");
             do {
                 windowBorder += windowSize;
             } while (windowBorder < currentTime);

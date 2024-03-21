@@ -41,15 +41,14 @@ class WindowsApplicationTests {
     // 但是相应的也会浪费一些存储空间，用来维护每一块时间内的单独计数，并且还没有解决固定窗口中可能出现的流量激增问题。
     @Test
     void test() throws InterruptedException {
-        SlidingWindowRateLimiter slidingWindowRateLimiter
-                = new SlidingWindowRateLimiter(1000, 10, 10);
+        SlidingWindowRateLimiter slidingWindowRateLimiter = new SlidingWindowRateLimiter(1000, 10, 10);
         TimeUnit.MILLISECONDS.sleep(800);
 
         for (int i = 0; i < 15; i++) {
             boolean acquire = slidingWindowRateLimiter.tryAcquire();
-            if (acquire){
+            if (acquire) {
                 System.out.println("执行任务");
-            }else{
+            } else {
                 System.out.println("被限流");
             }
             TimeUnit.MILLISECONDS.sleep(10);

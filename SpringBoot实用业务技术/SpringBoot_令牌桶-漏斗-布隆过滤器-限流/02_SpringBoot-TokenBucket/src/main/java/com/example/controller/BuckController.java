@@ -18,5 +18,4 @@ public class BuckController {
     public ResponseEntity<String> bucket(){
         return ResponseEntity.ok("访问成功");
     }
-
 }

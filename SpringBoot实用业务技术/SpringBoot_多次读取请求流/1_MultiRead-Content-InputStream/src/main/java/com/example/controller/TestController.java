@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author 游家纨绔
@@ -26,7 +27,7 @@ public class TestController {
     @RequestMapping(value = "/testGet", method = RequestMethod.GET)
     public String TestHttpRequiredGet(@RequestParam("userName") String userName,
                                       @RequestParam("passWord") String passWord,
-                                      Model model) throws IOException {
+                                      Model model) {
         model.addAttribute("userName", userName);
         model.addAttribute("passWord", passWord);
         return "test1";
@@ -54,7 +55,7 @@ public class TestController {
                                     ServletRequest request) throws IOException {
         model.addAttribute("passWord", passWord);
         model.addAttribute("userName", userName);
-        model.addAttribute("file", new String(file.getBytes()));
+        model.addAttribute("file", new String(file.getBytes(), StandardCharsets.UTF_8));
         HttpServletRequest req = (HttpServletRequest) request;
         String str = new String(StreamUtils.copyToByteArray(request.getInputStream()));
         System.out.println("接口/test2参数userName="+req.getParameter("userName")+",参数流"+str);

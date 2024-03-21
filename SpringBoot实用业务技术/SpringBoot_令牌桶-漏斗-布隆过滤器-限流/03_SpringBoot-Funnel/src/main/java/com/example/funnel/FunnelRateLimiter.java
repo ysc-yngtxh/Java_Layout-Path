@@ -26,6 +26,7 @@ public class FunnelRateLimiter {
             funnelMap.put(key, new Funnel(capacity, allowQuota, perSecond));
         }
         Funnel funnel = funnelMap.get(key);
+        // 设置漏斗中剩余水的容量至少为1，才能满足一次请求
         return funnel.watering(1);
     }
 }

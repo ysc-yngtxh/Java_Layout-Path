@@ -30,7 +30,6 @@ import java.io.UnsupportedEncodingException;
 @Component
 public class CustomerFilter extends OncePerRequestFilter {
 
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, @NotNull HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
@@ -52,10 +51,11 @@ public class CustomerFilter extends OncePerRequestFilter {
                 stopWatch.stop();
                 logResponseBody(multiRequest, multiResponse, stopWatch);
             }
-        } else{
-            /** 这里读取请求流，并没有实现HttpServletRequestWrapper，流只能被读取一次
-             * 所以后面的 getParameter() 方法和 @RequestParam 都无法取到值，为null,
-             * 要在注解加上@RequestParam(required = false)表示非必要参数，可以为null。否则将导致无法返回视图(走不进接口中)
+        } else {
+            /**
+             * 执行到这里：
+             *    如果是Get请求，则该请求已经被内部解析过二进制文件流，并将请求参数封装的数据类 Parameters 中
+             *    如果是Post请求且非 application/json 类型，则该请求没有被解析过，且没有将数据封装的数据类 Parameters 中
              */
             String str = new String(StreamUtils.copyToByteArray(request.getInputStream()));
             String userName = request.getParameter("userName");
@@ -100,7 +100,7 @@ public class CustomerFilter extends OncePerRequestFilter {
         try {
             long totalTimeMillis = stopWatch.getTotalTimeMillis();
             byte[] body = multiResponse.getBody();
-            String str = new String(body, 0, body.length, multiResponse.getCharacterEncoding());
+            String str = new String(body, multiResponse.getCharacterEncoding());
             System.out.println("=============================响应体进入过滤器============================");
             log.info("{} 请求总耗时 {} 毫秒，返回参数为 \n{}"
                     , Constants.REQUEST_URL.get(multiRequest.getRequestURI())

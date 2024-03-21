@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -27,6 +28,7 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 @Data
 @Builder
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 /**
@@ -65,9 +67,9 @@ public class Consumer3 implements Serializable {
 
     // 反序列化成实体对象Consumer3时有不对应的属性时加上该注解，不存在的属性不会丢弃而是会放到当前标注这个注解的Map中去
     @JsonAnySetter
-    private Map<String, String> properties;
+    private Map<String, Object> properties;
 
     @JsonAnyGetter  // 序列化时Map加上该属性可以将map中的属性序列化为指定字符串
-    private Map<String, String> propertiesJson;
+    private Map<String, Object> propertiesJson;
 }
 

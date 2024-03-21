@@ -6,9 +6,9 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import java.io.IOException;
 
-public class GenderJsonSerializer extends JsonSerializer {
+public class GenderJsonSerializer extends JsonSerializer<Integer> {
     @Override
-    public void serialize(Object o, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+    public void serialize(Integer o, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         if ( o.equals(1) ) {
             jsonGenerator.writeString("男"); // 写出参数
         } else if ( o.equals(0) ) {
