@@ -8,7 +8,9 @@ import java.io.Serializable;
 
 /*
   1、序列化：  Serialize        java对象存储到文件中，将java对象的状态保存下来的过程
+           例如：将Student对象作为新增数据写入Mysql中；还有通过SpringMvc将Student对象转为Json返回给客户端
      反序列化：DeSerialize      将硬盘上的数据重新恢复到内存当中，恢复成Java对象
+           例如：将Mysql中查询到的数据重新恢复到内存中，恢复成Student对象；还有前端传过来的Json数据，转为Student对象
 
   2、参与序列化和反序列化的对象，必须实现 Serializable 接口
 　

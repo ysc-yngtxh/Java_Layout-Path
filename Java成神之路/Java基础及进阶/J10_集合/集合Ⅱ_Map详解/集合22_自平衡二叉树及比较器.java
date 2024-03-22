@@ -21,6 +21,8 @@ import java.util.TreeSet;
                 第二种：在构造TreeSet或者TreeMap集合的时候给他传一个比较器对象
 
   5、Comparable和Comparator如何选择？
+           Comparable 可以直接在需要进行排序的类中实现，重写compareTo(T o)方法；
+           Comparator 需要另外顶一个实现 Comparator 接口的实现类来作为“比较器”。
            当比较规则不会发生改变的时候，或者说当比较规则只有1个的时候，建议实现Comparable接口
            如果比较规则多个，并且需要多个比较规则之间频繁切换，建议使用Comparator接口
 
