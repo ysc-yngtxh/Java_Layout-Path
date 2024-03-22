@@ -1,5 +1,6 @@
 package com.example.bean.beanFactoryAware;
 
+import lombok.Getter;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -7,13 +8,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MyBeanFactoryAware implements BeanFactoryAware {
+    @Getter
     private String brand;
 
     private BeanFactory beanFactory;
-
-    public String getBrand() {
-        return brand;
-    }
 
     public void setBrand(final String brand) {
         System.out.println("调用Car的setBrand属性");

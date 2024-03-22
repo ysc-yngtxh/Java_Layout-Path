@@ -8,6 +8,7 @@ import jakarta.websocket.OnOpen;
 import jakarta.websocket.Session;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -28,6 +29,7 @@ public class WebSocketServer {
     private static int onlineCount = 0;
 
     // concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
+    @Getter
     private static CopyOnWriteArraySet<WebSocketServer> webSocketSet = new CopyOnWriteArraySet<WebSocketServer>();
 
     // 与某个客户端的连接会话，需要通过它来给客户端发送数据
@@ -156,10 +158,6 @@ public class WebSocketServer {
 
     public static synchronized void subOnlineCount() {
         WebSocketServer.onlineCount--;
-    }
-
-    public static CopyOnWriteArraySet<WebSocketServer> getWebSocketSet() {
-        return webSocketSet;
     }
 
 }

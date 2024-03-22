@@ -2,6 +2,7 @@ package com.example.application.applicationContextAware;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,7 +15,7 @@ public class ApplicationContextRegister implements ApplicationContextAware {
       还不理解去看 WebSocket 那章笔记
     */
     @Override
-    public void setApplicationContext(ApplicationContext applicationContext) {
+    public void setApplicationContext(@NonNull ApplicationContext applicationContext) {
         APPLICATION_CONTEXT = applicationContext;
     }
 
