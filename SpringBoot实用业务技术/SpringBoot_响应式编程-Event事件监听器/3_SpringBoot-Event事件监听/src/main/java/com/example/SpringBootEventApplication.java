@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.listener.CustomEventListener;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -10,7 +11,9 @@ import org.springframework.scheduling.annotation.EnableAsync;
 public class SpringBootEventApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootEventApplication.class, args);
+        SpringApplication springApplication = new SpringApplication(SpringBootEventApplication.class);
+        springApplication.addListeners(new CustomEventListener());
+        springApplication.run(args);
     }
 
 }

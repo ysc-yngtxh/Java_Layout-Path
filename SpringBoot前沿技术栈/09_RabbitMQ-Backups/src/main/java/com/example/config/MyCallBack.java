@@ -27,7 +27,7 @@ public class MyCallBack implements RabbitTemplate.ConfirmCallback, RabbitTemplat
     @PostConstruct  // 被注解的方法将在bean创建并且注入完成，在执行初始化方法之前调用。原理：后处理器
     public void init() {
         rabbitTemplate.setConfirmCallback(this);  // 指定 ConfirmCallback
-        // rabbitTemplate.setReturnsCallback(this);  // 指定 ReturnsCallback
+        rabbitTemplate.setReturnsCallback(this);  // 指定 ReturnsCallback
     }
 
     /**

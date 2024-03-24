@@ -4,10 +4,18 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.ApplicationEvent;
 
-@Setter
+import java.io.Serial;
+
+/**
+ * 事件
+ * @param <T>
+ */
 @Getter
-@SuppressWarnings("serial")
+@Setter
 public class TestEvent<T> extends ApplicationEvent {
+    @Serial
+    private static final long serialVersionUID = -3237240975748896862L;
+
     private T message;
 
     public TestEvent(T message) {
