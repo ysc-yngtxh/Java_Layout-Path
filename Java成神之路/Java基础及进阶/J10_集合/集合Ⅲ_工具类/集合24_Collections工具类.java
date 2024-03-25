@@ -48,6 +48,10 @@ public class 集合24_Collections工具类 {
         Collections.sort(wuGui2s);
         System.out.println(wuGui2s);
         // Collections.sort(list集合, 比较器对象); // 这种方式也可以排序
+
+        // 对List集合中的元素进行倒序排序
+        Collections.reverse(wuGui2s);
+        System.out.println(wuGui2s);
     }
 }
 

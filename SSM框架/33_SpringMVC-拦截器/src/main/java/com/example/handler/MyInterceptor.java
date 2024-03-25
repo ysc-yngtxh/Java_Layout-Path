@@ -53,7 +53,7 @@ public class MyInterceptor implements HandlerInterceptor {
         System.out.println("拦截器的MyInterceptor的postHandle()");
         // 对原来的dosome执行结果，需要调整
         if(mv != null){
-            mv.addObject("myDate",new Date());
+            mv.addObject("myDate", new Date());
             mv.setViewName("other");
         }
     }

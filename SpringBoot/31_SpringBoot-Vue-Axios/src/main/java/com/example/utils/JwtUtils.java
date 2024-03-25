@@ -22,8 +22,8 @@ public class JwtUtils {
         JwtBuilder jwtBuilder = Jwts.builder();
         String jwtToken = jwtBuilder
                 // Header
-                .setHeaderParam("tpy","JWT")
-                .setHeaderParam("alg","HS256")
+                .setHeaderParam("tpy", "JWT")
+                .setHeaderParam("alg", "HS256")
                 // payload
                 .claim("name",username)
                 .claim("pwd",password)

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
@@ -72,7 +74,7 @@ public class JsonAnnotationController {
                 .phone(null)
                 .address("山西太原")
                 .deleteFlag(0)
-                .date(new Date())
+                .date(LocalDateTime.now())
                 .price(0.568)
                 .optional( Optional.empty() )
                 .atomicReference( new AtomicReference<>() )

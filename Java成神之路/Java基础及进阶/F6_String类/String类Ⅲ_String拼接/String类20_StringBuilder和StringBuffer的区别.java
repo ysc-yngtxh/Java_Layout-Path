@@ -19,6 +19,6 @@ public class String类20_StringBuilder和StringBuffer的区别 {
         sb.append("World");
         sb.append(100);
         sb.append(true);
-        System.out.println(sb);
+        System.out.println(sb.reverse());
     }
 }

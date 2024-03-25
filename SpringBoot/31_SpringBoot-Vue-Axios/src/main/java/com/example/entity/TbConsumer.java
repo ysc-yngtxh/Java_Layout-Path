@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -21,7 +20,6 @@ import java.util.Date;
 @NoArgsConstructor
 @TableName("tb_consumer")
 public class TbConsumer implements Serializable {
-    @Serial
     private static final long serialVersionUID = -25637857384418168L;
 
     /**

@@ -29,7 +29,7 @@ public class ConsumerController {
     private ConsumerService consumerService;
 
     @PostMapping("/login")
-    public ResponseEntity<ResponseVo> login(@RequestBody Map<String, Object> map) {
+    public ResponseEntity<?> login(@RequestBody Map<String, Object> map) {
         String username = map.get("username").toString();
         String password = map.get("password").toString();
         boolean check = consumerService.check(username, password);

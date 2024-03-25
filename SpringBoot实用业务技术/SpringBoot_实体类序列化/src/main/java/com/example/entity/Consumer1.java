@@ -13,10 +13,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
@@ -67,7 +70,7 @@ public class Consumer1 implements Serializable {
     private Integer deleteFlag;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss SSS", timezone = "GMT+8")  // 格式化 时间数据
-    private Date date;
+    private LocalDateTime date;
 
     /**
      * Style.CURRENCY：货币类型
