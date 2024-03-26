@@ -9,6 +9,12 @@ public class Java1_日期的处理 {
     public static void main(String[] args) throws ParseException {
         Date nowTime = new Date();
         System.out.println(nowTime); // Tue May 26 17:53:04 CST 2020
+        Date date = new Date(9999999);
+        System.out.println(date);
+        // 判断nowTime是否早与date
+        System.out.println(nowTime.before(date));
+        // 判断nowTime是否晚与date
+        System.out.println(nowTime.after(date));
 
         System.out.println(LocalDateTime.now());
 
