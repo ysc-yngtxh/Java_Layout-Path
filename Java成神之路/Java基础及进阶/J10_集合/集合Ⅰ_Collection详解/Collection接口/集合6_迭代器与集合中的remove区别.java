@@ -50,8 +50,9 @@ public class 集合6_迭代器与集合中的remove区别 {
         System.out.println(objects);  // [abc, def, a]
 
         // 上述集合删除元素：导致删除一个元素，后续元素便向前自动补齐。
-        // 比如：第一次循环i=0，删除下标为0的数据，原本下标为1的数据便补齐在下标为0上了。导致下一次i=1的循环就错过了原本下标为1的数据。
-        // 迭代器删除元素
+        // 比如：第一次循环i=0，删除下标为0的数据，原本下标为1的数据便自动补齐在下标为0上了。
+        //      导致下一次i=1的循环就错过了判断原本下标为1的数据，最后结果就是数据没能处理干净。
+        // 解决方法一：迭代器删除元素
         Collections.addAll(objects, "a", "abc", "def", "afr", "a");
         Iterator<String> iterator = objects.iterator();
         while (iterator.hasNext()) {
@@ -61,7 +62,7 @@ public class 集合6_迭代器与集合中的remove区别 {
         }
         System.out.println(objects);
 
-        // for循环倒序遍历删除元素。删除掉元素，只会往前进行自动补位，那我倒着删除，后面判断过的数据补不补位与我何干？
+        // 方法二：for循环倒序遍历删除元素。删除掉元素，只会往前进行自动补位，那我倒着删除，后面判断过的数据补不补位与我何干？
         Collections.addAll(objects, "a", "abc", "def", "afr", "a");
         for (int i = objects.size()-1; i > 0 ; i--) {
             if (objects.get(i).contains("a")) {
