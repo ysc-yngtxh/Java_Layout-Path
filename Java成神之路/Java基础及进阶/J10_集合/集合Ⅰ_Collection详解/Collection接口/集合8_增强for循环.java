@@ -1,6 +1,7 @@
 package J10_集合.集合Ⅰ_Collection详解.Collection接口;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -45,6 +46,17 @@ public class 集合8_增强for循环 {
         // 使用foreach
         for (String s: list) {
             System.out.println(s);
+        }
+
+        // TODO 不要在增强for循环中删除元素，会发生并发修改异常：java.util.ConcurrentModificationException
+        // 增强for循环内部原理其实是个Iterator迭代器，所以这里循环时候实际上使用的是集合 remove() 方法，
+        // 导致集合的结构发生改变，那么迭代器也应该改变才行。但是循环中的迭代器无法改变，因此会报错。
+        List<String> objects = new ArrayList<>();
+        Collections.addAll(objects, "a", "abc", "def", "afr", "a");
+        for (String item : objects) {
+            if (item.contains("a")) {
+                objects.remove(item);
+            }
         }
     }
 }

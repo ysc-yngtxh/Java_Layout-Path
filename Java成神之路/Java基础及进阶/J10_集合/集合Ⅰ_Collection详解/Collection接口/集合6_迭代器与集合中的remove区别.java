@@ -2,7 +2,9 @@ package J10_集合.集合Ⅰ_Collection详解.Collection接口;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 /*
   关于集合元素的remove
@@ -35,6 +37,38 @@ public class 集合6_迭代器与集合中的remove区别 {
             System.out.println(o);
         }
         System.out.println(c.size());
+
+
+        // TODO 集合删除元素错误示范
+        List<String> objects = new ArrayList<>();
+        Collections.addAll(objects, "a", "abc", "def", "afr", "a");
+        for (int i = 0; i < objects.size(); i++) {
+            if (objects.get(i).contains("a")) {
+                objects.remove(objects.get(i));
+            }
+        }
+        System.out.println(objects);  // [abc, def, a]
+
+        // 上述集合删除元素：导致删除一个元素，后续元素便向前自动补齐。
+        // 比如：第一次循环i=0，删除下标为0的数据，原本下标为1的数据便补齐在下标为0上了。导致下一次i=1的循环就错过了原本下标为1的数据。
+        // 迭代器删除元素
+        Collections.addAll(objects, "a", "abc", "def", "afr", "a");
+        Iterator<String> iterator = objects.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next().contains("a")) {
+                iterator.remove();
+            }
+        }
+        System.out.println(objects);
+
+        // for循环倒序遍历删除元素。删除掉元素，只会往前进行自动补位，那我倒着删除，后面判断过的数据补不补位与我何干？
+        Collections.addAll(objects, "a", "abc", "def", "afr", "a");
+        for (int i = objects.size()-1; i > 0 ; i--) {
+            if (objects.get(i).contains("a")) {
+                objects.remove(objects.get(i));
+            }
+        }
+        System.out.println(objects);
     }
 }
 /*
