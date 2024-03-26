@@ -12,13 +12,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ConfirmConfig {
+public class RabbitMQConfig {
 
     // 交换机
     @Bean("confirmExchange")
     public DirectExchange confirmExchange(){
-        return ExchangeBuilder.directExchange("confirmExchange").durable(true).build();
-                // .withArgument("alternate-exchange", "fanoutExchange").build();
+        return ExchangeBuilder
+                .directExchange("confirmExchange")
+                .durable(true)
+                // 以下两种写法都表示声明备用交换机。"alternate-exchange"为固定写法，"fanoutExchange"为备用交换机的名称
+                // .alternate("fanoutExchange")
+                // .withArgument("alternate-exchange", "fanoutExchange")
+                .build();
     }
     // 队列
     @Bean("confirmQueue")

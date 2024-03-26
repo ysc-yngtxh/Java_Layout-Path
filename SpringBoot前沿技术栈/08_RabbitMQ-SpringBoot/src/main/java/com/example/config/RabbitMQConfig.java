@@ -20,6 +20,7 @@ public class RabbitMQConfig {
     // 配置一个普通队列A  TTL 为 10S
     @Bean("bootDirectQueueA")
     public Queue directQueueA(){
+        // TODO 第一种写法
         HashMap<String, Object> map = new HashMap<>(3);
         map.put("x-dead-letter-exchange", "deadExchange");      // 设置死信交换机
         map.put("x-dead-letter-routing-key", "deadRoutingKey"); // 设置死信routing-key
@@ -32,25 +33,34 @@ public class RabbitMQConfig {
     // 配置一个普通队列B  TTL 为 40S
     @Bean("bootDirectQueueB")
     public Queue directQueueB(){
-        HashMap<String, Object> map = new HashMap<>(3);
-        map.put("x-dead-letter-exchange", "deadExchange");      // 设置死信交换机
-        map.put("x-dead-letter-routing-key", "deadRoutingKey"); // 设置死信routingKey
-        map.put("x-message-ttl", 40000); // 设置消息过期时间
-        // map.put("x-max-length", 10);  // 设置消息队列的长度
-        // 参数1、队列名称  2、是否持久化  3、是否排外  4、如果队列空了是否自动删除  5、死信设置
-        return new Queue("bootDirectQueueB", true, false, false, map);
+        // TODO 第二种写法
+        return QueueBuilder
+                // .nonDurable("bootDirectQueueA") 交换机不进行持久化
+                .durable("bootDirectQueueA")
+                // 设置队列最大长度
+                .withArgument("x-max-length", 10)
+                // 死信交换机声明
+                .withArgument("x-dead-letter-exchange", "deadExchange")
+                // 死信消息的路由key
+                .withArgument("x-dead-letter-routing-key", "deadRoutingKey")
+                // 消息过期时间设置 超出时间未消费成为死信
+                .withArgument("x-message-ttl", 40000)
+                // .exclusive() 是否排外
+                // .autoDelete() 如果队列空了是否自动删除
+                .build();
     }
 
-    // 配置一个普通队列B  TTL不配置 延迟队列时长掌握在生产者手里
+    // 配置一个普通队列C  TTL不配置 延迟队列时长掌握在生产者手里
     @Bean("bootDirectQueueC")
     public Queue directQueueC(){
-        HashMap<String, Object> map = new HashMap<>(3);
-        map.put("x-dead-letter-exchange", "deadExchange");      // 设置死信交换机
-        map.put("x-dead-letter-routing-key", "deadRoutingKey"); // 设置死信routingKey
-        // map.put("x-message-ttl", 40000); // 设置消息过期时间
-        // map.put("x-max-length", 10);     // 设置消息队列的长度0
-        // 参数1、队列名称  2、是否持久化  3、是否排外  4、如果队列空了是否自动删除  5、死信设置
-        return new Queue("bootDirectQueueC", true, false, false, map);
+        // TODO 第三种写法
+        return QueueBuilder
+                .durable("bootDirectQueueC")
+                // .maxLength(10) // 设置队列最大长度
+                .deadLetterExchange("deadExchange")  // 死信交换机声明
+                .deadLetterRoutingKey("deadRoutingKey") // 死信消息的路由key
+                // .ttl(40000) // 消息过期时间设置 超出时间未消费成为死信
+                .build();
     }
 
     // 配置一个普通队列和普通交换机的绑定

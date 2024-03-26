@@ -6,9 +6,9 @@ import org.springframework.retry.annotation.EnableRetry;
 
 @EnableRetry
 @SpringBootApplication
-public class SpringRabbitmqRedisRetryApplication {
+public class SpringRabbitRedisRetryApplication {
     public static void main(String[] args) {
-        SpringApplication.run(SpringRabbitmqRedisRetryApplication.class, args);
+        SpringApplication.run(SpringRabbitRedisRetryApplication.class, args);
     }
 }
 

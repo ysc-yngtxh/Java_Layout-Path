@@ -121,8 +121,11 @@
         的消息进行定时投递】
     2、Confirm模式————如果因为交换机故障，实现发布确认步骤：
           ①、配置文件：
-                    # 使用这个即可 confirm模式 ，发布交换机成功后会触发回调方法
+                    # none：是禁用发布确认模式，是默认值
+                    # correlated：是发布消息成功到交换器后会触发回调方法
+                    # 设置 correlated 即可在发布消息成功到达交换器(Exchange)后触发回调方法。
                     spring.rabbitmq.publisher-confirm-type=correlated
+
           ②、创建一个类去实现 RabbitTemplate.ConfirmCallback 接口，重写Confirm方法
               Ⅰ、引用注入RabbitTemplate
               Ⅱ、使用 @PostConstruct 注解，定义方法指定ConfirmCallback：rabbitTemplate.setConfirmCallback(this)
@@ -131,7 +134,9 @@
           此时生产者是不知道消息被丢弃这个事件的。那么如何让无法路由的消息帮我们处理一下？最起码通知我一声，我好自己处理啊。
           通过设置mandatory参数可以在当消息传递过程中不可达目的地时将消息返回给生产者
           ①、配置文件：
-                    # 开启回退消息配置
+                    # 但消息不可达队列时，mandatory 参数值来决定是返回消息还是直接丢弃消息。true表示返回消息不可达的包装信息[消息体、路由键、失败原因...]。
+                    spring.rabbitmq.template.mandatory=true
+                    # 开启ReturnsCallback监听器来监听 mandatory(消息不可达队列) 返回的消息，如果有返回消息则执行 returnedMessage()
                     spring.rabbitmq.publisher-returns=true
           ②、创建一个类去实现 RabbitTemplate.ReturnsCallback 接口，重写Returned 方法
               Ⅰ、引用注入RabbitTemplate

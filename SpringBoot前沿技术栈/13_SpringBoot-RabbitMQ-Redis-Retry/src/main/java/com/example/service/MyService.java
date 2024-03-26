@@ -22,11 +22,15 @@ public class MyService {
     private StringRedisTemplate stringRedisTemplate;
 
     @RabbitListener(queues = "orderQueue")
-    public void process(String orders, Message message, Channel channel) throws Exception {
+    public void process(String orders, Message message, Channel channel) {
         try {
             // TODO 具体业务
             // spring_returned_message_correlation固定写法，获取 CorrelationData 的Id值
-            String msgId = (String)message.getMessageProperties().getHeaders().get("spring_returned_message_correlation");
+            // 存在两个属性：spring_returned_message_correlation：该属性是指退回待确认消息的唯一标识
+            //             spring_listener_return_correlation：该属性是用来确定消息被退回时调用哪个监听器
+            String msgId = (String) message.getMessageProperties().getHeaders().get("spring_returned_message_correlation");
+            System.out.println("获取消息关联Id：" + msgId);
+
             // 这里获取 Redis 的 key 为"order"的数据，并判断其数据中 key 部分是否包含 msgId
             if (stringRedisTemplate.opsForHash().entries("order").containsKey(msgId)) {
                 // redis 中包含该 key，说明该消息已经被消费过,这个判断就是为了避免消息被重复消费。
@@ -37,11 +41,12 @@ public class MyService {
                 channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, false);
                 return;
             }
-            log.info("手动确认消息:{}",orders);
+
+            log.info("手动确认消息:{}", orders);
             // 添加到redis。参数1、Key 2、HashKey（相当于redis根据Key取出的Map中的key） 3、Map 中的 value
             stringRedisTemplate.opsForHash().put("order", msgId, orders);
             stringRedisTemplate.expire("order", 360, TimeUnit.SECONDS);
-            log.info(message.getMessageProperties().getDeliveryTag()+"");
+            log.info(String.valueOf(message.getMessageProperties().getDeliveryTag()));
             // 手动确认消息消费。参数：1、消息通道标识Id  2、为了减少网络流量，手动确认可以被批处理，当该参数为 true 时，则可以一次性确认 delivery_tag 小于等于传入值的所有消息
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
 
@@ -56,7 +61,7 @@ public class MyService {
 
         log.info(new String(message.getBody()));
         // TODO 具体业务
-        String msgId = (String)message.getMessageProperties().getHeaders().get("spring_returned_message_correlation");
+        String msgId = (String) message.getMessageProperties().getHeaders().get("spring_returned_message_correlation");
         if (msg != null) {
             // 说明redis中即将要删除的数据存入到了rabbitmq的队列中
             log.info("redis中即将要删除的数据：{}", msgId);
@@ -68,7 +73,7 @@ public class MyService {
             // 添加到redis。参数1、Key 2、HashKey（相当于redis根据Key取出的Map中的key） 3、value
             stringRedisTemplate.opsForHash().put("test", msgId, msg);
             channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);  // 确认消息已消费
-            int i=1/0; // 这里模拟出现异常导致重试机制触发
+            int i = 1/0; // 这里模拟出现异常导致重试机制触发
         }
     }
 

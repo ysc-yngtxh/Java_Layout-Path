@@ -45,22 +45,24 @@ public class MyCallBack implements RabbitTemplate.ConfirmCallback, RabbitTemplat
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
         // CorrelationData correlationData这个是发送端convertAndSend自己发送的东西
         String id = correlationData != null ? correlationData.getId() : "";
+        // ack是一个布尔值，表示消息是否被成功被交换机接收到了？
         if (ack) {
-            log.info("交换机已经收到Id为：{}的消息", id);
+            log.info("交换机在回调confirm()方法中收到Id为：{}的消息", id);
         } else {
-            log.info("交换机还未收到Id为：{}的消息，由于原因:{}", id, cause);
+            log.info("交换机在回调confirm()方法中还未收到Id为：{}的消息，由于原因:{}", id, cause);
         }
     }
 
     /**
-     * 当消息传递过程中不可达目的地时将消息返回给生产者
-     * 只有不可达目的地的时候 ，才进行回退
+     * 当消息传递过程中不可达目的地【队列】时将消息返回给生产者
+     * 只有不可达目的地【队列】的时候 ，才进行回退
      */
     @Override
     public void returnedMessage(ReturnedMessage returned) {
-        log.error("消息:{}，被交换机{}退回。退回原因：{}，路由Key{}"
+        log.error("在回调returnedMessage()方法中，消息:{} 被交换机{}退回，回应码：{}，退回原因：{}，路由{}"
                 , new String(returned.getMessage().getBody())
                 , returned.getExchange()
+                , returned.getReplyCode()
                 , returned.getReplyText()
                 , returned.getRoutingKey()
         );

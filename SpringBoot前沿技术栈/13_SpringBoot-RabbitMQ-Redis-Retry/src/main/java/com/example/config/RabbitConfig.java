@@ -1,13 +1,20 @@
 package com.example.config;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.*;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.CustomExchange;
+import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.QueueBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 @Component
@@ -22,10 +29,11 @@ public class RabbitConfig {
     }
     @Bean("orderQueue")
     public Queue Orderqueue(){
-        Map<String, Object> map = new HashMap<>(3);
-        map.put("x-dead-letter-exchange", "simpleDeadExchange");
-        map.put("x-dead-letter-routing-key", "simpleDeadRoutingKey");
-        return new Queue("orderQueue", true, false, false, map);
+        return QueueBuilder
+                .durable("orderQueue") // 设置持久化的队列名
+                .deadLetterExchange("simpleDeadExchange")    // 设置死信交换机
+                .deadLetterRoutingKey("simpleDeadRoutingKey")// 设置死信路由
+                .build();
     }
     @Bean
     public Binding Orderbinding(@Qualifier("orderExchange") CustomExchange integrationExchange,

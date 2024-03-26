@@ -10,6 +10,7 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.SerializerMessageConverter;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -103,9 +104,10 @@ public class RabbitListenerTest1 {
         System.out.println("message1 = " + message);
     }
     @Bean
-    @Scope("prototype")
+    @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
         RabbitTemplate template = new RabbitTemplate(connectionFactory);
+        // 设置RabbitMQ为强制模式：但消息不可达队列时，消息不直接丢弃而是返回消息
         template.setMandatory(true);
         template.setMessageConverter(new SerializerMessageConverter());
         return template;

@@ -45,7 +45,7 @@ class RabbitBackupsApplicationTests {
         rabbitTemplate.convertAndSend("info", "work", "第四种,路由Direct模型(work)");
     }
 
-    // 4、生产者-交换机(topic)-动态路由-队列-消费者
+    // 5、生产者-交换机(topic)-动态路由-队列-消费者
     @Test
     public void textTopic(){
         rabbitTemplate.convertAndSend("ect", "save.user", "第五种,动态路由Topic模型");
