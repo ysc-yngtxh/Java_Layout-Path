@@ -1,9 +1,6 @@
 package com.example.jdk;
 
-import org.springframework.stereotype.Component;
-
-@Component
-public class JdkByServiceImpl implements JdkService {
+public class JdkServiceImpl implements JdkService {
     @Override
     public String like(String name, Integer time) {
         System.out.println("=====like()方法的执行====");

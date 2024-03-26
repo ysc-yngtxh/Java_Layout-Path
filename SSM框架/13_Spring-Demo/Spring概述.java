@@ -194,7 +194,6 @@ package com.example;
               
     1、独立的连接池类的对象，使用阿里的druid(德鲁伊)连接池
     2、SqlSession
-
     
     Spring-集成mybatis的实现步骤：
       1、新建maven项目

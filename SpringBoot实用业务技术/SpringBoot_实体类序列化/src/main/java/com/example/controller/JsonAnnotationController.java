@@ -50,7 +50,7 @@ public class JsonAnnotationController {
                 	"phone": null,
                 	"address": "山西太原",
                 	"deleteFlag": 0,
-                	"date": "2023-08-20 22:52:42 186",
+                	"date": "2024-03-25 18:34:07.582",
                 	"price": 0.568,
                 	"optional": null,
                 	"atomicReference": null,
@@ -74,7 +74,7 @@ public class JsonAnnotationController {
                 .phone(null)
                 .address("山西太原")
                 .deleteFlag(0)
-                .date(LocalDateTime.now())
+                .date(new Date())
                 .price(0.568)
                 .optional( Optional.empty() )
                 .atomicReference( new AtomicReference<>() )

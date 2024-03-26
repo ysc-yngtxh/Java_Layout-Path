@@ -17,7 +17,7 @@ import org.aspectj.lang.annotation.Before;
 public class MyAspect6 {
 
     // 有接口的是jdk代理
-    @Before(value="execution(* *..JdkByServiceImpl.like(String, Integer))")
+    @Before(value="execution(* *..JdkServiceImpl.like(String, Integer))")
     public void MyText1(JoinPoint jp){
         Object[] args = jp.getArgs();
         for (Object arg : args) {

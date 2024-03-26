@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public class Orders implements Serializable {
     private Integer id;
-    private String ordertime;
+    private String orderTime;
     private Double money;
 
     private Integer uid; // 外键
@@ -17,7 +17,7 @@ public class Orders implements Serializable {
     public String toString() {
         return "Orders{" +
                 "id=" + id +
-                ", ordertime='" + ordertime + '\'' +
+                ", orderTime='" + orderTime + '\'' +
                 ", money=" + money +
                 ", uid=" + uid +
                 ", user=" + user +

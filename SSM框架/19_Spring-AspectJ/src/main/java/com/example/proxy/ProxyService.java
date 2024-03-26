@@ -5,7 +5,7 @@ package com.example.proxy;
  * @dateTime 2023-11-11 10:07
  * @apiNote TODO
  */
-public interface proxyService {
+public interface ProxyService {
 
     void saveRpc();
 
