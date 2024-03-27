@@ -1,4 +1,4 @@
-package P16_JUC并发.JUC并发Ⅳ_读写锁;
+package P16_JUC并发.JUC并发Ⅱ_读写锁;
 
 import java.util.HashMap;
 import java.util.Map;

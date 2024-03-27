@@ -11,7 +11,7 @@ public class Callable线程实现 {
      *  （1）优点：编写简单，如果需要访问当前线程，无需使用Thread.currentThread()方法，直接使用this，即可获得当前线程
      *  （2）缺点：因为线程类已经继承了Thread类，所以不能再继承其他的父类
      * 采用实现Runnable接口方式：
-     *  （1）优点：线程类只是实现了Runable接口，还可以继承其他的类。
+     *  （1）优点：线程类只是实现了Runnable接口，还可以继承其他的类。
      *  （2）缺点：编程稍微复杂，如果需要访问当前线程，必须使用Thread.currentThread()方法
      * Runnable和Callable的区别：
      *  （1）Callable规定的方法是call()，Runnable规定的方法是run()

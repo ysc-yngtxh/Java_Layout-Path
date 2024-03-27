@@ -18,6 +18,7 @@ public class CyclicBarrier辅助类 {
                 System.out.println(Thread.currentThread().getName() + " -- 集齐" + temp + "星龙珠");
                 try {
                     cyclicBarrier.await(); // 阻塞当前线程，并且计数器+1。等待集齐七颗龙珠
+                    System.out.println("在执行await()方法后会被阻塞吗？");
                 } catch (InterruptedException | BrokenBarrierException e) {
                     e.printStackTrace();
                 }

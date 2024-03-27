@@ -25,7 +25,7 @@ public class Lock锁常用方法 {
      *                            比如 10 个线程，用同一个 condition 对象，并且此时这 10 个线程都执行了
      *                            condition 对象的 await 方法，那么此时执行此方法返回 10
      *     7. hasWaiters(Condition condition)：查询是否有线程等待与此锁有关的给定条件(condition)，
-     *                                         对于指定 contidion 对象，有多少线程执行了 condition.await 方法
+     *                                         对于指定 condition 对象，有多少线程执行了 condition.await 方法
      *     8. hasQueuedThread(Thread thread)：查询给定线程是否等待获取此锁
      *     9. hasQueuedThreads()：是否有线程等待此锁
      *     10. isFair()：该锁是否公平锁

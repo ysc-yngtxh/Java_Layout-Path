@@ -9,7 +9,7 @@ public class Lock锁 {
      * Synchronized与Lock的区别：
      *    1、Synchronized是内置的Java关键字，Lock是一个Java接口类
      *    2、Synchronized无法判断获取锁的状态，Lock可以判断是否获取到了锁
-     *    3、Synchronized会自动释放锁,Lock必须手动释放锁(如果不释放锁----死锁)
+     *    3、Synchronized会自动释放锁，Lock必须手动释放锁(如果不释放锁----死锁)
      *    4、Synchronized：线程1(获得锁，阻塞)，线程2(等待)
      *       Lock锁不一定会等待下去
      *    5、Synchronized可重入锁，不可以中断，非公平(不公平，不遵循先来后到)
