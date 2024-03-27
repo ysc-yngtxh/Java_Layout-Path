@@ -9,7 +9,7 @@ import java.util.Map;
  * @description: TODO
  * @date 2022/08/13 19:10
  */
-public class 集合23_LinkedHashMap {
+public class 集合24_LinkedHashMap {
     /**
      * LinkedHashMap
      * 1、Key和Value都允许空

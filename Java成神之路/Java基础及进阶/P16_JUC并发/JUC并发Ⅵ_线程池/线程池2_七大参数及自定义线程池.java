@@ -44,7 +44,7 @@ public class 线程池2_七大参数及自定义线程池 {
                 TimeUnit.SECONDS,             // 超时单位
                 new LinkedBlockingDeque<>(3), // 阻塞队列
                 Executors.defaultThreadFactory(),    // 线程工厂。创建线程的，一般不动
-                new ThreadPoolExecutor.AbortPolicy() // 拒绝策略(有四种拒绝策略)。
+                new ThreadPoolExecutor.AbortPolicy() // 拒绝策略(有四种拒绝策略)。前提是已经达到最大线程数量了
                 // new ThreadPoolExecutor.AbortPolicy()         // 如果线程队列已满，丢弃任务并抛出RejectedExecutionException异常。
                 // new ThreadPoolExecutor.DiscardPolicy()       // 如果线程队列已满，则后续提交的任务都会被丢弃，不抛出异常。
                 // new ThreadPoolExecutor.DiscardOldestPolicy() // 丢弃队列最前面的任务，然后重新提交被拒绝的任务。
@@ -67,7 +67,8 @@ public class 线程池2_七大参数及自定义线程池 {
          * 二、排队策略
          *    1、直接提交，用SynchronousQueue。特点是不保存，直接提交给线程，如果没线程，则新建一个。
          *    2、无限提交，用类似LinkedBlockingQueue无界队列。特点是保存所以核心线程处理不了的任务，队列无上限，最大线程也没用。
-         *    3、有限提交，用类似ArrayBlockingQueue有界队列。特点是可以保存超过核心线程的任务，并且队列也是有上限的。超过上限，新建线程（满了抛错）。更好地保护资源，防止崩溃，也是最常用的排队策略。
+         *    3、有限提交，用类似ArrayBlockingQueue有界队列。特点是可以保存超过核心线程的任务，并且队列也是有上限的。
+         *       超过上限，新建线程（满了抛错）。更好地保护资源，防止崩溃，也是最常用的排队策略。
          */
         try {
             for (int i = 1; i <= 10; i++) {

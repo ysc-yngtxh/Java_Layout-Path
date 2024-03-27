@@ -1,7 +1,6 @@
 package J10_集合.集合Ⅲ_工具类;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -12,7 +11,7 @@ import java.util.Set;
   java.util.Collection  集合接口
   java.util.Collections  集合工具类，方便集合的操作
  */
-public class 集合24_Collections工具类 {
+public class 集合25_Collections工具类 {
     public static void main(String[] args) {
         // ArrayList集合不是线程安全的
         List<String> i = new ArrayList<>();
@@ -46,6 +45,8 @@ public class 集合24_Collections工具类 {
         wuGui2s.add(new WuGui2(8000));
         // TODO 注意：对List集合中元素排序，需要保证List集合中的元素实现了：Comparable接口
         Collections.sort(wuGui2s);
+        // 使用外部定义的比较器实现对List集合中元素排序，比Comparable需要实现要方便
+        Collections.sort(wuGui2s, Comparator.comparing(WuGui2::getAge));
         System.out.println(wuGui2s);
         // Collections.sort(list集合, 比较器对象); // 这种方式也可以排序
 
@@ -57,6 +58,10 @@ public class 集合24_Collections工具类 {
 
 class WuGui2 implements Comparable<WuGui2> {
     int age;
+
+    public int getAge() {
+        return age;
+    }
 
     public WuGui2(int age) {
         this.age = age;

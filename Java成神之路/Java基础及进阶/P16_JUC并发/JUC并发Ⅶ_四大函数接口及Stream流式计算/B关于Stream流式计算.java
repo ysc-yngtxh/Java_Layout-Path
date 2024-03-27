@@ -1,6 +1,7 @@
 package P16_JUC并发.JUC并发Ⅶ_四大函数接口及Stream流式计算;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +48,8 @@ public class B关于Stream流式计算 {
                 .filter(user -> user.getId()%2 == 0)
                 .filter(user -> {return user.getAge() > 23;})
                 .map(user -> {return user.getName().toUpperCase();})
-                .sorted((uu1,uu2) -> {return uu2.compareTo(uu1);}) // E1 E1 D1
+                // .sorted((uu1,uu2) -> {return uu2.compareTo(uu1);}) // E1 E1 D1
+                .sorted(Comparable::compareTo)
                 .distinct() // E1 D1
                 .skip(1)    // D1
                 .limit(3)
