@@ -19,28 +19,31 @@ public class E_纸牌分数 {
                 int parseInt = Integer.parseInt(split[i]);
                 arr[i] = parseInt;
             }
-
-            int N = arr.length;
-            // 先手表，即玩家A可能会出现的情况
-            int[][] fmap = new int[N][N];
-            // 后手表，即玩家B可能会出现的情况
-            int[][] gmap = new int[N][N];
-
-            for (int i = 0; i < N; i++) {
-                fmap[i][i] = arr[i];
-            }
-            for (int startCol = 1; startCol < N; startCol++) {
-                int L = 0;        // 行
-                int R = startCol; // 列
-                while (R < N) {
-                    // 玩家A在取 左边纸牌，右边纸牌 选择中选出最大值之和
-                    fmap[L][R] = Math.max(arr[L]+gmap[L+1][R], arr[R]+gmap[L][R-1]);
-                    gmap[L][R] = Math.min(fmap[L+1][R], fmap[L][R-1]);
-                    R++;
-                    L++;
-                }
-            }
-            System.out.println(Math.max(fmap[0][N-1], gmap[0][N-1]));
+            System.out.println(win(arr));
         }
+    }
+
+    private static int win(int[] arr) {
+        if (arr.length == 0 || arr == null) {
+            return 0;
+        }
+        // 先拿的最终分数；后拿的最终分数
+        return Math.max(first(arr,0,arr.length-1), after(arr,0,arr.length-1));
+    }
+
+    // i，j分别代表左边、右边的位置
+    private static int first(int[] arr, int i, int j) {
+        if (i == j) {
+            return arr[i];
+        }
+        return Math.max(arr[i]+after(arr,i+1,j), arr[j]+after(arr,i,j-1));
+    }
+
+    private static int after(int[] arr, int i, int j) {
+        if (i == j) {
+            return 0;
+        }
+        // 先手拿了最大的，那么后手肯定是拿了一副最小的牌，所以是Min
+        return Math.min(first(arr,i+1,j), first(arr,i,j-1));
     }
 }
