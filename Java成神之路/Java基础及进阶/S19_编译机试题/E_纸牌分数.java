@@ -6,7 +6,7 @@ import java.util.Scanner;
  * @author 游家纨绔
  * @dateTime 2024-03-28 15:02
  * @apiNote TODO 给定一个整型数组arr，代表数值不同的纸牌排成一条线，玩家A和玩家B依次拿走每张纸牌。
- *               规定玩家A先拿，玩家B后拿，但是每个玩家每次只能拿走最左和最右的纸牌，玩家A和玩家B绝顶聪明。请返回最后的获胜者的分数。
+ *               规定玩家A先拿，玩家B后拿，但是每个玩家每次只能拿走最左或最右的纸牌，玩家A和玩家B绝顶聪明。请返回最后的获胜者的分数。
  */
 public class E_纸牌分数 {
     public static void main(String[] args) {
@@ -30,7 +30,6 @@ public class E_纸牌分数 {
         // 先拿的最终分数；后拿的最终分数
         return Math.max(first(arr,0,arr.length-1), after(arr,0,arr.length-1));
     }
-
     // i，j分别代表左边、右边的位置
     private static int first(int[] arr, int i, int j) {
         if (i == j) {
@@ -38,7 +37,6 @@ public class E_纸牌分数 {
         }
         return Math.max(arr[i]+after(arr,i+1,j), arr[j]+after(arr,i,j-1));
     }
-
     private static int after(int[] arr, int i, int j) {
         if (i == j) {
             return 0;

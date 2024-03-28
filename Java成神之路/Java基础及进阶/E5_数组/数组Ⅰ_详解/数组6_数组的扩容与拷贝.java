@@ -17,7 +17,7 @@ public class 数组6_数组的扩容与拷贝 {
         // 拷贝目标
         int[] dest = new int[20];     // 动态初始化一个长度为20的数组，每一个元素默认值为0
 
-        // 调用JDK System类中的arraycopy（）方法，来完成数组的拷贝
+        // 调用JDK System类中的 arraycopy() 方法，来完成数组的拷贝
         // System.arraycopy(源数组，从下标1开始，目标数组，从下标3开始，拷贝几个元素);
         System.arraycopy(src, 1, dest, 3, 2);
 
@@ -28,10 +28,10 @@ public class 数组6_数组的扩容与拷贝 {
 
         // 数组中如果存储的元素是引用，可以拷贝吗？当然可以。
         String[] str = {"hello", "world!", "study", "java", "mysql", "jdbc", "oracle"};
-        String[] newstr = new String[20];
-        System.arraycopy(str, 0, newstr, 0, str.length);
-        for (int i = 0; i < newstr.length; i++) {
-            System.out.println(newstr[i]);
+        String[] newStr = new String[20];
+        System.arraycopy(str, 0, newStr, 0, str.length);
+        for (int i = 0; i < newStr.length; i++) {
+            System.out.println(newStr[i]);
         }
 
         // 还有数组拷贝的是对象地址

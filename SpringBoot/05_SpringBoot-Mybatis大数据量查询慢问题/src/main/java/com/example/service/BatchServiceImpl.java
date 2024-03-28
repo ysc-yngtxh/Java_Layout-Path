@@ -61,7 +61,7 @@ public class BatchServiceImpl implements BatchService {
             for (int i = 0; i < list.size(); i++) {
                 batchMapper.batchInsert(list.get(i));
                 if (i % list.size() == 0 || i == list.size() - 1) {
-                    // 此方法的作用就是将前面所有执行过的INSERT、UPDATE、DELETE语句真正刷新到数据库中。
+                    // flushStatements方法的作用就是将前面所有执行过的INSERT、UPDATE、DELETE语句真正刷新到数据库中。
                     // 底层调用了JDBC的statement.executeBatch()方法。
                     // 需要注意的是，调用这个方法后，之前所有执行过的SQL语句都会被提交，而不能回滚。
                     sqlSession.flushStatements();
