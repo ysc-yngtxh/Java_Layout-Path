@@ -21,25 +21,26 @@ public class E_纸牌分数 {
             }
 
             int N = arr.length;
-            // 先手表
+            // 先手表，即玩家A可能会出现的情况
             int[][] fmap = new int[N][N];
-            // 后手表
+            // 后手表，即玩家B可能会出现的情况
             int[][] gmap = new int[N][N];
 
             for (int i = 0; i < N; i++) {
                 fmap[i][i] = arr[i];
             }
             for (int startCol = 1; startCol < N; startCol++) {
-                int L = 0;  // 行
+                int L = 0;        // 行
                 int R = startCol; // 列
                 while (R < N) {
-                    fmap[L][R] = Math.max(arr[L] + gmap[L + 1][R], arr[R] + gmap[L][R - 1]);
-                    gmap[L][R] = Math.min(fmap[L + 1][R], fmap[L][R - 1]);
+                    // 玩家A在取 左边纸牌，右边纸牌 选择中选出最大值之和
+                    fmap[L][R] = Math.max(arr[L]+gmap[L+1][R], arr[R]+gmap[L][R-1]);
+                    gmap[L][R] = Math.min(fmap[L+1][R], fmap[L][R-1]);
                     R++;
                     L++;
                 }
             }
-            System.out.println(Math.max(fmap[0][N - 1], gmap[0][N - 1]));
+            System.out.println(Math.max(fmap[0][N-1], gmap[0][N-1]));
         }
     }
 }

@@ -40,7 +40,7 @@ public class D_次数大于n除以k的数 {
                     maxNum = arr[i];
                 }
             }
-            // 初始化计数数组 -- 这里使用的桶排序的思想
+            // 初始化计数数组 -- 这里使用的桶排序算法的思想
             int[] count = new int[maxNum - minNum + 1];
             // 统计每个数字出现的次数
             for (int num : arr) {
