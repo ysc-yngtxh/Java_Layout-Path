@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>24_SpringBoot-utf8</artifactId>
+    <artifactId>24_SpringBoot-UTF8</artifactId>
     <version>1.0.0</version>
     <name>24_SpringBoot-字符编码</name>
     <description>24_SpringBoot-字符编码</description>

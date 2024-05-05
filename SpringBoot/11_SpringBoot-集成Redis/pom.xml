@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>11_SpringBoot-Redis</artifactId>
     <version>1.0.0</version>
-    <name>11_SpringBoot-集成redis</name>
-    <description>11_SpringBoot-集成redis</description>
+    <name>11_SpringBoot-集成Redis</name>
+    <description>11_SpringBoot-集成Redis</description>
 
     <properties>
         <java.version>1.8</java.version>

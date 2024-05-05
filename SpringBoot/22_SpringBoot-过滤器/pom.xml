@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>22_SpringBoot-filter</artifactId>
+    <artifactId>22_SpringBoot-Filter</artifactId>
     <version>1.0.0</version>
     <name>22_SpringBoot-过滤器</name>
     <description>22_SpringBoot-过滤器</description>

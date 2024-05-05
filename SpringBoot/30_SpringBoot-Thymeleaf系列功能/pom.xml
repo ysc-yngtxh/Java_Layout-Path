@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.bjpowernode.springboot</groupId>
-    <artifactId>30_SpringBoot-if</artifactId>
+    <artifactId>30_SpringBoot-Thymeleaf-Loop</artifactId>
     <version>1.0.0</version>
     <name>30_SpringBoot-Thymeleaf系列功能</name>
     <description>30_SpringBoot-Thymeleaf系列功能</description>
