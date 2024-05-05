@@ -1,0 +1,10 @@
+
+一、入门案例认证流程
+    接口  AbstractAuthenticationProcessingFilter  AuthenticationManager  AuthenticationProvider     UserDetailsService
+    实现类 UsernamePasswordAuthenticationFilter    ProviderManager      DaoAuthenticationProvider   InMemoryUserDetailsManager
+
+
+
+
+
+

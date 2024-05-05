@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        <script type="text/javascript">
+            window.onload = function() {
+<!--复选框全选和取消全选-->
+                // 获取第一个复选框的选中状态
+                var first = document.getElementById("first");
+                // 根据name获取所有元素
+                var ysc = document.getElementsByName("ysc");
+                first.onclick = function() {
+                    for(var i=0; i<ysc.length; i++) {
+                        ysc[i].checked = first.checked;
+                    }
+                };
+
+                // 对以上数组进行遍历
+                var all = ysc.length;
+                for(var i=0; i<ysc.length; i++) {  // 这个for循环表示的是ysc数组遍历,鼠标点击事件
+                    ysc[i].onclick = function() {  // onclick表示的是鼠标点击后才会执行
+                        var checkedCount = 0;
+                        // 总数量和选中的数量相等的时候，第一个复选框选中
+                        for(var i=0; i<ysc.length; i++) {   // 这个for循环是用来判断复选框打勾的个数
+                            if(ysc[i].checked) {   // if语句判断里如果是其他的内容将自动转换成Boolean()函数，这就是与Java语法的区别
+                                checkedCount++;    // 鼠标点击打勾为true，取消为false
+                            }
+                        }
+                        first.checked = (all===checkedCout);
+                    }
+                }
+
+
+<!--change下拉列表选中项改变，或文本框内容改变-->
+                var pro = document.getElementById("provinceList");
+                pro.onchange = function(){
+                    alert(pro.value);
+                }
+            }
+        </script>
+        <input type="checkbox" id="first"/><br>
+        <input type="checkbox" name="ysc" value="smoke"/>抽烟<br>
+        <input type="checkbox" name="ysc" value="drink" checked/>喝酒<br>
+        <input type="checkbox" name="ysc" value="fireHair"/>烫头<br>
+
+        <select id="provinceList">
+            <option value="">--请选择省份--</option>
+            <option value="001">武汉</option>
+            <option value="002">北京</option>
+            <option value="003">上海</option>
+            <option value="004">深圳</option>
+            <option value="005">广州</option>
+            <option value="006">珠海</option>
+        </select>&emsp;&emsp;&emsp;
+
+        <!--获取下拉列表选中项的value第二种方式-->
+        <select onchange="alert(this.value)">
+            <option value="">--请选择省份--</option>
+            <option value="001">武汉</option>
+            <option value="002">北京</option>
+            <option value="003">上海</option>
+            <option value="004">深圳</option>
+            <option value="005">广州</option>
+            <option value="006">珠海</option>
+        </select>
+</body>
+</html>

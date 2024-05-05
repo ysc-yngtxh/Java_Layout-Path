@@ -1,0 +1,75 @@
+<!--
+     1、设置和获取文本框的value
+          a、在事件句柄上输出文本框里的value，即用户输入的信息
+          b、将第一个文本框中的value赋值到第二个文本框中
+          c、blur事件，失去焦点事件
+
+     2、DOM编程 - innerHTML和innerText操作div和span
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        #div1{
+            background-color: aquamarine;
+            width:300px;
+            height: 400px;
+            border:1px black solid;
+            position:absolute;
+            top:120px;
+            left:0px;
+        }
+    </style>
+</head>
+<body>
+         <input type="text" id="btn"/>
+         <input type="button" value="点击" id="username"/><br>
+
+         <input type="text" id="username1"/>
+         <input type="text" id="username2"/>
+         <input type="button" value="使劲点" id="brn"/><br>
+
+         <!--blur事件，失去焦点事件-->
+         <input type="text" onblur="alert(this.value)"/><br>
+
+         <!--
+             innerHTML和innerText属性有什么区别？
+                相同点：都是设置元素内部的内容
+                不同点：innerHTML会把后面的“字符串”当作一段HTML代码解释并执行。
+                       innerText即使后面是一段HTML代码，也只是将其当作普通的字符串来看待
+         -->
+         <input type="button" value="设置div中的内容" id="bnn"/>
+         <div id="div1"></div>
+
+         <script type="text/javascript">
+             // 1、第一步是将页面加载完毕后执行事件
+             window.onload = function() {
+                 // 2、第二步获取提交按钮对象
+                 var user = document.getElementById("username");
+                 // 3、第三步操作事件句柄
+                 user.onclick = function () {
+                     // 4、在事件句柄上输出文本框里的value，即用户输入的信息
+                     alert(document.getElementById("btn").value);
+                     // 修改文本框
+                     document.getElementById("btn").value = "游诗成";
+                 }
+
+                 var brn = document.getElementById("brn");
+                 brn.onclick = function () {
+                     document.getElementById("username2").value = document.getElementById("username1").value;
+                 }
+
+                 var bnn = document.getElementById("bnn");
+                 bnn.onclick = function () {
+                     var divElt = document.getElementById("div1");
+                     // divElt.innerHTML = "dfsdghdASDASDF";                         // 输出结果为dfsdghdASDASDF
+                     // divElt.innerHTML = "<font color='red'>用户名不能为空</font>";  // 输出结果为用户名不能为空
+                     // 输出结果为<font color='red'>用户名不能为空</font>
+                     divElt.innerText = "<font color='red'>用户名不能为空</font>";
+                 }
+             }
+         </script>
+</body>
+</html>

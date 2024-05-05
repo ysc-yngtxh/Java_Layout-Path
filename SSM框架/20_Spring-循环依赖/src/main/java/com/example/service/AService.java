@@ -1,0 +1,25 @@
+package com.example.service;
+
+/**
+ * @author 游家纨绔
+ * @dateTime 2023-11-11 22:10
+ * @apiNote TODO
+ */
+public class AService {
+    private BService bService;
+
+    public void setBService(BService bService) {
+        this.bService = bService;
+    }
+
+    public AService() {
+    }
+
+    public AService(BService bService) {
+        this.bService = bService;
+    }
+
+    public void testProxy(){
+        System.out.println("测试Aop切面");
+    }
+}

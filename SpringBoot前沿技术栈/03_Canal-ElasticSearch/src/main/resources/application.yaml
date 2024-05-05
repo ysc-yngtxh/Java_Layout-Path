@@ -1,0 +1,39 @@
+
+#启动端口设置
+server:
+  servlet:
+    port: 8080
+    context:
+      path: /
+  application:
+    name: 17_canal-elasticsearch
+
+#mybatis配置
+logging:
+  level:
+    com:
+      example:
+        canalelasticsearch:
+          mapper: debug  #mybatis查询数据的信息日志
+
+#jdbc配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC
+    username: root
+    password: 131474
+  data:     #Elasticsearch\u914D\u7F6E
+    elasticsearch:
+      repositories:
+        enabled: true
+  elasticsearch:
+    rest:
+      uris: localhost:9200
+      connection-timeout: 5000
+  devtools:   #java热部署
+    restart:
+      enabled: true
+      additional-paths: src/test/java     #热部署路径
+      #classpath\u76EE\u5F55\u4E0B\u7684WEB-INF\u6587\u4EF6\u5939\u5185\u5BB9\u4FEE\u6539\u4E0D\u91CD\u542F
+      #exclude: WEB-INF/**

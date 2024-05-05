@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--浏览器前进后退对象-->
+        <input type="button" value="后退" onclick="window.history.back()"/>
+        <input type="button" value="后退" onclick="window.history.go(-1)"/>
+        <input type="button" value="前进" onclick="window.history.go(1)"/><br><br>
+
+<!--设置浏览器地址栏上的url-->
+        <script type="text/javascript">
+            function gobaidu() {
+                document.location="http://www.jd.com";
+            }
+        </script>
+        <input type="button" value="京东" onclick="gobaidu()"/>
+</body>
+</html>
+<!--
+    总结：有哪些方法可以通过浏览器往服务器发请求？
+       1、表单form的提交
+       2、超链接：<a href="">http://localhost:8080/oaa/save?username=zhangsan&password=123>用户只能点击这个超链接</a>
+       3、document.location
+       4、window.location
+       5、window.open("url")
+       6、直接在浏览器地址栏上输入url,然后回车
+
+       以上的所有请求方式均可以携带数据给服务器，只有通过表单提交的数据才是动态的。
+-->

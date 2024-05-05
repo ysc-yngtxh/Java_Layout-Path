@@ -1,0 +1,52 @@
+                                 <!--
+                                     id节点
+                                     div及span在网页的应用
+                                 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTMLid节点及div图层</title>
+</head>
+<body>
+<!--id节点-->
+        <!--
+            1、在HTML文档当中，任何元素(节点)都有id属性，id属性是该节点的唯一标识。所以在同一个HTML文档当中id值不能重复。
+            2、注意：表单提交数据的时候，只和name有关系，和id无关
+            3、id有什么用？
+                 JavaScript语言：可以对HTML文档当中的任意节点进行增删改操作
+                 javascript可以对HTML文档当中的元素进行增删改，那么增删改之前需要先拿到这个节点，通常我们通过id来拿节点对象
+                 id的存在让我们获取元素(节点)更方便
+            4、HTML文档是一棵树，树上有很多节点，每一个节点都有唯一的id
+               JavaScript主要就是对这棵DOM树上的节点进行增删改的。
+               b2(DOM文档对象模型)(Document)树
+            5、<head>和<body>也可以加上id属性
+        -->
+        <form id="myform">
+            <input type="text" id="username" name="username"/>
+            <input type="password" id="userpwd" name="userpwd"/>
+            <input type="submit" value="提交">
+            <!--id就是结点的身份证号码，不能重复。-->
+        </form>
+
+
+<!--div及span在网页的应用-->
+        <!--
+            1、div和span是什么？有什么用？
+                  div和span都可以成为“图层”
+                  图层的作用是为了保证页面可以灵活的布局
+                  图层就是一个一个的盒子，div嵌套div就是盒子套盒子
+                  div和span是可以定位的，只要定下div的左上角的x轴和y轴坐标即可
+            2、其实最早的网页是采用table进行布局的，但是table不灵活，太死板。
+                  现代的网页开发中div布局使用最多，几乎很少使用table进行布局了。
+            3、div和span的区别。
+                  div独自占用一行(默认情况下)
+                  span不会独自占用一行
+        -->
+        <div id="div1">我是一个DIV</div>
+        <div id="div2">我是一个DIV</div>
+
+        <span id="span1">我是一个span标签</span>
+        <span id="span2">我是一个span标签</span>
+</body>
+</html>

@@ -1,0 +1,10 @@
+
+server:
+  port: 8080
+
+spring:
+  profiles:
+    # 定义具体使用哪种配置（dev、production）
+    # dev配置：相当于是使用了全部的默认四种静态文件包，并在访问这些静态包资源路径前添加了前缀
+    # production配置：相当于只使用 classpath:/static 这一个包作为静态资源包，也添加了访问路径前缀
+    active: production

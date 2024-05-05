@@ -1,0 +1,30 @@
+server:
+    port: 8082
+    servlet:
+        context-path: /
+
+spring:
+    #  sql:
+    #    init:
+    #      # SpringBoot启动时执行去执行的Sql脚本
+    #      schema-locations: classpath:/sql/*.sql
+    #      mode: always
+
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: mpw:tOuQTJfpXKEWbLY1fOJxqQ==
+        url: mpw:7rtYlSNgy+jVLRy6JLv8509gEPmSoMrwxM8kVPvD0kG2SfihsaKW436zUZLpdfPtBVp0mT9cwKLZgIetPFYWKquO4QfuXN+OuF4yZlU46KVXDWeV/KZQgyAMux4xbo5D8i1IsS67xEMSOFx2LVrQ1crL/7EuZ/bkw/N6hGRrhsTYZHzHfdtuJY/pXPhIyTvzu3R8nQLJu4wjrRRBLXF3uA==
+        username: mpw:Uwak4MyIBlTANPI/N9CasA==
+
+mybatis-plus:
+    mapper-locations: classpath:mapper/*.xml
+    configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    type-aliases-package: com.example.entity
+    global-config:
+        db-config:                         # 全局配置 db
+            id-type: assign_uuid             # 设置全局Id生成策略（注意：如果有局部Id生成策略，那局部策略生效，它是优先于全局策略）
+            logic-delete-field: deleteFlag   # 全局逻辑删除的实体字段名(注意：设置的是实体类中的字段名)
+            logic-delete-value: 1            # 逻辑已删除值(默认为 1)
+            logic-not-delete-value: 0        # 逻辑未删除值(默认为 0)
+            table-prefix: tb_                # 设置表前缀

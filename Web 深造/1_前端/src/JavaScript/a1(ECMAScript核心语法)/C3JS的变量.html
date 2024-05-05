@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--JS的变量-->
+        <!--
+            javaScript当中的变量？
+                   怎么声明变量？
+                        var 变量名;
+                   怎么给变量赋值？
+                        变量名 = 值
+                        JavaScript是一种弱类型语言，没有编译阶段，一个变量可以随意赋值。赋什么类型的值都行。
+                        var i=100;
+                        i = false;
+                        i = "abc";
+                        i = new Object();
+                        i = 3.14;
+
+           注意：在js当中，当一个变量没有手动赋值的时候，系统默认赋值undefined，undefined在js当中是一个具体存在值
+                 一个变量没有声明/定义，直接访问的话会造成语法错误
+
+              全局变量：
+                  在函数体之外声明的变量属于全局变量，全局变量的生命周期是：
+                       浏览器打开时声明，浏览器关闭时销毁，尽量少用。因为全局变量会一直在浏览器的内存当中，耗费内存空间。
+                       能使用局部变量尽量使用局部变量
+              局部变量：
+                  在函数体当中声明的变量，包括一个函数的形参都属于局部变量
+                  局部变量的生命周期是：函数开始执行是局部变量的内存空间开辟，函数执行结束之后，局部变量的内存空间释放
+                  局部变量声明周期较短.
+              注意：当一个变量声明的时候没有使用var关键字，那么不管这个变量是在哪儿声明的，都是全局变量
+        -->
+
+        <script>
+            var i;
+            alert("i = " + i);
+            alert(undefined);
+
+            var k = undefined;
+            alert("k =" + k);
+
+            var a,b,c = 200;  <!--a,b没赋值没定义。c赋值为200-->
+            alert("a=" + a);
+            alert("b=" + b);
+            alert("c=" + c);
+            a = false;
+            alert(a);
+            a = "abc";
+            alert(a);
+            a = 1.2;
+            alert(a);
+        </script>
+
+        <script type="text/javascript">
+            // 全局变量
+            var username = "jack";
+            function accessUsername(){
+                // 局部变量
+                var username = "lisi";
+                // 就近原则：访问局部变量
+                alert("username=" + username);
+            }
+            // 调用函数
+            accessUsername();
+            // 访问全局变量
+            alert("username=" + username);
+
+            function myfun() {
+                // 当一个变量声明的时候没有使用var关键字，那么不管这个变量是在哪儿声明的，都是全局变量
+                myname = "youshicheng";
+            }
+            myfun();
+            alert("myname=" + myname);
+        </script>
+
+<!--JS的函数初步-->
+        <!--
+            1、JS中的函数：
+               等同于Java语言中的方法，函数也是一段可以被重复利用的代码片段。
+               函数一般都是可以完成某个特定功能的
+
+            2、JS中的变量是一种弱类型的，那么函数应该怎么定义呢？
+               语法格式：
+                  第一种方式：
+                    function 函数名(形式参数列表){
+                        函数体;
+                    }
+                  第二种方式：
+                    函数名 = function(形式参数列表){
+                         函数体;
+                    }
+
+               JS中的函数不需要指定返回值类型，返回什么类型都行。
+        -->
+
+        <script type="text/javascript">
+            function sum(a, b){
+                alert(a + b);
+                // return(a + b);
+            }
+            <!--函数必须调用才能执行-->
+            sum(10, 20);
+
+            setHello = function(username){
+                alert("hello" + username);
+            }
+            setHello("曹玉敏");
+
+           /*
+               java中的方法有重载机制，JS中的函数能重载吗？
+                   JS当中的函数在调用的时候，参数的类型没有限制，并且参数的个数也没有限制，JS就是这么随意(弱类型)
+
+               重载的含义：
+                   方法名或者函数名一样，形参不同
+           */
+            var retValue = sum(1, 2);
+            alert(retValue);
+
+            var retValue2 = sum("jack");  // jack赋值给a变量，b变量没有赋值系统默认赋值undefined
+            alert(retValue2);             // 输出jackundefined
+
+            var retValue3 = sum();        // 当a,b变量都没有赋值*/
+            alert(retValue3);             // 输出NaN(NaN是一个具体存在的值，该值表示不是数字。Not a Number)
+
+            var retValue4 = sum(1,2,3);   // 当赋了三个值的情况下，只会取前两个值，后面的值会忽略掉
+            alert(retValue4);
+
+            /*在JS当中，函数的名字不能重名，当函数重名的时候，后声明的函数会将之前声明的同名函数覆盖
+            function text1(username){
+                alert("text1");
+            }
+            function text1(){
+                alert("text1 text1")
+            }
+            text1("lisi");     /*输出text1 text1,这里调用的是第二个text()函数*/
+
+
+        </script>
+
+        <input type="button" value="hello" onclick="setHello('游诗成')"/>
+        <input type="button" value="求和" onclick="sum(56, 20)"/>
+
+</body>
+</html>

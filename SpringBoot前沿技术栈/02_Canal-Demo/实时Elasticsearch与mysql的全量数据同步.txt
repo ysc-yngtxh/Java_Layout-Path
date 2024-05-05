@@ -1,0 +1,110 @@
+
+开源数据同步神器——canal
+        前言
+              如今大型的IT系统中，都会使用分布式的方式，同时会有非常多的中间件，如redis、消息队列、大数据存储等，
+          但是实际核心的数据存储依然是存储在数据库，作为使用最广泛的数据库，如何将mysql的数据与中间件的数据进行同步，
+          既能确保数据的一致性、及时性，也能做到代码无侵入的方式呢？如果有这样的一个需求，数据修改后，
+          需要及时的将mysql中的数据更新到elasticsearch,我们会怎么进行实现呢？
+
+       数据同步方案选择
+           针对上文的需求，经过思考，初步有如下的一些方案：
+       代码实现
+           针对代码中进行数据库的增删改操作时，同时进行elasticsearch的增删改操作。
+
+       canal介绍
+               canal 是阿里巴巴的一个开源项目，基于java实现，整体已经在很多大型的互联网项目生产环境中使用，包括阿里、美团等都有广泛的应用，
+           是一个非常成熟的数据库同步方案，基础的使用只需要进行简单的配置即可。
+           canal是通过模拟成为mysql 的slave的方式，监听mysql 的binlog日志来获取数据，binlog设置为row模式以后，
+           不仅能获取到执行的每一个增删改的脚本，同时还能获取到修改前和修改后的数据，基于这个特性，canal就能高性能的获取到mysql数据数据的变更。
+
+       使用
+           canal的部署主要分为server端和client端。
+           server端部署好以后，可以直接监听mysql binlog,因为server端是把自己模拟成了mysql slave，所以，只能接受数据，没有进行任何逻辑的处理，
+           具体的逻辑处理，需要client端进行处理。client端一般是需要大家进行简单的开发。
+
+       canal Adapter
+               为了便于大家的使用，官方做了一个独立的组件Adapter，Adapter是可以将canal server端获取的数据转换成几个常用的中间件数据源，
+           现在支持kafka、rocketmq、hbase、elasticsearch，针对这几个中间件的支持，直接配置即可，无需开发。
+           上文中，如果需要将mysql的数据同步到elasticsearch，直接运行 canal Adapter，修改相关的配置即可。
+
+       canal Adapter elasticsearch 改造
+           因为有了canal和canal Adapter这个神器，同步到elasticsearch、hbase等问题都解决了，但是自己的开发的过程中发现，
+           Adapter使用还是有些问题，因为先使用的是elasticsearch同步功能，所以对elasticsearch进行了一些改造：
+
+
+全量数据同步具体实操：
+   一、实施环境：
+       JDK 1.8
+       MySql 8.0.21
+       ElasticSearch 7.16.2
+       Canal-deployer 1.1.5（Canal服务器）
+       Canal-adapter 1.1.5 （Canal适配器）
+
+   二、配置mysql
+       canal的原理是基于mysql binlog技术，所以一定需要开启mysql的binlog写入功能，建议配置binlog模式为row
+       我这里的MySQL配置文件在 D:\MySoftware\MySQL\mysql data\my.ini 中加入
+                 log-bin=mysql-bin #后面名称随便取
+                 binlog-format=ROW #选择row模式
+                 server_id=1       #配置mysql replaction需要定义，不能和canal的slaveId重复
+
+   三、打开 elasticsearch-7.16.2\config\elasticsearch.yml 配置文件
+      1、cluster.name: my-elasticsearch  原这条语句时被注释掉的，现在把注释去掉 (后面的 my-application是集群名称，可以随便取)
+      2、提前创建好与 mysql中表testysc 匹配的索引映射(mappings)结构
+
+   四、因为版本问题Canal-adaper会有一个druid依赖冲突。所以你需要在官网下载源码：
+      1、打开源码：client-adapter 1.1.5\client-adapter\escore\pom.xml
+         找到druid依赖，加入 <scope>provided</scope>
+      2、加入语句后就需要打成jar包去替换
+         ①、在 client-adapter 1.1.5\client-adapter 路径下 cmd,打开命令提示符后打包：mvn clean package
+         ②、打包完成后在 client-adapter 1.1.5\client-adapter\es7x\target 目录下
+            找到 client-adapter.es7x-1.1.5-jar-with-dependencies.jar包
+         ③、将打包好的jar包与 应用程序canal.adapter-1.1.5\plugin目录下的client-adapter.es7x-1.1.5-jar-with-dependencies.jar包替换
+
+   五、canal-deployer进行配置
+      1、打开 canal.deployer-1.1.5\conf\example\instance.properties
+      2、canal.instance.mysql.slaveId=20（清掉注释，随便给个值就好，不能和mysql的server_id重复）
+      3、canal.instance.dbUsername=root（你需要连接的数据库用户名）
+         canal.instance.dbPassword=131474（你需要连接的数据库密码）
+
+   六、canal-adaper进行配置
+      1、在 canal.adapter-1.1.5\conf\application.yml 中配置
+          srcDataSources:
+            defaultDS:
+              url: jdbc:mysql://127.0.0.1:3306/springdb?useUnicode=true
+              username: root   （数据库用户名）
+              password: 131474 （数据库密码）
+          canalAdapters:
+          - instance: example # canal instance Name or mq topic name
+            groups:
+            - groupId: g1
+              outerAdapters:
+              - name: logger
+              - name: es7
+                key: exampleKey （这个key是用来关联es的配置文件，这个名称随便取）
+                hosts: 127.0.0.1:9300 （这个注意：es与java交互的默认端口号是9300，与http交互的端口号是9200，两者不要搞错了）
+                properties:
+                  mode: transport  #or rest
+                  #security.auth: test:123456 #  only used for rest mode
+                  cluster.name: my-elasticsearch  （这个是用来关联es集群的，与elasticsearch配置一致）
+      2、在 canal.adapter-1.1.5\conf\es7\ 目录下创建一个需要连接的表名.yml 比如：testysc.yml。再在配置文件中写入信息
+          dataSourceKey: defaultDS
+          destination: example
+          outerAdapterKey: exampleKey  （这个和上面的配置key关联上了）
+          groupId: g1
+          esMapping:
+              _index: testysc  （elasticsearch中的的索引名称）
+              _type: _doc
+              _id: _id
+          #    upsert: true
+          #    pk: id
+              sql: "select t.id AS _id, t.id AS testid, t.name, t.address from testysc t"
+          #  objFields:
+          #    _labels: array:;
+              etlCondition: "where a.c_time>={}"
+              commitBatch: 3000
+
+   七、启动顺序
+
+         mysql -->  elasticsearch  -->  canal-deployer(bin目录下的startup.bat) -->  canal-adaper
+
+

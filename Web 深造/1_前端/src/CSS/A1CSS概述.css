@@ -1,0 +1,56 @@
+/*
+  1、什么是CSS，有什么用？
+      CSS(Cascading Style Sheet):层叠样式表语言。
+      CSS的作用是：
+                 修饰HTML页面，设置HTML页面中的某些元素的样式，让HTML页面更好看
+                 CSS好比是HTML的化妆品一样。
+                 HTML还是主题，CSS依赖HTML。CSS的存在就是修饰HTML，所以新建的文件还是xxx.html文件。
+
+  2、CSS我们要求掌握到什么程度?
+      常见的CSS样式要求会写
+      别人写的CSS样式要能看懂
+
+  3、在HTML页面中嵌套使用CSS的三种方式：
+       第一种方式：在标签内部使用style属性来设置元素的CSS样式，这种方式称为内联定义方式。
+           语法格式：
+                  <标签 style="样式名:样式值;样式名:样式值;..."></标签>
+
+       第二种方式：在head标签中使用style块，这种方式被称为样式块方式。
+            语法格式：
+                    <head>
+                        <style type="text/css">
+                             选择器{
+                                 样式名:样式值;
+                                 样式名:样式值;
+                                 ...
+                              }
+                             选择器{
+                                 样式名:样式值;
+                                 样式名:样式值;
+                             ...
+                             }
+                             ...
+                        </style>
+                    <head>
+      第三种方式：链入外部样式表文件，这种方式最常见。(将样式写到一个独立的xxx.html文件当中，在需要的网页上直接引入CSS文件，样式就引入了)
+                语法格式：
+                        <link type="text/css" rel="stylesheet" href="css文件的路径"/>
+                        这种方式易维护，维护成本较低
+                        xxx.html文件
+                           1、html中引入了
+                           2、html中引入了
+                           3、html中引入了
+                           4、html中引入了
+*/
+
+a {
+    text-decoration: none;
+}
+
+/*
+  cursor:鼠标样式：pointer是小手，hand也是，但是hand有浏览器兼容问题，建议使用pointer
+ */
+#baiduSpan {
+    text-decoration: underline;
+    cursor:pointer;
+}

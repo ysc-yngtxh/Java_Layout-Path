@@ -1,0 +1,271 @@
+              <!--
+                  1、这是HTML的的注释
+                  2、加上以下代码的第一行就表示HTML5语法，去掉就表示HTML4
+                  3、HTML不区分大小写，语法松散不严格
+
+                  内容:
+                      基本标签
+                           a、段落标记
+                           b、字号大小
+                           c、换行标记
+                           d、横线标记
+                           e、预留格式
+                           ...
+                      实体符
+                           a、&gt:是大于号
+                           b、&lt:是小于号
+                           c、&nbsp:表示空格
+                      HTML表单
+                           a、table架构表格
+                           b、thead tbody tfoot在table中不是必须的，只是这样做便于后期的JS代码的编写
+                      图片标签
+                           (img src="")
+                      超链接也叫热链接
+                           <a href="http://www.hao123.com" target="_blank">超链接</a>    文字链接
+                           或
+                           <a href="http://www.hao123.com" target="_blank">             图片链接
+                               <img src="img/hao123.png"/>
+                           </a>
+                      HTML列表
+                           a、无序列表
+                           b、有序列表
+                           c、无序跟有序列表的type标签选项不一样
+              -->
+<!DOCTYPE html>
+
+<!--根-->
+<html lang="en">
+
+<!--头-->
+<head>
+        <!--这行代码的作用是告诉浏览器采用哪一种字符集打开当前页面。
+            注意：并不是设置当前页面的字符编码方式
+        -->
+        <meta charset="UTF-8">
+        <title>HTML基础知识</title> <!--网页标题，显示在网页左上角-->
+</head>
+
+<!--体-->
+        <!--
+            bgcolor:设置背景色
+            background:设置背景图片
+            以上的设置就是对背景进行设置
+        -->
+<body bgcolor="#00bfff" background="img/timg.jpg">
+    网页的主题内容，欢迎学习HTML
+
+<!--基本标签-->
+        <!--段落标记-->
+        <p>《黛玉葬花》是文学名著《红楼梦》中的经典片段。林黛玉最怜惜花，觉得花落以后埋在土里最干净，说明她对美有独特的见解。
+         她写了葬花词，以花比喻自己，在《红楼梦》中是最美丽的诗歌之一。
+         贾宝玉和林黛玉在葬花的时候有一段对话，成为《红楼梦》中一场情人之间解除误会的绝唱。
+        </p><p>《黛玉葬花》是文学名著《红楼梦》中的经典片段。林黛玉最怜惜花，觉得花落以后埋在土里最干净，说明她对美有独特的见解。
+            她写了葬花词，以花比喻自己，在《红楼梦》中是最美丽的诗歌之一。
+            贾宝玉和林黛玉在葬花的时候有一段对话，成为《红楼梦》中一场情人之间解除误会的绝唱 。
+        </p>
+
+        <h1>标题字号大小</h1>
+        <h2>标题字号大小</h2>
+        <h3>标题字号大小</h3>
+        <h4>标题字号大小</h4>
+        <h5>标题字号大小</h5>
+        <h6>标题字号大小</h6>
+
+        <!--换行标记，br标签是一个独目标记-->
+        hello <br>world!
+
+        <!--横线，独目标记-->
+        <hr>
+
+        <!--color和width都是hr标签的属性-->
+        <hr color="red" width="50%">
+        <!--语法相当松散，可以发现等号后面可加双引号，单引号，也可不加-->
+        <hr color='green' width=30%>
+
+        <!--预留格式-->
+        <pre>
+            for(int i=0; i<10; i++) {
+               System.out.println("i=" + i);
+            }
+        </pre>
+
+        <del>删除字</del>
+        <ins>插入字</ins>
+        <b>粗体字</b>
+        <i>斜体字</i>
+
+        10<sup>2</sup>
+        10<sub>m</sub>
+
+        <font color="red" size="10">字体标签</font>
+
+<!--实体符-->
+        <!--
+            实体符特点是：以&开始，以;结束。&gt:是大于号   &lt:是小于号  &nbsp:表示空格
+            在HTML中为什么大于和小于号不用>,<呢？因为会和<body>...之类的关键字起冲突
+            还有，在内容方面直接空格的话无论敲多少下空格，在浏览器显示都只是一个空格。因此&nbsp;就起到作用了
+        -->
+        <br>b&lt;a&gt;c
+        <br>a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bc
+
+<!--HTML表单-->
+        <br><br><br>
+        <h1 align="center">员工信息表</h1>
+        <hr>
+        <!--
+            border=1px  设置表格的边框为1像素宽度
+            width       宽度既可以用百分比表示，也可以用像素px表示
+            height      高度
+
+            单元格合并注意事项：
+                 1、row单元格合并的时候，删除“下面的”单元格
+                 2、col合并的时候，对删除那个没有要求
+
+            thead tbody tfoot在table中不是必须的，只是这样做便于后期的JS代码的编写
+            thead用于表格标签的标记，tbody用于表格内容的标记，tfoot用于表格结尾的标记
+        -->
+        <table align=center border="1" width=60% height=150px>
+            <thead>
+                <tr>
+                    <!--th标签也是单元格标签，比td多的是居中、加粗-->
+                    <th>员工编号</th>
+                    <th>员工薪资</th>
+                    <th>部门名称</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr align="center"><!--align="center"表示的是对齐方式居中-->
+                    <td>a</td>
+                    <td>b</td>
+                    <td>c</td>
+                </tr>
+                <tr align="center">
+                    <td>d</td>
+                    <td>e</td>
+                    <td rowspan="2">f</td><!--表示纵向合并2个单元格-->
+                </tr>
+                <tr align="center">
+                    <td>g</td>
+                    <td>h</td>
+                </tr>
+            </tbody>
+
+            <tfoot>
+                <tr align="center">
+                    <td colspan="2">i</td><!--表示横向合并2个单元格-->
+                    <td>j</td>
+                </tr>
+            </tfoot>
+        </table>
+
+<!--图片标签-->
+        <!--
+           1、设置图片宽度和高度的时候,只设置宽度就行,再设置高度的话会失真。因为宽度、高度会进行等比例缩放。
+           2、img标签就是图片标签
+           3、src属性是图片的路径
+           4、width设置宽度，height设置高度
+           5、title设置鼠标悬停时显示的信息
+           6、alt设置图片加载失败时显示的提示信息
+
+           注意：有以下两种写法
+        -->
+        <img src="img/timg.jpg" width="100px" title="我是草莓哦！" alt="图片找不到了哦！"></img>
+        <img src="img/timg.jpg" width="100px"/>
+
+<!--超链接也叫热链接-->
+        <!--
+            超链接的特点：
+                       有下划线
+                       鼠标停留在超链接上面显示小手形状
+                       点击超链接之后还能跳转页面
+
+            href:hot references热引用
+            href属性后面一定是一个资源的地址
+            href后面的路径可以是绝对路径也可以是相对路径，可以是网络中的某个资源的路径，也可以是本地资源的路径
+        -->
+        <a href="http://www.baidu.com">百度</a>
+        <a href="A1BS结构介绍.html">A1BS</a>
+
+        <!--
+            超链接有一个target属性：
+                 可取值：
+                    _blank:新窗口
+                    _self:当前窗口(默认的就是这种方式)
+                    _top:顶级窗口
+                    _parent:父窗口
+        -->
+        <a href="http://www.hao123.com" target="_self">
+            <img src="img/hao123.png"/>
+        </a>
+
+        <a href="http://www.hao123.com" target="_blank">
+            <img src="img/hao123.png"/>
+        </a>
+
+        <!--
+            超链接的作用
+                通过超链接可以从浏览器向服务器发送请求
+                浏览器向服务器发送数据：(请求：request)
+                服务器向浏览器发送数据：(响应: response)
+
+                B/S结构的系统，每一个请求都会对应一个响应
+                B--请求----S
+                S--响应----B
+
+            用户点击超链接和用户在浏览器地址栏上直接输入URL，有什么区别？
+                本质上没有区别，都是向服务器发送请求。
+                从操作上来讲，超链接使用更方便
+        -->
+
+<!--HTML列表-->
+        <!--有序列表-->
+        <!--type标签用于<ol>或<ul>中,
+            且在有序列表中和无序列表中的type选项标签不一样
+        -->
+        <ol type="A">
+            <li>水果
+                <ol>
+                    <li>苹果</li>
+                    <li>桃子</li>
+                    <li>西瓜</li>
+                </ol>
+            </li>
+
+            <li>蔬菜
+                <ol type="a">
+                    <li>西红柿</li>
+                    <li>大白菜</li>
+                    <li>花椰菜</li>
+                </ol>
+            </li>
+        </ol>
+
+        <!--无序列表-->
+        <ul type="circle">
+            <li>中国
+                <ul type="square">
+                    <li>湖北
+                        <ul type="disc">
+                            <li>武昌区</li>
+                            <li>汉口区</li>
+                            <li>江夏区</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li>美国
+                <ul>
+                    <li>华盛顿
+                        <ul>
+                            <li>第七区</li>
+                            <li>第八区</li>
+                            <li>第九区</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+</body>
+</html>

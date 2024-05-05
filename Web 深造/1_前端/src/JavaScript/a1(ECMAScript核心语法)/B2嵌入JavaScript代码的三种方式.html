@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>嵌入JS代码的三种方式</title>
+</head>
+<body>
+<!--嵌入JS代码的第一种方式-->
+        <!--
+            1、要实现的功能：
+                 用户点击一下按钮，弹出消息框
+
+            2、JS是一门事件驱动型的编程语言，依靠事件去驱动，然后执行对应的的程序。
+                 在JS中有很多事件，其中有一个事件叫做：鼠标点击。   单词：click。
+                 并且任何事件都会对应一个事件句柄叫做:onclick,而事件句柄是以HTML标签的属性存在的。
+                 【注意：事件和事件句柄的区别是：事件句柄是在事件单词前添加一个on】.
+
+            3、onclick="JS代码"，执行原理是什么？
+                 页面打开的时候，js代码并不会执行，只是把这 上了。
+                 等这个按钮发生click事件之后，注册在onclick后面的js代码会被浏览器自动调用
+
+            4、怎么使用JS代码弹出消息框？
+                 在JS中有一个内置的对象叫做window，全部小写，可以直接拿来使用，window代表的是浏览器对象。
+                 window对象有一个函数叫做：alert，用法是：window.alert("消息");这样就可以弹窗了
+
+            5、JS中的字符串可以使用双引号，也可以使用单引号
+
+            6、JS中的一条语句结束之后可以使用";"，也可以不用。
+
+            7、button与submit区别：
+                button-普通按钮，submit-提交按钮。
+　　            submit是button的一个特例，也是button的一种，它把提交这个动作自动集成了，
+                submit和button,二者都以按钮的形式展现,看起来都是按钮，所不同的是type属性和处发响应的事件上。
+                (简单理解就是submit提交后会跳转页面，button不会跳转页面)
+        -->
+        <input type="button" value="hello" onclick="window.alert('hello js')"/>
+        <input type="button" value="hello" onclick="window.alert('hello zhangSan')
+                                                    window.alert('hello lisi')
+                                                    window.alert('hello wangWu')"/>
+
+        <!--window.也可以不写-->
+        <input type="button" value="登录" onclick="alert('hello world!')"/>
+
+
+<!--嵌入JS代码的第二种方式：脚本块-->
+        <!--
+            暴露在脚本块当中的程序，在页面打开的时候执行，并且遵守自上而下的顺序依次逐行执行(这个代码块的执行不需要事件)
+            JavaScript的脚本块在一个页面当中可以出现多次，没有要求。
+            JavaScript的脚本块出现位置也没有要求，随意(像是在head里,body外)。
+
+            按Esc键可以在页面上进行下一步的操作，比较好用方便
+        -->
+        <script type="text/javascript">
+            // alert函数会阻塞整个HTML页面的加载，就是不点确定，后续内容不会出现
+            window.alert("游诗成！");  <!--window.可以省略-->
+        </script>
+
+        <input type="button" value="我喜欢穿着红衣服的姑娘"/>
+
+
+<!--嵌入JS代码的第三种方式：引入外部独立的js文件-->
+        <!--
+            在需要的位置引入js脚本文件
+            引入外部独立的js文件的时候，js文件中的代码会遵循自上而下的顺序依次逐行执行
+            同一个js文件可以被引入多次。但实际开发中这种需求很少
+                <script type="text/javascript" src="A1JavaScript概述.js"/>不可以这么写，因为不会执行
+                必须要加上</script>
+        -->
+        <script type="text/javascript" src="A1JavaScript概述.js">
+            // 这里写的代码块不会执行
+        </script>
+
+</body>
+</html>

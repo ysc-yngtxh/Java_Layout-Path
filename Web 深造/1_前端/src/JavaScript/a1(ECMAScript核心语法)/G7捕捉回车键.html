@@ -1,0 +1,72 @@
+                 <!--
+                      1、JS捕捉回车键
+                      2、JS中的void运算符:
+                           既保留住超链接的样式，同时用户点击该超链接的时候执行一段JS代码，但页面还不能跳转
+                      3、JS的控制语句
+                  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--JS捕捉回车键-->
+        <script type="text/javascript">
+            window.onload=function(){
+                //对于"键盘事件对象"来说，都有keyCode属性用来获取键值
+                var usernameElt = document.getElementById("username");
+                usernameElt.onkeydown = function(event){
+                    //回车键的键值是13。ESC键的键值是27
+                    if(event.keyCode === 13) {
+                        alert("正在进行验证1...");
+                    }
+                    //上述写法已弃用，请使用以下写法
+                    if(event.key === 'Enter') {
+                        alert("正在进行验证2...");
+                    }
+                }
+            }
+        </script>
+        <input type="text" id="username"/>
+        <input type="button" value="我是好男儿" id="username1"/><br>
+
+<!--JS中的void运算符-->
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <!--
+            void运算符的语法：void(表达式)
+            这个小括号当中的表达式必须要写东西，可以写任何东西，随意
+            运算原理：执行表达式，但不返回任何结果
+        -->
+        <a href="javascript:void(0)" onclick="window.alert('text code')">
+            既保留住超链接的样式，同时用户点击该超链接的时候执行一段JS代码，但页面还不能跳转
+        </a>
+
+<!--JS的控制语句-->
+        <script type="text/javascript">
+            // 创建JS数组
+            var arr =[false, true, 1, 2, "abc", 3.14];  // JS中数组元素的类型随意，元素的个数随意
+            // 遍历数组
+            for(var i=0; i<arr.length; i++){
+                alert(arr[i]);
+            }
+
+            // for...in语句可以遍历对象的属性
+            User = function(username, password){
+                this.username = username;
+                this.password = password;
+            };
+            var u = new User("游诗成", 333);
+            alert(u.username + "," + u.password);
+            alert(u["username"] + "," + u["password"]); // 两种写法
+            for(var ysc in u){
+                alert(u[ysc]); // 因为ysc表示的是u对象的属性名，本身就是字符串String类型，所以不需要加上双引号或者单引号
+            }
+
+            // 还有一种控制语句需要了解
+            with(u){
+                alert(username + "," + password); // 这种语法其实就是省略一个u.
+            }
+        </script>
+</body>
+</html>

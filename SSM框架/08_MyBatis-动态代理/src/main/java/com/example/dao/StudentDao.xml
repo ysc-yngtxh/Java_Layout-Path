@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.StudentDao">
+
+    <select id="selectStudents" resultType="com.example.domain.Student">
+        select id,name,email,age from student order by id
+    </select>
+
+    <select id="selectStudentsParam" resultType="com.example.domain.Student">
+        select id,name,email,age from student where name = #{name} and age = #{age}
+    </select>
+
+    <select id="selectStudentsAnnotationParam" resultType="com.example.domain.Student">
+        select id,name,email,age from student where name = #{name} and age = #{age}
+    </select>
+
+    <!--写法可读性不高，不推荐这种写法-->
+    <select id="selectStudentsReflect" resultType="com.example.domain.Student">
+        select id,name,email,age from student where name = #{arg0} and age = #{arg1}
+        union all
+        select id,name,email,age from student where name = #{param1} and age = #{param2}
+    </select>
+
+    <insert id="insertStudent">
+        insert into student values(#{id},#{name},#{email},#{age})
+    </insert>
+</mapper>

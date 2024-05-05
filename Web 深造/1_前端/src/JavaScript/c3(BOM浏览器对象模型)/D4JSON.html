@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        <!--
+            1、什么是JSON,有什么用？
+                JavaScript Object Notation (JavaScript对象标记)。简称JSON.(数据交换格式)
+                JSON主要的作用，一种标准的数据交换格式。(目前非常流行，90%以上的系统。系统A与系统B交换数据的话，都是采用JSON)
+            2、JSON是一种标准的轻量级的数据交换格式。
+                特点是：体积小，易解析
+            3、在实际的开发中有两种数据交换格式。使用最多，其一是JSON。另一个是XML
+                XML体积小，解析麻烦，但是有其优点：语法严谨(通常银行相关的系统之间进行数据交换的话会使用XML)
+            4、HTML和XML有一个父亲：SGML(标准通用的标记语言)
+               HTML主要是做页面展示：所以语法松散，很随意
+               XML主要是做数据存储和数据描述的：所以语法相当严格
+
+            面试题：在JS中，[]和{}有什么区别？
+               [] 是数组
+               {} 是JSON
+
+               Java中的数组：int[] arr = {1,2,3};     int[] arr = new int[3];
+               JS中的数组：  var arr = [1,2,3];
+               JSON:        var arr = {"sno": "110", "sname": "zhangsan","sex": "男"};
+        -->
+        <script type="text/javascript">
+            // 没有使用JSON的时候，创建对象，访问对象的属性
+            Student = function(sno, sname, sex) {
+                this.sno = sno;
+                this.sname = sname;
+                this.sex = sex;
+            };
+            var stu = new Student("111", "李四", "男");
+            alert(stu.sno + "," + stu.sname + "," + stu.sex);
+
+
+            // 创建JSON对象
+            var studentObj = {
+                "sno": "110",
+                "sname": "zhangsan",
+                "sex": "男"
+            };
+            // 访问JSON对象的属性
+            alert(studentObj.sno + "," + studentObj.sname + "," + studentObj.sex);
+
+
+            // JSON数组
+            var students = [
+                {"sno": "110", "sname": "zhangsan","sex": "男"},
+                {"sno": "120", "sname": "wangwu","sex": "女"}
+            ];
+            // 遍历
+            for(var i=0; i<students.length; i++){
+                alert(students[i].sno + "," + students[i].sname + "," + students[i].sex);
+            }
+
+
+            /*
+              eval函数的作用是：将字符串当作一段JS代码解释并执行
+             */
+            window.eval("var i = 100");
+            alert("i=" + i);   // i=100
+            /*
+              java连接数据库，查询数据之后，将数据在Java程序中拼接成JSON格式的“字符串”，将JSON格式的字符串响应到浏览器
+              也就是说Java响应到浏览器上的仅仅是一个“JSON格式的字符串”，还不是一个JSON对象。
+              可以使用eval函数,将JSON格式的字符串转换成JSON对象
+            */
+            var fromJava = "{\"name\":\"zhangsan\",\"password\":\"123\"}"  // 这是Java程序给发过来的json格式的“字符串”
+            // 将以上的json格式的字符串转换成json对象
+            window.eval("var jsonObj = " + fromJava);
+            // 访问json对象
+            alert(jsonObj.name + "," + jsonObj.password);
+        </script>
+</body>
+</html>

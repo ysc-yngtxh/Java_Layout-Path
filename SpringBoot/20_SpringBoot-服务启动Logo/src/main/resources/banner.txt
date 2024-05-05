@@ -1,0 +1,17 @@
+ ${AnsiColor.BRIGHT_RED}
+                      __   _     __
+  __ _____  __ _____ / /  (_)___/ /  ___ ___  ___ _
+ / // / _ \/ // (_-</ _ \/ / __/ _ \/ -_) _ \/ _ `/
+ \_, /\___/\_,_/___/_//_/_/\__/_//_/\__/_//_/\_, /
+/___/                                       /___/
+${AnsiColor.BRIGHT_BLUE}
+
+通过application.properties文件进行配置打印信息，使用${}符号获取
+
+Application Name: ${spring.application.name}
+Application Profile: ${spring.profiles.active}
+Server Port: ${server.port}
+
+Spring Boot Version: ${spring-boot.version}${spring-boot.formatted-version}
+
+${AnsiColor.DEFAULT}

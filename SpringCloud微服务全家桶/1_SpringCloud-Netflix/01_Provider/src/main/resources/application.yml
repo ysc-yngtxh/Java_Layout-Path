@@ -1,0 +1,30 @@
+
+server:
+    port: 8088
+    servlet:
+        context-path: /
+
+eureka:
+    client:
+        service-url:
+            defaultZone: http://127.0.0.1:10086/eureka/
+    instance:
+        lease-expiration-duration-in-seconds: 90
+        lease-renewal-interval-in-seconds: 30
+
+logging:
+    level:
+        com:
+            youshicheng: debug
+
+mybatis:
+    type-aliases-package: com.youshicheng.pojo
+
+spring:
+    application:
+        name: provider-service
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: 131474
+        url: jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC
+        username: root

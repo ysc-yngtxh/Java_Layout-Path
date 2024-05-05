@@ -1,0 +1,51 @@
+server:
+    port: 8087
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        # TODO 请求头中的认证信息校验路由
+        - id: my_route             # 自定义的路由名称，无特殊含义
+          uri: https://taobao.com
+          predicates:
+            # 以下自定义的predicates断言为true，则 localhost:8087 跳转 https://taobao.com
+            # 需要注意的：自定义的认证路由断言的名称与我们的断言处理逻辑文件名称前缀要保持一致【Auth -> AuthRoutePredicateFactory】
+            - Auth=ysc, 123
+
+        # TODO 请求参数中的Token校验 路由
+        - id: my_route2            # 自定义的路由名称
+          uri: https://taobao.com
+          predicates:
+            # 以下predicates断言为true，则 localhost:8087 跳转 https://taobao.com
+            # 需要注意的：自定义的认证路由断言的名称与我们的断言处理逻辑文件名称前缀要保持一致【Token -> TokenRoutePredicateFactory】
+            - Token=小妖盖
+
+        # TODO 添加请求Header参数过滤
+        - id: my_route3            # 自定义的路由名称
+          uri: http://localhost:8081
+          predicates:
+            # 请求路径 /red/{segment}/blue/{bean}，其中{segment}、{bean}表示变量，用以匹配任意字符路径。
+            # 并且变量字符没有硬性规定，{...}中可以是任意字符
+            - Path=/header, /red/{segment}/blue/{bean}
+          filters:
+            # localhost:8087/header 跳转 localhost:8081/header 可以发现其打印出的header中有 ner-color=red
+            # 需要注意的：自定义的认证路由过滤的名称与我们的过滤逻辑文件名称前缀要保持一致【AddHeader -> AddHeaderGatewayFilterFactory】
+            - AddHeader=ner-color, red
+
+        # TODO 自定义Gateway过滤工厂
+        - id: my_route4            # 自定义的路由名称
+          uri: http://localhost:8081
+          predicates:
+            - Path=/provider/**
+          filters:
+            # localhost:8087/header 跳转 localhost:8081/header 可以发现其打印出的header中有 ner-color=red
+            # 需要注意的：自定义的认证路由过滤的名称与我们的过滤逻辑文件名称前缀要保持一致【One -> OneGatewayFilterFactory】
+            - One=oneFilter, 111
+            - Two=twoFilter, 222
+            - Three=threeFilter, 333

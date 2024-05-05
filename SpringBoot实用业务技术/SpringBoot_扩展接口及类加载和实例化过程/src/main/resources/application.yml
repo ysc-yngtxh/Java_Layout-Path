@@ -1,0 +1,11 @@
+
+
+app:
+  url: https://github.com/dongguangming/
+  name: dgm
+  desc: dongguangming github
+  customComponentScanPackages: com.spring.mapper,com.spring.mapper
+
+
+mysqluser: rootroot
+mysqlpwd: cstorfscstorfs

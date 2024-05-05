@@ -1,0 +1,23 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: first-config-server
+  cloud:
+    config:
+      server:
+        git:
+          # 当前Config Server要访问的Git仓库地址
+          uri: https://gitee.com/you-shicheng/spring-cloud.git
+          # 私有仓库，下述两个属性必要，且仓库管理员，需要设置仓库访问用户列表及权限
+          # username: xxx  # 如果仓库是私有的，提供访问用户名；公有仓库则不需要提供
+          # password: xxx  # 如果仓库是私有的，提供访问密码；公有仓库则不需要提供
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka/
+
+
+

@@ -1,0 +1,20 @@
+
+server:
+  port: 8082
+spring:
+  application:
+    name: nacos-cluster
+  cloud:
+    nacos:
+      discovery:
+        # nacos服务地址，注册到nacos集群：192.168.2.101:8850、192.168.2.101:8860、192.168.2.101:8870
+        server-addr: 192.168.2.101:8850,192.168.2.101:8860,192.168.2.101:8870
+#          - 192.168.2.101:8850 # 这种写法不生效，setServerAddr参数为String类型，这样写表示一个数组或者集合
+#          - 192.168.2.101:8860 # 这种写法不生效，setServerAddr参数为String类型，这样写表示一个数组或者集合
+#          - 192.168.2.101:8870 # 这种写法不生效，setServerAddr参数为String类型，这样写表示一个数组或者集合
+        # nacos登陆用户名
+        username: nacos
+        # nacos登陆密码
+        password: nacos
+        # 是否设置为临时实例：默认为true，表示当前服务注册到Nacos中为临时实例
+        # ephemeral: false

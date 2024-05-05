@@ -1,0 +1,53 @@
+
+server:
+  port: 8085
+
+logging:
+  level:
+    com:
+      example: debug
+
+spring:
+  application:
+    name: nacos-consumer-openfeign
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+
+    # OpenFeign相关配置
+    openfeign:
+      # 开启 Apache 的 HttpClient 连接
+      httpclient:
+        hc5:
+          enabled: true
+      # 开启熔断机制（需要添加断路器circuitbreaker依赖）
+      circuitbreaker:
+        enabled: true
+      client:
+        config:
+          # 配置全局(其他所有的提供者服务配置)
+          default:
+            # openFeign连接超时
+            connect-timeout: 1000
+            # openFeign读取超时
+            read-timeout: 3000
+          # 配置局部(指定的提供者服务配置)
+          nacos-provider:
+            # openFeign连接超时
+            connect-timeout: 1000
+            # openFeign读取超时
+            read-timeout: 1000
+      # 请求与响应压缩配置
+      compression:
+        request:
+          # 开启请求压缩
+          enabled: true
+          mime-types: ["text/xml", "application/xml", "application/json", "video/mp4"]
+          # 请求类型为["text/xml", "application/xml", "application/json", "video/mp4"]的请求，请求数据大小达到了1024K的进行压缩
+          min-request-size: 1024
+        response:
+          # 开启响应压缩
+          enabled: true

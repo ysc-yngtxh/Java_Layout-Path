@@ -1,0 +1,236 @@
+                   <!--
+                       HTML表单form
+                         1、form表单基本属性
+                         2、用户注册表单的实现
+                               a、单选框(type=radio)
+                               b、复选框(type=checkbox)
+                               c、选项框(select__option)
+                               d、下拉列表支持多选(multiple)
+                               e、文本域(textarea)
+                               f、form的file控件(file控件，文件上传专用)
+                               g、隐藏域(hidden)
+                               h、只读属性(readonly和disabled)
+                               i、文本框可输入字符数量(maxlength)
+                   -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>form表单</title>
+</head>
+<body>
+<!--form表单基本属性-->
+        <!--
+            1、表单有什么用？
+                  收集用户信息。表单展现之后，用户填写表单，点击提交按钮提交数据给服务器。
+            2、怎么画一个表单？
+                  使用form标签画表单。
+            3、一个网页当中可以有多个表单form
+            4、表单最终是需要提交数据给服务器的
+                  action属性用来指定数据提交给哪个服务器
+                  action属性和超链接中的href属性一样。都可以向服务器发送请求(request)
+            5、http://192.168.111.3:8080/oa/save这是请求路径，表单提交数据最终提交给：
+               192.168.111.3机器上的8080端口对应的软件
+        -->
+        <form action="http://192.168.111.3:8080/oa/save">
+            <!--画按钮可以使用input输入域，
+                type="submit"的时候表示该按钮是一个提交按钮，具有提交表单的能力
+                按钮的value属性用来指定按钮上显示的文本信息
+            -->
+            <input type="submit" value="注册"/><!--画按钮可以使用input输入域,type="submit"是一个提交按钮，具有提交表单的能力-->
+            <input type="button" value="设置按钮上显示的文本"/><!--type="button"这是一个普通按钮，不具备提交表单的能力-->
+        </form>
+
+        <form action="http://www.baidu.com">
+            <input type="text"/><!--type="text"类似于一个搜索框-->
+            <input type="submit" value="百度"/><!--这个表单按钮和普通的超链接没什么太大的区别，只不过表单发送请求的同时可以携带数据-->
+        </form><br><br><br>
+
+        <form action="http://localhost:8080/jd.login">
+            用户名<input type="text"/><br>
+            密码<input type="password"/><br>
+            <input type="submit" value="登录"/>
+        </form><br><br><br>
+
+        <form action="http://localhost:8080/jd/login">
+            <table>
+                <!--
+                    表单以什么格式提交数据给服务器的？
+                    http://localhost:8080/jd/login?username=abc&userpwd=123
+
+                    重点强调：表单项写了name属性的，一律会提交给服务器。不想提交这一项的，就不要写name属性
+
+                    文本框和密码框的value不需要程序员指定，用户输入什么value就是什么
+
+                    当name没有写的时候，该项不会提交服务器。
+                    但是当value没有写的时候，value的默认值是空字符串"",会将空字符串提交给服务器。Java代码得到的是：String username="";
+                -->
+                <tr>
+                    <td>用户名</td>
+                    <td><input type="text" name="username"/></td>
+                </tr>
+                <tr>
+                    <td>密码</td>
+                    <td><input type="password" name="userpwd"/></td>
+                </tr>
+                <tr align="center">
+                    <td colspan="2"><!--colspan 属性规定单元格可横跨的列数。这里只有两列：一个字段名，一个输入框-->
+                        <input type="submit" value="登录"/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="reset" value="清空"/><!--type="reset"如果没有这个属性,这个‘清空’标签就没有重置表单的能力了-->
+                    </td>
+                </tr>
+            </table>
+        </form><br><br><br>
+
+<!--用户注册表单的实现-->
+        <!--
+            用户注册：
+                用户名
+                姓名
+                密码
+                确认密码
+                性别
+                兴趣爱好
+                学历
+                简介
+
+            form表单method属性：
+                get:采用get方式提交的时候，用户提交的信息会显示在浏览器的地址上。
+                post：采用post方式提交的时候，用户提交的信息不会显示在浏览器地址栏上。
+                当用户提交的信息中含有敏感信息，例如：密码，建议采用post方式提交
+
+            method属性不指定，或者指定get，这种情况下都是get。
+            只有当methods属性指定为post的时候才是post请求。
+            剩下所有的请求都是get请求
+
+            post提交的时候提交的数据格式和get还是一样，只不过不在地址栏上显示出来了。
+            post提交的数据还是：name=value&name=value&name=value...
+
+            超链接也可以提交数据给服务器，但是提交的数据都是固定不变的。
+            超链接是get请求，不是post请求
+        -->
+        <form action="http://localhost:8080/jd/register" method="get">
+            <table>
+                <tr>
+                    <td>用户名</td>
+                    <td><input type="text" name="username"/></td>
+                </tr>
+                <tr>
+                    <td>密码</td>
+                    <td><input type="text" name="userpwd"/></td>
+                </tr>
+                <tr>
+                    <td>确认密码</td>
+                    <td>
+                        <input type="text"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>性别</td>
+                    <td>
+                        <!--radio表示单选框，只有当name为同一个属性时,才会出现单选的功能。checked表示默认选项-->
+                        <input type="radio" name="ysc" value="1" checked/>男
+                        <input type="radio" name="ysc" value="0"/>女
+                    </td>
+                </tr>
+                <tr>
+                    <td>兴趣爱好</td>
+                    <td>
+                        <!--checkbox表示复选框，也叫做多选框-->
+                        <input type="checkbox" name="abc" value="smoke"/>抽烟
+                        <input type="checkbox" name="abc" value="drink" checked/>喝酒
+                        <input type="checkbox" name="abc" value="fireHair"/>烫头
+                    </td>
+                </tr>
+                <tr>
+                    <td>学历</td>
+                    <td>
+                        <!--<select><option>标签表示的是选项框。selected表示默认选项-->
+                        <select name="grade">
+                            <option value="gz">高中</option>
+                            <option value="dz">大专</option>
+                            <option value="bk" selected>本科</option>
+                            <option value="yjs">研究生</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>户口</td>
+                    <td>
+                        <!--multiple属性表示下拉列表支持多选。size属性表示在浏览器上列表显示元素条数。在浏览器上按住ctrl键点击鼠标可以多选-->
+                        <select multiple="multiple" size="4">
+                            <option>湖北省</option>
+                            <option>湖南省</option>
+                            <option>安徽省</option>
+                            <option>河南省</option>
+                            <option>东北省</option>
+                            <option>河北省</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>简介</td>
+                    <td>
+                        <!--<textarea>文本域，文本域没有value属性，用户填写内容就是value。rows表示纵高，cols表示横宽-->
+                        <textarea rows="10" cols="60" name="def"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>选择上传的文件</td>
+                    <td>
+                        <!--file控件，文件上传专用-->
+                        <input type="file"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <!--hidden表示隐藏域，网页上看不到，但是表单提交的时候数据会自动提交给服务器,在地址栏上可以看到-->
+                        <input type="hidden" name="userid" value="111"/>用户代码
+                    </td>
+                    <td>
+                        <input type="text" name="usercode"/>
+                        <input type="submit" value="提交"/>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <!--
+                        readonly和disabled相同点，都是只读不能修改
+                        但是readonly可以提交给服务器，disabled数据不会提交(即使有name属性也不会提交)
+                    -->
+                    <td>用户代码</td>
+                    <td>
+                        <input type="text" name="usercode" value="110" readonly/><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>用户姓名</td>
+                    <td>
+                        <input type="text" name="username" value="zhangsan" disabled/>
+                        <input type="submit" value="提交"/>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <!--maxlength设置文本框中可输入的字符数量-->
+                    <td>用户可输入的字符数量</td>
+                    <td>
+                        <input type="text" maxlength="3"/>
+                    </td>
+                </tr>
+                <tr align="center">
+                    <td colspan="2">
+                        <input type="submit" value="注册"/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="reset" value="清空"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+</body>
+</html>

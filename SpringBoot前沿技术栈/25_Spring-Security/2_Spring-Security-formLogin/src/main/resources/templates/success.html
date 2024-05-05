@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+     <p>恭喜你，登陆成功！！！</p>
+
+     <span th:inline="text">[[${token}]]</span><br><br>
+
+     <script type="text/javascript" th:src="@{jquery-3.1.1.min.js}"></script>
+     <script type="text/javascript" th:inline="javascript">  /*不加上这个内敛脚本，无法取到后台数据*/
+         $(function(){
+             $("button").click(function(){
+                 alert([[${token}]]);
+             })
+             localStorage.setItem("token", [[${token}]])
+         })
+     </script>
+     <button>展示数据</button>
+
+     <button>
+         <a th:href="@{/logout}">注销</a>
+     </button>
+</body>
+</html>

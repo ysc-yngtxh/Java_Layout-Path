@@ -1,0 +1,60 @@
+一、入门案例认证流程
+    接口  AbstractAuthenticationProcessingFilter  AuthenticationManager   AuthenticationProvider       UserDetailsService
+    实现类 UsernamePasswordAuthenticationFilter    ProviderManager        DaoAuthenticationProvider   InMemoryUserDetailsManager
+
+    1、提交用户名密码
+    2、通过实现类 UsernamePasswordAuthenticationFilter 封装Authentication对象，这时候最多只有用户名和密码，权限还没有
+    3、调用 ProviderManager 实现类的 authenticate() 方法进行认证
+    4、调用 AuthenticationProvider 实现类的 authenticate() 方法进行委托认证
+    5、调用 InMemoryUserDetailsManager 实现类的 loadUserByUsername() 方法查询用户
+      Ⅰ、根据用户名去查询对应的用户以及这个用户对应的权限信息，InMemoryUserDetailsManager 是在内存中查找
+      Ⅱ、把对应的用户信息包括去权限信息封装成 UserDetails 对象
+    6、返回 UserDetails 对象给实现类 DaoAuthenticationProvider
+      Ⅰ、通过 PasswordEncoder 对比 UserDetails 中的密码和 Authentication 的密码是否正确
+      Ⅱ、如果正确就把 UserDetails 中的权限信息设置到 Authentication 对象中
+    7、返回 Authentication 对象给实现类 UsernamePasswordAuthenticationFilter
+      Ⅰ、如果上一步返回了 Authentication 对象就使用 SecurityContextHolder.getContext().setAuthentication 方法存储该对象
+         其他过滤器会通过 SecurityContextHolder 来获取当前用户信息
+
+
+二、授权：
+     1、需要我们在 UserDetailsService的loadUserByUsername方法中获取到用户的权限信息，
+        再把权限信息封装到 Details 里(通过LoginUser类中的getAuthorities()方法)
+     2、在我们认证成功后(即密码比对后)，我们得到最终的Authentication对象，里面有我们用户的所有信息，
+        并且把这个对象交给SecurityContextHolder.getContext().setAuthentication方法存储
+
+   使用授权注解 @PreAuthorize("hasAuthority('admin')") 表示当前接口需要'admin'权限
+   或者在SecurityConfig类中的SecurityFilterChain方法，加上 .requestMatchers("/code").hasAuthority("admin")
+
+
+三、thymeleaf集成spring security
+    1、需要在html标签上加 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6
+
+    2、<div sec:authorize="!isAuthenticated()"> 表示没登录认证就能显示
+       <div sec:authorize="isAuthenticated()">  表示登录认证了才能显示
+
+    3、<span sec:authentication="principal.username">  表示获取该登录用户的账号
+       <span sec:authentication="principal.authorities"></span>  表示获取该登录用户的权限
+
+    4、<div class="column" sec:authorize="hasRole('vip2')">  表示需要该用户有'vip2'的权限才能显示
+
+
+四、自定义注销
+    1、前端的注销接口可以自己定义，也可以继续使用 /logout。对应SpringSecurity配置的 logoutUrl("/***")，
+       这个只是作为响应的接口，实际不会去执行接口逻辑。实际处理注销逻辑的接口在 logoutSuccessUrl("/***") 中
+
+    2、这里需要注意一下：
+          如果前端注销接口是 /logout，我们就不需要配置 logoutUrl("/logout")。
+          如果是其他的路径，那么就需要在配置加上 logoutUrl("/***")，并且还需要在控制层有响应的路径接口方法
+
+    3、作为自定义注销，是无论如何都要配置 logoutSuccessUrl("/***")，【不配置不就相当于使用原有默认的逻辑吗】
+       并且还需要在控制层提供其 logoutSuccessUrl("/***") 中的路径接口方法，
+
+    4、清除HttpSession，Cookie，用户信息SecurityContextHolder 都已经被Spring security在内部完成了，
+       这里我们不需要做过多的操作。（这里提供一种猜测：控制层的前端注销接口没被调用，是不是在这里做清理了）
+
+
+
+
+
+

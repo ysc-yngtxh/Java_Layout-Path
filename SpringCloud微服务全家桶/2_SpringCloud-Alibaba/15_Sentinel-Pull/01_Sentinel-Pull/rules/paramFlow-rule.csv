@@ -1,0 +1,1 @@
+[{"burstCount":0,"clusterConfig":{"fallbackToLocalWhenFail":true,"sampleCount":10,"thresholdType":0,"windowIntervalMs":1000},"clusterMode":false,"controlBehavior":0,"count":0.0,"durationInSec":1,"grade":1,"limitApp":"default","maxQueueingTimeMs":0,"paramFlowItemList":[],"paramIdx":0,"resource":"ooo"}]

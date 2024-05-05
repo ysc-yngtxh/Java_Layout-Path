@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.thymeleaf.org/thymeleaf-extras-shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+       <!--<guest标签(与@RequiresGuest对应),验证用户没有登录认证或被记住过，验证是否是一个guest的请求-->
+       <shiro:guest><h4>没有登陆</h4></shiro:guest>
+       <!--用户登陆验证后才能显示的标签。否则就会隐藏这条标签-->
+       <shiro:authenticated><h4>登陆成功</h4></shiro:authenticated>
+
+       <a href="/logout">登出</a><br><br><br>
+
+       <a th:href="@{|/admin/test|}">需要有admin角色的功能</a><br><br><br>
+       <a th:href="@{|/admin/test2|}">需要有admin:add权限的功能</a><br><br><br>
+       <a th:href="@{|/user/test|}">需要有user角色的功能</a><br/><br/><br/>
+
+       <button type="button" shiro:authenticated="ture">权限控制</button>
+       <shiro:hasRole name="admin">
+           <button type="button">权限控制</button>
+       </shiro:hasRole>
+
+</body>
+</html>

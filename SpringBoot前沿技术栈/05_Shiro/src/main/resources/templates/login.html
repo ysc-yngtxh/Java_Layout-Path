@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/js/md5.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("#loginBut").click(function(){
+                var v_md5password = $.md5($("#password").val());
+                alert(v_md5password)
+                $("#md5Password").val(v_md5password)
+            })
+        })
+    </script>
+</head>
+<body>
+      <form action="login" method="post">
+          账号<input type="text" name="username"><br>
+          密码<input type="text" id="password"><br>
+          <input type="hidden" name="password" id="md5Password">
+          <input type="submit" value="登录" id="loginBut">
+      </form>
+      <span style="color: red" th:text="${errorMessage}"></span>
+
+</body>
+</html>

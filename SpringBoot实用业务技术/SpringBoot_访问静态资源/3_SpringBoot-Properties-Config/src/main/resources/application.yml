@@ -1,0 +1,17 @@
+
+server:
+  port: 8082
+
+spring:
+  web:
+    resources:
+      # 官方默认静态资源包配置，且优先级逐次变低 static-locations=classpath:/META-INF/resources, classpath:/resources, classpath:/static, classpath:/public
+      static-locations: classpath:/static
+  mvc:
+    # 添加静态资源文件包访问路径前缀
+    static-path-pattern: /resource/prefix/**
+
+  # 上述配置解析：
+  # spring.web.resources.static-locations=classpath:/static 表示默认的四种静态文件包只保留classpath:/static。
+  # spring.mvc.static-path-pattern: /resource/prefix/** 表示为只剩下的classpath:/static资源文件包访问路径添加前缀
+

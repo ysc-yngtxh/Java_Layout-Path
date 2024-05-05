@@ -1,0 +1,4 @@
+rocketmq:
+  name-server: localhost:6789
+  producer:
+    group: boot-producer-group

@@ -1,0 +1,57 @@
+
+server:
+  port: 8095
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring_batch?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: 131474
+    druid:
+      # 连接池配置
+      #初始化连接池的连接数量大小，最小，最大
+      initial-size: 10
+      min-idle: 10
+      max-active: 20
+      #配置获取连接等待超时的时间
+      max-wait: 60000
+      #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 30000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: true
+      test-on-return: false
+      # 是否缓存preparedStatement，也就是PSCache  官方建议MySQL下建议关闭   个人建议如果想用 SQL防火墙 建议打开
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: 20
+  sql:
+    init:
+      # embedded表示只在初始化的时候执行一次  always表示每次重启都会执行  never表示不会去执行
+      mode: never
+      # 表示执行DDL脚本 （这里的路径是spring-batch-core中依赖里的sql脚本，替换成自己的sql脚本也可以）
+      schema-locations: classpath:org/springframework/batch/core/schema-mysql.sql # 或者 classpath:schema-mysql.sql
+      # 表示执行DML脚本 （一些insert、update、delete语句脚本路径）
+      data-locations:
+  batch:
+    job:
+      # 表示启动项目时候默认不开启SpringBatch
+      enabled: false
+
+# mybatis日志打印
+logging:
+  level:
+    com.example: debug
+
+mybatis:
+  #  mybatis的xml文件映射地址
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    default-executor-type: batch
+
+# 配置文件设置文件地址路径
+job:
+  data:
+    path: /19_Spring-Batch/09_Spring-Batch-ComprehensiveCase

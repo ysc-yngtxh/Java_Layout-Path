@@ -1,0 +1,49 @@
+
+一、任务：在线考试管理系统--------------用户信息管理模块
+    子任务：
+          用户信息注册
+          用户信息查询
+          用户信息删除
+          用户信息更新
+    准备工作：
+            1、创建用户信息表 User.frm
+            Create table Users(
+                userId int primary key auto_increment, #用户编号
+                userName varchar(50),                  #用户名称
+                password varchar(50),                  #用户密码
+                sex char(1),                           #用户性别 '男'或者'女'
+                email varchar(50)                      #用户邮箱
+            )
+            2、在src下 com.example.entity.Users 实体类
+            3、在src下 com.example.util.JdbcUtil 工具类【复用】
+                 (在bjpowernode包下新建一个util，再将jdbc连接数据库的工具类导入)
+            4、在web下WEB-INF下创建lib文件夹  存放MySQL提供JDBC实现jar包
+                  (在web下WEB-INF下创建lib文件夹，导入jdbc的jar包-->鼠标在jar包上，右键点击选择Add as Library-->点击ok)
+         遗留问题：
+                 当注册表单什么都不填的时候也能注册成功，如何修改?
+
+二、任务：在线考试管理系统---------试题信息管理模块
+    子任务：
+          添加试题
+          查询试题
+          删除试题
+          更新试题
+    准备工作：
+            1、准备试题信息表：单选题，每道题有4个选项   一个正确答案
+                Create table question(
+                  questionId int primary key auto_increment,
+                  title varchar(50),# 10-8=?
+                  optionA varchar(20),#A: 9
+                  optionB varchar(20),#B: 1
+                  optionC varchar(20),#C: 2
+                  optionD varchar(20),#D: 0
+                  answer char(1)      #正确答案: C
+                )
+            2、com.example.entity.Question
+
+三、任务：随机出题
+    任务描述：用户点击【参加考试】，系统【随机】提取四道考试题，交给用户
+
+四、任务：在线阅卷
+            1、根据用户提供答案与正确答案比较得到用户分数
+            2、将用户分数交给grades.jsp做输出

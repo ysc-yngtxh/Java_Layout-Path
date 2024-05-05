@@ -1,0 +1,30 @@
+
+server:
+  port: 10070
+
+# 数据源配置
+spring:
+  application:
+    name: order_server
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.26.92.110:3306/caoyumin?characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: 131474
+
+rocketmq:
+  producer:
+    isOnOff: on
+    groupName: order_group
+    namesrvAddr: 127.0.0.1:9876
+    maxMessageSize: 4096
+    sendMsgTimeout: 3000
+    retryTimesWhenSendFailed: 2
+  consumer:
+    isOnOff: on
+    groupName: order_group
+    namesrvAddr: 127.0.0.1:9876
+    topics: order~*
+    consumeThreadMin: 20
+    consumeThreadMax: 64
+    consumeMessageBatchMaxSize: 1

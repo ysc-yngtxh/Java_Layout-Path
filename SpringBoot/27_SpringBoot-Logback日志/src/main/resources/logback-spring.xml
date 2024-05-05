@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="10 seconds">
+    <!--输出到控制台-->
+    <appender name="CONSOLE"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <!--此日志 appender 是为开发使用，只配置最底级别，控制台输出的日志级别是大于或等于此级别的日志信息-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>debug</level><!--这里是追加器的输出级别，但是还是以根输出级别为准。根没有界定的话再以追加器为准-->
+        </filter>
+
+        <encoder>
+            <Pattern>%date [%-5p] [%thread] %logger{60} [%file : %line] %msg%n
+            </Pattern>
+            <!--设置字符集-->
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!--输出到日志文件-->
+    <appender name="FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>D:/IDEA/springboot-logback.log</File>
+        <encoder>
+            <pattern>%date %-5p %thread %logger{60} [%file : %line] %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--添加.gz 历史日志会启用压缩 大大缩小日志文件所占空间-->
+            <fileNamePattern>D:/IDEA/springboot-logback.log.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="com.example" level="DEBUG"/>
+
+    <!--根的级别是最高的，这里指定了”INFO“,所以只有当前级别或大于此级别的日志信息才能输出-->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>功能表达式对象</title>
+</head>
+<body>
+      <h1>内置功能对象：需要在标签前加上#</h1>
+      <div th:text="${time}"></div>
+      <div th:text="${#dates.format(time,'yyyy-MM-dd HH:mm:ss SS')}"></div>
+      <div th:text="${data}"></div>
+      <div th:text="${#strings.substring(data,0,10)}"></div>
+      <!--这个内置对象是固定死的，你只需要拿来用就行。
+          例如：dates strings ints folas-->
+</body>
+</html>

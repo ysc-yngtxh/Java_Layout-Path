@@ -1,0 +1,7 @@
+server:
+  port: 9090
+  servlet:
+    context-path: /
+
+# 配置文件只需要一个，但如果要有两个的话。一个后缀为yml，一个后缀为yaml
+# 但如果同时存在的话，框架优先执行properties的配置文件

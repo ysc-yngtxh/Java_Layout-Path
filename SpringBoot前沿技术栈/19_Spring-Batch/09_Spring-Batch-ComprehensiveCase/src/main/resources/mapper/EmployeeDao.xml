@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dao.EmployeeDao">
+
+    <resultMap  id="EmployeeMap" type="com.example.entity.Employee">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="age" column="age" jdbcType="INTEGER"/>
+        <result property="sex" column="sex" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <insert id="save" keyColumn="id" useGeneratedKeys="true" keyProperty="id">
+        insert into employee(id, name, age, sex)
+        values (#{id}, #{name}, #{age}, #{sex})
+    </insert>
+
+    <insert id="saveTemp" keyColumn="id" useGeneratedKeys="true" keyProperty="id">
+        insert into employee_temp(id, name, age, sex)
+        values (#{id}, #{name}, #{age}, #{sex})
+    </insert>
+
+    <delete id="truncateAll">
+        truncate employee
+    </delete>
+
+    <delete id="truncateTemp">
+        truncate employee_temp
+    </delete>
+
+    <select id="selectTemp" resultMap="EmployeeMap">
+        select * from employee_temp where id between #{from} and #{to}  limit #{_pagesize} OFFSET #{_skiprows}
+    </select>
+</mapper>
+

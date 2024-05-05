@@ -1,0 +1,17 @@
+server:
+    port: 8089
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring_batch?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: 131474
+  sql:
+    init:
+      # embedded表示只在初始化的时候执行一次  always表示每次重启都会执行  never表示不会去执行
+      mode: never
+      # 表示执行DDL脚本 （这里的路径是spring-batch-core中依赖里的sql脚本，替换成自己的sql脚本也可以）
+      schema-locations: classpath:org/springframework/batch/core/schema-mysql.sql # 或者 classpath:schema-mysql.sql
+      # 表示执行DML脚本 （一些insert、update、delete语句脚本）
+      data-locations:
+

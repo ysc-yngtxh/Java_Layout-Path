@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>内敛表达式</title>
+</head>
+<body>
+       <div th:text="${data}"></div>
+
+       <h1>内敛文本：th:inline="text"</h1>
+       <div th:inline="text">
+           数据：[[${data}]]
+       </div>
+
+       <h1>内敛脚本</h1>
+       <script type="text/javascript" src="/jquery-3.4.1.js"></script>
+       <script type="text/javascript" th:inline="javascript">  /*不加上这个内敛脚本，无法取到后台数据*/
+           $(function(){
+               $("button").click(function(){
+                   alert([[${data}]]);
+               })
+           })
+       </script>
+       <button th:onclick="inline()">展示数据</button>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>进度条</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+
+<body>
+<div class="progress" style="width: 60%;height: 60px;margin: 0 auto;margin-top: 150px;">
+    <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<div id="message"></div>
+<input type="button" name="" id="btn" value="开始" />
+</body>
+
+<script type="text/javascript">
+    var websocket = null;
+
+    // 判断当前浏览器是否支持WebSocket
+    if('WebSocket' in window){
+        websocket = new WebSocket("ws://localhost:8080/api/websocket/100");
+    }else{
+        alert('Not support websocket')
+    }
+
+    // 连接发生错误的回调方法
+    websocket.onerror = function(){
+        setMessageInnerHTML("发生错误");
+    };
+
+    // 连接成功建立的回调方法
+    websocket.onopen = function(event){
+        setMessageInnerHTML("建立连接");
+    }
+
+    // 接收到消息的回调方法
+    websocket.onmessage = function(event){
+        console.log(event.data)
+        // setMessageInnerHTML(event.data);
+        $(".progress-bar").attr("style", "width:"+event.data+"%")
+    }
+
+    // 连接关闭的回调方法
+    websocket.onclose = function(){
+        setMessageInnerHTML("关闭连接");
+    }
+
+    // 监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+    window.onbeforeunload = function(){
+        alert("已关闭连接");
+        websocket.close();
+    }
+
+    // 将消息显示在网页上
+    function setMessageInnerHTML(innerHTML){
+        document.getElementById('message').innerHTML += innerHTML + '<br/>';
+    }
+
+    // 关闭连接
+    function closeWebSocket(){
+        alert("已关闭连接");
+        websocket.close();
+    }
+    // 开始
+    $("#btn").click(function(){
+        $.ajax({
+            url: "http://localhost:8080/api/socket/jinDuTiao",
+            type:'post',
+            success: function(HTML) { // 返回页面内容
+                console.log(HTML);
+            }
+        });
+    })
+</script>
+</html>

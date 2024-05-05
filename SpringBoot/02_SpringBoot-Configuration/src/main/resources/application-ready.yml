@@ -1,0 +1,6 @@
+
+# 准生产环境配置文件
+server:
+  port: 8082
+  servlet:
+    context-path: /ready

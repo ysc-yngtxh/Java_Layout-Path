@@ -1,0 +1,22 @@
+# 发送普通消息
+POST http://localhost:10070/order
+Content-Type: application/json; charset=UTF-8
+
+{"userId":1,"orderAmout": 2,"messageType": 1}
+
+###
+# 发送事务消息
+POST http://localhost:10070/order
+Content-Type: application/json; charset=UTF-8
+
+{"userId":1,"orderAmout": 20,"messageType": 2}
+
+###
+# 根据用户id查询订单列表
+GET http://localhost:10070/order/1
+
+###
+# 根据订单id查询订单积分信息
+GET http://localhost:10080/points/1470650657383129088
+
+###

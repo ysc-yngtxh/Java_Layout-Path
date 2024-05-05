@@ -1,0 +1,54 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: nacos-gateway
+  cloud:
+    # 网关 gateway 注册到注册中心
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+
+    gateway:
+      # 开启 gateway 在注册中心进行发现其他服务的功能，默认为 false
+      discovery:
+        locator:
+          enabled: true
+      # 当Gateway使用负载均衡找不到实例时(比如实例服务宕机)会出现503错误，而这里设置可以将 503状态码转换为 404
+      # 当然，我们也可以通过继承DefaultErrorAttributes类，来实现状态码管理。但是这样设置两者会冲突，并且优先返回DefaultErrorAttributes类的逻辑。
+      loadbalancer:
+        use404: true
+
+      # 跨域CORS问题的全局解决方案
+#      globalcors:
+#        cors-configurations:
+#          '[/**]':
+#            allowedOrigins: "http://localhost:8081"
+#            allowedMethods:
+#              - GET
+
+      routes:
+        - id: my_route             # 自定义的路由名称
+          # 这里算是yml文件配置式全局过滤器实现负载均衡
+          # Gateway想要实现负载均衡的功能，那么这里跳转的路径写法不再是http://localhost:**** 而得是 lb://服务实例名称
+          # ⚠️：这里的 lb://** 是固定写法，是loadBalancer负载均衡的缩写
+          uri: lb://nacos-consumer
+          predicates:
+            - Path=/consumer/**
+
+        - id: cors_route
+          uri: lb://nacos-provider
+          predicates:
+           - Path=/provider/**
+          # 跨域CORS问题的局部解决方案
+          metadata:
+            cors:
+              allowedOrigins: '*'
+              allowedMethods:
+                - GET
+                - POST
+              allowedHeaders: '*'
+              maxAge: 30

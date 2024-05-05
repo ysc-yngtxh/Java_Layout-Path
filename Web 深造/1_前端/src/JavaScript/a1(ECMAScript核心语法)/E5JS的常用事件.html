@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--null undefined NaN的区别-->
+
+        <script type="text/javascript">
+            alert(typeof null);  // object
+            alert(typeof NaN);   // number
+            alert(typeof undefined); // undefined
+        </script>
+
+<!--等同和全等运算符-->
+        <!--
+            == :等同运算符，只判断值是否相等
+            ===:全等运算符，既判断值是否相等，又判断数据类型是否相等
+        -->
+        <script type="text/javascript">
+            alert(1===true);   // true
+            alert(1===true);   // false
+            alert(null === undefined);  // true
+        </script>
+
+<!--JS中的事件-->
+        <!--
+            *****需要背会，很重要：
+
+            blur失去焦点
+            focus获得焦点
+
+            click鼠标单击
+            dblclick鼠标双击
+
+            keydown键盘按下
+            keyup键盘弹起
+
+            mousedown鼠标按下
+            mouseover鼠标经过
+            mousemove鼠标移动
+            mouseout鼠标离开
+            mouseup鼠标弹起
+
+            reset表单重置
+            submit表单提交
+
+            change下拉列表选中项改变，或文本框内容改变
+            select文本被选定
+            load页面加载完毕(整个HTML页面中所有的元素全部加载完毕之后发生)
+
+            任何一个事件都会对应一个事件句柄，事件句柄是在事件前添加on。
+            onxxx这个事件句柄出现在一个标签的属性位置上。(事件句柄以属性的形式存在)
+        -->
+</body>
+</html>

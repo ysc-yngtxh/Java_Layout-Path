@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>基本表达式对象</title>
+</head>
+<body>
+      <h1>从Session中获取值</h1>
+      <span th:text="${#session.getAttribute('data')}"></span><br>
+      <span th:text="${#httpSession.getAttribute('data')}"></span><br>
+      <span th:text="${session.data}"></span><br>
+
+      <script type="text/javascript" th:inline="javascript">
+          // 获取协议名称
+          var scheme = [[${#request.getScheme()}]];
+          // 获取服务器名称
+          var serverName = [[${#request.getServerName()}]];
+          // 获取服务器端口号
+          var serverPort = [[${#request.getServerPort()}]];
+          // 获取上下文根
+          var contextPath = [[${#request.getContextPath()}]];
+
+          var allPath = scheme+"://"+serverName+":"+serverPort+"/"+contextPath
+          alert(allPath);
+
+          var requestAdd =[[${#httpServletRequest.requestURL}]] + "?" + [[${#httpServletRequest.queryString}]]
+          alert(requestAdd);
+      </script>
+</body>
+</html>

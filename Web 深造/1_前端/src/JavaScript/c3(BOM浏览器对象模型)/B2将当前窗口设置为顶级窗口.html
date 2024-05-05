@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        <script type="text/javascript">
+            // 如果当前窗口不是顶级窗口的话，将当前窗口设置为顶级窗口
+            function setTop() {
+                if(window.top !== window.self){
+                    // window.self.location是B2将当前窗口设置为顶级窗口.html的地址
+                    // 将顶级窗口的window.top.location地址设置为B2将当前窗口设置为顶级窗口.html
+                    window.top.location = window.self.location;
+                }
+            }
+        </script>
+        <input type="button" value="如果当前窗口不是顶级窗口的话，将当前窗口设置为顶级窗口" onclick="setTop()"/>
+
+        <!--作为C3后退和前进对象.html的父窗口-->
+        <iframe src="C3后退和前进对象.html" width="500px" height="500px"></iframe>
+</body>
+</html>

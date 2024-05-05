@@ -1,0 +1,8 @@
+
+spring:
+  strategy:
+    factory:
+      # 充值一个月会员、充值三个月会员、充值六个月会员
+      singleton: 充值六个月会员
+    # 红包、购物券、QQ音乐、WWE体育会员
+    ormap: 购物券

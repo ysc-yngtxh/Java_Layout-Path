@@ -1,0 +1,218 @@
+<!--
+  表单验证
+      (1)用户名不能为空
+      (2)用户名必须在6-14位之间
+      (3)用户名只能由数字和字母组成，不能含有其他符号(正则表达式)
+      (4)密码和确认密码一致，邮箱地址合法
+      (5)统一失去焦点验证
+      (6)错误提示信息统一在span标签中提示，并且要求字体12号，红色
+      (7)文本框再次获得焦点后，清空错误提示信息，如果文本框中数据不合法要求清空文本框的value
+      (8)最终表单中所有项均合法方可提交
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        span{
+            color:red;
+            font-size:12px;
+        }
+    </style>
+</head>
+<body>
+        <!--这个表单提交应该使用post，这里为了检测，所以使用了get。这里的action也可以在script中鼠标单击事件里的获取表单对象后写入-->
+        <form id="userForm" action="http://localhost:8080/se/chanjiaqi" method="get">
+            <table align="center">
+                <tr>
+                    <td>用户名</td>
+                    <td>
+                        <input type="text" name="username" id="username"/>
+                        <span id="usernameEltspan"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>密码</td>
+                    <td><input type="text" name="userpwd" id="userpwd"/></td>
+                </tr>
+                <tr>
+                    <td>确认密码</td>
+                    <td>
+                        <input type="text" id="userped"/>
+                        <span id="ped"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>性别</td>
+                    <td>
+                        <input type="radio" name="ysc" value="1" checked/>男
+                        <input type="radio" name="ysc" value="0"/>女
+                    </td>
+                </tr>
+                <tr>
+                    <td>兴趣爱好</td>
+                    <td>
+                        <input type="checkbox" name="ysc" value="smoke"/>抽烟
+                        <input type="checkbox" name="ysc" value="drink" checked/>喝酒
+                        <input type="checkbox" name="ysc" value="fireHair"/>烫头
+                    </td>
+                </tr>
+                <tr>
+                    <td>学历</td>
+                    <td>
+                        <select name="ysc">
+                            <option value="gz">高中</option>
+                            <option value="dz">大专</option>
+                            <option value="bk" selected>本科</option>
+                            <option value="yjs">研究生</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>向往的城市</td>
+                    <td>
+                        <select name="ysc" multiple="multiple" size="3">
+                            <option>武汉</option>
+                            <option>北京</option>
+                            <option>上海</option>
+                            <option>深圳</option>
+                            <option>广州</option>
+                            <option>珠海</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>简介</td>
+                    <td><textarea rows="10" cols="10" name="def"></textarea></td>
+                </tr>
+                <tr>
+                    <td>邮箱</td>
+                    <td>
+                        <input type="text" id="email"/>
+                        <span id="emailElt"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>选择文件</td>
+                    <td><input type="file"/></td>
+                </tr>
+                <tr align="center">
+                    <td colspan="2">
+                        <input type="button" value="注册" id="submitBtn"/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="reset" value="清空"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        <script type="text/javascript">
+            window.onload = function(){
+<!--用户名验证-->
+                // 获取username文本框对象
+                var usernameElt = document.getElementById("username");
+                // 获取username的span标签
+                var usernameEltspan = document.getElementById("usernameEltspan");
+                // 给用户名文本框绑定blur事件
+                usernameElt.onblur = function() {
+                    // 获取用户名
+                    var username = usernameElt.value;
+                    // 去除前后空白
+                    username = username.trim();
+                    // 判断用户名是否合法
+                    if (username === "") {
+                        usernameEltspan.innerText = "用户名不能为空"
+                    } else {
+                        if(username.length<6 || username.length>14) {
+                            usernameEltspan.innerText = "用户名长度必须在[6-14]之间";
+                        }else {
+                            // 用户名的正则表达式
+                            var regElt = /^[a-zA-Z0-9]{6,14}$/;
+                            if(regElt.test(username)) {
+                                usernameEltspan.innerText = "";   // 用户名最终合法
+                            } else {
+                                usernameEltspan.innerText = "用户名中含有特殊字符"
+                            }
+                        }
+                    }
+                };
+                // 给username这个文本框绑定获得焦点事件
+                usernameElt.onfocus = function() {
+                    if(usernameEltspan.innerText !== ""){
+                        usernameElt.value = "";
+                    }
+                    // 清空span
+                    usernameEltspan.innerText = "";
+                };
+
+<!--密码验证-->
+                // 获取确认密码框对象
+                var userped = document.getElementById("userped");
+                // 获取确认密码的span标签
+                var ped = document.getElementById("ped");
+                // 给确认密码文本框绑定blur事件
+                userped.onblur = function() {
+                    if(document.getElementById("userpwd").value !== userped.value){
+                        ped.innerText = "密码不一致，请重新确认密码";
+                    }
+                };
+                // 给确认密码文本框绑定获得焦点事件
+                userped.onfocus = function(){
+                    if(ped.innerText !== ""){
+                        userped.value = "";
+                    }
+                    ped.innerText = "";
+                };
+
+<!--邮箱验证-->
+                // 获取邮箱对象
+                var email = document.getElementById("email");
+                // 获取邮箱的span标签
+                var emailElt = document.getElementById("emailElt");
+                // 给邮箱文本框绑定blur事件
+                email.onblur = function() {
+                    if(email.value === ""){
+                        emailElt.innerText = "邮箱内容不能为空"
+                    }else{
+                        var emailElt1 = /^[\w][\w\d_]*@\w+\.[A-Za-z]+$/;
+                        if(emailElt1.test(email.value)) {
+                            emailElt.innerText = "";    // 邮箱格式正确
+                        } else {
+                            emailElt.innerText = "邮箱格式错误";
+                        }
+                    }
+                };
+                // 给邮箱文本框绑定获得焦点事件
+                email.onfocus = function() {
+                    if(emailElt.innerText !== "") {
+                        email.value = "";
+                    }
+                    emailElt.innerText = "";
+                };
+
+
+                // 给提交按钮绑定鼠标单击事件
+                var submitBtn = document.getElementById("submitBtn");
+                submitBtn.onclick = function() {
+                    usernameElt.focus();
+                    usernameElt.blur();
+
+                    userped.focus();
+                    userped.blur();
+
+                    email.focus();
+                    email.blur();
+
+                    //当所有表单项都是合法的时候，提交表单
+                    if(usernameEltspan.innerText==="" && ped.innerText==="" && emailElt.innerText==="") {
+                        //获取表单对象
+                        var userForm = document.getElementById("userForm");
+                        //提交表单
+                        userForm.submit();
+                    }
+                }
+            };
+        </script>
+</body>
+</html>

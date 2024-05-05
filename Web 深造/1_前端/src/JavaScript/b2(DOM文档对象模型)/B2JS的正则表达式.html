@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        <!--
+              *正则在线测试工具：https://regexr-cn.com/
+              *正则练习：https://codejiaonang.com/
+
+            1、什么是正则表达式，有什么用？
+                 正则表达式：Regular Expression
+                 正则表达式主要用在字符串格式匹配方面
+
+            2、正则表达式实际上是一门独立的学科，在Java语言中支持，C语言也支持，JavaScript中也支持。
+               大部分编程语言都支持正则表达式，正则表达式最初使用在医学方面，用来表示神经符号等。
+               目前使用最多的是计算机编程领域，用作字符串格式匹配，包括搜索方面等。
+
+            3、正则表达式，对于我们JavaScript变成来说，掌握哪些内容呢？
+                  第一：常见的正则表达式符号要认识
+                  第二：简单的正则表达式要会写
+                  第三：他人编写的正则表达式要能看懂
+                  第四：在JavaScript当中，怎么创建正则表达式对象！(new对象)
+                  第五：在JavaScript当中，正则表达式对象有哪些方法!(调方法)
+                  第六：要能够快速的从网络上找到自己需要的正则表达式，并且测试其有效性
+
+            4、常见的正则表达式符号
+                  . 匹配除换行符以外的任意字符
+                  \w匹配字母或数字或下划线或汉字
+                  \s匹配任意地空白符
+                  \d匹配数字
+                  \b匹配单词的开始或结束
+                  ^ 匹配字符串的开始
+                  $ 匹配字符串的结束
+
+                  *     重复零次或更多次
+                  +     重复一次或更多次
+                  ?     重复零次或一次
+                  {n}   重复n次
+                  {n,}  重复n次或更多次
+                  {n,m} 重复n到m次
+
+                  \W       匹配任意不是字母,数字,下划线,汉字的字符
+                  \S       匹配任意不是空白符的字符
+                  \D       匹配任意非数字的字符
+                  \B       匹配不是单词开头或结束的位置
+                  [^x]     匹配除了x以外的任意字符
+                  [^aeiou] 匹配除了aeiou这几个字母以外的任意字符
+
+                  正则表达式当中的小括号()优先级较高
+                  [1-9]        表示1到9的任意1个数字(次数是1次)
+                  [A-Za-z0-9]  表示A-Za-z0-9中的任意一个字符
+                  [A-Za-z0-9-] 表示A-Z、a-z、0-9、-,以上所有字符中的任意1个字符
+                  |            表示或者
+
+            5、简单的正则表达式要会写
+                  QQ号的正则表达式：^[1-9][0-9]{4,}$   表示的是第一个数字在1-9中任意一个，取4个或者更多的数字在0-9之间
+
+            6、他人编写的正则表达式要能看懂
+                  email正则：^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$
+
+            7、怎么创建正则表达式对象，怎么调用正则表达式对象的方法？
+                  第一种创建方式：
+                      var regExp = /正则表达式/flags;
+                  第二种创建方式：'
+                      var regExp = new RegExp("正则表达式","flags");
+
+                  关于flags：
+                      g:全局匹配
+                      i:忽略大小写
+                      m:多行搜索(ES规范制定之后才支持m)
+
+            8、正则表达式对象的text()方法
+                  可能返回true也有可能返回false = 正则表达式.text(用户填写的字符串);
+                  true：字符串格式匹配成功
+                  false：字符串格式匹配失败
+
+        -->
+
+        <!--验证邮箱-->
+        <input type="text" id="email"/>
+                <span id="emailError" style="color:red;font-size:12px;"></span>
+        <input type="button" value="验证邮箱" id="btn"/><br><br>
+        <!--去除字符串的前后空白-->
+        <input type="text" id="username"/>
+        <input type="button" value="获取用户名" id="brn"/>
+
+        <script type="text/javascript">
+            document.getElementById("email").onfocus = function () {
+                document.getElementById("emailError").innerText = "邮箱地址正在修改";
+            }
+            document.getElementById("email").onkeydown = function (event) {
+                if (event.keyCode === 13) {
+                    alert("正在验证......");
+                }
+            };
+            document.getElementById("btn").onclick = function () {
+                var email = document.getElementById("email").value;
+                var emailRegExp = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+                var ok = emailRegExp.test(email);
+                if (ok) {
+                    document.getElementById("emailError").innerText = "邮箱地址合法";
+                } else {
+                    document.getElementById("emailError").innerText = "邮箱地址不合法";
+                }
+            }
+
+            // 低版本的IE浏览器不支持字符串的trim()函数，怎么办？
+            // 可以自己对String类扩展一个全新的trim()函数
+            String.prototype.trim = function () {
+                // alert("扩展之后的trim方法");
+                // 在当前的方法中的this代表的就是当前字符串
+                return this.replace(/^\s+/, "").replace(/\s+$/, "");
+            };
+
+            // 如今各版本浏览器都支持trim方法,所以现如今也不需要扩展以上trim方法,直接写程序即可
+            window.onload = function() {
+                document.getElementById("brn").onclick = function() {
+                     // 获取用户名
+                     var username = document.getElementById("username").value;
+                     // 去除前后空白
+                     username = username.trim();
+                     // 测试
+                     alert("<--" + username + "-->");
+                }
+            }
+        </script>
+</body>
+</html>

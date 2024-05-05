@@ -1,0 +1,25 @@
+
+server:
+  port: 10086
+
+spring:
+  application:
+    name: eureka-server
+
+# 注册自己
+eureka:
+  client:
+    fetch-registry: true        # 表示是否从Eureka Server获取注册的服务信息
+    register-with-eureka: false # 表示是否将自己注册到Eureka Server
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka/
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+
+# 开启了负载均衡
+ribbon:
+  eager-load:
+    enabled: true
+
+# 打开Eureka视图页面 http://127.0.0.1:10086

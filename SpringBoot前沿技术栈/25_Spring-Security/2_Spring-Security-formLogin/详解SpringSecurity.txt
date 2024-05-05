@@ -1,0 +1,47 @@
+
+一、入门案例认证流程
+    接口  AbstractAuthenticationProcessingFilter  AuthenticationManager  AuthenticationProvider     UserDetailsService
+    实现类 UsernamePasswordAuthenticationFilter    ProviderManager      DaoAuthenticationProvider   InMemoryUserDetailsManager
+
+    1、提交用户名密码
+    2、通过实现类 UsernamePasswordAuthenticationFilter 封装Authentication对象，这时候最多只有用户名和密码，权限还没有
+    3、调用 ProviderManager 实现类的 authenticate() 方法进行认证
+    4、调用 AuthenticationProvider 实现类的 authenticate() 方法进行委托认证
+    5、调用 InMemoryUserDetailsManager 实现类的 loadUserByUsername() 方法查询用户
+      Ⅰ、根据用户名去查询对应的用户以及这个用户对应的权限信息，InMemoryUserDetailsManager 是在内存中查找
+      Ⅱ、把对应的用户信息包括去权限信息封装成 UserDetails 对象
+    6、返回 UserDetails 对象给实现类 DaoAuthenticationProvider
+      Ⅰ、通过 PasswordEncoder 对比 UserDetails 中的密码和 Authentication 的密码是否正确
+      Ⅱ、如果正确就把 UserDetails 中的权限信息设置到 Authentication 对象中
+    7、返回 Authentication 对象给实现类 UsernamePasswordAuthenticationFilter
+      Ⅰ、如果上一步返回了 Authentication 对象就使用 SecurityContextHolder.getContext().setAuthentication 方法存储该对象
+         其他过滤器会通过 SecurityContextHolder 来获取当前用户信息
+
+二、spring security的密码加密理解
+    1、对应的用户信息包括去权限信息封装成 UserDetails 对象。
+    2、通过 PasswordEncoder 对比 UserDetails 中的密码和 Authentication 中的密码是否一致，
+      如果一致则放入 SecurityContextHolder中(密码是否过期、是否锁定等)
+       ①、实际项目中我们不会把密码明文形式存放数据库。默认的 PasswordEncoder 要求数据库密码格式 {id}password ,它会根据id去判断加密方式。
+           比如账号'You shicheng'的密码'{noop}123456'。而Authentication的密码是'123456',比对后登陆成功!
+       ②、但我们一般不会使用这种方式，而是采用 SpringSecurity 为我们提供的 BCryPasswordEncoder 加密方式。
+       ③、定义一个 SpringSecurity 配置类，加上@EnableWebSecurity注解,把 BCryPasswordEncoder 对象注入到Spring容器中，
+          SpringSecurity就会使用该PasswordEncoder对象来进行密码校验。
+    3、如果正确就把UserDetails中的权限信息设置到Authentication中。
+
+
+三、注销
+     1、问题：
+               我在页面的注销按钮提供一个 /logout 路径，但是整个项目我都没有去提供注销的逻辑接口，
+            另外也没有在SpringSecurity中进行过注销的配置。那么这个路径究竟会指向何方呢？
+     2、回答：
+               如果自定义的前端登出接口是 /logout，那么就会使用SpringSecurity的内置接口 /logout
+            内置接口则会执行 logoutUrl("/logout"); 清除HttpSession，Cookie，用户信息SecurityContextHolder 等。
+            还会执行 logoutSuccessUrl("/toLoginForm?logout"); 这里的 /toLoginForm 路径会根据自己的设置的登录路径替换。
+     3、参照：
+           可依照默认SpringSecurity的 LogoutConfigurer 类，不进行注销功能配置，只需要把注销接口设置为 /logout
+
+
+
+
+
+

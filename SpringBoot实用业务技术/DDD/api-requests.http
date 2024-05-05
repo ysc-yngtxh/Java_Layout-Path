@@ -1,0 +1,24 @@
+#发消息
+POST http://localhost:8080/message
+Content-Type: application/json; charset=UTF-8
+
+{"sender":1, "receiver":2, "content":"http://www.baidu.com"}
+
+###
+#撤回消息
+POST http://localhost:8080/message/1/recall
+Content-Type: application/json; charset=UTF-8
+mock-user-id: 1
+
+
+###
+#未读消息
+GET http://localhost:8080/unreadMessageTotal
+Content-Type: application/json; charset=UTF-8
+mock-user-id: 2
+
+###
+#往来消息消息
+GET http://localhost:8080/contact/2/messages
+Content-Type: application/json; charset=UTF-8
+mock-user-id: 1
