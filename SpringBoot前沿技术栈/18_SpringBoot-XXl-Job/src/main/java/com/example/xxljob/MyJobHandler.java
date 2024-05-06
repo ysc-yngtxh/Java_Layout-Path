@@ -26,7 +26,7 @@ public class MyJobHandler {
     public ReturnT<String> myJobHandler(String param) throws Exception{
         XxlJobHelper.log("XXL-JOB, Hello World.");
         log.info("定时任务开始执行。。。。。。");
-        System.out.println("定时任务执行--"+ LocalDateTime.now());
+        System.out.println("定时任务执行--" + LocalDateTime.now());
         return ReturnT.SUCCESS;
     }
 }
