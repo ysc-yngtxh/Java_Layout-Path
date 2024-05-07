@@ -43,4 +43,11 @@
           </trim>
       </foreach>
   </insert>
+    <!--
+        useGeneratedKeys = true 这个表示插入数据之后返回一个自增的主键id给你对应实体类中的主键属性。
+                                通过这个设置可以解决在主键自增的情况下通过实体的getter方法获取主键
+                               （当然还需要keyProperty指明数据库中返回的主键id给实体类中的哪个属性）。
+        keyProperty = 主键，表示查询结果赋值给代码中的哪个属性
+        一般来说，加上这两个设置后。#{id}就可以删掉
+    -->
 </mapper>

@@ -12,22 +12,28 @@ import java.util.List;
 /**
  * @author 游家纨绔
  */
-@CacheNamespace(implementation = PerpetualCache.class)
+// @CacheNamespace(implementation = PerpetualCache.class)
 public interface StudentDao {
 
-    // 动态SQL，使用Java对象作为参数
+    // <if>标签使用。动态SQL，使用Java对象作为参数
     List<Student> selectStudentIf(Student student);
 
-    // where使用
+    // <where>标签使用
     List<Student> selectStudentWhere(Student student);
 
-    // foreach使用--用法1
+    // <trim>标签使用
+    List<Student> selectStudentTrim(Student student);
+
+    // <choose>标签使用
+    List<Student> selectStudentChoose(Student student);
+
+    // <foreach>标签--用法1
     List<Student> selectForEachOne(List<Integer> idList);
 
-    // foreach使用--用法2
+    // <foreach>标签--用法2
     List<Student> selectForEachTwo(Integer[] stuArray);
 
-    // foreach使用--用法3
+    // <foreach>标签--用法3
     List<Student> selectForEachThree(@Param("stuList") List<Student> stuList);
 
     // 使用pageHelper分页数据

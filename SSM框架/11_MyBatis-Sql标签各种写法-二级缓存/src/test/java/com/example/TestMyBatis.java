@@ -13,7 +13,7 @@ import java.util.List;
 
 public class TestMyBatis {
 
-    // if语句的使用
+    // <if>标签语句的使用
     @Test
     public void testSelectLikeOne(){
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
@@ -29,7 +29,7 @@ public class TestMyBatis {
         sqlSession.close();
     }
 
-    // where配合if语句的使用
+    // <where>标签配合<if>语句的使用
     @Test
     public void testSelectLikeTwo(){
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
@@ -45,7 +45,38 @@ public class TestMyBatis {
         sqlSession.close();
     }
 
-    // foreach在不写配置文件情况下
+    // <trim>标签的使用，替代<where>、<set>
+    @Test
+    public void selectStudentTrim(){
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+        StudentDao dao = sqlSession.getMapper(StudentDao.class);
+
+        Student student = new Student();
+        student.setName("李四");
+        student.setAge(18);
+        List<Student> students = dao.selectStudentTrim(student);
+        for (Student stu : students) {
+            System.out.println("trim===" + stu);
+        }
+        sqlSession.close();
+    }
+
+    // <choose>标签的使用
+    @Test
+    public void selectStudentChoose(){
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+        StudentDao dao = sqlSession.getMapper(StudentDao.class);
+
+        Student student = new Student();
+        student.setAge(18);
+        List<Student> students = dao.selectStudentChoose(student);
+        for (Student stu : students) {
+            System.out.println("choose===" + stu);
+        }
+        sqlSession.close();
+    }
+
+    // foreach，利用代码方式遍历数据组装Sql。
     @Test
     public void testFor(){
         List<Integer> list = new ArrayList<>();
@@ -69,7 +100,7 @@ public class TestMyBatis {
         System.out.println("sql==" + sql);
     }
 
-    // foreach 用法1
+    // <foreach>标签 用法1
     @Test
     public void testForEachOne(){
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
@@ -86,7 +117,7 @@ public class TestMyBatis {
         }
     }
 
-    // foreach 用法2
+    // <foreach>标签 用法2
     @Test
     public void testForEachTwo(){
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
@@ -100,7 +131,7 @@ public class TestMyBatis {
         }
     }
 
-    // foreach 用法3
+    // <foreach>标签 用法3
     @Test
     public void testForEachThree(){
         SqlSession sqlSession = MyBatisUtils.getSqlSession();

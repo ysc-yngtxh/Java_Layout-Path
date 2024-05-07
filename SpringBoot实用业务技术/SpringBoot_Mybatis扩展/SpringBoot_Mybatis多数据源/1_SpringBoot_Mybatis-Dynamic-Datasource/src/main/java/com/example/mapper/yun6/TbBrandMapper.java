@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.type.JdbcType;
 
 import java.util.List;
@@ -50,4 +51,14 @@ public interface TbBrandMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     @Insert("insert into yun6.tb_brand(name, image, letter) values(#{brand.name}, #{brand.image}, #{brand.letter})")
     void insertNameAndLetter(@Param("brand") TbBrand brand);
+
+    /**
+     * @SelectKey用法 其实就相当于我们在xml文件中 <insert></insert> 头部标签的属性配置
+     * selectKey的statement属性是SQL语句，before属性表示是否在执行insert语句之前执行selectKey语句，
+     * resultType属性表示返回的结果类型，keyProperty属性表示将返回的结果赋值给实体类中的哪个属性。
+     * last_insert_id()函数是获取数据库中下一个主键值。
+     */
+    @SelectKey(statement = "select last_insert_id()", keyProperty = "id", before = true, resultType = Integer.class)
+    @Insert("insert into yun6.tb_brand(name, image, letter) values(#{brand.name}, #{brand.image}, #{brand.letter})")
+    void insertNameAndSelectKey(@Param("brand") TbBrand brand);
 }

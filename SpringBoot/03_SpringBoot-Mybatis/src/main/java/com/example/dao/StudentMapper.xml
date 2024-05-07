@@ -23,7 +23,7 @@
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />/*你看，在这里就没有查询字段，而是采用SQL语句片段*/
+    <include refid="Base_Column_List" /><!--这里就没有查询字段，而是采用SQL语句片段-->
     from student
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -34,8 +34,7 @@
   </delete>
 
   <insert id="insert" parameterType="com.example.domain.Student">
-    insert into student (id, name, email, 
-      age)
+    insert into student (id, name, email, age)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{age,jdbcType=INTEGER})
   </insert>
@@ -92,8 +91,8 @@
   <update id="updateByPrimaryKey" parameterType="com.example.domain.Student">
     update student
     set name = #{name,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      age = #{age,jdbcType=INTEGER}
+        email = #{email,jdbcType=VARCHAR},
+        age = #{age,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

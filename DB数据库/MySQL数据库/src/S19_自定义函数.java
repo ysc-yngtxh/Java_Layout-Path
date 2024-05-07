@@ -1,0 +1,17 @@
+/**
+ * @author 游家纨绔
+ * @dateTime 2024-05-07 07:47
+ * @apiNote TODO
+ */
+
+/* --TODO 定义函数 NEXTVAL
+CREATE DEFINER=`root`@`%` FUNCTION `NEXTVAL`() RETURNS BIGINT(20) DETERMINISTIC
+BEGIN
+DECLARE current BIGINT;
+INSERT INTO TPL_SEQ_PROPERTY_S(SEQ_NAME) VALUES ('SEQ');
+SELECT LAST_INSERT_ID() INTO current;
+RETURN current;
+END
+*/
+public class S19_自定义函数 {
+}

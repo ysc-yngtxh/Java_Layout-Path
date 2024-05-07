@@ -37,8 +37,7 @@ public class Example implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        // 方法一：正常if判断
-        //        不方便修改，可维护性低。
+        // 存在冗余问题：正常if判断。不方便修改，可维护性低。
         switch (resourceType) {
             case "红包":
                 logger.info("查询红包的派发方式");
@@ -55,7 +54,7 @@ public class Example implements CommandLineRunner {
         }
 
 
-        // 方法二：策略模式
+        // 方法一：策略模式
         //        可维护性会好不少
         switch (resourceType) {
             case "红包":
@@ -73,7 +72,7 @@ public class Example implements CommandLineRunner {
         }
 
 
-        // 方法三：策略模式加工厂单例模式
+        // 方法二：策略模式加工厂单例模式
         //        策略模式通过接口、实现类、逻辑分派来完成，把 if语句块的逻辑抽出来写成一个类，更好维护。
         //        工厂单例模式便于获取业务列表，避免多次加载业务数据，即static代码块
         VipRechargeStrategy strategy = VipRechargeFactory.getInstance().getConcurrentStrategy(rechargeType);
@@ -83,7 +82,7 @@ public class Example implements CommandLineRunner {
         strategy.recharge(rechargeType);
 
 
-        // 方法四：策略模式加函数式接口
+        // 方法三：策略模式加函数式接口
         //        策略模式通过接口、实现类、逻辑分派来完成，把 if语句块的逻辑抽出来写成一个类，更好维护。
         //        Map+函数式接口通过Map.get(key)来代替 if-else的业务分派，避免策略模式带来的类增多、难以俯视整个业务逻辑的问题。
         String result = queryGrantTypeService.getResult(resourceType);

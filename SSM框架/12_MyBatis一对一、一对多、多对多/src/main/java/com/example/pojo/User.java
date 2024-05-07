@@ -34,4 +34,5 @@ public class User implements Serializable {
 
   2. mybatis解决问题的方式不同
        a. sql中是用外键建立表关系
-       b. mybatis中用属性 */
+       b. mybatis中用属性
+*/

@@ -102,7 +102,7 @@
      ![img_21](src/main/resources/static/img_21.png)
 
    [3]、终端会自动记录下每次调用方法的环境现场
-   ![img_23](src/main/resources/static/img_23.png)
+     ![img_23](src/main/resources/static/img_23.png)
 
    [4]、显示 tt 命令记录的时间片段
    - tt -l

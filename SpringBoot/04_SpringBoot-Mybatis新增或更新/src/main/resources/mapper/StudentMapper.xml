@@ -12,7 +12,7 @@
 
     <!--TODO 在实际开发中插入时可能存在数据重复问题，需要忽略或替换掉重复的数据
             （依据某个字段，比如Primary Key或Unique Key来确定是否重复）
-            Mysql中有两种方式可以实现：①、replace into     ②、on duplicate key update(推荐)-->
+             Mysql中有两种方式可以实现：①、replace into     ②、on duplicate key update(推荐)-->
 
     <!--REPLACE INTO student(`id`, `name`, `email`, `age`) VALUES ( 1, "XiaoCao", "123@163.com", 25 )
         REPLACE INTO的功能是替代，即：如果有重复(主键或者唯一索引重复)的话就先删除，然后再插入；如果没有重复的则新增
