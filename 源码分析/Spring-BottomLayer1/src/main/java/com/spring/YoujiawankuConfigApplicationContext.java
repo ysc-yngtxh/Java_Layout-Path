@@ -1,6 +1,12 @@
 package com.spring;
 
 import com.example.service.UserService;
+import com.spring.annatation.Autowired;
+import com.spring.annatation.Component;
+import com.spring.annatation.ComponentScan;
+import com.spring.annatation.Scope;
+import com.spring.interfaces.BeanNameAware;
+import com.spring.interfaces.InitializingBean;
 import lombok.SneakyThrows;
 
 import java.io.File;

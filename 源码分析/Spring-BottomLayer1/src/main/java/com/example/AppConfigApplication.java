@@ -1,6 +1,6 @@
 package com.example;
 
-import com.spring.ComponentScan;
+import com.spring.annatation.ComponentScan;
 
 /**
  * @author 游家纨绔
@@ -8,5 +8,5 @@ import com.spring.ComponentScan;
  * @apiNote TODO
  */
 @ComponentScan("com.example.service")
-public class AppConfig {
+public class AppConfigApplication {
 }

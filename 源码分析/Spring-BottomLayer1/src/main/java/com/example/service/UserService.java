@@ -1,10 +1,10 @@
 package com.example.service;
 
-import com.spring.Autowired;
-import com.spring.BeanNameAware;
-import com.spring.Component;
-import com.spring.InitializingBean;
-import com.spring.Scope;
+import com.spring.annatation.Autowired;
+import com.spring.interfaces.BeanNameAware;
+import com.spring.annatation.Component;
+import com.spring.interfaces.InitializingBean;
+import com.spring.annatation.Scope;
 
 /**
  * @author 游家纨绔
