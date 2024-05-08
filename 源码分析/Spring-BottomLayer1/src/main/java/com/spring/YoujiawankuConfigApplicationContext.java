@@ -1,13 +1,16 @@
 package com.spring;
 
+import com.example.service.UserService;
 import lombok.SneakyThrows;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author 游家纨绔
@@ -27,12 +30,14 @@ public class YoujiawankuConfigApplicationContext {
         // 流程：解析配置类
         // [ ComponentScan注解 ---> 扫描路径 ---> 扫描 ---> BeanDefinition ---> BeanDefinitionMap]
 
+        // 扫描
         scan(rootClass);
 
+        // 实例化Bean，并注册到单例池中
         for (Map.Entry<String, BeanDefinition> entry : beanDefinitionMap.entrySet()) {
             BeanDefinition beanDefinition = entry.getValue();
             if (beanDefinition.getScope().equals("singleton")) {
-                Object bean = createBean(beanDefinition); // 单例 Bean
+                Object bean = createBean(entry.getKey(), beanDefinition); // 单例 Bean
                 singletonBeanMap.put(entry.getKey(), bean);
             }
         }
@@ -41,21 +46,42 @@ public class YoujiawankuConfigApplicationContext {
     }
 
     @SneakyThrows
-    private Object createBean(BeanDefinition beanDefinition) {
+    private Object createBean(String beanName, BeanDefinition beanDefinition) {
         Class<?> clazz = beanDefinition.getClazz();
-        return clazz.getDeclaredConstructor().newInstance();
+        Object instance = clazz.getDeclaredConstructor().newInstance();
+        // 属性(依赖)注入
+        for (Field field : clazz.getDeclaredFields()) {
+            if (field.isAnnotationPresent(Autowired.class)) {
+                // 在这里可以处理 byName、byType 注入；这里只是简单实现 byName
+                Object bean = getBean(field.getName());
+                if (Objects.isNull(bean)) {
+                    throw new NullPointerException("该类没有找到对应的 Bean");
+                }
+                field.setAccessible(true);
+                field.set(instance, bean);
+            }
+        }
+
+        // Aware回调
+        if (instance instanceof BeanNameAware) {
+            ((UserService) instance).setBeanName(beanName);
+        }
+
+        // 初始化
+        if (instance instanceof InitializingBean) {
+            ((UserService) instance).afterPropertiesSet();
+        }
+
+        return instance;
     }
 
     @SneakyThrows
     private void scan(Class<?> rootClass) {
         // TODO 1、通过获取 @ComponentScan 注解，获取扫描路径
-
-        // 获取配置类上的 @ComponentScan 注解，从而获取扫描路径
         ComponentScan componentScan = rootClass.getDeclaredAnnotation(ComponentScan.class);
         String scanPath = componentScan.value();
 
         // TODO 2、扫描路径下的所有类
-
         // 获取当前类加载器
         ClassLoader classLoader = YoujiawankuConfigApplicationContext.class.getClassLoader();
         // 通过类加载器获取扫描路径的下的资源 URL (绝对地址)
@@ -112,7 +138,7 @@ public class YoujiawankuConfigApplicationContext {
             if (beanDefinition.getScope().equals("singleton")) {
                 return singletonBeanMap.get(beanName);
             } else {
-                return createBean(beanDefinition);
+                return createBean(beanName, beanDefinition);
             }
         } else {
             throw new NullPointerException("BeanDefinition 不存在, 请检查配置类是否正确");
