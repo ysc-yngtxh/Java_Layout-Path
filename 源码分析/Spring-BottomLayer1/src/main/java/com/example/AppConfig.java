@@ -7,6 +7,6 @@ import com.spring.ComponentScan;
  * @dateTime 2024-05-07 23:18
  * @apiNote TODO
  */
-@ComponentScan("com.example")
+@ComponentScan("com.example.service")
 public class AppConfig {
 }
