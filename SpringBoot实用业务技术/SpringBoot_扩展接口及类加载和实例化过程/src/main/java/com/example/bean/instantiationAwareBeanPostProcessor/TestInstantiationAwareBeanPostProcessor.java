@@ -6,8 +6,8 @@ import org.springframework.beans.factory.config.InstantiationAwareBeanPostProces
 
 public class TestInstantiationAwareBeanPostProcessor implements InstantiationAwareBeanPostProcessor {
 
-    // TODO BeanPostProcess接口只在bean的初始化阶段进行扩展（注入spring上下文前后），
-    //      而InstantiationAwareBeanPostProcessor接口在此基础上增加了3个方法，
+    // TODO BeanPostProcess 接口只在bean的初始化阶段进行扩展（注入spring上下文前后），
+    //      而 InstantiationAwareBeanPostProcessor 接口在此基础上增加了3个方法，
     //      把可扩展的范围增加了实例化阶段和属性注入阶段。
 
     // 实例化bean之前，相当于new这个bean之前
