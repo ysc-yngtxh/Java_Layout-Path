@@ -15,4 +15,13 @@ public class SpringBootAopApplication {
         SpringApplication.run(SpringBootAopApplication.class, args);
     }
 
+    /*
+      @EnableAspectJAutoProxy --> AspectJAutoProxyRegistrar.class --> AopConfigUtils.registerAspectJAnnotationAutoProxyCreatorIfNecessary(registry);
+      return registerAspectJAnnotationAutoProxyCreatorIfNecessary(registry, (Object)null); --> AnnotationAwareAspectJAutoProxyCreator .class
+      extends AspectJAwareAdvisorAutoProxyCreator --> extends AbstractAdvisorAutoProxyCreator
+      extends AbstractAutoProxyCreator --> implements SmartInstantiationAwareBeanPostProcessor
+      extends InstantiationAwareBeanPostProcessor --> extends BeanPostProcessor
+
+      一圈下来，你会发现开启 Aop 功能，实际上就是实现 BeanPostProcessor 类的初始化Bean扩展点
+    */
 }

@@ -1,6 +1,6 @@
 package com.example.demo1;
 
-import com.example.spring.annatation.ComponentScan;
+import com.example.spring.annotation.ComponentScan;
 
 /**
  * @author 游家纨绔
@@ -8,5 +8,5 @@ import com.example.spring.annatation.ComponentScan;
  * @apiNote TODO 扫描 demo1 的 service 包路径
  */
 @ComponentScan("com.example.demo1.service")
-public class AppConfigApplication1 {
+public class AppScanPath1 {
 }

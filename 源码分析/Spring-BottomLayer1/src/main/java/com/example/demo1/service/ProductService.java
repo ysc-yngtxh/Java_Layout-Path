@@ -1,7 +1,7 @@
 package com.example.demo1.service;
 
-import com.example.spring.annatation.Component;
-import com.example.spring.annatation.Scope;
+import com.example.spring.annotation.Component;
+import com.example.spring.annotation.Scope;
 
 /**
  * @author 游家纨绔
@@ -10,6 +10,6 @@ import com.example.spring.annatation.Scope;
  */
 @Component("userService1")
 @Scope("protoType")
-public class UserService1 {
+public class ProductService {
 
 }

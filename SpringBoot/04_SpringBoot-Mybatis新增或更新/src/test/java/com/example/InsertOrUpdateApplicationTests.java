@@ -14,6 +14,7 @@ class InsertOrUpdateApplicationTests {
 
     @Autowired
     private StudentService studentService;
+
     @Test
     void contextLoads() {
         Student student = studentService.queryStudentByIdCacheL1(1);

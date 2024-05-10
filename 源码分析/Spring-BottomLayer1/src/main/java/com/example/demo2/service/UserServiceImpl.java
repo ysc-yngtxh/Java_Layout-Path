@@ -1,10 +1,10 @@
 package com.example.demo2.service;
 
-import com.example.spring.annatation.Component;
+import com.example.spring.annotation.Component;
 import com.example.spring.interfaces.BeanNameAware;
 import com.example.spring.interfaces.InitializingBean;
-import com.example.spring.annatation.Autowired;
-import com.example.spring.annatation.Scope;
+import com.example.spring.annotation.Autowired;
+import com.example.spring.annotation.Scope;
 import lombok.Setter;
 
 /**
@@ -12,9 +12,9 @@ import lombok.Setter;
  * @dateTime 2024-05-08 20:25
  * @apiNote TODO
  */
-@Component("userService2")
+@Component("userServiceImpl")
 @Scope("protoType")
-public class UserService2 implements BeanNameAware, InitializingBean {
+public class UserServiceImpl implements UserService, BeanNameAware, InitializingBean {
 
     @Autowired
     private OrderService orderService;
@@ -22,6 +22,7 @@ public class UserService2 implements BeanNameAware, InitializingBean {
     @Setter
     private String name;
 
+    @Override
     public void test() {
         System.out.println("orderService = " + orderService);
         // 比如说我们希望在当前类中获取到 Bean 的名称并打印。那么可以通过 Aware 回调实现
