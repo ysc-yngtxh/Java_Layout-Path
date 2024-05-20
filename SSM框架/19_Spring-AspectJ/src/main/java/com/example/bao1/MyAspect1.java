@@ -60,6 +60,11 @@ public class MyAspect1 {
      */
     @Before(value="execution(void com.example.bao1.SomeServiceImpl.doSome(String, Integer))")
     public void myBefore4(JoinPoint jp){
+        // 获取的是实际的目标类
+        System.out.println("Aop底层实现为动态代理，因此代理的目标类为：" + jp.getTarget().getClass().getName());
+        // 获取的是代理类
+        System.out.println("Aop底层实现为动态代理，因此代理类为：" + jp.getThis().getClass().getName());
+
         // 获取方法的完整定义
         System.out.println("方法的签名(定义)=" + jp.getSignature());
         System.out.println("方法的名称=" + jp.getSignature().getName());

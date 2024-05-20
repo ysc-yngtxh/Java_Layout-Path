@@ -47,6 +47,11 @@ public class MyAspect3 {
      */
     @Around(value="execution(* *..FirstServiceImpl.First(..))")
     public Object myAround(ProceedingJoinPoint pjp) throws Throwable {
+        // 获取的是实际的目标类
+        System.out.println("Aop底层实现为动态代理，因此代理的目标类为：" + pjp.getTarget().getClass().getName());
+        // 获取的是代理类
+        System.out.println("Aop底层实现为动态代理，因此代理类为：" + pjp.getThis().getClass().getName());
+
         String name = null;
         // 获取第一个参数值
         Object[] args = pjp.getArgs();
