@@ -26,7 +26,7 @@ public class 线程14_实现线程的第三种方式 {
             }
         });
 
-        //创建线程对象
+        // 创建线程对象
         Thread t = new Thread(task);
         t.start();
 

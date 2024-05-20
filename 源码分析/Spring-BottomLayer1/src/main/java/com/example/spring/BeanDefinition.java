@@ -7,7 +7,9 @@ package com.example.spring;
  */
 public class BeanDefinition {
 
+    // Bean的类对象
     private Class<?> clazz;
+    // Bean的作用域
     private String scope;
 
     public Class<?> getClazz() {

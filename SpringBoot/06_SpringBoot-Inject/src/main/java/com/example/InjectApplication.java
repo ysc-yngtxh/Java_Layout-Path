@@ -1,15 +1,20 @@
 package com.example;
 
+import com.example.config.UserService;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 @MapperScan("com.example.dao")
 public class InjectApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(InjectApplication.class, args);
+		ConfigurableApplicationContext applicationContext = SpringApplication.run(InjectApplication.class, args);
+		// 获取容器里面的对象，并调用方法测试属性是否完成自动注入
+		UserService userService = applicationContext.getBean("userService", UserService.class);
+		userService.test();
 	}
 
 	// TODO

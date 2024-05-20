@@ -27,9 +27,11 @@ import java.util.Objects;
  */
 public class ConfigApplicationContext2 {
 
+    // 配置类
     private Class<?> rootClass;
 
-    private Map<String, Object> singletonBeanMap = new HashMap<>();  // 单例池
+    // 单例池
+    private Map<String, Object> singletonBeanMap = new HashMap<>();
     private Map<String, BeanDefinition> beanDefinitionMap = new HashMap<>();
     private List<BeanPostProcessor> beanPostProcessorList = new ArrayList<>();
 

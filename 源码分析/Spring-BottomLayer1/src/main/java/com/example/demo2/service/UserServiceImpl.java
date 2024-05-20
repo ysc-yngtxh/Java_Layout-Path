@@ -10,7 +10,7 @@ import lombok.Setter;
 /**
  * @author 游家纨绔
  * @dateTime 2024-05-08 20:25
- * @apiNote TODO
+ * @apiNote TODO 模拟引用注入
  */
 @Component("userServiceImpl")
 @Scope("protoType")
@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService, BeanNameAware, Initializing
     @Setter
     private String name;
 
+    // UserService接口的实现方法
     @Override
     public void test() {
         System.out.println("orderService = " + orderService);
@@ -29,11 +30,13 @@ public class UserServiceImpl implements UserService, BeanNameAware, Initializing
         System.out.println("beanName = " + name);
     }
 
+    // BeanNameAware接口的实现方法
     @Override
     public void setBeanName(String beanName) {
         this.name = beanName;
     }
 
+    // InitializingBean接口的实现方法
     @Override
     public void afterPropertiesSet() throws Exception {
         System.out.println("初始化～");

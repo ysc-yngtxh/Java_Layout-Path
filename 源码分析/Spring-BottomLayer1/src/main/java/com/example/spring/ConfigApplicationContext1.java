@@ -19,9 +19,11 @@ import java.util.Map;
  */
 public class ConfigApplicationContext1 {
 
+    // 配置类
     private Class<?> rootClass;
 
-    private Map<String, Object> singletonBeanMap = new HashMap<>();  // 单例池
+    // 单例池
+    private Map<String, Object> singletonBeanMap = new HashMap<>();
     private Map<String, BeanDefinition> beanDefinitionMap = new HashMap<>();
 
     public ConfigApplicationContext1(Class<?> rootClass) {
@@ -37,14 +39,14 @@ public class ConfigApplicationContext1 {
         for (Map.Entry<String, BeanDefinition> entry : beanDefinitionMap.entrySet()) {
             BeanDefinition beanDefinition = entry.getValue();
             if (beanDefinition.getScope().equals("singleton")) {
-                Object bean = createBean(entry.getKey(), beanDefinition); // 单例 Bean
+                Object bean = createBean(beanDefinition); // 单例 Bean
                 singletonBeanMap.put(entry.getKey(), bean);
             }
         }
     }
 
     @SneakyThrows
-    private Object createBean(String beanName, BeanDefinition beanDefinition) {
+    private Object createBean(BeanDefinition beanDefinition) {
         Class<?> clazz = beanDefinition.getClazz();
         return clazz.getDeclaredConstructor().newInstance();
     }
@@ -115,7 +117,7 @@ public class ConfigApplicationContext1 {
             if (beanDefinition.getScope().equals("singleton")) {
                 return singletonBeanMap.get(beanName);
             } else {
-                return createBean(beanName, beanDefinition);
+                return createBean(beanDefinition);
             }
         } else {
             throw new NullPointerException("BeanDefinition 不存在, 请检查配置类是否正确");

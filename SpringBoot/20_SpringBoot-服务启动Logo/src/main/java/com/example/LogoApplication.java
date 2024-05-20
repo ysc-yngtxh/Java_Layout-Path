@@ -24,7 +24,7 @@ public class LogoApplication {
 
 
         // 修改Logo
-        // SpringApplication.run(LogoApplication.class,args);
+        // SpringApplication.run(LogoApplication.class, args);
         // 在resources包下创建一个banner.txt文件，然后将你的Logo放入这个文件中，随后启动就OK
 
         // 修改Logo的网址：http://patorjk.com/software/taag/  和  https://www.bootschool.net/ascii

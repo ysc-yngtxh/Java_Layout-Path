@@ -12,7 +12,7 @@ import java.lang.reflect.Proxy;
  * @dateTime 2024-05-09 06:26
  * @apiNote TODO
  */
-@Component("youBeanPostProcessor")
+@Component("viewBeanPostProcessor")
 public class ViewBeanPostProcessor implements BeanPostProcessor {
 
     // Bean初始化前后的后置处理
