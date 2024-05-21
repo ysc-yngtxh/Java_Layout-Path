@@ -23,6 +23,7 @@ public class JavaOneApplication {
 
         // 从spring容器中获取指定bean对象
         StudentService studentService = (StudentService) applicationContext.getBean("studentServiceImpl");
+        // StudentService studentService1 = applicationContext.getBean("studentServiceImpl", StudentService.class);
 
         // 调用业务方法
         String sayHello = studentService.sayHello();
