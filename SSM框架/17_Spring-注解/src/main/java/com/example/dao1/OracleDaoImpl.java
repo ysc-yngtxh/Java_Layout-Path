@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 public class OracleDaoImpl implements UserDao {
     @Override
     public void insertUser(SysUser user) {
-        System.out.println("oracle 的insertUser " + user);
+        System.out.println("user插入到oracle数据库" + user);
     }
 }

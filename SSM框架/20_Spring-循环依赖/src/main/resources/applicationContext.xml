@@ -14,7 +14,7 @@
 
 
     <!-- TODO 构造器注入 发生在 实例化阶段，而 Spring 解决循环依赖问题依靠的 三级缓存 在 属性注入阶段
-              也就是说调用构造函数时还未能放入三级缓存中，所以无法解决 构造器注入 的循环依赖问题。-->
+              也就是说，调用构造函数时还未能放入三级缓存中，所以无法解决 构造器注入 的循环依赖问题。-->
     <!--<bean id="aService" class="com.example.service.AService">-->
     <!--    <constructor-arg name="bService" ref="bService"/>-->
     <!--</bean>-->

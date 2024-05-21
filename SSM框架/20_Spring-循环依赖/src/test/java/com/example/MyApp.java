@@ -6,7 +6,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class MyApp {
     @Test
     public void test() {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        String xmlPath = "applicationContext.xml";
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(xmlPath);
         System.out.println(context.getBean("aService"));
     }
 }
