@@ -24,12 +24,6 @@ public class SpringBottomLayer2Application {
         // 创建一个ApplicationContext容器，用于管理Spring bean的生命周期。
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringBottomLayer2Application.class);
 
-        // 在同一个应用程序中同时使用 AnnotationConfigApplicationContext 和 SpringApplication.run 可能会导致冲突.
-        // 因为它们都是用来初始化 Spring 应用上下文的方法。通常情况下，你只需要使用其中一种方法。
-        // 如果你需要自定义 Spring 上下文的初始化过程，你可以使用 AnnotationConfigApplicationContext；
-        // 而如果你想要使用 Spring Boot 的自动配置和默认行为，你可以使用 SpringApplication.run。
-        SpringApplication.run(SpringBottomLayer2Application.class, args); // 注意：
-
         // registerBean方法允许注册一个bean定义，可以配置bean的类、构造函数参数、作用域和其他属性。
         // 使用registerBean方法注册的bean可以在ApplicationContext容器中注入其他依赖、使用Autowiring等Spring功能。
         applicationContext.registerBean("hello", Hello.class);
