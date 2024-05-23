@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>05_SpringBoot-Mybatis3</artifactId>
     <version>1.0.0</version>
-    <name>05_SpringBoot-Mybatis大数据量查询慢问题</name>
-    <description>05_SpringBoot-Mybatis大数据量查询慢问题</description>
+    <name>05_SpringBoot-Mybatis大数据量查询及插入慢问题</name>
+    <description>05_SpringBoot-Mybatis大数据量查询及插入慢问题</description>
 
     <properties>
         <java.version>1.8</java.version>

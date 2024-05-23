@@ -43,10 +43,10 @@ public class MyAspect1 {
         System.out.println("2==前置通知，切面功能：在目标方法之前输出执行时间" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(new Date()));
     }
 
-    /*  @Before("execution(* do*(..))")   // 精简写法,这种写法很容易被其他测试类调用
-        public void myBefore3(){
+    /*@Before("execution(* do*(..))")   // 精简写法,这种写法很容易被其他测试类调用
+    public void myBefore3() {
         // 就是你切面要执行的功能代码
-        System.out.println("3==前置通知，切面功能：在目标方法之前输出执行时间"+ new Date());
+        System.out.println("3==前置通知，切面功能：在目标方法之前输出执行时间" + new Date());
     }*/
 
     /**

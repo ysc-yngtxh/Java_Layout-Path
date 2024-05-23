@@ -13,8 +13,9 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 // @ConditionalOnProperty: 可以作用于方法或者类上，在application.properties 或 application.yml 文件中
-//                         custom.application.enable 为 true 才会加载 ConditionalConfig 这个 Bean，
-//                         如果没有匹配上也会加载，因为 matchIfMissing = true，默认值是 false。
+//                         将配置文件中的值和havingValue的值对比，如果一样则加载Bean。比如：
+//                         custom.application.property.enable=true，havingValue="true"，加载Bean
+//                         如果在配置文件中没有该配置项，是否加载Bean: matchIfMissing = true 表示加载，默认值是 false。
 @ConditionalOnProperty(value="custom.application.property.enable", havingValue="true", matchIfMissing=true)
 
 // prefix表示配置文件里节点前缀，name用来从application.properties中读取某个属性值，havingValue表示目标值。

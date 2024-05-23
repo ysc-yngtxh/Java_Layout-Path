@@ -13,8 +13,10 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class ExampleAop {
+
     @Before("execution(* com.example.service.impl.CustomServiceImpl.definition(..))")
     public void beforeAdvice(JoinPoint jp){
         System.out.println("进入切面 " + jp.getSignature().getName() + "()");
     }
+
 }

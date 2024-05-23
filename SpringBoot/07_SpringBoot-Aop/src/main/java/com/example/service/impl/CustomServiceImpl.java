@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CustomServiceImpl implements CustomService {
+
     @Override
     public String definition() {
         return "你好！这里是definition()方法执行的返回结果";
@@ -18,7 +19,7 @@ public class CustomServiceImpl implements CustomService {
 
     @Override
     public String aopFailure() {
-        // 按理说：这里调用了Definition()方法，会执行其切面方法，但实际并没有进入切面
+        // 按理说，这里调用了Definition()方法，会执行其切面方法。但实际并没有进入切面。
         this.definition();
         return "你好！这里是aopFailure()方法执行的返回结果";
     }

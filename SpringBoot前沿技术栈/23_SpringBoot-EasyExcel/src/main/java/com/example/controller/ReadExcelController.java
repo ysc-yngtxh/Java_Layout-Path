@@ -28,9 +28,11 @@ public class ReadExcelController {
     private final Logger log = LoggerFactory.getLogger(ReadExcelController.class);
 
     // TODO 默认一行行的读取excel，所以需要创建excel一行一行的回调监听器
+    //      有一个注意点：使用表单提交数据时，要指定 input 标签中的 name 属性值，与后端接口参数名称保持一致。
+    //                  因为表单数据传递到后端，就是通过 name 属性，来进行参数匹配的。
     @RequestMapping("/upload")
-    public String onUpLoad(MultipartFile file) throws IOException {
-        EasyExcel.read(file.getInputStream()
+    public String onUpLoad(MultipartFile customFile) throws IOException {
+        EasyExcel.read(customFile.getInputStream()
                 , ReadDemo1.class
                 , new PageReadListener<ReadDemo1>(dataList -> {
                     for (ReadDemo1 readDemo1Data : dataList) {

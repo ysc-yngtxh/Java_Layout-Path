@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>00_AnnotationConfigApplication</artifactId>
+	<artifactId>00_AnnotationConfigApplicationContext</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>00_AnnotationConfigApplication</name>
-	<description>00_AnnotationConfigApplication</description>
+	<name>00_AnnotationConfigApplicationContext</name>
+	<description>00_AnnotationConfigApplicationContext</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
