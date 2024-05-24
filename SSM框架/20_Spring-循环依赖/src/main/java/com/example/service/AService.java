@@ -6,6 +6,7 @@ package com.example.service;
  * @apiNote TODO
  */
 public class AService {
+
     private BService bService;
 
     public void setBService(BService bService) {
@@ -20,6 +21,6 @@ public class AService {
     }
 
     public void testProxy(){
-        System.out.println("测试Aop切面");
+        System.err.println("进入 AService testProxy 方法，且 BService 对象为：" + bService.getClass());
     }
 }

@@ -6,6 +6,7 @@ package com.example.service;
  * @apiNote TODO
  */
 public class BService {
+
     private AService aService;
 
     public void setAService(AService aService) {
@@ -17,5 +18,9 @@ public class BService {
 
     public BService(AService aService) {
         this.aService = aService;
+    }
+
+    public void sayHello() {
+        System.err.println("进入 BService sayHello 方法，且 AService 对象为：" + aService.getClass());
     }
 }

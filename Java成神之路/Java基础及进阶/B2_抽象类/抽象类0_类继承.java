@@ -15,7 +15,7 @@ package B2_抽象类;
  多态：就是指一个引用（类型）在不同的情况下的多种状态。
       也可以理解为，多态是指通过指向父类的指针，来调用在不同子类中实现的方法。
  */
-class Person {  // 正常的Java类
+class Person {
     static {
         System.out.println("这里是静态代码块");
     }
@@ -38,5 +38,4 @@ class Child extends Person {
 
 
 public class 抽象类0_类继承 {
-
 }

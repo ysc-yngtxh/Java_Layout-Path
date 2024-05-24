@@ -38,12 +38,12 @@ public class SpringBottomLayer2Application {
         //    如果将 Aop 切面代码注释掉，那么在控制台显示的 productService 对象值会是确切对应的原始对象
         // 2、问题：对于原始 productService Bean对象来说，注入的属性 itemService 是存在值的。
         //         如果 productService 对象值是Aop代理对象，该 ProductService 中注入的属性 itemService 值为 null。
-        // 3、解答：对于代理对象来说，我实际关注点应该是代理的目标对象方法执行之前和执行之后，需要增强的功能，而并非目标对想象中注入的属性。
+        // 3、解答：对于代理对象来说，实际关注点应该是代理的目标对象方法执行之前和执行之后，需要增强的功能，而并非目标对想象中注入的属性。
         //         况且，
         productService.test();
 
-        // 为什么使用 Aop 切面操作后，就得使用代理对象来取代原始对象？
-        // 因为动态代理可以在目标类源代码不改变的情况下，增加功能。
+        // 问题：为什么使用 Aop 切面操作后，就得使用代理对象来取代原始对象？
+        // 因为动态代理可以在目标类源代码不改变的情况下，增加功能，无需影响业务逻辑代码，实现解耦
 
         // Aop代理对象 productService($CGLIB) 中有一个属性 target = ProductServiceImpl@7565
         // 当 Aop 切面时，无论是前置通知还是后置通知，都能在代理对象中得到功能增强。
