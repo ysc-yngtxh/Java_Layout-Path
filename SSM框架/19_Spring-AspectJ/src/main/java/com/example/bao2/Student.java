@@ -1,6 +1,7 @@
 package com.example.bao2;
 
 public class Student {
+
     private String name;
     private Integer age;
 

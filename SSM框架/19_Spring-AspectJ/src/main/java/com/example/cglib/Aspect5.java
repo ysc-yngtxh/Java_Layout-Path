@@ -3,6 +3,7 @@ package com.example.cglib;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.stereotype.Component;
 
 /**
  * @Aspect：是aspectj框架中的注解。
@@ -14,7 +15,8 @@ import org.aspectj.lang.annotation.Before;
  *         3、不会影响目标方法的执行
  */
 @Aspect
-public class MyAspect5 {
+@Component
+public class Aspect5 {
     // jdk动态代理是由java内部的反射机制来实现的，cglib动态代理底层则是借助asm来实现的。
     // 总的来说，反射机制在生成类的过程中比较高效，而asm在生成类之后的相关执行过程中比较高效
     //       （可以通过将asm生成的类进行缓存，这样解决asm生成类过程低效问题）。

@@ -3,6 +3,7 @@ package com.example.jdk;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.stereotype.Component;
 
 /**
  * @Aspect：是aspectj框架中的注解。
@@ -14,7 +15,8 @@ import org.aspectj.lang.annotation.Before;
  *         3、不会影响目标方法的执行
  */
 @Aspect
-public class MyAspect6 {
+@Component
+public class Aspect6 {
 
     // 有接口的是jdk代理
     @Before(value="execution(* *..JdkServiceImpl.like(String, Integer))")

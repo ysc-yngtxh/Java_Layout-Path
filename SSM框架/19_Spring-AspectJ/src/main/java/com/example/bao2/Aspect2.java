@@ -15,7 +15,7 @@ import org.aspectj.lang.annotation.Aspect;
  *         3、不会影响目标方法的执行
  */
 @Aspect
-public class MyAspect2 {
+public class Aspect2 {
     /**
      * 后置通知定义方法，方法就是实现切面功能的。
      * 方法的定义要求：

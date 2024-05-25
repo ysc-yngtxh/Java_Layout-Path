@@ -1,5 +1,5 @@
 package com.example.bao3;
 
-public interface FirstService {
+public interface ThreeService {
     String First(String name, Integer age);
 }

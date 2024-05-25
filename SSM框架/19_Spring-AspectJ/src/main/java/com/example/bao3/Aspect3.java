@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
  *         3、不会影响目标方法的执行
  */
 @Aspect
-public class MyAspect3 {
+public class Aspect3 {
 
     /**
      * 环绕通知方法的定义格式

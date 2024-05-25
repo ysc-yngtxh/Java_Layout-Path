@@ -3,7 +3,8 @@ package com.example.bao2;
 /**
  * @author 游家纨绔
  */
-public class OtherServiceImpl implements OtherService {
+public class TwoServiceImpl implements TwoService {
+
     @Override
     public String doOther(String name, Integer age) {
         System.out.println("====目标方法doOther()====");

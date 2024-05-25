@@ -20,8 +20,7 @@ import java.util.Date;
  *         3、不会影响目标方法的执行
  */
 @Aspect
-@Component
-public class MyAspect1 {
+public class Aspect1 {
     /**
      * 定义方法，方法就是实现切面功能的。
      * 方法的定义要求：
@@ -31,7 +30,7 @@ public class MyAspect1 {
      *   4、方法可以有参数，也可以没有参数
      *      如果有参数，参数不是自定义的，有几个参数类型可以使用
      */
-    @Before(value="execution(public void com.example.bao1.SomeServiceImpl.doSome(String, Integer))")
+    @Before(value="execution(public void com.example.bao1.OneServiceImpl.doSome(String, Integer))")
     public void myBefore1(){
         // 就是你切面要执行的功能代码
         System.out.println("1==前置通知，切面功能：在目标方法之前输出执行时间" + new Date());
@@ -58,7 +57,7 @@ public class MyAspect1 {
      * <p>
      *     注意：当你要使用参数时，方法括号里的参数不能再使用...  而是要使用其参数类型
      */
-    @Before(value="execution(void com.example.bao1.SomeServiceImpl.doSome(String, Integer))")
+    @Before(value="execution(void com.example.bao1.OneServiceImpl.doSome(String, Integer))")
     public void myBefore4(JoinPoint jp){
         // 获取的是实际的目标类
         System.out.println("Aop底层实现为动态代理，因此代理的目标类为：" + jp.getTarget().getClass().getName());

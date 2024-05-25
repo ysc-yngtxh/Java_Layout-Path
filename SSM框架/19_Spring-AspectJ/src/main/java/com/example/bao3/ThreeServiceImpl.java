@@ -1,6 +1,7 @@
 package com.example.bao3;
 
-public class FirstServiceImpl implements FirstService {
+public class ThreeServiceImpl implements ThreeService {
+
     @Override
     public String First(String name, Integer age) {
         System.out.println("====业务方法First()====");

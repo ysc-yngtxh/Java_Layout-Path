@@ -21,7 +21,7 @@ import java.util.Date;
  *         3、不会影响目标方法的执行
  */
 @Aspect
-public class MyAspect4 {
+public class Aspect4 {
     /**
      * @Pointcut:定义和管理切入点，如果你的项目中有多个切入点表达式是重复的，可以使用@Pointcut
      *      属性：value 切入点表达式

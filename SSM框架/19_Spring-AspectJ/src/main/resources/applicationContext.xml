@@ -4,31 +4,32 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!--第一种方式注入Bean-->
-    <!--组件扫描器：将包bao1下的@Component注入容器并创建对象bean-->
-    <context:component-scan base-package="com.example.bao1"/>
-    <context:component-scan base-package="com.example.proxy"/>
-
-    <!--第二种方式注入Bean-->
+    <!--TODO 第一种方式注入Bean-->
     <!--直接在配置文件中创建bean对象，把对象交给spring容器，由spring容器统一创建，管理对象-->
     <!--声明目标对象-->
-    <bean id="Service2" class="com.example.bao2.OtherServiceImpl"/>
+    <bean id="Service1" class="com.example.bao1.OneServiceImpl"/>
     <!--声明切面类对象-->
-    <bean id="OmyAspect" class="com.example.bao2.MyAspect2"/>
+    <bean id="OneAspect" class="com.example.bao1.Aspect1"/>
 
-    <bean id="Service3" class="com.example.bao3.FirstServiceImpl"/>
-    <bean id="FmyAspect" class="com.example.bao3.MyAspect3"/>
+    <bean id="Service2" class="com.example.bao2.TwoServiceImpl"/>
+    <bean id="TwoAspect" class="com.example.bao2.Aspect2"/>
 
-    <bean id="Service4" class="com.example.bao4.OutServiceImpl"/>
-    <bean id="TmyAspect" class="com.example.bao4.MyAspect4"/>
+    <bean id="Service3" class="com.example.bao3.ThreeServiceImpl"/>
+    <bean id="ThreeAspect" class="com.example.bao3.Aspect3"/>
 
-    <bean id="Service5" class="com.example.cglib.CglibServiceImpl"/>
-    <bean id="CmyAspect" class="com.example.cglib.MyAspect5"/>
+    <bean id="Service4" class="com.example.bao4.FourServiceImpl"/>
+    <bean id="FourAspect" class="com.example.bao4.Aspect4"/>
 
-    <bean id="Service6" class="com.example.jdk.JdkServiceImpl"/>
-    <bean id="JmyAspect" class="com.example.jdk.MyAspect6"/>
 
-    <!--声明自动代理生成器：使用aspectJ框架内部的功能，创建目标对象的代理对象。
+    <!--TODO 第二种方式注入Bean-->
+    <!--组件扫描器：将包bao1下的@Component注入容器并创建对象bean-->
+    <context:component-scan base-package="com.example.cglib"/>
+    <context:component-scan base-package="com.example.jdk"/>
+    <context:component-scan base-package="com.example.proxy"/>
+    <context:component-scan base-package="com.example.proxyAttribute"/>
+
+
+    <!--TODO 声明自动代理生成器：使用aspectJ框架内部的功能，创建目标对象的代理对象。
         创建代理对象是在内存中实现的，修改目标对象的的内存中的结构。
         创建微代理对象，所以目标对象就是被修改后的代理对象
 

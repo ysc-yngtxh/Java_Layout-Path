@@ -10,8 +10,9 @@ import org.springframework.stereotype.Service;
  * @dateTime 2023-11-11 10:12
  * @apiNote TODO
  */
-@Service(value = "Service7")
+@Service(value = "proxyService")
 public class ProxyServiceImpl implements ProxyService {
+
     // TODO 一旦代理对象创建完成，Spring会将其注册到容器中，替代原来的目标对象。
     //      这意味着，当其他Bean需要注入目标类的实例时，实际上注入的是代理对象。
     //      代理对象的target是指向目标对象的
