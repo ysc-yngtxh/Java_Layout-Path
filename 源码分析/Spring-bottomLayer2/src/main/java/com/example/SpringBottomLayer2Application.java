@@ -32,24 +32,27 @@ public class SpringBottomLayer2Application {
         // 启动 Spring 容器
         ConfigurableApplicationContext applicationContext = SpringApplication.run(SpringBottomLayer2Application.class, args);
 
-        // Spring 的 Aop 底层原理
+        //  TODO 由于 productService Bean具有 Aop 切面操作，可以打断点在控制台上看到 productService 对象值是代理对象
+        //       如果将 Aop 切面代码注释掉，那么在控制台显示的 productService 对象值会是确切对应的原始对象
+        // 问题1：对于原始 productService Bean对象来说，注入的属性 itemService 是存在值的。
+        //       如果 productService 对象值是代理对象，该 ProductService 中注入的属性 itemService 值为 null。
+        // 解答1：代理对象并没有对任何属性进行依赖注入。因此这里 代理对象 中属性 itemService 为 null
         ProductService productService = applicationContext.getBean("productService", ProductService.class);
-        // 1、由于 productService Bean具有 Aop 切面操作，可以在控制台上看到 productService 对象值是代理对象
-        //    如果将 Aop 切面代码注释掉，那么在控制台显示的 productService 对象值会是确切对应的原始对象
-        // 2、问题：对于原始 productService Bean对象来说，注入的属性 itemService 是存在值的。
-        //         如果 productService 对象值是Aop代理对象，该 ProductService 中注入的属性 itemService 值为 null。
-        // 3、解答：对于代理对象来说，实际关注点应该是代理的目标对象方法执行之前和执行之后，需要增强的功能，而并非目标对想象中注入的属性。
-        //         况且，
+
+        // 问题2：既然代理对象属性值 itemService 为null，那通过代理对象去执行方法，为什么在方法中打印出 itemService 属性却是有值的？
+        // 解答2：因为代理对象可以看做继承目标对象，并且存在一个属性 target = ProductServiceImpl@7565(原始对象)
+        //           public class proxy extends ProductServiceImpl {
+        //               private ProductServiceImpl target;
+        //               public void doSomething() {
+        //                   // 在这里执行切面前置逻辑......
+        //                   target.doSomething(); // 这里执行目标对象的方法
+        //                   // 在这里执行切面后置逻辑......
+        //               }
+        //           }
+        //       所以代理对象执行方法，是通过 target 属性可以访问到原始对象，从间接访问到原始对象中属性 itemService
         productService.test();
 
-        // 问题：为什么使用 Aop 切面操作后，就得使用代理对象来取代原始对象？
-        // 因为动态代理可以在目标类源代码不改变的情况下，增加功能，无需影响业务逻辑代码，实现解耦
-
-        // Aop代理对象 productService($CGLIB) 中有一个属性 target = ProductServiceImpl@7565
-        // 当 Aop 切面时，无论是前置通知还是后置通知，都能在代理对象中得到功能增强。
-        // 并可以控制属性 target 决定是否要执行目标对象方法。
-
-        // Aop实际上是实现了 BeanPostProcessor接口，因此
+        // Aop实际上是实现了 BeanPostProcessor接口
         // 推断构造方法 -> 普通对象 -> 依赖注入 -> 初始化 afterPropertiesSet -> 初始化后Aop -> 代理对象 -> 放入 Map<beanName, bean对象>
     }
 

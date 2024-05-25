@@ -1,5 +1,6 @@
 package com.example.service.impl;
 
+import com.example.annotation.Validation;
 import com.example.service.CustomService;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class CustomServiceImpl implements CustomService {
 
     @Override
+    @Validation
     public String definition() {
         return "你好！这里是definition()方法执行的返回结果";
     }

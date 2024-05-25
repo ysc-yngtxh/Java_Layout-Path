@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        https://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/tx
-       http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       https://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!--把数据库的配置信息，下写在一个独立的文件，编译修改数据库的配置内容
         spring知道jdbc.properties文件的位置
@@ -76,7 +79,8 @@
                 isolation：隔离级别
             -->
             <tx:method name="buy" propagation="REQUIRED" isolation="DEFAULT"
-                       rollback-for="java.lang.NullPointerException,com.example.excep.NotEnoughException"/>
+                       rollback-for="java.lang.NullPointerException,
+                                     com.example.excep.NotEnoughException"/>
 
             <!--使用通配符，指定很多的方法-->
             <tx:method name="add*" propagation="REQUIRES_NEW"/>
