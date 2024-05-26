@@ -41,7 +41,7 @@ public class B2_JDBC编程六步概述 {
             stmt = conn.createStatement();
 
             // 4、执行SQL
-            String sql = "insert into t_student(no,name,age) values(9,'birenwanghongtao','26')";
+            String sql = "insert into t_student(no, name, age) values(9, 'birenwanghongtao', '26')";
             int count = stmt.executeUpdate(sql);
             System.out.println(count == 1 ? "保存成功" : "保存失败");
 

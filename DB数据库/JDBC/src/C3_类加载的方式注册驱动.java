@@ -47,7 +47,7 @@ public class C3_类加载的方式注册驱动 {
             stmt = conn.createStatement();
 
             // 4、执行SQL
-            String sql = "insert into t_student(no,name,age) values(10,'shenfang','28')";
+            String sql = "insert into t_student(no, name, age) values(10, 'shenfang', '28')";
             int count = stmt.executeUpdate(sql);
             System.out.println(count == 1 ? "新增成功" : "新增失败");
 
