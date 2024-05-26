@@ -12,6 +12,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 @Service
 public class PaymentService {
+
     // 该类实例上的所有方法共享一个TransactionTemplate
     private final TransactionTemplate transactionTemplate;
 

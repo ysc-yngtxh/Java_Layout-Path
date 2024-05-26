@@ -17,6 +17,7 @@ import java.util.List;
 @RequestMapping("tbBrand")
 @RequiredArgsConstructor
 public class TbBrandController {
+
     private final TbBrandService tbBrandService;
 
     @RequestMapping("/selectAll")

@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @MapperScan(basePackages = "com.example.mapper.yun6", sqlSessionTemplateRef = "yun6SqlSessionTemplate")
-public class DataSourceUserConfig {
+public class DataSourceYun6Config {
 
     // application.yml文件配置好之后，我们创建两个配置类来加载配置信息，初始化数据源
     // 1）类注解@MapperScan的属性basePackages配置的为对应DA层dao的位置

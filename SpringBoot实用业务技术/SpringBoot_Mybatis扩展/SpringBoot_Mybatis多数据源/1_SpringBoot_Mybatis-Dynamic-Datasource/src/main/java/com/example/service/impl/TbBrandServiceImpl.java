@@ -16,6 +16,7 @@ import java.util.List;
 @Service("tbBrandService")
 @RequiredArgsConstructor
 public class TbBrandServiceImpl implements TbBrandService {
+
     private final TbBrandMapper tbBrandMapper;
 
     @Override

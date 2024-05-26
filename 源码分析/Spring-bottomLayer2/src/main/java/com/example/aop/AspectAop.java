@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  */
 @Aspect
 @Component
-public class ProductAspectJ {
+public class AspectAop {
 
     @Before(value="execution(public void com.example.service.impl.ProductServiceImpl.test())")
     public void myBefore(JoinPoint jp){
