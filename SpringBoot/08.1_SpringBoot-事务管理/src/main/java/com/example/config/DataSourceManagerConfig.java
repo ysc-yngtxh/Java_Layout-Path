@@ -11,7 +11,9 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 
 /**
- * 数据源配置类
+ * @author 游家纨绔
+ * @dateTime 2024-05-27 07:18
+ * @apiNote TODO 数据源配置类
  */
 @Configuration
 public class DataSourceManagerConfig {
@@ -20,7 +22,7 @@ public class DataSourceManagerConfig {
      * 定义数据源bean
      */
     @Bean
-    // @ConfigurationProperties("spring.datasource")  // 绑定配置文件中的数据源属性
+    // @ConfigurationProperties("spring.datasource")  // 不使用代码方式配置，通过配置文件中的数据源属性进行绑定
     public DataSource dataSource() {
         // TODO 数据库连接的数据源实现
         // 1、DriverManagerDataSource：（过时）

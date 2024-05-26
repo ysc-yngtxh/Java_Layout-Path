@@ -38,7 +38,7 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
      *      2)、如果你的抛出的异常不在rollbackFor列表中，spring会判断异常是不是RuntimeException,
      *          如果是一定回滚
      */
-    // 使用的是事务控制的默认值，默认的传播行为是REQUIRED,默认的隔离级别DEFAULT
+    // 使用的是事务控制的默认值，默认的传播行为是REQUIRED，默认的隔离级别DEFAULT
     // 默认抛出运行时异常，回滚事务
     @Transactional  // 使用该注解需要先到xml文件中进行事务配置
     @Override
