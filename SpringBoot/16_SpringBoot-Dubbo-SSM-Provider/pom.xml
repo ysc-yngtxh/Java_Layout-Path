@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>16_SpringBoot-Dubbo-SSM-Provider</artifactId>
     <version>1.0.0</version>
-    <name>14_SpringBoot-Dubbo-SSM-Provider</name>
-    <description>14_SpringBoot-Dubbo-SSM-Provider</description>
+    <name>16_SpringBoot-Dubbo-SSM-Provider</name>
+    <description>16_SpringBoot-Dubbo-SSM-Provider</description>
 
     <properties>
         <java.version>1.8</java.version>

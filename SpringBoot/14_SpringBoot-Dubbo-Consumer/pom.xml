@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>14_SpringBoot-Dubbo-Consumer</artifactId>
     <version>1.0.0</version>
-    <name>12_SpringBoot-Dubbo-Consumer</name>
-    <description>12_SpringBoot-Dubbo-Consumer</description>
+    <name>14_SpringBoot-Dubbo-Consumer</name>
+    <description>14_SpringBoot-Dubbo-Consumer</description>
 
     <properties>
         <java.version>1.8</java.version>

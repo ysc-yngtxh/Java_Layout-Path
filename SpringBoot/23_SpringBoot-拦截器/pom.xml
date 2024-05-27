@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>23_SpringBoot-Interceptor</artifactId>
     <version>1.0.0</version>
-    <name>19_SpringBoot-拦截器</name>
-    <description>19_SpringBoot-拦截器</description>
+    <name>23_SpringBoot-拦截器</name>
+    <description>23_SpringBoot-拦截器</description>
 
     <properties>
         <java.version>1.8</java.version>

@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>18_SpringBoot-Java</artifactId>
     <version>1.0.0</version>
-    <name>16_SpringBoot-Java</name>
-    <description>16_SpringBoot-Java</description>
+    <name>18_SpringBoot-Java</name>
+    <description>18_SpringBoot-Java</description>
 
     <properties>
         <java.version>1.8</java.version>

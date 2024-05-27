@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>17_SpringBoot-Dubbo-SSM-Consumer</artifactId>
     <version>1.0.0</version>
-    <name>15_SpringBoot-Dubbo-SSM-Consumer</name>
-    <description>15_SpringBoot-Dubbo-SSM-Consumer</description>
+    <name>17_SpringBoot-Dubbo-SSM-Consumer</name>
+    <description>17_SpringBoot-Dubbo-SSM-Consumer</description>
 
     <properties>
         <java.version>1.8</java.version>

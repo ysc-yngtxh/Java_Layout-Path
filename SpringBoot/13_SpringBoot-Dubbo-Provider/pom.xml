@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>13_SpringBoot-Dubbo-Provider</artifactId>
     <version>1.0.0</version>
-    <name>11_SpringBoot-Dubbo-Provider</name>
-    <description>11_SpringBoot-Dubbo-Provider</description>
+    <name>13_SpringBoot-Dubbo-Provider</name>
+    <description>13_SpringBoot-Dubbo-Provider</description>
 
     <properties>
         <java.version>1.8</java.version>
