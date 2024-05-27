@@ -9,48 +9,35 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>07_SpringBoot-Aop</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>07_SpringBoot-Aop</name>
-    <description>07_SpringBoot-Aop</description>
+    <artifactId>13_SpringBoot-Redis</artifactId>
+    <version>1.0.0</version>
+    <name>13_SpringBoot-集成Redis</name>
+    <description>13_SpringBoot-集成Redis</description>
+
     <properties>
         <java.version>1.8</java.version>
     </properties>
+
     <dependencies>
+        <!--springboot框架的web项目依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!--添加Aop切面编程依赖-->
+        <!--springboot集成redis的起步依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <!--springboot的打包编译插件-->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
+                <version>2.3.5.RELEASE</version>
             </plugin>
         </plugins>
     </build>
