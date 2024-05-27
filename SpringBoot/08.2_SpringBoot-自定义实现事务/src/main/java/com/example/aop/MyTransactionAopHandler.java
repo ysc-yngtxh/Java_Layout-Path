@@ -84,8 +84,8 @@ public class MyTransactionAopHandler {
      * 异常处理，捕获的异常是目标异常或者其子类，就进行回滚，否则就提交事务。
      */
     private void completeTransactionAfterThrowing(Throwable throwable) {
-        if (es != null && es.length > 0) {
-            for (Class<? extends Throwable> e : es) {
+        if (exception != null && exception.length > 0) {
+            for (Class<? extends Throwable> e : exception) {
                 if (e.isAssignableFrom(throwable.getClass())) {
                     doRollBack();
                 }
