@@ -7,5 +7,5 @@ package com.example.service;
  */
 public interface MyTransactionService {
 
-    void saveTest(int id);
+    void saveTest(String name);
 }

@@ -57,7 +57,7 @@ public class 反射2_实例化对象 {
         FileInputStream fis = null;
         try {
             // 创建输入流对象。
-            fis = new FileInputStream(System.getProperty("User.dir") + "/Java基础及进阶/M13_反射/反射Ⅰ_获取Class实例化对象/实例化对象2/classInfo.properties");
+            fis = new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/M13_反射/反射Ⅰ_获取Class实例化对象/实例化对象2/classInfo.properties");
             // 创建属性类对象Map
             Properties pro = new Properties();
             // 加载

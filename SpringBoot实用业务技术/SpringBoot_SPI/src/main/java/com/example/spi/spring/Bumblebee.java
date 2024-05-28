@@ -9,7 +9,9 @@ import org.slf4j.LoggerFactory;
  * @apiNote TODO
  */
 public class Bumblebee implements Robot {
+
     private final Logger log = LoggerFactory.getLogger(Bumblebee.class);
+
     @Override
     public void sayHello() {
         log.debug("Hello, I am Bumblebee.");

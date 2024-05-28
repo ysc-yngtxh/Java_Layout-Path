@@ -9,7 +9,9 @@ import org.slf4j.LoggerFactory;
  * @apiNote TODO
  */
 public class Motorcycle implements Car {
+
     private final Logger log = LoggerFactory.getLogger(Motorcycle.class);
+
     @Override
     public void sayHello() {
         log.debug("Hello, I am Motorcycle.");

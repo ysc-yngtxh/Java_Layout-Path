@@ -9,7 +9,9 @@ import org.slf4j.LoggerFactory;
  * @apiNote TODO
  */
 public class Cat implements Animals {
+
     private final Logger log = LoggerFactory.getLogger(Cat.class);
+
     @Override
     public void sayHello() {
         log.debug("Hello, I am Cat.");

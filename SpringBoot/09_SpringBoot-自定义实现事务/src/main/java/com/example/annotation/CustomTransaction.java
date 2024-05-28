@@ -12,10 +12,10 @@ import java.lang.annotation.Target;
  * @create: 2024-05-27 22:56
  * @description: 自定义事务注解
  **/
-@Target({ElementType.METHOD})
-@Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
+@Target({ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
 public @interface CustomTransaction {
 
     // 指定异常回滚

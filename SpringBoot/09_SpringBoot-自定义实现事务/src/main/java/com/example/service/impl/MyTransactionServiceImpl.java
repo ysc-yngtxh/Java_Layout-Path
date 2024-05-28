@@ -3,12 +3,12 @@ package com.example.service.impl;
 import com.example.annotation.CustomTransaction;
 import com.example.config.DataSourceConnectHolder;
 import com.example.service.MyTransactionService;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 /**
  * @author: 游家纨绔
@@ -22,27 +22,24 @@ public class MyTransactionServiceImpl implements MyTransactionService {
     DataSourceConnectHolder holder;
 
     // 一个事务中执行两个sql插入
-    @CustomTransaction(rollbackFor = NullPointerException.class)
     @Override
-    public void saveTest(int id) {
-        saveWithParameters(id, "luozhou@gmail.com");
-        saveWithParameters(id + 10, "luozhou@gmail.com");
-        int str = id / 0;
+    @CustomTransaction(rollbackFor = NullPointerException.class)
+    public void saveTest(String name) {
+        saveWithParameters(name, "luozhou@gmail.com");
+        saveWithParameters(name+"-cym", "luozhou@gmail.com");
+        int str = 10 / 0;
     }
 
     // 执行sql
-    private void saveWithParameters(int id, String email) {
-        String sql = "insert into tb_test values(?,?)";
+    @SneakyThrows
+    private void saveWithParameters(String name, String email) {
+        String sql = "insert into student(name,email) values(?, ?)";
         Connection connection = holder.getConnection();
-        PreparedStatement stmt = null;
-        try {
-            stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, id);
-            stmt.setString(2, email);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, name);
+        stmt.setString(2, email);
+        stmt.executeUpdate();
     }
 
 }

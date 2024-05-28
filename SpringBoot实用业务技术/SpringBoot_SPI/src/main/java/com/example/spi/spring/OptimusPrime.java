@@ -15,7 +15,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConditionalOnClass({EnableCustomDependency.class})
 public class OptimusPrime implements Robot {
+
     private final Logger log = LoggerFactory.getLogger(OptimusPrime.class);
+
     @Override
     public void sayHello() {
         log.debug("Hello, I am Optimus Prime.");
@@ -26,6 +28,7 @@ public class OptimusPrime implements Robot {
     public CustomTemplate customTemplate() {
         return new CustomTemplate();
     }
+
     class CustomTemplate {
 
     }

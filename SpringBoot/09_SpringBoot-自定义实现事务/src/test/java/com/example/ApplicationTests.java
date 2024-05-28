@@ -15,7 +15,7 @@ class ApplicationTests {
 
     @Test
     void contextLoads() throws SQLException {
-        myTransactionService.saveTest(1);
+        myTransactionService.saveTest("ysc");
     }
 
 }

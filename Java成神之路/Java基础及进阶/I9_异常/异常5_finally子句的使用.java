@@ -48,7 +48,7 @@ public class 异常5_finally子句的使用 {
         System.out.println("=========================================================================================");
 
         // 代码执行顺序：先执行try,再执行finally，最后执行return(return只要执行方法必然结束）
-        try{
+        try {
             System.out.println("try1...");
             return;
         } finally {
@@ -56,7 +56,7 @@ public class 异常5_finally子句的使用 {
         }
 
         /*
-        try{
+        try {
             System.out.println("try2...嘿嘿");
             System.exit(0); // 退出JVM之后，finally语句中的代码就不执行了
         } finally {
