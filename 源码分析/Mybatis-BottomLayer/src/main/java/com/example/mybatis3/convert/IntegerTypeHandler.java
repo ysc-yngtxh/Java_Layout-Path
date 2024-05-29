@@ -11,6 +11,7 @@ import java.sql.ResultSet;
  * @apiNote TODO Integer类型的TypeHandler
  */
 public class IntegerTypeHandler implements TypeHandler<Integer> {
+
     @SneakyThrows
     @Override
     public void setParameter(PreparedStatement ps, int i, Integer parameter) {

@@ -8,5 +8,6 @@ import java.sql.PreparedStatement;
  * @apiNote TODO 类型转换
  */
 public interface TypeHandler<T> {
+
     void setParameter(PreparedStatement ps, int i, T parameter);
 }

@@ -1,6 +1,7 @@
 package com.example.mybatis3.parser;
 
 public class GenericTokenParser {
+
     private final String openToken;
     private final String closeToken;
     private final TokenHandler handler;

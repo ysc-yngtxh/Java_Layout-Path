@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
  * @apiNote TODO String类型的TypeHandler
  */
 public class StringTypeHandler implements TypeHandler<String> {
+
     @SneakyThrows
     @Override
     public void setParameter(PreparedStatement ps, int i, String parameter) {

@@ -24,6 +24,7 @@ import java.util.List;
  * @apiNote TODO Mapper工厂
  */
 public class MapperProxyFactory1 {
+
     static {
         try {
             // JDBC注册驱动

@@ -6,4 +6,6 @@ package com.example.service;
  * @apiNote TODO
  */
 public interface TransactionService {
+
+    void saveUserTransaction();
 }
