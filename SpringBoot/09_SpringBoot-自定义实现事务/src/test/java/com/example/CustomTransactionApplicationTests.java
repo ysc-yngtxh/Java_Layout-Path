@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.sql.SQLException;
 
 @SpringBootTest
-class ApplicationTests {
+class CustomTransactionApplicationTests {
 
     @Autowired
     private MyTransactionService myTransactionService;

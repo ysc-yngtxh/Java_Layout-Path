@@ -39,6 +39,7 @@ public class MyTransactionAopHandler {
         }
         CustomTransaction transaction = method.getAnnotation(CustomTransaction.class);
         if (transaction != null) {
+            // 当存在自定义事务注解，获取食物回滚的异常类型
             exception = transaction.rollbackFor();
         }
         try {
@@ -48,9 +49,23 @@ public class MyTransactionAopHandler {
             completeTransactionAfterThrowing(throwable);
             throw throwable;
         }
-        // 直接提交
+        // 执行目标方法，没有捕获到异常就直接提交
         doCommit();
         return result;
+    }
+
+    /**
+     * 异常处理，捕获的异常是目标异常或者其子类，就进行回滚，否则就提交事务。
+     */
+    private void completeTransactionAfterThrowing(Throwable throwable) {
+        if (exception != null && exception.length > 0) {
+            for (Class<? extends Throwable> e : exception) {
+                if (e.isAssignableFrom(throwable.getClass())) {
+                    doRollBack();
+                }
+            }
+        }
+        doCommit();
     }
 
     /**
@@ -78,19 +93,5 @@ public class MyTransactionAopHandler {
         } finally {
             connectHolder.cleanHolder();
         }
-    }
-
-    /**
-     * 异常处理，捕获的异常是目标异常或者其子类，就进行回滚，否则就提交事务。
-     */
-    private void completeTransactionAfterThrowing(Throwable throwable) {
-        if (exception != null && exception.length > 0) {
-            for (Class<? extends Throwable> e : exception) {
-                if (e.isAssignableFrom(throwable.getClass())) {
-                    doRollBack();
-                }
-            }
-        }
-        doCommit();
     }
 }

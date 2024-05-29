@@ -1,7 +1,8 @@
-package com.example.service;
+package com.example.service.impl;
 
 import com.example.dao.StudentMapper;
 import com.example.domain.Student;
+import com.example.service.MyService;
 import org.springframework.stereotype.Service;
 
 @Service
