@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ItemServiceImpl implements ItemService {
+
     @Override
     public double price() {
         return 1.22;
