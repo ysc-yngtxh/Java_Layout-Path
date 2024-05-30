@@ -39,7 +39,7 @@ public class MyTransactionAopHandler {
         }
         CustomTransaction transaction = method.getAnnotation(CustomTransaction.class);
         if (transaction != null) {
-            // 当存在自定义事务注解，获取食物回滚的异常类型
+            // 当存在自定义事务注解，获取事务回滚的异常类型
             exception = transaction.rollbackFor();
         }
         try {

@@ -19,18 +19,18 @@ public class TransactionServiceImpl implements TransactionService {
     private JdbcTemplate jdbcTemplate;
 
     @Transactional
-    public void saveUserTransaction() {
+    public void saveTransaction() {
         jdbcTemplate.execute(
                 "INSERT INTO `user`(`username`, `birthday`, `sex`, `address`) " +
                            "VALUES ('荒', '2024-05-27 11:44:00', '男', '雁塔区十年城')");
         // 执行以非事务方式定义的方法
-        updateUserNonTransactional();
+        updateNonTransactional();
     }
 
 
-    // NEVER：以非事务方式执行，如果当前存在事务，则抛出异常。
+    // 事务传播级别 NEVER：以非事务方式执行，如果当前存在事务，则抛出异常。
     @Transactional(propagation = Propagation.NEVER)
-    public void updateUserNonTransactional() {
+    public void updateNonTransactional() {
         jdbcTemplate.update(
                 "INSERT INTO `user` (`username`, `birthday`, `sex`, `address`) " +
                             "VALUES ('牛牛栏目', '2024-04-27 11:44:00', '女', '雁塔区兴贺佳苑')");
@@ -42,9 +42,22 @@ public class TransactionServiceImpl implements TransactionService {
 
     /**
      * Spring中的事务管理是基于AOP（面向切面编程）实现的，它通过动态代理来拦截方法调用并管理事务。
-     * 疑问一：为什么事务方法 saveUserTransaction() 中执行非事务方式 test() 方法，应该抛出异常的却没有抛出异常？
-     * 解答一：因为在执行 saveUserTransaction() 是通过代理对象执行，而执行 test() 方法是通过原始对象调用，而不是通过代理对象调用的。
-     *        简单来说，在执行这两个方法时，并非同一个对象，因此事务是不生效的
+     * 疑问一：为什么事务方法 saveTransaction() 中调用传播级别为NEVER的 updateNonTransactional() 方法，
+     *        按理来说，本应该抛出异常的，但实际上却没有抛出异常？并且插入数据还成功了，数据库没有进行回滚?
+     * 解答一：事务是基于 AOP 实现的，也就是说当我加上 @Transactional 注解，该方法已经被切面。
+     *        此时我去调用 saveTransaction() 方法，实际上是通过代理对象调用的。
+     *        但是具体的方法逻辑是通过代理对象中的 target(原始对象transactionService) 属性调用。
+     *            public class proxy extends TransactionServiceImpl {
+     *                private TransactionServiceImpl target;
+     *                public void saveTransaction() {
+     *                    // 在这里执行切面前置逻辑......
+     *                    target.saveTransaction(); // 这里执行目标对象的方法
+     *                    // 在这里执行切面后置逻辑......
+     *                }
+     *            }
+     *        由此，在执行在执行 saveTransaction() 是通过代理对象执行，代理对象是能执行切面逻辑的，因此事务是能够生效的。
+     *        而执行 updateNonTransactional() 方法是通过原始对象调用，原始对象无法进入到切面逻辑当中，所以事务会失效。
+     *
      * 疑问二：为什么实际数据没有插入成功，但在数据库中 自增ID 却增加了？
      * 解答二：数据库的自增ID是在插入操作实际执行时立即生成并分配的，而不是在事务提交时。
      *        这意味着，一旦SQL插入语句被执行，无论事务最终是否成功提交，自增ID都会增加。

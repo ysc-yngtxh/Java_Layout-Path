@@ -7,5 +7,5 @@ package com.example.service;
  */
 public interface TransactionService {
 
-    void saveUserTransaction();
+    void saveTransaction();
 }
