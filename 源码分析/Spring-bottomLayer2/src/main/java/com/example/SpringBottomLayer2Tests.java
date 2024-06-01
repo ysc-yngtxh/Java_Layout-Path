@@ -1,10 +1,9 @@
 package com.example;
 
 import com.example.service.ProductService;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 // 添加该注解用以开启AOP
 // proxyTargetClass：默认值为false，表示使用JDK动态代理。将其设置为true，表示不论有没有接口都使用CGLIB动态代理。
@@ -25,12 +24,13 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 //      1、在 resources包下 配置文件中：spring.aop.auto = false 使自动配置类 AopAutoConfiguration 不加载。
 //      2、在 resources包下 配置文件中：spring.aop.proxy-target-class = false
 //                                   使自动配置类 AopAutoConfiguration 配置 proxyTargetClass = false
-@SpringBootApplication
-public class SpringBottomLayer2Application {
+public class SpringBottomLayer2Tests {
 
-    public static void main(String[] args) {
+    @Test
+    public void loader() {
         // 启动 Spring 容器
-        ConfigurableApplicationContext applicationContext = SpringApplication.run(SpringBottomLayer2Application.class, args);
+        ClassPathXmlApplicationContext applicationContext =
+                new ClassPathXmlApplicationContext("applicationContext.xml");
 
         //  TODO 由于 productService Bean具有 Aop 切面操作，可以打断点在控制台上看到 productService 对象值是代理对象
         //       如果将 Aop 切面代码注释掉，那么在控制台显示的 productService 对象值会是确切对应的原始对象

@@ -43,6 +43,7 @@ public class DataSourceManagerConfig {
         // SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
         // dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 
+        // 只有在 SpringBoot 框架中才存在 DataSourceBuilder 这个类，单独的 Spring 框架是没有的。
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.cj.jdbc.Driver")
                 .url("jdbc:mysql://127.0.0.1:3306/springdb?useUnicode=true&characterEncoding=utf-8")

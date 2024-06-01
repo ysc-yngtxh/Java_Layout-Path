@@ -1,11 +1,13 @@
 package com.example.config;
 
+import com.mysql.cj.jdbc.Driver;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -17,18 +19,19 @@ import javax.sql.DataSource;
  * @apiNote TODO
  */
 @Configuration
-@EnableTransactionManagement  // 开启事务管理
+@EnableTransactionManagement  // 开启注解事务管理，等同于xml配置方式的 <tx:annotation-driven/>
 public class TransactionManagerConfig {
 
     // 定义数据源
+    @SneakyThrows
     @Bean("transactionDataSource")
     public DataSource dataSource() {
-        return DataSourceBuilder.create()
-                .driverClassName("com.mysql.cj.jdbc.Driver")
-                .url("jdbc:mysql://localhost:3306/springdb?useSSL=false&serverTimezone=UTC")
-                .username("root")
-                .password("131474")
-                .build();
+        SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
+        dataSource.setDriver(new Driver());
+        dataSource.setUrl("jdbc:mysql://localhost:3306/springdb?useSSL=false&serverTimezone=UTC");
+        dataSource.setUsername("root");
+        dataSource.setPassword("131474");
+        return dataSource;
     }
 
     // 定义事务管理器

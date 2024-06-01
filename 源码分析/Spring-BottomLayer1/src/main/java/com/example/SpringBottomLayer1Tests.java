@@ -7,7 +7,7 @@ import com.example.spring.ConfigApplicationContext1;
 import com.example.spring.ConfigApplicationContext2;
 import org.junit.jupiter.api.Test;
 
-public class ApplicationTests {
+public class SpringBottomLayer1Tests {
 
     @Test
     public void applicationContext1() {

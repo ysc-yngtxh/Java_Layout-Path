@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @dateTime 2024-05-29 22:42
  * @apiNote TODO
  */
-@Service
+@Service("transactionService")
 public class TransactionServiceImpl implements TransactionService {
 
     @Autowired
