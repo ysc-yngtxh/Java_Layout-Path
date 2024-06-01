@@ -1,6 +1,7 @@
 package com.example.service.impl;
 
 import com.example.service.TransactionService;
+import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -56,4 +57,27 @@ public class TransactionServiceImpl implements TransactionService {
      *      而执行 updateNonTransactional() 方法是通过原始对象调用，原始对象无法进入到切面逻辑当中，所以事务会失效。
      */
 
+
+    // 方法一：利用 AopContext.currentProxy() 解决事务失效问题
+    @Transactional
+    public void saveAopContextTransaction() {
+        jdbcTemplate.execute(
+                "INSERT INTO `user`(`username`, `birthday`, `sex`, `address`) " +
+                        "VALUES ('荒', '2024-05-27 11:44:00', '男', '雁塔区十年城')");
+        // 利用 Aop 特性暴露当前类，获取当前对象的AOP代理。通过代理执行其方法，肯定是会走事务注解的切面逻辑
+        TransactionService transactionService = (TransactionService) AopContext.currentProxy();
+        transactionService.updateNonTransactional();
+    }
+
+
+    // 方法二：将被调用的事务方法 updateNonTransactional() 择出来单独作为一个 Bean 注入到调用者所属类中。
+    //        由于该方法添加了 @Transactional注解，所以会被Aop切面，最后在Spring容器中存在的 Bean 肯定是代理对象。
+    //        而通过代理对象执行的方法，是可以顺利进入事务逻辑，从而解决事务失效问题。
+    @Autowired
+    private TransactionServiceTargetBean transactionServiceBean;
+
+    @Transactional
+    public void saveClassTransactional() {
+        transactionServiceBean.updateNonTransactional();
+    }
 }

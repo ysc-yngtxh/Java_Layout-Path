@@ -8,4 +8,10 @@ package com.example.service;
 public interface TransactionService {
 
     void saveTransaction();
+
+    void updateNonTransactional();
+
+    void saveAopContextTransaction();
+
+    void saveClassTransactional();
 }
