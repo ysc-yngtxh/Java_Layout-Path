@@ -5,7 +5,6 @@ import com.example.config.DataSourceConnectHolder;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,7 +14,7 @@ import java.sql.SQLException;
 
 /**
  * @description:
- * @author: luozhou
+ * @author: 游家纨绔
  * @create: 2020-03-29 17:08
  **/
 @Aspect
