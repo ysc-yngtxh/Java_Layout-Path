@@ -1,5 +1,8 @@
 package com.example.mybatis3.entity;
 
+import lombok.Data;
+import lombok.ToString;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +11,8 @@ import java.io.Serializable;
  * @author 游家纨绔
  * @since 2024-04-04 23:58:33
  */
+@Data
+@ToString
 public class Student implements Serializable {
 
     private static final long serialVersionUID = 884930802771289886L;
@@ -25,47 +30,5 @@ public class Student implements Serializable {
      * 年龄
      */
     private Integer age;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", age='" + age + '\'' +
-                '}';
-    }
 }
 
