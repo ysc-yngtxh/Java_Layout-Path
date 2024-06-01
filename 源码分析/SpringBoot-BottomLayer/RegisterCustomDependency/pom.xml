@@ -3,32 +3,42 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.0</version>
+        <groupId>com.example</groupId>
+        <artifactId>SpringBoot-BottomLayer</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot-BottomLayer</artifactId>
+    <artifactId>RegisterCustomDependency</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot-BottomLayer</name>
-    <description>SpringBoot-BottomLayer</description>
+    <name>RegisterCustomDependency</name>
+    <description>RegisterCustomDependency</description>
 
     <properties>
         <java.version>17</java.version>
     </properties>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>yjwk-Spring-boot-starter</module>
-    </modules>
 
     <dependencies>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <groupId>com.example</groupId>
+            <artifactId>yjwk-spring-boot-starter</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.tomcat.embed</groupId>
+                    <artifactId>tomcat-embed-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

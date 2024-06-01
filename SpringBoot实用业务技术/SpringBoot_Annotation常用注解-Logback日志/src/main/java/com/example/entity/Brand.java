@@ -16,7 +16,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Brand implements Serializable {
+
     private static final long serialVersionUID = 914776956171371836L;
+
     /**
      * 主键Id
      */

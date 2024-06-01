@@ -27,9 +27,9 @@ public class VertxTcpServer {
         // 启动 TCP 服务器并监听指定端口
         server.listen(port, result -> {
             if (result.succeeded()) {
-                log.info("TCP server started on port " + port);
+                log.info("TCP webServer started on port " + port);
             } else {
-                log.info("Failed to start TCP server: " + result.cause());
+                log.info("Failed to start TCP webServer: " + result.cause());
             }
         });
     }

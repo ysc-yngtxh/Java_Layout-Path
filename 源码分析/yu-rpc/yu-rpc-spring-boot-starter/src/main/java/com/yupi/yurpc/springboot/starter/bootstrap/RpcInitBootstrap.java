@@ -42,7 +42,7 @@ public class RpcInitBootstrap implements ImportBeanDefinitionRegistrar {
             VertxTcpServer vertxTcpServer = new VertxTcpServer();
             vertxTcpServer.doStart(rpcConfig.getServerPort());
         } else {
-            log.info("不启动 server");
+            log.info("不启动 webServer");
         }
 
     }

@@ -41,7 +41,7 @@ public class VertxTcpClient {
         netClient.connect(serviceMetaInfo.getServicePort(), serviceMetaInfo.getServiceHost(),
                 result -> {
                     if (!result.succeeded()) {
-                        System.err.println("Failed to connect to TCP server");
+                        System.err.println("Failed to connect to TCP webServer");
                         return;
                     }
                     NetSocket socket = result.result();
