@@ -9,6 +9,7 @@ import com.example.executor.Executor;
 import com.example.executor.SimpleExecutor;
 import com.example.plugin.Interceptor;
 import com.example.plugin.InterceptorChain;
+import lombok.SneakyThrows;
 
 import java.io.File;
 import java.lang.annotation.Annotation;
@@ -48,6 +49,7 @@ public class Configuration {
     /**
      * 初始化时解析全局配置文件
      */
+    @SneakyThrows
     public Configuration() {
         // Note：在properties和注解中重复配置SQL会覆盖
         // 1.解析sql.properties
@@ -60,14 +62,11 @@ public class Configuration {
             statement = sqlMappings.getString(key).split("--")[0];
             // properties中的value用--隔开，第二个是需要转换的POJO类型
             pojoStr = sqlMappings.getString(key).split("--")[1];
-            try {
-                // properties中的key是接口类型+方法
-                // 从接口类型+方法中截取接口类型
-                mapper = Class.forName(key.substring(0, key.lastIndexOf(".")));
-                pojo = Class.forName(pojoStr);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+
+            // properties中的key是接口类型+方法
+            // 从接口类型+方法中截取接口类型
+            mapper = Class.forName(key.substring(0, key.lastIndexOf(".")));
+            pojo = Class.forName(pojoStr);
 
             MAPPER_REGISTRY.addMapper(mapper, pojo); // 接口与返回的实体类关系
             mappedStatements.put(key, statement); // 接口方法与SQL关系
@@ -98,9 +97,6 @@ public class Configuration {
 
     /**
      * 根据statement判断是否存在映射的SQL
-     *
-     * @param statementName
-     * @return
      */
     public boolean hasStatement(String statementName) {
         return mappedStatements.containsKey(statementName);
@@ -108,9 +104,6 @@ public class Configuration {
 
     /**
      * 根据statement ID获取SQL
-     *
-     * @param id
-     * @return
      */
     public String getMappedStatement(String id) {
         return mappedStatements.get(id);
@@ -121,10 +114,7 @@ public class Configuration {
     }
 
     /**
-     * 创建执行器，当开启缓存时使用缓存装饰
-     * 当配置插件时，使用插件代理
-     *
-     * @return
+     * 创建执行器，当开启缓存时使用缓存装饰。当配置插件时，使用插件代理
      */
     public Executor newExecutor() {
         Executor executor = null;
@@ -159,12 +149,12 @@ public class Configuration {
         // 2.解析方法上的注解
         Method[] methods = mapper.getMethods();
         for (Method method : methods) {
-            //TODO 其他操作
-            // 解析@Select注解的SQL语句
+            // TODO 其他操作
+            // 解析 @Select 注解的SQL语句
             if (method.isAnnotationPresent(Select.class)) {
                 for (Annotation annotation : method.getDeclaredAnnotations()) {
                     if (annotation.annotationType().equals(Select.class)) {
-                        // 注册接口类型+方法名和SQL语句的映射关系
+                        // 注册接口类型 + 方法名和SQL语句的映射关系
                         String statement = method.getDeclaringClass().getName() + "." + method.getName();
                         mappedStatements.put(statement, ((Select) annotation).value());
                     }

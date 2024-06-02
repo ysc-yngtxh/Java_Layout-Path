@@ -16,8 +16,6 @@ public class InterceptorChain {
 
     /**
      * 对被拦截对象进行层层代理
-     * @param target
-     * @return
      */
     public Object pluginAll(Object target){
         for (Interceptor interceptor : interceptors) {
@@ -27,7 +25,7 @@ public class InterceptorChain {
     }
 
     public boolean hasPlugin(){
-        if (interceptors.size() == 0) {
+        if (interceptors.isEmpty()) {
             return false;
         }
         return true;

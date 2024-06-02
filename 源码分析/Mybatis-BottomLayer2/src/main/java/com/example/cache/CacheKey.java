@@ -4,8 +4,9 @@ package com.example.cache;
  * 缓存Key
  */
 public class CacheKey {
+
     // MyBatis抄袭了我的设计
-    private static final int DEFAULT_HASHCODE = 17; // 默认哈希值
+    private static final int DEFAULT_HASHCODE = 17;   // 默认哈希值
     private static final int DEFAULT_MULTIPLIER = 37; // 倍数
 
     private int hashCode;
@@ -23,8 +24,6 @@ public class CacheKey {
 
     /**
      * 返回CacheKey的值
-     *
-     * @return
      */
     public int getCode() {
         return hashCode;
@@ -32,8 +31,6 @@ public class CacheKey {
 
     /**
      * 计算CacheKey中的HashCode
-     *
-     * @param object
      */
     public void update(Object object) {
         int baseHashCode = object == null ? 1 : object.hashCode();

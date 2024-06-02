@@ -8,6 +8,7 @@ import java.lang.reflect.Proxy;
  * 用于产生MapperProxy代理类
  */
 public class MapperProxyFactory<T> {
+
     private Class<T> mapperInterface;
     private Class object;
 

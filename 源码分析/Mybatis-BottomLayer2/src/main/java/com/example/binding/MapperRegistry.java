@@ -17,10 +17,6 @@ public class MapperRegistry {
     /**
      * 在Configuration中解析接口上的注解时，存入接口和工厂类的映射关系
      * 此处传入pojo类型，是为了最终处理结果集的时候将结果转换为POJO类型
-     *
-     * @param clazz
-     * @param pojo
-     * @param <T>
      */
     public <T> void addMapper(Class<T> clazz, Class pojo) {
         knownMappers.put(clazz, new MapperProxyFactory(clazz, pojo));

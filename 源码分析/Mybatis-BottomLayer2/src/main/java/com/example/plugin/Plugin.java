@@ -11,11 +11,11 @@ import java.lang.reflect.Proxy;
  * 同时提供了创建代理类的方法
  */
 public class Plugin implements InvocationHandler {
+
     private Object target;
     private Interceptor interceptor;
 
     /**
-     *
      * @param target 被代理对象
      * @param interceptor 拦截器（插件）
      */
@@ -26,23 +26,13 @@ public class Plugin implements InvocationHandler {
 
     /**
      * 对被代理对象进行代理，返回代理类
-     * @param obj
-     * @param interceptor
-     * @return
      */
     public static Object wrap(Object obj, Interceptor interceptor) {
         Class clazz = obj.getClass();
         return Proxy.newProxyInstance(clazz.getClassLoader(), clazz.getInterfaces(), new Plugin(obj, interceptor));
     }
 
-    /**
-     *
-     * @param proxy
-     * @param method
-     * @param args
-     * @return
-     * @throws Throwable
-     */
+
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         // 自定义的插件上有@Intercepts注解，指定了拦截的方法

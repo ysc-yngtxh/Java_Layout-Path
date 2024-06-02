@@ -2,6 +2,7 @@ package com.example.executor;
 
 import com.example.parameter.ParameterHandler;
 import com.example.session.Configuration;
+import lombok.SneakyThrows;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -49,24 +50,16 @@ public class StatementHandler {
 
     /**
      * 获取连接
-     *
-     * @return
-     * @throws SQLException
      */
+    @SneakyThrows
     private Connection getConnection() {
         String driver = Configuration.properties.getString("jdbc.driver");
         String url = Configuration.properties.getString("jdbc.url");
         String username = Configuration.properties.getString("jdbc.username");
         String password = Configuration.properties.getString("jdbc.password");
-        Connection conn = null;
-        try {
-            Class.forName(driver);
-            conn = DriverManager.getConnection(url, username, password);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+        Class.forName(driver);
+        Connection conn = DriverManager.getConnection(url, username, password);
         return conn;
     }
 }

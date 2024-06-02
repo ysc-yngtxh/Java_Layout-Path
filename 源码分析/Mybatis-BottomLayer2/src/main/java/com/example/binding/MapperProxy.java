@@ -11,21 +11,15 @@ import java.lang.reflect.Method;
 public class MapperProxy implements InvocationHandler {
 
     private DefaultSqlSession sqlSession;
-    private Class object;
+    private Class<?> object;
 
-    public MapperProxy(DefaultSqlSession sqlSession, Class object) {
+    public MapperProxy(DefaultSqlSession sqlSession, Class<?> object) {
         this.sqlSession = sqlSession;
         this.object = object;
     }
 
     /**
      * 所有Mapper接口的方法调用都会走到这里
-     *
-     * @param proxy
-     * @param method
-     * @param args
-     * @return
-     * @throws Throwable
      */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
