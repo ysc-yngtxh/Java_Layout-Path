@@ -1,6 +1,6 @@
 package com.example.binding;
 
-import com.example.session.DefaultSqlSession;
+import com.example.session.SqlSession;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -10,10 +10,10 @@ import java.lang.reflect.Method;
  */
 public class MapperProxy implements InvocationHandler {
 
-    private DefaultSqlSession sqlSession;
+    private SqlSession sqlSession;
     private Class<?> object;
 
-    public MapperProxy(DefaultSqlSession sqlSession, Class<?> object) {
+    public MapperProxy(SqlSession sqlSession, Class<?> object) {
         this.sqlSession = sqlSession;
         this.object = object;
     }
@@ -23,10 +23,12 @@ public class MapperProxy implements InvocationHandler {
      */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        // 获取Mapper接口类型 + 方法名，作为SQL的唯一标识（全限定名称）
         String mapperInterface = method.getDeclaringClass().getName();
         String methodName = method.getName();
         String statementId = mapperInterface + "." + methodName;
-        // 如果根据接口类型+方法名能找到映射的SQL，则执行SQL
+
+        // 如果根据接口类型 + 方法名能找到映射的SQL，则执行SQL
         if (sqlSession.getConfiguration().hasStatement(statementId)) {
             return sqlSession.selectOne(statementId, args, object);
         }

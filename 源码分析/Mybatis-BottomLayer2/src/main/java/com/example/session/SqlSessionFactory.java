@@ -7,18 +7,14 @@ public class SqlSessionFactory {
 
     private Configuration configuration;
 
-    /**
-     * build方法用于初始化Configuration，解析配置文件的工作在Configuration的构造函数中
-     */
-    public SqlSessionFactory build() {
-        configuration = new Configuration();
-        return this;
+    public SqlSessionFactory(Configuration configuration) {
+        this.configuration = configuration;
     }
 
     /**
-     * 获取DefaultSqlSession
+     * 获取SqlSession
      */
-    public DefaultSqlSession openSqlSession() {
-        return new DefaultSqlSession(configuration);
+    public SqlSession openSession() {
+        return new SqlSession(configuration);
     }
 }

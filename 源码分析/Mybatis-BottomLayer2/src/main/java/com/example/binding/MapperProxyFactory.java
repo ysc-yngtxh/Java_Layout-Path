@@ -1,6 +1,6 @@
 package com.example.binding;
 
-import com.example.session.DefaultSqlSession;
+import com.example.session.SqlSession;
 
 import java.lang.reflect.Proxy;
 
@@ -17,7 +17,9 @@ public class MapperProxyFactory<T> {
         this.object = object;
     }
 
-    public T newInstance(DefaultSqlSession sqlSession) {
-        return (T) Proxy.newProxyInstance(mapperInterface.getClassLoader(), new Class[]{mapperInterface}, new MapperProxy(sqlSession, object));
+    public T newInstance(SqlSession sqlSession) {
+        return (T) Proxy.newProxyInstance(mapperInterface.getClassLoader()
+                , new Class[]{mapperInterface}
+                , new MapperProxy(sqlSession, object));
     }
 }

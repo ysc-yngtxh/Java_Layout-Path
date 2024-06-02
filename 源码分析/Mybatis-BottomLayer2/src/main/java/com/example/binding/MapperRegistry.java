@@ -1,6 +1,6 @@
 package com.example.binding;
 
-import com.example.session.DefaultSqlSession;
+import com.example.session.SqlSession;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +25,7 @@ public class MapperRegistry {
     /**
      * 创建一个代理对象
      */
-    public <T> T getMapper(Class<T> clazz, DefaultSqlSession sqlSession) {
+    public <T> T getMapper(Class<T> clazz, SqlSession sqlSession) {
         MapperProxyFactory proxyFactory = knownMappers.get(clazz);
         if (proxyFactory == null) {
             throw new RuntimeException("Type: " + clazz + " can not find");

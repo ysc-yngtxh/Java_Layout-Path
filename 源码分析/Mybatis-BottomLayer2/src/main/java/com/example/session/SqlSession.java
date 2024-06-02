@@ -1,24 +1,22 @@
 package com.example.session;
 
 import com.example.executor.Executor;
+import lombok.Getter;
 
 /**
  * MeBatis的API，提供给应用层使用
  */
-public class DefaultSqlSession {
+public class SqlSession {
+
+    @Getter
     private Configuration configuration;
     private Executor executor;
 
-    public DefaultSqlSession(Configuration configuration) {
+    public SqlSession(Configuration configuration) {
         this.configuration = configuration;
         // 根据全局配置决定是否使用缓存装饰
         this.executor = configuration.newExecutor();
     }
-
-    public Configuration getConfiguration() {
-        return configuration;
-    }
-
 
     public <T> T getMapper(Class<T> clazz) {
         return configuration.getMapper(clazz, this);

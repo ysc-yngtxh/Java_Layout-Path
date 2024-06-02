@@ -53,10 +53,10 @@ public class StatementHandler {
      */
     @SneakyThrows
     private Connection getConnection() {
-        String driver = Configuration.properties.getString("jdbc.driver");
-        String url = Configuration.properties.getString("jdbc.url");
-        String username = Configuration.properties.getString("jdbc.username");
-        String password = Configuration.properties.getString("jdbc.password");
+        String driver = Configuration.properties.get("jdbc.driver").toString();
+        String url = Configuration.properties.get("jdbc.url").toString();
+        String username = Configuration.properties.get("jdbc.username").toString();
+        String password = Configuration.properties.get("jdbc.password").toString();
 
         Class.forName(driver);
         Connection conn = DriverManager.getConnection(url, username, password);
