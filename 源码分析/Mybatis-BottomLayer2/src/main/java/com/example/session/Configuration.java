@@ -17,15 +17,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 /**
  * 全局配置类
  */
 public class Configuration {
 
-    // SQL映射关系配置，使用注解时不用重复配置
-    public static final ResourceBundle sqlMappings;
     // 全局配置
     public static final Map<String, Object> properties = new HashMap<>();
     // 维护接口方法与SQL关系
@@ -33,16 +30,13 @@ public class Configuration {
     // 维护接口与工厂类关系
     public static final MapperRegistry mapperRegistry = new MapperRegistry();
 
-    // 插件
-    private InterceptorChain interceptorChain = new InterceptorChain();
     // 所有Mapper接口
     private List<Class<?>> mapperList = new ArrayList<>();
     // 类所有文件
     private List<String> classList = new ArrayList<>();
 
-    static {
-        sqlMappings = ResourceBundle.getBundle("v2sql");
-    }
+    // 插件
+    private InterceptorChain interceptorChain = new InterceptorChain();
 
     /**
      * 初始化时解析全局配置文件

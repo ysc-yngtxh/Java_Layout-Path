@@ -3,6 +3,7 @@ package com.example.service.impl;
 import com.example.service.UsbSell;
 
 public class UsbKingFactory implements UsbSell {
+
     @Override
     public float sell(int amount) {
         // 目标方法

@@ -10,6 +10,7 @@ public class SqlSession {
 
     @Getter
     private Configuration configuration;
+
     private Executor executor;
 
     public SqlSession(Configuration configuration) {
