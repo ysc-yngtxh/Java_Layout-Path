@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class TestMyBatis {
+
     // 测试方法，测试功能
     @Test
     public void testInsert() throws IOException {
