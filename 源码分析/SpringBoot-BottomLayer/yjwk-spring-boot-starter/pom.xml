@@ -47,6 +47,8 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
+            <!--这里设置为 可选 项。即：对于当前项目无影响，但是对于引用当前项目作为依赖的，则不会引入该 jetty-->
+            <optional>true</optional>
         </dependency>
     </dependencies>
 

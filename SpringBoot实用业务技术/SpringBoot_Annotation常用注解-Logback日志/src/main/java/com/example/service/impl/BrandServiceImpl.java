@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
  */
 @Service("brandService")
 public class BrandServiceImpl implements BrandService {
+
     @Resource
     private BrandDao brandDao;
 

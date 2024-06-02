@@ -3,7 +3,9 @@ package com.example.config;
 import com.example.conditional.ENCondition;
 import com.example.conditional.ZHCondition;
 import com.example.entity.Brand;
+import org.apache.catalina.startup.Tomcat;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnResource;
@@ -27,6 +29,10 @@ import org.springframework.context.annotation.Configuration;
 // 当给定的在bean存在时,则实例化当前Bean，如果这个bean没有注册到ioc里，@ConditionalOnBean可以让当前Bean也不进行注册；
 // 与之相反，有时候我们需要某个 Bean 不存在于应用上下文时才会加载，那么我们会用到 @ConditionalOnMissingBean 注解
 @ConditionalOnBean(SpringConfig.class)
+
+// 当项目中存在某个类时才会使标有该注解的类或方法生效；
+// @ConditionalOnClass(value = Tomcat.class)
+@ConditionalOnClass(name = "org.apache.catalina.startup.Tomcat")
 
 // 指定资源是否存在于 classpath 中，如果不存在，抛出异常；
 @ConditionalOnResource(resources = "logback-spring.xml")

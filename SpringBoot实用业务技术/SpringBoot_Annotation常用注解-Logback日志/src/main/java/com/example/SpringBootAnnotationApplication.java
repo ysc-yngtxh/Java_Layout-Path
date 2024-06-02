@@ -21,20 +21,21 @@ import java.util.Map;
 public class SpringBootAnnotationApplication {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext run = SpringApplication.run(SpringBootAnnotationApplication.class, args);
+        ConfigurableApplicationContext applicationContext
+                = SpringApplication.run(SpringBootAnnotationApplication.class, args);
 
         System.out.println("当前环境语言：" +
-                (run.getEnvironment().getProperty("user.language").equalsIgnoreCase("zh") ? "中文" : "非中文"));
+                (applicationContext.getEnvironment().getProperty("user.language").equalsIgnoreCase("zh") ? "中文" : "非中文"));
 
         System.out.println(
-                Arrays.stream(run.getBeanDefinitionNames()).toList().contains("conditionalConfig")
-                ? "ConditionalConfig类Bean已注入" : "ConditionalConfig类Bean未注入");
+                Arrays.stream(applicationContext.getBeanDefinitionNames()).toList()
+                .contains("conditionalConfig") ? "ConditionalConfig类Bean已注入" : "ConditionalConfig类Bean未注入");
 
         System.out.println(
-                Arrays.stream(run.getBeanDefinitionNames()).toList().contains("brandExpression")
-                ? "brandExpression类Bean已注入" : "brandExpression类Bean未注入");
+                Arrays.stream(applicationContext.getBeanDefinitionNames()).toList()
+                .contains("brandExpression") ? "brandExpression类Bean已注入" : "brandExpression类Bean未注入");
 
-        Map<String, Brand> beansOfType = run.getBeansOfType(Brand.class);
+        Map<String, Brand> beansOfType = applicationContext.getBeansOfType(Brand.class);
         beansOfType.forEach( (key, value) -> {
             System.out.println(value);
         });

@@ -19,6 +19,14 @@
     </properties>
 
     <dependencies>
+        <!--默认使用 Tomcat服务器-->
+        <!--<dependency>-->
+        <!--    <groupId>com.example</groupId>-->
+        <!--    <artifactId>yjwk-spring-boot-starter</artifactId>-->
+        <!--    <version>0.0.1-SNAPSHOT</version>-->
+        <!--</dependency>-->
+
+        <!--使用 Jetty服务器。需要排除 Tomcat，重新引入 Jetty-->
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>yjwk-spring-boot-starter</artifactId>
@@ -34,11 +42,6 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 

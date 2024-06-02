@@ -1,15 +1,9 @@
 package com.example.webServer;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.SneakyThrows;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.DefaultHandler;
 import org.springframework.web.context.WebApplicationContext;
-
-import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * @author 游家纨绔
