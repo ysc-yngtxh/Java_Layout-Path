@@ -1,4 +1,4 @@
-package com.example.executor;
+package com.example.handler;
 
 import com.example.parameter.ParameterHandler;
 import com.example.session.Configuration;
@@ -52,15 +52,21 @@ public class StatementHandler {
     /**
      * 获取连接
      */
-    @SneakyThrows
     private Connection getConnection() {
         String driver = Configuration.properties.get("jdbc.driver").toString();
         String url = Configuration.properties.get("jdbc.url").toString();
         String username = Configuration.properties.get("jdbc.username").toString();
         String password = Configuration.properties.get("jdbc.password").toString();
 
-        Class.forName(driver);
-        Connection conn = DriverManager.getConnection(url, username, password);
+        Connection conn = null;
+        try {
+            Class.forName(driver);
+            conn = DriverManager.getConnection(url, username, password);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return conn;
     }
 }

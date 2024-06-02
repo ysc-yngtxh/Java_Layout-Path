@@ -5,6 +5,6 @@ import com.example.domain.User;
 
 public interface UserMapper {
 
-    @Select("select * from t_user where id = ?")
+    @Select("select * from user where id = ?")
     public User selectOne(Object id);
 }

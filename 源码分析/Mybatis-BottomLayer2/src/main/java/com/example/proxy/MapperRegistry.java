@@ -1,4 +1,4 @@
-package com.example.binding;
+package com.example.proxy;
 
 import com.example.session.SqlSession;
 
@@ -18,8 +18,8 @@ public class MapperRegistry {
      * 在Configuration中解析接口上的注解时，存入接口和工厂类的映射关系
      * 此处传入pojo类型，是为了最终处理结果集的时候将结果转换为POJO类型
      */
-    public <T> void addMapper(Class<T> clazz, Class pojo) {
-        knownMappers.put(clazz, new MapperProxyFactory(clazz, pojo));
+    public <T> void addMapper(Class<T> clazzByInterface, Class pojo) {
+        knownMappers.put(clazzByInterface, new MapperProxyFactory(clazzByInterface, pojo));
     }
 
     /**

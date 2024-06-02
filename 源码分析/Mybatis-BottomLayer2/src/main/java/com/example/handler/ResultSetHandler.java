@@ -1,8 +1,9 @@
-package com.example.executor;
+package com.example.handler;
 
 import lombok.SneakyThrows;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,18 +17,31 @@ public class ResultSetHandler {
      * @param resultSet 结果集
      * @param type      需要转换的目标类型
      */
-    @SneakyThrows
     public <T> T handle(ResultSet resultSet, Class type) {
         // 直接调用Class的newInstance方法产生一个实例
         Object pojo = null;
-        pojo = type.newInstance();
+        try {
+            pojo = type.getDeclaredConstructor().newInstance();
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
 
         // 遍历结果集
-        if (resultSet.next()) {
-            // 循环赋值
-            for (Field field : pojo.getClass().getDeclaredFields()) {
-                setValue(pojo, field, resultSet);
+        try {
+            if (resultSet.next()) {
+                // 循环赋值
+                for (Field field : pojo.getClass().getDeclaredFields()) {
+                    setValue(pojo, field, resultSet);
+                }
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
         return (T) pojo;
@@ -36,13 +50,25 @@ public class ResultSetHandler {
     /**
      * 通过反射给属性赋值
      */
-    @SneakyThrows
     private void setValue(Object pojo, Field field, ResultSet rs) {
         // 获取 pojo 的 set 方法
-        Method setMethod = pojo.getClass().getMethod("set" + firstWordCapital(field.getName()), field.getType());
+        Method setMethod = null;
+        try {
+            setMethod = pojo.getClass().getMethod("set" + firstWordCapital(field.getName()), field.getType());
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
         // 调用 pojo 的set 方法，使用结果集给属性赋值
         // 赋值先从resultSet取出值 setter
-        setMethod.invoke(pojo, getResult(rs, field));
+        try {
+            setMethod.invoke(pojo, getResult(rs, field));
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

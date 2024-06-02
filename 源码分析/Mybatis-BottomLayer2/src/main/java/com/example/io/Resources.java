@@ -1,7 +1,5 @@
 package com.example.io;
 
-import lombok.SneakyThrows;
-
 import java.io.InputStream;
 
 /**

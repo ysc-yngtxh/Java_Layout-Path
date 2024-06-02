@@ -1,4 +1,4 @@
-package com.example.binding;
+package com.example.proxy;
 
 import com.example.session.SqlSession;
 

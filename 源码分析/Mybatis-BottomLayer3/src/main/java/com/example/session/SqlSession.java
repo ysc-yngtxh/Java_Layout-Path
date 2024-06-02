@@ -15,17 +15,14 @@ public class SqlSession {
 
     public SqlSession(Configuration configuration) {
         this.configuration = configuration;
+        // 根据全局配置决定是否使用缓存装饰
+        this.executor = configuration.newExecutor();
     }
 
     public <T> T getMapper(Class<T> clazz) {
         return configuration.getMapper(clazz, this);
     }
 
-    /**
-     * @param statement Sql的全限定名称
-     * @param parameter SqL的参数
-     * @param pojo      Sql的返回类型
-     */
     public <T> T selectOne(String statement, Object[] parameter, Class pojo) {
         String sql = getConfiguration().getMappedStatement(statement);
         // 打印代理对象时会自动调用toString()方法，触发invoke()

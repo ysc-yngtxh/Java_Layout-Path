@@ -1,4 +1,4 @@
-package com.example.binding;
+package com.example.proxy;
 
 import com.example.session.SqlSession;
 
@@ -23,7 +23,7 @@ public class MapperProxy implements InvocationHandler {
      */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        // 获取Mapper接口类型 + 方法名，作为SQL的唯一标识（全限定名称）
+        // Mapper接口类型+方法名（全限定名称），作为SQL的唯一标识
         String mapperInterface = method.getDeclaringClass().getName();
         String methodName = method.getName();
         String statementId = mapperInterface + "." + methodName;

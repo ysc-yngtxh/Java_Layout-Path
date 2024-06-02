@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration>
+<configuration>
+
+    <!--settings:控制mybatis全局行为-->
+    <settings>
+        <!--setting：设置mybatis输出日志-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <!--环境配置：数据库的连接信息-->
+    <!--default:必须和某个environment的id值一样。告诉mybatis使用哪个数据库的连接信息。也就是访问哪个数据库-->
+    <environments default="mydev">
+        <!--表示线上的数据库，是项目真实使用的库-->
+        <environment id="mydev">
+        <!--
+            environment:一个数据库信息的配置，环境
+            id:一个唯一值，自定义，表示环境的名称
+        -->
+            <transactionManager type="JDBC"/>
+            <!--
+                transactionManager:表示mybatis提交事务，回滚事务的方式
+                type:事务的处理的类型
+                     1)、JDBC:表示mybatis底层是调用JDBC的connection对象的commit，rollback做事务处理
+                     2)、MANAGED:把mybatis的事务处理委托给其他容器(一个服务器软件，一个框架(Spring))
+            -->
+            <dataSource type="POOLED">
+            <!--
+                dataSource:表示数据源，连接数据库的.java体系中，规定实现了javax.sql.DataSource接口的都是数据源。数据源表示Connection对象的
+                type:指定数据源的类型。
+                      1)、POOLED：表示使用连接池，mybatis会创建PooledDataSource类
+                      2)、UPOOLED：不使用连接池，在每次执行sql语句，先创建连接，执行sql，再关闭连接。
+                                   mybatis会创建一个UnPooledDataSource,管理Connection对象的使用
+                      3)、JNDI:java命名和目录服务(windows注册表)
+            -->
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/springdb?useSSL=false&amp;allowPublicKeyRetrieval=true"/>
+                <property name="username" value="root"/>
+                <property name="password" value="131474"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <!--
+            一个mapper标签指定一个文件的位置。
+            从类路径开始的路径信息。 target/class(类路径)
+        -->
+        <mapper resource="com/example/mapper/UserMapper.xml"/>
+        <package name="com.example.mapper"/>
+    </mappers>
+</configuration>

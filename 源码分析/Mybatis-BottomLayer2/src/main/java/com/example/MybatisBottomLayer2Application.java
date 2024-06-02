@@ -25,10 +25,7 @@ public class MybatisBottomLayer2Application {
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 		User user = mapper.selectOne(1);
 
-		System.out.println("第一次查询: " + user);
-		System.out.println();
-		user = mapper.selectOne(1);
-		System.out.println("第二次查询: " + user);
+		System.out.println("查询: " + user);
 	}
 
 }

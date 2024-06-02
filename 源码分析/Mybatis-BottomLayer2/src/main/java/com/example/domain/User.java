@@ -2,19 +2,18 @@ package com.example.domain;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class User {
 
     private Integer id;
 
-    private String userName;
+    private String username;
 
-    private String realName;
+    private Date birthday;
 
-    private String password;
+    private String sex;
 
-    private Integer age;
-
-    private Integer dId;
-
+    private String address;
 }
