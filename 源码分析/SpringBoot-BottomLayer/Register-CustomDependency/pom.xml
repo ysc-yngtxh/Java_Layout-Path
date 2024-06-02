@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>RegisterCustomDependency</artifactId>
+    <artifactId>Register-CustomDependency</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>RegisterCustomDependency</name>
-    <description>RegisterCustomDependency</description>
+    <name>Register-CustomDependency</name>
+    <description>Register-CustomDependency</description>
 
     <properties>
         <java.version>17</java.version>

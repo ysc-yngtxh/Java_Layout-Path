@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.config.WebServerAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 
@@ -16,7 +17,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @ComponentScan
-@Import(WebServerAutoConfiguration.class)
+@Import(WebServerAutoConfiguration.class) // 将自动配置类注入到 Spring 容器中
 public @interface YjwkSpringBootApplication {
 
 }
