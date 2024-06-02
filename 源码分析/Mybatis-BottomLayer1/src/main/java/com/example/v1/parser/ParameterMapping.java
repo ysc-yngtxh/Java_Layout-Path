@@ -2,6 +2,11 @@ package com.example.v1.parser;
 
 import lombok.ToString;
 
+/**
+ * @author 游家纨绔
+ * @dateTime 2024-04-04 23:50
+ * @apiNote TODO 占位符参数映射器
+ */
 @ToString
 public class ParameterMapping {
 

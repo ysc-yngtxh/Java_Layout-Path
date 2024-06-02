@@ -1,5 +1,6 @@
 package com.example.executor;
 
+import com.example.parameter.ParameterHandler;
 import com.example.session.Configuration;
 
 import java.sql.Connection;
@@ -21,7 +22,7 @@ public class StatementHandler {
         try {
             conn = getConnection();
             preparedStatement = conn.prepareStatement(statement);
-            com.demo.parameter.ParameterHandler parameterHandler = new com.demo.parameter.ParameterHandler(preparedStatement);
+            ParameterHandler parameterHandler = new ParameterHandler(preparedStatement);
             parameterHandler.setParameters(parameter);
             preparedStatement.execute();
             try {

@@ -1,5 +1,8 @@
 package com.example.v2.parser;
 
+import lombok.ToString;
+
+@ToString
 public class ParameterMapping {
 
     // 这个String对象，表示的是占位符 #{} 中的参数名
@@ -15,12 +18,5 @@ public class ParameterMapping {
 
     public void setProperty(String property) {
         this.property = property;
-    }
-
-    @Override
-    public String toString() {
-        return "ParameterMapping{" +
-                "property='" + property + '\'' +
-                '}';
     }
 }

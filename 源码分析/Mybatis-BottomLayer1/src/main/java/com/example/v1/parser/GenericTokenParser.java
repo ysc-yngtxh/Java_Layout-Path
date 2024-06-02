@@ -1,5 +1,10 @@
 package com.example.v1.parser;
 
+/**
+ * @author 游家纨绔
+ * @dateTime 2024-04-04 23:50
+ * @apiNote TODO 通用标记解析器
+ */
 public class GenericTokenParser {
 
     private final String openToken;
@@ -15,6 +20,7 @@ public class GenericTokenParser {
     public String parse(String text) {
         if (text != null && !text.isEmpty()) {
             int start = text.indexOf(this.openToken);
+            // 如果不存在 #{ 符号，直接返回原生Sql
             if (start == -1) {
                 return text;
             } else {
@@ -24,8 +30,9 @@ public class GenericTokenParser {
                 StringBuilder expression = null;
 
                 do {
-                    if (start > 0 && src[start - 1] == '\\') {
-                        builder.append(src, offset, start - offset - 1).append(this.openToken);
+                    // 判断 src[start] 前一个字符是否为转义字符‘\’。确保动态SQL中的参数正确地被解析和转义，避免SQL注入或语法错误。
+                    if (start > 0 && src[start-1] == '\\') {
+                        builder.append(src, offset, start-offset-1).append(this.openToken);
                         offset = start + this.openToken.length();
                     } else {
                         if (expression == null) {
@@ -34,17 +41,17 @@ public class GenericTokenParser {
                             expression.setLength(0);
                         }
 
-                        builder.append(src, offset, start - offset);
+                        builder.append(src, offset, start-offset);
                         offset = start + this.openToken.length();
 
                         int end;
                         for(end = text.indexOf(this.closeToken, offset); end > -1; end = text.indexOf(this.closeToken, offset)) {
                             if (end <= offset || src[end - 1] != '\\') {
-                                expression.append(src, offset, end - offset);
+                                expression.append(src, offset, end-offset);
                                 break;
                             }
 
-                            expression.append(src, offset, end - offset - 1).append(this.closeToken);
+                            expression.append(src, offset, end-offset-1).append(this.closeToken);
                             offset = end + this.closeToken.length();
                         }
 
@@ -61,7 +68,7 @@ public class GenericTokenParser {
                 } while(start > -1);
 
                 if (offset < src.length) {
-                    builder.append(src, offset, src.length - offset);
+                    builder.append(src, offset, src.length-offset);
                 }
 
                 return builder.toString();

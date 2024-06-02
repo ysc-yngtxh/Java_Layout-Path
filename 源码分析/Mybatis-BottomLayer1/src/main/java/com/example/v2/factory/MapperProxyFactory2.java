@@ -7,7 +7,7 @@ import com.example.v2.convert.StringTypeHandler;
 import com.example.v2.convert.TypeHandler;
 import com.example.v2.parser.GenericTokenParser;
 import com.example.v2.parser.ParameterMapping;
-import com.example.v2.parser.ParameterMappingTokenHandler;
+import com.example.v2.parser.PlaceholderTokenHandler;
 import lombok.SneakyThrows;
 
 import java.lang.reflect.Method;
@@ -71,14 +71,14 @@ public class MapperProxyFactory2 {
                     for (int i = 0; i < parameters.length; i++) {
                         Param annotationParam = parameters[i].getAnnotation(Param.class);
                         String parameter = annotationParam.value();
-                        // 添加参数对应值：name、age...
+                        // 添加 @Param 注解标注的参数对应值：name、age...
                         paramValueMapping.put(parameter, args[i]);
                         // 添加通过反射获取的参数对应值：arg0、arg1...
                         paramValueMapping.put(parameters[i].getName(), args[i]);
                     }
 
                     // 解析Sql：将 #{} 解析为 ？占位符。这里的解析过程参考了 MyBatis 提供的解析器，自己做了些许改动
-                    ParameterMappingTokenHandler tokenHandler = new ParameterMappingTokenHandler();
+                    PlaceholderTokenHandler tokenHandler = new PlaceholderTokenHandler();
                     GenericTokenParser genericTokenParser = new GenericTokenParser("#{", "}", tokenHandler);
                     String parseSql = genericTokenParser.parse(sql);
                     // 获取所有的占位符的参数名

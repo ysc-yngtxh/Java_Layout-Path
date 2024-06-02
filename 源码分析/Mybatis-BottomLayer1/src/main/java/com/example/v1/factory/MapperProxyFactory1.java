@@ -4,7 +4,7 @@ import com.example.v1.annotation.Param;
 import com.example.v1.annotation.Select;
 import com.example.v1.entity.Student;
 import com.example.v1.parser.GenericTokenParser;
-import com.example.v1.parser.ParameterMappingTokenHandler;
+import com.example.v1.parser.PlaceholderTokenHandler;
 import lombok.SneakyThrows;
 
 import java.lang.reflect.Method;
@@ -52,24 +52,24 @@ public class MapperProxyFactory1 {
                     Select annotationSelect = method.getAnnotation(Select.class);
                     String sql = annotationSelect.value();
 
-                    // 解析参数，并将参数名与参数值包装成一个Map：{[name,xxx], [age,xxx]}
+                    // 解析代理对象的方法参数，并将参数名与参数值包装成一个Map：{[name,xxx], [age,xxx]}
                     HashMap<String, Object> paramValueMapping = new HashMap<>();
                     Parameter[] parameters = method.getParameters();
                     for (int i = 0; i < parameters.length; i++) {
                         Param annotationParam = parameters[i].getAnnotation(Param.class);
                         String parameter = annotationParam.value();
-                        // 添加参数对应值：name、age...
+                        // 添加 @Param 注解标注的参数对应值：myName、myAge...
                         paramValueMapping.put(parameter, args[i]);
                         // 添加通过反射获取的参数对应值：arg0、arg1...
                         paramValueMapping.put(parameters[i].getName(), args[i]);
                     }
 
                     // 解析Sql：将 #{} 解析为 ？占位符。这里解析过程参考了 MyBatis 提供的解析器，自己做了些许改动
-                    ParameterMappingTokenHandler tokenHandler = new ParameterMappingTokenHandler();
+                    PlaceholderTokenHandler tokenHandler = new PlaceholderTokenHandler();
                     GenericTokenParser genericTokenParser = new GenericTokenParser("#{", "}", tokenHandler);
                     String parseSql = genericTokenParser.parse(sql);
 
-                    // JDBC预编译Sql语句：将#{}替换为？，并使用参数值进行查询
+                    // JDBC预编译Sql语句：将 #{} 替换为 ？，并使用参数值进行查询
                     PreparedStatement ps = conn.prepareStatement(parseSql);
                     ps.setString(1, paramValueMapping.get("name").toString());
                     ps.setInt(2, Integer.parseInt(paramValueMapping.get("age").toString()));
