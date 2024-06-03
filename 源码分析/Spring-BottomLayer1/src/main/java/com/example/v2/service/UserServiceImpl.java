@@ -1,10 +1,10 @@
-package com.example.demo2.service;
+package com.example.v2.service;
 
-import com.example.spring.annotation.Component;
-import com.example.spring.interfaces.BeanNameAware;
-import com.example.spring.interfaces.InitializingBean;
-import com.example.spring.annotation.Autowired;
-import com.example.spring.annotation.Scope;
+import com.example.framework.annotation.Component;
+import com.example.framework.interfaces.BeanNameAware;
+import com.example.framework.interfaces.InitializingBean;
+import com.example.framework.annotation.Autowired;
+import com.example.framework.annotation.Scope;
 import lombok.Setter;
 
 /**

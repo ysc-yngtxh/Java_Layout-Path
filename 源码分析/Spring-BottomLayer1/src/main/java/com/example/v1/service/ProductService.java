@@ -1,7 +1,7 @@
-package com.example.demo1.service;
+package com.example.v1.service;
 
-import com.example.spring.annotation.Component;
-import com.example.spring.annotation.Scope;
+import com.example.framework.annotation.Component;
+import com.example.framework.annotation.Scope;
 
 /**
  * @author 游家纨绔

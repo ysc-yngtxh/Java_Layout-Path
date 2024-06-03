@@ -1,4 +1,4 @@
-package com.example.spring.interfaces;
+package com.example.framework.interfaces;
 
 /**
  * @author 游家纨绔

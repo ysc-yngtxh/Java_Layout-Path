@@ -1,23 +1,31 @@
-package com.example.spring;
+package com.example.framework;
 
-import com.example.spring.annotation.Component;
-import com.example.spring.annotation.ComponentScan;
-import com.example.spring.annotation.Scope;
+import com.example.framework.annotation.Autowired;
+import com.example.framework.annotation.Component;
+import com.example.framework.annotation.ComponentScan;
+import com.example.framework.annotation.Scope;
+import com.example.framework.interfaces.BeanNameAware;
+import com.example.framework.interfaces.BeanPostProcessor;
+import com.example.framework.interfaces.InitializingBean;
 import lombok.SneakyThrows;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author 游家纨绔
  * @dateTime 2024-05-07 23:15
  * @apiNote TODO Spring容器
  */
-public class ConfigApplicationContext1 {
+public class ConfigApplicationContext2 {
 
     // 配置类
     private Class<?> rootClass;
@@ -25,8 +33,9 @@ public class ConfigApplicationContext1 {
     // 单例池
     private Map<String, Object> singletonBeanMap = new HashMap<>();
     private Map<String, BeanDefinition> beanDefinitionMap = new HashMap<>();
+    private List<BeanPostProcessor> beanPostProcessorList = new ArrayList<>();
 
-    public ConfigApplicationContext1(Class<?> rootClass) {
+    public ConfigApplicationContext2(Class<?> rootClass) {
         this.rootClass = rootClass;
 
         // 流程：解析配置类
@@ -39,16 +48,50 @@ public class ConfigApplicationContext1 {
         for (Map.Entry<String, BeanDefinition> entry : beanDefinitionMap.entrySet()) {
             BeanDefinition beanDefinition = entry.getValue();
             if (beanDefinition.getScope().equals("singleton")) {
-                Object bean = createBean(beanDefinition); // 单例 Bean
+                Object bean = createBean(entry.getKey(), beanDefinition); // 单例 Bean
                 singletonBeanMap.put(entry.getKey(), bean);
             }
         }
     }
 
     @SneakyThrows
-    private Object createBean(BeanDefinition beanDefinition) {
+    private Object createBean(String beanName, BeanDefinition beanDefinition) {
         Class<?> clazz = beanDefinition.getClazz();
-        return clazz.getDeclaredConstructor().newInstance();
+        Object instance = clazz.getDeclaredConstructor().newInstance();
+        // 属性(依赖)注入
+        for (Field field : clazz.getDeclaredFields()) {
+            if (field.isAnnotationPresent(Autowired.class)) {
+                // 在这里可以处理 byName、byType 注入；这里只是简单实现 byName
+                Object bean = getBean(field.getName());
+                if (Objects.isNull(bean)) {
+                    throw new NullPointerException("该类没有找到对应的 Bean");
+                }
+                field.setAccessible(true);
+                field.set(instance, bean);
+            }
+        }
+
+        // Aware回调
+        if (instance instanceof BeanNameAware) {
+            ((BeanNameAware) instance).setBeanName(beanName);
+        }
+
+        // 调用 BeanPostProcessor 初始化前的后置处理
+        for (BeanPostProcessor beanPostProcessor : beanPostProcessorList) {
+            instance = beanPostProcessor.postProcessBeforeInitialization(instance, beanName);
+        }
+
+        // 初始化
+        if (instance instanceof InitializingBean) {
+            ((InitializingBean) instance).afterPropertiesSet();
+        }
+
+        // 调用 BeanPostProcessor 初始化后的后置处理
+        for (BeanPostProcessor beanPostProcessor : beanPostProcessorList) {
+            instance = beanPostProcessor.postProcessAfterInitialization(instance, beanName);
+        }
+
+        return instance;
     }
 
     @SneakyThrows
@@ -59,7 +102,7 @@ public class ConfigApplicationContext1 {
 
         // TODO 2、扫描路径下的所有类
         // 获取当前类加载器
-        ClassLoader classLoader = ConfigApplicationContext1.class.getClassLoader();
+        ClassLoader classLoader = ConfigApplicationContext2.class.getClassLoader();
         // 通过类加载器获取扫描路径的下的资源 URL (绝对地址)
         URL url = classLoader.getResource(scanPath.replace(".", "/"));
         // 将 URL 进行中文解码 (避免路径中存在中文乱码)
@@ -105,6 +148,12 @@ public class ConfigApplicationContext1 {
                         beanDefinition.setScope(defaultValue);
                     }
                     beanDefinitionMap.put(beanName, beanDefinition);
+
+                    // 判断该类是否实现了 BeanPostProcessor 接口。不能使用 instanceof，因为这里判断的是类不是对象
+                    if (BeanPostProcessor.class.isAssignableFrom(aClass)) {
+                        BeanPostProcessor beanPostProcessor = (BeanPostProcessor) aClass.getDeclaredConstructor().newInstance();
+                        beanPostProcessorList.add(beanPostProcessor);
+                    }
                 }
             }
         }
@@ -117,7 +166,7 @@ public class ConfigApplicationContext1 {
             if (beanDefinition.getScope().equals("singleton")) {
                 return singletonBeanMap.get(beanName);
             } else {
-                return createBean(beanDefinition);
+                return createBean(beanName, beanDefinition);
             }
         } else {
             throw new NullPointerException("BeanDefinition 不存在, 请检查配置类是否正确");

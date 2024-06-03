@@ -1,6 +1,6 @@
-package com.example.demo2.service;
+package com.example.v2.service;
 
-import com.example.spring.annotation.Component;
+import com.example.framework.annotation.Component;
 
 /**
  * @author 游家纨绔

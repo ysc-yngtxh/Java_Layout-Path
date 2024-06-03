@@ -1,7 +1,7 @@
-package com.example.demo2.service;
+package com.example.v2.service;
 
-import com.example.spring.interfaces.BeanPostProcessor;
-import com.example.spring.annotation.Component;
+import com.example.framework.interfaces.BeanPostProcessor;
+import com.example.framework.annotation.Component;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

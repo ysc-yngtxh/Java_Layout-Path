@@ -1,4 +1,4 @@
-package com.example.spring;
+package com.example.framework;
 
 /**
  * @author 游家纨绔

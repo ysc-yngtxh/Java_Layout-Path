@@ -1,10 +1,10 @@
 package com.example;
 
-import com.example.demo1.AppScanPath1;
-import com.example.demo2.AppScanPath2;
-import com.example.demo2.service.UserService;
-import com.example.spring.ConfigApplicationContext1;
-import com.example.spring.ConfigApplicationContext2;
+import com.example.v1.AppScanPath1;
+import com.example.v2.AppScanPath2;
+import com.example.v2.service.UserService;
+import com.example.framework.ConfigApplicationContext1;
+import com.example.framework.ConfigApplicationContext2;
 import org.junit.jupiter.api.Test;
 
 public class SpringBottomLayer1Tests {
@@ -15,7 +15,7 @@ public class SpringBottomLayer1Tests {
         // AnnotationConfigApplicationContext 表示从注解加载配置文件
 
         // 简单模拟实现自定义的 Spring 容器 -- ConfigApplicationContext1
-        // AppScanPath1.class 表示容器扫描 demo1 路径
+        // AppScanPath1.class 表示容器扫描 v1 路径
         ConfigApplicationContext1 applicationContext1 =
                 new ConfigApplicationContext1(AppScanPath1.class);
 
@@ -27,7 +27,7 @@ public class SpringBottomLayer1Tests {
 
     @Test
     public void applicationContext2() {
-        // AppScanPath2.class 表示容器扫描 demo1 路径
+        // AppScanPath2.class 表示容器扫描 v1 路径
         ConfigApplicationContext2 applicationContext2 =
                 new ConfigApplicationContext2(AppScanPath2.class);
 
