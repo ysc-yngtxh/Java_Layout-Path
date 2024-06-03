@@ -231,7 +231,10 @@
              <include>##/#.properties</include>
              <include>##/#.xml</include>
            </includes>
-           <filtering>false</filtering>  <!--filetering选项false不启用过滤器，#.properties已经起到了过滤器的作用-->
+           <!--Maven 提供了一种过滤机制，这种机制能够在资源文件被复制到目标目录的同时，
+               当 filtering=true 时替换资源文件中的占位符，
+               当 filtering=false 时不进行占位符的替换。-->
+           <filtering>false</filtering>
          </resource>
        </resources>
      </build>
