@@ -18,7 +18,7 @@ public class CachingExecutor implements Executor {
     }
 
     @Override
-    public <T> T query(String statement, Object[] parameter, Class pojo) {
+    public <T> T query(String statement, Object[] parameter, Class<T> pojo) {
         // 计算CacheKey
         CacheKey cacheKey = new CacheKey();
         cacheKey.update(statement);

@@ -17,6 +17,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Invocation implements Serializable {
+
     private static final long serialVersionUID = 3068662031159582351L;
 
     private String interfaceName;

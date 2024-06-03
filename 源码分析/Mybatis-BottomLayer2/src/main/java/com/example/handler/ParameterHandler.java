@@ -1,4 +1,4 @@
-package com.example.parameter;
+package com.example.handler;
 
 import lombok.SneakyThrows;
 
@@ -16,7 +16,7 @@ public class ParameterHandler {
     }
 
     /**
-     * 从方法中获取参数，遍历设置SQL中的？占位符
+     * 从方法中获取参数，遍历设置SQL中的 ？占位符
      */
     @SneakyThrows
     public void setParameters(Object[] parameters) {

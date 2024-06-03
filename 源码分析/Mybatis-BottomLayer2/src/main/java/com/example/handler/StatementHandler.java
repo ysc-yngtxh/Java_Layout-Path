@@ -1,6 +1,5 @@
 package com.example.handler;
 
-import com.example.parameter.ParameterHandler;
 import com.example.session.Configuration;
 import lombok.SneakyThrows;
 
@@ -16,7 +15,7 @@ public class StatementHandler {
 
     private ResultSetHandler resultSetHandler = new ResultSetHandler();
 
-    public <T> T query(String statement, Object[] parameter, Class pojo) {
+    public <T> T query(String statement, Object[] parameter, Class<T> pojo) {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
         Object result = null;
@@ -26,12 +25,11 @@ public class StatementHandler {
             preparedStatement = conn.prepareStatement(statement);
             ParameterHandler parameterHandler = new ParameterHandler(preparedStatement);
             parameterHandler.setParameters(parameter);
+
             preparedStatement.execute();
-            try {
-                result = resultSetHandler.handle(preparedStatement.getResultSet(), pojo);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+
+            result = resultSetHandler.handle(preparedStatement.getResultSet(), pojo);
+
             return (T) result;
         } catch (Exception e) {
             e.printStackTrace();
@@ -42,7 +40,6 @@ public class StatementHandler {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-                conn = null;
             }
         }
         // 只在try里面return会报错
@@ -52,21 +49,15 @@ public class StatementHandler {
     /**
      * 获取连接
      */
+    @SneakyThrows
     private Connection getConnection() {
         String driver = Configuration.properties.get("jdbc.driver").toString();
         String url = Configuration.properties.get("jdbc.url").toString();
         String username = Configuration.properties.get("jdbc.username").toString();
         String password = Configuration.properties.get("jdbc.password").toString();
 
-        Connection conn = null;
-        try {
-            Class.forName(driver);
-            conn = DriverManager.getConnection(url, username, password);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        Class.forName(driver);
+        Connection conn = DriverManager.getConnection(url, username, password);
         return conn;
     }
 }

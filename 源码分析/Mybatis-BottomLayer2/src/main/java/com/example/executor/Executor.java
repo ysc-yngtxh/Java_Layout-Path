@@ -5,5 +5,5 @@ package com.example.executor;
  */
 public interface Executor {
 
-    <T> T query(String statement, Object[] parameter, Class pojo);
+    <T> T query(String statement, Object[] parameter, Class<T> pojo);
 }
