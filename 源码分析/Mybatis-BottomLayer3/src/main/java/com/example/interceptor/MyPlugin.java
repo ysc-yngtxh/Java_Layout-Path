@@ -17,7 +17,7 @@ public class MyPlugin implements Interceptor {
     public Object intercept(Invocation invocation) throws Throwable {
         String statement = (String) invocation.getArgs()[0];
         Object[] parameter = (Object[]) invocation.getArgs()[1];
-        Class pojo = (Class) invocation.getArgs()[2];
+        Class<?> pojo = (Class<?>) invocation.getArgs()[2];
         System.out.println("进入自定义插件：MyPlugin");
         System.out.println("SQL：[" + statement + "]");
         System.out.println("Parameters：" + Arrays.toString(parameter));

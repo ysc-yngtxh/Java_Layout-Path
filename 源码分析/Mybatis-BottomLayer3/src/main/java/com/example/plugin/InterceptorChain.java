@@ -10,6 +10,9 @@ public class InterceptorChain {
 
     private final List<Interceptor> interceptors = new ArrayList<>();
 
+    /**
+     * 添加插件
+     */
     public void addInterceptor(Interceptor interceptor){
         interceptors.add(interceptor);
     }
@@ -24,6 +27,9 @@ public class InterceptorChain {
         return target;
     }
 
+    /**
+     * 判断是否存在插件
+     */
     public boolean hasPlugin(){
         if (interceptors.isEmpty()) {
             return false;

@@ -58,7 +58,7 @@ public class ExecutorTenantInterceptor implements Interceptor {
     @Override
     public Object plugin(Object target) {
         log.info("ExecutorTenantInterceptor Plugin >>>>>>> {}", target);
-        // 判断一下目标类型，是本插件要拦截的对象时才执行Plugin.wrap方法，否则的话，直接返回目标本身
+        // 判断一下目标类型，是本插件要拦截的对象时才执行 Plugin.wrap 方法，否则的话，直接返回目标本身
         // 我们要拦截的对象是定义在 @Signature 中的第一个参数 type 值。根据第二个参数 method 值了解到针对的是查询请求
         if (target instanceof Executor) {
             // 返回一个拦截器代理对象，这里的 this 就是我们的 ExecutorTenantInterceptor 类，作为代理对象会去执行我们重写的拦截 intercept() 方法

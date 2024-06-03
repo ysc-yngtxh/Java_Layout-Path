@@ -15,5 +15,6 @@ import java.util.List;
 @Component
 @ConfigurationProperties(prefix = "lock-tables")
 public class LockTables {
+
     private List<String> pessimistic;
 }

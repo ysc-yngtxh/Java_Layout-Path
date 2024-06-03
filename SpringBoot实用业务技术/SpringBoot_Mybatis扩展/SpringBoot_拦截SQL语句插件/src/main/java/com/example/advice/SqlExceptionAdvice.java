@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  */
 @RestControllerAdvice
 public class SqlExceptionAdvice {
+
     @ExceptionHandler(SqlException.class)
     public String ExceptionResult(SqlException se) {
         return se.getSqlEnum().getMessage();

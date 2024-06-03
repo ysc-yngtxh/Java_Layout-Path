@@ -28,7 +28,7 @@ public class SqlSessionFactoryBuilder {
         map.put("jdbc.username", "root");
         map.put("jdbc.password", "131474");
         map.put("mapper.path", "com.example.mapper");
-        map.put("plugin.path", "com.example.plugin");
+        map.put("plugin.path", "com.example.interceptor.MyPlugin");
         map.put("cache.enabled", true);
         return map;
     }

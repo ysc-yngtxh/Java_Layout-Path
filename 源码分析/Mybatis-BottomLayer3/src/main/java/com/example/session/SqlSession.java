@@ -23,7 +23,7 @@ public class SqlSession {
         return configuration.getMapper(clazz, this);
     }
 
-    public <T> T selectOne(String statement, Object[] parameter, Class pojo) {
+    public <T> T selectOne(String statement, Object[] parameter, Class<T> pojo) {
         String sql = getConfiguration().getMappedStatement(statement);
         // 打印代理对象时会自动调用toString()方法，触发invoke()
         return executor.query(sql, parameter, pojo);

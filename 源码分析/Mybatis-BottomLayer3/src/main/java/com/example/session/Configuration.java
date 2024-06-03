@@ -59,12 +59,7 @@ public class Configuration {
         if (pluginPaths != null) {
             // 将插件添加到interceptorChain中
             for (String plugin : pluginPaths) {
-                Interceptor interceptor = null;
-                try {
-                    interceptor = (Interceptor) Class.forName(plugin).newInstance();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                Interceptor interceptor = (Interceptor) Class.forName(plugin).getDeclaredConstructor().newInstance();
                 interceptorChain.addInterceptor(interceptor);
             }
         }
