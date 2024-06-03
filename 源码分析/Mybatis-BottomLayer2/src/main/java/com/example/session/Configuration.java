@@ -81,11 +81,9 @@ public class Configuration {
         String mainPath = classPath + mapperPath;
         doPath(new File(mainPath));
         for (String className : classList) {
-            String replace = className.replace("/target/classes", "/src/main/java");
-            String replace1 = replace.replace(".class", "");
-            String replace2 = replace1.replace("/", ".");
-            String substring = replace2.substring(replace2.indexOf("com"));
-            Class<?> clazz = Class.forName(substring);
+            String subPath = className.substring(className.indexOf("com/example"), className.indexOf(".class"));
+            String classAbsolutePath = subPath.replace("/", ".");
+            Class<?> clazz = Class.forName(classAbsolutePath);
             if (clazz.isInterface()) {
                 mapperList.add(clazz);
             }
