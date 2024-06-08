@@ -18,6 +18,7 @@ import org.mapstruct.factory.Mappers;
 // 注意是MapStuct的@Mapper注解：表示把该接口通过动态代理的方式注入到Spring容器中，
 //                            就不需要下面的实例对象 MapStructExample mapStr = Mappers.getMapper(MapStructExample.class);
 public interface MapStructExample {
+
     // 这里是获取mapStruct实例对象，肯定是代理对象 [接口是无法实例化的]
     MapStructExample mapStr = Mappers.getMapper(MapStructExample.class);
 

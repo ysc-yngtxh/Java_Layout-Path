@@ -11,6 +11,7 @@ public class OrderPipeline implements Pipeline {
     private HandlerNode head = new HandlerNode();
     private HandlerNode tail;
     private PipelineContext context;
+
     public OrderPipeline(PipelineContext context) {
         this.context = context;
     }

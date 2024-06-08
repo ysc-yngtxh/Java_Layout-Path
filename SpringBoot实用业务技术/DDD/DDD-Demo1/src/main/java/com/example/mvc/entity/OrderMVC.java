@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  * @description TODO 订单信息
  */
 @Data
-public class Order {
+public class OrderMVC {
     private long orderId;
     private int buyerId;
     private int sellerId;

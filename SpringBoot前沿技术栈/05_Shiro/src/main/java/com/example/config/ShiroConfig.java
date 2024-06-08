@@ -3,6 +3,7 @@ package com.example.config;
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.example.realm.MyRealm;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.mgt.SessionsSecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +17,7 @@ public class ShiroConfig {
 
     // 配置一个Shiro的过滤器bean,这个bean将配置shiro相关的一个规则的拦截
     @Bean
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager){
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager){
         // 创建过滤器配置Bean
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
@@ -46,7 +47,7 @@ public class ShiroConfig {
         // filterChainMap.put("/user/**", "authc, roles[admin]");
 
         // 配置剩余的所有请求全部需要进行登录认证(注意：这个必须写在最后面)：可选的配置
-        // filterChainMap.put("/**","authc");
+        // filterChainMap.put("/**", "authc");
 
         // 设置权限拦截规则
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainMap);
@@ -56,7 +57,7 @@ public class ShiroConfig {
 
     // 配置一个SecurityManager 安全管理器
     @Bean
-    public SecurityManager securityManager(MyRealm myrealm){
+    public SessionsSecurityManager securityManager(MyRealm myrealm){
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
         defaultWebSecurityManager.setRealm(myrealm);
         return defaultWebSecurityManager;

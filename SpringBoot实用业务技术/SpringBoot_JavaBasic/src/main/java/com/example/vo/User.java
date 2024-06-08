@@ -22,11 +22,14 @@ import java.util.Optional;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
+
     private Long id;
     private String name;
     private String email;
+
     @JSONField(name="AGE")
     private int age;
+
     private Date date;
     private Models models;
     private Optional<Models> modelsOptional;

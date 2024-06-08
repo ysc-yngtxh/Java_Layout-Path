@@ -1,6 +1,6 @@
 package com.example.ddd.application.service.impl;
 
-import com.example.ddd.domain.entity.Order;
+import com.example.ddd.domain.entity.OrderDDD;
 import com.example.ddd.domain.repository.OrderRepository;
 import com.example.ddd.domain.valobj.Address;
 import com.example.ddd.domain.valobj.OrderItem;
@@ -15,11 +15,11 @@ import java.util.Set;
  * @apiNote TODO
  */
 @Service
-public class OrderServiceImpl {
+public class OrderDDDServiceImpl {
 
     private final OrderRepository orderRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository) {
+    public OrderDDDServiceImpl(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
 
@@ -30,10 +30,10 @@ public class OrderServiceImpl {
      * @param orderItems
      */
     public void createOrder(int buyerId, int sellerId, Set<OrderItem> orderItems){
-        Order order = new Order(1L, buyerId, sellerId, new Address(), orderItems);
+        OrderDDD orderDDD = new OrderDDD(1L, buyerId, sellerId, new Address(), orderItems);
         // 运费不随订单其它信息一同构造，因为运费可能在后期会进行修改，因此提供一个设置运费的方法
-        order.setShippingFee(BigDecimal.TEN);
-        orderRepository.save(order);
+        orderDDD.setShippingFee(BigDecimal.TEN);
+        orderRepository.save(orderDDD);
     }
 
     /**
@@ -41,9 +41,9 @@ public class OrderServiceImpl {
      * @param orderId
      */
     public void updateAddress(long orderId, Address address){
-        Order order = orderRepository.findById(orderId);
-        order.updateAddress(address);
-        orderRepository.save(order);
+        OrderDDD orderDDD = orderRepository.findById(orderId);
+        orderDDD.updateAddress(address);
+        orderRepository.save(orderDDD);
     }
 
     /**
@@ -52,8 +52,8 @@ public class OrderServiceImpl {
      * @param discountAmount
      */
     public void setDiscount(long orderId, BigDecimal discountAmount){
-        Order order = orderRepository.findById(orderId);
-        order.setDiscount(discountAmount);
-        orderRepository.save(order);
+        OrderDDD orderDDD = orderRepository.findById(orderId);
+        orderDDD.setDiscount(discountAmount);
+        orderRepository.save(orderDDD);
     }
 }

@@ -20,29 +20,29 @@
 
     <dependencies>
         <!--默认使用 Tomcat服务器-->
-        <!--<dependency>-->
-        <!--    <groupId>com.example</groupId>-->
-        <!--    <artifactId>yjwk-spring-boot-starter</artifactId>-->
-        <!--    <version>0.0.1-SNAPSHOT</version>-->
-        <!--</dependency>-->
-
-        <!--使用 Jetty服务器。需要排除 Tomcat，重新引入 Jetty-->
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>yjwk-spring-boot-starter</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.tomcat.embed</groupId>
-                    <artifactId>tomcat-embed-core</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-server</artifactId>
-        </dependency>
+        <!--使用 Jetty服务器。需要排除 Tomcat，重新引入 Jetty-->
+        <!--<dependency>-->
+        <!--    <groupId>com.example</groupId>-->
+        <!--    <artifactId>yjwk-spring-boot-starter</artifactId>-->
+        <!--    <version>0.0.1-SNAPSHOT</version>-->
+        <!--    <exclusions>-->
+        <!--        <exclusion>-->
+        <!--            <groupId>org.apache.tomcat.embed</groupId>-->
+        <!--            <artifactId>tomcat-embed-core</artifactId>-->
+        <!--        </exclusion>-->
+        <!--    </exclusions>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+        <!--    <groupId>org.eclipse.jetty</groupId>-->
+        <!--    <artifactId>jetty-server</artifactId>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>

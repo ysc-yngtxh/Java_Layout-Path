@@ -50,6 +50,7 @@ public class TomcatWebServer implements WebServer {
         service.setContainer(engine);
         service.addConnector(connector);
 
+        // 调用 SpringMVC 的中央调度器DispatchServlet，中央调度起要能扫描所有的 Controller类，因此需要传入 Spring容器
         tomcat.addServlet(contextPath, "dispatcher", new DispatcherServlet(webApplicationContext));
         context.addServletMappingDecoded("/*", "dispatcher");
 

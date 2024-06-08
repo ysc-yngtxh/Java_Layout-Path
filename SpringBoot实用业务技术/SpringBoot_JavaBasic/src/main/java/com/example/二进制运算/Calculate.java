@@ -8,6 +8,7 @@ import cn.hutool.log.Log;
  * @apiNote TODO 计算机二进制运算
  */
 public class Calculate {
+
     private static final Log log = Log.get(Calculate.class);
 
     public static void main(String[] args) {

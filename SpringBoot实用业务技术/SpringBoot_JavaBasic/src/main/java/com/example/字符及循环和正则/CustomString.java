@@ -13,7 +13,9 @@ import java.util.Locale;
  * @date 2022/11/27 23:44
  */
 public class CustomString {
+
     public static final Log log = LogFactory.get(CustomString.class);
+
     public static void main(String[] args) {
 
         // TODO 判断字符串是否为空

@@ -16,6 +16,7 @@ import java.util.Optional;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Models {
+
     private ModelView modelView;
     private Optional<ModelView> modelViewOptional;
 

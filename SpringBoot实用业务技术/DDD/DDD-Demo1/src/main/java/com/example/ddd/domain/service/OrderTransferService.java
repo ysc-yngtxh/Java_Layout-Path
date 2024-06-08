@@ -1,6 +1,6 @@
 package com.example.ddd.domain.service;
 
-import com.example.ddd.domain.entity.Order;
+import com.example.ddd.domain.entity.OrderDDD;
 
 /**
  * @author 游家纨绔
@@ -8,5 +8,5 @@ import com.example.ddd.domain.entity.Order;
  * @apiNote TODO
  */
 public interface OrderTransferService {
-    void transfer(Order sourceAccount, Order targetAccount);
+    void transfer(OrderDDD sourceAccount, OrderDDD targetAccount);
 }

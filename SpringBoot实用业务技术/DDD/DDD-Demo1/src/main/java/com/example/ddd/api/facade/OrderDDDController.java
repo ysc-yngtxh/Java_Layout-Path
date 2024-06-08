@@ -5,5 +5,5 @@ package com.example.ddd.api.facade;
  * @dateTime 2024-04-22 下午11:33
  * @apiNote TODO
  */
-public class OrderController {
+public class OrderDDDController {
 }

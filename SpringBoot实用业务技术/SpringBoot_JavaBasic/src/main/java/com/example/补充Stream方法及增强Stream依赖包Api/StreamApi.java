@@ -24,7 +24,9 @@ import java.util.stream.Stream;
  * @date 2022/11/28 15:54
  */
 public class StreamApi {
+
     public static final Log log = LogFactory.get(StreamApi.class);
+
     List<User> users = Arrays.asList(
             new User(1L, null, null, 0, null
                     , new Models(new ModelView("WUHAN"), null), null)

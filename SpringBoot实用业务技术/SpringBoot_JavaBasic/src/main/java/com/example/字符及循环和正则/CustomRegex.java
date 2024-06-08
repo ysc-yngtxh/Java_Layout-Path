@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
  * @apiNote TODO 正则详情
  */
 public class CustomRegex {
+
     public static void main(String[] args) {
 
         // TODO Pattern在java.util.regex包中，是正则表达式的编译表示形式，此类的实例是不可变的，可供多个并发线程安全使用。

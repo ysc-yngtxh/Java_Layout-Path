@@ -16,12 +16,13 @@
     <description>SpringBoot-BottomLayer</description>
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>22</java.version>
     </properties>
     <packaging>pom</packaging>
 
     <modules>
         <module>yjwk-Spring-boot-starter</module>
+        <module>Register-CustomDependency</module>
     </modules>
 
     <dependencies>

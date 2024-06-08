@@ -19,6 +19,7 @@ import java.util.Optional;
  * @date 2022/11/26 17:18
  */
 public class OptionalApi {
+
     public static final Log log = LogFactory.get(OptionalApi.class);
 
     @Test
@@ -43,6 +44,7 @@ public class OptionalApi {
             log.debug("User为空");
         }
     }
+
     @Test
     public void test2() {
         // TODO 使用optional来处理空指针(简约)
@@ -65,6 +67,7 @@ public class OptionalApi {
                 .orElseGet(() -> new User(1L, "two", "qwer@163.com", 25));
         log.info(one.toString());
     }
+
     @Test
     public void test3() {
         // TODO map()与flatMap()方法的区别
@@ -89,6 +92,7 @@ public class OptionalApi {
                 .orElse(new Models(new ModelView("大大"), null));
         System.out.println(orElse);
     }
+
     @Test
     public void test4() {
         // TODO 判断是否有值

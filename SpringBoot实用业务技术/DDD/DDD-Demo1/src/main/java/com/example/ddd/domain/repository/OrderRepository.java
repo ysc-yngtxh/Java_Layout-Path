@@ -1,9 +1,6 @@
 package com.example.ddd.domain.repository;
 
-import com.example.ddd.domain.entity.Order;
-import com.example.ddd.infrastucture.po.OrderPO;
-
-import java.util.List;
+import com.example.ddd.domain.entity.OrderDDD;
 
 /**
  * @author 游家纨绔
@@ -12,7 +9,7 @@ import java.util.List;
  */
 public interface OrderRepository {
 
-    void save(Order order);
+    void save(OrderDDD orderDDD);
 
-    Order findById(Long id);
+    OrderDDD findById(Long id);
 }

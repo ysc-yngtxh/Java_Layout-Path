@@ -12,6 +12,7 @@ import java.util.List;
  * @apiNote TODO 循环
  */
 public class CustomCycle {
+
     public static void main(String[] args) {
         // TODO 区别迭代器、for循环、增强for循环、list.foreach()、stream.foreach()
         // 原生语法跳出当前循环使用continue

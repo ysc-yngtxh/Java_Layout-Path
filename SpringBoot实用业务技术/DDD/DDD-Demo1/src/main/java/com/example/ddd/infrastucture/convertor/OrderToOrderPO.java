@@ -1,6 +1,6 @@
 package com.example.ddd.infrastucture.convertor;
 
-import com.example.ddd.domain.entity.Order;
+import com.example.ddd.domain.entity.OrderDDD;
 import com.example.ddd.infrastucture.po.OrderPO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -23,5 +23,5 @@ public interface OrderToOrderPO {
             @Mapping(target = "discountAmount", source = "discountAmount"),
             @Mapping(target = "address", source = "address")
     })
-    OrderPO toOrderPO(Order order);
+    OrderPO toOrderPO(OrderDDD orderDDD);
 }

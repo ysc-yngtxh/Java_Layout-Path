@@ -11,7 +11,7 @@ import java.util.Set;
  * @dateTime 2024-04-22 下午11:42
  * @apiNote TODO
  */
-public interface IOrderService {
+public interface IOrderDDDService {
     void createOrder(int buyerId, int sellerId, Set<OrderItem> orderItems);
     void updateAddress(long orderId, Address address);
     void setDiscount(long orderId, BigDecimal discountAmount);

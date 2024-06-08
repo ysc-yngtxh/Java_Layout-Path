@@ -23,6 +23,7 @@ import java.util.stream.Stream;
  * @date 2022/11/26 14:54
  */
 public class CustomerCollection {
+
     public static final Log log = LogFactory.get(CustomerCollection.class);
 
     @Test
@@ -37,6 +38,7 @@ public class CustomerCollection {
         // 3、使用Stream流
         List<Object> collect = Stream.of("address", "1234").collect(Collectors.toList());
     }
+
     @Test
     public void test2() {
         // ImmutableList是一个不可变、线程安全的列表集合(静态方法、集合元素类型保持一致)
@@ -57,6 +59,7 @@ public class CustomerCollection {
         List<String> arrayList = Lists.newArrayList("123", "456");
         Map<String, Integer> hashMap = Maps.newHashMap(ImmutableMap.of("name", 25));
     }
+
     @Test
     public void test3() {
         // TODO 集合引用小问题

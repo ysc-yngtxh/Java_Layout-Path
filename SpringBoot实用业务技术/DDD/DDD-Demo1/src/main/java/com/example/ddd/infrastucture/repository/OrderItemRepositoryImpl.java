@@ -3,7 +3,7 @@ package com.example.ddd.infrastucture.repository;
 import com.example.ddd.domain.repository.OrderItemRepository;
 import com.example.ddd.domain.valobj.OrderItem;
 import com.example.ddd.infrastucture.convertor.OrderItemToOrderItemPO;
-import com.example.ddd.infrastucture.dao.OrderItemDao;
+import com.example.ddd.infrastucture.dao.OrderItemDDDDao;
 import com.example.ddd.infrastucture.po.OrderItemPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class OrderItemRepositoryImpl implements OrderItemRepository {
 
     @Autowired
-    private OrderItemDao orderItemDao;
+    private OrderItemDDDDao orderItemDDDDao;
     @Autowired
     private OrderItemToOrderItemPO orderItemToOrderItemPO;
 
@@ -30,7 +30,7 @@ public class OrderItemRepositoryImpl implements OrderItemRepository {
                         .map(orderItemToOrderItemPO::toOrderItemPO)
                         .collect(Collectors.toList());
 
-        // orderItemDao => 存储订单商品数据
-        orderItemDao.batchInsert(orderItemPOList);
+        // orderItemDDDDao => 存储订单商品数据
+        orderItemDDDDao.batchInsert(orderItemPOList);
     }
 }

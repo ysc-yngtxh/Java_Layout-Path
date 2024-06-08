@@ -14,7 +14,6 @@ import one.util.streamex.StreamEx;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Arrays;
 import java.util.Collections;
@@ -31,7 +30,9 @@ import java.util.stream.Stream;
  * @date 2022/11/28 0:03
  */
 public class StreamExApi {
+
     public static final Log log = LogFactory.get(StreamExApi.class);
+
     List<User> users = Arrays.asList(
             new User(null, null, null, 0, null
                     ,new Models(new ModelView("WUHAN"),null),null)
@@ -67,6 +68,7 @@ public class StreamExApi {
             System.out.println(line);
         }
     }
+
     @Test
     public void test2() {
         // TODO 6、通过IntStreamEx流将数据业务处理再转为short数组
@@ -92,6 +94,7 @@ public class StreamExApi {
                 .toSet();
         log.info("TODO-8"+nonNullRoles.toString());
     }
+
     @Test
     @SneakyThrows
     public void test3() {
@@ -121,6 +124,7 @@ public class StreamExApi {
                 .toList();
         log.info(stringList.toString());
     }
+
     @Test
     public void test4() {
         /** ========================================StreamEx与EntryStream分割线=====================================*/

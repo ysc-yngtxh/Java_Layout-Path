@@ -76,7 +76,7 @@ DDD主要分为两个部分，战略设计与战术设计，战略设计围绕�
 
 将实体和值对象在一致性边界之内组成聚合,使用聚合划分限界上下文(微服务)内部的边界,聚合根做为一种特殊的实体，用于管理聚合内部的实体与值对象，并将自身暴露给外部进行引用。
 
-![order-aggregation](https://gitee.com/izhengyin/ddd-message/raw/master/blog/images/order-aggregation.png)
+![orderDDD-aggregation](https://gitee.com/izhengyin/ddd-message/raw/master/blog/images/orderDDD-aggregation.png)
 
 比如在上图中描述的是一个订单聚合，在这个聚合中，它里面有两个实体，一个是订单一个是退货退款协议，显然退货退款协议应该依托于订单，但是它也符合实体的特征，因此被定义为实体。在此情况下，订单实体就是此聚合的聚合根。
 

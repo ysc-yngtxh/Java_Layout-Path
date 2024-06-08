@@ -421,28 +421,28 @@ public class Order {
      */
     public void createOrder(int buyerId,int sellerId,List<OrderItem> orderItems){
         //新建一个Order数据对象
-        Order order = new Order();
-        order.setOrderId(1L);
+        Order orderDDD = new Order();
+        orderDDD.setOrderId(1L);
         //算订单总金额
         BigDecimal amount = orderItems.stream()
                 .map(OrderItem::getPrice)
                 .reduce(BigDecimal.ZERO,BigDecimal::add);
-        order.setAmount(amount);
+        orderDDD.setAmount(amount);
         //运费
-        order.setShippingFee(BigDecimal.TEN);
+        orderDDD.setShippingFee(BigDecimal.TEN);
         //优惠金额
-        order.setDiscountAmount(BigDecimal.ZERO);
+        orderDDD.setDiscountAmount(BigDecimal.ZERO);
         //支付总额 = 订单总额 + 运费 - 优惠金额
-        BigDecimal payAmount = order.getAmount().add(order.getShippingFee()).subtract(order.getDiscountAmount());
-        order.setPayAmount(payAmount);
+        BigDecimal payAmount = orderDDD.getAmount().add(orderDDD.getShippingFee()).subtract(orderDDD.getDiscountAmount());
+        orderDDD.setPayAmount(payAmount);
         //设置买卖家
-        order.setBuyerId(buyerId);
-        order.setSellerId(sellerId);
+        orderDDD.setBuyerId(buyerId);
+        orderDDD.setSellerId(sellerId);
         //设置收获地址
-        order.setAddress(JSON.toJSONString(new Address()));
+        orderDDD.setAddress(JSON.toJSONString(new Address()));
         //写库
-        orderDao.insert(order);
-        orderItems.forEach(orderItemDao::insert);
+        orderDDDDao.insert(orderDDD);
+        orderItems.forEach(orderItemDDDDao::insert);
     }
 ```
 
@@ -457,13 +457,13 @@ public class Order {
      * @param discountAmount
      */
     public void setDiscount(long orderId, BigDecimal discountAmount){
-        Order order = orderDao.find(orderId);
-        order.setDiscountAmount(discountAmount);
+        Order orderDDD = orderDDDDao.find(orderId);
+        orderDDD.setDiscountAmount(discountAmount);
         //从新计算支付金额
-        BigDecimal payAmount = order.getAmount().add(order.getShippingFee()).subtract(discountAmount);
-        order.setPayAmount(payAmount);
-        //orderDao => 通过主键更新订单信息
-        orderDao.updateByPrimaryKey(order);
+        BigDecimal payAmount = orderDDD.getAmount().add(orderDDD.getShippingFee()).subtract(discountAmount);
+        orderDDD.setPayAmount(payAmount);
+        //orderDDDDao => 通过主键更新订单信息
+        orderDDDDao.updateByPrimaryKey(orderDDD);
     }
 ```
 
@@ -570,10 +570,10 @@ public class Order {
      * @param orderItems
      */
     public void createOrder(int buyerId, int sellerId, Set<OrderItem> orderItems){
-        Order order = new Order(1L,buyerId,sellerId,new Address(),orderItems);
+        Order orderDDD = new Order(1L,buyerId,sellerId,new Address(),orderItems);
         //运费不随订单其它信息一同构造，因为运费可能在后期会进行修改，因此提供一个设置运费的方法
-        order.setShippingFee(BigDecimal.TEN);
-        orderRepository.save(order);
+        orderDDD.setShippingFee(BigDecimal.TEN);
+        orderRepository.save(orderDDD);
     }
 ```
 
@@ -590,9 +590,9 @@ public class Order {
      * @param discountAmount
      */
      public void setDiscount(long orderId, BigDecimal discountAmount){
-        Order order = orderRepository.find(orderId);
-        order.setDiscount(discountAmount);
-        orderRepository.save(order);
+        Order orderDDD = orderRepository.find(orderId);
+        orderDDD.setDiscount(discountAmount);
+        orderRepository.save(orderDDD);
     }
 ```
 
@@ -621,19 +621,19 @@ public class Order {
 
 ```  
 public class OrderRepository {
-    private final OrderDao orderDao;
-    private final OrderItemDao orderItemDao;
+    private final OrderDao orderDDDDao;
+    private final OrderItemDao orderItemDDDDao;
 
 
-    public OrderRepository(OrderDao orderDao, OrderItemDao orderItemDao) {
-        this.orderDao = orderDao;
-        this.orderItemDao = orderItemDao;
+    public OrderRepository(OrderDao orderDDDDao, OrderItemDao orderItemDDDDao) {
+        this.orderDDDDao = orderDDDDao;
+        this.orderItemDDDDao = orderItemDDDDao;
     }
 
-    public void save(Order order){
+    public void save(Order orderDDD){
         // 在此处通过Order实体,创建数据对象 new OrderPO() ; new OrderItemPO();
-        // orderDao => 存储订单数据
-        // orderItemDao => 存储订单商品数据
+        // orderDDDDao => 存储订单数据
+        // orderItemDDDDao => 存储订单商品数据
 
     }
 
@@ -646,7 +646,7 @@ public class OrderRepository {
 }
 ```
 
-源码地址： https://gitee.com/izhengyin/ddd-message/tree/master/src/main/java/democode/order
+源码地址： https://gitee.com/izhengyin/ddd-message/tree/master/src/main/java/democode/orderDDD
 
 
 

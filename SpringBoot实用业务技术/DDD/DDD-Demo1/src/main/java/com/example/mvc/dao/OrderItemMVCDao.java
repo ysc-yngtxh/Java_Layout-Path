@@ -9,7 +9,7 @@ import java.util.List;
  * @since 2024-04-18 07:20:00
  * @description TODO 订单商品DAO层
  */
-public interface OrderItemDao {
+public interface OrderItemMVCDao {
     void insert(OrderItem orderItem);
     void update(OrderItem orderItem);
     List<OrderItem> getOrderItems(long orderId);

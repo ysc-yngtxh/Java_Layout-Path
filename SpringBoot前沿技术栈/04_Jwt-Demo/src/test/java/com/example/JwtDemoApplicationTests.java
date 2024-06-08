@@ -1,24 +1,25 @@
-package com.example.jwtdemo;
+package com.example;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.JwtParser;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
-
-
 
 @Slf4j
 @SpringBootTest
 class JwtDemoApplicationTests {
 
     private String signature = "csaydgcaisdyc"; // 加盐
-
 
     @Test
     void contextLoads() {
@@ -44,7 +45,6 @@ class JwtDemoApplicationTests {
 
     @Test
     void parse() {
-
         String token = "eyJ0cHkiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoi6ZmI546J5qKFIiwicHdkIjoiNTE0Iiwic3ViIjoiYWRtaW4tdGVzdCIsImV4cCI6MTYzNTM1MDE4NywianRpIjoiZjk1NjQ5ZmQtOGZlMS00NjMzLWJmNjctMTgyODNjZDkxNmUxIn0._yGitIWtGZ2LyD2wXIUGKNPqqqneWNxoVk8kdOtWdn0";
         JwtParser jwtParser = Jwts.parser();
         Jws<Claims> claimsJws = jwtParser.setSigningKey("csaydgcaisdyc").parseClaimsJws(token);
@@ -58,8 +58,9 @@ class JwtDemoApplicationTests {
         log.info(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(claims.getExpiration()));
     }
 
+
     @Test
-    public static void main(String[] args) {
+    public void loader() {
         Md5Hash md5Hash = new Md5Hash("514","MD5",1024);
         System.out.println(md5Hash);
     }

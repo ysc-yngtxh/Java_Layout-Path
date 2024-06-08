@@ -15,7 +15,7 @@ import java.util.Set;
  * @Desccription TODO 订单实体类
  */
 @Getter
-public class Order {
+public class OrderDDD {
     private long orderId;
     private int buyerId;
     private int sellerId;
@@ -24,7 +24,7 @@ public class Order {
     private Address address;
     private Set<OrderItem> orderItems;
 
-    public Order(long orderId, int buyerId, int sellerId, Address address, Set<OrderItem> orderItems){
+    public OrderDDD(long orderId, int buyerId, int sellerId, Address address, Set<OrderItem> orderItems){
         this.orderId = orderId;
         this.buyerId = buyerId;
         this.sellerId = sellerId;
@@ -32,7 +32,7 @@ public class Order {
         this.orderItems = orderItems;
     }
 
-    public Order(long orderId, int buyerId, int sellerId, BigDecimal shippingFee, BigDecimal discountAmount, Address address, Set<OrderItem> orderItems) {
+    public OrderDDD(long orderId, int buyerId, int sellerId, BigDecimal shippingFee, BigDecimal discountAmount, Address address, Set<OrderItem> orderItems) {
         this.orderId = orderId;
         this.buyerId = buyerId;
         this.shippingFee = shippingFee;

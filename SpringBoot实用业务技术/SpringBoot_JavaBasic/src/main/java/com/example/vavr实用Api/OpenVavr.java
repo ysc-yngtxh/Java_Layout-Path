@@ -27,7 +27,9 @@ import static io.vavr.control.Validation.valid;
  * @date 2022/11/27 0:45
  */
 public class OpenVavr {
+
     public static final Log log = LogFactory.get(OpenVavr.class);
+
     static final String NAME_ERR = "Invalid Characters In Name: ";
     static final String AGE_ERR = "Age Must Be At Least 0";
 

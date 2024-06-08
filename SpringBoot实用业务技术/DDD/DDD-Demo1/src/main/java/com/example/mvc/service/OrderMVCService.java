@@ -11,7 +11,7 @@ import java.util.List;
  * @dateTime 2024-04-22 下午11:34
  * @apiNote TODO
  */
-public interface OrderService {
+public interface OrderMVCService {
     void createOrder(int buyerId, int sellerId, List<OrderItem> orderItems);
     void updateAddress(long orderId, Address address);
     void setDiscount(long orderId, BigDecimal discountAmount);
