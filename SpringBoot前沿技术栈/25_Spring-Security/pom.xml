@@ -21,11 +21,11 @@
 
     <modules>
         <module>1_Spring-Security-Demo</module>
-        <module>2.0_Spring-Security-InMemoryUserDetailsManager</module>
-        <module>2_Spring-Security-formLogin</module>
-        <module>3_Spring-Security-Authorization</module>
-        <module>4_Spring-Security-Custom-PreAuthoriza</module>
-        <module>5_Spring-Security-FrontendBackendSeparation</module>
+        <module>2_Spring-Security-InMemoryUserDetailsManager</module>
+        <module>3_Spring-Security-formLogin</module>
+        <module>4_Spring-Security-Authorization</module>
+        <module>5_Spring-Security-Custom-PreAuthoriza</module>
+        <module>6_Spring-Security-FrontendBackendSeparation</module>
     </modules>
     <packaging>pom</packaging>
 
