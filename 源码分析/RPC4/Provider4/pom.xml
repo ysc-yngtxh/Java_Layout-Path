@@ -8,14 +8,17 @@
         <version>3.2.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.example</groupId>
     <artifactId>Provider4</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Provider4</name>
     <description>Provider4</description>
+
     <properties>
-        <java.version>22</java.version>
+        <java.version>21</java.version>
     </properties>
+
     <dependencies>
         <!--引入自定义的Provider-Common依赖-->
         <dependency>

@@ -14,7 +14,7 @@
     <name>RPC4</name>
     <description>RPC4</description>
     <properties>
-        <java.version>22</java.version>
+        <java.version>21</java.version>
     </properties>
     <modules>
         <module>Consumer4</module>
