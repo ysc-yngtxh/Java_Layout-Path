@@ -5,10 +5,23 @@
   <groupId>org.example</groupId>
   <artifactId>Dubbo</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
 
   <name>Dubbo</name>
   <url>http://maven.apache.org</url>
+
+  <modules>
+    <module>01_dubbo-link1</module>
+    <module>02_dubbo-link2</module>
+    <module>03_dubbo-interface</module>
+    <module>04_dubbo-provider</module>
+    <module>05_dubbo-consumer</module>
+    <module>06_dubbo-zookeeper-interface</module>
+    <module>07_dubbo-zookeeper-provider</module>
+    <module>08_dubbo-zookeeper-consumer</module>
+    <module>09_dubbo-version-provider</module>
+    <module>10_dubbo-version-consumer</module>
+  </modules>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
