@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.4</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>com.example</groupId>
+    <artifactId>RPC</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>RPC</name>
+    <description>RPC</description>
+
+    <properties>
+        <java.version>21</java.version>
+    </properties>
+
+    <modules>
+        <module>v1/Consumer</module>
+        <module>v1/Provider</module>
+        <module>v1/Provider-Common</module>
+        <module>v1/RPC-FrameWork</module>
+        <module>v2/Consumer2</module>
+        <module>v2/Provider2</module>
+        <module>v2/Provider-Common2</module>
+        <module>v2/RPC-FrameWork2</module>
+        <module>v3/Consumer3</module>
+        <module>v3/Provider3</module>
+        <module>v3/Provider-Common3</module>
+        <module>v3/RPC-FrameWork3</module>
+        <module>v4/Consumer4</module>
+        <module>v4/Provider4</module>
+        <module>v4/Provider-Common4</module>
+        <module>v4/RPC-FrameWork4</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

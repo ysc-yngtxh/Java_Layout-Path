@@ -1,5 +1,4 @@
 
-
 nacos:
   core:
     size: 3
