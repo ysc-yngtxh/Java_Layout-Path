@@ -31,7 +31,7 @@
                          经尝试，使用尝鲜版本就能解决这些版本问题，后续还是等正式版本更新-->
         <dependency>
             <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
             <version>3.5.5</version>
         </dependency>
         <dependency>
@@ -60,7 +60,7 @@
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
-            <version>0.12.3</version>
+            <version>0.9.1</version>
         </dependency>
         <!--thymeleaf依赖-->
         <dependency>
