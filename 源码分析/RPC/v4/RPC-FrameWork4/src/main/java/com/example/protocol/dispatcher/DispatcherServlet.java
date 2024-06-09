@@ -13,6 +13,7 @@ import java.io.IOException;
  * @apiNote TODO
  */
 public class DispatcherServlet extends HttpServlet {
+
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         new HttpServletHandler().handler(req, resp);

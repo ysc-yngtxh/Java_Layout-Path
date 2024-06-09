@@ -24,14 +24,14 @@ public class AspectAop {
         System.out.println("Aop底层实现为动态代理，因此代理类为：" + jp.getThis().getClass().getName());
 
         // 获取方法的完整定义
-        System.out.println("方法的签名(定义)=" + jp.getSignature());
-        System.out.println("方法的名称=" + jp.getSignature().getName());
+        System.out.println("方法的签名(定义) = " + jp.getSignature());
+        System.out.println("方法的名称 = " + jp.getSignature().getName());
         // 获取方法的实参
         Object[] args = jp.getArgs();
         for(Object arg : args) {
-            System.out.println("参数=" + arg);
+            System.out.println("参数 = " + arg);
         }
         // 就是你切面要执行的功能代码
-        System.out.println("前置通知，切面功能：在目标方法之前输出执行时间" + LocalDateTime.now());
+        System.out.println("前置通知，切面功能：在目标方法之前输出执行时间 " + LocalDateTime.now());
     }
 }

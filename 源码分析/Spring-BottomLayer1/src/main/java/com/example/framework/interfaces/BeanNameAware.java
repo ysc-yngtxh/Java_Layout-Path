@@ -6,5 +6,6 @@ package com.example.framework.interfaces;
  * @apiNote TODO 回调方法
  */
 public interface BeanNameAware {
+
     void setBeanName(String beanName);
 }

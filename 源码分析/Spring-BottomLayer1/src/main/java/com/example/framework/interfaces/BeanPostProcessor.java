@@ -6,6 +6,7 @@ package com.example.framework.interfaces;
  * @apiNote TODO Bean初始化的后置处理器
  */
 public interface BeanPostProcessor {
+
     // Bean初始化前后的后置处理
     Object postProcessBeforeInitialization(Object bean, String beanName);
 

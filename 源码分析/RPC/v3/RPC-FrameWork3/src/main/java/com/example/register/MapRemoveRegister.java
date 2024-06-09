@@ -50,6 +50,7 @@ public class MapRemoveRegister {
     private static void saveFile() {
         FileOutputStream fileOutputStream = new FileOutputStream(path);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        // ⚠️：这里序列化文件，因为是二进制流，不是文本，所以打开文件不论设置什么编码都会乱码。
         objectOutputStream.writeObject(map);
     }
 

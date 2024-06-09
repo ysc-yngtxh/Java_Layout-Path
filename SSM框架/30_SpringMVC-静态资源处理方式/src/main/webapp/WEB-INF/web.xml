@@ -5,30 +5,30 @@
          version="4.0">
 
         <servlet>
-          <servlet-name>springmvc</servlet-name>
-          <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+            <servlet-name>springmvc</servlet-name>
+            <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 
-          <!--自定义springmvc读取的配置文件的位置-->
-          <init-param>
-            <!--contextConfigLocation:表示配置文件的路径-->
-            <param-name>contextConfigLocation</param-name>
-            <!--自定义配置文件的路径-->
-            <param-value>classpath:springmvc.xml</param-value>
-          </init-param>
+            <!--自定义springmvc读取的配置文件的位置-->
+            <init-param>
+                <!--contextConfigLocation:表示配置文件的路径-->
+                <param-name>contextConfigLocation</param-name>
+                <!--自定义配置文件的路径-->
+                <param-value>classpath:springmvc.xml</param-value>
+            </init-param>
 
-          <load-on-startup>1</load-on-startup>
+            <load-on-startup>1</load-on-startup>
         </servlet>
 
         <servlet-mapping>
-          <servlet-name>springmvc</servlet-name>
-            <!--使用斜杠："/"
-                 当你的项目中使用了"/"，他会替代tomcat中的default。
-                 导致所有的静态资源文件都给DispatcherServlet处理，默认情况下DispatcherServlet，没有处理能力
-                 没有控制器对象能处理静态资源的访问。所以静态资源(html,js,图片,css)都是404
+            <servlet-name>springmvc</servlet-name>
+              <!--使用斜杠："/"
+                   当你的项目中使用了"/"，他会替代tomcat中的default。
+                   导致所有的静态资源文件都给DispatcherServlet处理，默认情况下DispatcherServlet，没有处理能力
+                   没有控制器对象能处理静态资源的访问。所以静态资源(html,js,图片,css)都是404
 
-                 动态资源some.do是可以访问的，因为我们程序中有MyController控制器对象，能处理some.do请求
-            -->
-          <url-pattern>/</url-pattern>
+                   动态资源some.do是可以访问的，因为我们程序中有MyController控制器对象，能处理some.do请求
+              -->
+            <url-pattern>/</url-pattern>
         </servlet-mapping>
 
     <!--注册声明过滤器，解决post乱码问题-->

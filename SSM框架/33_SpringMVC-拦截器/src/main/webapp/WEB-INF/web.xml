@@ -6,18 +6,18 @@
 
       <!--注册中央调度器-->
       <servlet>
-        <servlet-name>myWeb</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-          <param-name>contextConfigLocation</param-name>
-          <param-value>classpath:springmvc.xml</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
+          <servlet-name>myWeb</servlet-name>
+          <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+          <init-param>
+              <param-name>contextConfigLocation</param-name>
+              <param-value>classpath:springmvc.xml</param-value>
+          </init-param>
+          <load-on-startup>1</load-on-startup>
       </servlet>
 
       <servlet-mapping>
-        <servlet-name>myWeb</servlet-name>
-        <url-pattern>*.do</url-pattern>
+          <servlet-name>myWeb</servlet-name>
+          <url-pattern>*.do</url-pattern>
       </servlet-mapping>
 
     <!--注册声明过滤器，解决post乱码问题-->
