@@ -7,6 +7,8 @@
   <groupId>com.example</groupId>
   <artifactId>34_SpringMVC-LoginInterceptor</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <!--Tomcat服务器是专门用来运行Java Web应用的容器，它部署的是 war 文件或者是已解压的Web应用目录。
+      因此在使用Tomcat服务器时，项目应该打包成 war 包部署-->
   <packaging>war</packaging>
 
   <name>34_SpringMVC-登陆验证拦截器实现</name>

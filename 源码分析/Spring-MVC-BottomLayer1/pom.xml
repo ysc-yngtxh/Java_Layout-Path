@@ -8,6 +8,8 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>SpringMVC-BottomLayer1</name>
     <description>SpringMVC-BottomLayer1</description>
+    <!--Tomcat服务器是专门用来运行Java Web应用的容器，它部署的是 war 文件或者是已解压的Web应用目录。
+        因此在使用Tomcat服务器时，项目应该打包成 war 包部署-->
     <packaging>war</packaging>
 
     <properties>
@@ -15,6 +17,7 @@
     </properties>
 
     <dependencies>
+        <!--Spring MVC的实现：spring-webmvc依赖，其内含spring-web依赖，无需再显式添加spring-web-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
