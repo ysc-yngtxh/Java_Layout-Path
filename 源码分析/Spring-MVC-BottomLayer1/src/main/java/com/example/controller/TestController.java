@@ -1,19 +1,18 @@
 package com.example.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author 游家纨绔
  * @dateTime 2024-06-09 19:34
  * @apiNote TODO
  */
-@Controller
+@RestController
 public class TestController {
 
     @RequestMapping("/query")
-    public @ResponseBody String loader() {
+    public String loader() {
         return "access success!!!";
     }
 }
