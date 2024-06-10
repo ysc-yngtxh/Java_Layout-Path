@@ -17,25 +17,16 @@
 
         <!--自定义springmvc读取的配置文件的位置-->
         <init-param>
-            <!--contextConfigLocation:表示配置文件的路径-->
-            <param-name>contextConfigLocation</param-name>
-            <!--自定义配置文件的路径-->
-            <param-value>classpath:springmvc.xml</param-value>
+            <param-name>contextConfigLocation</param-name>     <!--表示配置文件的路径-->
+            <param-value>classpath:springmvc.xml</param-value> <!--自定义配置文件的路径-->
         </init-param>
 
-        <!--在tomcat启动后，创建servlet对象
-            load-on-startup：表示Tomcat启动后创建对象的顺序。他的值是整数，数值越小，Tomcat创建对象的时间越早。
-        -->
+        <!--load-on-startup：表示Tomcat启动后创建对象的顺序。他的值是整数，数值越小，Tomcat创建对象的时间越早。-->
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>springmvc</servlet-name>
-        <!--
-            使用框架的时候，url-pattern可以使用两种值
-            1、使用扩展名方式，语法  *.xxxx , xxxx是自定义的扩展名。常用的方法 *.do, *.action, *.mvc等等
-            2、使用斜杠"/"
-        -->
-        <url-pattern>*.do</url-pattern>
+        <servlet-name>springmvc</servlet-name> <!--servlet映射名称-->
+        <url-pattern>*.do</url-pattern>        <!--匹配访问路径 URL-->
     </servlet-mapping>
 </web-app>
