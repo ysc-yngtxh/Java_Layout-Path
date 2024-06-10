@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class MessageEventListener implements ApplicationListener<MessageEvent> {
+
     @SneakyThrows
     public void onApplicationEvent(MessageEvent event) {
         System.out.println("被监听到了。。。。。");

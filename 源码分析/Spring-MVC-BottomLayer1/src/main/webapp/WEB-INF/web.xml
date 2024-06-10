@@ -21,12 +21,12 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>classpath:springmvc.xml</param-value> <!--设定的参数名称的值。对应配置文件的路径-->
         </init-param>
-        <!--DispatcherServlet初始化参数配置：指定 SpringMVC 容器-->
-        <init-param>
-            <!--设定上下文的参数名称。FrameworkServlet 类中已固定的变量名：contextClass-->
-            <param-name>contextClass</param-name>
-            <param-value>com.example.controller.TestController</param-value>
-        </init-param>
+        <!--DispatcherServlet初始化参数配置：指定SpringMVC容器。参考FrameworkServlet的createWebApplicationContext()方法-->
+        <!--<init-param>-->
+        <!--    &lt;!&ndash;设定上下文的参数名称。FrameworkServlet 类中已固定的变量名：contextClass&ndash;&gt;-->
+        <!--    <param-name>contextClass</param-name>-->
+        <!--    <param-value>com.example.controller.TestController</param-value>-->
+        <!--</init-param>-->
 
         <!--load-on-startup：表示Tomcat启动后创建对象的顺序。他的值是整数，数值越小，Tomcat创建对象的时间越早-->
         <load-on-startup>1</load-on-startup>

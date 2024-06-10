@@ -52,7 +52,7 @@
 
 /*********************************** FrameworkServlet.java *******************************/ 
     protected WebApplicationContext initWebApplicationContext() {
-        // 获取  SpringWeb 容器初始化时候的上下文信息
+        // 获取 SpringWeb 容器初始化时候的上下文信息
         // 获得 ContextLoaderListener 存的父容器
         WebApplicationContext rootContext =
                 WebApplicationContextUtils.getWebApplicationContext(getServletContext());
@@ -103,7 +103,8 @@
 
 /*********************************** FrameworkServlet.java *******************************/
     protected WebApplicationContext createWebApplicationContext(@Nullable ApplicationContext parent) {
-        // 这里获取的类是 SpringMVC 容器:（DEFAULT_CONTEXT_CLASS = XmlWebApplicationContext.class）
+        // 获取SpringMVC容器：如果存在自定义的容器配置<param-name>contextClass</param-name>，那么这里返回的是自定义的容器类。
+        //                  如果没有进行容器配置，则会使用默认容器（DEFAULT_CONTEXT_CLASS = XmlWebApplicationContext.class）
         Class<?> contextClass = getContextClass();
         if (!ConfigurableWebApplicationContext.class.isAssignableFrom(contextClass)) {
             throw new ApplicationContextException(
@@ -111,20 +112,22 @@
                             "': custom WebApplicationContext class [" + contextClass.getName() +
                             "] is not of type ConfigurableWebApplicationContext");
         }
+        // 实例化SpringMVC容器指定的类
         ConfigurableWebApplicationContext wac =
                 (ConfigurableWebApplicationContext) BeanUtils.instantiateClass(contextClass);
 
         wac.setEnvironment(getEnvironment());
-        // 将IOC容器作为Web容器的父容器
+        // 将IOC容器作为 SpringWeb 容器的父容器
         wac.setParent(parent);
-        // 获取到web配置信息
+        // 获取到Web配置信息：即 web.xml 中对应的<param-value>值
         String configLocation = getContextConfigLocation();
         if (configLocation != null) {
             wac.setConfigLocation(configLocation);
         }
+        
         // 调用IOC容器初始化流程，实例化并依赖注入，初始化及回调后置处理器
+        // 解析扫描resource包下的配置文件 springmvc.xml
         configureAndRefreshWebApplicationContext(wac);
-
         return wac;
     }
     
@@ -147,19 +150,21 @@
         wac.setServletConfig(getServletConfig());
         wac.setNamespace(getNamespace());
         // 请记住这个地方，Spring在上下文中添加了一个监听事件SourceFilteringListener，当IOC初始化完成后通过广播事件触发该监听，进行MVC九大组件的初始化
+        // 监听器   委托设计模式 
+        // new ContextRefreshListener() ----> DispatcherServlet【onRefresh() ----> initStrategies(context)】
         wac.addApplicationListener(new SourceFilteringListener(wac, new ContextRefreshListener()));
 
-        // The wac environment's #initPropertySources will be called in any case when the context
-        // is refreshed; do it eagerly here to ensure servlet property sources are in place for
-        // use in any post-processing or initialization that occurs below prior to #refresh
+        // 将 init-param 设置到 Environment 中
         ConfigurableEnvironment env = wac.getEnvironment();
         if (env instanceof ConfigurableWebEnvironment) {
             ((ConfigurableWebEnvironment) env).initPropertySources(getServletContext(), getServletConfig());
         }
-        // 啥也没干
+        // 空方法可扩展
         postProcessWebApplicationContext(wac);
+        // 容器启动前初始化
         applyInitializers(wac);
         // 接下来就是IOC的流程了
         wac.refresh();
     }
 ```
+
