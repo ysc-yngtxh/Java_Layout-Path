@@ -9,10 +9,11 @@
         <servlet-name>springmvc</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 
-        <!--自定义springmvc读取的配置文件的位置-->
+        <!--DispatcherServlet初始化参数配置：定义 SpringMVC 读取的配置文件的位置-->
         <init-param>
-            <param-name>contextConfigLocation</param-name>                  <!--表示配置文件的路径-->
-            <param-value>classpath:conf/dispatcherServlet.xml</param-value> <!--自定义配置文件的路径-->
+            <!--设定上下文的参数名称。FrameworkServlet 类中已固定的变量名：contextConfigLocation-->
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:conf/dispatcherServlet.xml</param-value> <!--设定的参数名称的值。对应配置文件的路径-->
         </init-param>
 
         <!--load-on-startup：表示Tomcat启动后创建对象的顺序。他的值是整数，数值越小，Tomcat创建对象的时间越早。-->
