@@ -1,14 +1,25 @@
 
 ## 一、流程
 1、启动 Tomcat
-2、解析 web.xml
+2、解析 web.xml 【<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>】
 3、创建并初始化 DispatcherServlet
-4、调用 DispatcherServlet 的 init() 方法：（DispatcherServlet实现了 Servlet 接口）
+4、调用 DispatcherServlet 的 init 方法：
+   DispatcherServlet继承FrameworkServlet，FrameworkServlet实现HttpServletBean，HttpServletBean继承HttpServlet
+   ----> Tomcat启动后执行的 initServlet 方法，调用 Servlet 类中的 init 方法，HttpServletBean 实现 init方法，
+   ----> HttpServletBean 调用 FrameworkServlet 实现的 initServletBean 方法
+   ----> 在 initServletBean 方法中创建 SpringMVC 容器（FrameworkServlet类中的createWebApplicationContext方法） 
+   ----> initStrategies(context)方法
+5、SpringMVC 九种组件初始化策略
+   ----> 1. 比如：执行 initHandlerMappings(context);
+   ----> 2. 没有拿到 HandlerMapping，就会使用默认的 HandlerMapping。
+            去找 DispatcherServlet.properties 文件中，获取 HandlerMapping 对应的 value 值。
+   ----> 3. 比如：创建 RequestMappingHandlerMapping 的 Bean 对象
+   ----> 4. 执行 afterPropertiesSet 方法
 
 ```java
 /*********************************** HttpServletBean.java *******************************/
     /**
-     * 重写了父类HttpServlet的init方法，进行配置文件的读取和MVC的初始化
+     * 重写了父类 HttpServlet 的init方法，进行配置文件的读取和MVC的初始化
      */
     public final void init() throws ServletException {
         // 解析 init-param 并封装到 PropertyValues 对象中
@@ -133,18 +144,8 @@
     
 /*********************************** FrameworkServlet.java *******************************/
     protected void configureAndRefreshWebApplicationContext(ConfigurableWebApplicationContext wac) {
-        if (ObjectUtils.identityToString(wac).equals(wac.getId())) {
-            // The application context id is still set to its original default value
-            // -> assign a more useful id based on available information
-            if (this.contextId != null) {
-                wac.setId(this.contextId);
-            }
-            else {
-                // Generate default id...
-                wac.setId(ConfigurableWebApplicationContext.APPLICATION_CONTEXT_ID_PREFIX +
-                        ObjectUtils.getDisplayString(getServletContext().getContextPath()) + '/' + getServletName());
-            }
-        }
+        //..........................................略
+        
         // 把之前ContextLoaderListener加载的web容器信息设置到WebApplicationContext
         wac.setServletContext(getServletContext());
         wac.setServletConfig(getServletConfig());
@@ -168,3 +169,109 @@
     }
 ```
 
+
+## 二、SpringMVC 九种组件初始化策略。
+```java
+/*********************************** DispatcherServlet.java *******************************/
+    private void initHandlerMappings(ApplicationContext context) {
+		this.handlerMappings = null;
+
+		if (this.detectAllHandlerMappings) {
+			// 根据类型获取 Bean（可能会拿到多个）
+			Map<String, HandlerMapping> matchingBeans =
+					BeanFactoryUtils.beansOfTypeIncludingAncestors(context, HandlerMapping.class, true, false);
+			if (!matchingBeans.isEmpty()) {
+				this.handlerMappings = new ArrayList<>(matchingBeans.values());
+				// We keep HandlerMappings in sorted order.
+				AnnotationAwareOrderComparator.sort(this.handlerMappings);
+			}
+		}
+        // 根据名字（唯一）
+		else {
+			try {
+				HandlerMapping hm = context.getBean(HANDLER_MAPPING_BEAN_NAME, HandlerMapping.class);
+				this.handlerMappings = Collections.singletonList(hm);
+			}
+			catch (NoSuchBeanDefinitionException ex) {
+				// Ignore, we'll add a default HandlerMapping later.
+			}
+		}
+
+		// 如果没有配，就去 DispatcherServlet.properties 拿默认的
+		if (this.handlerMappings == null) {
+			this.handlerMappings = getDefaultStrategies(context, HandlerMapping.class);
+			if (logger.isTraceEnabled()) {
+				logger.trace("No HandlerMappings declared for servlet '" + getServletName() +
+						"': using default strategies from DispatcherServlet.properties");
+			}
+		}
+        //..........................................略
+	}
+    
+/*********************************** DispatcherServlet.java *******************************/
+    protected <T> List<T> getDefaultStrategies(ApplicationContext context, Class<T> strategyInterface) {
+        if (defaultStrategies == null) {
+            try {
+                // 通过 PropertiesLoaderUtils 工具类加载 DEFAULT_STRATEGIES_PATH = DispatcherServlet.properties
+                ClassPathResource resource = new ClassPathResource(DEFAULT_STRATEGIES_PATH, DispatcherServlet.class);
+                defaultStrategies = PropertiesLoaderUtils.loadProperties(resource);
+            }
+            catch (IOException ex) {
+                throw new IllegalStateException("Could not load '" + DEFAULT_STRATEGIES_PATH + "': " + ex.getMessage());
+            }
+        }
+
+        String key = strategyInterface.getName();
+        String value = defaultStrategies.getProperty(key);
+        if (value != null) {
+            String[] classNames = StringUtils.commaDelimitedListToStringArray(value);
+            List<T> strategies = new ArrayList<>(classNames.length);
+            for (String className : classNames) {
+                try {
+                    Class<?> clazz = ClassUtils.forName(className, DispatcherServlet.class.getClassLoader());
+                    // 通过 BeanFactory 创建容器 Bean，并进行初始化
+                    Object strategy = createDefaultStrategy(context, clazz);
+                    strategies.add((T) strategy);
+                }
+                //..........................................略
+            }
+            return strategies;
+        }
+        else {
+            return Collections.emptyList();
+        }
+    }
+```
+
+```java
+/*********************************** RequestMappingHandlerMapping.java *******************************/
+    public void afterPropertiesSet() {
+        //..........................................略
+		super.afterPropertiesSet();
+	}
+    protected boolean isHandler(Class<?> beanType) {
+        // 判断该类型的类是否添加 @Controller 注解
+        return AnnotatedElementUtils.hasAnnotation(beanType, Controller.class);
+    }
+    
+/*********************************** AbstractHandlerMethodMapping.java *******************************/
+    public void afterPropertiesSet() {
+		initHandlerMethods();
+	}
+    protected void initHandlerMethods() {
+        for (String beanName : getCandidateBeanNames()) {
+            if (!beanName.startsWith(SCOPED_TARGET_NAME_PREFIX)) {
+                processCandidateBean(beanName);
+            }
+        }
+        handlerMethodsInitialized(getHandlerMethods());
+    }
+    protected void processCandidateBean(String beanName) {
+        //..........................................略
+        
+        if (beanType != null && isHandler(beanType)) {
+            detectHandlerMethods(beanName);
+        }
+    }
+    protected abstract boolean isHandler(Class<?> beanType);
+```
