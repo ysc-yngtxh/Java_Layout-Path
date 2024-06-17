@@ -173,6 +173,30 @@
 ## 二、SpringMVC 九种组件初始化策略。
 ```java
 /*********************************** DispatcherServlet.java *******************************/
+    protected void initStrategies(ApplicationContext context) {
+       // 请求解析
+       initMultipartResolver(context);
+       // 多语言，国际化
+       initLocaleResolver(context);
+       // 主题view层
+       initThemeResolver(context);
+       // 解析 url 和 Method 的对应关系
+       initHandlerMappings(context);
+       // 适配器匹配
+       initHandlerAdapters(context);
+       // 异常解析
+       initHandlerExceptionResolvers(context);
+       // 视图转发，根据视图名字匹配到一个具体模板
+       initRequestToViewNameTranslator(context);
+       // 解析模板中的内容
+       initViewResolvers(context);
+       initFlashMapManager(context);
+    }
+```
+```java
+    对于具体的初始化过程，根据上面的方法名称，很容易理解。以 HandlerMapping 为例来说明这个 initHandlerMappings()过程。这里的 Mapping 关系 的作用是，为 HTTP 请求 找到相应的 Controller 控制器，从而利用这些 控制器 Controller 去完成设计好的数据处理工作。
+
+    HandlerMappings 完成对 MVC 中 Controller 的定义和配置，只不过在 Web 这个特定的应用环境中，这些控制器是与具体的 HTTP 请求 相对应的。在 HandlerMapping 初始化 的过程中，把在 Bean 配置文件 中配置好的 HandlerMapping 从 IoC 容器 中取得。
     private void initHandlerMappings(ApplicationContext context) {
 		this.handlerMappings = null;
 
@@ -244,14 +268,16 @@
 ```
 
 ```java
+将 DispatchServlet.properties 文件中的默认策略路径的类进行加载后，初始化完成后执行 afterPropertiesSet()方法
 /*********************************** RequestMappingHandlerMapping.java *******************************/
     public void afterPropertiesSet() {
         //..........................................略
 		super.afterPropertiesSet();
 	}
     protected boolean isHandler(Class<?> beanType) {
-        // 判断该类型的类是否添加 @Controller 注解
-        return AnnotatedElementUtils.hasAnnotation(beanType, Controller.class);
+        // 判断该类型的类是否添加 @Controller || @RequestMapping注解
+        return AnnotatedElementUtils.hasAnnotation(beanType, Controller.class) ||
+               AnnotatedElementUtils.hasAnnotation(beanType, RequestMapping.class);
     }
     
 /*********************************** AbstractHandlerMethodMapping.java *******************************/
@@ -273,5 +299,40 @@
             detectHandlerMethods(beanName);
         }
     }
+    // 这里是一个接口，具体实现类在 RequestMappingHandlerMapping。
+    // 实现逻辑为 该类如果存在 @Controller 或者@RequestMapping 注解，则表示为是一个处理器，可以用来处理请求的
     protected abstract boolean isHandler(Class<?> beanType);
+    
+    protected void detectHandlerMethods(Object handler) {
+       Class<?> handlerType = (handler instanceof String beanName ?
+               obtainApplicationContext().getType(beanName) : handler.getClass());
+    
+       if (handlerType != null) {
+          Class<?> userType = ClassUtils.getUserClass(handlerType);
+          // 循环所有方法：这里最后 Map 保存的是 <Method, @RequestMapping注解信息>
+          Map<Method, T> methods = MethodIntrospector.selectMethods(userType,
+                  (MethodIntrospector.MetadataLookup<T>) method -> {
+                     try {
+                        return getMappingForMethod(method, userType);
+                     }
+                     catch (Throwable ex) {
+                        throw new IllegalStateException("Invalid mapping on handler class [" +
+                                userType.getName() + "]: " + method, ex);
+                     }
+                  });
+          if (logger.isTraceEnabled()) {
+             logger.trace(formatMappings(userType, methods));
+          }
+          else if (mappingsLogger.isDebugEnabled()) {
+             mappingsLogger.debug(formatMappings(userType, methods));
+          }
+          methods.forEach((method, mapping) -> {
+             Method invocableMethod = AopUtils.selectInvocableMethod(method, userType);
+             // 遍历@RequestMapping 方法，将方法注册到mappingRegistry中
+             registerHandlerMethod(handler, invocableMethod, mapping);
+          });
+       }
+    }
 ```
+
+根据上述逻辑：在 JDK1.8中，可以使用@Component 和@RequestMapping 注解来代替@Controller 注解，用来表示 MVC 的处理器
