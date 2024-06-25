@@ -124,7 +124,7 @@ public class JsonAnnotationController {
                  	},
                 	"gender": "男",
                 	"title": "标题",
-                	"product": "产品",
+                	"category": "产品",
                 	"propertiesJson": {"id": 1, "user": "ysc"}
                 }
                 """;

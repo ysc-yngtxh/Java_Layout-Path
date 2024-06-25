@@ -19,7 +19,7 @@
         </selectKey>
         <!-- 如果大于0则更新 -->
         <if test="count>0">
-            UPDATE  `student`
+            UPDATE `student`
             <set >
                 <if test="id != null and id != ''">
                     id = #{id},

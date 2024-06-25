@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class MyApp {
+
     @Test
     public void test() {
         // 从spring容器中获取UserService类型的对象，dao,service都是spring管理的

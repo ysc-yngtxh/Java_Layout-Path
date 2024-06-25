@@ -9,6 +9,7 @@ import org.junit.Test;
 import java.util.List;
 
 public class TestMyBatis {
+
     // 一个简单类型参数
     @Test
     public void testSelectStudents(){

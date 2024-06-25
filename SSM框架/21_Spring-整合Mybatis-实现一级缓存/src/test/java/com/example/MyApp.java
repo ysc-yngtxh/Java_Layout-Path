@@ -7,7 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -17,7 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+// @RunWith(SpringRunner.class)：主要作用是使得单元测试可以在Spring框架提供的环境下执行属性注入。
+//                               如：在单元测试中使用 @Autowired 注解，注入Spring容器中管理的Bean
+// 如果是 Junit 4.x 则需要加 @RunWith，是 Junit 5.x 就不需要加，因为内置了。
 @RunWith(SpringRunner.class)
+// @ContextConfiguration：指定了用于测试的应用程序上下文从哪个XML配置文件加载Spring的bean定义。
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 public class MyApp {
 
