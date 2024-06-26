@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.service.PositionService;
+import com.example.application.PositionDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -55,55 +55,55 @@ public class SpringBootMockitoApplicationTests {
 	@Test
 	public void test1() {
 		// TODO 手动配置单个模拟对象
-		PositionService mockPositionService1 = Mockito.mock(PositionService.class);
+		PositionDto mockPositionDto1 = Mockito.mock(PositionDto.class);
 
 		// 打桩：定义当调用mock positionService 的 getStr() 方法，并且任意字符串参数时，就返回字符串 "hello"
-		Mockito.when(mockPositionService1.getStr(Mockito.anyString())).thenReturn("hello");
-		System.out.println(mockPositionService1.getStr(Mockito.anyString()));
+		Mockito.when(mockPositionDto1.getStr(Mockito.anyString())).thenReturn("hello");
+		System.out.println(mockPositionDto1.getStr(Mockito.anyString()));
 
 		// 打桩：定义当调用 mock positionService 的 getStr() 方法，并且参数是字符串 "美女" 时，就返回字符串 "刘亦菲"
-		Mockito.when(mockPositionService1.getStr("美女")).thenReturn("刘亦菲");
-		System.out.println(mockPositionService1.getStr("美女"));
+		Mockito.when(mockPositionDto1.getStr("美女")).thenReturn("刘亦菲");
+		System.out.println(mockPositionDto1.getStr("美女"));
 
 		// 验证 positionService 的 getStr()这个方法是否被调用过
-		Mockito.verify(mockPositionService1).getStr("刘亦菲");
+		Mockito.verify(mockPositionDto1).getStr("刘亦菲");
 
 		// 检查调用 positionService 的 getStr() 方法，且参数为 “3” 的次数是否为1次
-		Mockito.verify(mockPositionService1, Mockito.times(1)).getStr(Mockito.eq("3"));
+		Mockito.verify(mockPositionDto1, Mockito.times(1)).getStr(Mockito.eq("3"));
 	}
 
 	@Test
 	public void test2() {
 		// TODO 手动配置单个模拟对象
-		PositionService mockPositionService2 = Mockito.mock(PositionService.class);
+		PositionDto mockPositionDto2 = Mockito.mock(PositionDto.class);
 
 		// 打桩：当调用 mock positionService 的 getStr() 方法，输入的的参数是 字符串 “9” 时，抛出一个 RuntimeException
-		Mockito.when(mockPositionService2.getStr("9")).thenThrow(new RuntimeException("mock throw exception"));
+		Mockito.when(mockPositionDto2.getStr("9")).thenThrow(new RuntimeException("mock throw exception"));
 		// 会抛出一个RuntimeException
-		String str = mockPositionService2.getStr("9");
+		String str = mockPositionDto2.getStr("9");
 	}
 
 	@Test
 	public void test3() {
 		// TODO 手动配置单个模拟对象
-		PositionService mockPositionService3 = Mockito.mock(PositionService.class);
+		PositionDto mockPositionDto3 = Mockito.mock(PositionDto.class);
 
 		// 打桩：如果方法没有返回值的话（即是方法定义为 public void myMethod() {…}），要改用 doThrow() 抛出 Exception
 		Mockito.doThrow(new RuntimeException("mock throw exception when method is void"))
-			   .when(mockPositionService3).getVoid();
+			   .when(mockPositionDto3).getVoid();
 		// 会抛出一个RuntimeException
-		mockPositionService3.getVoid();
+		mockPositionDto3.getVoid();
 	}
 
 	@Test
 	public void test4() {
 		// TODO 手动配置单个模拟对象
-		PositionService mockPositionService4 = Mockito.mock(PositionService.class);
+		PositionDto mockPositionDto4 = Mockito.mock(PositionDto.class);
 
 		// 验证调用顺序，验证 positionService 是否先调用 getStr() 两次，并且第一次的参数是 “3”、第二次的参数是 “5”，然后才调用 getVoid() 方法
-		InOrder inOrder = Mockito.inOrder(mockPositionService4);
-		inOrder.verify(mockPositionService4).getStr("3");
-		inOrder.verify(mockPositionService4).getStr("5");
-		inOrder.verify(mockPositionService4).getVoid();
+		InOrder inOrder = Mockito.inOrder(mockPositionDto4);
+		inOrder.verify(mockPositionDto4).getStr("3");
+		inOrder.verify(mockPositionDto4).getStr("5");
+		inOrder.verify(mockPositionDto4).getVoid();
 	}
 }

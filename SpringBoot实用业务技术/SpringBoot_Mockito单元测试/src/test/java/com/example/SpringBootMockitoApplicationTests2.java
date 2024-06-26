@@ -1,8 +1,12 @@
 package com.example;
 
+import com.example.mapper.BrandMapper;
 import com.example.mapper.CategoryMapper;
 import com.example.mapper.SkuMapper;
-import com.example.service.PositionService;
+import com.example.pojo.Brand;
+import com.example.pojo.Category;
+import com.example.service.BrandService;
+import com.example.service.CategoryService;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -10,9 +14,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 
 @Slf4j
@@ -27,25 +34,34 @@ public class SpringBootMockitoApplicationTests2 {
 	// @spy和@mock生成的对象不受spring管理
 	// @spy调用真实方法时，其它bean是无法注入的，要使用注入，要使用@SpyBean
 	// @SpyBean和@MockBean生成的对象受spring管理，相当于自动替换对应类型bean的注入，比如@Autowired等注入
-	//
-	// spy和mock的相同点和区别：
-	// 		1.得到的对象同样可以进行“监管”，即验证和打桩。
-	// 		2.如果不对spy对象的methodA打桩，那么调用spy对象的methodA时，会调用真实方法。
-	// 		3.如果不对mock对象的methodA打桩，将doNothing，且返回默认值（null,0,false）。
 
-	// 模拟调用
+	// @Mock和@MockBean生成的对象对于未进行打桩的方法，默认不执行，有返回值的，返回默认值（null,0,false）
+
+	// @Mock 模拟调用（Mockito 的注解）。无法注入到Spring上下文中
 	@Mock
+	private BrandMapper brandMapper;
+
+	// 使用 @InjectMocks 注解，Mockito会自动将使用 @Mock 或 @Spy 注解创建的模拟对象注入到被测试类的对应字段中。
+	@InjectMocks
+	private BrandService brandService;
+
+
+	// @MockBean 模拟调用（SpringBoot 的注解）。在Spring上下文中创建一个模拟对象，并将其注入到被测试对象中。
+	@MockBean
 	private CategoryMapper categoryMapper;
 
-	@Spy
-	private List<Object> list = new ArrayList<>();
+	@Autowired
+	private CategoryService categoryService;
 
-	// 真实调用
+
+	// @Spy 真实调用，标注该注解的测试类无法注入到 Spring 容器上下文中使用
+	@Spy
+	private List<Category> list = new ArrayList<>();
+
+	// @SpyBean 真实调用，标注该注解的测试类可以注入到 Spring 容器上下文中使用
 	@SpyBean
 	private SkuMapper skuMapper;
 
-	@InjectMocks
-	private PositionService positionService;
 
 	// 被 @BeforeEach 标注的方法会在每个测试方法执行前被调用
 	@BeforeEach
@@ -58,15 +74,40 @@ public class SpringBootMockitoApplicationTests2 {
 
 	@Test
 	public void test1() {
-		// @Mock 模拟调用
-		System.out.println(categoryMapper.findById(1));
+		// @Mock 模拟调用，因此不会真正的调用 ORM 框架的查询方法，结果返回 类型默认值（null，0，false）
+		System.err.println("@Mock模拟调用：" + brandMapper.findById(1));
 
-		// @Spy 真实调用
-		list.add("小曹哇小曹～");
-		log.error(list.toString());
+		// 使用 @InjectMocks 注解，Mockito会自动将使用 @Mock 或 @Spy 注解创建的模拟对象或注入到被测试类的对应字段中。
+		System.err.println("注入的模拟对象不打桩，返回值为默认值null：" + brandService.findBrandById(1));
 
-		// @SptBean 真实调用。
-		// 区别：@Spy调用真实方法时，bean是无法注入的。@SpyBean则可以注入
-		log.error(skuMapper.findById(1).toString());
+		// 使用 @InjectMocks 注解，Mockito会自动将使用 @Mock 或 @Spy 注解创建的模拟对象或注入到被测试类的对应字段中。
+		Mockito.when(brandMapper.findById(1))
+				.thenReturn(new Brand(1L, "华为 meta", 1, 0, null));
+		System.err.println("注入的模拟对象打桩，返回值为打桩返回值：" + brandService.findBrandById(1));
+	}
+
+	@Test
+	public void test2() {
+		// @MockBean 模拟调用
+		System.err.println("@MockBean模拟调用：" + categoryMapper.findById(2));
+
+		// 由于，我们已经使用了@MockBean。所以已经在Spring上下文中注入了模拟对象categoryMapper。
+		// 因此不会执行 ORM 框架的方法。而模拟对象又没有打桩，因此这里打印值为 null
+		System.err.println("@MockBean模拟调用：" + categoryService.findCategoryById(2));
+
+		// @MockBean 模拟调用打桩。这里的效果同@Mock、@InjectMocks 一样，不同的是注解来源不同
+		Mockito.when(categoryMapper.findById(2))
+				.thenReturn(new Category(2L, "小曹哇小曹1～", "Cao", 0, null));
+		System.err.println(categoryService.findCategoryById(2));
+	}
+
+	@Test
+	public void test3() {
+		// @Spy 真实调用，会真实的调用其对象的方法，但是无法注入到 Spring 容器中。因此适合用来标注集合这种原生的类
+		list.add(new Category(3L, "小曹哇小曹～", "Cao", 0, null));
+		System.err.println("@Spy 真实调用：" + list);
+
+		// @SptBean 真实调用。可以注入到 Spring 容器中。所以能使用 ORM 框架查询数据库数据
+		System.err.println("@SptBean 真实调用：" + skuMapper.findById(3));
 	}
 }
