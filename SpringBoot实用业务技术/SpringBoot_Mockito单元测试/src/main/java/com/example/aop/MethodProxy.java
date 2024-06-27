@@ -3,6 +3,7 @@ package com.example.aop;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.stereotype.Component;
 
 /**
  * @author 游家纨绔
@@ -10,10 +11,11 @@ import org.aspectj.lang.annotation.Before;
  * @apiNote TODO
  */
 @Aspect
+@Component
 public class MethodProxy {
 
-    // @Before(value = "execution(* *..service.CategoryService.findBrandById(*))")
-    // public void before(JoinPoint joinPoint) {
-    //
-    // }
+    @Before(value = "execution(* *..findBrandById(*))")
+    public void before(JoinPoint joinPoint) {
+        System.err.println("进入切面逻辑～");
+    }
 }

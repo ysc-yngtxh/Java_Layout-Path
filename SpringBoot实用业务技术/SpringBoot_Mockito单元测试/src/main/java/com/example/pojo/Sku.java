@@ -16,6 +16,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Sku implements Serializable {
+
     private static final long serialVersionUID = 892788188735402403L;
 
     /**

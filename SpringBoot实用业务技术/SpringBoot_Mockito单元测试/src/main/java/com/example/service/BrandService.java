@@ -2,7 +2,7 @@ package com.example.service;
 
 import com.example.mapper.BrandMapper;
 import com.example.pojo.Brand;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BrandService {
 
-    @Resource
+    @Autowired
     private BrandMapper brandMapper;
 
     public Brand findBrandById(Integer id) {

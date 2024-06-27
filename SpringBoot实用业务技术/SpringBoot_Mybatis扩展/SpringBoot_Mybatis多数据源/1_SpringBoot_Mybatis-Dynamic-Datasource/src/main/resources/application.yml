@@ -4,6 +4,7 @@ server:
     context-path: /
 
 
+
 spring:
   datasource:
     springdb:
@@ -17,3 +18,7 @@ spring:
       username: root
       password: 131474
       driver-class-name: com.mysql.cj.jdbc.Driver
+logging:
+  level:
+    com:
+      example: debug

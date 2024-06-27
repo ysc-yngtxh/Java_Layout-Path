@@ -33,7 +33,7 @@ public class Brand extends Model<Brand> {
     // 逻辑删除：0存在,1删除
     private Integer deleteFlag;
     // 备注
-    private String remack;
+    private String remark;
 
     // 不作为映射数据库字段
     @TableField(exist = false)

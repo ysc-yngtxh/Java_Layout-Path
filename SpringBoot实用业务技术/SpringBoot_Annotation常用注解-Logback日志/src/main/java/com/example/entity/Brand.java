@@ -38,6 +38,6 @@ public class Brand implements Serializable {
     /**
      * 备注
      */
-    private String remack;
+    private String remark;
 }
 

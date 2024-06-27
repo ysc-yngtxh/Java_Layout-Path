@@ -7,6 +7,7 @@ import com.example.pojo.Brand;
 import com.example.pojo.Category;
 import com.example.service.BrandService;
 import com.example.service.CategoryService;
+import com.example.service.SkuService;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -62,6 +63,10 @@ public class SpringBootMockitoApplicationTests2 {
 	@SpyBean
 	private SkuMapper skuMapper;
 
+	// 使用 @InjectMocks 注解，Mockito会自动将使用 @Mock 或 @Spy 注解创建的模拟对象注入到被测试类的对应字段中。
+	@InjectMocks
+	private SkuService skuService;
+
 
 	// 被 @BeforeEach 标注的方法会在每个测试方法执行前被调用
 	@BeforeEach
@@ -108,6 +113,8 @@ public class SpringBootMockitoApplicationTests2 {
 		System.err.println("@Spy 真实调用：" + list);
 
 		// @SptBean 真实调用。可以注入到 Spring 容器中。所以能使用 ORM 框架查询数据库数据
-		System.err.println("@SptBean 真实调用：" + skuMapper.findById(3));
+		System.err.println("@SptBean 真实调用：" + skuMapper.findById(30));
+
+		System.err.println("@InjectMocks 真实调用：" + skuService.findSkuById(3));
 	}
 }

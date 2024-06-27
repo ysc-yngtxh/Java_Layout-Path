@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.SkuMapper">
+
+    <resultMap id="SkuMap" type="Sku">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="spuId" column="spu_id" jdbcType="INTEGER"/>
+        <result property="img" column="img" jdbcType="VARCHAR"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="price" column="price" jdbcType="NUMERIC"/>
+        <result property="ownSpec" column="own_spec" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="findById" resultMap="SkuMap">
+        select * from sku where id = #{id}
+    </select>
+
+</mapper>
+
