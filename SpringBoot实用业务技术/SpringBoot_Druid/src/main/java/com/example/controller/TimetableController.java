@@ -2,13 +2,10 @@ package com.example.controller;
 
 import com.example.entity.Timetable;
 import com.example.service.TimetableService;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/timetable")
 public class TimetableController {
 
-    @Resource
+    @Autowired
     private TimetableService timetableService;
 
     /**
@@ -32,9 +29,9 @@ public class TimetableController {
      * @param id 主键
      * @return 单条数据
      */
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Timetable> queryById(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok(this.timetableService.queryById(id));
+        return ResponseEntity.ok(timetableService.queryById(id));
     }
 }
 

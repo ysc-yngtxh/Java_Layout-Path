@@ -78,7 +78,6 @@ public class MyTransactionAopHandler {
         } finally {
             connectHolder.cleanHolder();
         }
-
     }
 
     /**
