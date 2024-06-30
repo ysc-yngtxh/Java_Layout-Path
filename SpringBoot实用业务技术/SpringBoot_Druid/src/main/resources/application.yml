@@ -4,51 +4,47 @@ spring:
         name: SpringBoot_Druid
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        password: 131474
         username: root
+        password: 131474
         url: jdbc:mysql://localhost:3306/caoyumin?serverTimezone=UTC
 
-        # TODO 原先 SpringBoot3 以下版本集成 Druid 在配置数据库连接信息时，
-        #      支持 [url、username、password、driverClassName、type] 属性
-        #      在 SpringBoot3 以上版本，不再支持。统一在 spring.datasource 路径下进行 数据库连接信息 配置
+        # TODO SpringBoot3 以下版本集成 Druid ,支持 [url、username、password、driverClassName、type] 属性
+        # TODO 在 SpringBoot3 以上版本，不再支持。统一在 spring.datasource 路径下进行 数据库连接信息 配置
 
         # druid-spring-boot-starter 依赖自动生效 druid，可以不配置 type 属性，但建议配置
         type: com.alibaba.druid.pool.DruidDataSource
-        # 配置 Druid 连接池的属性。
+        #  ===================== ↓↓↓↓↓↓  使用 druid 配置  ↓↓↓↓↓↓ =====================
         druid:
             socket-timeout: 30000  # 连接超时时间
             initial-size: 5   # 连接池初始化连接数量
-            min-idle: 5       # 连接池最小空闲数
+            min-idle: 6       # 连接池最小空闲数
             max-active: 20    # 连接池最大活跃连接数
             max-wait: 60000   # 连接池最大等待时间
             time-between-eviction-runs-millis: 60000 # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
             min-evictable-idle-time-millis: 300000   # 配置一个连接在池中最小生存的时间，单位是毫秒
-            validation-query: SELECT 1 FROM DUAL     # 连接是否有效的查询语句 必须是一个查询语句(oracle中为 select 1 from dual)
+            validation-query: SELECT 1 FROM DUAL     # 连接是否有效的查询语句 必须是一个查询语句(oracle中为 select org.springframework.boot.autoconfigure.AutoConfiguration.imports from dual)
             testWhileIdle: true
             # 申请连接时会执行validationQuery检测连接是否有效,开启会降低性能,默认为true
             testOnBorrow: false
             # 归还连接时会执行validationQuery检测连接是否有效,开启会降低性能,默认为true
             testOnReturn: false
             # 是否缓存preparedStatement, 也就是PSCache,PSCache对支持游标的数据库性能提升巨大，比如说oracle,在mysql下建议关闭。
-            poolPreparedStatements: true  # 打开PSCache，并且指定每个连接上PSCache的大小
+            poolPreparedStatements: false  # 打开PSCache，并且指定每个连接上PSCache的大小
             maxPoolPreparedStatementPerConnectionSize: 20
             removeAbandoned: true
             # 配置监控统计拦截的filters，去掉后监控界面sql无法统计【'stat':监控统计  'wall'：用于防火墙，防御sql注入  'slf4j':日志 】
-            filters: stat,wall,slf4j
-            # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+            filter:
+                stat:
+                    enabled: true
+                wall:
+                    enabled: true
+                slf4j:
+                    enabled: true
+            # 通过connectProperties属性来打开mergeSql功能、慢SQL记录
             connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
             useGlobalDataSourceStat: true  # 合并多个DruidDataSource的监控数据
 
-            # 配置过滤器，过滤掉静态文件
-            web-stat-filter:
-                # 是否启用StatFilter默认值true，启用"Web应用/URI监控/Session监控"面板
-                enabled: true
-                # 添加过滤规则
-                url-pattern: /*
-                # 忽略过滤的格式
-                exclusions: /druid/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico
-
-            # 配置可视化控制台页面
+            # 配置可视化控制台页面(代码配置 优先级 大于 yml文件配置)
             stat-view-servlet:
                 # 是否启用Druid监控面板,默认值true
                 enabled: true
@@ -63,6 +59,15 @@ spring:
                 allow: 127.0.0.1
                 # IP黑名单（共同存在时，deny优先于allow）
                 deny:
+
+            # 配置过滤器，过滤掉静态文件
+            web-stat-filter:
+                # 是否启用StatFilter默认值true，启用"Web应用/URI监控/Session监控"面板
+                enabled: true
+                # 添加过滤规则
+                url-pattern: /*
+                # 忽略过滤的格式
+                exclusions: /druid/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico
 
 mybatis:
     type-aliases-package: com.example.entity
