@@ -26,6 +26,6 @@ public class TimetableServiceImpl implements TimetableService {
      */
     @Override
     public Timetable queryById(Integer id) {
-        return this.timetableMapper.queryById(id);
+        return timetableMapper.queryById(id);
     }
 }

@@ -50,7 +50,7 @@ public class DataSourceConfig {
     @Scope("prototype")
     public JdkRegexpMethodPointcut druidStatPointcut() {
         JdkRegexpMethodPointcut pointcut = new JdkRegexpMethodPointcut();
-        pointcut.setPattern("com.zhengqing.demo.modules.*.api.*");
+        pointcut.setPattern("com.example.service.impl.");
         return pointcut;
     }
 

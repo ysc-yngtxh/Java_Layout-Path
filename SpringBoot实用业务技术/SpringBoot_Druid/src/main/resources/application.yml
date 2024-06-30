@@ -17,8 +17,8 @@ spring:
         druid:
             socket-timeout: 30000  # 连接超时时间
             initial-size: 5   # 连接池初始化连接数量
-            min-idle: 6       # 连接池最小空闲数
-            max-active: 20    # 连接池最大活跃连接数
+            min-idle: 5       # 连接池最小空闲数
+            max-active: 20    # 连接池最大连接数量
             max-wait: 60000   # 连接池最大等待时间
             time-between-eviction-runs-millis: 60000 # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
             min-evictable-idle-time-millis: 300000   # 配置一个连接在池中最小生存的时间，单位是毫秒
@@ -36,6 +36,10 @@ spring:
             filter:
                 stat:
                     enabled: true
+                    db-type: mysql          # 数据库类型（实测没啥用，会自动根据上面的连接自动识别）
+                    log-slow-sql: true      # 记录慢日志（"SQL监控"面板中数值会标记为红色）
+                    slow-sql-millis: 3000   # 慢日志判定标准（单位：毫秒）
+                    slow-sql-log-level: ERROR # 自定义日志级别，默认日志级别"ERROR"
                 wall:
                     enabled: true
                 slf4j:
@@ -43,6 +47,8 @@ spring:
             # 通过connectProperties属性来打开mergeSql功能、慢SQL记录
             connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
             useGlobalDataSourceStat: true  # 合并多个DruidDataSource的监控数据
+
+            aop-patterns: com.example.service.impl.* # Spring监控AOP切入点，多个用逗号分隔
 
             # 配置可视化控制台页面(代码配置 优先级 大于 yml文件配置)
             stat-view-servlet:
@@ -60,7 +66,7 @@ spring:
                 # IP黑名单（共同存在时，deny优先于allow）
                 deny:
 
-            # 配置过滤器，过滤掉静态文件
+            # 配置过滤器，过滤掉静态文件(代码配置 优先级 大于 yml文件配置)
             web-stat-filter:
                 # 是否启用StatFilter默认值true，启用"Web应用/URI监控/Session监控"面板
                 enabled: true
