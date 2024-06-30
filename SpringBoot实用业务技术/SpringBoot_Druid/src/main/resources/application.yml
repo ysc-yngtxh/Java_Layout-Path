@@ -1,0 +1,13 @@
+spring:
+    application:
+        name: SpringBoot_Druid
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: 131474
+        username: root
+        url: jdbc:mysql://localhost:3306/caoyumin?serverTimezone=UTC
+    druid:
+
+mybatis:
+    type-aliases-package: com.example.demo.entity
+    mapper-locations: classpath:mapper/*.xml
