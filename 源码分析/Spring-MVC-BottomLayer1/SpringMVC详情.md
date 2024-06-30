@@ -190,6 +190,7 @@
        initRequestToViewNameTranslator(context);
        // 解析模板中的内容
        initViewResolvers(context);
+       // 刷新 Map 管理器
        initFlashMapManager(context);
     }
 ```

@@ -9,6 +9,7 @@ import java.util.Map;
  * @apiNote TODO
  */
 public class LocalRegister {
+
     public static Map<String, Class<?>> map = new HashMap<>();
 
     public static void register(String interfaceName, String version, Class<?> implClass) {

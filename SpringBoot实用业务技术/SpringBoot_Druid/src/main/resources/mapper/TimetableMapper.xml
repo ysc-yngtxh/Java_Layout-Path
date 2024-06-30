@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.TimetableMapper">
+
+    <resultMap type="Timetable" id="TimetableMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="objectId" column="object_id" jdbcType="INTEGER"/>
+        <result property="code" column="code" jdbcType="INTEGER"/>
+        <result property="tenant" column="tenant" jdbcType="VARCHAR"/>
+        <result property="week" column="week" jdbcType="INTEGER"/>
+        <result property="start" column="start" jdbcType="INTEGER"/>
+        <result property="finish" column="finish" jdbcType="INTEGER"/>
+        <result property="deleteFlag" column="delete_flag" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TimetableMap">
+        select
+          id,object_id,code,tenant,week,start,finish,delete_flag
+        from time_table
+        where id = #{id}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from time_table
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="objectId != null">
+                and object_id = #{objectId}
+            </if>
+            <if test="code != null">
+                and code = #{code}
+            </if>
+            <if test="tenant != null and tenant != ''">
+                and tenant = #{tenant}
+            </if>
+            <if test="week != null">
+                and week = #{week}
+            </if>
+            <if test="start != null">
+                and start = #{start}
+            </if>
+            <if test="finish != null">
+                and finish = #{finish}
+            </if>
+            <if test="deleteFlag != null">
+                and delete_flag = #{deleteFlag}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into time_table(object_id,code,tenant,week,start,finish,delete_flag)
+        values (#{objectId},#{code},#{tenant},#{week},#{start},#{finish},#{deleteFlag})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into time_table(object_id,code,tenant,week,start,finish,delete_flag)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.objectId},#{entity.code},#{entity.tenant},#{entity.week},#{entity.start},#{entity.finish},#{entity.deleteFlag})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into time_table(object_id,code,tenant,week,start,finish,delete_flag)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.objectId},#{entity.code},#{entity.tenant},#{entity.week},#{entity.start},#{entity.finish},#{entity.deleteFlag})
+        </foreach>
+        on duplicate key update
+            object_id = values(objectId),
+            code = values(code),
+            tenant = values(tenant),
+            week = values(week),
+            start = values(start),
+            finish = values(finish),
+            delete_flag = values(delete_flag)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update time_table
+        <set>
+            <if test="objectId != null">
+                object_id = #{objectId},
+            </if>
+            <if test="code != null">
+                code = #{code},
+            </if>
+            <if test="tenant != null and tenant != ''">
+                tenant = #{tenant},
+            </if>
+            <if test="week != null">
+                week = #{week},
+            </if>
+            <if test="start != null">
+                start = #{start},
+            </if>
+            <if test="finish != null">
+                finish = #{finish},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from time_table where id = #{id}
+    </delete>
+
+</mapper>
+
