@@ -20,7 +20,7 @@ public class DataSourceConfig {
      * 添加 DruidDataSource 组件到容器中，并绑定属性
      */
     @Bean
-    @ConfigurationProperties(prefix = "spring.datasource")
+    @ConfigurationProperties(prefix = "spring.datasource.druid")
     @ConditionalOnProperty(name = "spring.datasource.type", havingValue = "com.alibaba.druid.pool.DruidDataSource")
     public DataSource dataSource(){
         return DruidDataSourceBuilder.create().build();
