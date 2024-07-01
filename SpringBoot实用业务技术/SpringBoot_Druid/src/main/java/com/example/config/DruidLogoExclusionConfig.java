@@ -7,7 +7,6 @@ import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
-import java.io.IOException;
 import lombok.SneakyThrows;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -17,46 +16,37 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Druid的配置类
- *
- * @author BBF
+ * Druid去除广告配置
  */
 @Configuration
 @AutoConfigureAfter(DruidDataSourceAutoConfigure.class)
 public class DruidLogoExclusionConfig {
 
-    /**
-     * 带有广告的common.js全路径，druid-1.1.14
-     */
-    private static final String FILE_PATH = "support/http/resources/js/common.js";
-    /**
-     * 原始脚本，触发构建广告的语句
-     */
-    private static final String ORIGIN_JS = "this.buildFooter();";
-    /**
-     * 替换后的脚本
-     */
-    private static final String NEW_JS = "//this.buildFooter();";
+    // 带有广告的common.js全路径
+    private static final String COMMON_JS_PATH = "support/http/resources/js/common.js";
+    // 原始脚本，JS中构建广告Logo的方法
+    private static final String OLD_JS = "this.buildFooter();";
+    // 替换后的脚本：将JS中调用广告Logo的方法注释掉，即可移除 Druid 的 Logo广告
+    private static final String NEW_JS = "// this.buildFooter();";
+
 
     /**
      * 去除Druid监控页面的广告
-     *
-     * @param properties DruidStatProperties属性集合
-     * @return {@link org.springframework.boot.web.servlet.FilterRegistrationBean}
      */
     @Bean
+    @SneakyThrows
     @ConditionalOnWebApplication
     @ConditionalOnProperty(name = "spring.datasource.druid.stat-view-servlet.enabled", havingValue = "true")
-    public FilterRegistrationBean<RemoveAdFilter> removeDruidAdFilter(DruidStatProperties properties) throws IOException {
+    public FilterRegistrationBean<RemoveAdFilter> removeDruidAdFilter(DruidStatProperties properties) {
         // 获取web监控页面的参数
         DruidStatProperties.StatViewServlet config = properties.getStatViewServlet();
-        // 提取common.js的配置路径
+        // 提取 common.js 配置路径
         String pattern = config.getUrlPattern() != null ? config.getUrlPattern() : "/druid/*";
         String commonJsPattern = pattern.replaceAll("\\*", "js/common.js");
-        // 获取common.js
-        String text = Utils.readFromResource(FILE_PATH);
-        // 屏蔽 this.buildFooter(); 不构建广告
-        final String newJs = text.replace(ORIGIN_JS, NEW_JS);
+        // 获取 common.js
+        String text = Utils.readFromResource(COMMON_JS_PATH);
+        // 注释 this.buildFooter(); 不执行JS中广告方法
+        final String newJs = text.replace(OLD_JS, NEW_JS);
         FilterRegistrationBean<RemoveAdFilter> registration = new FilterRegistrationBean<>();
         registration.setFilter(new RemoveAdFilter(newJs));
         registration.addUrlPatterns(commonJsPattern);

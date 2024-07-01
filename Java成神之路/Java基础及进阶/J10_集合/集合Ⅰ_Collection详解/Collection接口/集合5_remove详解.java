@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /*
-  boolean remove(Object o)  删除集合中的某个元素
+ * boolean remove(Object o)  删除集合中的某个元素
  */
 public class 集合5_remove详解 {
     public static void main(String[] args) {
-        //创建对象
+        // 创建对象
         Collection<Object> c = new ArrayList<>();
 
         Integer i1 = new Integer(200);
