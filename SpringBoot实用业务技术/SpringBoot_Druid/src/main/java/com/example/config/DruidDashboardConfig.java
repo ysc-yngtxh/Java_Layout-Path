@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
  * @apiNote TODO 以下的Druid 监控、过滤 配置，都可以在 yml 文件中进行配置，但代码配置优先级大于yml
  */
 @Configuration
-public class DruidPropertiesConfig {
+public class DruidDashboardConfig {
 
     /**
      * 配置 Druid 监控管理后台的Servlet；
