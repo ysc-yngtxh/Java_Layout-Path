@@ -44,10 +44,10 @@ import java.util.Set;
               4=ZhaoLiu
 
         效率比较：对于 keySet() 其实是遍历了2次，一次是转为iterator，一次就从HashMap中取出Key所对应的Value。
-                而 entrySet() 只是遍历了第一次(转为iterator)），他把Key和Value都放到了Entry中，所以就快了。
+                而 entrySet() 只是遍历了第一次(转为iterator)，他把Key和Value都放到了Entry中，所以就快了。
 
                 对于 entrySet() 来说：entry.getValue() 可以直接拿到 value,
-                对于 keySet() 来说：hashmap.get(key) 是先得到Entry对象，再通过entry.getValue()去拿，
+                对于 keySet() 来说：hashmap.get(key) 是先得到Entry对象(遍历key的hash值【Map数组】)，再通过entry.getValue()去拿，
                                   直白点说就是 hashmap.get(key) 走了一个弯路，所以它慢一些；
  */
 public class 集合17_Map接口的常用方法 {
