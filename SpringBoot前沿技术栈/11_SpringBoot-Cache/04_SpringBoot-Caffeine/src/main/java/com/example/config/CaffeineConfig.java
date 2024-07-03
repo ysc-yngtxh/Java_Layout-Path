@@ -29,8 +29,8 @@ public class CaffeineConfig {
         SimpleCacheManager cacheManager = new SimpleCacheManager();
         List<CaffeineCache> caches = new ArrayList<>();
         Map<String, Object> map = getCacheType();
-        for (String name : map.keySet()) {
-            caches.add(new CaffeineCache(name, (Cache<Object, Object>) map.get(name)));
+        for (Map.Entry<String, Object> node : map.entrySet()) {
+            caches.add(new CaffeineCache(node.getKey(), (Cache<Object, Object>) node.getValue()));
         }
         cacheManager.setCaches(caches);
         return cacheManager;
@@ -41,13 +41,13 @@ public class CaffeineConfig {
      */
     private static Map<String, Object> getCacheType() {
         Map<String, Object> map = new ConcurrentHashMap<>();
-        map.put("name1", Caffeine.newBuilder().recordStats()
+        map.put("UnitCache", Caffeine.newBuilder().recordStats()
                 .expireAfterWrite(10, TimeUnit.SECONDS)
                 .maximumSize(100)
                 .build());
-        map.put("name2", Caffeine.newBuilder().recordStats()
-                .expireAfterWrite(50, TimeUnit.SECONDS)
-                .maximumSize(50)
+        map.put("UnitCache2", Caffeine.newBuilder().recordStats()
+                .expireAfterWrite(60, TimeUnit.SECONDS)
+                .maximumSize(600)
                 .build());
         return map;
     }

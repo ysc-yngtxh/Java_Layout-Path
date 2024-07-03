@@ -3,20 +3,27 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.example</groupId>
-        <artifactId>11_SpringBoot-Redis</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
     <groupId>com.example</groupId>
-    <artifactId>01_SpringBoot-Redis</artifactId>
+    <artifactId>11_SpringBoot-Cache</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>01_SpringBoot-Redis</name>
-    <description>01_SpringBoot-Redis</description>
+    <name>11_SpringBoot-Cache</name>
+    <description>11_SpringBoot-Cache</description>
     <properties>
         <java.version>21</java.version>
     </properties>
+
+    <modules>
+        <module>01_SpringBoot-Redis</module>
+        <module>02_SpringBoot-Redis-Serialization</module>
+        <module>03_SpringBoot-Redis-Lock</module>
+        <module>04_SpringBoot-Caffeine</module>
+    </modules>
+    <packaging>pom</packaging>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
