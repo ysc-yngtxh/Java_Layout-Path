@@ -19,8 +19,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class CacheService {
 
-    // @Cacheable：当方法被调用时，会先检查缓存中是否存在对应的key，如果存在则直接返回缓存中的value值；
-    //             如果不存在，则执行方法并将其结果存储到缓存中。
+    // TODO @Cacheable：当方法被调用时，会先检查缓存中是否存在对应的key，如果存在则直接返回缓存中的value值；
+    //                  如果不存在，则执行方法并将其结果存储到缓存中。
     // 当调用被注解的方法时，如果对应的键已经存在缓存，则不再执行方法体，而从缓存中直接返回。
     //             当方法返回 null 时，将不进行缓存操作。
     // @Cacheable 常用的注解属性如下：
@@ -40,13 +40,14 @@ public class CacheService {
         return new Data(1L, "abc");
     }
 
+    // 添加 unless 属性，当满足从本地缓存中取值不存在(即为null)时，unless=true，即不执行方法体，直接返回 null。
     @Cacheable(value = "UnitCache", key = "#unitType+'-'+#unitId", unless = "#result == null")
     public Data cacheable2(String unitType, String unitId) {
         return null;
     }
 
 
-    // @CachePut：表示执行该方法后，其值将作为最新结果更新到缓存中。每次都执行该方法。
+    // TODO @CachePut：表示执行该方法后，其值将作为最新结果更新到缓存中。每次都执行该方法。
     @CachePut(value = "UnitCache",
               key = "#unitType + '-' + #unitId"
     )
@@ -55,7 +56,7 @@ public class CacheService {
     }
 
 
-    // @CacheEvict：表示执行该方法后，将触发缓存清除操作
+    // TODO @CacheEvict：表示执行该方法后，将触发缓存清除操作
     @CacheEvict(value = "UnitCache",
                 key = "#unitType + '-' + #unitId"
                 // allEntries：是否清空所有缓存，默认为 false，即清空指定 key 的缓存。
@@ -66,7 +67,7 @@ public class CacheService {
     }
 
 
-    // @Caching：用于组合前三个注解，例如：
+    // TODO @Caching：用于组合前三个注解，例如：
     @Caching(cacheable = @Cacheable("UnitCache"),
              evict = {@CacheEvict("UnitCache"), @CacheEvict(value = "UnitCache2", allEntries = true)})
     public Data caching(Long id) {

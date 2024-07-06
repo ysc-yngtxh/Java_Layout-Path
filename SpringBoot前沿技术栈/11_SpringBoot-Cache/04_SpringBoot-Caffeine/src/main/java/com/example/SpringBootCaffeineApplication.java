@@ -21,6 +21,8 @@ public class SpringBootCaffeineApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        // 业务场景：当从本地缓存中通过 key 取数据时，我希望当这个 key 存在的时候，取出value值；当 key 不存在的时候，返回null。
+        // 很明显，只通过注解@Cacheable、@CachePut、@CacheEvict之间的组合是很难实现这个需求，因此需要特别的使用属性 'unless'
         while (true) {
             Scanner scanner = new Scanner(System.in);
             if (scanner.hasNext()) {
