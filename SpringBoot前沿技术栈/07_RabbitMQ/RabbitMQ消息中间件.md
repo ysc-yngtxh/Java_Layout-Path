@@ -95,8 +95,8 @@
                     支持在springboot框架中使用，是在第二种方式上的改良，延迟时长由用户决定。
                     但是如果第一个用户消息的延时时长很长，而第二个用户消息的延时时长很短，第二个消息并不会优先得到执行
        ⑤、基于插件的延迟队列
-          首先关闭RabbitMq,下载 rabbitmq_delayed_message_exchange-3.9.0.ez 插件到 \rabbitmq_server-3.8.9\plugins 中，
-          然后在 \rabbitmq_server-3.8.9\sbin目录下打开cmd输入：rabbitmq-plugins enable rabbitmq_delayed_message_exchange进行安装
+          首先关闭RabbitMq,下载 rabbitmq_delayed_message_exchange-3.13.0.ez 插件到 \rabbitmq_server-3.13.4\plugins 中，
+          然后在 \rabbitmq_server-3.13.4\sbin目录下打开cmd输入：rabbitmq-plugins enable rabbitmq_delayed_message_exchange进行安装
           最后再重新启动，使插件生效。
           打开http://localhost:15672可以后台管理页面Exchange项的Type下拉，能找到 x-delayed-message 类型表示安装成功！
 
