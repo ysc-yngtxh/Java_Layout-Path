@@ -52,7 +52,7 @@
                       | titles              |
                       +---------------------+
       第六步 -- 初始化数据(导入sql脚本)
-               mysql> source D:\......\employees.sql
+               mysql> source D:\\......\\employees.sql
                       ①、什么是SQL脚本呢？
                             当一个文件的扩展名是.sql, 并且该文件中编写了大量的SQL语句，我们称这样的文件为SQL脚本
                             注意：直接只用source命令可以执行SQL脚本。

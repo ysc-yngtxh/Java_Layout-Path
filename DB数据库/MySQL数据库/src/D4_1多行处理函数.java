@@ -74,6 +74,11 @@
              并且任何一个 分组函数 都是在 group by语句 执行结束之后才会执行的。
              当一条SQL语句没有 group by 的话，整张表的数据会自成一组。
 
+             在Having子句中，拿聚合函数跟具体的数据做比较是没有问题的，
+             但是，拿聚合函数跟某个字段作条件判断是不行的，这个必须用表连接才能实现；
+             例如：SELECT dept_no,AVG(sal) FROM t_emp GROUP BY dept_no HAVING sql > AVG(sal); 语法上是不行的
+
+
         执行顺序：
                SELECT      5
                   ...

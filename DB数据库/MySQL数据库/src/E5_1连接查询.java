@@ -141,7 +141,7 @@
 5、外连接
       [1]、什么是外连接，和内连接有什么区别？
              外连接：假设A和B表进行连接，使用外连接的话，AB两张表中有一张表示主表，一张表是副表，主要查询主表中的数据，
-                    捎带着查询副表，当副表中的数据没有和主表中的数据匹配上，副表自动模拟出null与之匹配。
+                    捎带着查询副表，当副表中的数据没有和主表中的数据匹配上，副表自动模拟出 null 与之匹配。
 
              左外连接(左连接 LEFT OUTER)：表示左边的这张表是主表、
              右外连接(右连接 RIGHT OUTER)：表示右边的这张表是主表、
@@ -188,7 +188,7 @@
 ---------------------------------------------------------------------------------------------------------------
 6、TODO MySQL中的 left join *1 on *2 and *3 语句and后面不生效，而 inner join *1 on *2 and *3 语句and生效
        Ⅰ、在 LEFT JOIN 中，条件中的 AND 连接条件会影响连接的结果集。
-          如果 AND 条件不满足，那么对应的左表记录会保持，但在右表中产生 NULL 值。
+          作为外连接，其作为主表的数据是一定存在的，不会受 and 条件影响,但是次表会受到 and 条件影响。
           [1]、t_dict表
                +----+-----------+---------------+--------------+----------+
                ｜ id｜ dict_name ｜ dict_code    ｜ description ｜ del_flag｜
@@ -210,11 +210,11 @@
                ｜ 8  ｜ 2     ｜ 退款失败         ｜ REFUD_FAIL     ｜ 退款失败      ｜
                ｜ 9  ｜ 2     ｜ 订单已关闭       ｜ TRADE_CLOSED   ｜ 订单已关闭     ｜
                +----+---------+-----------------+----------------+---------------+
-       Ⅱ、假设有 左表t_dict 和 右表t_dict_item，语句 FROM t_dict LEFT JOIN t_dict_item ON condition1 AND condition2
-          [1]、首先查询出根据 condition1 (连接条件)满足的数据，然后根据 condition2 过滤掉右表的数据
-          [2]、在没有 WHERE 条件的情况下，使用 LEFT JOIN 连接，左表(主表)数据一定是全部都有的，condition2 过滤的是右表数据，
-               且右表过滤的数据在对应的左表存在的结果集中返回 NULL 值。
-          [3]、SELECT
+       Ⅱ、假设有 左表t_dict 和 右表t_dict_item，语句 FROM t_dict LEFT JOIN t_dict_item ON [condition1] AND [condition2]
+          [1]、在没有 WHERE 条件的情况下，使用 LEFT JOIN 连接，左表(主表)数据一定是全部都有的，
+               condition2 过滤的是右表(次表)数据，对于左表(主表)数据不产生影响。
+               且右表过滤的数据在对应的左表关联的结果集中返回为 NULL 值。
+          [2]、SELECT
               	 d.id, d.dict_name, d.dict_code,
               	 di.id AS di_id, di.dict_id, di.item_text, di.item_value, di.description
                FROM t_dict AS d
@@ -227,7 +227,7 @@
                ｜ 1 ｜ 支付方式     ｜ PAY_METHOD   ｜ 1    ｜ 1       ｜ 支付宝    ｜ ZFB       ｜ 支付宝       ｜
                ｜ 2 ｜ 订单状态     ｜ ORDER_STATUS ｜ NULL ｜ NULL    ｜ NULL     ｜ NULL      ｜ NULL        ｜
                +----+--------------+--------------+-------+---------+-----------+------------+-------------+
-          [4]、SELECT
+          [3]、SELECT
               	 d.id, d.dict_name, d.dict_code,
               	 di.id AS di_id, di.dict_id, di.item_text, di.item_value, di.description
                FROM t_dict AS d
