@@ -19,11 +19,11 @@ public class AppTest {
         InputStream inputStream = Resources.getResourceAsStream("mybatis.xml");
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
+        TblEmployeeMapper mapper = sqlSession.getMapper(TblEmployeeMapper.class);
 
         TblEmployee tblEmployee = new TblEmployee();
         tblEmployee.setEmployeeName("Lui Yu Ling");
 
-        TblEmployeeMapper mapper = sqlSession.getMapper(TblEmployeeMapper.class);
         List<TblEmployee> tblEmployees = mapper.queryAllByLimit(tblEmployee, 0, 10);
         tblEmployees.forEach(System.out::println);
 
