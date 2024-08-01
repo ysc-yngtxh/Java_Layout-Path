@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--指定properties文件的位置，从类路径根开始找文件-->
+    <properties resource="jdbc.properties"/>
+
+    <!--settings：控制mybatis全局行为-->
+    <settings>
+        <!--setting：设置mybatis输出日志-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <!--开启mybatis的二级缓存-->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+    <!--配置插件-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"/>
+    </plugins>
+
+
+    <!--环境配置：数据库的连接信息-->
+    <!--default:必须和某个environment的id值一样。告诉mybatis使用哪个数据库的连接信息。也就是访问哪个数据库-->
+    <environments default="mydev">
+        <!--表示线上的数据库，是项目真实使用的库-->
+        <environment id="mydev">
+            <!--
+                environment:一个数据库信息的配置，环境
+                id:一个唯一值，自定义，表示环境的名称
+            -->
+            <transactionManager type="JDBC"/>
+            <!--
+                transactionManager:表示mybatis提交事务，回滚事务的方式
+                type:事务的处理的类型
+                     1)、JDBC:表示mybatis底层是调用JDBC的connection对象的commit，rollback做事务处理
+                     2)、MANAGED:把mybatis的事务处理委托给其他容器(一个服务器软件，一个框架(Spring))
+            -->
+            <dataSource type="POOLED">
+                <!--
+                    dataSource:表示数据源，连接数据库的.java体系中，规定实现了javax.sql.DataSource接口的都是数据源。数据源表示Connection对象的
+                    type:指定数据源的类型。
+                          1)、POOLED：表示使用连接池，mybatis会创建PooledDataSource类
+                          2)、UPOOLED：不使用连接池，在每次执行sql语句，先创建连接，执行sql，再关闭连接。
+                                       mybatis会创建一个UnPooledDataSource,管理Connection对象的使用
+                          3)、JNDI:java命名和目录服务(windows注册表)
+                -->
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--sql mapper(sql映射文件)的位置-->
+    <mappers>
+        <!--
+            一个mapper标签指定一个文件的位置。
+            从类路径开始的路径信息。 target/class(类路径)
+        -->
+        <mapper resource="mapper/TblEmployeeMapper.xml"/>
+
+        <!--当你的sql映射文件特别的多，一百多个，一个个的写mapper文件太繁琐了-->
+        <!--使用包名确定sql映射文件位置。
+            name:xml文件(mapper文件) 所在的包名，这个包中的所有xml文件一次都能加载给mybatis
+            使用package的要求：
+               1、mapper文件名称需要和接口名称一样，区分大小写的一样
+               2、mapper文件和dao接口需要在同一目录下
+        -->
+        <!--
+        <package name="com.example"/>
+        -->
+    </mappers>
+</configuration>
