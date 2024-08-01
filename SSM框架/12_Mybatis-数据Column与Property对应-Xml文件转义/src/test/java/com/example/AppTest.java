@@ -22,7 +22,7 @@ public class AppTest {
         TblEmployeeMapper mapper = sqlSession.getMapper(TblEmployeeMapper.class);
 
         TblEmployee tblEmployee = new TblEmployee();
-        tblEmployee.setEmployeeName("Lui Yu Ling");
+        tblEmployee.setEmployeeName("Lui Yu Ling");11
 
         List<TblEmployee> tblEmployees = mapper.queryAllByLimit(tblEmployee, 0, 10);
         tblEmployees.forEach(System.out::println);
