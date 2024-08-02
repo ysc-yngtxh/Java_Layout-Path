@@ -13,20 +13,54 @@ import org.junit.Test;
 
 public class AppTest {
 
-    // TODO 很明显出现的一个问题：查询出来的数据存在，但是打印出来的数据却是null
-    @Test
-    public void testApp() throws IOException {
+    public SqlSession getSqlSessionFactory() throws IOException {
         InputStream inputStream = Resources.getResourceAsStream("mybatis.xml");
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-        SqlSession sqlSession = sqlSessionFactory.openSession();
-        TblEmployeeMapper mapper = sqlSession.getMapper(TblEmployeeMapper.class);
+        return sqlSessionFactory.openSession();
+    }
+
+    // TODO 在 xml 文件中，column 与 property 的对应关系，使用 resultMap 来进行映射
+    @Test
+    public void testApp1() throws IOException {
+        TblEmployeeMapper mapper = getSqlSessionFactory().getMapper(TblEmployeeMapper.class);
+
+        TblEmployee tblEmployees = mapper.queryById(8);
+        System.out.println(tblEmployees);
+
+        getSqlSessionFactory().close();
+    }
+
+    // TODO 在 xml 文件中，未进行 column 与 property 的对应关系，返回值使用 resultType
+    //      问题：当 column 与 property 不一致时，查询出来的数据存在，但是打印出来的数据却是null。
+    //      解决方案：1、可以使用 resultMap 来进行映射
+    //              2、使用 Mybatis-Plus 的 @TableField 注解
+    @Test
+    public void testApp2() throws IOException {
+        TblEmployeeMapper mapper = getSqlSessionFactory().getMapper(TblEmployeeMapper.class);
 
         TblEmployee tblEmployee = new TblEmployee();
-        tblEmployee.setEmployeeName("Lui Yu Ling");11
+        tblEmployee.setEmployeeName("Lui Yu Ling");
 
         List<TblEmployee> tblEmployees = mapper.queryAllByLimit(tblEmployee, 0, 10);
         tblEmployees.forEach(System.out::println);
 
-        sqlSession.close();
+        getSqlSessionFactory().close();
+    }
+
+
+
+    @Test
+    public void testApp3() throws IOException {
+        TblEmployeeMapper mapper = getSqlSessionFactory().getMapper(TblEmployeeMapper.class);
+
+        TblEmployee tblEmployee = new TblEmployee();
+        tblEmployee.setEmployeeId(3);
+        tblEmployee.setEmployeeGradeId(100);
+        tblEmployee.setEmployeeSalary(700);
+
+        List<TblEmployee> tblEmployees = mapper.findById(tblEmployee);
+        tblEmployees.forEach(System.out::println);
+
+        getSqlSessionFactory().close();
     }
 }

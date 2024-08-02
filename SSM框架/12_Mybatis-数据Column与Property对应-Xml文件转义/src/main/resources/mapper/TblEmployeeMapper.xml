@@ -43,30 +43,27 @@
         limit #{offset}, #{size}
     </select>
 
-    <!--统计总行数-->
-    <select id="count" resultType="java.lang.Long">
-        select count(1)
+    <select id="findById" resultMap="TblEmployeeMap">
+        select *
         from tbl_employee
         <where>
             <if test="tblEmployee.employeeId != null">
-                and employee_id = #{tblEmployee.employeeId}
-            </if>
-            <if test="tblEmployee.employeeName != null and tblEmployee.employeeName != ''">
-                and employee_name = #{tblEmployee.employeeName}
-            </if>
-            <if test="tblEmployee.employeeDepartmentId != null">
-                and employee_department_id = #{tblEmployee.employeeDepartmentId}
+                and employee_id >= #{tblEmployee.employeeId}
             </if>
             <if test="tblEmployee.employeeGradeId != null">
-                and employee_grade_id = #{tblEmployee.employeeGradeId}
+                ### 这里的 小于号'<' 可以看成是标签的 '<'左符号，所以需要转义，使其能够正常解析成 Sql 语句
+                and employee_grade_id < #{tblEmployee.employeeGradeId}
             </if>
             <if test="tblEmployee.employeeSalary != null">
-                and employee_salary = #{tblEmployee.employeeSalary}
+                ### 第一种方式：使用xml 原生转义的方式进行转义
+                and employee_salary &lt; #{tblEmployee.employeeSalary}
+            </if>
+            <if test="tblEmployee.employeeSalary != null">
+                ### 第二种方式：使用 <![CDATA[ 内容 ]]> 转义
+                and employee_salary <![CDATA[ < ]]> #{tblEmployee.employeeSalary}
             </if>
         </where>
     </select>
-
-
 
     <!--方法一：使用xml 原生转义的方式进行转义#-->
     <!--字符名称	sql符号	转义字符-->
@@ -79,7 +76,7 @@
     <!--单引号	'	&apos;-->
     <!--双引号	"	&quot;-->
 
-    <!--方法二：使用 <![CDATA[ 内容 ]]>#-->
+    <!--方法二：使用 <![CDATA[ 内容 ]]> -->
     <!--在 xml 格式中，当遇到 <![CDATA[ ]]> 这种格式时，会把方块中的内容直接输出，不做任何的解析转义-->
 </mapper>
 

@@ -34,6 +34,7 @@
                       2)、UPOOLED：不使用连接池，在每次执行sql语句，先创建连接，执行sql，再关闭连接。
                                    mybatis会创建一个UnPooledDataSource,管理Connection对象的使用
                       3)、JNDI:java命名和目录服务(windows注册表)
+                注意：xml文件中，会将 & 符号进行转义，因此需要使用 &amp; 原生转义的方式进行转义
             -->
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
                 <property name="url" value="jdbc:mysql://localhost:3306/springdb?useSSL=false&amp;allowPublicKeyRetrieval=true"/>

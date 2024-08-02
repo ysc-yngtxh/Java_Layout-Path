@@ -62,5 +62,15 @@ public class TblEmployee implements Serializable {
         this.employeeSalary = employeeSalary;
     }
 
+    @Override
+    public String toString() {
+        return "TblEmployee{" +
+                "employeeId=" + employeeId +
+                ", employeeName='" + employeeName + '\'' +
+                ", employeeDepartmentId=" + employeeDepartmentId +
+                ", employeeGradeId=" + employeeGradeId +
+                ", employeeSalary=" + employeeSalary +
+                '}';
+    }
 }
 

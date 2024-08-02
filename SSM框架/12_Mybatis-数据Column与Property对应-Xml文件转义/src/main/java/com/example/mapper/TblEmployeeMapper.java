@@ -34,6 +34,6 @@ public interface TblEmployeeMapper {
      * @param tblEmployee
      * @return
      */
-    Long count(TblEmployee tblEmployee);
+    List<TblEmployee> findById(@Param("tblEmployee") TblEmployee tblEmployee);
 }
 
