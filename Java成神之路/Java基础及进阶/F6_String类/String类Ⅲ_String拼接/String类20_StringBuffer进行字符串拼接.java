@@ -8,7 +8,7 @@ package F6_String类.String类Ⅲ_String拼接;
          在创建StringBuffer的时候尽可能给定一个初始化容量。
          最好减少底层数组的扩容次数。预估一下，给一个大一些的初始化容量
  */
-public class String类19_StringBuffer进行字符串拼接 {
+public class String类20_StringBuffer进行字符串拼接 {
     public static void main(String[] args) {
         String s = "";
         for (int i = 0; i < 10; i++) {

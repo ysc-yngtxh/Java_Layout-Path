@@ -9,7 +9,7 @@ package F6_String类.String类Ⅲ_String拼接;
       StringBuffer是线程安全的。
       StringBuilder是非线程安全的。
  */
-public class String类20_StringBuilder和StringBuffer的区别 {
+public class String类21_StringBuilder和StringBuffer的区别 {
     public static void main(String[] args) {
         StringBuilder sb = new StringBuilder();
         sb.append("a");

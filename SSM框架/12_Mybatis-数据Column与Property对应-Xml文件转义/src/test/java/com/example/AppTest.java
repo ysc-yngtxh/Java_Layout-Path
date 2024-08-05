@@ -47,8 +47,7 @@ public class AppTest {
         getSqlSessionFactory().close();
     }
 
-
-
+    // TODO 对于在 xml 文件中，针对 Sql 组装语句的转义问题
     @Test
     public void testApp3() throws IOException {
         TblEmployeeMapper mapper = getSqlSessionFactory().getMapper(TblEmployeeMapper.class);

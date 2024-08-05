@@ -78,6 +78,21 @@ public class StreamApi {
 
     @Test
     public void test3() {
+        // TODO 3、分组 join
+        List<String> list = Arrays.asList("hello", "si", "world");
+        // 第一个例子中，直接将集合数据进行拼接，中间没有分隔符
+        String joinStr1 = list.stream().collect(Collectors.joining());
+        log.info(joinStr1);
+        // 第二个例子中，分隔符为 " - "
+        String joinStr2 = list.stream().collect(Collectors.joining(" - "));
+        log.info(joinStr2);
+        // 第三个例子中，分隔符为 " - "，前缀为 "@" ， 后缀为 "$"
+        String joinStr3 = list.stream().collect(Collectors.joining(" - ", "@", "$"));
+        log.info(joinStr3);
+    }
+
+    @Test
+    public void test4() {
         // TODO 4、合并两个流的话，可以使用静态方法Stream.concat()
         Stream<Integer> stream1 = Stream.of(1, 3, 5);
         Stream<Integer> stream2 = Stream.of(2, 4, 6);
@@ -118,7 +133,7 @@ public class StreamApi {
     }
 
     @Test
-    public void test4() {
+    public void test5() {
         // TODO 7、flatMap (对流扁平化处理)
         List<List<String>> lists = Lists.newArrayList(Arrays.asList("AB", "Amla", "Faf"), Arrays.asList("Virat", "Dhoni", "Jadeja"));
         // 以下两种写法都可以。flatMap其实就相当于将List<List<String>>转为List<String>，将外层的List元素全部依次放入List<String>中

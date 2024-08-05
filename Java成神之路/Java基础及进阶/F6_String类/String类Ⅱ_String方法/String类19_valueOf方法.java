@@ -7,7 +7,7 @@ class  Customer{
     //     return "我是湖北武汉人，我要年薪百万！";
     // }
 }
-public class String类18_valueOf方法 {
+public class String类19_valueOf方法 {
     public static void main(String[] args) {
 
         // (掌握) String中只有一个方法是静态的，不需要new对象
