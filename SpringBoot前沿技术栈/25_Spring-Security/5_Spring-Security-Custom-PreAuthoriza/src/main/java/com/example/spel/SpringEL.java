@@ -1,4 +1,4 @@
-package com.example.component;
+package com.example.spel;
 
 import com.example.dto.LoginUser;
 import org.springframework.security.core.Authentication;
@@ -11,12 +11,12 @@ import java.util.regex.Pattern;
 /**
  * @author example
  * @date 2023-04-17 下午4:22
- * @apiNote TODO SPEL语法表达式
+ * @apiNote TODO SpEL语法表达式
  */
 @Component("spel")
 public class SpringEL {
 
-    public boolean hasAuthoriza(){
+    public boolean hasAuthorization(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         LoginUser user = (LoginUser) authentication.getAuthorities();
         List<String> permission = user.getPermission();

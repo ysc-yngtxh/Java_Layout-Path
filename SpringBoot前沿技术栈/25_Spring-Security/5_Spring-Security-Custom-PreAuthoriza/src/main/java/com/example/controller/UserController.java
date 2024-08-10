@@ -24,7 +24,7 @@ public class UserController {
 
     @RequestMapping("/spel")
     // 这里使用的是SpringEl表达式，简称spel表达式
-    @PreAuthorize("@spel.hasAuthoriza()")
+    @PreAuthorize("@spel.hasAuthorization()")
     public @ResponseBody String role(){
         return "无丝竹之乱耳，无案牍之劳形;";
     }
