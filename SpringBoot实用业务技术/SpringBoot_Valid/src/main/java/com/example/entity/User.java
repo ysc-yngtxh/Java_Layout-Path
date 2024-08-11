@@ -33,6 +33,7 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = -98875421927312539L;
 
+    // 使用自定义的校验注解
     @IsLeek
     private String account;
 

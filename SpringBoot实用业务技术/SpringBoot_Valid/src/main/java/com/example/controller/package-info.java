@@ -1,7 +1,7 @@
 package com.example.controller;
 
 // {
-//   "account": "新韭菜们，我又来收割了！",
+//   "account": "我又来收割了！",
 //   "username": "username_4006fc0777b3",
 //   "password": "password",
 //   "phone": "17265302789",

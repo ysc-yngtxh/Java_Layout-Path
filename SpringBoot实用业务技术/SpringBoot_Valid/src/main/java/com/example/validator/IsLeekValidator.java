@@ -1,4 +1,4 @@
-package com.example.validated;
+package com.example.validator;
 
 import com.example.annotation.IsLeek;
 import jakarta.validation.ConstraintValidator;
