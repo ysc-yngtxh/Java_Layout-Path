@@ -18,10 +18,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class HandlerException {
 
+    /**
+     * 处理参数验证异常：MethodArgumentNotValidException
+     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<String> handlerException(MethodArgumentNotValidException e){
-        List<ObjectError> allErrors = e.getBindingResult().getAllErrors();
+    public ResponseEntity<String> handlerException(MethodArgumentNotValidException exception){
+        List<ObjectError> allErrors = exception.getBindingResult().getAllErrors();
         String result = String.join(" | ", allErrors.stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList()));
         // String result = allErrors.stream().map(ObjectError::getDefaultMessage).collect(Collectors.joining(" | "));
         return ResponseEntity.ok(result);

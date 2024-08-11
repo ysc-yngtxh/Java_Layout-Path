@@ -1,12 +1,3 @@
 spring:
     application:
-        name: SpringBoot_Vaild
-    datasource:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        username: root
-        password: 131474
-        url: jdbc:mysql://localhost:3306/yun6?serverTimezone=UTC
-
-mybatis:
-    mapper-locations: classpath:mapper/*.xml
-    type-aliases-package: com.example.entity
+        name: SpringBoot_Valid
