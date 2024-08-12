@@ -1,21 +1,28 @@
 package com.example;
 
 import com.alibaba.dubbo.common.extension.ExtensionLoader;
+import com.example.spi.custom.Color;
 import com.example.spi.dubbo.Car;
 import com.example.spi.jdk.Animals;
 import com.example.spi.spring.Robot;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.ServiceLoader;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.SpringFactoriesLoader;
-
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ServiceLoader;
-import java.util.stream.Collectors;
-
 
 @SpringBootApplication
 public class SpringBootSpiApplication implements CommandLineRunner {
@@ -48,9 +55,10 @@ public class SpringBootSpiApplication implements CommandLineRunner {
             animals.sayHello();
         }
 
+
         System.out.println("=======================================================");
 
-        // TODO Spring SPI沿用了Java SPI的设计思想，Spring采用的是‘spring.factories’方式实现SPI机制，
+        // TODO Spring SPI沿用了Java SPI的设计思想，Spring采用的是 'spring.factories' 方式实现SPI机制，
         //      可以在不修改Spring源码的前提下，提供Spring框架的扩展性。
         //   区别：在是否实例化实现类的层面上，SpringBoot会依据@Conditional注解来判断是否进行实例化并注入进容器中，
         //        而jdk会在next方法内部懒加载实现类。
@@ -64,9 +72,62 @@ public class SpringBootSpiApplication implements CommandLineRunner {
 
         // TODO Dubbo SPI 除了支持按需加载接口实现类，还增加了 IOC和AOP 等特性
         ExtensionLoader<Car> extensionLoader = ExtensionLoader.getExtensionLoader(Car.class);
-        Car bumblebee = extensionLoader.getExtension("bus");
-        Car optimusPrime = extensionLoader.getExtension("motorcycle");
-        bumblebee.sayHello();
-        optimusPrime.sayHello();
+        Car bus = extensionLoader.getExtension("bus");
+        Car motorcycle = extensionLoader.getExtension("motorcycle");
+        bus.sayHello();
+        motorcycle.sayHello();
+
+
+        System.out.println("=======================================================");
+
+        // TODO 自定义 SPI 实现：按需加载
+        CustomLoader<Color> customLoader = CustomLoader.getCustomLoader(Color.class);
+        Color red = customLoader.getCustomClass("red");
+        Color blue = customLoader.getCustomClass("blue");
+        red.takeColor();
+        blue.takeColor();
+    }
+
+
+    public static class CustomLoader<T> {
+
+        private static Map<String, String> customMap = new ConcurrentHashMap<>();
+
+        public CustomLoader(Map<String, String> customMap) {
+            CustomLoader.customMap = customMap;
+        }
+
+        public static <T> CustomLoader<T> getCustomLoader(Class<T> clazz) throws IOException {
+            // 获取 class 类路径
+            String classPath = clazz.getName();
+            // 获取相应的资源
+            ClassPathResource resource = new ClassPathResource("META-INF/custom/" + classPath);
+            InputStream inputStream = resource.getInputStream();
+            // 构造 Properties 对象
+            Properties properties = new Properties();
+            // 将指定的资源加载到 Properties 对象中
+            properties.load(inputStream);
+            Map<String, String> map = new HashMap<>();
+            properties.forEach((proKey, proValue) -> {
+                map.put((String) proKey, (String) proValue);
+            });
+            return new CustomLoader<>(map);
+        }
+
+        public T getCustomClass(String className) {
+            Object instance = null;
+            if (customMap.containsKey(className)) {
+                try {
+                    // 加载指定的类，也就是说JVM会执行该类的静态代码段
+                    Class<?> aClass = Class.forName(customMap.get(className));
+                    // 获取该类的实例化对象
+                    instance = aClass.getDeclaredConstructor().newInstance();
+                } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException |
+                         IllegalAccessException | InvocationTargetException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            return (T) instance;
+        }
     }
 }
