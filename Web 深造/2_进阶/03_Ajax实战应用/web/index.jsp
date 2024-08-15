@@ -27,7 +27,7 @@
       }
       //3、初始异步对象
       var proid = document.getElementById("proid").value;
-      xmlHttp.open("get","querypravice?proid="+proid,true);
+      xmlHttp.open("get", "querypravice?proid="+proid, true);
       //4、发送请求
       xmlHttp.send();
     }
