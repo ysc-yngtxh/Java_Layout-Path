@@ -25,9 +25,11 @@ public class ShardingController {
     @Autowired
     private ResourceLoader resourceLoader;
 
+    // 存放分片文件的路径
     public static final String UPLOAD_PATH = System.getProperty("user.dir")
             + "/SpringBoot_文件秒传-分片-断点续传/src/main/resources/static";
 
+    // 使用 currentHashMap，保证多线程下数据安全
     private Map<String, List<File>> chunksMap = new ConcurrentHashMap<>();
 
     @RequestMapping("/sharding")

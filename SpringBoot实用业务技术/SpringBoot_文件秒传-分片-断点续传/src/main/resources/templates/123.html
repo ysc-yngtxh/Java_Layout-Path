@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File Upload Demo</title></head>
+<body>
+<input type="file" id="fileInput" multiple>
+<button type="button" onclick="uploadFile()">上传</button>
+<div id="progressBar"></div>
+<script src="https://cdn.bootcss.com/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+<script>
+    var fileId = "";
+    var fileName = null;
+    var file;
+    const chunkSize = 1024 * 10;
+    // 每个分片的大小10KB
+
+    async function uploadFile() {
+        var fileInput = document.getElementById('fileInput');
+        file = fileInput.files[0];
+        fileName = document.getElementById("fileInput").files[0].name;
+        // 分片上传文件
+        const chunks = Math.ceil(file.size / chunkSize);
+        for (let i = 0; i < chunks; i++) {
+            try {
+                await uploadChunk(file, i);
+            } catch (error) {
+                console.error('Failed to upload chunk', i, error);
+                // 如果上传失败，则尝试恢复上传
+                try {
+                    await uploadChunk(file, i);
+                } catch (error) {
+                    console.error('Failed to resume upload', i, error);
+                    return;
+                }
+            }
+        }
+        // 合并文件
+        try {
+            const fileUrl = await mergeFile();
+            console.log('File URL:', fileUrl);
+        } catch (error) {
+            console.error('Failed to merge file', error);
+        }
+    }
+
+    function uploadChunk(file, chunkIndex) {
+        return new Promise((resolve, reject) => {
+            let fileTemp = file.slice(chunkIndex * chunkSize, (chunkIndex + 1) * chunkSize);
+            var myPromise = calculateHash(fileTemp);
+            myPromise.then(result => {
+                const formData = new FormData();
+                formData.append('chunk', fileTemp);
+                formData.append('chunkIndex', chunkIndex);
+                formData.append('chunkChecksum', result);
+                formData.append('chunkSize', chunkSize);
+                formData.append('fileId', fileId);
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '/hospital/file2/upload', true);
+                xhr.onload = () => {
+                    if (xhr.status === 200) {
+                        resolve(xhr.response);
+                        fileId = xhr.responseText
+                    } else {
+                        reject(xhr.statusText);
+                    }
+                };
+                xhr.onerror = () => {
+                    reject(xhr.statusText);
+                };
+                xhr.send(formData);
+            })
+        });
+    }
+
+    function mergeFile() {
+        return new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            const formData = new FormData();
+            formData.append('fileId', fileId);
+            formData.append('fileName', fileName);
+            xhr.open('POST', '/hospital/file2/merge', true);
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    resolve(xhr.response);
+                } else {
+                    reject(xhr.statusText);
+                    resume(xhr.response.replace(/\[|]/g, '').split(','));
+                }
+            };
+            xhr.onerror = () => {
+                reject(xhr.statusText);
+            };
+            xhr.send(formData);
+        });
+    }
+
+    async function resume(list) {
+        for (let i = 0; i < list.length; i++) {
+            try {
+                await uploadChunk(file, i);
+            } catch (error) {
+                console.error('Failed to upload chunk', i, error);
+                // 如果上传失败，则尝试恢复上传
+                try {
+                    await uploadChunk(file, i);
+                } catch (error) {
+                    console.error('Failed to resume upload', i, error);
+                    return;
+                }
+            }
+        }
+        // 合并文件
+        try {
+            const fileUrl = await mergeFile();
+            console.log('File URL:', fileUrl);
+        } catch (error) {
+            console.error('Failed to merge file', error);
+        }
+    }
+
+    // 计算文件的 SHA-256 校验和
+    function calculateHash(fileChunk) {
+        return new Promise((resolve, reject) => {
+            const blob = new Blob([fileChunk]);
+            const reader = new FileReader();
+            reader.readAsArrayBuffer(blob);
+            reader.onload = () => {
+                const arrayBuffer = reader.result;
+                const crypto = window.crypto || window.msCrypto;
+                const digest = crypto.subtle.digest("SHA-256", arrayBuffer);
+                digest.then(hash => {
+                    const hashArray = Array.from(new Uint8Array(hash));
+                    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+                    resolve(hashHex);
+                });
+            };
+            reader.onerror = () => {
+                reject(new Error('Failed to calculate hash'));
+            };
+        });
+    }
+</script>
+</body>
+</html>

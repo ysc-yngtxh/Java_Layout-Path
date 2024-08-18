@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class UploadController {
 
+    // 存放普通文件的路径
     public static final String UPLOAD_PATH = System.getProperty("user.dir")
             + "/SpringBoot_文件秒传-分片-断点续传/src/main/resources/";
 
