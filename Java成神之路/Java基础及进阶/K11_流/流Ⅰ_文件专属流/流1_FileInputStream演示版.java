@@ -24,9 +24,9 @@ public class 流1_FileInputStream演示版 {
             // 也可以写成这样：fis = new FileInputStream("/Users/youshicheng/IDEA/java-layout-path/Java成神之路/log");
             fis1 = new FileInputStream(System.getProperty("user.dir") + "/log");
 
-            // 绝对路径：D:IDEA\java-layout-path\Java成神之路\Java基础及进阶\K11_流\Filetemp
+            // 绝对路径：D:IDEA\java-layout-path\Java成神之路\Java基础及进阶\K11_流\FileTemp
             // 相对路径：从IDEA模块路径出发
-            fis2 = new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/Filetemp");
+            fis2 = new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/FileTemp");
             fis3 = new FileInputStream("log");
             // 开始读
             while(true) {

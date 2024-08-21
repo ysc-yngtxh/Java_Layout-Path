@@ -12,30 +12,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-@RestController
-@RequestMapping("/file2")
-public class File2Controller {
+@Controller
+public class 断点续传 {
 
     private static final String FILE_UPLOAD_PREFIX = "file_upload:";
 
     @Autowired
     private ResourceLoader resourceLoader;
 
-    @Value("${my.config.savePath}")
-    private String uploadPath;
+    private static final String uploadPath = System.getProperty("user.dir")
+            + "/SpringBoot_文件秒传-分片-断点续传/src/main/resources/static";
 
     @Autowired
     private ThreadLocal<RedisConnection> redisConnectionThreadLocal;
@@ -43,8 +41,17 @@ public class File2Controller {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    @PostMapping("/upload")
-    public ResponseEntity<?> uploadFile(@RequestParam("chunk") MultipartFile chunk, @RequestParam("chunkIndex") Integer chunkIndex, @RequestParam("chunkSize") Integer chunkSize, @RequestParam("chunkChecksum") String chunkChecksum, @RequestParam("fileId") String fileId) throws Exception {
+    @RequestMapping("/resume")
+    public String resume() {
+        return "resume";
+    }
+
+    @PostMapping("/file2/upload")
+    public ResponseEntity<?> uploadFile(@RequestParam("chunk") MultipartFile chunk,
+                                        @RequestParam("chunkIndex") Integer chunkIndex,
+                                        @RequestParam("chunkSize") Integer chunkSize,
+                                        @RequestParam("chunkChecksum") String chunkChecksum,
+                                        @RequestParam("fileId") String fileId) throws Exception {
         if (StringUtils.isBlank(fileId) || StringUtils.isEmpty(fileId)) {
             fileId = UUID.randomUUID().toString();
         }
@@ -73,12 +80,12 @@ public class File2Controller {
         StringBuilder hexString = new StringBuilder();
         while (byteBuffer.hasRemaining()) {
             hexString.append(
-                    String.format("%02x", byteBuffer.get()));
+                    java.lang.String.format("%02x", byteBuffer.get()));
         }
         return hexString.toString();
     }
 
-    @PostMapping("/merge")
+    @PostMapping("/file2/merge")
     public ResponseEntity<?> mergeFile(@RequestParam("fileId") String fileId,
                                        @RequestParam("fileName") String fileName) {
         String key = FILE_UPLOAD_PREFIX + fileId;

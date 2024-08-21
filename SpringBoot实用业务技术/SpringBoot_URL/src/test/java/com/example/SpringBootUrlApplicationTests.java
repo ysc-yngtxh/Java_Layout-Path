@@ -16,9 +16,10 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
-import org.apache.tomcat.util.codec.binary.Base64;
+import java.util.List;
+import java.util.Map;
+import lombok.val;
 import org.junit.jupiter.api.Test;
-import org.springframework.core.io.ClassPathResource;
 
 // @SpringBootTest
 class SpringBootUrlApplicationTests {
@@ -69,39 +70,30 @@ class SpringBootUrlApplicationTests {
     @Test
     public void contextLoads1() throws IOException {
         URL url = new URL("https://devapi.qweather.com/v7/weather/now?location=101110101&key=f83cf5800baf480fa4c3bc6a474ffd90");
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        URL url1 = new URL("http://localhost:8081/treeChildrenSet");
+        HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
         conn.setRequestMethod("GET");
-        conn.setRequestProperty("content-type", "application/json;charset=utf-8");
-        // 包装Basic信息
-        String username = "elastic";
-        String password = "Z*h-KkWj6FGdy2gYUQpC";
-        String auth = username + ":" + password;  // elastic:Z*h-KkWj6FGdy2gYUQpC
-        // 对其进行加密
-        byte[] rel = Base64.encodeBase64(auth.getBytes(), true);
-        // 注意不要使用数组工具类的toString方法：Arrays.toString(rel)
-        String res = new String(rel);
-        // 设置Basic认证
-        conn.setRequestProperty("Authorization", "Basic " + res);
-        // 允许输出流/允许参数
-        conn.setDoOutput(true);
-        // 获取输出流，就是获取请求路径的一个输出
-        OutputStream out = conn.getOutputStream();
-        String params = "{\n" +
-                "  \"query\": {\n" +
-                "    \"match\": {\n" +
-                "      \"title\": \"小米\"\n" +
-                "    }\n" +
-                "  }\n" +
-                "}";
-        out.write(params.getBytes());  // 输出的请求中携带的数据
+
+        conn.setRequestProperty("contentType", "application/json;charset=utf-8");
+        conn.setConnectTimeout(360000);
+        conn.setReadTimeout(360000);
 
         if (conn.getResponseCode() == 200) {
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            // 4.2获取响应的头字段
+            Map<String, List<String>> headers = conn.getHeaderFields();
+            System.out.println(headers); // 输出头字段
+            InputStream inputStream = conn.getInputStream();
+            System.out.println(inputStream);
+            InputStreamReader isr = new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8);
+            BufferedReader br = new BufferedReader(isr);
             String str;
             while ((str = br.readLine()) != null) {
                 System.err.println(str);
             }
+
             br.close();
+            isr.close();
+            conn.disconnect();
         }
     }
 
@@ -112,10 +104,11 @@ class SpringBootUrlApplicationTests {
     // URLClassLoader（URL[] urls, ClassLoader parent)，使用指定的类加载器作为父类加载器创建ClassLoader对象
     @Test
     public void contextLoads2() throws MalformedURLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        File file = new File(System.getProperty("user.dir") + "/target/classes/com/example/");
+        File file = new File(System.getProperty("user.dir") + "/src/main/java/com/example");
         URL url = file.toURI().toURL();
         ClassLoader loader = new URLClassLoader(new URL[]{url});
-        Class<?> clazz = loader.loadClass("Hello");
+        // loadClass()参数：所需class的含包名的全名
+        Class<?> clazz = loader.loadClass("com.example.Hello");
         System.out.println("当前类加载器" + clazz.getClassLoader());
         System.out.println("父类加载器" + clazz.getClassLoader().getParent());
         clazz.newInstance();

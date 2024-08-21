@@ -12,7 +12,7 @@ public class 流3_FileInputStream常用方法 {
     public static void main(String[] args) {
         FileInputStream fis = null;
         try {
-            fis = new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/Filetemp");
+            fis = new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/FileTemp");
             // int available():返回流当中剩余的没有读到的字节数量
             System.out.println("总字节数量：" + fis.available());
 

@@ -14,10 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * @author 游家纨绔
  * @dateTime 2024-08-15 20:59
- * @apiNote TODO
+ * @apiNote TODO 上传
  */
 @Controller
-public class UploadController {
+public class 上传 {
 
     // 存放普通文件的路径
     public static final String UPLOAD_PATH = System.getProperty("user.dir")
@@ -26,7 +26,7 @@ public class UploadController {
     @RequestMapping("/upload")
     public ResponseEntity<Map<String, String>> upload(@RequestParam MultipartFile file) throws IOException {
         File dstFile = new File(UPLOAD_PATH, String.format("%s.%s", UUID.randomUUID(), StringUtils.getFilename(file.getOriginalFilename())));
-        // 将所指向的 'file' 文件上传到对应的 'dstFile' 目录下
+        // 使用 Spring 框架transferTo()方法：将所指向的 'file' 文件上传到对应的 'dstFile' 目录下
         file.transferTo(dstFile);
         return ResponseEntity.ok(Map.of("path", dstFile.getAbsolutePath()));
     }
