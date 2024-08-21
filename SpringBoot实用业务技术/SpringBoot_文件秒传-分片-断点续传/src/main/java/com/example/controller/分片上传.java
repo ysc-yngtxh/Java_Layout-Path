@@ -44,6 +44,7 @@ public class 分片上传 {
     }
 
 
+    // 文件的分片上传
     @PostMapping("/file/upload")
     public @ResponseBody void upload(@RequestParam int currentChunk,
                                      @RequestParam int totalChunks,
@@ -60,6 +61,7 @@ public class 分片上传 {
     }
 
 
+    // 将分片文件合并
     @PostMapping("/file/merge")
     public @ResponseBody String merge(@RequestParam String fileName) throws IOException {
         // 获取所有分片，并按照分片的顺序将它们合并成一个文件
@@ -72,6 +74,7 @@ public class 分片上传 {
         try (FileChannel outChannel = new FileOutputStream(outputFile).getChannel()) {
             for (int i = 0; i < chunkList.size(); i++) {
                 try (FileChannel inChannel = new FileInputStream(chunkList.get(i)).getChannel()) {
+                    // 将分片文件内容写入到输出文件中
                     inChannel.transferTo(0, inChannel.size(), outChannel);
                 }
                 chunkList.get(i).delete(); // 删除分片

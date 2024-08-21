@@ -64,7 +64,7 @@ public class 流18_FileChannel定义 {
         // 获取一个只写FileChannel通道
         FileChannel outChannel = new FileOutputStream(filePath).getChannel();
 
-        // 创建一个1024字节大小的 ByteBuffer（缓冲区），用于读取或写入数据。
+        // 创建一个1024字节大小的 ByteBuffer（内存缓冲区，不同于其他缓冲区），用于读取或写入数据。
         ByteBuffer buffer = ByteBuffer.allocate(1024);
         inChannel.read(buffer);
         // 向 buffer缓冲区 中写入了一些数据
@@ -77,15 +77,15 @@ public class 流18_FileChannel定义 {
         System.out.println("get()方法读取数据，且读取操作会更新位置（position）：" + (char) buffer.get());
         System.out.println("get()方法读取数据，且读取操作会更新位置（position）：" + (char) buffer.get());
         System.out.println("get()方法读取数据，且读取操作会更新位置（position）：" + (char) buffer.get());
-        // 重置缓冲区，准备再次写入数据。这会将位置（position）设置为0，并将限制（limit）设置为容量。
+        // 重置缓冲区，准备再次写入数据。这会将位置（position）设置为0。
         buffer.rewind();
         System.out.println("重置缓冲区后，读取的数据：" + (char) buffer.get());
         System.out.println("重置缓冲区后，读取的数据：" + (char) buffer.get());
         System.out.println("重置缓冲区后，读取的数据：" + (char) buffer.get());
 
-        // 检查是否还有未读的数据，因为位置（position）被设置为0，所以这里返回true，表示存在未读的数据
+        // 检查是否还有未读的数据，这里的 位置（position）< 限制（limit），所以这里返回true，表示存在未读的数据
         while (buffer.hasRemaining()) {
-            // 重置缓冲区，否则会影响下面的写文件
+            // 重置缓冲区，否则下面的写文件会从已经变动的位置（position）开始写
             buffer.rewind();
             // 将缓冲区中的数据通过通道写入到文件中（从位置(position)开始写）
             outChannel.write(buffer);
