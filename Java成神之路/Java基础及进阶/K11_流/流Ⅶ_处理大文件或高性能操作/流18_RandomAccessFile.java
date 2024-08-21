@@ -3,7 +3,7 @@ package K11_流.流Ⅶ_处理大文件或高性能操作;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
-public class RandomAccessExample {
+public class 流18_RandomAccessFile {
 
     /*
       RandomAccessFile是Java中的一个类，它属于java.io包。

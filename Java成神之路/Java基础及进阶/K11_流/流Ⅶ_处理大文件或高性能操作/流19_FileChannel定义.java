@@ -53,7 +53,7 @@ import java.nio.charset.StandardCharsets;
        FileChannel 的性能优势体现在哪里？
        在处理大文件时，FileChannel 的性能优势尤为明显，读写速度大幅提升。
  */
-public class 流18_FileChannel定义 {
+public class 流19_FileChannel定义 {
 
     private static final String filePath = System.getProperty("user.dir")
             + "/Java基础及进阶/K11_流/FileTemp";
