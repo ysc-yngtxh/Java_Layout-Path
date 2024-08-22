@@ -250,7 +250,8 @@
     // 或者 添加到Promise类中方法
     Promise.syncAll = function syncAll() {
         return syncPromise
-    }// 以后可以直接使用
+    }
+    // 以后可以直接使用
     Promise.syncAll(arr).then(result => {
         console.log(result);
         console.log('完成了');
