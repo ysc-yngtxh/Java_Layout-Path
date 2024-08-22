@@ -32,7 +32,7 @@ public class ExamServlet extends HttpServlet {
             String answer = question.getAnswer();
             String userAnswer = request.getParameter("answer_" + questionId);
             // 3、判分
-            if(userAnswer.equals(answer)){
+            if(userAnswer.equals(answer)) {
                 fraction += 25;
             }
         }

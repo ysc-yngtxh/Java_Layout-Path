@@ -1,10 +1,10 @@
 /*
   1、JavaScript包括三大块
-       a1(ECMAScript核心语法): JS的核心语法(ES规范/ECMA-262标准)
+       js1(ECMAScript核心语法): JS的核心语法(ES规范/ECMA-262标准)
 
-       b2(DOM文档对象模型): Document Object Model(文档对象模型，对网页当中的节点进行增删改)HTML文档被当作一棵DOM树来看待
+       js2(DOM文档对象模型): Document Object Model(文档对象模型，对网页当中的节点进行增删改)HTML文档被当作一棵DOM树来看待
 
-       c3(BOM浏览器对象模型): Browser Object Model(浏览器对象模型)
+       js3(BOM浏览器对象模型): Browser Object Model(浏览器对象模型)
             关闭浏览器窗口，打开一个新的浏览器窗口、后退、前进、浏览器地址栏上的地址等，都是BOM编程
 
   2、DOM和BOM的区别和联系。

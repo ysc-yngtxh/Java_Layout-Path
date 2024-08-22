@@ -16,9 +16,9 @@ public class UserDao {
 
     // 用户注册
     // jdbc规范中，Connection创建与销毁最浪费时间，设计tcp协议的三次握手，四次挥手
-    public int add(Users user, HttpServletRequest request){
-        String sql = "insert into users(userName,password,sex,email) values(?,?,?,?)";
-        PreparedStatement ps = util.createStatement(sql,request);
+    public int add(Users user, HttpServletRequest request) {
+        String sql = "insert into users(userName,password,sex,email) values(?, ?, ?, ?)";
+        PreparedStatement ps = util.createStatement(sql, request);
         int result = 0;
         try{
             ps.setString(1, user.getUserName());
@@ -28,14 +28,14 @@ public class UserDao {
             result = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally{
+        } finally {
             util.close(request);
         }
         return result;
     }
 
     // 查询所有用户新消息
-    public List findAll(){
+    public List findAll() {
         List userList = new ArrayList();
         String sql = "select * from users";
         PreparedStatement ps = util.createStatement(sql);
@@ -48,12 +48,12 @@ public class UserDao {
                 String password = rs.getString("password");
                 String sex = rs.getString("sex");
                 String email = rs.getString("email");
-                Users users = new Users(userId,userName,password,sex,email);
+                Users users = new Users(userId, userName, password, sex, email);
                 userList.add(users);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally{
+        } finally {
             util.close();
         }
         return userList;
@@ -61,7 +61,7 @@ public class UserDao {
 
     // 根据用户编号删除用户信息
     public int delete(String userId){
-        String sql = "delete from users where userId=?";
+        String sql = "delete from users where userId = ?";
         PreparedStatement ps = util.createStatement(sql);
         int result = 0;
         try{
@@ -69,15 +69,15 @@ public class UserDao {
             result = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally{
+        } finally {
             util.close();
         }
         return result;
     }
 
     // 登陆验证
-    public int login(String userName,String password){
-        String sql = "select count(*) from users where userName=? and password=?";
+    public int login(String userName,String password) {
+        String sql = "select count(*) from users where userName = ? and password = ?";
         PreparedStatement ps = util.createStatement(sql);
         ResultSet rs = null;
         int result = 0;
@@ -85,12 +85,12 @@ public class UserDao {
             ps.setString(1,userName);
             ps.setString(2,password);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while(rs.next()) {
                 result = rs.getInt("count(*)");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally{
+        } finally {
             util.close();
         }
         return result;

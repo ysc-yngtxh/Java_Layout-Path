@@ -17,7 +17,7 @@ public class QuestionAddServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String title,optionA,optionB,optionC,optionD,answer;
+        String title, optionA, optionB, optionC, optionD, answer;
         QuestionDao dao = new QuestionDao();
         Question question = null;
         int result = 0;
@@ -29,14 +29,14 @@ public class QuestionAddServlet extends HttpServlet {
         optionD = request.getParameter("optionD");
         answer = request.getParameter("answer");
         // 2、调用Dao对象将Insert命令推送到数据库，并得到处理结果
-        question = new Question(null,title,optionA,optionB,optionC,optionD,answer);
+        question = new Question(null, title, optionA, optionB, optionC, optionD, answer);
         result = dao.add(question);
         // 3、通过请求转发，向Tomcat索要info.jsp将处理结果写入到响应体
-        if(result == 1){
+        if(result == 1) {
             request.setAttribute("info","试题添加成功");
-        } else{
+        } else {
             request.setAttribute("info","试题添加失败");
         }
-        request.getRequestDispatcher("/info.jsp").forward(request,response);
+        request.getRequestDispatcher("/info.jsp").forward(request, response);
     }
 }

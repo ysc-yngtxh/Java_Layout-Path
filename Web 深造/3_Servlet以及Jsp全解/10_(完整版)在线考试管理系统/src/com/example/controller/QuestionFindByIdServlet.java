@@ -27,7 +27,7 @@ public class QuestionFindByIdServlet extends HttpServlet {
         Question question = dao.findById(questionId);
         // 3、调用question_Update.jsp将试题信息写入到响应体
         request.setAttribute("key", question);
-        request.getRequestDispatcher("/question_Update.jsp").forward(request,response);
+        request.getRequestDispatcher("/question_Update.jsp").forward(request, response);
 
     }
 }

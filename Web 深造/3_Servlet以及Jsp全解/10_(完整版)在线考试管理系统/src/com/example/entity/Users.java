@@ -2,7 +2,7 @@ package com.example.entity;
 
 public class Users {
 
-    private Integer userId;  //这里的userId之所以选用Integer进行包装，是因为在后面传值new这个对象的时候没有userId的值需要写null
+    private Integer userId;  // 这里的userId之所以选用Integer进行包装，是因为在后面传值new这个对象的时候没有userId的值需要写null
     private String userName;
     private String password;
     private String sex;

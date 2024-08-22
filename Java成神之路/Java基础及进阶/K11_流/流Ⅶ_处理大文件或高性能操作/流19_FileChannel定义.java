@@ -56,7 +56,7 @@ import java.nio.charset.StandardCharsets;
 public class 流19_FileChannel定义 {
 
     private static final String filePath = System.getProperty("user.dir")
-            + "/Java基础及进阶/K11_流/FileTemp";
+                                           + "/Java基础及进阶/K11_流/FileTemp";
 
     public static void main(String[] args) throws IOException {
         // 获取一个只读FileChannel通道

@@ -28,9 +28,9 @@ public class QuestionDeleteServlet extends HttpServlet {
         // 3、调用响应对象将处理结果以二进制写入到响应体，交给浏览器
         response.setContentType("text/html;charset=utf-8");
         out = response.getWriter();
-        if(result == 1){
+        if(result == 1) {
             out.print("<font style='color:red;font-size:40'>试题信息删除成功</font>");
-        } else{
+        } else {
             out.print("<font style='color:red;font-size:40'>试题信息删除失败</font>");
         }
     }

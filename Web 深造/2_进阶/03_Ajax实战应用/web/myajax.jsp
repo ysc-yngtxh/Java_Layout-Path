@@ -19,11 +19,11 @@
                 if(xmlHttp.readyState===4 && xmlHttp.status===200){
                     var data = xmlHttp.responseText;
                     // eval是执行括号中的代码，把json字符串转为json对象
-                    var jsonobj = eval("("+data+")");  // 这条语句可以不做了解，后面学的jQuery会使用另种方法
+                    var jsonObj = eval("("+data+")");  // 这条语句可以不做了解，后面学的jQuery会使用另种方法
                     // 更新dom对象
-                    document.getElementById("proname").value = jsonobj.name;
-                    document.getElementById("projiancheng").value = jsonobj.jiancheng;
-                    document.getElementById("proshenghui").value = jsonobj.shenghui;
+                    document.getElementById("proname").value = jsonObj.name;
+                    document.getElementById("projiancheng").value = jsonObj.jiancheng;
+                    document.getElementById("proshenghui").value = jsonObj.shenghui;
                 }
             }
             // 3、初始异步对象

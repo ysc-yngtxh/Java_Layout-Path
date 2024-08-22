@@ -26,6 +26,6 @@ public class QuestionRandServlet extends HttpServlet {
         // 2、将4道题目添加到request作为共享数据
         session.setAttribute("key",ques);
         // 3、请求转发
-        request.getRequestDispatcher("/question_Rand.jsp").forward(request,response);
+        request.getRequestDispatcher("/question_Rand.jsp").forward(request, response);
     }
 }

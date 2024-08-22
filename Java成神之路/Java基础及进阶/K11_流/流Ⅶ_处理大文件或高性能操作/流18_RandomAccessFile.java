@@ -37,14 +37,34 @@ public class 流18_RandomAccessFile {
             raf.writeInt(12345);
             raf.writeUTF("Hello, World!");
 
-            // 移动文件指针并读取数据
-            raf.seek(0); // 回到文件开头
-            int number = raf.readInt();
-            String text = raf.readUTF();
+            // 移动文件指针，回到文件开头，并读取数据
+            raf.seek(0);
 
             // 输出读取的数据
-            System.out.println("Number: " + number);
-            System.out.println("Text: " + text);
+            System.out.println("Number: " + raf.readInt());
+            System.out.println("Text: " + raf.readUTF());
+
+            System.out.println("初始文件指针位置：" + raf.getFilePointer());
+            raf.write("你好，world!".getBytes());
+            System.out.println("第一次写完之后文件指针位置：" + raf.getFilePointer());
+
+            // 手动修改读写指针位置
+            raf.seek(9);
+            System.out.println("修改后的文件指针位置：" + raf.getFilePointer());
+
+            byte b = raf.readByte();
+            System.out.println("第一次读完之后文件指针位置：" + raf.getFilePointer() + "，读到的内容：" + (char) b);
+
+            // 修改指针位置10处的字节内容
+            raf.writeBytes("K");
+            System.out.println("第二次写完之后文件指针位置：" + raf.getFilePointer());
+
+            byte[] dst = new byte[(int) raf.length()];
+            // 指针归零
+            raf.seek(0);
+            // 将数据全部读取出来
+            raf.read(dst);
+            System.out.println("第二次读完之后文件指针位置：" + raf.getFilePointer() + "，读到的内容：" + new String(dst));
 
             // 关闭文件
             raf.close();

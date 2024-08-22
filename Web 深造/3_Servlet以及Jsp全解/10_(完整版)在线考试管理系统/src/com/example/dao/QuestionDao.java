@@ -13,8 +13,9 @@ public class QuestionDao {
     DBUtil util = new DBUtil();
 
     // 注册试题
-    public int add(Question question){
-        String sql = "insert into question(title,optionA,optionB,optionC,optionD,answer) values(?,?,?,?,?,?)";
+    public int add(Question question) {
+        String sql = "insert into question(title, optionA, optionB, optionC, optionD, answer) " +
+                "values(?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = util.createStatement(sql);
         int result = 0;
         try{
@@ -27,7 +28,7 @@ public class QuestionDao {
             result = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally{
+        } finally {
             util.close();
         }
         return result;
@@ -41,7 +42,7 @@ public class QuestionDao {
         ResultSet rs = null;
         try{
             rs = ps.executeQuery();
-            while(rs.next()){
+            while(rs.next()) {
                 Integer questionId = rs.getInt("questionId");
                 String title = rs.getString("title");
                 String optionA = rs.getString("optionA");
@@ -49,12 +50,12 @@ public class QuestionDao {
                 String optionC = rs.getString("optionC");
                 String optionD = rs.getString("optionD");
                 String answer = rs.getString("answer");
-                Question que = new Question(questionId,title,optionA,optionB,optionC,optionD,answer);
+                Question que = new Question(questionId, title, optionA, optionB, optionC, optionD, answer);
                 questionlist.add(que);
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally{
+        } finally {
             util.close();
         }
         return questionlist;
@@ -62,7 +63,7 @@ public class QuestionDao {
 
     // 删除试题
     public int delete(String questionId){
-        String sql = "delete from question where questionId=?";
+        String sql = "delete from question where questionId = ?";
         PreparedStatement ps = util.createStatement(sql);
         int result = 0;
         try{
@@ -70,22 +71,22 @@ public class QuestionDao {
             result = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally{
+        } finally {
             util.close();
         }
         return result;
     }
 
     // 根据试题编号查询试题信息
-    public Question findById(String questionId){
-        String sql = "select * from question where questionId=?";
+    public Question findById(String questionId) {
+        String sql = "select * from question where questionId = ?";
         PreparedStatement ps = util.createStatement(sql);
         ResultSet rs = null;
         Question question = null;
-        try{
+        try {
             ps.setInt(1,Integer.valueOf(questionId));
             rs = ps.executeQuery();
-            while(rs.next()){
+            while(rs.next()) {
                 Integer quesId = rs.getInt("questionId");
                 String title = rs.getString("title");
                 String optionA = rs.getString("optionA");
@@ -93,12 +94,12 @@ public class QuestionDao {
                 String optionC = rs.getString("optionC");
                 String optionD = rs.getString("optionD");
                 String answer = rs.getString("answer");
-                question = new Question(quesId,title,optionA,optionB,optionC,optionD,answer);
+                question = new Question(quesId, title, optionA, optionB, optionC, optionD, answer);
             }
-        } catch(SQLException e){
+        } catch(SQLException e) {
             e.printStackTrace();
-        } finally{
-            if(rs != null){
+        } finally {
+            if(rs != null) {
                 try {
                     rs.close();
                 } catch (SQLException e) {
@@ -111,8 +112,9 @@ public class QuestionDao {
     }
 
     // 更新试题
-    public int update(Question question){
-        String sql = "update question set title=?,optionA=?,optionB=?,optionC=?,optionD=?,answer=? where questionId=?";
+    public int update(Question question) {
+        String sql = "update question set title = ?, optionA = ?, optionB = ?, optionC = ?, " +
+                "optionD = ?, answer = ? where questionId = ?";
         PreparedStatement ps = util.createStatement(sql);
         int result = 0;
         try{
@@ -124,9 +126,9 @@ public class QuestionDao {
             ps.setString(6,question.getAnswer());
             ps.setInt(7,question.getQuestionId());
             result = ps.executeUpdate();
-        } catch(SQLException e){
+        } catch(SQLException e) {
             e.printStackTrace();
-        } finally{
+        } finally {
             util.close();
         }
         return result;
@@ -139,9 +141,9 @@ public class QuestionDao {
         PreparedStatement ps = util.createStatement(sql);
         ResultSet rs = null;
         Question ques = null;
-        try{
+        try {
             rs = ps.executeQuery();
-            while(rs.next()){
+            while(rs.next()) {
                 Integer questionId = rs.getInt("questionId");
                 String title = rs.getString("title");
                 String optionA = rs.getString("optionA");
@@ -149,13 +151,13 @@ public class QuestionDao {
                 String optionC = rs.getString("optionC");
                 String optionD = rs.getString("optionD");
                 String answer = rs.getString("answer");
-                ques = new Question(questionId,title,optionA,optionB,optionC,optionD,answer);
+                ques = new Question(questionId, title, optionA, optionB, optionC, optionD, answer);
                 questionlist.add(ques);
             }
-        } catch(SQLException e){
+        } catch(SQLException e) {
             e.printStackTrace();
-        } finally{
-            if(rs != null){
+        } finally {
+            if(rs != null) {
                 try {
                     rs.close();
                 } catch (SQLException e) {

@@ -22,7 +22,7 @@ public class UserAddServlet extends HttpServlet {
     // 浏览器根据响应头content-type指定编译器对响应体二进制内容编辑
     // 浏览器将编译后结果在窗口中展示给用户【结束】
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userName,password,sex,email;
+        String userName, password, sex, email;
         UserDao dao = new UserDao();
         Users user = null;
         int result = 0;

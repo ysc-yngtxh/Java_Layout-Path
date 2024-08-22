@@ -37,7 +37,7 @@ public class DBUtil {
         while(it.hasNext()){
             conn = (Connection)it.next();
             boolean flag = (boolean)map.get(conn);
-            if(flag == true){
+            if(flag){
                 map.put(conn,false);
                 break;
             }
@@ -75,8 +75,8 @@ public class DBUtil {
       将jar包中driver实现类加载到Jvm中
       静态代码块在类加载时执行，并且只执行一次
     */
-    static{
-        try{
+    static {
+        try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -85,8 +85,8 @@ public class DBUtil {
 
     // 封装连接通道到创建细节
     public Connection getCon(){
-        try{
-            conn = DriverManager.getConnection(url,user,password);
+        try {
+            conn = DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {
             e.printStackTrace();
         }

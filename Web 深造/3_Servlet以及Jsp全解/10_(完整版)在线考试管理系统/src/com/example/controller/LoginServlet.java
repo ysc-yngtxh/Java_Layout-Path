@@ -23,7 +23,7 @@ public class LoginServlet extends HttpServlet {
         userName = request.getParameter("userName");
         password = request.getParameter("password");
         // 3、调用Dao将查询验证信息推送到数据库服务器上
-        result = dao.login(userName,password);
+        result = dao.login(userName, password);
         // 4、调用响应对象，根据验证结果将不同资源文件地址写入到响应头，交给浏览器
         if(result == 1) {
             // 在判断来访用户身份合法后，通过请求对象向tomcat申请，为当前用户申请一个HttpSession

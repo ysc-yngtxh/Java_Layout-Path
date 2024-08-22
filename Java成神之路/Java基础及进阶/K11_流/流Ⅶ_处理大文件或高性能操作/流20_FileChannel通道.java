@@ -15,18 +15,23 @@ import java.nio.file.StandardOpenOption;
  */
 public class 流20_FileChannel通道 {
 
+    private static final String filePath = System.getProperty("user.dir")
+            + "/Java基础及进阶/K11_流/FileTemp";
+
     public static void main(String[] args) throws IOException {
 
-        // 从 RandomAccessFile 中获取
-        // 从 RandomAccessFile 中获取的通道取决于 RandomAccessFile 对象是以什么方式创建的，"r", "w", "rw" 分别对应着读模式，写模式，以及读写模式。
-        RandomAccessFile file = new RandomAccessFile("a.txt", "rw");
-        FileChannel channel0 = file.getChannel(); // 获取一个可读写文件通道
+        // TODO 获取 FileChannel 的其他方法1：
+        // 从 RandomAccessFile 中获取一个可读写文件通道
+        FileChannel random = new RandomAccessFile(filePath, "rw").getChannel();
 
-        // 通过 FileChannel.open() 打开
+        // TODO 获取 FileChannel 的其他方法2：
         // 通过静态静态方法 FileChannel.open() 打开的通道可以指定打开模式，模式通过 StandardOpenOption 枚举类型指定。
+        FileChannel open = FileChannel.open(Paths.get(filePath), StandardOpenOption.READ);
+
         // 读取到多个缓冲区
         // 文件通道 FileChannel 实现了 ScatteringByteChannel 接口，可以将文件通道中的内容同时读取到多个 ByteBuffer 当中，这在处理包含若干长度固定数据块的文件时很有用。
-        ScatteringByteChannel channel = FileChannel.open(Paths.get("a.txt"), StandardOpenOption.READ);
+        ScatteringByteChannel channel = FileChannel.open(Paths.get(filePath), StandardOpenOption.READ);
+        // 创建字节大小分别为 5、10的 ByteBuffer缓冲区
         ByteBuffer key = ByteBuffer.allocate(5), value = ByteBuffer.allocate(10);
         ByteBuffer[] buffers = new ByteBuffer[]{key, value};
         while(channel.read(buffers) != -1){

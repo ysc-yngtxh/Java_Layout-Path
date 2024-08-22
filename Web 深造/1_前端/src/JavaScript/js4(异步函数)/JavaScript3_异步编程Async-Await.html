@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--【背景】
+         Promise虽然使用链式表达非常清晰了，但是我们也发现如果有大量的异步请求的时候，流程复杂的情况下，
+     会发现充满了屏幕的then，看起来非常吃力。
+         所以，ES7(2017年) 引入了async/await，这是JavaScript异步编程的一个重大改进，
+     提供了在不阻塞主线程的情况下使用同步代码编写方式来处理异步流程的能力，并且使得代码看起来更像同步代码，更加优雅。
+-->
+<script type="text/javascript">
+
+    // async声明的函数的返回本质上是一个Promise。
+    // 只要声明了这个函数是async，那么内部不管你怎么处理，它的返回肯定是个Promise。
+    async function demo1() {
+        return '写法一：我是Promise'
+        // 等同于 return Promise.resolve('写法一：我是Promise');
+        // 等同于 return new Promise((resolve,reject)=>{ resolve('写法一：我是Promise') })
+    }
+
+    demo1().then(result => {
+        console.log(result)
+    })
+
+
+    const demo2 = async function () {
+        return '写法二：我是Promise'
+        // 等同于 return Promise.resolve('写法二：我是Promise');
+        // 等同于 return new Promise((resolve,reject)=>{ resolve('写法二：我是Promise') })
+    }
+    demo2().then(result => {
+        console.log(result)
+    })
+
+
+    // await的本质是可以提供等同于 "同步效果" 的等待异步返回能力的语法糖。
+    // 顾名思义就是等待一会，只要await声明的函数还没有返回，那么下面的程序是不会去执行的！！！
+    const demo3 = async () => {
+        let result = await new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('写法三：我是Promise。我延迟了一秒')
+            }, 1000)
+        });
+        console.log('我由于上面的程序还没执行完，先不执行“等待一会”');
+        // return result;
+    }
+    // demo3的返回当做Promise
+    demo3().then(result => {
+        console.log('输出', result);
+        // 这里输出的 result = undefined，因为demo3没有返回值。
+    })
+
+
+    // setTimeout这是个异步，但是不是Promise！起不到“等待一会”的作用。
+    // 所以更准确的说法应该是用await声明的Promise异步返回，必须“等待”到有返回值的时候，代码才继续执行下去。
+    const demo4 = async () => {
+        let result = await new Promise((resolve, reject) => {
+            resolve('我延迟了一秒')
+            console.log('我在 await 中执行了');
+        });
+        console.log('先不执行“等待一会”');
+        return result;
+    }
+    // demo4的返回当做Promise
+    demo4().then(result => {
+        console.log('输出', result);
+    })
+
+
+    const setDelay = (millisecond) => {
+        return new Promise((resolve, reject) => {
+            if (typeof millisecond != 'number') reject(new Error('参数必须是number类型'));
+            setTimeout(() => {
+                resolve(`我延迟了${millisecond}毫秒后输出的`)
+            }, millisecond)
+        })
+    }
+    const setDelaySecond = (seconds) => {
+        return new Promise((resolve, reject) => {
+            if (typeof seconds != 'number' || seconds > 10) reject(new Error('参数必须是number类型，并且小于等于10'));
+            setTimeout(() => {
+                resolve(`我延迟了${seconds}秒后输出的，注意单位是秒`)
+            }, seconds * 1000)
+        })
+    }
+    // 上面两个延时函数setDelay、setDelaySecond，比如我想先延时1秒，在延迟2秒，再延时1秒，最后输出“完成”，
+    // 这个过程，如果用then的写法，大概是这样（嵌套地狱写法出门右拐不送）：
+    setDelay(1000)
+        .then(result => {
+            console.log(result);
+            return setDelaySecond(2)
+        })
+        .then(result => {
+            console.log(result);
+            return setDelay(1000)
+        })
+        .then(result => {
+            console.log(result);
+            console.log('完成')
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    // 没有冗余的长长的链式代码，语义化也非常清楚，非常舒服
+    const test = async () => {
+        const result = await setDelay(1000);
+        console.log(result);
+        console.log(await setDelaySecond(2));
+        console.log(await setDelay(1000));
+        console.log('完成了');
+    }
+
+    // async函数中捕获错误除了catch()方法，可以使用try...catch语句
+    const test = async () => {
+        try {
+            const result = await setDelay(1000);
+            console.log(result);
+            console.log(await setDelaySecond(2));
+            console.log(await setDelay(1000));
+            console.log('完成了');
+        } catch (e) {
+            console.log(e); // 这里捕获错误
+        }
+    }
+
+    // 如果不想因为一个的错误就整个process都crash掉，可以拆分开分别处理
+    const test = async () => {
+        const result = await setDelay(1000).catch(err => {
+            console.log(err)
+        });
+        console.log(result);
+        const result1 = await setDelaySecond(12).catch(err => {
+            console.log(err)
+        })
+        console.log(result1);
+        console.log(await setDelay(1000));
+        console.log('完成了');
+    }
+
+    // 改进一下，封装一下提取错误的代码函数
+    function to(promise) {
+        return promise.then(data => {
+            return [null, data];
+        }).catch(err => [err]); // es6的返回写法
+    }
+
+    const test = async () => {
+        // es6的写法，返回一个数组，第一个是错误信息，第二个是then的异步返回数据
+        [err, result] = await to(setDelay(1000))
+        // 如果err存在就是有错，不想继续执行就抛出错误
+        if (err) throw new Error('出现错误，同时我不想执行了');
+        console.log(result);
+        [err, result1] = await to(setDelaySecond(12))
+        // 还想执行就不要抛出错误
+        if (err) console.log('出现错误，同时我想继续执行', err);
+        console.log(result1);
+        console.log(await setDelay(1000));
+        console.log('完成了');
+    }
+
+
+    // 期望的逻辑结果是：隔一秒输出 '我延迟了1000毫秒后输出的'，一共经过循环3次。
+    const setDelay = (millisecond) => {
+        return new Promise((resolve, reject) => {
+            if (typeof millisecond != 'number') reject(new Error('参数必须是number类型'));
+            setTimeout(() => {
+                resolve(`我延迟了${millisecond}毫秒后输出的`)
+            }, millisecond)
+        })
+    }
+
+    // 结果输出是并行的！！！也就是说一秒钟一次性输出了3个值！
+    // 分析：把setDelay(1000)这个直接添加到数组的时候，其实就已经执行了
+    arr = [setDelay(1000), setDelay(1000), setDelay(1000)];
+    arr[0]
+        .then(result => {
+            console.log(result)
+            return arr[1]
+        })
+        .then(result => {
+            console.log(result)
+            return arr[2]
+        })
+        .then(result => {
+            console.log(result)
+        })
+
+    // 解决方案：直接函数名存储函数的方式（不执行Promise）来达到目的
+    arr = [setDelay, setDelay, setDelay]
+    arr[0](1000)
+        .then(result => {
+            console.log(result)
+            return arr[1](1000)
+        })
+        .then(result => {
+            console.log(result)
+            return arr[2](1000)
+        })
+        .then(result => {
+            console.log(result)
+        })
+
+    // 上述写法是不优雅的，次数一多就GG了
+    arr = [setDelay, setDelay, setDelay]
+    let temp;
+    temp = arr[0](1000)
+    for (let i = 1; i <= arr.length; i++) {
+        if (i === arr.length) {
+            temp.then(result => {
+                console.log('完成了');
+            })
+            break;
+        }
+        temp = temp.then((result) => {
+            console.log(result);
+            return arr[i - 1](1000)
+        });
+    }
+
+
+    // 提取成公共方法。首先需要闭包Promise程序
+    // 如果不闭包会导致什么后果呢？不闭包的话，你传入的参数值后，你的Promise会马上执行，导致状态改变，
+    // 如果用闭包实现的话，你的Promise会一直保存着，等到你需要调用的时候再使用。
+    function timeout(millisecond) {
+        return () => {
+            return setDelay(millisecond);
+        }
+    }
+
+    arr = [timeout(2000), timeout(1000), timeout(1000)]
+    const syncPromise = function (arr) {
+        const _syncLoop = function (count) {
+            if (count === arr.length - 1) { // 是最后一个就直接return
+                return arr[count]()
+            }
+            return arr[count]().then((result) => {
+                console.log(result);
+                return _syncLoop(count + 1) // 递归调用数组下标
+            });
+        }
+        return _syncLoop(0);
+    }
+    syncPromise(arr).then(result => {
+        console.log(result);
+        console.log('完成了');
+    })
+    // 或者 添加到Promise类中方法
+    Promise.syncAll = function syncAll() {
+        return syncPromise
+    }// 以后可以直接使用
+    Promise.syncAll(arr).then(result => {
+        console.log(result);
+        console.log('完成了');
+    })
+
+
+    // 大神写法
+    const p = arr.reduce((total, current) => {
+        return total.then((result) => {
+            console.log(result);
+            return current()
+        })
+    }, Promise.resolve('程序开始'))
+    p.then((result) => {
+        console.log('结束了', result);
+    })
+
+    // async/await写法
+    let force = async () => {
+        arr2 = [timeout(2000), timeout(1000), timeout(1000)]
+        for (let i = 0; i < arr.length; i++) {
+            let result = await arr[i]();
+            console.log(result);
+        }
+    }
+</script>
+</body>
+</html>
