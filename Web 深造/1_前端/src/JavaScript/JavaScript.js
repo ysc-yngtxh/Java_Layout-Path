@@ -12,3 +12,4 @@
        DOM的顶级对象是：document
         实际上BOM是包括DOM的！
 */
+

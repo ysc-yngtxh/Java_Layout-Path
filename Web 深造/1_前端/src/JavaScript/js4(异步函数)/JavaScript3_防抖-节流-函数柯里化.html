@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div style="width: 200px;height: 100px;background-color: #9cb3ed;">
+    鼠标放上来：防抖</br></br>
+    鼠标点击：节流
+</div>
+
+<script type="text/javascript">
+    // 节流和防抖的区别:
+    //           防抖避免重复执行 只执行一次
+    //           节流 减少执行次数 执行多次
+
+    // TODO 防抖 避免函数的重复调用 只会调用一次
+    function antiShaking(fn, wait) { // 第一个参数是函数 第二个参数是毫秒值
+        let timer = null;  // 声明一个变量来接收延时器 初始值为null
+        return function () {
+            clearTimeout(timer); // 清除延时器，clearTimeout()取消了先前通过调用setTimeout()建立的定时器。
+            timer = setTimeout(() => {
+                fn();
+            }, wait);
+        }
+    }
+    let an = antiShaking(function(){console.log('555')}, 2000);
+    document.querySelector('div').onmouseenter = ()=>{an()}  // onmouseenter 事件在鼠标指针移动到元素上时触发。
+
+
+    // TODO 节流 防止函数的重复调用 减少执行次数
+    function throttle(fn, wait) {
+        let timer = null;
+        return function () {
+            if (timer) return; // null false 不是null结果减少true 如果上传没有我就直接跳过 没有人我就上去
+            timer = setTimeout(() => {
+                fn();
+                timer = null;
+            }, wait);
+        }
+    }
+    let throttle1 = throttle(()=>{console.log('我上车了')}, 2000)
+    document.querySelector('div').onclick = ()=>{throttle1()};
+
+
+    // TODO 函数柯里化 其实就是函数颗粒化 将一个函数变成一个个颗粒可以组装，就是这个里面的多个参数 将他变成一个个的函数来传递这个参数。
+    // 简单柯里化函数
+    function fnSum(a, b, c) { // 求和函数
+        return a + b + c;
+    }
+    function curry(fn) {
+        return function (a) {
+            return function (b) {
+                return function (c) {
+                    return fn(a, b, c);
+                }
+            }
+        }
+    }
+    // 调用 避免了多余的无用参数传递
+    let fnCurry = curry(fnSum);
+    console.log(fnCurry(1)(2)(3)); // 6
+
+
+    // TODO 改进后的柯里化函数
+    function fnSum(a, b, c) { // 求和函数
+        return a + b + c;
+    }
+    function curry1(fn) {
+        // 接收一个后面的参数 除了fn的参数
+        let args = Array.prototype.slice.call(arguments, 1); // 从下标1开始全部剪切  把Array里面的slice方法加给外部函数的arguments
+        return function () {
+            let newArg = args.concat(Array.from(arguments)); // 将内部函数的参数和外部的参数合并
+            return fn.apply(this, newArg); // 将内部函数自动指向 传入所有的参数
+        }
+    }
+    let fn2 = curry1(fnSum, 1, 2); // 函数
+    console.log(fn2(3)); // 6
+
+
+    // TODO 最终改进的柯里化函数：可以任意组合传参 如果不满足就返回偏函数 如果满足就返回结果
+    function fnSum(a, b, c) { // 求和函数
+        return a + b + c;
+    }
+    function curry2(fn) {
+        // 接收一个后面的参数 除了fn的参数
+        let args = Array.prototype.slice.call(arguments, 1);
+        return function () {
+            let newArg = args.concat(Array.from(arguments)); // 将内部函数的参数和外部的参数合并
+            if (newArg.length < fn.length) { // 参数没有到三个 fn.length获取传递的函数的参数个数
+                return curry2.call(this, fn, ...newArg); // 又套了一个function  这个this指向这个function 如果没有到达会一直套这个方法
+            } else {
+                return fn.apply(this, newArg); // 将内部函数自动指向 传入所有的参数
+            }
+        }
+    }
+    let fn3 = curry2(fnSum); // 函数
+    console.log(fn3(1)()(2)()(3)); // 6
+    console.log(fn3()(1)()(2)()()); // 偏函数  function
+
+</script>
+</body>
+</html>

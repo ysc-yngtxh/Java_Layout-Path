@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+
+    // TODO 闭包：是指有权访问一个函数作用域中变量的函数。创建闭包最常见的方式就是，在一个函数内部创建另一个函数。
+    // TODO 闭包缺点：容易导致内存泄露。
+    // TODO         闭包会携带包含他的函数作用域，因此会比其他函数占用更多的内存。
+    // TODO         过度使用闭包会导致内存占用过多，所以要谨慎使用闭包。
+
+    // 在使用闭包时需要特别注意内存泄漏的问题，可以用以下两种方法解决内存泄露问题：
+    // 1.及时释放闭包：手动调用闭包函数，并将其返回值赋值为null，这样可以让闭包中的变量及时被垃圾回收器回收。
+    // 2.使用立即执行函数：在创建闭包时，将需要保留的变量传递给一个立即执行函数，并将这些变量作为参数传递给闭包函数，
+    //                  这样可以保留所需的变量，而不会导致其他变量的内存泄漏。
+
+
+
+    // 作为正常函数，normal()函数在被调用时，是无法在外部对 normal()函数内部的变量i进行访问或修改的。
+    function normal() {
+        let i = 0;
+        i++;
+        return i;
+    }
+    let test1 = normal(); // 执行 normal()函数，并将结果赋值给变量 test1
+    console.log("获取 test1.i 的值 == ", test1.i,
+        "因为函数执行完后，局部变量被回收了，所以无法访问获取到函数内部作用域里的变量");
+    console.log("获取 test1 的返回值 == ", test1);
+
+
+    // 正常情况下，一个函数在执行完成后的整个内部作用域被销毁，占用的内存被回收。
+    // 闭包函数closure()的返回值是持有对该作用域的引用，内部作用域还在使用，所以不会对其进行回收。而这个引用就叫做闭包。
+    function closure() {
+        let i = 0;
+        i++;
+        return {i};  // 这里返回的是一个对象引用，语法参考对象解构
+    }
+    let test2 = closure(); // 执行 closure() 函数，并将结果赋值给变量 test2
+    console.log("获取 test2.i 的值 == ", test2.i,
+        "因为闭包的存在，内部作用域还在使用，没有将其进行回收。所以引用的 test2.i 仍然可以访问到或者修改");
+    test2.i++;  // 将闭包的引用，进行属性自增
+    console.log("获取 test2.i 的值 == ", test2.i, "由于已经将 test2.i 进行自增，所以这里获取的是自增后的值");
+
+
+    // TODO 闭包函数的典型应用：循环中的异步函数
+    // setTimeout() 是一个异步方法，在延时的1000ms内，for已经循环结束了。得到的 i最终值为 9。所以输出结果都是 9
+    let i;
+    function spider() {
+        for (i = 0; i < 9; i++) {
+            setTimeout(() => {
+                console.log(`当前 i：${i}`)
+            }, 1000)
+        }
+    }
+    spider();
+
+
+    // TODO 方案一：解决for循环中异步函数的 j 数据相同性
+    // 将 setTimeout()方法包装进一个函数，并将 j 作为函数参数。
+    // 这样 setTimeout()方法在每次循环执行时，打印的都是当时传进函数的参数 j值，而每次传参都是不同的。
+    let j;
+    function spider2() {
+        for (j = 0; j < 9; j++) {
+            (function (j) {
+                setTimeout(() => {
+                    console.log(`当前 j：${j}`)
+                }, 1000)
+            })(j)
+        }
+    }
+    spider2();
+
+
+    // TODO 方案二：解决for循环中异步函数的 k 数据相同性
+    // 其实解决方案的思想和方案一如出一辙，只不过这里是将方法抽离出来了
+    let k;
+    function getData(k) {
+        setTimeout(() => {
+            console.log(`当前 k：${k}`)
+        }, 1000)
+    }
+    function spider3() {
+        for (k = 0; k < 9; k++) {
+            getData(k);
+        }
+    }
+    spider3();
+
+</script>
+</body>
+</html>
