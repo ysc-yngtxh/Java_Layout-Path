@@ -48,13 +48,13 @@
             console.log(result)
         })
 
-    // 写法三：上述写法是不优雅的，次数一多then回调就多了
+    // 写法三：上述写法是不优雅的，次数一多then回调就多了。所以使用 for循环来优化。
     arr = [setDelay, setDelay, setDelay]
     let temp;
     temp = arr[0](1000)
     for (let i = 1; i <= arr.length; i++) {
         if (i === arr.length) {
-            temp.then(result => {
+            temp.then(() => {
                 console.log('完成了');
             })
             break;
@@ -66,9 +66,9 @@
     }
 
 
-    // 提取成公共方法。首先需要闭包Promise程序
-    // 如果不闭包会导致什么后果呢？不闭包的话，你传入的参数值后，你的Promise会马上执行，导致状态改变，
-    // 如果用闭包实现的话，你的Promise会一直保存着，等到你需要调用的时候再使用。
+    // 方法四_1：提取成公共方法。
+    // 首先需要使用闭包Promise程序来实现，这样你的Promise会一直保存着，等到你需要调用的时候再使用。
+    // 如果不闭包的话，传入的参数值后，Promise会马上执行，导致状态改变。
     function timeout(millisecond) {
         return () => {
             return setDelay(millisecond);
@@ -91,9 +91,10 @@
         console.log(result);
         console.log('完成了');
     })
-    // 或者 添加到Promise类中方法
+
+    // 方法四_2：添加到Promise类中方法
     Promise.syncAll = function syncAll() {
-        return syncPromise
+        return syncPromise;
     }
     // 以后可以直接使用
     Promise.syncAll(arr).then(result => {
@@ -102,7 +103,7 @@
     })
 
 
-    // 大神写法
+    // 方法四_3：大神写法
     const p = arr.reduce((total, current) => {
         return total.then((result) => {
             console.log(result);
@@ -113,9 +114,8 @@
         console.log('结束了', result);
     })
 
-    // async/await写法
+    // 方法四_4：async/await写法
     let force = async () => {
-        arr2 = [timeout(2000), timeout(1000), timeout(1000)]
         for (let i = 0; i < arr.length; i++) {
             let result = await arr[i]();
             console.log(result);

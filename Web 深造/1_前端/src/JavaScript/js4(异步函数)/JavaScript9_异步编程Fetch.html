@@ -107,27 +107,27 @@
 
     // fetch()请求发送后，如果中途想要取消，需要使用AbortController对象
     // 创建一个AbortController实例
-    let controller = new AbortController();
+    let controller1 = new AbortController();
     fetch(url, {
-        signal: controller.signal
+        signal: controller1.signal
     });
     // 给controller.signal绑定监听事件，controller.signal的值改变则会触发abort事件
-    controller.signal.addEventListener('abort',
+    controller1.signal.addEventListener('abort',
         () => console.log('abort!')
     );
     // controller.abort()方法用于发出取消信号。这时会触发abort事件，这个事件可以监听
-    controller.abort(); // 取消
+    controller1.abort(); // 取消
     // 可以通过controller.signal.aborted属性判断取消信号是否已经发出
-    console.log(controller.signal.aborted); // true
+    console.log(controller1.signal.aborted); // true
 
     //创建实例
-    let controller = new AbortController();
+    let controller2 = new AbortController();
     //设置定时器
-    setTimeout(() => controller.abort(), 300);
+    setTimeout(() => controller2.abort(), 300);
 
     try {
         let response = await fetch('请求路径', {
-            signal: controller.signal
+            signal: controller2.signal
         });
     } catch (err) {
         if (err.name === 'AbortError') {
