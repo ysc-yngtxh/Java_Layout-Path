@@ -97,6 +97,8 @@ public class 流19_FileChannel定义 {
 
         // 关闭通道
         inChannel.close();
+        // 在对文件进行重要的操作之后，应该将数据刷出刷出(force)到磁盘，避免操作系统崩溃导致的数据丢失。
+        outChannel.force(false); // 将数据刷出到磁盘，但不包括元数据[修改人，时间，地点等等]
         outChannel.close();
     }
 }

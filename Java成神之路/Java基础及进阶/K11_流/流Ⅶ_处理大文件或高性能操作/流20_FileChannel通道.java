@@ -1,5 +1,8 @@
 package K11_流.流Ⅶ_处理大文件或高性能操作;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
@@ -56,9 +59,31 @@ public class 流20_FileChannel通道 {
         key1.flip();
         value1.flip();
         channel1.write(buffers1);
-        channel1.force(false); // 将数据刷出到磁盘
+        channel1.force(false); // 将数据刷出到磁盘，但不包括元数据
         channel1.close();
 
 
+
+
+    }
+
+    // 普通的读写方式是利用一个 ByteBuffer 缓冲区，作为数据的容器。但如果是两个通道之间的数据交互，利用缓冲区作为媒介是多余的。
+    // transferFrom(ReadableByteChannel src, position, count) 和 transferTo(position, count, WritableChannel target)
+    // 进行通道间的数据传输时，这两个方法比使用 ByteBuffer 作为媒介的效率要高；
+    // transferFrom 或者 transferTo 在调用之后并不会改变 position 的位置。
+    public static void copy(File source, File target) throws IOException {
+        FileInputStream sourceOutStream = new FileInputStream(source);
+        FileOutputStream targetOutStream = new FileOutputStream(target);
+        FileChannel sourceChannel = sourceOutStream.getChannel();
+        FileChannel targetChannel = targetOutStream.getChannel();
+        long transfered = 0;
+        // 需要注意，调用这两个转换方法，某些情况下并不保证数据能够全部完成传输，确切传输了多少字节数据需要根据返回值来进行判断
+        while (transfered < sourceChannel.size()){
+            transfered += sourceChannel.transferTo(transfered, targetChannel.size(), targetChannel);
+        }
+        sourceChannel.close();
+        targetChannel.close();
+        sourceOutStream.close();
+        targetOutStream.close();
     }
 }
