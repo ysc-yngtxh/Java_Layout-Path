@@ -49,10 +49,10 @@ public class 流20_FileChannel通道 {
 
 
         // 从多个缓冲区写入
-        // FileChannel 实现了 GatherringByteChannel 接口，与 ScatteringByteChannel 相呼应。可以一次性将多个缓冲区的数据写入到通道中。
+        // FileChannel 实现了 GatheringByteChannel 接口，与 ScatteringByteChannel 相呼应。可以一次性将多个缓冲区的数据写入到通道中。
         FileChannel channel1 = FileChannel.open(Paths.get("a.txt"), StandardOpenOption.WRITE);
         ByteBuffer key1 = ByteBuffer.allocate(10), value1 = ByteBuffer.allocate(10);
-        byte[] data = "017 Robothy".getBytes();
+        byte[] data = "017 Robot".getBytes();
         key1.put(data, 0, 3);
         value1.put(data, 4, data.length-4);
         ByteBuffer[] buffers1 = new ByteBuffer[]{key1, value};
@@ -62,9 +62,8 @@ public class 流20_FileChannel通道 {
         channel1.force(false); // 将数据刷出到磁盘，但不包括元数据
         channel1.close();
 
-
-
-
+        // 通道转换
+        copy(new File(filePath), new File(filePath + "1"));
     }
 
     // 普通的读写方式是利用一个 ByteBuffer 缓冲区，作为数据的容器。但如果是两个通道之间的数据交互，利用缓冲区作为媒介是多余的。

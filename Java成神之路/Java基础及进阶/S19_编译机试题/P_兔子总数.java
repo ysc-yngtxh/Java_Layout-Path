@@ -34,8 +34,8 @@ public class P_兔子总数 {
             return;
         }
         for (int i = 3; i <= month; ++i) {
-            count = num;
-            num = all;
+            num = count;
+            count = all;
             all = num + count;
         }
         System.out.println("兔子总数为：" + all);

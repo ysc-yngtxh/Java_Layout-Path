@@ -8,7 +8,7 @@ import static java.util.concurrent.ThreadLocalRandom.current;
 /**
  * @author 游家纨绔
  * @dateTime 2023-08-21 07:06
- * @apiNote TODO
+ * @apiNote TODO 高并发环境下的性能优势 LongAdder，AtomicLong
  */
 public class Atomic1_AtomicReference示例 {
 
