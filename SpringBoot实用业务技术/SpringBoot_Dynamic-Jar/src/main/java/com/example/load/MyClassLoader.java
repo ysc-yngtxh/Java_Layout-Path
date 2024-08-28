@@ -31,7 +31,7 @@ public class MyClassLoader extends URLClassLoader {
     }
 
     @Override
-    protected Class<?> findClass(String name) throws ClassNotFoundException {
+    protected Class<?> findClass(String name) {
         // 从已加载的类集合中获取指定名称的类
         Class<?> clazz = loadedClasses.get(name);
         if (clazz != null) {

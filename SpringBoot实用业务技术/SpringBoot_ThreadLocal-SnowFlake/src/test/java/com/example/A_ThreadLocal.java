@@ -26,7 +26,7 @@ public class A_ThreadLocal {
      *    前者仅提供一份变量，让不同的线程排队访问，而后者为每一个线程都提供了一份变量，因此可以同时访问而互不影响。
      */
 
-    private static final java.lang.ThreadLocal<User> THREAD_LOCAL = new java.lang.ThreadLocal<>();
+    private static final ThreadLocal<User> THREAD_LOCAL = new ThreadLocal<>();
     private static void setData(User user) {
         System.out.println("set数据，线程名：" + Thread.currentThread().getName());
     }
@@ -46,7 +46,6 @@ public class A_ThreadLocal {
                 // 方法入口处，设置一个变量和当前线程绑定
                 setData(new User(i, "游诗成" + i));
                 // 调用其它方法，其它方法内部也能获取到刚放进去的变量
-                User user = THREAD_LOCAL.get();
                 getAndPrintData();
                 THREAD_LOCAL.remove();
                 System.out.println("======== Finish" + i + " =========");

@@ -47,20 +47,23 @@ public class 断点续传 {
     }
 
     @PostMapping("/file2/upload")
-    public ResponseEntity<?> uploadFile(@RequestParam("chunk") MultipartFile chunk,
-                                        @RequestParam("chunkIndex") Integer chunkIndex,
-                                        @RequestParam("chunkSize") Integer chunkSize,
-                                        @RequestParam("chunkChecksum") String chunkChecksum,
-                                        @RequestParam("fileId") String fileId) throws Exception {
+    public ResponseEntity<?> uploadFile(@RequestParam("chunk") MultipartFile chunk, // 文件块
+                                        @RequestParam("chunkIndex") Integer chunkIndex, // 该文件分片所在整个文件中的索引
+                                        @RequestParam("chunkChecksum") String chunkChecksum, // 该文件分片的校验值
+                                        @RequestParam("fileId") String fileId) throws Exception { // 文件唯一标识
         if (StringUtils.isBlank(fileId) || StringUtils.isEmpty(fileId)) {
             fileId = UUID.randomUUID().toString();
         }
         String key = FILE_UPLOAD_PREFIX + fileId;
+        // 获取文件块的字节
         byte[] chunkBytes = chunk.getBytes();
+        // 获取文件块的 md5 校验值
         String actualChecksum = calculateHash(chunkBytes);
+        // 比较前端上传的文件块校验值和实际计算出的校验值是否一致（避免文件在上传过程中被篡改或者网络波动导致文件丢失）
         if (!chunkChecksum.equals(actualChecksum)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Chunk checksum does not match");
         }
+        // 将文件块存储到 Redis 中（这里简化操作：不存储数据库或者 OOS 或者 fastDFT）
         if (!redisTemplate.opsForHash().hasKey(key, String.valueOf(chunkIndex))) {
             redisTemplate.opsForHash().put(key, String.valueOf(chunkIndex), chunkBytes);
         }
@@ -79,8 +82,7 @@ public class 断点续传 {
         ByteBuffer byteBuffer = ByteBuffer.wrap(hash);
         StringBuilder hexString = new StringBuilder();
         while (byteBuffer.hasRemaining()) {
-            hexString.append(
-                    java.lang.String.format("%02x", byteBuffer.get()));
+            hexString.append(String.format("%02x", byteBuffer.get()));
         }
         return hexString.toString();
     }

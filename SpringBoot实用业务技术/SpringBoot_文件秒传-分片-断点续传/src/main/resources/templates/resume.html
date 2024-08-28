@@ -9,14 +9,14 @@
 <div id="progressBar"></div>
 <script src="https://cdn.bootcss.com/crypto-js/3.1.9-1/crypto-js.min.js"></script>
 <script>
-    var fileId = "";
-    var fileName = null;
-    var file;
+    let fileId = "";
+    let fileName = null;
+    let file;
     const chunkSize = 1024 * 10;
     // 每个分片的大小10KB
 
     async function uploadFile() {
-        var fileInput = document.getElementById('fileInput');
+        let fileInput = document.getElementById('fileInput');
         file = fileInput.files[0];
         fileName = document.getElementById("fileInput").files[0].name;
         // 分片上传文件
@@ -32,7 +32,7 @@
                 } catch (error) {
                     console.error('Failed to resume upload', i, error);
                     return;
-                }
+                }......................................................................0
             }
         }
         // 合并文件
@@ -47,13 +47,12 @@
     function uploadChunk(file, chunkIndex) {
         return new Promise((resolve, reject) => {
             let fileTemp = file.slice(chunkIndex * chunkSize, (chunkIndex + 1) * chunkSize);
-            var myPromise = calculateHash(fileTemp);
+            let myPromise = calculateHash(fileTemp);
             myPromise.then(result => {
                 const formData = new FormData();
                 formData.append('chunk', fileTemp);
                 formData.append('chunkIndex', chunkIndex);
                 formData.append('chunkChecksum', result);
-                formData.append('chunkSize', chunkSize);
                 formData.append('fileId', fileId);
                 const xhr = new XMLHttpRequest();
                 xhr.open('POST', '/file2/upload', true);
