@@ -12,13 +12,41 @@
     let fileId = "";
     let fileName = null;
     let file;
-    const chunkSize = 1024 * 10;
-    // 每个分片的大小10KB
+    let validate = false;
+    const chunkSize = 1024 * 10; // 每个分片的大小10KB
 
     async function uploadFile() {
         let fileInput = document.getElementById('fileInput');
         file = fileInput.files[0];
         fileName = document.getElementById("fileInput").files[0].name;
+        // 计算整个文件hash,用于传给后端进行文件库查询。判断文件是否已经存在。
+        // 发送请求给后端，判断文件是否已经存在
+        await calculateHash(file).then(fileHash => {
+            inValid(fileHash);
+        })
+    }
+
+    function inValid(fileHash) {
+        return new Promise(() => {
+            const formData = new FormData();
+            formData.append('fileHash', fileHash);
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/file2/check', true);
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    validate = (xhr.responseText === 'true')
+                    console.log(validate ? '文件已存在，感受秒传！' : '文件不存在，开始上传！');
+                    if (validate) return new Promise(() => {});
+                    shardingFile();
+                } else {
+                    console.log('文件校验出错了！！！');
+                }
+            };
+            xhr.send(formData);
+        })
+    }
+
+    async function shardingFile() {
         // 分片上传文件
         const chunks = Math.ceil(file.size / chunkSize);
         for (let i = 0; i < chunks; i++) {
@@ -32,7 +60,7 @@
                 } catch (error) {
                     console.error('Failed to resume upload', i, error);
                     return;
-                }......................................................................0
+                }
             }
         }
         // 合并文件
@@ -47,12 +75,14 @@
     function uploadChunk(file, chunkIndex) {
         return new Promise((resolve, reject) => {
             let fileTemp = file.slice(chunkIndex * chunkSize, (chunkIndex + 1) * chunkSize);
+            fileTemp.fileName = fileName;
             let myPromise = calculateHash(fileTemp);
             myPromise.then(result => {
                 const formData = new FormData();
-                formData.append('chunk', fileTemp);
+                // 注意⚠️：后端想要获取分片文件的文件名只能传过去
+                formData.append('chunk', fileTemp, fileTemp.fileName);
                 formData.append('chunkIndex', chunkIndex);
-                formData.append('chunkChecksum', result);
+                formData.append('chunkCheckSum', result);
                 formData.append('fileId', fileId);
                 const xhr = new XMLHttpRequest();
                 xhr.open('POST', '/file2/upload', true);
@@ -71,6 +101,7 @@
             })
         });
     }
+
 
     function mergeFile() {
         return new Promise((resolve, reject) => {

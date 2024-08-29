@@ -30,6 +30,7 @@ public class MyClassLoader extends URLClassLoader {
         super(urls, parent);
     }
 
+    // 重写findClass方法，当类加载器加载类时，会调用该方法
     @Override
     protected Class<?> findClass(String name) {
         // 从已加载的类集合中获取指定名称的类

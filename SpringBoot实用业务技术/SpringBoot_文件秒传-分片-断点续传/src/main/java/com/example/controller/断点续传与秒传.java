@@ -22,10 +22,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-public class 断点续传 {
+public class 断点续传与秒传 {
 
     private static final String FILE_UPLOAD_PREFIX = "file_upload:";
 
@@ -46,31 +47,51 @@ public class 断点续传 {
         return "resume";
     }
 
+
+    /**
+     * 秒传逻辑：前端校验文件的 md5值，如果和已上传文件存入 Redis 中的 md5值一致，则表示是同一文件，无需再上传
+     * @param fileHash 文件的md5值
+     * @return 文件库存在，则返回 true；否则返回 false
+     */
+    @PostMapping("/file2/check")
+    public @ResponseBody ResponseEntity<Boolean> check(@RequestParam("fileHash") String fileHash) {
+        if (redisTemplate.opsForValue().get(fileHash) != null) {
+            return ResponseEntity.ok(true);
+        }
+        return ResponseEntity.ok(false);
+    }
+
+    /**
+     * @param chunk 文件块
+     * @param chunkIndex 该文件分片所在整个文件中的索引
+     * @param chunkCheckSum 该文件分片的校验值
+     * @param fileId 文件唯一标识
+     */
     @PostMapping("/file2/upload")
-    public ResponseEntity<?> uploadFile(@RequestParam("chunk") MultipartFile chunk, // 文件块
-                                        @RequestParam("chunkIndex") Integer chunkIndex, // 该文件分片所在整个文件中的索引
-                                        @RequestParam("chunkChecksum") String chunkChecksum, // 该文件分片的校验值
-                                        @RequestParam("fileId") String fileId) throws Exception { // 文件唯一标识
+    public ResponseEntity<?> uploadFile(@RequestParam("chunk") MultipartFile chunk,
+                                        @RequestParam("chunkIndex") Integer chunkIndex,
+                                        @RequestParam("chunkCheckSum") String chunkCheckSum,
+                                        @RequestParam("fileId") String fileId) throws Exception {
         if (StringUtils.isBlank(fileId) || StringUtils.isEmpty(fileId)) {
             fileId = UUID.randomUUID().toString();
         }
-        String key = FILE_UPLOAD_PREFIX + fileId;
+        String key = chunk.getOriginalFilename() + "&" + chunkIndex + "-" + fileId;
         // 获取文件块的字节
         byte[] chunkBytes = chunk.getBytes();
         // 获取文件块的 md5 校验值
         String actualChecksum = calculateHash(chunkBytes);
         // 比较前端上传的文件块校验值和实际计算出的校验值是否一致（避免文件在上传过程中被篡改或者网络波动导致文件丢失）
-        if (!chunkChecksum.equals(actualChecksum)) {
+        if (!chunkCheckSum.equals(actualChecksum)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Chunk checksum does not match");
         }
         // 将文件块存储到 Redis 中（这里简化操作：不存储数据库或者 OOS 或者 fastDFT）
         if (!redisTemplate.opsForHash().hasKey(key, String.valueOf(chunkIndex))) {
             redisTemplate.opsForHash().put(key, String.valueOf(chunkIndex), chunkBytes);
         }
-        RedisConnection connection = redisConnectionThreadLocal.get();
-        Boolean flag = connection.hExists(key.getBytes(), String.valueOf(chunkIndex).getBytes());
-        if (flag == null || flag == false) {
-            connection.hSet(key.getBytes(), String.valueOf(chunkIndex).getBytes(), chunkBytes);
+        // 将文件块信息存储到 /resources/static 目录下
+        File file = new File(uploadPath + "/" + key);
+        if (!file.exists()) {
+            chunk.transferTo(file);
         }
         return ResponseEntity.ok(fileId);
     }

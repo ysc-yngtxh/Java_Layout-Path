@@ -1,5 +1,6 @@
 package com.example.dynamic;
 
+import com.example.annotation.XxlJobCron;
 import com.example.load.MyClassLoader;
 import com.example.utils.IsSpringAnnotationUtils;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
@@ -61,7 +62,7 @@ public class DynamicLoad {
      * @param path
      * @param fileName
      * @param isRegistXxlJob  是否需要注册xxljob执行器，项目首次启动不需要注册执行器
-     * @return map<jobHander, Cron> 创建xxljob任务时需要的参数配置
+     * @return map<jobHandler, Cron> 创建xxljob任务时需要的参数配置
      */
     public void loadJar(String path, String fileName, Boolean isRegistXxlJob) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         File file = new File(path +"/" + fileName);
