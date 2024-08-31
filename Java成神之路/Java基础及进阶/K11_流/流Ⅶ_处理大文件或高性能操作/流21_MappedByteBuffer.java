@@ -53,8 +53,8 @@ public class 流21_MappedByteBuffer {
         // 意味着 buf 中的内容不一定都在物理内存中，要让这些内容加载到物理内存，可以调用 MappedByteBuffer 中的 load() 方法。
         // 另外，还可以调用 isLoaded() 来判断 buf 中的内容是否在物理内存中。
 
-        FileChannel fileChannel2 = java.nio.channels.FileChannel.open(Paths.get("a.txt"), StandardOpenOption.WRITE, StandardOpenOption.READ);
-        MappedByteBuffer buf2 = fileChannel2.map(java.nio.channels.FileChannel.MapMode.READ_WRITE, 0, fileChannel2.size());
+        FileChannel fileChannel2 = FileChannel.open(Paths.get("a.txt"), StandardOpenOption.WRITE, StandardOpenOption.READ);
+        MappedByteBuffer buf2 = fileChannel2.map(FileChannel.MapMode.READ_WRITE, 0, fileChannel2.size());
         fileChannel2.close();    // 关于文件通道对 buf 没有影响
         System.out.println(buf2.capacity()); // 输出 fileChannel.size()
         System.out.println(buf2.limit());    // 输出 fileChannel.size()

@@ -13,8 +13,10 @@
 -->
 <script type="text/javascript">
 
-    // async声明的函数的返回本质上是一个Promise。
-    // 只要声明了这个函数是async，那么内部不管你怎么处理，它的返回肯定是个Promise。
+    // TODO 在调用 async声明的函数时，要么加上 await关键字，要么通过 .then() 和 .catch() 方法来处理返回的 Promise
+
+    // async声明的函数，内部不管你怎么处理，它的返回本质上是个Promise，所以一般来说都是存在有返回值的。
+    // 如果 async 函数体内没有任何 return 语句，那么该函数返回的 Promise 将会解析为 undefined，无意义。
     async function demo1() {
         return '写法一：我是Promise'
         // 等同于 return Promise.resolve('写法一：我是Promise');

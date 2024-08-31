@@ -1,20 +1,19 @@
 package com.example.controller;
 
+import com.example.utils.Encrypt;
 import io.micrometer.common.util.StringUtils;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.security.MessageDigest;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,20 +27,16 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class 断点续传与秒传 {
 
-    private static final String FILE_UPLOAD_PREFIX = "file_upload:";
+    private static final String uploadPath = System.getProperty("user.dir")
+            + "/SpringBoot_文件秒传-分片-断点续传/src/main/resources/File library";
 
     @Autowired
     private ResourceLoader resourceLoader;
 
-    private static final String uploadPath = System.getProperty("user.dir")
-            + "/SpringBoot_文件秒传-分片-断点续传/src/main/resources/static";
-
-    @Autowired
-    private ThreadLocal<RedisConnection> redisConnectionThreadLocal;
-
     @Autowired
     private RedisTemplate redisTemplate;
 
+    // 断点续传页面地址
     @RequestMapping("/resume")
     public String resume() {
         return "resume";
@@ -50,27 +45,33 @@ public class 断点续传与秒传 {
 
     /**
      * 秒传逻辑：前端校验文件的 md5值，如果和已上传文件存入 Redis 中的 md5值一致，则表示是同一文件，无需再上传
+     *
      * @param fileHash 文件的md5值
      * @return 文件库存在，则返回 true；否则返回 false
      */
-    @PostMapping("/file2/check")
+    @PostMapping("/file2/isTeleportation")
     public @ResponseBody ResponseEntity<Boolean> check(@RequestParam("fileHash") String fileHash) {
-        if (redisTemplate.opsForValue().get(fileHash) != null) {
+        // 判断Redis 中是否存有该文件的 md5值。存在则表示该文件已经上传，否则未上传
+        if (redisTemplate.hasKey(fileHash)) {
             return ResponseEntity.ok(true);
         }
         return ResponseEntity.ok(false);
     }
 
+
     /**
+     * 断点续传：前端将文件分片上传到服务器，服务器将文件分片存储到 Redis 中，待所有分片上传完毕后，将所有分片合并成一个文件
+     *
      * @param chunk 文件块
      * @param chunkIndex 该文件分片所在整个文件中的索引
-     * @param chunkCheckSum 该文件分片的校验值
+     * @param chunkMD5 该文件分片的校验值
      * @param fileId 文件唯一标识
+     * @return 文件唯一标识
      */
     @PostMapping("/file2/upload")
     public ResponseEntity<?> uploadFile(@RequestParam("chunk") MultipartFile chunk,
                                         @RequestParam("chunkIndex") Integer chunkIndex,
-                                        @RequestParam("chunkCheckSum") String chunkCheckSum,
+                                        @RequestParam("chunkMD5") String chunkMD5,
                                         @RequestParam("fileId") String fileId) throws Exception {
         if (StringUtils.isBlank(fileId) || StringUtils.isEmpty(fileId)) {
             fileId = UUID.randomUUID().toString();
@@ -79,55 +80,55 @@ public class 断点续传与秒传 {
         // 获取文件块的字节
         byte[] chunkBytes = chunk.getBytes();
         // 获取文件块的 md5 校验值
-        String actualChecksum = calculateHash(chunkBytes);
+        String actualChecksum = Encrypt.calculateHash(chunkBytes);
         // 比较前端上传的文件块校验值和实际计算出的校验值是否一致（避免文件在上传过程中被篡改或者网络波动导致文件丢失）
-        if (!chunkCheckSum.equals(actualChecksum)) {
+        if (!chunkMD5.equals(actualChecksum)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Chunk checksum does not match");
         }
-        // 将文件块存储到 Redis 中（这里简化操作：不存储数据库或者 OOS 或者 fastDFT）
-        if (!redisTemplate.opsForHash().hasKey(key, String.valueOf(chunkIndex))) {
-            redisTemplate.opsForHash().put(key, String.valueOf(chunkIndex), chunkBytes);
+        // 通过文件唯一标识判断该文件是否上传过
+        if (redisTemplate.opsForHash().hasKey(fileId, chunkIndex)) {
+            return ResponseEntity.ok(fileId);
         }
         // 将文件块信息存储到 /resources/static 目录下
         File file = new File(uploadPath + "/" + key);
         if (!file.exists()) {
+            // 将分片文件内容写入到输出文件中
             chunk.transferTo(file);
+            // 将文件块信息存储到 Redis 中（这里简化操作：不存储至DB数据库）
+            redisTemplate.opsForHash().put(fileId, chunkIndex, file);
         }
         return ResponseEntity.ok(fileId);
     }
 
-    public static String calculateHash(byte[] fileChunk) throws Exception {
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        md.update(fileChunk);
-        byte[] hash = md.digest();
-        ByteBuffer byteBuffer = ByteBuffer.wrap(hash);
-        StringBuilder hexString = new StringBuilder();
-        while (byteBuffer.hasRemaining()) {
-            hexString.append(String.format("%02x", byteBuffer.get()));
-        }
-        return hexString.toString();
-    }
 
+
+    /**
+     * 合并文件
+     *
+     * @param fileId        文件唯一标识
+     * @param fileName      文件名
+     * @param fileHash      文件MD5值
+     * @param fileChunkSize 文件分片数量
+     * @return
+     */
     @PostMapping("/file2/merge")
     public ResponseEntity<?> mergeFile(@RequestParam("fileId") String fileId,
-                                       @RequestParam("fileName") String fileName) {
-        String key = FILE_UPLOAD_PREFIX + fileId;
-        RedisConnection connection = redisConnectionThreadLocal.get();
+                                       @RequestParam("fileName") String fileName,
+                                       @RequestParam("fileHash") String fileHash,
+                                       @RequestParam("fileChunkSize") Integer fileChunkSize) {
         try {
-            Map<byte[], byte[]> chunkMap = connection.hGetAll(key.getBytes());
-            // Map chunkMap = redisTemplate.opsForHash().entries(key);
-            if (chunkMap.isEmpty()) {
+            // 文件合并前，先判断该文件分片是否存在
+            if (!redisTemplate.hasKey(fileId)) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("File not found");
             }
-            Map<String, byte[]> hashMap = new HashMap<>();
-            for (Map.Entry<byte[], byte[]> entry : chunkMap.entrySet()) {
-                hashMap.put((new String(entry.getKey())), entry.getValue());
-            }
+            // 获取文件分片信息
+            Map<Integer, File> chunkMap = redisTemplate.opsForHash().entries(fileId);
+
             // 检测是否所有分片都上传了
             boolean allChunksUploaded = true;
             List<Integer> missingChunkIndexes = new ArrayList<>();
-            for (int i = 0; i < hashMap.size(); i++) {
-                if (!hashMap.containsKey(String.valueOf(i))) {
+            for (int i = 0; i < fileChunkSize; i++) {
+                if (!chunkMap.containsKey(i)) {
                     allChunksUploaded = false;
                     missingChunkIndexes.add(i);
                 }
@@ -135,32 +136,43 @@ public class 断点续传与秒传 {
             if (!allChunksUploaded) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(missingChunkIndexes);
             }
-            File outputFile = new File(uploadPath, fileName);
-            boolean flag = mergeChunks(hashMap, outputFile);
+
+            // 合并文件分片
+            boolean flag = mergeChunks(chunkMap, new File(uploadPath, fileName));
             Resource resource = resourceLoader.getResource("file:" + uploadPath + fileName);
-            if (flag == true) {
-                connection.del(key.getBytes());
-                redisTemplate.delete(key);
+
+            // 判断文件是否合并成功
+            // 如果合并成功，则删除 Redis 中该文件的分片信息，并存储该文件的MD5值(用于在秒传逻辑中进行判断)
+            if (flag) {
+                // 文件上传结束，删除在 Redis 中的文件分片信息
+                redisTemplate.delete(fileId);
+                // 在 Redis 中存储上传文件的 md5 值
+                redisTemplate.opsForValue().set(fileHash, 1);
                 return ResponseEntity.ok().body(resource.getURI().toString());
             } else {
-                return ResponseEntity.status(555).build();
+                return ResponseEntity.status(555).body("文件合并失败！");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
-    private boolean mergeChunks(Map<String, byte[]> chunkMap, File destFile) {
-        try (FileOutputStream outputStream = new FileOutputStream(destFile)) {
+    // 分片文件合并逻辑
+    private boolean mergeChunks(Map<Integer, File> chunkMap, File destFile) {
+        try (FileChannel outChannel = new FileOutputStream(destFile).getChannel()) {
             // 将分片按照顺序合并
             for (int i = 0; i < chunkMap.size(); i++) {
-                byte[] chunkBytes = chunkMap.get(String.valueOf(i));
-                outputStream.write(chunkBytes);
+                try (FileChannel inChannel = new FileInputStream(chunkMap.get(i)).getChannel()) {
+                    // 使用 FileChanel 进行文件合并
+                    inChannel.transferTo(0, inChannel.size(), outChannel);
+                    // 文件合并成功后，删除文件分片
+                    chunkMap.get(i).delete();
+                }
             }
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             return false;
         }
     }

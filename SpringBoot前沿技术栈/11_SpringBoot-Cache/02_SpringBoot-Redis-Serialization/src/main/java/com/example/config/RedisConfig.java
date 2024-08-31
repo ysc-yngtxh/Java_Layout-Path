@@ -1,10 +1,12 @@
 package com.example.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.GenericToStringSerializer;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
@@ -40,6 +42,10 @@ public class RedisConfig {
         template.setHashKeySerializer(stringSerializer);
         // 设置Redis的hash数据类型value部分，序列化方式为 Jackson2JsonRedisSerializer
         template.setHashValueSerializer(jackson2JsonRedisSerializer);
+
+        // 推荐使用 GenericToStringSerializer 作为类型序列化，比Jackson2JsonRedisSerializer兼容性更好
+        // template.setHashKeySerializer(new GenericToStringSerializer<>(Integer.class));
+        // template.setHashValueSerializer(new GenericToStringSerializer<>(File.class));
 
         return template;
     }

@@ -446,7 +446,7 @@
           1、将hash存放到redis当中：redisTemplate.opsForHash().put(key, hashkey, Value);这里的key表示存入redis的key,hashKey表示存入的Map集合中的Key
           2、检测 是否 存在该键：redisTemplate.opsForHash().hasKey(key, key1);
           3、将hash从redis当中取出来 根据具体的key取出具体的值：redisTemplate.opsForHash().get(key, key1);
-          4、将key中所有的值都取出来：redisTemplate.opsForHash().entries(key);
+          4、将key中所有的k-v值都取出来：redisTemplate.opsForHash().entries(key);
           5、根据具体的key移除具体的值：redisTemplate.opsForHash().delete(key, key1);
      在Set类型中的操作：
           1、set数据存入redis中：redisTemplate.opsForSet().add(key, object);
