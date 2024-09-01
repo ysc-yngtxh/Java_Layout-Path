@@ -5,12 +5,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 </head>
 <body>
+
 <form>
     <h2>每个分片的大小定义为10KB，以此模拟大文件分片上传</h2>
     <input type="file" id="fileInput" multiple>
     <button type="button" onclick="upload()">上传</button>
 </form>
 <h2 id="uploadResult"></h2>
+
 <script>
 
     let uploadResult = document.getElementById("uploadResult")

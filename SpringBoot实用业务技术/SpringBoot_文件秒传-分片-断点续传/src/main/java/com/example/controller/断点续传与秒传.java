@@ -17,18 +17,18 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@RestController
 public class 断点续传与秒传 {
 
     private static final String uploadPath = System.getProperty("user.dir")
-            + "/SpringBoot_文件秒传-分片-断点续传/src/main/resources/File library";
+            + "/SpringBoot_文件秒传-分片-断点续传/src/main/resources/File Library";
 
     @Autowired
     private ResourceLoader resourceLoader;
@@ -38,21 +38,21 @@ public class 断点续传与秒传 {
 
     // 断点续传页面地址
     @RequestMapping("/resume")
-    public String resume() {
-        return "resume";
+    public ModelAndView resume() {
+        return new ModelAndView("resume");
     }
 
 
     /**
      * 秒传逻辑：前端校验文件的 md5值，如果和已上传文件存入 Redis 中的 md5值一致，则表示是同一文件，无需再上传
      *
-     * @param fileHash 文件的md5值
+     * @param fileMD5 文件的md5值
      * @return 文件库存在，则返回 true；否则返回 false
      */
-    @PostMapping("/file2/isTeleportation")
-    public @ResponseBody ResponseEntity<Boolean> check(@RequestParam("fileHash") String fileHash) {
+    @PostMapping("/file2/teleport")
+    public ResponseEntity<Boolean> check(@RequestParam("fileMD5") String fileMD5) {
         // 判断Redis 中是否存有该文件的 md5值。存在则表示该文件已经上传，否则未上传
-        if (redisTemplate.hasKey(fileHash)) {
+        if (redisTemplate.hasKey(fileMD5)) {
             return ResponseEntity.ok(true);
         }
         return ResponseEntity.ok(false);
@@ -62,10 +62,10 @@ public class 断点续传与秒传 {
     /**
      * 断点续传：前端将文件分片上传到服务器，服务器将文件分片存储到 Redis 中，待所有分片上传完毕后，将所有分片合并成一个文件
      *
-     * @param chunk 文件块
+     * @param chunk      文件块
      * @param chunkIndex 该文件分片所在整个文件中的索引
-     * @param chunkMD5 该文件分片的校验值
-     * @param fileId 文件唯一标识
+     * @param chunkMD5   该文件分片的校验值
+     * @param fileId     文件唯一标识
      * @return 文件唯一标识
      */
     @PostMapping("/file2/upload")
@@ -107,14 +107,14 @@ public class 断点续传与秒传 {
      *
      * @param fileId        文件唯一标识
      * @param fileName      文件名
-     * @param fileHash      文件MD5值
+     * @param fileMD5       文件MD5值
      * @param fileChunkSize 文件分片数量
      * @return
      */
     @PostMapping("/file2/merge")
     public ResponseEntity<?> mergeFile(@RequestParam("fileId") String fileId,
                                        @RequestParam("fileName") String fileName,
-                                       @RequestParam("fileHash") String fileHash,
+                                       @RequestParam("fileMD5") String fileMD5,
                                        @RequestParam("fileChunkSize") Integer fileChunkSize) {
         try {
             // 文件合并前，先判断该文件分片是否存在
@@ -147,7 +147,7 @@ public class 断点续传与秒传 {
                 // 文件上传结束，删除在 Redis 中的文件分片信息
                 redisTemplate.delete(fileId);
                 // 在 Redis 中存储上传文件的 md5 值
-                redisTemplate.opsForValue().set(fileHash, 1);
+                redisTemplate.opsForValue().set(fileMD5, new File(uploadPath,fileName).toURI().getPath());
                 return ResponseEntity.ok().body(resource.getURI().toString());
             } else {
                 return ResponseEntity.status(555).body("文件合并失败！");

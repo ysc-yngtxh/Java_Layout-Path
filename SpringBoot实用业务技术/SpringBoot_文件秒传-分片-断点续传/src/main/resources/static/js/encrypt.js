@@ -1,5 +1,5 @@
 
-// 计算文件的 MD5 校验和
+// 计算文件的 MD5 校验值
 function calculateMD5(fileChunk) {
     return new Promise((resolve, reject) => {
         // 构造文件块对象 Blob.代表一个不可变的、原始数据的类文件对象。

@@ -1,0 +1,28 @@
+
+
+#bar-div {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+}
+#bar-warp {
+    width: 500px;
+    height: 30px;
+    border: 1px solid green;
+}
+#bar {
+    width: 0px;
+    height: 30px;
+    background: green;
+}
+#stop, #start {
+    width: 90px;
+    height: 30px;
+    margin-left: 50px;
+    background: dodgerblue;
+    border-radius: 15px;
+}
+#start {
+    background: #3cda49;
+}
