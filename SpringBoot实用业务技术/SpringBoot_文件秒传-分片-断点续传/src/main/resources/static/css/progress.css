@@ -12,7 +12,7 @@
     border: 1px solid green;
 }
 #bar {
-    width: 0px;
+    width: 0;
     height: 30px;
     background: green;
 }

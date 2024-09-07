@@ -1,11 +1,14 @@
 package com.example;
 
+import com.example.load.CustomClassLoader;
 import com.example.utils.ChineseToUrl;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -15,10 +18,8 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import lombok.val;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -119,17 +120,50 @@ class SpringBootUrlApplicationTests {
 
 
     // URLClassLoader是ClassLoader的实现类，既能从本地加载二进制文件类，也能从远程加载类。它有两个构造函数，即：
-    //   URLClassLoader(URL[] urls)，使用默认的父类加载器（SystemClassLoader）创建一个ClassLoader对象
-    //   URLClassLoader（URL[] urls, ClassLoader parent)，使用指定的类加载器作为父类加载器创建ClassLoader对象
+    //    URLClassLoader(URL[] urls)：
+    //       创建一个 URLClassLoader 实例，这里没有显式地指定父类加载器，它将会使用系统的默认父类加载器（AppClassLoader/SystemClassLoader）。
+    //       URLClassLoader 会首先尝试让其默认的父类加载器从应用程序的类路径中加载类。
+    //       在 SpringBoot 项目中应用程序的类路径为（CLASSPATH：即 target/classes 目录）
+    //       如果父类加载器在 CLASSPATH 中找到了这个类并成功加载，那么 URLClassLoader 就不需要再做任何事情。
+    //       如果父类加载器在 CLASSPATH 中没有找到这个类，那么 URLClassLoader(即子加载器) 就会尝试从指定的 URL[] urls 路径中加载类。
+    //    URLClassLoader（URL[] urls, ClassLoader parent)：
+    //       创建一个 URLClassLoader 实例，显式地指定父类加载器 ClassLoader parent，父类加载器从其下的类路径中加载类。
+    //       在SpringBoot项目中指定 应用类[AppClassLoader]/系统类[SystemClassLoader] 加载器会从类路径（CLASSPATH：即 target/classes 目录）中加载类。
+    //       如果父类加载器在 CLASSPATH 中没有找到这个类，那么 URLClassLoader(即子加载器) 就会尝试从指定的 URL[] urls 路径中加载类。
+    //       注意⚠️：当第二个传参数 ClassLoader parent 父类加载器为 null 时
+    //       那么 URLClassLoader 将独立地尝试加载传参 URL[] urls 路径下的类，而不会委托给其他类加载器。
     @Test
-    public void contextLoads2() throws MalformedURLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        File file = new File(System.getProperty("user.dir") + "/src/main/java/com/example");
-        URL url = file.toURI().toURL();
-        ClassLoader loader = new URLClassLoader(new URL[]{url});
-        // loadClass()参数：所需class的含包名的全名
-        Class<?> clazz = loader.loadClass("com.example.Hello");
-        System.out.println("当前类加载器：" + clazz.getClassLoader());
-        System.out.println("父类加载器：" + clazz.getClassLoader().getParent());
-        clazz.newInstance();
+    public void contextLoads2() throws MalformedURLException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        URL url = new File(System.getProperty("user.dir")).toURI().toURL();
+        // 三种写法：1️⃣隐式使用默认的应用类父加载器 2️⃣指定当前上下文的类加载器作为父加载器 3️⃣指定系统类加载器作为父加载器
+        ClassLoader loader1 = new URLClassLoader(new URL[]{url});
+        ClassLoader loader2 = new URLClassLoader(new URL[]{url}, this.getClass().getClassLoader());
+        ClassLoader loader3 = new URLClassLoader(new URL[]{url}, ClassLoader.getSystemClassLoader());
+
+        // 按理来说：URL 的地址跟加载的全限定名称路径并不能完美匹配上（缺少/target/classes）,并且累加载器只能加载 class 文件，不能加载 Java 文件。
+        //         所以这里应该会报异常找不到指定的 Hello 类。但是执行结果是正常输出，说明使用了父加载器从默认路径 CLASSPATH 下加载类
+        Class<?> clazz = loader1.loadClass("com.example.pojo.Hello");
+        System.out.println("使用 URLClassLoader(URL[] urls)，当前类加载器：" + clazz.getClassLoader());
+        System.out.println("使用 URLClassLoader(URL[] urls)，父类加载器：" + clazz.getClassLoader().getParent());
+        Object instance = clazz.getDeclaredConstructor().newInstance();
+        Method method = clazz.getMethod("sayHello");
+        method.invoke(instance);
+
+
+        // 第四种写法：指定父类加载器为 null，即不使用任何父类加载器，独立地尝试加载传参 URL[] urls 路径下的类
+        URL url1 = new File(System.getProperty("user.dir") + "/target/classes").toURI().toURL();
+        ClassLoader loaderAndNull = new URLClassLoader(new URL[]{url1}, null);
+        Class<?> clazz3 = loaderAndNull.loadClass("com.example.pojo.Hello");
+        System.out.println("使用 URLClassLoader(new URL[]{url}, null)，当前类加载器：" + clazz3.getClassLoader());
+        System.out.println("使用 URLClassLoader(new URL[]{url}, null)，父类加载器：" + clazz3.getClassLoader().getParent());
+        clazz3.newInstance();
+
+
+        // 第五种写法：自定义类加载器
+        CustomClassLoader customClassLoader = new CustomClassLoader(url.getPath());
+        Class<?> clazz2 = customClassLoader.loadClass("com.example.pojo.Hello");
+        System.out.println("使用自定义的加载器后，当前类加载器：" + clazz2.getClassLoader());
+        System.out.println("使用自定义的加载器后，父类加载器：" + clazz2.getClassLoader().getParent());
+        clazz2.newInstance();
     }
 }

@@ -18,7 +18,6 @@ public class MyClassLoader extends URLClassLoader {
     // 它的主要作用是动态加载外部的 JAR 包或者类文件，从而实现动态扩展应用程序的功能。
     // 为了便于管理动态加载的jar包，自定义类加载器继承URLClassloader。
 
-
     // 定义一个map保存已加载的类信息。key为这个类的ClassName，value为这个类的类信息。
     private Map<String, Class<?>> loadedClasses = new ConcurrentHashMap<>();
 
