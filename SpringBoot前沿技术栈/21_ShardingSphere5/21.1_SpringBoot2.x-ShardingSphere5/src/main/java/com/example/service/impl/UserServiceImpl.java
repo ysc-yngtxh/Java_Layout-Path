@@ -3,7 +3,7 @@ package com.example.service.impl;
 import com.example.entity.User;
 import com.example.mapper.UserMapper;
 import com.example.service.UserService;
-import jakarta.annotation.Resource;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 /**

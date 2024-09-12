@@ -30,4 +30,9 @@ class SpringBoot2ShardingSphereApplicationTests {
         );
     }
 
+    @Test
+    void contextLoads2() {
+        System.out.println(userMapper.queryById(1));
+    }
+
 }
