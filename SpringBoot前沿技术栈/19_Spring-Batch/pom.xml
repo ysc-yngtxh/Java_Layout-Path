@@ -8,14 +8,30 @@
         <version>3.3.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.example</groupId>
     <artifactId>19_Spring-Batch</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <description>${project.artifactId}</description>
+
     <properties>
         <java.version>21</java.version>
     </properties>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>19.1_Spring-Batch</module>
+        <module>19.2_Spring-Batch-JobParam-Validate-Listener-Context</module>
+        <module>19.3_Spring-Batch-StepDecider-Listener-Status-Flow</module>
+        <module>19.4_Spring-Batch-Control-StopAndReset</module>
+        <module>19.5_Spring-Batch-ItemReader</module>
+        <module>19.6_Spring-Batch-ItemProcessor</module>
+        <module>19.7_Spring-Batch-ItemWriter</module>
+        <module>19.8_Spring-Batch-HighLevel</module>
+        <module>19.9_Spring-Batch-ComprehensiveCase</module>
+    </modules>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

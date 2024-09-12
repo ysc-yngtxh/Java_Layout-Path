@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>01_Easy-Es</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>01.1_Easy-Es</name>
-    <description>01.1_Easy-Es</description>
+    <name>01_Easy-Es</name>
+    <description>01_Easy-Es</description>
     <properties>
         <java.version>22</java.version>
     </properties>

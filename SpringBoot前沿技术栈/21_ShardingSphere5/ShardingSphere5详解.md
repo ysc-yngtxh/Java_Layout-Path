@@ -5,7 +5,7 @@
    架构的扩展。业务量越来越大，I/O访问频率过高，单机无法满足，此时做多库的存储，降低磁盘I/O访问的频率，提高单个机器的I/O性能
 
  ### 2. MySQL主从复制的流程
-   - ![images-2.png](src/main/resources/static/image-2.png)  
+   - ![images-1.png](./21.1_SpringBoot2.x-ShardingSphere5/src/main/resources/static/image-1.png)  
    （1） 主库db的更新事件(update、insert、delete)被写到binlog  
    （2）主库创建一个binlog dump thread，把binlog的内容发送到从库  
    （3）从库启动并发起连接，连接到主库  
@@ -87,7 +87,7 @@
   &emsp;&emsp;执行完此步骤后不要在操作主服务器 MySQL，防止主服务器状态值变化  
   &emsp;&emsp;&emsp;&emsp;`SHOW MASTER STATUS;`  
   &emsp;&emsp;记下 File 和 Position 的值。执行完此步骤后不要再操作主服务器 Mysql，防止主服务器状态值变化。
-  ![输入图片说明](src/main/resources/static/image-1.png)
+  ![输入图片说明](./21.1_SpringBoot2.x-ShardingSphere5/src/main/resources/static/image-2.png)
 
 ---
 
