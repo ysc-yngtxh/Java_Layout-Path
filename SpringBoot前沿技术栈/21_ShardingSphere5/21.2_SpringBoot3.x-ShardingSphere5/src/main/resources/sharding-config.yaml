@@ -1,0 +1,56 @@
+# ShardingSphere 配置文件
+mode:
+  type: Standalone
+props:
+  sql-show: true
+
+dataSources:
+  names: ds_0,ds_1,ds_2
+  ds_0:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    jdbcUrl: jdbc:mysql://localhost:3306/sys
+    username: root
+    password: 131474
+  ds_1:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    jdbcUrl: jdbc:mysql://localhost:3306/springdb
+    username: root
+    password: 131474
+  ds_2:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    jdbcUrl: jdbc:mysql://localhost:3306/caoyumin
+    username: root
+    password: 131474
+
+# 单数据库模式
+rules:
+  - !SHARDING
+    tables:
+      user:
+        actualDataNodes: ds_${0..2}.user
+        # 分库策略
+        databaseStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: database_inline
+        # 分表策略
+        #tableStrategy:
+        #  standard:
+        #    shardingColumn: sex
+        #    shardingAlgorithmName: user_inline
+
+    shardingAlgorithms:
+      database_inline:
+        type: INLINE
+        props:
+          algorithm-expression: ds_${id % 3}
+      #user_inline:
+      #  type: INLINE
+      #  props:
+      #    algorithm-expression: user_${sex == '男'}
+
+
+

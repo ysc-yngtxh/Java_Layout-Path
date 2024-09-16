@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.example.mapper")
+@MapperScan(basePackages = "com.example.mapper")
 public class SpringBoot2ShardingSphereApplication {
 
 	public static void main(String[] args) {

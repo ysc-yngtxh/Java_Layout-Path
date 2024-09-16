@@ -10,22 +10,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringBoot3ShardingSphereApplicationTests {
+class SpringBoot2ShardingSphereApplicationTests {
 
     @Autowired
     private UserMapper userMapper;
 
     @Test
     void contextLoads() throws ParseException {
-        String data = "2024-09-11 22:00:00";
+        String data = "2024-09-16 10:00:00";
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date parseData = format.parse(data);
         userMapper.insert(
                 User.builder()
-                        .username("张三")
+                        .username("李四")
                         .birthday(parseData)
-                        .sex("男")
-                        .address("西安雁塔区")
+                        .sex("女")
+                        .address("湖北武汉洪山区")
                         .build()
         );
     }

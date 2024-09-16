@@ -1,0 +1,57 @@
+
+# ShardingSphere 配置文件
+dataSources:
+  ds_0:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/smartmatch_ece?currentSchema=smc_ece1
+    username: root
+    password: 131474
+  ds_1:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/smartmatch_ece?currentSchema=smc_ece2
+    username: root
+    password: 131474
+  ds_2:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/smartmatch_ece?currentSchema=smc_ece3
+    username: root
+    password: 131474
+
+mode:
+  type: Standalone
+
+props:
+  sql-show: false
+
+# 单数据库模式
+rules:
+  - !SHARDING
+    tables:
+      user:
+        actualDataNodes: ds_${0..2}.user
+        databaseStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: database_inline
+#            tableStrategy:
+#              standard:
+#                shardingColumn: sex
+#                shardingAlgorithmName: user_inline
+
+    shardingAlgorithms:
+      database_inline:
+        type: INLINE
+        props:
+          algorithm-expression: ds_${id % 3}
+#      user_inline:
+#        type: INLINE
+#        props:
+#          algorithm-expression: smc_ece${Integer.parse(sex) % 3}.user
+
+
+
+
+

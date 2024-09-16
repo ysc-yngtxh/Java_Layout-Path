@@ -1,0 +1,10 @@
+
+spring:
+    application:
+        name: SpringBoot3-PostGreSql-ShardingSphere
+    datasource:
+        driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
+        url: jdbc:shardingsphere:classpath:sharding-config.yaml
+
+mybatis:
+    mapper-locations: classpath:mapper/*.xml

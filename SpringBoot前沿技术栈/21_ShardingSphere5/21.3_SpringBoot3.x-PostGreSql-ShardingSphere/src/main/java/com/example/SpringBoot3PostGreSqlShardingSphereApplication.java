@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("com.example.mapper")
-public class SpringBoot3ShardingSphereApplication {
+public class SpringBoot3PostGreSqlShardingSphereApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBoot3ShardingSphereApplication.class, args);
+        SpringApplication.run(SpringBoot3PostGreSqlShardingSphereApplication.class, args);
     }
 
 }
