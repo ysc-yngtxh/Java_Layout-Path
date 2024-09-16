@@ -5,4 +5,4 @@ spring:
         name: SpringBoot3.x-ShardingSphere5
     datasource:
         driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
-        url: jdbc:shardingsphere:classpath:sharding-config.yaml
+        url: jdbc:shardingsphere:classpath:sharding-config.yml

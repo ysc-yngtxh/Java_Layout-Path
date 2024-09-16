@@ -1,7 +1,7 @@
 package com.example;
 
-import com.example.entity.User;
-import com.example.mapper.UserMapper;
+import com.example.entity.EceUser;
+import com.example.mapper.EceUserMapper;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,15 +13,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 class SpringBoot3PostGreSqlShardingSphereApplicationTests {
 
     @Autowired
-    private UserMapper userMapper;
+    private EceUserMapper eceUserMapper;
 
     @Test
     void contextLoads() throws ParseException {
         String data = "2024-09-11 22:00:00";
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date parseData = format.parse(data);
-        userMapper.insert(
-                User.builder()
+        eceUserMapper.insert(
+                EceUser.builder()
                         .username("张三")
                         .birthday(parseData)
                         .sex("男")
@@ -32,7 +32,7 @@ class SpringBoot3PostGreSqlShardingSphereApplicationTests {
 
     @Test
     void contextLoads2() {
-        System.out.println(userMapper.queryById(1));
+        // 使用 PostgreSql 来进行数据分片，有个注意点：public架构中必须要创建分片的表(可以没数据，但必须要建表)
+        System.out.println(eceUserMapper.queryById(7));
     }
-
 }

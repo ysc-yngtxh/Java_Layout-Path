@@ -49,7 +49,7 @@
   server-id=1
   # 设置日志格式，默认值 ROW
   # binlog_format=STATEMENT：日志记录的是主机数据库的写指令，性能高，但是 now() 之类的函数以及获取系统参数的操作会出现主从数据不同步的问题
-  # binlog_format=ROW(默认)：日志记录的是主机数据库的写后的数据，批量操作是性能较差，解决 now() 或者 user() 或者 @@hostname 等操作在主从机器上不一致的问题
+  # binlog_format=ROW(默认)：日志记录的是主机数据库的写后的数据，批量操作是性能较差，解决 now() 或者 eceUser() 或者 @@hostname 等操作在主从机器上不一致的问题
   binlog_format=STATEMENT
   
   # 二进制日志名，默认 binlog

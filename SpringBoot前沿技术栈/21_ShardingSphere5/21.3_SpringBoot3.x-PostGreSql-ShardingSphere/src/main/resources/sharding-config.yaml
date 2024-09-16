@@ -1,5 +1,11 @@
 
 # ShardingSphere 配置文件
+mode:
+  # 设置模式类型为独立模式
+  type: Standalone
+props:
+  sql-show: true
+
 dataSources:
   ds_0:
     dataSourceClassName: com.zaxxer.hikari.HikariDataSource
@@ -20,36 +26,24 @@ dataSources:
     username: root
     password: 131474
 
-mode:
-  type: Standalone
-
-props:
-  sql-show: false
 
 # 单数据库模式
+# 使用 PostgreSql 来进行数据分片，有个注意点：public架构中必须要创建分片的表(可以没数据，但必须要建表[ece_user])
 rules:
   - !SHARDING
     tables:
-      user:
-        actualDataNodes: ds_${0..2}.user
+      ece_user:
+        # 数据节点：默认只支持两层结构，即【逻辑数据源名.逻辑表名】的形式
+        actualDataNodes: ds_${0..2}.ece_user
         databaseStrategy:
           standard:
             shardingColumn: id
             shardingAlgorithmName: database_inline
-#            tableStrategy:
-#              standard:
-#                shardingColumn: sex
-#                shardingAlgorithmName: user_inline
-
     shardingAlgorithms:
       database_inline:
         type: INLINE
         props:
           algorithm-expression: ds_${id % 3}
-#      user_inline:
-#        type: INLINE
-#        props:
-#          algorithm-expression: smc_ece${Integer.parse(sex) % 3}.user
 
 
 

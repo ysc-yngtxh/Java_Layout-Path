@@ -1,7 +1,7 @@
 package com.example.service.impl;
 
-import com.example.entity.User;
-import com.example.mapper.UserMapper;
+import com.example.entity.EceUser;
+import com.example.mapper.EceUserMapper;
 import com.example.service.UserService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     @Resource
-    private UserMapper userMapper;
+    private EceUserMapper eceUserMapper;
 
     /**
      * 通过ID查询单条数据
@@ -25,8 +25,8 @@ public class UserServiceImpl implements UserService {
      * @return 实例对象
      */
     @Override
-    public User queryById(Integer id) {
-        return this.userMapper.queryById(id);
+    public EceUser queryById(Integer id) {
+        return this.eceUserMapper.queryById(id);
     }
 
 
@@ -37,8 +37,8 @@ public class UserServiceImpl implements UserService {
      * @return 实例对象
      */
     @Override
-    public User insert(User user) {
-        this.userMapper.insert(user);
+    public EceUser insert(EceUser user) {
+        this.eceUserMapper.insert(user);
         return user;
     }
 
@@ -49,8 +49,8 @@ public class UserServiceImpl implements UserService {
      * @return 实例对象
      */
     @Override
-    public User update(User user) {
-        this.userMapper.update(user);
+    public EceUser update(EceUser user) {
+        this.eceUserMapper.update(user);
         return this.queryById(user.getId());
     }
 
@@ -62,6 +62,6 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean deleteById(Integer id) {
-        return this.userMapper.deleteById(id) > 0;
+        return this.eceUserMapper.deleteById(id) > 0;
     }
 }

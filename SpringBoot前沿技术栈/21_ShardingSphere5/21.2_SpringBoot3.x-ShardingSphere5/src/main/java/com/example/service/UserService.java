@@ -1,6 +1,6 @@
 package com.example.service;
 
-import com.example.entity.User;
+import com.example.entity.EceUser;
 
 /**
  * (User)表服务接口
@@ -16,7 +16,7 @@ public interface UserService {
      * @param id 主键
      * @return 实例对象
      */
-    User queryById(Integer id);
+    EceUser queryById(Integer id);
 
     /**
      * 新增数据
@@ -24,7 +24,7 @@ public interface UserService {
      * @param user 实例对象
      * @return 实例对象
      */
-    User insert(User user);
+    EceUser insert(EceUser user);
 
     /**
      * 修改数据
@@ -32,7 +32,7 @@ public interface UserService {
      * @param user 实例对象
      * @return 实例对象
      */
-    User update(User user);
+    EceUser update(EceUser user);
 
     /**
      * 通过主键删除数据

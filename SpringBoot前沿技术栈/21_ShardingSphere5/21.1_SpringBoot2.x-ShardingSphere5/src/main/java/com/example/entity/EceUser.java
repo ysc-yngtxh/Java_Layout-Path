@@ -1,5 +1,6 @@
 package com.example.entity;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.AllArgsConstructor;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * (User)实体类
+ * (EceUser)实体类
  *
  * @author 游家纨绔
  * @since 2024-09-11 22:37:34
@@ -19,7 +20,8 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements Serializable {
+public class EceUser implements Serializable {
+    @Serial
     private static final long serialVersionUID = 311930963439804215L;
 
     private Integer id;
@@ -31,6 +33,10 @@ public class User implements Serializable {
      * 生日
      */
     private Date birthday;
+    /**
+     * 年龄
+     */
+    private Integer age;
     /**
      * 性别
      */
