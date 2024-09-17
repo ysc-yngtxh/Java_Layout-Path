@@ -5,7 +5,7 @@ import com.example.entity.EceUser;
 /**
  * (User)表数据库访问层
  *
- * @author makejava
+ * @author 游家纨绔
  * @since 2024-09-11 22:37:34
  */
 public interface EceUserMapper {

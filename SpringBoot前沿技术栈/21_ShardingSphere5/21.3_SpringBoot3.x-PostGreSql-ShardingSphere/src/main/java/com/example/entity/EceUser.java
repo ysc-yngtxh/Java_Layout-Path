@@ -13,7 +13,7 @@ import lombok.ToString;
  * (EceUser)实体类
  *
  * @author 游家纨绔
- * @since 2024-09-11 22:37:34
+ * @since 2024-09-17 12:43:59
  */
 @Data
 @Builder
@@ -21,14 +21,23 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EceUser implements Serializable {
+
     @Serial
-    private static final long serialVersionUID = 311930963439804215L;
+    private static final long serialVersionUID = -935366043629512096L;
 
     private Integer id;
     /**
+     * eceId
+     */
+    private Integer eceId;
+    /**
+     * 用户编码
+     */
+    private String userCode;
+    /**
      * 用户名称
      */
-    private String username;
+    private String userName;
     /**
      * 生日
      */
@@ -45,5 +54,13 @@ public class EceUser implements Serializable {
      * 地址
      */
     private String address;
+    /**
+     * 创建时间
+     */
+    private Date createDate;
+    /**
+     * 更新时间
+     */
+    private Date updateDate;
 }
 

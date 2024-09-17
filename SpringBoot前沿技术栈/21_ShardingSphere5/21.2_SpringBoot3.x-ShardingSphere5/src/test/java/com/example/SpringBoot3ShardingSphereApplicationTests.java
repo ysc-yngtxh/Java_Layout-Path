@@ -17,16 +17,18 @@ class SpringBoot3ShardingSphereApplicationTests {
 
     @Test
     void contextLoads() throws ParseException {
-        String data = "2024-09-11 22:00:00";
+        String data = "2024-09-16 10:00:00";
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date parseData = format.parse(data);
         eceUserMapper.insert(
                 EceUser.builder()
-                        .username("张三")
+                        .eceId(123456)
+                        .userCode("ECE-RPT")
+                        .userName("李四")
                         .birthday(parseData)
-                        .age(24)
-                        .sex("男")
-                        .address("西安雁塔区")
+                        .age(22)
+                        .sex("女")
+                        .address("湖北武汉洪山区")
                         .build()
         );
     }

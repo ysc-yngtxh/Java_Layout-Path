@@ -12,27 +12,34 @@ import lombok.ToString;
 /**
  * (EceUser)实体类
  *
- * @author makejava
- * @since 2024-09-16 13:12:14
+ * @author 游家纨绔
+ * @since 2024-09-17 12:43:59
  */
 @Data
+@Builder
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@Builder
 public class EceUser implements Serializable {
+
     @Serial
-    private static final long serialVersionUID = -12368305365031341L;
-    /**
-     * 主键ID
-     */
+    private static final long serialVersionUID = -935366043629512096L;
+
     private Integer id;
     /**
-     * 用户名
+     * eceId
      */
-    private String username;
+    private Integer eceId;
     /**
-     * 生日时间
+     * 用户编码
+     */
+    private String userCode;
+    /**
+     * 用户名称
+     */
+    private String userName;
+    /**
+     * 生日
      */
     private Date birthday;
     /**
@@ -47,5 +54,13 @@ public class EceUser implements Serializable {
      * 地址
      */
     private String address;
+    /**
+     * 创建时间
+     */
+    private Date createDate;
+    /**
+     * 更新时间
+     */
+    private Date updateDate;
 }
 

@@ -22,7 +22,9 @@ class SpringBoot2ShardingSphereApplicationTests {
         Date parseData = format.parse(data);
         eceUserMapper.insert(
                 EceUser.builder()
-                        .username("李四")
+                        .eceId(123456)
+                        .userCode("ECE-RPT")
+                        .userName("李四")
                         .birthday(parseData)
                         .age(22)
                         .sex("女")
