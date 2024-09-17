@@ -147,7 +147,11 @@
                             `sno` int  primary key auto_increment,
                             `s_name` varchar(255),
                             `cmo` int,
-                            foreign key(cmo) references t_class(cno)    // cmo 引用 cno，cmo中的数据只能是cno中的数据
+                            constraint `fk_cmo` foreign key(cmo) references t_class(cno) on delete cascade
+                            // constraint `fk_cmo`：表示外键约束名
+                            // foreign key(cmo) references t_class(cno)：表示外键，`cmo`是外键，引用t_class表中的cno字段
+                            // on delete cascade：表示级联删除，当et_class表中的cno字段被删除时，t_student表中的cmo字段也会被删除
+                            // cmo 引用 cno，cmo中的数据只能是cno中的数据
                          );
                          insert into t_class values(101, 'x');
                          insert into t_class values(102, 'y');

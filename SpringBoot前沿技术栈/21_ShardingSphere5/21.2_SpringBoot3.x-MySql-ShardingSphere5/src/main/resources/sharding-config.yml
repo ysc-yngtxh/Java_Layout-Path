@@ -37,17 +37,23 @@ rules:
       ece_user:
         # 数据节点：默认只支持两层结构，即【逻辑数据源名.逻辑表名】的形式
         actualDataNodes: ds_$->{0..2}.ece_user
-        databaseStrategy: # TODO 数据库分片策略
-          standard:
-            shardingColumn: ece_id # 根据指定的列名进行分片
-            shardingAlgorithmName: database_inline # 使用自定义的分片算法
+        databaseStrategy: # TODO 分库策略
+          standard: # 用于单分片键的标准分片场景
+            shardingColumn: ece_id # 分片列名称
+            shardingAlgorithmName: database_inline # 分片算法名称
+          # complex: # 用于多分片键的复合分片场景
+          #   shardingColumns: # 分片列名称，多个列以逗号分隔
+          #   shardingAlgorithmName: # 分片算法名称
+          # hint: # Hint 分片策略
+          #   shardingAlgorithmName: # 分片算法名称
+          # none: # 不分片
         keyGenerateStrategy: # TODO 主键生成策略
           column: id
           keyGeneratorName: snowflake
-        # tableStrategy: # TODO 表分片策略。如果有需要则配置，没有避免则无需书写，以免报错
-        #   standard:
-        #     shardingColumn: id
-        #     shardingAlgorithmName:
+        tableStrategy: # TODO 分表策略，同分库策略
+          # standard:
+          #   shardingColumn:
+          #   shardingAlgorithmName:
     shardingAlgorithms: # TODO 定义分片算法
       database_inline:  # 自定义分片算法名称，自定义名称【随便取】
         type: INLINE
@@ -81,4 +87,9 @@ rules:
         type: ROUND_ROBIN # 负载均衡算法类型【轮询】
         props: # 负载均衡算法属性配置
         # ...
+
+  - !BROADCAST # 广播表规则
+    tables:
+      - ece_lookup
+      - ece_lookup_item
 
