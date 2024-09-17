@@ -22,8 +22,9 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>21.1_SpringBoot2.x-ShardingSphere5</module>
-		<module>21.2_SpringBoot3.x-ShardingSphere5</module>
+		<module>21.1_SpringBoot2.x-MySql-ShardingSphere5</module>
+		<module>21.2_SpringBoot3.x-MySql-ShardingSphere5</module>
+		<module>21.3_SpringBoot3.x-PostGreSql-ShardingSphere5</module>
 	</modules>
 
 	<dependencies>
