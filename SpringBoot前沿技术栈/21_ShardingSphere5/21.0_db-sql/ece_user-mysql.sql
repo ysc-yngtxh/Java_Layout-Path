@@ -1,7 +1,7 @@
 
 
 CREATE TABLE `ece_user`(
-    `id`          int              NOT NULL AUTO_INCREMENT,
+    `id`          bigint           NOT NULL AUTO_INCREMENT COMMENT '主键Id',
     `ece_id`      int              DEFAULT NULL COMMENT 'eceId',
     `user_code`   varchar(32)      NOT NULL COMMENT '用户编码',
     `user_name`   varchar(32)      NOT NULL COMMENT '用户名称',

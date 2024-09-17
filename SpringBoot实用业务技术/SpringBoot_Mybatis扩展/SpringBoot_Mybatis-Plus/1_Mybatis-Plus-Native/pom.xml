@@ -11,10 +11,10 @@
 	</parent>
 
 	<groupId>com.example</groupId>
-	<artifactId>1_Mybatis-Plus-Navite</artifactId>
+	<artifactId>1_Mybatis-Plus-Native</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>1_Mybatis-Plus-Navite</name>
-	<description>1_Mybatis-Plus-Navite</description>
+	<name>1_Mybatis-Plus-Native</name>
+	<description>1_Mybatis-Plus-Native</description>
 
 	<properties>
 		<java.version>21</java.version>

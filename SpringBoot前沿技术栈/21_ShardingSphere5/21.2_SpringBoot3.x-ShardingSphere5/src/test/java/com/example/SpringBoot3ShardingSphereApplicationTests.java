@@ -35,7 +35,7 @@ class SpringBoot3ShardingSphereApplicationTests {
 
     @Test
     void contextLoads2() {
-        System.out.println(eceUserMapper.queryById(1));
+        System.out.println(eceUserMapper.queryById(76));
     }
 
 }

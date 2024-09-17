@@ -32,7 +32,7 @@ class SpringBootPostgreSqlApplicationTests {
                         .userName("李四")
                         .birthday(parseData)
                         .age(22)
-                        .sex("女")
+                        .sex("男")
                         .address("湖北武汉洪山区")
                         .build()
         );

@@ -1,11 +1,10 @@
 
--- TODO 创建枚举类型
-CREATE TYPE sex AS ENUM ('男', '女');
+
 -- TODO 创建序列
 CREATE SEQUENCE smc_ece1.ece_user_id_seq;
 -- TODO 创建表
 CREATE TABLE smc_ece1.ece_user(
-    id           int4          NOT NULL DEFAULT nextval('smc_ece1.ece_user_id_seq'::regclass),
+    id           int8          NOT NULL DEFAULT nextval('smc_ece1.ece_user_id_seq'::regclass),
 --  id           serial        NOT NULL, 类型serial表示该字段数值是自增的，就不需要提前执行创建序列的脚本，
 --  以上提供了 PostgreSql 的两种自增字段的配置，自行选择即可。
     ece_id       int4          NOT NULL,
@@ -20,7 +19,7 @@ CREATE TABLE smc_ece1.ece_user(
     CONSTRAINT "ece_user_pkey" PRIMARY KEY (id)
 );
 
-COMMENT ON COLUMN smc_ece1.ece_user.id IS '主键ID';
+COMMENT ON COLUMN smc_ece1.ece_user.id IS '主键Id';
 
 COMMENT ON COLUMN smc_ece1.ece_user.ece_id IS 'eceId';
 

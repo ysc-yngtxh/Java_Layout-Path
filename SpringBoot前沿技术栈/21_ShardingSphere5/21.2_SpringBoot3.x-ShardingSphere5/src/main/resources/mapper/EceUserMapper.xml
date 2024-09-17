@@ -3,7 +3,7 @@
 <mapper namespace="com.example.mapper.EceUserMapper">
 
     <resultMap type="com.example.entity.EceUser" id="EceUserMap">
-        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="id" column="id" jdbcType="BIGINT"/>
         <result property="eceId" column="ece_id" jdbcType="INTEGER"/>
         <result property="userCode" column="user_code" jdbcType="VARCHAR"/>
         <result property="userName" column="user_name" jdbcType="VARCHAR"/>
@@ -28,7 +28,7 @@
                create_date,
                update_date
         from ece_user
-        where id = #{id}
+        where ece_id = #{id}
     </select>
 
     <!--新增所有列-->

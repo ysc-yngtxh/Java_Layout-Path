@@ -3,7 +3,7 @@
 <mapper namespace="com.example.mapper.EceUserMapper">
 
     <resultMap type="com.example.entity.EceUser" id="EceUserMap">
-        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="id" column="id" jdbcType="BIGINT"/>
         <result property="eceId" column="ece_id" jdbcType="INTEGER"/>
         <result property="userCode" column="user_code" jdbcType="VARCHAR"/>
         <result property="userName" column="user_name" jdbcType="VARCHAR"/>
@@ -28,13 +28,13 @@
                create_date,
                update_date
         from ece_user
-        where id = #{id}
+        where ece_id = #{ece_id}
     </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into ece_user(ece_id,user_code,user_name,birthday,age,sex,address,create_date,update_date)
-        values (#{eceId},#{userCode},#{userName},#{birthday},#{age},#{sex},#{address},#{createDate},#{updateDate})
+        insert into ece_user(ece_id, user_code, user_name, birthday, age, sex, address)
+        values (#{eceId}, #{userCode}, #{userName}, #{birthday}, #{age}, #{sex}, #{address})
     </insert>
 
     <!--通过主键修改数据-->

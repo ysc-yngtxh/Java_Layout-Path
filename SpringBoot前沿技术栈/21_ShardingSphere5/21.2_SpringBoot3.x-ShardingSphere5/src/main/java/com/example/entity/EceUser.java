@@ -25,7 +25,10 @@ public class EceUser implements Serializable {
     @Serial
     private static final long serialVersionUID = -935366043629512096L;
 
-    private Integer id;
+    /**
+     * 主键 Id
+     */
+    private long id;
     /**
      * eceId
      */

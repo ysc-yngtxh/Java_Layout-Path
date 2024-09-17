@@ -50,8 +50,9 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public EceUser update(EceUser user) {
-        this.eceUserMapper.update(user);
-        return this.queryById(user.getId());
+        // this.eceUserMapper.update(user);
+        // return this.queryById(user.getId());
+        return null;
     }
 
     /**
