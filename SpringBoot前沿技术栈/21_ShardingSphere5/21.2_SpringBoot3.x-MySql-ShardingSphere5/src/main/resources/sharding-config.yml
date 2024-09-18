@@ -13,19 +13,19 @@ dataSources:
   ds_0:
     driverClassName: com.mysql.cj.jdbc.Driver
     dataSourceClassName: com.zaxxer.hikari.HikariDataSource
-    jdbcUrl: jdbc:mysql://localhost:3306/sys
+    jdbcUrl: jdbc:mysql://localhost:3306/shardingsphere1
     username: root
     password: 131474
   ds_1:
     driverClassName: com.mysql.cj.jdbc.Driver
     dataSourceClassName: com.zaxxer.hikari.HikariDataSource
-    jdbcUrl: jdbc:mysql://localhost:3306/springdb
+    jdbcUrl: jdbc:mysql://localhost:3306/shardingsphere2
     username: root
     password: 131474
   ds_2:
     driverClassName: com.mysql.cj.jdbc.Driver
     dataSourceClassName: com.zaxxer.hikari.HikariDataSource
-    jdbcUrl: jdbc:mysql://localhost:3306/caoyumin
+    jdbcUrl: jdbc:mysql://localhost:3306/shardingsphere3
     username: root
     password: 131474
 
@@ -64,12 +64,12 @@ rules:
           complex: # complex：适用于多个分片键的分片场景。
             shardingColumns: ece_id,age # 分片列名称，多个列以逗号分隔
             shardingAlgorithmName: # 分片算法名称
-      ece_order:
+      ece_order_item:
         actualDataNodes: ds_$->{0..2}.ece_order
         databaseStrategy:
           hint: # Hint：适用于在运行时动态指定分片键值的场景，通常用于无法在 SQL 中明确指定分片键的情况。
             shardingAlgorithmName: # 分片算法名称
-      ece_order:
+      ece_product:
         actualDataNodes: ds_$->{0..2}.ece_order
         databaseStrategy:
           none: # none：适用于不需要分片的表。
@@ -96,7 +96,7 @@ rules:
         props: # 负载均衡算法属性配置
         # ...
 
-  - !BROADCAST # 广播表规则
+  - !BROADCAST # 广播表规则（目前看来与读写分离配置相冲突，将读写分离配置注释掉后，广播表规则才生效）
     tables:
       - ece_lookup
       - ece_lookup_items

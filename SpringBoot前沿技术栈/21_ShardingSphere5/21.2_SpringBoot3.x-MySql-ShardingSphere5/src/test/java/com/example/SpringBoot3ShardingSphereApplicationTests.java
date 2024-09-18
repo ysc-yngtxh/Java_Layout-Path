@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.entity.EceLookupClassify;
 import com.example.entity.EceUser;
 import com.example.mapper.EceLookupClassifyMapper;
 import com.example.mapper.EceUserMapper;
@@ -66,7 +67,7 @@ class SpringBoot3ShardingSphereApplicationTests {
     @Test
     void contextLoads3() {
         System.out.println(eceLookupClassifyMapper.update(
-                EceLookup.builder()
+                EceLookupClassify.builder()
                         .lookupId(1L)
                         .updateBy("游家纨绔1")
                         .build()
