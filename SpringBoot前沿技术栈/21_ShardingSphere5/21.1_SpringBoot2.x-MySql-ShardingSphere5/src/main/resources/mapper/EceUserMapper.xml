@@ -7,12 +7,16 @@
         <result property="eceId" column="ece_id" jdbcType="INTEGER"/>
         <result property="userCode" column="user_code" jdbcType="VARCHAR"/>
         <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="passWord" column="pass_word" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
         <result property="birthday" column="birthday" jdbcType="TIMESTAMP"/>
         <result property="age" column="age" jdbcType="INTEGER"/>
         <result property="sex" column="sex" jdbcType="VARCHAR"/>
         <result property="address" column="address" jdbcType="VARCHAR"/>
         <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
         <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
     </resultMap>
 
     <!--查询单个-->
@@ -21,20 +25,25 @@
                ece_id,
                user_code,
                user_name,
+               pass_word,
+               email,
+               phone,
                birthday,
                age,
                sex,
                address,
                create_date,
-               update_date
+               update_date,
+               status
         from ece_user
         where id = #{id}
     </select>
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into ece_user(ece_id, user_code, user_name, birthday, age, sex, address)
-        values (#{eceId}, #{userCode}, #{userName}, #{birthday}, #{age}, #{sex}, #{address})
+        insert into ece_user(ece_id, user_code, user_name, pass_word, email, phone, birthday, age, sex, address, status)
+        values (#{eceId}, #{userCode}, #{userName}, #{password}, #{email}, #{phone}, #{birthday}, #{age}, #{sex},
+                #{address}, #{status})
     </insert>
 
     <!--通过主键修改数据-->
@@ -50,6 +59,15 @@
             <if test="userName != null and userName != ''">
                 user_name = #{userName},
             </if>
+            <if test="password != null and password != ''">
+                pass_word = #{password},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
             <if test="birthday != null">
                 birthday = #{birthday},
             </if>
@@ -62,11 +80,8 @@
             <if test="address != null and address != ''">
                 address = #{address},
             </if>
-            <if test="createDate != null">
-                create_date = #{createDate},
-            </if>
-            <if test="updateDate != null">
-                update_date = #{updateDate},
+            <if test="status != null and status != ''">
+                status = #{status},
             </if>
         </set>
         where id = #{id}

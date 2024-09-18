@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.EceLookupClassifyMapper">
+
+    <resultMap type="com.example.entity.EceLookupClassify" id="EceLookupClassifyMap">
+        <result property="lookupId" column="lookup_id" jdbcType="INTEGER"/>
+        <result property="lookupName" column="lookup_name" jdbcType="VARCHAR"/>
+        <result property="lookupType" column="lookup_type" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+        <result property="createdDate" column="created_date" jdbcType="TIMESTAMP"/>
+        <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+        <result property="updatedDate" column="updated_date" jdbcType="TIMESTAMP"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="EceLookupClassifyMap">
+        select lookup_id,
+               lookup_name,
+               lookup_type,
+               status,
+               create_by,
+               created_date,
+               update_by,
+               updated_date,
+               remark
+        from ece_lookup_classify
+        where lookup_id = #{lookupId}
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="lookupId" useGeneratedKeys="true">
+        insert into ece_lookup_classify(lookup_name, lookup_type, status, create_by, update_by, remark)
+        values (#{lookupName}, #{lookupType}, #{status}, #{createBy}, #{updateBy}, #{remark})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update ece_lookup_classify
+        <set>
+            <if test="lookupName != null and lookupName != ''">
+                lookup_name = #{lookupName},
+            </if>
+            <if test="lookupType != null and lookupType != ''">
+                lookup_type = #{lookupType},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="createBy != null and createBy != ''">
+                create_by = #{createBy},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                update_by = #{updateBy},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+        </set>
+        where lookup_id = #{lookupId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from ece_lookup_classify
+        where lookup_id = #{lookupId}
+    </delete>
+
+</mapper>
+

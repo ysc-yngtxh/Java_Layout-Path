@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * (EceUser)实体类
+ * 用户表(EceUser)实体类
  *
  * @author 游家纨绔
- * @since 2024-09-17 12:43:59
+ * @since 2024-09-19 00:48:08
  */
 @Data
 @Builder
@@ -22,9 +22,12 @@ import lombok.ToString;
 @NoArgsConstructor
 public class EceUser implements Serializable {
     @Serial
-    private static final long serialVersionUID = -36009261253819242L;
+    private static final long serialVersionUID = 658527409271205137L;
 
-    private Integer id;
+    /**
+     * 用户ID
+     */
+    private Long id;
     /**
      * eceId
      */
@@ -37,6 +40,18 @@ public class EceUser implements Serializable {
      * 用户名称
      */
     private String userName;
+    /**
+     * 密码
+     */
+    private String passWord;
+    /**
+     * 邮箱
+     */
+    private String email;
+    /**
+     * 手机号
+     */
+    private String phone;
     /**
      * 生日
      */
@@ -61,5 +76,9 @@ public class EceUser implements Serializable {
      * 更新时间
      */
     private Date updateDate;
+    /**
+     * 用户状态
+     */
+    private String status;
 }
 

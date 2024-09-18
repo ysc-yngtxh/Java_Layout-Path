@@ -2,8 +2,8 @@
 -- ----------------------------
 -- 字典表
 -- ----------------------------
-CREATE TABLE `ece_lookup`(
-    `lookup_id`        BIGINT(20)   NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '字典主键',
+CREATE TABLE `ece_lookup_classify`(
+    `lookup_id`        BIGINT(20)   NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '字典ID',
     `lookup_name`      VARCHAR(255) NOT NULL UNIQUE COMMENT '字典名称',
     `lookup_type`      VARCHAR(255) NOT NULL UNIQUE COMMENT '字典类型',
     `status`           TINYINT      DEFAULT 0 COMMENT '状态：(0正常 1停用)',
@@ -15,16 +15,16 @@ CREATE TABLE `ece_lookup`(
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC COMMENT '字典表';
 
-insert into ece_lookup values(1,  '用户性别', 'sys_user_sex',        '0', 'admin', sysdate(), '', null, '用户性别列表');
-insert into ece_lookup values(2,  '菜单状态', 'sys_show_hide',       '0', 'admin', sysdate(), '', null, '菜单状态列表');
-insert into ece_lookup values(3,  '系统开关', 'sys_normal_disable',  '0', 'admin', sysdate(), '', null, '系统开关列表');
-insert into ece_lookup values(4,  '任务状态', 'sys_job_status',      '0', 'admin', sysdate(), '', null, '任务状态列表');
-insert into ece_lookup values(5,  '任务分组', 'sys_job_group',       '0', 'admin', sysdate(), '', null, '任务分组列表');
-insert into ece_lookup values(6,  '系统是否', 'sys_yes_no',          '0', 'admin', sysdate(), '', null, '系统是否列表');
-insert into ece_lookup values(7,  '通知类型', 'sys_notice_type',     '0', 'admin', sysdate(), '', null, '通知类型列表');
-insert into ece_lookup values(8,  '通知状态', 'sys_notice_status',   '0', 'admin', sysdate(), '', null, '通知状态列表');
-insert into ece_lookup values(9,  '操作类型', 'sys_oper_type',       '0', 'admin', sysdate(), '', null, '操作类型列表');
-insert into ece_lookup values(10, '系统状态', 'sys_common_status',   '0', 'admin', sysdate(), '', null, '登录状态列表');
+insert into ece_lookup_classify values(1,  '用户性别', 'sys_user_sex',        '0', 'admin', sysdate(), '', null, '用户性别列表');
+insert into ece_lookup_classify values(2,  '菜单状态', 'sys_show_hide',       '0', 'admin', sysdate(), '', null, '菜单状态列表');
+insert into ece_lookup_classify values(3,  '系统开关', 'sys_normal_disable',  '0', 'admin', sysdate(), '', null, '系统开关列表');
+insert into ece_lookup_classify values(4,  '任务状态', 'sys_job_status',      '0', 'admin', sysdate(), '', null, '任务状态列表');
+insert into ece_lookup_classify values(5,  '任务分组', 'sys_job_group',       '0', 'admin', sysdate(), '', null, '任务分组列表');
+insert into ece_lookup_classify values(6,  '系统是否', 'sys_yes_no',          '0', 'admin', sysdate(), '', null, '系统是否列表');
+insert into ece_lookup_classify values(7,  '通知类型', 'sys_notice_type',     '0', 'admin', sysdate(), '', null, '通知类型列表');
+insert into ece_lookup_classify values(8,  '通知状态', 'sys_notice_status',   '0', 'admin', sysdate(), '', null, '通知状态列表');
+insert into ece_lookup_classify values(9,  '操作类型', 'sys_oper_type',       '0', 'admin', sysdate(), '', null, '操作类型列表');
+insert into ece_lookup_classify values(10, '系统状态', 'sys_common_status',   '0', 'admin', sysdate(), '', null, '登录状态列表');
 
 
 
@@ -45,9 +45,9 @@ CREATE TABLE ece_lookup_items (
     `updated_date`      TIMESTAMP    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `remark`            VARCHAR(500) DEFAULT NULL COMMENT '备注',
     -- CONSTRAINT `fk_lookup_id`：表示约束名
-    -- FOREIGN KEY (`lookup_id`) REFERENCES ece_lookup(`lookup_id`)：表示外键，`lookup_id`是外键，引用ece_lookup表中的lookup_id字段
-    -- ON DELETE CASCADE：表示级联删除，当ece_lookup表中的lookup_id字段被删除时，ece_lookup_items表中的lookup_id字段也会被删除
-    CONSTRAINT `fk_lookup_id` FOREIGN KEY (`lookup_id`) REFERENCES ece_lookup(`lookup_id`) ON DELETE CASCADE,
+    -- FOREIGN KEY (`lookup_id`) REFERENCES ece_lookup_classify(`lookup_id`)：表示外键，`lookup_id`是外键，引用ece_lookup_classify表中的lookup_id字段
+    -- ON DELETE CASCADE：表示级联删除，当ece_lookup_classify表中的lookup_id字段被删除时，ece_lookup_items表中的lookup_id字段也会被删除
+    CONSTRAINT `fk_lookup_id` FOREIGN KEY (`lookup_id`) REFERENCES ece_lookup_classify(`lookup_id`) ON DELETE CASCADE,
     PRIMARY KEY (`lookup_item_id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC COMMENT '字典数据表';
@@ -81,5 +81,4 @@ insert into ece_lookup_items values (26, 9,  'Generate code',  '生成代码', '
 insert into ece_lookup_items values (27, 9,  'Clear data',     '清空数据', '9',      9, 0, 'admin', sysdate(), '', NULL, '清空操作');
 insert into ece_lookup_items values (28, 10, 'Success',        '成功',    '0',      1, 0, 'admin', sysdate(), '', NULL, '正常状态');
 insert into ece_lookup_items values (29, 10, 'Fail',           '失败',    '1',      2, 0, 'admin', sysdate(), '', NULL, '停用状态');
-
 
