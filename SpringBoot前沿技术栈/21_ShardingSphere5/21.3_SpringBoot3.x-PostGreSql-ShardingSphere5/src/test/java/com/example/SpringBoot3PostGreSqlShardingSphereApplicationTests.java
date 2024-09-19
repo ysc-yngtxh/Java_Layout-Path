@@ -36,6 +36,6 @@ class SpringBoot3PostGreSqlShardingSphereApplicationTests {
     @Test
     void contextLoads2() {
         // 使用 PostgreSql 来进行数据分片，有个注意点：public架构中必须要创建分片的表(可以没数据，但必须要建表)
-        System.out.println(eceUserMapper.queryById(307));
+        System.out.println(eceUserMapper.queryById(76));
     }
 }

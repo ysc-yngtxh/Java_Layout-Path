@@ -24,7 +24,7 @@
         select
             id,ece_id,user_code,user_name,pass_word,email,phone,birthday,age,sex,address,create_date,update_date,status
         from ece_user
-        where id = #{id}
+        where ece_id = #{eceId}
     </select>
 
     <!--新增所有列-->

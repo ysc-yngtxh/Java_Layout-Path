@@ -98,6 +98,6 @@ rules:
 
   - !BROADCAST # 广播表规则（目前看来与读写分离配置相冲突，将读写分离配置注释掉后，广播表规则才生效）
     tables:
-      - ece_lookup
+      - ece_lookup_classify
       - ece_lookup_items
 
