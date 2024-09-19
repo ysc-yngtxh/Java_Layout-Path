@@ -11,7 +11,7 @@
          唯一约束(unique)：     约束的字段不能重复
          主键约束(primary key)：约束的字段既不能为null，也不能重复（简称PK）
          外键约束(foreign key)：不能重复（简称FK）
-         检查约束(check)：      注意Oracle数据库有check约束，但是MySQL没有，目前MySQL不支持该约束
+         检查约束(check)：      注意：Oracle数据库有check约束，MySQL8.0.16 版本后才引入 check约束
 ---------------------------------------------------------------------------------------------------------------
   3、非空约束 (not null)
          drop table if exists t_user;
@@ -21,7 +21,7 @@
             `password` varchar(255)
          );
          insert into t_user(id, password) values(1, '123');
-         // 报错.这样写默认情况下username是null，但是因为加了not null语句，所以报错
+         // 报错：这样写默认情况下username是null，但是因为加了not null语句，所以报错
          // ERROR 1364 (HY000): Field 'username' doesn't have a default value
          insert into t_user(is, username, password) values(1, 'lisi', '123');
 ---------------------------------------------------------------------------------------------------------------
@@ -151,7 +151,7 @@
                             // constraint `fk_cmo`：表示外键约束名
                             // foreign key(cmo) references t_class(cno)：表示外键，`cmo`是外键，引用t_class表中的cno字段
                             // on delete cascade：表示级联删除，当et_class表中的cno字段被删除时，t_student表中的cmo字段也会被删除
-                            // cmo 引用 cno，cmo中的数据只能是cno中的数据
+                            // cmo 引用 cno，cmo中的数据只能是cno中的数据。且 cno 中的数据只能是唯一的【因此只能是主键或者加了唯一约束】。
                          );
                          insert into t_class values(101, 'x');
                          insert into t_class values(102, 'y');
@@ -170,6 +170,22 @@
                      马上在 t_student 表中中查找是否有 cmo=101 这个记录，然后进行删除或更新，这就叫级联。
         2、在使用外键的情况下,每次修改数据都需要去另外一个表检查数据,需要获取额外的锁。若是在高并发大流量事务场景,使用外键更容易造成死锁
            外键和级联比较适合单机和低并发的情况下 ，大量事务也会影响crud速度，不适合分布式和高并发集群。
+---------------------------------------------------------------------------------------------------------------
+  7、check约束
+     MySQL 对 CHECK 约束的支持是在 MySQL 8.0.16 版本中引入的。在此之前，MySQL 并不完全支持标准 SQL 中定义的 CHECK 约束。
+     自 MySQL 8.0.16 版本起，用户可以在创建表或修改表时使用 CHECK 约束来限定列值的有效范围。
+
+     这意味着，如果你使用的是 MySQL 8.0.16 或更高版本，你可以直接利用 CHECK 约束来增强数据完整性检查。
+     对于老版本的 MySQL 数据库，你需要升级到至少 8.0.16 版本才能使用这一功能。
+     在此之前，通常的做法是通过触发器、存储过程或应用程序逻辑来强制执行这样的约束。
+
+           create table t_product(
+               id      bigint    auto_increment primary key comment '评论ID',
+               -- CHECK 约束用于确保列中的值满足特定条件。InnoDB 存储引擎中支持 CHECK 约束，但在 MyISAM 存储引擎中则不支持。
+               rating  int       check (rating >= 1 AND rating <= 5) comment '评分',
+           )
+
+
  */
 public class J10_约束 {
 }

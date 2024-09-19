@@ -3,17 +3,17 @@
 -- 用户表
 -- ----------------------------
 CREATE TABLE `ece_user`(
-    `id`          bigint           NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '用户ID',
-    `ece_id`      int              DEFAULT NULL COMMENT 'eceId',
-    `user_code`   varchar(32)      NOT NULL COMMENT '用户编码',
-    `user_name`   varchar(32)      NOT NULL COMMENT '用户名称',
-    `pass_word`    VARCHAR(255)    NOT NULL COMMENT '密码',
+    `id`          BIGINT           NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '用户ID',
+    `ece_id`      INT              DEFAULT NULL COMMENT 'eceId',
+    `user_code`   VARCHAR(32)      NOT NULL COMMENT '用户编码',
+    `user_name`   VARCHAR(32)      NOT NULL COMMENT '用户名称',
+    `pass_word`   VARCHAR(255)     NOT NULL COMMENT '密码',
     `email`       VARCHAR(100)     NOT NULL UNIQUE COMMENT '邮箱',
     `phone`       VARCHAR(20)      NOT NULL UNIQUE COMMENT '手机号',
-    `birthday`    datetime         DEFAULT NULL COMMENT '生日',
-    `age`         int              NOT NULL COMMENT '年龄',
-    `sex`         enum('男', '女')  DEFAULT NULL COMMENT '性别',
-    `address`     varchar(256)     DEFAULT NULL COMMENT '地址',
+    `birthday`    DATETIME         DEFAULT NULL COMMENT '生日',
+    `age`         INT              NOT NULL COMMENT '年龄',
+    `sex`         ENUM('男', '女')  DEFAULT NULL COMMENT '性别',
+    `address`     VARCHAR(256)     DEFAULT NULL COMMENT '地址',
     `create_date` TIMESTAMP        DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_date` TIMESTAMP        DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     `status` ENUM('ACTIVE', 'INACTIVE', 'DELETED') NOT NULL DEFAULT 'ACTIVE' COMMENT '用户状态'
