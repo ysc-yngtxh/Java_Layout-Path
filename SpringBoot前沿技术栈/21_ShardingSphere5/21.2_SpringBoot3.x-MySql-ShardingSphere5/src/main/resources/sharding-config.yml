@@ -38,6 +38,14 @@ rules:
         type: INLINE
         props:
           algorithm-expression: ds_$->{ece_id % 3}
+      table_inline:  # 自定义分片算法名称，自定义名称【随便取】
+        type: INLINE
+        props:
+          algorithm-expression: ece_order_$->{ece_id % 3}
+      complex_inline:  # 自定义分片算法名称，自定义名称【随便取】
+        type: INLINE
+        props:
+          algorithm-expression: ds_$->{ece_id % 3}.$->{age % 2}
     keyGenerators: # TODO 定义主键生成策略
       snowflake:   # 自定义主键生成策略名称，自定义名称【随便取】
         type: SNOWFLAKE
@@ -63,14 +71,13 @@ rules:
         databaseStrategy:
           complex: # complex：适用于多个分片键的分片场景。
             shardingColumns: ece_id,age # 分片列名称，多个列以逗号分隔
-            shardingAlgorithmName: # 分片算法名称
+            shardingAlgorithmName: complex_inline # 分片算法名称
       ece_order_item:
-        actualDataNodes: ds_$->{0..2}.ece_order
+        actualDataNodes: ds_$->{0..2}.ece_order_item
         databaseStrategy:
           hint: # Hint：适用于在运行时动态指定分片键值的场景，通常用于无法在 SQL 中明确指定分片键的情况。
-            shardingAlgorithmName: # 分片算法名称
+            shardingAlgorithmName: database_inline # 分片算法名称
       ece_product:
-        actualDataNodes: ds_$->{0..2}.ece_order
         databaseStrategy:
           none: # none：适用于不需要分片的表。
 

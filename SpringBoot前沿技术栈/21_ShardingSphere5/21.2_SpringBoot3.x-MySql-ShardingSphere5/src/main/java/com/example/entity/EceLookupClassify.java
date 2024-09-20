@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * 字典表(EceLookupClassify)实体类
+ * 字典类别表(EceLookupClassify)实体类
  *
  * @author 游家纨绔
- * @since 2024-09-19 00:58:28
+ * @since 2024-09-20 21:11:08
  */
 @Data
 @Builder
@@ -22,24 +22,36 @@ import lombok.ToString;
 @NoArgsConstructor
 public class EceLookupClassify implements Serializable {
     @Serial
-    private static final long serialVersionUID = 687760483410347788L;
+    private static final long serialVersionUID = 223883240660535570L;
 
     /**
-     * 字典主键
+     * 类别ID
      */
-    private Long lookupId;
+    private Long classifyId;
     /**
-     * 字典名称
+     * 类别编码
      */
-    private String lookupName;
+    private String classifyCode;
     /**
-     * 字典类型
+     * 类别名称
      */
-    private String lookupType;
+    private String classifyName;
+    /**
+     * 类别类型
+     */
+    private String classifyType;
     /**
      * 状态：(0正常 1停用)
      */
     private Integer status;
+    /**
+     * 类别描述
+     */
+    private String classifyDesc;
+    /**
+     * 应用名称
+     */
+    private String appName;
     /**
      * 创建者
      */

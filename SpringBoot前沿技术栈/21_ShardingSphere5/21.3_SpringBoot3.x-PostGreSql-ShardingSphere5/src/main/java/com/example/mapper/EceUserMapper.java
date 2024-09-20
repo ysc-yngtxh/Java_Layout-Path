@@ -13,10 +13,10 @@ public interface EceUserMapper {
     /**
      * 通过ID查询单条数据
      *
-     * @param ece_id 主键
+     * @param eceId 主键
      * @return 实例对象
      */
-    EceUser queryById(Integer ece_id);
+    EceUser queryById(Integer eceId);
 
     /**
      * 新增数据

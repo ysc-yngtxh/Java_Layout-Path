@@ -36,10 +36,14 @@ class SpringBoot3ShardingSphereApplicationTests {
                         .eceId(123456)
                         .userCode("ECE-RPT")
                         .userName("李四")
+                        .passWord("123456")
+                        .email("1234567@qq.com")
+                        .phone("13888888887")
                         .birthday(parseData)
                         .age(22)
                         .sex("女")
                         .address("湖北武汉洪山区")
+                        .status("ACTIVE")
                         .build()
         );
     }
@@ -68,8 +72,8 @@ class SpringBoot3ShardingSphereApplicationTests {
     void contextLoads3() {
         System.out.println(eceLookupClassifyMapper.update(
                 EceLookupClassify.builder()
-                        .lookupId(1L)
-                        .updateBy("游家纨绔1")
+                        .classifyId(1L)
+                        .updateBy("游家纨绔")
                         .build()
         ));
     }

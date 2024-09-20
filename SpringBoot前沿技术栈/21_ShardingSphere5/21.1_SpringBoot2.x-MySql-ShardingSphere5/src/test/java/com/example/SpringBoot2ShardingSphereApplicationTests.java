@@ -25,10 +25,14 @@ class SpringBoot2ShardingSphereApplicationTests {
                         .eceId(123456)
                         .userCode("ECE-RPT")
                         .userName("李四")
+                        .passWord("123456")
+                        .email("123456@qq.com")
+                        .phone("13888888888")
                         .birthday(parseData)
                         .age(22)
                         .sex("女")
                         .address("湖北武汉洪山区")
+                        .status("ACTIVE")
                         .build()
         );
     }

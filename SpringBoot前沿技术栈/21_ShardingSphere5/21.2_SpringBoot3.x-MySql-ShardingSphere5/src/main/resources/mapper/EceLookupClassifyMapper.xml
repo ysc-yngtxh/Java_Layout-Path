@@ -3,10 +3,13 @@
 <mapper namespace="com.example.mapper.EceLookupClassifyMapper">
 
     <resultMap type="com.example.entity.EceLookupClassify" id="EceLookupClassifyMap">
-        <result property="lookupId" column="lookup_id" jdbcType="INTEGER"/>
-        <result property="lookupName" column="lookup_name" jdbcType="VARCHAR"/>
-        <result property="lookupType" column="lookup_type" jdbcType="VARCHAR"/>
+        <result property="classifyId" column="classify_id" jdbcType="INTEGER"/>
+        <result property="classifyCode" column="classify_code" jdbcType="VARCHAR"/>
+        <result property="classifyName" column="classify_name" jdbcType="VARCHAR"/>
+        <result property="classifyType" column="classify_type" jdbcType="VARCHAR"/>
         <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="classifyDesc" column="classify_desc" jdbcType="VARCHAR"/>
+        <result property="appName" column="app_name" jdbcType="VARCHAR"/>
         <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
         <result property="createdDate" column="created_date" jdbcType="TIMESTAMP"/>
         <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
@@ -16,37 +19,51 @@
 
     <!--查询单个-->
     <select id="queryById" resultMap="EceLookupClassifyMap">
-        select lookup_id,
-               lookup_name,
-               lookup_type,
+        select classify_id,
+               classify_code,
+               classify_name,
+               classify_type,
                status,
+               classify_desc,
+               app_name,
                create_by,
                created_date,
                update_by,
                updated_date,
                remark
         from ece_lookup_classify
-        where lookup_id = #{lookupId}
+        where classify_id = #{classifyId}
     </select>
 
     <!--新增所有列-->
-    <insert id="insert" keyProperty="lookupId" useGeneratedKeys="true">
-        insert into ece_lookup_classify(lookup_name, lookup_type, status, create_by, update_by, remark)
-        values (#{lookupName}, #{lookupType}, #{status}, #{createBy}, #{updateBy}, #{remark})
+    <insert id="insert" keyProperty="classifyId" useGeneratedKeys="true">
+        insert into ece_lookup_classify(classify_code, classify_name, classify_type, status, classify_desc, app_name,
+                                        create_by, update_by, remark)
+        values (#{classifyCode}, #{classifyName}, #{classifyType}, #{status}, #{classifyDesc}, #{appName}, #{createBy},
+                #{updateBy}, #{remark})
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
         update ece_lookup_classify
         <set>
-            <if test="lookupName != null and lookupName != ''">
-                lookup_name = #{lookupName},
+            <if test="classifyCode != null and classifyCode != ''">
+                classify_code = #{classifyCode},
             </if>
-            <if test="lookupType != null and lookupType != ''">
-                lookup_type = #{lookupType},
+            <if test="classifyName != null and classifyName != ''">
+                classify_name = #{classifyName},
+            </if>
+            <if test="classifyType != null and classifyType != ''">
+                classify_type = #{classifyType},
             </if>
             <if test="status != null">
                 status = #{status},
+            </if>
+            <if test="classifyDesc != null and classifyDesc != ''">
+                classify_desc = #{classifyDesc},
+            </if>
+            <if test="appName != null and appName != ''">
+                app_name = #{appName},
             </if>
             <if test="createBy != null and createBy != ''">
                 create_by = #{createBy},
@@ -58,14 +75,12 @@
                 remark = #{remark},
             </if>
         </set>
-        where lookup_id = #{lookupId}
+        where classify_id = #{classifyId}
     </update>
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete
-        from ece_lookup_classify
-        where lookup_id = #{lookupId}
+        delete from ece_lookup_classify where classify_id = #{classifyId}
     </delete>
 
 </mapper>

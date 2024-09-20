@@ -12,8 +12,8 @@ import lombok.ToString;
 /**
  * 用户表(EceUser)实体类
  *
- * @author 游家纨绔
- * @since 2024-09-19 00:48:08
+ * @author makejava
+ * @since 2024-09-20 21:17:03
  */
 @Data
 @Builder
@@ -22,8 +22,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class EceUser implements Serializable {
     @Serial
-    private static final long serialVersionUID = 658527409271205137L;
-
+    private static final long serialVersionUID = 893554974075705049L;
     /**
      * 用户ID
      */

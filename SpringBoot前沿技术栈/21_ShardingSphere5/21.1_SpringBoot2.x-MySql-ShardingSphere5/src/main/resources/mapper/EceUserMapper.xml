@@ -39,11 +39,11 @@
         where id = #{id}
     </select>
 
+
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into ece_user(ece_id, user_code, user_name, pass_word, email, phone, birthday, age, sex, address, status)
-        values (#{eceId}, #{userCode}, #{userName}, #{password}, #{email}, #{phone}, #{birthday}, #{age}, #{sex},
-                #{address}, #{status})
+        insert into ece_user(ece_id,user_code,user_name,pass_word,email,phone,birthday,age,sex,address,status)
+        values (#{eceId},#{userCode},#{userName},#{passWord},#{email},#{phone},#{birthday},#{age},#{sex},#{address},#{status})
     </insert>
 
     <!--通过主键修改数据-->
@@ -59,8 +59,8 @@
             <if test="userName != null and userName != ''">
                 user_name = #{userName},
             </if>
-            <if test="password != null and password != ''">
-                pass_word = #{password},
+            <if test="passWord != null and passWord != ''">
+                pass_word = #{passWord},
             </if>
             <if test="email != null and email != ''">
                 email = #{email},
@@ -80,6 +80,9 @@
             <if test="address != null and address != ''">
                 address = #{address},
             </if>
+            <if test="createDate != null">
+                create_date = #{createDate},
+            </if>
             <if test="status != null and status != ''">
                 status = #{status},
             </if>
@@ -91,6 +94,5 @@
     <delete id="deleteById">
         delete from ece_user where id = #{id}
     </delete>
-
 </mapper>
 
