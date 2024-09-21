@@ -217,5 +217,4 @@
              # ALTER TABLE 表名 AUTO_INCREMENT = 预想的下一次插入数据的自增值;
              ALTER TABLE t_student AUTO_INCREMENT = 10000;
  */
-public class I9_表的创建 {
-}
+public class I9_表的创建 {}

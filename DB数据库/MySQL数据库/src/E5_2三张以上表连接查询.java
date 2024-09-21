@@ -49,5 +49,4 @@
                  e.mgr = em.emp_no;    // 因为SMITH领导为null，所以一定要用到外连接。否则SMITH这条数据就会不显示。
       因为我们肯定会选用有null的那张表作为主导，而主导的那张表会显示所有数据。
  */
-public class E5_2三张以上表连接查询 {
-}
+public class E5_2三张以上表连接查询 {}

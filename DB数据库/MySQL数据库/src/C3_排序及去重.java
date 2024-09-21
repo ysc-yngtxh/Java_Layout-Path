@@ -57,5 +57,4 @@
          示例二：统计岗位的数量
                 SELECT COUNT(DISTINCT job) FROM t_emp;  // 这个SQL语句表达的意思是统计不重复岗位的数量
  */
-public class C3_排序及去重 {
-}
+public class C3_排序及去重 {}

@@ -22,5 +22,4 @@ union（可以将查询结果集相加）
         union会将查询结果集进行去重处理，去除重复行是基于所有选择的列数据都相同的情况。
         而union all不会被去除。
  */
-public class G7_union用法 {
-}
+public class G7_union用法 {}

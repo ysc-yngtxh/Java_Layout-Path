@@ -176,5 +176,4 @@
          第三：可重复读(repeatable read)
          第四：可串行化
  */
-public class L12_1事务 {
-}
+public class L12_1事务 {}

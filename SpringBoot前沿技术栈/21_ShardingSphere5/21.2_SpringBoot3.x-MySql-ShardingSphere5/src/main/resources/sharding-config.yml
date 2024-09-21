@@ -35,7 +35,7 @@ rules:
   - !SHARDING # 分片规则
     shardingAlgorithms: # TODO 定义分片算法
       database_inline:  # 自定义分片算法名称，自定义名称【随便取】
-        type: INLINE
+        type: INLINE # 内敛算法
         props:
           algorithm-expression: ds_$->{ece_id % 3}
       table_inline:  # 自定义分片算法名称，自定义名称【随便取】
@@ -46,6 +46,10 @@ rules:
         type: INLINE
         props:
           algorithm-expression: ds_$->{ece_id % 3}.$->{age % 2}
+      auto_mod:
+        type: MOD # 取模算法
+        props:
+          sharding-count: 4
     keyGenerators: # TODO 定义主键生成策略
       snowflake:   # 自定义主键生成策略名称，自定义名称【随便取】
         type: SNOWFLAKE

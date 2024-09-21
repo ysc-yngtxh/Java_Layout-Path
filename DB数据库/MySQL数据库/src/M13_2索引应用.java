@@ -174,5 +174,4 @@
    [7]、模糊查询的时候，第一个通配符使用的是%，这个时候索引是失效的。
         SELECT ename FROM emp WHERE ename LIKE '%A%';
 */
-public class M13_2索引应用 {
-}
+public class M13_2索引应用 {}

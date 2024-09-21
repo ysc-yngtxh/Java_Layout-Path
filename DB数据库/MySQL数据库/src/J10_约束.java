@@ -187,5 +187,4 @@
 
 
  */
-public class J10_约束 {
-}
+public class J10_约束 {}

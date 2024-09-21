@@ -127,5 +127,4 @@
      truncate 用于删除表中的所有行，但不删除表本身。truncate table 表名称;
      drop     用于删除整个表，包括其结构和数据。   drop table 表名称;
  */
-public class A1_入门知识 {
-}
+public class A1_入门知识 {}

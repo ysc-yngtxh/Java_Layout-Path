@@ -145,5 +145,4 @@
              FROM
                  tb_order;
  */
-public class D4_2单行处理函数 {
-}
+public class D4_2单行处理函数 {}

@@ -36,7 +36,7 @@
 
             insert ignore into progress_20230925 select * from progress
 ---------------------------------------------------------------------------------------------------------------
-    5、添加字段
+    5、添加字段【set关键字表示赋值】
        SET @schema = 'caoyumin';    -- 表所在的数据库模式为caoyumin
        SET @table = 'brand';        -- 要操作的表名为brand
        SET @col = 'age';            -- 要创建的字段名称为age
@@ -93,5 +93,4 @@
            );
 
  */
-public class Q17_幂等性脚本 {
-}
+public class Q17_幂等性脚本 {}

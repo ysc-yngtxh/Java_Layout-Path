@@ -69,5 +69,4 @@
              ON
                 e.dept_no = d.dept_no;
  */
-public class F6_子查询 {
-}
+public class F6_子查询 {}

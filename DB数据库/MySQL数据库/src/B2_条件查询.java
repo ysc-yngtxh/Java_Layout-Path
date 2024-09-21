@@ -86,5 +86,4 @@
               SELECT ename FROM emp WHERE enamel LIKE '%T';
           注意：模糊查询不需要和字段名个数一致
  */
-public class B2_条件查询 {
-}
+public class B2_条件查询 {}

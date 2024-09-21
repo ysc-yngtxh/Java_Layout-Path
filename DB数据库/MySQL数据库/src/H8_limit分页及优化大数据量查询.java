@@ -93,5 +93,4 @@ LIMIT(重点之中的重点，以后分页查询全靠它了)
                特别是MySQL和应用程序不在同一台机器，这种开销非常明显。
                因此，开发当中是禁止 SELECT *
  */
-public class H8_limit分页及优化大数据量查询 {
-}
+public class H8_limit分页及优化大数据量查询 {}
