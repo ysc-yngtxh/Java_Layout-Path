@@ -71,16 +71,16 @@
 
    [3]、存储过程用法
         (1)、简单示例
-             create procedure myPro(in a int, in b int, out sum int)
+             create procedure myPro1(in a int, in b int, out sum int)
              begin
                set sum = a+b;
              end;
              -- 语法解析：
-                create procedure 用来创建过程；myPro 用来定义过程名称；
+                create procedure 用来创建过程；myPro1 用来定义过程名称；
                 (in a int, in b int, out sum int) 表示过程的参数，
                 其中 in 表示输入参数，默认可以不写；out 表示输出参数。类似于 Java 定义方法时的形参和返回值；
                 begin 与end 表示过程主体的开始和结束，相当于 Java 定义方法的一对大括号；
-                call用来调用过程，@s 是用来接收过程输出参数的变量
+                call用来调用过程。
 
         (2)、存储过程的参数
              MySQL 存储过程的参数用在存储过程的定义，共有三种参数类型：

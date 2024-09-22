@@ -62,11 +62,14 @@
               update_time timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
               graduate tinyint(1) DEFAULT 1 COMMENT '是否毕业',
               PRIMARY KEY (`id`)
-        ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='学生信息表';
+        ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4
+          COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='学生信息表';
         // unsigned关键字：表示的是为“无符号”的意思，即为非负数，用此类型可以增加数据长度：
                           例如 tinyint的范围[-128,127] 最大值是127，tinyint unsigned的范围[0,127*2] 最大值就可以到127*2，
                           且unsigned只针对整型的数据类型。
         // AUTO_INCREMENT=1：表示的是自增将会从1开始，第一条数据的id序号将会是1。datetime格式2023-09-25 14:30:00
+        // ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4：表示使用innodb存储引擎，下一个主键自增序号为1，默认字符集为 utf8mb4
+        // COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC：字符集校对规则为utf8mb4_0900_ai_ci。DYNAMIC为默认行格式，它允许记录的长度可变
         +-------------+-----------------+------+-----+-------------------+-----------------------------------------------+
         | Field       | Type            | Null | Key | Default           | Extra                                         |
         +-------------+-----------------+------+-----+-------------------+-----------------------------------------------+
