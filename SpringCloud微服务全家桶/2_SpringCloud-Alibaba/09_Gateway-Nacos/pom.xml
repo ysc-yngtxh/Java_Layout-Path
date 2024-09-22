@@ -15,7 +15,7 @@
 	<description>09_Gateway-Nacos</description>
 
 	<properties>
-		<java.version>17</java.version>
+		<java.version>23</java.version>
 	</properties>
 
 	<dependencies>
@@ -36,10 +36,10 @@
             SpringMVC 构建于 Servlet API 之上，同步阻塞I/O模型, 认为应用会阻塞当前线程，所以一个Request对应一个Thread，需要有一个含有大量线程的线程池
             Spring WebFlux 构建于 Reactive Streams Adapters 之上，异步非阻塞I/O模型，认为应用不会阻塞当前线程，所以只是需要一个包含少数固定线程数的线程池 (event loop workers) 来处理请求
         -->
-		<!--        <dependency>-->
-		<!--            <groupId>org.springframework.boot</groupId>-->
-		<!--            <artifactId>spring-boot-starter-web</artifactId>-->
-		<!--        </dependency>-->
+		<!-- <dependency> -->
+		<!-- 	<groupId>org.springframework.boot</groupId> -->
+		<!-- 	<artifactId>spring-boot-starter-web</artifactId> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

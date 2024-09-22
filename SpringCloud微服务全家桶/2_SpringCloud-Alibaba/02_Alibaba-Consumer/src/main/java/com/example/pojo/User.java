@@ -20,7 +20,7 @@ public class User {
     private String passWord;    // 密码
     private String alias;       // 别名
     private Integer age;        // 年龄
-    private Integer sex;        // 性别
+    private String sex;         // 性别
     private String phone;       // 手机号
     private String address;     // 地址
     private String email;       // 邮件

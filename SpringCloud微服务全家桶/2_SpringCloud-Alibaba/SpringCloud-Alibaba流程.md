@@ -1,6 +1,6 @@
 
 ## 一、获取对应项目版本号
-#### 1、Spring官网Https://spring.io 可以看到 SpringBoot3.0.x、3.1.x版本对应 SpringCloud2022.0.x版本，且当前最新SpringCloud最新版本为 2022.0.4
+#### 1、Spring官网 Https://spring.io 可以看到 SpringBoot3.0.x、3.1.x版本对应 SpringCloud2022.0.x版本，且当前最新SpringCloud最新版本为 2022.0.4
    ![img_1](01_Alibaba-Provider/src/main/resources/static/img.png)
 
 #### 2、GitHub搜索alibaba，进入 spring-cloud-alibaba 的文档版本说明。适配 SpringBoot 3.0 版本及以上的 Spring Cloud Alibaba 版本为 2022.0.0.0
@@ -12,8 +12,8 @@
   >
   > ![img.png_3](01_Alibaba-Provider/src/main/resources/static/img_7.png)
   
-- > 外置数据库Mysql：进入nacos文件 ../nacos/conf/application.properties 配置编辑外置MySQL来存储配置数据
-  >
+- > 外置数据库Mysql：进入nacos文件 ../nacos/conf/application.properties 配置编辑外置MySQL来存储配置数据   
+  > 另外需要在建立合适的数据库，以及执行 Nacos 提供的建表语句。路径通常为：bin 同级包下 ../conf/**-schema.sql
   > ![img.png_3](01_Alibaba-Provider/src/main/resources/static/img_6.png)
 #### 2. 启动Nacos命令
 - > ①、Windows系统使用命令提示符窗口：  

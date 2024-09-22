@@ -6,7 +6,7 @@ spring:
         name: nacos-provider
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC
+        url: jdbc:mysql://localhost:3306/nacos_config?serverTimezone=UTC
         password: 131474
         username: root
     cloud:

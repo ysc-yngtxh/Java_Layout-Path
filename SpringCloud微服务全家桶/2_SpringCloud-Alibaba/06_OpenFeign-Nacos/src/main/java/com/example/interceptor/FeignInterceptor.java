@@ -2,7 +2,6 @@ package com.example.interceptor;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
-import lombok.SneakyThrows;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 
@@ -16,7 +15,7 @@ import java.nio.charset.StandardCharsets;
  */
 @Configuration
 public class FeignInterceptor implements RequestInterceptor {
-    @SneakyThrows
+
     @Override
     public void apply(RequestTemplate requestTemplate) {
         // 添加Openfeign请求中的Header属性，例如将获取的Token传递到其他服务

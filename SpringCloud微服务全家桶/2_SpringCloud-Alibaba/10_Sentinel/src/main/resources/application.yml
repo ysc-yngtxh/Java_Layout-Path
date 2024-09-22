@@ -21,6 +21,6 @@ spring:
         dashboard: 127.0.0.1:8010
 
       # 关闭URL资源
-#      filter:
-#        enabled: false
+      # filter:
+      #   enabled: false
 

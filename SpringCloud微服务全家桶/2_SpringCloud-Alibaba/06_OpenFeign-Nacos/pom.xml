@@ -8,12 +8,14 @@
         <version>1.0.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <artifactId>06_OpenFeign-Nacos</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>06_OpenFeign-Nacos</name>
     <description>06_OpenFeign-Nacos</description>
+
     <properties>
-        <java.version>17</java.version>
+        <java.version>23</java.version>
     </properties>
 
     <dependencies>

@@ -8,6 +8,7 @@
     <version>1.0.0</version>
     <name>${project.artifactId}</name>
     <description>${project.artifactId}</description>
+
     <modules>
         <module>01_Alibaba-Provider</module>
         <module>02_Alibaba-Consumer</module>
@@ -32,15 +33,15 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.0</version>
+        <version>3.3.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <!--父管理依赖的版本号-->
     <properties>
-        <java.version>21</java.version>
-        <spring-cloud.version>2022.0.4</spring-cloud.version>
-        <spring.cloud.alibaba.version>2022.0.0.0</spring.cloud.alibaba.version>
+        <java.version>23</java.version>
+        <spring-cloud.version>2023.0.3</spring-cloud.version>
+        <spring.cloud.alibaba.version>2023.0.1.0</spring.cloud.alibaba.version>
     </properties>
 
     <dependencies>

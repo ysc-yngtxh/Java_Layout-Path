@@ -15,10 +15,10 @@ import java.util.Date;
 @Data               // 属于Lombok依赖的注解，提供类的set,get，toString方法
 @AllArgsConstructor // 属于Lombok依赖的注解，提供类的全参构造
 @NoArgsConstructor  // 属于Lombok依赖的注解，提供类的无参构造
-@TableName("tb_consumer")  // 属于通用mapper依赖的注解，用于表示连接的是哪张表
+@TableName("alibaba_user")  // 属于通用mapper依赖的注解，用于表示连接的是哪张表
 public class User {
  
-    @TableId         // 属于MybatisPlus依赖的注解，用于标注主键
+    @TableId            // 属于MybatisPlus依赖的注解，用于标注主键
     private Integer id; // 主键Id
 
     private Integer superiorId; // 上级Id
@@ -26,7 +26,7 @@ public class User {
     private String passWord;    // 密码
     private String alias;       // 别名
     private Integer age;        // 年龄
-    private Integer sex;        // 性别
+    private String sex;         // 性别
     private String phone;       // 手机号
     private String address;     // 地址
     private String email;       // 邮件

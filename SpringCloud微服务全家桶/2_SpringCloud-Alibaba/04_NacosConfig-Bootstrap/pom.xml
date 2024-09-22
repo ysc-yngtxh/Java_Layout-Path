@@ -5,19 +5,22 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.3</version>
+        <version>3.3.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.example</groupId>
     <artifactId>04_NacosConfig-Bootstrap</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>04_NacosConfig-Bootstrap</name>
     <description>04_NacosConfig-Bootstrap</description>
+
     <properties>
-        <java.version>17</java.version>
-        <spring-cloud.version>2023.0.0</spring-cloud.version>
-        <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
+        <java.version>23</java.version>
+        <spring-cloud.version>2023.0.1</spring-cloud.version>
+        <spring-cloud-alibaba.version>2023.0.1.0</spring-cloud-alibaba.version>
     </properties>
+
     <dependencies>
         <!--注册到 nacos配置中心的客户端
             这里你可能会感到困惑，为什么已经有了注册到 nacos客户端 的依赖，现在又需要一个注册到 nacos配置中心客户端 依赖？
