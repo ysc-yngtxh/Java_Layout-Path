@@ -5,9 +5,10 @@ import com.alibaba.druid.spring.boot3.autoconfigure.properties.DruidStatProperti
 import com.alibaba.druid.util.Utils;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
-import lombok.SneakyThrows;
+import java.io.IOException;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -34,10 +35,9 @@ public class DruidLogoExclusionConfig {
      * 去除Druid监控页面的广告
      */
     @Bean
-    @SneakyThrows
     @ConditionalOnWebApplication
     @ConditionalOnProperty(name = "spring.datasource.druid.stat-view-servlet.enabled", havingValue = "true")
-    public FilterRegistrationBean<RemoveAdFilter> removeDruidAdFilter(DruidStatProperties properties) {
+    public FilterRegistrationBean<RemoveAdFilter> removeDruidAdFilter(DruidStatProperties properties) throws IOException {
         // 获取web监控页面的参数
         DruidStatProperties.StatViewServlet config = properties.getStatViewServlet();
         // 提取 common.js 配置路径
@@ -65,8 +65,7 @@ public class DruidLogoExclusionConfig {
         }
 
         @Override
-        @SneakyThrows
-        public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) {
+        public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
             chain.doFilter(request, response);
             // 重置缓冲区，响应头不会被重置
             response.resetBuffer();

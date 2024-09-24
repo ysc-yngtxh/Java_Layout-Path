@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.0</version>
+        <version>3.3.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -17,7 +17,7 @@
     <url/>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>23</java.version>
     </properties>
 
     <dependencies>
@@ -38,11 +38,11 @@
         <!--SpringBoot3.3.0 集成 Druid1.2.23 依赖，
             使用代码方式配置 监控管理后台、web监控的filter 暂仅支持 javax.servlet.*，不支持 jakarta.servlet.*
             因此需要添加 javax.servlet-api 依赖-->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
-        </dependency>
+        <!-- <dependency> -->
+        <!--     <groupId>javax.servlet</groupId> -->
+        <!--     <artifactId>javax.servlet-api</artifactId> -->
+        <!--     <version>4.0.1</version> -->
+        <!-- </dependency> -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
@@ -56,6 +56,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.34</version>
             <optional>true</optional>
         </dependency>
     </dependencies>

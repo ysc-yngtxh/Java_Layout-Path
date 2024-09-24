@@ -84,7 +84,7 @@ public class ApprenticeUtil {
 
     /** 反射获取字段值
      */
-    public static <E> Object getValueForClass(E entity,String value) {
+    public static <E> Object getValueForClass(E entity, String value) {
 
         Field id = null;
         PropertyDescriptor pd = null;

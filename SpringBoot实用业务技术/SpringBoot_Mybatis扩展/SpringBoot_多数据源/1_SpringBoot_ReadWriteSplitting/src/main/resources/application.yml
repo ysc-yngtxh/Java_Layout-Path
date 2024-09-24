@@ -1,0 +1,20 @@
+spring:
+    application:
+        name: SpringBoot_ReadWriteSplitting
+    datasource:
+        master:
+            jdbc-url: jdbc:mysql://localhost:3306/yun6?serverTimezone=UTC&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+            username: root
+            password: 131474
+            driver-class-name: com.mysql.cj.jdbc.Driver
+        slave:
+            # 注意：这里配置多数据源由原先的 url 改为 jdbc-url
+            jdbc-url: jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+            username: root
+            password: 131474
+            driver-class-name: com.mysql.cj.jdbc.Driver
+
+logging:
+    level:
+        com:
+            example: debug
