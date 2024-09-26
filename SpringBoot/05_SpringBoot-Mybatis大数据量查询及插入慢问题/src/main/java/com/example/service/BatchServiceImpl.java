@@ -1,6 +1,6 @@
 package com.example.service;
 
-import com.example.dao.BatchMapper;
+import com.example.mapper.BatchMapper;
 import com.example.domain.Student;
 import com.google.common.collect.Lists;
 import org.apache.ibatis.session.ExecutorType;

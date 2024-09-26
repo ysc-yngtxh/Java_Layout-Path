@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
  */
 @Data
 public class ExceptionResult {
+
     private int status;
     private String message;
     private String timestamp;

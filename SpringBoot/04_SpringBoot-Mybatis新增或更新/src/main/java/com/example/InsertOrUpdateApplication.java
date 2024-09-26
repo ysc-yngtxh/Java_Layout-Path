@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // 开启spring配置
 @SpringBootApplication
 // 开启扫描Mpper接口的包以及子目录.就不用在StudentMapper类上加@Mapper注解
-@MapperScan(basePackages = "com.example.dao")
+@MapperScan(basePackages = "com.example.mapper")
 public class InsertOrUpdateApplication {
 
     public static void main(String[] args) {

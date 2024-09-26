@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author 游家纨绔
  */
 @SpringBootApplication
-@MapperScan(basePackages = "com.example.dao")
+@MapperScan(basePackages = "com.example.mapper")
 @EnableDubboConfiguration  // 开启dubbo配置
 public class SSMProviderApplication {
 

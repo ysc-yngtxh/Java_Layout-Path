@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-@MapperScan("com.example.dao")
+@MapperScan("com.example.mapper")
 public class InjectApplication {
 
 	public static void main(String[] args) {

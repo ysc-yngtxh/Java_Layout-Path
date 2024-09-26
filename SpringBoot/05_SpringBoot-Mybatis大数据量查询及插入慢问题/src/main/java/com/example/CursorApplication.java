@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
  */
 @EnableAsync
 @SpringBootApplication
-@MapperScan(basePackages = "com.example.dao")
+@MapperScan(basePackages = "com.example.mapper")
 public class CursorApplication {
     public static void main(String[] args) {
         SpringApplication.run(CursorApplication.class, args);

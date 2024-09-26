@@ -20,7 +20,7 @@
 
     <modules>
         <module>SpringBoot_Mybatis-Plus</module>
-        <module>SpringBoot_Mybatis多数据源</module>
+        <module>SpringBoot_多数据源</module>
         <module>SpringBoot_拦截SQL语句插件</module>
     </modules>
     <packaging>pom</packaging>

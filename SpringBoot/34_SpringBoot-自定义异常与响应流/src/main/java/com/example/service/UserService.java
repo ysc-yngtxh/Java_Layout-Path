@@ -1,14 +1,14 @@
 package com.example.service;
 
-import com.example.advice.LyException;
 import com.example.advice.UserEnum;
+import com.example.advice.exception.CustomException;
+import com.example.advice.exception.LyException;
 import com.example.mapper.UserMapper;
 import com.example.pojo.User;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
-
-import java.util.List;
 
 /**
  * @author 游家纨绔
@@ -34,7 +34,7 @@ public class UserService {
         // selectByPrimaryKey  根据主键查询，返回实体类型
         User users = userMapper.selectByPrimaryKey(id);
         if(users == null){
-            throw new LyException(UserEnum.NO_URL);
+            throw new CustomException("不好意思，你查询的用户不存在！");
         }
         return users;
     }
@@ -57,7 +57,6 @@ public class UserService {
         int insert = userMapper.insert(user);
         if(insert!=1){
             throw new LyException(UserEnum.NO_INSERT);
-
         }
     }
 

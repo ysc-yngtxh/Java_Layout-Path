@@ -2,7 +2,7 @@ package com.example.interceptor;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.components.SpringContextHolder;
-import com.example.dao.ConsumerDao;
+import com.example.mapper.ConsumerDao;
 import com.example.entity.TbConsumer;
 import com.example.utils.JwtUtils;
 import jakarta.servlet.http.HttpServletRequest;

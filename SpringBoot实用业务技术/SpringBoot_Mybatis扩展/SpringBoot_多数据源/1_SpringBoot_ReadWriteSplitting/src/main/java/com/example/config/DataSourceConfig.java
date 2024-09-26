@@ -4,6 +4,9 @@ import com.example.constant.DataSourceType;
 import java.util.HashMap;
 import java.util.Map;
 import javax.sql.DataSource;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -41,6 +44,19 @@ public class DataSourceConfig {
         return routingDataSource;
     }
 
+    @Bean(name = "SqlSessionFactory")
+    public SqlSessionFactory userSqlSessionFactory(@Qualifier("routingDataSource") DataSource dataSource) throws Exception {
+        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
+        bean.setDataSource(dataSource);
+        return bean.getObject();
+    }
+
+    @Bean(name = "SqlSessionTemplate")
+    public SqlSessionTemplate userSqlSessionTemplate(@Qualifier("SqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
+        return new SqlSessionTemplate(sqlSessionFactory);
+    }
+
+    // 事务管理
     @Bean
     public PlatformTransactionManager transactionManager(@Qualifier("routingDataSource") DataSource routingDataSource) {
         return new DataSourceTransactionManager(routingDataSource);

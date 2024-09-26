@@ -1,6 +1,6 @@
 package com.example.config;
 
-import com.example.dao.StudentMapper;
+import com.example.mapper.StudentMapper;
 
 /**
  * @author 游家纨绔

@@ -29,14 +29,14 @@
         </javaModelGenerator>
 
         <!--生成mybatis的Mapper.xml文件，targetPackage指定mapper.xml文件的包名。targetProject指定生成的mapper.xml放在idea的哪个工程下面-->
-        <sqlMapGenerator targetPackage="com.example.dao"
+        <sqlMapGenerator targetPackage="com.example.mapper"
                          targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
         <!--生成mybatis的mapper接口类文件，targetPackage指定mapper接口类的包名。targetProject指定生成的mapper接口放在idea的哪个工程下面-->
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="com.example.dao"
+                             targetPackage="com.example.mapper"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>

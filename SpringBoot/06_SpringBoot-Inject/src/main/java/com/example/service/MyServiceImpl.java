@@ -1,6 +1,6 @@
 package com.example.service;
 
-import com.example.dao.StudentMapper;
+import com.example.mapper.StudentMapper;
 import com.example.domain.Student;
 import org.springframework.stereotype.Service;
 

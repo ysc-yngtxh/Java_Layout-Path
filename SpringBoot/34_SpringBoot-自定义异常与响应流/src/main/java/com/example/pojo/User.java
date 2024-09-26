@@ -1,5 +1,6 @@
 package com.example.pojo;
 
+import javax.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import javax.persistence.Table;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "consumer")
+@Table(name = "tb_consumer")
 public class User {
 
     @Id
@@ -22,8 +23,12 @@ public class User {
     private Integer id;
     private String username; // 用户名
     private String password; // 密码，加密存储
+    private String alias;
     private Integer age;
-    private String name;
-    private Integer sex;
+    private String sex;
+    private String phone;
+    private String address;
+    @Column(name = "delete_flag")
+    private boolean deleteFlag;
 
 }

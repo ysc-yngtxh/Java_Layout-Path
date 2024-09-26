@@ -1,7 +1,7 @@
 package com.example.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.example.dao.ConsumerDao;
+import com.example.mapper.ConsumerDao;
 import com.example.entity.TbConsumer;
 import com.example.service.ConsumerService;
 import com.google.common.collect.Lists;

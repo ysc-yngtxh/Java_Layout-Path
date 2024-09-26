@@ -1,7 +1,7 @@
 package com.example.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.example.dao.StudentMapper;
+import com.example.mapper.StudentMapper;
 import com.example.domain.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

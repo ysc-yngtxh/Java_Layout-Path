@@ -19,13 +19,20 @@ public class TestController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<User> queryUser(@PathVariable("id") Integer id){
+    @GetMapping("/1/{id}")
+    // 标注状态码。即正常访问接口返回的状态码为：302
+    @ResponseStatus(value = HttpStatus.FOUND, reason = "参数错误")
+    public ResponseEntity<List<User>> queryUser1(@PathVariable("id") Integer id){
+        return ResponseEntity.ok(userService.queryUser1(id));
+    }
+
+    @GetMapping("/2/{id}")
+    public ResponseEntity<User> queryUser2(@PathVariable("id") Integer id){
         return ResponseEntity.ok(userService.queryUser2(id));
     }
 
     @GetMapping("/ysc")
-    public ResponseEntity<List<User>> queryUser(User user){
+    public ResponseEntity<List<User>> queryUser3(User user){
         return ResponseEntity.ok(userService.queryUser3(user));
     }
 
