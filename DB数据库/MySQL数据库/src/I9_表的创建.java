@@ -219,5 +219,10 @@
         [5]、创建表之后设置自增
              # ALTER TABLE 表名 AUTO_INCREMENT = 预想的下一次插入数据的自增值;
              ALTER TABLE t_student AUTO_INCREMENT = 10000;
+---------------------------------------------------------------------------------------------------------------
+  9、备份表
+        语法：mysqldump -u root -p [database] [table...] > [custom-path]
+
+        示例：mysqldump -u root -p springdb t_student > /Users/ysc/Desktop/t_student.sql 
  */
 public class I9_表的创建 {}

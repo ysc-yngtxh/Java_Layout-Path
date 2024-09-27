@@ -1,6 +1,6 @@
 package com.example.service.impl;
 
-import com.example.dao.BrandDao;
+import com.example.mapper.BrandDao;
 import com.example.entity.Brand;
 import com.example.service.BrandService;
 import jakarta.annotation.Resource;

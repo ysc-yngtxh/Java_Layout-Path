@@ -7,17 +7,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.stereotype.Indexed;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
 import java.util.Map;
 
 @EnableAsync // 开启异步支持
-@RestController
 @SpringBootApplication
-@MapperScan("com.example.dao")
+@MapperScan("com.example.mapper")
 public class SpringBootAnnotationApplication {
 
     public static void main(String[] args) {

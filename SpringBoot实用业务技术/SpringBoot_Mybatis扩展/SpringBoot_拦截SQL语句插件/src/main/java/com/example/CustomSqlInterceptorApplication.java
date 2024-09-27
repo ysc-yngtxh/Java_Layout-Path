@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.example.dao")
+@MapperScan("com.example.mapper")
 // 使用自定义的注解，表示开启 mybatis 拦截器配置
 @EnableSqlInterceptor
 public class CustomSqlInterceptorApplication {

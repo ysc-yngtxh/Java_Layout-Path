@@ -16,7 +16,7 @@
     <description>Mybatis-BottomLayer3</description>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>23</java.version>
     </properties>
 
     <dependencies>

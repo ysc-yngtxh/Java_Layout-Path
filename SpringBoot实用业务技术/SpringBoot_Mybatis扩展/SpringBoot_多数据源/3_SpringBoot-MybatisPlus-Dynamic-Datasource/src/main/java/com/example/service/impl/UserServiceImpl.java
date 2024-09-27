@@ -2,14 +2,12 @@ package com.example.service.impl;
 
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.dao.UserDao;
-import com.example.entity.Student;
+import com.example.mapper.UserDao;
 import com.example.entity.User;
 import com.example.service.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 /**

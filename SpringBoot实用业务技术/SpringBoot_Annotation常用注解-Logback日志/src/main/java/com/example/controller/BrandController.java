@@ -1,9 +1,7 @@
 package com.example.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.entity.Brand;
 import com.example.service.BrandService;
-import com.fasterxml.jackson.annotation.JacksonInject;
 import jakarta.annotation.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

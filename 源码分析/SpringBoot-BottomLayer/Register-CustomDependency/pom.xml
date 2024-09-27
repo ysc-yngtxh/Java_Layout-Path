@@ -8,6 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.example</groupId>
     <artifactId>Register-CustomDependency</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -15,7 +16,7 @@
     <description>Register-CustomDependency</description>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>23</java.version>
     </properties>
 
     <dependencies>

@@ -8,6 +8,7 @@
         <version>2.3.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.example</groupId>
     <artifactId>05_SpringBoot-Mybatis3</artifactId>
     <version>1.0.0</version>

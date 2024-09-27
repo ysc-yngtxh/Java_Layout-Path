@@ -110,7 +110,7 @@ public class ExecutorTenantInterceptor implements Interceptor {
         // if ( !(oldSql.contains("where") || oldSql.contains("WHERE")) ) {
         //     throw new SqlException(SqlEnum.SQL_QUERY_WHERE_NULL);
         // }
-        // 获取节点的id属性加命名空间,其实就是全限定名称加唯一标识Id的路径（com.example.dao.TbUserDao.queryById）
+        // 获取节点的id属性加命名空间,其实就是全限定名称加唯一标识Id的路径（com.example.mapper.TbUserDao.queryById）
         String id = statements.getId();
         // 获取 Class 路径
         String clazzName = id.substring(0, id.lastIndexOf('.'));

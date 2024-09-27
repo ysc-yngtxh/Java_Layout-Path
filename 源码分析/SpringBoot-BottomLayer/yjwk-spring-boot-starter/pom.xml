@@ -16,7 +16,7 @@
     <description>yjwk-Spring-boot-starter</description>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>23</java.version>
     </properties>
 
     <dependencies>

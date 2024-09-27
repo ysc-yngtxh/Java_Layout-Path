@@ -8,14 +8,17 @@
         <version>3.2.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.example</groupId>
     <artifactId>RPC-FrameWork4</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>RPC-FrameWork4</name>
     <description>RPC-FrameWork4</description>
+
     <properties>
-        <java.version>21</java.version>
+        <java.version>23</java.version>
     </properties>
+
     <dependencies>
         <!--Tomcat依赖-->
         <dependency>

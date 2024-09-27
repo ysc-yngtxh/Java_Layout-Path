@@ -10,14 +10,14 @@
 	<description>Mybatis-BottomLayer2</description>
 
 	<properties>
-		<java.version>21</java.version>
+		<java.version>23</java.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.28</version>
+			<version>8.0.33</version>
 		</dependency>
 
 		<dependency>

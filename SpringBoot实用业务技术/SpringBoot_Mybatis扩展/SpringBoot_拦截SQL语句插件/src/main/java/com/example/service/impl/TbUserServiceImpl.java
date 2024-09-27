@@ -1,7 +1,7 @@
 package com.example.service.impl;
 
 import com.example.entity.TbUser;
-import com.example.dao.TbUserDao;
+import com.example.mapper.TbUserDao;
 import com.example.service.TbUserService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;

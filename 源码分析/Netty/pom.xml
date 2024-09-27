@@ -8,13 +8,15 @@
         <version>3.2.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.example</groupId>
     <artifactId>Netty</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Netty</name>
     <description>Netty</description>
+
     <properties>
-        <java.version>21</java.version>
+        <java.version>23</java.version>
     </properties>
 
     <modules>
@@ -27,7 +29,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

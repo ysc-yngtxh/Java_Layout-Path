@@ -8,7 +8,7 @@
     <contextName>logback-spring</contextName>
 
     <!-- name的值是变量的名称，value的值时变量定义的值。通过定义的值会被插入到logger上下文中。定义后，可以使“${}”来使用变量。 -->
-    <property name="log.path" value="log.path" />
+    <property name="log.path" value="./SpringBoot_Annotation常用注解-Logback日志/log.path" />
 
     <!--0. 日志格式和颜色渲染 -->
     <!-- 彩色日志依赖的渲染类 -->
@@ -155,7 +155,7 @@
         使用mybatis的时候，sql语句是debug下才会打印，而这里我们只配置了info，所以想要查看sql语句的话，有以下两种操作：
         第一种把<root level="info">改成<root level="DEBUG">这样就会打印sql，不过这样日志那边会出现很多其他消息
         第二种就是单独给dao下目录配置debug模式，代码如下，这样配置sql语句会打印，其他还是正常info级别：
-        【logging.level.org.mybatis=debug logging.level.dao=debug】
+        【logging.level.org.mybatis=debug logging.level.mapper=debug】
      -->
 
     <!--
