@@ -1,0 +1,16 @@
+{
+  "properties": [
+    {
+      "name": "swagger.properties.description",
+      "type": "java.lang.String",
+      "description": "额外描述",
+      "sourceType": "com.example.config.SwaggerProperties"
+    },
+    {
+      "name": "swagger.properties.title",
+      "type": "java.lang.String",
+      "description": "额外标题",
+      "sourceType": "com.example.config.SwaggerProperties"
+    }
+  ]
+}

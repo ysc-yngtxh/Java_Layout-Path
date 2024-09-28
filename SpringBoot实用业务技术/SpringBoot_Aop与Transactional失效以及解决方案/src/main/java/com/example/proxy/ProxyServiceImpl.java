@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ProxyServiceImpl implements ProxyService {
+
     @Override
     public void useInterface() {
         System.out.println("调用useInterface()方法");

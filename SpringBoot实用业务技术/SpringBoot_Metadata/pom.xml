@@ -5,15 +5,15 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.0</version>
+        <version>3.3.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>01_SpringBoot-Starter-IpCount</artifactId>
+    <artifactId>SpringBoot_Metadata</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>01_SpringBoot-Starter-IpCount</name>
-    <description>01_SpringBoot-Starter-IpCount</description>
+    <name>SpringBoot_Metadata</name>
+    <description>SpringBoot_Metadata</description>
 
     <properties>
         <java.version>23</java.version>
@@ -25,9 +25,19 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
