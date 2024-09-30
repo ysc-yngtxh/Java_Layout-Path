@@ -28,18 +28,17 @@ target
 .DS_Store
 mvnw
 mvnw.cmd
-源码分析/.idea
-源码分析/Mybatis-BottomLayer2/.mvn
 Java成神之路/.idea
 Java成神之路/out
 Java理论相关知识点/.idea
 SpringBoot/.idea
 SpringBoot/00_AnnotationConfigApplicationContext/.mvn
-.gitignore
 SpringBoot/06_SpringBoot-Inject/.mvn
 SpringBoot/07_SpringBoot-Aop-Proxy/.mvn
 SpringBoot/08_SpringBoot-事务管理/.mvn
 SpringBoot/09_SpringBoot-自定义实现事务/.mvn
+源码分析/.idea
+源码分析/Mybatis-BottomLayer2/.mvn
 源码分析/Mybatis-BottomLayer3/.mvn
 源码分析/Netty/.mvn
 源码分析/Netty/IO/.mvn
@@ -70,10 +69,6 @@ SpringBoot前沿技术栈/21_ShardingSphere5/21.3_SpringBoot3.x-PostGreSql-Shard
 SpringBoot前沿技术栈/16_RocketMQ-SpringBoot/.mvn
 SpringBoot前沿技术栈/26_SpringBoot-MongoDB/.mvn
 SpringBoot前沿技术栈/27_SpringBoot-Flowable/.mvn
-SpringCloud微服务全家桶/.idea
-SpringCloud微服务全家桶/1_SpringCloud-Netflix/05_Config/config-client-refresh-bus/.mvn
-SpringCloud微服务全家桶/2_SpringCloud-Alibaba/01_Alibaba-Provider/.mvn
-SpringCloud微服务全家桶/2_SpringCloud-Alibaba/17_Seata/.mvn
 SpringBoot实用业务技术/.idea
 SpringBoot实用业务技术/DDD/DDD-Demo1/.mvn
 SpringBoot实用业务技术/DDD/DDD-Demo2/.mvn
@@ -92,8 +87,6 @@ SpringBoot实用业务技术/SpringBoot_PostgreSql/.mvn
 SpringBoot实用业务技术/SpringBoot_Starter/.mvn
 SpringBoot实用业务技术/SpringBoot_Starter/01_SpringBoot-Starter-IpCount/.mvn
 SpringBoot实用业务技术/SpringBoot_Starter/02_SpringBoot-Test/.mvn
-SSM框架/.idea
-Web 深造/.idea
 SpringBoot实用业务技术/SpringBoot_访问静态资源/.mvn
 SpringBoot实用业务技术/SpringBoot_访问静态资源/1_SpringBoot-StaticLocal-Properties/.mvn
 SpringBoot实用业务技术/SpringBoot_访问静态资源/2_SpringBoot-StaticLocal-Config/.mvn
@@ -112,6 +105,10 @@ SpringBoot实用业务技术/SpringBoot_响应式编程-Event事件监听器/3_S
 SpringBoot实用业务技术/SpringBoot_响应式编程-Event事件监听器/2_SpringBoot-Reactor/.mvn
 SpringBoot实用业务技术/SpringBoot_响应式编程-Event事件监听器/1_SpringBoot_CustomReactive/.mvn
 SpringBoot实用业务技术/SpringBoot_文件秒传-分片-断点续传/.mvn
+SpringCloud微服务全家桶/.idea
+SpringCloud微服务全家桶/1_SpringCloud-Netflix/05_Config/config-client-refresh-bus/.mvn
+SpringCloud微服务全家桶/2_SpringCloud-Alibaba/01_Alibaba-Provider/.mvn
+SpringCloud微服务全家桶/2_SpringCloud-Alibaba/17_Seata/.mvn
 SpringCloud微服务全家桶/2_SpringCloud-Alibaba/02_Alibaba-Consumer/.mvn
 SpringCloud微服务全家桶/2_SpringCloud-Alibaba/03_NacosCluster-8850-8860-8870/.mvn
 SpringCloud微服务全家桶/2_SpringCloud-Alibaba/05_Provider-NacosConfig/.mvn
@@ -134,3 +131,7 @@ SpringCloud微服务全家桶/2_SpringCloud-Alibaba/17_Seata/Account/.mvn
 SpringCloud微服务全家桶/2_SpringCloud-Alibaba/17_Seata/Business/.mvn
 SpringCloud微服务全家桶/2_SpringCloud-Alibaba/17_Seata/Commons/.mvn
 SpringCloud微服务全家桶/2_SpringCloud-Alibaba/17_Seata/Storage/.mvn
+SSM框架/.idea
+Web 深造/.idea
+DB数据库/.idea
+.gitignore
