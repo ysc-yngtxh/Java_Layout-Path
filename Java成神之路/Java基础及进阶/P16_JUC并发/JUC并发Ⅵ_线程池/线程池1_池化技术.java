@@ -27,7 +27,7 @@ public class 线程池1_池化技术 {
     public static void main(String[] args) {
         // 不建议使用这种形式去创建线程池
         ExecutorService executorService1 = Executors.newSingleThreadExecutor(); // Single单例线程
-        ExecutorService executorService2 = Executors.newFixedThreadPool(5);     // 固定线程，5个线程
+        ExecutorService executorService2 = Executors.newFixedThreadPool(5); // 固定线程，5个线程
         ExecutorService executorService3 = Executors.newCachedThreadPool();     // 可伸缩线程，随用户需要去扩展线程数
         ScheduledExecutorService executorService4 = Executors.newScheduledThreadPool(3);
 

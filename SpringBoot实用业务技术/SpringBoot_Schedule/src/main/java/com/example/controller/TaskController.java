@@ -2,6 +2,14 @@ package com.example.controller;
 
 import com.example.config.ScheduleCronConfig;
 import com.example.config.ScheduleTimerConfig;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,13 +37,23 @@ public class TaskController {
      * 例子：0/10 * * * * ? 每10秒触发一次
      *      10 * * * * ?   每分钟的第 10秒触发一次
      */
+    // 注解式定时任务
+    @Scheduled(cron = "3 * * * * ?")
     @RequestMapping("/task")
-    public String task(@RequestParam String cron) {
+    public String task() {
+        System.out.println("注解式定时接口任务开启");
+        return "ok";
+    }
+
+    // 配置类定时任务 -> 写法一
+    @RequestMapping("/task1")
+    public String task1(@RequestParam String cron) {
         System.out.println("new cron: " + cron);
         scheduleCronConfig.setCron(cron);
         return "ok";
     }
 
+    // 配置类定时任务 -> 写法二
     @RequestMapping("/task2")
     public String task2(@RequestParam long timer) {
         System.out.println("new timer: " + timer);
@@ -43,10 +61,36 @@ public class TaskController {
         return "ok";
     }
 
-    @Scheduled(cron = "3 * * * * ?")
+    // 线程池支持定时任务
     @RequestMapping("/task3")
     public String task3() {
-        System.out.println("注解式定时接口任务开启");
+        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+        try {
+            ScheduledFuture<String> scheduledFuture = executorService.schedule(
+                    () -> {
+                        return "call";
+                        },
+                    10,
+                    TimeUnit.SECONDS);
+            System.out.println(scheduledFuture.get());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            executorService.shutdown();
+        }
+        return "ok";
+    }
+
+    // JDK原生Timer类支持定时任务
+    @RequestMapping("/task4")
+    public String task4() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("定时任务开启");
+            }
+        }, 3000);
         return "ok";
     }
 
