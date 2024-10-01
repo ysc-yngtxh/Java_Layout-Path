@@ -50,5 +50,22 @@
       "sourceType": "com.example.config.ContextProperties"
     }
   ],
-  "hints": []
+  "hints": [
+    {
+      "name": "context.properties.base-paths",
+      "values": [
+        {
+          "value": "com.example.service"
+        },
+        {
+          "value": "com.example.controller"
+        }
+      ],
+      "providers": [
+        {
+          "name": "any"
+        }
+      ]
+    }
+  ]
 }

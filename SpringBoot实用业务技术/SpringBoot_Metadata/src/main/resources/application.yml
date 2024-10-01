@@ -1,6 +1,0 @@
-spring:
-    application:
-        name: SpringBoot_Metadata
-context:
-    properties:
-        base-paths: com/example

@@ -10,30 +10,30 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot_Metadata</artifactId>
+    <artifactId>SpringBoot_Jasypt</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot_Metadata</name>
-    <description>SpringBoot_Metadata</description>
+    <name>SpringBoot_Jasypt</name>
+    <description>SpringBoot_Jasypt</description>
 
     <properties>
         <java.version>23</java.version>
     </properties>
-
-    <modules>
-        <module>SpringBoot_Metadata-Common</module>
-        <module>SpringBoot_UseMetadata</module>
-    </modules>
-    <packaging>pom</packaging>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!-- 加密组件 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+            <version>3.0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

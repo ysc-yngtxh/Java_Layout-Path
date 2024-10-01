@@ -31,16 +31,6 @@ public class ContextProperties {
     private String author = "游家纨绔";
 
     /**
-     * 许可证
-     **/
-    private String license = "";
-
-    /**
-     * 联系人
-     **/
-    private String contactName = "";
-
-    /**
      * 扫描的路径
      **/
     private List<String> basePaths = List.of(new String[]{"com.example.service", "com.example.controller"});

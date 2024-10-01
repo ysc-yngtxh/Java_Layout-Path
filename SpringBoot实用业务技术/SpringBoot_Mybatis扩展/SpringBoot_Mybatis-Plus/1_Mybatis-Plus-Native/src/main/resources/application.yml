@@ -4,11 +4,11 @@ server:
         context-path: /
 
 spring:
-    #  sql:
-    #    init:
-    #      # SpringBoot启动时执行去执行的Sql脚本
-    #      schema-locations: classpath:/sql/*.sql
-    #      mode: always
+     sql:
+       init:
+         # SpringBoot启动时执行去执行的Sql脚本
+         schema-locations: classpath:/sql/*.sql
+         mode: always
 
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver

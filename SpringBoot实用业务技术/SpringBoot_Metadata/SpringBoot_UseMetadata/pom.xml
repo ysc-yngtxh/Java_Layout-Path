@@ -10,20 +10,15 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot_Metadata</artifactId>
+    <artifactId>SpringBoot_UseMetadata</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot_Metadata</name>
-    <description>SpringBoot_Metadata</description>
+    <name>SpringBoot_UseMetadata</name>
+    <description>SpringBoot_UseMetadata</description>
+
 
     <properties>
         <java.version>23</java.version>
     </properties>
-
-    <modules>
-        <module>SpringBoot_Metadata-Common</module>
-        <module>SpringBoot_UseMetadata</module>
-    </modules>
-    <packaging>pom</packaging>
 
     <dependencies>
         <dependency>
@@ -31,9 +26,9 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
+            <groupId>com.example</groupId>
+            <artifactId>SpringBoot_Metadata-Common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
