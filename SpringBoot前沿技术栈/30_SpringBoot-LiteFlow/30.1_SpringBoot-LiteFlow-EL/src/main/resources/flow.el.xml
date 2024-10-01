@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow>
+    <!-- 串行编排 关键字：THEN，必须大写 -->
+    <chain name="chain1">
+        THEN(a, b, c);
+    </chain>
+
+    <!-- 并行编排 关键字：THEN，必须大写 -->
+    <chain name="chain2_1">
+        WHEN(a, b, c);
+    </chain>
+    <chain name="chain2_2">
+        THEN(
+             a,
+             WHEN(b, c)
+        );
+    </chain>
+
+    <!-- 条件编排：表达式的 x 如果为 true，则选择 a; 如果为 false，则选择 b -->
+    <chain name="chain3_1">
+        IF(x, a, b)
+    </chain>
+    <!-- 条件编排：表达式的 x 如果为 true，则选择 a; 如果为 false，则判断 x2...... -->
+    <chain name="chain3_2">
+        IF(x, a).ELIF(x2, b).ELIF(x3, c);
+    </chain>
+
+    <!-- 选择编排：表达式的 x 如果返回非a,b,c中的一个，则默认选择到 default -->
+    <chain name="chain4">
+        SWITCH(s).to(a, b, c).DEFAULT(default);
+    </chain>
+
+    <!-- 循环编排 FOR循环 f 次，其中y这个节点需要为布尔组件，返回一个布尔值，为true则退出循环。-->
+    <chain name="chain5_1">
+        FOR(f).DO(THEN(a, b)).BREAK(y);
+    </chain>
+    <!-- 循环编排 WHILE循环，其中 x 这个节点需要为布尔组件，返回一个布尔值，为true则继续循环 -->
+    <chain name="chain5_2">
+        WHILE(x).DO(THEN(a, b));
+    </chain>
+    <!-- 循环编排 ITERATOR(迭代器)循环 iterator 次 -->
+    <chain name="chain5_3">
+        ITERATOR(iterator).DO(THEN(a, b));
+    </chain>
+
+    <!-- 与或非表达式 AND表达式都为 true，结果为true；OR表达式都为 false，结果为 true；Not表示非(!)-->
+    <chain name="chain6_1">
+        IF(AND(x,x2), a, b);
+    </chain>
+    <chain name="chain6_2">
+        IF(OR(x,x2), a, b);
+    </chain>
+    <chain name="chain6_3">
+        IF(NOT(x), a, b);
+    </chain>
+
+    <!-- 使用子变量 -->
+    <!-- <chain> -->
+    <!--     t1 = THEN(C, WHEN(J, K)); -->
+    <!--     w1 = WHEN(Q, THEN(P, R)).id("w01"); -->
+    <!--     t2 = THEN(H, I); -->
+
+    <!--     THEN( -->
+    <!--          A, B, -->
+    <!--          WHEN(t1, D, t2), -->
+    <!--          SWITCH(X).to(M, N, w1), -->
+    <!--          Z -->
+    <!--     ); -->
+    <!-- </chain> -->
+
+</flow>
