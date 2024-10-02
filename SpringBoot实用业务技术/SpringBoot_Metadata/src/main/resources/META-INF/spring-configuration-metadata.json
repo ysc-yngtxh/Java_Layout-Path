@@ -1,0 +1,98 @@
+{
+  "groups": [
+    {
+      "name": "metadata.properties",
+      "type": "com.example.config.ContextProperties",
+      "sourceType": "com.example.config.ContextProperties"
+    },
+    {
+      "name": "metadata.properties.school",
+      "type": "com.example.config.ContextProperties$School",
+      "sourceType": "com.example.config.ContextProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "metadata.properties.author",
+      "type": "java.lang.String",
+      "description": "作者",
+      "sourceType": "com.example.config.ContextProperties"
+    },
+    {
+      "name": "metadata.properties.base-paths",
+      "type": "java.util.List<java.lang.String>",
+      "description": "扫描的路径",
+      "sourceType": "com.example.config.ContextProperties"
+    },
+    {
+      "name": "metadata.properties.contexts",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "规格内容",
+      "sourceType": "com.example.config.ContextProperties"
+    },
+    {
+      "name": "metadata.properties.hobbies",
+      "type": "java.lang.String[]",
+      "description": "爱好",
+      "sourceType": "com.example.config.ContextProperties"
+    },
+    {
+      "name": "metadata.properties.school.address",
+      "type": "java.lang.String",
+      "sourceType": "com.example.config.ContextProperties$School"
+    },
+    {
+      "name": "metadata.properties.school.name",
+      "type": "java.lang.String",
+      "sourceType": "com.example.config.ContextProperties$School"
+    },
+    {
+      "name": "metadata.properties.sex-enum",
+      "type": "com.example.config.ContextProperties$SexEnum",
+      "description": "性别",
+      "sourceType": "com.example.config.ContextProperties"
+    },
+    {
+      "name": "metadata.properties.version",
+      "type": "java.lang.String",
+      "description": "版本",
+      "sourceType": "com.example.config.ContextProperties"
+    },
+    {
+      "name": "metadata.properties.description",
+      "type": "java.lang.String",
+      "description": "描述",
+      "sourceType": "com.example.config.ContextProperties",
+      "deprecated": true,
+      "deprecation": {}
+    }
+  ],
+  "hints": [
+    {
+      "name": "metadata.properties.contexts.keys",
+      "values": [
+        {
+          "value": "name_cn",
+          "description": "The name of the person."
+        },
+        {
+          "value": "sex_se",
+          "description": "The sex of the person."
+        }
+      ]
+    },
+    {
+      "name": "metadata.properties.base-paths",
+      "values": [
+        {
+          "value": "name",
+          "description": "The name of the person."
+        },
+        {
+          "value": "sex",
+          "description": "The sex of the person."
+        }
+      ]
+    }
+  ]
+}

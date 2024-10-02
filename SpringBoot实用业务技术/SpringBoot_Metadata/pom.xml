@@ -19,12 +19,6 @@
         <java.version>23</java.version>
     </properties>
 
-    <modules>
-        <module>SpringBoot_Metadata-Common</module>
-        <module>SpringBoot_UseMetadata</module>
-    </modules>
-    <packaging>pom</packaging>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
