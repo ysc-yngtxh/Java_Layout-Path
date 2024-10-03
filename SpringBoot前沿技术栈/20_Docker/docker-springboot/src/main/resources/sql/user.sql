@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.33, for macos13.3 (arm64)
 --
--- Host: 127.0.0.1    Database: springdb
+-- Host: 127.0.0.1    Database: smc_ece
 -- ------------------------------------------------------
 -- Server version	8.0.33
 

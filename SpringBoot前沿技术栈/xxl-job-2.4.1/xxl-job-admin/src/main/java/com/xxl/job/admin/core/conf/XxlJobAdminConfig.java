@@ -67,7 +67,7 @@ public class XxlJobAdminConfig implements InitializingBean, DisposableBean {
     @Value("${xxl.job.logretentiondays}")
     private int logretentiondays;
 
-    // dao, service
+    // mapper, service
 
     @Resource
     private XxlJobLogDao xxlJobLogDao;

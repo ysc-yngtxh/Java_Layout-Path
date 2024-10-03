@@ -19,10 +19,12 @@
 
     > **docker run -d -p 3306:3306 --name docker-mysql -v /mydata:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=131474 mysql:8.0.26**
     >
-    > - -d : 作为守护进程
+    > - -d : 表示以守护进程（后台）模式启动容器。
     > - -p 3306:3306 : 第一个3306是指mysql这个服务的端口为3306；第二个3306是容器里运行环境开放的端口
     > - --name docker-mysql : 表示取的运行容器的名字
-    > - -v /mydata:/var/lib/mysql : 将本机的/mydata下文件跟容器中/var/lib/mysql文件同步
+    > - -v /mydata:/var/lib/mysql : 将本机的/mydata下文件跟容器中/var/lib/mysql文件同步。      
+                                    这是一个数据卷挂载选项。它将宿主机上的 /mydata 目录挂载到容器内的 /var/lib/mysql 目录。   
+                                    这样做的好处是可以持久化 MySQL 数据库的数据，即使容器停止或删除后，数据仍然保留在宿主机上。
     > - -e MYSQL_ROOT_PASSWORD=131474 : 设置mysql初始密码
     > - mysql:8.0.26 : 就是容器运行的来源镜像
 
@@ -104,6 +106,7 @@
     ```
     # 后面的为镜像版本(可写可不写，不写的话就默认为latest)
     docker build -t docker-springboot:1.0.0 .
+    docker build -t docker-springboot .
     
     docker images
     ```

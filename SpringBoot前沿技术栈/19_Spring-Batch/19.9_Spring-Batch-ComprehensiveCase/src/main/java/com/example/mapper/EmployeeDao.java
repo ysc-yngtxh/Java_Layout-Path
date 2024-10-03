@@ -1,9 +1,8 @@
-package com.example.dao;
+package com.example.mapper;
 
 import com.example.entity.Employee;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * (Employee)表数据库访问层

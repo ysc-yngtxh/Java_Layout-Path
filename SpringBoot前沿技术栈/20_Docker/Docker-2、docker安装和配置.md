@@ -101,7 +101,7 @@
   sudo systemctl restart docker
   ```
 
-- ### 2.3 下载ubuntu镜像系统
+- ### 2.3 下载ubuntu操作系统镜像(Docker 容器需要一个基础的操作系统层来运行这些应用程序和服务)
 
   ```
   # 查看docker有哪些容器

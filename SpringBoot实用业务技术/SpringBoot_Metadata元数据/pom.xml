@@ -12,8 +12,8 @@
     <groupId>com.example</groupId>
     <artifactId>SpringBoot_Metadata</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot_Metadata</name>
-    <description>SpringBoot_Metadata</description>
+    <name>SpringBoot_Metadata元数据</name>
+    <description>SpringBoot_Metadata元数据</description>
 
     <properties>
         <java.version>23</java.version>

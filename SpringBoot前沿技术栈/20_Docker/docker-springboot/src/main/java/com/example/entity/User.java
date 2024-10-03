@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * (User)实体类
  *
- * @author makejava
+ * @author 游家纨绔
  * @since 2023-07-22 08:45:19
  */
 @Data

@@ -1,6 +1,6 @@
 package com.example.service.impl;
 
-import com.example.dao.EmployeeDao;
+import com.example.mapper.EmployeeDao;
 import com.example.entity.Employee;
 import com.example.service.EmployeeService;
 import jakarta.annotation.Resource;

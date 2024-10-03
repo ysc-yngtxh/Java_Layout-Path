@@ -2,23 +2,24 @@ package com.example.controller;
 
 import com.example.entity.User;
 import com.example.service.UserService;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
  * (User)表控制层
  *
- * @author makejava
+ * @author 游家纨绔
  * @since 2023-07-22 08:45:13
  */
 @RestController
 @RequestMapping("user")
 public class UserController {
+
     /**
      * 服务对象
      */
-    @Resource
+    @Autowired
     private UserService userService;
 
     /**

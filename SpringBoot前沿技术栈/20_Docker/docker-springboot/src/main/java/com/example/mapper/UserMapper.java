@@ -1,14 +1,14 @@
-package com.example.dao;
+package com.example.mapper;
 
 import com.example.entity.User;
 
 /**
  * (User)表数据库访问层
  *
- * @author makejava
+ * @author 游家纨绔
  * @since 2023-07-22 08:45:18
  */
-public interface UserDao {
+public interface UserMapper {
 
     /**
      * 通过ID查询单条数据

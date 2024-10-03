@@ -1,22 +1,22 @@
 package com.example.service.impl;
 
 import com.example.entity.User;
-import com.example.dao.UserDao;
+import com.example.mapper.UserMapper;
 import com.example.service.UserService;
-import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 /**
  * (User)表服务实现类
  *
- * @author makejava
+ * @author 游家纨绔
  * @since 2023-07-22 08:45:21
  */
 @Service("userService")
 public class UserServiceImpl implements UserService {
-    @Resource
-    private UserDao userDao;
+
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * 通过ID查询单条数据
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User queryById(Integer id) {
-        return this.userDao.queryById(id);
+        return this.userMapper.queryById(id);
     }
 
 }
