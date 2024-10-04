@@ -1,9 +1,13 @@
 package com.example.domain;
 
+import java.io.Serializable;
+
 /**
  * @author 游家纨绔
  */
-public class Student {
+public class Student implements Serializable {
+    private static final long serialVersionUID = -6109567371297192663L;
+
     private Integer id;
 
     private String name;

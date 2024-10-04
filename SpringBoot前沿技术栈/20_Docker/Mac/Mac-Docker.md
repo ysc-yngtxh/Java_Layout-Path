@@ -39,7 +39,7 @@ ENTRYPOINT ["java","-jar","/app.jar"]
 
 下载jdk镜像：docker pull openjdk:8
 
-编译：docker build -f Dockerfile -t app:1.0 .
+编译：docker build -f Dockerfile -t docker-springboot .
 
 执行完毕后直接就在docker images中看到app这个SpringBoot的镜像。
 

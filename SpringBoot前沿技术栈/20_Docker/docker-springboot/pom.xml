@@ -32,6 +32,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -53,6 +54,34 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<!-- 定义了maven-compiler-plugin的版本，确保你使用的是期望的插件版本 -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<!-- 指定Java源代码的编译版本为1.8 -->
+					<source>1.8</source>
+					<!-- 指定生成的字节码版本（即类文件）的目标版本也为1.8 -->
+					<target>1.8</target>
+					<!-- 指定注解处理器的路径。注解处理器在编译时运行，用于生成额外的源代码或字节码 -->
+     				<annotationProcessorPaths>
+     					<!-- 指定了lombok注解处理器的依赖 -->
+     					<path>
+     						<groupId>org.projectlombok</groupId>
+     						<artifactId>lombok</artifactId>
+     						<version>1.18.34</version>
+     					</path>
+     					<!-- 指定了mapstruct注解处理器的依赖 -->
+     					<path>
+     						<groupId>org.mapstruct</groupId>
+     						<artifactId>mapstruct-processor</artifactId>
+     						<version>1.4.2.Final</version>
+     					</path>
+     				</annotationProcessorPaths>
 				</configuration>
 			</plugin>
 		</plugins>

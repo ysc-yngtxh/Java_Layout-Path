@@ -8,14 +8,17 @@
         <version>3.3.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.example</groupId>
     <artifactId>27_SpringBoot-PostgreSql</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot_PostgreSql</name>
-    <description>SpringBoot_PostgreSql</description>
+    <name>27_SpringBoot-PostgreSql</name>
+    <description>27_SpringBoot-PostgreSql</description>
+
     <properties>
-        <java.version>21</java.version>
+        <java.version>23</java.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

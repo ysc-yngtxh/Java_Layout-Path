@@ -12,8 +12,8 @@
     <groupId>com.example</groupId>
     <artifactId>29_SpringBoot-Flowable</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>27_SpringBoot-Flowable</name>
-    <description>27_SpringBoot-Flowable</description>
+    <name>29_SpringBoot-Flowable</name>
+    <description>29_SpringBoot-Flowable</description>
 
     <properties>
         <java.version>23</java.version>

@@ -1,9 +1,11 @@
 package com.example.controller;
 
+import com.example.domain.Student;
 import com.example.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -17,7 +19,7 @@ public class StudentController {
 
     // 这里体现了Mybatis的一级缓存
     @RequestMapping("/cache")
-    public @ResponseBody Object cache(Integer id){
+    public @ResponseBody Student cache(@RequestParam Integer id){
         return studentService.queryStudentByIdCacheL1(id);
     }
 }

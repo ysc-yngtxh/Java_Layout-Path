@@ -9,7 +9,7 @@
                    2、当前查询的结果没有对象一个表的时候，可以自定义一个结果集
     -->
   <!--properties配置文件中设置了实体类的别名，因此不需要全限定类名，爆红不影响-->
-  <resultMap id="BaseResultMap" type="Student">
+  <resultMap id="BaseResultMap" type="com.example.domain.Student">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="email" jdbcType="VARCHAR" property="email" />
