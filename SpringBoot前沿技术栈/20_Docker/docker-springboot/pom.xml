@@ -32,7 +32,6 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -63,10 +62,10 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<!-- 指定Java源代码的编译版本为1.8 -->
-					<source>1.8</source>
-					<!-- 指定生成的字节码版本（即类文件）的目标版本也为1.8 -->
-					<target>1.8</target>
+					<!-- 指定Java源代码的编译版本为1.8、17、21-->
+					<source>21</source>
+					<!-- 指定生成的字节码版本（即类文件）的目标版本也为1.8、17、21 -->
+					<target>21</target>
 					<!-- 指定注解处理器的路径。注解处理器在编译时运行，用于生成额外的源代码或字节码 -->
      				<annotationProcessorPaths>
      					<!-- 指定了lombok注解处理器的依赖 -->

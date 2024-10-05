@@ -65,10 +65,10 @@
   - 启动docker后需要安装ubuntu(乌邦图)系统，由于下载地址在国外，速度会非常缓慢。因此我们需要在国内找一个镜像下载
 
     [阿里云容器镜像服务 (aliyun.com)](https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors)
-    ![image-20230721174626022](../image/image-20230721174626022.png)
+    ![image-20230721174626022](../Windows/win-img/image-20230721174626022.png)
 
     [道客镜像站_DaoCloud道客](https://www.daocloud.io/mirror)
-    ![image-20230721174936892](../image/image-20230721174936892.png)
+    ![image-20230721174936892](../Windows/win-img/image-20230721174936892.png)
 
 - ### 2.2.1 在命令行中进行镜像配置
 
