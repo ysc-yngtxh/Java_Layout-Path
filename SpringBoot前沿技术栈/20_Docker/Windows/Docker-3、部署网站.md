@@ -35,7 +35,8 @@
 ***
 
 - ### 1.3 下载jdk17安装包
-  - #### 1.3.1 下载
+  - #### 方法一：
+  - #### 1.3.1_1 下载
 
     ``` 
     # 通过wget命令下载jdk17
@@ -44,7 +45,7 @@
     # 浏览器查看当前下载的jdk版本
     https://www.oracle.com/java/technologies/downloads/#jdk17-linux
     ```
-  - #### 1.3.2 配置Dockerfile来制作jdk17镜像
+  - #### 1.3.1_2 配置Dockerfile来制作jdk17镜像
     ```
     # 进入当前路径的Dockerfile配置文件中
     vim dockerfile
@@ -65,7 +66,7 @@
     RUN javac --version \
         && java --version
     ```
-  - #### 1.3.3 构建我们的jdk17镜像
+  - #### 1.3.1_3 构建我们的jdk17镜像
     ```
     # 镜像名：java；版本：17.0.8
     docker build -t java:17.0.8 .
@@ -77,6 +78,11 @@
      > 查看构建完成的jdk17镜像：docker images
 
      - ![输入图片说明](../Windows/win-img/image1.png)
+
+  - #### 方法二：下载、镜像制作，一步到位
+  ```
+     docker pull openjdk:17
+  ```
 
 ***
 
@@ -135,7 +141,7 @@
     # 进入docker-springboot容器目录：方法二
     docker exec -it 容器Id /bin/bash
     ```
-     - ![输入图片说明](../Windows/win-img/image2.png)
+     - ![输入图片说明](../Windows/win-img/image1-24.png)
 
 ***
 

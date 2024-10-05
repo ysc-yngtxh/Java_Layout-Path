@@ -4,7 +4,7 @@
 
 # **学习了解 Docker**
 
-## 一、安装 虚拟机-VMware、CentOS 7镜像系统
+## 一、安装 虚拟机-VMware、CentOS 7镜像系统 [安装过程有部分缺省，忽略部分为默认配置直接下一步即可]
 
 1. ### ***安装好VMware后，新建一个虚拟机,选择自定义配置***
 
@@ -86,18 +86,55 @@
    ```
 
    ![输入图片说明](../Windows/win-img/image1-14.png)
- 
+
 ---
 
-2. ### ***配置虚拟机网络信息***
+2. ### ***查看虚拟机网络配置：VMnet0是否连接，是否配置成宿主网络***
+    
+   ![输入图片说明](../Windows/win-img/image1-15.png)
+   ![输入图片说明](../Windows/win-img/image1-16.png)
 
+---
+
+3. ### ***验证虚拟机网络通信正常***
+
+   ```
+   ping baidu.com
+   ```
+   ![输入图片说明](../Windows/win-img/image1-17.png)
+
+---
+
+## 三、Xshell -- 终端模拟器
+
+1. 查看虚拟机的 Ip 地址
+   ``` 
+   ip addr
+   ```
+   ![输入图片说明](../Windows/win-img/image1-23.png)
+
+---
+
+2. ### ***连接虚拟机***
+
+   ![输入图片说明](../Windows/win-img/image1-18.png)
+   
+---
+
+3. ### ***连接成功***
+
+   ![输入图片说明](../Windows/win-img/image1-19.png)
+
+---
+
+4. ### ***配置虚拟机网络信息***
    ``` 
    # 终端命令
    cd /etc/sysconfig/network-scripts/
    ls
    vi ifcfg-ens33
    ```
-   
+
    ```
    # 进入配置文件中
    TYPE=Ethernet
@@ -117,10 +154,10 @@
    DEVICE=ens33
    # 由原来的no改成yes
    ONBOOT=yes
-   # 新增，当前主机的IP：在起始和结束ip中选一个
-   IPADDR=192.168.1.128
+   # 新增，当前主机的IP：在起始和结束ip中选一个[如：192.168.2.128/24 指的是一个包含192.168.2.0 到 192.168.2.255 的子网内的所有IP地址]
+   IPADDR=192.168.2.128
    # 网关----同宿主机的网关
-   GATEWAY=192.168.1.1
+   GATEWAY=192.168.2.1
    # 掩码
    NETMASK=255.255.255.0
    # DNS服务
@@ -128,37 +165,6 @@
    # DNS服务
    DNS2=8.8.4.4
    ```
----
-
-3. ### ***查看虚拟机网络配置：VMnet0是否连接，是否配置成宿主网络***
-    
-   ![输入图片说明](../Windows/win-img/image1-15.png)
-   ![输入图片说明](../Windows/win-img/image1-16.png)
-
----
-
-4. ### ***验证虚拟机网络通信正常***
-
-   ```
-   ping baidu.com
-   ```
-   ![输入图片说明](../Windows/win-img/image1-17.png)
-
----
-
-## 三、Xshell -- 终端模拟器
-
-1. ### ***连接虚拟机***
-
-   ![输入图片说明](../Windows/win-img/image1-18.png)
-   
----
-
-2. ### ***连接成功***
-
-   ![输入图片说明](../Windows/win-img/image1-19.png)
-
----
 
 ## 四、系统初始化
 
@@ -237,22 +243,6 @@
 
    ![输入图片说明](../Windows/win-img/image1-21.png)
    ![输入图片说明](../Windows/win-img/image1-22.png)
-
----
-
-6. ### ***wget（下载工具）***
-
-   ```
-   yum install wget -y
-   ```
-
----
-
-7. ### ***CentOS常用工具包***
-
-   ```
-   yum install -y wget bash-completion vim lrzsz wget expect net-tools nc nmap tree dos2unix htop iftop iotop unzip telnet sl psmisc nethogs glances bc ntpdate openldap-devel
-   ```
 
 ---
 

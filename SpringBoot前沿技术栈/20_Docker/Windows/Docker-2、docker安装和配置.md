@@ -6,16 +6,32 @@
   curl -o /etc/yum.repos.d/Centos-7.repo http://mirrors.aliyun.com/repo/Centos-7.repo
   curl -o /etc/yum.repos.d/docker-ce.repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
   
+  # 清除缓存
   yum clean all && yum makecache
+  
+  # wget（下载工具）
+  yum install wget -y
+  
+  # CentOS常用工具包
+  yum install -y wget bash-completion vim lrzsz wget expect net-tools nc nmap tree dos2unix htop iftop iotop unzip telnet sl psmisc nethogs glances bc ntpdate openldap-devel
+  
+- 如果以上Centos配置源操作出现报错：只需将 yum源 的一个配置文件文件 CentOS-base.repo 删除掉即可
+  ![image1-27.png](../Windows/win-img/image1-27.png)
+  ```
+  # 进入 yum 源配置文件目录
+  cd /etc/yum.repos.d/
+  ls
+  rm -rf CentOS-base.repo
   ```
 
-- 查看可下载版本
+
+- 查看 docker-ce 可下载的版本
 
   ```
   yum list docker-ce --showduplicates | sort -r
   ```
 
-- 安装
+- 安装 docker-ce
 
   ```
   # 最新版
@@ -65,10 +81,10 @@
   - 启动docker后需要安装ubuntu(乌邦图)系统，由于下载地址在国外，速度会非常缓慢。因此我们需要在国内找一个镜像下载
 
     [阿里云容器镜像服务 (aliyun.com)](https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors)
-    ![image-20230721174626022](../Windows/win-img/image-20230721174626022.png)
+    ![image-20230721174626022](../Windows/win-img/image1-25.png)
 
     [道客镜像站_DaoCloud道客](https://www.daocloud.io/mirror)
-    ![image-20230721174936892](../Windows/win-img/image-20230721174936892.png)
+    ![image-20230721174936892](../Windows/win-img/image1-26.png)
 
 - ### 2.2.1 在命令行中进行镜像配置
 
