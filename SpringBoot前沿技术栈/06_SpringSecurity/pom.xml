@@ -5,30 +5,41 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.18</version>
+        <version>3.1.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.example</groupId>
-    <artifactId>05_Shiro</artifactId>
+    <artifactId>06_SpringSecurity</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>05_Shiro</name>
-    <description>05_Shiro</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
+
+    <properties>
+        <java.version>17</java.version>
+    </properties>
+    <packaging>pom</packaging>
 
     <modules>
-        <module>05.1_SpringBoot-Shiro</module>
-        <module>05.2_SpringBoot-Shiro-Demo</module>
+        <module>06.1_Spring-Security-Demo</module>
+        <module>06.2_Spring-Security-InMemoryUserDetailsManager</module>
+        <module>06.3_Spring-Security-formLogin</module>
+        <module>06.4_Spring-Security-Authorization</module>
+        <module>06.5_Spring-Security-Custom-PreAuthoriza</module>
+        <module>06.6_Spring-Security-FrontendBackendSeparation</module>
     </modules>
-    <packaging>pom</packaging>
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.0.33</version>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -36,8 +47,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
     </dependencies>
 

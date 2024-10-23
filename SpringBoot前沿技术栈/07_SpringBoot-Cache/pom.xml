@@ -5,25 +5,33 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.18</version>
+        <version>3.3.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>05_Shiro</artifactId>
+    <artifactId>07_SpringBoot-Cache</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>05_Shiro</name>
-    <description>05_Shiro</description>
+    <name>07_SpringBoot-Cache</name>
+    <description>07_SpringBoot-Cache</description>
 
-    <modules>
-        <module>05.1_SpringBoot-Shiro</module>
-        <module>05.2_SpringBoot-Shiro-Demo</module>
-    </modules>
-    <packaging>pom</packaging>
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>23</java.version>
     </properties>
 
+    <modules>
+        <module>07.1_SpringBoot-Redis</module>
+        <module>07.2_SpringBoot-Redis-Serialization</module>
+        <module>07.3_SpringBoot-Redis-Lock</module>
+        <module>07.4_SpringBoot-Caffeine</module>
+        <module>07.5_SpringBoot-Redisson</module>
+    </modules>
+    <packaging>pom</packaging>
+
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

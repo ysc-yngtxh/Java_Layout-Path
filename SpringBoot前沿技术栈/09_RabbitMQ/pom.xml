@@ -5,22 +5,25 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.18</version>
+        <version>3.3.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>05_Shiro</artifactId>
+    <artifactId>09_RabbitMQ</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>05_Shiro</name>
-    <description>05_Shiro</description>
+    <name>09_RabbitMQ</name>
+    <description>09_RabbitMQ</description>
 
     <modules>
-        <module>05.1_SpringBoot-Shiro</module>
-        <module>05.2_SpringBoot-Shiro-Demo</module>
+        <module>09.1_RabbitMQ-Demo</module>
+        <module>09.2_RabbitMQ-SpringBoot</module>
+        <module>09.3_RabbitMQ-Backups</module>
+        <module>09.4_RabbitMQ-Priority</module>
+        <module>09.5_SpringBoot-RabbitMQ-Redis-Retry</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>23</java.version>
     </properties>
 
     <dependencies>

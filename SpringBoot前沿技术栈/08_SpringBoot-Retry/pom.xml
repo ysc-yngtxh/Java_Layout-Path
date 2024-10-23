@@ -9,16 +9,11 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>05_Shiro</artifactId>
+    <artifactId>08_SpringBoot-Retry</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>05_Shiro</name>
-    <description>05_Shiro</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
-    <modules>
-        <module>05.1_SpringBoot-Shiro</module>
-        <module>05.2_SpringBoot-Shiro-Demo</module>
-    </modules>
-    <packaging>pom</packaging>
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -28,7 +23,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -38,6 +32,29 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <!--Java常用工具类依赖-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <!--Spring Retry 重试机制依赖-->
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--配合重试机制-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
     </dependencies>
 
