@@ -1,0 +1,20 @@
+server:
+    port: 8081
+
+spring:
+    application:
+        name: 11.1_SpringBoot-Kafka-Demo
+
+    kafka:
+        bootstrap-servers: localhost:9092
+        consumer:
+            group-id: my-group
+            auto-offset-reset: earliest
+            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        producer:
+            key-serializer: org.apache.kafka.common.serialization.StringSerializer
+            value-serializer: org.apache.kafka.common.serialization.StringSerializer
+        template:
+            default-topic: my-topic
+
