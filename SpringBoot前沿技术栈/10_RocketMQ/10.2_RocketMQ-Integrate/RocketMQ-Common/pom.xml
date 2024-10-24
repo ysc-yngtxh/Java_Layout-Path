@@ -6,7 +6,6 @@
         <groupId>com.example</groupId>
         <artifactId>10.2_RocketMQ-Integrate</artifactId>
         <version>1.0.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>com.example</groupId>
@@ -16,7 +15,7 @@
     <description>RocketMQ-Common</description>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>23</java.version>
     </properties>
 
     <dependencies>

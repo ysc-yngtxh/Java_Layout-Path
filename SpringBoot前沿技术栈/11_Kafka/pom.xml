@@ -14,6 +14,9 @@
     <name>11_Kafka</name>
     <description>11_Kafka</description>
 
+    <modules>
+        <module>11.1_SpringBoot-Kafka-Demo</module>
+    </modules>
     <properties>
         <java.version>23</java.version>
     </properties>

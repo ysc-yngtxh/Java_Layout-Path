@@ -6,7 +6,6 @@
         <groupId>com.example</groupId>
         <artifactId>SpringBoot_Mybatis-MultiDataSource</artifactId>
         <version>1.0.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>com.example</groupId>
