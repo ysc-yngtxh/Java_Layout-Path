@@ -37,22 +37,22 @@
 
 
 
-![image-20230516214329834](../6_Spring-Security-AuthorizationCode/authorization-server/src/main/resources/static/image-20230516214329834.png)
+![image-20230516214329834](../06.7_Spring-Security-OAuth2/authorization-server/src/main/resources/static/image-20230516214329834.png)
 
 #### *2、简化模式*
 
 > 简化模式：不需要让第三方应用与资源服务器进行交互的，直接在浏览器中向资源服务器申请令牌（token），一般如果网站是纯静态页面则可以采用这种方式。
 
-![image-20230516222357558](../6_Spring-Security-AuthorizationCode/authorization-server/src/main/resources/static/image-20230516222357558.png)
+![image-20230516222357558](../06.7_Spring-Security-OAuth2/authorization-server/src/main/resources/static/image-20230516222357558.png)
 
 #### *3、密码模式*
 
 > 密码模式：密码模式是用户把用户名密码直接告诉客户端，客户端使用说这些信息向授权服务器申请令牌（token）。这需要用户对客户端高度信任，例如客户端应用和服务提供商就是同一家公司，我们自己做前后端分离登录就可以采用这种模式。
 
-![image-20230516222653625](../6_Spring-Security-AuthorizationCode/authorization-server/src/main/resources/static/image-20230516222653625.png)
+![image-20230516222653625](../06.7_Spring-Security-OAuth2/authorization-server/src/main/resources/static/image-20230516222653625.png)
 
 #### *4、客户端模式*
 
 > 客户端模式：是指客户端使用自己的名义而不是用户的名义向服务提供者申请授权，严格来说，客户端模式并不能算作 OAuth 协议要解决的问题的一种解决方案，但是，对于开发者而言，在一些前后端分离应用或者为移动端提供的认证授权服务器上使用这种模式还是非常方便的。
 
-![image-20230516225319903](../6_Spring-Security-AuthorizationCode/authorization-server/src/main/resources/static/image-20230516225319903.png)
+![image-20230516225319903](../06.7_Spring-Security-OAuth2/authorization-server/src/main/resources/static/image-20230516225319903.png)

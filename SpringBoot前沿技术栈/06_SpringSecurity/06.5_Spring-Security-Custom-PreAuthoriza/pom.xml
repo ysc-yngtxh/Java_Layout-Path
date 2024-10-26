@@ -30,10 +30,15 @@
 		<!--我真是无语至极：spring boot3版本的 mybatis-plus-boot-starter 会出现取消了自动注入SqlSessionFactory和SqlSessionTemplate的问题
                          所以需要加上 mybatis-spring-boot-starter 依赖。但是这个时候又会出现Mapper的无效绑定语句问题
                          经尝试，使用尝鲜版本就能解决这些版本问题，后续还是等正式版本更新-->
+		<!-- <dependency> -->
+		<!-- 	<groupId>com.baomidou</groupId> -->
+		<!-- 	<artifactId>mybatis-plus-boot-starter</artifactId> -->
+		<!-- 	<version>3.5.5</version> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>com.baomidou</groupId>
-			<artifactId>mybatis-plus-boot-starter</artifactId>
-			<version>3.5.3.1</version>
+			<artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+			<version>3.5.7</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -77,7 +82,7 @@
 		<dependency>
 			<groupId>cn.hutool</groupId>
 			<artifactId>hutool-all</artifactId>
-			<version>5.8.11</version>
+			<version>5.8.21</version>
 		</dependency>
 		<dependency>
 			<groupId>io.vavr</groupId>

@@ -1,0 +1,23 @@
+server:
+    port: 8080
+spring:
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: 131474
+        url: jdbc:mysql://localhost:3306/sys?useUnicode=true&serverTimezone=Asia/Shanghai
+        username: root
+    security:
+        oauth2:
+            client:
+                registration:
+                    github:
+                        client-id: Ov23liukOOM7knKdMlD8
+                        client-secret: 9a9c059d953cb3043d751c155446e2b6d20afda5
+                        redirect-uri: http://localhost:8080/oauth2/callback
+                        scope: repo,user
+                provider:
+                    github:
+                        authorization-uri: https://github.com/login/oauth/authorize
+                        token-uri: https://github.com/login/oauth/access_token
+                        user-info-uri: https://api.github.com/user
+                        user-name-attribute: login

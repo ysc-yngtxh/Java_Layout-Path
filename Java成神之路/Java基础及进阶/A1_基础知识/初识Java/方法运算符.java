@@ -81,7 +81,7 @@ public class 方法运算符 {
 		
 		int a1 = 10;
 		int b1 = 20;
-		System.out.println(a1 + "+" + b1 + "=" + (a1+b1)); // 控制台输出10+20=30  是一个是“动态输出”
+		System.out.println(a1 + "+" + b1 + "=" + (a1+b1));     // 控制台输出10+20=30  是一个是“动态输出”
 		int a2 = 50;
 		int b2 = 90;
 		System.out.println(a2 + " + " + b2 + " = " + (a2+b2)); // 50+90=140  变量要连接字符串必须要加上“+”
@@ -89,10 +89,10 @@ public class 方法运算符 {
 		
 		boolean sex = true;
 		char c = sex ? '男' : '女';
-		System.out.println(c);                  // 男
-		System.out.println(sex ? '男' : '女');   // 男
-		System.out.println(sex ? '男' : "女");   // 男     在println括号中字符或者字符号都可以运行
-		System.out.println(a1 > b1 ? a1 : b1);  // 20
+		System.out.println(c);                 // 男
+		System.out.println(sex ? '男' : '女');  // 男
+		System.out.println(sex ? '男' : "女");  // 男     在println括号中字符或者字符号都可以运行
+		System.out.println(a1 > b1 ? a1 : b1); // 20
 		String  s = sex ? "男" : "女";
 		System.out.println(sex ? "猛男的" : "淑女的"); // 猛男的
 	}

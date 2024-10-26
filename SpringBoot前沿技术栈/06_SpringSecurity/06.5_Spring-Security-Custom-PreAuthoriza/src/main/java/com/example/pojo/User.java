@@ -37,11 +37,13 @@ public class User implements Serializable {
     /**
      * 用户名
      */
+    @TableField("user_name")
     private String userName;
 
     /**
      * 昵称
      */
+    @TableField("nick_name")
     private String nickName;
 
     /**
@@ -62,7 +64,7 @@ public class User implements Serializable {
     /**
      * 手机号
      */
-    private String phonenumber;
+    private String phone;
 
     /**
      * 用户性别(0男， 1女， 2未知)
@@ -77,13 +79,14 @@ public class User implements Serializable {
     /**
      * 用户类型(0管理员，1普通用户)
      */
+    @TableField("user_type")
     private String userType;
 
     /**
      * 用户权限
      */
     @TableField(typeHandler= FastjsonTypeHandler.class)
-    private List<String> permssion;
+    private List<String> permission;
 
     /**
      * 创建人的用户id
@@ -93,7 +96,7 @@ public class User implements Serializable {
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private LocalDateTime createDate;
 
     /**
      * 更新人
@@ -103,7 +106,7 @@ public class User implements Serializable {
     /**
      * 更新时间
      */
-    private LocalDateTime updateTime;
+    private LocalDateTime updateDate;
 
     /**
      * 删除标志(0未删除， 1已删除)

@@ -45,8 +45,8 @@ public class UrlAuthorizationManager implements AuthorizationManager<RequestAuth
     // 有权限：new AuthorizationDecision(true)
     // 无权限：new AuthorizationDecision(false)
     @Override
-    public AuthorizationDecision check(Supplier<Authentication> authentication
-            , RequestAuthorizationContext requestAuthorizationContext) {
+    public AuthorizationDecision check(Supplier<Authentication> authentication,
+                                       RequestAuthorizationContext requestAuthorizationContext) {
         // 获取当前用户访问路径
         HttpServletRequest request = requestAuthorizationContext.getRequest();
         String requestURI = request.getRequestURI();

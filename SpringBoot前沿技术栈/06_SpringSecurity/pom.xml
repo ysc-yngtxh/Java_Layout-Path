@@ -26,7 +26,7 @@
         <module>06.4_Spring-Security-Authorization</module>
         <module>06.5_Spring-Security-Custom-PreAuthoriza</module>
         <module>06.6_Spring-Security-FrontendBackendSeparation</module>
-        <module>06.7_Spring-Security-AuthorizationCode</module>
+        <module>06.7_Spring-Security-OAuth2</module>
     </modules>
     <packaging>pom</packaging>
 

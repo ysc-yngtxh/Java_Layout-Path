@@ -2,6 +2,7 @@ package com.example;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import java.net.URISyntaxException;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,9 +45,8 @@ class EmailApplicationTests {
         mailSender.send(message);
     }
 
-    @SneakyThrows
     @Test
-    void testMailB() throws MessagingException {
+    void testMailB() throws MessagingException, URISyntaxException {
         // 创建复杂有限发送对象
         MimeMessage mimeMessage = mailSender.createMimeMessage();
 
