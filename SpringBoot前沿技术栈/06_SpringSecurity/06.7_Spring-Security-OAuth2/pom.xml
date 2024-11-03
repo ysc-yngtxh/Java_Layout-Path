@@ -14,4 +14,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <modules>
+        <module>06.7_1-AuthorizationCode-Mode</module>
+        <module>authorization-client</module>
+        <module>authorization-server</module>
+    </modules>
+    <packaging>pom</packaging>
 </project>
