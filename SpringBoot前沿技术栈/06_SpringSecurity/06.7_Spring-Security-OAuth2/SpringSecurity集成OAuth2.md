@@ -30,29 +30,41 @@
 
 
 ### **二、OAuth2的方式**
+OAuth 2.0 是一种开放标准的授权协议，用于授权第三方应用程序访问受保护的资源，而无需用户提供其用户名和密码。
+它允许用户通过授权代理向第三方应用程序颁发访问令牌（access token），以访问特定的资源。
 
-#### *1、授权码*
+    OAuth 2.0 的核心概念:
+       授权服务器（Authorization Server）  负责认证资源所有者并授权客户端访问资源的服务器。
+       资源所有者（Resource Owner）        通常是用户，拥有受保护的资源，例如图片、个人资料等。
+       客户端（Client）                   第三方应用程序，想要访问资源所有者的受保护资源。
+       资源服务器（Resource Server）       存储受保护资源的服务器，提供访问受保护资源的 API。
+       访问令牌（Access Token）
 
-> 授权码模式：常见的第三方平台登录功能基本都是使用这种模式。
+OAuth2 认证授权总体流程
+![image](../06.7_Spring-Security-OAuth2/06.7_1-AuthorizationCode-Mode/src/main/resources/static/img.png)
+
+####  *1、授权码*
+
+ - > 授权码模式：常见的第三方平台登录功能基本都是使用这种模式。
 
 
 
-![image-20230516214329834](../06.7_Spring-Security-OAuth2/06.7_1-AuthorizationCode-Mode/src/main/resources/static/img_0.png)
+- ![image-20230516214329834](../06.7_Spring-Security-OAuth2/06.7_1-AuthorizationCode-Mode/src/main/resources/static/img_0.png)
 
-#### *2、简化模式*
+#### >> *2、简化模式*
 
-> 简化模式：不需要让第三方应用与资源服务器进行交互的，直接在浏览器中向资源服务器申请令牌（token），一般如果网站是纯静态页面则可以采用这种方式。
+- > 简化模式：不需要让第三方应用与资源服务器进行交互的，直接在浏览器中向资源服务器申请令牌（token），一般如果网站是纯静态页面则可以采用这种方式。
 
-![image-20230516222357558](../06.7_Spring-Security-OAuth2/06.7_1-AuthorizationCode-Mode/src/main/resources/static/img_1.png)
+- ![image-20230516222357558](../06.7_Spring-Security-OAuth2/06.7_1-AuthorizationCode-Mode/src/main/resources/static/img_1.png)
 
 #### *3、密码模式*
 
-> 密码模式：密码模式是用户把用户名密码直接告诉客户端，客户端使用说这些信息向授权服务器申请令牌（token）。这需要用户对客户端高度信任，例如客户端应用和服务提供商就是同一家公司，我们自己做前后端分离登录就可以采用这种模式。
+- > 密码模式：密码模式是用户把用户名密码直接告诉客户端，客户端使用说这些信息向授权服务器申请令牌（token）。这需要用户对客户端高度信任，例如客户端应用和服务提供商就是同一家公司，我们自己做前后端分离登录就可以采用这种模式。
 
-![image-20230516222653625](../06.7_Spring-Security-OAuth2/06.7_1-AuthorizationCode-Mode/src/main/resources/static/img_2.png)
+- ![image-20230516222653625](../06.7_Spring-Security-OAuth2/06.7_1-AuthorizationCode-Mode/src/main/resources/static/img_2.png)
 
 #### *4、客户端模式*
 
-> 客户端模式：是指客户端使用自己的名义而不是用户的名义向服务提供者申请授权，严格来说，客户端模式并不能算作 OAuth 协议要解决的问题的一种解决方案，但是，对于开发者而言，在一些前后端分离应用或者为移动端提供的认证授权服务器上使用这种模式还是非常方便的。
+- > 客户端模式：是指客户端使用自己的名义而不是用户的名义向服务提供者申请授权，严格来说，客户端模式并不能算作 OAuth 协议要解决的问题的一种解决方案，但是，对于开发者而言，在一些前后端分离应用或者为移动端提供的认证授权服务器上使用这种模式还是非常方便的。
 
-![image-20230516225319903](../06.7_Spring-Security-OAuth2/06.7_1-AuthorizationCode-Mode/src/main/resources/static/img_3.png)
+- ![image-20230516225319903](../06.7_Spring-Security-OAuth2/06.7_1-AuthorizationCode-Mode/src/main/resources/static/img_3.png)

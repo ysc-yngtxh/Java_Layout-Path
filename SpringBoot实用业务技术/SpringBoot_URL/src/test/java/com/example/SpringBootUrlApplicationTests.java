@@ -60,24 +60,24 @@ class SpringBootUrlApplicationTests {
         // 打开与此 URL ，并返回一个 InputStream ，以便从该连接读取。
         InputStream in = url3.openStream();
         new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8)).lines().forEach(System.out::println);
-       System.out.print("\n");
+        System.out.print("\n");
 
         // URL只能解析ASCII字符(256个字符)，不能解析中文及特殊字符，因此需要将请求路径中的中文或者特殊字符进行编码处理
         String strPath = "https://geoapi.qweather.com/v2/city/lookup?location=西安&key=f83cf5800baf480fa4c3bc6a474ffd90";
         System.out.println("请求路径携带中文部分开始断开，表示无法解析：" + new URL(strPath).toURI());
-       System.out.print("\n");
+        System.out.print("\n");
 
         // 使用工具类将中文或者特殊字符解析为 ASCII码
         String urls = ChineseToUrl.ChineseToUrls(strPath);
         System.out.println("使用工具类将请求路径中带中文的解析为：" + urls);
         System.out.println("路径编码之后，路径没有从中间断开，并可以直接访问：" + new URL(urls));
-       System.out.print("\n");
+        System.out.print("\n");
 
         // 将字转为码是编码
         System.out.println("使用URLEncoder编码：" + URLEncoder.encode("西安", StandardCharsets.UTF_8));
         // 注意：不要将整个URL请求路径进行编码。否则会将路径中‘://’、‘=’、‘&’也进行编码。URLEncoder只适合做URL的局部编码
         System.out.println("无法将 URL 中所需要的部分进行保留：" + URLEncoder.encode(strPath, StandardCharsets.UTF_8));
-       System.out.print("\n");
+        System.out.print("\n");
 
 
         // 将码转为字是解码

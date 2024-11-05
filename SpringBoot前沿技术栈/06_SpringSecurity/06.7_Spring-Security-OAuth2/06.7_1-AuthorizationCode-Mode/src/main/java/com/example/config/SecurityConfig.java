@@ -23,6 +23,19 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return NoOpPasswordEncoder.getInstance();
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService(){
+        InMemoryUserDetailsManager userDetailsManager = new InMemoryUserDetailsManager(
+                User.withUsername("admin").password("admin").authorities("admin").build(),
+                User.withUsername("manager").password("manager").authorities("manager").build());
+        return userDetailsManager;
+    }
+
     /**
      * 使用 Lambda DSL
      */
@@ -69,19 +82,5 @@ public class SecurityConfig {
                     oauth2.defaultSuccessUrl("/repo")
             );
         return http.build();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return NoOpPasswordEncoder.getInstance();
-    }
-
-
-    @Bean
-    public UserDetailsService userDetailsService(){
-        InMemoryUserDetailsManager userDetailsManager = new InMemoryUserDetailsManager(
-                User.withUsername("admin").password("admin").authorities("admin").build(),
-                User.withUsername("manager").password("manager").authorities("manager").build());
-        return userDetailsManager;
     }
 }

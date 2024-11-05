@@ -21,10 +21,10 @@ spring:
                         # repo:访问用户的仓库信息   user:访问用户的个人信息
                         scope: repo,user
                 # 授权服务器
-                provider:
-                    github:
-                        # 认证 URI
-                        authorization-uri: https://github.com/login/oauth/authorize
-                        token-uri: https://github.com/login/oauth/access_token
-                        user-info-uri: https://api.github.com/user
-                        user-name-attribute: login
+                # provider:
+                #     github:
+                #         # 认证 URI
+                #         authorization-uri: https://github.com/login/oauth/authorize
+                #         token-uri: https://github.com/login/oauth/access_token
+                #         user-info-uri: https://api.github.com/user
+                #         user-name-attribute: login
