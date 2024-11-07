@@ -1,0 +1,9 @@
+spring:
+    application:
+        name: authorization-client
+    security:
+        oauth2:
+            client:
+                registration:
+                   jwt:
+

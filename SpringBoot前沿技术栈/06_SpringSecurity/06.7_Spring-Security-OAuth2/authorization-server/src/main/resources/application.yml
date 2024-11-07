@@ -12,8 +12,8 @@ spring:
                 registration:
                     github:
                         client-id: Ov23liukOOM7knKdMlD8
-                        client-secret: 9a9c059d953cb3043d751c155446e2b6d20afda5
-                        redirect-uri: http://localhost:8080/oauth2/callback
+                        client-secret: 5f6ec1ae0581fbaed813b2cf2c643736ad4e4cb5
+                        redirect-uri: http://localhost:8080/github/callback
                         scope: repo,user
                 provider:
                     github:

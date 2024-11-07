@@ -4,11 +4,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -65,10 +66,17 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .cors(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(authorize -> authorize
-                    .requestMatchers("/", "/oauth2/callback").permitAll()
+                    .requestMatchers("/").permitAll()
+                    .requestMatchers("/gitee/auth").permitAll()
+                    .requestMatchers("/gitee/callback").permitAll()
+                    .requestMatchers("/github/auth").permitAll()
+                    .requestMatchers("/github/callback").permitAll()
+                    .requestMatchers("/google/auth").permitAll()
+                    .requestMatchers("/google/callback").permitAll()
+                    .requestMatchers("/static/**").permitAll()
                     .anyRequest().authenticated()
             )
-            .formLogin(Customizer.withDefaults())
+            .formLogin(Customizer.withDefaults());
             // .formLogin((formLogin) ->
             //         formLogin
             //                 .usernameParameter("username")
@@ -77,10 +85,10 @@ public class SecurityConfig {
             //                 .failureUrl("/authentication/login?failed")
             //                 .loginProcessingUrl("/authentication/login/process"));
             // 运行请求后会自动跳转到第三方登录界面
-            .oauth2Login(oauth2 ->
-                    // 指定成功跳转的范围
-                    oauth2.defaultSuccessUrl("/repo")
-            );
+            // .oauth2Login(oauth2 ->
+            //         // 指定成功跳转的范围
+            //         oauth2.defaultSuccessUrl("/repo")
+            // );
         return http.build();
     }
 }

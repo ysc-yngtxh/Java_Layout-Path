@@ -41,7 +41,16 @@
                             <div class="field">
                                 <input type="checkbox" name="remember"> 记住我
                             </div>
-                            <input type="submit" class="ui blue submit button"/>
+                            <input type="submit" class="ui blue submit button"/></br>
+                            <a th:href="@{/gitee/auth}" target="_self">
+                                <img th:src="@{/static/gitee.svg}" style="whith: 35px;height: 35px;margin-left: 440px" alt="Gitee授权">
+                            </a>
+                            <a th:href="@{/github/auth}" target="_self">
+                                <img th:src="@{/static/github.svg}" style="whith: 35px;height: 35px;margin-left: 40px" alt="Github授权">
+                            </a>
+                            <a th:href="@{/google/auth}" target="_self">
+                                <img th:src="@{/static/google.svg}" style="whith: 35px;height: 35px;margin-left: 40px" alt="Google授权">
+                            </a>
                         </form>
                     </div>
                 </div>
@@ -56,7 +65,7 @@
             <small>blog.plushuang.com</small>
         </div>
         <div class="ui segment" style="text-align: center">
-            <h3>Spring Security PlusYou 2022</h3>
+            <h3>Spring Security PlusYou 2024</h3>
         </div>
     </div>
 
