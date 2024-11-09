@@ -1,35 +1,9 @@
 server:
     port: 8080
 spring:
-    datasource:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        password: 131474
-        url: jdbc:mysql://localhost:3306/sys?useUnicode=true&serverTimezone=Asia/Shanghai
-        username: root
     thymeleaf:
         prefix: classpath:/templates/
         suffix: .html
     mvc:
+        # 添加静态资源访问路径前缀 /static
         static-path-pattern: /static/**
-    security:
-        oauth2:
-            client:
-                # 资源服务器
-                registration:
-                    github:
-                        # client-id: Ov23liukOOM7knKdMlD8
-                        # client-secret: 9a9c059d953cb3043d751c155446e2b6d20afda5
-                        # # 用于指定重定向 URI，当用户授权成功后，GitHub 会将用户重定向到该 URI。
-                        # redirect-uri: http://localhost:8080/oauth2/callback
-                        # # 用于指定向 GitHub 发起授权请求时所需的权限范围（scopes）。
-                        # # 这些权限范围定义了你的应用在用户授权后可以访问哪些用户的 GitHub 数据。
-                        # # repo:访问用户的仓库信息   user:访问用户的个人信息
-                        # scope: repo,user
-                # 授权服务器
-                # provider:
-                #     github:
-                #         # 认证 URI
-                #         authorization-uri: https://github.com/login/oauth/authorize
-                #         token-uri: https://github.com/login/oauth/access_token
-                #         user-info-uri: https://api.github.com/user
-                #         user-name-attribute: login

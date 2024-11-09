@@ -84,11 +84,6 @@ public class SecurityConfig {
             //                 .loginPage("/authentication/login")
             //                 .failureUrl("/authentication/login?failed")
             //                 .loginProcessingUrl("/authentication/login/process"));
-            // 运行请求后会自动跳转到第三方登录界面
-            // .oauth2Login(oauth2 ->
-            //         // 指定成功跳转的范围
-            //         oauth2.defaultSuccessUrl("/repo")
-            // );
         return http.build();
     }
 }

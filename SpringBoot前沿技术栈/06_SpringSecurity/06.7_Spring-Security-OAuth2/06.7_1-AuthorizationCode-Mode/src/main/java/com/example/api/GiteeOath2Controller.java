@@ -29,10 +29,10 @@ public class GiteeOath2Controller {
     public String giteeAuth() {
         // TODO Step1：获取Authorization Code
         StringBuilder urlBuilder = new StringBuilder(Oauth2Property.AUTHORIZE_URL);
-        urlBuilder.append("?response_type=code")
+        urlBuilder.append("?response_type=").append("code")
                 .append("&client_id=").append(Oauth2Property.CLIENT_ID)
                 .append("&redirect_uri=").append(URLEncoder.encode(Oauth2Property.CALLBACK_URI))
-                .append("&scope=user_info");
+                .append("&scope=").append("user_info");
 
         // 重定向
         return "redirect:" + urlBuilder;
@@ -71,7 +71,8 @@ public class GiteeOath2Controller {
             String accessTokenStr = accessTokenJson.get("access_token").toString();
 
             // TODO Step3: 获取用户信息
-            HttpRequest httpRequest = HttpRequest.get(Oauth2Property.GET_USER_INFO_URL + "?access_token=" + accessTokenStr);
+            HttpRequest httpRequest = HttpRequest.get(Oauth2Property.GET_USER_INFO_URL);
+            httpRequest.form("access_token", accessTokenStr);
             System.out.println("httpRequest = " + httpRequest);
             return httpRequest.execute().body();
 

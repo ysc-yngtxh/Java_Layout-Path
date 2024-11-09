@@ -16,8 +16,8 @@
 
     <modules>
         <module>06.7_1-AuthorizationCode-Mode</module>
+        <module>06.7_2-Github-Oauth2</module>
         <module>authorization-client</module>
-        <module>authorization-server</module>
     </modules>
     <packaging>pom</packaging>
 </project>
