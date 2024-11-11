@@ -36,6 +36,10 @@ public class SecurityConfig {
             //                 .loginProcessingUrl("/authentication/login/process"));
             // TODO 这里定义 Oauth2 的登录配置
             .oauth2Login(Customizer.withDefaults());
+            // .oauth2Login(oauth2 ->
+            //         // 指定成功跳转的范围
+            //         oauth2.defaultSuccessUrl("/repo")
+            // );
         return http.build();
     }
 }
