@@ -12,12 +12,11 @@ public class Oauth2ClientAutoConfig {
     @Bean
     public SecurityFilterChain authorizationClientSecurityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests()
-                .anyRequest().authenticated()
-                .and().logout()
-                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                .and().oauth2Client()
-                .and().oauth2Login();
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
+                .logout(Customizer.withDefaults())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+                .oauth2Client(Customizer.withDefaults())
+                .oauth2Login(Customizer.withDefaults());
 
         return http.build();
     }
