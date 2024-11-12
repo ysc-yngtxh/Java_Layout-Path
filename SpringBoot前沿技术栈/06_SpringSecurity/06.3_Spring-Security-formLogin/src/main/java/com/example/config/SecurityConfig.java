@@ -159,7 +159,7 @@ public class SecurityConfig {
      *   因为没有认证就会被拦截重定向到登陆路径loginPage("/user/index") ---- http://localhost:8080/user/index
      *   这个时候我们登录跳转，但由于我们并没有设置第二个参数，就会导致我们跳转的不是defaultSuccessUrl()方法的/toMain路径，
      *   而是我们一开始访问的路径http://localhost:8080，但是我们并没有在Controller层定义"/"路径，
-     *   从而被重定向到web的默认欢迎资源文件index.html ,所以又会出现登陆后跳转到登陆前的页面。
+     *   从而被重定向到web的默认欢迎资源文件index.html，而index.html文件又没有配置为放行，所以又会出现登陆后跳转到登陆前的页面。
      *
      *   解决这种问题方案：一、在requestMatchers()中加上"/"路径，用来排除需要认证的拦截，那么在我们跳转"/"路径时就不需要再被拦截，
      *                     然后会发现在Controller里并没有"/"路径，直接被重定向到web的默认欢迎资源文件index.html，
