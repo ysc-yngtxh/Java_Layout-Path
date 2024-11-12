@@ -15,11 +15,14 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class ResourceServerAutoConfig {
 
+    @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
+    public String issuerUri;
+    
     @Bean
     public SecurityFilterChain resourceServerSecurityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth2 -> auth2.anyRequest().authenticated())
-            .oauth2ResourceServer().jwt();
+            .oauth2ResourceServer(oauth2Resource -> oauth2Resource.jwt(jwt -> jwt.decoder(JwtDecoders.fromIssuerLocation(issuerUri))));
         return http.build();
     }
 }
