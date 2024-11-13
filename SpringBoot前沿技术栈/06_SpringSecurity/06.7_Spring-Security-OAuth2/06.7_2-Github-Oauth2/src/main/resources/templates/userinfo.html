@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+    <title>信息展示</title>
+</head>
+<body>
+<h1>登录信息展示</h1>
+<div>
+    恭喜，您使用应用 <span th:text="${clientName}"></span> 的账号 <span th:text="${userName}"></span>    登录成功！
+</div>
+<div>
+    登录用户信息如下：
+    <ol type="1">
+        <li th:each="attrbute:${userAttrbutes}">
+            <span th:text="${attrbute.key}"/> = <span th:text="${attrbute.value}"/>
+        </li>
+    </ol>
+</div>
+</body>
+</html>

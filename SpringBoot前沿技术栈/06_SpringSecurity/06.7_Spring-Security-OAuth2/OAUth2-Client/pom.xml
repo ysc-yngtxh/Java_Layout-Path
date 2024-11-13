@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>authorization-client</artifactId>
+    <artifactId>OAUth2-Client</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>authorization-client</name>
-    <description>authorization-client</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>23</java.version>

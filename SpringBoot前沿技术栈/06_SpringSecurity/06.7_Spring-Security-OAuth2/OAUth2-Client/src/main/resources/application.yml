@@ -1,6 +1,6 @@
 
 server:
-  port: 8081
+  port: 8080
   session:
     cookie:
       # 需要更换存放sessionId的cookie名字，否则认证服务和客户端的sessionId会相互覆盖
@@ -19,7 +19,7 @@ spring:
             client-secret: demo-client-secret
             authorization-grant-type: authorization_code
             redirect-uri: '{baseUrl}/{action}/oauth2/code/{registrationId}'
-            #            client-authentication-method: POST
+            # client-authentication-method: POST
             scope: user_info, pull_requests
             client-name: demo-client-id
           client-id-2:
@@ -28,16 +28,17 @@ spring:
             client-secret: demo-client-secret
             authorization-grant-type: authorization_code
             redirect-uri: '{baseUrl}/{action}/oauth2/code/{registrationId}'
-            #            client-authentication-method: POST
+            # client-authentication-method: POST
             scope: user_info, pull_requests
             client-name: demo-client-id2
         provider:
           demo-client-id:
-            authorization-uri: http://127.0.0.1:8080/oauth2/authorize
-            token-uri: http://127.0.0.1:8080/oauth2/token
-            user-info-uri: http://127.0.0.1:8082/user/info
+            authorization-uri: http://localhost:9090/oauth2/authorize
+            token-uri: http://localhost:9090/oauth2/token
+            user-info-uri: http://localhost:9090/user/info
+            # 获取用户 xxx 属性的值（无默认，不能为空）
             user-name-attribute: name
-            jwk-set-uri: http://127.0.0.1:8080/oauth2/jwks
+            issuer-uri: http://localhost:9090
           demo-client-id2:
             authorization-uri: http://127.0.0.1:8080/oauth2/authorize
             token-uri: http://127.0.0.1:8080/oauth2/token

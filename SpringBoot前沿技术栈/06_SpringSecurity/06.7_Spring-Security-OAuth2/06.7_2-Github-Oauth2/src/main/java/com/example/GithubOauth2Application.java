@@ -27,8 +27,17 @@ public class GithubOauth2Application {
      * 授权回调
      * @param code 授权编码
      */
-    @RequestMapping("/github/callback")
-    public @ResponseBody String AuthCallback(@RequestParam("code") String code) {
+    @RequestMapping("/login/oauth2/code/github/callback")
+    public @ResponseBody String GithubAuthCallback(@RequestParam("code") String code) {
+        return "Authorization code: " + code;
+    }
+
+    /**
+     * 授权回调
+     * @param code 授权编码
+     */
+    @RequestMapping("/login/oauth2/code/gitee/callback")
+    public @ResponseBody String GiteeAuthCallback(@RequestParam("code") String code) {
         return "Authorization code: " + code;
     }
 }

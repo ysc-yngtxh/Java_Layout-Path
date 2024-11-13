@@ -4,10 +4,15 @@ import cn.hutool.http.HttpRequest;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.example.constant.Oauth2Property;
+import jakarta.servlet.http.HttpServletRequest;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,8 +47,9 @@ public class GiteeOath2Controller {
      * 授权回调
      * @param code 授权编码
      */
-    @RequestMapping("/gitee/callback")
-    public @ResponseBody String AuthCallback(@RequestParam("code") String code) {
+    @RequestMapping("/login/oauth2/code/gitee/callback")
+    @ResponseBody
+    public String AuthCallback(@RequestParam("code") String code) {
         try {
             // 得到Authorization Code
             System.out.println("授权服务器的Authorization code = " + code);
@@ -75,7 +81,6 @@ public class GiteeOath2Controller {
             httpRequest.form("access_token", accessTokenStr);
             System.out.println("httpRequest = " + httpRequest);
             return httpRequest.execute().body();
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

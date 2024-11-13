@@ -46,7 +46,7 @@ public class GithubOath2Controller {
      * 授权回调
      * @param code 授权编码
      */
-    @RequestMapping("/github/callback")
+    @RequestMapping("/login/oauth2/code/github/callback")
     public @ResponseBody String AuthCallback(@RequestParam("code") String code) {
         try {
             // 得到Authorization Code

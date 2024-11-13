@@ -26,6 +26,10 @@ public class SecurityConfig {
             // TODO 注意：更新springboot版本3.1.0后。已经不支持再继续使用.csrf().disable()、and()这种类似写法了
             .csrf(AbstractHttpConfigurer::disable)
             .cors(AbstractHttpConfigurer::disable)
+            .authorizeHttpRequests((authorize) ->
+                    authorize.requestMatchers("/login/oauth2/code/**").permitAll()
+                            .anyRequest().authenticated()
+            )
             .formLogin(Customizer.withDefaults())
             // .formLogin((formLogin) ->
             //         formLogin
