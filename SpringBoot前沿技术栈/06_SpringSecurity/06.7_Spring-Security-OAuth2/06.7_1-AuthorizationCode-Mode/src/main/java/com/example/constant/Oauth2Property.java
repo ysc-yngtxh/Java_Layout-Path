@@ -17,7 +17,7 @@ public interface Oauth2Property {
     // 授权路径
     public String AUTHORIZE_URL = "https://gitee.com/oauth/authorize";
     // 回调路径
-    public String CALLBACK_URI = "http://localhost:8080/login/oauth2/code/gitee/callback";
+    public String CALLBACK_URI = "http://localhost:8080/login/oauth2/code/gitee";
     // 令牌路径
     public String TOKEN_URL = "https://gitee.com/oauth/token";
     // 获取用户信息路径
@@ -33,7 +33,7 @@ public interface Oauth2Property {
     // 授权路径
     public String GITHUB_AUTHORIZE_URL = "https://github.com/login/oauth/authorize";
     // 回调路径
-    public String GITHUB_CALLBACK_URI = "http://localhost:8080/login/oauth2/code/github/callback";
+    public String GITHUB_CALLBACK_URI = "http://localhost:8080/login/oauth2/code/github";
     // 令牌路径
     public String GITHUB_TOKEN_URL = "https://github.com/login/oauth/access_token";
     // 获取用户信息路径

@@ -47,7 +47,7 @@ public class GiteeOath2Controller {
      * 授权回调
      * @param code 授权编码
      */
-    @RequestMapping("/login/oauth2/code/gitee/callback")
+    @RequestMapping("/login/oauth2/code/gitee")
     @ResponseBody
     public String AuthCallback(@RequestParam("code") String code) {
         try {

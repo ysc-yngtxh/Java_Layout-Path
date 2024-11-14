@@ -23,21 +23,14 @@ public class GithubOauth2Application {
         return "forward:/login";
     }
 
-    /**
-     * 授权回调
-     * @param code 授权编码
-     */
-    @RequestMapping("/login/oauth2/code/github/callback")
-    public @ResponseBody String GithubAuthCallback(@RequestParam("code") String code) {
-        return "Authorization code: " + code;
+
+    @RequestMapping("/oauth2/github")
+    public @ResponseBody String GithubAuthCallback() {
+        return "Authorization code: ";
     }
 
-    /**
-     * 授权回调
-     * @param code 授权编码
-     */
-    @RequestMapping("/login/oauth2/code/gitee/callback")
-    public @ResponseBody String GiteeAuthCallback(@RequestParam("code") String code) {
-        return "Authorization code: " + code;
+    @RequestMapping("/oauth2/gitee")
+    public @ResponseBody String GiteeAuthCallback() {
+        return "Authorization code: ";
     }
 }

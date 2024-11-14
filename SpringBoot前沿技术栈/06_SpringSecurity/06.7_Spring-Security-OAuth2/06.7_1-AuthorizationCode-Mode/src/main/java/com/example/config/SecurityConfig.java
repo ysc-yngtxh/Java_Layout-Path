@@ -68,11 +68,9 @@ public class SecurityConfig {
             .authorizeHttpRequests(authorize -> authorize
                     .requestMatchers("/").permitAll()
                     .requestMatchers("/gitee/auth").permitAll()
-                    .requestMatchers("/gitee/callback").permitAll()
                     .requestMatchers("/github/auth").permitAll()
-                    .requestMatchers("/github/callback").permitAll()
                     .requestMatchers("/google/auth").permitAll()
-                    .requestMatchers("/google/callback").permitAll()
+                    .requestMatchers("/login/oauth2/code/*").permitAll()
                     .requestMatchers("/static/**").permitAll()
                     .anyRequest().authenticated()
             )
