@@ -9,7 +9,7 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>3_Spring-Security-FormLogin</artifactId>
+    <artifactId>06.3_Spring-Security-FormLogin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <description>${project.artifactId}</description>

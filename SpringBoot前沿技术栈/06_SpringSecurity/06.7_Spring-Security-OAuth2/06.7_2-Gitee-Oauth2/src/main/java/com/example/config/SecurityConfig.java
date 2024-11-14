@@ -94,9 +94,9 @@ public class SecurityConfig {
                                 // .successHandler(customSuccessHandler) // 自定义成功处理器
                                 // .failureHandler(customFailureHandler) // 自定义失败处理器
 
-                                // 自定义授权端点。默认 URI 为：/oauth2/authorization。
+                                // 自定义授权端点。默认 URI 为：/oauth2/authorization
                                 .authorizationEndpoint(authorizationEndpoint -> authorizationEndpoint
-                                        .baseUri("/oauth2/authorize-client")
+                                        .baseUri("/oauth2/authorization")
                                 )
 
                                 // 自定义用户信息端点。用于配置 OAuth2 用户信息的端点。可以指定用户信息 URI 的模板和其他相关属性。
@@ -163,17 +163,17 @@ public class SecurityConfig {
 
     private ClientRegistration githubClientRegistration() {
         // 配置客户端注册信息
-        return ClientRegistration.withRegistrationId("github")
-                .clientId("your-github-client-id")
-                .clientSecret("your-github-client-secret")
+        return ClientRegistration.withRegistrationId("gitee")
+                .clientId("8def619da68a212d02a36d471cef229ab3b80c81222e76ed2e581de76f9a6d0a")
+                .clientSecret("1f5276f0abd9c8b8b5eee50356ca912d61e62a59d0b8ad285dc49b4879b0ddad")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .redirectUri("{baseUrl}/login/oauth2/code/{registrationId}")
-                .scope("read:user", "user:email")
-                .authorizationUri("https://github.com/login/oauth/authorize")
-                .tokenUri("https://github.com/login/oauth/access_token")
-                .userInfoUri("https://api.github.com/user")
-                .userNameAttributeName("id")
+                .scope("pull_requests", "emails", "user_info")
+                .authorizationUri("https://gitee.com/oauth/authorize")
+                .tokenUri("https://gitee.com/oauth/token")
+                .userInfoUri("https://gitee.com/api/v5/user")
+                .userNameAttributeName("name")
                 .build();
     }
 
