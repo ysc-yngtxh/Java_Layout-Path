@@ -67,10 +67,6 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) ->
                         authorize
-                                .requestMatchers(
-                                        // new AntPathRequestMatcher("/login/oauth2/code/**"),
-                                        new AntPathRequestMatcher("/user/**")
-                                ).permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(session ->
@@ -106,7 +102,7 @@ public class SecurityConfig {
 
                                 // 自定义重定向端点。默认 URI 为：login/oauth2/code/*
                                 .redirectionEndpoint(redirectionEndpoint -> redirectionEndpoint
-                                        .baseUri("/login/oauth2/code/gitee")
+                                        .baseUri("/login/oauth2/code/**")
                                 )
 
                                 // 用于配置 OAuth2 访问令牌的端点。可以指定访问令牌 URI 的模板和其他相关属性。
@@ -120,19 +116,20 @@ public class SecurityConfig {
                                 // 用于指定授权客户端服务。可以自定义授权客户端服务来管理用户的授权信息。
                                 .authorizedClientService(authorizedClientService())
 
+
                                 // 用于配置是否允许所有用户访问 OAuth2 登录相关的端点。默认情况下，这些端点是允许所有用户访问的。
                                 .permitAll(true)
                 );
                 // .oauth2Client(oauth2 -> oauth2
                 //         .clientRegistrationRepository(clientRegistrationRepository())
                 //         .authorizedClientService(authorizedClientService())
-                        // .authorizationCodeGrant(authorizationCodeGrant -> authorizationCodeGrant
-                        //         .accessTokenResponseClient(accessTokenResponseClient())
-                        //         .authorizationRequestResolver(authorizationRequestResolver())
-                                // .authorizationRequestCustomizer(authorizationRequestCustomizer -> authorizationRequestCustomizer
-                                //         .additionalParameters(parameters -> parameters.put("custom_param", "value"))
-                                // )
-                        // )
+                //         .authorizationCodeGrant(authorizationCodeGrant -> authorizationCodeGrant
+                //                 .accessTokenResponseClient(accessTokenResponseClient())
+                //                 .authorizationRequestResolver(authorizationRequestResolver())
+                //                 .authorizationRequestCustomizer(authorizationRequestCustomizer -> authorizationRequestCustomizer
+                //                         .additionalParameters(parameters -> parameters.put("custom_param", "value"))
+                //                 )
+                //         )
                 // );
         return http.build();
     }
@@ -164,6 +161,7 @@ public class SecurityConfig {
     private ClientRegistration githubClientRegistration() {
         // 配置客户端注册信息
         return ClientRegistration.withRegistrationId("gitee")
+                .clientName("Gitee")
                 .clientId("8def619da68a212d02a36d471cef229ab3b80c81222e76ed2e581de76f9a6d0a")
                 .clientSecret("1f5276f0abd9c8b8b5eee50356ca912d61e62a59d0b8ad285dc49b4879b0ddad")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)

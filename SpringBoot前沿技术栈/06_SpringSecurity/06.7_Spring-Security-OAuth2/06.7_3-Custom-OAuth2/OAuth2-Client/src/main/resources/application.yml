@@ -5,7 +5,11 @@ server:
     cookie:
       # 需要更换存放sessionId的cookie名字，否则认证服务和客户端的sessionId会相互覆盖
       name: JSESSIONID-2
-
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
 spring:
   application:
     name: authorization-client
@@ -34,8 +38,8 @@ spring:
         provider:
           demo-client-id:
             authorization-uri: http://localhost:9090/oauth2/authorize
-            token-uri: http://localhost:9090/oauth2/token
-            user-info-uri: http://localhost:9090/user/info
+            token-uri: http://localhost:8082/oauth2/token
+            user-info-uri: http://localhost:8082/user/info
             # 获取用户 xxx 属性的值（无默认，不能为空）
             user-name-attribute: name
             issuer-uri: http://localhost:9090

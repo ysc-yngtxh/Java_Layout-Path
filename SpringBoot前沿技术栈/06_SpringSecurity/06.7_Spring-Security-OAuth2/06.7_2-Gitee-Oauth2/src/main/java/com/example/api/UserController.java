@@ -1,6 +1,7 @@
 package com.example.api;
 
 import jakarta.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
@@ -14,16 +15,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @dateTime 2024-11-14 00:06
  * @apiNote TODO
  */
-@Controller("/user")
+@Controller
+@RequestMapping("/user")
 public class UserController {
 
     @RequestMapping("/info")
-    public @ResponseBody String index(HttpServletRequest request,
-                                      @RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient client,
-                                      @AuthenticationPrincipal OAuth2User user) {
+    public String index(HttpServletRequest request,
+                        @RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient client,
+                        @AuthenticationPrincipal OAuth2User user) {
         request.setAttribute("userName", user.getName());
-        request.setAttribute("clientName", client.getClientRegistration().getClientName());
         request.setAttribute("userAttrbutes", user.getAttributes());
+        request.setAttribute("clientName", client.getClientRegistration().getClientName());
         return "userinfo";
+    }
+
+    @RequestMapping("/context")
+    public @ResponseBody Principal context(Principal principal) {
+        return principal;
     }
 }

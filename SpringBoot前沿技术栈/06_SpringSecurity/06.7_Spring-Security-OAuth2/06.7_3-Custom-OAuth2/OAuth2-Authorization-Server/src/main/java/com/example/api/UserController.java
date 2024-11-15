@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class UserController {
 
-    @RequestMapping("/user/info")
-    public @ResponseBody String index() {
-        return "index";
-    }
+    // @RequestMapping("/user/info")
+    // public @ResponseBody String index() {
+    //     return "index";
+    // }
 }

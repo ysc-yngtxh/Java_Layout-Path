@@ -4,16 +4,12 @@ server:
 logging:
     level:
         org.springframework.security: DEBUG
+
 spring:
     security:
         oauth2:
             client:
                 registration:
-                    # github:
-                    #     client-id: Ov23liukOOM7knKdMlD8
-                    #     client-secret: 5f6ec1ae0581fbaed813b2cf2c643736ad4e4cb5
-                    #     redirect-uri: '{baseUrl}/{action}/oauth2/code/{registrationId}'
-                    #     scope: repo,user
                     gitee:
                         client-id: 8def619da68a212d02a36d471cef229ab3b80c81222e76ed2e581de76f9a6d0a
                         client-secret: 1f5276f0abd9c8b8b5eee50356ca912d61e62a59d0b8ad285dc49b4879b0ddad
@@ -24,11 +20,6 @@ spring:
                         client-name: Gitee
                         provider: gitee
                 provider:
-                    # github:
-                    #     authorization-uri: https://github.com/login/oauth/authorize
-                    #     token-uri: https://github.com/login/oauth/access_token
-                    #     user-info-uri: https://api.github.com/user
-                    #     user-name-attribute: login
                     gitee:
                         authorization-uri: https://gitee.com/oauth/authorize
                         token-uri: https://gitee.com/oauth/token
