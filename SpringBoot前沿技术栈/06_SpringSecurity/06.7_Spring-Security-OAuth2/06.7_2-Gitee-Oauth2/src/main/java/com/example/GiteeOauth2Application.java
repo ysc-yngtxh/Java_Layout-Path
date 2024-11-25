@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @SpringBootApplication
-public class GithubOauth2Application {
+public class GiteeOauth2Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(GithubOauth2Application.class, args);
+        SpringApplication.run(GiteeOauth2Application.class, args);
     }
 
     @RequestMapping("/")

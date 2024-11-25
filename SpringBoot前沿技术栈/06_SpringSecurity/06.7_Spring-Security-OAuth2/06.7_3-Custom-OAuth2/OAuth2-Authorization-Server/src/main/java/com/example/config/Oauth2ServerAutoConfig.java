@@ -57,7 +57,7 @@ public class Oauth2ServerAutoConfig {
                 )
                 // Accept access tokens for User Info and/or Client Registration
                 .oauth2ResourceServer(resourceServer -> resourceServer
-                        .jwt(Customizer.withDefaults())
+                        .jwt()
                 );
 
         return http.build();

@@ -116,7 +116,6 @@ public class SecurityConfig {
                                 // 用于指定授权客户端服务。可以自定义授权客户端服务来管理用户的授权信息。
                                 .authorizedClientService(authorizedClientService())
 
-
                                 // 用于配置是否允许所有用户访问 OAuth2 登录相关的端点。默认情况下，这些端点是允许所有用户访问的。
                                 .permitAll(true)
                 );
@@ -166,7 +165,8 @@ public class SecurityConfig {
                 .clientSecret("1f5276f0abd9c8b8b5eee50356ca912d61e62a59d0b8ad285dc49b4879b0ddad")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .redirectUri("{baseUrl}/login/oauth2/code/{registrationId}")
+                // 注意：这里的 {baseUrl} 可能是 http://127.0.0.1:8080。与 http://localhost:8080 有所不同。
+                .redirectUri("{baseUrl}/{action}/oauth2/code/{registrationId}")
                 .scope("pull_requests", "emails", "user_info")
                 .authorizationUri("https://gitee.com/oauth/authorize")
                 .tokenUri("https://gitee.com/oauth/token")
