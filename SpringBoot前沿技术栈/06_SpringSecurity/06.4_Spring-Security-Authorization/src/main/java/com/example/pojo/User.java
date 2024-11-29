@@ -4,16 +4,13 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler;
-import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author 游诗成
@@ -47,7 +44,7 @@ public class User implements Serializable {
     /**
      * 密码
      */
-    private String password;
+    private String passWord;
 
     /**
      * 帐号状态(0正常，1停用)
@@ -62,7 +59,7 @@ public class User implements Serializable {
     /**
      * 手机号
      */
-    private String phonenumber;
+    private String phone;
 
     /**
      * 用户性别(0男， 1女， 2未知)
@@ -80,10 +77,10 @@ public class User implements Serializable {
     private String userType;
 
     /**
-     * 用户权限
+     * 用户权限、角色
      */
     @TableField(typeHandler= FastjsonTypeHandler.class)
-    private List<String> permssion;
+    private List<String> permission;
 
     /**
      * 创建人的用户id
@@ -93,7 +90,7 @@ public class User implements Serializable {
     /**
      * 创建时间
      */
-    private LocalDateTime createTime;
+    private LocalDateTime createDate;
 
     /**
      * 更新人
@@ -103,7 +100,7 @@ public class User implements Serializable {
     /**
      * 更新时间
      */
-    private LocalDateTime updateTime;
+    private LocalDateTime updateDate;
 
     /**
      * 删除标志(0未删除， 1已删除)

@@ -35,7 +35,7 @@ public class ShiroConfig {
         Map.put("/user/update", "perms[user:update]");  // 授权要写在认证前面，否则会发生安全穿透
 
         // 必须认证了才能访问
-        // Map.put("/user/*","authc");
+        // Map.put("/user/*", "authc");
 
         bean.setFilterChainDefinitionMap(Map);
 

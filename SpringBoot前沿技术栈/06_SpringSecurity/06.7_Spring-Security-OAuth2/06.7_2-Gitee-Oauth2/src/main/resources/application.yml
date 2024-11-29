@@ -1,11 +1,17 @@
 server:
     port: 8080
+    address: localhost
 
 logging:
     level:
         org.springframework.security: DEBUG
 
 spring:
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/springdb?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+        username: root
+        password: 131474
     security:
         oauth2:
             client:
@@ -13,7 +19,8 @@ spring:
                     gitee:
                         client-id: 8def619da68a212d02a36d471cef229ab3b80c81222e76ed2e581de76f9a6d0a
                         client-secret: 1f5276f0abd9c8b8b5eee50356ca912d61e62a59d0b8ad285dc49b4879b0ddad
-                        # SpringSecurity 规定回调地址为：/login/oauth2/code/* ，否则不识别
+                        # SpringSecurity 默认规定的回调地址为：/login/oauth2/code/* ，否则不识别。但也可以自定义回调地址。
+                        # 如果确认配置的回调地址一致后还是不识别，有可能是 {baseUrl} 中的 127.0.0.1 与 localhost 不一致导致的。可以通过在 yml 文件中指定 server.address 属性来解决
                         redirect-uri: '{baseUrl}/{action}/oauth2/code/{registrationId}'
                         authorization-grant-type: authorization_code
                         scope: user_info
@@ -24,8 +31,6 @@ spring:
                         authorization-uri: https://gitee.com/oauth/authorize
                         token-uri: https://gitee.com/oauth/token
                         user-info-uri: https://gitee.com/api/v5/user
+                        # user-name-attribute: login 的作用是告诉 Spring Security OAuth2 将 OAuth2 提供商返回的用户信息中的 login 属性视为用户的用户名。
+                        # 如果不设置 user-name-attribute，Spring Security OAuth2 将默认使用 OAuth2 提供商返回的用户信息中的 sub 属性作为用户的用户名。
                         user-name-attribute: login
-# user-name-attribute: login 的作用是告诉 Spring Security OAuth2 将 OAuth2 提供商返回的用户信息中的 login 属性视为用户的用户名。
-# 如果不设置 user-name-attribute，Spring Security OAuth2 将默认使用 OAuth2 提供商返回的用户信息中的 sub 属性作为用户的用户名。
-# 在 GitHub 的用户信息响应中，sub 属性是用户的唯一标识符，而 login 属性是用户的用户名。因此，如果将 user-name-attribute 设置为 login，Spring Security OAuth2 将使用 login 属性的值作为用户的用户名。
-# 如果不设置 user-name-attribute，Spring Security OAuth2 将使用默认的 sub 属性作为用户的用户名。这可能适用于大多数 OAuth2 提供商，因为它们通常会返回一个唯一的用户标识符。

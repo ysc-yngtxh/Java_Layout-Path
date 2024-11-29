@@ -79,7 +79,8 @@ public class SecurityConfig {
                 // 设置哪些路径可以直接访问不需要认证(permitAll()表示允许所有人访问)
                 .authorizeHttpRequests().requestMatchers("/").permitAll()
                 .requestMatchers("/user/login").anonymous()  // anonymous()表示匿名访问（登陆提交接口通常都是匿名访问）
-                .requestMatchers("/code").hasAuthority("admin")
+                .requestMatchers("/code").hasAuthority("admin") // 需要 admin 的权限才能访问
+                .requestMatchers("/menu").hasRole("ADMIN") // 需要 admin 的角色才能访问（对应的数据库中的 ROLE_ADMIN）
                 // .requestMatchers("/static/**").permitAll()
                 // 其余的都需要认证校验(拦截)
                 .anyRequest().authenticated()
@@ -162,5 +163,10 @@ public class SecurityConfig {
                 web.ignoring().requestMatchers("/static/**");
             }
         };
+    }
+
+    public static void main(String[] args) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        System.out.println(bCryptPasswordEncoder.encode("123456"));
     }
 }

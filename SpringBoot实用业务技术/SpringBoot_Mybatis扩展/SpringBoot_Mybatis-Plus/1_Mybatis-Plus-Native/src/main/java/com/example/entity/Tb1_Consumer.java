@@ -35,7 +35,7 @@ public class Tb1_Consumer implements Serializable {
     @Serial
     private static final long serialVersionUID = 692869694057194050L;
 
-    // 主键Id。当我们的主键Id字段不是 Id 时，应该添加上@TableId注解进行认为映射主键。这里是 Id值恰好对上，则不需要
+    // 主键Id。当我们的主键Id字段不是 Id 时，应该添加上@TableId注解进行人为映射主键。这里是 Id值恰好对上，则不需要
     private Integer id;
     // 上级Id
     private Integer superiorId; // 这里驼峰字段，Mybatis-plus 会自动转为字段superior_id

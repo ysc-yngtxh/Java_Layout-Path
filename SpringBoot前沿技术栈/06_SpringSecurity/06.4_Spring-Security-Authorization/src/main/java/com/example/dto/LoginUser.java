@@ -28,7 +28,7 @@ public class LoginUser implements UserDetails {
     private List<String> permission;
 
     // 存储Security所需要的权限信息集合，这里权限敏感数据，不去做序列化
-    // 这里的SimpleGrantedAuthority类是GrantedAuthority类的实现类
+    // 这里的SimpleGrantedAuthority 类是 GrantedAuthority 类的实现类
     // @JSONField(serialize = false)
     private transient List<SimpleGrantedAuthority> authorityList;
 
@@ -37,6 +37,7 @@ public class LoginUser implements UserDetails {
         this.permission = permission;
     }
 
+    // GrantedAuthority 类被用于表示用户被授予的权限
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (Objects.nonNull(authorityList)) {
@@ -48,7 +49,7 @@ public class LoginUser implements UserDetails {
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return user.getPassWord();
     }
 
     @Override

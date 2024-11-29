@@ -48,17 +48,17 @@ public class LoginController {
 
     @GetMapping("/level1/{id}")
     public String level1(@PathVariable("id") int id) {
-        return "view/level1" + "/" + id;
+        return "view/level1/" + id;
     }
 
     @GetMapping("/level2/{id}")
     public String level2(@PathVariable("id") int id) {
-        return "view/level2" + "/" + id;
+        return "view/level2/" + id;
     }
 
     @GetMapping("/level3/{id}")
     public String level3(@PathVariable("id") int id) {
-        return "view/level3" + "/" + id;
+        return "view/level3/" + id;
     }
 
 

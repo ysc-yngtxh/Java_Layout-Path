@@ -30,8 +30,8 @@ public class Tb2_Sku implements Serializable {
     @Serial
     private static final long serialVersionUID = 436500863014955490L;
 
-    // 主键Id。当我们的主键Id字段不是 Id 时，应该添加上@TableId注解进行认为映射主键
-    // @TableId参数：value映射数据库column列主键字段；type设置新增数据主键Id规则,有自增、UUID等
+    // 主键Id。当我们的主键Id字段不是 Id 时，应该添加上@TableId注解进行人为映射主键
+    // @TableId参数：value映射数据库column列主键字段；type设置新增数据主键Id规则,有自增(数据库自增)、UUID等
     // 并且这里作为局部的Id生成策略，会覆盖掉application.properties中的全局Id生成策略
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;

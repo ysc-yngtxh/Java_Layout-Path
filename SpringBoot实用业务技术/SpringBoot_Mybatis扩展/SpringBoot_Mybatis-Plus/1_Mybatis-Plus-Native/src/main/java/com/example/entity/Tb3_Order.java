@@ -44,8 +44,8 @@ public class Tb3_Order implements Serializable {
     @Serial
     private static final long serialVersionUID = -53428860068885420L;
 
-    // 订单id。当我们的主键Id字段不是 Id 时，应该添加上@TableId注解进行认为映射主键
-    // @TableId参数：value映射数据库column列主键字段；type设置新增数据主键Id规则,有自增、UUID等
+    // 订单id。当我们的主键Id字段不是 Id 时，应该添加上@TableId注解进行人为映射主键
+    // @TableId参数：value映射数据库column列主键字段；type设置新增数据主键Id规则,有自增(数据库自增)、UUID等
     // 并且这里作为局部的Id生成策略，会覆盖掉application.properties中的全局Id生成策略
     @TableId(value = "order_id", type = IdType.AUTO)
     private Long orderId;

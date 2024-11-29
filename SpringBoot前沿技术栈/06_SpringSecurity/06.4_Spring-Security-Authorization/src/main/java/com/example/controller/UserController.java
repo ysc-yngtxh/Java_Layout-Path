@@ -42,5 +42,10 @@ public class UserController {
     public @ResponseBody String code(){
         return "无敌是多么，多么寂寞~";
     }
+
+    @RequestMapping("/menu")
+    public @ResponseBody String menu(){
+        return "一片赤胆平乱世，手中长枪定江山！";
+    }
 }
 

@@ -1,6 +1,7 @@
 package com.example.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.dto.LoginUser;
 import com.example.mapper.UserMapper;
 import com.example.pojo.User;
@@ -66,7 +67,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Optional.ofNullable(user)
                 .orElseThrow(() -> new RuntimeException("用户名不存在!!!"));
 
-        List<String> permsssion = user.getPermssion();
+        List<String> permsssion = user.getPermission();
 
         /**
          * 这里需要注意的点就是：spring security把权限和角色放一起了
