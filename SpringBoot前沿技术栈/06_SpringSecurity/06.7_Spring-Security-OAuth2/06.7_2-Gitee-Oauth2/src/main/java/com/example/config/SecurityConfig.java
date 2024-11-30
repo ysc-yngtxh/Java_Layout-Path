@@ -75,9 +75,6 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        // .requestMatchers("/result/user").hasAnyRole("USER")
-                        // .requestMatchers("/result/admin").hasAnyRole("ADMIN")
-                        // .requestMatchers("/result/vip").hasAnyRole("VIP")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session ->

@@ -1,7 +1,7 @@
 package com.example.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.entity.SysUser;
+import com.example.pojo.entity.SysUser;
 
 /**
  * @author 游诗成

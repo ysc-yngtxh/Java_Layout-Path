@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.dto.ResponseResult;
+import com.example.pojo.vo.ResponseResult;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,7 +1,7 @@
 package com.example.controller;
 
-import com.example.dto.ResponseResult;
-import com.example.pojo.User;
+import com.example.pojo.vo.ResponseResult;
+import com.example.pojo.po.User;
 import com.example.service.impl.LoginServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

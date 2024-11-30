@@ -1,6 +1,6 @@
 package com.example.service.impl;
 
-import com.example.entity.SysRole;
+import com.example.pojo.entity.SysRole;
 import com.example.mapper.SysRoleMapper;
 import com.example.service.SysRoleService;
 import jakarta.annotation.Resource;

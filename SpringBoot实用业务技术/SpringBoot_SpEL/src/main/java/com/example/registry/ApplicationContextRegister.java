@@ -19,7 +19,7 @@ public class ApplicationContextRegister implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.APPLICATION_CONTEXT = applicationContext;
+        APPLICATION_CONTEXT = applicationContext;
     }
 
     public static ApplicationContext getApplicationContext() {

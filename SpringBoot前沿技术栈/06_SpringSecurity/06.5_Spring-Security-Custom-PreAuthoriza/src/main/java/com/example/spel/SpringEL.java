@@ -1,6 +1,6 @@
 package com.example.spel;
 
-import com.example.dto.LoginUser;
+import com.example.security.bo.LoginUserDetails;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ public class SpringEL {
 
     public boolean hasAuthorization(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        LoginUser user = (LoginUser) authentication.getAuthorities();
+        LoginUserDetails user = (LoginUserDetails) authentication.getAuthorities();
         List<String> permission = user.getPermission();
         // 匹配 'system:*:*'
         Pattern compile = Pattern.compile("^(system:)?([a-z]+:)?([a-z]+)$");

@@ -1,6 +1,6 @@
 package com.example.service;
 
-import com.example.entity.SysMenu;
+import com.example.pojo.entity.SysMenu;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
 package com.example.filter;
 
 import com.alibaba.fastjson.JSONObject;
-import com.example.authentication.CustomAuthenticationManager;
-import com.example.entity.SysUser;
-import com.example.handler.CustomFailureHandler;
-import com.example.handler.CustomSuccessHandler;
+import com.example.security.authentication.CustomAuthenticationManager;
+import com.example.pojo.entity.SysUser;
+import com.example.security.handler.CustomFailureHandler;
+import com.example.security.handler.CustomSuccessHandler;
 import com.example.utils.MultiReadHttpServletRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

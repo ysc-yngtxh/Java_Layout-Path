@@ -1,7 +1,7 @@
 package com.example.service;
 
-import com.example.dto.ResponseResult;
-import com.example.entity.SysUser;
+import com.example.pojo.vo.ResponseResult;
+import com.example.pojo.entity.SysUser;
 
 public interface LoginService {
 

@@ -1,7 +1,7 @@
 package com.example.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.example.dto.LoginUser;
+import com.example.security.bo.LoginUserDetails;
 import com.example.service.LoginService;
 import com.example.utils.JwtUtil;
 import com.example.utils.RedisCache;
@@ -47,14 +47,14 @@ public class LoginServiceImpl implements LoginService {
             throw new RuntimeException("登陆失败");
         }
         // 如果认证通过，根据我们的认证逻辑是获取该用户所有信息的
-        LoginUser loginUser = (LoginUser) authenticationToken.getPrincipal();
-        String userId = loginUser.getUser().getId().toString();
+        LoginUserDetails loginUserDetails = (LoginUserDetails) authenticationToken.getPrincipal();
+        String userId = loginUserDetails.getUser().getId().toString();
         // 使用userId生成一个jwt，并将jwt放入ResponseResult返回
         String jwt = JwtUtil.createJwt(userId);
         Map<Object, Object> map = new HashMap<>();
         map.put("token", jwt);
         // 把完整的用户信息存入Redis,使用userId作为key
-        redisCache.setCacheObject("login:" + userId, loginUser);
+        redisCache.setCacheObject("login:" + userId, loginUserDetails);
 
         // 获取请求中的属性对象
         RequestAttributes requestAttributes = RequestContextHolder.currentRequestAttributes();

@@ -1,6 +1,6 @@
 package com.example.service;
 
-import com.example.entity.SysRole;
+import com.example.pojo.entity.SysRole;
 
 import java.util.List;
 

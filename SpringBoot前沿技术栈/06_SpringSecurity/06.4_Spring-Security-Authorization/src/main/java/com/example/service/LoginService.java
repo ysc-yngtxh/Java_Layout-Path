@@ -1,6 +1,6 @@
 package com.example.service;
 
-import com.example.dto.ResponseResult;
+import com.example.pojo.vo.ResponseResult;
 
 public interface LoginService {
     String login();

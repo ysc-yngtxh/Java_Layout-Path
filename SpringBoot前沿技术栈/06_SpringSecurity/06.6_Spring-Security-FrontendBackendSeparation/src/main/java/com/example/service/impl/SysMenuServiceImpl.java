@@ -1,12 +1,11 @@
 package com.example.service.impl;
 
-import com.example.entity.SysMenu;
+import com.example.pojo.entity.SysMenu;
 import com.example.mapper.SysMenuMapper;
 import com.example.service.SysMenuService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
 import java.util.List;
 
 /**

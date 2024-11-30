@@ -3,7 +3,7 @@ package com.example.filter;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson2.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.example.dto.LoginUser;
+import com.example.security.bo.LoginUserDetails;
 import com.example.utils.JwtUtil;
 import com.example.utils.MultiReadHttpServletRequest;
 import com.example.utils.MultiReadHttpServletResponse;
@@ -83,15 +83,15 @@ public class MyAuthenticationFilter extends OncePerRequestFilter {
                 // 从redis中获取用户信息
                 String redisKey = "login:" + userId;
                 Object cacheObject = redisCache.getCacheObject(redisKey);
-                LoginUser loginUser =
-                        JSONUtil.toBean(JSONObject.toJSONString(cacheObject), LoginUser.class);
+                LoginUserDetails loginUserDetails =
+                        JSONUtil.toBean(JSONObject.toJSONString(cacheObject), LoginUserDetails.class);
 
-                if (loginUser == null || loginUser.getCurrentSysUserInfo() == null) {
+                if (loginUserDetails == null || loginUserDetails.getCurrentSysUserInfo() == null) {
                     throw new AccessDeniedException("TOKEN已过期，请重新登录！");
                 }
                 // 三个参数的构造方法，用以表明认证成功
                 UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(loginUser, loginUser.getCurrentSysUserInfo().getPassword(), loginUser.getAuthorities());
+                        new UsernamePasswordAuthenticationToken(loginUserDetails, loginUserDetails.getCurrentSysUserInfo().getPassword(), loginUserDetails.getAuthorities());
                 // 全局注入角色权限信息和登录用户基本信息
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }

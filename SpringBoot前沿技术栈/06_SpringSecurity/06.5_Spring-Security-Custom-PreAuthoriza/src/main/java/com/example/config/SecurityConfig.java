@@ -1,9 +1,9 @@
 package com.example.config;
 
 import com.alibaba.fastjson2.JSON;
-import com.example.dto.LoginUser;
-import com.example.dto.ResponseResult;
-import com.example.service.impl.UserDetailsServiceImpl;
+import com.example.security.bo.LoginUserDetails;
+import com.example.pojo.vo.ResponseResult;
+import com.example.security.service.UserDetailsServiceImpl;
 import com.example.utils.WebUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -86,8 +86,8 @@ public class SecurityConfig {
         return new AuthenticationSuccessHandler() {
             @Override
             public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-                LoginUser loginUser = (LoginUser) authentication.getPrincipal();
-                String token = loginUser.getUser().getToken();
+                LoginUserDetails loginUserDetails = (LoginUserDetails) authentication.getPrincipal();
+                String token = loginUserDetails.getUser().getToken();
                 WebUtil.renderText(response, token);
             }
         };
@@ -133,7 +133,7 @@ public class SecurityConfig {
 
                 // 设置哪些路径可以直接访问不需要认证(permitAll()表示允许所有人访问)
                 .authorizeHttpRequests().requestMatchers("/").permitAll()
-                .requestMatchers("/user/login").anonymous()
+                .requestMatchers("/user/login").anonymous()  //表示该路径可以被匿名访问
                 .anyRequest().authenticated()
                 .and()
 
@@ -197,7 +197,7 @@ public class SecurityConfig {
                 // .logoutSuccessUrl("/logout")
                 // 注销处理器
                 // .logoutSuccessHandler((req, resp, authentication) -> {
-                //     LoginUser principal = (LoginUser) authentication.getPrincipal();
+                //     LoginUserDetails principal = (LoginUserDetails) authentication.getPrincipal();
                 //     resp.setContentType("application/json;charset=utf-8");
                 //     PrintWriter out = resp.getWriter();
                 //     out.write(principal.getUsername() + "退出登录！");

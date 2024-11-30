@@ -1,11 +1,11 @@
 package com.example.config;
 
 import com.alibaba.fastjson2.JSON;
-import com.example.authorization.UrlAuthorizationManager;
-import com.example.dto.ResponseResult;
+import com.example.security.authorization.UrlAuthorizationManager;
+import com.example.pojo.vo.ResponseResult;
 import com.example.filter.AdminAuthenticationProcessingFilter;
 import com.example.filter.MyAuthenticationFilter;
-import com.example.handler.CustomFailureHandler;
+import com.example.security.handler.CustomFailureHandler;
 import com.example.utils.WebUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,7 +29,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Objects;
 
 import static org.springframework.security.config.Customizer.withDefaults;

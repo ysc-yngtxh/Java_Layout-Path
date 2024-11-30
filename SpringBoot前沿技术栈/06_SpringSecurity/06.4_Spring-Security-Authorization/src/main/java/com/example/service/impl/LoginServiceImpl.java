@@ -1,8 +1,8 @@
 package com.example.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.example.dto.LoginUser;
-import com.example.dto.ResponseResult;
+import com.example.security.bo.LoginUserDetails;
+import com.example.pojo.vo.ResponseResult;
 import com.example.service.LoginService;
 import com.example.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;
@@ -27,9 +27,9 @@ public class LoginServiceImpl implements LoginService {
             throw new RuntimeException("登陆失败");
         }
         // 如果认证通过，根据我们的认证逻辑是获取该用户所有信息的
-        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+        LoginUserDetails loginUserDetails = (LoginUserDetails) authentication.getPrincipal();
 
-        String userId = loginUser.getUser().getId().toString();
+        String userId = loginUserDetails.getUser().getId().toString();
         // 使用userId生成一个jwt，并将jwt放入ResponseResult返回
         return JwtUtil.createJwt(userId);
     }

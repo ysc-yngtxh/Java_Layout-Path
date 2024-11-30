@@ -1,9 +1,9 @@
 package com.example.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.example.dto.LoginUser;
-import com.example.dto.ResponseResult;
-import com.example.entity.SysUser;
+import com.example.security.bo.LoginUserDetails;
+import com.example.pojo.vo.ResponseResult;
+import com.example.pojo.entity.SysUser;
 import com.example.mapper.SysUserMapper;
 import com.example.service.LoginService;
 import com.example.utils.RedisCache;
@@ -32,8 +32,8 @@ public class LoginServiceImpl implements LoginService {
     public ResponseResult<String> logout() {
         // 获取SecurityContextHolder中的用户id
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
-        String userId = loginUser.getCurrentSysUserInfo().getId().toString();
+        LoginUserDetails loginUserDetails = (LoginUserDetails) authentication.getPrincipal();
+        String userId = loginUserDetails.getCurrentSysUserInfo().getId().toString();
         // 删除redis中的值
         redisCache.deleteObject("login:" + userId);
         return new ResponseResult<>(200, "登出成功", null);

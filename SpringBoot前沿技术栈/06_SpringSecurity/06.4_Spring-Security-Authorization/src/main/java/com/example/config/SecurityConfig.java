@@ -1,6 +1,6 @@
 package com.example.config;
 
-import com.example.service.impl.UserDetailsServiceImpl;
+import com.example.security.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -127,7 +127,7 @@ public class SecurityConfig {
                 .logoutSuccessUrl("/logout")
                 // 注销处理器
                 // .logoutSuccessHandler((req, resp, authentication) -> {
-                //     LoginUser principal = (LoginUser) authentication.getPrincipal();
+                //     LoginUserDetails principal = (LoginUserDetails) authentication.getPrincipal();
                 //     resp.setContentType("application/json;charset=utf-8");
                 //     PrintWriter out = resp.getWriter();
                 //     out.write(principal.getUsername() + "退出登录！");

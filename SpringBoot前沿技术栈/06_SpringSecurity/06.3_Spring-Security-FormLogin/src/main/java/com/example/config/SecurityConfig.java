@@ -1,6 +1,6 @@
 package com.example.config;
 
-import com.example.service.impl.UserDetailsServiceImpl;
+import com.example.security.services.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -144,7 +143,7 @@ public class SecurityConfig {
                 // .logoutSuccessUrl("/toLoginForm")
                 // 注销处理器
                 // .logoutSuccessHandler((req, resp, authentication) -> {
-                //     LoginUser principal = (LoginUser) authentication.getPrincipal();
+                //     LoginUserDetails principal = (LoginUserDetails) authentication.getPrincipal();
                 //     resp.setContentType("application/json;charset=utf-8");
                 //     PrintWriter out = resp.getWriter();
                 //     out.write(principal.getUsername() + "退出登录！");

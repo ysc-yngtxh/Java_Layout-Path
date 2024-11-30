@@ -1,10 +1,10 @@
 package com.example.controller;
 
 import com.example.config.MyAuthorizationProperties;
-import com.example.dto.ResponseResult;
-import com.example.entity.SysUser;
+import com.example.pojo.vo.ResponseResult;
+import com.example.pojo.entity.SysUser;
 import com.example.service.LoginService;
-import com.example.vo.User;
+import com.example.pojo.dto.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
