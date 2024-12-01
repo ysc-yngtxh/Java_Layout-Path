@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /**
  * @author 游家纨绔
  * @dateTime 2024-11-14 00:06
- * @apiNote TODO
+ * @apiNote TODO 用户登录后即可访问的接口
  */
 @Controller
 @RequestMapping("/user")

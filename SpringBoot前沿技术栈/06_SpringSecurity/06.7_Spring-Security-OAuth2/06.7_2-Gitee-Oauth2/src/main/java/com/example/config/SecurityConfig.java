@@ -33,17 +33,21 @@ import org.springframework.security.web.SecurityFilterChain;
 /**
  * @author 游家纨绔
  * @dateTime 2023-05-23 18:43
- * @apiNote TODO 配置类
+ * @apiNote TODO SpringSecurity、OAuth2配置类
  */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
+    // 。
     @Bean
     public PasswordEncoder passwordEncoder() {
+        // NoOpPasswordEncoder 表示不进行任何密码编码的密码编码器，但是明文存储密码是极其不安全，因此官方标记已过时。
+        // 在实际项目中，应该使用更安全的密码编码器，如 BCryptPasswordEncoder。
         return NoOpPasswordEncoder.getInstance();
     }
 
+    // 创建了一个用户名为 "admin"、密码为 "123456" 且具有 "ADMIN" 角色的用户，并将其存储在内存中。
     @Bean
     public UserDetailsService userDetailsService() {
         return new InMemoryUserDetailsManager(

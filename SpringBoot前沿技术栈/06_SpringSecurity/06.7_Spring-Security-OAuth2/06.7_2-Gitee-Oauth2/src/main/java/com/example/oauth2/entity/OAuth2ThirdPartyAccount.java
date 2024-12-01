@@ -11,7 +11,7 @@ import lombok.Data;
 /**
  * @author 游家纨绔
  * @dateTime 2024-11-29 12:41
- * @apiNote TODO
+ * @apiNote TODO OAuth2的映射信息类
  */
 @Data
 @TableName("oauth2_account")

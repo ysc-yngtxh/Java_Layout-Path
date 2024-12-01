@@ -1,6 +1,7 @@
 package com.example.config;
 
 import com.example.security.services.UserDetailsServiceImpl;
+import javax.swing.Spring;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,9 +31,18 @@ public class SecurityConfig {
 
     private final UserDetailsServiceImpl userDetailsService;
 
-
-    // 密码加密编码方式不使用默认的加密方式，使用BCryptPasswordEncoder
-    // 当我们不加加密方式时，spring security默认的加密方式就是将用户密码前加上{noop}。所以我们从数据库的密码要是{noop}xxxxx的形式
+    /**
+     * Spring Security 本身并没有默认的密码校验算法。
+     * 从SpringSecurity 5.0开始，框架强制要求使用PasswordEncoder接口来处理密码，并且需要明确配置一个实现类来指定具体的密码编码和校验逻辑。
+     * 官方推荐使用 DelegatingPasswordEncoder，它支持多种编码格式，并且可以透明地处理不同类型的哈希算法。
+     * 这样，即使未来需要更改密码编码策略，也可以平滑过渡而不需要重新编码所有现有密码。
+     *
+     * 这里密码加密编码方式使用的是 BCryptPasswordEncoder.
+     *
+     * 在Spring Security中，如果你选择使用明文存储密码（生产环境中是非常不推荐），你必须在密码前加上 {noop} 前缀。
+     * {noop} 前缀表明这是一个故意以明文形式存储的密码。
+     * 这种情况下，Spring Security会跳过所有密码编码器，直接将用户输入的密码与数据库中存储的明文密码进行比较。
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

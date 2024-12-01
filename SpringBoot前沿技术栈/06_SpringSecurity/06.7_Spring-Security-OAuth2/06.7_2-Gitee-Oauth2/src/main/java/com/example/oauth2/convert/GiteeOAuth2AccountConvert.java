@@ -14,7 +14,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 /**
  * @author 游家纨绔
  * @dateTime 2024-11-29 12:28
- * @apiNote TODO
+ * @apiNote TODO Gitee 的属性转换类
  */
 public class GiteeOAuth2AccountConvert {
 

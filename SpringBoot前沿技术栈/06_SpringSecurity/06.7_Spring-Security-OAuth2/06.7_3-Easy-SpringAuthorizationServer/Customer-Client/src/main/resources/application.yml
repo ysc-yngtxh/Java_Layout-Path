@@ -1,0 +1,40 @@
+
+server:
+  port: 8080
+  address: 127.0.0.1
+
+logging:
+  level:
+    org:
+      springframework:
+        security: trace
+
+spring:
+  application:
+    name: authorization-client
+  security:
+    oauth2:
+      client:
+        registration:
+          myClient:
+            client-id: ysc
+            client-secret: ｛noop｝123456
+            authorization-grant-type: authorization_code
+            # 客户端回调地址（谨慎使用127.0.0.1）
+            redirect-uri: '{baseUrl}/{action}/oauth2/code/{registrationId}'
+            # client-authentication-method: POST
+            scope: openid, profile
+            client-name: myClient
+            # 服务提供商名
+            provider: sas
+        provider:
+          sas:
+            # 授权地址
+            authorization-uri: http://ysc-macbook-air:9090/oauth2/authorize
+            # 访问令牌地址
+            token-uri: http://ysc-macbook-air:9090/oauth2/token
+            # 用于验证JWT签名的、oauth2授权服务器的公钥集合
+            jwk-set-uri: http://ysc-macbook-air:9090/oauth2/jwks
+
+
+

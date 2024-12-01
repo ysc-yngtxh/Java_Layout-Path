@@ -17,7 +17,8 @@
     <modules>
         <module>06.7_1-AuthorizationCode-Mode</module>
         <module>06.7_2-Gitee-Oauth2</module>
-        <module>06.7_3-Custom-Oauth2</module>
+        <module>06.7_3-Easy-SpringAuthorizationServer</module>
+        <module>06.7_4-Custom-OAuth2</module>
     </modules>
     <packaging>pom</packaging>
 </project>
