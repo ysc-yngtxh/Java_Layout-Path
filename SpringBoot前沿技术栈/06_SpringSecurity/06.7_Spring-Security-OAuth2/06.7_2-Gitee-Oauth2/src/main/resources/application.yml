@@ -27,6 +27,7 @@ spring:
                         client-name: Gitee
                         provider: gitee
                 provider:
+                    # provider 中各个uri的默认值可通过 AuthorizationServerSettings 查看得知；
                     gitee:
                         authorization-uri: https://gitee.com/oauth/authorize
                         token-uri: https://gitee.com/oauth/token
