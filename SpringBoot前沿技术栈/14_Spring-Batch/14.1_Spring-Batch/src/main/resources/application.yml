@@ -8,7 +8,9 @@ spring:
     password: 131474
   sql:
     init:
-      # embedded表示只在初始化的时候执行一次  always表示每次重启都会执行  never表示不会去执行
+      # always: 表示总是执行 schemaLocations 和 dataLocations 声明的脚本
+      # embedded: 表示只有是内存数据库（如 H2, HSQLDB）时，会在每次启动时删除并重新创建数据库。
+      # never: 表示不执行
       mode: never
       # 表示执行DDL脚本 （这里的路径是spring-batch-core中依赖里的sql脚本，替换成自己的sql脚本也可以）
       schema-locations: classpath:org/springframework/batch/core/schema-mysql.sql # 或者 classpath:schema-mysql.sql

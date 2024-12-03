@@ -1,0 +1,51 @@
+
+server:
+  port: 8080
+  address: 127.0.0.1
+
+logging:
+  level:
+    org:
+      springframework:
+        security: trace
+
+spring:
+  application:
+    name: authorization-client
+  security:
+    oauth2:
+      client:
+        registration:
+          myClient:
+            client-id: yjwk
+            client-secret: 123456
+            authorization-grant-type: authorization_code
+            # 客户端回调地址（谨慎使用127.0.0.1。如使用的是 127.0.0.1，页面上访问域名不能使用localhost）
+            # {baseUrl} 是客户端的域名(当前服务器域名)，可以通过 server.address 属性指定
+            redirect-uri: '{baseUrl}/{action}/oauth2/code/{registrationId}'
+            # client-authentication-method: POST
+            scope: openid, profile, pull_requests, groups, emalls
+            client-name: myClient
+            # 服务提供商的名称
+            provider: sas
+        provider:
+          # 1、provider 中各个uri的默认值可通过 AuthorizationServerSettings 查看得知；
+          # 2、provider 中各个uri的 host部分(localhost) 应当与 客户端的域名(127.0.0.1) 区分开。
+          #   若 授权服务器 与 客户端 的域名保持一致，那么授权服务器在重定向到 回调接口 过程中，
+          #   回调地址里host与授权服务器的host是一致的，浏览器中会产生cookie覆盖，从而导致无法获取授权请求；
+          sas:
+            # 授权地址
+            authorization-uri: http://localhost:9090/oauth2/authorize
+            # 访问令牌地址
+            token-uri: http://localhost:9090/oauth2/token
+            # 用于验证JWT签名的、oauth2授权服务器的公钥集合
+            jwk-set-uri: http://localhost:9090/oauth2/jwks
+
+
+# 针对 cookie覆盖问题 的说明：
+# 1、在访问页面的时候我们的每一个请求，都会从携带的Cookie中找到key为JSESSIONID的value值去和服务器的任何一个session的id进行比对，
+#    如果不存在，则服务器就创建一个新的session，并同时创建一个key为JSESSIONID，value为该session的id的cookie并响应给浏览器写入
+#    如果存在，那么这个key为JSESSIONID的Cookie将一直存在于此次的会话里，用于辨别该用户的操作。
+# 2、假设 客户端(localhost:8080) 的 JSESSIONID=123，授权服务器(localhost:9090) 的 JSESSIONID=456.
+#    那么在授权服务器重定向到客户端的时候，由于域名相同，导致浏览器中 Cookie覆盖。
+#    回调接口 localhost:8080/** 的 JSESSIONID 与 session 比对不相同，被认为不是同一个会话，从而导致授权请求失败
