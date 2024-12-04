@@ -40,6 +40,9 @@ spring:
             token-uri: http://localhost:9090/oauth2/token
             # 用于验证JWT签名的、oauth2授权服务器的公钥集合
             jwk-set-uri: http://localhost:9090/oauth2/jwks
+            # 获取用户的信息地址（AuthorizationServerSettings）
+            user-info-uri: http://localhost:9090/userinfo
+            user-name-attribute: sub
 
 
 # 针对 cookie覆盖问题 的说明：

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-public class OauthClientController {
+public class OidcClientController {
 
     @RequestMapping("/hello")
     public String Hello() {

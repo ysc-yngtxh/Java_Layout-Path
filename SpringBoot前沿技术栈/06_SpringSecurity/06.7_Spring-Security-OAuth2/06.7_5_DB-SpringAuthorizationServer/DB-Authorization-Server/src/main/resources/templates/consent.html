@@ -14,12 +14,14 @@
             <span th:text="${clientName}" style="font-style:italic;color:blue"></span>
             希望获取账号 <span th:text="${principalName}" style="font-style:italic;color:blue"></span>
             的以下许可：
-            <ol>
-                <li th:each="scope:${scopes}">
-                    <input type="checkbox" name="scope" th:value="${scope}" checked/>
-                    <span th:text="${scope}"></span>
-                </li>
-            </ol>
+            <ul style="margin-left: 600px;">
+                <ol>
+                    <li th:each="scope:${scopes}" style="text-align: left" >
+                        <input type="checkbox" name="scope" th:value="${scope}" checked/>
+                        <span th:text="${scope}"></span>
+                    </li>
+                </ol>
+            </ul>
         </div>
         <input type="hidden" name="client_id" th:value="${clientId}"/>
         <input type="hidden" name="state" th:value="${state}"/>
