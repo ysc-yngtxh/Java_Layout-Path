@@ -19,6 +19,7 @@ import org.springframework.security.oauth2.server.authorization.client.JdbcRegis
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
+import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
@@ -96,6 +97,14 @@ public class SecurityConfig {
         return http.build();
     }
 
+    // 配置授权服务器的一些基本设置
+    @Bean
+    public AuthorizationServerSettings authorizationServerSettings() {
+        return AuthorizationServerSettings.builder()
+                .issuer("https://your-issuer-url")
+                .oidcUserInfoEndpoint("/custom/userinfo") // 设置自定义 user-info endpoint
+                .build();
+    }
 
     // TODO 以下三个 Bean 主要用于数据库持久化使用的。只不过需要传入 JdbcTemplate，当然也可以自定义
 
