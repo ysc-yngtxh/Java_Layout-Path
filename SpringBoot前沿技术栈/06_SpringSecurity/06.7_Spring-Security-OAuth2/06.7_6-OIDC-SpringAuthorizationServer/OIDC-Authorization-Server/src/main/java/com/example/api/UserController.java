@@ -61,8 +61,9 @@ public class UserController {
                 .redirectUris(uris-> uris.add(redirectUri))
                 // 授权范围-scopes
                 .scopes (scopes -> {
+                    // 这是用于OpenId Connect认证协议的scope，允许客户端应用程序获取用户的唯一标识符。
                     scopes.add("openid");
-                    scopes.add("profile");
+                    // 这个scope允许客户端应用程序获取用户的基本资料信息，比如姓名、电子邮件地址等。
                     scopes.addAll(scopeSets);
                 })
                 // 客户端 settings-clientSettings
