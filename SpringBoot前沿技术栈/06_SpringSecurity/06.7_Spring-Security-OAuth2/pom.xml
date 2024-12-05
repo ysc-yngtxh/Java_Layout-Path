@@ -16,7 +16,7 @@
 
     <modules>
         <module>06.7_1-AuthorizationCode-Mode</module>
-        <module>06.7_2-Gitee-Oauth2</module>
+        <module>06.7_2-Gitee-Oauth2-Client</module>
         <module>06.7_3-Easy-SpringAuthorizationServer</module>
         <module>06.7_4-Custom-SpringAuthorizationServer</module>
         <module>06.7_5_DB-SpringAuthorizationServer</module>

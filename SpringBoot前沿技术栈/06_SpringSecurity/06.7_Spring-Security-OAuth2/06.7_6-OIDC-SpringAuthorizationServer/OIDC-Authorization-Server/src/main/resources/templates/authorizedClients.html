@@ -12,7 +12,9 @@
     <ul>
         <li th:each="client:${registeredClients}">
             <form th:action="@{/undo}" method="post">
-                <!-- 提示方式：DELETE -->
+                <!-- name="_method" 和 value="delete": 这是在模拟HTTP DELETE方法。
+                因为HTML表单默认只支持GET和POST方法，所以一些框架（如Spring MVC）允许你通过这种方式来模拟其他HTTP动词。
+                当表单被提交时，服务器端可以识别这个特殊参数，并将其作为DELETE请求处理。 [Ajax支持所有的请求方式]-->
                 <input type="hidden" name="_method" value="delete"/>
                 <span th:text="${client.clientName}" style="font-weight: bold"></span>
                 <input type="hidden" name="client_id" th:value="${client.id}"/>

@@ -125,7 +125,7 @@ PostgreSQL 模式SCHEMA 可以看着是一个表的集合。一个模式可以�
 假设你有一个表名为 User，并且希望它是大小写敏感的，可以这样创建表：
 
 sql
-深色版本
+
 CREATE TABLE "User" (
     "id" int4 NOT NULL,
     "name" varchar(255),
@@ -137,7 +137,7 @@ CREATE TABLE "User" (
 如果不使用双引号，PostgreSQL会将标识符转换为小写，并且默认为大小写不敏感。例如：
 
 sql
-深色版本
+
 CREATE TABLE user (
     id int4 NOT NULL,
     name varchar(255),
@@ -154,7 +154,7 @@ CREATE TABLE user (
 假设你有一个名为 User 的表，并且希望它是大小写敏感的：
 
 sql
-深色版本
+
 -- 插入数据
 INSERT INTO "User" ("id", "name") VALUES (1, 'Alice');
 

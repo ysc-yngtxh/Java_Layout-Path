@@ -101,7 +101,7 @@ public class SecurityConfig {
     @Bean
     public AuthorizationServerSettings authorizationServerSettings() {
         return AuthorizationServerSettings.builder()
-                .issuer("https://localhost:8080") // 设置授权服务器地址
+                .issuer("https://localhost:9090") // 设置授权服务器地址
                 .oidcUserInfoEndpoint("/custom/userinfo") // 设置自定义 user-info endpoint
                 .build();
     }

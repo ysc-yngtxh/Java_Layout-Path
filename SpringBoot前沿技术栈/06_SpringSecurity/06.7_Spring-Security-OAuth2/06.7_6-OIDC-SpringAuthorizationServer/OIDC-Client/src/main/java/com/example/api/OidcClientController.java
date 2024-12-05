@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 public class OidcClientController {
 
-    @RequestMapping("/")
+    @RequestMapping("/access")
     public String access() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         log.info("authentication: {}", authentication);
