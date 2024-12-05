@@ -1,0 +1,62 @@
+package com.example.service.impl;
+
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.example.entity.OAth2AuthorizationConsent;
+import com.example.mapper.OAuth2AuthorizationConsentMapper;
+import com.example.service.ClientService;
+import java.sql.Wrapper;
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsent;
+import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsentService;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
+import org.springframework.stereotype.Service;
+
+/**
+ * @author 游家纨绔
+ * @dateTime 2024-12-05 11:58
+ * @apiNote TODO
+ */
+@Service
+public class ClientServiceImpl implements ClientService {
+
+
+    @Autowired
+    private OAuth2AuthorizationConsentMapper consentMapper;
+
+    @Autowired
+    private RegisteredClientRepository clientRepository;
+
+    @Autowired
+    private OAuth2AuthorizationConsentService consentService;
+
+    @Override
+    public List<RegisteredClient> findRegisteredClientsByPrincipalName(String principalName) {
+        // 根据 principalName 查询出 OAth2AuthorizationConsent
+        List<OAth2AuthorizationConsent> oAth2AuthorizationConsents = consentMapper.selectList(
+                Wrappers.<OAth2AuthorizationConsent>lambdaQuery().eq(OAth2AuthorizationConsent::getPrincipalName, principalName)
+        );
+        // 根据 oAth2AuthorizationConsents 查询所有的RegisteredClient对象，然后存入RegisteredClient集合
+        List<RegisteredClient> arrayList = new ArrayList<>();
+        oAth2AuthorizationConsents.forEach(oAth2AuthorizationConsent -> {
+            arrayList.add(clientRepository.findById(oAth2AuthorizationConsent.getRegisteredClientId()));
+        });
+        // 返回已授权的客户端列表
+        return arrayList;
+    }
+
+    @Override
+    public void revokeAuthorization(String clientId, String principalName) {
+        // 构建已同意授权信息
+        OAuth2AuthorizationConsent consent = OAuth2AuthorizationConsent
+                .withId(clientId, principalName)
+                // .authorities()
+                // .authority()
+                .scope("")
+                .build();
+        // 删除已同意的授权信息
+        consentService.remove(consent);
+    }
+}

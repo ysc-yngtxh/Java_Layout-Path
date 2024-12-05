@@ -21,6 +21,7 @@ public class OidcUserServiceImpl extends OidcUserService {
 
         System.out.println("oidcUser = " + oidcUser);
 
+        //  可以获取 OIDC 的 id_token
         OidcIdToken idToken = userRequest.getIdToken();
 
         // 基于不同的 provider 做判断，然后保存用户

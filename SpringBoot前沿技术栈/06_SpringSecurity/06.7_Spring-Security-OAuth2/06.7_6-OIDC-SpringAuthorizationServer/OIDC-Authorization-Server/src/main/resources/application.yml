@@ -9,6 +9,10 @@ logging:
         security: debug
 
 spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
   application:
     name: demo-server
   thymeleaf:

@@ -97,11 +97,11 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // 配置授权服务器的一些基本设置
+    // 配置授权服务器的一些基本设置：重新配置用户信息uri
     @Bean
     public AuthorizationServerSettings authorizationServerSettings() {
         return AuthorizationServerSettings.builder()
-                .issuer("https://your-issuer-url")
+                .issuer("https://localhost:8080") // 设置授权服务器地址
                 .oidcUserInfoEndpoint("/custom/userinfo") // 设置自定义 user-info endpoint
                 .build();
     }
