@@ -10,7 +10,8 @@ public class SSOAuthorizationServerApplication {
         SpringApplication.run(SSOAuthorizationServerApplication.class, args);
     }
 
-    // 基于SAS+OAuth2实现单点登录（登出）
+    // 基于 SAS
+    // + OAuth2 实现单点登录（登出）
     // 1、什么是单点登录
     //    单点登录，英文叫做Single Sign On，简称SSO。
     //    SSO允许用户在一个应用系统群中的某一个应用里登录之后，能够访问多个相互信任的其他应用系统而无需再次进行登录。
