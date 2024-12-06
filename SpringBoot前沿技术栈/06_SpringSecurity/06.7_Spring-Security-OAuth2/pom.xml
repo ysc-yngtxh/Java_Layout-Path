@@ -21,6 +21,7 @@
         <module>06.7_4-Custom-SpringAuthorizationServer</module>
         <module>06.7_5_DB-SpringAuthorizationServer</module>
         <module>06.7_6-OIDC-SpringAuthorizationServer</module>
+        <module>06.7_7-SSO-SpringAuthorizationServer</module>
     </modules>
     <packaging>pom</packaging>
 </project>
