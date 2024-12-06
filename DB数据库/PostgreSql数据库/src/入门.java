@@ -4,15 +4,18 @@
  * @apiNote TODO
  */
 public class 入门 {
-    // brew install postgresql;
-    // brew services start postgresql@16;
-    // export PATH=$PATH:/opt/homebrew/Cellar/postgresql@16/16.3/bin
-    // psql postgres;
-    // CREATE ROLE newUser WITH LOGIN PASSWORD 'password';
-    // ALTER ROLE newUser CREATEDB;  角色 newUser 授予 CREATEDB 权限，使其能够创建数据库
-    // \q  退出命令行
-    // \du 查看所有用户
-    // CREATE DATABASE testdb;  创建数据库
+    Mac环境下安装PostgreSql流程：
+    // 1、brew install postgresql@17; #使用homebrew下载安装postgresql@17
+    // 2、brew services start postgresql@17;  #开启postgresql@17
+    // 3、export PATH=$PATH:/opt/homebrew/Cellar/postgresql@17/17.2/bin  #配置postgresql@17环境变量
+    // 4、psql postgres;  进入postgresql
+    // 5、CREATE ROLE 角色 WITH LOGIN PASSWORD '密码'; 或者 CREATE USER 用户 PASSWORD '密码';
+    // #在Postgresql中 USER(用户) 与 ROLE(角色) 没有太大的区别。不同的是 CREATE USER 定义的用户默认就有 'LOGIN' 权限，而 CREATE ROLE 默认没有 'LOGIN' 权限（默认没有，但是可以自定义加上）
+    // #'LOGIN' 权限：表示的是登录数据库的权限。
+    // 6、ALTER ROLE 角色 CREATEDB; 或者 ALTER USER 用户 CREATEDB; #角色或者用户 授予 CREATEDB(创建数据库) 权限
+    // 7、\q  #退出命令行
+    // 8、\du #查看所有用户
+    // 9、CREATE DATABASE testdb;  #创建数据库
 }
 /* PostgreSQL 常用管理命令
 
@@ -110,9 +113,21 @@ PostgreSQL 模式SCHEMA 可以看着是一个表的集合。一个模式可以�
 第三方应用的对象可以放在独立的模式中，这样它们就不会与其他对象的名称发生冲突。
 
 
-·
 
-
+在PostgreSql中，执行SQL语句时，会把所有表示关键字，库名，表名，列名的标识符转换成小写。如果有需要保持标识符的大写状态，需要在Sql语句中加上双引号("")标记出来
+标识符不带双引号的效果：
+CREATE TABLE USER (                                                     CREATE TABLE "user" (
+    Id bigserial, # bigserial属性表示使用序列                               "id" bigserial, # bigserial属性表示使用序列 
+    userName varchar(255),                       ==== 实际执行效果 ====》   "username" varchar(255),
+    PRIMARY KEY (id)                                                       PRIMARY KEY ("id")
+);                                                                      );
+标识符带双引号的效果：
+CREATE TABLE "User" (                                                   CREATE TABLE "User" (
+    "Id" bigserial, # bigserial属性表示使用序列                             "Id" bigserial,  # bigserial属性表示使用序列
+    "userName" varchar(255),                    ==== 实际执行效果 ====》    "userName" varchar(255),
+    PRIMARY KEY ("Id")                                                     PRIMARY KEY ("Id")
+);                                                                      );
+在这个例子中，user 和 id 都是大小写不敏感的标识符。无论你在查询时如何书写它们（例如 USER 或 ID），PostgreSQL都会将其转换为小写，并查找对应的表或列。
 
 在PostgreSQL中，给表名、列名或其他标识符加上双引号（"）是为了支持大小写敏感的标识符。这是PostgreSQL中的一个特性，允许你使用保留关键字作为标识符，并且使标识符成为大小写敏感。
 
@@ -127,7 +142,7 @@ PostgreSQL 模式SCHEMA 可以看着是一个表的集合。一个模式可以�
 sql
 
 CREATE TABLE "User" (
-    "id" int4 NOT NULL,
+    "id" bigserial, # bigserial属性表示使用序列
     "name" varchar(255),
     PRIMARY KEY ("id")
 );
@@ -136,14 +151,7 @@ CREATE TABLE "User" (
 不使用双引号的情况
 如果不使用双引号，PostgreSQL会将标识符转换为小写，并且默认为大小写不敏感。例如：
 
-sql
 
-CREATE TABLE user (
-    id int4 NOT NULL,
-    name varchar(255),
-    PRIMARY KEY (id)
-);
-在这个例子中，user 和 id 都是大小写不敏感的标识符。无论你在查询时如何书写它们（例如 USER 或 ID），PostgreSQL都会将其转换为小写，并查找对应的表或列。
 
 使用双引号的注意事项
 大小写一致性：
