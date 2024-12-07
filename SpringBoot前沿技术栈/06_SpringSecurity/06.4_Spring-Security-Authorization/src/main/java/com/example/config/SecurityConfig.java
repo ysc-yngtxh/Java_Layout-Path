@@ -76,6 +76,10 @@ public class SecurityConfig {
      *    1、UsernamePasswordAuthenticationFilter 负责处理我们在登录页面填写了用户名密码后的登录请求，入门案例的认证工作主要由他负责
      *    2、ExceptionTranslationFilter 处理过滤器链中抛出的任何AccessDeniedException和AuthenticationException
      *    3、AuthorizationFilter  负责权限校验的过滤器
+     * 
+     * 注意：在配置类中引入了 SecurityFilterChain 类型的Bean，就不会显示Spring Security的默认登陆界面了。
+     *      如果有使用默认的登陆界面的必要，可以在 securityFilterChain 方法中加上 .and().formLogin() 就可以显示默认。
+     *      另外，只使用 formLogin()，不进行表单的其他配置，控制台还是可以打印出登陆的默认密码；但是如果有配置其他的表单内容，控制台将不打印默认的登陆密码。
      */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
