@@ -21,8 +21,6 @@
 
     <modules>
         <module>OAuth2-Authorization-Server</module>
-        <module>OAuth2-Client</module>
-        <module>OAuth2-Resource-Server</module>
         <module>Custom-Authorization-Server</module>
         <module>Custom-Client</module>
     </modules>

@@ -91,7 +91,6 @@ public class SecurityConfig {
                 // .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 // .and()
 
-
                 // 设置哪些路径可以直接访问不需要认证(permitAll()表示允许所有人访问)
                 .authorizeHttpRequests().requestMatchers("/user/index","/").permitAll()
                 .requestMatchers("/user/login").anonymous()  // anonymous()表示匿名访问（登陆提交接口通常都是匿名访问）

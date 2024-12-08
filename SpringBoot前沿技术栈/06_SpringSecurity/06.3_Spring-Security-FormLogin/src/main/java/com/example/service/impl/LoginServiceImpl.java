@@ -47,6 +47,8 @@ public class LoginServiceImpl implements LoginService {
             throw new RuntimeException("登陆失败");
         }
         // 如果认证通过，根据我们的认证逻辑是获取该用户所有信息的
+        // principal参数代表认证的主体信息，通常为用户名或用户对象；
+        // credentials`参数代表认证的凭证信息，通常为密码或其他类似信息。
         LoginUserDetails loginUserDetails = (LoginUserDetails) authenticationToken.getPrincipal();
         String userId = loginUserDetails.getUser().getId().toString();
         // 使用userId生成一个jwt，并将jwt放入ResponseResult返回
