@@ -23,6 +23,7 @@ import org.springframework.security.oauth2.server.authorization.settings.Authori
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -85,7 +86,10 @@ public class SecurityConfig {
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/create/app").permitAll()
+                        .requestMatchers(
+                                new AntPathRequestMatcher("/create/app"),
+                                new AntPathRequestMatcher("/static/**")
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

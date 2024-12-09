@@ -14,6 +14,7 @@ spring:
       filter:
         # 启用 HiddenHttpMethodFilter 以支持非GET（POST）的请求
         enabled: true
+    static-path-pattern: /static/**
   application:
     name: demo-server
   thymeleaf:
