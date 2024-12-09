@@ -1,0 +1,103 @@
+
+一、入门案例认证流程
+    接口:                                       实现类:
+       AbstractAuthenticationProcessingFilter       UsernamePasswordAuthenticationFilter
+           ⬇︎                                           ⬇︎
+       AuthenticationManager                        ProviderManager
+           ⬇︎                                           ⬇︎
+       AuthenticationProvider                       DaoAuthenticationProvider
+           ⬇︎                                           ⬇︎
+       UserDetailsService                           InMemoryUserDetailsManager（JdbcUserDetailsManager）
+
+    UsernamePasswordAuthenticationFilter
+        |- attemptAuthentication()方法尝试认证
+              |- UsernamePasswordAuthenticationToken包装用户信息
+                    |- AuthenticationManager
+                          |- authenticate()方法有一个for循环来执行 AuthenticationProvider
+                                |- AuthenticationProvider
+                                      |- authenticate()方法
+                                            |- retrieveUser()方法检索用户名
+                                                 |- UserDetailsService
+                                                       |- loadUserByUsername()方法
+                                            |- additionalAuthenticationChecks()方法检索密码
+
+   表单登录的认证流程
+   1、表单提交用户名、密码
+   2、表单的请求被 UsernamePasswordAuthenticationFilter 捕获，调用 attemptAuthentication 方法执行响应
+   3、将用户名和密码封装到 Authentication（实现类[UsernamePasswordAuthenticationToken]）对象之中。这时候只有用户名和密码，权限还没有。
+   4、AuthenticationManager 是认证管理器，它通过 authenticate() 方法发起委托认证，之后由 ProviderManager 根据参数类型，匹配合适的 AuthenticationProvider
+   5、AuthenticationProvider 是认证类的提供者，其实现类 DaoAuthenticationProvider 专用于处理 UsernamePasswordAuthenticationToken 的认证请求
+   6、DaoAuthenticationProvider 认证类执行 authenticate() 方法，其内部执行以下操作：
+      (1)、调用 retrieveUser() 方法实现对用户名的检索。
+           retrieveUser()方法中调用 UserDetailsService类的 loadUserByUsername()返回 UserDetails 对象
+           ①、UserDetailsService 是用户信息的业务类。
+              Ⅰ、其实现类 InMemoryUserDetailsManager 专用于从内存中检索用户信息
+              Ⅱ、另外，可自定义其实现类，从数据库中检索用户信息
+           ②、UserDetailsService 的实现类功能：
+              Ⅰ、根据用户名去查询对应的用户以及这个用户对应的权限信息，InMemoryUserDetailsManager 是在内存中查找，自定义实现类是在数据库中查找。
+              Ⅱ、把对应的用户信息包括去权限信息封装成 UserDetails 对象返回
+           ③、UserDetails 是用户信息接口，其实现类 User 封装了用户信息，包括用户名、密码、权限信息等。
+      (2)、调用 additionalAuthenticationChecks() 方法实现对密码的检索，
+           通过 PasswordEncoder 对比 UserDetails 中的密码和 Authentication 的密码是否正确。
+      (3)、如果上述的用户名与密码检索都正确，就把 UserDetails 中的权限信息封装到 Authentication（实现类[UsernamePasswordAuthenticationToken]）对象中
+   7、返回 Authentication 对象给实现类 UsernamePasswordAuthenticationFilter
+      (1)、返回的 Authentication 对象就使用 SecurityContextHolder.getContext().setAuthentication() 方法
+           存储到 SecurityContextHolder 对象中，供后续Security的Filter使用。其他过滤器会通过 SecurityContextHolder 来获取当前用户信息。
+
+
+二、授权：
+     1、需要我们在 UserDetailsService的loadUserByUsername方法中获取到用户的权限信息，
+        再把权限信息封装到 Details 里(通过LoginUser类中的getAuthorities()方法)
+     2、在我们认证成功后(即密码比对后)，我们得到最终的Authentication对象，里面有我们用户的所有信息，
+        并且把这个对象交给SecurityContextHolder.getContext().setAuthentication方法存储
+
+   使用授权注解 @PreAuthorize("hasAuthority('admin')") 表示当前接口需要'admin'权限
+   或者在SecurityConfig类中的SecurityFilterChain方法，加上 .requestMatchers("/code").hasAuthority("admin")
+
+三、CSRF攻击(跨域请求伪造 Cross-site request forgery)
+        比如说，我们的有一个不是前后端分离的项目系统A，前后端都是通过Cookie或者JSESSIONID来校验用户信息的，
+    有一天我通过这个A系统给自己的的女朋友转账（转账行为看成是C），转了大概有十个小目标。
+    这个时候外部有一个钓鱼网站系统B，我在不知道是非法网站的的情况下点击了这个网站，
+    这个网站就携带了我当前用户系统A的Cookie或者JSESSIONID去进行转账（也就是去操作C），然后转账成功了，
+    因为发起转账请求的是自己的Cookie或者JSESSION，A系统验证了该用户身份信息（老铁没毛病）。
+    其实就是因为 钓鱼网站系统B 伪造了我的请求，携带我的 Cookie 信息去进行访问而造成的。
+
+
+        因此，为了避免这种攻击，Spring Security提供了防止CSRF攻击的手段。
+    CSRF为了保证不是其他第三方网站访问，要求访问时携带参数名为 _csrf 值为token（token在服务端产生）的内容，如果token和服务端的token匹配成功，则正常访问。
+
+    流程：
+    1、当你在项目里开启了csrf(),那么不管你项目系统是否是前后端分离，SpringSecurity后端都会去生成一个csrf_token放入Cookie中，例如：XSRF-TOKEN=53efae5b-b0f9-4112-a328-3323a08d5ddc
+    2、然后需要前端将这个 XSRF-TOKEN 值解析出来，后续的请求将 _csrf=解析的XSRF-TOKEN值 这个请求参数带上。（因为每次请求都会携带Cookie，为了防止是伪造的请求，所以后端不会从Cookie中解析这个csrf_token，只会从请求参数中解析_csrf）
+    3、后端有过滤器进行校验，如果参数 _csrf 没有携带或者伪造就不允许访问。
+    
+
+        Spring Security的这个CSRF方式跟我们的Jwt就是同一个原理。
+    如果无状态 API 使用基于 Token 的身份验证（如 JWT），就不需要 CSRF 保护，前后端分离项目天生就预防了CSRF攻击。
+    反之，如果使用 Session Cookie 进行身份验证，就需要启用 CSRF 保护。
+
+四、thymeleaf集成spring security
+    1、需要在html标签上加 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6
+
+    2、<div sec:authorize="!isAuthenticated()"> 表示没登录认证就能显示
+       <div sec:authorize="isAuthenticated()">  表示登录认证了才能显示
+
+    3、<span sec:authentication="principal.username">  表示获取该登录用户的账号
+       <span sec:authentication="principal.authorities"></span>  表示获取该登录用户的权限
+
+    4、<div class="column" sec:authorize="hasRole('vip2')">  表示需要该用户有'vip2'的权限才能显示
+
+
+五、自定义注销
+    1、前端的注销接口可以自己定义，也可以继续使用 /logout。对应SpringSecurity配置的 logoutUrl("/***")，
+       这个只是作为响应的接口，实际不会去执行接口逻辑。实际处理注销逻辑的接口在 logoutSuccessUrl("/***") 中
+
+    2、这里需要注意一下：
+          如果前端注销接口是 /logout，我们就不需要配置 logoutUrl("/logout")。
+          如果是其他的路径，那么就需要在配置加上 logoutUrl("/***")，并且还需要在控制层有响应的路径接口方法
+
+    3、作为自定义注销，是无论如何都要配置 logoutSuccessUrl("/***")，【不配置不就相当于使用原有默认的逻辑吗】
+       并且还需要在控制层提供其 logoutSuccessUrl("/***") 中的路径接口方法，
+
+    4、清除HttpSession，Cookie，用户信息SecurityContextHolder 都已经被Spring security在内部完成了，
+       这里我们不需要做过多的操作。（这里提供一种猜测：控制层的前端注销接口没被调用，是不是在这里做清理了）

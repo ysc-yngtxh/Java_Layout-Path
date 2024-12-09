@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ADMIN</title>
+
+    <script type="text/javascript" th:src="@{/static/jquery-3.4.1.js}"></script>
+    <script>
+        let csrfToken = null;
+        $(function () {
+            const cookiePair = document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+            csrfToken = cookiePair;
+            console.log(csrfToken)
+        })
+
+        function toManager() {
+            $.ajax({
+                url: "/manager",
+                type: "get",
+                dataType: "json",
+                data: {
+                    "_csrf": csrfToken
+                },
+                headers: {
+                    'X-XSRF-TOKEN': csrfToken
+                },
+                success: function (data) {
+                    console.log("访问成功！")
+                }
+            })
+        }
+    </script>
+</head>
+<body style="text-align: center">
+    <h1>你好！访问 ADMIN 成功！</h1><br/>
+    <input type="button" name="name" value="跳转按钮🔘" onclick="toManager()"/>
+</body>
+</html>

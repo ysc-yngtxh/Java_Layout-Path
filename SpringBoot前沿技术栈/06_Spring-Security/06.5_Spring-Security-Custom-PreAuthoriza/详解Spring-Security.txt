@@ -1,0 +1,49 @@
+
+一、自定义权限方法
+    比如在注解@PreAuthorize("hasAuthority('admin')")中，我想匹配 system:*:* 的权限
+    但是你会发现官方的方法并不能满足自己的需求，这个时候就需要自定义权限方法来实现
+
+    这里呢，我们要引入一个新的知识点：spel表达式（又叫SpringEL表达式）
+        我们知道EL表达式适用于jsp的，方便我们可以从后端拿数据。
+        而SpringEL表达式则是用于我们去拿Bean的，拿到Bean了就可以执行其方法
+
+    所以，我们首先需要自定义一个权限方法，并把这个自定的类注入到Spring容器中，
+    这样我们就可以通过 @Bean名称 得到自定义方法的类，继而得到其自定义的权限方法
+
+    最后，通过我们的操作就可以自定义权限方法：@PreAuthorize("@spel.hasAuthoriza()")
+
+二、SpringSecurity的异常处理
+    1、没有进行异常配置信息时候，是没有办法去统一处理和管理在认证和授权过程中可能出现的异常信息。
+       并且在出现异常后，直接给你重定向到登陆界面，而且没有相应的异常信息去返回给前端，实际体验非常不好。
+
+    2、具体的异常处理去代码去看吧 --- SecurityConfig类
+
+
+三、CSRF攻击(跨域请求伪造 Cross-site request forgery)
+        比如说，我们的有一个不是前后端分离的项目系统A，前后端都是通过Cookie或者JSESSIONID来校验用户信息的，
+    有一天我通过这个A系统给自己的的女朋友转账（转账行为看成是C），转了大概有十个小目标。
+    这个时候外部有一个钓鱼网站系统B，我在不知道是非法网站的的情况下点击了这个网站，
+    这个网站就携带了我当前用户系统A的Cookie或者JSESSIONID去进行转账（也就是去操作C），然后转账成功了，
+    因为发起转账请求的是自己的Cookie或者JSESSION，A系统验证了该用户身份信息（老铁没毛病）。
+    其实就是因为 钓鱼网站系统B 伪造了我的请求，携带我的 Cookie 信息去进行访问而造成的。
+
+
+        因此，为了避免这种攻击，Spring Security提供了防止CSRF攻击的手段。
+    CSRF为了保证不是其他第三方网站访问，要求访问时携带参数名为 _csrf 值为token（token在服务端产生）的内容，如果token和服务端的token匹配成功，则正常访问。
+
+    流程：
+    1、当你在项目里开启了csrf(),那么不管你项目系统是否是前后端分离，SpringSecurity后端都会去生成一个csrf_token放入Cookie中，例如：XSRF-TOKEN=53efae5b-b0f9-4112-a328-3323a08d5ddc
+    2、然后需要前端将这个 XSRF-TOKEN 值解析出来，后续的请求将 _csrf=解析的XSRF-TOKEN值 这个请求参数带上。（因为每次请求都会携带Cookie，为了防止是伪造的请求，所以后端不会从Cookie中解析这个csrf_token，只会从请求参数中解析_csrf）
+    3、后端有过滤器进行校验，如果参数 _csrf 没有携带或者伪造就不允许访问。
+    
+        Spring Security的这个CSRF方式跟我们的Jwt就是同一个原理。
+    如果无状态 API 使用基于 Token 的身份验证（如 JWT），就不需要 CSRF 保护，前后端分离项目天生就预防了CSRF攻击。
+    反之，如果使用 Session Cookie 进行身份验证，就需要启用 CSRF 保护。
+
+四、其他认证方案畅想
+       1、实现UsernamePasswordAuthenticationFilter类表单登录Filter，重写其登录方法
+       2、实现AuthenticationManager类来进行用户的认证，重写其authentication方法
+       3、实现UserDetailsService类来进行数据库账号查询，重写其loadUserByUsername方法
+       4、实现Details类，用来包装用户信息
+
+
