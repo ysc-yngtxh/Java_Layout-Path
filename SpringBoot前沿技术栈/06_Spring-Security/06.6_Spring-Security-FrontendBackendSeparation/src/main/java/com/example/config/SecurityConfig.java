@@ -1,21 +1,24 @@
 package com.example.config;
 
 import com.alibaba.fastjson2.JSON;
-import com.example.security.authorization.UrlAuthorizationManager;
-import com.example.pojo.vo.ResponseResult;
 import com.example.filter.AdminAuthenticationProcessingFilter;
 import com.example.filter.MyAuthenticationFilter;
+import com.example.pojo.vo.ResponseResult;
+import com.example.security.authorization.UrlAuthorizationManager;
 import com.example.security.handler.CustomFailureHandler;
 import com.example.utils.WebUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -27,11 +30,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-
-import java.io.IOException;
-import java.util.Objects;
-
-import static org.springframework.security.config.Customizer.withDefaults;
 
 /**
  * @author 游诗成
@@ -140,7 +138,7 @@ public class SecurityConfig {
                 )
 
                 // 自动登录 - cookie储存方式
-                .rememberMe(withDefaults())
+                .rememberMe(Customizer.withDefaults())
                 // 防止iframe 造成跨域
                 .headers((header) -> header
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)

@@ -2,37 +2,115 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <!-- TODO 使用<meta>标签来嵌入CSRF令牌。
+              这种方法允许前端JavaScript代码方便地获取CSRF令牌和对应的请求头名称。 -->
+    <meta id="csrf-token" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="csrf-header" name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>ADMIN</title>
+
+    <style>
+        .container {
+            max-width: 550px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .input-group input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.25);
+            outline: none;
+        }
+    </style>
 
     <script type="text/javascript" th:src="@{/static/jquery-3.4.1.js}"></script>
     <script>
-        let csrfToken = null;
-        $(function () {
-            const cookiePair = document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-            csrfToken = cookiePair;
-            console.log(csrfToken)
-        })
+        function getCsrfToken() {
+            return document.querySelector('[name=_csrf]').content;
+        }
+        function getCsrfHeader() {
+            return document.querySelector('[name=_csrf_header]').content;
+        }
 
-        function toManager() {
+        function toXor() {
+            const csrfToken = document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+            console.log("Cookie中解析出的 XSRF-TOKEN 值：" + csrfToken);
+            console.log("从视图中解析出的 ${_csrf.token} 值：" + getCsrfToken());
+            console.log("从视图中解析出的 ${_csrf.headerName} 值：" + getCsrfHeader());
+            let csrfHeaderName = getCsrfHeader();
             $.ajax({
-                url: "/manager",
-                type: "get",
-                dataType: "json",
-                data: {
-                    "_csrf": csrfToken
-                },
+                url: "/xor",
+                type: "POST",
                 headers: {
-                    'X-XSRF-TOKEN': csrfToken
+                    // TODO 注意这里使用的是 从视图中解析出的 ${_csrf.token} 值
+                    [csrfHeaderName]: getCsrfToken()    // 'X-XSRF-TOKEN': csrfToken
                 },
                 success: function (data) {
-                    console.log("访问成功！")
+                    document.getElementById("xor").style.visibility = 'visible';
+                }
+            })
+        }
+
+        function toCustom() {
+            const csrfToken = document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+            console.log("Cookie中解析出的 XSRF-TOKEN 值：" + csrfToken);
+            console.log("从视图中解析出的 ${_csrf.token} 值：" + getCsrfToken());
+            console.log("从视图中解析出的 ${_csrf.headerName} 值：" + getCsrfHeader());
+            let csrfHeaderName = getCsrfHeader();
+            $.ajax({
+                url: "/custom",
+                type: "POST",
+                headers: {
+                    // TODO 注意这里使用的是 Cookie中解析出的 XSRF-TOKEN 值
+                    [csrfHeaderName]: csrfToken    // 'X-XSRF-TOKEN': csrfToken
+                },
+                success: function (data) {
+                    document.getElementById("custom").style.visibility = 'visible';
                 }
             })
         }
     </script>
 </head>
-<body style="text-align: center">
+<body style="text-align: center" class="container">
     <h1>你好！访问 ADMIN 成功！</h1><br/>
-    <input type="button" name="name" value="跳转按钮🔘" onclick="toManager()"/>
+
+    <!-- post请求没有携带 csrf Token令牌，请求被拦截掉，报错 403 -->
+    <form action="/manager" method="post">
+        <div class="input-group">
+            <input type="submit" name="manager" value="表单提交，跳转/manager。按钮🔘"/>
+        </div>
+    </form></br>
+
+    <!-- 方法一：请求参数 _csrf 携带令牌 -->
+    <form action="/button" method="post">
+        <div class="input-group">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <input type="submit" name="name" value="表单提交，跳转/button，请求参数中携带 _csrf 令牌。按钮🔘"/>
+        </div>
+    </form></br>
+
+    <!-- 方法二：请求头 header 中携带 csrf 令牌 -->
+    <div class="input-group">
+        <input type="button" name="xor" value="跳转/xor，请求头携带 从视图中解析出的 ${_csrf.token} 令牌。按钮🔘" onclick="toXor()"/></br>
+        <h1 id="xor" style="visibility: hidden;">请求 Xor 路径成功！！！</h1>
+    </div>
+
+    <!-- 方法三：可以从 Cookie 中解析出CSRF令牌
+         TODO 当注释 SpringSecurity 的 csrfTokenRequestHandler 配置，那么使用的是默认 CSRF 处理器
+              这时候Cookie 中的 XSRF-TOKEN令牌值 与视图中解析出的 CSRF令牌值 不是一致的。就会导致请求失败(403)-->
+    <div class="input-group">
+        <input type="button" name="custom" value="跳转/custom，请求头携带Cookie中解析的 XSRF-TOKEN令牌值。按钮🔘" onclick="toCustom()"/></br>
+        <h1 id="custom" style="visibility: hidden;">请求 Custom 路径成功！！！</h1>
+    </div>
+
 </body>
 </html>

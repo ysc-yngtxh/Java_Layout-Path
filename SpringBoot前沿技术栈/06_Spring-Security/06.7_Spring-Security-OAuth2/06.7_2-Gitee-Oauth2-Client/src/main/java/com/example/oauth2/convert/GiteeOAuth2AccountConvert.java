@@ -2,7 +2,6 @@ package com.example.oauth2.convert;
 
 import com.example.oauth2.entity.OAuth2ThirdPartyAccount;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
