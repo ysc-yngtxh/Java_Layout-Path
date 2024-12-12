@@ -48,6 +48,7 @@ spring:
 # 1、在访问页面的时候我们的每一个请求，都会从携带的Cookie中找到key为JSESSIONID的value值去和服务器的任何一个session的id进行比对，
 #    如果不存在，则服务器就创建一个新的session，并同时创建一个key为JSESSIONID，value为该session的id的cookie并响应给浏览器写入
 #    如果存在，那么这个key为JSESSIONID的Cookie将一直存在于此次的会话里，用于辨别该用户的操作。
-# 2、假设 客户端(localhost:8080) 的 JSESSIONID=123，授权服务器(localhost:9090) 的 JSESSIONID=456.
-#    那么在授权服务器重定向到客户端的时候，由于域名相同，导致浏览器中 Cookie覆盖。
+# 2、根据同源策略来说cookie应该是区分端口的。但实际上对于浏览器来说，cookie是区分域，不区分端口的，在一个ip地址下多个端口的cookie是共享的。
+#    假设 客户端(localhost:8080) 的 JSESSIONID=123，授权服务器(localhost:9090) 的 JSESSIONID=456。
+#    那么在授权服务器重定向到客户端的时候，由于域名相同且Cookie的参数名也相同，导致浏览器中 Cookie覆盖。
 #    回调接口 localhost:8080/** 的 JSESSIONID 与 session 比对不相同，被认为不是同一个会话，从而导致授权请求失败
