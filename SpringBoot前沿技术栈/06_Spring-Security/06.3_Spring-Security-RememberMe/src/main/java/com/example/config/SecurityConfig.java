@@ -1,5 +1,9 @@
 package com.example.config;
 
+import jakarta.annotation.Resource;
+import java.util.UUID;
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -11,6 +15,11 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.RememberMeServices;
+import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 /**
  * @author 游家纨绔
@@ -55,31 +64,41 @@ public class SecurityConfig {
             .cors(AbstractHttpConfigurer::disable)
             .csrf(AbstractHttpConfigurer::disable)
             .formLogin(Customizer.withDefaults())
-            // Remember Me 即记住我，常用于 Web 应用的登录页目的是让用户选择是否记住用户的登录状态。
-            // 当用户选择了 Remember Me 选项，则在有效期内若用户重新访问同一个 Web 应用，那么用户可以直接登录到系统中，而无需重新执行登录操作。
-            // 实现原理：用户登录成功后，Security会往用户浏览器中写入一个可以为 remember-me 的 Cookie，其值经过了Base64的编码。经过解码后得到的原始值分为四段，使用":"分割。
-            //         base64(username + ":" + expirationTime + ":" + algorithmName + ":" + algorithmHex(username+":"+expirationTime+":"password+":"+key))
-            //         四段分别表示的含义：用户名：过期时间戳：加密算法名：签名字符串(该字符串由用户名、过期时间戳、密码、开发指定的key值四者结合起来按照算法生成十六进制的加密字符串)
-            // RememberMe的Cookie中保存了用户名和密码等敏感信息，虽然加密处理，仍然有被破解的可能。在使用JWT实现登录认证之后，就不必使用RememberMe的功能了。
+                // 配置"记住我"功能
             .rememberMe(remember ->
                     // 指定Cookie中生成的 remember-me 加密需要的key值，使其编码更加难以被破解
                     remember.key("yjwk")
                             // 修改登陆表单中remember复选框的name值，其默认参数为remember-me
                             .rememberMeParameter("rememberMe")
-                            // 修改Cookie中的"记住我"值，其默认参数为remember-me
+                            // 设置浏览器中存储的Cookie名称，其默认参数为remember-me
                             .rememberMeCookieName("rememberMe")
-                            // 设置 token 的有效时间
+                            // 设置 token 的有效时间(单位：秒)。Security默认时长为14天(两周)
                             .tokenValiditySeconds(30)
+                            // 设置操作数据表的 Repository
+                            .tokenRepository(persistentTokenRepository())
+                            // .userDetailsService(userDetailsService())
             )
             .authorizeHttpRequests(auth -> {
-                auth
-                        // .requestMatchers(new AntPathRequestMatcher("/")).permitAll()
-                        .anyRequest().authenticated();
+                auth.anyRequest().authenticated();
             })
             .logout(Customizer.withDefaults());
 
-        // TODO 非持久化RememberMe功能弊端：重启服务器会导致浏览器Cookie中的remember-me自动删除，从而导致数据丢失无法实现RememberMe功能。因此需要持久化RememberMe功能
-
         return http.build();
+    }
+
+    @Resource
+    private DataSource dataSource;
+
+    /**
+     * 配置 JdbcTokenRepositoryImpl，用于 Remember-Me 的持久化 Token
+     */
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+        // 赋值数据源
+        jdbcTokenRepository.setDataSource(dataSource);
+        // 自动创建表,第一次执行会创建，以后要执行就要删除掉！
+        // jdbcTokenRepository.setCreateTableOnStartup(true);
+        return jdbcTokenRepository;
     }
 }

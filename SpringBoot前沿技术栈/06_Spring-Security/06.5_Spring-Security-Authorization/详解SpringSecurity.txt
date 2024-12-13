@@ -67,10 +67,20 @@
     CSRF为了保证不是其他第三方网站访问，要求访问时携带参数名为 _csrf 值为token（token在服务端产生）的内容，如果token和服务端的token匹配成功，则正常访问。
 
     流程：
-    1、当你在项目里开启了csrf(),那么不管你项目系统是否是前后端分离，SpringSecurity后端都会去生成一个csrf_token放入Cookie中，例如：XSRF-TOKEN=53efae5b-b0f9-4112-a328-3323a08d5ddc
-    2、然后需要前端将这个 XSRF-TOKEN 值解析出来，后续的请求将 _csrf=解析的XSRF-TOKEN值 这个请求参数带上。（因为每次请求都会携带Cookie，为了防止是伪造的请求，所以后端不会从Cookie中解析这个csrf_token，只会从请求参数中解析_csrf）
-    3、后端有过滤器进行校验，如果参数 _csrf 没有携带或者伪造就不允许访问。
-    
+        1、生成CSRF Token：
+           当用户访问受保护的页面时，Spring Security会为该会话生成一个唯一的CSRF token。
+           这个token被存储在服务器端（通常是与HttpSession关联），并且也会传递给客户端(Cookie或者视图参数_csrf)。
+        2、包含CSRF Token在请求中：
+           当客户端发出POST、PUT、DELETE等可能会修改服务器状态的请求时，需要将CSRF token包含在请求中。
+           对于传统的HTML表单提交，CSRF token通常作为一个隐藏字段(_csrf=解析的XSRF-TOKEN值)包含在表单中。
+           对于AJAX请求，CSRF token通常添加到HTTP头部，如X-XSRF-TOKEN。
+        3、验证CSRF Token：
+           CsrfFilter会在处理每个可能改变状态的请求之前检查请求中的CSRF token。
+           它会比较来自请求的CSRF token和服务器端存储的token是否匹配。
+           如果token匹配，则请求被认为是合法的，允许继续处理；如果不匹配，请求将被拒绝。
+        4、处理结果：
+           如果验证成功，请求将被转发到下一个过滤器或目标资源。
+           如果验证失败，将会抛出异常，默认情况下会导致403 Forbidden HTTP状态码响应。
 
         Spring Security的这个CSRF方式跟我们的Jwt就是同一个原理。
     如果无状态 API 使用基于 Token 的身份验证（如 JWT），就不需要 CSRF 保护，前后端分离项目天生就预防了CSRF攻击。
