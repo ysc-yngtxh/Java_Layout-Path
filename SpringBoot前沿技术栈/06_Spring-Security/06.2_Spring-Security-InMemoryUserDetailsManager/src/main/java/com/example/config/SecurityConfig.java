@@ -56,12 +56,12 @@ public class SecurityConfig {
 
         // TODO CSRF（跨站请求防伪造）写法一：
         // 自 SpringSecurity4.0 起，CSRF 跨站请求防伪造保护是默认开启的，因此有开启需要的话不用特意书写这行代码。
-        // 当使用这种写法时，Cookie 中不包含CSRF令牌信息，前端可以通过请求中获取 ${_csrf.token} 来获取 CSRF 令牌。
+        // 当使用这种写法时，Cookie 中不包含CSRF令牌信息，前端可以通过MVC返回视图中获取 ${_csrf.token} 来获取 CSRF令牌。
         http.csrf(Customizer.withDefaults());
 
         // TODO CSRF（跨站请求防伪造）写法二：
-        // 这里的 CSRF 配置适用于 前后端分离的项目。服务器会在请求的 Cookie 中生成一个 XSRF-TOKEN 值。
-        // 前端在每次请求时，需要将这个值放在请求头中，名称为 X-XSRF-TOKEN，服务器会验证这个值是否正确。
+        // 这里的 CSRF 配置比较适用于 前后端分离的项目。服务器会在请求的 Cookie 中生成一个 XSRF-TOKEN 值。
+        // 前端在每次请求时，需要携带一个名称为 X-XSRF-TOKEN 的值，服务器会验证这个值是否正确。
         // 如果验证失败，服务器会返回一个 403 错误，表示请求被拒绝。
         http.csrf(csrf ->
                 // 该配置为前端设置一个名为 XSRF-TOKEN 的 Cookie。
@@ -84,7 +84,7 @@ public class SecurityConfig {
         );
 
         http
-                // 配置了HTTP Basic身份验证。
+                // 配置 HTTP Basic 身份验证。
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize ->
                         authorize
