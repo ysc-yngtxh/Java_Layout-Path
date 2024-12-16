@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>11_Kafka</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>11_Kafka</name>
-    <description>11_Kafka</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <modules>
         <module>11.1_SpringBoot-Kafka-Demo</module>

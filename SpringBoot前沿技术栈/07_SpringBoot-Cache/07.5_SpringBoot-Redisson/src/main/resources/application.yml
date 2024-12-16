@@ -1,6 +1,6 @@
 spring:
     application:
-        name: 05_SpringBoot-Redission
+        name: 07.5_SpringBoot-Redission
     data:
         redis:
             host: 127.0.0.1

@@ -12,8 +12,8 @@
     <groupId>com.example</groupId>
     <artifactId>07.4_SpringBoot-Caffeine</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>07.4_SpringBoot-Caffeine</name>
-    <description>07.4_SpringBoot-Caffeine</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>23</java.version>

@@ -19,6 +19,12 @@
 		<java.version>23</java.version>
 	</properties>
 
+	<modules>
+		<module>16.1_SpringBoot-EasyExcel</module>
+		<module>16.2_SpringBoot-EasyExcelPlus</module>
+	</modules>
+	<packaging>pom</packaging>
+
 	<build>
 		<plugins>
 			<plugin>

@@ -12,8 +12,8 @@
     <groupId>com.example</groupId>
     <artifactId>19_SpringBoot-PostgreSql</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>19_SpringBoot-PostgreSql</name>
-    <description>19_SpringBoot-PostgreSql</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>23</java.version>

@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>05_Shiro</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>05_Shiro</name>
-    <description>05_Shiro</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <modules>
         <module>05.1_SpringBoot-Shiro</module>

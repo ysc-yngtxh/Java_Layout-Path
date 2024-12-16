@@ -12,8 +12,8 @@
     <groupId>com.example</groupId>
     <artifactId>07.1_SpringBoot-Redis</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>07.1_SpringBoot-Redis</name>
-    <description>07.1_SpringBoot-Redis</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>23</java.version>

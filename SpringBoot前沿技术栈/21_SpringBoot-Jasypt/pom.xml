@@ -12,8 +12,8 @@
     <groupId>com.example</groupId>
     <artifactId>21_SpringBoot-Jasypt</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>21_SpringBoot-Jasypt</name>
-    <description>21_SpringBoot-Jasypt</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>23</java.version>

@@ -12,8 +12,8 @@
 	<groupId>com.example</groupId>
 	<artifactId>23.2_SpringBoot-LiteFlow-Context</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>23.2_SpringBoot-LiteFlow-Context</name>
-	<description>23.2_SpringBoot-LiteFlow-Context</description>
+	<name>${project.artifactId}</name>
+	<description>${project.artifactId}</description>
 
 	<properties>
 		<java.version>23</java.version>

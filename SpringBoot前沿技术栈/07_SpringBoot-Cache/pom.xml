@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>07_SpringBoot-Cache</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>07_SpringBoot-Cache</name>
-    <description>07_SpringBoot-Cache</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>23</java.version>

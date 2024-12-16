@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>10_RocketMQ</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>10_RocketMQ</name>
-    <description>10_RocketMQ</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <modules>
         <module>10.1_RocketMQ-Demo</module>

@@ -12,7 +12,7 @@
     <artifactId>04_Jwt-Demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>${project.artifactId}</name>
-    <description>Demo project for Spring Boot</description>
+    <description>${project.artifactId}</description>
     <properties>
         <java.version>22</java.version>
     </properties>

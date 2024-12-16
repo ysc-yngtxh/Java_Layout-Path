@@ -12,8 +12,8 @@
     <groupId>com.example</groupId>
     <artifactId>07.5_SpringBoot-Redisson</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>07.5_SpringBoot-Redisson</name>
-    <description>07.5_SpringBoot-Redisson</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>23</java.version>

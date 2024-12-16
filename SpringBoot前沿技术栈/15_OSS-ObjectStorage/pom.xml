@@ -12,8 +12,8 @@
 	<groupId>com.example</groupId>
 	<artifactId>15_OSS-ObjectStorage</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>15_OSS-ObjectStorage</name>
-	<description>15_OSS-ObjectStorage</description>
+	<name>${project.artifactId}</name>
+	<description>${project.artifactId}</description>
 
 	<properties>
 		<java.version>23</java.version>

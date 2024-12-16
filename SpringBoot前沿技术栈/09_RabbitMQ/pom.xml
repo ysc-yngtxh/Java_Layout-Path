@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>09_RabbitMQ</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>09_RabbitMQ</name>
-    <description>09_RabbitMQ</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <modules>
         <module>09.1_RabbitMQ-Demo</module>
