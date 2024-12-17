@@ -13,7 +13,10 @@ public class A1_安装及部署 {}
 //      3、配置 postgresql@17 环境变量
 //          export PATH=$PATH:/opt/homebrew/Cellar/postgresql@17/17.2/bin
 //      4、进入postgresql，postgres是PostgreSql的默认数据库
-//          psql postgres;
+//          ①、明确指定了要连接的数据库主机，以用户名 root 进行连接
+//              psql -h localhost -p 5432 -U root -d postgres -W;
+//          ②、使用操作系统的默认设置
+//              psql postgres;
 //      5、创建角色或者用户
 //          ①、在Postgresql中 USER(用户) 与 ROLE(角色) 没有太大的区别。
 //          ②、不同的是 CREATE USER 定义的用户默认就有 'LOGIN' 权限，

@@ -3,9 +3,8 @@
  * @dateTime 2024-12-15 11:45
  * @apiNote TODO
  */
-public class B2_常用命令及DDL语法 {}
-/* TODO PostgreSQL 常用管理命令
-
+public class B2_常用命令及DCL语法 {}
+/*
 一、常用命令说明
     \?                  # 所有命令帮助
     \l                  # 列出所有数据库
@@ -29,36 +28,39 @@ public class B2_常用命令及DDL语法 {}
 
 二、常用的语法说明
     1、登录命令
-       # 连接指定服务器上的数据库
-         psql [-h IP] [-p 端口] [-U 用户名] [-d 数据库名] -W;
-         例如：psql -h localhost -p 5432 -U root -d smartmatch_ece -W;
-              -h # 数据库所在的IP地址
-              -p #（默认5432）数据库的监听端口
-              -U # 用户名
-              -d # 数据库名称
+       ①、连接指定服务器上的数据库
+           psql [-h IP] [-p 端口] [-U 用户名] [-d 数据库名] -W;
+           例如：psql -h localhost -p 5432 -U root -d smartmatch_ece -W;
+                -h # 数据库所在的IP地址
+                -p #（默认5432）数据库的监听端口
+                -U # 用户名
+                -d # 数据库名称
+       ②、使用操作系统的默认配置
+           psql [数据库名];
+           例如：psql smartmatch_ece;
 
     2、创建账号(角色或者用户)：
         # 在Postgresql中 USER(用户) 与 ROLE(角色) 没有太大的区别。
         # 不同的是 CREATE USER 定义的用户默认就有 'LOGIN' 权限，而 CREATE ROLE 默认没有 'LOGIN' 权限（默认没有，但是可以自定义加上）
         # 'LOGIN' 权限：表示的是登录数据库的权限。
-        创建角色：create role [角色名] with login password '密码'; (这里的角色加上了'LOGIN'权限)
-        创建用户：create user [用户名] password '密码';
+        ①、创建角色：create role [角色名] with login password '密码'; (这里的角色加上了'LOGIN'权限)
+        ②、创建用户：create user [用户名] password '密码';
 
     3、创建数据库
-        # 创建数据库（默认所有者）
-          CREATE DATABASE [数据库名];
-        # 这里 OWNER 指定新数据库的所有者，ENCODING 设置字符编码，LC_COLLATE 和 LC_CTYPE 设置排序规则，而 TEMPLATE 指定了用于初始化新数据库的模板。
-          CREATE DATABASE [数据库名]
-                 WITH OWNER = your_username ENCODING = 'UTF8'
-                      LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8'
-                      TEMPLATE template0;
-          注意：PostgreSQL 的默认模板数据库为 template1。
-               当使用 CREATE DATABASE 命令但没有指定模板时，默认情况下会从 template1 复制所有内容来创建新数据库。
-               template1：包含了一些预定义的对象（如系统表、视图、函数等）和可能已经被安装到系统的扩展模块或自定义设置。
-                          这意味着任何对 template1 的修改都会影响到从此模板创建的所有新数据库。
-                          用户可以连接并修改 template1，但这通常不被推荐，因为这会影响到所有将来从中创建的新数据库。
-               template0：是一个几乎完全空的模板数据库，它只包含了启动一个新的数据库实例所必需的最小集合的对象。
-                          这意味着它没有任何额外的用户数据或配置，提供了一个非常干净的基础。
+        ①、创建数据库（默认所有者）
+            CREATE DATABASE [数据库名];
+        ②、这里 OWNER 指定新数据库的所有者，ENCODING 设置字符编码，LC_COLLATE 和 LC_CTYPE 设置排序规则，而 TEMPLATE 指定了用于初始化新数据库的模板。
+            CREATE DATABASE [数据库名]
+                   WITH OWNER = your_username ENCODING = 'UTF8'
+                        LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8'
+                        TEMPLATE template0;
+            注意：PostgreSQL 的默认模板数据库为 template1。
+                 当使用 CREATE DATABASE 命令但没有指定模板时，默认情况下会从 template1 复制所有内容来创建新数据库。
+                 template1：包含了一些预定义的对象（如系统表、视图、函数等）和可能已经被安装到系统的扩展模块或自定义设置。
+                            这意味着任何对 template1 的修改都会影响到从此模板创建的所有新数据库。
+                            用户可以连接并修改 template1，但这通常不被推荐，因为这会影响到所有将来从中创建的新数据库。
+                 template0：是一个几乎完全空的模板数据库，它只包含了启动一个新的数据库实例所必需的最小集合的对象。
+                            这意味着它没有任何额外的用户数据或配置，提供了一个非常干净的基础。
 
     4、权限
        Ⅰ、授予权限：
@@ -135,18 +137,18 @@ public class B2_常用命令及DDL语法 {}
        如果有需要保持标识符的大写状态，只需要在Sql语句中加上双引号("")标记出来
 
     2、标识符不带双引号("")，PostgreSQL会将标识符转换为小写，并且默认为大小写不敏感。
-       CREATE TABLE USER (                                       CREATE TABLE "user" (
-           Id bigserial PRIMARY KEY, # bigserial属性表示使用序列       "id" int8 NOT NULL DEFAULT nextval('"smc_ece".user_id_seq'::regclass),
-           userName varchar(255)         ==== 实际执行效果 ====》      "username" varchar(255)
-       );                                                            CONSTRAINT "ece_user_pkey" PRIMARY KEY ("id")
-                                                              );
+       CREATE TABLE USER (                                     CREATE TABLE "user" (
+           Id bigserial PRIMARY KEY,                               "id" int8 NOT NULL DEFAULT nextval('"smc_ece".user_id_seq'::regclass),
+           userName varchar(255)       ==== 实际执行效果 ====》      "username" varchar(255)
+       );                                                          CONSTRAINT "ece_user_pkey" PRIMARY KEY ("id")
+                                                               );
 
     3、标识符带双引号("")，PostgreSQL会将其视为大小写敏感的标识符。例如，"User" 和 "user" 将被视为不同的标识符。
-       CREATE TABLE "User" (                                     CREATE TABLE "User" (
-           "Id" bigserial PRIMARY KEY, # bigserial属性表示使用序列     "Id" int8 NOT NULL DEFAULT nextval('"smc_ece".User_id_seq'::regclass),
-           "userName" varchar(255)        ==== 实际执行效果 ====》     "userName" varchar(255),
-       );                                                            CONSTRAINT "ece_user_pkey" PRIMARY KEY ("id")
-                                                                 );
+       CREATE TABLE "User" (                                   CREATE TABLE "User" (
+           "Id" bigserial PRIMARY KEY,                            "Id" int8 NOT NULL DEFAULT nextval('"smc_ece".User_id_seq'::regclass),
+           "userName" varchar(255)     ==== 实际执行效果 ====》     "userName" varchar(255),
+       );                                                         CONSTRAINT "ece_user_pkey" PRIMARY KEY ("id")
+                                                               );
 
     4、根据上述标识符带双引号("")，那么对应的 DML、DQL 语句也需要加上双引号("")，且区分大小写，否则会报错。
        -- 插入数据：INSERT INTO "User" ("Id","userName") VALUES(1, 'Alice');

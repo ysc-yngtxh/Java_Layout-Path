@@ -3,7 +3,7 @@
  * @dateTime 2024-12-17 00:34
  * @apiNote TODO
  */
-public class 常见函数 {}
+public class D4_常见函数 {}
 /*
 一、数学函数
     1、绝对值函数 ABS(x) 和返回圆周率函数 PI()
@@ -11,57 +11,47 @@ public class 常见函数 {}
            SELECT ABS(2), ABS(-3.3), ABS(-33);
        ②、返回圆周率值，输入语句如下：
            SELECT pi();
-
     2、平方根函数 SQRT(x) 和求余函数 MOD(x,y)
        ①、求9，40和-49的二次平方根，输入语句如下：
            SELECT SQRT(9), SQRT(40);
        ②、对MOD(31,8)，MOD(234, 10)，MOD(45.5,6)进行求余运算，输入语句如下：
            SELECT MOD(31,8),MOD(234, 10),MOD(45.5,6);
-
     3、获取整数的函数 CEIL(x)、CEILING(x)、FLOOR(x)
        ①、使用CEIL和CEILING函数返回最小整数，输入语句如下：
            SELECT  CEIL(-3.35),CEILING(3.35);
        ②、FLOOR(x)返回不大于x的最大整数值，返回值转化为一个BIGINT。使用FLOOR函数返回最大整数，输入语句如下：
            SELECT FLOOR(-3.35), FLOOR(3.35);
-
     4、四舍五入函数ROUND(x)和ROUND(x,y)
        ①、使用ROUND(x)函数对操作数进行四舍五入操作，输入语句如下：
            SELECT ROUND(-1.14),ROUND(-1.67), ROUND(1.14),ROUND(1.66);
        ②、使用ROUND(x,y)函数对操作数进行四舍五入操作，结果保留小数点后面指定y位，输入语句如下：
            SELECT ROUND(1.38, 1), ROUND(1.38, 0), ROUND(232.38, -1), ROUND (232.38,-2);
-
     5、符号函数SIGN(x)
        ①、使用SIGN函数返回参数的符号，输入语句如下：
            SELECT SIGN(-21),SIGN(0), SIGN(21);
-
     6、幂运算函数POW(x,y)、POWER(x,y)和EXP(x)
        ①、使用POW和POWER函数进行乘方运算，输入语句如下：
            SELECT POW(2,2), POWER(2,2),POW(2,-2), POWER(2,-2);
        ②、使用EXP函数计算e的乘方，输入语句如下：
            SELECT EXP(3),EXP(-3),EXP(0);
-
     7、对数运算函数LOG(x)
        ①、使用LOG(x)函数计算自然对数，输入语句如下：
            SELECT LOG(3);
-
     8、角度与弧度相互转换的函数RADIANS(x)和DEGREES(x)
        ①、使用RADIANS将角度转换为弧度，输入语句如下：
            SELECT RADIANS(90),RADIANS(180);
        ②、使用DEGREES将弧度转换为角度，输入语句如下：
            SELECT DEGREES(PI()), DEGREES(PI() / 2);
-
     9、正弦函数SIN(x)和反正弦函数ASIN(x)
        ①、使用SIN函数计算正弦值，输入语句如下：
            SELECT SIN(1), ROUND(SIN(PI()));
        ②、使用ASIN函数计算反正弦值，输入语句如下：
            SELECT ASIN(0.8414709848078965);
-
     10、余弦函数COS(x)反余弦函数ACOS(x)
         ①、使用COS函数计算余弦值，输入语句如下：
             SELECT COS(0),COS(PI()),COS(1);
         ②、使用ACOS计算反余弦值，输入语句如下：
             SELECT ACOS(1),ACOS(0), ROUND(ACOS(0.5403023058681398));
-
     11、正切函数、反正切函数和余切函数
         ①、使用TAN函数计算正切值，输入语句如下：
             SELECT TAN(0.3), ROUND(TAN(PI()/4));
@@ -71,61 +61,52 @@ public class 常见函数 {}
             SELECT COT(0.3), 1/TAN(0.3),COT(PI() / 4);
 
 二、字符串函数
-    1、计算字符数的函数char_length(str)和字符串长度(length)的函数
+    1、计算字符数的函数 char_length(str) 和字符串长度 length() 的函数
        ①、使用CHAR_LENGTH函数计算字符串字符个数，输入语句如下：
            SELECT CHAR_LENGTH('date'), CHAR_LENGTH('egg');
        ②、使用LENGTH函数计算字符串长度，输入语句如下：
            SELECT LENGTH('date'), LENGTH('egg');
-    
-    2、合并字符串CONCAT(s1,s2,…),CONCAT_WS(x,s1,s2,…)
+    2、合并字符串 CONCAT(s1,s2,…),CONCAT_WS(x,s1,s2,…)
        ①、使用CONCAT函数连接字符串，输入语句如下：
-           SELECT CONCAT('PostgreSQL', '9.15'),CONCAT('Postgre',NULL, 'SQL');
+           SELECT CONCAT('PostgreSQL', '9.15'), CONCAT('Postgre',NULL,'SQL');
        ②、使用CONCAT_WS函数连接带分隔符的字符串，输入语句如下：
            SELECT CONCAT_WS('-', '1st','2nd', '3rd'), CONCAT_WS('*', '1st', NULL, '3rd');
-    
-    3、获取指定长度的字符串的函数LEFT(s,n)和RIGHT(s,n)
+    3、获取指定长度的字符串的函数 LEFT(s,n) 和 RIGHT(s,n)
        ①、使用LEFT函数返回字符串中左边的字符，输入语句如下：
            SELECT LEFT('football', 5);
        ②、使用RIGHT函数返回字符串中右边的字符，输入语句如下：
            SELECT RIGHT('football', 4);
-    
-    4、填充字符串LPAD(s1,len,s2)和RPAD(s1,len,s2)
+    4、填充字符串 LPAD(s1,len,s2) 和 RPAD(s1,len,s2)
        ①、使用LPAD函数对字符串进行填充操作，输入语句如下：
            SELECT LPAD('hello',4,'??'), LPAD('hello',10,'??');
        ②、使用LPAD函数对字符串进行填充操作，输入语句如下：
            SELECT RPAD('hello',4,'?'), RPAD('hello',10,'?');
-    
-    5、删除空格的函数LTRIM(s)、RTRIM(s)和TRIM(s)
+    5、删除空格的函数 LTRIM(s)、RTRIM(s)和TRIM(s)
        ①、使用LTRIM函数删除字符串左边的空格，输入语句如下：
-           SELECT '(  book  )',CONCAT('(',LTRIM('  book  '),')');
+           SELECT CONCAT('(',LTRIM('  book  '),')');
        ②、使用LTRIM函数删除字符串右边的空格，输入语句如下：
-           SELECT '(  book  )',CONCAT('(', RTRIM ('  book  '),')');
+           SELECT CONCAT('(', RTRIM ('  book  '),')');
        ③、使用TRIM函数删除指定字符串两端的空格，输入语句如下：
-           SELECT '(  book  )',CONCAT('(', TRIM('  book  '),')');
-    
+           SELECT CONCAT('(', TRIM('  book  '),')');
     6、删除指定字符串的函数TRIM(s2 from s)
        ①、使用TRIM(s1 FROM s)函数删除字符串中两端指定的字符，输入语句如下：
            SELECT TRIM('xy' FROM 'xyboxyokxyxy') ;
-    
-    7、重复生成字符串的函数REPEAT(s,n)
+    7、重复生成字符串的函数 REPEAT(s,n)
        ①、使用REPEAT函数重复生成相同的字符串，输入语句如下：
            SELECT REPEAT('PostgreSQL', 3);
-    
-    8、替换函数REPLATE(s,s1,s2)
+    8、替换函数 REPLATE(s,s1,s2)
        ①、使用REPLACE函数进行字符串替代操作，输入语句如下：
            SELECT REPLACE('xxx.PostgreSQL.com', 'x', 'w');
-    
-    9、获取指定子串的函数SUBSTRING(s,n,len)
+    9、获取指定子串的函数 SUBSTRING(s,n,len)
        ①、使用SUBSTRING函数获取指定位置处的子字符串，输入语句如下：
-           SELECT SUBSTRING('breakfast',5) AS col1,
-                  SUBSTRING('breakfast',5,3) AS col2,
-                  SUBSTRING('lunch', -3) AS col3,
-     
-    10、匹配子串开始位置的函数POSITION(str1 in str)
+           SELECT SUBSTRING('breakfast', 5) AS col1,     # 从第5个位置开始截取，截取到最后一个字符。
+                  SUBSTRING('breakfast', 5, 3) AS col2,  # 从第5个位置开始截取，截取3个字符。
+                  SUBSTRING('lunch', -3) AS col3,        # 不支持负索引，但也不会报错，会显示出完整的字符
+                  SUBSTRING ('PostgreSQL', 'gre') col4;  # 正则表达式截取，截取 'gre' 字符串
+    10、匹配子串开始位置的函数 POSITION(str1 in str)
         ①、使用POSITION函数查找字符串中指定子字符串的开始位置，输入语句如下：
             SELECT POSITION('ball' IN 'football');
-    
-    11、字符串逆序的函数REVERSE(s)
+    11、字符串逆序的函数 REVERSE(s)
         ①、使用REVERSE函数反转字符串，输入语句如下：
             SELECT REVERSE('abc');
 
@@ -137,7 +118,6 @@ public class 常见函数 {}
            SELECT CURRENT_TIME;
        ③、使用时间函数获取系统当期日期(返回时不带时区)，输入语句如下：
            SELECT LOCALTIME;
-       
     2、返回当前日期和时间的函数
        ①、使用日期时间函数获取当前系统日期和时间，输入语句如下：
            SELECT CURRENT_TIMESTAMP,LOCALTIMESTAMP,NOW();
@@ -175,6 +155,26 @@ public class 常见函数 {}
            SELECT 50 * interval '2 second';
        ⑨、计算小时数与整数相乘的结果，输入语句如下：
            SELECT interval '1 hour' / integer  '2';
+       ⑩、当前时间加一天
+           SELECT NOW()::TIMESTAMP + '1 day';
+           SELECT NOW() + INTERVAL '1 DAY';
+           SELECT now()::timestamp + ('1' || ' day')::interval
+       ⑪、当前时间减一天
+           SELECT NOW()::TIMESTAMP + '-1 day';
+           SELECT NOW() - INTERVAL '1 DAY';
+           SELECT now()::timestamp - ('1' || ' day')::interval
+       ⑫、加1年1月1天1时1分1秒
+           SELECT NOW()::timestamp + '1 year 1 month 1 day 1 hour 1 min 1 sec';
+
+     5、类型转换相关函数
+        ①、to_timestamp() 字符串转时间
+           select * from t_user where create_time >= to_timestamp('2023-01-01 00:00:00', 'yyyy-mm-dd hh24:MI:SS');
+        ②、to_char 时间转字符串
+           select to_char(create_time, 'yyyy-mm-dd hh24:MI:SS') from t_user;
+        ③、to_date(text, text) 字符串转换为日期
+           select to_date('2024-12-25', 'YYYY-MM-DD');
+        ④、to_number(text, text) 转换字符串为数字
+           select to_number('1,234,567.89', '999G999G999D99');  返回值：1234567.89
 
 四、条件判断函数
     1、CASE expr WHEN v1 THEN r1 [WHEN v2 THEN r2][ELSE rn] END;
