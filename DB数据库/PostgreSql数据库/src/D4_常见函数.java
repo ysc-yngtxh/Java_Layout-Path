@@ -110,7 +110,17 @@ public class D4_常见函数 {}
         ①、使用REVERSE函数反转字符串，输入语句如下：
             SELECT REVERSE('abc');
 
-三、日期和时间函数
+三、类型转换相关函数
+    1、to_timestamp() 字符串转时间
+       select * from t_user where create_time >= to_timestamp('2023-01-01 00:00:00', 'yyyy-mm-dd hh24:MI:SS');
+    2、to_char 时间转字符串
+       select to_char(create_time, 'yyyy-mm-dd hh24:MI:SS') from t_user;
+    3、to_date(text, text) 字符串转换为日期
+       select to_date('2024-12-25', 'YYYY-MM-DD');
+    4、to_number(text, text) 转换字符串为数字
+       select to_number('1,234,567.89', '999G999G999D99');  返回值：1234567.89
+
+四、日期和时间函数
     1、获取当前日期的函数和当前时间的函数
        ①、使用日期函数获取系统当期日期，输入语句如下：
            SELECT CURRENT_DATE;
@@ -121,7 +131,6 @@ public class D4_常见函数 {}
     2、返回当前日期和时间的函数
        ①、使用日期时间函数获取当前系统日期和时间，输入语句如下：
            SELECT CURRENT_TIMESTAMP,LOCALTIMESTAMP,NOW();
-       
     3、获取指定值的日期
        ①、使用EXTRACT函数从月份中提取日期，输入语句如下：
            SELECT EXTRACT(DAY FROM TIMESTAMP '2012-09-10 10:18:40');
@@ -135,7 +144,6 @@ public class D4_常见函数 {}
            SELECT EXTRACT(DOW FROM TIMESTAMP '2012-09-10 10:18:40');
        ⑥、使用EXTRACT函数查询指定日期是该年的第几季度(1-4)，输入语句如下：
            SELECT EXTRACT(QUARTER FROM TIMESTAMP '2012-09-10 10:18:40');
-       
     4、日期和时间的运算操作
        ①、计算指定日期加上间隔天数后的结果，输入语句如下：
            SELECT DATE '2019-09-28' + integer '10';
@@ -166,16 +174,6 @@ public class D4_常见函数 {}
        ⑫、加1年1月1天1时1分1秒
            SELECT NOW()::timestamp + '1 year 1 month 1 day 1 hour 1 min 1 sec';
 
-     5、类型转换相关函数
-        ①、to_timestamp() 字符串转时间
-           select * from t_user where create_time >= to_timestamp('2023-01-01 00:00:00', 'yyyy-mm-dd hh24:MI:SS');
-        ②、to_char 时间转字符串
-           select to_char(create_time, 'yyyy-mm-dd hh24:MI:SS') from t_user;
-        ③、to_date(text, text) 字符串转换为日期
-           select to_date('2024-12-25', 'YYYY-MM-DD');
-        ④、to_number(text, text) 转换字符串为数字
-           select to_number('1,234,567.89', '999G999G999D99');  返回值：1234567.89
-
 四、条件判断函数
     1、CASE expr WHEN v1 THEN r1 [WHEN v2 THEN r2][ELSE rn] END;
        意思是如果expr的值等于某个vn，则返回对应位置THEN后面的结果，如果与所有值都不相等，则返回ELSE后面的rn。
@@ -197,11 +195,9 @@ public class D4_常见函数 {}
     1、加密函数MD5(str)
        ①、使用MD5函数加密字符串，输入语句如下：
            SELECT MD5 ('mypwd');
-    
     2、加密函数ENCODE(str,pswd_str)
        ①、使用ENCODE加密字符串，输入语句如下：
            SELECT ENCODE('secret','hex'), LENGTH(ENCODE('secret','hex'));
-    
     3、解密函数DECODE(cypt_str,pswd_str)
        ①、使用DECODE函数解密被ENCODE加密的字符串，输入语句如下：
            SELECT DECODE(ENCODE('secret','hex'),'hex');
@@ -215,7 +211,6 @@ public class D4_常见函数 {}
     疑问1：如何从日期时间值中获取年、月、日等部分日期或时间值？
           在PostgreSQL中，日期和时间是以字符串形式存储在数据表中，可以截取字符串，
           如dt = ‘2020-03-01 12:30:30’,则可以输入left(dt, 4)截取年份，输入mid(dt, 6, 2)截取月份，其他同理。
-
     疑问2：如何计算年龄？
           年龄通过当前年龄减去出生年份来计算的。例如extract(year form m_birth)返回的结果是出生的年份，
           然后通过extract(year from current_date)获取当前年份，两者相减就是年龄。
