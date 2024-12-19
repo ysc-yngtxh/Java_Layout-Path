@@ -7,7 +7,7 @@ public class C3_DDL语法 {}
 /*
 一、创建表格式
     CREATE TABLE public.t_user (
-      "id" BIGSERIAL NOT NULL,  # 这里的 serial 是自增序列，bigserial 是大整数类型
+      "id" BIGSERIAL NOT NULL,  # 这里的 serial 是自增序列，bigserial 是大整数类型的自增序列
       "username" VARCHAR(64) NOT NULL,
       "password" VARCHAR(64) NOT NULL,
       "create_time" TIMESTAMP(0) default CURRENT_TIMESTAMP not null,
@@ -25,7 +25,7 @@ public class C3_DDL语法 {}
     ①、数值类型
         名字	               存储长度	          描述	                                范围
         ----------------------------------------------------------------------------------------------------
-        smallint	       2 字节	        小范围整数	                     -32768 到 +32767
+        smallint	       2 字节	           小范围整数	                      -32768 到 +32767
         integer	           4 字节            常用的整数	                -2147483648 到 +2147483647
         bigint	           8 字节            大范围整数	        -9223372036854775808 到 +9223372036854775807
         decimal	           可变长            用户指定的精度，精确	    小数点前 131072 位；小数点后 16383 位
@@ -41,11 +41,11 @@ public class C3_DDL语法 {}
         numeric、int 和 bigint 类型的值可以转换为 money，不建议使用浮点数来处理处理货币类型，因为存在舍入错误的可能性。
         名字	    存储容量	      描述	                         范围
         ----------------------------------------------------------------------------------------------------
-        money	8 字节	    货币金额	      -92233720368547758.08 到 +92233720368547758.07
+        money	  8 字节	        货币金额	      -92233720368547758.08 到 +92233720368547758.07
 
     ③、字符类型
         变长，有长度限制：character varying(n), varchar(n)
-        定长,不足补空白：character(n), char(n)
+        定长，不足补空白：character(n), char(n)
         变长，无长度限制：text
 
     ④、日期/时间类型
@@ -59,7 +59,7 @@ public class C3_DDL语法 {}
         interval [ fields ] [ (p) ]	            12 字节	时间间隔
 
     ⑤、布尔类型
-        boolean 1字节，有"true"(真)或"false"(假)两个状态， 第三种"unknown"(未知)状态，用 NULL 表示。
+        boolean 类型只有1字节，有"true"(真)或"false"(假)两个状态， 第三种"unknown"(未知)状态，用 NULL 表示。
 
     ⑥、枚举类型
         枚举类型是一个包含静态合值的有序集合的数据类型。
