@@ -214,4 +214,13 @@ public class D4_常见函数 {}
     疑问2：如何计算年龄？
           年龄通过当前年龄减去出生年份来计算的。例如extract(year form m_birth)返回的结果是出生的年份，
           然后通过extract(year from current_date)获取当前年份，两者相减就是年龄。
+
+九、工作学习函数：
+    1、函数：nullIf()、coalesce(t.lead_status, 1)
+         position()函数返回一个整数：该整数表示子字符串在字符串中的位置。如果在字符串中未找到字符串，则position()函数将返回零(0)，否则返回子字符串在字符串中的下标。
+                                    例如：select position('handler' in 'warning,handler,handler,cases,caseinfo');运行后返回值为9
+	     cast()函数操作数据类型转换：例如 cast('100' AS INTEGER) String类型转换Integer类型
+		 
+    2、当磁盘满当会锁住表为只读，需要清空些表数据：set session default_transaction_read_only=off;  ---临时会话临时解除只读
+                                               truncate TABLE 表名;（同上个脚本一起执行）
  */
