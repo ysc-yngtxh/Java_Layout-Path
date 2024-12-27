@@ -28,7 +28,7 @@ public class ContextProperties {
     /**
      * 描述
      **/
-    @Deprecated // 被该 @Deprecated 注解标注的[属性、方法、类]已废弃、暂时可用
+    @Deprecated // 被该 @Deprecated 注解标注的[属性、方法、类]                                                                    已废弃、暂时可用
     private String description = "";
 
     /**
