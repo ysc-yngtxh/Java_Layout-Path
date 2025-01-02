@@ -24,7 +24,7 @@ public class 流22_ByteArrayOutputStream {
             + "/Java基础及进阶/K11_流/FileTemp";
 
     public static void main(String[] args) {
-        // 简单理解 ByteArrayOutputStream 就是将数据写入到内存中.
+        // 简单理解 ByteArrayOutputStream 就是将数据写入到内存中，不需要指定文件路径。
         try (FileInputStream fis = new FileInputStream(filePath);
              ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
 

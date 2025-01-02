@@ -67,7 +67,8 @@ public class 流19_FileChannel定义 {
         // 创建一个1024字节大小的 ByteBuffer（内存缓冲区，不同于其他缓冲区），用于读取或写入数据。
         ByteBuffer buffer = ByteBuffer.allocate(1024);
         inChannel.read(buffer);
-        // 向 buffer缓冲区 中写入了一些数据
+        // 向 buffer缓冲区 中写入了一些数据.
+        // 打印出的数据有很多空格，因为 buffer缓冲区 的容量是1024字节，但实际写入的数据并没有占满。
         buffer.put("\nNew String to write to file...".getBytes(StandardCharsets.UTF_8));
         // 从写模式切换到读模式。这会将位置（position）设置为0，并将限制（limit）设置为当前位置。
         buffer.flip();

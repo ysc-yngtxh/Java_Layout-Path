@@ -10,8 +10,8 @@ import java.util.Properties;
      因为控制线程安全有其他更好的方案。比如：ConcurrentHashMap
 
   2、Hashtable的key可以为null吗？
-       Hashtable的key和value不允许null的,且都可以为空
-       HashMap集合的key和value都是可以为null的,且都可以为空
+       Hashtable的key和value不允许null的，且都可以为空
+       HashMap集合的key和value都是可以为null的，且都可以为空
 
   3、Hashtable集合初始化容量11
      Hashtable集合扩容，原容量*2+1

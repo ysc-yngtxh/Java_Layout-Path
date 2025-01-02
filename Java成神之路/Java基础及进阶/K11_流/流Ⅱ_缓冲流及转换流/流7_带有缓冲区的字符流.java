@@ -14,7 +14,7 @@ import java.io.IOException;
 public class 流7_带有缓冲区的字符流 {
     public static void main(String[] args)  {
         FileReader fr = null;
-        try{
+        try {
             fr = new FileReader(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/IO流概述.md");
             // 当一个流的构造方法中需要一个流的时候，这个被传进来的流叫做：节点流
             // 外部负责包装的这个流，叫做：包装流。还有一个名字叫做：处理流

@@ -23,7 +23,7 @@ public class 线程4_线程的sleep方法 {
     public static void main(String[] args) {
         // 让当前线程进入休眠，休眠五秒
         // 当前线程是主线程
-        try{
+        try {
             Thread.sleep(1000 * 5);
         } catch(InterruptedException e){
             e.printStackTrace();

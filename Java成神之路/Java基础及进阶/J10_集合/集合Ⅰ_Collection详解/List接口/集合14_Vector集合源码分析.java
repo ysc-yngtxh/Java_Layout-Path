@@ -1,6 +1,9 @@
 package J10_集合.集合Ⅰ_Collection详解.List接口;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Vector;
 
 /*
   Vector：

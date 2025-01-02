@@ -47,5 +47,6 @@ public class Object类5_HashCode {
 
         System.out.println(new Myclass().hashCode());
     }
-    // 现在我们不需要去弄懂哈希表，哈希码，哈希算法，后面会讲到。我们现在只需要知道hashCode是将对象的内存地址通过哈希算法转换的数字
+    // 现在我们不需要去弄懂哈希表，哈希码，哈希算法，后面会讲到。
+    // 我们现在只需要知道hashCode是将对象的内存地址通过哈希算法转换的数字
 }

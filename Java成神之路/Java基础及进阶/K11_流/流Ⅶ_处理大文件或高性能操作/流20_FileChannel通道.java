@@ -40,8 +40,8 @@ public class 流20_FileChannel通道 {
         while(channel.read(buffers) != -1){
             key.flip();
             value.flip();
-            System.out.println(new String(key.array()));
-            System.out.println(new String(value.array()));
+            System.err.println("key：" + new String(key.array()));
+            System.err.println("value：" + new String(value.array()));
             key.clear();
             value.clear();
         }
@@ -50,7 +50,7 @@ public class 流20_FileChannel通道 {
 
         // 从多个缓冲区写入
         // FileChannel 实现了 GatheringByteChannel 接口，与 ScatteringByteChannel 相呼应。可以一次性将多个缓冲区的数据写入到通道中。
-        FileChannel channel1 = FileChannel.open(Paths.get("a.txt"), StandardOpenOption.WRITE);
+        FileChannel channel1 = FileChannel.open(Paths.get("myFile"), StandardOpenOption.WRITE);
         ByteBuffer key1 = ByteBuffer.allocate(10), value1 = ByteBuffer.allocate(10);
         byte[] data = "017 Robot".getBytes();
         key1.put(data, 0, 3);

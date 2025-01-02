@@ -17,7 +17,7 @@ public class 集合13_LinkedList集合 {
         // List list2 = new ArrayList();           // 这样写表示底层你用了数组
         List<Object> list3 = new LinkedList<>();   // 这样写表示底层你用了双向链表
 
-        //以下这些方法你面向的都是接口编程
+        // 以下这些方法你面向的都是接口编程
         list3.add(123);
         list3.add(456);
         list3.add(789);

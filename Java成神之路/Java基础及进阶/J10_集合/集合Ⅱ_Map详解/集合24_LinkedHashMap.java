@@ -1,5 +1,6 @@
 package J10_集合.集合Ⅱ_Map详解;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -29,6 +30,20 @@ public class 集合24_LinkedHashMap {
         map.put("", "6");
         map.put("", "");
         map.put(" ", "");
-        System.out.println(map);
+        System.err.println("LinkedHashMap = " + map);
+
+        Map<String, String> hashMap = new HashMap<String, String>(){{
+            put("A", "1");
+            put("B", "2");
+            put("D", "4");
+            put("C", "3");
+            put("E", "5");
+            put(null, "6");
+            put(null, "6");
+            put("", "6");
+            put("", "");
+            put(" ", "");
+        }};
+        System.err.println("HashMap = " + hashMap);
     }
 }

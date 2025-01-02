@@ -8,9 +8,9 @@ import java.io.Serializable;
 
 /*
   1、序列化：  Serialize        java对象存储到文件中，将java对象的状态保存下来的过程
-           例如：将Student对象作为新增数据写入Mysql中；还有通过SpringMvc将Student对象转为Json返回给客户端
+           例如：①、将Student对象作为新增数据写入Mysql中；②、通过SpringMvc将Student对象转为Json返回给客户端
      反序列化：DeSerialize      将硬盘上的数据重新恢复到内存当中，恢复成Java对象
-           例如：将Mysql中查询到的数据重新恢复到内存中，恢复成Student对象；还有前端传过来的Json数据，转为Student对象
+           例如：①、将Mysql中查询到的数据重新恢复到内存中，恢复成Student对象；②、还有前端传过来的Json数据，转为Student对象
 
   2、参与序列化和反序列化的对象，必须实现 Serializable 接口
 　
@@ -27,14 +27,14 @@ import java.io.Serializable;
            在 Student类编译时JVM会自动生成序列化版本号--A，随后我将 Student类 进行序列化处理。
        ③、序列完之后，我在 Student类 中新增一个属性字段(address)。由于 Student类 进行了修改操作，JVM会重新编译。
            因为进行了重新编译，Java虚拟机会认为这是一个全新的类，此时会为 Student类 生成全新的序列化版本号--B。
-       ④、然后我再去操作 Student类 的反序列化，就会出现 java.io.InvalidClassException异常 报错。
-           因为我们类名可能是一样，但是我们的序列化版本号不一样，就会造成Java虚拟机认为不是同一个类。
+       ④、然后我再去操作 Student类 的反序列化。因为我们类名可能是一样的，但是我们的序列化版本号不一样，
+           尝试用新的类去反序列化旧的对象数据就会失败。就会出现 java.io.InvalidClassException异常 报错。
 
        因此，为了避免可能出现的异常问题，需要我们在实现序列化Serializable接口的时候，自己手动定义该类的序列化版本号。
 
   6、应用场景：
         1、需要把内存中的对象状态数据保存到一个文件或者数据库中的时候，这个场景是比较常见的。
-           例如我们利用mybatis框架编写持久层insert对象数据到数据库中时;
+           例如我们利用 mybatis框架 编写持久层 insert对象数据到数据库中时;
         2、网络通信时需要用套接字在网络中传送对象时，如我们使用RPC协议进行网络通信时;
  */
 public class 流15_序列化与反序列化的实现 {

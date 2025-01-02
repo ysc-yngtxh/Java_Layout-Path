@@ -50,9 +50,34 @@ public class 集合25_Collections工具类 {
         System.out.println(wuGui2s);
         // Collections.sort(list集合, 比较器对象); // 这种方式也可以排序
 
-        // 对List集合中的元素进行倒序排序
+        // 对List集合中的元素进行倒序排序，集合元素位置翻转
         Collections.reverse(wuGui2s);
-        System.out.println(wuGui2s);
+        System.err.println("元素位置翻转：" + wuGui2s);
+
+        // 对List集合中的元素进行随机排序
+        Collections.shuffle(wuGui2s);
+        System.err.println("随机排序：" + wuGui2s);
+
+        // 对List集合中的元素进行二分查找
+        // Collections.binarySearch(list集合, 要查找的元素); // 返回值是元素的索引
+
+        // 对List集合中的元素进行替换
+        // Collections.replaceAll(list集合, 要替换的元素, 替换后的元素);
+
+        // 对List集合中的元素进行交换
+        // Collections.swap(list集合, 索引1, 索引2);
+
+        // 对List集合中的元素进行拷贝
+        // Collections.copy(list集合, 源list集合);
+
+        // 对List集合中的元素进行填充
+        // Collections.fill(list集合, 要填充的元素);
+
+        // 对List集合中的元素进行最大值
+        // Collections.max(list集合);
+
+        // 对List集合中的元素进行最小值
+        // Collections.min(list集合);
     }
 }
 

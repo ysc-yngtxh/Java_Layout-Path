@@ -20,11 +20,12 @@ public class 流14_目录拷贝 {
         File[] files = srcDir.listFiles(); // 列举目录下所有文件（包含子目录）存放至数组
         for (File file : files) {          // 增强for循环提取文件
             if (file.isFile()) {           // 判断是否为文件
-                copyFile(new File(srcDir + "\\" + file.getName()), new File(targetDir + "\\" + file.getName()));
                 // 调用复制文件方法；创建新的File表示源文件名及目标文件名，文件名为源文件夹路径＋文件名，目标文件名同理
-            } else { // 不是文件则为文件夹，以下为文件夹的处理方法
-                copyDir(new File(srcDir + "\\" + file.getName()), new File(targetDir + "\\" + file.getName()));
+                copyFile(new File(srcDir + "\\" + file.getName()), new File(targetDir + "\\" + file.getName()));
+            } else {
+                // 不是文件则为目录（文件夹），以下为文件夹的处理方法
                 // 如果当前file为文件夹，则再次调用copyDir方法（递归）
+                copyDir(new File(srcDir + "\\" + file.getName()), new File(targetDir + "\\" + file.getName()));
             }
         }
     }
