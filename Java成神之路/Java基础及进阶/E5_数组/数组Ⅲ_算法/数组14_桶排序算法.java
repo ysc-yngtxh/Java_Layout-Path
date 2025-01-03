@@ -28,6 +28,7 @@ public class 数组14_桶排序算法 {
             bucketArray[arr[i]]++;
         }
         // 遍历桶数组。外层循环从桶的第一位开始（即下标为零）；内层循环遍历桶数组中下标为i的值出现的次数【排序的数组可能会出现重复的数值】
+        // 当桶数组元素值为 0 时，是不走内层循环的，因此不影响 arr 数组排序。
         int index = 0;
         for (int i = 0; i < bucketArray.length; i++) {
             for (int j = 0; j < bucketArray[i]; j++) {
