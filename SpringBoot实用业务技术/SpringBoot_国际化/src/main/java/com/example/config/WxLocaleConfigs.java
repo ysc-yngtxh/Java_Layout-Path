@@ -94,7 +94,7 @@ public class WxLocaleConfigs implements LocaleResolver,InitializingBean {
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         wxLocaleConfigs = this;
     }
 }

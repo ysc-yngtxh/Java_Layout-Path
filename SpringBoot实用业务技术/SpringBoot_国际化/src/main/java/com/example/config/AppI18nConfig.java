@@ -1,6 +1,7 @@
 package com.example.config;
 
 import jakarta.annotation.PostConstruct;
+import lombok.Getter;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -45,6 +46,7 @@ public class AppI18nConfig implements InitializingBean {
         System.out.println("接口initializingBean的实现方法执行");
     }
 
+
     public void init11(){
         System.out.println("我是init方法执行...");
     }
@@ -54,20 +56,18 @@ public class AppI18nConfig implements InitializingBean {
         return new AppI18nConfig();
     }
 
+
     @Value("${xxl.job.i18n}")
     private String i18n;
 
+    @Getter
     @Value("${spring.messages.basename}")
     private String baseName;
 
     public String getI18n() {
-        if (!Arrays.asList("zh_CN", "zh_TC", "en").contains(i18n)) {
+        if (!Arrays.asList("zh_CN", "zh_TW", "en_US").contains(i18n)) {
             return "zh_CN";
         }
         return i18n;
-    }
-
-    public String getBaseName(){
-        return baseName;
     }
 }

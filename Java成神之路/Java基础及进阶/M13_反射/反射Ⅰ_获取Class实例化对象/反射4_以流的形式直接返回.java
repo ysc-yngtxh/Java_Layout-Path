@@ -2,6 +2,7 @@ package M13_反射.反射Ⅰ_获取Class实例化对象;
 
 import java.io.*;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 public class 反射4_以流的形式直接返回 {
@@ -13,13 +14,12 @@ public class 反射4_以流的形式直接返回 {
                 .toURI()
                 .getPath();
         FileInputStream reader = null;
-        // FileReader isr = null;
+        // FileReader reader = null;
         try{
             reader = new FileInputStream(path);
-            // isr = new FileReader(path);
+            // reader = new FileReader(path);
             Properties pro = new Properties();
             pro.load(reader);
-            // pro.load(isr);
             String value1 = pro.getProperty("className1");
             System.out.println("使用字节流当然会乱码啊！改用字符流即可！ -- " + value1);
         } catch (FileNotFoundException e) {
@@ -42,8 +42,10 @@ public class 反射4_以流的形式直接返回 {
         InputStream in = null;
         try{
             in = Thread.currentThread().getContextClassLoader().getResourceAsStream("classInfo.properties");
+            // 通过InputStreamReader将字节流转换为字符流
+            InputStreamReader inputStreamReader = new InputStreamReader(in, StandardCharsets.UTF_8);
             Properties pro1 = new Properties();
-            pro1.load(in);
+            pro1.load(inputStreamReader);
             String value2 = pro1.getProperty("className3");
             System.out.println(value2);
         } catch (IOException e) {
