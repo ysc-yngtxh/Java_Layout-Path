@@ -18,7 +18,6 @@ import java.util.concurrent.ArrayBlockingQueue;
         DelayQueue: 使用优先级队列实现的延迟无界阻塞队列
         SynchronousQueue: 不存储元素的阻塞队列,也即是单个元素的队列
         LinkedTransferQueue: 由链表结构组成的无界阻塞队列
-        LinkedBlockingDeque: 由了解结构组成的双向阻塞队列
  */
 public class 阻塞队列1_抛出异常API {
     /**
@@ -63,6 +62,7 @@ public class 阻塞队列1_抛出异常API {
         queue.add("A");
         queue.add("B");
         queue.add("C");
+        // 返回这个队列的头部元素。此方法与peek的不同之处仅在于，如果该队列为空，它会引发异常。除非队列为空，否则此实现将返回peek的结果。
         System.out.println(queue.element());
         System.out.println(queue.element());
         System.out.println(queue);
