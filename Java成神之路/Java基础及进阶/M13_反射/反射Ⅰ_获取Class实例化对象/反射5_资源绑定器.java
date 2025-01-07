@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
@@ -23,31 +24,11 @@ public class 反射5_资源绑定器 {
 
         String className1 = bundle1.getString("className1");
         System.out.println(className1);
-        // 将 ISO-8859-1 编码的字符串转换为 UTF-8
+        // 中文乱码：可以将 ISO-8859-1 编码的字符串转换为 UTF-8
         System.out.println(
                 new String(className1.getBytes(StandardCharsets.ISO_8859_1),
                 StandardCharsets.UTF_8)
         );
-
-
-        ResourceBundle bundle2 = ResourceBundle.getBundle("classInfo", new ResourceBundle.Control(){
-            @Override
-            public ResourceBundle newBundle(String baseName, Locale locale, String format, ClassLoader loader, boolean reload) throws IllegalAccessException, InstantiationException, IOException {
-                String bundleName = toBundleName(baseName, locale);
-                String resourceName = toResourceName(bundleName, "properties");
-                try (InputStream stream = loader.getResourceAsStream(resourceName)) {
-                    if (stream != null) {
-                        // 使用 UTF-8 编码读取 .properties 文件
-                        try (InputStreamReader reader = new InputStreamReader(stream, StandardCharsets.UTF_8)) {
-                            return new PropertyResourceBundle(reader);
-                        }
-                    }
-                }
-                return super.newBundle(baseName, locale, format, loader, reload);
-            }
-        });
-        String className2 = bundle2.getString("className2");
-        System.out.println(className2);
 
 
         // 如果需要读取其他的属性配置文件，需要使用带有Locale参数的方法。拼接的文件名：xxx_en_US.properties

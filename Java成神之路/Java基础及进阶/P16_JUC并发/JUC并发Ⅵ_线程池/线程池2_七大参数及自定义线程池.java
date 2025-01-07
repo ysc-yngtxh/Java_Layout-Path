@@ -6,12 +6,12 @@ import java.util.concurrent.*;
 public class 线程池2_七大参数及自定义线程池 {
     /**
        public ThreadPoolExecutor(
-              核心线程池大小(已有的线程数)    int corePoolSize,
-              最大核心线程池大小             int maximumPoolSize,
-              超时了没有人调用就会释放       long keepAliveTime,
+              核心线程池大小(已有的线程数)     int corePoolSize,
+              最大核心线程池大小              int maximumPoolSize,
+              超时了没有人调用就会释放         long keepAliveTime,
               超时单位                      TimeUnit unit,
               阻塞队列                      BlockingQueue<Runnable> workQueue,
-              线程工厂。创建线程的，一般不动  ThreadFactory threadFactory,
+              线程工厂。创建线程的，一般不动   ThreadFactory threadFactory,
               拒绝策略                      RejectedExecutionHandler handler
        )
 
@@ -34,15 +34,18 @@ public class 线程池2_七大参数及自定义线程池 {
        }
      */
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        // 自定义线程池！工作中使用ThreadPoolExecutor
+        // 自定义线程池！工作中推荐使用ThreadPoolExecutor
         ExecutorService executorService = new ThreadPoolExecutor(
                 2,          // 核心线程池大小，定义了可以同时运行的最小任务数量。即这个线程池已经创建好2个线程，你随调随用。
                 5,          /* 最大核心线程池大小。
                                当任务数大于核心线程数大小，并不会立马去创建线程供任务使用，而是把任务放到下面我们定义的阻塞队列中。
                                当阻塞队列也满了，还有多余的任务时，这个时候才会去创建线程。并且创建的线程数始终不能超过5个。 */
                 3,          // 超时时间。当线程数大于核心线程数时，多余的空闲线程存活的最长时间，超过该时间则会销毁该线程。
+                            /* 在 Java 线程池中，空闲线程指的是当前没有执行任务且处于等待状态的线程。具体来说：
+                                  1、没有任务分配：这些线程已经完成了之前的任务，暂时没有新的任务需要处理。
+                                  2、等待新任务：它们处于等待队列中，随时准备接受并执行新的任务。*/
                 TimeUnit.SECONDS,             // 超时单位
-                new LinkedBlockingDeque<>(3), // 阻塞队列
+                new LinkedBlockingDeque<>(3), // 阻塞队列。任务队列用于存放等待执行的任务，当线程池中的线程都在忙碌时，新任务会进入队列等待。
                 Executors.defaultThreadFactory(),    // 线程工厂。创建线程的，一般不动
                 new ThreadPoolExecutor.AbortPolicy() // 拒绝策略(有四种拒绝策略)。前提是已经达到最大线程数量了
                 // new ThreadPoolExecutor.AbortPolicy()         // 如果线程队列已满，丢弃任务并抛出RejectedExecutionException异常。

@@ -22,15 +22,15 @@ public class 反射10_可变长度参数 {
         m3("ab", "cd", "ef", "gh");
     }
 
-    public static void m(int...args){
+    public static void m(int... args){
         System.out.println("m方法执行了！");
     }
 
-    public static void m2(int a, String...args1) {    // 可变长度参数一定要写在形参后面，并且一个方法里只能写一个
+    public static void m2(int a, String... args1) {    // 可变长度参数一定要写在形参后面，并且一个方法里只能写一个
 
     }
 
-    public static void m3(String...args){
+    public static void m3(String... args){
         for (int i = 0; i < args.length; i++) {
             System.out.println(args[i]);
         }

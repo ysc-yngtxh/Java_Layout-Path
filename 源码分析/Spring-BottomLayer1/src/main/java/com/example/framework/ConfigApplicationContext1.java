@@ -63,7 +63,7 @@ public class ConfigApplicationContext1 {
         // 通过类加载器获取扫描路径的下的资源 URL (绝对地址)
         URL url = classLoader.getResource(scanPath.replace(".", "/"));
         // 将 URL 进行中文解码 (避免路径中存在中文乱码)
-        String urlDecodePath = URLDecoder.decode(url.getFile(), StandardCharsets.UTF_8.name());
+        String urlDecodePath = URLDecoder.decode(url.getFile(), StandardCharsets.UTF_8);
 
         // 创建 File 对象
         File file = new File(urlDecodePath);

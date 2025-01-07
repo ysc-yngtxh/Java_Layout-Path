@@ -29,12 +29,12 @@ public class Lock锁常用方法 {
      *     8. hasQueuedThread(Thread thread)：查询给定线程是否等待获取此锁
      *     9. hasQueuedThreads()：是否有线程等待此锁
      *     10. isFair()：该锁是否公平锁
-     *     11. isHeldByCurrentThread()： 当前线程是否保持锁锁定，线程的执行 lock 方法的前后分别是 false 和 true
+     *     11. isHeldByCurrentThread()：当前线程是否保持锁锁定，线程的执行 lock 方法的前后分别是 false 和 true
      *     12. isLock()：此锁是否有任意线程占用
      *     13. lockInterruptibly()：获取可中断的锁
      *                              一个线程调用lockInterruptibly()方法时，如果其他线程调用了该线程的interrupt()方法，
      *                              则lockInterruptibly()会抛出InterruptedException，从而允许线程响应中断。
-     *     14. tryLock()：尝试获得锁，如果锁不可用, 不会导致当前线程被禁用,当前线程仍然继续往下执行代码.
+     *     14. tryLock()：尝试获得锁，如果锁不可用，不会导致当前线程被禁用,当前线程仍然继续往下执行代码.
      *     15. tryLock(long timeout TimeUnit unit)：如果锁在给定等待时间内没有被另一个线程持有，则获取该锁。
      */
 

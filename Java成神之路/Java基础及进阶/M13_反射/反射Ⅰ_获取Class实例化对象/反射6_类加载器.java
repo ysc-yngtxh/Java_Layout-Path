@@ -7,18 +7,18 @@ package M13_反射.反射Ⅰ_获取Class实例化对象;
 
        2、Java中有4种类加载器：
              Bootstrap ClassLoader（启动类加载器）：
-                 负责加载存放在JAVA_HOME/jre/lib/rt.jar或者扩展模块路径（如JAVA_HOME/jre/lib/modules）中的核心类库。
-                 Bootstrap ClassLoader没有父类加载器，并且它是用C++编写的，是JVM的一部分。
+                 负责加载存放在 JAVA_HOME/jre/lib/rt.jar 或者扩展模块路径（如JAVA_HOME/jre/lib/modules）中的核心类库。
+                 Bootstrap ClassLoader 没有父类加载器，并且它是用C++编写的，是JVM的一部分。
                  它加载的类被认为是可信的，不需要进行签名验证。
              Extension ClassLoader（扩展类加载器）：
-                 扩展类加载器通常会加载JAVA_HOME/jre/lib/ext目录中的类库，或者是由java.ext.dirs系统属性指定的路径中的类库。
-                 它是由Java编写的，可以从sun.misc.Launcher$ExtClassLoader类中找到其实现。
-                 扩展类加载器的父类加载器是Bootstrap ClassLoader。
+                 扩展类加载器通常会加载 JAVA_HOME/jre/lib/ext 目录中的类库，或者是由 java.ext.dirs 系统属性指定的路径中的类库。
+                 它是由Java编写的，可以从 sun.misc.Launcher$ExtClassLoader 类中找到其实现。
+                 扩展类加载器的父类加载器是 Bootstrap ClassLoader。
              System ClassLoader（应用类加载器/系统类加载器）：
                  负责加载用户类路径（ClassPath）所指定的类。
-                 它可以从sun.misc.Launcher$AppClassLoader类中找到其实现。
-                 System ClassLoader的父类加载器是Extension ClassLoader。
-                 用户可以通过ClassLoader.getSystemClassLoader()方法获取到这个类加载器的实例。
+                 它可以从 sun.misc.Launcher$AppClassLoader 类中找到其实现。
+                 System ClassLoader 的父类加载器是 Extension ClassLoader。
+                 用户可以通过 ClassLoader.getSystemClassLoader() 方法获取到这个类加载器的实例。
              自定义类加载器。
 
           双亲（parent）委托机制
@@ -35,7 +35,7 @@ package M13_反射.反射Ⅰ_获取Class实例化对象;
            String s = "abc";
 
            代码在开始执行之前，会将所需要类全部加载到JVM当中。
-           通过类加载器加载，看到以上代码类加载器会找到String.class文件
+           通过类加载器加载，看到以上代码类加载器会找到 String.class 文件
            找到就加载，那么是怎么进行加载的呢？
 
                首先通过“启动类加载器”加载

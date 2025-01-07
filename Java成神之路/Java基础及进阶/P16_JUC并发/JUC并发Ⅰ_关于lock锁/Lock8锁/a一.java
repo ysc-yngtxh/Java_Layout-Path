@@ -21,8 +21,8 @@ public class a一 {
         new Thread(test::Call, "B").start();
     }
 }
-class Test1{
-    public synchronized void Send(){
+class Test1 {
+    public synchronized void Send() {
         try {
             TimeUnit.SECONDS.sleep(2);  // 睡眠，不再使用Thread.sleep()
         } catch (InterruptedException e) {
@@ -30,7 +30,7 @@ class Test1{
         }
         System.out.println("发短信");
     }
-    public synchronized void Call(){
+    public synchronized void Call() {
         System.out.println("打电话");
     }
 }

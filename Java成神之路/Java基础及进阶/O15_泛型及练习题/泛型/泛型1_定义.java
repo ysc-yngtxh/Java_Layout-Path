@@ -2,6 +2,7 @@ package O15_泛型及练习题.泛型;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 游家纨绔
@@ -26,10 +27,10 @@ public class 泛型1_定义 {
      * */
 
     public static void main(String[] args) {
-        ArrayList<String> list1 = new ArrayList<>();
+        List<String> list1 = new ArrayList<>();
         // add 方法形参类型为 String
         list1.add("XiaoCao");
-        ArrayList<Integer> list2 = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
         // 实例化 ArrayList 时虽然传入不同的泛型，但其实它们仍然还是同一个类型。
         System.out.println("list1 和 list2 类型相同吗：" + (list1.getClass() == list2.getClass()));
 

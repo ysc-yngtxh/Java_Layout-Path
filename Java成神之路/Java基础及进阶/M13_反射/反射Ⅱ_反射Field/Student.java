@@ -8,7 +8,7 @@ public class Student {
     protected int age;
     boolean sex;
     private int no;
-    private final String level;
+    private String level;
     private final String bounds = "11";
 
     public static final double MATH_PI = 3.1415926;

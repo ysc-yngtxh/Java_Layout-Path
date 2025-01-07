@@ -12,7 +12,7 @@ public class 注解4_反射注解 {
         // 判断这个类型上是否有这个@MyAnnotation注解
         if(c.isAnnotationPresent(MyAnnotation.class)){
             // 获取该注解对象
-            MyAnnotation myAnnotation = (MyAnnotation)c.getAnnotation(MyAnnotation.class);
+            MyAnnotation myAnnotation = c.getAnnotation(MyAnnotation.class);
             System.out.println("类上面的注解对象" + myAnnotation);
             // 获取注解对象的属性
             myAnnotation.value();

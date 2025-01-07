@@ -9,9 +9,8 @@ public class A一百以内的素数 {
                     sushu = false;
                 }
             }
-
-            if(sushu){
-                System.out.println("i="+i);
+            if(sushu) {
+                System.out.println("i = " + i);
             }
         }
     }

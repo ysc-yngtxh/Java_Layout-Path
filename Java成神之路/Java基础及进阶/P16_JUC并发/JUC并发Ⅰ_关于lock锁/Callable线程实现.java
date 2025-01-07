@@ -7,19 +7,19 @@ import java.util.concurrent.FutureTask;
 public class Callable线程实现 {
     /**
      * 三种方式的优缺点
-     * 采用继承Thread类方式：
-     *  （1）优点：编写简单，如果需要访问当前线程，无需使用Thread.currentThread()方法，直接使用this，即可获得当前线程
-     *  （2）缺点：因为线程类已经继承了Thread类，所以不能再继承其他的父类
-     * 采用实现Runnable接口方式：
-     *  （1）优点：线程类只是实现了Runnable接口，还可以继承其他的类。
-     *  （2）缺点：编程稍微复杂，如果需要访问当前线程，必须使用Thread.currentThread()方法
-     * Runnable和Callable的区别：
-     *  （1）Callable规定的方法是call()，Runnable规定的方法是run()
-     *  （2）Callable的任务执行后可返回值，而Runnable的任务是不能返回值的
-     *  （3）call方法可以抛出异常，run方法不可以，因为run方法本身没有抛出异常，所以自定义的线程类在重写run的时候也无法抛出异常
-     *  （4）运行Callable任务可以拿到一个Future对象，表示异步计算的结果。
-     *      它提供了检查计算是否完成的方法，以等待计算的完成，并检索计算的结果。
-     *      通过Future对象可以了解任务的执行情况，可取消任务的执行，还可获取执行结果
+     *   1、采用继承Thread类方式：
+     *     （1）优点：编写简单，如果需要访问当前线程，无需使用Thread.currentThread()方法，直接使用this，即可获得当前线程。
+     *     （2）缺点：因为线程类已经继承了Thread类，所以不能再继承其他的父类
+     *   2、采用实现Runnable接口方式：
+     *     （1）优点：线程类只是实现了Runnable接口，还可以继承其他的类。
+     *     （2）缺点：编程稍微复杂，如果需要访问当前线程，必须使用Thread.currentThread()方法
+     *   3、Runnable和Callable的区别：
+     *     （1）Callable规定的方法是call()，Runnable规定的方法是run()
+     *     （2）Callable的任务执行后可返回值，而Runnable的任务是不能返回值的
+     *     （3）call方法可以抛出异常，run方法不可以，因为run方法本身没有抛出异常，所以自定义的线程类在重写run的时候也无法抛出异常
+     *     （4）运行Callable任务可以拿到一个Future对象，表示异步计算的结果。
+     *         它提供了检查计算是否完成的方法，以等待计算的完成，并检索计算的结果。
+     *         通过Future对象可以了解任务的执行情况，可取消任务的执行，还可获取执行结果
      */
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         Demo demo = new Demo();
