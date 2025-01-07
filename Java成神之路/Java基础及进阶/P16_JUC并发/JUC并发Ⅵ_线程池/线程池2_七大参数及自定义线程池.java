@@ -8,11 +8,11 @@ public class 线程池2_七大参数及自定义线程池 {
        public ThreadPoolExecutor(
               核心线程池大小(已有的线程数)    int corePoolSize,
               最大核心线程池大小             int maximumPoolSize,
-              超时了没有人调用就会释放        long keepAliveTime,
-              超时单位                     TimeUnit unit,
-              阻塞队列                     BlockingQueue<Runnable> workQueue,
-              线程工厂。创建线程的，一般不动   ThreadFactory threadFactory,
-              拒绝策略                     RejectedExecutionHandler handler
+              超时了没有人调用就会释放       long keepAliveTime,
+              超时单位                      TimeUnit unit,
+              阻塞队列                      BlockingQueue<Runnable> workQueue,
+              线程工厂。创建线程的，一般不动  ThreadFactory threadFactory,
+              拒绝策略                      RejectedExecutionHandler handler
        )
 
        public static ExecutorService newSingleThreadExecutor() {
