@@ -6,13 +6,13 @@ import java.util.concurrent.*;
 public class 线程池2_七大参数及自定义线程池 {
     /**
        public ThreadPoolExecutor(
-              核心线程池大小(已有的线程数)     int corePoolSize,
-              最大核心线程池大小              int maximumPoolSize,
-              超时了没有人调用就会释放         long keepAliveTime,
-              超时单位                      TimeUnit unit,
-              阻塞队列                      BlockingQueue<Runnable> workQueue,
-              线程工厂。创建线程的，一般不动   ThreadFactory threadFactory,
-              拒绝策略                      RejectedExecutionHandler handler
+              核心线程池大小(提前创建好的线程数)             int corePoolSize,
+              最大核心线程池大小                            int maximumPoolSize,
+              空闲线程存活时间                              long keepAliveTime,
+              超时时间单位                                  TimeUnit unit,
+              工作队列（阻塞队列）                           BlockingQueue<Runnable> workQueue,
+              线程工厂（创建新线程的，一般不动）              ThreadFactory threadFactory,
+              拒绝策略（线程数量超过最大线程数时，拒绝任务）   RejectedExecutionHandler handler
        )
 
        public static ExecutorService newSingleThreadExecutor() {
@@ -36,7 +36,7 @@ public class 线程池2_七大参数及自定义线程池 {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         // 自定义线程池！工作中推荐使用ThreadPoolExecutor
         ExecutorService executorService = new ThreadPoolExecutor(
-                5,          // 核心线程池大小。即不论用不用得上，这个线程池都会创建好5个线程，不会因为线程被空闲而被销毁。
+                5,          // 核心线程池大小。即不论用不用得上，这个线程池都会创建好5个线程准备执行任务，不会因为线程被空闲而被销毁。
                 10,         /* 最大核心线程池大小。
                                当任务数大于核心线程数大小，并不会立马去创建线程供任务使用，而是把任务放到下面我们定义的阻塞队列中。
                                当阻塞队列也满了，还有多余的任务时，这个时候才会去创建新线程。并且创建的线程数始终不能超过5个。
@@ -45,7 +45,7 @@ public class 线程池2_七大参数及自定义线程池 {
                                当线程数大于核心线程数时，多余的空闲线程存活的最长时间，超过该时间则会销毁该线程。*/
                 TimeUnit.SECONDS,             // 超时时间单位（如：TimeUnit.SECONDS[秒]、TimeUnit.MILLISECONDS[毫秒]...）
                 new LinkedBlockingDeque<>(3), // 工作队列（任务等待队列）。任务队列用于存放等待执行的任务，当线程池中的线程都在忙碌时，新任务会进入阻塞队列等待。
-                Executors.defaultThreadFactory(),    /* 线程工厂（用于创建新线程）。
+                Executors.defaultThreadFactory(),    /* 线程工厂（用于创建新线程）
                                                         默认的线程工厂采用new Thread()方式创建，且创建的线程名具有统一风格：pool-m-thread-n(m为线程池编号,n为线程池中的线程编号)
                                                         除了使用默认工厂外，也可以自定义工厂，设置线程的属性，如线程名称、优先级、守护线程属性等。*/
                 new ThreadPoolExecutor.AbortPolicy() // 拒绝策略(有四种拒绝策略)。前提是已经达到最大线程数量了
@@ -56,13 +56,6 @@ public class 线程池2_七大参数及自定义线程池 {
                                                                 // 如果线程队列已满，那么就会由主线程直接运行该任务。
         );
 
-        /* 总结：
-               1、工作队列中只有等待执行的任务，没有提供线程资源。只有等其他的线程资源释放出来，队列中的任务才能被执行。
-               2、空闲线程：指的是当前没有执行任务且处于等待状态的线程
-                           ①、当核心线程中存在暂时没有任务执行的线程，那么这部分线程也可以被称为空闲线程，只是核心线程是不会被销毁的
-                           ②、当创建了最大线程数，那么超过核心线程数的那部分线程完成了之前的任务，且暂时没有新任务时也可以称为空闲线程。
-                              但这部分如果超过设置的存活时间，那么这部分线程会被销毁。*/
-
        /* 引发java.util.concurrent.RejectedExecutionException的场景：
           1、当你的排队策略为有界队列，并且配置的拒绝策略是 ThreadPoolExecutor.AbortPolicy，
              当线程池的线程数量已经达到了maximumPoolSize的时候，你再向它提交任务，就会抛出ThreadPoolExecutor.AbortPolicy异常。
@@ -70,12 +63,17 @@ public class 线程池2_七大参数及自定义线程池 {
           2、线程池显式的调用了shutdown()之后，再向线程池提交任务的时候，如果你配置的拒绝策略是ThreadPoolExecutor.AbortPolicy的话，
              这个异常就被会抛出来。从而引发java.util.concurrent.RejectedExecutionException */
 
-        /**
-         * 一、线程基本规则
+        /** 总结：
+         *  一、线程基本规则
          *    1、默认情况下，线程池在初始的时候，线程数为0。当接收到一个任务时，如果线程池中存活的线程数小于corePoolSize核心线程，则新建一个线程。
          *    2、如果所有运行的核心线程都在忙，超出核心线程处理的任务，执行器更多地选择把任务放进队列，而不是新建一个线程。
          *    3、如果一个任务提交不了到队列，在不超出最大线程数量情况下，会新建线程。超出了就会报错。
-         * 二、排队策略
+         *    4、工作队列中只有等待执行的任务，没有提供线程资源。只有等其他的线程资源释放出来，队列中的任务才能被执行。
+         *    5、空闲线程：指的是当前没有执行任务且处于等待状态的线程
+         *                ①、当核心线程中存在暂时没有任务执行的线程，那么这部分线程也可以被称为空闲线程，只是核心线程是不会被销毁的
+         *                ②、当创建了最大线程数，那么超过核心线程数的那部分线程完成了之前的任务，且暂时没有新任务时也可以称为空闲线程。
+         *                   但这部分如果超过设置的存活时间，那么这部分线程会被销毁。
+         *  二、排队策略
          *    1、直接提交，用SynchronousQueue。特点是不保存，直接提交给线程，如果没线程，则新建一个。
          *    2、无限提交，用类似LinkedBlockingQueue无界队列。特点是保存所以核心线程处理不了的任务，队列无上限，最大线程也没用。
          *    3、有限提交，用类似ArrayBlockingQueue有界队列。特点是可以保存超过核心线程的任务，并且队列也是有上限的。
