@@ -36,18 +36,18 @@ public class 线程池2_七大参数及自定义线程池 {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         // 自定义线程池！工作中推荐使用ThreadPoolExecutor
         ExecutorService executorService = new ThreadPoolExecutor(
-                2,          // 核心线程池大小，定义了可以同时运行的最小任务数量。即这个线程池已经创建好2个线程，你随调随用。
-                5,          /* 最大核心线程池大小。
+                5,          // 核心线程池大小。即不论用不用得上，这个线程池都会创建好5个线程，不会因为线程被空闲而被销毁。
+                10,         /* 最大核心线程池大小。
                                当任务数大于核心线程数大小，并不会立马去创建线程供任务使用，而是把任务放到下面我们定义的阻塞队列中。
-                               当阻塞队列也满了，还有多余的任务时，这个时候才会去创建线程。并且创建的线程数始终不能超过5个。 */
-                3,          /* 超时时间。
-                               当线程数大于核心线程数时，多余的空闲线程存活的最长时间，超过该时间则会销毁该线程。
-                               在 Java 线程池中，空闲线程指的是当前没有执行任务且处于等待状态的线程。具体来说：
-                                  1、没有任务分配：这些线程已经完成了之前的任务，暂时没有新的任务需要处理。
-                                  2、等待新任务：它们处于等待队列中，随时准备接受并执行新的任务。*/
-                TimeUnit.SECONDS,             // 超时单位
-                new LinkedBlockingDeque<>(3), // 阻塞队列。任务队列用于存放等待执行的任务，当线程池中的线程都在忙碌时，新任务会进入队列等待。
-                Executors.defaultThreadFactory(),    // 线程工厂。创建线程的，一般不动
+                               当阻塞队列也满了，还有多余的任务时，这个时候才会去创建新线程。并且创建的线程数始终不能超过5个。
+                               如果创建的新线程处于空闲状态，且超过设置的存活时间，那么会被进行销毁处理。*/
+                3,          /* 空闲线程存活时间（超时时间）
+                               当线程数大于核心线程数时，多余的空闲线程存活的最长时间，超过该时间则会销毁该线程。*/
+                TimeUnit.SECONDS,             // 超时时间单位（如：TimeUnit.SECONDS[秒]、TimeUnit.MILLISECONDS[毫秒]...）
+                new LinkedBlockingDeque<>(3), // 工作队列（任务等待队列）。任务队列用于存放等待执行的任务，当线程池中的线程都在忙碌时，新任务会进入阻塞队列等待。
+                Executors.defaultThreadFactory(),    /* 线程工厂（用于创建新线程）。
+                                                        默认的线程工厂采用new Thread()方式创建，且创建的线程名具有统一风格：pool-m-thread-n(m为线程池编号,n为线程池中的线程编号)
+                                                        除了使用默认工厂外，也可以自定义工厂，设置线程的属性，如线程名称、优先级、守护线程属性等。*/
                 new ThreadPoolExecutor.AbortPolicy() // 拒绝策略(有四种拒绝策略)。前提是已经达到最大线程数量了
                 // new ThreadPoolExecutor.AbortPolicy()         // 如果线程队列已满，丢弃任务并抛出RejectedExecutionException异常。
                 // new ThreadPoolExecutor.DiscardPolicy()       // 如果线程队列已满，则后续提交的任务都会被丢弃，不抛出异常。
@@ -56,12 +56,19 @@ public class 线程池2_七大参数及自定义线程池 {
                                                                 // 如果线程队列已满，那么就会由主线程直接运行该任务。
         );
 
+        /* 总结：
+               1、工作队列中只有等待执行的任务，没有提供线程资源。只有等其他的线程资源释放出来，队列中的任务才能被执行。
+               2、空闲线程：指的是当前没有执行任务且处于等待状态的线程
+                           ①、当核心线程中存在暂时没有任务执行的线程，那么这部分线程也可以被称为空闲线程，只是核心线程是不会被销毁的
+                           ②、当创建了最大线程数，那么超过核心线程数的那部分线程完成了之前的任务，且暂时没有新任务时也可以称为空闲线程。
+                              但这部分如果超过设置的存活时间，那么这部分线程会被销毁。*/
+
        /* 引发java.util.concurrent.RejectedExecutionException的场景：
-         1、当你的排队策略为有界队列，并且配置的拒绝策略是 ThreadPoolExecutor.AbortPolicy，
-            当线程池的线程数量已经达到了maximumPoolSize的时候，你再向它提交任务，就会抛出ThreadPoolExecutor.AbortPolicy异常。
-            从而引发java.util.concurrent.RejectedExecutionException
-         2、线程池显式的调用了shutdown()之后，再向线程池提交任务的时候，如果你配置的拒绝策略是ThreadPoolExecutor.AbortPolicy的话，
-            这个异常就被会抛出来。从而引发java.util.concurrent.RejectedExecutionException */
+          1、当你的排队策略为有界队列，并且配置的拒绝策略是 ThreadPoolExecutor.AbortPolicy，
+             当线程池的线程数量已经达到了maximumPoolSize的时候，你再向它提交任务，就会抛出ThreadPoolExecutor.AbortPolicy异常。
+             从而引发java.util.concurrent.RejectedExecutionException
+          2、线程池显式的调用了shutdown()之后，再向线程池提交任务的时候，如果你配置的拒绝策略是ThreadPoolExecutor.AbortPolicy的话，
+             这个异常就被会抛出来。从而引发java.util.concurrent.RejectedExecutionException */
 
         /**
          * 一、线程基本规则
@@ -75,11 +82,11 @@ public class 线程池2_七大参数及自定义线程池 {
          *       超过上限，新建线程（满了抛错）。更好地保护资源，防止崩溃，也是最常用的排队策略。
          */
         try {
-            for (int i = 1; i <= 10; i++) {
+            for (int i = 1; i <= 20; i++) {
                 // 线程池接受的最大任务数 = 阻塞队列数 + 最大线程池大小
                 // 如果 任务数 > 阻塞队列数 + 最大线程池大小,继续往线程池中执行任务，会执行我们的拒绝策略
                 executorService.execute(() -> {
-                    System.out.println(Thread.currentThread().getName() + "--OK"); // 运行可以发现同步线程数最大值是5
+                    System.out.println(Thread.currentThread().getName() + "--OK"); // 运行可以发现同步线程数最大值是10
                 });
             }
         } catch (Exception e) {
@@ -93,9 +100,9 @@ public class 线程池2_七大参数及自定义线程池 {
         /*
           线程池提交任务的两种方式：execute与submit的区别
              execute：只能提交 Runnable 类型的任务，无返回值，如果遇到异常会直接抛出。
-             submit：既可以提交 Runnable 类型的任务，也可以提交 Callable 类型的任务，如果遇到异常不会直接抛出。
-                    提交 Callable 类型的任务时会有一个类型为Future的返回值，但当任务类型为 Runnable 时，返回值为null。
-                    并且只有在使用Future的get方法获取返回值时，才会抛出异常。
+             submit： 既可以提交 Runnable 类型的任务，也可以提交 Callable 类型的任务，如果遇到异常不会直接抛出。
+                      提交 Callable 类型的任务时会有一个类型为Future的返回值，但当任务类型为 Runnable 时，返回值为null。
+                      并且只有在使用Future的get方法获取返回值时，才会抛出异常。
          */
         Callable<String> callable = new Callable<String>() {
             @Override
