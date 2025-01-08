@@ -67,3 +67,175 @@ good luck！！！！
 作者：stateis0
 
 链接：https://hacpai.com/article/1519403810488
+
+JVM（Java Virtual Machine）调优是 Java 应用程序性能优化的重要部分。通过调整 JVM 参数和优化代码，可以减少内存占用、提高垃圾回收效率、降低延迟并提升吞吐量。以下是 JVM 调优的关键点和方法：
+
+1. 内存区域调优
+   JVM 内存主要分为以下几个区域：
+
+堆（Heap）：存储对象实例。
+
+方法区（Metaspace）：存储类元数据、常量池等。
+
+栈（Stack）：存储局部变量和方法调用。
+
+本地方法栈（Native Method Stack）：用于 Native 方法调用。
+
+程序计数器（Program Counter Register）：记录当前线程执行的字节码指令地址。
+
+调优重点：
+
+堆内存：调整堆大小（-Xms 和 -Xmx）。
+
+方法区：调整 Metaspace 大小（-XX:MetaspaceSize 和 -XX:MaxMetaspaceSize）。
+
+栈内存：调整栈大小（-Xss）。
+
+示例：
+
+bash
+复制
+java -Xms512m -Xmx2g -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=256m -Xss256k -jar app.jar
+2. 垃圾回收（GC）调优
+   JVM 的垃圾回收机制对性能影响很大，选择合适的垃圾回收器和调整相关参数可以显著提升性能。
+
+常见的垃圾回收器
+Serial GC：单线程，适合小型应用。
+
+Parallel GC：多线程，适合吞吐量优先的应用。
+
+CMS GC：并发标记清除，适合低延迟应用。
+
+G1 GC：分代回收，适合大内存和低延迟应用。
+
+ZGC：低延迟，适合超大堆内存（JDK 11+）。
+
+Shenandoah GC：低延迟，适合大内存（JDK 12+）。
+
+常用 GC 参数
+-XX:+UseSerialGC：启用 Serial GC。
+
+-XX:+UseParallelGC：启用 Parallel GC。
+
+-XX:+UseConcMarkSweepGC：启用 CMS GC。
+
+-XX:+UseG1GC：启用 G1 GC。
+
+-XX:MaxGCPauseMillis：设置最大 GC 停顿时间（如 -XX:MaxGCPauseMillis=200）。
+
+-XX:GCTimeRatio：设置 GC 时间与应用程序时间的比例（如 -XX:GCTimeRatio=99）。
+
+示例：
+
+bash
+复制
+java -Xms2g -Xmx2g -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -jar app.jar
+3. 堆内存分配调优
+   新生代和老年代比例：
+
+通过 -XX:NewRatio 设置新生代与老年代的比例（如 -XX:NewRatio=2 表示新生代占 1/3，老年代占 2/3）。
+
+通过 -XX:SurvivorRatio 设置 Eden 区与 Survivor 区的比例（如 -XX:SurvivorRatio=8 表示 Eden 区占 80%，Survivor 区占 20%）。
+
+对象晋升老年代的阈值：
+
+通过 -XX:MaxTenuringThreshold 设置对象在新生代存活多少次 GC 后晋升到老年代。
+
+示例：
+
+bash
+复制
+java -Xms2g -Xmx2g -XX:NewRatio=2 -XX:SurvivorRatio=8 -XX:MaxTenuringThreshold=15 -jar app.jar
+4. 线程栈调优
+   栈大小：
+
+通过 -Xss 设置每个线程的栈大小（如 -Xss256k）。
+
+减少线程数：
+
+避免创建过多线程，减少栈内存占用。
+
+示例：
+
+bash
+复制
+java -Xss512k -jar app.jar
+5. JIT 编译器调优
+   JIT（Just-In-Time）编译器将热点代码编译为本地机器码，提升执行效率。
+
+启用分层编译：
+
+通过 -XX:+TieredCompilation 启用分层编译。
+
+调整编译阈值：
+
+通过 -XX:CompileThreshold 设置方法调用多少次后被编译。
+
+示例：
+
+bash
+复制
+java -XX:+TieredCompilation -XX:CompileThreshold=10000 -jar app.jar
+6. 监控与分析工具
+   JVM 内置工具：
+
+jps：查看 Java 进程。
+
+jstat：监控 JVM 内存和 GC 情况。
+
+jmap：生成堆内存快照。
+
+jstack：生成线程快照。
+
+jconsole：图形化监控工具。
+
+VisualVM：功能强大的性能分析工具。
+
+第三方工具：
+
+MAT（Memory Analyzer Tool）：分析堆内存快照。
+
+Arthas：在线诊断工具。
+
+Prometheus + Grafana：监控和可视化。
+
+示例：
+
+bash
+复制
+jstat -gc <pid> 1000 10  # 每 1 秒输出一次 GC 情况，共 10 次
+jmap -heap <pid>         # 查看堆内存使用情况
+jstack <pid>             # 生成线程快照
+7. 常见问题与解决方案
+   OutOfMemoryError：
+
+增加堆内存（-Xmx）。
+
+检查内存泄漏（使用 jmap 和 MAT 分析堆内存）。
+
+频繁 Full GC：
+
+调整新生代和老年代比例。
+
+检查对象生命周期，避免过早晋升到老年代。
+
+高 CPU 占用：
+
+使用 jstack 分析线程状态，检查是否存在死循环或锁竞争。
+
+8. 调优步骤总结
+   监控：使用工具监控 JVM 内存、GC、线程等指标。
+
+分析：找出性能瓶颈（如内存泄漏、频繁 GC、锁竞争等）。
+
+调整：根据分析结果调整 JVM 参数或优化代码。
+
+测试：在测试环境中验证调优效果。
+
+上线：将调优后的配置应用到生产环境。
+
+示例调优命令
+bash
+复制
+java -Xms2g -Xmx2g -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=256m -Xss512k -jar app.jar
+通过以上方法，可以显著提升 JVM 的性能和稳定性。如果遇到复杂问题，可以结合监控工具和日志进行深入分析。

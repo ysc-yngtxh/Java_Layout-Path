@@ -101,6 +101,7 @@ public class 线程池2_七大参数及自定义线程池 {
          *    3、有限提交，用类似ArrayBlockingQueue有界队列。特点是可以保存超过核心线程的任务，并且队列也是有上限的。
          *       超过上限，新建线程（满了抛错）。更好地保护资源，防止崩溃，也是最常用的排队策略。
          */
+
         try {
             // 预先创建核心线程。即不论线程中是否有任务，都会创建核心线程
             executorService.prestartAllCoreThreads();
