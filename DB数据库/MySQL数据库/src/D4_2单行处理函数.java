@@ -106,8 +106,24 @@
      5.str_to_date 将日期格式的字符转换成指定格式的日期
           SELECT STR_TO_DATE('09-20-2023', '%m-%d-%Y');     -- 返回 2023-09-20
 
-     6.date_format:将日期转换成字符
+     6.date_format 将日期转换成字符
           SELECT DATE_FORMAT('2023/09/20', '%Y年%m月%d日');  -- 返回 2023年09月20日
+    
+     7. 时间间隔加减
+          -- date_add 加
+          select date_add('2025-1-9', interval 1 day) dayTime,
+                 date_add('2025-1-9', interval 1 month) monthTime,
+                 date_add('2025-1-9', interval 1 year) yearTime;
+          -- date_add 减
+          select date_sub('2025-1-9', interval 1 day) dayTime,
+                 date_sub('2025-1-9', interval 1 month) monthTime,
+                 date_sub('2025-1-9', interval 1 year) yearTime;
+
+     8. 日期时间减法
+          -- datediff 日期减
+          select datediff('2025-1-9', '2025-1-5') intervfalDay;
+          -- timediff 时间减
+          select timediff('12:00:00', '11:10:00') intervfalTime;
 ---------------------------------------------------------------------------------------------------------------
   Ⅳ、其它函数
      1.if(condition, expr_if_true, expr_if_false) 函数
