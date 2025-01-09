@@ -23,7 +23,9 @@ public class TestMyBatis {
         SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
         // 4、创建SqlSessionFactory对象
         SqlSessionFactory factory = builder.build(in);
-        // 5、获取SqlSession对象，从SqlSessionFactory中获取SqlSession
+        // 5、获取SqlSession对象，从SqlSessionFactory中获取SqlSession.
+        //    在使用JDBC的事务管理器的时候，它会把自动提交先关闭一下。所以默认方式获取的SqlSession是非自动提交事务。
+        //    如果希望能够自动提交事务，可在方法中传入参数：SqlSession sqlSession = factory.openSession(true);
         SqlSession sqlSession = factory.openSession();
         // 6、【重要】指定要执行得sql语句的标识。sql映射文件中的 namespace + "." + 标签的id值
         String sqlId = "com.example.dao.StudentDao.insertStudent";
@@ -34,7 +36,7 @@ public class TestMyBatis {
         student.setAge(23);
         int nums = sqlSession.insert(sqlId, student);
 
-        // mybatis默认不是自动提交事务的，所以在insert,update,delete后要手工提交事务
+        // 由于获取的SqlSession不是自动提交事务的，所以在insert,update,delete后要手工提交事务
         sqlSession.commit();
 
         // 8、输出结果
