@@ -94,7 +94,7 @@ public class D4_常见函数 {}
     7、重复生成字符串的函数 REPEAT(s,n)
        ①、使用REPEAT函数重复生成相同的字符串，输入语句如下：
            SELECT REPEAT('PostgreSQL', 3);
-    8、替换函数 REPLATE(s,s1,s2)
+    8、替换函数 REPLACE(s,s1,s2)
        ①、使用REPLACE函数进行字符串替代操作，输入语句如下：
            SELECT REPLACE('xxx.PostgreSQL.com', 'x', 'w');
     9、获取指定子串的函数 SUBSTRING(s,n,len)
@@ -182,6 +182,12 @@ public class D4_常见函数 {}
     2、CASE WHEN v1 THEN r1 [WHEN v2 THEN r2][ELSE rn] END;
        使用CASE WHEN语句执行分支操作，输入语句如下：
            SELECT CASE WHEN 1<0 THEN 'true' ELSE 'false' END;
+    3、IF(condition, value_if_true, value_if_false)
+       condition 是一个布尔表达式，用于表示条件。如果条件为真，则返回 value_if_true；如果条件为假，则返回 value_if_false。
+    4、COALESCE(value [, ...])
+       COALESCE函数返回它的第一个非空参数的值。当且仅当所有参数都为空时才会返回空。它常用于在为显示目的检索数据时用缺省值替换空值。
+    5、NULLIF(value1, value2)
+       当value1和value2相等时，NULLIF返回一个空值。否则它返回value1。
        
 五、系统信息函数
     1、获取PostgreSQL版本号
@@ -216,11 +222,12 @@ public class D4_常见函数 {}
           然后通过extract(year from current_date)获取当前年份，两者相减就是年龄。
 
 九、工作学习函数：
-    1、函数：nullIf()、coalesce(t.lead_status, 1)
-         position()函数返回一个整数：该整数表示子字符串在字符串中的位置。如果在字符串中未找到字符串，则position()函数将返回零(0)，否则返回子字符串在字符串中的下标。
-                                    例如：select position('handler' in 'warning,handler,handler,cases,caseinfo');运行后返回值为9
+    1、函数：
+         position()函数返回一个整数：
+                   该整数表示子字符串在字符串中的位置。如果在字符串中未找到字符串，则position()函数将返回零(0)，否则返回子字符串在字符串中的下标。
+                   例如：select position('handler' in 'warning,handler,handler,cases,caseinfo'); 运行后返回值为9
 	     cast()函数操作数据类型转换：例如 cast('100' AS INTEGER) String类型转换Integer类型
 		 
     2、当磁盘满当会锁住表为只读，需要清空些表数据：set session default_transaction_read_only=off;  ---临时会话临时解除只读
-                                               truncate TABLE 表名;（同上个脚本一起执行）
+                                            truncate TABLE 表名;（同上个脚本一起执行）
  */
