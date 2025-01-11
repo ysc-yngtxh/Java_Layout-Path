@@ -176,7 +176,7 @@
                  1、配置当前工程的设置，File--settings--Build,Excution,Deployment--Build Tools
                     --Maven
                         Maven Home directory：maven的安装目录
-                        USer Settings File：就是maven安装目录conf/setting.xml配置文件
+                        User Settings File：就是maven安装目录conf/setting.xml配置文件
                         Local Repository：本机仓库的目录位置
                     --Build Tools--Maven--Runner
                         VM Options:-DarchetypeCatalog=internal

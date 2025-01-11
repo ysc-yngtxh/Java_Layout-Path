@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.dao.StudentDao">
+
+    <select id="selectStudentByView" resultType="com.example.vo.ViewStudent">
+        select id,name,email,age from student where id=#{sid}
+    </select>
+
+    <!-- 返回Map
+           1)、列名是map的key，列值是map的value
+           2)、只能最多返回一行数据。多于一行是错误的
+    -->
+    <select id="selectMapById" resultType="java.util.HashMap">
+        select id,name from student where id=#{stuid}
+    </select>
+
+    <!--使用resultMap
+          id：自定义名称，表示你定义的这个resultMap
+          type：java类型的全限定名称
+    -->
+    <resultMap id="studentMap" type="com.example.domain.Student">
+        <!--列名和Java属性的关系-->
+        <!--使用id标签
+            column：列名
+            property：Java类型的属性名
+        -->
+        <id column="id" property="id"/>
+        <!--非主键列，使用result-->
+        <result column="name" property="name"/>
+        <result column="email" property="email"/>
+        <result column="age" property="age"/>
+    </resultMap>
+    <!--列名和属性名不一样：第一种方法-->
+    <select id="selectAllStudent" resultMap="studentMap">
+        select id,name,email,age from student
+    </select>
+
+    <!--列名和属性名不一样：第二种方法-->
+    <select id="selectAliasCol" resultType="com.example.vo.MyStudent">
+        select id as stuId, name as stuName, email as stuEmail, age as stuAge from student
+    </select>
+
+    <!--第一种like，java代码指定like内容-->
+    <select id="selectLikeOne" resultType="com.example.domain.Student">
+        select id,name,email,age from student where name like #{name}
+    </select>
+
+    <!--第二种方式：在mapper文件中拼接 like内容-->
+    <select id="selectLikeTwo" resultType="com.example.domain.Student">
+        select id,name,email,age from student where name like "%" #{name} "%"
+    </select>
+
+    <!--第三种方式：使用concat函数拼接 like内容-->
+    <select id="selectLikeThree" resultType="com.example.domain.Student">
+        select id,name,email,age from student where name like concat("%", #{name}, "%")
+    </select>
+</mapper>

@@ -79,10 +79,10 @@
 
       2、SqlSessionFactoryBuilder：创建SqlSessionFactory对象
          SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
-         //创建SqlSessionFactory对象
+         // 创建SqlSessionFactory对象
          SqlSessionFactory target = builder.build(in);
 
-      3、SqlSessionFactory:重量级对象，程序创建一个对象耗时较长，使用资源比较多。在整个项目中有一个就足够用了
+      3、SqlSessionFactory：重量级对象，程序创建一个对象耗时较长，使用资源比较多。在整个项目中有一个就足够用了
          SqlSessionFactory接口：接口实现类：DefaultSqlSessionFactory
          SqlSessionFactory作用：获取SqlSession对象。SqlSession sqlSession = target.openSession();
 
@@ -154,8 +154,8 @@
   三、MyBatis的输出结果
       mybatis执行了SQL语句，得到Java对象。
       1、resultType结果类型,指SQL语句执行完毕后，数据转为的Java对象，Java类型是任意的
-         resultType结果类型他的值：1)类型的全限定名称
-                                2)类型的别名，例如 java.lang.Integer 别名是int
+         resultType结果类型他的值：1)、类型的全限定名称
+                                2)、类型的别名，例如 java.lang.Integer 别名是int
 
          处理方式：
            1)、mybatis执行SQL语句，然后mybatis调用类的无参数构造方法，创建对象
@@ -257,20 +257,42 @@
       什么时候清空一级缓存?
            MyBatis 在执行增、删、改操作时，或者当 SqlSession 关闭时，会自动清空一级缓存，以确保数据的准确性和一致性。
 
-  ⚠️ 需要注意的是：使用我们自己写的原生mybatis，一级缓存在同一个方法中是可以得到体现的，但是使用官方的mybatis则在同一个方法中并不会。
-                 其原因就是官方的mybatis会在一级缓存中获取SqlSession时候加入一个事务判断机制，为的是避免在多线程情况下造成的数据不安全
-            SqlSession是MyBatis工作的最顶层API会话接口，所有的数据库操作都经由它来实现，由于它就是一个会话，即一个SqlSession应该仅存活于一个业务请求中，
-            也可以说SqlSession对应这一次数据库会话，它不是永久存活的，每次访问数据库都需要创建它。因此，SqlSession并不是线程安全，
-            每次创建一个SqlSession会话，都会伴随创建一个专属SqlSession的连接管理对象，如果SqlSession共享，就会出现事务问题。
-            所以，官方的mybatis获取SqlSessionUtils.getSqlSession()时候执行一个sessionHolder()方法，在这个方法里判断是否执行的方法是事务性的，
-            如果加了 @Transactional，则会把sqlSession暂存在ThreadLocal中，则当第二次执行相同的mapper、sql、参数的时候就会去ThreadLocal中去取有没有，
-            如果没有，那么直接返回SqlSession为null,那么当第二次执行相同的mapper就会新建一个新的SqlSession
+   2、⚠️SqlSession 会话接口
+      (1)、SqlSession 是 MyBatis 工作的最顶层API会话接口，所有的数据库操作都经由它来实现。
+           由于它就是一个会话，不是永久存活的，即一个 SqlSession 应该仅存活于一个业务请求中，也可以说仅存活于一次数据库会话。
+      (2)、每次创建一个 SqlSession 会话，都会伴随创建一个专属 SqlSession 的连接管理对象。
+           为避免导致事务问题和数据不一致问题（尤其是在并发场景下），SqlSession 不应该被共享，应该仅在方法内部使用。
+           SqlSession 不被共享，也就不会存在线程安全的问题了。
+      (3)、Mybatis 在不集成 Spring 的情况下，SqlSession 的生命周期由开发者手动管理。
+           因此，在同一个方法中是可以从一级缓存里得到 SqlSession 的，继而可以得到缓存的数据。
+      (4)、Mybatis 集成 Spring 的情况下，SqlSession 的生命周期由Spring的事务管理器管理，因此每个Mapper方法调用都需要一个新的 SqlSession。
+           Ⓐ、如果不开启事务管理，Spring 会为每个 Mapper 方法创建一个新的 SqlSession，并在 Mapper 方法执行完成后关闭(SqlSession会close)。
+               这样可以保证线程安全，但是会增加系统开销（频繁创建和销毁 SqlSession 可能会导致连接池耗尽）
+           Ⓑ、如果启用了事务管理，Spring 会将 SqlSession 绑定到当前线程的事务中，多个 Mapper 方法共享同一个 SqlSession。
+               所以如果一个请求中存在多次相同 Sql 调用，那么从第二次调用相同 Sql 开始可以从缓存中读取数据。
+      (5)、Mybatis 集成 Spring 的情况下，Mybatis 一级缓存实现原理：
+           Mybatis 会在一级缓存中获取 SqlSession 时候加入一个事务判断机制，为的是避免在多线程情况下造成的数据不安全。
+           Mybatis 调用 SqlSessionUtils.getSqlSession() 时候执行一个 sessionHolder() 方法，该方法会判断业务请求是否事务性的。
+           a、如果没有事务管理，Spring 无法将多个 Mapper 方法绑定到同一个 SqlSession 中。
+           b、如果有配置添加了 @Transactional 注解，则会把 SqlSession 暂存在 ThreadLocal 中，
+              则当第二次执行相同的 Mapper 方法的时候就会去 ThreadLocal 中去取有没有，
+              如果没有，直接返回 SqlSession 为 null，并且在第二次执行相同的 Mapper 就会新建一个新的 SqlSession。
 
-   总结：Spring集成Mybatis，如果不开启事务，则每一个Mapper方法，都会开启一个sqlSession，执行完成后，sqlSession就会close，
-        则在并发的请求下，虽然mapper是单例，但是能保证线程安全。
-        当用了事务之后，当执行完所有方法后，sqlSeesion才会close，所以一个请求中多次调用，第二次调用可以从缓存中读取
+      总结：SqlSession 不应该是共享的：在多线程或事务环境中，必须确保每个线程或事务使用独立的 SqlSession。
+           Mybatis 集成 Spring 下的生命周期管理：
+               a、无事务管理时，每个 Mapper 方法使用独立的 SqlSession。
+               b、启用事务管理时，多个 Mapper 方法共享同一个 SqlSession，并通过 ThreadLocal 实现线程隔离。
+           一级缓存的作用：在同一个 SqlSession 或事务中，一级缓存可以提升查询性能，避免重复查询数据库。
 
-   2、二级缓存是Mapper级别的,一个Mapper有着一个缓存区,就是说不管几个SqlSession只要他们获取的是同一个Mapper,
+           为了避免共享 SqlSession 导致的问题，应该确保每个线程或操作使用独立的 SqlSession。以下是两种常见的解决方案：
+               方案 1：使用 SqlSessionTemplate
+                      SqlSessionTemplate 是线程安全的，每次操作都会创建新的 SqlSession。
+                      通过 Spring 注入 SqlSessionTemplate，确保每个操作独立。
+               方案 2：使用 Spring 事务管理
+                      通过 Spring 的事务管理机制，确保每个事务使用独立的 SqlSession。
+                      使用 @Transactional 注解声明事务边界。
+
+   3、二级缓存是Mapper级别的,一个Mapper有着一个缓存区,就是说不管几个 SqlSession 只要他们获取的是同一个Mapper,
       缓存数据就会是共享的,不过二级缓存需要我们自己去开启。
 
       开启步骤：①、使用mybatis二级缓存的实体类必须实现Serializable接口
@@ -294,7 +316,7 @@
            这次是两次相同的查询,不同的SqlSession,获取的同一个Mapper,只有第一次查询的时候日志显示向数据库发送了sql语句,
            其他两次都没有发送sql语句,说明其他两次都是从缓存中获取的数据
 
-   3、MyBatis 执行批量插入，能返回数据库主键列表吗？(示例：07_Mybatis-demo)
+   4、MyBatis 执行批量插入，能返回数据库主键列表吗？(示例：07_Mybatis-demo)
        useGeneratedKeys = true 这个表示插入数据之后返回一个自增的主键id给你对应实体类中的主键属性。
                        通过这个设置可以解决在主键自增的情况下通过实体的getter方法获取主键
                        （当然还需要keyproperty指明数据库中返回的主键id给实体类中的哪个属性）。

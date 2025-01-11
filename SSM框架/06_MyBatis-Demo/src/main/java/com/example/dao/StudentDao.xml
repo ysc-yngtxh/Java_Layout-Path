@@ -15,12 +15,12 @@
            namespace：叫做命名空间，唯一值的，可以是自定义的字符串。
                       要求你使用dao接口的全限定名称
         4、在当前文件中，可以使用特定的标签，表示数据库的特定操作。
-           <select>:表示执行查询，select语句
-           <update>:表示更新数据库的操作，就是在<update>标签中 写的是update sql语句
-           <insert>:表示插入：放的是insert语句
-           <delete>:表示删除，执行的是delete语句
+           <select>：表示执行查询，select语句
+           <update>：表示更新数据库的操作，就是在<update>标签中 写的是update sql语句
+           <insert>：表示插入：放的是insert语句
+           <delete>：表示删除，执行的是delete语句
     -->
-<mapper namespace="com.example.dao.StudentDao">
+<mapper namespace="com.example.dao.MappingTypeDao">
     <!--
         select:表示查询操作。
         id:你要执行的sql语法的唯一标识，mybatis会使用这个id的值来找到要执行的sql语句
