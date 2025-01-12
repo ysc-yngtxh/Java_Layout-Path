@@ -1,7 +1,7 @@
 package com.example.service.impl;
 
-import com.example.dao.UserDao;
-import com.example.domain.SysUser;
+import com.example.mapper.UserDao;
+import com.example.pojo.SysUser;
 import com.example.service.UserService;
 
 public class UserServiceImpl implements UserService {

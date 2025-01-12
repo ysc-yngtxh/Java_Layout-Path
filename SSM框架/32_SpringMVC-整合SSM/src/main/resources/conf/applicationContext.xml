@@ -4,7 +4,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!--spring配置文件：声明service，dao，工具类等对象-->
+    <!--spring配置文件：声明service，mapper，工具类等对象-->
     <context:property-placeholder location="classpath:conf/jdbc.properties"/>
 
     <!--声明数据源，连接数据库-->
@@ -25,7 +25,7 @@
     <!--声明mybatis的扫描器，创建dao对象-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-        <property name="basePackage" value="com.example.dao"/>
+        <property name="basePackage" value="com.example.mapper"/>
     </bean>
 
     <!--声明service的注解@Service所在的包名位置-->

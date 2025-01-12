@@ -44,7 +44,7 @@
             MapperScannerConfigurer会扫描这个包中所有接口，把每个接口都执行一次getMapper()方法，
             得到每个接口的dao对象。创建好的dao对象放入到spring的容器中的。
         -->
-        <property name="basePackage" value="com.example.dao"/>
+        <property name="basePackage" value="com.example.mapper"/>
     </bean>
 
     <!--以上的语句相当于模板，可以固定，不需要死记硬背，只做理解！！！当然能记住更好-->

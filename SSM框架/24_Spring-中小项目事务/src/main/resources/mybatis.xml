@@ -13,11 +13,11 @@
     <!--设置别名-->
     <typeAliases>
         <!--实体类所在的包名-->
-        <package name="com.example.domain"/>
+        <package name="com.example.pojo"/>
     </typeAliases>
 
     <!--sql mapper(sql映射文件的位置)-->
     <mappers>
-        <package name="com.example.dao"/>
+        <package name="com.example.mapper"/>
     </mappers>
 </configuration>

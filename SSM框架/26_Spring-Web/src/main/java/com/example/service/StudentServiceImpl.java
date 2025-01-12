@@ -1,7 +1,7 @@
 package com.example.service;
 
-import com.example.domain.Student;
-import com.example.dao.StudentDao;
+import com.example.pojo.Student;
+import com.example.mapper.StudentDao;
 
 import java.util.List;
 

@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="myStudent" class="com.example.dao.Student" autowire="byType">
+    <bean id="myStudent" class="com.example.mapper.Student" autowire="byType">
         <property name="name" value="曹玉敏"/>
         <property name="age" value="21"/>
     </bean>

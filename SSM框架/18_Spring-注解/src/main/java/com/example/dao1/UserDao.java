@@ -1,6 +1,6 @@
 package com.example.dao1;
 
-import com.example.domain.SysUser;
+import com.example.pojo.SysUser;
 
 public interface UserDao {
 

@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="mysqlDao" class="com.example.dao.UserDaoImpl"/>
+    <bean id="mysqlDao" class="com.example.mapper.UserDaoImpl"/>
 
     <bean id="userService" class="com.example.service.impl.UserServiceImpl">
         <property name="dao" ref="mysqlDao"/>

@@ -16,7 +16,7 @@
             1、加入一个新的约束文件spring-context.xsd
             2、给这个新的约束文件起个命名空间的名称
       -->
-    <context:component-scan base-package="com.example.dao"/>
+    <context:component-scan base-package="com.example.mapper"/>
     <context:component-scan base-package="com.example.dao1"/>
     <context:component-scan base-package="com.example.service"/>
 

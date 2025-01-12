@@ -31,7 +31,23 @@
       <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
+
+    <!--加入tomcat9以上的servlet依赖(servlet的jar)-->
+    <dependency>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>6.0.0</version>
+    </dependency>
+
+    <!--加入jsp的依赖(jsp相关的jar加入进来)-->
+    <dependency>
+      <groupId>javax.servlet.jsp</groupId>
+      <artifactId>jsp-api</artifactId>
+      <version>2.2</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
+
 
   <!--插件的管理-->
   <build>

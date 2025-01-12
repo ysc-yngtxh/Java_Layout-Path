@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.domain.SysUser;
+import com.example.pojo.SysUser;
 import com.example.service.UserService;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -10,7 +10,7 @@ public class MyApp {
 
     @Test
     public void test() {
-        // 从spring容器中获取UserService类型的对象，dao,service都是spring管理的
+        // 从spring容器中获取UserService类型的对象，mapper,service都是spring管理的
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
         UserService service = (UserService) ctx.getBean("userService");
 

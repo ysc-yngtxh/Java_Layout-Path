@@ -1,6 +1,6 @@
 package com.example.service;
 
-import com.example.domain.SysUser;
+import com.example.pojo.SysUser;
 
 public interface UserService {
 

@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.domain.Student;
+import com.example.pojo.Student;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

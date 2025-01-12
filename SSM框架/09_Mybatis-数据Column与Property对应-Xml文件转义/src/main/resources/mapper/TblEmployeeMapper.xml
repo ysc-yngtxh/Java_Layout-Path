@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.TblEmployeeMapper">
+
+    <resultMap type="com.example.entity.TblEmployee" id="TblEmployeeMap">
+        <result property="employeeId" column="employee_id" jdbcType="INTEGER"/>
+        <result property="employeeName" column="employee_name" jdbcType="VARCHAR"/>
+        <result property="employeeDepartmentId" column="employee_department_id" jdbcType="INTEGER"/>
+        <result property="employeeGradeId" column="employee_grade_id" jdbcType="INTEGER"/>
+        <result property="employeeSalary" column="employee_salary" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TblEmployeeMap">
+        select
+          employee_id,employee_name,employee_department_id,employee_grade_id,employee_salary
+        from tbl_employee
+        where employee_id = #{employeeId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultType="com.example.entity.TblEmployee">
+        select
+          employee_id,employee_name,employee_department_id,employee_grade_id,employee_salary
+        from tbl_employee
+        <where>
+            <if test="tblEmployee.employeeId != null">
+                and employee_id = #{tblEmployee.employeeId}
+            </if>
+            <if test="tblEmployee.employeeName != null and tblEmployee.employeeName != ''">
+                and employee_name = #{tblEmployee.employeeName}
+            </if>
+            <if test="tblEmployee.employeeDepartmentId != null">
+                and employee_department_id = #{tblEmployee.employeeDepartmentId}
+            </if>
+            <if test="tblEmployee.employeeGradeId != null">
+                and employee_grade_id = #{tblEmployee.employeeGradeId}
+            </if>
+            <if test="tblEmployee.employeeSalary != null">
+                and employee_salary = #{tblEmployee.employeeSalary}
+            </if>
+        </where>
+        limit #{offset}, #{size}
+    </select>
+
+    <select id="findById" resultMap="TblEmployeeMap">
+        select *
+        from tbl_employee
+        <where>
+            <if test="tblEmployee.employeeId != null">
+                and employee_id >= #{tblEmployee.employeeId}
+            </if>
+            <if test="tblEmployee.employeeGradeId != null">
+                <!-- 在 XML 文件中，小于号 '<' 是一个特殊的字符，因为它用于标记 XML 标签的开始。
+                     小于号'<' 可以看成是标签的 '<'左符号，所以需要通过转义，使其能够正常解析成 Sql 语句。-->
+                <!-- and employee_grade_id < #{tblEmployee.employeeGradeId} -->
+            </if>
+            <if test="tblEmployee.employeeSalary != null">
+                ### 第一种方式：使用xml 原生转义的方式进行转义
+                and employee_salary &lt; #{tblEmployee.employeeSalary}
+            </if>
+            <if test="tblEmployee.employeeSalary != null">
+                ### 第二种方式：使用 <![CDATA[ 内容 ]]> 转义
+                and employee_salary <![CDATA[ < ]]> #{tblEmployee.employeeSalary}
+            </if>
+        </where>
+    </select>
+
+    <!--方法一：使用xml 原生转义的方式进行转义-->
+    <!--TODO 字符名称	sql符号	 转义字符   -->
+    <!--     大于号	      >	       &gt;    -->
+    <!--     小于号	      <	       &lt;    -->
+    <!--     不等于	      <>	   &lt;&gt;-->
+    <!--     大于等于号	  >=	   &gt;=   -->
+    <!--     小于等于号	  <=	   &lt;=   -->
+    <!--     与	          &	       &amp;   -->
+    <!--     单引号	      '	       &apos;  -->
+    <!--     双引号	      "	       &quot;  -->
+
+    <!--方法二：使用 <![CDATA[ 内容 ]]> -->
+    <!--在 xml 格式中，当遇到 <![CDATA[ ]]> 这种格式时，会把方块中的内容直接输出，不做任何的解析转义-->
+</mapper>
+

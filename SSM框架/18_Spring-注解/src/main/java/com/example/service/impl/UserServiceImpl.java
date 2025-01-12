@@ -1,7 +1,7 @@
 package com.example.service.impl;
 
 import com.example.dao1.UserDao;
-import com.example.domain.SysUser;
+import com.example.pojo.SysUser;
 import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

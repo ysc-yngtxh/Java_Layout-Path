@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.domain.Student;
+import com.example.pojo.Student;
 import com.example.service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

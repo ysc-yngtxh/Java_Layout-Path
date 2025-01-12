@@ -1,11 +1,10 @@
 package com.example.service;
 
-import com.example.dao.GoodsDao;
-import com.example.dao.SaleDao;
-import com.example.domain.Goods;
-import com.example.domain.Sale;
+import com.example.mapper.GoodsDao;
+import com.example.mapper.SaleDao;
+import com.example.pojo.Goods;
+import com.example.pojo.Sale;
 import com.example.excep.NotEnoughException;
-import org.springframework.transaction.annotation.Transactional;
 
 public class BuyGoodsServiceImpl implements BuyGoodsService {
 

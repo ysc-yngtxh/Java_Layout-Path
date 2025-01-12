@@ -1,6 +1,6 @@
 package com.example.mapper;
 
-import com.example.domain.Student;
+import com.example.pojo.Student;
 
 import java.util.List;
 

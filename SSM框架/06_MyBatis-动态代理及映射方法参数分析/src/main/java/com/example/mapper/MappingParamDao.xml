@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.MappingParamDao">
+
+    <select id="selectStudents" resultType="com.example.pojo.Student">
+        select id,name,email,age from student order by id
+    </select>
+
+    <!-- 当方法只有一个参数时，可以直接使用#{参数名}、#{_parameter}的方式获取参数 -->
+    <select id="selectStudentsSingleParam" resultType="com.example.pojo.Student">
+        select id,name,email,age from student where name = #{name}
+        union all
+        select id,name,email,age from student where name = #{_paramenter}
+    </select>
+
+    <!-- 当方法有多个参数时，直接使用 #{参数名} 的方式获取参数会报错 -->
+    <select id="selectStudentsPropertyParam" resultType="com.example.pojo.Student">
+        select id,name,email,age from student where name = #{name} and age = #{age}
+    </select>
+
+    <!-- 当方法有多个参数时，MyBatis 默认会将参数封装为一个 Map.
+         可以使用#{arg0}、#{arg1}、#{param1}、#{param2}的方式获取参数.
+         写法可读性不高，不推荐这种写法-->
+    <select id="selectStudentsReflect" resultType="com.example.pojo.Student">
+        select id,name,email,age from student where name = #{arg0} and age = #{arg1}
+        union all
+        select id,name,email,age from student where name = #{param1} and age = #{param2}
+    </select>
+
+    <!-- 当方法有多个参数时，推荐使用@Param注解的方式获取参数 -->
+    <select id="selectStudentsAnnotationParam" resultType="com.example.pojo.Student">
+        select id,name,email,age from student where name = #{name} and age = #{age}
+    </select>
+
+
+    <insert id="insertStudent">
+        insert into student values(#{id},#{name},#{email},#{age})
+    </insert>
+</mapper>

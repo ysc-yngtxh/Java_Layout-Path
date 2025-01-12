@@ -172,14 +172,14 @@
        1、SSM:SpringMVC + Spring + Mybatis
 
           SpringMVC：视图层，界面层，负责接收请求，显示处理结果
-          Spring ：业务层，管理service，dao,工具类对象的
+          Spring ：业务层，管理service，mapper,工具类对象的
           Mybatis：持久层，访问数据库的
 
           用户发起请求--SpringMVC接收--Spring中的Service对象--MyBatis处理数据
 
        2、SSM整合也叫做SSI(IBatis也就是mybatis的前身)，整合中有容器。
             1)、第一个容器SpringMVC容器，管理Controller控制器对象的。
-            2)、第二个容器Spring容器，管理Service,dao，工具类对象的
+            2)、第二个容器Spring容器，管理Service,mapper，工具类对象的
 
             我们要做的把使用的对象交给合适的容器创建，管理。把Controller还有web开发的相关对象
             交给springmvc容器，这些web用的对象写在springmvc配置文件中

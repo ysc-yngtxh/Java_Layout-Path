@@ -1,7 +1,7 @@
 package com.example.service;
 
-import com.example.dao.StudentDao;
-import com.example.domain.Student;
+import com.example.mapper.StudentDao;
+import com.example.pojo.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

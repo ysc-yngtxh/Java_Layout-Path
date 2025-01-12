@@ -13,7 +13,7 @@
     <!--设置别名：通过这个别名，我们在XML文件中的paramType、resultType参数上不用写全限定类名，只需要别名即可-->
     <typeAliases>
         <!--实体类所在的包名-->
-        <package name="com.example.domain"/>
+        <package name="com.example.pojo"/>
     </typeAliases>
 
     <!--sql mapper(sql映射文件的位置)-->
