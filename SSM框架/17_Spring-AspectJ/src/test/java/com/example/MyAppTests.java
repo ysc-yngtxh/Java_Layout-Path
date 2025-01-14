@@ -26,7 +26,7 @@ public class MyAppTests {
                 "并且代理对象是在目标对象属性注入之后、初始化之前 创建的 " + proxy.getClass().getName()
         );
         // 通过代理的对象执行方法，实现目标方法执行时，增强了功能
-        proxy.doSome("曹玉敏我喜欢你", 23);
+        proxy.doSome("小敏我喜欢你", 23);
     }
 
     // bao2中的AspectJ，后置通知切面功能
@@ -41,7 +41,7 @@ public class MyAppTests {
                 "并且代理对象是在目标对象属性注入之后、初始化之前 创建的 " + proxy.getClass().getName()
         );
         // 通过代理的对象执行方法，实现目标方法执行时，增强了功能
-        String str = proxy.doOther("曹玉敏我喜欢你", 2020917);
+        String str = proxy.doOther("小敏我喜欢你", 2020917);
         System.out.println("str = " + str);
     }
 
@@ -57,7 +57,7 @@ public class MyAppTests {
                 "并且代理对象是在目标对象属性注入之后、初始化之前 创建的 " + proxy.getClass().getName()
         );
         // 通过代理的对象执行方法，实现目标方法执行时，增强了功能
-        proxy.student("曹玉敏我喜欢你", 2020917);
+        proxy.student("小敏我喜欢你", 2020917);
     }
 
     // bao3中的AspectJ，环绕通知切面功能
@@ -72,7 +72,7 @@ public class MyAppTests {
                 "并且代理对象是在目标对象属性注入之后、初始化之前 创建的 " + proxy.getClass().getName()
         );
         // 通过代理的对象执行方法，实现目标方法执行时，增强了功能
-        String str = proxy.First("曹玉敏我喜欢你", 2020917);
+        String str = proxy.First("小敏我喜欢你", 2020917);
         System.out.println("str=" + str);
     }
 
@@ -86,7 +86,7 @@ public class MyAppTests {
                 "这个代理对象不是该实现类的实例，而是它实现的接口的实例。因此在代理对象进行类型转换时，应该转换为接口的实例，而不是具体实现类的实例。\n" +
                 "并且代理对象是在目标对象属性注入之后、初始化之前 创建的 " + proxy.getClass().getName()
         );
-        proxy.like("曹玉敏，我喜欢你!", 23);
+        proxy.like("小敏我喜欢你!", 23);
     }
 
     // cglib包中没有接口是cglib代理(有接口默认是jdk代理，没有接口默认是cglib代理)
@@ -99,7 +99,7 @@ public class MyAppTests {
                 "那么这个代理对象就是该实现类的实例。因此在代理对象进行类型转换时，应该转换为具体实现类的实例。\n" +
                 "并且代理对象是在目标对象属性注入之后、初始化之前 创建的 " + proxy.getClass().getName()
         );
-        proxy.like("曹玉敏，我喜欢你!", 23);
+        proxy.like("小敏我喜欢你!", 23);
     }
 
     // jdk包下存在接口，表示为jdk动态代理
@@ -112,7 +112,7 @@ public class MyAppTests {
                 "这个代理对象不是该实现类的实例，而是它实现的接口的实例。因此在代理对象进行类型转换时，应该转换为接口的实例，而不是具体实现类的实例。\n" +
                 "并且代理对象是在目标对象属性注入之后、初始化之前 创建的 " + proxy.getClass().getName()
         );
-        proxy.like("曹玉敏，我喜欢你!", 23);
+        proxy.like("小敏我喜欢你!", 23);
     }
 
     // 控制台的结果没有切面编程的打印。因为Aop是基于动态代理实现的，这里this调用直接对象，Aop不生效
