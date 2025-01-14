@@ -11,7 +11,7 @@ public class Aspect7 {
 
     @Around(value="execution(* *..ProxyServiceImpl.saveUser())")
     public Object MyText7(ProceedingJoinPoint pjp) throws Throwable {
-        System.out.println("来，看看喜欢曹玉敏的前置通知是怎么做的。");
+        System.out.println("来，看看喜欢小曹的环绕通知是怎么做的。");
         pjp.proceed();
         return "";
     }
