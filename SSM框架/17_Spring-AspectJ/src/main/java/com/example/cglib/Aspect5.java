@@ -26,6 +26,6 @@ public class Aspect5 {
         for (Object arg : args) {
             System.out.println("参数：" + arg);
         }
-        System.out.println("来，看看喜欢曹玉敏的前置通知是怎么做的。");
+        System.out.println("来，看看小曹的前置通知是怎么做的。");
     }
 }
