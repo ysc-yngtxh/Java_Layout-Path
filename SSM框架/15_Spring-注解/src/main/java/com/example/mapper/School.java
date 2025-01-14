@@ -36,9 +36,9 @@ public class School {
      *          2、在set方法的上面
      *     注意：加上属性赋值前提是要有 @Component("myStudent")。在获取到对象后才能进行赋值
      */
-    @Value("等我变优秀哦！")  // 或者加在set方法上
+    @Value("游家纨绔")       // 或者加在set方法上
     private String name;
-    @Value("最迟明年")       // 或者加在set方法上
+    @Value("陕西西安雁塔区") // 或者加在set方法上
     private String address;
 
     /**
