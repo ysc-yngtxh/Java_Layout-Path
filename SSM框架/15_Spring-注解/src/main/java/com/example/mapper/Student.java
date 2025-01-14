@@ -29,7 +29,7 @@ import javax.annotation.Resource;
  *        即在MyApp中：Student service = (Student) ac.getBean("student");
  *        通过容器的 getBean() 方法，可以获取指定的Bean名称实例对象。
  *     3、特殊情况：注解中没有指定value属性值，且类名是连续两个首字母大写的话，类名即为Bean名称，不用做其他处理。
- *        比如：STudent student = (STudent) ac.getBean("STudent");
+ *        比如：存在STudent类，那么 STudent student = (STudent) ac.getBean("STudent");
  */
 @Component(value="myStudent")
 public class Student {
