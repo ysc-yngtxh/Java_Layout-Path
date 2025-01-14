@@ -15,7 +15,7 @@ public class TwoServiceImpl implements TwoService {
     public Student student(String name, Integer age) {
         System.out.println("====目标方法student()====");
         Student st = new Student();
-        st.setName("李晶晶");
+        st.setName("小曹");
         st.setAge(1314);
         return st;
     }
