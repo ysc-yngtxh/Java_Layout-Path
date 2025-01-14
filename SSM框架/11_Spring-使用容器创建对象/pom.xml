@@ -5,11 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.example</groupId>
-  <artifactId>12_Spring-SetInject</artifactId>
+  <artifactId>11_Spring-Container</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>12_Spring-设值注入</name>
-  <description>12_Spring-设值注入</description>
+  <name>11_Spring-使用容器创建对象</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 

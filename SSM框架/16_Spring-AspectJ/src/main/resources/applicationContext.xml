@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--TODO 第一种方式注入Bean-->
+    <!--直接在配置文件中创建bean对象，把对象交给spring容器，由spring容器统一创建，管理对象-->
+    <!--声明目标对象-->
+    <bean id="Service1" class="com.example.aop1.OneServiceImpl"/>
+    <!--声明切面类对象-->
+    <bean id="OneAspect" class="com.example.aop1.Aspect1"/>
+
+    <bean id="Service2" class="com.example.aop2.TwoServiceImpl"/>
+    <bean id="TwoAspect" class="com.example.aop2.Aspect2"/>
+
+    <bean id="Service3" class="com.example.aop3.ThreeServiceImpl"/>
+    <bean id="ThreeAspect" class="com.example.aop3.Aspect3"/>
+
+    <bean id="Service4" class="com.example.aop4.FourServiceImpl"/>
+    <bean id="FourAspect" class="com.example.aop4.Aspect4"/>
+
+
+    <!--TODO 第二种方式注入Bean-->
+    <!--组件扫描器：将包bao1下的@Component注入容器并创建对象bean-->
+    <context:component-scan base-package="com.example.cglib"/>
+    <context:component-scan base-package="com.example.jdk"/>
+    <context:component-scan base-package="com.example.proxy"/>
+    <context:component-scan base-package="com.example.proxyAttribute"/>
+
+
+    <!--TODO 声明自动代理生成器：使用aspectJ框架内部的功能，创建目标对象的代理对象。
+        创建代理对象是在内存中实现的，修改目标对象的的内存中的结构。
+        创建微代理对象，所以目标对象就是被修改后的代理对象
+
+        aspectj-autoproxy：        会把Spring容器中的所有目标对象，一次性都生成代理对象
+        proxy-target-class="true"：表示要使用cglib动态代理。默认值为false，表示使用的jdk动态代理，除非代理对象没有接口
+        expose-proxy="true"：      表示强制AOP代理创建器暴露代理对象为ThreadLocal模式。使其能在被代理的对象内部通过AopContext访问。
+                                   可以使用AopContext.currentProxy()方法获取方法内部调用的代理对象。
+    -->
+    <aop:aspectj-autoproxy proxy-target-class="false" expose-proxy="true" />
+
+</beans>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
+
+      <!--声明组件扫描器(component-scan),组件就是Java对象
+          base-package:
+          component-scan工作方式：spring会扫描遍历base-package指定的包，
+             把包中和子包的的所有类，找到类中的注解，按照注解的功能创建对象，或给属性赋值。
+
+          加入了 component-scan 变迁，配置文件的变化：
+            1、加入一个新的约束文件spring-context.xsd
+            2、给这个新的约束文件起个命名空间的名称
+      -->
+    <context:component-scan base-package="com.example.mapper"/>
+    <context:component-scan base-package="com.example.repository"/>
+    <context:component-scan base-package="com.example.service"/>
+
+    <!--指定多个包的三种方式-->
+    <!--第一种方式：使用多次组件扫描器，指定不同的包-->
+    <context:component-scan base-package="com.example.**"/>
+
+    <!--第二种方式：使用分隔符(;或,)分隔多个包名-->
+    <context:component-scan base-package="com.example.**;com.example.**"/>
+
+    <!--第三种方式：指定父包-->
+    <context:component-scan base-package="com.example"/>
+</beans>

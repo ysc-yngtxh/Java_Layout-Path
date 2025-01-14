@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="mysqlDao" class="com.example.mapper.UserDaoImpl"/>
+
+    <bean id="userService" class="com.example.service.impl.UserServiceImpl">
+        <property name="dao" ref="mysqlDao"/>
+    </bean>
+
+
+    <!--byName-->
+    <bean id="myStudent" class="com.example.repository.Student" autowire="byName">
+        <property name="name" value="曹玉敏"/>
+        <property name="age" value="23"/>
+        <!--
+            <property name="school" ref="school"/>
+            本来正常情况下是要写引用类型的set注入的（property标签），
+            但是如果需要注入的对象比较多，比如Student类中有几十个注入属性，那么这里的property属性是不是需要写几十个，
+            如果A类中新增或者删除了一些依赖，还需要手动去调整bean.xml中的依赖配置信息，总的来说就是不利于维护和扩展。
+            为了解决这些问题，spring为我们提供了更强大的功能：自动注入
+
+            1、直接加上autowire="byName",自己会在class="com.example.mapperper.Student"这个类中寻找引用类型的引用school。
+            2、然后我们在其它bean语句的id中找到对应的引用类型的引用。
+            这种语句就叫做：引用类型的自动注入(byName)
+        -->
+    </bean>
+
+    <bean id="school" class="com.example.repository.School">
+        <property name="name" value="武汉纺织大学外经贸学院"/>
+        <property name="address" value="商英"/>
+    </bean>
+
+
+
+    <!--byType-->
+    <!--
+    <bean id="myStudent" class="com.example.mapperper.Student" autowire="byType">
+        <property name="name" value="曹玉敏"/>
+        <property name="age" value="23"/>
+
+            <property name="school" ref="mySchool"/>
+            本来正常情况下是要写引用类型的set注入的，但是spring语句方便
+            1、直接加上 autowire="byType",自己会在class="com.example.Student"
+               这个类中寻找引用类型的类型School。
+            2、然后我们在其它bean语句的id中找到对应的引用类型的引用。
+            这种语句就叫做：引用类型的自动注入(byType)
+
+            这里我为什么要选择注释掉呢？因为在byType中，在xml配置文件中声明bean只能有一个符合条件的，多余一个会使其在运行时出现错误。
+    </bean>
+
+    <bean id="mySchool" class="com.example.School">
+        <property name="name" value="湖北大学"/>
+        <property name="address" value="计算机科学与技术"/>
+    </bean>-->
+</beans>

@@ -15,37 +15,37 @@
 ### 1、TransactionInterceptor类中的代码有很多，我简化一下逻辑，方便说明：
 
 ```java
-    // 以下代码省略部分内容
-    public Object invoke(MethodInvocation invocation) throws Throwable {
-        // 获取事务调用的目标方法
-        Class<?> targetClass = (invocation.getThis() != null ? AopUtils.getTargetClass(invocation.getThis()) : null);
-        // 执行带事务调用
-        return invokeWithinTransaction(invocation.getMethod(), targetClass, invocation::proceed);
-    }
+   // 以下代码省略部分内容
+   public Object invoke(MethodInvocation invocation) throws Throwable {
+       // 获取事务调用的目标方法
+       Class<?> targetClass = (invocation.getThis() != null ? AopUtils.getTargetClass(invocation.getThis()) : null);
+       // 执行带事务调用
+       return invokeWithinTransaction(invocation.getMethod(), targetClass, invocation::proceed);
+   }
 ```
 
 
 ### 2、invokeWithinTransaction 简化逻辑如下：
 ```java
-    // TransactionAspectSupport.class 省略了部分代码
-    protected Object invokeWithinTransaction(Method method, @Nullable Class<?> targetClass
-            , final InvocationCallback invocation) throws Throwable {
-        Object retVal;
-        try {
-            // 调用真正的方法体
-        	retVal = invocation.proceedWithInvocation();
-        } catch (Throwable ex) {
-        	// 如果出现异常，执行事务异常处理
-        	completeTransactionAfterThrowing(txInfo, ex);
-        	throw ex;
-        } finally {
-            // 最后做一下清理工作，主要是缓存和状态等
-        	cleanupTransactionInfo(txInfo);
-        }
-        // 如果没有异常，直接提交事务。
-        commitTransactionAfterReturning(txInfo);
-        return retVal;
-	}
+   // TransactionAspectSupport.class 省略了部分代码
+   protected Object invokeWithinTransaction(Method method, @Nullable Class<?> targetClass
+           , final InvocationCallback invocation) throws Throwable {
+       Object retVal;
+       try {
+           // 调用真正的方法体
+       	   retVal = invocation.proceedWithInvocation();
+       } catch (Throwable ex) {
+       	   // 如果出现异常，执行事务异常处理
+       	   completeTransactionAfterThrowing(txInfo, ex);
+       	   throw ex;
+       } finally {
+           // 最后做一下清理工作，主要是缓存和状态等
+       	   cleanupTransactionInfo(txInfo);
+       }
+       // 如果没有异常，直接提交事务。
+       commitTransactionAfterReturning(txInfo);
+       return retVal;
+}
 ```
 
 

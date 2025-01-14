@@ -52,7 +52,7 @@ public class MyTest {
         ApplicationContext ac = new ClassPathXmlApplicationContext(config);
 
         File st = (File) ac.getBean("myFile");
-        System.out.println("File=" + st);
-        System.out.println("File=" + st.getName());
+        System.out.println("File = " + st);
+        System.out.println("File = " + st.getName());
     }
 }

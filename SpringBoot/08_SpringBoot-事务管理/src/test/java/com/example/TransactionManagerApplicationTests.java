@@ -16,8 +16,8 @@ class TransactionManagerApplicationTests {
     @Transactional
     void contextLoads() {
         // execute：可以执行所有SQL语句，一般用于执行DDL语句。
-        // update：用于执行INSERT、UPDATE、DELETE等DML语句。
-        // query：用于DQL数据查询语句。
+        // update： 用于执行INSERT、UPDATE、DELETE等DML语句。
+        // query：  用于DQL数据查询语句。
         jdbcTemplate.execute(
                 "INSERT INTO `user` " +
                         "(`username`, `birthday`, `sex`, `address`) " +
