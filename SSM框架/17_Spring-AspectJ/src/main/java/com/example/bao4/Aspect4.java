@@ -40,23 +40,23 @@ public class Aspect4 {
         for (Object arg : args) {
             System.out.println("参数：" + arg);
         }
-        System.out.println("来，看看喜欢曹玉敏的前置通知是怎么做的。");
+        System.out.println("来，看看小曹的前置通知是怎么做的。");
     }
 
 
     @AfterReturning(value="myPoint()", returning="res")
     public void MyText2(Object res){
-        System.out.println("嘚，我们喜欢曹玉敏的后置通知，当当当！" + res);
+        System.out.println("嘚，我们小曹的后置通知，铛铛铛！" + res);
         if("曹玉敏，我喜欢你!".equals(res)) {
-            System.out.println("我期待我们的再次相逢");
+            System.out.println("期待再次相逢");
         } else {
-            System.out.println("我好想见你啊！");
+            System.out.println("我好想你啊！");
         }
     }
 
     @Around(value="myPoint()")
     public Object MyText3(ProceedingJoinPoint pjp) throws Throwable {
-        System.out.println("然后我们再来看一下喜欢曹玉敏的环绕通知，在目标方法执行之前:" + new Date());
+        System.out.println("然后我们再来看一下小曹的环绕通知，在目标方法执行之前:" + new Date());
 
         String name = null;
         Object[] args = pjp.getArgs();
@@ -64,7 +64,7 @@ public class Aspect4 {
             name = (String)args[0];
         }
         Object result = null;
-        if("曹玉敏，我喜欢你!".equals(name)){
+        if("小曹，我like你!".equals(name)){
             result = pjp.proceed();
         }
 
@@ -72,7 +72,7 @@ public class Aspect4 {
 
         // 其实这里是可以做修改返回值的，但是为了能使后置通知正常执行，故没做修改。
         if(result != null){
-            result = "曹玉敏，我喜欢你!";
+            result = "小曹，我like你!";
         }
         return result;
     }
