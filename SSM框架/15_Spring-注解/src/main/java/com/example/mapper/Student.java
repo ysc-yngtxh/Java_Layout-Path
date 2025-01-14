@@ -14,26 +14,27 @@ import javax.annotation.Resource;
  *
  * @Component(value="myStudent")  等同于
  *        <bean id="myStudent" class="com.example.bao.Student"/>
+ *        也可以省略配置注解中的value属性值：@Component("myStudent")
  *
- *    spring中和@Component功能一致，创建对象的注解还有：
- *        1、@Repository(用在持久层的上面)：放在dao的实现类上面，表示创建dao对象，dao对象是能访问数据库的
- *        2、@service(用在业务层的上面)：放在service的实现类上面，创建service对象，service对象是做业务处理，可以有事务等功能的。
- *        3、@Controller(用在控制器的上面)：放在控制器(处理器)类的上面，创建控制器对象的，控制器对象，能够接受用户提交的参数，显示请求的处理结果
- *        以上三个注解的使用语法和@Component一样的。都能创建对象，但是这三个注解还有额外的功能。
- *        @Repository, @service, @Controller 是给项目的对象分层的。当你不确定类的功能时，可以使用@Component
+ * Spring中和@Component功能一致，创建对象的注解还有：
+ *     1、@Repository(用在持久层的上面)：放在dao的实现类上面，表示创建dao对象，dao对象是能访问数据库的
+ *     2、@Service   (用在业务层的上面)：放在service的实现类上面，创建service对象，service对象是做业务处理，可以有事务等功能的。
+ *     3、@Controller(用在控制器的上面)：放在controller(控制器)类的上面，创建控制器对象的，控制器对象，能够接受用户提交的参数，显示请求的处理结果
+ *     以上三个注解的子注解中都存在@Component，所以注解功能是包含@Component的，都能创建对象。但是这三个注解还有额外的功能。
+ *     @Repository, @service, @Controller 是给项目的对象分层的。当你不确定类的功能时，可以使用@Component
+ *
+ * Spring生成的Bean名称规则：
+ *     1、优先取注解中 name 指定的名字 -- @Component(value="myStudent")
+ *     2、如果注解中没有指定value属性值的话，默认情况下是类名首字母转小写。
+ *        即在MyApp中：Student service = (Student) ac.getBean("student");
+ *        通过容器的 getBean() 方法，可以获取指定的Bean名称实例对象。
+ *     3、特殊情况：注解中没有指定value属性值，且类名是连续两个首字母大写的话，类名即为Bean名称，不用做其他处理。
+ *        比如：STudent student = (STudent) ac.getBean("STudent");
  */
-
-// 也可以省略value：@Component("myStudent")
-/*
-   还有不指定对象名称:@Component
-   由spring提供默认名称：类名的首字母小写
-   即在MyApp中 Student service = (Student) ac.getBean("student");
-   getBean()里对象名称就是类Student的spring默认名称 student
-*/
 @Component(value="myStudent")
 public class Student {
     /**
-     * @Value:简单类型的属性赋值
+     * @Value：简单类型的属性赋值
      *     属性：value是String类型的，表示简单类型的属性值
      *     位置：1、在属性定义的上面，无需set方法，推荐使用
      *          2、在set方法的上面
@@ -51,9 +52,7 @@ public class Student {
      *      属性：required 是一个boolean类型的的，默认是true
      *           required=true：表示引用类型赋值失败，程序报错，并终止执行
      *           required=false：引用类型如果赋值失败，程序正常执行，引用类型是null
-     *           常用的也是默认的required=true，便于调试
-     *
-     *      位置：1、在属性定义的上面，无需set方法，推荐使用
+     *      位置：在属性定义的上面，无需set方法，推荐使用
      *
      * @Autowired注解的工作原理如下：
      *      1、Spring框架会在你的应用启动时，自动扫描并解析所有的Bean。
@@ -73,7 +72,7 @@ public class Student {
      * 引用类型(jdk提供的注解)
      * @Resource：来自jdk中的注解，spring框架提供了对这个注解的功能支持，可以使用他给引用类型赋值
      *            使用的也是自动注入原理，支持byName,byType，默认是byName
-     *    位置：1、在属性定义的上面，无需set方法.
+     *      位置：在属性定义的上面，无需set方法.
      */
     @Resource // 默认使用byName：先使用byName自动注入，如果byName赋值失败，再使用byType
     // @Resource(name="myTeacher") // 这种写法表示只使用byName方式，需要增加一个属性name,name的值是bean的id(名称)
