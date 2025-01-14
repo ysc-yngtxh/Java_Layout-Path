@@ -64,7 +64,7 @@ public class Aspect3 {
         System.out.println("环绕通知，在目标方法之前，输出时间：" + LocalDateTime.now());
 
         // 1、目标方法调用
-        if ("曹玉敏我喜欢你".equals(name)) {
+        if ("小曹我like你".equals(name)) {
             result = pjp.proceed();
         }
         System.out.println("环绕通知：在目标方法之后，提交事务");
