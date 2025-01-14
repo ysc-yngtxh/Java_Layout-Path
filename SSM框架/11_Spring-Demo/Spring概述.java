@@ -101,20 +101,28 @@ package com.example;
 
      8、基于注解的di:通过注解完成Java对象创建，属性赋值
         1)、使用注解的步骤
-            [1]加入maven的依赖 spring-context ，在你加入spring-context的同时，间接加入spring-aop的依赖。使用注解必须使用spring-aop依赖
-            [2]在类中加入spring的注解(多个不同功能的注解)
-            [3]在spring的配置文件中，加入一个组件扫描器的标签，说明注解在你的项目中的位置
-                学习的注解：
+            [1]、加入maven的依赖 spring-context ，在你加入spring-context的同时，间接加入spring-aop的依赖。使用注解必须使用spring-aop依赖
+            [2]、在类中加入spring的注解(多个不同功能的注解)
+            [3]、在spring的配置文件中，加入一个组件扫描器的标签，说明注解在你的项目中的位置
+                 学习的注解：
                         @Component: 创建对象的，等同于<bean>的功能
                         @Value: 简单类型的属性赋值
                         @Autowired: spring框架提供的注解，实现引用类型的赋值。
                         @Resource: 来自jdk中的注解，spring框架提供了对这个注解的功能支持，可以使用他给引用类型赋值.和@Autowired类似
                         
-                        @Repository: (用在持久层的上面)：放在dao的实现类上面，表示创建dao对象，dao对象是能访问数据库的
-                        @service: (用在业务层的上面)：放在service的实现类上面，创建service对象，service对象是做业务处理，可以有事务等功能的。
-                        @Controller: (用在控制器的上面)：放在控制器(处理器)类的上面，创建控制器对象的，控制器对象，能够接受用户提交的参数，显示请求的处理结果
-                      以上三个注解的使用语法和@Component一样的。都能创建对象，但是这三个注解还有额外的功能。
-                      @Repository, @service, @Controller 是给项目的对象分层的。当你不确定类的功能时，可以使用@Component
+                        @Repository(用在持久层的上面)：放在dao的实现类上面，表示创建dao对象，dao对象是能访问数据库的
+                        @Service   (用在业务层的上面)：放在service的实现类上面，创建service对象，service对象是做业务处理，可以有事务等功能的。
+                        @Controller(用在控制器的上面)：放在controller(控制器)类的上面，创建控制器对象的，控制器对象，能够接受用户提交的参数，显示请求的处理结果
+                        以上三个注解的子注解中都存在@Component，所以注解功能是包含@Component的，都能创建对象。但是这三个注解还有额外的功能。
+                        @Repository, @service, @Controller 是给项目的对象分层的。当你不确定类的功能时，可以使用@Component
+
+            [4]、Spring生成的Bean名称规则：
+                 1、优先取注解中 name 指定的名字 -- @Component(value="myStudent")
+                 2、如果注解中没有指定value属性值的话，默认情况下是类名首字母转小写。
+                    即在MyApp中：Student service = (Student) ac.getBean("student");
+                    通过容器的 getBean() 方法，可以获取指定的Bean名称实例对象。
+                 3、特殊情况：注解中没有指定value属性值，且类名是连续两个首字母大写的话，类名即为Bean名称，不用做其他处理。
+                    比如：存在STudent类，那么 STudent student = (STudent) ac.getBean("STudent");
 
 二、aop
    1、动态代理
