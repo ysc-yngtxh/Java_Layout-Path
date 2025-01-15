@@ -72,17 +72,17 @@ public class SpringMybatisTest {
     }
 
 
-    // TODO Spring整合MyBatis下，会使用 SqlSessionTemplate 作为SqlSession的实现类，默认情况下会自动创建一个SqlSessionTemplate对象，
-    //      并将其注入到 Mapper 代理对象中，这个 SqlSessionTemplate 对象会在每次执行Mapper方法时，
-    //      自动获取当前线程上下文中的 SqlSession 对象，然后调用相应的 Mapper 方法。
-    //      因此，SqlSession 对象不是每次执行Mapper方法都会创建，而是在需要时从线程上下文中获取。
+    // TODO Spring整合MyBatis，因为SqlSession是非线程安全的，所以Mybatis提供了一个 SqlSessionTemplate 作为SqlSession的实现类。
+    //      SqlSessionTemplate对象，内部是通过TheadLocal包装实现的线程安全，并将其作为实现 Mapper 代理的主要对象。
+    //      SqlSessionTemplate 对象在每次执行Mapper方法时，会获取当前线程上下文中的 SqlSession 对象，然后调用相应的Mapper方法。
     //      这样做的好处是可以确保每个线程都使用独立的SqlSession对象，从而保证线程安全性。
 
-    // 因为我们的Mapper代理对象和Service都已交给Spring容器管理，因此我们两个查询方法所获取Mapper代理对象是同一个。
-    // 但是每执行完一个Mapper方法，都会关闭掉SqlSession。
-    // 因为如果 SqlSession 在使用完毕后不被关闭，那么它将持续占用数据库连接和其他相关资源，这可能会导致资源耗尽，特别是当并发请求较多时。
-    // 因此SqlSession都被关闭掉了，一级缓存自然就没有任何数据，因此第二个查询就只能再重新查询数据库。
-    // 可以通过添加事务注解Transactional，来保证两个查询方法在彻底执行完之前不关闭sqlSession，这样第二个查询就能获取一级缓存数据
+    // 1、Spring整合的MyBatis，是不需要开发者手动去关闭SqlSession。（正常我们使用SqlSession结束后需要手动关闭连接）
+    //    如果 SqlSession 在使用完毕后不被关闭，那么它将持续占用数据库连接和其他相关资源，这可能会导致资源耗尽，特别是当并发请求较多时。
+    // 2、Spring整合的MyBatis，Mapper代理对象和Service都已交给Spring容器管理，因此我们两个查询方法所获取Mapper代理对象将会是同一个。
+    //    但是每执行完一个Mapper方法，都会通过在动态代理切面编程的Finally语句中关闭掉SqlSession，因此不需要开发者手动去关闭SqlSession。
+    // 3、Mybatis把SqlSession都被关闭掉了，一级缓存自然就没有任何数据，因此第二个查询就只能再重新查询数据库。
+    //    但是可以通过添加事务注解@Transactional，来保证两个查询方法在彻底执行完之前不关闭sqlSession，这样第二个查询就能获取一级缓存数据。
     @Test
     @Transactional
     public void test04(){
