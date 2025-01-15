@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  *        位置：：在类的上面
  *
  * @Component(value="mySchool")  等同于
- *        <bean id="mySchool" class="com.example.bean.Student"/>
+ *        <bean id="mySchool" class="com.example.bean.School"/>
  *        也可以省略配置注解中的value属性值：@Component("mySchool")
  *
  * Spring中和@Component功能一致，创建对象的注解还有：
