@@ -11,7 +11,7 @@
              statementType  要运行的SQL语句，它的返回值通过resultType来指定
              order          表示在执行SQL语句之前还是之后执行selectKey标签中的SQL语句
 
-             注意：使用MySQL的last_insert_id()函数时，before必为false，
+             注意：使用MySQL的last_insert_id()函数时，order必为AFTER，
                   也就是说必须先插入然后执行last_insert_id()才能获得刚刚插入数据的ID
          */
         <selectKey keyProperty="count" resultType="int" order="BEFORE">
