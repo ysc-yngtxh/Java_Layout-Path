@@ -24,7 +24,7 @@ public class TransactionalTest1 {
      *        从而造成数据不完整，不一致的情况。
      */
 
-    // 执行事务方法。抛出异常：商品不存在异常。结果：sale 表插入失败，goods 表插入失败
+    // 执行默认事务方法。抛出异常：商品不存在异常。结果：sale 表插入失败，goods 表插入失败
     @Test
     public void text01(){
         String config = "applicationContext.xml";
@@ -34,7 +34,7 @@ public class TransactionalTest1 {
         service.buy(1005, 10);
     }
 
-    // 执行事务方法。抛出异常：商品库存不足异常。结果：sale 表插入失败，goods 表插入失败
+    // 执行默认事务方法。抛出异常：商品库存不足异常。结果：sale 表插入失败，goods 表插入失败
     @Test
     public void text02(){
         String config = "applicationContext.xml";
@@ -44,7 +44,7 @@ public class TransactionalTest1 {
         service.buy(1, 2);
     }
 
-    // 执行事务方法。正常运行。结果：sale 表插入成功，goods 表插入成功
+    // 执行默认事务方法。正常运行。结果：sale 表插入成功，goods 表插入成功
     @Test
     public void text03(){
         String config = "applicationContext.xml";
