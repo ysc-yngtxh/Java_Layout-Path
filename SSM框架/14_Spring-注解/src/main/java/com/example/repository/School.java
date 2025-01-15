@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 /**
  * @Component: 创建对象的，等同于<bean>的功能
  *        属性：value 就是对象的名称，也就是bean的id值。value的值是唯一的，创建的对象在整个spring容器中就一个
- *        位置：：在类的上面
+ *        位置：在类的上面
  *
  * @Component(value="mySchool")  等同于
  *        <bean id="mySchool" class="com.example.bean.School"/>
