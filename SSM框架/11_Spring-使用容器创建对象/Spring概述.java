@@ -47,7 +47,7 @@ package com.example;
 
      6、di的语法分两类：
         1)、set注入(设值注入)：spring调用类的set方法，在set方法可以实现属性的赋值。80左右都是使用的set注入。
-        2)、构造注入，spring调用类的有参构造方法，创建对象。在构造方法中完成赋值。
+        2)、构造注入：         spring调用类的有参构造方法，创建对象。在构造方法中完成赋值。
 
      7、设值注入
         注入：就是赋值的意思
@@ -137,10 +137,10 @@ package com.example;
    3、Aop：面向切面编程，基于动态代理的，可以使用jdk,cglib两种代理方式。
           Aop就是动态代理的规范化，把动态代理的实现步骤，方式都定义好了，让开发人员用一种统一的方式，使用动态代理。
    4、Aop(Aspect Orient Programming)面向切面编程
-      Aspect：切面，给你的目标类增加的功能，就是切面。像使用的日志，事物都是切面。切面的特点：一般都是非业务方法，独立使用的。
-      Orient：面向，对着
+      Aspect：     切面，给你的目标类增加的功能，就是切面。像使用的日志，事物都是切面。切面的特点：一般都是非业务方法，独立使用的。
+      Orient：     面向，对着
       Programming：编程
-      oop：面向对象编程
+      oop：        面向对象编程
 
       怎么理解面向切面编程？
         1)、需要在分析项目功能时，找出切面。
@@ -151,8 +151,8 @@ package com.example;
         1)、Aspect：   切面，表示增强的功能，就是一堆代码，完成某一个功能。非业务功能，常见的切面功能有日志，事务，统计信息，参数检查，权限验证。
         2)、JoinPoint：连接点，连接业务方法和切面的位置。就某类中的业务方法
         3)、Pointcut： 切入点，至多个连接点方法的集合，多个方法
-        4)、目标对象：给哪个类的方法增加功能，这个类就是目标对象
-        5)、Advice： 通知，通知表示切面功能执行的时间
+        4)、目标对象：  给哪个类的方法增加功能，这个类就是目标对象
+        5)、Advice：   通知，通知表示切面功能执行的时间
 
       说一个切面有三个关键的要素：
         1)、切面的功能代码，切面干什么
@@ -256,7 +256,7 @@ package com.example;
              事务管理器是一个接口和他的众多实现类。
              接口：PlatformTransactionManager，定义了事务重要方法 commit，rollback
              实现类：spring把每一种数据库访问技术对应的事务处理类都创建好了。
-                    mybatis访问数据库----spring创建的是DateSourceTransactionManager
+                    mybatis访问数据库  ----spring创建的是DateSourceTransactionManager
                     hibernate访问数据库----spring创建的是hibernateTransactionManager
 
              怎么使用：你需要告诉spring你用的是哪种数据库的访问技术，怎么告诉spring呢？
@@ -267,16 +267,16 @@ package com.example;
              说明方法需要的事务：
                【1】事务的隔离级别：有4个值。(读未提交，读已提交，可重复读[幻读]，串行化)
                【2】事务的超时时间：表示一个方法最长的执行时间，如果方法执行时间超过了时间，事务就回滚。
-                                 单位是秒，整数值，默认是 -1
+                                  单位是秒，整数值，默认是 -1
                【3】事务的传播行为：控制业务方法是不是有事务的，是什么样的事务的。
-                                 7个传播行为，表示你的业务方法调用时，事务在方法之前是如果使用的
-                      PROPAGATION_REQUIRED – 支持当前事务，如果当前没有事务，就新建一个事务。这是最常见的选择。
-                      PROPAGATION_SUPPORTS – 支持当前事务，如果当前没有事务，就以非事务方式执行。
-                      PROPAGATION_MANDATORY – 支持当前事务，如果当前没有事务，就抛出异常。
-                      PROPAGATION_REQUIRES_NEW – 新建事务，如果当前存在事务，把当前事务挂起。
-                      PROPAGATION_NOT_SUPPORTED – 以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。
-                      PROPAGATION_NEVER – 以非事务方式执行，如果当前存在事务，则抛出异常。
-                      PROPAGATION_NESTED – 如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则进行与PROPAGATION_REQUIRED类似的操作。
+                                  7个传播行为，表示你的业务方法调用时，事务在方法之前是如果使用的
+                      PROPAGATION_REQUIRED        支持当前事务，如果当前没有事务，就新建一个事务。这是最常见的选择。
+                      PROPAGATION_SUPPORTS        支持当前事务，如果当前没有事务，就以非事务方式执行。
+                      PROPAGATION_MANDATORY       支持当前事务，如果当前没有事务，就抛出异常。
+                      PROPAGATION_REQUIRES_NEW    新建事务，如果当前存在事务，把当前事务挂起。
+                      PROPAGATION_NOT_SUPPORTED   以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。
+                      PROPAGATION_NEVER           以非事务方式执行，如果当前存在事务，则抛出异常。
+                      PROPAGATION_NESTED          如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则进行与PROPAGATION_REQUIRED类似的操作。
 
          3)、事务提交事务，回滚事务的时机
              【1】当你的业务方法，执行成功，没有异常抛出，当方法执行完毕，spring在方法执行后提交事务。事务管理器commit
