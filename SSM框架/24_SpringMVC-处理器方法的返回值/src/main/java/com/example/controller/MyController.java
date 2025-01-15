@@ -75,7 +75,7 @@ public class  MyController {
     public Student doStudentJsonObject(String name, Integer age){
         //调用service，获取请求结果数据，Student对象表示结果数据
         Student student = new Student();
-        student.setName("曹玉敏同学");
+        student.setName("小曹同学");
         student.setAge(20);
         return student;
     }
@@ -105,12 +105,12 @@ public class  MyController {
     public List<Student> doOut(){
         List<Student> list = new ArrayList();
         Student student = new Student();
-        student.setName("曹玉敏同学");
+        student.setName("小曹同学");
         student.setAge(20);
         list.add(student);
 
         Student students = new Student();
-        students.setName("曹玉敏我喜欢你哦");
+        students.setName("小曹我like你哦");
         students.setAge(22);
         list.add(students);
 
@@ -127,19 +127,19 @@ public class  MyController {
     @RequestMapping(value="/returnString1.do")
     @ResponseBody
     public String doFirst1(){
-        return "Hello SpringMVC 曹玉敏你个大傻子!";
+        return "Hello SpringMVC 小曹你个大傻子!";
         // 这里不显示事件句柄是因为返回类型是json，但是默认使用"text/plain;charset=ISO-8859-1"作为contextType，导致无法显示
     }
     @RequestMapping(value="/returnString2.do")
     @ResponseBody
     public String doFirst2(){
-        return "Hello SpringMVC 曹玉敏你个大傻子!";
+        return "Hello SpringMVC 小曹你个大傻子!";
         // 这里显示，但是事件句柄有中文乱码。是因为我在脚本中写上了返回值是文本类型，所以能显示，但是因为字符集不符，中文乱码
     }
     @RequestMapping(value="/returnString3.do", produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String doFirst3(){
-        return "Hello SpringMVC 曹玉敏你个大傻子!";
+        return "Hello SpringMVC 小曹你个大傻子!";
         // 这里我在RequestMapping中加入produces = "text/plain;charset=utf-8"语句，所以事件句柄显示正常
     }
 
