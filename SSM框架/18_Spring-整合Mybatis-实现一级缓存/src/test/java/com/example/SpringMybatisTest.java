@@ -40,7 +40,7 @@ public class SpringMybatisTest {
         StudentMapper mapper = ac.getBean("studentMapper", StudentMapper.class);
         Student student = new Student();
         student.setId(1020);
-        student.setName("我喜欢曹玉敏");
+        student.setName("我like小曹");
         student.setEmail("lijingjing@163.com");
         student.setAge(2020919);
         int nums = mapper.insertStudent(student);
