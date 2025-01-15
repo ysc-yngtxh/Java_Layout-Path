@@ -214,11 +214,10 @@ package com.example;
          2)、SqlSessionFactory
          3)、Dao对象
 
-    ⚠️Spring整合MyBatis时，会使用 SqlSessionTemplate 作为 SqlSession 的实现类，
-   默认情况下会自动创建一个 SqlSessionTemplate对象，并将其注入到 Mapper代理对象 中。
-      这个SqlSessionTemplate对象会在每次执行Mapper方法时，自动获取当前线程上下文中的SqlSession对象，然后调用相应的Mapper方法。
-   因此，SqlSession对象不是每次执行Mapper方法都会创建，而是在需要时从线程上下文中获取。
-      这样做的好处是可以确保每个线程都使用独立的SqlSession对象，从而保证线程安全性。
+    ⚠️Spring整合MyBatis，因为SqlSession是非线程安全的，所以Mybatis提供了一个 SqlSessionTemplate 作为SqlSession的实现类。
+       SqlSessionTemplate对象，内部是通过TheadLocal包装实现的线程安全，并将其作为实现 Mapper 代理的主要对象。
+       SqlSessionTemplate 对象在每次执行Mapper方法时，会获取当前线程上下文中的 SqlSession 对象，然后调用相应的Mapper方法。
+       这样做的好处是可以确保每个线程都使用独立的SqlSession对象，从而保证线程安全性。
 
 
 四、spring的事务处理
