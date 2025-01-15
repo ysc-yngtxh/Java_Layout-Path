@@ -5,11 +5,11 @@
 
     <insert id="insertOrUpdateOneUserInfo">
         /* selectKey标签属性：
-             keyProperty：	表示查询结果赋值给代码中的哪个对象
-             keyColumn：     表示将查询结果赋值给数据库表中哪一列
-             resultType：	填入 keyProperty 的 Java 类型
-             statementType   要运行的SQL语句，它的返回值通过resultType来指定
-             order：         表示在执行SQL语句之前还是之后执行selectKey标签中的SQL语句
+             keyProperty    表示查询结果赋值给代码中的哪个对象
+             keyColumn      表示将查询结果赋值给数据库表中哪一列
+             resultType     填入 keyProperty 的 Java 类型
+             statementType  要运行的SQL语句，它的返回值通过resultType来指定
+             order          表示在执行SQL语句之前还是之后执行selectKey标签中的SQL语句
 
              注意：使用MySQL的last_insert_id()函数时，before必为false，
                   也就是说必须先插入然后执行last_insert_id()才能获得刚刚插入数据的ID
