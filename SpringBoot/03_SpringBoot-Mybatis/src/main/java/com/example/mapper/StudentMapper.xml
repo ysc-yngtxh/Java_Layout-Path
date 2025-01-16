@@ -3,7 +3,7 @@
 
 <mapper namespace="com.example.mapper.StudentMapper">
   <!--
-        id  标签只能修改主键字段
+        id        标签只能修改主键字段
         jdbcType  列在数据库种字段的类型(可以省略不写)
         result作用：1、当数据库中字段名称与实体类对象的属性名不一致时，可以进行转换
                    2、当前查询的结果没有对象一个表的时候，可以自定义一个结果集

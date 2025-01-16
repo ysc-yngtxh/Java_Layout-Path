@@ -19,7 +19,6 @@ public class InsertOrUpdateApplication {
 
 }
 
-
 /**
  * 比较前一个模块，此模块可以避免在dao包下的Mapper类较多时，每一个加上@Mapper注解
  * 因为，统一在Application类下开启了一个类似扫描器的注解@MapperScan

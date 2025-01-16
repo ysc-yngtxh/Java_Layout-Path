@@ -28,7 +28,7 @@
     </insert>
 
 
-    <!--避免重复插入（存在则忽略）注意：没有 replace ignore into 这种写法
+    <!--避免重复插入（存在则忽略）注意：没有 replace insert ignore into 这种写法
         INSERT IGNORE INTO student(`id`, `name`, `email`, `age`) VALUES ( ?, ?, ?, ? )-->
     <insert id="insertIgnoreInto" parameterType="java.util.List">
         INSERT IGNORE INTO student(`id`, `name`, `email`, `age`)

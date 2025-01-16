@@ -26,8 +26,13 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional
     public Student queryStudentByIdCacheL1(Integer id) {
+        System.out.println("============第一次查询============");
         Student student = studentMapper.selectByPrimaryKey(id);
+        System.out.println(student);
+
+        System.out.println("============第二次查询============");
         Student student1 = studentMapper.selectByPrimaryKey(id);
+        System.out.println(student1);
         return student;
     }
 

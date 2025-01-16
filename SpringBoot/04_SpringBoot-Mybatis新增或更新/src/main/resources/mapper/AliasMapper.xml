@@ -4,7 +4,7 @@
 <mapper namespace="com.example.mapper.StudentMapper">
 
     <insert id="insertOrUpdateOneUserInfo">
-        /* selectKey标签属性：
+        /* selectKey标签：在 MyBatis 中用于在插入数据前或后获取数据库生成的主键或其他值，通常与 insert 标签配合使用。
              keyProperty    表示查询结果赋值给代码中的哪个对象
              keyColumn      表示将查询结果赋值给数据库表中哪一列
              resultType     填入 keyProperty 的 Java 类型
