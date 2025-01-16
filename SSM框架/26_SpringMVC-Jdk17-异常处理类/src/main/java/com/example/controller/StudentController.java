@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class StudentController {
+
     @RequestMapping(value="/some.do")
     public ModelAndView doSome(String name,Integer age) throws MyUserException {
         ModelAndView mv = new ModelAndView();

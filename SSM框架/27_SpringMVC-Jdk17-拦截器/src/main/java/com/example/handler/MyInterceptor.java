@@ -1,9 +1,9 @@
 package com.example.handler;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 /**
@@ -11,6 +11,7 @@ import java.util.Date;
  * @dep 拦截器类：拦截用户的请求
  */
 public class MyInterceptor implements HandlerInterceptor {
+
     long btime;
     /**
      * preHandle叫做预处理方法

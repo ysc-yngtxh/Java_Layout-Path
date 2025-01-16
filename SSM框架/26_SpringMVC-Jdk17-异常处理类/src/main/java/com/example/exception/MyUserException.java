@@ -3,7 +3,8 @@ package com.example.exception;
 /**
  * @author 游家纨绔
  */
-public class MyUserException extends Exception{
+public class MyUserException extends Exception {
+
     public MyUserException() {
         super();
     }
