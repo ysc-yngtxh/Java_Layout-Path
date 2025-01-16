@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.mapper.StudentDao">
-    <select id="selectStudents" resultType="com.example.pojo.Student">
+    <select id="selectStudents" resultType="Student">
           select id,name,age from students order by id desc
     </select>
 

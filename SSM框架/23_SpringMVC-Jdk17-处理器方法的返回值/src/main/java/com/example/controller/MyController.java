@@ -27,8 +27,8 @@ public class  MyController {
                              , String name
                              , Integer age){
         System.out.println("doReturnView,name=" + name + "  age=" + age);
-        request.setAttribute("myname",name);
-        request.setAttribute("myage",age);
+        request.setAttribute("myName",name);
+        request.setAttribute("myAge",age);
         // show：逻辑视图名称，项目中配置了视图解析器
         // 框架对视图执行forward转发操作
         return "show";
@@ -86,7 +86,7 @@ public class  MyController {
     @RequestMapping(value="/returnList.do")
     @ResponseBody
     public List<Student> doOut(){
-        List<Student> list = new ArrayList();
+        List<Student> list = new ArrayList<>();
         Student student = new Student();
         student.setName("小曹同学");
         student.setAge(20);
@@ -104,7 +104,7 @@ public class  MyController {
      * 区分返回值String是数据，还是视图，看有没有@ResponseBody注解
      * 如果有@ResponseBody注解，返回String就是数据，反之就是视图
      *
-     * 默认使用"text/plain;charset=ISO-8859-1"作为contextType，导致中文有乱码
+     * 默认使用 "text/plain;charset=ISO-8859-1" 作为contextType，导致中文有乱码
      * 解决方案：给RequestMapping增加一个属性 produces,使用这个属性指定新的contextType
      */
     @RequestMapping(value="/returnString1.do")

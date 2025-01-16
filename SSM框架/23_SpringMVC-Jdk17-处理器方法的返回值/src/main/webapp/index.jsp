@@ -53,10 +53,7 @@
             $("#btn4").click(function(){
                 $.ajax({
                     url: "returnString1.do",
-                    data: {
-                        name: "zhangsan",
-                        age: 20
-                    },
+                    data: {},
                     type: "post",
                     dataType: "json",
                     success: function(resp){
@@ -67,10 +64,7 @@
             $("#btn5").click(function(){
                 $.ajax({
                     url: "returnString2.do",
-                    data: {
-                        name: "zhangsan",
-                        age: 20
-                    },
+                    data: {},
                     type: "post",
                     dataType: "text",
                     success: function(resp){
@@ -81,10 +75,7 @@
             $("#btn6").click(function(){
                 $.ajax({
                     url: "returnString3.do",
-                    data: {
-                        name: "zhangsan",
-                        age: 20
-                    },
+                    data: {},
                     type: "post",
                     success: function(resp){
                         alert(resp);

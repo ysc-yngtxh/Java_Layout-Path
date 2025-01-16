@@ -29,6 +29,5 @@
     <!--default-servlet-handler 和 @RequestMapping注解 有冲突，需要加入annotation-driven 解决问题-->
     <mvc:annotation-driven/>
 
-
     <mvc:default-servlet-handler/>
 </beans>

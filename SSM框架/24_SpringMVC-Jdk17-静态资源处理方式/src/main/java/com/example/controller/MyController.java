@@ -15,8 +15,8 @@ public class MyController {
 
         System.out.println("doSome name="+name+"  age="+age);
         ModelAndView mv = new ModelAndView();
-        mv.addObject("myname",name);
-        mv.addObject("myage",age);
+        mv.addObject("myName",name);
+        mv.addObject("myAge",age);
         mv.setViewName("show");
         return mv;
     }

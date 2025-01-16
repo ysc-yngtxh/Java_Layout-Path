@@ -103,7 +103,7 @@
      2) $.post():使用post方式做Ajax请求
      3) $.get():使用get方式发送Ajax的请求
 
-       $.post()和$.get()他们在内部都是调用的$.ajax()
+       $.post()和$.get()他们在内部都是调用的 $.ajax()
        介绍$.ajax()函数的使用，函数的参数表示请求的url,请求的方式，参数值等信息。$.ajax()参数是一个json的结构
        例如：$.ajax( {名称：值，名称1：值1......} )
              例如：$.ajax( {async:true , contentType:"application/json" ,
@@ -127,7 +127,7 @@
          4)dataType:表示期望从服务器端返回的数据格式，可选的有：xml,html,text,json
                     当我们使用$.ajax()发送请求时，会把dataType的值发送给服务器，那我们的servlet能够读取到dataType的值
                     就知道你的浏览器需要的是json或者xml的数据，那么服务器就可以返回你需要的数据格式。
-         5)error:一个function ，表示当请求发生错误时，执行的函数。
+         5)error:一个function，表示当请求发生错误时，执行的函数。
                  error:function(){发生错误时执行}
          6)success:一个function，请求成功了，从服务器端返回了数据，会执行success指定函数之前使用XMLHttpRequest对象，
                    当readyState==4 && state==200的时候

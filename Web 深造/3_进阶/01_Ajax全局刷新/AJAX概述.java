@@ -60,21 +60,21 @@
          回调：当请求的状态变化时，异步对象会自动调用 onreadyStatechange事件对应的函数
 
   4、json介绍
-       1)ajax发起请求----servlet(返回的一个json格式的字符串{name:"河北", jiancheng:"冀", shenghui:"石家庄"})
-         json分类：1>json对象，JSONObject,这种对象的格式  名称:值，也可以看作是 key:value 格式。
-                  2>json数组，JSONArray，基本格式[{name:"河北",jiancheng:"冀",shenghui:"石家庄"},{name:"河北",jiancheng:"冀",shenghui:"石家庄"}]
-       2)为什么要使用json:
-         1、json格式好理解
-         2、json格式数据在多种语言中，比较容易处理。使用Java，JavaScript读写json格式的数据比较容易
-         3、json格式数据它占用的空间下，在网络中传输快，用户的体验好
-       3)处理json的工具库：
-          gson(google)
-          fastjson(阿里):速度快，不是最符合json处理规范的
-          jackson:性能好，规范好
-          json-lib:性能差，依赖多
-        4)异步和同步
-          异步：open(get,url,true),在send之后执行其他的代码，可以同时执行多个异步请求
-          同步：open(get,url,false),一次只能执行一个异步请求，必须请求处理完成后，才能执行其他的请求处理
+       1)、ajax发起请求----servlet(返回的一个json格式的字符串{name:"河北", jiancheng:"冀", shenghui:"石家庄"})
+           json分类：1>json对象，JSONObject,这种对象的格式  名称:值，也可以看作是 key:value 格式。
+                    2>json数组，JSONArray，基本格式[{name:"河北",jiancheng:"冀",shenghui:"石家庄"},{name:"河北",jiancheng:"冀",shenghui:"石家庄"}]
+       2)、为什么要使用json:
+           1、json格式好理解
+           2、json格式数据在多种语言中，比较容易处理。使用Java，JavaScript读写json格式的数据比较容易
+           3、json格式数据它占用的空间下，在网络中传输快，用户的体验好
+       3)、处理json的工具库：
+           gson(google)
+           fastjson(阿里):速度快，不是最符合json处理规范的
+           jackson:性能好，规范好
+           json-lib:性能差，依赖多
+        4)、异步和同步
+            异步：open(get,url,true),在send之后执行其他的代码，可以同时执行多个异步请求
+            同步：open(get,url,false),一次只能执行一个异步请求，必须请求处理完成后，才能执行其他的请求处理
  */
 public class AJAX概述 {
 }

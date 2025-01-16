@@ -9,7 +9,7 @@
 
       <h3>/WEB-INF/view/show.jsp从request作用域获取数据</h3><br>
 
-      <h3>name数据：${myname}</h3><br>
-      <h3>age数据：${myage}</h3><br>
+      <h3>name数据：${myName}</h3><br>
+      <h3>age数据：${myAge}</h3><br>
 </body>
 </html>
