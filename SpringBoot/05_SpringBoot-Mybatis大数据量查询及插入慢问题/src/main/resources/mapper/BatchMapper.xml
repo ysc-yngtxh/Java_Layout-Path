@@ -8,7 +8,8 @@
   </insert>
 
   <insert id="insertForeach" parameterType="java.util.List" useGeneratedKeys="true">
-      # foreach 遇到数量大，会有性能瓶颈。表的列数较多（超过20），建议遍历100个就ok了，不要太高。
+      # foreach 遇到数量大，会有性能瓶颈。并且Mysql对语句的长度有限制，默认是4M。
+      # 表的列数较多（超过20），建议最多遍历100个就ok了，不要太高。
       insert into student (name, email, age) values
       <foreach collection="list" item="item" index="index" separator=",">
           <trim prefix="(" suffix=")" suffixOverrides=",">
