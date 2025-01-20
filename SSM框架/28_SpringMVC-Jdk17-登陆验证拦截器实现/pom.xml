@@ -30,29 +30,6 @@
       <version>6.2.2</version>
       <scope>compile</scope>
     </dependency>
-    <!--做spring事务用到的-->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-tx</artifactId>
-      <version>6.2.2</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-jdbc</artifactId>
-      <version>6.2.2</version>
-    </dependency>
-    <!--mybatis依赖-->
-    <dependency>
-      <groupId>org.mybatis</groupId>
-      <artifactId>mybatis</artifactId>
-      <version>3.5.13</version>
-    </dependency>
-    <!--spring和mybatis集成的依赖-->
-    <dependency>
-      <groupId>org.mybatis</groupId>
-      <artifactId>mybatis-spring</artifactId>
-      <version>3.0.0</version>
-    </dependency>
     <!--Spring MVC的实现：spring-webmvc依赖，其内含spring-web依赖，无需再显式添加spring-web-->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -65,18 +42,6 @@
       <artifactId>jakarta.servlet-api</artifactId>
       <version>6.1.0</version>
     </dependency>
-    <!--MySQL驱动-->
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.33</version>
-    </dependency>
-    <!--阿里公司的数据库连接池-->
-    <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>druid</artifactId>
-      <version>1.2.16</version>
-    </dependency>
     <!--Jackson依赖-->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -87,12 +52,6 @@
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
       <version>2.15.1</version>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.13.2</version>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 
