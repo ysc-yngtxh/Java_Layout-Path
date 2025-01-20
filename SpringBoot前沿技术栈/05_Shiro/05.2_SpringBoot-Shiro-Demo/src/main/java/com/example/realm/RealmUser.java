@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class RealmUser extends AuthorizingRealm {
 
-
     @Autowired
     private UserService userService;
 

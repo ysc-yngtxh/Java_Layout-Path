@@ -1,14 +1,15 @@
 package com.example.controller;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.ShiroException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.apache.shiro.lang.ShiroException;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +26,7 @@ public class ShiroController {
     }
 
     @RequestMapping("/login")
-    public String login(String username, String password, Model model){
+    public String login(String username, String password, Model model) {
         // 获取权限操作对象，利用这个对象来完成登陆操作
         Subject subject = SecurityUtils.getSubject();
         // 登出，进入这个请求用户一定是要完成用户登录功能。因此我们就先登出，否则Shiro会有缓存不能重新登陆
@@ -63,6 +64,7 @@ public class ShiroController {
         return "redirect:/";
     }
 
+    @RequiresGuest
     @RequestMapping("/success")
     public String loginSuccess(){
         return "success";
@@ -82,7 +84,7 @@ public class ShiroController {
 
         注意：Shiro中出现基于配置权限验证以及注解的权限验证以外还支持基于方法调用的权限验证
              例如：验证当前用户是否拥有指定的角色  验证当前用户是否拥有指定的权限
-   */
+    */
     @RequiresRoles(value="admin")
     @RequestMapping("/admin/test")
     public @ResponseBody String adminTest(){

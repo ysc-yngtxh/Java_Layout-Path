@@ -16,7 +16,7 @@ public class ShiroConfig {
 
     // 3、ShiroFilterFactoryBean   shiro过滤工厂(请求都在这儿过滤)
     @Bean
-    public ShiroFilterFactoryBean factoryBean(@Qualifier("defaultWebSecurityManager") DefaultWebSecurityManager defaultWebSecurityManager) {
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(@Qualifier("defaultWebSecurityManager") DefaultWebSecurityManager defaultWebSecurityManager) {
 
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
         // 设置安全管理器

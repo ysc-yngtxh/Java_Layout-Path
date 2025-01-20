@@ -7,7 +7,6 @@ import com.example.pojo.User;
  */
 public interface UserMapper {
 
-
     User selectByPrimaryKey(Long id);
 
     User selectByName(String name);

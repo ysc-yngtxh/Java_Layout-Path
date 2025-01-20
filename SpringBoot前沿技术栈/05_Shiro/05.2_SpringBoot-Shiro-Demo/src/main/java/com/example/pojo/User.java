@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 
  * @TableName students
  */
 @Data
@@ -15,19 +14,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class User implements Serializable {
 
-    private Integer id;
+    private static final long serialVersionUID = 1L;
 
+    private Integer id;
 
     private String name;
 
-
     private String pwd;
 
-
     private String perms;
-
-    private static final long serialVersionUID = 1L;
-
-
-
 }

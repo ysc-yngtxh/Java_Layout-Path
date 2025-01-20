@@ -1,6 +1,6 @@
 ## Elasticsearch是一个分布式的搜索引擎
 
-   &emsp;&emsp;&emsp;&emsp;ElasticSearch的服务IP是：https://localhost:9200
+   &emsp;&emsp;&emsp;&emsp;ElasticSearch的服务IP是：http://localhost:9200
 
    &emsp;&emsp;&emsp;&emsp;为了更好的在浏览器上直观的显示搜索命令可以使用kibana
 
@@ -13,7 +13,7 @@
 - **基本elasticsearch7.7以上版本都可以设置安全验证登录使用。第一次下载安装，命令行会给你 密码 和 token令牌。需要注意的是只有在第一次启动的时候才会显示出来**
     - ![输入图片说明](src/main/resources/static/image-1.png)
 
-    &emsp;&emsp;&emsp;&emsp;**进入 https://localhost:9200 地址会弹出用户名和密码登录界面：**
+    &emsp;&emsp;&emsp;&emsp;**进入 http://localhost:9200 地址会弹出用户名和密码登录界面：**
 
     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;用户名 ==> elastic(固定的)    密码 ==> fVH4-Z3vb2Kqvxn1jyjF
 

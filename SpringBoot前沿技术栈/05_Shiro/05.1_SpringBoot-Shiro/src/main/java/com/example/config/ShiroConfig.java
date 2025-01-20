@@ -17,7 +17,7 @@ public class ShiroConfig {
 
     // 配置一个Shiro的过滤器bean,这个bean将配置shiro相关的一个规则的拦截
     @Bean
-    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager){
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager) {
         // 创建过滤器配置Bean
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
@@ -28,7 +28,7 @@ public class ShiroConfig {
         // 权限拦截
         Map<String, String> filterChainMap = new LinkedHashMap<>();
 
-        /*添加shiro的内置过滤器
+        /* 添加shiro的内置过滤器
          *    anon:无需认证就可以访问
          *    authc:必须认证了才能访问
          *    role:拥有某个角色权限才能访问
@@ -57,7 +57,7 @@ public class ShiroConfig {
 
     // 配置一个SecurityManager 安全管理器
     @Bean
-    public SessionsSecurityManager securityManager(MyRealm myrealm){
+    public SessionsSecurityManager securityManager(MyRealm myrealm) {
         DefaultWebSecurityManager defaultWebSecurityManager = new DefaultWebSecurityManager();
         defaultWebSecurityManager.setRealm(myrealm);
         return defaultWebSecurityManager;
@@ -65,13 +65,13 @@ public class ShiroConfig {
 
     // 配置一个自定义的Realm的bean,最终将使用这个bean返回的对象完成我们的认证和授权
     @Bean
-    public MyRealm myRealm(){
+    public MyRealm myRealm() {
         return new MyRealm();
     }
 
     //*** 千万别忘了加 bean, 否则页面无法正常的显示shiro标签权限 !!! ***//
     @Bean
-    public ShiroDialect shiroDialect(){
+    public ShiroDialect shiroDialect() {
         return new ShiroDialect();
     }
 }

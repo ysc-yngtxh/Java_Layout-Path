@@ -62,5 +62,4 @@ public class UserController {
     public @ResponseBody String auThorization(HttpServletResponse response) {
         return "未经授权，无法访问相应页面!";
     }
-
 }

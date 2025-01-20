@@ -11,7 +11,5 @@ import tk.mybatis.mapper.common.Mapper;
  */
 public interface TestyscMapper extends Mapper<Testysc> {
 
-
-
 }
 

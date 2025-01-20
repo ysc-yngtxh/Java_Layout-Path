@@ -17,7 +17,7 @@ import javax.crypto.spec.SecretKeySpec;
  */
 public class JwtUtil {
 
-    // 有效期为
+    // 设置有效期
     public static final Long JWT_TTL = 60 * 60 * 1000L;
     // 设置密钥明文
     public static final String JWT_KEY = "example";

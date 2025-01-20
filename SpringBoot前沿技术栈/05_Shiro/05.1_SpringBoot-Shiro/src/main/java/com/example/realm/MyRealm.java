@@ -27,7 +27,7 @@ public class MyRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        System.out.println("=====我正在授权哦！=========");
+        System.out.println("========我正在授权哦！=========");
         Object obj = principals.getPrimaryPrincipal(); // 获取用户的账号，根据获取数据的账号来从数据库中获取
         // 定义用户角色的set集合，这个集合应该来自数据库
         /*

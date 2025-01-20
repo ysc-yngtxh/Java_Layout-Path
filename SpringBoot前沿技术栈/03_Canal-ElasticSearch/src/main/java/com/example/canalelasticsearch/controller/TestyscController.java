@@ -1,6 +1,5 @@
 package com.example.canalelasticsearch.controller;
 
-
 import com.alibaba.fastjson.JSON;
 import com.example.canalelasticsearch.pojo.Testysc;
 import com.example.canalelasticsearch.service.TestyscService;
