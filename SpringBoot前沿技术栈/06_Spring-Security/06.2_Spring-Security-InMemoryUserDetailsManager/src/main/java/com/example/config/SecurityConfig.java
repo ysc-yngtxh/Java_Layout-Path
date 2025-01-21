@@ -56,7 +56,7 @@ public class SecurityConfig {
 
         // TODO CSRF（跨站请求防伪造）写法一：
         // 自 SpringSecurity4.0 起，CSRF 跨站请求防伪造保护是默认开启的，因此有开启需要的话不用特意书写这行代码。
-        // 当使用这种写法时，Cookie 中不包含CSRF令牌信息，前端可以通过MVC返回视图中获取 ${_csrf.token} 来获取 CSRF令牌。
+        // 当使用CSRF默认配置时，Cookie 中不包含CSRF令牌信息，前端可以通过MVC返回视图中获取 ${_csrf.token} 来获取 CSRF令牌。
         http.csrf(Customizer.withDefaults());
 
         // TODO CSRF（跨站请求防伪造）写法二：
