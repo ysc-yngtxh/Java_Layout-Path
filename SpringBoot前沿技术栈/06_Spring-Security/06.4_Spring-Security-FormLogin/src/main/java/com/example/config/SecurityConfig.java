@@ -41,7 +41,7 @@ public class SecurityConfig {
      *
      * 在Spring Security中，如果你选择使用明文存储密码（生产环境中是非常不推荐），你必须在密码前加上 {noop} 前缀。
      * {noop} 前缀表明这是一个故意以明文形式存储的密码。
-     * 这种情况下，Spring Security会跳过所有密码编码器，直接将用户输入的密码与数据库中存储的明文密码进行比较。
+     * 该情况下，Spring Security会跳过所有密码编码器，直接将用户输入的密码与数据库中存储的{noop} 前缀明文密码进行比较。
      */
     @Bean
     public PasswordEncoder passwordEncoder() {
