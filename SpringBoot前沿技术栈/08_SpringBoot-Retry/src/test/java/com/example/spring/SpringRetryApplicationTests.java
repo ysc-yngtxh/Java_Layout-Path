@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.remoting.RemoteAccessException;
 import org.springframework.retry.backoff.FixedBackOffPolicy;
 import org.springframework.retry.policy.SimpleRetryPolicy;
 import org.springframework.retry.support.RetryTemplate;
@@ -33,12 +32,13 @@ class SpringRetryApplicationTests {
     // 这种就是纯代码编写重试规则
     @Test
     void contextLoads() {
-        // 设置重试回退策略， 主要设置重试时间间隔
+        // FixedBackOffPolicy 是 Spring Retry 模块提供的一个类，用于在重试失败的操作时，控制每次重试之间的等待时间（退避策略）。
+        // 设置重试回退策略，主要设置重试时间间隔
         FixedBackOffPolicy backOffPolicy = new FixedBackOffPolicy();
         backOffPolicy.setBackOffPeriod(fixedPeriodTime);
 
         // 设置重试策略，主要设置重试次数, 以及什么异常进行重试
-        exceptionMap.put(RemoteAccessException.class, true);
+        exceptionMap.put(NumberFormatException.class, true);
         SimpleRetryPolicy retryPolicy = new SimpleRetryPolicy(maxRetryTimes, exceptionMap);
 
         // 构建重试模板实列
@@ -49,7 +49,7 @@ class SpringRetryApplicationTests {
 
         Boolean execute = retryTemplate.execute(
                 retryContext -> {
-                    boolean b = RetryUtil.retryTask("abc");
+                    boolean b = RetryUtil.retryTask();
                     log.info("调用结果: {}", b);
                     return b;
                 },

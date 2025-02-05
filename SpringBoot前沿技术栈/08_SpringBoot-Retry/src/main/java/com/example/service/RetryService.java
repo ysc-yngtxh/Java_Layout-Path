@@ -2,7 +2,6 @@ package com.example.service;
 
 import com.example.utils.RetryUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.remoting.RemoteAccessException;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
@@ -19,13 +18,13 @@ public class RetryService {
      *     设置delay、maxDealy、multiplier，使用 ExponentialBackOffPolicy（指数级重试间隔的实现 ），
      *     multiplier即指定延迟倍数，比如delay=5000l,multiplier=2,则第一次重试为5秒，第二次为10秒，第三次为20秒
      */
-    // 启动重试机制的异常RemoteAccessException、IllegalArgumentException。最大重连次数3。重连所花时间。
-    @Retryable(value = {RemoteAccessException.class, IllegalArgumentException.class}, maxAttempts = 3, backoff = @Backoff(delay = 2000L, multiplier = 2))
+    // 启动重试机制的异常NumberFormatException、IllegalArgumentException。最大重连次数3。重连所花时间。
+    @Retryable(value = {NumberFormatException.class, IllegalArgumentException.class}, maxAttempts = 3, backoff = @Backoff(delay = 2000L, multiplier = 2))
     public boolean calls(String param){
-        return RetryUtil.retryTask("abc");
+        return RetryUtil.retryTask();
     }
 
-    // 这里,当抛出RemoteAccessException时重试会尝试运行。
+    // 这里,当抛出NumberFormatException时重试会尝试运行。
     // 当@Retryable方法因指定异常而失败时，@Recover注释用于在@Retryable方法因指定的异常而失败时定义单独的恢复方法
     // recover()方法返回值需要与重试方法返回值保证一致
     @Recover

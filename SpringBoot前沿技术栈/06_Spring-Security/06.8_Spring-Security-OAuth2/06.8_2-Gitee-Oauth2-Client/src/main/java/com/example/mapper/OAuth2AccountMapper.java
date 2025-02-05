@@ -9,4 +9,5 @@ import com.example.oauth2.entity.OAuth2ThirdPartyAccount;
  * @apiNote TODO
  */
 public interface OAuth2AccountMapper extends BaseMapper<OAuth2ThirdPartyAccount> {
+
 }

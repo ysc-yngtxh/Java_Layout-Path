@@ -5,7 +5,7 @@
 5. Java 17/SpringBoot 3.x 或更高版本的环境，最新版 V1.3.2（截止2024-09-02)
 
 Spring Authorization Server发展历程
- ![img](./img_1.png)
+ ![img](Custom-Authorization-Server/src/main/resources/static/img_1.png)
 
 OAuth2.1
 OAuth2.1对比 OAuth2.0 的区别

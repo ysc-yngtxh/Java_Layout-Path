@@ -1,10 +1,6 @@
 package com.example.service;
 
-import com.example.pojo.Data;
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
+import com.example.pojo.UseData;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -36,13 +32,13 @@ public class CacheService {
                condition = "#unitType != 'A'",
                unless = "#unitType == 'B'"
     )
-    public Data cacheable(String unitType, String unitId) {
-        return new Data(1L, "abc");
+    public UseData cacheable(String unitType, String unitId) {
+        return new UseData(1L, "abc");
     }
 
     // 添加 unless 属性，当满足从本地缓存中取值不存在(即为null)时，unless=true，即不执行方法体，直接返回 null。
     @Cacheable(value = "UnitCache", key = "#unitType+'-'+#unitId", unless = "#result == null")
-    public Data cacheable2(String unitType, String unitId) {
+    public UseData cacheable2(String unitType, String unitId) {
         return null;
     }
 
@@ -51,8 +47,8 @@ public class CacheService {
     @CachePut(value = "UnitCache",
               key = "#unitType + '-' + #unitId"
     )
-    public Data cachePut(String unitType, String unitId) {
-        return new Data(2L, "def");
+    public UseData cachePut(String unitType, String unitId) {
+        return new UseData(2L, "def");
     }
 
 
@@ -70,7 +66,7 @@ public class CacheService {
     // TODO @Caching：用于组合前三个注解，例如：
     @Caching(cacheable = @Cacheable("UnitCache"),
              evict = {@CacheEvict("UnitCache"), @CacheEvict(value = "UnitCache2", allEntries = true)})
-    public Data caching(Long id) {
-        return new Data(id, "sample data");
+    public UseData caching(Long id) {
+        return new UseData(id, "sample data");
     }
 }

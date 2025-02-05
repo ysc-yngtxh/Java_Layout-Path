@@ -1,12 +1,12 @@
 package com.example;
 
 import jakarta.annotation.Resource;
+import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.scripting.support.ResourceScriptSource;
@@ -32,9 +32,8 @@ class SpringRedisLockApplicationTests {
     @Test
     public void test1() {
         /**
-         * setIfAbsent(K key, V value)方法表示的是
-         * 如果Redis中不存在key=K1值，就添加一个key=K1的数据，并设置其value=V1，返回一个true
-         * 如果存在，那么就不进行设置value或者value值覆盖，并返回一个 false
+         * setIfAbsent(K key, V value)方法表示的是：
+         * 如果键原本不存在则设置键值对，返回 true；如果键已经存在，则不做任何操作并返回 false。
          */
         Boolean success = redisTemplate.opsForValue().setIfAbsent("K1", "V1");
         if (Boolean.TRUE.equals(success)) {
@@ -115,7 +114,7 @@ class SpringRedisLockApplicationTests {
             if (redisTemplate.hasKey("stock")) {
                 // 先判断库存是否充足
                 int stock = Integer.parseInt( redisTemplate.opsForValue().get("stock") );
-                if ( stock > 0 ) {
+                if (stock > 0) {
                     // 缓存中key为stock的库存进行自减
                     redisTemplate.opsForValue().decrement("stock");
                 }
@@ -123,7 +122,7 @@ class SpringRedisLockApplicationTests {
             // 判断当前线程通过 UUID的一个随机值是否还与我的锁值是相等的
             // 如果不相等，说明我的锁值过期了，释放了锁，后续线程获取到了新锁，且这个新锁的值随机，这才造成的不相等。
             // 因而不会进入 if判断中，避免去删除掉新锁，造成后续线程无锁执行
-            if (redisTemplate.opsForValue().get("K1") == value) {
+            if (Objects.equals(redisTemplate.opsForValue().get("K1"), value)) {
                 // 能执行到 if判断里，说明我的锁还未过期。所以删除掉当前线程锁，让后续线程得以执行
                 redisTemplate.delete("K1");
             }
@@ -140,7 +139,7 @@ class SpringRedisLockApplicationTests {
 
     /**
      * 上面的test3测试还是有缺陷：
-     * 虽然我们增加了锁值判断，但是if(redisTemplate.opsForValue().get("K1")==value)获取锁,判断值,删除锁这三个操作不是原子性操作
+     * 虽然我们增加了锁值判断，但是 if(Objects.equals(redisTemplate.opsForValue().get("K1"), value)) 获取锁,判断值,删除锁这三个操作不是原子性操作
      * 比如： A 线程去执行获取锁 redisTemplate.opsForValue().get("K1") 这一步，得到了锁值后并进行判断为true，
      *       还没执行if中的删除锁操作时，锁的过期时间到了。
      *       于是 B 线程就通过setIfAbsent()方法重新设置锁值，设置好了之后 A 线程再执行删除锁操作，

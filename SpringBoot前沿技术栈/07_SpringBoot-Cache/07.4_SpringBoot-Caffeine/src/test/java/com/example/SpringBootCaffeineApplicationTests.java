@@ -13,11 +13,9 @@ import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cache.caffeine.CaffeineCache;
 
 @SpringBootTest
 class SpringBootCaffeineApplicationTests {
@@ -30,11 +28,13 @@ class SpringBootCaffeineApplicationTests {
     @Test
     @SneakyThrows
     void test1() {
+        System.out.println("Step 0: Cache created");
         // 创建一个缓存实例
         Cache<String, String> cache = Caffeine.newBuilder()
                 .expireAfterWrite(1, TimeUnit.SECONDS)
                 .maximumSize(100)
                 .build();
+        System.out.println("Step 1: Cache created");
 
         // 往缓存里放一些数据
         cache.put("关键词1", "值1");
