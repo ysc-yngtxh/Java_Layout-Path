@@ -11,7 +11,7 @@ public class WarningConsumer {
 
     // 这里既然设置了备份交换机模式，那么程序就不走回退消息给生产者。所以回退的日志没打印
     @RabbitListener(queues = "warningQueue")
-    public void warning(Message message){
+    public void warning(Message message) {
         String msg = new String(message.getBody());
         log.info("备份队列报警发现不可用路由,其无法路由到的消息：{}", msg);
     }

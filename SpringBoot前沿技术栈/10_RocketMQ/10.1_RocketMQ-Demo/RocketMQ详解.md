@@ -4,7 +4,7 @@
    ![img_1](src/main/resources/static/img_1.png)
    ![img_2](src/main/resources/static/img_2.png)
 
-   ### 2、启动 RocketMQ
+   ### 2、启动 RocketMQ（注意：截止2025年2月7号，RocketMQ服务端服务需要在 JDK8版本下开启）
    > ##### 2.1、启动 Name Server 
    > ##### 进入RocketMQ解压路径：nohup sh bin/mqnamesrv & tail -f ~/logs/rocketmqlogs/namesrv.log  
    > ①、nohup 命令用于在后台运行程序，并忽略 SIGHUP（终端关闭）信号。这意味着即使终端关闭，程序仍然会继续运行。  
@@ -20,7 +20,28 @@
      ④、& 符号用于将前面的命令放入后台执行。  
      ⑤、tail -f ~/logs/rocketmqlogs/broker.log：是用于实时查看指定日志文件的最新内容。-f 参数表示持续监视文件，并实时输出新增的日志内容。
 
-   ### 3、RocketMQ可视化工具：rocketmq-dashboard
+   ### 3、关闭 RocketMQ
+   > ##### 2.1、关闭 Name Server 
+   > 方法一：直接杀死进程   
+   >> ①、找到 Name Server(mqnamesrv) 进程 ID(PID)：   
+   >>>     ps -ef | grep mqnamesrv   
+   >> ②、找到 mqnamesrv 进程的 PID 后，可以使用 kill 命令关闭 Name Server 进程(TERM 信号可以让进程有机会清理资源并完成当前正在处理的任务，从而优雅地关闭)：   
+   >>>     kill -TERM <PID>   
+   > 
+   > 方法二：直接运行 RocketMQ 提供的关闭脚本：   
+   >> sh bin/mqshutdown namesrv
+
+   > ##### 2.2、关闭 Broker
+   > 方法一：直接杀死进程
+   >> ①、找到 Broker(mqbroker) 进程 ID(PID)：    
+   >>>     ps -ef | grep mqbroker    
+   >> ②、找到 mqbroker 进程的 PID 后，可以使用 kill 命令关闭 Broker 进程(TERM 信号可以让进程有机会清理资源并完成当前正在处理的任务，从而优雅地关闭)：   
+   >>>     kill -TERM <PID>    
+   > 
+   > 方法二：直接运行 RocketMQ 提供的关闭脚本：    
+   >> sh bin/mqshutdown broker
+
+   ### 4、RocketMQ可视化工具：rocketmq-dashboard
    > 在GitHub上下载解压后，使用IDEA打开项目，进行可视化服务的相关配置。配置完后使用jar包方式运行。
 
    > ![img_5](src/main/resources/static/img_5.png)

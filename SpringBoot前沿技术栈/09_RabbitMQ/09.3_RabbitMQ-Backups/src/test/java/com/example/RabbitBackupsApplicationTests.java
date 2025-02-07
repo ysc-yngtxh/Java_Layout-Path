@@ -67,7 +67,7 @@ class RabbitBackupsApplicationTests {
 
     @Test
     public void test2() {
-        // RabbitTemplate只允许设置一个ConfirmCallback方法.现在我们设置了两个，执行会报错
+        // RabbitTemplate只允许设置一个ConfirmCallback方法。现在我们设置了两个，执行会报错
         // 解决方法：设置RabbitTemplate的作用域@Scope("prototype")，这样每次bean都是新的
         rabbitTemplate.setConfirmCallback(new RabbitTemplate.ConfirmCallback() {
             @Override
@@ -82,7 +82,7 @@ class RabbitBackupsApplicationTests {
         });
         // 第一个参数 交换机名称  第二个参数 routingKey 也就是路由key 第三个参数 消息
         // 填写正确的交换机名即可看见效果 如果想看见失败填写一个错误的交换机名称
-        rabbitTemplate.convertAndSend("fanoutExchange", "", "什么鬼");
+        rabbitTemplate.convertAndSend("fanoutExchange", "123", "什么鬼");
     }
 
 

@@ -1,5 +1,7 @@
 package com.example.config;
 
+import java.util.HashMap;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -10,11 +12,6 @@ import org.springframework.amqp.core.QueueBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 @Slf4j
 @Component
@@ -31,8 +28,8 @@ public class RabbitConfig {
     public Queue Orderqueue(){
         return QueueBuilder
                 .durable("orderQueue") // 设置持久化的队列名
-                .deadLetterExchange("simpleDeadExchange")    // 设置死信交换机
-                .deadLetterRoutingKey("simpleDeadRoutingKey")// 设置死信路由
+                .deadLetterExchange("simpleDeadExchange")     // 设置死信交换机
+                .deadLetterRoutingKey("simpleDeadRoutingKey")// 设置死信路由Key
                 .build();
     }
     @Bean
@@ -53,8 +50,8 @@ public class RabbitConfig {
     @Bean("integrationQueue")
     public Queue queue(){
         Map<String, Object> map = new HashMap<>(3);
-        map.put("x-dead-letter-exchange", "simpleDeadExchange");
-        map.put("x-dead-letter-routing-key", "simpleDeadRoutingKey");
+        map.put("x-dead-letter-exchange", "simpleDeadExchange");     // 设置死信交换机
+        map.put("x-dead-letter-routing-key", "simpleDeadRoutingKey");// 设置死信路由Key
         return new Queue("integrationQueue", true, false, false, map);
     }
     @Bean

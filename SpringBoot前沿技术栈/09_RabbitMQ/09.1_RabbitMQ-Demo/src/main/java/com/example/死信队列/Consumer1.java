@@ -13,6 +13,7 @@ import java.util.Map;
  * 正常队列消费者C1
  */
 public class Consumer1 {
+
     // 普通交换器名称
     public static final String NORMAL_EXCHANGE = "normal_exchange";
     // 普通队列名称

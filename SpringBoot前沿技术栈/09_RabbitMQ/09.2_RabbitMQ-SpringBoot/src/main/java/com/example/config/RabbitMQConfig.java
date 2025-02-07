@@ -63,7 +63,7 @@ public class RabbitMQConfig {
                 .build();
     }
 
-    // 配置一个普通队列和普通交换机的绑定
+    // 配置一个普通队列A和普通交换机的绑定
     @Bean
     public Binding directBindingA(@Qualifier("bootDirectExchange") DirectExchange directExchange,
                                   @Qualifier("bootDirectQueueA") Queue directQueueA){
@@ -76,7 +76,7 @@ public class RabbitMQConfig {
         */
     }
 
-    // 配置一个普通队列和普通交换机的绑定
+    // 配置一个普通队列B和普通交换机的绑定
     @Bean
     public Binding directBindingB(@Qualifier("bootDirectExchange") DirectExchange directExchange,
                                   @Qualifier("bootDirectQueueB") Queue directQueueB){
@@ -89,7 +89,7 @@ public class RabbitMQConfig {
         */
     }
 
-    // 配置一个普通队列和普通交换机的绑定
+    // 配置一个普通队列C和普通交换机的绑定
     @Bean
     public Binding directBindingC(@Qualifier("bootDirectExchange") DirectExchange directExchange,
                                   @Qualifier("bootDirectQueueC") Queue directQueueC){

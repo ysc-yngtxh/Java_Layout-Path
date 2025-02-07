@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
  * 生产者
  */
 public class Producer {
+
     // 普通交换器名称
     public static final String NORMAL_EXCHANGE = "normal_exchange";
 
