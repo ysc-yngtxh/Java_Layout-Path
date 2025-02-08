@@ -21,14 +21,15 @@ import java.util.UUID;
  * @dateTime 2023-10-21 18:09
  * @apiNote TODO 发送同步消息
  */
+// 加载特定的配置类或主类进行测试时，可以使用 classes 属性来指定。尤其是当你不需要加载整个应用程序上下文，或者需要自定义测试环境时。
 @SpringBootTest(classes = Demo1_SyncMessage.class)
 public class Demo1_SyncMessage {
 
     // 发送同步消息：这种可靠性同步地发送方式使用的比较广泛，比如：重要的消息通知，短信通知。
     @Test
     public void SyncMessage() throws Exception {
-        // 实例化消息生产者 -- 生产组(Sync_Group)
-        DefaultMQProducer producer = new DefaultMQProducer("Sync_Group");
+        // 实例化消息生产者 -- 生产组(Sync_Producer_Group)
+        DefaultMQProducer producer = new DefaultMQProducer("Sync_Producer_Group");
         producer.setNamesrvAddr("localhost:9876"); // 设置NameServer的地址
         // 启动Producer实例
         producer.start();
@@ -53,10 +54,10 @@ public class Demo1_SyncMessage {
 
     // 消费消息
     public static void main(String[] args) throws MQClientException {
-        // 实例化消息Push消费者 -- 消费组
-        DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("Sync_Group");
+        // 实例化消息Push消费者 -- 消费组(Sync_Comsumer_Group)【注意：消费分组不必与生产分组保持一致】
+        DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("Sync_Comsumer_Group");
         // 实例化Pull消费者，虽然API是过时的，但我们也需要去了解。
-        // DefaultMQPullConsumer pullConsumer = new DefaultMQPullConsumer("Sync_Group");
+        // DefaultMQPullConsumer pullConsumer = new DefaultMQPullConsumer("Sync_Producer_Group");
         // TODO
         //  1、Push是MQ主动推送消息给客户端
         //     优点：及时性好；

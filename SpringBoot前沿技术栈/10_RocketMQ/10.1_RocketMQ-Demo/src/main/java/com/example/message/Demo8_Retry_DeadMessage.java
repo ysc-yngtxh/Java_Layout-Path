@@ -39,8 +39,7 @@ public class Demo8_Retry_DeadMessage {
         for (int i = 0; i < 10; i++) {
             String MessageKey = UUID.randomUUID().toString();
             // 创建消息，并指定Topic，Tag和消息Key与消息体（Tag和消息Key不是必写参数）
-            Message msg = new Message("TopicRetry", "TagRetry", MessageKey, ("Hello RocketMQ " + i).getBytes(RemotingHelper.DEFAULT_CHARSET)
-            );
+            Message msg = new Message("TopicRetry", "TagRetry", MessageKey, ("Hello RocketMQ " + i).getBytes(RemotingHelper.DEFAULT_CHARSET));
             SendResult sendResult = producer.send(msg);
             System.out.printf("%s %n", sendResult);      // 通过sendResult返回消息是否成功送达
         }
@@ -50,7 +49,7 @@ public class Demo8_Retry_DeadMessage {
 
     // 消费消息
     public static void main(String[] args) throws MQClientException {
-        // 实例化消息Push消费者 -- 消费组
+        // 实例化消息Push消费者 -- 消费组【注意：消费分组不必与生产分组保持一致】
         DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("Retry_Dead_Group");
         pushConsumer.setNamesrvAddr("localhost:9876");
         pushConsumer.subscribe("TopicRetry", "*");

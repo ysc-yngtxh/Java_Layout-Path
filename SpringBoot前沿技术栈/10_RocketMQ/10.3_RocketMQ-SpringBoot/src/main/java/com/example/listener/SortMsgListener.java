@@ -13,10 +13,11 @@ import org.springframework.stereotype.Component;
  * @apiNote TODO 顺序消费监听器
  */
 @Component
-@RocketMQMessageListener(topic = "bootOrderlyTopic",  // 主题
-        consumerGroup = "Orderly-group",              // 消费者组
-        consumeMode = ConsumeMode.ORDERLY)            // 消费模式(并发模式，顺序模式)
-public class OrderlyMsgListener implements RocketMQListener<MessageExt> {
+@RocketMQMessageListener(
+        topic = "bootOrderlyTopic",         // 主题
+        consumerGroup = "springboot-orderly-group",    // 消费者组
+        consumeMode = ConsumeMode.ORDERLY)  // 消费模式(并发模式，顺序模式)
+public class SortMsgListener implements RocketMQListener<MessageExt> {
 
     @Override
     public void onMessage(MessageExt messageExt) {

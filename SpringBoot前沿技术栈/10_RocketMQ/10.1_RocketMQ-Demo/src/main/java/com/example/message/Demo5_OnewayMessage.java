@@ -44,7 +44,7 @@ public class Demo5_OnewayMessage {
 
     // 消费消息
     public static void main(String[] args) throws MQClientException {
-        // 实例化消息Push消费者 -- 消费组
+        // 实例化消息Push消费者 -- 消费组【注意：消费分组不必与生产分组保持一致】
         DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("Oneway_Group");
         // 设置NameServer的地址
         pushConsumer.setNamesrvAddr("localhost:9876");

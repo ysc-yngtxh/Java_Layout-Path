@@ -34,8 +34,7 @@ public class Demo7_SqlFilterMessage {
         producer.start();
         for (int i = 0; i < 10; i++) {
             // 创建消息，并指定Topic，Tag和消息体
-            Message msg = new Message("TopicSqlFilter", "TagSqlFilter", ("Hello RocketMQ " + i).getBytes(StandardCharsets.UTF_8)
-            );
+            Message msg = new Message("TopicSqlFilter", "TagSqlFilter", ("Hello RocketMQ " + i).getBytes(StandardCharsets.UTF_8));
             // TODO 发送消息时，通过putUserProperty来设置消息的属性
             msg.putUserProperty("a", String.valueOf(i));
             // 发送消息到一个Broker
@@ -49,12 +48,14 @@ public class Demo7_SqlFilterMessage {
 
     // 消费消息
     public static void main(String[] args) throws MQClientException {
-        // 实例化消费者 -- 消费组(SqlFilterConsumer)
+        // 实例化消费者 -- 消费组(SqlFilterConsumer)【注意：消费分组不必与生产分组保持一致】
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("SqlFilterConsumer");
         // 设置NameServer的地址
         consumer.setNamesrvAddr("localhost:9876");
         // TODO 订阅Topic 通过发送消息时设置的属性来进行过滤，使用SQL表达式筛选消息。
-        //      需要在broker.conf文件中添加属性 enablePropertyFilter=true；重启broker服务
+        //      需要在broker.conf文件中添加属性 enablePropertyFilter=true；
+        //      然后重新启动broker，并指定刚刚修改的conf配置文件
+        //      sh mqbroker -n localhost:9876 -c ../conf/broker.conf
         consumer.subscribe("TopicSqlFilter", MessageSelector.bySql("a between 0 and 3"));
         // pushConsumer.registerMessageListener() 注册消息监听器
         // MessageListenerConcurrently 并发模式，多线程的。相当于多线程去处理从broker拉取回来的消息

@@ -9,7 +9,6 @@ import com.example.utils.SnowFlakeUtils;
 import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
-import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.client.producer.TransactionMQProducer;
 import org.apache.rocketmq.common.message.Message;
@@ -37,17 +36,19 @@ public class RocketOrderServiceImpl extends ServiceImpl<RocketOrderMapper, Rocke
      * 添加订单（发送消息积分模块同步添加积分）
      **/
     @Override
-    public RocketOrder addOder(RocketOrder order) {
+    public RocketOrder addOrder(RocketOrder order) {
         order.setOrderId(SnowFlakeUtils.nextId());
         if (order.getMessageType() == 1) {
-            //普通消息
+            // 普通消息
             this.save(order);
             Message message = new Message("points", "default", JSON.toJSONString(order).getBytes());
             try {
                 SendResult sendResult = producer.send(message); // 同步消息
-                System.out.println("发送状态：" + sendResult.getSendStatus() +
+                System.out.println(
+                        "发送状态：" + sendResult.getSendStatus() +
                         ", 消息ID：" + sendResult.getMsgId() +
-                        ", 队列：" + sendResult.getMessageQueue().getQueueId());
+                        ", 队列："   + sendResult.getMessageQueue().getQueueId()
+                );
                // producer.sendOneway(message); // 单向消息
                // producer.send(message, new SendCallback() { // 异步消息
                //     @Override

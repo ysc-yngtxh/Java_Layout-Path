@@ -30,7 +30,7 @@ public class RocketOrderController {
      **/
     @PostMapping
     public Result addOrder(@RequestBody RocketOrder order) {
-        return Result.success(orderService.addOder(order));
+        return Result.success(orderService.addOrder(order));
     }
 
     /**

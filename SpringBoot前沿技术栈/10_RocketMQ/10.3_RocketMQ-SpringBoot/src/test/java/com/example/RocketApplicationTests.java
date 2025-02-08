@@ -40,7 +40,7 @@ class RocketApplicationTests {
             }
         });
 
-        // 3、单向消息
+        // 3、单向消息（只负责发送消息，不等待应答，不关心发送结果，如日志）
         rocketMQTemplate.sendOneWay("bootTestTopic", "我是bootTest的一个单向消息");
 
         // 4、延迟消息

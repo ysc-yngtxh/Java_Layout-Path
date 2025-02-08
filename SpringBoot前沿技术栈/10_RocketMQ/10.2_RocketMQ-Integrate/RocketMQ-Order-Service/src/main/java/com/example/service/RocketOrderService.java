@@ -10,5 +10,5 @@ import com.example.entity.RocketOrder;
  */
 public interface RocketOrderService extends IService<RocketOrder> {
 
-    RocketOrder addOder(RocketOrder order);
+    RocketOrder addOrder(RocketOrder order);
 }

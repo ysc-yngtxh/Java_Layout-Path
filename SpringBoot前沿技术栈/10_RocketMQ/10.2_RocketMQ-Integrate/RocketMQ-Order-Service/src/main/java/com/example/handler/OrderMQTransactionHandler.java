@@ -2,7 +2,6 @@ package com.example.handler;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.entity.RocketOrder;
-import com.example.mapper.RocketOrderMapper;
 import com.example.mq.annotation.MQHandlerActualizer;
 import com.example.mq.handler.MQTransactionHandler;
 import com.example.service.RocketOrderService;
@@ -24,7 +23,7 @@ public class OrderMQTransactionHandler implements MQTransactionHandler {
 
     @Override
     public LocalTransactionState executeLocalTransaction(Message message, Object o) {
-        //执行本地事务
+        // 执行本地事务
         LocalTransactionState state;
         try {
             String body = new String(message.getBody());
@@ -32,7 +31,7 @@ public class OrderMQTransactionHandler implements MQTransactionHandler {
             // 执行本地事务
             orderService.save(order);
             state = LocalTransactionState.COMMIT_MESSAGE;
-        }catch (Exception e){
+        } catch (Exception e){
             state = LocalTransactionState.ROLLBACK_MESSAGE;
         }
         return state;
@@ -46,9 +45,9 @@ public class OrderMQTransactionHandler implements MQTransactionHandler {
         RocketOrder tempOrder = JSONObject.parseObject(body, RocketOrder.class);
         // 如果数据存在，则事务提交成功
         RocketOrder order = orderService.getById(tempOrder.getOrderId());
-        if (order != null){
+        if (order != null) {
             state = LocalTransactionState.COMMIT_MESSAGE;
-        }else{
+        } else {
             state = LocalTransactionState.ROLLBACK_MESSAGE;
         }
         return state;

@@ -1,4 +1,6 @@
 rocketmq:
-  name-server: localhost:6789
+  # NameServer 地址，集群使用';'隔开
+  name-server: localhost:9876
   producer:
-    group: boot-producer-group
+    # 生产者组名称【注意：消费分组不必与生产分组保持一致】
+    group: springboot-producer-group

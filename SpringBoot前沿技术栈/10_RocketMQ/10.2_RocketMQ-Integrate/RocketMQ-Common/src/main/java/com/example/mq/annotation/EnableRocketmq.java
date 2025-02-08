@@ -1,6 +1,5 @@
 package com.example.mq.annotation;
 
-import com.example.mq.config.MQConfig;
 import com.example.mq.listener.MQTransactionListener;
 import com.example.mq.handler.impl.DefaultMQHandler;
 import com.example.mq.handler.impl.DefaultMQTransactionHandler;
