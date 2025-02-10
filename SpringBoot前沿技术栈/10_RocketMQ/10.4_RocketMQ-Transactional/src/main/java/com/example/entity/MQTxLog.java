@@ -8,8 +8,8 @@ import lombok.Data;
 
 /**
  * @author 游家纨绔
- * @dateTime 2025-02-08 21:56
- * @apiNote TODO
+ * @dateTime 2025-02-08 21:00
+ * @apiNote TODO RocketMQ事务日志表
  */
 @Data
 @Builder

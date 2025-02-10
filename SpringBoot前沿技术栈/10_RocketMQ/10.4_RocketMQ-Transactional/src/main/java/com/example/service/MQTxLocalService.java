@@ -15,11 +15,11 @@ import org.springframework.messaging.MessageHeaders;
 
 /**
  * @author 游家纨绔
- * @dateTime 2025-02-08 21:43
+ * @dateTime 2025-02-08 21:00
  * @apiNote TODO
  */
 @Slf4j
-@RocketMQTransactionListener
+@RocketMQTransactionListener // 该注解用于声明当前类是一个事务消息监听器，不能省略
 public class MQTxLocalService implements RocketMQLocalTransactionListener {
 
     @Autowired
@@ -38,7 +38,7 @@ public class MQTxLocalService implements RocketMQLocalTransactionListener {
         String transactionId = (String) messageHeaders.get(RocketMQHeaders.TRANSACTION_ID);
         log.info("【执行本地事务】消息体参数：transactionId = {}", transactionId);
 
-        // 执行带有事务注解的本地方法：增加用户余额+保存mq日志
+        // 执行带有事务注解的本地方法：增加用户余额 + 保存mq日志
         try {
             UserCharge userCharge = (UserCharge) obj;
             userService.addBalance(userCharge, transactionId);

@@ -5,8 +5,8 @@ import lombok.Data;
 
 /**
  * @author 游家纨绔
- * @dateTime 2025-02-08 21:46
- * @apiNote TODO
+ * @dateTime 2025-02-08 21:00
+ * @apiNote TODO 用户充值dto类
  */
 @Data
 public class UserCharge {

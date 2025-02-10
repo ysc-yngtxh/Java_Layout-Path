@@ -5,7 +5,7 @@ import com.example.entity.Credit;
 
 /**
  * @author 游家纨绔
- * @dateTime 2025-02-08 21:50
+ * @dateTime 2025-02-08 21:00
  * @apiNote TODO
  */
 public interface CreditMapper extends BaseMapper<Credit> {

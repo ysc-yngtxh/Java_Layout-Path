@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author 游家纨绔
- * @dateTime 2025-02-09 11:09
+ * @dateTime 2025-02-09 11:00
  * @apiNote TODO
  */
 @Data
@@ -46,13 +46,11 @@ public class Result<T> implements Serializable {
     public static <T> Result<T> failed() {
         return new Result<T>(500, "操作失败");
     }
-
-    public static <T> Result<T> failed(Integer code, String message, T date) {
-        return new Result<T>(code, message, date);
-    }
-
     public static <T> Result<T> failed(Integer code, String message) {
         return new Result<T>(code, message);
+    }
+    public static <T> Result<T> failed(Integer code, String message, T date) {
+        return new Result<T>(code, message, date);
     }
 }
 

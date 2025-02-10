@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author 游家纨绔
- * @dateTime 2025-02-08 21:43
- * @apiNote TODO
+ * @dateTime 2025-02-08 21:00
+ * @apiNote TODO RocketMQ监听，消费消息
  */
 @Slf4j
 @Component

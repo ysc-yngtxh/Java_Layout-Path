@@ -10,8 +10,8 @@ import lombok.Data;
 
 /**
  * @author 游家纨绔
- * @dateTime 2025-02-08 23:09
- * @apiNote TODO
+ * @dateTime 2025-02-08 23:00
+ * @apiNote TODO 用户表
  */
 @Data
 @Builder
