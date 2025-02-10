@@ -18,6 +18,7 @@
         <module>10.1_RocketMQ-Demo</module>
         <module>10.2_RocketMQ-Integrate</module>
         <module>10.3_RocketMQ-SpringBoot</module>
+        <module>10.4_RocketMQ-Transactional</module>
     </modules>
     <packaging>pom</packaging>
     <properties>

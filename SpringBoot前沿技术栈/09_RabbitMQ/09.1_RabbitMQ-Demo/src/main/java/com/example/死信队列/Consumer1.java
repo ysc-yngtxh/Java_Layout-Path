@@ -64,8 +64,20 @@ public class Consumer1 {
                     channel.basicAck(message.getEnvelope().getDeliveryTag(), false);
                 }
             };
-            // 第二个参数为false：开启手动应答
+
             channel.basicConsume(NORMAL_QUEUE, false, callback, consumer -> {});
+
+            /* 队列中的参数说明：
+             参数1：为当前消费者需要监听的队列名，队列名必须要与发送时的队列名完全一致，否则接收不到消息
+             参数2：为是否自动进行消息确认.true表示自动进行ACK，false表示手动ACK
+             参数3：消息传递回调（DeliverCallback）：用于定义当消息到达时应执行的操作。
+                   当你从RabbitMQ收到一条消息时，会触发这个回调。
+                   它包含一个方法 handle，该方法接受两个参数：consumerTag（消费者的标签）和 delivery（消息封装对象，包含消息体、属性、路由键等信息）。
+                   通过这个回调，你可以实现对消息的具体处理逻辑。
+             参数4：取消消费回调（CancelCallback）：用于定义当消费被意外取消时应执行的操作。
+                   例如，如果RabbitMQ服务器主动关闭了连接或通道，导致无法继续消费消息，则会触发这个回调。
+                   它允许你执行一些清理工作或者记录日志等操作。
+             */
         } catch (IOException e) {
             e.printStackTrace();
         }

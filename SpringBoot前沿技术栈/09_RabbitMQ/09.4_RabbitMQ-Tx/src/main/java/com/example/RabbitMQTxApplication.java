@@ -1,15 +1,13 @@
 package com.example;
 
-import com.example.mq.annotation.EnableRocketMQ;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@EnableRocketMQ
-public class OrderServiceApplication {
+public class RabbitMQTxApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(OrderServiceApplication.class, args);
+        SpringApplication.run(RabbitMQTxApplication.class, args);
     }
 
 }

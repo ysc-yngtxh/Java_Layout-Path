@@ -79,7 +79,7 @@ public class SendController {
         rabbitTemplate.convertAndSend("delayedExchange", "delayedRoutingKey", message, msg -> {
             // 发送消息的时候 延长时长
             // 死信队列的延迟是在队列中进行的，而基于插件的延迟队列是在交换机中实现的
-            msg.getMessageProperties().setDelay(delayTime);
+            msg.getMessageProperties().setDelayLong(Long.valueOf(delayTime));
             return msg;
         });
     }
