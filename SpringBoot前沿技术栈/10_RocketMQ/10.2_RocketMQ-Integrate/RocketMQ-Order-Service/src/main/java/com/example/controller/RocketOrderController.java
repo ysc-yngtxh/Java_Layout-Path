@@ -2,9 +2,9 @@ package com.example.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.entity.RocketOrder;
-import com.example.mapper.RocketOrderMapper;
 import com.example.service.RocketOrderService;
 import com.example.vo.Result;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +29,7 @@ public class RocketOrderController {
      * 新增订单
      **/
     @PostMapping
-    public Result addOrder(@RequestBody RocketOrder order) {
+    public Result<RocketOrder> addOrder(@RequestBody RocketOrder order) {
         return Result.success(orderService.addOrder(order));
     }
 
@@ -37,7 +37,7 @@ public class RocketOrderController {
      * 根据用户id查询订单列表
      **/
     @GetMapping("/{userId}")
-    public Result getOrders(@PathVariable Integer userId) {
+    public Result<List<RocketOrder>> getOrders(@PathVariable Integer userId) {
         QueryWrapper<RocketOrder> pointsQueryWrapper = new QueryWrapper<>();
         pointsQueryWrapper.lambda().eq(RocketOrder::getUserId, userId);
         return Result.success(orderService.list(pointsQueryWrapper));
