@@ -1,4 +1,4 @@
-package com.example.consumer;
+package com.example.listener;
 
 import com.rabbitmq.client.Channel;
 import java.text.SimpleDateFormat;
@@ -17,7 +17,7 @@ public class ConfirmConsumer {
     @RabbitListener(queues = "confirmDirectQueue")
     public void receiveDrivect(Message message, Channel channel){
         String msg = new String(message.getBody());
-        log.info("当前时间：{},消息确认队列接收到消息：{}"
+        log.info("当前时间：{},消息确认队列监听到消息：{}。准备消费～～～"
                 , new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(new Date())
                 , msg);
     }
@@ -27,7 +27,7 @@ public class ConfirmConsumer {
     @RabbitListener(queues = "deadQueue")
     public void receive(Message message, Channel channel){
         String msg = new String(message.getBody());
-        log.info("当前时间：{},死信队列接收到消息：{}"
+        log.info("当前时间：{},死信队列接收到消息：{}。准备消费～～～"
                 , new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(new Date())
                 , msg);
     }

@@ -52,7 +52,7 @@ public class ComsumerMQConfig {
         // TODO 设置Consumer第一次启动是从队列头部开始消费还是队列尾部开始消费,如果非第一次启动，那么按照上次消费的位置继续消费
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
         // TODO 设置消费模型，集群还是广播，默认为集群
-        //consumer.setMessageModel(MessageModel.CLUSTERING);
+        //listener.setMessageModel(MessageModel.CLUSTERING);
         // TODO 设置一次消费消息的条数，默认为1条
         consumer.setConsumeMessageBatchMaxSize(consumeMessageBatchMaxSize);
         try {

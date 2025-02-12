@@ -2,7 +2,6 @@ package com.example.controller;
 
 import com.example.domain.Student;
 import com.example.service.MyService;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;

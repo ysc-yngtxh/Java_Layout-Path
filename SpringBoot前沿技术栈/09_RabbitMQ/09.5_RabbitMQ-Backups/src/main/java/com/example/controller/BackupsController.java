@@ -35,6 +35,4 @@ public class BackupsController {
         // TODO 如果想让程序执行 returnedMessage()方法，先删除服务器里的 confirmExchange交换机(因为绑定过备份交换机，避免又走备份)
         //  然后删除 @Bean("confirmExchange")方法里的备份交换机配置。重新执行，即可实现退回消息
     }
-
-    // 还有一部分  RabbitMq 的 Demo 在 test 包里
 }

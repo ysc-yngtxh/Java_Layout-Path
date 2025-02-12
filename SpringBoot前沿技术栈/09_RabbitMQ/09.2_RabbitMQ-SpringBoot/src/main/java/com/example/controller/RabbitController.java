@@ -14,7 +14,7 @@ import java.util.Date;
 @Slf4j
 @RestController
 @RequestMapping("/ttl")
-public class SendController {
+public class RabbitController {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;

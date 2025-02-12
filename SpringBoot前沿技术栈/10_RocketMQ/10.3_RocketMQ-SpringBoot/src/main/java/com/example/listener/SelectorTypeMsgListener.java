@@ -16,12 +16,12 @@ import java.nio.charset.StandardCharsets;
 @Component
 @RocketMQMessageListener(
         topic = "bootTestTopic",                    // 主题
-        consumerGroup = "springboot-consumer-group", // 消费者组
+        consumerGroup = "springboot-listener-group", // 消费者组
         selectorType = SelectorType.TAG,            // 选择器类型(tag过滤模式)
         selectorExpression = "tagA || tagB")        // 只监听消息标签为 tagA 或 tagB 的消息
 // @RocketMQMessageListener(
 //         topic = "bootTestTopic",                     // 主题
-//         consumerGroup = "springboot-consumer-group", // 消费者组
+//         consumerGroup = "springboot-listener-group", // 消费者组
 //         selectorType = SelectorType.SQL92,           // 选择器类型(SQL92过滤模式)使用这种方式需要broker.conf中开启EnablePropertyFilter=true
 //         selectorExpression = "a in(3,5,7)")          // 只监听消息标签值为 (3,5,7) 的消息
 public class SelectorTypeMsgListener implements RocketMQListener<MessageExt> {

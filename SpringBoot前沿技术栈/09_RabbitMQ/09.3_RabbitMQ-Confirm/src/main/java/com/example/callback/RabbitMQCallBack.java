@@ -1,4 +1,4 @@
-package com.example.config;
+package com.example.callback;
 
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class RabbitCallBackConfig implements RabbitTemplate.ConfirmCallback, RabbitTemplate.ReturnsCallback {
-    // RabbitCallBackConfig 实现的是内部接口 ConfirmCallback 是交换机消息确认。ReturnCallback 是实现消息回退模式
+public class RabbitMQCallBack implements RabbitTemplate.ConfirmCallback, RabbitTemplate.ReturnsCallback {
+    // RabbitMQCallBack 实现的是内部接口 ConfirmCallback 是交换机消息确认。ReturnCallback 是实现消息回退模式
     // 通过实现 ConfirmCallback 接口，消息发送到 Exchange 后触发回调，确认是否正确到达 Exchange 中
     // 通过实现 ReturnCallback 接口，如果消息不可路由，通过其实现方法来让消息回退给生产者
 
@@ -42,19 +42,19 @@ public class RabbitCallBackConfig implements RabbitTemplate.ConfirmCallback, Rab
     // 注意：要想发布确认，不光要实现confirm方法，还需要在配置文件中spring.rabbitmq.publisher-confirm-type=correlated
     @Override
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
-        // CorrelationData correlationData这个是发送端convertAndSend自己发送的东西
+        // CorrelationData correlationData 这个是发送端convertAndSend自己发送的东西
         String id = correlationData != null ? correlationData.getId() : "";
         // ack是一个布尔值，表示消息是否被成功被交换机接收到了？
         if (ack) {
-            log.info("交换机在回调confirm()方法中收到Id为：{}的消息", id);
+            log.info("交换机在确认消息的回调confirm()方法中收到Id为：{}的消息", id);
         } else {
-            log.info("交换机在回调confirm()方法中还未收到Id为：{}的消息，由于原因:{}", id, cause);
+            log.info("交换机在确认消息的回调confirm()方法中还未收到Id为：{}的消息，由于原因:{}", id, cause);
         }
     }
 
     /**
      * 当消息传递过程中不可达目的地【队列】时将消息返回给生产者
-     * 只有不可达目的地【队列】的时候 ，才进行回退
+     * 只有不可达目的地【队列】的时候，才进行回退
      */
     @Override
     public void returnedMessage(ReturnedMessage returned) {

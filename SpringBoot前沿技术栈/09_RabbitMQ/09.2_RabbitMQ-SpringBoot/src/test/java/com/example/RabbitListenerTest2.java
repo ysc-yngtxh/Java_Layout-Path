@@ -17,9 +17,9 @@ import org.springframework.stereotype.Component;
 @Component
 @RabbitListener(bindings = {
         @QueueBinding(
-                exchange = @Exchange(value = "cym"),
-                key = {"cymKey"},
-                value = @Queue(value = "cym")
+                exchange = @Exchange(value = "rabbitExchange5"),
+                key = {"rabbitKey"},
+                value = @Queue(value = "rabbitQueue5")
         )
 })
 public class RabbitListenerTest2 {
