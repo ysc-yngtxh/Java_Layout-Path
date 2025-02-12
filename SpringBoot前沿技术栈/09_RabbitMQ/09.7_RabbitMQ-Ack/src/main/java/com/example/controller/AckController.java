@@ -18,10 +18,9 @@ public class AckController {
 
     @GetMapping("/ack/{message}")
     public void sendMsg(@PathVariable String message){
-        log.info("当前时间：{},发送一条消息给两个TTL队列：{}"
+        log.info("当前时间：{},发送一条消息给需要「手动确认消息」队列：{}"
                 , new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(new Date())
                 , message);
-        rabbitTemplate.convertAndSend("bootDirectExchange", "bootDirectRoutingKeyA", "消息来自ttl为10s的队列：" + message);
-        rabbitTemplate.convertAndSend("bootDirectExchange", "bootDirectRoutingKeyB", "消息来自ttl为40s的队列：" + message);
+        rabbitTemplate.convertAndSend("ackExchange", "ackRoutingKey", "消息来自ttl为10s的队列：" + message);
     }
 }

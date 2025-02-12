@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ${project.artifactId}
+    name: @project.artifactId@
 
   rabbitmq:
     host: localhost
@@ -19,7 +19,7 @@ spring:
     listener:
       simple:
         # 开启手动确认模式
-        # 消息确认方式，其有三种配置方式。分别是none、manual(手动ack) 和auto(自动ack) 默认auto
+        # 消息确认方式，其有三种配置方式。分别是none(不配置消息确认方式)、manual(手动ack) 和auto(自动ack) 默认auto
         acknowledge-mode: manual
         # 开启消息重试
         retry:

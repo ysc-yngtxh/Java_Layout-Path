@@ -12,13 +12,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RabbitMQConfig {
+public class BackupsConfig {
 
     // 交换机
-    @Bean("confirmExchange")
+    @Bean("backupsExchange")
     public DirectExchange confirmExchange(){
         return ExchangeBuilder
-                .directExchange("confirmExchange")
+                .directExchange("backupsExchange")
                 .durable(true)
                 // 以下两种写法都表示声明备用交换机。"alternate-exchange"为固定写法，"fanoutExchange"为备用交换机的名称
                 // .alternate("fanoutExchange")
@@ -26,15 +26,15 @@ public class RabbitMQConfig {
                 .build();
     }
     // 队列
-    @Bean("confirmQueue")
+    @Bean("backupsQueue")
     public Queue directQueue(){
-        return QueueBuilder.durable("confirmQueue").build();
+        return QueueBuilder.durable("backupsQueue").build();
     }
     // 绑定交换机和队列
     @Bean
-    public Binding queueBinding(@Qualifier("confirmExchange") DirectExchange directExchange,
-                                @Qualifier("confirmQueue") Queue directQueue){
-        return BindingBuilder.bind(directQueue).to(directExchange).with("confirmRoutingKey");
+    public Binding queueBinding(@Qualifier("backupsExchange") DirectExchange backupsExchange,
+                                @Qualifier("backupsQueue") Queue backupsQueue){
+        return BindingBuilder.bind(backupsQueue).to(backupsExchange).with("backupsRoutingKey");
     }
 
 

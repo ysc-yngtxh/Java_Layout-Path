@@ -232,8 +232,10 @@
              <include>##/#.xml</include>
            </includes>
            <!--Maven 提供了一种过滤机制，这种机制能够在资源文件被复制到目标目录的同时，
+               决定是否将 <directory> 指定目录下的文件中的引用（@xxx@）进行参数替换。并且这个时机是先于 compile 的一个阶段。
                当 filtering=true 时替换资源文件中的占位符，
-               当 filtering=false 时不进行占位符的替换。-->
+               当 filtering=false 时不进行占位符的替换。
+            -->
            <filtering>false</filtering>
          </resource>
        </resources>

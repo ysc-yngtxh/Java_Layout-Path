@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BackupsConsumer {
 
-    @RabbitListener(queues = "confirmQueue")
+    @RabbitListener(queues = "backupsQueue")
     public void sendMessage(Message message) {
         String msg = new String(message.getBody());
         log.info("正常队列接收到的消息：{}", msg);
