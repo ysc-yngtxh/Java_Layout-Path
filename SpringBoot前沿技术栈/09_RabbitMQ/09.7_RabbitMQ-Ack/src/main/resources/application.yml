@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: ${project.artifactId}
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+    # 开启发布确认模式
+    publisher-confirm-type: correlated
+    # 开启消息不可达队列
+    template:
+      mandatory: true
+    # 开启 ReturnsCallback 监听器来监听 mandatory(消息不可达队列) 返回的消息，如果有返回消息则执行 returnedMessage()
+    publisher-returns: true
+
+    listener:
+      simple:
+        # 开启手动确认模式
+        # 消息确认方式，其有三种配置方式。分别是none、manual(手动ack) 和auto(自动ack) 默认auto
+        acknowledge-mode: manual
+        # 开启消息重试
+        retry:
+          enabled: true
+        # 消费者最小并发数
+        concurrency: 5
+        # 消费者最大并发数
+        max-concurrency: 10
+        # 每次消费消息的数量
+        prefetch: 1
+        # 监听器抛出异常而拒绝的消息是否被重新放回队列  true表示会重新放回队列，false表示不会放回队列
+        default-requeue-rejected: false

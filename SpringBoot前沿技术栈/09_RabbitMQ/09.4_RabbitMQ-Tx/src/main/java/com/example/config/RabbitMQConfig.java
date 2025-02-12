@@ -38,13 +38,13 @@ public class RabbitMQConfig {
 
     // 配置一个普通队列和普通交换机的绑定
     @Bean
-    public Binding directBindingC(@Qualifier("txDirectExchange") DirectExchange directExchange,
-                                  @Qualifier("txDirectQueue") Queue directQueue) {
-        return BindingBuilder.bind(directQueue).to(directExchange).with("txDirectRoutingKey");
+    public Binding directBindingC(@Qualifier("txDirectExchange") DirectExchange txDirectExchange,
+                                  @Qualifier("txDirectQueue") Queue txDirectQueue) {
+        return BindingBuilder.bind(txDirectQueue).to(txDirectExchange).with("txDirectRoutingKey");
         /*
-           BindingBuilder.bind(directQueue)：指定队列
-           to(directExchange)：to英语翻译为到，达。所以这句话的意思是指定队列到交换机
-           with("bootDirectRoutingKey")：根据routingKey的值来绑定队列和交换机
+           BindingBuilder.bind(txDirectQueue)：指定队列
+           to(txDirectExchange)：to英语翻译为到，达。所以这句话的意思是指定队列到交换机
+           with("txDirectRoutingKey")：根据routingKey的值来绑定队列和交换机
         */
     }
 }

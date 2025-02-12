@@ -1,0 +1,27 @@
+package com.example.controller;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+@Slf4j
+@RestController
+public class AckController {
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    @GetMapping("/ack/{message}")
+    public void sendMsg(@PathVariable String message){
+        log.info("当前时间：{},发送一条消息给两个TTL队列：{}"
+                , new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(new Date())
+                , message);
+        rabbitTemplate.convertAndSend("bootDirectExchange", "bootDirectRoutingKeyA", "消息来自ttl为10s的队列：" + message);
+        rabbitTemplate.convertAndSend("bootDirectExchange", "bootDirectRoutingKeyB", "消息来自ttl为40s的队列：" + message);
+    }
+}

@@ -31,13 +31,13 @@ public class RabbitMQConfig {
     }
     // 配置一个普通队列和普通交换机的绑定
     @Bean
-    public Binding directBindingC(@Qualifier("confirmDirectExchange") DirectExchange directExchange,
-                                  @Qualifier("confirmDirectQueue") Queue directQueue) {
-        return BindingBuilder.bind(directQueue).to(directExchange).with("confirmDirectRoutingKey");
+    public Binding directBindingC(@Qualifier("confirmDirectExchange") DirectExchange confirmDirectExchange,
+                                  @Qualifier("confirmDirectQueue") Queue confirmDirectQueue) {
+        return BindingBuilder.bind(confirmDirectQueue).to(confirmDirectExchange).with("confirmDirectRoutingKey");
         /*
-           BindingBuilder.bind(directQueue)：指定队列
-           to(directExchange)：to英语翻译为到，达。所以这句话的意思是指定队列到交换机
-           with("bootDirectRoutingKey")：根据routingKey的值来绑定队列和交换机
+           BindingBuilder.bind(confirmDirectQueue)：指定队列
+           to(confirmDirectExchange)：to英语翻译为到，达。所以这句话的意思是指定队列到交换机
+           with("confirmDirectRoutingKey")：根据routingKey的值来绑定队列和交换机
         */
     }
 
@@ -54,12 +54,12 @@ public class RabbitMQConfig {
     }
     // 配置一个死信队列和死信交换机的绑定
     @Bean
-    public Binding deadBinding(@Qualifier("deadExchange") DirectExchange directExchange,
-                               @Qualifier("deadQueue") Queue directQueue) {
-        return BindingBuilder.bind(directQueue).to(directExchange).with("deadRoutingKey");
+    public Binding deadBinding(@Qualifier("deadExchange") DirectExchange deadExchange,
+                               @Qualifier("deadQueue") Queue deadQueue) {
+        return BindingBuilder.bind(deadQueue).to(deadExchange).with("deadRoutingKey");
         /*
-           BindingBuilder.bind(directQueue)：指定队列
-           to(directExchange)：to英语翻译为到，达。所以这句话的意思是指定队列到交换机
+           BindingBuilder.bind(deadQueue)：指定队列
+           to(deadExchange)：to英语翻译为到，达。所以这句话的意思是指定队列到交换机
            with("deadRoutingKey")：根据routingKey的值来绑定队列和交换机
         */
     }
