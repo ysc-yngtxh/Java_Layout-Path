@@ -17,7 +17,7 @@ public class TxController {
     private RabbitTemplate rabbitTemplate;
 
     // 事务机制的使用姿势，看起来和消息确认(comfirm模式)差不多，无非是需要添加一个@Transactional注解罢了
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @GetMapping("/tx/{message}")
     public void sendMsg(@PathVariable String message){
         CorrelationData correlationData1 = new CorrelationData("1");

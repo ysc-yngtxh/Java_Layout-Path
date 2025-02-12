@@ -102,25 +102,22 @@ public class RabbitMQConfig {
         */
     }
 
+
     // 配置一个Direct类型的死信交换机
     @Bean("deadExchange")
     public DirectExchange deadExchange(){
         return new DirectExchange("deadExchange", true, false);
     }
-
     // 配置一个死信队列
     @Bean("deadQueue")
     public Queue deadQueue(){
         return new Queue("deadQueue");
     }
-
     // 配置一个死信队列和死信交换机的绑定
     @Bean
     public Binding deadBinding(@Qualifier("deadExchange") DirectExchange directExchange,
                                @Qualifier("deadQueue") Queue directQueue){
-
         return BindingBuilder.bind(directQueue).to(directExchange).with("deadRoutingKey");
-
         /*
            BindingBuilder.bind(directQueue)：指定队列
            to(directExchange)：to英语翻译为到，达。所以这句话的意思是指定队列到交换机

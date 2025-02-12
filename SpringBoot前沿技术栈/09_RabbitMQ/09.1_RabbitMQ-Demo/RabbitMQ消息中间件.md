@@ -107,26 +107,35 @@
           死信队列的延迟是在队列中进行的，而基于插件的延迟队列是在交换机中实现的
 
 ## 四、消息可靠性投递
-RabbitMQ提供transaction和conﬁrm模式来确保生产者不丢消息，但是transaction模式性能较差，一般不使用。
-事务机制：发送消息前，开启事务（channel.txSelect()）,然后发送消息，如果发送过程中出现什么异常，
-事务就会回滚（channel.txRollback()）,如果发送成功则提交事务（channel.txCommit()）。
-这种方式有个缺点：吞吐量下降；
-
-事务实现
-● channel.txSelect(): 将当前信道设置成事务模式
-● channel.txCommit(): 用于提交事务
-● channel.txRollback(): 用于回滚事务
-
-通过事务实现机制，只有消息成功被rabbitmq服务器接收，事务才能提交成功，否则便可在捕获异常之后进行回滚，
-然后进行消息重发，但是事务非常影响rabbitmq的性能。还有就是事务机制是阻塞的过程，只有等待服务器回应之后才会处理下一条消息
-
-conﬁrm模式用的居多
-一旦channel进入conﬁrm模式，所有在该信道上发布的消息都将会被指派一个唯一的ID（从1开始），一旦消息被投递到所有匹配的队列之后；rabbitMQ就会发送一个ACK给生产者（包含消息的唯一ID），这就使得生产者知道消息已经正确到达目的队列了；如果rabbitMQ没能处理该消息，则会发送一个Nack消息给你，你可以进行重试操作。
-confirm方式有三种模式：普通confirm模式、批量confirm模式、异步confirm模式
-channel.confirmSelect(): 将当前信道设置成了confirm模式
-普通confirm模式
-每发送一条消息，就调用waitForConfirms()方法，等待服务端返回Ack或者nack消息
-
+    消息推送存在四种情况：
+       ①、消息推送到server，但是在server里找不到交换机
+       ②、消息推送到server，找到交换机了，但是没找到队列
+       ③、消息推送到server，交换机和队列啥都没找到
+       ④、消息推送成功
+    
+    RabbitMQ提供了消息确认机制，生产者发送消息到服务器，服务器接收到消息后会给生产者一个应答，告诉生产者消息是否发送成功。
+    RabbitMQ提供transaction和conﬁrm模式来确保生产者不丢消息，但是transaction模式性能较差，一般不使用。
+    
+    消息确认机制有两种：事务机制和confirm模式
+    事务机制：发送消息前，开启事务（channel.txSelect()）,然后发送消息，如果发送过程中出现什么异常，
+    事务就会回滚（channel.txRollback()）,如果发送成功则提交事务（channel.txCommit()）。
+    这种方式有个缺点：吞吐量下降；
+    
+    事务实现
+    ● channel.txSelect(): 将当前信道设置成事务模式
+    ● channel.txCommit(): 用于提交事务
+    ● channel.txRollback(): 用于回滚事务
+    
+    通过事务实现机制，只有消息成功被rabbitmq服务器接收，事务才能提交成功，否则便可在捕获异常之后进行回滚，
+    然后进行消息重发，但是事务非常影响rabbitmq的性能。还有就是事务机制是阻塞的过程，只有等待服务器回应之后才会处理下一条消息
+    
+    conﬁrm模式用的居多
+    一旦channel进入conﬁrm模式，所有在该信道上发布的消息都将会被指派一个唯一的ID（从1开始），一旦消息被投递到所有匹配的队列之后；rabbitMQ就会发送一个ACK给生产者（包含消息的唯一ID），这就使得生产者知道消息已经正确到达目的队列了；如果rabbitMQ没能处理该消息，则会发送一个Nack消息给你，你可以进行重试操作。
+    confirm方式有三种模式：普通confirm模式、批量confirm模式、异步confirm模式
+    channel.confirmSelect(): 将当前信道设置成了confirm模式
+    普通confirm模式
+    每发送一条消息，就调用waitForConfirms()方法，等待服务端返回Ack或者nack消息
+    
     1、在生产环境中由于一些不明原因，导致 rabbitmq 重启，在 RabbitMQ 重启期间生产者消息投递失败， 导致消息丢失，需要手动处理和恢复。
        于是，我们开始思考，如何才能进行 RabbitMQ 的消息可靠投递呢？ 特别是在这样比较极端的情况，RabbitMQ 集群不可用的时候，
        无法投递的消息该如何处理呢？
