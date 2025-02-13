@@ -20,7 +20,8 @@
         <module>09.3_RabbitMQ-Confirm</module>
         <module>09.4_RabbitMQ-Tx</module>
         <module>09.5_RabbitMQ-Backups-Priority</module>
-        <module>09.7_RabbitMQ-Ack</module>
+        <module>09.6_RabbitMQ-Ack</module>
+        <module>09.7_RabbitMQ-DynamicListener</module>
         <module>09.8_SpringBoot-RabbitMQ-Redis-Retry</module>
     </modules>
     <packaging>pom</packaging>

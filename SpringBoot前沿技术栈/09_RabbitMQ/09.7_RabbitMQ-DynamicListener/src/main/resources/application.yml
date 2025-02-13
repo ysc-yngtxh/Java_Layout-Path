@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: @project.artifactId@
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    addresses: localhost:5672
+    virtual-host: /
