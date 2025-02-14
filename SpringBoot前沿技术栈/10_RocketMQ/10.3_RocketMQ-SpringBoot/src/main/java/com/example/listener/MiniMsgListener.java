@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
  */
 @Component
 @RocketMQMessageListener(
-        topic = "bootTestTopic",                    // 主题
+        topic = "bootTestTopic",                     // 主题
         consumerGroup = "springboot-listener-group") // 消费者组
 public class MiniMsgListener implements RocketMQListener<MessageExt> {
 

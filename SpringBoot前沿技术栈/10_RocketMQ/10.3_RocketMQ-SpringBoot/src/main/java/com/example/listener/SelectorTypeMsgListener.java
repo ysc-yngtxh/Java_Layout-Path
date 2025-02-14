@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
  */
 @Component
 @RocketMQMessageListener(
-        topic = "bootTestTopic",                    // 主题
+        topic = "bootTestTopic",                     // 主题
         consumerGroup = "springboot-listener-group", // 消费者组
         selectorType = SelectorType.TAG,            // 选择器类型(tag过滤模式)
         selectorExpression = "tagA || tagB")        // 只监听消息标签为 tagA 或 tagB 的消息

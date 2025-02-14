@@ -14,13 +14,14 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 @Configuration
 public class RabbitConfig {
+
     /**
      * 初始化连接工厂
-     * @param addresses
-     * @param userName
-     * @param password
-     * @param vhost
-     * @return
+     * @param addresses RabbitMQ服务地址
+     * @param userName 用户名
+     * @param password 密码
+     * @param vhost 虚拟主机
+     * @return ConnectionFactory
      */
     @Bean
     public ConnectionFactory connectionFactory(@Value("${spring.rabbitmq.addresses}") String addresses,
@@ -37,21 +38,21 @@ public class RabbitConfig {
 
     /**
      * 重新实例化 RabbitAdmin 操作类
-     * @param connectionFactory
-     * @return
+     * @param connectionFactory 连接工厂
+     * @return RabbitAdmin
      */
     @Bean
-    public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory){
+    public RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {
         return new RabbitAdmin(connectionFactory);
     }
 
     /**
      * 重新实例化 RabbitTemplate 操作类
-     * @param connectionFactory
-     * @return
+     * @param connectionFactory 连接工厂
+     * @return RabbitTemplate
      */
     @Bean
-    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory){
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
         RabbitTemplate rabbitTemplate=new RabbitTemplate(connectionFactory);
         // 数据转换为json存入消息队列
         rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
@@ -60,10 +61,10 @@ public class RabbitConfig {
 
     /**
      * 将 RabbitUtil 操作工具类加入IOC容器
-     * @return
+     * @return RabbitUtil
      */
     @Bean
-    public RabbitUtil rabbitUtil(){
+    public RabbitUtil rabbitUtil() {
         return new RabbitUtil();
     }
 }

@@ -14,11 +14,11 @@ import org.springframework.context.annotation.Configuration;
 public class StaticConsumeListener {
 
     /**
-     * 监听指定队列，名称：rabbitQueue1
+     * 监听指定队列，名称：rabbitQueue3
      * @param message 消息内容
      * @param channel 信道
      */
-    @RabbitListener(queues = "rabbitQueue1")
+    @RabbitListener(queues = "rabbitQueue2")
     public void consume(Message message, Channel channel) {
         log.info("StaticConsumeListener，收到消息: {}", message.toString());
     }

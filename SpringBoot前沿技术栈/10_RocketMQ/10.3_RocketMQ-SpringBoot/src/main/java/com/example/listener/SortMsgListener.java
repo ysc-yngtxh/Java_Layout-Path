@@ -14,9 +14,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @RocketMQMessageListener(
-        topic = "bootOrderlyTopic",         // 主题
-        consumerGroup = "springboot-orderly-group",    // 消费者组
-        consumeMode = ConsumeMode.ORDERLY)  // 消费模式(并发模式，顺序模式)
+        topic = "bootOrderlyTopic",                  // 主题
+        consumerGroup = "springboot-orderly-group",  // 消费者组
+        consumeMode = ConsumeMode.ORDERLY)           // 消费模式(并发模式，顺序模式)
 public class SortMsgListener implements RocketMQListener<MessageExt> {
 
     @Override

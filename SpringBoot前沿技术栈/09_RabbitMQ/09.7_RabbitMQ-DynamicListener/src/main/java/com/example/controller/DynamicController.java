@@ -28,7 +28,7 @@ public class DynamicController {
     /**
      * 添加队列到监听器
      */
-    @PostMapping("/addQueue")
+    @PostMapping("/addQueueToListener")
     public void addQueue(@RequestBody ConsumerInfo consumerInfo) {
         boolean existQueue = rabbitUtil.existQueue(consumerInfo.getQueueName());
         if(!existQueue) {
@@ -43,7 +43,7 @@ public class DynamicController {
     /**
      * 移除正在监听的队列
      */
-    @PostMapping("removeQueue")
+    @PostMapping("removeQueueFromListener")
     public void removeQueue(@RequestBody ConsumerInfo consumerInfo) {
         // 消费mq消息的类
         container.removeQueueNames(consumerInfo.getQueueName());
