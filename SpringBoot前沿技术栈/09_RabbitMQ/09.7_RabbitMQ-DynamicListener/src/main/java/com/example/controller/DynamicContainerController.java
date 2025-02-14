@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 动态添加、移除监听队列到监听容器中
+ */
 @Slf4j
 @RestController
-public class DynamicController {
+public class DynamicContainerController {
 
     @Autowired
     private SimpleMessageListenerContainer container;

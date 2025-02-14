@@ -20,7 +20,8 @@ public class RabbitUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(RabbitUtil.class);
 
-    // TODO RabbitAdmin的作用是创建、删除、绑定队列、交换机、绑定关系。
+    // TODO RabbitAdmin 的作用是创建、删除、绑定队列、交换机、绑定关系。
+    //      注意：RabbitAdmin 需要手动配置注入到 Spring IOC容器中，才能使用
     @Autowired
     private RabbitAdmin rabbitAdmin;
 

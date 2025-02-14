@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 public class StaticConsumeListener {
 
     /**
-     * 监听指定队列，名称：rabbitQueue3
+     * 监听指定队列，名称：rabbitQueue2
      * @param message 消息内容
      * @param channel 信道
      */

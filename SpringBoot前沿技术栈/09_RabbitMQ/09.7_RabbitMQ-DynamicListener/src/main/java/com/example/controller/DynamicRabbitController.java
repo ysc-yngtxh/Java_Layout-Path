@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * rabbitMQ管理操作控制层
+ * 通过封装好的工具类 RabbitUtil(RabbitAdmin) 实现动态创建、删除交换器、队列、绑定关系。
+ * 不需要事先配置好交换器、队列、绑定关系等，可以在运行时动态创建、删除。
  */
 @RestController
-public class RabbitController {
+public class DynamicRabbitController {
 
     @Autowired
     private RabbitUtil rabbitUtil;

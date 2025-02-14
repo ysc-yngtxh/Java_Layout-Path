@@ -14,15 +14,18 @@ import org.springframework.context.annotation.Configuration;
 public class DynamicConsumeListener {
 
     /**
-     * 使用SimpleMessageListenerContainer实现动态监听
+     * 消息监听容器。
+     * 使用 SimpleMessageListenerContainer 实现动态监听
      * @param connectionFactory 连接工厂
-     * @return SimpleMessageListenerContainer 实例
      */
     @Bean
     public SimpleMessageListenerContainer messageListenerContainer(ConnectionFactory connectionFactory){
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(connectionFactory);
         container.setMessageListener(message -> {
             log.info("ConsumerMessageListen，动态监听器收到消息: {}", message.toString());
+        });
+        container.setErrorHandler(throwable -> {
+            log.error("ConsumerMessageListen，消息监听发生错误: {}", throwable.getMessage());
         });
         return container;
     }
