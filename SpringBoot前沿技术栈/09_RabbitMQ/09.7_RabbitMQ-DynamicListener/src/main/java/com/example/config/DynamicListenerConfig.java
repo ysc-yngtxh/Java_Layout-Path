@@ -2,11 +2,16 @@ package com.example.config;
 
 import com.example.utils.RabbitUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -77,5 +82,28 @@ public class DynamicListenerConfig {
     @Bean
     public RabbitUtil rabbitUtil() {
         return new RabbitUtil();
+    }
+
+
+    // 配置一个Direct类型的死信交换机
+    @Bean("deadExchange")
+    public DirectExchange deadExchange(){
+        return new DirectExchange("deadExchange", true, false);
+    }
+    // 配置一个死信队列
+    @Bean("deadQueue")
+    public Queue deadQueue(){
+        return new Queue("deadQueue");
+    }
+    // 配置一个死信队列和死信交换机的绑定
+    @Bean
+    public Binding deadBinding(@Qualifier("deadExchange") DirectExchange directExchange,
+                               @Qualifier("deadQueue") Queue directQueue){
+        return BindingBuilder.bind(directQueue).to(directExchange).with("deadRoutingKey");
+        /*
+           BindingBuilder.bind(directQueue)：指定队列
+           to(directExchange)：to英语翻译为到，达。所以这句话的意思是指定队列到交换机
+           with("deadRoutingKey")：根据routingKey的值来绑定队列和交换机
+        */
     }
 }

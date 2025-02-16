@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Slf4j
 @Configuration
-public class StaticConsumeListener {
+public class StaticListener {
 
     /**
      * 监听指定队列，名称：rabbitQueue2
@@ -20,6 +20,6 @@ public class StaticConsumeListener {
      */
     @RabbitListener(queues = "rabbitQueue2")
     public void consume(Message message, Channel channel) {
-        log.info("StaticConsumeListener，收到消息: {}", message.toString());
+        log.info("StaticListener，收到消息: {}", message.toString());
     }
 }

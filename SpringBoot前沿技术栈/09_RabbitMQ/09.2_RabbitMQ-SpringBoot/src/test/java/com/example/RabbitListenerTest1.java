@@ -23,7 +23,7 @@ public class RabbitListenerTest1 {
 
     // 监听消息中间件的队列rabbitQueue1。第二个参数是排外，如果排外了则这个队列只允许一个消费者监听。第三个参数是持久化
     // AMQP 默认消息是持久化的，但只有在队列也是持久化时才有作用
-    @RabbitListener(queuesToDeclare = @Queue(value = "rabbitQueue1", exclusive = "false", durable = "false"))
+    @RabbitListener(queuesToDeclare = @Queue(value = "rabbitQueue1", exclusive = "false", durable = "true"))
     public void receive1(String message){
         System.out.println("message = " + message);
     }
@@ -31,14 +31,14 @@ public class RabbitListenerTest1 {
 
     // 监听消息中间件的队列rabbitQueue2。第二个参数是排外，如果排外了则这个队列只允许一个消费者监听。第三个参数是持久化
     // AMQP 默认消息是持久化的，但只有在队列也是持久化时才有作用
-    @RabbitListener(queuesToDeclare = @Queue(value = "rabbitQueue2", exclusive = "false", durable = "false"))
+    @RabbitListener(queuesToDeclare = @Queue(value = "rabbitQueue2", exclusive = "false", durable = "true"))
     public void receive2(String message){
         System.out.println("message1 = " + message);
     }
 
     // 监听消息中间件的队列rabbitQueue2 。第二个参数是排外，如果排外了则这个队列只允许一个消费者监听。第三个参数是持久化
     // AMQP 默认消息是持久化的，但只有在队列也是持久化时才有作用
-    @RabbitListener(queuesToDeclare = @Queue(value = "rabbitQueue2", exclusive = "false", durable = "false"))
+    @RabbitListener(queuesToDeclare = @Queue(value = "rabbitQueue2", exclusive = "false", durable = "true"))
     public void receive3(String message){
         System.out.println("message2 = " + message);
     }
@@ -77,7 +77,7 @@ public class RabbitListenerTest1 {
             )
     })
     public void receive6(String message){
-        System.out.println("message6 = "+message);
+        System.out.println("message = "+message);
     }
 
 
