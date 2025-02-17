@@ -29,8 +29,7 @@ public class DynamicListener {
     private RabbitTemplate rabbitTemplate;
 
     /**
-     * 消息监听容器。
-     * 使用 SimpleMessageListenerContainer 实现动态监听
+     * 消息监听容器。使用 SimpleMessageListenerContainer 实现动态监听
      * @param connectionFactory 连接工厂
      */
     @Bean

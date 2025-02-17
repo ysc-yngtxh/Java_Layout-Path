@@ -25,7 +25,8 @@ public class RabbitMQConfig {
         map.put("x-dead-letter-exchange", "deadExchange");      // 设置死信交换机
         map.put("x-dead-letter-routing-key", "deadRoutingKey"); // 设置死信routing-key
         map.put("x-message-ttl", 10000); // 设置消息过期时间
-        // map.put("x-max-length", 10);  // 设置消息队列的长度
+        // map.put("x-queue-mode", "lazy"); // 设置为惰性队列
+        // map.put("x-max-length", 10);     // 设置消息队列的长度
         // 参数1、队列名称  2、是否持久化  3、是否排外  4、如果队列空了是否自动删除  5、死信设置
         return new Queue("bootDirectQueueA", true, false, false, map);
     }
@@ -45,6 +46,7 @@ public class RabbitMQConfig {
                 .withArgument("x-dead-letter-routing-key", "deadRoutingKey")
                 // 消息过期时间设置 超出时间未消费成为死信
                 .withArgument("x-message-ttl", 40000)
+                // .withArgument("x-queue-mode", "lazy") 设置为惰性队列
                 // .exclusive() 是否排外
                 // .autoDelete() 如果队列空了是否自动删除
                 .build();
@@ -60,6 +62,7 @@ public class RabbitMQConfig {
                 .deadLetterExchange("deadExchange")  // 死信交换机声明
                 .deadLetterRoutingKey("deadRoutingKey") // 死信消息的路由key
                 // .ttl(40000) // 消息过期时间设置 超出时间未消费成为死信
+                // .lazy() // 设置为惰性队列
                 .build();
     }
 
