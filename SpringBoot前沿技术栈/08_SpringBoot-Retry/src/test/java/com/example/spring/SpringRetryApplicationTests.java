@@ -44,7 +44,9 @@ class SpringRetryApplicationTests {
         // 构建重试模板实列
         RetryTemplate retryTemplate = new RetryTemplate();
 
+        // 设置重试模板的重试策略
         retryTemplate.setRetryPolicy(retryPolicy);
+        // 设置重试模板的重试回退策略
         retryTemplate.setBackOffPolicy(backOffPolicy);
 
         Boolean execute = retryTemplate.execute(

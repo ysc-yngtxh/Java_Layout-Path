@@ -25,7 +25,7 @@ public class RabbitMqConfirmExample {
             // 发布消息到队列
             channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
 
-            // 等待确认
+            // waitForConfirms() 方法等待确认
             if (channel.waitForConfirms()) {
                 System.out.println("Message sent successfully");
             } else {

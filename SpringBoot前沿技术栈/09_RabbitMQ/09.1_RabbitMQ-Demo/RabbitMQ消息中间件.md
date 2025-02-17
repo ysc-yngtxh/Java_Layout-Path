@@ -48,6 +48,7 @@
                          那么生产者在生产消息时的key就只能被与之相对应的队列key接收。
                              比如生产者key=aa,三条队列都能接收；  key=aa.bb,只有②、③能接收；  key=aa.bb.cc,就只有③能接收
                   headers:
+
 ## 三、死信
     1、概念：
            一般来说，生产者将消息投递到queue里，消费者从queue取出消息进行消费，但某些时候由于特定的而原因导致queue中的某些消息无法被消费，
@@ -68,134 +69,168 @@
                                                        ||
                                                        \/
                                                      死信队列 ------> Connection通道连接 -------> 消费者c2
-    3、延迟队列（"x-message-ttl"）
-       ①、概念
-           给队列设置过期时间，将消息加入队列，过期时间之后消息自动进入死信队列，监听死信队列，进行消费操作即可实现延迟队列
-       ②、延时队列使用场景
-           订单在十分钟之内未支付则自动取消。
-           新创建的店铺，如果在十天内都没有上传过商品，则自动发送消息提醒。
-           账单在一周内未支付，则自动结算。
-           用户注册成功后，如果三天内没有登陆则进行短信提醒。
-           用户发起退款，如果三天内没有得到处理则通知相关运营人员。
-           预定会议后，需要在预定的时间点前十分钟通知各个与会人员参加会议。
-       ③、RabbitMQ中的TTL
-          TTL（Time To Live）是RabbitMQ中一个消息或者队列的属性，表明一条消息或者该队列中的所有消息的最大存活时间，单位是毫秒。
-       换句话说，如果一条消息设置了TTL属性或者进入了设置TTL属性的队列，那么这条消息如果在TTL设置的时间内没有被消费，则会成为“死信”。
-       如果同时配置了队列的TTL和消息的TTL，那么较小的那个值将会被使用。
-       ④、延时队列写法
-          第一种方式：AMQP.BasicProperties properties = new AMQP.BasicProperties().builder().expiration("10000").build();
-                    支持在spring框架中生产端使用
-          第二种方式：map.put("x-message-ttl", 10000);
-                    支持在spring、springboot中使用，但是有个很明显的缺陷：当延迟需求很多时，要重复地去声明新队列，维护很麻烦
-          第三种方式：rabbitTemplate.convertAndSend("bootDirectExchange", "bootDirectRoutingKeyC", message, msg -> {
-                         // 发送消息的时候 延长时长
-                         msg.getMessageProperties().setExpiration(ttlTime);
-                         return msg;
-                    });
-                    支持在springboot框架中使用，是在第二种方式上的改良，延迟时长由用户决定。
-                    但是如果第一个用户消息的延时时长很长，而第二个用户消息的延时时长很短，第二个消息并不会优先得到执行
-       ⑤、基于插件的延迟队列
-          首先关闭RabbitMq,下载 rabbitmq_delayed_message_exchange-3.13.0.ez 插件到 \rabbitmq_server-3.13.4\plugins 中，
-          然后在 \rabbitmq_server-3.13.4\sbin目录下打开cmd输入：rabbitmq-plugins enable rabbitmq_delayed_message_exchange进行安装
-          最后再重新启动，使插件生效。
-          打开http://localhost:15672可以后台管理页面Exchange项的Type下拉，能找到 x-delayed-message 类型表示安装成功！
 
-                                     (Binding绑定)
-                                     (Channel信道)                                       (Channel信道)
-          消息生产者--->Exchange交换器--------------->Queue消息队列------>Connection通道连接--------------->消费者
+## 四、MQ高级
+   ### 消息队列在使用过程中，面临着很多实际问题需要思考：
+   ![img](../09.2_RabbitMQ-SpringBoot/src/main/resources/static/img.png)
 
-          死信队列的延迟是在队列中进行的，而基于插件的延迟队列是在交换机中实现的
+   ### <figure>1、延迟队列（"x-message-ttl"）</figure>
+   <figure>    
 
-## 四、消息可靠性投递
-    消息推送存在四种情况：
-       ①、消息推送到server，但是在server里找不到交换机
-       ②、消息推送到server，找到交换机了，但是没找到队列
-       ③、消息推送到server，交换机和队列啥都没找到
-       ④、消息推送成功
-    
-    RabbitMQ提供了消息确认机制，生产者发送消息到服务器，服务器接收到消息后会给生产者一个应答，告诉生产者消息是否发送成功。
-    RabbitMQ提供transaction和conﬁrm模式来确保生产者不丢消息，但是transaction模式性能较差，一般不使用。
-    
-    消息确认机制有两种：事务机制和confirm模式
-    事务机制：发送消息前，开启事务（channel.txSelect()）,然后发送消息，如果发送过程中出现什么异常，
-    事务就会回滚（channel.txRollback()）,如果发送成功则提交事务（channel.txCommit()）。
-    这种方式有个缺点：吞吐量下降；
-    
-    事务实现
-    ● channel.txSelect(): 将当前信道设置成事务模式
-    ● channel.txCommit(): 用于提交事务
-    ● channel.txRollback(): 用于回滚事务
-    
-    通过事务实现机制，只有消息成功被rabbitmq服务器接收，事务才能提交成功，否则便可在捕获异常之后进行回滚，
-    然后进行消息重发，但是事务非常影响rabbitmq的性能。还有就是事务机制是阻塞的过程，只有等待服务器回应之后才会处理下一条消息
-    
-    conﬁrm模式用的居多
-    一旦channel进入conﬁrm模式，所有在该信道上发布的消息都将会被指派一个唯一的ID（从1开始），一旦消息被投递到所有匹配的队列之后；rabbitMQ就会发送一个ACK给生产者（包含消息的唯一ID），这就使得生产者知道消息已经正确到达目的队列了；如果rabbitMQ没能处理该消息，则会发送一个Nack消息给你，你可以进行重试操作。
-    confirm方式有三种模式：普通confirm模式、批量confirm模式、异步confirm模式
-    channel.confirmSelect(): 将当前信道设置成了confirm模式
-    普通confirm模式
-    每发送一条消息，就调用waitForConfirms()方法，等待服务端返回Ack或者nack消息
-    
-    1、在生产环境中由于一些不明原因，导致 rabbitmq 重启，在 RabbitMQ 重启期间生产者消息投递失败， 导致消息丢失，需要手动处理和恢复。
-       于是，我们开始思考，如何才能进行 RabbitMQ 的消息可靠投递呢？ 特别是在这样比较极端的情况，RabbitMQ 集群不可用的时候，
-       无法投递的消息该如何处理呢？
-                                              (Binding绑定)
-                                              (Channel信道)                                       (Channel信道)
-           消息生产者----------->Exchange交换器--------------->Queue消息队列------>Connection通道连接--------------->消费者
-              ||                   ||
-              || (发送消息备份)      ||(当交换机收到消息，从缓存中清除已收到的消息)
-              ||                   ||
-             缓存(Redis) =============
-     【定时任务对未成功发布
-        的消息进行定时投递】
-    2、Confirm模式————如果因为交换机故障，实现发布确认步骤：
-          ①、配置文件：
-                    # none：是禁用发布确认模式，是默认值
-                    # correlated：是发布消息成功到交换器后会触发回调方法
-                    # 设置 correlated 即可在发布消息成功到达交换器(Exchange)后触发回调方法。
-                    spring.rabbitmq.publisher-confirm-type=correlated
+    ①、概念
+         给队列设置过期时间，将消息加入队列，过期时间之后消息自动进入死信队列，监听死信队列，进行消费操作即可实现延迟队列
+    ②、延时队列使用场景
+         订单在十分钟之内未支付则自动取消。
+         新创建的店铺，如果在十天内都没有上传过商品，则自动发送消息提醒。
+         账单在一周内未支付，则自动结算。
+         用户注册成功后，如果三天内没有登陆则进行短信提醒。
+         用户发起退款，如果三天内没有得到处理则通知相关运营人员。
+         预定会议后，需要在预定的时间点前十分钟通知各个与会人员参加会议。
+    ③、RabbitMQ中的TTL
+        TTL（Time To Live）是RabbitMQ中一个消息或者队列的属性，表明一条消息或者该队列中的所有消息的最大存活时间，单位是毫秒。
+        换句话说，如果一条消息设置了TTL属性或者进入了设置TTL属性的队列，那么这条消息如果在TTL设置的时间内没有被消费，则会成为“死信”。
+        如果同时配置了队列的TTL和消息的TTL，那么较小的那个值将会被使用。
+    ④、延时队列写法
+        第一种方式：AMQP.BasicProperties properties = new AMQP.BasicProperties().builder().expiration("10000").build();
+                  支持在spring框架中生产端使用
+        第二种方式：map.put("x-message-ttl", 10000);
+                  支持在spring、springboot中使用，但是有个很明显的缺陷：当延迟需求很多时，要重复地去声明新队列，维护很麻烦
+        第三种方式：rabbitTemplate.convertAndSend("bootDirectExchange", "bootDirectRoutingKeyC", message, msg -> {
+                       // 发送消息的时候 延长时长
+                       msg.getMessageProperties().setExpiration(ttlTime);
+                       return msg;
+                  });
+                  支持在springboot框架中使用，是在第二种方式上的改良，延迟时长由用户决定。
+                  但是如果第一个用户消息的延时时长很长，而第二个用户消息的延时时长很短，第二个消息并不会优先得到执行
+    ⑤、基于插件的延迟队列
+        首先关闭RabbitMq,下载 rabbitmq_delayed_message_exchange-3.13.0.ez 插件到 \rabbitmq_server-3.13.4\plugins 中，
+        然后在 \rabbitmq_server-3.13.4\sbin目录下打开cmd输入：rabbitmq-plugins enable rabbitmq_delayed_message_exchange进行安装
+        最后再重新启动，使插件生效。
+        打开http://localhost:15672可以后台管理页面Exchange项的Type下拉，能找到 x-delayed-message 类型表示安装成功！
 
-          ②、创建一个类去实现 RabbitTemplate.ConfirmCallback 接口，重写Confirm方法
-              Ⅰ、引用注入RabbitTemplate
-              Ⅱ、使用 @PostConstruct 注解，定义方法指定ConfirmCallback：rabbitTemplate.setConfirmCallback(this)
-    3、回退消息————如果队列发生故障（即消息无法路由到队列）
-             在仅开启了生产者确认机制的情况下，交换机接收到消息后，会直接给消息生产者发送确认消息，如果发现消息不可路由，那么消息会被直接丢弃，
-          此时生产者是不知道消息被丢弃这个事件的。那么如何让无法路由的消息帮我们处理一下？最起码通知我一声，我好自己处理啊。
-          通过设置mandatory参数可以在当消息传递过程中不可达目的地时将消息返回给生产者
-          ①、配置文件：
-                    # 但消息不可达队列时，mandatory 参数值来决定是返回消息还是直接丢弃消息。true表示返回消息不可达的包装信息[消息体、路由键、失败原因...]。
-                    spring.rabbitmq.template.mandatory=true
-                    # 开启ReturnsCallback监听器来监听 mandatory(消息不可达队列) 返回的消息，如果有返回消息则执行 returnedMessage()
-                    spring.rabbitmq.publisher-returns=true
-          ②、创建一个类去实现 RabbitTemplate.ReturnsCallback 接口，重写Returned 方法
-              Ⅰ、引用注入RabbitTemplate
-              Ⅱ、使用 @PostConstruct 注解，定义方法指定ReturnsCallback：rabbitTemplate.setReturnsCallback(this)
-    4、备份交换机
-         ①、概念：
-                有了mandatory参数和回退消息，我们获得了对无法投递消息的感知能力，有机会在生产者的消息无法被投递时发现并处理。但有时候，
-            我们并不知道该如何处理这些无法路由的消息。那能否添加死信的机制来解决这些消息呢?,可是这些不可路由消息根本没有机会进入到队列，
-            因此无法发使用死信队列来保存消息。
-                在RabbitMq中有一种备份交换机的机制存在,可以很好地应对这个问题。当我们为某个交换机声明一个对应的备份交换机时,就是为他创建一个备胎，
-            当交换机接收到一条不可路由消息时，将会把这条消息转发到备份交换机中，由备份交换机来转发和处理，通常备份交换机的类型为Fanout,
-            这样就能把所有消息都投递到与其绑定的的队列中，然后我们在备份交换机下绑定一个队列，这样所有那些原交换机无法被路由的消息，
-            就会都进入这个队列了。当然，我们还可以建立一个报警队列，用独立的消息着来进行检测和报警。
-                                              (Binding绑定)
-                                              (Channel信道)                                       (Channel信道)
-            消息生产者----------->Exchange交换器-------------->Queue消息队列------>Connection通道连接--------------->消费者
-                                   ||
-                                   ||              备份队列
-                                   \/           /
-                                备份交换机------<
-                                                \
-                                                   警告队列 -------------> 警告消费者
+                                 (Binding绑定)
+                                 (Channel信道)                                       (Channel信道)
+      消息生产者--->Exchange交换器--------------->Queue消息队列------>Connection通道连接--------------->消费者
 
-        ②、步骤：
-           Ⅰ、创建备份交换机和备份队列还有警告队列以及 Binding 等实例
-           Ⅱ、将正常交换机上绑定备份交换机
-           Ⅲ、监听警告队列
+      死信队列的延迟是在队列中进行的，而基于插件的延迟队列是在交换机中实现的
+   </figure>
 
-           注意：mandatory参数和备份交换机一起使用时，消息该何去何从？是先回退给生产者还是先备份给交换机
-           经过发现，备份交换机的优先级高于回退消息。有备份交换机的时候，ReturnsCallback是失效的
+   ### <figure>2、消息可靠性投递（消息从发送到消费者接收，会经历多个过程）</figure>
+   - - ![img_1](../09.2_RabbitMQ-SpringBoot/src/main/resources/static/img_1.png)
+   <figure>
+
+    消息丢失原因：消息投递的每一步都可能导致消息丢失，常见的丢失原因包括：
+        ①、发送时丢失：
+             生产者发送的消息未送达exchange
+             消息到达exchange后未到达queue
+        ②、RabbitMQ 异常（如：MQ宕机，queue将消息丢失）
+        ③、consumer接收到消息后未消费就宕机
+    解决方案：
+        ①、生产者确认机制
+        ②、mq持久化
+        ③、消费者确认机制
+        ④、失败重试机制
+
+    RabbitMQ提供 transactional 和 conﬁrm模式 来确保生产者不丢消息。
+    2.1、Transactional模式
+         概念：通过事务实现机制，只有消息成功被rabbitmq服务器接收，事务才能提交成功，否则便可在捕获异常之后进行回滚，
+              然后进行消息重发，但是事务非常影响rabbitmq的性能。
+              还有就是事务机制是阻塞的过程，只有等待服务器回应之后才会处理下一条消息，这样会大大降低消息的发送速度。
+              吞吐量下降；性能较差，一般不使用。
+         ①、开启事务
+             channel.txSelect();
+         ②、发送消息
+             channel.basicPublish("exchangeName", "routingKey", null, "message".getBytes());
+         ③、提交事务
+             channel.txCommit();
+         ④、回滚事务
+             channel.txRollback();
+    2.2、Conﬁrm模式
+         2.2.1、概念：将 RabbitMQ 的 channel(信道) 设置为 conﬁrm模式，所有在该信道上发布的消息都将会被指派一个唯一的ID（从1开始），
+                     一旦消息被投递到所有匹配的队列之后，RabbitMQ就会发送一个ACK给生产者(包含消息的唯一ID)，这就使得生产者知道消息已经正确到达目的队列了；
+                     如果 RabbitMQ 没能处理该消息，则会发送一个Nack消息给生产者，生产者可以进行重试操作。
+
+                                            (Binding绑定)
+                                            (Channel信道)                                  (Channel信道)
+                消息生产者------->Exchange交换器---------->Queue消息队列------>Connection通道连接--------->消费者
+                   ||                ||
+                   ||(发送消息备份)    ||(当交换机收到消息，从缓存中清除已收到的消息)
+                   ||                ||
+                  缓存(Redis) ========
+         【定时任务对未成功发布的消息进行定时投递】
+          
+               ①、配置文件：# none：是禁用发布确认模式，是默认值
+                           # correlated：是发布消息成功到交换器后会触发回调方法
+                           # 设置 correlated 即可在发布消息成功到达交换器(Exchange)后触发回调方法。
+                           spring.rabbitmq.publisher-confirm-type = correlated
+               ②、开启生产者确认机制
+                   rabbitTemplate.setConfirmCallback(new RabbitTemplate.ConfirmCallback() {
+                       @Override
+                       public void confirm(CorrelationData correlationData, boolean ack, String cause) {
+                           if (ack) {
+                               log.info("消息发送成功：correlationData({}),ack({}),cause({})", correlationData, ack, cause);
+                           } else {
+                               log.error("消息发送失败：correlationData({}),ack({}),cause({})", correlationData, ack, cause);
+                           }
+                       }
+                   });
+               ③、发送消息
+                   rabbitTemplate.convertAndSend("bootDirectExchange", "bootDirectRoutingKeyC", message, correlationData);
+
+               confirm方式有三种模式：普通confirm模式、批量confirm模式、异步confirm模式
+                      普通confirm模式：每发送一条消息，就调用waitForConfirms()方法，等待服务端返回Ack或者nack消息。
+                      批量confirm模式：每发送一批消息，就调用waitForConfirms()方法，等待服务端返回Ack或者nack消息。
+                      异步confirm模式：提供一个回调方法，服务端返回Ack或者nack消息时，会回调这个confirm()方法。
+
+         2.2.2、回退消息————如果队列发生故障（即消息无法路由到队列）
+                概念：在仅开启了生产者确认机制的情况下，交换机接收到消息后，会直接给消息生产者发送确认消息，如果发现消息不可路由，那么消息会被直接丢弃，
+                     此时生产者是不知道消息被丢弃这个事件的。那么如何让无法路由的消息帮我们处理一下？这就需要开启回退消息机制。
+                     通过设置mandatory参数可以在当消息传递过程中不可达目的地时将消息返回给生产者
+                ①、配置文件：
+                          # 但消息不可达队列时，mandatory 参数值来决定是返回消息还是直接丢弃消息。true表示返回消息不可达的包装信息[消息体、路由键、失败原因...]。
+                          spring.rabbitmq.template.mandatory=true
+                          # 开启ReturnsCallback监听器来监听 mandatory(消息不可达队列) 返回的消息，如果有返回消息则执行 returnedMessage()
+                          spring.rabbitmq.publisher-returns=true
+                ②、创建一个类去实现 RabbitTemplate.ReturnsCallback 接口，重写Returned 方法
+                   rabbitTemplate.setReturnsCallback(new RabbitTemplate.ReturnsCallback() {
+                       @Override
+                       public void returnedMessage(ReturnedMessage returned) {
+                           log.error("在回调returnedMessage()方法中，消息:{} 被交换机{}退回，回应码：{}，退回原因：{}，路由{}", 
+                                     new String(returned.getMessage().getBody()), 
+                                     returned.getExchange(), 
+                                     returned.getReplyCode(), 
+                                     returned.getReplyText(), 
+                                     returned.getRoutingKey());
+                       );
+
+         2.2.3、备份交换机
+                ①、概念：
+                       有了mandatory参数和回退消息，我们获得了对无法投递消息的感知能力，有机会在生产者的消息无法被投递时发现并处理。
+                   但有时候我们并不知道该如何处理这些无法路由的消息。
+                       问题：那能否添加死信的机制来解决这些消息呢?
+                       回答：不可路由消息根本就没有机会进入到正常队列里，更别说是进入到死信队列中来保存消息了。
+                       方案：在RabbitMq中有一种备份交换机的机制存在，可以很好地应对这个问题。
+                            当我们为某个交换机声明一个对应的备份交换机时，就是为他创建一个备胎，
+                   当交换机接收到一条不可路由消息时，将会把这条消息转发到备份交换机中，由备份交换机来转发和处理，通常备份交换机的类型为Fanout,
+                   这样就能把所有消息都投递到与其绑定的的队列中，然后我们在备份交换机下绑定一个队列，这样所有那些原交换机无法被路由的消息，
+                   就会都进入这个队列了。当然，我们还可以建立一个报警队列，用独立的消息着来进行检测和报警。
+                                            (Binding绑定)
+                                            (Channel信道)                              (Channel信道)
+                   消息生产者----->Exchange交换器------>Queue消息队列------>Connection通道连接------>消费者
+                                      ||
+                                      ||              备份队列
+                                      \/           /
+                                   备份交换机------<
+                                                   \
+                                                      警告队列 -------------> 警告消费者
+                ②、步骤：
+                    Ⅰ、创建备份交换机和备份队列还有警告队列以及 Binding 等实例
+                    Ⅱ、将正常交换机上绑定备份交换机
+                    Ⅲ、监听警告队列
+
+                    注意：mandatory参数和备份交换机一起使用时，消息该何去何从？是先回退给生产者还是先备份给交换机
+                    经过发现，备份交换机的优先级高于回退消息。有备份交换机的时候，ReturnsCallback是失效的
+   </figure>
 
 ## 五、其他知识点
     1、幂等性

@@ -64,7 +64,7 @@ public class DynamicListener {
                     throw new RuntimeException("消息处理失败");
                 } catch (Exception e) {
                     // 拒绝消息并设置 requeue=false，表示拒绝重新入队，触发死信队列
-                    // 需要注意的是：要在配置文件中开启手动确认模式
+                    // 需要注意的是：要在配置文件中开启手动确认模式后，才能使用此方法手动拒绝消息
                     channel.basicReject(
                             message.getMessageProperties().getDeliveryTag(),
                             false
