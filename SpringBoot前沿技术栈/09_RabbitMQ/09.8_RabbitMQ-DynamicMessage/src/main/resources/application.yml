@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: @project.artifactId@
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    addresses: localhost:5672
+    virtual-host: /
+
+    listener:
+      simple:
+        # 开启手动确认模式
+        # 消息确认方式，其有三种配置方式。分别是none(不配置消息确认方式)、manual(手动ack) 和auto(自动ack) 默认auto
+        acknowledge-mode: manual
+        # 开启消息重试
+        retry:
+          enabled: true
+          initial-interval: 1000ms # 初识的失败等待时长为1秒
+          multiplier: 1   # 失败的等待时长倍数，下次等待时长 = multiplier * last-interval
+          max-attempts: 3 # 最大重试次数
+          stateless: true # true无状态；false有状态。如果业务中包含事务，这里改为false
+        # 消费者最小并发数
+        concurrency: 5
+        # 消费者最大并发数
+        max-concurrency: 10
+        # 该配置作用：为了控制每个消费者一次从队列中预取的消息数量。
+        # 虽然RabbitMQ表面上看起来消费者是“直接消费消息”，但实际上底层的工作流程是先从队列中预取消息，然后再消费消息。
+        # 目的就是为了避免消息处理耗时过长或者流量过大，消息堆积在服务器的本地缓存中，导致资源浪费和负载不均衡。
+        # 注意：较小的值适合消息处理耗时较长的场景，避免单个消费者积压消息。默认值为3
+        prefetch: 10
+        # 监听器抛出异常而拒绝的消息是否被重新放回队列  true表示会重新放回队列，false表示不会放回队列
+        default-requeue-rejected: false
