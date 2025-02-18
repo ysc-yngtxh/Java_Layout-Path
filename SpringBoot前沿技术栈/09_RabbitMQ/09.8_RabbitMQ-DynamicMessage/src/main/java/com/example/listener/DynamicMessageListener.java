@@ -18,7 +18,7 @@ public class DynamicMessageListener implements ChannelAwareMessageListener {
 
     private final Map<String, MessageHandler> handlers = new ConcurrentHashMap<>();
 
-    // 以下配置将 MessageConverter 作为构造函数参数传入
+    // 使用构造器注入 MessageConverter 对象
     private final MessageConverter messageConverter;
     public DynamicMessageListener(MessageConverter messageConverter) {
         this.messageConverter = messageConverter;

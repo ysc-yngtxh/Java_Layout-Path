@@ -28,20 +28,20 @@ public class HandlerRegistry {
         dynamicMessageListener.unregisterHandler(messageType);
     }
 
-    @PostConstruct
-    public void initHandlers() {
-        // 注册订单处理器
-        dynamicMessageListener.registerHandler("order", (payload, channel, deliveryTag) -> {
-            Order order = (Order) payload;
-            // 处理订单逻辑...
-            channel.basicAck(deliveryTag, false);
-        });
-
-        // 注册支付处理器
-        dynamicMessageListener.registerHandler("payment", (payload, channel, deliveryTag) -> {
-            Payment payment = (Payment) payload;
-            // 处理支付逻辑...
-            channel.basicAck(deliveryTag, false);
-        });
-    }
+    // @PostConstruct
+    // public void initHandlers() {
+    //     // 注册订单处理器
+    //     dynamicMessageListener.registerHandler("order", (payload, channel, deliveryTag) -> {
+    //         Order order = (Order) payload;
+    //         // 处理订单逻辑...
+    //         channel.basicAck(deliveryTag, false);
+    //     });
+    //
+    //     // 注册支付处理器
+    //     dynamicMessageListener.registerHandler("payment", (payload, channel, deliveryTag) -> {
+    //         Payment payment = (Payment) payload;
+    //         // 处理支付逻辑...
+    //         channel.basicAck(deliveryTag, false);
+    //     });
+    // }
 }

@@ -16,7 +16,6 @@ public class KafkaProducerService {
     private KafkaTemplate<String, String> kafkaTemplate;
 
     public void sendMessage(String topic, String message) {
-
         // 异步发送消息
         kafkaTemplate.send(topic, message);
     }

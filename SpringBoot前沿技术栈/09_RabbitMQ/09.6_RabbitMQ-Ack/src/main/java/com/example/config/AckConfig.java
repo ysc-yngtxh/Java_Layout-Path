@@ -22,7 +22,6 @@ public class AckConfig {
     // 配置一个普通队列  TTL不配置 延迟队列时长掌握在生产者手里
     @Bean("ackQueue")
     public Queue directQueueC(){
-        // TODO 第三种写法
         return QueueBuilder
                 .durable("ackQueue")
                 .build();
