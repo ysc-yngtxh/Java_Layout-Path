@@ -5,6 +5,7 @@ import com.rabbitmq.client.Channel;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
+import lombok.Getter;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.listener.api.ChannelAwareMessageListener;
 import org.springframework.amqp.support.converter.MessageConverter;
@@ -16,6 +17,7 @@ import org.springframework.amqp.support.converter.MessageConverter;
  */
 public class DynamicMessageListener implements ChannelAwareMessageListener {
 
+    @Getter
     private final Map<String, MessageHandler> handlers = new ConcurrentHashMap<>();
 
     // 使用构造器注入 MessageConverter 对象
@@ -24,15 +26,15 @@ public class DynamicMessageListener implements ChannelAwareMessageListener {
         this.messageConverter = messageConverter;
     }
 
-    // 提供动态注册方法
-    public void registerHandler(String messageType, MessageHandler handler) {
-        handlers.put(messageType, handler);
-    }
-
-    // 提供动态注销方法
-    public void unregisterHandler(String messageType) {
-        handlers.remove(messageType);
-    }
+    // // 提供动态注册方法
+    // public void registerHandler(String messageType, MessageHandler handler) {
+    //     handlers.put(messageType, handler);
+    // }
+    //
+    // // 提供动态注销方法
+    // public void unregisterHandler(String messageType) {
+    //     handlers.remove(messageType);
+    // }
 
     @Override
     public void onMessage(Message message, Channel channel) throws Exception {
