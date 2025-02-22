@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class HeadersConsumer {
+public class HeadersExchangeConsumer {
 
     // 参数说明：String message 消息； Channel channel 通道
     @RabbitListener(queues = "headerQueue1")

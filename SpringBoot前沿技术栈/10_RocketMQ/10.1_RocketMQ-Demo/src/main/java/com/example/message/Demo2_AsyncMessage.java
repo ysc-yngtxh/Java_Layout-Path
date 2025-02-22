@@ -9,9 +9,11 @@ import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.CountDownLatch2;
+import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
+import org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -79,6 +81,17 @@ public class Demo2_AsyncMessage {
         DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("Async_Group");
         // 设置NameServer的地址
         pushConsumer.setNamesrvAddr("localhost:9876");
+        // 设置Consumer第一次启动是从队列头部开始消费还是队列尾部开始消费
+        // 如果不是第一次启动，那么按照上次消费的位置继续消费
+        pushConsumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
+        // 设置消费模型，集群还是广播，默认为集群
+        pushConsumer.setMessageModel(MessageModel.CLUSTERING);
+        // 消费者最小线程量
+        pushConsumer.setConsumeThreadMin(5);
+        // 消费者最大线程量
+        pushConsumer.setConsumeThreadMax(10);
+        // 设置一次消费消息的条数，默认是1
+        pushConsumer.setConsumeMessageBatchMaxSize(1);
 
         // 订阅一个或者多个Topic，以及Tag来过滤需要消费的消息
         pushConsumer.subscribe("TopicAsync", "*");

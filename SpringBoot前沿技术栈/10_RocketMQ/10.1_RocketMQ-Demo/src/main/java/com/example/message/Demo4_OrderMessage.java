@@ -102,6 +102,7 @@ public class Demo4_OrderMessage {
         pushConsumer.registerMessageListener(new MessageListenerOrderly() {
             @Override
             public ConsumeOrderlyStatus consumeMessage(List<MessageExt> list, ConsumeOrderlyContext consumeOrderlyContext) {
+                consumeOrderlyContext.setAutoCommit(false); // 设置为手动提交
                 // MessageExt：是一个消息接收通配符，不管发送的是String还是对象，都可接收，当然也可以像上面明确指定类型（我建议还是指定类型较方便）
                 // System.out.printf：支持使用字符信息的格式化
                 // 标记该消息已经被成功消费

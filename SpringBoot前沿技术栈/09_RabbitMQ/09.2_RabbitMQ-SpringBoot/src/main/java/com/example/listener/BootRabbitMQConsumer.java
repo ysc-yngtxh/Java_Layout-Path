@@ -11,12 +11,13 @@ import java.util.Date;
 
 @Slf4j
 @Component
-public class RabbitMQConsumer {
+public class BootRabbitMQConsumer {
 
     // 接收消息。这里监听的是基于插件的队列，这里当做是第一个消费者
-    // 参数说明：String message 消息； Channel channel 通道
-    @RabbitListener(queues = "delayedQueue")
-    public void receive1(Message message) {
+    // queues：指定队列名  concurrency：设置并发消费者数量，不显性设置则默认线程数量为1
+    @RabbitListener(queues = "delayedQueue", concurrency = "10")
+
+    public void receive1(Message message, Channel channel) { // Message message 消息； Channel channel 通道
         String msg = new String(message.getBody());
 
         log.info("当前时间：{},基于插件队列 -- 第一个监听器接收到消息：{}"
@@ -26,7 +27,7 @@ public class RabbitMQConsumer {
 
     // 接收消息。这里监听的是基于插件的队列，这里当做是第二个消费者
     @RabbitListener(queues = "delayedQueue")
-    public void receive2(Message message) {
+    public void receive2(Message message, Channel channel) {
         String msg = new String(message.getBody());
 
         log.info("当前时间：{},基于插件队列 -- 第二个监听器接收到消息：{}"

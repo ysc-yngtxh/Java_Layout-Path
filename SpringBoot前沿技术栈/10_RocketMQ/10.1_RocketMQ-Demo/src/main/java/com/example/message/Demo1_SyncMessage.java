@@ -45,7 +45,10 @@ public class Demo1_SyncMessage {
             // TODO 发送消息存储到 Broker，在Broker里的每一个主题(Topic)消息默认读队列4个、写队列4个。[可以自定义队列数]
             //  循环发送的消息虽然都是相同主题，但是循环10次发送的消息并不是存放在一条写队列中，而是分别写入存储在4条写队列里。
             SendResult sendResult = producer.send(msg);
-            System.out.printf("%s %n", sendResult);      // 通过sendResult返回消息是否成功送达
+            System.out.printf("RocketMQ 消息发送到Broker，Broker会将消息进行持久化处理。" +
+                    "持久化成功后，Broker给生产者响应消息写入结果（ACK响应）。通过返回的结果判断是否成功送达。" +
+                    "返回的结果为：%s %n", sendResult.getSendStatus());
+            System.out.printf("%s %n", sendResult);      // 打印返回结果
         }
         // 如果不再发送消息，关闭Producer实例。
         producer.shutdown();

@@ -1,6 +1,17 @@
 rocketmq:
-  # NameServer 地址，集群使用';'隔开
-  name-server: localhost:9876
+  # NameServer 地址（必须配置），集群使用';'隔开
+  name-server: 127.0.0.1:9876
+
+  # 生产者配置（如果需发送消息）
   producer:
     # 生产者组名称【注意：消费分组不必与生产分组保持一致】
     group: springboot-producer-group
+    send-message-timeout: 3000             # 发送消息超时时间（毫秒，默认3000）
+    retry-times-when-send-failed: 2        # 同步发送失败重试次数（默认2）
+    retry-times-when-send-async-failed: 2  # 异步发送失败重试次数（默认2）
+    max-message-size: 4194304              # 消息最大大小（默认4MB）
+
+  # 消费者全局配置（可选，会被 @RocketMQMessageListener 中的配置覆盖）
+  consumer:
+    group: springboot-consumer-group  # 默认消费者组（监听器未指定时生效）
+    message-model: CLUSTERING  # 消费模式：CLUSTERING（集群）/BROADCASTING（广播）

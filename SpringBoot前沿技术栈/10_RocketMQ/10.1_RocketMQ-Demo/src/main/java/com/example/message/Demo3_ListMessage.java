@@ -7,8 +7,10 @@ import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendResult;
+import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.MessageExt;
+import org.apache.rocketmq.remoting.protocol.heartbeat.MessageModel;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -40,8 +42,10 @@ public class Demo3_ListMessage {
         // TODO 发送 Collection集合 消息到Broker。发送的 Collection集合 消息被存储在同一个队列里。
         //  可以这么理解：每执行一次send()方法，相当于重新在MQ规则下选择队列再写入存储消息。
         SendResult sendResult = producer.send(list);
-        // 通过sendResult返回消息是否成功送达
-        System.out.printf("%s%n", sendResult);
+        System.out.printf("RocketMQ 消息发送到Broker，Broker会将消息进行持久化处理。" +
+                "持久化成功后，Broker给生产者响应消息写入结果（ACK响应）。通过返回的结果判断是否成功送达。" +
+                "返回的结果为：%s %n", sendResult.getSendStatus());
+        System.out.printf("%s %n", sendResult);      // 打印返回结果
         // 如果不再发送消息，关闭Producer实例。
         producer.shutdown();
     }
@@ -52,6 +56,17 @@ public class Demo3_ListMessage {
         DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("ListMessage_Group");
         // 设置NameServer的地址
         pushConsumer.setNamesrvAddr("localhost:9876");
+        // 设置Consumer第一次启动是从队列头部开始消费还是队列尾部开始消费
+        // 如果不是第一次启动，那么按照上次消费的位置继续消费
+        pushConsumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
+        // 设置消费模型，集群还是广播，默认为集群
+        pushConsumer.setMessageModel(MessageModel.CLUSTERING);
+        // 消费者最小线程量
+        pushConsumer.setConsumeThreadMin(5);
+        // 消费者最大线程量
+        pushConsumer.setConsumeThreadMax(10);
+        // 设置一次消费消息的条数，默认是1
+        pushConsumer.setConsumeMessageBatchMaxSize(1);
 
         // 订阅一个或者多个Topic，以及Tag来过滤需要消费的消息
         // pushConsumer.subscribe("TopicList", "*");

@@ -39,8 +39,10 @@ public class Demo7_SqlFilterMessage {
             msg.putUserProperty("a", String.valueOf(i));
             // 发送消息到一个Broker
             SendResult sendResult = producer.send(msg);
-            // 通过sendResult返回消息是否成功送达
-            System.out.printf("%s %n", sendResult);
+            System.out.printf("RocketMQ 消息发送到Broker，Broker会将消息进行持久化处理。" +
+                    "持久化成功后，Broker给生产者响应消息写入结果（ACK响应）。通过返回的结果判断是否成功送达。" +
+                    "返回的结果为：%s %n", sendResult.getSendStatus());
+            System.out.printf("%s %n", sendResult);      // 打印返回结果
         }
         // 如果不再发送消息，关闭Producer实例。
         producer.shutdown();

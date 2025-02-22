@@ -68,4 +68,15 @@ class RocketBootApplicationTests {
                 .build();
         rocketMQTemplate.syncSend("bootKeyTopic", msgKey);
     }
+
+    @Test
+    void contextLoads2() {
+        SendResult sendResult = rocketMQTemplate.syncSend("bootBatchTopic", "我是测试消息！！！");
+        System.out.printf("RocketMQ 消息发送到Broker，Broker会将消息进行持久化处理。" +
+                "持久化成功后，Broker给生产者响应消息写入结果（ACK响应）。通过返回的结果判断是否成功送达。" +
+                "返回的结果为：%s %n", sendResult.getSendStatus()
+        );
+        System.out.printf("消息 Id（RocketMQ系统生成） = %s %n", sendResult.getMsgId());
+        System.out.printf("消息队列 = %s %n", sendResult.getMessageQueue());
+    }
 }

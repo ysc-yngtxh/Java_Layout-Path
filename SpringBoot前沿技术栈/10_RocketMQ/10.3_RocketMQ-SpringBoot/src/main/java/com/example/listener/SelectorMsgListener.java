@@ -24,7 +24,7 @@ import java.nio.charset.StandardCharsets;
 //         consumerGroup = "springboot-listener-group", // 消费者组
 //         selectorType = SelectorType.SQL92,           // 选择器类型(SQL92过滤模式)使用这种方式需要broker.conf中开启EnablePropertyFilter=true
 //         selectorExpression = "a in(3,5,7)")          // 只监听消息标签值为 (3,5,7) 的消息
-public class SelectorTypeMsgListener implements RocketMQListener<MessageExt> {
+public class SelectorMsgListener implements RocketMQListener<MessageExt> {
 
     // 这个重写方法就是消费者消费消息的方法。没有返回值(消费状态)。
     // 这个方法正常执行，表示消费成功；如果出现异常，消息拒收，并且进行重试

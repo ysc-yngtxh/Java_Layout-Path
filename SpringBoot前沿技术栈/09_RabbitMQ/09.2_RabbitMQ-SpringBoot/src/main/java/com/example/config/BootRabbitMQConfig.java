@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.HashMap;
 
 @Configuration  // 标注这是个配置类，同时注入进spring容器
-public class RabbitMQConfig {
+public class BootRabbitMQConfig {
 
     // 配置一个Direct类型的普通交换机
     @Bean("bootDirectExchange")

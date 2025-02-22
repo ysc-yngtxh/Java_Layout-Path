@@ -36,7 +36,7 @@ public class Demo5_OnewayMessage {
             Message msg = new Message("TopicOneway", "TagA", ("Hello RocketMQ " + i).getBytes(RemotingHelper.DEFAULT_CHARSET) /* Message body */);
             // TODO 发送消息存储到 Broker，在Broker里的每一个主题(Topic)消息默认读队列4个、写队列4个。[可以自定义队列数]
             //  循环发送的消息虽然都是相同主题，但是循环发送的消息并不是存放在一条写队列中，而是分别写入存储在4条写队列里。
-            producer.sendOneway(msg);  // 发送单向消息，没有任何返回结果
+            producer.sendOneway(msg);  // 发送单向消息，没有任何返回结果[没有返回值]
         }
         // 如果不再发送消息，关闭Producer实例。
         producer.shutdown();

@@ -41,7 +41,10 @@ public class Demo8_Retry_DeadMessage {
             // 创建消息，并指定Topic，Tag和消息Key与消息体（Tag和消息Key不是必写参数）
             Message msg = new Message("TopicRetry", "TagRetry", MessageKey, ("Hello RocketMQ " + i).getBytes(RemotingHelper.DEFAULT_CHARSET));
             SendResult sendResult = producer.send(msg);
-            System.out.printf("%s %n", sendResult);      // 通过sendResult返回消息是否成功送达
+            System.out.printf("RocketMQ 消息发送到Broker，Broker会将消息进行持久化处理。" +
+                    "持久化成功后，Broker给生产者响应消息写入结果（ACK响应）。通过返回的结果判断是否成功送达。" +
+                    "返回的结果为：%s %n", sendResult.getSendStatus());
+            System.out.printf("%s %n", sendResult);      // 打印返回结果
         }
         // 如果不再发送消息，关闭Producer实例。
         producer.shutdown();
@@ -72,7 +75,7 @@ public class Demo8_Retry_DeadMessage {
     public static void main1(String[] args) throws MQClientException {
         DefaultMQPushConsumer pushConsumer = new DefaultMQPushConsumer("Retry_Dead_Group");
         pushConsumer.setNamesrvAddr("localhost:9876");
-        // TODO 注意这里订阅的主题应该是死信主题：%DLQ%Retry_Dead_Group
+        // TODO 注意：死信队列其名称是在原队列名称前加 %DLQ% ，即为：%DLQ%Retry_Dead_Group
         pushConsumer.subscribe("%DLQ%Retry_Dead_Group", "*");
         pushConsumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.HashMap;
 
 @Configuration
-public class DelayedConfig {
+public class DelayedRabbitConfig {
 
     // 安装插件的交换机
     @Bean("delayedExchange")
