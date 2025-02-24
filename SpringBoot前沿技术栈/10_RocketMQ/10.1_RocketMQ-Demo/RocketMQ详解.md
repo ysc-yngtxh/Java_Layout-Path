@@ -466,58 +466,19 @@
     # abort 文件存储路径
     abortFile=/rocketmq/rocketmq-4.9.2/store/abort
    ```
-   
-   ``` Slave配置文件
-    # 所属集群名称
-    brokerClusterName=DefaultCluster
-    # broker名字，同一组的master-slave中，broker名字相同【重要】
-    brokerName=broker-a
-    # brokerId的ID，0 表示Master，>0 表示Slave
-    brokerId=1
-    # 删除文件时间点，默认凌晨 4点
-    deleteWhen=04
-    # 文件保留时间，默认 48 小时
-    fileReservedTime=48
-    # Broker 的角色
-    # - ASYNC_MASTER 异步复制Master
-    # - SYNC_MASTER 同步双写Master
-    # - SLAVE
-    brokerRole=SLAVE
-    # 刷盘方式
-    # - ASYNC_FLUSH 异步刷盘
-    # - SYNC_FLUSH 同步刷盘
-    flushDiskType=ASYNC_FLUSH
-     
-    # nameServer集群地址，如果是多个，使用分号;分割
-    namesrvAddr=10.0.90.59:9876;10.0.90.144:9876;10.0.91.8:9876;10.0.91.49:9876
-    brokerIP1=10.0.91.8
-     
-    # 存储路径
-    storePathRootDir=/rocketmq/rocketmq-4.9.2/store
-    # commitLog 存储路径
-    storePathCommitLog=/rocketmq/rocketmq-4.9.2/store/commitlog
-    # 消费队列存储路径存储路径
-    storePathConsumeQueue=/rocketmq/rocketmq-4.9.2/store/consumequeue
-    # 消息索引存储路径
-    storePathIndex=/rocketmq/rocketmq-4.9.2/store/index
-    # checkpoint 文件存储路径
-    storeCheckpoint=/rocketmq/rocketmq-4.9.2/store/checkpoint
-    # abort 文件存储路径
-    abortFile=/rocketmq/rocketmq-4.9.2/store/abort
-   ```
    </figure>
 
 ## 八、RocketMQ额外知识点
 ### 1、死信队列
-<h3>
+   <h3>
 
        消费者从 Broker 拉取到消息之后，需要返回消费成功（CONSUME_SUCCESS）来表示业务方正常消费完成。
     如果返回 CONSUME_LATER 则会按照不同的 messageDelayLevel 时间进行再次消费，时间分级从秒到小时，
     最长时间为2个小时后再次进行消费重试，如果消费满16次之后还是未能消费成功，则不再重试。
 
        而未能成功消费的消息并不会立刻将丢弃，而是将消息发送到【死信队列】，其名称是在原队列名称前加 %DLQ%，
-    如果消息最终进入了死信队列，则可以通过 RocketMQ 提供的相关接口从死信队列获取到相应的消息，保证了消息消费的可靠性。
-</h3>
+    如果消息最终进入了死信队列，则可以通过从死信队列获取到相应的消息，保证了消息消费的可靠性。
+   </h3>
 
 ### 2、消费幂等
    ### 幂等概念：如果有一个操作，多次执行与一次执行所产生的影响是相同的，我们就称这个操作是幂等的。
@@ -657,7 +618,7 @@
         b、异步刷盘（默认策略）：消息写入到内存的 PageCache 中，就立刻给客户端返回写操作成功，
                    当 PageCache 中的消息积累到一定的量时，触发一次写操作，或者定时等策略将 PageCache 中的消息写入到磁盘中。
                    这种方式吞吐量大，性能高，但是 PageCache 中的数据可能丢失，不能保证数据绝对的安全。
-      】
+       】
     ②、Broker主从复制同步时，可以通过配置文件来设置同步方式（同步复制、异步复制）。
        同步复制可以保证消息的可靠性，但是会影响性能。
       【
@@ -665,7 +626,7 @@
                    但是同步复制会增大数据写入延迟，降低系统吞吐量。
         b、异步复制：异步复制方式是只要Master写成功，即可反馈给客户端写成功状态。
                    异步复制拥有较低的延迟和较高的吞吐量，但是如果 Master 出了故障，有些数据因为没有被写入Slave，有可能会丢失；
-      】
+       】
 <h4>
 
 <h3>Ⅲ、Broker把消息推送给消费者或者消费者主动拉取消息时；</h3>

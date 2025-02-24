@@ -41,7 +41,7 @@ class BakDataThread extends Thread{
     public void run(){
         int i = 0;
         // 虽然while是死循环，但是守护线程会随着主线程的结束而结束
-        while(true){
+        while(true) {
             System.out.println(Thread.currentThread().getName() + "-->" + (++i));
             try {
                 Thread.sleep(1000);
