@@ -20,10 +20,10 @@ public class B_ScopeThreadLocal {
     //      2、举个具体点的例子：当web服务器收到一个请求时，需要解析当前登录态的用户，在后续的业务执行流程中都需要这个用户相关信息。
     //                        例如：个人实名信息、用户虚拟信息【等级，状态...】等等十几个实体类信息
     //                        执行每个业务方法的时候都通过方法传参的形式传递进去，这个方式就不太优雅了。
-    //      3、可行的方案：通过Threadlocal实现请求线程的上下文，只要是同一线程的执行过程，不同方法间不通过传参方式传递上下文状态变量，
+    //      3、可行的方案：通过ThreadLocal实现请求线程的上下文，只要是同一线程的执行过程，不同方法间不通过传参方式传递上下文状态变量，
     //                   而是直接操作ThreadLocal对象实现状态数据的读写。当存在多个上下文状态的话，则需要定义多个ThreadLocal
     //      4、但是当遇到业务流程中使用线程池的情况下，从Tomcat传递这些ThreadLocal到线程池中的线程里就变的比较麻烦了。
-    //         基于以上考虑，下面介绍一种基于Threadlocal实现的上下文管理组件Scope
+    //         基于以上考虑，下面介绍一种基于ThreadLocal实现的上下文管理组件Scope
     @Test
     public void testScopeKey() {
         ScopeKey<String> localThreadName = new ScopeKey<>();
