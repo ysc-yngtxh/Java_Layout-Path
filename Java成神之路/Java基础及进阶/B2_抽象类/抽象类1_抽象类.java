@@ -1,4 +1,5 @@
 package B2_抽象类;
+
 /*
    抽象类（abstract）
    1、类和类之间具有共同特征，将这些共同特征提取出来，形成的就是抽象类。
@@ -87,6 +88,7 @@ public class 抽象类1_抽象类 {
     public static void feed(Animal an) {
         an.move();
     }
+    
     // 多态：就是指一个引用（类型）在不同的情况下的多种状态。
     //      也可以理解为，多态是指通过指向父类的指针，来调用在不同子类中实现的方法。
     public static void main(String[] args) {
@@ -100,4 +102,3 @@ public class 抽象类1_抽象类 {
         feed(new Master(30));
     }
 }
-

@@ -34,7 +34,9 @@ public class B_ScopeThreadLocal {
             Scope.beginScope();
             try {
                 localThreadName.set("initVal");
-                log.info("currentThread: {}", localThreadName.get());
+                log.info("当前线程：{}，上下文中的变量副本为: {}"
+                        , Thread.currentThread().getName()
+                        , localThreadName.get());
             } finally {
                 // 关闭 Scope
                 Scope.endScope();
@@ -54,7 +56,9 @@ public class B_ScopeThreadLocal {
         Runnable r = () -> {
             Scope.beginScope();
             try {
-                log.info("initValue: {}", initValue.get());
+                log.info("当前线程：{}，上下文中的变量副本为: {}"
+                         , Thread.currentThread().getName()
+                         , initValue.get());
             } finally {
                 Scope.endScope();
             }
@@ -69,7 +73,10 @@ public class B_ScopeThreadLocal {
     public void testRunWithNewScope() {
         ScopeKey<String> localThreadName = ScopeKey.withInitial(() -> "initVal");
 
-        Runnable r = () -> log.info("currentThread: {}", localThreadName.get());
+        Runnable r = () -> log.info("当前线程：{}，上下文中的变量副本为: {}"
+                                    , Thread.currentThread().getName()
+                                    , localThreadName.get()
+        );
 
         // 不同线程中执行时，开启独占的 Scope，然后在各自的线程中获取Scope的数据状态
         new Thread(() -> Scope.OpenCloseScope(r), "thread-1").start();
@@ -85,11 +92,20 @@ public class B_ScopeThreadLocal {
         localThreadName.set("initVal");
 
         Runnable r = () -> {
-            log.info("currentThread: {}", localThreadName.get());
+            // 注意：不能在线程中修改 Scope。由于Scope是共享数据，所以会有线程安全问题
+            log.info("当前线程：{}，上下文中的变量副本为: {}"
+                     , Thread.currentThread().getName()
+                     , localThreadName.get()
+            );
         };
 
         // 不同线程中执行时，获取的是同一个主线程的Scope，并不是独占！！！
         new Thread(() -> Scope.supplyWithExistScope(scope, r), "thread-1").start();
         new Thread(() -> Scope.supplyWithExistScope(scope, r), "thread-2").start();
+
+        log.info("当前线程：{}，上下文中的变量副本为: {}"
+                , Thread.currentThread().getName()
+                , localThreadName.get()
+        );
     }
 }

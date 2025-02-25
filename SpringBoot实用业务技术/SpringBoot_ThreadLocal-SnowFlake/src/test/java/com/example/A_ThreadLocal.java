@@ -27,7 +27,8 @@ public class A_ThreadLocal {
      */
 
     private static final ThreadLocal<User> THREAD_LOCAL = new ThreadLocal<>();
-    private static void setData(User user) {
+    private static void setAndPrintData(User user) {
+        THREAD_LOCAL.set(user);
         System.out.println("set数据，线程名：" + Thread.currentThread().getName());
     }
 
@@ -39,12 +40,12 @@ public class A_ThreadLocal {
 
     @Test
     void contextLoads() throws InterruptedException {
-        setData(new User());
+        setAndPrintData(new User());
 
         Runnable A = () -> {
             for (int i = 0; i < 5; i++) {
                 // 方法入口处，设置一个变量和当前线程绑定
-                setData(new User(i, "游诗成" + i));
+                setAndPrintData(new User(i, "游诗成" + i));
                 // 调用其它方法，其它方法内部也能获取到刚放进去的变量
                 getAndPrintData();
                 THREAD_LOCAL.remove();
@@ -55,17 +56,19 @@ public class A_ThreadLocal {
         Runnable B = () -> {
             for (int i = 0; i < 5; i++) {
                 // 方法入口处，设置一个变量和当前线程绑定
-                setData(new User(i, "曹玉敏" + i));
+                setAndPrintData(new User(i, "曹玉敏" + i));
                 // 调用其它方法，其它方法内部也能获取到刚放进去的变量
                 getAndPrintData();
                 THREAD_LOCAL.remove();
                 System.out.println("======== Finish" + i + " =========");
             }
         };
-        new Thread(A).start();
-        new Thread(A).join();
-        new Thread(B).start();
-        new Thread(B).join();
+        Thread t1 = new Thread(A, "t1");
+        t1.start();
+        t1.join();
+        Thread t2 = new Thread(B, "t2");
+        t2.start();
+        t1.join();
 
         TimeUnit.SECONDS.sleep(6);
         getAndPrintData();

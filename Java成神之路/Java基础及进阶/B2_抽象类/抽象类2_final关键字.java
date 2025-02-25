@@ -49,8 +49,6 @@ class B extends A{
 }
 */     // 编译错误
 
-import A1_基础知识.初识Java.方法;
-
 class T{
     int abc = 12;
     public final void doSome(){

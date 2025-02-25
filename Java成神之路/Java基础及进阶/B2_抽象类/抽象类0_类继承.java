@@ -20,7 +20,10 @@ class Person {
         System.out.println("这里是静态代码块");
     }
     {
-        System.out.println("这里是构造代码块");
+        System.out.println("这里是构造(普通)代码块，在构造函数之前执行");
+    }
+    public Person() {
+        System.out.println("这里是构造函数");
     }
     public final void finalMethod() {
         // 这是一个 final 方法，子类将无法重写它
