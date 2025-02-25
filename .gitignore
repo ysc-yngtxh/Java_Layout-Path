@@ -135,3 +135,11 @@ SSM框架/.idea
 Web 深造/.idea
 DB数据库/.idea
 .gitignore
+maven-wrapper.properties
+maven-wrapper.jar
+SpringBoot前沿技术栈/10_RocketMQ/10.1_RocketMQ-Demo/.mvn
+SpringBoot前沿技术栈/10_RocketMQ/10.2_RocketMQ-Integrate/.mvn
+SpringBoot前沿技术栈/10_RocketMQ/10.2_RocketMQ-Integrate/RocketMQ-Common/.mvn
+SpringBoot前沿技术栈/10_RocketMQ/10.2_RocketMQ-Integrate/RocketMQ-Order-Service/.mvn
+SpringBoot前沿技术栈/10_RocketMQ/10.2_RocketMQ-Integrate/RocketMQ-Points-Service/.mvn
+SpringBoot前沿技术栈/10_RocketMQ/10.3_RocketMQ-SpringBoot/.mvn
