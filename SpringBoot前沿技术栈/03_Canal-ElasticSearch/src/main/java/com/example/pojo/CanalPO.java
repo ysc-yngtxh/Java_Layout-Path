@@ -1,4 +1,4 @@
-package com.example.canalelasticsearch.pojo;
+package com.example.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,10 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
 
 /**
- * (Testysc)实体类
+ * (CanalPO)实体类
  *
  * @author makejava
  * @since 2022-03-05 11:30:32
@@ -18,7 +17,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "testysc")
-public class Testysc {
+public class CanalPO {
 
     @Id
     private Integer id;
@@ -29,11 +28,10 @@ public class Testysc {
 
     @Override
     public String toString() {
-        return "Testysc{" +
+        return "CanalPO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 '}';
     }
 }
-

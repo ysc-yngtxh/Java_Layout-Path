@@ -6,15 +6,14 @@ server:
     context:
       path: /
   application:
-    name: 17_canal-elasticsearch
+    name: ${project.artifactId}
 
 #mybatis配置
 logging:
   level:
     com:
       example:
-        canalelasticsearch:
-          mapper: debug  #mybatis查询数据的信息日志
+        mapper: debug  #mybatis查询数据的信息日志
 
 #jdbc配置
 spring:
@@ -23,7 +22,7 @@ spring:
     url: jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC
     username: root
     password: 131474
-  data:     #Elasticsearch\u914D\u7F6E
+  data:     # Elasticsearch\u914D\u7F6E
     elasticsearch:
       repositories:
         enabled: true

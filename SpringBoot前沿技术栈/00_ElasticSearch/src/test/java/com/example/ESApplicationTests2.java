@@ -92,7 +92,7 @@ public class ESApplicationTests2 {
     // 这就是一个普通的 HTTP 请求，请求参数就是查询的条件，这个条件是一个 JSON 字符串，需要我们自己组装，
     // 请求的返回值也是一个 JSON 字符串，这个 JSON 字符串也需要我们自己手动去解析，这种可以算是弱类型的请求和响应
     @Test
-    void tst() throws IOException {
+    void test() throws IOException {
         URL url = new URL("http://localhost:9200/shop/_search");
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
@@ -455,6 +455,7 @@ public class ESApplicationTests2 {
 
     /**
      * 模板化搜索
+     * <p>
      * 模板化搜索是存储的搜索，可以使用不同的变量运行它。搜索模板让您无需修改应用程序代码即可更改搜索。
      * 在运行模板搜索之前，首先必须创建模板。这是一个返回搜索请求正文的存储脚本，通常定义为 Mustache 模板
      */
@@ -708,5 +709,4 @@ public class ESApplicationTests2 {
     // 这个错误的原因是因为我的分组聚合查询的字符串sex类型是text(可分词)类型。当使用到 term 查询的时候，
     // 由于是精准匹配，所以查询的关键字在es上的类型，必须是keyword而不能是text。
     // 所以想要分组查询，指定根据分组字段的keyword属性就可以了。
-
 }

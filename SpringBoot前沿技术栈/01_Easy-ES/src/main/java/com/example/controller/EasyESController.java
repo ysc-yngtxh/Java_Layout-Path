@@ -2,7 +2,6 @@ package com.example.controller;
 
 import com.example.mapper.DocumentMapper;
 import com.example.model.Document;
-import lombok.RequiredArgsConstructor;
 import org.dromara.easyes.core.conditions.select.LambdaEsQueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class TestUseEeController {
+public class EasyESController {
 
     // Easy-Es底层用的就是 ElasticSearch 官方提供的 RestHighLevelClient
     // 我们只是对 RestHighLevelClient 做了增强，并没有改变减少或是削弱它原有的功能，所以您无需担心拓展性.

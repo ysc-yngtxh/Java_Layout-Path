@@ -15,7 +15,7 @@ spring:
     connection-timeout: 5000 # 连接ElasticSearch超时时间
 
 easy-es:
-  enable: true # 默认为true,若为false时,则认为不启用本框架
+  enable: true   # 默认为true,若为false时,则认为不启用本框架
   address: 127.0.0.0:9200  # 填你的es连接地址
   banner: false  # 关闭启动时Easy-Es在控制台LOGO
   # username: 有设置才填写,非必须

@@ -30,7 +30,6 @@ public class CanalClient implements InitializingBean {
                 , "example", "", "");
 
         while (true) {
-
             // TODO 连接
             canalConnector.connect();
 

@@ -5,7 +5,7 @@ import org.dromara.easyes.core.core.BaseEsMapper;
 
 /**
  * Mapper
- **/
+ */
 public interface DocumentMapper extends BaseEsMapper<Document> {
 
 }

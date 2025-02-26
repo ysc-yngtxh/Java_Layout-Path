@@ -1,8 +1,8 @@
-package com.example.canalelasticsearch.controller;
+package com.example.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.example.canalelasticsearch.pojo.Testysc;
-import com.example.canalelasticsearch.service.TestyscService;
+import com.example.pojo.CanalPO;
+import com.example.service.CanalService;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -23,17 +23,17 @@ import java.util.Map;
 import static java.util.stream.Collectors.toList;
 
 /**
- * (Testysc)表控制层
+ * (CanalPO)表控制层
  *
  * @author makejava
  * @since 2022-03-05 11:30:29
  */
 @RestController
-@RequestMapping("testysc")
-public class TestyscController {
+@RequestMapping("canal")
+public class CanalController {
 
     @Autowired
-    private TestyscService testyscService;
+    private CanalService canalService;
 
     @Autowired
     private RestHighLevelClient highLevelClient;
@@ -44,8 +44,8 @@ public class TestyscController {
      * @return
      */
     @GetMapping("/search/{id}")
-    public ResponseEntity<Testysc> queryByPage(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok(this.testyscService.query(id));
+    public ResponseEntity<CanalPO> queryByPage(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok(this.canalService.query(id));
     }
 
 
@@ -54,9 +54,9 @@ public class TestyscController {
      * @return
      */
     @GetMapping("/search")
-    public ResponseEntity<List<Testysc>> queryById() {
+    public ResponseEntity<List<CanalPO>> queryById() {
         //return ResponseEntity.ok(this.testyscService.queryList());
-        return ResponseEntity.status(HttpStatus.CREATED).body( this.testyscService.queryList() );
+        return ResponseEntity.status(HttpStatus.CREATED).body( this.canalService.queryList() );
     }
 
     /**
@@ -65,8 +65,8 @@ public class TestyscController {
      * @return
      */
     @PostMapping("/add")
-    public ResponseEntity<String> add(Testysc testysc) {
-        this.testyscService.save(testysc);
+    public ResponseEntity<String> add(CanalPO testysc) {
+        this.canalService.save(testysc);
         return ResponseEntity.status(HttpStatus.OK).body( "添加数据成功！" );
     }
 
@@ -76,8 +76,8 @@ public class TestyscController {
      * @return
      */
     @PutMapping("/update")
-    public ResponseEntity<String> edit(Testysc testysc) {
-        this.testyscService.update(testysc);
+    public ResponseEntity<String> edit(CanalPO testysc) {
+        this.canalService.update(testysc);
         return ResponseEntity.status(HttpStatus.OK).body( "更新数据成功！" );
     }
 
@@ -88,7 +88,7 @@ public class TestyscController {
      */
     @DeleteMapping("/remove/{id}")
     public ResponseEntity<Boolean> deleteById(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok(!this.testyscService.remove(id));
+        return ResponseEntity.ok(!this.canalService.remove(id));
     }
 
     /**
@@ -124,4 +124,3 @@ public class TestyscController {
     }
 
 }
-

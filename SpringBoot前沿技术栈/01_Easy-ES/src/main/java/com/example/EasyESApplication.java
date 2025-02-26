@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @EsMapperScan("com.example.mapper")
-public class EasyEsApplication {
+public class EasyESApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(EasyEsApplication.class, args);
+        SpringApplication.run(EasyESApplication.class, args);
     }
 
 }
