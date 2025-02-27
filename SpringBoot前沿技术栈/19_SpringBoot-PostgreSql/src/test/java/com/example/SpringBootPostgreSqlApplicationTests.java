@@ -15,6 +15,7 @@ class SpringBootPostgreSqlApplicationTests {
     @Autowired
     private EceUserMapper eceUserMapper;
 
+    // 建议查询
     @Test
     void contextLoads() {
         System.out.println(eceUserMapper.queryById(1));
