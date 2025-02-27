@@ -11,11 +11,11 @@ public class A1_安装及部署 {}
 //      2、开启 postgresql@17
 //          brew services start postgresql@17;
 //      3、配置 postgresql@17 环境变量
-//          export PATH=$PATH:/opt/homebrew/Cellar/postgresql@17/17.2/bin
+//          export PATH=/opt/homebrew/Cellar/postgresql@17/17.2/bin:$PATH
 //      4、进入postgresql，postgres是PostgreSql的默认数据库
-//          ①、明确指定了要连接的数据库主机，以用户名 root 进行连接
-//              psql -h localhost -p 5432 -U root -d postgres -W;
-//          ②、使用操作系统的默认设置
+//          ①、查看安装版本
+//              psql -version;
+//          ②、进入postgresql
 //              psql postgres;
 //      5、创建角色或者用户
 //          ①、在Postgresql中 USER(用户) 与 ROLE(角色) 没有太大的区别。
@@ -25,6 +25,11 @@ public class A1_安装及部署 {}
 //          创建角色：CREATE ROLE [角色] WITH LOGIN PASSWORD '密码'; (这里的角色加上了'LOGIN'权限)
 //                  如果一开始没有加上'LOGIN'权限，可另外执行语句添加'LOGIN'权限：ALTER ROLE [角色] LOGIN;
 //          创建用户：CREATE USER [用户] PASSWORD '密码';
+//          ④、创建 root 用户：create user root password '123456';
+//      6、退出命令行
+//          \q
+//      7、明确指定以用户名 root 进行连接的数据库主机
+//              psql -h localhost -p 5432 -U root -d postgres -W;
 //      6、角色或者用户 授予 CREATEDB(创建数据库) 权限
 //          授予角色 CREATEDB(创建数据库) 权限：ALTER ROLE [角色] CREATEDB;
 //          授予用户 CREATEDB(创建数据库) 权限：ALTER USER [用户] CREATEDB;
