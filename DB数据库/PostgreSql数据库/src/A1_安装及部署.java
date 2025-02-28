@@ -22,10 +22,10 @@ public class A1_安装及部署 {}
 //          ②、不同的是 CREATE USER 定义的用户默认就有 'LOGIN' 权限，
 //              而 CREATE ROLE 默认没有 'LOGIN' 权限（默认没有，但是可以执行另外语句添加）
 //          ③、'LOGIN' 权限：表示的是登录数据库的权限。
-//          创建角色：CREATE ROLE [角色] WITH LOGIN PASSWORD '密码'; (这里的角色加上了'LOGIN'权限)
-//                  如果一开始没有加上'LOGIN'权限，可另外执行语句添加'LOGIN'权限：ALTER ROLE [角色] LOGIN;
-//          创建用户：CREATE USER [用户] PASSWORD '密码';
-//          ④、创建 root 用户：create user root password '123456';
+//              创建角色：CREATE ROLE [角色] WITH LOGIN PASSWORD '密码'; (这里的角色加上了'LOGIN'权限)
+//                      如果一开始没有加上'LOGIN'权限，可另外执行语句添加'LOGIN'权限：ALTER ROLE [角色] LOGIN;
+//              创建用户：CREATE USER [用户] PASSWORD '密码';
+//          ④、使用 Postgres 命令行创建 root 用户：create user root password '123456';
 //      6、退出命令行
 //          \q
 //      7、明确指定以用户名 root 进行连接的数据库主机
