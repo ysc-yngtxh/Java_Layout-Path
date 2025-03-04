@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>LogStash</artifactId>
+    <artifactId>01.3_LogStash</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>LogStash</name>
     <description>LogStash</description>

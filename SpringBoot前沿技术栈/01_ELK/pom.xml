@@ -20,6 +20,16 @@
         <java.version>23</java.version>
     </properties>
 
+    <modules>
+        <module>01.1_ElasticSearch</module>
+        <module>01.2_Kibana</module>
+        <module>01.3_LogStash</module>
+        <module>01.4_Easy-ES</module>
+        <module>01.5_Canal-Demo</module>
+        <module>01.6_Canal-ElasticSearch</module>
+    </modules>
+    <packaging>pom</packaging>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
