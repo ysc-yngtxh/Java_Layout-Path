@@ -180,72 +180,77 @@
    - ![ES原理图片](src/main/resources/static/image-0.jpg)
 
 ## **三、CURL语法**
-## 1. 索引操作
 <figure>
 
-  ### ①、创建索引（PUT）
-  - ```
-    PUT /索引       # 索引名类比于MySQL的数据库
-    {
-      "settings": {   # 设置
-        "index": {    # 索引
-          "number_of_shards": "8",    # 主分片8块
-          "number_of_replicas": "1"   # 副本1个，副本分片8块
-        }
-      },
-      # mapping映射。用来定义一个文档以及其所包含的字段如何被存储和索引，可以在映射中事先定义字段的数据类型、
-      #             字段的权重、分词器等属性，就如同在关系型数据库中创建数据表时会设置字段的类型。
-      "mappings":{
-        "properties": {        # 属性
-          "title":{            # 标题
-            "type": "text",    # 可分词的类型
-            "analyzer": "ik_max_word"   # 最细的分法
-          },
-          "images":{           # 图片，是一个url地址
-            "type": "keyword", # 不需要分词，所以可以加一个keyword类型
-            "index": false     # 也没必要加上搜索
-          },
-          "price":{            # 价格
-            "type": "float"    # float类型
-          },
-          "name": {
-            "type": "text",
-            "fields": {
-              "kyName" : {
-                "type": "keyword"
-              }
-            }
-          }
-        }
-      }
-    }
-    
-    type: text(可分词)、keyword(不可分词)、long、integer、short、double、float、date、boolean、binary......
-    fields: 实现一个字段多种数据类型，例如上述name是全文检索可以进行分词的，但是我们也可以对其进行排序或者聚合等，
-            很奇怪：正常的不是说es中进行过滤、排序、聚合的字段,不能被分词嘛，怎么name又可以进行排序或者聚合等呢？
-            因为其中kyName可以理解为附加名，不设置的话默认是keyword。我们通过name.kyName作为排序条件：
-            GET /ysc/_search
-            {
-              "query": {
-                "match_all": {}
-              },
-              "sort": [
-                {
-                  "name.kyName": {
-                    "order": "asc"
-                  }
-                }
-              ]
-            }
-    index: true表示字段会被索引，默认是true。false表示字段不会被索引
-    store: Elasticsearch在创建文档索引时，会将文档中的原始数据备份，保存在一个叫做_source的属性中。
-           而我们可以通过过滤_source来选择哪些要显示，那些不显示。
-    如果存的是对象，比如：
-           {girl:{name:"rose",age:21}}
-           会处理成两个字段：girl.name和girl.age
-    ```
+  ## 1. 索引操作
+   <figure>
+
+   ### ①、创建索引（PUT）
+   <figure>
+
+     PUT /索引       # 索引名类比于MySQL的数据库
+     {
+       "settings": {   # 设置
+         "index": {    # 索引
+           "number_of_shards": "8",    # 主分片8块
+           "number_of_replicas": "1"   # 副本1个，副本分片8块
+         }
+       },
+       # mapping映射。用来定义一个文档以及其所包含的字段如何被存储和索引，可以在映射中事先定义字段的数据类型、
+       #             字段的权重、分词器等属性，就如同在关系型数据库中创建数据表时会设置字段的类型。
+       "mappings":{
+         "properties": {        # 属性
+           "title":{            # 标题
+             "type": "text",    # 可分词的类型
+             "analyzer": "ik_max_word"   # 最细的分法
+           },
+           "images":{           # 图片，是一个url地址
+             "type": "keyword", # 不需要分词，所以可以加一个keyword类型
+             "index": false     # 也没必要加上搜索
+           },
+           "price":{            # 价格
+             "type": "float"    # float类型
+           },
+           "name": {
+             "type": "text",
+             "fields": {
+               "kyName" : {
+                 "type": "keyword"
+               }
+             }
+           }
+         }
+       }
+     }
+     
+     type: text(可分词)、keyword(不可分词)、long、integer、short、double、float、date、boolean、binary......
+     fields: 实现一个字段多种数据类型，例如上述name是全文检索可以进行分词的，但是我们也可以对其进行排序或者聚合等，
+             很奇怪：正常的不是说es中进行过滤、排序、聚合的字段,不能被分词嘛，怎么name又可以进行排序或者聚合等呢？
+             因为其中kyName可以理解为附加名，不设置的话默认是keyword。我们通过name.kyName作为排序条件：
+             GET /ysc/_search
+             {
+               "query": {
+                 "match_all": {}
+               },
+               "sort": [
+                 {
+                   "name.kyName": {
+                     "order": "asc"
+                   }
+                 }
+               ]
+             }
+     index: true表示字段会被索引，默认是true。false表示字段不会被索引
+     store: Elasticsearch在创建文档索引时，会将文档中的原始数据备份，保存在一个叫做_source的属性中。
+            而我们可以通过过滤_source来选择哪些要显示，那些不显示。
+     如果存的是对象，比如：
+            {girl:{name:"rose",age:21}}
+            会处理成两个字段：girl.name和girl.age
+   </figure>
+
    ### ②、新增索引映射关系（PUT）【创建好的索引不支持更新属性，但允许新增映射关系】
-   - ```
+   <figure>
+
      倒排索引结构虽然不复杂，但是一旦数据结构改变（比如改变了分词器），就需要重新创建倒排索引，这简直是灾难。
      因此索引库一旦创建，无法修改mapping。
      虽然无法修改mapping中已有的字段，但是却允许添加新的字段到mapping中，因为不会对倒排索引产生影响。
@@ -259,299 +264,315 @@
               }
             }  
           }
-     ```
+   </figure>
+
    ### ③、查看索引映射关系（GET）
-   - ```
+   <figure>
+
      GET /索引名
      GET /索引名/_mapping
-     ```
+   </figure>
+
    ### ④、删除索引（DELETE）
-   - ```
+   <figure>
+
      DELETE /索引名
-     ```
-</figure>
+   </figure>
 
-## 2. 文档操作
-<figure>
+   </figure>
 
-  ①、新增文档（POST）
-  - ```
-    POST /索引库名/_doc      # id会随机赋值进行新增，注意：这里的id指的是ES中的文档id【_id】
-    {
-      "title": "小米手机",
-      "images": "http://localhost:8080/img/2.jpg",
-      "price": 2699.00
-    }
+  ## 2. 文档操作
+   <figure>
 
-    # 新增(更新)数据（POST）其实使用PUT也有一样的效果，学了就能理解
-    POST /索引库名/_doc/自定义id值     # 根据id进行新增
-    {
-        "title":"超米手机",
-        "images":"http://image.leyou.com/12479122.jpg",
-        "price":3699.00
-    }
-    ```
-  ②、更新文档数据（PUT）
-  - ```
-    PUT /索引库/_doc/id值    # 根据文档id更新
-    {
-      "title": "巨无霸手机",
-      "images": "http://localhost:8080/img/2.jpg",
-      "price": 2699.00
-    }
-    ```
-  ③、删除索引（DELETE）
-   - `DELETE /索引库名/_doc/id值 # 根据id删除`
+   ### ①、新增文档数据（POST）
+   <figure>
 
-  ④、查询索引（GET）
-  - ```
-    Ⅰ、全文检索(match模糊查询，搜索的词会先进行分词)
-          GET /ysc/_search                   GET /ysc/_search             GET /ysc/_doc/{id}
-          {                                  {
-            "query": {                          "query": {
-               "match": {                         "match_all": {}
-                 "title": "大米手机"                }
-               }                             }
-            }
-          }
-    
-          你会发现，你做一个全文检索 "大米手机"，会查出很多的数据。这是因为，你在做 "大米手机" 检索的时候。
-          Elasticsearch会先做一个分词处理，比如："大","米","手","机","手机"......。
-          所以只要包含这些词条的信息就都会被查询到。
-    
-    Ⅱ、词条匹配(terms查询用于精准值匹配，搜索的词不会进行分词)
-          GET /ysc/_search                 GET /ysc/_search
-          {                                {
-            "query": {                       "query": {
-              "term": {                        "terms": {
-                "title": "小米"                   "title": ["小米","oppo"]  # 这里注意,里面的英文oppo要小写，大写查询不到
-              }                                 }
-            }                                 }
-          }                                }
+     POST /索引库名/_doc      # id会随机赋值进行新增，注意：这里的id指的是ES中的文档id【_id】
+     {
+       "title": "小米手机",
+       "images": "http://localhost:8080/img/2.jpg",
+       "price": 2699.00
+     }
+ 
+     # 新增(更新)数据（POST）其实使用PUT也有一样的效果，学了就能理解
+     POST /索引库名/_doc/自定义id值     # 根据id进行新增
+     {
+         "title":"超米手机",
+         "images":"http://image.leyou.com/12479122.jpg",
+         "price":3699.00
+     }
+   </figure>
+
+   ### ②、更新文档数据（PUT）
+   <figure>
+
+     PUT /索引库/_doc/id值    # 根据文档id更新
+     {
+       "title": "巨无霸手机",
+       "images": "http://localhost:8080/img/2.jpg",
+       "price": 2699.00
+     }
+   </figure>
+
+   ### ③、删除文档数据（DELETE）
+   <figure>
+
+     DELETE /索引库名/_doc/id值 # 根据id删除
+   </figure>
+
+   ### ④、查询文档数据（GET）
+   <figure>
+
+     Ⅰ、全文检索(match模糊查询，搜索的词会先进行分词)
+           GET /ysc/_search                   GET /ysc/_search             GET /ysc/_doc/{id}
+           {                                  {
+             "query": {                          "query": {
+                "match": {                         "match_all": {}
+                  "title": "大米手机"                }
+                }                             }
+             }
+           }
+     
+           你会发现，你做一个全文检索 "大米手机"，会查出很多的数据。这是因为，你在做 "大米手机" 检索的时候。
+           Elasticsearch会先做一个分词处理，比如："大","米","手","机","手机"......。
+           所以只要包含这些词条的信息就都会被查询到。
+     
+     Ⅱ、词条匹配(terms查询用于精准值匹配，搜索的词不会进行分词)
+           GET /ysc/_search                 GET /ysc/_search
+           {                                {
+             "query": {                       "query": {
+               "term": {                        "terms": {
+                 "title": "小米"                   "title": ["小米","oppo"]  # 
+                 这里注意,里面的英文oppo要小写，大写查询不到
+               }                                 }
+             }                                 }
+           }                                }
      
           match与term的区别：
             match是代表模糊查询，match查询会先对搜索词进行分词,分词完毕后再逐个对分词结果进行匹配，
             term是代表精确查询，搜索前不会再对搜索词进行分词，所以我们的搜索词必须是文档分词集合中的一个
   
-    Ⅲ、结果过滤(excludes:不显示的字段  includes: 显示的字段)
-          GET /ysc/_search
-          {
-            "_source": {
-              "excludes": "{images}"
-            },
-            "query": {
-               "match": {
-                  "title": "大米手机"
-               }
-            }
-          }
-    
-          表示搜索出来的信息返回的只有"title","price"
-  
-    Ⅳ、模糊查询(fuzzy可以允许搜索字段是错误的)
-          GET /ysc/_search
-          {
-            "_source": ["title","price"],
-            "query": {
-               "fuzzy": {
-                  "title": "appla"
-               }
-            }
-          }
-    
-          我的索引库中只有一个apple手机的信息，但是这里，我去查询appla。按理说词条是错误的查询不到
-          但是结果还是能得到apple手机信息。_source表示显示的字段
-  
-    Ⅴ、范围查询(range)
-          GET /ysc/_search
-          {
-            "_source": ["title","price"],
-            "query": {
-               "range": {
-                  "price": {
-                     "gte":1000,  # 大于1000
-                     "lte":3000   # 小于3000
-                  }
-               }
-            }
-          }
-    
-          通过"range"关键字，在价格里进行范围查询。
-  
-    Ⅵ、布尔查询(bool)
-          GET /ysc/_search
-          {
-            "_source": ["title","price"],
-            "query": {
-              "bool": {
-                "must": [       # 表示的是查询条件都要满足，还有一个must_not表示查询条件都不满足
-                  {"match":{"title": "apple"}},{"range":{"price": {"gte": 3000}}}
-                ]
-              }
-            }
-          }
-    
-          GET /ysc/_search
-          {
-            "_source": ["title","price"],
-            "query": {
-              "bool": {
-                "should": [       # 表示的是只要满足一个条件就可以
-                  {"match": {"title": "apple"}},{"range":{"price": {"gte": 3000}}}
-                ]
-              }
-            }
-          }
-  
-    Ⅶ、过滤(filter),过滤只能在bool属性或者聚合查询桶之下使用
-          GET /ysc/_search
-          {
-            "_source": ["title","price"],
-            "query": {
-              "bool": {
-                "must": [
-                  {"match": {"title": "apple"}}
-                ],
-                "filter": {
-                  "term": {"name.keyword": "游诗成"},  # 精准匹配name值为游诗成的数据，并进行过滤掉(name为可分词的字段属性，精准匹配则需加上keyword)
-                  "terms": {"context": ["123", "456"]},  # 多数据精准匹配
-                  "range": {"price": {"gte": 3000}},  # 取范围price值大于3000的数据
-                  "bool": {                          # 
-                    "must": {
-                      "match": {"hobby": "运维大佬"}
-                    }
-                  },
-                  "age": [25,26,27],      # 过滤掉字段属性age值为[25,26,27]的数据
-                  "exits": {              # 过滤存在指定字段，获取字段不为空的索引记录使用
-                    "field": "sex"
-                  }
+     Ⅲ、结果过滤(excludes:不显示的字段  includes: 显示的字段)
+           GET /ysc/_search
+           {
+             "_source": {
+               "excludes": "{images}"
+             },
+             "query": {
+                "match": {
+                   "title": "大米手机"
                 }
-              }
-            }
-          }
-  
-    Ⅷ、排序(sort)以及分页
-          GET /ysc/_search
-          {
-            "_source": ["title","price"],
-            "query": {
-              "bool": {
-                "must": [
-                  {"match": {"title": "apple"}}
-                ],
-                "filter": {
-                  "range": {"price": {"gte": 3000}}
+             }
+           }
+     
+           表示搜索出来的信息返回的只有"title","price"
+   
+     Ⅳ、模糊查询(fuzzy可以允许搜索字段是错误的)
+           GET /ysc/_search
+           {
+             "_source": ["title","price"],
+             "query": {
+                "fuzzy": {
+                   "title": "appla"
                 }
-              }
-            },
-            "sort": [
-              {
-                "price": {
-                   "order": "desc"
-                 }
-              }
-            ],
-            "from":1,  # 表示当前偏移量：一共有13条数据，如果from是12，则只会有一条数据
-            "size":7   # 表示一页几条数据
-          }
+             }
+           }
+    
+           我的索引库中只有一个apple手机的信息，但是这里，我去查询appla。按理说词条是错误的查询不到
+           但是结果还是能得到apple手机信息。_source表示显示的字段
   
-    Ⅸ、聚合aggregations
-         Elasticsearch中的聚合，包含多种类型，最常用的两种，一个叫“桶(相当于分组)”，一个叫“度量(相当于求max,min,avg,   sum...)”
-         和关系型数据库中的聚合函数相类似
-         GET /test/_search
-         {
-           "size": 0,         # size设置为0，返回结果里是没有文档数据的，只有分组aggregations数据
-           "aggs": {          # 官方的属性，用于表示开启聚合
-             "max_title": {   # 自定义的名字
-               "max": {
-                 "field": "title"
+     Ⅴ、范围查询(range)
+           GET /ysc/_search
+           {
+             "_source": ["title","price"],
+             "query": {
+                "range": {
+                   "price": {
+                      "gte":1000,  # 大于1000
+                      "lte":3000   # 小于3000
+                   }
+                }
+             }
+           }
+     
+           通过"range"关键字，在价格里进行范围查询。
+   
+     Ⅵ、布尔查询(bool)
+           GET /ysc/_search
+           {
+             "_source": ["title","price"],
+             "query": {
+               "bool": {
+                 "must": [       # 表示的是查询条件都要满足，还有一个must_not表示查询条件都不满足
+                   {"match":{"title": "apple"}},{"range":{"price": {"gte": 
+                   3000}}}
+                 ]
                }
              }
            }
-         }
-         
-         聚合中常用的桶terms、filter、top_hits
-         GET /test/_search
-         {
-           "query": {
-             "match_all": {}
-           },
-           "size": 0,             # size设置为0，返回结果里是没有文档数据的，只有分组aggregations数据
-           "aggs": {              # 官方的属性，用于表示开启聚合
-             "group_by_name": {   # 自定义的名字
-               "terms": {         # 第一个桶：terms桶--针对某个field的值进行分组，field有几种值就分成几组
-                 "field": "name", # 查询的字段name, 注意：这个name不能是text类型的，不可以被分词。如果是text类型则要定义name.keyword
-                 "size": 10000,   # 指定返回的term个数，默认为10
-                 "order": {       # 按照price值进行倒排
-                   "price": "desc"
-                 } 
-               },
-               "aggs":{           # aggs可以嵌套在别的aggs里，相当于分组之后继续进行分组
-                 "group_by_price": {
-                   "sum": {
-                     "field": "price"
+    
+           GET /ysc/_search
+           {
+             "_source": ["title","price"],
+             "query": {
+               "bool": {
+                 "should": [       # 表示的是只要满足一个条件就可以
+                   {"match": {"title": "apple"}},{"range":{"price": {"gte": 3000}}}
+                 ]
+               }
+             }
+           }
+  
+     Ⅶ、过滤(filter),过滤只能在bool属性或者聚合查询桶之下使用
+           GET /ysc/_search
+           {
+             "_source": ["title","price"],
+             "query": {
+               "bool": {
+                 "must": [
+                   {"match": {"title": "apple"}}
+                 ],
+                 "filter": {
+                   "term": {"name.keyword": "游诗成"},  # 精准匹配name值为游诗成的数据，并进行过滤掉(name为可分词的字段属性，精准匹配则需加上keyword)
+                   "terms": {"context": ["123", "456"]},  # 多数据精准匹配
+                   "range": {"price": {"gte": 3000}},     # 取范围price值大于3000的数据
+                   "bool": {                          # 
+                     "must": {
+                       "match": {"hobby": "运维大佬"}
+                     }
+                   },
+                   "age": [25,26,27],      # 过滤掉字段属性age值为[25,26,27]的数据
+                   "exits": {              # 过滤存在指定字段，获取字段不为空的索引记录使用
+                     "field": "sex"
                    }
                  }
                }
-             },
-             "group_by_title": {
-               "filter": {        # 第二个桶：filter--一个用来过滤的桶。用法与上述布尔中filter一致
-                 "term": {
-                   "title": "游诗成"
-               }
              }
            }
-         }
-   
-         注意：es中进行过滤,排序,聚合的字段,不能被分词!!!!*
   
-    Ⅹ、实现搜索高亮highlight
-         这个高亮的字段是你想要查询的可分词的字段。
-         比如：我去百度一个关键字，给出的结果高亮部分肯定是你关键词中分词的一部分
-         所以，这里高亮的字段必须跟的query查询中的字段
-    
-         GET /ysc/_search
-         {
-            "query": {
-               "match": {
-                  "title": "手机"
+     Ⅷ、排序(sort)以及分页
+           GET /ysc/_search
+           {
+             "_source": ["title","price"],
+             "query": {
+               "bool": {
+                 "must": [
+                   {"match": {"title": "apple"}}
+                 ],
+                 "filter": {
+                   "range": {"price": {"gte": 3000}}
+                 }
                }
-            },
-            "highlight": {
-              "fields": {
-                "title": {}
+             },
+             "sort": [
+               {
+                 "price": {
+                    "order": "desc"
+                  }
+               }
+             ],
+             "from":1,  # 表示当前偏移量：一共有13条数据，如果from是12，则只会有一条数据
+             "size":7   # 表示一页几条数据
+           }
+  
+     Ⅸ、聚合aggregations
+          Elasticsearch中的聚合，包含多种类型，最常用的两种，一个叫“桶(相当于分组)”，一个叫“度量(相当于求max,min,
+          avg,   sum...)”
+          和关系型数据库中的聚合函数相类似
+          GET /test/_search
+          {
+            "size": 0,         # size设置为0，返回结果里是没有文档数据的，只有分组aggregations数据
+            "aggs": {          # 官方的属性，用于表示开启聚合
+              "max_title": {   # 自定义的名字
+                "max": {
+                  "field": "title"
+                }
               }
             }
-         }
-    
-         // 构建多个字段高亮
-         GET /ysc/_search
-         {
+          }
+          
+          聚合中常用的桶terms、filter、top_hits
+          GET /test/_search
+          {
             "query": {
-               "bool": {
-                  "should": [{
-                     "match": {
-                        "title": "手机"
-                     }
-                  }, {
-                     "match": {
-                        "price": "4562"
-                     }
-                  }]
-               }
-    
+              "match_all": {}
             },
-            "highlight": {
-              "fields": [{
-                "name": {}
-              }, {
-                "price": {}
-              }],
-              "preTags": "<span style='color: blue'",
-              "postTags": "</spn>"
+            "size": 0,             # size设置为0，返回结果里是没有文档数据的，只有分组aggregations数据
+            "aggs": {              # 官方的属性，用于表示开启聚合
+              "group_by_name": {   # 自定义的名字
+                "terms": {         # 第一个桶：terms桶--针对某个field的值进行分组，field有几种值就分成几组
+                  "field": "name", # 查询的字段name, 注意：这个name不能是text类型的，不可以被分词。如果是text类型则要定义name.keyword
+                  "size": 10000,   # 指定返回的term个数，默认为10
+                  "order": {       # 按照price值进行倒排
+                    "price": "desc"
+                  } 
+                },
+                "aggs":{           # aggs可以嵌套在别的aggs里，相当于分组之后继续进行分组
+                  "group_by_price": {
+                    "sum": {
+                      "field": "price"
+                    }
+                  }
+                }
+              },
+              "group_by_title": {
+                "filter": {        # 第二个桶：filter--一个用来过滤的桶。用法与上述布尔中filter一致
+                  "term": {
+                    "title": "游诗成"
+                }
+              }
             }
-         }
-    ```
+          }
+   
+          注意：es中进行过滤,排序,聚合的字段,不能被分词!!!!*
+  
+     Ⅹ、实现搜索高亮highlight
+          这个高亮的字段是你想要查询的可分词的字段。
+          比如：我去百度一个关键字，给出的结果高亮部分肯定是你关键词中分词的一部分
+          所以，这里高亮的字段必须跟的query查询中的字段
+     
+          GET /ysc/_search
+          {
+             "query": {
+                "match": {
+                   "title": "手机"
+                }
+             },
+             "highlight": {
+               "fields": {
+                 "title": {}
+               }
+             }
+          }
+    
+          // 构建多个字段高亮
+          GET /ysc/_search
+          {
+             "query": {
+                "bool": {
+                   "should": [{
+                      "match": {
+                         "title": "手机"
+                      }
+                   }, {
+                      "match": {
+                         "price": "4562"
+                      }
+                   }]
+                }
+             },
+             "highlight": {
+               "fields": [{
+                 "name": {}
+               }, {
+                 "price": {}
+               }],
+               "preTags": "<span style='color: blue'",
+               "postTags": "</spn>"
+             }
+          }
+   </figure>
+   </figure>
 </figure>
 
 ## 四、高级内容
