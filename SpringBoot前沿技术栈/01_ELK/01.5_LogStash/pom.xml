@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>01_ELK</artifactId>
+    <artifactId>01.5_LogStash</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <description>${project.artifactId}</description>
@@ -19,18 +19,6 @@
     <properties>
         <java.version>23</java.version>
     </properties>
-
-    <modules>
-        <module>01.1_ElasticSearch7.x</module>
-        <module>01.2_ElasticSearch8.x</module>
-        <module>01.3_SpringBoot-ElasticSearch8.0</module>
-        <module>01.4_Kibana</module>
-        <module>01.5_LogStash</module>
-        <module>01.6_Easy-ES</module>
-        <module>01.7_Canal-Demo</module>
-        <module>01.8_Canal-ElasticSearch</module>
-    </modules>
-    <packaging>pom</packaging>
 
     <dependencies>
         <dependency>
