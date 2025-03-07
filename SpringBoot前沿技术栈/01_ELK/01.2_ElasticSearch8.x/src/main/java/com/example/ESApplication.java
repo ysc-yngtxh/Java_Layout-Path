@@ -10,4 +10,5 @@ public class ESApplication {
 		SpringApplication.run(ESApplication.class, args);
 	}
 
+	// 注意：RestHighLevelClient 和 ElasticsearchTemplate 都已经在版本8.x.x被废弃
 }

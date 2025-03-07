@@ -218,6 +218,16 @@
                  "type": "keyword"
                }
              }
+           },
+           "alias": {
+             "properties": {
+               "firstName": {
+                 "type": "text"
+               },
+               "lastName": {
+                 "type": "text"
+               }
+             }
            }
          }
        }
@@ -291,7 +301,11 @@
      {
        "title": "小米手机",
        "images": "http://localhost:8080/img/2.jpg",
-       "price": 2699.00
+       "price": 2699.00,
+       "alias" : {
+         "firstName": "XIAO",
+         "lastName": "MI" 
+       }
      }
  
      # 新增(更新)数据（POST）其实使用PUT也有一样的效果，学了就能理解
@@ -299,19 +313,41 @@
      {
          "title":"超米手机",
          "images":"http://image.leyou.com/12479122.jpg",
-         "price":3699.00
+         "price":3699.00,
+         "alias" : {
+           "firstName": "XIAO",
+           "lastName": "MI"
+         }
      }
    </figure>
 
    ### ②、更新文档数据（PUT）
    <figure>
 
+     # 全量修改是覆盖原来的文档，其本质是：
+        1、根据指定的id删除文档
+        2、新增一个相同id的文档
+     # 注意：如果根据id删除时，id不存在，第二步的新增也会执行，也就从修改变成了新增操作了。
+     #      如果id存在，但是更新时未传递某些字段，那么这些字段会被删除。
      PUT /索引库/_doc/id值    # 根据文档id更新
      {
        "title": "巨无霸手机",
        "images": "http://localhost:8080/img/2.jpg",
-       "price": 2699.00
+       "price": 2699.00,
+       "alias" : {
+         "firstName": "小",
+         "lastName" "米": 
+       }
      }
+
+     # 增量修改：是只修改指定id匹配的文档中的部分字段。
+     POST /索引库/_update/id值
+     {
+       "doc": {
+         "price": "2200"
+       }
+     }
+
    </figure>
 
    ### ③、删除文档数据（DELETE）
@@ -324,33 +360,52 @@
    <figure>
 
      Ⅰ、全文检索(match模糊查询，搜索的词会先进行分词)
-           GET /ysc/_search                   GET /ysc/_search             GET /ysc/_doc/{id}
-           {                                  {
-             "query": {                          "query": {
-                "match": {                         "match_all": {}
-                  "title": "大米手机"                }
-                }                             }
+        (1)、match查询：单字段查询
+             ES 全文检索 "大米手机" 时，会在指定的索引里查出很多的相关词条数据。
+             这是由于 ES 在检索之前会先做分词处理，比如："大"、"米"、"手"、"机"、"手机" ......
+             所以，文档中有包含这些词条的文档信息就会被查询出来。
+
+             GET /索引库名/_search             GET /索引库名/_search           
+             {                                {
+               "query": {                       "query": {
+                 "match": {                       "match_all": {} # 查询索引中所有文档
+                   "title": "大米手机"           }
+                 }                            }
+               }
              }
-           }
      
-           你会发现，你做一个全文检索 "大米手机"，会查出很多的数据。这是因为，你在做 "大米手机" 检索的时候。
-           Elasticsearch会先做一个分词处理，比如："大","米","手","机","手机"......。
-           所以只要包含这些词条的信息就都会被查询到。
-     
+             GET /索引库名/_search           GET /索引库名/_doc/{id}
+             {                        
+               "query": {             
+                 "match": {          
+                   "all": "大米手机"  # 注意⚠️：这里指的是查询字段 all 中包含 大米手机 的文档
+                 }                   
+               }
+             }
+        (2)、multi_match查询：多字段查询，任意一个字段符合条件就算符合查询条件
+             GET /索引库名/_search
+             {
+               "query": {
+                 "multi_match": {
+                   "query": "apple手机",
+                   "fields": ["title", "name", "alias.firstName", "alias.lastName"]
+                 }
+               }
+             }
+
      Ⅱ、词条匹配(terms查询用于精准值匹配，搜索的词不会进行分词)
            GET /ysc/_search                 GET /ysc/_search
            {                                {
              "query": {                       "query": {
                "term": {                        "terms": {
-                 "title": "小米"                   "title": ["小米","oppo"]  # 
-                 这里注意,里面的英文oppo要小写，大写查询不到
+                 "title": "小米"                   "title": ["小米","oppo"]  # 这里注意,里面的英文oppo要小写，大写查询不到
                }                                 }
              }                                 }
            }                                }
      
           match与term的区别：
-            match是代表模糊查询，match查询会先对搜索词进行分词,分词完毕后再逐个对分词结果进行匹配，
-            term是代表精确查询，搜索前不会再对搜索词进行分词，所以我们的搜索词必须是文档分词集合中的一个
+            match：是代表模糊查询，match查询会先对搜索词进行分词，分词完毕后再逐个对分词结果进行匹配，
+            term： 是代表精确查询，搜索前不会再对搜索词进行分词，所以我们的搜索词必须是文档分词集合中的一个
   
      Ⅲ、结果过滤(excludes:不显示的字段  includes: 显示的字段)
            GET /ysc/_search
@@ -365,7 +420,7 @@
              }
            }
      
-           表示搜索出来的信息返回的只有"title","price"
+           表示搜索出来的信息返回的只有"title"、"price"、"alias"、"name"
    
      Ⅳ、模糊查询(fuzzy可以允许搜索字段是错误的)
            GET /ysc/_search
@@ -388,8 +443,8 @@
              "query": {
                 "range": {
                    "price": {
-                      "gte":1000,  # 大于1000
-                      "lte":3000   # 小于3000
+                      "gte": 1000,  # 大于等于1000
+                      "lte": 3000   # 小于等于3000
                    }
                 }
              }
@@ -404,8 +459,7 @@
              "query": {
                "bool": {
                  "must": [       # 表示的是查询条件都要满足，还有一个must_not表示查询条件都不满足
-                   {"match":{"title": "apple"}},{"range":{"price": {"gte": 
-                   3000}}}
+                   {"match":{"title": "apple"}},{"range":{"price": {"gte": 3000}}}
                  ]
                }
              }
@@ -423,7 +477,7 @@
              }
            }
   
-     Ⅶ、过滤(filter),过滤只能在bool属性或者聚合查询桶之下使用
+     Ⅶ、过滤(filter)，过滤只能在bool属性或者聚合查询桶之下使用
            GET /ysc/_search
            {
              "_source": ["title","price"],
@@ -436,7 +490,7 @@
                    "term": {"name.keyword": "游诗成"},  # 精准匹配name值为游诗成的数据，并进行过滤掉(name为可分词的字段属性，精准匹配则需加上keyword)
                    "terms": {"context": ["123", "456"]},  # 多数据精准匹配
                    "range": {"price": {"gte": 3000}},     # 取范围price值大于3000的数据
-                   "bool": {                          # 
+                   "bool": {
                      "must": {
                        "match": {"hobby": "运维大佬"}
                      }
@@ -476,9 +530,7 @@
            }
   
      Ⅸ、聚合aggregations
-          Elasticsearch中的聚合，包含多种类型，最常用的两种，一个叫“桶(相当于分组)”，一个叫“度量(相当于求max,min,
-          avg,   sum...)”
-          和关系型数据库中的聚合函数相类似
+          ES 中的聚合，包含多种类型，最常用的两种，一个叫“桶(相当于分组)”，一个叫“度量(相当于求max,min,avg,sum...)”和关系型数据库中的聚合函数相类似
           GET /test/_search
           {
             "size": 0,         # size设置为0，返回结果里是没有文档数据的，只有分组aggregations数据
@@ -504,18 +556,22 @@
                   "field": "name", # 查询的字段name, 注意：这个name不能是text类型的，不可以被分词。如果是text类型则要定义name.keyword
                   "size": 10000,   # 指定返回的term个数，默认为10
                   "order": {       # 按照price值进行倒排
-                    "price": "desc"
-                  } 
+                    "price": "desc",
+                    # "_count": "asc"  Bucket聚合会统计Bucket内的文档数量，记为_count。按照_count升序排列
+                  }
                 },
                 "aggs":{           # aggs可以嵌套在别的aggs里，相当于分组之后继续进行分组
                   "group_by_price": {
                     "sum": {
                       "field": "price"
+                    },
+                    "stats": {     # 聚合类型，这里stats可以计算min、max、avg等
+                      "field": "score" 
                     }
                   }
                 }
               },
-              "group_by_title": {
+              "group_by_title": {  # 自定义的名字
                 "filter": {        # 第二个桶：filter--一个用来过滤的桶。用法与上述布尔中filter一致
                   "term": {
                     "title": "游诗成"
@@ -524,7 +580,7 @@
             }
           }
    
-          注意：es中进行过滤,排序,聚合的字段,不能被分词!!!!*
+          注意：es中进行过滤、排序、聚合的字段，不能被分词!!!!
   
      Ⅹ、实现搜索高亮highlight
           这个高亮的字段是你想要查询的可分词的字段。
@@ -567,8 +623,11 @@
                }, {
                  "price": {}
                }],
-               "preTags": "<span style='color: blue'",
+               "preTags": "<span style='color: blue'>",
                "postTags": "</spn>"
+               # 或者另一种写法
+               # "preTags": "<em>",
+               # "postTags": "</em>"
              }
           }
    </figure>

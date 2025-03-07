@@ -228,8 +228,8 @@
          <resource>
            <directory>src/main/java</directory>  <!--所在的目录-->
            <includes>
-             <include>##/#.properties</include>
-             <include>##/#.xml</include>
+             <include>**/*.properties</include>
+             <include>**/*.xml</include>
            </includes>
            <!--Maven 提供了一种过滤机制，这种机制能够在资源文件被复制到目标目录的同时，
                决定是否将 <directory> 指定目录下的文件中的引用（@xxx@）进行参数替换。并且这个时机是先于 compile 的一个阶段。

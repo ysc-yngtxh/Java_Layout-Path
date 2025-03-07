@@ -3,7 +3,6 @@ package com.example;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONWriter;
 import com.example.pojo.Produce;
-import com.example.pojo.User;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +22,8 @@ class SpringBootESApplicationTests {
 	@Autowired
 	private ElasticsearchOperations elasticsearchOperations;
 
+
+	/********************************************* 索引操作 ********************************************/
 
 	// 创建索引
 	@Test
@@ -61,11 +62,12 @@ class SpringBootESApplicationTests {
 	// 删除索引
 	@Test
 	void deleteIndex() {
-		IndexOperations indexOperations = elasticsearchOperations.indexOps(User.class);
+		IndexOperations indexOperations = elasticsearchOperations.indexOps(Produce.class);
 		if (indexOperations.exists()) {
 			indexOperations.delete();
 		}
 	}
+
 
 	/********************************************* 增删改查 ********************************************/
 

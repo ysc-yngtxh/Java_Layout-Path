@@ -36,11 +36,18 @@ class SpringBootESApplicationTests2 {
 	@Autowired
 	private ElasticsearchOperations elasticsearchOperations;
 
+	// CriteriaQuery：查询允许创建查询来搜索数据，而不需要了解Elasticsearch查询的语法或基础知识。
+	//                它们允许用户通过简单地链接和组合Criteria对象来构建查询，这些对象指定搜索的文档必须满足的条件。
+	// StringQuery：此类将Elasticsearch查询作为JSON字符串。
+	// NativeQuery：当您具有复杂查询或无法使用Criteria API表示的查询时（例如，在构建查询和使用聚合时）要使用的类。
+	//              它允许使用所有不同的co.elastic.clients.elasticsearch_类型.query_dsl。
+	//              Elasticsearch库中的查询实现因此被命名为“native”。
 
-	// CriteriaQuery：寻找附近两公里18-30岁的妹纸
+
+	// CriteriaQuery：寻找附近两公里内商品类型是【电子产品】、价格在【1800～3000】的商品品牌地。
 	@Test
 	public void updateById() {
-		// 位置坐标：九号线星中路地铁站 121.375569, 31.163862
+		// GeoPoint 是用来表示位置坐标的类：九号线星中路地铁站 121.375569, 31.163862
 		GeoPoint location = new GeoPoint(31.163862, 121.375569);
 		// 按地址由近到远排序，相同小区年龄从大到小排
 		Sort sort = Sort
@@ -49,7 +56,7 @@ class SpringBootESApplicationTests2 {
 				.and(Sort.by("price").descending());
 
 		Query query = new CriteriaQuery(
-				// 询星中路地铁站2公里内的小区
+				// 查询星中路地铁站2公里内的、商品类型是【电子产品】、价格在【1800～3000】的商品品牌地。
 				new Criteria("brandLocation").within(location, "2km")
 				    .and(new Criteria("type").is("电子产品"))
 				    .and(new Criteria("price").lessThan(3000).greaterThanEqual(1800))
@@ -89,20 +96,20 @@ class SpringBootESApplicationTests2 {
 	}
 
 
-	// NativeQuery：统计上海各区妹纸人数,并显示前3人信息
+	// NativeQuery：统计上海各区商品数量,并显示前3件商品信息
 	@Test
 	public void nativeQuery() {
-		// 按距离和年龄排序，选择最近的和最年轻的
+		// 按距离和价格排序，选择最近的和最便宜的
 		Sort sort = Sort.by(
 				new GeoDistanceOrder("brandLocation", new GeoPoint(31.163862, 121.375569)))
 		                .ascending()
 		                .and(Sort.by("price").ascending());
 
 		Query query = NativeQuery.builder()
-		                         // 定义一个名为byDistrict，按district字段分组统计的聚合。
-		                         .withAggregation("byDistrict", Aggregation.of(a -> a.terms(ta -> ta.field("district").size(100))))
-		                         // 只统计妹纸
-		                         .withQuery(q -> q.match(m -> m.field("sex").query("女")))
+		                         // 定义一个名为byType，按 ‘type’ 字段分组统计的聚合。
+		                         .withAggregation("byType", Aggregation.of(a -> a.terms(ta -> ta.field("type").size(100))))
+		                         // 只统计商品状态为‘0’的数据
+		                         .withQuery(q -> q.match(m -> m.field("status").query("0")))
 		                         // 每页3条，显示第一页数据
 		                         .withPageable(PageRequest.of(0, 3, sort))
 		                         .build();
@@ -111,7 +118,7 @@ class SpringBootESApplicationTests2 {
 		ElasticsearchAggregations aggregationsContainer = (ElasticsearchAggregations) searchHits.getAggregations();
 		Map<String, ElasticsearchAggregation> aggregations = Objects.requireNonNull(aggregationsContainer).aggregationsAsMap();
 		// 获取指名称的聚合
-		ElasticsearchAggregation aggregation = aggregations.get("byDistrict");
+		ElasticsearchAggregation aggregation = aggregations.get("byType");
 		Buckets<StringTermsBucket> buckets = aggregation.aggregation().getAggregate().sterms().buckets();
 		// 打印聚合信息
 		buckets.array().forEach(bucket -> log.info("\n区名:{}\n人数：{}", bucket.key().stringValue(), bucket.docCount()));

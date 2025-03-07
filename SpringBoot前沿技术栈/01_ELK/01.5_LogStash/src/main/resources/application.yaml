@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: @project.artifactId@
+
+server:
+  port: 8080
+
+# 配置输入到 logstash 的地址和端口
+# 注意：这里是自定义的配置，是提供给 logback-spring.xml 使用的，不是logstash依赖中的配置
+log:
+  logstash-host: 127.0.0.1:8081
+
+# 应用自定义的日志配置文件
+logging:
+  config: classpath:logback-spring.xml
