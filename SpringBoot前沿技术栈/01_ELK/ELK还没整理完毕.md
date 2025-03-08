@@ -5,4 +5,4 @@
    使用 ElasticsearchOperations 和 ElasticsearchRepository 来操作ES。
    目前 ElasticsearchRepository 还未整理完毕，后续会继续完善。
 
-3、Kibana 和 LogStash 知识点还没有整理
+3、Kibana 和 LogStash 知识点还没有整理（LogStash中过滤器部分还没整理）
