@@ -23,6 +23,8 @@
 
     <dependencies>
         <!--引入模块01_Sentinel-Pull的jar包，实现Sentinel的pull模式-->
+        <!--方式一：将所需的jar包放到项目的lib目录下，然后通过Maven指定路径引入-->
+        <!--方式二：将所需jar包上传到maven本地仓库，然后引入-->
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>01_Sentinel-Pull</artifactId>
