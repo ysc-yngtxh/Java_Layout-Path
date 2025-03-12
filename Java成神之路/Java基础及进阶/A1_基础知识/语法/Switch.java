@@ -1,6 +1,7 @@
 package A1_基础知识.语法;
 
 import java.util.Scanner;
+
 /*
 关于switch语句：
     1、switch语句的语法结构：

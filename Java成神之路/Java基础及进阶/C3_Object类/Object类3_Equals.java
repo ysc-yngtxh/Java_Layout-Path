@@ -1,4 +1,5 @@
 package C3_Object类;
+
 /*
  * 关于object类中的equals方法
  * 1、equals方法的源代码：
@@ -15,9 +16,7 @@ package C3_Object类;
  */
 class Time {  // 其实每个类都继承了Object, 即extends Object
     int year,month,day;
-    public Time(){
-
-    }
+    public Time(){}
     public Time(int year, int month, int day){
         this.year = year;
         this.month = month;

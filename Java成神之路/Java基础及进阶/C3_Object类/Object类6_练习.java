@@ -55,5 +55,4 @@ public class Object类6_练习 {
         User u3 = new User("游诗成", new Address("武汉", "江岸区", "111222"));
         System.out.println(u1.equals(u3));   // false
     }
-
 }

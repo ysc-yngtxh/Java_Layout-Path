@@ -5,7 +5,7 @@ package B2_抽象类;
  * @dateTime 2024-03-18 12:24
  * @apiNote TODO 在Java 8之前，一旦一个接口被定义并广泛使用，就不能再向其中添加新的方法，
  *               否则所有实现该接口的类都必须实现新方法，这可能会破坏现有的代码。
- *               有了默认方法，我们可以向接口添加新方法，而不需要修改所有实现该接口的类。
+ *               Java 8之后有了默认方法，我们可以向接口添加新方法，而不需要修改所有实现该接口的类。
  */
 public interface 抽象类5_默认方法 {
     // 抽象方法，子类必须实现
@@ -16,7 +16,8 @@ public interface 抽象类5_默认方法 {
         System.out.println("This is a default implementation in the abstract class.");
     }
 }
-class MyClass implements 抽象类5_默认方法{
+
+class MyClass implements 抽象类5_默认方法 {
 
     @Override
     public void abstractMethod() {

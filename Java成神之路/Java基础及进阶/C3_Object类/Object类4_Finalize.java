@@ -1,4 +1,5 @@
 package C3_Object类;
+
 /*关于Object类中的finalize（）方法
  *   1、在Object类中的源代码
  *      protected void finalize() throws Throwable{  }
@@ -47,4 +48,3 @@ public class Object类4_Finalize {
         }
     }
 }
-

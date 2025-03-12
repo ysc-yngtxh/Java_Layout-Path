@@ -12,36 +12,36 @@ package E5_数组.数组Ⅱ_作业;
  */
 public class 数组8_数组作业第一题 {
     public static void main(String[] args) {
-        MyStack sta = new MyStack();
+        MyStack stack = new MyStack();
         try {
-            sta.push(new Object());      // 压栈java.lang.Object@1540e19d成功，栈帧指向0
-            sta.push(new Object());      // 压栈java.lang.Object@677327b6成功，栈帧指向1
-            sta.push(new Object());      // 压栈java.lang.Object@14ae5a5成功，栈帧指向2
-            sta.push(new Object());      // 压栈java.lang.Object@7f31245a成功，栈帧指向3
-            sta.push(new Object());      // 压栈java.lang.Object@6d6f6e28成功，栈帧指向4
-            sta.push(new Object());      // 压栈java.lang.Object@135fbaa4成功，栈帧指向5
-            sta.push(new Object());      // 压栈java.lang.Object@45ee12a7成功，栈帧指向6
-            sta.push(new Object());      // 压栈java.lang.Object@330bedb4成功，栈帧指向7
-            sta.push(new Object());      // 压栈java.lang.Object@2503dbd3成功，栈帧指向8
-            sta.push(new Object());      // 压栈java.lang.Object@4b67cf4d成功，栈帧指向9
-            sta.push(new Object());      // 压栈失败，栈已满！
+            stack.push(new Object());      // 压栈java.lang.Object@1540e19d成功，栈帧指向0
+            stack.push(new Object());      // 压栈java.lang.Object@677327b6成功，栈帧指向1
+            stack.push(new Object());      // 压栈java.lang.Object@14ae5a56成功，栈帧指向2
+            stack.push(new Object());      // 压栈java.lang.Object@7f31245a成功，栈帧指向3
+            stack.push(new Object());      // 压栈java.lang.Object@6d6f6e28成功，栈帧指向4
+            stack.push(new Object());      // 压栈java.lang.Object@135fbaa4成功，栈帧指向5
+            stack.push(new Object());      // 压栈java.lang.Object@45ee12a7成功，栈帧指向6
+            stack.push(new Object());      // 压栈java.lang.Object@330bedb4成功，栈帧指向7
+            stack.push(new Object());      // 压栈java.lang.Object@2503dbd3成功，栈帧指向8
+            stack.push(new Object());      // 压栈java.lang.Object@4b67cf4d成功，栈帧指向9
+            stack.push(new Object());      // 压栈失败，栈已满！
         } catch (MyStackOperationException e){
             System.out.println(e.getMessage());
         }
 
         // 弹栈遵循先进后出，后进先出的数据结构原则
         try {
-            sta.pop();      // 弹栈java.lang.Object@4b67cf4d元素成功栈帧指向8
-            sta.pop();      // 弹栈java.lang.Object@2503dbd3元素成功栈帧指向7
-            sta.pop();      // 弹栈java.lang.Object@330bedb4元素成功栈帧指向6
-            sta.pop();      // 弹栈java.lang.Object@45ee12a7元素成功栈帧指向5
-            sta.pop();      // 弹栈java.lang.Object@135fbaa4元素成功栈帧指向4
-            sta.pop();      // 弹栈java.lang.Object@6d6f6e28元素成功栈帧指向3
-            sta.pop();      // 弹栈java.lang.Object@7f31245a元素成功栈帧指向2
-            sta.pop();      // 弹栈java.lang.Object@14ae5a5元素成功栈帧指向1
-            sta.pop();      // 弹栈java.lang.Object@677327b6元素成功栈帧指向0
-            sta.pop();      // 弹栈java.lang.Object@1540e19d元素成功栈帧指向-1
-            sta.pop();      // 弹栈失败，栈已空！
+            stack.pop();      // 弹栈java.lang.Object@4b67cf4d元素成功栈帧指向8
+            stack.pop();      // 弹栈java.lang.Object@2503dbd3元素成功栈帧指向7
+            stack.pop();      // 弹栈java.lang.Object@330bedb4元素成功栈帧指向6
+            stack.pop();      // 弹栈java.lang.Object@45ee12a7元素成功栈帧指向5
+            stack.pop();      // 弹栈java.lang.Object@135fbaa4元素成功栈帧指向4
+            stack.pop();      // 弹栈java.lang.Object@6d6f6e28元素成功栈帧指向3
+            stack.pop();      // 弹栈java.lang.Object@7f31245a元素成功栈帧指向2
+            stack.pop();      // 弹栈java.lang.Object@14ae5a5元素成功栈帧指向1
+            stack.pop();      // 弹栈java.lang.Object@677327b6元素成功栈帧指向0
+            stack.pop();      // 弹栈java.lang.Object@1540e19d元素成功栈帧指向-1
+            stack.pop();      // 弹栈失败，栈已空！
         } catch (MyStackOperationException e){
             System.out.println(e.getMessage());
         }
@@ -49,7 +49,7 @@ public class 数组8_数组作业第一题 {
     }
 }
 
-class MyStack{
+class MyStack {
     // 向栈当中存储元素，我们这里使用一维数组模拟。存到栈中,就表示存储到数组中
     // 为什么选择Object类型数组？因为这个栈可以存储Java中任何引用类型的数据
     // 还记得前面我们学的Object类吗？每个类都是继承了Object类的，包括String类也是可以存储进去。Object类就是个超级父类。
@@ -101,9 +101,7 @@ class MyStack{
 
 // 栈操作异常：自定义异常
 class MyStackOperationException extends Exception{   // 编译时异常
-    public MyStackOperationException(){
-
-    } // 无参构造方法
+    public MyStackOperationException() {} // 无参构造方法
 
     public MyStackOperationException(String s){
         super(s);

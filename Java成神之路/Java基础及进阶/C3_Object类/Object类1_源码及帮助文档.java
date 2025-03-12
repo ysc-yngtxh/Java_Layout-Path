@@ -1,4 +1,5 @@
 package C3_Object类;
+
 /*
  * Object类当中有哪些常用的方法？
  * 我们去哪里找这些方法呢？
@@ -34,7 +35,4 @@ package C3_Object类;
  *
  * 3、finalize()方法
  * */
-public class Object类1_源码及帮助文档 {
-}
-
-
+public class Object类1_源码及帮助文档 {}

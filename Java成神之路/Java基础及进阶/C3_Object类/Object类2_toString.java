@@ -1,4 +1,5 @@
 package C3_Object类;
+
 /*
  * 1、源代码上toString()方法的默认实现是：
  *     类名@对象的内存地址转换成十六进制的形式
@@ -10,9 +11,7 @@ package C3_Object类;
  */
 class MyTime{
     int year,month,day;
-    public MyTime(){
-
-    }
+    public MyTime(){}
     public void MyTime1(){};
     public MyTime(int year,int month,int day){
         this.year = year;

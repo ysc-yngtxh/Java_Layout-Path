@@ -1,7 +1,8 @@
 package A1_基础知识.数据类型;
 
 /*
-1、Java语言当中的“整数型字面值”被默认当作int类型来处理。要让这个“整数型字面值”被当作long类型来处理的话，需要在”整数型字面值“后面添加l或L，建议使用大写的L
+1、Java语言当中的“整数型字面值”被默认当作int类型来处理。
+   要让这个“整数型字面值”被当作long类型来处理的话，需要在”整数型字面值“后面添加l或L，建议使用大写的L
 
 2、Java语言当中的整数型字面值有三种表达方式：
           第一种方式：十进制【是一种默认的方式】
@@ -11,11 +12,13 @@ package A1_基础知识.数据类型;
 public class 数据类型整数型{
 	public static void main(String[] args){
 		int a = 10;
-		int b = 010;
-		int c = 0x10;
+		int b = 010;   // 0*8² + 1*8¹ + 0*8⁰ = 0 + 8 + 0 = 8
+		int c = 0x10;  // 1*16¹ + 0*16⁰ = 16
+		int d = 0xFFA; // 15*16² + 15*16¹ + 10*16⁰ = 255*16 + 15*16 + 10 = 4095 + 240 + 10 = 4335
 		System.out.println(a);     // 输出十进制的10
 		System.out.println(b);     // 输出八进制的8
 		System.out.println(c);     // 输出十六进制的16
+		System.out.println(d);     // 输出十六进制的4335
 		System.out.println(a+b+c); // 系统会默认输出的十进制34
 
         // 强制类型转换符

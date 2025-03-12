@@ -1,14 +1,13 @@
 package B2_抽象类;
 
 /*
-  接口(interface)
+ 接口(interface)
   1、接口也是一种“引用数据类型”，编译之后也是一个class字节码文件
 
   2、接口是完全抽象的（抽象类是半抽象）或者也可以说接口是特殊的抽象类。
 
   3、接口语法：
-        interface 接口名 {
-        }
+        interface 接口名 {}
 
   4、接口中只包含两部分内容
         一部分是：常量
@@ -32,29 +31,23 @@ package B2_抽象类;
   与接口相比，抽象类不能搞定的
        接口可以多继承(实现)，而抽象类不能。抽象类只能单继承。
  */
-interface K{
+interface K {
     abstract void k1();
     void k2();  // abstract void k2(); 中的abstract在接口中可以省略
 }
-interface M{
+interface M {
     void m1();
 }
-class C implements K,M{ // 一个类可以实现多个接口，Java不存在多继承，但是可以通过接口进行多实现。弥补了Java单继承的缺陷。
+class C implements K,M { // 一个类可以实现多个接口，Java不存在多继承，但是可以通过接口进行多实现。弥补了Java单继承的缺陷。
     @Override
-    public void k1() {
-
-    }
+    public void k1() {}
     @Override
-    public void k2() {
-
-    }
+    public void k2() {}
     @Override
-    public void m1() {
-
-    }
+    public void m1() {}
 }
 
-interface MyMath{
+interface MyMath {
     // 常量
     double PI = 3.1415926; // public static final double PI=3.1415926; 中的public static final在接口中可以省略
     // 抽象方法
@@ -62,26 +55,25 @@ interface MyMath{
     // 接口当中的抽象方法不可以有方法体
     int sub(int a, int b);
 }
-abstract class MyMathImpl1 implements MyMath{
+abstract class MyMathImpl1 implements MyMath {
     // 因为MyMathImpl1类加上了abstract关键字变成了抽象类，所以继承MyMath类不需要覆盖/重写其父类的方法。
     abstract int product();
 }
-class MyMathImpl2 implements MyMath{
+class MyMathImpl2 implements MyMath {
     public int sum(int a, int b) {   // 实现访问父类方法的权限只能更高，不能更低。所以父类中的方法都是public公开的，子类中只能加上public.用以符合语法
         return a + b;                // private < 缺省 < protected < public
     }
-    public int sub(int a, int b){
+    public int sub(int a, int b) {
         return a - b;
     }
 }
 
 
-class Abc{
-}
-interface Flyable{
+class Abc {}
+interface Flyable {
     void fly();
 }
-class Pig extends Abc implements Flyable{
+class Pig extends Abc implements Flyable {
     public void fly(){
         System.out.println("先谋生再谋爱！");
     }
@@ -96,5 +88,4 @@ public class 抽象类3_接口类 {
         Flyable f = new Pig();
         f.fly();
     }
-
 }

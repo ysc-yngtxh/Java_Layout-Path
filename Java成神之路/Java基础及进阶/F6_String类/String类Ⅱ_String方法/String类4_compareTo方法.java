@@ -3,8 +3,7 @@ package F6_String类.String类Ⅱ_String方法;
 public class String类4_compareTo方法 {
     public static void main(String[] args) {
 
-        // (了解)int compareTo(String anotherString)
-        // 就是进行字符串比较
+        // (了解)int compareTo(String anotherString) 进行字符串比较
         int result = "abc".compareTo("abc");
         System.out.println(result);                   // 输出结果为0，即字符串是相等的
 

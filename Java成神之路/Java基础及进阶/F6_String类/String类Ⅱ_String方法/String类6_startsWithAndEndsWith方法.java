@@ -1,6 +1,6 @@
 package F6_String类.String类Ⅱ_String方法;
 
-public class String类6_endsWith方法 {
+public class String类6_startsWithAndEndsWith方法 {
     public static void main(String[] args) {
 
         // (掌握)boolean endsWith(String suffix)

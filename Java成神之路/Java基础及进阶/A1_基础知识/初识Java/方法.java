@@ -38,7 +38,7 @@ package A1_基础知识.初识Java;
               - 二叉树
               - 哈希表/散列表
 */
-public class 方法{
+public class 方法 {
 	
 	public static void sumInt(int a, int b) {         // (int a,int b)形参列表
 		int c = a + b;
@@ -74,10 +74,9 @@ public class 方法{
 	}
 }
 
-class A{
+class A {
 	public static void M() {
 		System.out.println("Hello World!");
 	}
 	
 }
-

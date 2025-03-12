@@ -1,7 +1,7 @@
 package A1_基础知识.数据类型;
 
 /*
-关于字面值：
+  关于字面值：
       - 10、1000
       - 3.14
       - "abc"
@@ -28,7 +28,6 @@ public class 字面值 {
 	 */
 	static int k = 90; // 成员变量
 	public static void main(String[] args) {
-		
 		System.out.println("abc");
 		System.out.println(1000);
 		System.out.println('A');
@@ -60,4 +59,3 @@ public class 字面值 {
 		 */
 	}
 }
-

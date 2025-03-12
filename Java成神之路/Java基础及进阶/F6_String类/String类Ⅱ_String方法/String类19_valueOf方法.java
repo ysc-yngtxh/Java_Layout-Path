@@ -1,6 +1,6 @@
 package F6_String类.String类Ⅱ_String方法;
 
-class  Customer{
+class  Customer {
     // 重写toString()方法
     // @Override
     // public String toString() {

@@ -17,7 +17,7 @@ public class String类1_String字符串 {
         String s2 = "abcd" + "xy";  
 
         // 这里创建了两个对象：①、凡是双引号括起来的都在字符串常量池中有一份
-        //                   ②、new对象的时候一定在堆内存当中开辟空间
+        //                  ②、new对象的时候一定在堆内存当中开辟空间
         String s3 = new String("xyz");
     }
 }

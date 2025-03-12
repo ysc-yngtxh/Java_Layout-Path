@@ -53,6 +53,4 @@ package E5_数组.数组Ⅰ_详解;
               String[] array4;
               Object[] array5;
  */
-public class 数组1_一维数组内存结构 {
-
-}
+public class 数组1_一维数组内存结构 {}

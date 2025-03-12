@@ -37,7 +37,7 @@ package A1_基础知识.初识Java;
                                           字符串的连接运算
        六、三元运算符/三目运算符/条件运算符
                 语法规则：
-                       布尔表达式？表达式1：表达式2
+                       布尔表达式 ? 表达式1 : 表达式2
 */
 public class 方法运算符 {
 	public static void main(String[] args) {
