@@ -26,7 +26,7 @@ import java.util.List;
               改：update,set,modify
               查：find,get,query,select
  */
-public class 集合9_List接口的常用方法 {
+public class 集合10_List接口的常用方法 {
     public static void main(String[] args) {
         // 创建List对象
         List<Object> myList = new ArrayList<>();

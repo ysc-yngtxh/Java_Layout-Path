@@ -47,14 +47,6 @@ public class 集合4_迭代器 {
             // 存进去什么类型，取出来的就是什么类型。只不过在输出的时候会转换成字符串，因为这里println调用了toString()方法
         }
 
-        /*
-        boolean hasNext = it.hasNext();  // 这是迭代器的另一种表现方式
-        System.out.println(hasNext);
-        if (hasNext){
-            Object obj = it.next();
-            System.out.println(obj);
-        }*/
-
         System.out.println("=========================================================================================");
 
         // HashSet集合：无序不可重复

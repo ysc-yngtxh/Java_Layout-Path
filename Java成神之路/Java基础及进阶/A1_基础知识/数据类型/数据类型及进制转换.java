@@ -26,8 +26,8 @@ package A1_基础知识.数据类型;
                   short                2               【-32768~32767】              0
                   int                  4           【-2147483648~2147483647】        0
                   long                 8                                            0
-                  float                4                                            0
-                  double               8                                            0
+                  float                4                 小数位6～7位                 0
+                  double               8                 小数位15位                   0
                   boolean              1                【true, false】            false
                   char                 2                  【0~65535】              \u0000
      

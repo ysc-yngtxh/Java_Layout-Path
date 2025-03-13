@@ -35,11 +35,11 @@ public class Java4_高精度BigDecimal {
         System.out.println("相乘 v5 = " + v5);
 
         /**
-           BigDecimal.ROUND_UP         进位制：不管保留数字后面是大是小(0 除外)都会进1。比如2.3001变成2.4
-           BigDecimal.ROUND_DOWN       舍去制，截断操作，后面所有数字直接去除。比如2.35会变成2.3
-           BigDecimal.ROUND_HALF_UP    根据保留数字后一位 >=5 进行四舍五入。比如2.35变成2.4
-           BigDecimal.ROUND_HALF_DOWN  根据保留数字后一位 >5 进行五舍六入。比如2.35变成2.3
-           BigDecimal.ROUND_CEILING    向正无穷方向对齐，转换为正无穷方向最接近的数值。如果为正数，行为和 ROUND_UP 一样；如果为负数，行为和 ROUND_DOWN 一样。
+         * BigDecimal.ROUND_UP         进位制：不管保留数字后面是大是小(0 除外)都会进1。比如2.3001变成2.4
+         * BigDecimal.ROUND_DOWN       舍去制，截断操作，后面所有数字直接去除。比如2.35会变成2.3
+         * BigDecimal.ROUND_HALF_UP    根据保留数字后一位 >=5 进行四舍五入。比如2.35变成2.4
+         * BigDecimal.ROUND_HALF_DOWN  根据保留数字后一位 >5 进行五舍六入。比如2.35变成2.3
+         * BigDecimal.ROUND_CEILING    向正无穷方向对齐，转换为正无穷方向最接近的数值。如果为正数，行为和 ROUND_UP 一样；如果为负数，行为和 ROUND_DOWN 一样。
          */
 
         // 相除

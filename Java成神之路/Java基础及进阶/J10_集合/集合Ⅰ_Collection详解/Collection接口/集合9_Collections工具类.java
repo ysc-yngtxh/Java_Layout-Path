@@ -1,4 +1,4 @@
-package J10_集合.集合Ⅲ_工具类;
+package J10_集合.集合Ⅰ_Collection详解.Collection接口;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,7 +11,7 @@ import java.util.Set;
   java.util.Collection  集合接口
   java.util.Collections  集合工具类，方便集合的操作
  */
-public class 集合25_Collections工具类 {
+public class 集合9_Collections工具类 {
     public static void main(String[] args) {
         // ArrayList集合不是线程安全的
         List<String> i = new ArrayList<>();
@@ -73,11 +73,13 @@ public class 集合25_Collections工具类 {
         // 对List集合中的元素进行填充
         // Collections.fill(list集合, 要填充的元素);
 
-        // 对List集合中的元素进行最大值
-        // Collections.max(list集合);
+        // 筛选出List集合中的元素最大值
+        Collections.max(wuGui2s); // 前提是WuGui2类实现Comparable接口
+        Collections.max(wuGui2s, Comparator.comparing(WuGui2::getAge));
 
-        // 对List集合中的元素进行最小值
-        // Collections.min(list集合);
+        // 筛选出List集合中的元素最小值
+        Collections.min(wuGui2s); // 前提是WuGui2类实现Comparable接口
+        Collections.max(wuGui2s, Comparator.comparing(WuGui2::getAge));
     }
 }
 

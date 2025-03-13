@@ -18,7 +18,7 @@ public class Java8_用于替代Date的JDK8时间API {
     public static void main(String[] args) {
         // Instant代表当前时间的时间戳，获取的是UTC的时间
         System.out.println(Instant.now());
-        // 国际事件与我们当前时间偏移了8个时区，因此需要加上八个小时
+        // 国际时间与我们当前时间偏移了8个时区，因此需要加上八个小时
         System.out.println("Instant + 08:00 = " + Instant.now().atOffset(ZoneOffset.ofHours(8)));
 
         // Date 转 Instant

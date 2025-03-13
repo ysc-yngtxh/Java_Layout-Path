@@ -22,6 +22,6 @@ public class 异常6_finally面试题 {
 
     /*
       执行m()方法return的是100，所以m()返回值就是100.
-      final表示一定执行，就算是return结束了都会去执行 ++i; 但是return结束后增 不影响已经返回的结果
+      final表示一定执行，就算是return结束了都会去执行 ++i; 但是return结束后自增 不影响已经返回的结果
      */
 }

@@ -1,7 +1,6 @@
 package I9_异常;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /*
@@ -17,7 +16,7 @@ import java.io.IOException;
 public class 异常5_finally子句的使用 {
     public static void main(String[] args) {
         FileInputStream fis = null;
-        try{
+        try {
             // 创建输入流对象
             fis = new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/I9_异常/异常5_finally子句的使用.java");
             // 开始读文件。。。

@@ -14,7 +14,7 @@ package H8_Java对日期的处理;
 public class Java7_枚举类型 {
     public static void main(String[] args) {
         Result R = divide(10, 2);
-        System.out.println(R == Result.SUCCESS ?"计算成功" : "计算失败");
+        System.out.println(R == Result.SUCCESS ? "计算成功" : "计算失败");
 
         System.out.println("=========================================================================================");
 
@@ -35,17 +35,17 @@ public class Java7_枚举类型 {
         }
     }
 
-    public static Result divide(int a, int b){
-        try{
+    public static Result divide(int a, int b) {
+        try {
             int c = a/b;
             return Result.SUCCESS;
-        }catch (Exception e){
+        } catch (Exception e) {
             return Result.FAIL;
         }
     }
 }
 
-enum Result{
+enum Result {
     // SUCCESS,FAIL是枚举Result类型中的值
     // 枚举中的每一个值，可以看作是“常量”
     SUCCESS,
@@ -53,7 +53,7 @@ enum Result{
 }
 
 // 四季枚举类型
-enum Season{
+enum Season {
     SPRING,
     SUMMER,
     AUTUMN,
@@ -61,10 +61,9 @@ enum Season{
 }
 
 // 颜色枚举类型
-enum Color{
+enum Color {
     RED,
-    BIUE,
+    BLUE,
     YELLO,
     BLACK
 }
-

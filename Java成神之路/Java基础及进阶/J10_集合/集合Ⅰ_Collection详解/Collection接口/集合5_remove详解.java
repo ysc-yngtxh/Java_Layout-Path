@@ -34,8 +34,7 @@ public class 集合5_remove详解 {
 class User1{
     private String name;
 
-    public User1() {
-    }
+    public User1() {}
 
     public User1(String name) {
         this.name = name;

@@ -8,7 +8,8 @@ import java.util.List;
 
 /*
   关于集合元素的remove
-    重点：当集合的结构发生改变时，迭代器必须重新获取，如果还是用以前老的迭代器，会出现异常：java.util.ConcurrentModificationException
+    重点：当集合的结构发生改变时，迭代器必须重新获取，
+         如果还是用以前老的迭代器，会出现异常：java.util.ConcurrentModificationException（并发修改异常）
 
     重点：在迭代集合元素的过程中，不能调用集合对象的remove方法，删除元素：
           c.remove(o),迭代过程中不能这样

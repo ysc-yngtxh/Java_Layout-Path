@@ -29,7 +29,7 @@ import java.util.List;
              因为往数组末尾添加元素，效率不受影响
              另外，我们检索/查找某个元素的操作比较多
  */
-public class 集合10_ArrayList集合初始化容量及扩容 {
+public class 集合11_ArrayList集合初始化容量及扩容 {
     public static void main(String[] args) {
         // 默认初始化容量10
         List<Object> list = new ArrayList<>();

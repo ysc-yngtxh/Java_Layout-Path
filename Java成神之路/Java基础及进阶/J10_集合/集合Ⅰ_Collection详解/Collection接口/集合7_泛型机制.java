@@ -61,10 +61,10 @@ public class 集合7_泛型机制<E> {
         System.out.println("=========================================================================================");
 
         集合7_泛型机制<String> g = new 集合7_泛型机制<>();
-        // new对象的时候指定了泛型是：String类Ⅰ_String类型
+        // new对象的时候指定了泛型是：String类型
 
-        g.doSome("abc");
         // g.doSome(100); // 类型不匹配
+        g.doSome("abc");
     }
     public void doSome(E e){
         System.out.println(e);
@@ -77,10 +77,6 @@ class Animal{
     }
 }
 
-class Cat extends Animal{
+class Cat extends Animal {}
 
-}
-
-class Bird extends Animal{
-
-}
+class Bird extends Animal{}

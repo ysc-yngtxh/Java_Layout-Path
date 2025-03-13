@@ -12,7 +12,7 @@ public class Java6_产生随机数 {
         int num1 = random.nextInt();
         System.out.println(num1);
 
-        // 产生[0-101)之间的随机数，不能产生101
+        // 产生[0-101)之间的随机数，不能产生101。遵循左闭右开
         // nextInt翻译为：下一个int类型的数据是101，表示只能取到100
         int num2 = random.nextInt(101);  // 不包括101
         System.out.println(num2);

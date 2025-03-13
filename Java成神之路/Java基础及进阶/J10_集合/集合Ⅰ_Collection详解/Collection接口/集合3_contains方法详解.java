@@ -42,7 +42,7 @@ public class 集合3_contains方法详解 {
     }
 }
 
-class User{
+class User {
     private String name;
     public User() {
     }

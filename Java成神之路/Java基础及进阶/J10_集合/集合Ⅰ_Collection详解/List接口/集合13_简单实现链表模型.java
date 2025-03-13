@@ -1,6 +1,6 @@
 package J10_集合.集合Ⅰ_Collection详解.List接口;
 
-public class 集合12_简单实现链表模型 {
+public class 集合13_简单实现链表模型 {
     public static void main(String[] args) {
         Linked Link = new Linked();
         Link.add("abc");
@@ -15,8 +15,7 @@ public class 集合12_简单实现链表模型 {
         Node header;
         int size = 0;
 
-        Linked() {
-        }
+        Linked() {}
 
         public int size() {
             return size;
@@ -48,14 +47,10 @@ public class 集合12_简单实现链表模型 {
         }
 
         // 删除链表中的某个数据的方法
-        public void remove(Object obj) {
-
-        }
+        public void remove(Object obj) {}
 
         // 修改链表中某个数据的方法
-        public void modify(Object newObj) {
-
-        }
+        public void modify(Object newObj) {}
 
         // 查找链表中某个元素的方法
         public int find(Object obj) {
@@ -89,7 +84,7 @@ public class 集合12_简单实现链表模型 {
         // 下一个节点的内存地址
         Node next;
         public Node(){}
-        public Node(Object data, Node next){
+        public Node(Object data, Node next) {
             this.data = data;
             this.next = next;
         }
