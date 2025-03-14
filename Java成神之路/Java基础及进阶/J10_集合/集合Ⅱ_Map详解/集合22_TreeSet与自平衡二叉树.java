@@ -29,26 +29,16 @@ import java.util.TreeSet;
  *       第二种：在构造TreeSet或者TreeMap集合的时候给他传一个比较器对象
  *
  */
-public class 集合22_TreeSet自平衡二叉树 {
+public class 集合22_TreeSet与自平衡二叉树 {
     public static void main(String[] args) {
-        // TODO List集合转换Set集合
-        List<Integer> arrayList = new ArrayList<>();
-        Collections.addAll(arrayList, 1, 7, 3, 2, 5, 8, 10);
-        // 构造一个TreeSet集合对象时，传入一个List集合对象。其排序规则按照集合元素Integer类重写的compareTo方法进行排序
-        TreeSet<Integer> ts = new TreeSet<>(arrayList);
-        System.out.println(ts);
-
-
-        System.out.println("=============================================================================\n");
-
         // TODO 创建TreeSet集合的时候，需要使用这个比较器
 
         // 第一种写法：使用Comparable的内部比较规则，前提是Person类实现了Comparable，并重写了compareTo方法。不够灵活
         TreeSet<Person> person1 = new TreeSet<>();
-        // 第二种写法：使用Comparator的静态方法。推荐
-        TreeSet<Person> person2 = new TreeSet<>(Comparator.comparing(Person::getAge));
-        // 第三种写法，传进Comparator实现对象，只不过把比较规则写在了实现类中。简直就是脱裤子放屁
+        // 第二种写法，传进Comparator实现对象，只不过把比较规则写在了实现类中。简直就是脱裤子放屁
         TreeSet<Person> person3 = new TreeSet<>(new PersonComparator());
+        // 第三种写法：使用Comparator的静态方法。推荐
+        TreeSet<Person> person2 = new TreeSet<>(Comparator.comparing(Person::getAge));
         // 第四种写法：匿名内部类，把比较规则写在了匿名内部类中。可读性太差，但会更加灵活
         TreeSet<Person> person4 = new TreeSet<>(new Comparator<Person>() {
             @Override
@@ -67,7 +57,7 @@ public class 集合22_TreeSet自平衡二叉树 {
             add(new Person("WangWu",   23));
             add(new Person("WangW",    23));
         }};
-        System.out.println(person4);
+        System.err.println(person4);
     }
 }
 

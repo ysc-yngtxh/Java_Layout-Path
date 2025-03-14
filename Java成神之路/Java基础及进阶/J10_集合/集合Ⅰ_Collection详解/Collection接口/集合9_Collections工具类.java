@@ -8,14 +8,14 @@ import java.util.List;
 import java.util.Set;
 
 /*
-  java.util.Collection  集合接口
-  java.util.Collections  集合工具类，方便集合的操作
+ * java.util.Collection  集合接口
+ * java.util.Collections  集合工具类，方便集合的操作
  */
 public class 集合9_Collections工具类 {
     public static void main(String[] args) {
         // ArrayList集合不是线程安全的
         List<String> i = new ArrayList<>();
-        // 变成线程安全的
+        // 转换成线程安全的
         Collections.synchronizedList(i);
 
         // 排序

@@ -1,5 +1,6 @@
 package J10_集合.集合Ⅱ_Map详解;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
@@ -31,17 +32,19 @@ import java.util.Properties;
 public class 集合20_Hashtable {
     public static void main(String[] args) {
         Map<Object, Object> map = new HashMap<>();
-        map.put(null, "100");
-        map.put(100, "null");
-        map.put("", "null");
-        map.put("200", "");
+        // HashMap集合转换成线程安全的集合
+        Map<Object, Object> map1 = Collections.synchronizedMap(map);
+        map1.put(null,  "100");
+        map1.put(100,   "null");
+        map1.put("",    "null");
+        map1.put("200", "");
         System.out.println(map);
 
         Map<Object, Object> map2 = new Hashtable<>();
-        map2.put("", "游诗成");
+        map2.put("",   "游诗成");
         map2.put(null, "游诗成");
-        map2.put(222, "null");
-        map2.put(333, "曹玉敏");
+        map2.put(222,  "null");
+        map2.put(333,  "曹玉敏");
         // Hashtable的key和value不允许null的，否则会出现空指针异常：java.lang.NullPointerException
         System.out.println(map.get(null));
         System.out.println(map.get(222));

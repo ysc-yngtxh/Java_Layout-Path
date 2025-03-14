@@ -10,13 +10,16 @@ import java.util.Map;
  * @description: TODO
  * @date 2022/08/13 19:10
  */
-public class 集合23_LinkedHashMap {
+public class 集合24_LinkedHashMap {
     /*
-     * LinkedHashMap
-     *   1、Key和Value都允许空
-     *   2、Key重复会覆盖、Value允许重复
-     *   3、有序 -- 指的是存进去的数据跟取出来的数据顺序是一样的【这与HashMap最大的区别】
+     * LinkedHashMap 可以认为是 HashMap+LinkedList，即它既使用HashMap操作数据结构，又使用LinkedList维护插入元素的先后顺序。
+     *   1、Key 和 Value值 都允许为null或者空
+     *   2、Key值 重复会覆盖、Value值 允许重复
+     *   3、有序 --> 指的是存进去的数据跟取出来的数据顺序是一样的【这与HashMap最大的区别】
      *   4、非线程安全
+     *   5、应用场景：
+     *         ①、在需要按照插入顺序遍历的场景中使用
+     *         ②、在LRU缓存中使用
      */
     public static void main(String[] args) {
         Map<String, String> map = new LinkedHashMap<>();
