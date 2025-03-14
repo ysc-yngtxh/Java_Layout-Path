@@ -10,13 +10,13 @@ import java.util.Map;
  * @description: TODO
  * @date 2022/08/13 19:10
  */
-public class 集合24_LinkedHashMap {
-    /**
+public class 集合23_LinkedHashMap {
+    /*
      * LinkedHashMap
-     * 1、Key和Value都允许空
-     * 2、Key重复会覆盖、Value允许重复
-     * 3、有序 -- 指的是存进去的数据跟取出来的数据顺序是一样的[这与HashMap最大的区别]
-     * 4、非线程安全
+     *   1、Key和Value都允许空
+     *   2、Key重复会覆盖、Value允许重复
+     *   3、有序 -- 指的是存进去的数据跟取出来的数据顺序是一样的【这与HashMap最大的区别】
+     *   4、非线程安全
      */
     public static void main(String[] args) {
         Map<String, String> map = new LinkedHashMap<>();
@@ -32,7 +32,7 @@ public class 集合24_LinkedHashMap {
         map.put(" ", "");
         System.err.println("LinkedHashMap = " + map);
 
-        Map<String, String> hashMap = new HashMap<String, String>(){{
+        Map<String, String> hashMap = new HashMap<>(){{
             put("A", "1");
             put("B", "2");
             put("D", "4");

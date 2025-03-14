@@ -1,5 +1,8 @@
 package J10_集合.集合Ⅰ_Collection详解.Set接口;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -11,17 +14,23 @@ import java.util.TreeSet;
  */
 public class 集合16_TreeSet集合 {
     public static void main(String[] args) {
-        Set<String> s = new TreeSet<>();
-        s.add("A");
-        s.add("B");
-        s.add("Z");
-        s.add("Y");
-        s.add("Z");
+        Set<String> s = new TreeSet<>(){{
+            add("A");
+            add("B");
+            add("Z");
+            add("Y");
+            add("Z");
+        }};
         s.add("K");
         s.add("M");
+        System.out.println("TreeSet集合：" + s);
 
-        for (String t : s) {
-            System.out.println(t);
-        }
+        // Set集合转换成List集合
+        List<String> strings = new ArrayList<>(s);
+        System.out.println("ArrayList集合：" + strings);
+
+        // List集合转换成Set集合
+        Set<String> set = new TreeSet<>(strings);
+        System.out.println("List集合转换成Set集合：" + set);
     }
 }

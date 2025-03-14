@@ -6,21 +6,27 @@ import java.util.Map;
 import java.util.Properties;
 
 /*
-  1、Hashtable集合底层也是哈希表数据结构，是线程安全的，其中所有的方法都带有synchronized关键字，效率较低，现在使用较少了，
+  1、Hashtable集合底层也是哈希表数据结构，是线程安全的，其中所有的方法都带有 synchronized 关键字，效率较低，现在使用较少了，
      因为控制线程安全有其他更好的方案。比如：ConcurrentHashMap
 
-  2、Hashtable的key可以为null吗？
-       Hashtable的key和value不允许null的，且都可以为空
-       HashMap集合的key和value都是可以为null的，且都可以为空
+  2、Hashtable的 Key 可以为 null 吗？
+       Hashtable 的 Key 和 Value 不允许 null 的，且都可以为空
+       HashMap 集合的 Key 和 Value 都是可以为 null 的，且都可以为空
+       ①、HashTable 的保守设计：
+          作为 Java 早期的线程安全集合（JDK 1.0），HashTable 的设计偏向保守，
+          禁止 null 键值以减少潜在的错误（如 NullPointerException）和并发场景的复杂性。
+       ②、HashMap 的灵活设计：
+          HashMap（JDK 1.2 引入）作为非线程安全的替代方案，更注重灵活性和开发便利性。
+          允许 null 键值使得某些场景（如表示“未设置”或“缺失”状态）更简洁，无需引入特殊占位符。
 
   3、Hashtable集合初始化容量11
-     Hashtable集合扩容，原容量*2+1
+       Hashtable集合扩容，原容量*2+1
 
-  4、目前只需要掌握Properties属性类对象的相关方法即可
-     Properties是一个Map集合，继承Hashtable,
-     Properties的key和value都是String类型
-     Properties被称为属性类对象
-     Properties是线程安全的
+  4、目前只需要掌握 Properties 属性类对象的相关方法即可
+       Properties是一个 Map集合，继承 Hashtable,
+       Properties的 Key 和 Value 都是String类型
+       Properties被称为属性类对象
+       Properties是线程安全的
  */
 public class 集合20_Hashtable {
     public static void main(String[] args) {
@@ -36,7 +42,7 @@ public class 集合20_Hashtable {
         map2.put(null, "游诗成");
         map2.put(222, "null");
         map2.put(333, "曹玉敏");
-        // Hashtable的key和value不允许null的,否则会出现空指针异常：java.lang.NullPointerException
+        // Hashtable的key和value不允许null的，否则会出现空指针异常：java.lang.NullPointerException
         System.out.println(map.get(null));
         System.out.println(map.get(222));
 

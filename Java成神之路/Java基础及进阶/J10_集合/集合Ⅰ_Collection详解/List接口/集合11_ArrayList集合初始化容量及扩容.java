@@ -41,15 +41,14 @@ public class 集合11_ArrayList集合初始化容量及扩容 {
         // 集合的size()方法是获取当前集合中元素的个数。不是获取集合的容量
 
         // 创建一个HashSet集合
-        Collection<Object> c = new HashSet<>();
-        // 添加元素到Set集合
-        c.add(100);
-        c.add(200);
-        c.add(900);
-        c.add(50);
+        Collection<Object> set = new HashSet<>();
+        set.add(100);
+        set.add(200);
+        set.add(900);
+        set.add(50);
 
-        // 通过这个构造方法就可以将HashSet集合转换成List集合。
-        List<Object> list3 = new ArrayList<>(c);   // 将HashSet集合对象通过引用c传到ArrayList集合里
+        // 通过构造方法传入参数【HashSet集合对象set】，将HashSet集合转换成List集合。
+        List<Object> list3 = new ArrayList<>(set);
         for (int i = 0; i < list3.size(); i++) {
             System.out.println(list3.get(i));
         }
