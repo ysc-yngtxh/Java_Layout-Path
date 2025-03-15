@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 /*
-  java.io.PrintStream：标准的字节输出流。默认输出到控制台
+ * java.io.PrintStream：标准的字节输出流。默认输出到控制台
  */
-public class 流10_标准输出流 {
+public class 流9_标准输出流 {
     public static void main(String[] args) {
         // 联合起来写
         System.out.println("Hello World!");

@@ -5,17 +5,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /*
-  File类的常用方法：
-          getName()       获取文件名 ,不是目录名
-          isDirectory()   判断是否是一个目录(文件名)
-          isFile()        判断是否是一个文件
-          lastModified()  获取文件最后一次修改时间
-          length()        获取文件大小
-
-          *** 重点方法
-          listFiles()     获取当前目录下所有的子文件及子目录
+ * File类的常用方法：
+ *         getName()       获取文件名 ,不是目录名
+ *         isDirectory()   判断是否是一个目录(文件名)
+ *         isFile()        判断是否是一个文件
+ *         lastModified()  获取文件最后一次修改时间
+ *         length()        获取文件大小
+ *
+ *         *** 重点方法
+ *         listFiles()     获取当前目录下所有的子文件及子目录
  */
-public class 流13_File类的常用方法 {
+public class 流12_File类的常用方法 {
     public static void main(String[] args) {
         // 获取该路径下的文件或者目录，如果不存在也不会自行创建
         File f1 = new File(System.getProperty("user.dir") + "/myFile");

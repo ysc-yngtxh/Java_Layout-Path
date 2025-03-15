@@ -3,13 +3,12 @@ package K11_流.流Ⅱ_缓冲流及转换流;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-public class 流8_节点流和包装流 {
+public class 流7_节点流和包装流 {
     public static void main(String[] args) {
         FileInputStream fis = null;
         try{
@@ -34,12 +33,14 @@ public class 流8_节点流和包装流 {
             }
 
             // 带有缓冲区的输出流
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("myFile4", true)));
+            BufferedWriter out = new BufferedWriter(
+                    new OutputStreamWriter(
+                            new FileOutputStream(System.getProperty("user.dir")
+                                                    + "/Java基础及进阶/K11_流/FileTemp1", true)));
             out.write("曹玉敏");
             out.write("你在哪儿？");
             out.write("你知道吗？");
             out.write("我好想你啊！");
-            out.write(br1.readLine()); // 这里一行应该加到while判断语句中，避免出现空指针异常
 
             // 刷新
             out.flush();

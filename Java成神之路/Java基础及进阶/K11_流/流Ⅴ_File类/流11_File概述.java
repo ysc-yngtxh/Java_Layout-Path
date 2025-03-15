@@ -4,14 +4,14 @@ import java.io.File;
 import java.io.IOException;
 
 /*
-  File:
-     1、File类和四大家族没有关系，所以File类不能完成文件的读和写
-     2、File对象代表什么？
-          文件和目录路径名的抽象表示形式
-
-          目录也可以叫做文件名
+ * File:
+ *    1、File类和四大家族没有关系，所以File类不能完成文件的读和写
+ *    2、File对象代表什么？
+ *         文件和目录路径名的抽象表示形式
+ *
+ *         目录也可以叫做文件名
  */
-public class 流12_File概述 {
+public class 流11_File概述 {
     public static void main(String[] args) {
         // 创建一个file对象
         File f1 = new File(System.getProperty("user.dir") + "file");

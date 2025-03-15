@@ -9,7 +9,7 @@ import java.io.IOException;
  * @dateTime 2024-09-03 22:50
  * @apiNote TODO
  */
-public class 流22_ByteArrayOutputStream {
+public class 流21_ByteArrayOutputStream {
 
     // ByteArrayOutputStream：
     //         是一个输出流, 它将数据写入到内存中, 而不是写入到文件或网络中.

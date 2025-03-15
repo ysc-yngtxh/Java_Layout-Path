@@ -1,17 +1,16 @@
 package K11_流.流Ⅱ_缓冲流及转换流;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
 /*
-  BufferedReader:
-       带有缓冲区的字符输入流
-       使用这个流的时候不需要自定义char数组，或者说不需要自定义byte数组，自带缓冲
-       读取时候是一行一行的读，效率比FileInputStream高
+ * BufferedReader:
+ *      带有缓冲区的字符输入流
+ *      使用这个流的时候不需要自定义char数组，或者说不需要自定义byte数组，自带缓冲
+ *      读取时候是一行一行的读，效率比FileInputStream高
  */
-public class 流7_带有缓冲区的字符流 {
+public class 流6_带有缓冲区的字符流 {
     public static void main(String[] args)  {
         FileReader fr = null;
         try {
@@ -27,7 +26,7 @@ public class 流7_带有缓冲区的字符流 {
 
             // 读到文件结束
             String s2 = null;
-            while((s2 = br.readLine()) != null){
+            while((s2 = br.readLine()) != null) {
                 System.out.println(s2);
             }
         } catch (IOException e) {

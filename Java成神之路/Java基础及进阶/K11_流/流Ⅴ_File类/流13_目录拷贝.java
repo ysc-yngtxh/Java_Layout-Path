@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class 流14_目录拷贝 {
+public class 流13_目录拷贝 {
     public static void main(String[] args) {
         File srcDir = new File("D:\\course");  // 手动填写源文件夹路径
         File targetDir = new File("D:\\a");    // 手动填写目标路径

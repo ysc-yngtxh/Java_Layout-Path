@@ -75,8 +75,8 @@
     java.io.DataOutputStream
     
     标准输出流：
-    java.io.PrintWriter
-    java.io.PrintStream
+    java.io.PrintWriter（输出字符）
+    java.io.PrintStream（输出字节）
     
     对象专属流：
     java.io.ObjectInputStream

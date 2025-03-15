@@ -6,7 +6,7 @@ import java.io.PrintStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class 流11_日志工具 {
+public class 流10_日志工具 {
     public static void main(String[] args) {
         // 测试工具类是否好用
         Logger.log("调用了System类的gc()方法，建议启动垃圾回收");
@@ -18,8 +18,8 @@ public class 流11_日志工具 {
     }
 }
 
-class Logger{
-    public static void log(String msg){
+class Logger {
+    public static void log(String msg) {
         try{
             // 指向一个日志文件
             PrintStream out = new PrintStream(new FileOutputStream("log1", true));

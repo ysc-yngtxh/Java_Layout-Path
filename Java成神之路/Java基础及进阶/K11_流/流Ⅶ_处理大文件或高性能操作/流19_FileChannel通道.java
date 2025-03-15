@@ -16,7 +16,7 @@ import java.nio.file.StandardOpenOption;
  * @dateTime 2024-08-21 22:05
  * @apiNote TODO
  */
-public class 流20_FileChannel通道 {
+public class 流19_FileChannel通道 {
 
     private static final String filePath = System.getProperty("user.dir")
             + "/Java基础及进阶/K11_流/FileTemp";
