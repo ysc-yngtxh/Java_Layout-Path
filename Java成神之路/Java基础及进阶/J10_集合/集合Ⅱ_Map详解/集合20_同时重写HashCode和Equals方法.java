@@ -39,7 +39,7 @@ import java.util.Set;
           当红黑树上的节点数量小于6时，会重新把红黑树变成单向链表数据结构。
           这种方式也是为了提高检索效率，二叉树的检索会再次缩小扫描范围，进而提高效率。
  */
-public class 集合19_同时重写HashCode和Equals方法 {
+public class 集合20_同时重写HashCode和Equals方法 {
     public static void main(String[] args) {
         Student s1 = new Student("曹玉敏");
         Student s2 = new Student("曹玉敏");

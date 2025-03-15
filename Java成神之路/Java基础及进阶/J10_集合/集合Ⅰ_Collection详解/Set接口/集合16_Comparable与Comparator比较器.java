@@ -1,4 +1,4 @@
-package J10_集合.集合Ⅱ_Map详解;
+package J10_集合.集合Ⅰ_Collection详解.Set接口;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +11,7 @@ import java.util.List;
  * @dateTime 2024-03-27 19:20
  * @apiNote TODO 两种比较排序方法
  */
-public class 集合21_Comparable与Comparator比较器 {
+public class 集合16_Comparable与Comparator比较器 {
     /*
      * 1、Comparable：可以直接在需要进行排序的类中实现，重写compareTo(T o)方法；缺点是要实现Comparable接口
      * 2、Comparator：需要另外一个实现 Comparator 接口的实现类来作为 “比较器”。不用实现接口，直接编写排序逻辑

@@ -1,17 +1,21 @@
-package J10_集合.集合Ⅱ_Map详解;
+package J10_集合.集合Ⅰ_Collection详解.Set接口;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 
 /*
- * 1、TreeSet集合底层实际上是一个TreeMap，TreeSet/TreeMap集合底层是自平衡二叉树，遵循左小右大原则存放
+ * 1、TreeSet集合存储元素特点：
+ *    ①、无序不可重复的，但是存储的元素可以按照大小顺序排序！
+ *       称为：可排序集合
+ *    ②、无序：这里的无序指的是存进去的顺序和取出来的顺序不同。并且没有下标
  *
- * 2、放到TreeSet集合中的元素，等同于放到TreeMap集合Key部分了。
+ * 2、TreeSet集合底层实际上是一个TreeMap，TreeSet/TreeMap集合底层是自平衡二叉树，遵循左小右大原则存放
  *
- * 3、TreeSet集合中的元素：无序不可重复，但是可以按照元素的 可排序集合
+ * 3、放到TreeSet集合中的元素，等同于放到TreeMap集合Key部分了。
  *
  * 4、遍历二叉树的时候有三种方式：
  *       前序遍历：根左右
@@ -27,10 +31,21 @@ import java.util.TreeSet;
  * 6、TreeSet或者TreeMap集合中根据Key部分元素可排序的方式：
  *       第一种：放在集合中的元素实现java.lang.Comparable接口（需要重写compareTo方法）
  *       第二种：在构造TreeSet或者TreeMap集合的时候给他传一个比较器对象
- *
  */
-public class 集合22_TreeSet与自平衡二叉树 {
+public class 集合17_TreeSet集合与自平衡二叉树 {
     public static void main(String[] args) {
+        Set<String> s = new TreeSet<>();
+        Collections.addAll(s,"A","B","Z","Y","Z","K","M");
+        System.out.println("TreeSet集合：" + s);
+
+        // Set集合转换成List集合
+        List<String> strings = new ArrayList<>(s);
+        System.out.println("ArrayList集合：" + strings);
+
+        // List集合转换成Set集合
+        Set<String> set = new TreeSet<>(strings);
+        System.out.println("List集合转换成Set集合：" + set);
+
         // TODO 创建TreeSet集合的时候，需要使用这个比较器
 
         // 第一种写法：使用Comparable的内部比较规则，前提是Person类实现了Comparable，并重写了compareTo方法。不够灵活

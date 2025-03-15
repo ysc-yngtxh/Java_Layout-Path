@@ -50,7 +50,7 @@ import java.util.Set;
                 对于 keySet() 来说：hashmap.get(key) 是先得到Entry对象(遍历key的hash值【Map数组】)，再通过entry.getValue()去拿，
                                   直白点说就是 hashmap.get(key) 走了一个弯路，所以它慢一些；
  */
-public class 集合17_Map接口的常用方法 {
+public class 集合18_Map接口的常用方法 {
     public static void main(String[] args) {
         Map<Integer, String> map = new HashMap<>();
         map.put(1, "张三"); // 1在这里自动装箱

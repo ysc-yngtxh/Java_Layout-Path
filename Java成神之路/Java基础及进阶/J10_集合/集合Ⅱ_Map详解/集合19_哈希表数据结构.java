@@ -76,7 +76,7 @@ import java.util.Set;
            重点记住：HashMap集合初始化容量必须是2的幂数，这也是官方推荐的，
                     这是因为散列分布均匀，为了提高HashMap集合的存取效率所必须的
  */
-public class 集合18_哈希表数据结构 {
+public class 集合19_哈希表数据结构 {
     public static void main(String[] args) {
         /*
           为什么哈希表的随机增删，以及查询效率都很高？

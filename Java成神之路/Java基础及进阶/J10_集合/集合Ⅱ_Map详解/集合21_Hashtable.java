@@ -29,7 +29,7 @@ import java.util.Properties;
        Properties被称为属性类对象
        Properties是线程安全的
  */
-public class 集合20_Hashtable {
+public class 集合21_Hashtable {
     public static void main(String[] args) {
         Map<Object, Object> map = new HashMap<>();
         // HashMap集合转换成线程安全的集合

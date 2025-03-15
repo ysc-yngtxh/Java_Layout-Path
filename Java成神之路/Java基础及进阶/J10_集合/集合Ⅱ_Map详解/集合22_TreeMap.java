@@ -2,7 +2,6 @@ package J10_集合.集合Ⅱ_Map详解;
 
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -11,7 +10,7 @@ import java.util.TreeMap;
  * @Description TODO
  * @Date 2025-03-14 15:06:10
  */
-public class 集合23_TreeMap {
+public class 集合22_TreeMap {
 	/*
 	 * 1、TreeMap 的底层实现基于红黑树（Red-Black Tree）。红黑树是一种自平衡的二叉查找树，具有以下特点：
      *      - 每个节点要么是红色，要么是黑色。
@@ -61,9 +60,6 @@ public class 集合23_TreeMap {
 class QueueUp {
 	String name;
 	int age;
-	public int getAge() {
-		return age;
-	}
 	public QueueUp(String name, int age) {
 		this.name = name;
 		this.age = age;

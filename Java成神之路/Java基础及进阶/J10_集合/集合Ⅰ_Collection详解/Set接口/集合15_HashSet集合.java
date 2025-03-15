@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Set;
 
 /*
-  HashSet集合：
-      无序不可重复
-           1、存储时顺序和取出时顺序不同
-           2、不可重复
-           3、放到HashSet集合中的元素实际上是放到HashMap集合的key部分了。
+ * HashSet集合：
+ *     无序不可重复
+ *         1、存储时顺序和取出时顺序不同
+ *         2、不可重复
+ *         3、放到HashSet集合中的元素实际上是放到HashMap集合的key部分了。
  */
 public class 集合15_HashSet集合 {
     public static void main(String[] args) {
