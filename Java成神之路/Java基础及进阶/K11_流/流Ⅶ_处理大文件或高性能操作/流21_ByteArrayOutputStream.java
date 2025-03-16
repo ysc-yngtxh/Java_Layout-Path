@@ -21,13 +21,13 @@ public class 流21_ByteArrayOutputStream {
     // close()方法, 可以关闭 ByteArrayOutputStream, 但实际上它什么也不做.
 
     private static final String filePath = System.getProperty("user.dir")
-            + "/Java基础及进阶/K11_流/FileTemp";
+                                         + "/Java基础及进阶/K11_流/FileTemp";
 
     public static void main(String[] args) {
         // 简单理解 ByteArrayOutputStream 就是将数据写入到内存中，不需要指定文件路径。
         try (FileInputStream fis = new FileInputStream(filePath);
-             ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-
+             ByteArrayOutputStream baos = new ByteArrayOutputStream()
+        ) {
             int len;
             byte[] buffer = new byte[1024];
             while ((len = fis.read(buffer)) != -1) {

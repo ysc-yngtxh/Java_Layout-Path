@@ -16,7 +16,7 @@ public class 流2_FileInputStream最终版 {
     public static void main(String[] args) {
         // try-with-resources 语法糖【close() 方法在 try代码块 中完成工作后，将立即调用】
         try (FileInputStream fis = new FileInputStream(System.getProperty("user.dir")
-                                                         + "/Java基础及进阶/K11_流/FileTemp")
+                                                     + "/Java基础及进阶/K11_流/FileTemp")
         ) {
             System.err.println("打印的字符有乱码，这是因为使用的字节流，无法避免\n");
             byte[] bytes = new byte[6];

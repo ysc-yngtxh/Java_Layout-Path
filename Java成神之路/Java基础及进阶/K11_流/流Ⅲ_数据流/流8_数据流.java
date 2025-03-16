@@ -21,7 +21,8 @@ public class 流8_数据流 {
         FileOutputStream fos = null;
         try{
             // 创建数据专属的字节输出流
-            fos = new FileOutputStream("data");
+            fos = new FileOutputStream(System.getProperty("user.dir")
+                                     + "/Java基础及进阶/K11_流/DataFile", true);
             DataOutputStream dos = new DataOutputStream(fos);
 
             // 写数据
@@ -45,7 +46,8 @@ public class 流8_数据流 {
             dos.writeChar(c);
 
             // 创建数据专属的字节输入流
-            fis = new FileInputStream("data");
+            fis = new FileInputStream(System.getProperty("user.dir")
+                                              + "/Java基础及进阶/K11_流/ReaderFile");
             DataInputStream dis = new DataInputStream(fis);
             // 开始读
             byte b1 = dis.readByte();

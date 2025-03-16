@@ -28,7 +28,7 @@ public class 流1_FileInputStream演示版 {
             fis3 = new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/FileTemp");
 
             // fis1 开始读
-            while(true) {
+            while (true) {
                 int readData1 = fis1.read();
                 if (readData1 == -1){
                     break;     // 当读不出文件元素后，返回-1
@@ -38,7 +38,7 @@ public class 流1_FileInputStream演示版 {
 
             // fis2 改造while循环
             int readData2 = 0;
-            while( (readData2 = fis2.read()) != -1 ){
+            while( (readData2 = fis2.read()) != -1 ) {
                 System.out.println("改造while循环的读: " + readData2);
             }
 

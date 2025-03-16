@@ -31,9 +31,12 @@ public class 流20_MappedByteBuffer {
       *  如果操作的文件很小，只有数十KB，映射文件所获得的好处将不及其开销。因此，只有在操作大文件的时候才将其映射到直接内存。
       */
 
+    private static final String filePath = System.getProperty("user.dir")
+                                         + "/Java基础及进阶/K11_流/FileTemp";
+
     public static void main(String[] args) throws IOException {
         // 以读写的方式打开文件通道
-        FileChannel fileChannel = FileChannel.open(Paths.get("a.txt"), StandardOpenOption.READ, StandardOpenOption.WRITE);
+        FileChannel fileChannel = FileChannel.open(Paths.get(filePath), StandardOpenOption.READ, StandardOpenOption.WRITE);
         // 将整个文件映射到内存
         MappedByteBuffer buf = fileChannel.map(FileChannel.MapMode.READ_WRITE, 0, fileChannel.size());
 
@@ -53,15 +56,15 @@ public class 流20_MappedByteBuffer {
         // 意味着 buf 中的内容不一定都在物理内存中，要让这些内容加载到物理内存，可以调用 MappedByteBuffer 中的 load() 方法。
         // 另外，还可以调用 isLoaded() 来判断 buf 中的内容是否在物理内存中。
 
-        FileChannel fileChannel2 = FileChannel.open(Paths.get("a.txt"), StandardOpenOption.WRITE, StandardOpenOption.READ);
+        FileChannel fileChannel2 = FileChannel.open(Paths.get(filePath), StandardOpenOption.WRITE, StandardOpenOption.READ);
         MappedByteBuffer buf2 = fileChannel2.map(FileChannel.MapMode.READ_WRITE, 0, fileChannel2.size());
-        fileChannel2.close();    // 关于文件通道对 buf 没有影响
+        fileChannel2.close();    // 关闭文件通道对 buf 没有影响
         System.out.println(buf2.capacity()); // 输出 fileChannel.size()
         System.out.println(buf2.limit());    // 输出 fileChannel.size()
         System.out.println(buf2.position()); // 输出 0
         buf2.put((byte)'R'); // 写入内容
-        buf2.compact();      // 截掉 position 之前的内容
-        buf2.force();        // 将数据刷出到 I/O 设备
+        buf2.compact();         // 截掉 position 之前的内容
+        buf2.force();           // 将数据刷出到 I/O 设备
 
 
         // 小结

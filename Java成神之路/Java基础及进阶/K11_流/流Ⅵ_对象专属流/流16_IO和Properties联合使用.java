@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.util.Properties;
 
 /*
- * IO + Properties(继承于HashTable) 的联合应用
+ * IO + Properties(继承于Hashtable) 的联合应用
  * 非常好的一个设计理念：
  *       以后经常改变的数据，可以单独写到一个文件中，使用程序动态读取。
  *       将来只需要修改这个文件的内容，Java代码不需要改动，不需要重新编译，服务器也不需要重启，就可以拿到动态信息。
@@ -26,7 +26,7 @@ public class 流16_IO和Properties联合使用 {
         // 新建一个Map集合
         Properties pro = new Properties();
 
-        // 调用Properties对象的Load方法将文件中的数据加载到Map集合中
+        // 调用 Properties对象 的 load() 方法将文件中的数据加载到Map集合中
         // 文件中的数据顺着管道加载到Map集合当中，其中 (等号=) 左边做key，右边做value
         pro.load(fr);
 

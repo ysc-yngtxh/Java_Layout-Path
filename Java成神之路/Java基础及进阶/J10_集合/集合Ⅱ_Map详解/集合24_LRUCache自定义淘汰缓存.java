@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 // 继承 LinkedHashMap 类实现自定义LRU缓存
-public class 集合24_LRUCache<K, V> extends LinkedHashMap<K, V> {
+public class 集合24_LRUCache自定义淘汰缓存<K, V> extends LinkedHashMap<K, V> {
     private final int maxCapacity;
 
-    public 集合24_LRUCache(int maxCapacity) {
+    public 集合24_LRUCache自定义淘汰缓存(int maxCapacity) {
         // LinkedHashMap构造方法参数：
         //     initialCapacity：表示哈希表的初始容量（即底层数组的初始大小）
         //     loadFactor：负载因子（Load Factor），表示哈希表的填充比例阈值。

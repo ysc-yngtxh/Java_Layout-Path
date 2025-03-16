@@ -20,9 +20,11 @@ public class 流10_日志工具 {
 
 class Logger {
     public static void log(String msg) {
-        try{
+        try {
             // 指向一个日志文件
-            PrintStream out = new PrintStream(new FileOutputStream("log1", true));
+            PrintStream out = new PrintStream(
+                    new FileOutputStream(System.getProperty("user.dir")
+                                           + "/Java基础及进阶/K11_流/LogFile", true));
             // 改变输出方向，不再是控制台输出
             System.setOut(out);
             // 日期当前时间

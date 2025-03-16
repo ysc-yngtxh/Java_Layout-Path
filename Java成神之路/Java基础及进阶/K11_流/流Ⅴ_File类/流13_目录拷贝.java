@@ -8,11 +8,14 @@ import java.io.IOException;
 
 public class 流13_目录拷贝 {
     public static void main(String[] args) {
-        File srcDir = new File("D:\\course");  // 手动填写源文件夹路径
-        File targetDir = new File("D:\\a");    // 手动填写目标路径
-        copyDir(srcDir, targetDir);            // 调用复制文件夹方法
+        // 手动填写源文件夹路径
+        File srcDir = new File(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/流Ⅰ_文件专属流");
+        // 手动填写目标路径
+        File targetDir = new File(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/流Ⅴ_File类/newDir");
+        // 调用复制文件夹方法
+        copyDir(srcDir, targetDir);
     }
-    // 复制文件夹方法
+    // 复制文件夹（目录）方法
     public static void copyDir(File srcDir, File targetDir) {
         if (!targetDir.exists()) { // 如果目标文件不存在
             targetDir.mkdir();     // 则创建之
@@ -21,11 +24,11 @@ public class 流13_目录拷贝 {
         for (File file : files) {          // 增强for循环提取文件
             if (file.isFile()) {           // 判断是否为文件
                 // 调用复制文件方法；创建新的File表示源文件名及目标文件名，文件名为源文件夹路径＋文件名，目标文件名同理
-                copyFile(new File(srcDir + "\\" + file.getName()), new File(targetDir + "\\" + file.getName()));
+                copyFile(new File(srcDir + "/" + file.getName()), new File(targetDir + "/" + file.getName()));
             } else {
                 // 不是文件则为目录（文件夹），以下为文件夹的处理方法
                 // 如果当前file为文件夹，则再次调用copyDir方法（递归）
-                copyDir(new File(srcDir + "\\" + file.getName()), new File(targetDir + "\\" + file.getName()));
+                copyDir(new File(srcDir + "/" + file.getName()), new File(targetDir + "/" + file.getName()));
             }
         }
     }

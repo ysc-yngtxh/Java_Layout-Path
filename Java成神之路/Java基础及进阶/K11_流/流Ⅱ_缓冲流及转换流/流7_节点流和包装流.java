@@ -36,7 +36,7 @@ public class 流7_节点流和包装流 {
             BufferedWriter out = new BufferedWriter(
                     new OutputStreamWriter(
                             new FileOutputStream(System.getProperty("user.dir")
-                                                    + "/Java基础及进阶/K11_流/FileTemp1", true)));
+                                                   + "/Java基础及进阶/K11_流/FileTemp1", true)));
             out.write("曹玉敏");
             out.write("你在哪儿？");
             out.write("你知道吗？");

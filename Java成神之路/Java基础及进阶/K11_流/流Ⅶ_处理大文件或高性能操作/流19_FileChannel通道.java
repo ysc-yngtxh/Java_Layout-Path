@@ -19,7 +19,7 @@ import java.nio.file.StandardOpenOption;
 public class 流19_FileChannel通道 {
 
     private static final String filePath = System.getProperty("user.dir")
-            + "/Java基础及进阶/K11_流/FileTemp";
+                                         + "/Java基础及进阶/K11_流/FileTemp";
 
     public static void main(String[] args) throws IOException {
 
@@ -34,7 +34,7 @@ public class 流19_FileChannel通道 {
         // 读取到多个缓冲区
         // 文件通道 FileChannel 实现了 ScatteringByteChannel 接口，可以将文件通道中的内容同时读取到多个 ByteBuffer 当中，这在处理包含若干长度固定数据块的文件时很有用。
         ScatteringByteChannel channel = FileChannel.open(Paths.get(filePath), StandardOpenOption.READ);
-        // 创建字节大小分别为 5、10的 ByteBuffer缓冲区
+        // 创建字节大小分别为 5、10 的 ByteBuffer缓冲区
         ByteBuffer key = ByteBuffer.allocate(5), value = ByteBuffer.allocate(10);
         ByteBuffer[] buffers = new ByteBuffer[]{key, value};
         while(channel.read(buffers) != -1){
@@ -50,7 +50,7 @@ public class 流19_FileChannel通道 {
 
         // 从多个缓冲区写入
         // FileChannel 实现了 GatheringByteChannel 接口，与 ScatteringByteChannel 相呼应。可以一次性将多个缓冲区的数据写入到通道中。
-        FileChannel channel1 = FileChannel.open(Paths.get("myFile"), StandardOpenOption.WRITE);
+        FileChannel channel1 = FileChannel.open(Paths.get(filePath), StandardOpenOption.WRITE);
         ByteBuffer key1 = ByteBuffer.allocate(10), value1 = ByteBuffer.allocate(10);
         byte[] data = "017 Robot".getBytes();
         key1.put(data, 0, 3);
@@ -77,7 +77,7 @@ public class 流19_FileChannel通道 {
         FileChannel targetChannel = targetOutStream.getChannel();
         long transfered = 0;
         // 需要注意，调用这两个转换方法，某些情况下并不保证数据能够全部完成传输，确切传输了多少字节数据需要根据返回值来进行判断
-        while (transfered < sourceChannel.size()){
+        while (transfered < sourceChannel.size()) {
             transfered += sourceChannel.transferTo(transfered, targetChannel.size(), targetChannel);
         }
         sourceChannel.close();

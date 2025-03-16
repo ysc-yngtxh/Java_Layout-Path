@@ -18,13 +18,13 @@ public class 流5_FileReader和FileWriter的使用 {
     public static void main(String[] args) {
         try (
              FileReader reader1 = new FileReader(System.getProperty("user.dir")
-                                                + "/Java基础及进阶/K11_流/ReaderFile");
+                                               + "/Java基础及进阶/K11_流/ReaderFile");
              FileReader reader2 = new FileReader(System.getProperty("user.dir")
-                                                         + "/Java基础及进阶/K11_流/ReaderFile");
+                                               + "/Java基础及进阶/K11_流/ReaderFile");
              // 当写入文件不存在时会自动新建。
              // 当写入文件存在时，这里第二个参数设置为 true，表示以追加的方式在文件末尾写入，不会清空源文件内容
              FileWriter writer = new FileWriter(System.getProperty("user.dir")
-                                                + "/Java基础及进阶/K11_流/WriterFile", true);
+                                              + "/Java基础及进阶/K11_流/WriterFile", true);
         ) {
             // reader1 字符输入流，这里配置每次读取4个字符
             char[] charsInput = new char[4];

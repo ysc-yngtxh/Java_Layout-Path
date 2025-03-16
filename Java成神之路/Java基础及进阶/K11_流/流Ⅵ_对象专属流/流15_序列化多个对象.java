@@ -21,16 +21,15 @@ public class 流15_序列化多个对象 {
         u.add(new User(1, "游诗成"));
         u.add(new User(2, "曹玉敏"));
         u.add(new User(3, "我想你"));
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Users"));
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/流Ⅵ_对象专属流/ObjectFile"));
         oos.writeObject(u);
         oos.close();
         oos.flush();
 
         // 反序列化集合
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Users"));
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/流Ⅵ_对象专属流/ObjectFile"));
         List<User> userList = (List<User>) ois.readObject();   // 是个List集合，强转成List集合
-        for (User user : userList         // 集合元素遍历
-             ) {
+        for (User user : userList) {
             System.out.println(user);
         }
         ois.close();
@@ -42,8 +41,7 @@ class User implements Serializable {
     private int no;
     private String name;
 
-    public User() {
-    }
+    public User() {}
 
     public User(int no, String name) {
         this.no = no;
