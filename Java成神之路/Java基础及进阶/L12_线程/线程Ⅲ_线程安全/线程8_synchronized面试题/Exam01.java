@@ -1,9 +1,9 @@
 package L12_线程.线程Ⅲ_线程安全.线程8_synchronized面试题;
 
 /*
-  面试题：
-    MyClass方法中一个有synchronized，一个没有synchronized
-    doOther方法的执行需不需要等doSome方法的结束？
+ * 面试题：
+ *   MyClass方法中一个有synchronized，一个没有synchronized
+ *   doOther方法的执行需不需要等doSome方法的结束？
  */
 public class Exam01 {
     public static void main(String[] args) throws InterruptedException {

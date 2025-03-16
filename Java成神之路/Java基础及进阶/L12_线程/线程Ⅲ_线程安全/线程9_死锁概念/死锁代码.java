@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /*
-  死锁代码要会写，一般面试官要求你会写，只有会写的，才会在以后的开发中注意这个事儿，因为死锁很难调试
+ * 死锁代码要会写，一般面试官要求你会写，只有会写的，才会在以后的开发中注意这个事儿，因为死锁很难调试
  */
 public class 死锁代码 {
     public static void main(String[] args) {
@@ -26,7 +26,7 @@ class MyThread5 extends Thread{
         this.o1 = o1;
         this.o2 = o2;
     }
-    public void run(){
+    public void run() {
         System.out.println(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").format(new Date()) + " MyThread5 开始执行");
         try {
             synchronized(o1) {
@@ -43,10 +43,10 @@ class MyThread5 extends Thread{
         }
     }
 }
-class MyThread6 extends Thread{
+class MyThread6 extends Thread {
     Object o1;
     Object o2;
-    public void run(){
+    public void run() {
         System.out.println(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").format(new Date()) + " MyThread6 开始执行");
         try {
             synchronized(o2) {

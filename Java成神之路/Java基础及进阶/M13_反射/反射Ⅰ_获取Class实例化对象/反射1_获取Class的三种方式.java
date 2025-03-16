@@ -3,13 +3,13 @@ package M13_反射.反射Ⅰ_获取Class实例化对象;
 import java.util.Date;
 
 /*
-  要操作一个类的字节码，需要首先获取到这个类的字节码，怎么获取java.lang.Class实例？
-  ClassNotFoundException是一个类没找到的异常，父类是Exception，编译时异常，需要上抛或者try,catch
-
-  三种方式：
-          第一种：Class c2 = Class.forName("完整类名带包名");
-          第二种：Class c = 对象.getClass();
-          第三种：class c = 任何类型.class;
+ * 要操作一个类的字节码，需要首先获取到这个类的字节码，怎么获取java.lang.Class实例？
+ * ClassNotFoundException是一个类没找到的异常，父类是Exception，编译时异常，需要上抛或者try,catch
+ *
+ * 三种方式：
+ *         第一种：Class c2 = Class.forName("完整类名带包名");
+ *         第二种：Class c = 对象.getClass();
+ *         第三种：class c = 任何类型.class;
  */
 public class 反射1_获取Class的三种方式 {
     public static void main(String[] args) {

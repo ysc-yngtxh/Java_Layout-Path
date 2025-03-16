@@ -4,10 +4,10 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
 /*
-  实现线程的第三种方式：
-     FutureTask方式,实现Callable接口（JDK8新特性）
-     这种方式的优点：可以获取到线程的执行结果
-     这种方式的缺点：效率比较低，在获取t线程执行结果的时候，当前线程受阻塞，效率较低
+ * 实现线程的第三种方式：
+ *    FutureTask方式,实现Callable接口（JDK8新特性）
+ *    这种方式的优点：可以获取到线程的执行结果
+ *    这种方式的缺点：效率比较低，在获取t线程执行结果的时候，当前线程受阻塞，效率较低
  */
 public class 线程14_实现线程的第三种方式 {
     public static void main(String[] args) throws Exception {

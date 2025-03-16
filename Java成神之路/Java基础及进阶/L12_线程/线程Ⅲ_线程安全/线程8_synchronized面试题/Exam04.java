@@ -1,9 +1,9 @@
 package L12_线程.线程Ⅲ_线程安全.线程8_synchronized面试题;
 
 /*
-  面试题：
-    在主方法中创建两个MyClass2对象，且MyClass方法中的synchronized是在静态方法中
-    doOther方法的执行需不需要等doSome方法的结束？
+ * 面试题：
+ *   在主方法中创建两个MyClass2对象，且MyClass方法中的synchronized是在静态方法中
+ *   doOther方法的执行需不需要等doSome方法的结束？
  */
 public class Exam04 {
     public static void main(String[] args) throws InterruptedException {
@@ -23,10 +23,10 @@ public class Exam04 {
 }
 class MyThread4 extends Thread{
     private MyClass4 mc4;
-    public MyThread4(MyClass4 mc4){
+    public MyThread4(MyClass4 mc4) {
         this.mc4 = mc4;
     }
-    public void run(){
+    public void run() {
         if(Thread.currentThread().getName().equals("t1")){
             mc4.doSome();
         }
@@ -36,7 +36,7 @@ class MyThread4 extends Thread{
     }
 }
 class MyClass4 {
-    public synchronized static void doSome(){
+    public synchronized static void doSome() {
         System.out.println("doSome begin");
         try{
             Thread.sleep(1000*10);
@@ -45,7 +45,7 @@ class MyClass4 {
         }
         System.out.println("doSome over");
     }
-    public synchronized static void doOther(){
+    public synchronized static void doOther() {
         System.out.println("doOther begin");
         System.out.println("doOther over");
     }
