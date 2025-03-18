@@ -5,21 +5,21 @@ import java.util.Collection;
 import java.util.List;
 
 /*
-  关于java.util.Collection接口中的常用方法：
-      1、Collection中能存放什么元素？
-          没有使用“泛型”之前，Collection中可以存储Object的所有子类型
-          使用了“泛型”之后，Collection中只能存储某个具体的类型
-          Collection中什么都能存，只要是Object的子类型就行(集合中不能直接存储基本数据类型，也不能存Java对象，只是存储Java对象的内存地址)
+ * 关于java.util.Collection接口中的常用方法：
+ *     1、Collection中能存放什么元素？
+ *         没有使用“泛型”之前，Collection中可以存储Object的所有子类型
+ *         使用了“泛型”之后，Collection中只能存储某个具体的类型
+ *         Collection中什么都能存，只要是Object的子类型就行(集合中不能直接存储基本数据类型，也不能存Java对象，只是存储Java对象的内存地址)
 
-      2、Collection中的常用方法
-           boolean add(Object e)  向集合中添加元素
-           int size()  获取集合中元素的个数
-           void clear()  清空集合
-           boolean contains(Object o)  判断当前集合中是否包含元素o,包含返回true，不包含返回false
-           boolean remove(Object o)  删除集合中的某个元素
-           boolean isEmpty()  判断该集合中元素的个数是否为空
-           Object[] toArray()  调用这个方法可以把集合转换成数组
-*/
+ *     2、Collection中的常用方法
+ *          boolean add(Object e)  向集合中添加元素
+ *          int size()  获取集合中元素的个数
+ *          void clear()  清空集合
+ *          boolean contains(Object o)  判断当前集合中是否包含元素o,包含返回true，不包含返回false
+ *          boolean remove(Object o)  删除集合中的某个元素
+ *          boolean isEmpty()  判断该集合中元素的个数是否为空
+ *          Object[] toArray()  调用这个方法可以把集合转换成数组
+ */
 public class 集合2_Collection接口常用方法 {
     public static void main(String[] args) {
         Collection<Object> c = new ArrayList<>();

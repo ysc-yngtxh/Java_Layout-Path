@@ -18,7 +18,7 @@ package L12_线程.线程Ⅱ_线程基础知识;
  *                   优先级比较高的获取CPU时间片可能会多一些。（但也不完全是，大概率是高的）
  *
  *        2)、静态方法：yield()
- *                    static void yield()  让位方法(指的是如果当前线程抢到时间片，就把时间片让掉，然后和其他的线程在同一起点重新去争抢)
+ *                    static void yield() 让位方法(指的是如果当前线程抢到时间片，就把时间片让掉，然后和其他的线程在同一起点重新去争抢)
  *                    yield() 方法不是阻塞方法。是使当前线程从执行状态（运行状态）变为可执行态（就绪状态）。
  *                    而CPU会从众多的可执行态里选择，也就是说，执行 yield() 的线程还是有可能会被再次执行到的，
  *                    并不是说一定会执行其他线程而执行yield()的线程在下一次中不会执行到了。
@@ -26,7 +26,7 @@ package L12_线程.线程Ⅱ_线程基础知识;
  *                         因此，即使当前线程让出 CPU，其他试图获取该锁的线程仍然会被阻塞，直到当前线程释放锁。
  *
  *        3)、实例方法：join()
- *                    void join()  插队
+ *                    void join() 插队
  *                    join()是 Thread 类中的一个方法，当我们需要让线程按照自己指定的顺序执行的时候，就可以利用这个方法。
  *                    class MyThread1 extends Thread {
  *                       public void doSome(){
@@ -37,7 +37,7 @@ package L12_线程.线程Ⅱ_线程基础知识;
  *                    class MyThread2 extends Thread{}
  *                    当线程 A 调用线程 B 的 join() 方法时，线程 A 会进入阻塞状态，直到线程 B 执行完毕。所以是需要释放锁操作的。
  */
-class YSC implements Runnable{
+class YSC implements Runnable {
     @Override
     public void run() {
         // 默认的优先级是5

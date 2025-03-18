@@ -25,16 +25,16 @@ class MyThread extends Thread {
     public void run() {
         for (int i = 0; i < 100; i++) {
             // currentThread 就是当前线程对象
-            // 当m线程执行run方法，那么这个当前线程就是 m
-            // 当mf线程执行run方法，那么这个当前线程就是 mf
+            // 当 m线程 执行 run() 方法，那么这个当前线程就是 m
+            // 当 mf线程 执行 run() 方法，那么这个当前线程就是 mf
             Thread c = Thread.currentThread();
-            System.out.println(c.getName() + "-->" + i);
+            System.out.println(c.getName() + " --> " + i);
         }
     }
 }
 public class 线程3_获取线程的名字和当前线程对象 {
     public static void main(String[] args) {
-        // 这个代码出现在main方法当中，所以当前线程就是主线程
+        // 这个代码出现在 main() 方法当中，所以当前线程就是主线程
         Thread t = Thread.currentThread();
         System.out.println(t.getName());
 

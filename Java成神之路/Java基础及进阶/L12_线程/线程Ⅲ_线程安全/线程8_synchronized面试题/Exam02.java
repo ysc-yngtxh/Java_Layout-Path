@@ -2,15 +2,15 @@ package L12_线程.线程Ⅲ_线程安全.线程8_synchronized面试题;
 
 /*
  * 面试题：
- *   MyClass中两方法都有synchronized
- *   doOther方法的执行需不需要等doSome方法的结束？
+ *   类MyClass2 中 doSome()、doOther() 方法都有synchronized
+ *   且在主方法中只创建 MyClass2 一个对象，doOther() 方法的执行需不需要等 doSome() 方法执行结束？
  */
 public class Exam02 {
     public static void main(String[] args) throws InterruptedException {
-        MyClass1 mc1 = new MyClass1();
+        MyClass2 mc = new MyClass2();
 
-        Thread t1 = new MyThread1(mc1);
-        Thread t2 = new MyThread1(mc1);
+        Thread t1 = new MyThread2(mc);
+        Thread t2 = new MyThread2(mc);
 
         t1.setName("t1");
         t2.setName("t2");
@@ -20,24 +20,24 @@ public class Exam02 {
         t2.start();
     }
 }
-class MyThread1 extends Thread{
-    private MyClass1 mc1;
-    public MyThread1(MyClass1 mc1) {
-        this.mc1 = mc1;
+class MyThread2 extends Thread {
+    private MyClass2 mc;
+    public MyThread2(MyClass2 mc) {
+        this.mc = mc;
     }
     public void run() {
-        if(Thread.currentThread().getName().equals("t1")){
-            mc1.doSome();
+        if(Thread.currentThread().getName().equals("t1")) {
+            mc.doSome();
         }
-        if(Thread.currentThread().getName().equals("t2")){
-            mc1.doOther();
+        if(Thread.currentThread().getName().equals("t2")) {
+            mc.doOther();
         }
     }
 }
-class MyClass1 {
+class MyClass2 {
     public synchronized void doSome() {
         System.out.println("doSome begin");
-        try{
+        try {
             Thread.sleep(1000*10);
         } catch(InterruptedException e){
             e.printStackTrace();

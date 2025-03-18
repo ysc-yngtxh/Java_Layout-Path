@@ -2,7 +2,7 @@ package L12_线程.线程Ⅰ_实现线程;
 
 /*
  * 实现线程的第一种方式：
- *     编写一个类，直接继承java.lang.Thread，重写run方法
+ *     编写一个类，直接继承 java.lang.Thread，重写 run() 方法
  *
  *     怎么创建线程对象？new就行了
  *     怎么启动线程？调用线程对象的start()方法
@@ -20,13 +20,13 @@ class MyThread extends Thread {
     public void run() {
         // 编写程序，这段程序运行在分支线程中
         for (int i = 0; i < 100; i++) {
-            System.out.println("分支线程--->" + i);
+            System.out.println("分支线程 ---> " + i);
         }
     }
 }
 public class 线程1_实现线程的第一种方式 {
     public static void main(String[] args) {
-        // 这里是main方法，这里的代码属于主线程，在主栈中运行
+        // 这里是 main() 方法，这里的代码属于主线程，在主栈中运行
         // 新建一个分支线程对象
         MyThread myThread = new MyThread();
 

@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 
 /*
-  1、BigDecimal 属于大数据，精度极高，不属于基本数据类型，属于Java对象（引用数据类型）
-       这是SUN提供的一个类。专门用在财务软件当中
-
-  2、注意：财务软件中double是不够的。
-           你处理过财务数据吗！？用的是哪一种类型？
-           千万别说double，说java.math.BigDecimal
+ * 1、BigDecimal 属于大数据，精度极高，不属于基本数据类型，属于Java对象（引用数据类型）
+ *      这是SUN提供的一个类。专门用在财务软件当中
+ *
+ * 2、注意：财务软件中double是不够的。
+ *          你处理过财务数据吗！？用的是哪一种类型？
+ *          千万别说double，说java.math.BigDecimal
  */
 public class Java4_高精度BigDecimal {
 

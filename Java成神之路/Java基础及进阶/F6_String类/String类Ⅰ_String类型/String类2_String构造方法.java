@@ -3,13 +3,13 @@ package F6_String类.String类Ⅰ_String类型;
 import java.util.Arrays;
 
 /*
-  关于String类中的构造方法。
-     第一个：String s1 = new String("");
-     第二个：String s2 = ""; 最常用
-     第三个：String s3 = new String(char数组）;
-     第四个：String s4 = new String(char数组, 起始下标, 长度);
-     第五个：String s5 = new String(byte数下标, 长度);
-     第六个：String s6 = new String(byte数组, 起始下标, 长度);
+ * 关于String类中的构造方法。
+ *    第一个：String s1 = new String("");
+ *    第二个：String s2 = ""; 最常用
+ *    第三个：String s3 = new String(char数组）;
+ *    第四个：String s4 = new String(char数组, 起始下标, 长度);
+ *    第五个：String s5 = new String(byte数下标, 长度);
+ *    第六个：String s6 = new String(byte数组, 起始下标, 长度);
  */
 public class String类2_String构造方法 {
     public static void main(String[] args) {

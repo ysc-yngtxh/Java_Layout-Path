@@ -5,10 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /*
-  深入try...catch
-    1、catch后面的小括号中的类型可以是具体以的异常类型，也可以是该异常类型的父类型
-    2、catch可以写多个，建议catch的时候，精确的一个一个处理。这样有利于程序的调试
-    3、catch写多个的时候，从上带下，必须遵循从小到大（比如，IOException e不能写在FileNotFoundException e的上面）
+ * 深入try...catch
+ *   1、catch后面的小括号中的类型可以是具体以的异常类型，也可以是该异常类型的父类型
+ *   2、catch可以写多个，建议catch的时候，精确的一个一个处理。这样有利于程序的调试
+ *   3、catch写多个的时候，从上带下，必须遵循从小到大（比如，IOException e不能写在FileNotFoundException e的上面）
  */
 public class 异常3_捕捉异常详解 {
     public static void main(String[] args) {

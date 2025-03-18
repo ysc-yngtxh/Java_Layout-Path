@@ -34,5 +34,5 @@ package C3_Object类;
  *    以后判断两个字符串是否相等，最好不要使用==，要调用字符串对象的equals方法。
  *
  * 3、finalize()方法
- * */
+ */
 public class Object类1_源码及帮助文档 {}

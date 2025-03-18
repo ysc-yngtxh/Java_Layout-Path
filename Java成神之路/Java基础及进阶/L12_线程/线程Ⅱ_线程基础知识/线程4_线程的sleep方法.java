@@ -51,10 +51,10 @@ public class 线程4_线程的sleep方法 {
         try {
             // 问题：t.sleep(1000 * 5);会让线程t进入休眠状态吗？
             t.sleep(1000 * 5);
-            // 不会。sleep方法是一个静态方法，应该通过Thread类来调用，而不是通过Thread对象来调用 -- Thread.sleep(1000 * 5);
-            // 因此在执行的t.sleep(1000 * 5); 还是会转换成：Thread.sleep(1000*5);
-            // 使用sleep方法休眠的始终是当前线程，而不会是指定的线程。所以睡眠的不是t，而是调用sleep方法时所在类的main线程。
-            // 如果想要指定线程睡眠，sleep最好使用在run方法的内部，因为写在run方法内部可以让该线程休眠
+            // 不会。sleep() 方法是一个静态方法，应该通过Thread类来调用，而不是通过Thread对象来调用 -- Thread.sleep(1000 * 5);
+            // 因此在执行的 t.sleep(1000 * 5); 还是会转换成：Thread.sleep(1000*5);
+            // 使用 sleep() 方法休眠的始终是当前线程，而不会是指定的线程。所以睡眠的不是t，而是调用 sleep() 方法时所在类的main线程。
+            // 如果想要指定线程睡眠，sleep最好使用在run方法的内部，因为写在 run() 方法内部可以让该线程休眠
         } catch(InterruptedException e2){
             e2.printStackTrace();
         }

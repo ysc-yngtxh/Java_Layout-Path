@@ -7,15 +7,15 @@ import java.util.Iterator;
 import java.util.List;
 
 /*
-  关于集合元素的remove
-    重点：当集合的结构发生改变时，迭代器必须重新获取，
-         如果还是用以前老的迭代器，会出现异常：java.util.ConcurrentModificationException（并发修改异常）
+ * 关于集合元素的remove
+ *   重点：当集合的结构发生改变时，迭代器必须重新获取，
+ *        如果还是用以前老的迭代器，会出现异常：java.util.ConcurrentModificationException（并发修改异常）
 
-    重点：在迭代集合元素的过程中，不能调用集合对象的remove方法，删除元素：
-          c.remove(o),迭代过程中不能这样
-          否则会出现：java.util.ConcurrentModificationException
+ *   重点：在迭代集合元素的过程中，不能调用集合对象的remove方法，删除元素：
+ *         c.remove(o),迭代过程中不能这样
+ *         否则会出现：java.util.ConcurrentModificationException
 
-    重点：在迭代元素的过程中，一定要使用迭代器Iterator的remove方法，删除元素，不要使用集合自带的remove方法删除元素
+ *   重点：在迭代元素的过程中，一定要使用迭代器Iterator的remove方法，删除元素，不要使用集合自带的remove方法删除元素
  */
 public class 集合6_迭代器与集合中的remove区别 {
     public static void main(String[] args) {

@@ -5,26 +5,26 @@ import java.util.Iterator;
 import java.util.List;
 
 /*
-  测试List接口中的常用方法
-     1、List集合存储元素的特点：有序可重复
-          有序：List集合中的元素有下标。从0开始，以1递增
-          可重复：存储一个1，还可以再存储1
-
-     2、List既然是Collection接口的子接口，那么肯定List接口有自己"特色"的方法：
-           以下只列出List接口特有的常用的方法：
-               void add(int index, E element)     // 在列表的指定位置插入指定元素（第一个参数是下标）
-               E set(int index, Object element)   // 修改指定位置的元素
-               E get(int index)                   // 根据下标获取元素
-               int indexOf(Object o)              // 获取指定对象第一次出现出的索引
-               int lastIndexOf(Object o)          // 获取指定对象最后一次出现的索引
-               E remove(int index)                // 删除指定下标位置的元素
-
-      计算机英语：
-          增删改查这几个单词要知道：
-              增：add,save,new
-              删：delete,drop,remove
-              改：update,set,modify
-              查：find,get,query,select
+ * 测试List接口中的常用方法
+ *    1、List集合存储元素的特点：有序可重复
+ *         有序：List集合中的元素有下标。从0开始，以1递增
+ *         可重复：存储一个1，还可以再存储1
+ *
+ *    2、List既然是Collection接口的子接口，那么肯定List接口有自己"特色"的方法：
+ *          以下只列出List接口特有的常用的方法：
+ *              void add(int index, E element)     // 在列表的指定位置插入指定元素（第一个参数是下标）
+ *              E set(int index, Object element)   // 修改指定位置的元素
+ *              E get(int index)                   // 根据下标获取元素
+ *              int indexOf(Object o)              // 获取指定对象第一次出现出的索引
+ *              int lastIndexOf(Object o)          // 获取指定对象最后一次出现的索引
+ *              E remove(int index)                // 删除指定下标位置的元素
+ *
+ *     计算机英语：
+ *         增删改查这几个单词要知道：
+ *             增：add,save,new
+ *             删：delete,drop,remove
+ *             改：update,set,modify
+ *             查：find,get,query,select
  */
 public class 集合10_List接口的常用方法 {
     public static void main(String[] args) {

@@ -9,8 +9,8 @@ public class AccountThread extends Thread {
         this.act = act;
     }
 
-    public void run(){
-        // run方法的执行表示取款操作
+    public void run() {
+        // run() 方法的执行表示取款操作
         // 假设取款5000
         double money = 5000;
         // 取款

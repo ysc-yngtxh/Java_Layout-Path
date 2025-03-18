@@ -1,14 +1,14 @@
 package I9_异常;
 
 /*
-  java中我们可以自己去定义异常
-      第一步：编写一个类继承Exception或者RuntimeException
-      第二部：提供两个构造方法，一个是无参的，一个是有参的
-
-  throw和throws的区别：
-       1 throw是语句抛出一个异常。
-         语法：throw (异常对象);
-       2 throws是方法可能抛出异常的声明。(用在声明方法时，表示该方法可能要抛出异常)
+ * java中我们可以自己去定义异常
+ *     第一步：编写一个类继承Exception或者RuntimeException
+ *     第二部：提供两个构造方法，一个是无参的，一个是有参的
+ *
+ * throw和throws的区别：
+ *      1 throw是语句抛出一个异常。
+ *        语法：throw (异常对象);
+ *      2 throws是方法可能抛出异常的声明。(用在声明方法时，表示该方法可能要抛出异常)
  */
 public class 异常7_异常在实际开发中的使用 {
     public static void main(String[] args) {

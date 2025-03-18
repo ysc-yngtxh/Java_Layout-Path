@@ -4,32 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
- * 一、关于Object类中的wait和notify方法。（生产者和消费者模式！）
- *     第一：wait和notify方法不是线程对象的方法，是Java中任何一个Java对象都有的方法，因为这两个方式是Object类中自带的。
- *           wait方法和notify方法不是通过线程对象调用的。不是这样的：t.wait(),t.notify();...
+ * 一、关于Object类中的 wait() 和 notify() 方法。（生产者和消费者模式！）
+ *     第一：wait() 和 notify() 方法不是线程对象的方法，是Java中任何一个Java对象都有的方法，因为这两个方式是Object类中自带的。
+ *          wait() 和 notify() 方法不是通过线程对象调用的。不是这样的：t.wait(),t.notify();...
  *
- *     第二：wait()方法作用？
+ *     第二：wait() 方法作用？
  *           Object obj = new Object();
  *           obj.wait();
  *           表示：
- *               obj.wait()方法的调用，会让 "当前线程" (正在obj对象上活动的线程)进入等待状态，无限期等待，直到被唤醒为止
+ *               obj.wait() 方法的调用，会让 "当前线程" (正在obj对象上活动的线程)进入等待状态，无限期等待，直到被唤醒为止
  *
- *     第三：notify()方法作用？
+ *     第三：notify() 方法作用？
  *           Object obj = new Object();
  *           obj.notify();
  *           表示：
  *               唤醒正在obj对象上等待的线程
  *
- *           还有一个notifyAll()方法：
+ *           还有一个 notifyAll() 方法：
  *                唤醒对象上处于等待的所有线程。
  *
- *     ⚠️：当我们在synchronized块中使用wait()方法时，它会释放当前线程持有的对象锁，并使得当前线程进入该对象的等待锁定池。
- *         直到其他线程调用了该对象的notify()或notifyAll()方法，该线程才会进入对象锁定池准备获得对象锁并进入运行状态。
+ *     ⚠️：当我们在synchronized块中使用 wait() 方法时，它会释放当前线程持有的对象锁，并使得当前线程进入该对象的等待锁定池。
+ *         直到其他线程调用了该对象的 notify() 或 notifyAll() 方法，该线程才会进入对象锁定池准备获得对象锁并进入运行状态。
  *
- * 二、使用wait方法和notify方法实现“生产者和消费者模式”
+ * 二、使用 wait() 方法和 notify() 方法实现“生产者和消费者模式”
  *     什么是生产者和消费者模式？
  *         生产线程负责生产，消费线程负责消费，生产线程和消费线程要达到均衡。
- *         这是一种特殊的业务需求，在这种特殊的情况下需要使用wait方法和notify方法
+ *         这是一种特殊的业务需求，在这种特殊的情况下需要使用 wait() 和 notify() 方法
  *
  *     模拟这样一个需求：
  *         仓库我们采用List集合。
@@ -55,7 +55,7 @@ public class 线程10_Object类中的wait和notify方法 {
     }
 }
 // 生产线程
-class Producer implements Runnable{
+class Producer implements Runnable {
     private List<Object> list;
     public Producer(List<Object> list) {
         this.list = list;
@@ -77,7 +77,7 @@ class Producer implements Runnable{
                 // 程序能够执行到此处，说明仓库是空的，可以生产
                 Object obj = new Object();
                 list.add(obj);
-                System.out.println(Thread.currentThread().getName() + "-->" + obj);
+                System.out.println(Thread.currentThread().getName() + " --> " + obj);
                 // 唤醒消费者消费
                 list.notifyAll();
             }
@@ -104,7 +104,7 @@ class Consumer implements Runnable {
                 }
                 // 程序能执行到此处，说明仓库中有数据，进行消费
                 Object obj = list.remove(0);   // 删除指定下标的元素
-                System.out.println(Thread.currentThread().getName() + "-->" + obj);
+                System.out.println(Thread.currentThread().getName() + " --> " + obj);
                 // 唤醒生产者生产
                 list.notifyAll();
             }

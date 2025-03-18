@@ -6,19 +6,19 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 /*
-    迭代器是个对象(Iterator)。
-    负责遍历/迭代集合当中元素的。
-    注意：迭代器最初并没有指向第一个元素
-
-    迭代器有三个方法：
-    hasNext()和next()交替使用；
-    remove()
-
-    boolean hasNext = it.hasNext();
-    这个方法返回true，便是还有元素可以迭代。这个方法返回false便是没有更多的元素可以迭代了
-
-    Object obj = it.next();
-    这个方法让迭代器前进一位，并且将指向的元素返回（拿到）
+ *  迭代器是个对象(Iterator)。
+ *  负责遍历/迭代集合当中元素的。
+ *  注意：迭代器最初并没有指向第一个元素
+ *
+ *  迭代器有三个方法：
+ *  hasNext()和next()交替使用；
+ *  remove()
+ *
+ *  boolean hasNext = it.hasNext();
+ *  这个方法返回true，便是还有元素可以迭代。这个方法返回false便是没有更多的元素可以迭代了
+ *
+ *  Object obj = it.next();
+ *  这个方法让迭代器前进一位，并且将指向的元素返回（拿到）
  */
 public class 集合4_迭代器 {
     public static void main(String[] args) {

@@ -3,18 +3,18 @@ package A1_基础知识.语法;
 import java.util.Scanner;
 
 /*
- 控制语句：
-     * 选择结构
-        - if, if...else
-        - switch
-     * 循环结构
-        - for
-        - while
-        - do...while()
-     * 控制循环的语句
-        - break
-        - continue
- * */
+ * 控制语句：
+ *     * 选择结构
+ *        - if, if...else
+ *        - switch
+ *     * 循环结构
+ *        - for
+ *        - while
+ *        - do...while()
+ *     * 控制循环的语句
+ *        - break
+ *        - continue
+ */
 public class If{
 	public static void main(String[] args) {
 		Scanner a = new Scanner(System.in);     // 接受用户键盘输入——————在DOS中输入命令指令，只需要输入一条语句就可以了

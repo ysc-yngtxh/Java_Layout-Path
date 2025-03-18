@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /*
-  深入Collection集合的contains方法：
-      boolean contains(Object o)判断集合中是否包含某个对象o
-      如果包含返回true，如果不包含返回false
-
-      contains方法是用来判断集合中是否包含某个元素的方法。
-      那么他在底层是怎么判断集合中是否包含某个元素的呢？
-          调用了equals方法进行比对
-          equals方法返回true，就表示包含这个元素
+ * 深入Collection集合的contains方法：
+ *     boolean contains(Object o)判断集合中是否包含某个对象o
+ *     如果包含返回true，如果不包含返回false
+ *
+ *     contains方法是用来判断集合中是否包含某个元素的方法。
+ *     那么他在底层是怎么判断集合中是否包含某个元素的呢？
+ *         调用了equals方法进行比对
+ *         equals方法返回true，就表示包含这个元素
  */
 public class 集合3_contains方法详解 {
     public static void main(String[] args) {

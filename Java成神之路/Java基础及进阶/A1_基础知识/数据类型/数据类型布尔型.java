@@ -1,10 +1,10 @@
 package A1_基础知识.数据类型;
 
 /*
-     在Java语言当中boolean类型只有两个值：true、false，没有其他值。
-     不像C语言当中，0和1可以表示假和真
-  
-      布尔类型在实际开发当中非常重要，经常使用在逻辑运算和条件控制语句当中。
+ *  在Java语言当中boolean类型只有两个值：true、false，没有其他值。
+ *  不像C语言当中，0和1可以表示假和真
+ *
+ *   布尔类型在实际开发当中非常重要，经常使用在逻辑运算和条件控制语句当中。
  */
 public class 数据类型布尔型 {
 	public static void main(String[] args) {

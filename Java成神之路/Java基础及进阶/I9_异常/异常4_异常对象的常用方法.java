@@ -4,16 +4,16 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 /*
-  异常对象有两个非常重要的方法：
-       获取异常简单的描述信息：
-           String msg = exception.getMessage();
-       打印异常追踪的堆栈信息：
-           exception.printStackTrace();
-
-  我们以后查看异常的追踪信息，我们应该怎么看，可以快速的调试程序？
-       1、异常信息追踪信息，从上往下一行一行看
-       2、但是需要注意的是：SUN公司写的代码就不用看了
-       3、主要问题是出现在自己编写的代码上
+ * 异常对象有两个非常重要的方法：
+ *      获取异常简单的描述信息：
+ *          String msg = exception.getMessage();
+ *      打印异常追踪的堆栈信息：
+ *          exception.printStackTrace();
+ *
+ * 我们以后查看异常的追踪信息，我们应该怎么看，可以快速的调试程序？
+ *      1、异常信息追踪信息，从上往下一行一行看
+ *      2、但是需要注意的是：SUN公司写的代码就不用看了
+ *      3、主要问题是出现在自己编写的代码上
  */
 public class 异常4_异常对象的常用方法 {
     public static void main(String[] args) {
