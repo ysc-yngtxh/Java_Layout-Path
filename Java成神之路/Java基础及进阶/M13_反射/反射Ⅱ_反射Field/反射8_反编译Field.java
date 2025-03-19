@@ -1,11 +1,10 @@
 package M13_反射.反射Ⅱ_反射Field;
 
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 public class 反射8_反编译Field {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         // 创建这个是为了拼接字符串
         StringBuilder s = new StringBuilder();
 
@@ -19,9 +18,12 @@ public class 反射8_反编译Field {
         Field[] fields = studentClass.getDeclaredFields();
         for (Field field: fields) {
             s.append("\t");  //  "\t"是制表符，即每个类下代码前的空格
-            s.append(Modifier.toString(field.getModifiers()));
-            s.append(" ");
-            s.append(field.getType().getName());
+            // 这里加一个if判断是为了避免没有修饰符时打印出来的属性格式不规范
+            if (field.getModifiers() != 0) {
+                s.append(Modifier.toString(field.getModifiers()));
+                s.append(" ");
+            }
+            s.append(field.getType().getSimpleName());
             s.append(" ");
             s.append(field.getName());
             s.append(";\n");

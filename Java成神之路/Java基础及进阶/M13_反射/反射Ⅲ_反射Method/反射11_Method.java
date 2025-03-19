@@ -5,7 +5,7 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.Parameter;
 
 public class 反射11_Method {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         // 获取类
         Class<?> userClass = Class.forName("M13_反射.反射Ⅲ_反射Method.User");
         // 获取所有的Method(包括私有的)

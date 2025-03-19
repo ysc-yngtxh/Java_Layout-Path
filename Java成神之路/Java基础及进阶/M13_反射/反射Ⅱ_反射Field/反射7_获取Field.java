@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 /*
-  Field翻译为字段，其实就是属性/成员
+ * Field翻译为字段，其实就是属性/成员
  */
 public class 反射7_获取Field {
     public static void main(String[] args) throws Exception{
@@ -18,7 +18,7 @@ public class 反射7_获取Field {
         System.out.println("简类名:" + simpleName);
 
         // 获取类中所有的public修饰的Field
-        Field[] fields = studentClass.getFields(); // 只能获取公开的属性，即public修饰的Field
+        Field[] fields = studentClass.getFields(); // 只能获取公开的属性，即 public修饰 的Field
         System.out.println(fields.length);         // 测试数组中只有有2个元素
         // 取出这个Field
         Field f = fields[0];
@@ -35,8 +35,9 @@ public class 反射7_获取Field {
             // 获取属性的修饰符列表
             int i = field.getModifiers(); // 返回的修饰符是一个数字，每一个数字都是修饰符的代号！！
             System.out.println(i);
-            String modifierString = Modifier.toString(i);// 这里的toString()方法是返回描述指定修饰符中的访问修饰符标志的字符串。
-            System.out.println(modifierString);          // 就是将代号转换成字符串
+            // 这里的 toString() 方法是返回描述指定修饰符中的访问修饰符标志的字符串。
+            String modifierString = Modifier.toString(i);
+            System.out.println(modifierString);  // 就是将代号转换成字符串
             // 获取属性的类型
             Class<?> fieldType = field.getType();
             String fName = fieldType.getName();  // 获取简单的类型名：String fName = fieldType.getSimpleName();

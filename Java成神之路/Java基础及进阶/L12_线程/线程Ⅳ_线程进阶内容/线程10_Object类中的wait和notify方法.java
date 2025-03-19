@@ -6,7 +6,7 @@ import java.util.List;
 /*
  * 一、关于Object类中的 wait() 和 notify() 方法。（生产者和消费者模式！）
  *     第一：wait() 和 notify() 方法不是线程对象的方法，是Java中任何一个Java对象都有的方法，因为这两个方式是Object类中自带的。
- *          wait() 和 notify() 方法不是通过线程对象调用的。不是这样的：t.wait(),t.notify();...
+ *          wait() 和 notify() 方法不是通过线程对象调用的。不是这样的：t.wait()、t.notify();...
  *
  *     第二：wait() 方法作用？
  *           Object obj = new Object();
