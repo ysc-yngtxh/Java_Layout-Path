@@ -1,7 +1,7 @@
 package N14_注解.注解Ⅱ_注解测试类;
 
 /*
-  自定义注解：@MyAnnotation1
+ * 自定义注解：@MyAnnotation1
  */
 public @interface MyAnnotation1 {
     /**

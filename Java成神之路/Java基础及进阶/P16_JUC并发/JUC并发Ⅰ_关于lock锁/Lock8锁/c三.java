@@ -20,7 +20,7 @@ public class c三 {
     }
 }
 class Test3{
-    public synchronized void Send(){
+    public synchronized void Send() {
         try {
             TimeUnit.SECONDS.sleep(2);  // 睡眠，不再使用Thread.sleep()
         } catch (InterruptedException e) {

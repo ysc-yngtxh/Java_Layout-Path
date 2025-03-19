@@ -24,8 +24,8 @@ public class User {
     /**
      * 获取所有用户名
      */
-    public Map<String, List<String>> getAllUser() {
-        return Collections.singletonMap("姓名", Collections.singletonList("张三"));
+    public Map<String, List<Integer>> getUsers() {
+        return Collections.singletonMap("姓名", Collections.singletonList(28));
     }
 
     /**

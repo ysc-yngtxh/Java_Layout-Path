@@ -24,7 +24,7 @@ public class f六 {
     }
 }
 class Test6{
-    public static synchronized void Send(){
+    public static synchronized void Send() {
         try {
             TimeUnit.SECONDS.sleep(2);  // 睡眠，不再使用Thread.sleep()
         } catch (InterruptedException e) {

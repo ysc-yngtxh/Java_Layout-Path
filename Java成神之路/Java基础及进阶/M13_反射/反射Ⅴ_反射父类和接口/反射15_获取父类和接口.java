@@ -1,7 +1,7 @@
 package M13_反射.反射Ⅴ_反射父类和接口;
 
 public class 反射15_获取父类和接口 {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         // String举例
         Class<?> stringClass = Class.forName("java.lang.String");
 

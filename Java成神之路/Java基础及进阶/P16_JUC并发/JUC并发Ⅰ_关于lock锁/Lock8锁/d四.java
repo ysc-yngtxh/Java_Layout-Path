@@ -22,7 +22,7 @@ public class d四 {
     }
 }
 class Test4{
-    public synchronized void Send(){
+    public synchronized void Send() {
         try {
             TimeUnit.SECONDS.sleep(2);  // 睡眠，不再使用Thread.sleep()
         } catch (InterruptedException e) {

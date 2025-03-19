@@ -20,7 +20,7 @@ public class 反射11_Method {
             System.out.println(method.getName());
             // 获取方法参数列表（一个方法可能有多个形参）
             Class<?>[] parameterTypes = method.getParameterTypes();
-            for (Class<?> parameterType:parameterTypes) {
+            for (Class<?> parameterType : parameterTypes) {
                 System.out.println(parameterType.getSimpleName());
             }
         }
@@ -41,11 +41,17 @@ public class 反射11_Method {
             Class<?>[] parameterTypes = method1.getParameterTypes();
             // TODO 在Java8之前，代码编译为class文件后，方法参数的类型固定，但是方法名称会丢失，方法名称会变成arg0、arg1....。
             //      在Java8开始可以在class文件中保留参数名，这就给反射带来了极大的便利。
-            //      像mybatis等需要使用反射机制获取方法参数的时候就可以不用像以前一样需要使用类似于@Param之类的注解。
+            //      像 mybatis 等需要使用反射机制获取方法参数的时候就可以不用像以前一样需要使用类似于 @Param 之类的注解。
+            //  解决方案：在编译时添加参数：-parameters
             Parameter[] parameters = method1.getParameters();
             if (parameterTypes.length != 0) {
                 for (int i = 0; i < parameters.length; i++) {
-                    s.append(parameterTypes[i].getSimpleName() + " " + parameters[i].getName());
+                    // 检查参数名是否可用
+                    if (parameters[i].isNamePresent()) {
+                        s.append(parameterTypes[i].getSimpleName() + " " + parameters[i].getName());
+                    } else {
+                        System.err.println("方法" + method1.getName() + "中第" + i + "个参数名未保留");
+                    }
                     if (i < parameters.length - 1) {
                         s.append(", ");
                     }
