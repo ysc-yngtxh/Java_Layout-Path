@@ -42,6 +42,9 @@ public class 泛型1_定义 {
                 if (parameterTypes.length == 1) {
                     for (Class<?> parameterType : parameterTypes) {
                         // 按道理说打印出来应该是指定的String泛型，但是这里泛型的参数 E 运行时得到的却都是 Object 类型
+                        // TODO 注意：在反射里获取方法返回值类型中，可以通过 parameterType.getName() 获取到对应的泛型值
+                        //           这是因为，方法返回值是确切的泛型类型（如：Map<String, List<Integer>>）
+                        //           而这个的泛型使用的是通配符（E），故而获取类型只能为 Object。
                         System.out.println("add(E e) 形参 E 的类型为：" + parameterType.getName());
                     }
                 }

@@ -53,14 +53,14 @@ public class ForkJoinDemo extends RecursiveTask<Long> {
     }
 }
 
-class Test{
+class Test {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         test1();
         test2();
         test3();
     }
     // 普通程序员
-    public static void test1(){
+    public static void test1() {
         long sum = 0L;
         Long start = System.currentTimeMillis();
         for (long i = 0L; i < 10_0000_0000L; i++) {
@@ -80,7 +80,7 @@ class Test{
         System.out.println("sum=" + sum + " => ForkJoin 执行所需时间：" + (end-start) + "毫秒");
     }
     // 超级程序员：使用Stream并行流
-    public static void test3(){
+    public static void test3() {
         Long start = System.currentTimeMillis();
         long sum = LongStream.rangeClosed(0L, 10_0000_0000L).parallel().reduce(0, Long::sum);
         Long end = System.currentTimeMillis();

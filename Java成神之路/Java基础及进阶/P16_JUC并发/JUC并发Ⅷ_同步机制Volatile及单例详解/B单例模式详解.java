@@ -35,7 +35,7 @@ public class B单例模式详解 {
 
     private static B单例模式详解 B = new B单例模式详解();
 
-    public static B单例模式详解 getInstance(){
+    public static B单例模式详解 getInstance() {
         return B;
     }
 }
@@ -53,13 +53,11 @@ public class B单例模式详解 {
  */
 @SuppressWarnings("InstantiationOfUtilityClass")
 class LazyMan{
-    private LazyMan(){
-
-    }
+    private LazyMan() {}
 
     private static LazyMan lazyMan;
 
-    public static LazyMan getInstance(){
+    public static LazyMan getInstance() {
         if (null == lazyMan) {
             lazyMan = new LazyMan();
         }
@@ -83,22 +81,22 @@ class LazyMan{
 /**
  * 线程安全的懒汉式单例
  */
-class Singleton{
+class Singleton {
     private String str;
     public String getStr() {
         return str;
     }
-    private Singleton(){
+    private Singleton() {
         str = "hello";
     }
 
     private static volatile Singleton singleton; // 第二层锁，volatile关键字禁止指令重排
-    public static Singleton getInstance(){
-        if(singleton == null){              // 第一层检查，检查是否有引用指向对象，高并发情况下会有多个线程同时进入
-            synchronized (Singleton.class){ //第一层锁，保证只有一个线程进入
+    public static Singleton getInstance() {
+        if(singleton == null) {              // 第一层检查，检查是否有引用指向对象，高并发情况下会有多个线程同时进入
+            synchronized (Singleton.class) { //第一层锁，保证只有一个线程进入
                 // 双重检查，防止多个线程同时进入第一层检查(因单例模式只允许存在一个对象，故在创建对象之前无引用指向对象，所有线程均可进入第一层检查)
                 // 当某一线程获得锁创建一个Singleton对象时,即已有引用指向对象，singleton不为空，从而保证只会创建一个对象
-                if(singleton == null){      // 第二层检查。假设没有第二层检查，那么第一个线程创建完对象释放锁后，后面进入对象也会创建对象，会产生多个对象
+                if(singleton == null) {      // 第二层检查。假设没有第二层检查，那么第一个线程创建完对象释放锁后，后面进入对象也会创建对象，会产生多个对象
                     // volatile关键字作用为禁止指令重排，保证返回Singleton对象一定在创建对象后
                     singleton = new Singleton();
                     // singleton = new Singleton 语句为非原子性，实际上会执行以下内容：

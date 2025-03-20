@@ -15,11 +15,10 @@ public class 泛型2_示例 {
         Double generic031 = generic03.toGeneric03(num);
         String generic032 = generic03.toGeneric03(str);
 
-        System.out.println(generic011.getClass() + " " + generic011 + "\n" +
-                           generic031.getClass() + " " + generic031 + "\n" +
-                           generic032.getClass() + " " + generic032);
+        System.out.println("Generic01<T>：" + generic011.getClass().getSimpleName() + " " + generic011 + "\n" +
+                           "Generic03：" + generic031.getClass().getSimpleName() + " " + generic031 + "\n" +
+                           "Generic03：" + generic032.getClass().getSimpleName() + " " + generic032);
     }
-
 
     static class Generic01<T> {
         // 这里的 T 表示返回的是 T 类型的数据
@@ -30,10 +29,10 @@ public class 泛型2_示例 {
     }
 
     static class Generic02 {
-        // 只有声明了<T>方法才表示这是一个泛型方法
+        // 只有声明了 <T> 方法才表示这是一个泛型方法
         // 泛型方法与普通方法区别在于：无需指定类泛型
         public static <T> void toGeneric02(T[] arr) {
-            T t = arr[arr.length - 1];
+            System.out.println("Generic02：" + arr[arr.length - 1]);
         }
     }
 

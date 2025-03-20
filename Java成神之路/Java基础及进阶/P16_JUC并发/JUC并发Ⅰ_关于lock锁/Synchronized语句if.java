@@ -64,7 +64,7 @@ public class Synchronized语句if{
 class Data{
     volatile int num = 0;
     public synchronized void demo1() throws InterruptedException {
-        if(num == 0){
+        if(num == 0) {
             this.wait();
         }
         num--;
@@ -72,7 +72,7 @@ class Data{
         this.notifyAll();
     }
     public synchronized void demo2() throws InterruptedException {
-        if(num != 0){
+        if(num != 0) {
             this.wait();
         }
         num++;

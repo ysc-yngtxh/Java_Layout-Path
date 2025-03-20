@@ -31,19 +31,19 @@ public class B关于Stream流式计算 {
         List<User> list = Arrays.asList(user1, user2, user3, user4, user5, user6);
 
 
-        /*计算交给Stream流,链式编程（主要针对集合编程）
-             filter(过滤):将数据流中满足过滤条件的数据筛选出来
-             map(映射)：接收一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的元素。
-             sorted(Comparator com):定制排序，自定义Comparator排序器
-             limit(n)：获取n个元素
-             skip(n)：跳过前n元素
-             distinct：通过流中元素的 hashCode() 和 equals() 去除重复元素
-             peek：如同于map，能得到流中的每一个元素。但map接收的是一个Function表达式，有返回值；而peek接收的是Consumer表达式，没有返回值。
-
-             Count(计数)：统计到Count函数时的数据流中数据个数
-             max：返回流中元素最大值
-             min：返回流中元素最小值
-        */
+        /* 计算交给Stream流,链式编程（主要针对集合编程）
+         *    filter(过滤):将数据流中满足过滤条件的数据筛选出来
+         *    map(映射)：接收一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的元素。
+         *    sorted(Comparator com):定制排序，自定义Comparator排序器
+         *    limit(n)：获取n个元素
+         *    skip(n)：跳过前n元素
+         *    distinct：通过流中元素的 hashCode() 和 equals() 去除重复元素
+         *    peek：如同于map，能得到流中的每一个元素。但map接收的是一个Function表达式，有返回值；而peek接收的是Consumer表达式，没有返回值。
+         *
+         *    Count(计数)：统计到Count函数时的数据流中数据个数
+         *    max：返回流中元素最大值
+         *    min：返回流中元素最小值
+         */
         list.stream()
                 .filter(user -> user.getId()%2 == 0)
                 .filter(user -> {return user.getAge() > 23;})
@@ -95,7 +95,7 @@ public class B关于Stream流式计算 {
          */
     }
 }
-class User{
+class User {
     private int id;
     private String name;
     private int age;

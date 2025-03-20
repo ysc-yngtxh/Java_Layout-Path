@@ -6,18 +6,18 @@ import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /*
-  一、阻塞队列
-     当阻塞队列是空时，从队列中获取元素的操作将会被阻塞
-     当阻塞队列是满时，往队列中添加元素的操作将会被阻塞
-
-  二.阻塞队列的种类和方法
-     阻塞队列有主要以下几种：
-        ArrayBlockingQueue: 由数组结构组成的有界阻塞队列
-        LinkedBlockingDeque: 由链表结构组成的有界(但大小默认值Integer>MAX_VALUE)阻塞队列
-        PriorityBlockingQueue: 支持优先级排序的无界阻塞队列。默认情况下，优先级由对象的自然顺序决定。队列构建时提供的比较器可以覆盖默认优先级。
-        DelayQueue: 使用优先级队列实现的延迟无界阻塞队列
-        SynchronousQueue: 不存储元素的阻塞队列,也即是单个元素的队列
-        LinkedTransferQueue: 由链表结构组成的无界阻塞队列
+ * 一、阻塞队列
+ *    当阻塞队列是空时，从队列中获取元素的操作将会被阻塞
+ *    当阻塞队列是满时，往队列中添加元素的操作将会被阻塞
+ *
+ * 二.阻塞队列的种类和方法
+ *    阻塞队列有主要以下几种：
+ *       ArrayBlockingQueue: 由数组结构组成的有界阻塞队列
+ *       LinkedBlockingDeque: 由链表结构组成的有界(但大小默认值Integer>MAX_VALUE)阻塞队列
+ *       PriorityBlockingQueue: 支持优先级排序的无界阻塞队列。默认情况下，优先级由对象的自然顺序决定。队列构建时提供的比较器可以覆盖默认优先级。
+ *       DelayQueue: 使用优先级队列实现的延迟无界阻塞队列
+ *       SynchronousQueue: 不存储元素的阻塞队列,也即是单个元素的队列
+ *       LinkedTransferQueue: 由链表结构组成的无界阻塞队列
  */
 public class 阻塞队列1_抛出异常API {
     /**
@@ -41,7 +41,7 @@ public class 阻塞队列1_抛出异常API {
     /**
      * 队列溢出或者队列空取会抛出异常,且异常没有返回值
      */
-    public static void test(){
+    public static void test() {
         ArrayBlockingQueue<Object> queue = new ArrayBlockingQueue<>(3); // 队列卡槽为3个
         // 往队列中添加元素
         System.out.println(queue.add("a")); // true

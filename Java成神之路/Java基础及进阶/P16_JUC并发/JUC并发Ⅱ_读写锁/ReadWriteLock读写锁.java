@@ -51,7 +51,7 @@ class MyCache{
     private ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
     // 存。写入的时候，只希望同时只有一个线程写
-    public void put(String key, Object value){
+    public void put(String key, Object value) {
         // System.out.println(Thread.currentThread().getName() + "写入" + key);
         // map.put(key, value);
         // System.out.println(Thread.currentThread().getName() + "写入完成");
@@ -71,11 +71,12 @@ class MyCache{
     }
 
     // 取，读，所有人都可以读
-    public void get(String key){
-        /*System.out.println(Thread.currentThread().getName() + "读取" + key);
-        Object o = map.get(key);
-        System.out.println(Thread.currentThread().getName() + "读取完成");*/
-
+    public void get(String key) {
+        /*
+         * System.out.println(Thread.currentThread().getName() + "读取" + key);
+         * Object o = map.get(key);
+         * System.out.println(Thread.currentThread().getName() + "读取完成");
+         */
         readWriteLock.readLock().lock();
         try {
             System.out.println(Thread.currentThread().getName() + "读取" + key);

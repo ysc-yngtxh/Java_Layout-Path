@@ -12,7 +12,7 @@ public class 阻塞队列4_超时等待API {
     /**
      * 队列溢出或者队列空取会造成阻塞，如果一直存不进去或者取不出来就会超时，一旦超时就会返回false或者null
      */
-    public static void test(){
+    public static void test() {
         ArrayBlockingQueue<Object> queue = new ArrayBlockingQueue<>(3); // 队列卡槽为3个
         try {
             // 往队列中添加元素

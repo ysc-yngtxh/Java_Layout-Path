@@ -3,13 +3,13 @@ package N14_注解.注解Ⅳ_注解在开发中的作用;
 import java.lang.reflect.Field;
 
 /*
-  需求：
-      假设有这样一个注解，叫做：@Id
-      这个注解只能出现在类上面，当这个类中有这个注解的时候，要求这个类中必须有一个int类型的id属性.
-      如果没有这个属性就报异常，如果有这个属性则正常执行！
+ * 需求：
+ *     假设有这样一个注解，叫做：@Id
+ *     这个注解只能出现在类上面，当这个类中有这个注解的时候，要求这个类中必须有一个int类型的id属性.
+ *     如果没有这个属性就报异常，如果有这个属性则正常执行！
  */
 public class Test {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         Class<?> userClass = Class.forName("N14_注解.注解Ⅳ_注解在开发中的作用.User");
         // 判断类上是否存在Id注解
         if(userClass.isAnnotationPresent(Id.class)){

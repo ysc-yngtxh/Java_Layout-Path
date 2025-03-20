@@ -11,7 +11,7 @@ public class 阻塞队列3_阻塞等待API {
     /**
      * 队列溢出或者队列空取会造成阻塞，如果一直存不进去或者取不出来就会一直等待
      */
-    public static void test(){
+    public static void test() {
         ArrayBlockingQueue<Object> queue = new ArrayBlockingQueue<>(3); // 队列卡槽为3个
         // 往队列中添加元素
         try {

@@ -24,7 +24,7 @@ public class 注解4_反射注解 {
 
 
         // 通过反射机制获取注解对象属性的值
-        // 获取doSome()方法
+        // 获取 doSome() 方法
         Method doSomeMethod = c.getDeclaredMethod("doSome");
         // 判断该方法上是否存在这个注解
         if(doSomeMethod.isAnnotationPresent(MyAnnotation.class)) {
