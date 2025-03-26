@@ -29,12 +29,12 @@ public class K_严格排序的三元组 {
         }
 
         int K = 10;
-        int l = 0;
-        int r = arr.length - 1;
-        int m;
+        int l = 0; // 第一个指针
+        int r = arr.length - 1; // 第三个指针
+        int m;     // 第二个指针
         while (l < r - 1) {
             // l++;
-            if (l == 0 || arr[l] != arr[l - 1]) {
+            if (l == 0 || arr[l] != arr[l-1]) {
                 // l不重复在比较m,r
                 m = l + 1;
                 r = arr.length - 1;

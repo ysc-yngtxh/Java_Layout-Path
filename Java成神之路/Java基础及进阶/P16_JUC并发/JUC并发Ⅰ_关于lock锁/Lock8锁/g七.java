@@ -31,7 +31,7 @@ class Test7{
         }
         System.out.println("发短信");
     }
-    public synchronized void Call(){
+    public synchronized void Call() {
         System.out.println("打电话");
     }
 }

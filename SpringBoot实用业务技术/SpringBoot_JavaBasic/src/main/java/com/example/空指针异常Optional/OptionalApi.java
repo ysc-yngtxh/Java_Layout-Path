@@ -99,7 +99,7 @@ public class OptionalApi {
         User user2 = null;
         boolean present = Optional.ofNullable(user2).isPresent();
         log.debug(String.valueOf(present));
-        // TODO 判断是否有值, 如果值存在则执行块.注意：这里是if不是is
+        // TODO 判断是否有值，如果值存在则执行块。注意：这里是if不是is
         User user5 = new User("ysc", 25);
         Optional.ofNullable(user5).ifPresent(u -> log.debug(u.toString()));
 

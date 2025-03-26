@@ -14,7 +14,7 @@ import java.util.Scanner;
                3 |                     ██
                2 |         ██ □  □  □  ██ ██ □  ██
                1 |   ██ □  ██ ██ □  ██ ██ ██ ██ ██ ██
-                 +------------------------------------>   ██：表示数组高度   □：表示可以接住的雨水
+                 +——————————————————————————————————————>   ██：表示数组高度   □：表示可以接住的雨水
                   0  1  0  2  1  0  1  3  2  1  2  1
                  <p>
                  输入：height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
@@ -41,7 +41,7 @@ public class 接雨水 {
         int[] leftMax = new int[n];
         leftMax[0] = height[0];
         for (int i = 1; i < n; ++i) {
-            leftMax[i] = Math.max(leftMax[i - 1], height[i]);
+            leftMax[i] = Math.max(leftMax[i-1], height[i]);
         }
 
         int[] rightMax = new int[n];
@@ -81,7 +81,7 @@ public class 接雨水 {
     // 方法三：双指针
     public static int trap3(int[] height) {
         int ans = 0;
-        int left = 0, right = height.length - 1;
+        int left = 0, right = height.length-1;
         int leftMax = 0, rightMax = 0;
         while (left < right) {
             leftMax = Math.max(leftMax, height[left]);

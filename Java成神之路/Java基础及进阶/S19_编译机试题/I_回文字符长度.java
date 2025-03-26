@@ -8,12 +8,13 @@ import java.util.Scanner;
  * @apiNote TODO 小红拿到了一个只包含 'a','b','c' 三种字符的字符串。
  *               小红想知道，这个字符串最短的、长度超过 1 的回文子串的长度是多少？
  *               如果不存在长度超过1的回文子串，则输出-1。否则输出长度超过1的最短回文子串的长度
- *               回文子串定义：字符串取一段连续的区间。例如"cc"或者"baab"还有"bab "才是回文子串
+ *               回文子串定义：字符串取一段连续的区间。例如 "cc"、"baab"、"bab" 才是回文子串
  */
 public class I_回文字符长度 {
     // 分析：要求返回字符串中最短的回文子串长度。
     //      最短的回文子串无非类似 "aa" 这样的，但是也考虑如果不存在"aa"结构的，那么存在的最短回文子串就是"aba"
     //      因此：结果有三种  -1[不存在回文结构]   2[存在"aa"的结构]   3[存在"aba"的结构]
+    // 疑问：为什么不存在"aaa"、"baab"的结构？因为题目要求最短的回文子串，所以"aaa"可以看作”aa“，"baab"也可以看作"aa"
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String s = scanner.nextLine();

@@ -20,6 +20,18 @@ import java.util.Properties;
  *         HashMap（JDK 1.2 引入）作为非线程安全的替代方案，更注重灵活性和开发便利性。
  *         允许 null 键值使得某些场景（如表示“未设置”或“缺失”状态）更简洁，无需引入特殊占位符。
  *
+ *    分析：在多线程环境中，如果Hashtable允许 key或value 为null，那么当调用 get(key)方法 返回null时，
+ *         我们无法判断这个null是因为key根本不存在，还是因为对应的value值就是null。
+ *         这种二义性在单线程环境中可以通过调用 containsKey(key)方法 来消除，
+ *         但在多线程环境中，由于并发操作的存在，这种判断可能变得不准确，从而引发线程安全问题。
+ *         因此在源码中：putVal(K key, V value, boolean onlyIfAbsent) {
+ *                 		  // 首先会判断 key 和 value 是否为 null,如果是则抛出异常
+ *                         if (key == null || value == null) throw new NullPointerException();
+ *                     }
+ *         至于 “空” 的概念，它通常指的是一个对象的内容为空，而不是对象引用本身为null。
+ *         在Hashtable中，只要key和value不是null，即使它们的内容为空（例如，一个空字符串或一个空的集合），也是可以被接受的。
+ *         但需要注意的是，对于Hashtable来说，它关注的是对象的引用而非内容，因此，即使内容为空，引用本身也不能为null。
+ *
  * 3、Hashtable集合初始化容量11
  *      Hashtable集合扩容，原容量*2+1
  *

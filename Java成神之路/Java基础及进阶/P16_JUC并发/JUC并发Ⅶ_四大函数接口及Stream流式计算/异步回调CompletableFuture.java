@@ -20,7 +20,7 @@ public class 异步回调CompletableFuture {
         // TODO 一、创建异步任务
         System.out.println("================================一、创建异步任务==================================");
         /**
-         * runAsync 是创建没有返回值的异步任务。
+         * runAsync() 是创建没有返回值的异步任务。
          * 它有两个方法，一个是使用默认线程池（ForkJoinPool.commonPool()）的方法(如下)，一个是带有自定义线程池的重载方法
          */
         CompletableFuture<Void> cfRunAsync1 = CompletableFuture.runAsync( () -> {
@@ -83,13 +83,13 @@ public class 异步回调CompletableFuture {
             int i = 10/0;
             return 2021;
         }).whenComplete((result, error) -> { // whenComplete回调方法，对原任务执行的结果进行操作，不创建新对象
-            // result:表示执行成功的返回值  e:表示执行失败的报错信息
+            // result：表示执行成功的返回值  error：表示执行失败的报错信息
             System.out.println("上个任务结果result：" + result);
             System.out.println("上个任务抛出异常e：" + error);
         });
 
         CompletableFuture<Integer> cf2 = cfSupplyAsync1.whenComplete((result, error) -> {
-            // result:表示执行成功的返回值  e:表示执行失败的报错信息
+            // result：表示执行成功的返回值  error：表示执行失败的报错信息
             System.out.println("上个任务结果result：" + result);
             System.out.println("上个任务抛出异常e：" + error);
         }).exceptionally((e) -> { // exceptionally返回一个新的CompletableFuture对象
@@ -106,7 +106,7 @@ public class 异步回调CompletableFuture {
             list.add("数学");
             return list;
         });
-        // 使用handle()方法接收list数据和error异常,并且产生一个新的CompletableFuture对象
+        // 使用 handle() 方法接收list数据和error异常，并且产生一个新的CompletableFuture对象
         CompletableFuture<Integer> future2 = future.handle((list, error)-> {
             // 如果报错，就打印出异常
             Optional.ofNullable(error).ifPresent(e -> System.out.println(error.getMessage()));
@@ -120,9 +120,9 @@ public class 异步回调CompletableFuture {
         System.out.println("================================三、多任务组合处理==================================");
         /**
          * thenCombine、thenAcceptBoth 和runAfterBoth
-         * thenCombine 会将两个任务的执行结果作为所提供函数的参数，且该方法有返回值；
-         * thenAcceptBoth 同样将两个任务的执行结果作为方法入参，但是无返回值；
-         * runAfterBoth没有入参，也没有返回值。注意两个任务中只要有一个执行异常，则将该异常信息作为指定任务的执行结果。
+         * thenCombine：会将两个任务的执行结果作为所提供函数的参数，且该方法有返回值；
+         * thenAcceptBoth：同样将两个任务的执行结果作为方法入参，但是无返回值；
+         * runAfterBoth：没有入参，也没有返回值。注意两个任务中只要有一个执行异常，则将该异常信息作为指定任务的执行结果。
          */
         CompletableFuture<Integer> supplyAsync1 = CompletableFuture.supplyAsync(() -> {
             System.out.println(Thread.currentThread().getName() + " supplyAsync1 do something....");
@@ -142,9 +142,9 @@ public class 异步回调CompletableFuture {
 
         /**
          * applyToEither、acceptEither和runAfterEither
-         * applyToEither 会将先完成任务的执行结果作为所提供函数的参数，后执行完的CompletableFuture结果不管，且该方法有返回值；
-         * acceptEither 同样将先完成任务的执行结果作为方法入参，但是无返回值；
-         * runAfterEither 没有入参，也没有返回值。
+         * applyToEither：会将先完成任务的执行结果作为所提供函数的参数，后执行完的CompletableFuture结果不管，且该方法有返回值；
+         * acceptEither：同样将先完成任务的执行结果作为方法入参，但是无返回值；
+         * runAfterEither：没有入参，也没有返回值。
          */
         CompletableFuture<String> applyToEither = supplyAsync1.applyToEither(supplyAsync2, (result) -> {
             System.out.println("接收到的值：" + result);

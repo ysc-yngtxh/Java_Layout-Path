@@ -19,7 +19,7 @@ public class M_数组中字符串最近距离 {
         String str2 = scanner.next();
         // 比如输入：123 456
         //         123 dfas bvf34 dsfasdf 456 dfashf dafbqide 123
-        // 需要在while循环前执行scanner.nextLine()消耗掉当前位置行与换行符。否则后续的nextLine()方法会读取不到数组数据。
+        // 需要在while循环前执行 scanner.nextLine() 消耗掉当前位置行与换行符。否则后续的 nextLine() 方法会读取不到数组数据。
         // 原因：next()只会消耗掉一个空格，那么执行 nextLine()，读取到的是 [123 456 ] 后的这一行数据，即为空。
         scanner.nextLine();
 
@@ -49,8 +49,7 @@ public class M_数组中字符串最近距离 {
                 System.out.println(-1);
                 return;
             }
-            // 因为这里 min 是下标差值，因此我们输出的最小距离需要 减1
-            System.out.println(min-1);
+            System.out.println(min);
         }
     }
 }

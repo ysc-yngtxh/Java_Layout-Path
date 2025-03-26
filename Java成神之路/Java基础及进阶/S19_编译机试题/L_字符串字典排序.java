@@ -22,9 +22,9 @@ public class L_字符串字典排序 {
         int n = strings.length;
         // 冒泡排序，这个还是比较好理解的
         for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
-                // 可查看 compareTo 源码，是通过字典顺序比较两个字符串的
-                if (strings[j].compareTo(strings[j + 1]) > 0) {
+            for (int j = 0; j < n-i-1; j++) {
+                // 可查看 compareTo() 源码，是通过字典顺序比较两个字符串的
+                if (strings[j].compareTo(strings[j+1]) > 0) {
                     // 交换 strings[j] 和 strings[j+1]
                     String temp = strings[j];
                     strings[j] = strings[j + 1];

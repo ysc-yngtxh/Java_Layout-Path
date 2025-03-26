@@ -9,7 +9,7 @@ public class 阻塞队列2_不抛出异常API {
     }
 
     /**
-     * 队列溢出或者队列空取不会抛出异常,且有返回值
+     * 队列溢出或者队列空取不会抛出异常，且有返回值
      */
     public static void test(){
         ArrayBlockingQueue<Object> queue = new ArrayBlockingQueue<>(3); // 队列卡槽为3个

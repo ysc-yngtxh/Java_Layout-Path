@@ -64,7 +64,13 @@ class Available implements Comparable<Available> {
         return "Available{" + "age=" + age + '}';
     }
     @Override
-    public int compareTo(Available o) {
-        return this.age-o.age;
+    public int compareTo(Available other) {
+        // return this.age-o.age;  直接使用差值，当数值极大时可能导致整数溢出，应该使用包装类的compare方法
+        return Integer.compare(this.age, other.age);
+        /* 注意⚠️：compareTo()方法默认是升序排序，this.age - other.age 为升序排序，other.age - this.age 为降序排序。
+         *        如果想要降序排序，只需要将返回值的正负号调换即可
+         *        return -Integer.compare(this.age, other.age); // 降序排序
+         *        return Integer.compare(other.age, this.age);  // 降序排序
+         */
     }
 }

@@ -39,12 +39,17 @@ public class 集合17_TreeSet集合与自平衡二叉树 {
         System.out.println("TreeSet集合：" + s);
 
         // Set集合转换成List集合
-        List<String> strings = new ArrayList<>(s);
-        System.out.println("ArrayList集合：" + strings);
+        List<String> setToList = new ArrayList<>(s);
+        System.out.println("ArrayList集合：" + setToList);
 
         // List集合转换成Set集合
-        Set<String> set = new TreeSet<>(strings);
-        System.out.println("List集合转换成Set集合：" + set);
+        Set<String> listToSet1 = new TreeSet<>(setToList);
+        System.out.println("List集合转换成Set集合：" + listToSet1);
+
+        // List集合转换成Set集合，并且Set集合进行倒序排列
+        Set<String> listToSet2 = new TreeSet<>(Comparator.reverseOrder());
+        listToSet2.addAll(setToList);
+        System.out.println("List集合转换成Set集合，并且Set集合进行倒序排列：" + listToSet2);
 
         // TODO 创建TreeSet集合的时候，需要使用这个比较器
 
@@ -53,14 +58,14 @@ public class 集合17_TreeSet集合与自平衡二叉树 {
         // 第二种写法，传进Comparator实现对象，只不过把比较规则写在了实现类中。简直就是脱裤子放屁
         TreeSet<Person> person3 = new TreeSet<>(new PersonComparator());
         // 第三种写法：使用Comparator的静态方法。推荐
-        TreeSet<Person> person2 = new TreeSet<>(Comparator.comparing(Person::getAge));
+        TreeSet<Person> person2 = new TreeSet<>(Comparator.comparing(Person::getAge).reversed());
         // 第四种写法：匿名内部类，把比较规则写在了匿名内部类中。可读性太差，但会更加灵活
         TreeSet<Person> person4 = new TreeSet<>(new Comparator<Person>() {
             @Override
             public int compare(Person o1, Person o2) {
                 // 年龄相同时按照名字排序
                 if (o1.age == o2.age) {
-                    // 姓名是String类型，可以直接比。调用String类的compareTo来完成比较
+                    // 姓名是String类型，可以直接比。调用String类的 compareTo() 来完成比较
                     return o1.name.compareTo(o2.name);
                 } else {
                     return o1.age - o2.age; // 年龄不相同时按照年龄大小排序
@@ -87,10 +92,10 @@ class Person implements Comparable<Person> { // String类和Integer类都有Comp
         this.age = age;
     }
 
-    /* compareTo() 方法的返回值很重要：
-     *     返回=0，表示相同，value会覆盖
-     *     返回>0，会继续在右子树上找。【10-9=1，1>0的说明左边这个数字比较大。所以在右子树上找。】
-     *     返回<0，会继续在左子树上找
+    /* 注意⚠️：compareTo()方法默认是升序排序，this.age - other.age 为升序排序，other.age - this.age 为降序排序。
+     *        如果想要降序排序，只需要将返回值的正负号调换即可
+     *        return -Integer.compare(this.age, other.age); // 降序排序
+     *        return Integer.compare(other.age, this.age);  // 降序排序
      */
     @Override
     public int compareTo(Person o) {
@@ -99,7 +104,9 @@ class Person implements Comparable<Person> { // String类和Integer类都有Comp
             // 姓名是String类型，可以直接比。调用String类的compareTo来完成比较
             return this.name.compareTo(o.name);
         } else {
-            return this.age - o.age;  // 年龄不相同时按照年龄大小排序
+            // 年龄不相同时按照年龄大小排序
+            // return this.age-o.age;  直接使用差值，当数值极大时可能导致整数溢出，应该使用包装类的compare方法
+            return Integer.compare(this.age, o.age);
         }
     }
     @Override

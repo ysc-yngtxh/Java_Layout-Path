@@ -26,16 +26,16 @@ public class 线程池1_池化技术 {
      */
     public static void main(String[] args) {
         // 不建议使用这种形式去创建线程池
-        ExecutorService executorService1 = Executors.newSingleThreadExecutor(); // Single单例线程
+        ExecutorService executorService1 = Executors.newSingleThreadExecutor();      // Single单例线程
         ExecutorService executorService2 = Executors.newFixedThreadPool(5); // 固定线程，5个线程
-        ExecutorService executorService3 = Executors.newCachedThreadPool();     // 可伸缩线程，随用户需要去扩展线程数
+        ExecutorService executorService3 = Executors.newCachedThreadPool();          // 可伸缩线程，随用户需要去扩展线程数
         ScheduledExecutorService executorService4 = Executors.newScheduledThreadPool(3);
 
         try {
             // 可以在运行后发现线程启动最多只有一个
             for (int i = 1; i <= 10; i++) {
                 executorService1.execute(() -> {
-                    System.out.println(Thread.currentThread().getName() + "--OK");
+                    System.out.println(Thread.currentThread().getName() + " -- OK");
                 });
             }
 
@@ -45,17 +45,17 @@ public class 线程池1_池化技术 {
             // 可以在运行后发现线程启动最多有五个
             for (int i = 1; i <= 10; i++) {
                 executorService2.execute(() -> {
-                    System.out.println(Thread.currentThread().getName() + "--OK");
+                    System.out.println(Thread.currentThread().getName() + " -- OK");
                 });
             }
 
             TimeUnit.SECONDS.sleep(2);
             System.out.println("==========3==========");
 
-            // 可以在运行后发现线程启动最多有十个
+            // 可以在运行后发现线程启动最多有十个，原因是for循环只有十次，线程池会自动扩展线程数
             for (int i = 1; i <= 10; i++) {
                 executorService3.execute(() -> {
-                    System.out.println(Thread.currentThread().getName() + "--OK");
+                    System.out.println(Thread.currentThread().getName() + " -- OK");
                 });
             }
 

@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 情况六：类中方法都加上static synchronized关键字
- *       这个时候我在main方法中创建两对象，并分别去执行A和B线程。。。 先打印出来的是 "发短信" 还是 "打电话" ？
+ *        这个时候我在main方法中创建两对象，并分别去执行A和B线程。。。 先打印出来的是 "发短信" 还是 "打电话" ？
  */
 public class f六 {
     public static void main(String[] args) {
@@ -23,7 +23,7 @@ public class f六 {
         new Thread(() -> test2.Call(), "B").start();
     }
 }
-class Test6{
+class Test6 {
     public static synchronized void Send() {
         try {
             TimeUnit.SECONDS.sleep(2);  // 睡眠，不再使用Thread.sleep()
@@ -32,7 +32,7 @@ class Test6{
         }
         System.out.println("发短信");
     }
-    public static synchronized void Call(){
+    public static synchronized void Call() {
         System.out.println("打电话");
     }
 }

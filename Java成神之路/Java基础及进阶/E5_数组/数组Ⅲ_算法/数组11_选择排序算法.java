@@ -32,7 +32,7 @@ public class 数组11_选择排序算法 {
             int min = i;
             for (int j = i+1; j < arr.length; j++) {
                 count++;
-                if (arr[j] < arr[min]){
+                if (arr[j] < arr[min]) {
                     min=j;
                 }
             }

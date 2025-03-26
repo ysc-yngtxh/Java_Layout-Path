@@ -32,10 +32,10 @@ public class Semaphore辅助类 {
                         if (semaphore.availablePermits() == 0) { // 获取还剩下的停车位
                             System.err.println("车位不足，请耐心等待");
                         }
-                        semaphore.acquire(); // 获取令牌进入停车场
-                        System.out.println("====" + Thread.currentThread().getName() + "成功进入停车场");
-                        Thread.sleep(new Random().nextInt(10000)); // 模拟车辆在停车场停留的时间
-                        System.out.println("****" + Thread.currentThread().getName() + "驶出停车场");
+                        semaphore.acquire(); // 获取令牌进入停车场，当没有令牌会在此处等待。
+                        System.out.println("==== " + Thread.currentThread().getName() + "成功进入停车场");
+                        Thread.sleep(new Random().nextInt(10000)); // 模拟车辆在停车场停留的时间（10s）
+                        System.out.println("🚗🚗🚗" + Thread.currentThread().getName() + "驶出停车场");
                         semaphore.release(); // 释放令牌，腾出停车场车位
                     } catch (InterruptedException e) {
                         e.printStackTrace();

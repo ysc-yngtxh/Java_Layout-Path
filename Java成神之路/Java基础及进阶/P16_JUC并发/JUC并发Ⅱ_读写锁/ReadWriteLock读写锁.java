@@ -44,7 +44,7 @@ public class ReadWriteLock读写锁 {
     }
 }
 
-class MyCache{
+class MyCache {
     // volatile：可见性
     private volatile Map<String, Object> map = new HashMap<>();
     // 读写锁：更加细粒度的控制

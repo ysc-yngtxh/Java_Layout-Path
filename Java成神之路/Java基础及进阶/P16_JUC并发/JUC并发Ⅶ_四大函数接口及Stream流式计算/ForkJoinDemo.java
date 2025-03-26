@@ -1,5 +1,6 @@
 package P16_JUC并发.JUC并发Ⅶ_四大函数接口及Stream流式计算;
 
+import java.io.Serial;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
@@ -7,13 +8,15 @@ import java.util.concurrent.RecursiveTask;
 import java.util.stream.LongStream;
 
 public class ForkJoinDemo extends RecursiveTask<Long> {
+    @Serial
     private static final long serialVersionUID = 2947412188376658390L;
     /**
-     * ForkJoin在Jdk1.7，并行执行任务！提高效率，大数据量
-     * ForkJoinPool是线程池的一种实现，因此它使用了线程池技术。
-     * ForkJoinPool基于Java的Executor框架，它使用一个线程池来管理任务的执行。
-     * 通过使用线程池，ForkJoinPool可以复用已经创建的线程，避免了频繁地创建和销毁线程的开销，提高了任务的执行效率。
-     * 同时，ForkJoinPool还支持任务的并行执行和任务之间的合并，这些功能都是通过线程池实现的。
+     * ForkJoin在Jdk1.7，并行执行任务并合并任务！在大数据量中提高效率。ForkJoinPool是线程池的一种实现，因此它使用了线程池技术。
+     * 默认情况下，ForkJoinPool中的线程数量等于处理器的核心数。但是，在实际应用中，可以根据任务的特性和系统的负载情况调整线程池的大小。
+     *
+     * 在ForkJoinPool中，任务的拆分和合并是通过继承自 RecursiveAction 或 RecursiveTask类，实现 compute() 方法来定义任务的处理逻辑。
+     * 当一个大任务被拆分成多个小任务时，这些小任务会被提交到ForkJoinPool中并行执行。当所有小任务都执行完成后，它们的结果会被合并起来得到大任务的处理结果。
+     * 这个过程是递归的，也就是说每个小任务还可以继续被拆分成更小的任务并行执行。这种递归拆分和合并的方式使得ForkJoinPool能够处理非常复杂和庞大的任务。
      *
      * 大数据：Map Reduce(把大任务拆分为小任务)
      *
@@ -72,7 +75,7 @@ class Test {
     // 高级程序员：会使用ForkJoin
     public static void test2() throws ExecutionException, InterruptedException {
         Long start = System.currentTimeMillis();
-        ForkJoinPool forkJoinPool = new ForkJoinPool();
+        ForkJoinPool forkJoinPool = new ForkJoinPool(8); // 配置线程数为8的ForkJoinPool
         ForkJoinTask<Long> task = new ForkJoinDemo(0L, 10_0000_0000L);
         ForkJoinTask<Long> submit = forkJoinPool.submit(task);
         Long sum = submit.get();

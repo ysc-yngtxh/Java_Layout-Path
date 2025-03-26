@@ -9,11 +9,11 @@ public class Lock锁 {
      * Synchronized与Lock的区别：
      *    1、Synchronized是内置的Java关键字，Lock是一个Java接口类
      *    2、Synchronized无法判断获取锁的状态，Lock可以判断是否获取到了锁
-     *    3、Synchronized会自动释放锁，Lock必须手动释放锁(如果不释放锁----死锁)
+     *    3、Synchronized会自动释放锁，Lock必须手动释放锁(如果不释放锁 ----> 死锁)
      *    4、Synchronized：线程1(获得锁，阻塞)，线程2(等待)
      *       Lock锁不一定会等待下去，可以通过 lock(10, TimeUnit.SECONDS) 设置一个过期锁
-     *    5、Synchronized可重入锁，不可以中断，非公平(不公平，不遵循先来后到)
-     *       Lock可重入锁，可中断，可判断锁状态(tryLock)，默认是非公平(非常不公平，可插队)但是可以实现为公平锁
+     *    5、Synchronized可重入锁，不可以中断，非公平（不公平，不遵循先来后到）
+     *       Lock可重入锁，可中断，可判断锁状态(tryLock)，默认是非公平（非常不公平，可插队）但是可以实现为公平锁
      *    6、Synchronized适合少量代码同步问题
      *       Lock适合锁大量的同步代码
      *
@@ -95,11 +95,11 @@ class Dataes {
     public void demo0() throws InterruptedException {
         try {
             while (num != 1) {
-                // 线程等待
-                condition0.await();
+                condition0.await(); // 线程等待
             }
-            if (lock.tryLock()) { // 尝试获取锁，如果锁不可用，不会导致当前线程被禁用，当前线程仍然会继续往下执行代码
-                System.out.println(Thread.currentThread().getName() + "---demo0正在尝试获取锁...");
+            // 尝试获取锁，如果锁不可用，不会导致当前线程被禁用，当前线程仍然会继续往下执行代码
+            if (lock.tryLock()) {
+                System.out.println(Thread.currentThread().getName() + " --- demo0正在尝试获取锁...");
                 lock.unlock();
             }
         } catch (Exception e) {
@@ -114,10 +114,9 @@ class Dataes {
         lock.lock();
         try {
             while (num != 1) {
-                // 线程等待
-                condition1.await();
+                condition0.await(); // 线程等待
             }
-            System.out.println(Thread.currentThread().getName() + "---demo1");
+            System.out.println(Thread.currentThread().getName() + " --- demo1");
             num = 2;
             // condition1.signalAll(); // 唤醒所有线程
             condition2.signal(); // 唤醒指定线程
@@ -133,10 +132,9 @@ class Dataes {
         lock.lock();
         try {
             while (num != 2) {
-                // 线程等待
-                condition2.await();
+                condition0.await(); // 线程等待
             }
-            System.out.println(Thread.currentThread().getName() + "---demo2");
+            System.out.println(Thread.currentThread().getName() + " --- demo2");
             num = 3;
             // condition2.signalAll(); // 唤醒所有线程
             condition3.signal(); // 唤醒指定线程
@@ -152,10 +150,9 @@ class Dataes {
         lock.lock();
         try {
             while (num != 3) {
-                // 线程等待
-                condition3.await();
+                condition0.await(); // 线程等待
             }
-            System.out.println(Thread.currentThread().getName() + "---demo3");
+            System.out.println(Thread.currentThread().getName() + " --- demo3");
             num = 1;
             // condition3.signalAll(); // 唤醒所有线程
             condition1.signal(); // 唤醒指定线程
@@ -170,7 +167,7 @@ class Dataes {
         // 启动线程
         lock.lock();
         try {
-            System.out.println(Thread.currentThread().getName() + "---demo4");
+            System.out.println(Thread.currentThread().getName() + " --- demo4");
             // condition3.signalAll(); // 唤醒所有线程
             condition1.signal(); // 唤醒指定线程
         } catch (Exception e) {

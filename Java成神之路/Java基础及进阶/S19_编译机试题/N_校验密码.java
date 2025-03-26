@@ -21,7 +21,7 @@ public class N_校验密码 {
         String split = scanner.nextLine();
 
         // 验证密码长度是否符合要求
-        if (split.length()<= 8 || split.length()>100){
+        if (split.length()<= 8 || split.length()>100) {
             System.out.println("密码长度不符合要求");
             return;
         }
@@ -29,7 +29,7 @@ public class N_校验密码 {
         // 根据要求：子串可以重复，但重复的子串长度不能超过2
         int upper=0, lower=0, num=0, other=0;
         for (int i = 0; i < split.length(); i++) {
-            if ('A'<=split.charAt(i) && split.charAt(i)<='Z'){
+            if ('A'<=split.charAt(i) && split.charAt(i)<='Z') {
                 upper++;
             } else if ('a'<=split.charAt(i) && split.charAt(i)<='z') {
                 lower++;

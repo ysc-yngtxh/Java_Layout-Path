@@ -1,10 +1,10 @@
 package P16_JUC并发.JUC并发Ⅰ_关于lock锁;
 
-public class Synchronized语句if{
+public class Synchronized语句if {
     /**
      * 为什么在synchronized中使用wait、notify等关键字时，尽量不使用if作为判断语句
-     *    1、如果在一if判断中去使用wait、notify，当前只有一两个线程去调用是没有什么问题，
-     *       但是一旦很多线程去调用，那么就会出现跟我们预期结果相悖的错误(num<0或者num>1)。
+     *    1、如果在if判断中去使用wait、notify，当前只有一两个线程去调用是没有什么问题，
+     *       但是一旦很多线程去调用，那么就会出现跟我们预期结果相悖的错误(num<0 或者 num>1)。
      *    2、正常情况下当我们在synchronized块中使用 wait() 方法时，它会释放当前线程持有的对象锁，并使得当前线程进入该对象的等待锁定池
      *       直到其他线程调用了该对象的 notify() 或 notifyAll() 方法，该线程才会进入对象锁定池准备获得对象锁并进入运行状态。
      *    3、而我们去使用if判断中的wait、notify就会存在一个虚假唤醒的问题：
@@ -61,22 +61,22 @@ public class Synchronized语句if{
         }, "D").start();
     }
 }
-class Data{
+class Data {
     volatile int num = 0;
     public synchronized void demo1() throws InterruptedException {
         if(num == 0) {
-            this.wait();
+            this.wait(); // wait() 方法会释放对象锁，并使得当前线程进入该对象的等待锁定池
         }
         num--;
-        System.out.println(Thread.currentThread().getName() + "---num值===" + num);
+        System.out.println(Thread.currentThread().getName() + " --- num值= " + num);
         this.notifyAll();
     }
     public synchronized void demo2() throws InterruptedException {
         if(num != 0) {
-            this.wait();
+            this.wait(); // wait() 方法会释放对象锁，并使得当前线程进入该对象的等待锁定池
         }
         num++;
-        System.out.println(Thread.currentThread().getName() + "---num值===" + num);
+        System.out.println(Thread.currentThread().getName() + " --- num值= " + num);
         this.notifyAll();
     }
 }

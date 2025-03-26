@@ -43,7 +43,7 @@ public class C_分金条的最小代价 {
             // 3：一次弹出两个，进行相加，得到的结果进行标注一下，然后再存放在堆中。直到堆里只剩下一个元素循环才停止。
             int count = 0;
             while (heap.size() > 1) {
-                int cur = heap.poll() + heap.poll(); // 注意空指针异常。
+                int cur = heap.poll() + heap.poll(); // 注意空指针异常，poll()方法表示取出数据并删除。
                 count += cur;
                 heap.add(cur);
             }

@@ -23,11 +23,13 @@ public class 跳跃游戏 {
         String line = new Scanner(System.in).nextLine();
         String[] arr = line.split(", ");
         int[] array = Arrays.stream(arr).mapToInt(Integer::parseInt).toArray();
-        int index = 0;
-        int[] sum = {0};
-        int[] flag = {0};
+        int index = 0;    // 当前下标位置
+        int[] sum = {0};  // 当前下标位置的值，也能理解为下标位置可以移动的步数
+        int[] flag = {0}; // 判断是否能到达最后一个下标
         new 跳跃游戏().printArray(array, index, sum, flag);
         System.out.println(flag[0] != 2);
+
+        System.out.println(new 跳跃游戏().canJump(array));
     }
 
     // 自己想的方法
@@ -49,11 +51,11 @@ public class 跳跃游戏 {
     // 方法二：贪心算法
     public boolean canJump(int[] nums) {
         int n = nums.length;
-        int rightmost = 0;
+        int rightmost = 0;  // 记录当前能到达的最远位置
         for (int i = 0; i < n; ++i) {
             if (i <= rightmost) {
-                rightmost = Math.max(rightmost, i + nums[i]);
-                if (rightmost >= n - 1) {
+                rightmost = Math.max(rightmost, i+nums[i]);
+                if (rightmost >= n-1) {
                     return true;
                 }
             }

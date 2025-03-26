@@ -15,7 +15,7 @@ public class CountDownLatch辅助类 {
         // 创建一个值为7 的计数器。
         CountDownLatch count = new CountDownLatch(7);
 
-        for (int i = 1; i <= 6; i++) {
+        for (int i = 0; i < 7; i++) {
             new Thread(() -> {
                 System.out.println(Thread.currentThread().getName() + " -- Go Out");
                 count.countDown(); // 计数器-1

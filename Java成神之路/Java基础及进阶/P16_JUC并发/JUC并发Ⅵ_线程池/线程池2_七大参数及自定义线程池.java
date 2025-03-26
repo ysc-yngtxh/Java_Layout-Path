@@ -47,7 +47,7 @@ public class 线程池2_七大参数及自定义线程池 {
                 5,    // 核心线程池大小。
                 10,         /* 最大核心线程池大小。
                                当任务数大于核心线程数大小，并不会立马去创建线程供任务使用，而是把任务放到下面我们定义的阻塞队列中。
-                               当阻塞队列也满了，还有多余的任务时，这个时候才会去创建新线程。并且创建的线程数始终不能超过5个。
+                               当阻塞队列也满了，还有多余的任务时，这个时候才会去创建新线程。并且创建的新线程数始终不能超过(10-5)个。
                                如果创建的新线程处于空闲状态，且超过设置的存活时间，那么会被进行销毁处理。*/
                 3,          /* 空闲线程存活时间（超时时间）
                                当线程数大于核心线程数时，多余的空闲线程存活的最长时间，超过该时间则会销毁该线程。*/
@@ -64,12 +64,19 @@ public class 线程池2_七大参数及自定义线程池 {
                                                                 // 如果线程队列已满，那么就会由主线程直接运行该任务。
         );
 
-       /* 引发java.util.concurrent.RejectedExecutionException的场景：
-          1、当你的排队策略为有界队列，并且配置的拒绝策略是 ThreadPoolExecutor.AbortPolicy，
-             当线程池的线程数量已经达到了maximumPoolSize的时候，你再向它提交任务，就会抛出ThreadPoolExecutor.AbortPolicy异常。
-             从而引发java.util.concurrent.RejectedExecutionException
-          2、线程池显式的调用了shutdown()之后，再向线程池提交任务的时候，如果你配置的拒绝策略是ThreadPoolExecutor.AbortPolicy的话，
-             这个异常就被会抛出来。从而引发java.util.concurrent.RejectedExecutionException */
+       /* 上述自定义的线程池最多能成功提交 13个任务，第14个任务将触发AbortPolicy拒绝策略并抛出异常。
+        *   分析：前5个任务直接由核心线程执行，
+        *        第6~8个任务进入队列（队列容量为3），
+        *        第9~13个任务触发创建非核心线程（最大线程数为10，可创建10-5=5个非核心线程），
+        *        第14个任务提交时，线程数已达最大值（10），队列已满（3），触发AbortPolicy抛出RejectedExecutionException。
+        *
+        * 引发java.util.concurrent.RejectedExecutionException的场景：
+        *   1、当你的排队策略为有界队列，并且配置的拒绝策略是 ThreadPoolExecutor.AbortPolicy，
+        *      当线程池的线程数量已经达到了maximumPoolSize的时候，你再向它提交任务，就会抛出ThreadPoolExecutor.AbortPolicy异常。
+        *      从而引发 java.util.concurrent.RejectedExecutionException
+        *   2、线程池显式的调用了shutdown()之后，再向线程池提交任务的时候，如果你配置的拒绝策略是ThreadPoolExecutor.AbortPolicy的话，
+        *      这个异常就被会抛出来。从而引发java.util.concurrent.RejectedExecutionException
+        */
 
         /** 总结：
          *  一、线程基本规则
@@ -97,7 +104,7 @@ public class 线程池2_七大参数及自定义线程池 {
          *
          *  二、排队策略
          *    1、直接提交，用SynchronousQueue。特点是不保存，直接提交给线程，如果没线程，则新建一个。
-         *    2、无限提交，用类似LinkedBlockingQueue无界队列。特点是保存所以核心线程处理不了的任务，队列无上限，最大线程也没用。
+         *    2、无限提交，用类似LinkedBlockingQueue无界队列。特点是保存所有核心线程处理不了的任务，队列无上限，最大线程也没用。
          *    3、有限提交，用类似ArrayBlockingQueue有界队列。特点是可以保存超过核心线程的任务，并且队列也是有上限的。
          *       超过上限，新建线程（满了抛错）。更好地保护资源，防止崩溃，也是最常用的排队策略。
          */
@@ -110,9 +117,9 @@ public class 线程池2_七大参数及自定义线程池 {
 
             for (int i = 1; i <= 20; i++) {
                 // 线程池接受的最大任务数 = 阻塞队列数 + 最大线程池大小
-                // 如果 任务数 > 阻塞队列数 + 最大线程池大小,继续往线程池中执行任务，会执行我们的拒绝策略
+                // 如果 任务数 > 阻塞队列数 + 最大线程池大小，继续往线程池中执行任务，会执行我们的拒绝策略
                 executorService.execute(() -> {
-                    System.out.println(Thread.currentThread().getName() + "--OK"); // 运行可以发现同步线程数最大值是10
+                    System.out.println(Thread.currentThread().getName() + " -- OK"); // 运行可以发现同步线程数最大值是10
                 });
 
             }
@@ -125,11 +132,11 @@ public class 线程池2_七大参数及自定义线程池 {
         System.out.println("-----------------------------------------------------------------------");
 
         /*
-          线程池提交任务的两种方式：execute与submit的区别
-             execute：只能提交 Runnable 类型的任务，无返回值，如果遇到异常会直接抛出。
-             submit： 既可以提交 Runnable 类型的任务，也可以提交 Callable 类型的任务，如果遇到异常不会直接抛出。
-                      提交 Callable 类型的任务时会有一个类型为Future的返回值，但当任务类型为 Runnable 时，返回值为null。
-                      并且只有在使用Future的get方法获取返回值时，才会抛出异常。
+         * 线程池提交任务的两种方式：execute() 与 submit() 的区别
+         *    execute：只能提交 Runnable 类型的任务，无返回值，如果遇到异常会直接抛出。
+         *    submit： 既可以提交 Runnable 类型的任务，也可以提交 Callable 类型的任务，如果遇到异常不会直接抛出。
+         *             提交 Callable 类型的任务时会有一个类型为Future的返回值，但当任务类型为 Runnable 时，返回值为null。
+         *             并且只有在使用Future的 get() 方法获取返回值时，才会抛出异常。
          */
         Callable<String> callable = new Callable<String>() {
             @Override

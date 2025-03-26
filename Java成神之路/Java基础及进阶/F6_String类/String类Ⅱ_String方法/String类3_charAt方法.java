@@ -6,5 +6,10 @@ public class String类3_charAt方法 {
         //（掌握）char charAt(int index) 根据指定下标截取字符串中的一个字符
         char c = "中国人".charAt(1);  // "中国人"是一个字符串String对象，只要是对象就能“点.”
         System.out.println(c);  // 国
+
+        // （掌握）char charAt(int index) 将字符串转化成字节数组
+        String str = "中国人";
+        char[] charArray = str.toCharArray();
+        System.out.println(charArray);  // 中国人
     }
 }

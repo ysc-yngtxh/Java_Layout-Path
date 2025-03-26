@@ -37,8 +37,8 @@ public class B_找到出现次数为奇数次的数 {
 
 class 纯逻辑代码_B {
     // 运用异或(^)的相关性质:
-    // a^a=0
-    // a^0=a
+    // a^a = 0
+    // a^0 = a
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();

@@ -5,8 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
-/*
- * 一、阻塞队列
+/* 一、阻塞队列
  *    当阻塞队列是空时，从队列中获取元素的操作将会被阻塞
  *    当阻塞队列是满时，往队列中添加元素的操作将会被阻塞
  *
@@ -16,16 +15,16 @@ import java.util.concurrent.ArrayBlockingQueue;
  *       LinkedBlockingDeque: 由链表结构组成的有界(但大小默认值Integer>MAX_VALUE)阻塞队列
  *       PriorityBlockingQueue: 支持优先级排序的无界阻塞队列。默认情况下，优先级由对象的自然顺序决定。队列构建时提供的比较器可以覆盖默认优先级。
  *       DelayQueue: 使用优先级队列实现的延迟无界阻塞队列
- *       SynchronousQueue: 不存储元素的阻塞队列,也即是单个元素的队列
+ *       SynchronousQueue: 不存储元素的阻塞队列，即是单个元素的队列
  *       LinkedTransferQueue: 由链表结构组成的无界阻塞队列
  */
 public class 阻塞队列1_抛出异常API {
     /**
      * ArrayBlockingQueue 是数组实现的线程安全的有界的阻塞队列。
-     * 线程安全是指，ArrayBlockingQueue内部通过“互斥锁”保护竞争资源，实现了多线程对竞争资源的互斥访问。
-     * 有界，则是指ArrayBlockingQueue对应的数组是有界限的。
+     * 线程安全是指，ArrayBlockingQueue 内部通过“互斥锁”保护竞争资源，实现了多线程对竞争资源的互斥访问。
+     * 有界，则是指 ArrayBlockingQueue 对应的数组是有界限的。
      * 阻塞队列，是指多线程访问竞争资源时，当竞争资源已被某线程获取时，其它要获取该资源的线程需要阻塞等待；
-     * 而且，ArrayBlockingQueue是按 FIFO（先进先出）原则对元素进行排序，元素都是从尾部插入到队列，从头部开始返回。
+     * 而且，ArrayBlockingQueue 是按 FIFO（先进先出）原则对元素进行排序，元素都是从尾部插入到队列，从头部开始返回。
      *
      * 什么时候使用队列？多线程并发处理，线程池！
      * 四组API
@@ -39,7 +38,7 @@ public class 阻塞队列1_抛出异常API {
     }
 
     /**
-     * 队列溢出或者队列空取会抛出异常,且异常没有返回值
+     * 队列溢出或者队列空取会抛出异常，且异常没有返回值
      */
     public static void test() {
         ArrayBlockingQueue<Object> queue = new ArrayBlockingQueue<>(3); // 队列卡槽为3个
@@ -65,7 +64,7 @@ public class 阻塞队列1_抛出异常API {
         List<Object> list = new ArrayList<>();
         // 移除此队列中所有可用的元素，并将它们添加到给定 collection 中。
         int drain = queue.drainTo(list);
-        System.out.println("drainTo方法的返回值：" + drain);
+        System.out.println("drainTo方法的返回值：" + drain + " - 队列元素：" + queue);
         System.out.println("drainTo方法中转移的collection集合：" + list);
 
         queue.add("E");
@@ -74,7 +73,7 @@ public class 阻塞队列1_抛出异常API {
         List<Object> list2 = new ArrayList<>();
         // 最多从此队列中移除给定数量的可用元素，并将这些元素添加到给定 collection 中。
         int drains = queue.drainTo(list2, 1);
-        System.out.println("drainTo方法两形参的返回值：" + drains);
+        System.out.println("drainTo方法两形参的返回值：" + drains + " - 队列元素：" + queue);
         System.out.println("drainTo方法两形参中转移的collection集合：" + list2);
 
         // 获取但不移除此队列的头部元素；如果此队列为空，则返回 null。

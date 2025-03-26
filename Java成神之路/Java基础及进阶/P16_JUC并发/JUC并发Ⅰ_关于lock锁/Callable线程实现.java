@@ -18,8 +18,8 @@ public class Callable线程实现 {
      *     （2）Callable的任务执行后可返回值，而Runnable的任务是不能返回值的
      *     （3）call方法可以抛出异常，run方法不可以，因为run方法本身没有抛出异常，所以自定义的线程类在重写run的时候也无法抛出异常
      *     （4）运行Callable任务可以拿到一个Future对象，表示异步计算的结果。
-     *         它提供了检查计算是否完成的方法，以等待计算的完成，并检索计算的结果。
-     *         通过Future对象可以了解任务的执行情况，可取消任务的执行，还可获取执行结果
+     *          它提供了检查计算是否完成的方法，以等待计算的完成，并检索计算的结果。
+     *          通过Future对象可以了解任务的执行情况，可取消任务的执行，还可获取执行结果
      */
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         Demo demo = new Demo();
@@ -32,17 +32,16 @@ public class Callable线程实现 {
         FutureTask<Integer> task = new FutureTask<>(demo);
 
         new Thread(task, "A").start();
-        new Thread(task, "B").start(); // 这里创建两个Demo对象并不会让结果出现两次。可以理解为结果缓存
+        new Thread(task, "B").start(); // 这里创建两个Demo对象并不会让结果出现两次。可以理解为结果缓存。
 
-        // 通过task对象的get方法获取返回结果.
-        // 但是这一步会产生阻塞，因为它会去等待结果的返回。如果Demo类中的Call()方法被睡眠了或者其他异常，等待时间过长就会阻塞
+        // 通过 task对象 的 get() 方法获取返回结果.
+        // 但是这一步会产生阻塞，因为它会去等待结果的返回。如果Demo类中的 Call() 方法被睡眠了或者其他异常，等待时间过长就会阻塞
         Integer o = task.get();
         System.out.println(o);
     }
 }
 
 class Demo implements Callable<Integer> {
-
     @Override
     public Integer call() throws Exception {
         System.out.println("call()");
