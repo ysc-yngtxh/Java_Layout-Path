@@ -1,7 +1,6 @@
 package com.example;
 
-public class 杂文笔记 {
-}
+public class 杂文笔记 {}
 /*
 一、分布式锁
      1、数据库的排它锁

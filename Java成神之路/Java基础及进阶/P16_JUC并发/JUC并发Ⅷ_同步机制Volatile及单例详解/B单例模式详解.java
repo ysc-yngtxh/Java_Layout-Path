@@ -14,11 +14,11 @@ package P16_JUC并发.JUC并发Ⅷ_同步机制Volatile及单例详解;
  *         那么必须要对关键的代码进行上锁，只能一个一个按照顺序来写，而单例模式只有一个人来向日志里写入信息方便控制，避免了这种多人干扰的问题出现。
  *
  * 实现单例模式的思路
- *     1.构造私有:
+ *     1、构造私有:
  *         如果要保证一个类不能多次被实例化，那么我肯定要阻止对象 被new 出来，所以需要把类的所有构造方法私有化。
- *     2.以静态方法返回实例。
+ *     2、以静态方法返回实例。
  *         因为外界就不能通过new来获得对象，所以我们要通过提供类的方法来让外界获取对象实例。
- *     3.确保对象实例只有一个。
+ *     3、确保对象实例只有一个。
  *         只对类进行一次实例化，以后都直接获取第一次实例化的对象。
  */
 @SuppressWarnings({"NonAsciiCharacters", "InstantiationOfUtilityClass"})
@@ -29,9 +29,7 @@ public class B单例模式详解 {
      *     饿汉式单例在类创建的同时就已经创建好一个静态的对象供系统使用，以后不再改变，所以是线程安全的，可以直接用于多线程而不会出现问题
      *     但是缺点就是如果这个类需要的提前就加载好，比较浪费内存空间
      */
-    private B单例模式详解(){  
-
-    }
+    private B单例模式详解() {}
 
     private static B单例模式详解 B = new B单例模式详解();
 
@@ -46,13 +44,13 @@ public class B单例模式详解 {
  *    顾名思义就是实例在用到的时候才去创建，"比较懒"，用的时候才去检查有没有实例，如果有则返回，没有则新建。
  *    有线程安全和线程不安全两种写法，区别就是synchronized关键字。
  *
- * 思考一下：  为什么会线程不安全？
- *           比如有两个线程a,b。都在其run()方法中调用了懒汉式单例的静态方法getInstance()
- *           线程a会发现 lazyMan == null,就会去实例化对象，得到LazyMan@5643x
- *           线程b在线程a实例化对象时，也发现了lazyMan  == null，也去实例化对象，得到LazyMan@4564x
+ * 思考一下：为什么会线程不安全？
+ *           比如有两个线程a,b。都在其 run() 方法中调用了懒汉式单例的静态方法 getInstance()
+ *           线程a会发现 lazyMan == null,就会去实例化对象，得到 LazyMan@5643x
+ *           线程b在线程a实例化对象时，也发现了lazyMan == null，也去实例化对象，得到 LazyMan@4564x
  */
 @SuppressWarnings("InstantiationOfUtilityClass")
-class LazyMan{
+class LazyMan {
     private LazyMan() {}
 
     private static LazyMan lazyMan;
@@ -100,7 +98,7 @@ class Singleton {
                     // volatile关键字作用为禁止指令重排，保证返回Singleton对象一定在创建对象后
                     singleton = new Singleton();
                     // singleton = new Singleton 语句为非原子性，实际上会执行以下内容：
-                    // (1)在堆上开辟空间；(2)属性初始化；(3)引用指向对象
+                    // (1)、在堆上开辟空间；(2)、属性初始化；(3)、引用指向对象
                     // 假设以上三个步骤为三条单独指令，因指令重排可能会导致执行顺序为 1 -> 3 -> 2 (正常为 1 -> 2 -> 3),
                     // 当单例模式中存在普通变量需要在构造方法中进行初始化操作时，并发情况下线程1执行singleton = new Singleton()语句时先(1)再(3)，
                     // 此时由于系统调度 线程2 的原因导致 线程1 没来得及执行步骤(2)，但此时已有引用指向对象也就是说 singleton 指向了一段地址 @****
@@ -117,7 +115,6 @@ class Singleton {
                 System.out.println( Singleton.getInstance() );
             }).start();
         }
-
         System.out.println( Singleton.getInstance().getStr() );
     }
 }

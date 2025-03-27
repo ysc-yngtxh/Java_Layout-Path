@@ -12,7 +12,7 @@ public class Java8 {
  *     2、HashMap的数据结构在Java8之后的某一种情况下会由数组加链表结构变为数组加红黑树结构
  *     3、增加了Lambda表达式
  *          // 原来的匿名内部类
- *          public void Test(){
+ *          public void Test() {
  *             Comparator<Integer> com = new Comparator<Integer>(){
  *                 @Override
  *                 public int compare(Integer o1, Integer o2){
@@ -21,7 +21,7 @@ public class Java8 {
  *          };
  *
  *          // Lambda表达式
- *          public void Test(){
+ *          public void Test() {
  *             Comparator<Integer> com = (x,y) -> Integer.compare(x, y);
  *          }
  *     4、强大的Stream API
