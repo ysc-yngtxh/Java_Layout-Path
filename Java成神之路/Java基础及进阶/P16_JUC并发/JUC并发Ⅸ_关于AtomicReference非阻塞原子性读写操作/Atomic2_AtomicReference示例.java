@@ -59,15 +59,15 @@ public class Atomic2_AtomicReference示例 {
 	}
 }
 
-class AtomicReference示例 {
+class AtomicReference简易示例 {
+	// 定义AtomicReference并且初始值为 DebitCard("ZhangSan", 0)
+	static AtomicReference<DebitCard> debitCardRef =
+			new AtomicReference<>(new DebitCard("ZhangSan", 0));
 	public static void main(String[] args) {
 		/** TODO 使用 AtomicReference 的非阻塞原子性解决方案（写法上有缺陷）
 		 * synchronized是一种阻塞式的解决方案，同一时刻只能有一个线程真正在工作，其他线程都将陷入阻塞。
 		 * 因此这并不是一种效率很高的解决方案。这个时候就可以利用 AtomicReference 的非阻塞原子性解决方案提供更加高效的方式了
 		 */
-		// 定义AtomicReference并且初始值为 DebitCard("ZhangSan", 0)
-		AtomicReference<DebitCard> debitCardRef =
-				new AtomicReference<>(new DebitCard("ZhangSan", 0));
 		for (int i = 0; i < 10; i++) {
 			new Thread("T-" + i) {
 				@Override
@@ -101,12 +101,12 @@ class AtomicReference示例 {
 	}
 }
 
-class AtomicReference最终版 {
+class AtomicReference手动循环重试版 {
+	// 定义AtomicReference并且初始值为 DebitCard("ZhangSan", 0)
+	static AtomicReference<DebitCard> debitCardRef =
+			new AtomicReference<>(new DebitCard("ZhangSan", 0));
 	public static void main(String[] args) {
 		// TODO 使用 AtomicReference 循环重试 CAS（最终版）
-		// 定义AtomicReference并且初始值为 DebitCard("ZhangSan", 0)
-		AtomicReference<DebitCard> debitCardRef =
-				new AtomicReference<>(new DebitCard("ZhangSan", 0));
 		for (int i = 0; i < 10; i++) {
 			new Thread("T-" + i) {
 				@Override
@@ -129,10 +129,44 @@ class AtomicReference最终版 {
 				}
 			}.start();
 		}
+		// 根据打印结果：打印的金额没有出现重复，且最终的金额总是 100元。完成了高并发场景下的金额累加操作。
+		// 但是在高并发情况下，还可能出现：线程一直在CAS循环重试，导致线程长时间自旋，浪费 CPU 资源。
+		// 因此，我们可以通过改造代码 ①、限制重试次数；②、结合其他状态判断 的方式来优化循环重试逻辑。
 	}
 }
 
-class AtomicReference简化版 {
+class AtomicReference限制循环重试版 {
+	// 定义AtomicReference并且初始值为 DebitCard("ZhangSan", 0)
+	static AtomicReference<DebitCard> debitCardRef =
+			new AtomicReference<>(new DebitCard("ZhangSan", 0));
+	public static void main(String[] args) {
+		int maxRetries = 5; // 设置最大重试次数
+		int retryCount = 0;
+		while (retryCount < maxRetries) {
+			DebitCard dc = debitCardRef.get();
+			DebitCard newDC = new DebitCard(dc.getAccount(), dc.getAmount() + 10);
+			if (debitCardRef.compareAndSet(dc, newDC)) {
+				System.out.println("成功更新：" + newDC);
+				break;
+			} else {
+				retryCount++;
+				// 退避策略优化（减少竞争）
+				try {
+					// 指数退避：等待时间随重试次数增加（例如 2^retryCount * 基础时间）
+					long sleepTime = (long) (Math.pow(2, retryCount) * 10);
+					TimeUnit.MILLISECONDS.sleep(sleepTime);
+				} catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
+				}
+			}
+		}
+		if (retryCount >= maxRetries) {
+			System.err.println(Thread.currentThread().getName() + " 更新失败，已达最大重试次数");
+		}
+	}
+}
+
+class AtomicReference自动循环重试版 {
 	public static void main(String[] args) {
 		// TODO 利用 getAndUpdate() 方法自动重试 CAS，简化循环逻辑。
 		// 定义AtomicReference并且初始值为 DebitCard("ZhangSan", 0)

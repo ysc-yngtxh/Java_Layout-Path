@@ -9,7 +9,6 @@ public class DebitCard {
 
     // 账户名
     private final String account;
-
     // 账户金额
     private final int amount;
 

@@ -29,7 +29,7 @@ public class Atomic3_AtomicReference类API {
 
         // compareAndSet(V expect, V update)：原子性地更新AtomicReference内部的value值，该方法会返回一个boolean的结果
         // 其中 expect 代表当前AtomicReference的value值，update 则是需要设置的新引用值
-        // 当 expect 和AtomicReference的当前值不相等时，修改会失败，返回值为false；若修改成功则会返回true
+        // 当 expect 和AtomicReference的当前值不相等时，修改会失败并不会重新更新，返回值为false；若修改成功则会返回true
         boolean compared = reference.compareAndSet(debitCard, new DebitCard("cym", 10));
         System.out.println( "compareAndSet()方法修改情况：" + compared );
 
