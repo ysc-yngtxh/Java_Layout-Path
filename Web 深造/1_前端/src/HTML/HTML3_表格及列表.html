@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--HTML表格-->
+    <h1 align="center">员工信息表</h1>
+    <hr>
+    <!--
+        border=1px  设置表格的边框为1像素宽度
+        width       宽度既可以用百分比表示，也可以用像素px表示
+        height      高度
+
+        单元格合并注意事项：
+             1、row单元格合并的时候，删除“下面的”单元格
+             2、col合并的时候，对删除那个没有要求
+
+        thead tbody tfoot在table中不是必须的，只是这样做便于后期的JS代码的编写
+        thead用于表格标签的标记，tbody用于表格内容的标记，tfoot用于表格结尾的标记
+    -->
+    <table align=center border="1" width=60% height=150px> <!--table标签的属性已被弃用，推荐使用CSS样式表来设置表格的样式-->
+        <thead>
+            <tr> <!--tr标签是Table Row（表格行）的缩写-->
+                <th>员工编号</th>
+                <th>员工薪资</th> <!--th标签是 Table Header（表格表头）的缩写。样式：居中、加粗-->
+                <th>部门名称</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr align="center"><!--align="center"表示的是对齐方式居中-->
+                <td>a</td> <!--<td>标签是Table Data（表格数据单元格）的缩写-->
+                <td>b</td>
+                <td>c</td>
+            </tr>
+            <tr align="center">
+                <td>d</td>
+                <td>e</td>
+                <td rowspan="2">f</td><!--表示纵向合并2个单元格-->
+            </tr>
+            <tr align="center">
+                <td>g</td>
+                <td>h</td>
+            </tr>
+        </tbody>
+
+        <tfoot>
+            <tr align="center">
+                <td colspan="2">i</td><!--表示横向合并2个单元格-->
+                <td>j</td>
+            </tr>
+        </tfoot>
+    </table>
+
+<!--HTML列表-->
+    <!--有序列表-->
+    <!--type标签用于<ol>或<ul>中,
+        且在有序列表中和无序列表中的type选项标签不一样
+    -->
+    <ol type="A"> <!--ol标签可看作是Ordered list的缩写-->
+        <li>水果   <!--li标签可看作是list的缩写，表示容器-->
+            <ol>
+                <li>苹果</li>
+                <li>桃子</li>
+                <li>西瓜</li>
+            </ol>
+        </li>
+
+        <li>蔬菜
+            <ol type="a">
+                <li>西红柿</li>
+                <li>大白菜</li>
+                <li>花椰菜</li>
+            </ol>
+        </li>
+    </ol>
+
+    <!--无序列表-->
+    <ul type="circle"><!--ul标签可看作是UnOrdered list的缩写-->
+        <li>中国
+            <ul type="square">
+                <li>湖北
+                    <ul type="disc">
+                        <li>武昌区</li>
+                        <li>汉口区</li>
+                        <li>江夏区</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+        <li>美国
+            <ul>
+                <li>华盛顿
+                    <ul>
+                        <li>第七区</li>
+                        <li>第八区</li>
+                        <li>第九区</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <!--自定义列表-->
+    <dl> <!--dl标签是Definition List（定义列表）的缩写-->
+        <dt>帮助中心</dt> <!--dt标签是Definition Term（定义术语）的缩写-->
+        <dd>账户管理</dd> <!--dd标签是Definition Description（定义描述）的缩写-->
+        <dd>购物指南</dd>
+        <dd>订单操作</dd>
+    </dl>
+</body>
+</html>

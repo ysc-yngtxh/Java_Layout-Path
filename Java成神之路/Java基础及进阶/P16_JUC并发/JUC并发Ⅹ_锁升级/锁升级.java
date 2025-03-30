@@ -76,6 +76,7 @@ public class 锁升级 {
     // 锁对象
     private static Object obj = new Object();
 
+    // 可重入就是说某个线程已经获得某个锁，可以再次获取锁而不会出现死锁。synchronized和ReentrantLock都是可重入的，可重入降低了编程复杂性
     public static void main(String[] args) {
         // 自定义Runnable对象
         Runnable runnable = () -> {
@@ -90,7 +91,6 @@ public class 锁升级 {
                 }
             }
         };
-
         new Thread(runnable, "t1").start();
     }
 }

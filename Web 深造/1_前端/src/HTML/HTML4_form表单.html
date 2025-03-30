@@ -1,0 +1,122 @@
+                   <!--
+                       HTML表单form
+                         1、form表单基本属性
+                         2、用户注册表单的实现
+                               a、单选框(type=radio)
+                               b、复选框(type=checkbox)
+                               c、选项框(select__option)
+                               d、下拉列表支持多选(multiple)
+                               e、文本域(textarea)
+                               f、form的file控件(file控件，文件上传专用)
+                               g、隐藏域(hidden)
+                               h、只读属性(readonly和disabled)
+                               i、文本框可输入字符数量(maxlength)
+                   -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>form表单</title>
+    <style> /*定义表格样式*/
+        table {
+            border-collapse: collapse; /* 合并边框 */
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            align-content: center;
+        }
+    </style>
+</head>
+<body>
+<!--form表单基本属性-->
+        <!--
+            1、表单有什么用？
+                  收集用户信息。表单展现之后，用户填写表单，点击提交按钮提交数据给服务器。
+            2、怎么画一个表单？
+                  使用form标签画表单。
+            3、一个网页当中可以有多个表单form
+            4、表单最终是需要提交数据给服务器的
+                  action属性用来指定数据提交给哪个服务器
+                  action属性和超链接中的href属性一样。都可以向服务器发送请求(request)
+            5、http://192.168.111.3:8080/oa/save这是请求路径，表单提交数据最终提交给：
+               192.168.111.3机器上的8080端口对应的软件
+        -->
+        <form action="http://192.168.111.3:8080/oa/save">
+            <!--HTML 中的 <input> 标签有多种 type 属性值，每种类型定义了不同的输入方式和功能。
+                以下是一些常见的 type 属性值及其用途：
+                    text:     定义一个单行的文本输入框，用户可以在其中输入文本
+                    password: 定义一个密码输入框，输入的字符会被遮蔽
+                    radio:    定义单选按钮，用户可以在一组选项中选择一个
+                    checkbox: 定义复选框，用户可以选择多个选项
+                    file:     定义文件选择字段和“浏览...”按钮，用于文件上传
+                    hidden:   定义隐藏输入字段，用户不可见
+                    image:    定义图像作为提交按钮
+                    button:   定义一个可点击的按钮，通常与 JavaScript 一起使用
+                    submit:   定义提交按钮，用于提交表单
+                    reset:    定义重置按钮，重置所有表单值为默认值
+                    number:   定义用于输入数字的字段，可以设置可接受的数字范围
+                    search:   定义搜索字段，用于输入搜索字符串
+                    tel:      定义用于输入电话号码的字段
+                    url:      定义用于输入 URL 的字段
+                    email:    定义用于输入电子邮件地址的字段
+                    date:     定义日期选择控件
+                    datetime-local: 定义日期和时间选择控件，不带时区
+                    month:    定义月份和年份选择控件
+                    week:     定义周和年份选择控件
+                    time:     定义时间选择控件
+                    color:    定义颜色选择器
+                    range:    定义用于输入范围值的滑块控件
+            -->
+            用户名:              <input type="text"/><br>
+            密码:               <input type="password"/><br>
+            选择你喜欢的颜色(取色组件): <input type="color" name="favcolor"><br>
+            生日:               <input type="date" name="bday"><br>
+            生日 (日期和时间):   <input type="datetime-local" name="batatime"><br>
+            E-mail:            <input type="email" name="useremail"><br>
+            生日 ( 月和年 ):     <input type="month" name="bdaymonth"><br>
+            数量 ( 1 到 5 之间): <input type="number" name="quantity" min="1" max="5"><br>
+            输入范围值的滑块控件:  <input type="range" name="points" min="1" max="10"><br>
+            Search Google:      <input type="search" name="googlesearch"><br>
+            电话号码:            <input type="tel" name="usrtel"><br>
+            选择时间:            <input type="time" name="usr_time"><br>
+            添加你的主页:        <input type="url" name="homepage"><br>
+            选择周:             <input type="week" name="week_year"><br>
+            <input type="submit" value="注册"/><!--按钮可以使用input输入域，type="submit"表示为提交按钮，具有提交表单的能力-->
+            <input type="button" value="设置按钮上显示的文本"/><!--type="button"这是一个普通按钮，不具备提交表单的能力-->
+        </form><br><br><br>
+
+        <form action="http://localhost:8080/jd/login">
+            <table>
+                <!--
+                    表单以什么格式提交数据给服务器的？
+                    http://localhost:8080/jd/login?username=abc&userpwd=123
+
+                    重点强调：表单项写了name属性的，一律会提交给服务器。不想提交这一项的，就不要写name属性
+
+                    文本框和密码框的value不需要程序员指定，用户输入什么value就是什么
+
+                    当name没有写的时候，该项不会提交服务器。
+                    但是当value没有写的时候，value的默认值是空字符串"",会将空字符串提交给服务器。Java代码得到的是：String username="";
+                -->
+                <tr>
+                    <td>用户名</td>
+                    <td><input type="text" name="username"/></td>
+                </tr>
+                <tr>
+                    <td>密码</td>
+                    <td><input type="password" name="userpwd"/></td>
+                </tr>
+                <tr align="center">
+                    <td colspan="2"><!--colspan 属性规定单元格可横跨的列数。这里只有两列：一个字段名，一个输入框-->
+                        <input type="submit" value="登录"/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="reset" value="清空"/><!--type="reset"如果没有这个属性,这个‘清空’标签就没有重置表单的能力了-->
+                    </td>
+                </tr>
+            </table>
+        </form>
+</body>
+</html>

@@ -47,33 +47,32 @@ public class Java8 {
  *             (可以理解为方法引用是是 Lambda表达式得另一种表现形式)
  *     主要有三种语法格式：
  *        1、对象::实例方法名
- *           public void Test(){
+ *           public void Test() {
  *                Consumer<String> con = (x) -> System.out.println(x);
  *                PrintStream ps = System.out;
  *                Consumer<String> con1 = ps::println;
  *           }
  *
  *        2、类::静态方法名
- *           public void Test(){
+ *           public void Test() {
  *               Comparator<Integer> com = (x,y) -> Integer.compare(x, y);
  *               Comparator<Integer> com1 = Integer::compare;
  *           }
  *
  *        3、类::实例方法名
- *           public void Test(){
+ *           public void Test() {
  *               BiPredicate<String,String> bp = (x,y) -> x.equals(y);
  *               BiPredicate<String,String> bp2 = String::equals;
  *           }
  * 四、Stream API
- *
- *     public void Test(){
+ *     public void Test() {
  *         // 1、可以通过Collection系列集合提供的stream()或parallelStream()
  *         List<String> list = new ArrayList<>();
  *         Stream<String> stream = list.stream();
  *
  *         // 2、通过Arrays中的静态方法stream()获取数组流
- *         User[] User = new User[10];
- *         Stream<User> stream2 = Arrays.stream(User);
+ *         User[] user = new User[10];
+ *         Stream<User> stream2 = Arrays.stream(user);
  *
  *         // 3、通过Stream类中的静态方法of()
  *         Stream<String> stream3 = Stream.of("aa", "bb", "cc");
