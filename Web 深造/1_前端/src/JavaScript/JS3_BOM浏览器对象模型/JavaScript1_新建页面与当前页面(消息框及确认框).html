@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--open() 和 close()  方法，可以开启窗口和关闭窗口-->
+    <script type="text/javascript">
+    /* 1、BOM编程中，window对象是顶级对象，代表浏览器窗口
+     * 2、window有open和close方法，可以开启窗口和关闭窗口
+     */
+    </script>
+    <input type="button" value="开启百度(新窗口)" onclick="window.open('http://www.baidu.com')"/>
+    <input type="button" value="开启百度(新窗口)" onclick="window.open('http://www.baidu.com', '_blank')"/>
+    <input type="button" value="开启百度(当前窗口)" onclick="window.open('http://www.baidu.com', '_self')"/>
+    <!--父级窗口是指被其他窗口（也可能是一个弹出窗口）打开的窗口-->
+    <input type="button" value="开启百度(父窗口)" onclick="window.open('http://www.baidu.com', '_parent')"/>
+    <!--顶级窗口则是指在浏览器窗口和其他窗口（如果存在）之上的窗口，也就是包含所有其他窗口和标签页的窗口-->
+    <input type="button" value="开启百度(顶级窗口)" onclick="window.open('http://www.baidu.com', '_top')"/><br><br>
+
+<!--通常情况下每个标签页都是一个顶级窗口，而通过JavaScript脚本打开的新窗口或标签页则可以被看作是父级窗口、顶级窗口或者其他级别的窗口-->
+    <input type="button" value="开启百度(新窗口)" onclick="window.open('JavaScript1_新建页面与当前页面(消息框及确认框).html')"/>
+    <!--close()方法关闭窗口-->
+    <input type="button" value="关闭窗口" onclick="window.close()"/><br><br>
+
+<!--消息框和确认框-->
+    <script type="text/javascript">
+        function del() {
+            if(window.confirm("亲，确认删除数据吗？")) {
+                alert("delete data...");
+            }
+        }
+    </script>
+    <input type="button" value="弹出消息框" onclick="alert('消息框')"/>
+    <input type="button" value="弹出确认框" onclick="del()"/><br><br>
+
+<!--将子窗口设置为顶级窗口-->
+    <iframe src="JavaScript2_将当前窗口设置为顶级窗口.html" width="500px" height="500px"></iframe>
+</body>
+</html>

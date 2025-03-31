@@ -13,15 +13,15 @@
 <body>
 <!--JS捕捉回车键-->
         <script type="text/javascript">
-            window.onload=function(){
-                //对于"键盘事件对象"来说，都有keyCode属性用来获取键值
-                var usernameElt = document.getElementById("username");
-                usernameElt.onkeydown = function(event){
-                    //回车键的键值是13。ESC键的键值是27
+            window.onload = function() {
+                // 对于"键盘事件对象"来说，都有keyCode属性用来获取键值
+                let usernameElt = document.getElementById("username");
+                usernameElt.onkeydown = function(event) {
+                    // 回车键的键值是13。ESC键的键值是27
                     if(event.keyCode === 13) {
                         alert("正在进行验证1...");
                     }
-                    //上述写法已弃用，请使用以下写法
+                    // 上述写法已弃用，请使用以下写法
                     if(event.key === 'Enter') {
                         alert("正在进行验证2...");
                     }
@@ -45,27 +45,28 @@
 <!--JS的控制语句-->
         <script type="text/javascript">
             // 创建JS数组
-            var arr =[false, true, 1, 2, "abc", 3.14];  // JS中数组元素的类型随意，元素的个数随意
+            let arr =[false, true, 1, 2, "abc", 3.14];  // JS中数组元素的类型随意，元素的个数随意
             // 遍历数组
-            for(var i=0; i<arr.length; i++){
+            for(let i=0; i<arr.length; i++){
                 alert(arr[i]);
             }
 
-            // for...in语句可以遍历对象的属性
-            User = function(username, password){
+            // for...in 语句可以遍历对象的属性
+            User = function(username, password) {
                 this.username = username;
                 this.password = password;
             };
-            var u = new User("游诗成", 333);
+            let u = new User("游诗成", 333);
             alert(u.username + "," + u.password);
             alert(u["username"] + "," + u["password"]); // 两种写法
-            for(var ysc in u){
+            for(let ysc in u) {
                 alert(u[ysc]); // 因为ysc表示的是u对象的属性名，本身就是字符串String类型，所以不需要加上双引号或者单引号
             }
 
-            // 还有一种控制语句需要了解
-            with(u){
-                alert(username + "," + password); // 这种语法其实就是省略一个u.
+            // 在 JavaScript 中，with 语句用于临时扩展一个表达式的作用域链，允许在代码块内直接访问指定对象的属性，而无需重复书写对象名。
+            // 但因其设计缺陷和潜在风险，现代开发中已被严格禁止使用，这里仅作了解
+            with(u) {
+                alert(username + "," + password); // 等价于：alert(u.username + "," + u.password);
             }
         </script>
 </body>

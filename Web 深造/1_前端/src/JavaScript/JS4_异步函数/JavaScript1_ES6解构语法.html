@@ -6,7 +6,7 @@
 </head>
 <body>
 
-    以前我们去定义一个局部变量是：var i = [1,2,3]
+    以前我们去定义一个局部变量是：var i = [1, 2, 3]
     但是我们会发现，这个变量在全局中还是会起到作用。所以网络编程发展到今天，已经做出了改变。
     现在的定义局部变量：let i
     声明的变量不能被修改：const k ---- 相当于Java里的final
@@ -34,7 +34,7 @@
       name: "jack",
       age: 21
     }
-    const hello = function({name, age}){
+    const hello = function({name, age}) {
       console.log(name, age);
     }
 
@@ -45,8 +45,7 @@
     map和reduce
     let arr = ['2', '5', '7', '-8', '-6'];
     let arr2 = arr.map(s => parseInt(s)); ===> arr2 = [2, 5, 7, -8, -6]
-    arr2.reduce((a,b) => a+b) ===> 相当于a = 2,b = 5,进行a+b操作即2+5=7，再将7做为a，进行后续的加法
+    arr2.reduce((a,b) => a+b)    ===> 相当于a=2,b=5,进行a+b操作即2+5=7，再将7做为a，进行后续的加法
     arr2.reduce((a,b) => a*b, 0) ===> reduce()方法的第二个参数，即累加器的初始值结果为0。结果值为0
-
 </body>
 </html>

@@ -4,51 +4,47 @@
     <meta charset="UTF-8">
     <title>HTML中引入CSS样式的第二种方式：样式块</title>
 
-    <style type="text/css">
-    /*
-        id选择器
-        语法格式：
-              #id{
-                  样式名:样式值;
-                  样式名:样式值;
-                   ...
-              }
-    */
-        #username{
-            color:red;
-            font-size:30px;
+    <style type="text/css"> /* type属性已被弃用，因为浏览器默认会将 <style> 内容视为 CSS，不需要额外声明 */
+        /*  id选择器
+         *  语法格式：
+         *        #id {
+         *            样式名: 样式值;
+         *            样式名: 样式值;
+         *             ...
+         *        }
+         */
+        #username {
+            color: red;
+            font-size: 30px;
         }
 
-    /*
-        标签选择器
-        语法格式：
-               标签名{
-                    样式名：样式值
-                    样式名：样式值
-                    ...
-               }
-               标签选择起作用的范围比id选择器广
-    */
-        div{
-            background-color:deepskyblue;
-            border:1px solid red;
-            width:100px;
-            height:100px;
-        }
-
-    /*
-        类选择器
-        语法格式：
-               .类名{
-                    样式名：样式值
-                    样式名：样式值
-                    ...
-               }
-    */
-        .student{
+        /*  标签选择器（标签选择起作用的范围比id选择器广）
+         *  语法格式：
+         *         标签名 {
+         *              样式名: 样式值
+         *              样式名: 样式值
+         *              ...
+         *         }
+         */
+        div {
+            background-color: deepskyblue;
             border: 1px solid red;
-            width:400px;
-            height:20px;
+            width: 100px;
+            height: 100px;
+        }
+
+        /*  类选择器
+         *  语法格式：
+         *         .类名{
+         *              样式名: 样式值
+         *              样式名: 样式值
+         *              ...
+         *         }
+         */
+        .student {
+            border: 1px solid red;
+            width: 400px;
+            height: 20px;
         }
     </style>
 </head>

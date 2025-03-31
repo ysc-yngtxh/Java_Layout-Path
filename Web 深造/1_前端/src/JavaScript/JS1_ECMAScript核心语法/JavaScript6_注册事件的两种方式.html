@@ -17,7 +17,7 @@
             回调函数的特点：自己把这个函数代码写出来了，但是这个函数不是自己负责调用，由其他程序负责调用该函数
         -->
         <script type="text/javascript">
-            function sayHello(){
+            function sayHello() {
                 alert("hello js!");
             }
         </script>
@@ -38,30 +38,30 @@
             }
             // 注册事件的第二种方式：是使用纯JS代码完成事件的注册
             // 第一步：先获取这个按钮对象(document是全部小写，内置对象，可以直接用，document就代表整个HTML页面)
-            var btnObj = document.getElementById("mybtn");
+            let mybtn = document.getElementById("mybtn");
             // 第二步：给按钮对象的onclick属性赋值
-            btnObj.onclick = doSome; // 注意：千万别加小括号。这行代码的含义是：将回调函数doSome注册到click事件上
+            mybtn.onclick = doSome; // 注意：千万别加小括号。这行代码的含义是：将回调函数doSome注册到click事件上
 
-            var mybtn1 = document.getElementById("mybtn1");
+            let mybtn1 = document.getElementById("mybtn1");
             // 这个函数没有名字，叫做匿名函数，这个匿名函数也是一个回调函数
-            mybtn1.onclick = function(){
+            mybtn1.onclick = function() {
                 alert("text...");
             }
-            document.getElementById("mybtn2").onclick = function(){
+
+            document.getElementById("mybtn2").onclick = function() {
                 alert('text1...');
             }
         </script>
 
 <!--JS代码的执行顺序-->
         <script type="text/javascript">
-            /*
-                当没有其他的标签的情况下，JS程序是自上而下的运行的。
-                所以当注册事件的id在回调函数的下方时候，注册事件无法执行，因为id并没有加载完毕,回调函数取用id时候发现内存中并无此数据，所以执行失败。
-                在此情况下，我们添加了load事件，用来解决此尴尬的问题。
-            */
+            /* 当没有其他的标签的情况下，JS程序是自上而下的运行的。
+             * 所以当注册事件的id在回调函数的下方时候，注册事件无法执行，因为id并没有加载完毕,回调函数取用id时候发现内存中并无此数据，所以执行失败。
+             * 在此情况下，我们添加了load事件，用来解决此尴尬的问题。
+             */
             window.onload = function() {    // load事件表示页面全部元素加载完毕之后才会发生
-                document.getElementById("btn").onclick = function(){
-                        console.log("123")
+                document.getElementById("btn").onclick = function() {
+                    console.log("123")
                     alert("唉，失去后才知道那是弥足珍贵的东西...");
                 }
             }
@@ -70,10 +70,10 @@
 
 <!--将文本框修改为复选框-->
         <script type="text/javascript">
-            window.onload = function(){
-                document.getElementById("btr").onclick = function(){
-                    var mytext = document.getElementById("mytext");
-                    mytext.type = "radio";
+            window.onload = function() {
+                document.getElementById("btr").onclick = function() {
+                    let mytext = document.getElementById("mytext");
+                    mytext.type = "radio"; // 直接修改文本框的type属性为radio
                 }
             }
         </script>

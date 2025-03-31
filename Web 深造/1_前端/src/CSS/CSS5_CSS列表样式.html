@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <title>列表样式</title>
 
-    <style type="text/css">
-        ul{
-            list-style-type:none
+    <style type="text/css"> /* type属性已被弃用，因为浏览器默认会将 <style> 内容视为 CSS，不需要额外声明 */
+        ul {
+            list-style-type: none
             /* 这个CSS样式是去掉无序列表前面的标识 */
         }
     </style>
 </head>
 <body>
+    <!--使用CSS样式去掉列表前面的标识-->
     <ul>
         <li>中国
             <ul>
@@ -23,5 +24,18 @@
         <li>美国</li>
         <li>俄罗斯</li>
     </ul>
+
+    <!--自定义列表，默认没有列表标识-->
+    <dl>
+        <dt>中国</dt>
+            <dd>北京</dd>
+            <dd>上海</dd>
+            <dd>武汉</dd>
+        <dt>美国</dt>
+            <dd>洛杉矶</dd>
+            <dd>白宫</dd>
+            <dd>武汉</dd>
+        <dt>俄罗斯</dt>
+    </dl>
 </body>
 </html>

@@ -6,8 +6,8 @@
 </head>
 <body>
         <!--
-              *正则在线测试工具：https://regexr-cn.com/
-              *正则练习：https://codejiaonang.com/
+               正则在线测试工具：https://regexr-cn.com/
+               正则练习：https://codejiaonang.com/
 
             1、什么是正则表达式，有什么用？
                  正则表达式：Regular Expression
@@ -26,25 +26,25 @@
                   第六：要能够快速的从网络上找到自己需要的正则表达式，并且测试其有效性
 
             4、常见的正则表达式符号
-                  . 匹配除换行符以外的任意字符
-                  \w匹配字母或数字或下划线或汉字
-                  \s匹配任意地空白符
-                  \d匹配数字
-                  \b匹配单词的开始或结束
-                  ^ 匹配字符串的开始
-                  $ 匹配字符串的结束
+                  .     匹配除换行符以外的任意单个字符
+                  \b    匹配单词的开始或结束
+                  \B    匹配不是单词开头或结束的位置
+                  \d    匹配数字（等价于 [0-9]）
+                  \D    匹配非数字（等价于 [^0-9]）
+                  \w    匹配单词字符（字母、数字、下划线）
+                  \W    匹配非单词字符
+                  \s    匹配空白符（空格、制表符等）
+                  \S    匹配非空白符
+                  ^     匹配字符串的开始。如：/^start/ → 仅匹配以 "start" 开头的字符串
+                  $     匹配字符串的结束。如：/end$/ → 仅匹配以 "end" 结尾的字符串
 
-                  *     重复零次或更多次
-                  +     重复一次或更多次
-                  ?     重复零次或一次
-                  {n}   重复n次
-                  {n,}  重复n次或更多次
-                  {n,m} 重复n到m次
+                  *     匹配 0 次或多次。	如：/a*/ → "", "a", "aaa"
+                  +     匹配 1 次或多次。	如：/\d+/ → "1", "123"
+                  ?     匹配 0 次或 1 次。如：/colou?r/ → "color", "colour"
+                  {n}   匹配 恰好 n 次。	如：/\d{3}/ → "123"
+                  {n,}  匹配 至少 n 次。	如：/\d{2,}/ → "12", "123"
+                  {n,m} 匹配 n 到 m 次。	如：/\d{2,4}/ → "12", "1234"
 
-                  \W       匹配任意不是字母,数字,下划线,汉字的字符
-                  \S       匹配任意不是空白符的字符
-                  \D       匹配任意非数字的字符
-                  \B       匹配不是单词开头或结束的位置
                   [^x]     匹配除了x以外的任意字符
                   [^aeiou] 匹配除了aeiou这几个字母以外的任意字符
 
@@ -55,32 +55,31 @@
                   |            表示或者
 
             5、简单的正则表达式要会写
-                  QQ号的正则表达式：^[1-9][0-9]{4,}$   表示的是第一个数字在1-9中任意一个，取4个或者更多的数字在0-9之间
+                  QQ号的正则表达式：^[1-9][0-9]{4,}$  表示的是第一个数字在1-9中任意一个，取4个或者更多的数字在0-9之间
 
             6、他人编写的正则表达式要能看懂
                   email正则：^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$
 
             7、怎么创建正则表达式对象，怎么调用正则表达式对象的方法？
                   第一种创建方式：
-                      var regExp = /正则表达式/flags;
+                      let regExp = /正则表达式/flags;
                   第二种创建方式：'
-                      var regExp = new RegExp("正则表达式","flags");
+                      let regExp = new RegExp("正则表达式", "flags");
 
                   关于flags：
-                      g:全局匹配
-                      i:忽略大小写
-                      m:多行搜索(ES规范制定之后才支持m)
+                      g: 全局匹配
+                      i: 忽略大小写
+                      m: 多行搜索(ES规范制定之后才支持m)
 
-            8、正则表达式对象的text()方法
-                  可能返回true也有可能返回false = 正则表达式.text(用户填写的字符串);
-                  true：字符串格式匹配成功
+            8、正则表达式对象的test()方法
+                  可能返回true也有可能返回false = 正则表达式.test(用户填写的字符串);
+                  true： 字符串格式匹配成功
                   false：字符串格式匹配失败
-
         -->
 
         <!--验证邮箱-->
         <input type="text" id="email"/>
-                <span id="emailError" style="color:red;font-size:12px;"></span>
+                <span id="emailError" style="color: #e66666;font-size: 12px;"></span>
         <input type="button" value="验证邮箱" id="btn"/><br><br>
         <!--去除字符串的前后空白-->
         <input type="text" id="username"/>
@@ -91,14 +90,14 @@
                 document.getElementById("emailError").innerText = "邮箱地址正在修改";
             }
             document.getElementById("email").onkeydown = function (event) {
-                if (event.keyCode === 13) {
+                if (event.key === 'Enter') {
                     alert("正在验证......");
                 }
             };
             document.getElementById("btn").onclick = function () {
-                var email = document.getElementById("email").value;
-                var emailRegExp = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-                var ok = emailRegExp.test(email);
+                let email = document.getElementById("email").value;
+                let emailRegExp = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+                let ok = emailRegExp.test(email);
                 if (ok) {
                     document.getElementById("emailError").innerText = "邮箱地址合法";
                 } else {
@@ -106,19 +105,18 @@
                 }
             }
 
-            // 低版本的IE浏览器不支持字符串的trim()函数，怎么办？
-            // 可以自己对String类扩展一个全新的trim()函数
+            // 低版本的IE浏览器不支持字符串的 trim() 函数，怎么办？ 可以自己对String类扩展一个全新的trim()函数
             String.prototype.trim = function () {
                 // alert("扩展之后的trim方法");
                 // 在当前的方法中的this代表的就是当前字符串
                 return this.replace(/^\s+/, "").replace(/\s+$/, "");
             };
 
-            // 如今各版本浏览器都支持trim方法,所以现如今也不需要扩展以上trim方法,直接写程序即可
+            // 如今各版本浏览器都支持trim方法，所以现如今也不需要扩展以上trim方法，直接写程序即可
             window.onload = function() {
                 document.getElementById("brn").onclick = function() {
                      // 获取用户名
-                     var username = document.getElementById("username").value;
+                     let username = document.getElementById("username").value;
                      // 去除前后空白
                      username = username.trim();
                      // 测试

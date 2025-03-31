@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- Promise 是异步编程的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大。
+         它由社区最早提出和实现，ES6(2015年) 将其写进了语言标准，统一了用法，原生提供了Promise对象。
+
+         Promise 有三种状态 ，分别是 pending(等待)、resolved(解决)、rejected(拒绝)
+
+         pending可以转换成另外两种状态
+            pending -> resolved
+            pending -> rejected
+    -->
+    <script type="text/javascript">
+        // pending -> resolved 【状态转换时间太短，无法复现属性转换过程。打印的PromiseState属性为'fulfilled'】
+        const p1 = new Promise((resolve, reject) => {
+            // 调用resolve方法，Promise变为操作成功状态（fulfilled）
+            resolve("你好，这里是状态'resolved'");
+        })
+        console.log('p1', p1);
+
+
+        // pending -> rejected 【状态转换时间太短，无法复现属性转换过程。打印的PromiseState属性为'rejected'】
+        const p2 = new Promise((resolve, reject) => {
+            // 调用reject方法，Promise变为操作成功状态（rejected）
+            reject("你好，这里是状态'rejected'");
+        })
+        console.log('p2', p2);
+
+
+        // 延时10秒后，状态转换 pending -> resolved【打印的PromiseState属性由'pending'转变为'fulfilled'】
+        const p3 = new Promise((resolve, reject) => {
+            console.log('进入 promise');
+            setTimeout(() => {
+                resolve("你好，这里是状态'pending'转变为'resolved'");
+                console.log('蒸发 promise');
+            }, 10000)
+            console.log('离开 promise');
+        })
+        console.log('p3', p3)
+
+
+        // Promise链式编程：then()方法中分别存在Promised状态 resolved、rejected 的回调函数
+        // 1、then()方法默认返回 resolved 状态的 Promise，实际执行的是 onfulfilled 操作(监听fulfilled状态的方法)，且没有返回值
+        // 2、then()方法如果返回 rejected 状态的 Promise，实际执行的是 onrejected 操作(监听rejected状态的方法)，且没有返回值
+        let p4 = new Promise(function (resolve, reject) {
+            let flag = false;
+            if (flag) {
+                resolve('这是数据1');
+            } else {
+                reject('这是数据2');
+            }
+        });
+        p4.then(
+            function (data) { // 状态为fulfilled时执行
+                console.log('p4', data);
+                console.log('p4', '这是成功操作');
+            },
+            function (reason) { // 状态为rejected时执行
+                console.log('p4', reason);
+                console.log('p4', '这是失败的操作');
+            }
+        );
+
+
+        // then方法捕捉到Promise的状态为rejected，就执行catch方法里面的操作
+        const p5 = Promise.resolve(`你好，我是游家纨绔`);
+        console.log('p5', p5);
+        p5.then(data => {
+            console.log('p5 then1 [写法一：解构传参]', data)
+          })
+          .then(data => {
+              console.log(`p5 then2 [写法一：解构传参]
+                           data = ${data}，原因就在于 then()方法默认返回 resolved 状态的 Promise，且没有返回值。
+                           因此在第一个 then()方法执行完后，第二个 then()方法得到的是没有返回值的 Promise`, data);
+              return Promise.resolve("黑神话·悟空"); // 这里返回在下一阶段处理的值
+          })
+          .then(data => {
+              console.log('p5 then3 [写法一：解构传参]', data);
+          })
+          .then(() => {
+              console.log('p5 then4 [写法二：解构]');
+          })
+          .then(function (data) {
+              console.log('p5 then5 [写法三：function(data)作为参数]', data);
+              throw new Error('这里抛出异常！！！');
+          })
+          .catch(() => {
+              console.log('p5 catch');
+          })
+        // 分析回调函数：
+        //     p5 最开始 resolve 触发 then 方法，将 `你好，我是游家纨绔` 作为 data参数
+        //     then1 中打印 Promise的返回值 data = `你好，我是游家纨绔`，默认返回 resolved 状态的 Promise，且没有返回值。
+        //     then2 中打印 Promise的返回值 data = undefined，构造一个 Promise 作为返回值，继续触发下面的 then。
+        //     then3 中打印上一个then()的返回值 data = '黑神话·悟空' ，继续触发下面的 then。
+        //     then4 返回 resolved 状态的 promise ，继续触发下面的 then。
+        //     then5 中抛出异常，触发 catch 方法，catch 返回 rejected 状态的 promise ，结束。
+    </script>
+</body>
+</html>

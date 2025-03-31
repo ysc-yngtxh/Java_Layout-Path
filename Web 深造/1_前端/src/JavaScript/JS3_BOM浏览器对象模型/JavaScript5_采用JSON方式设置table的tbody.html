@@ -6,7 +6,7 @@
 </head>
 <body>
         <script type="text/javascript">
-            var date = {
+            let date = {
                 "total": 3,
                 "emps": [
                     {"empno":7369, "ename":"SMITH1", "sal":800.0},
@@ -17,18 +17,18 @@
 
             // 利用拼接html将JSON里的数据导入到table里的tbody
             window.onload = function() {
-                document.getElementById("displayBtn").onclick = function(){
-                    var emps = date.emps;
-                    var html = "";
-                    for(var i=0; i<emps.length; i++){
-                        var emp = emps[i];
+                document.getElementById("displayBtn").onclick = function() {
+                    let emps = date.emps;
+                    let html = "";
+                    for(let i=0; i<emps.length; i++){
+                        let emp = emps[i];
                         html += "<tr align='center'>";
                         html += "<td>" + emp.empno + "</td>";
                         html += "<td>" + emp.ename + "</td>";
                         html += "<td>" + emp.sal + "</td>";
                         html += "</tr>";
                     }
-                    document.getElementById("emptbody").innerHTML = html;
+                    document.getElementById("empTbody").innerHTML = html;
                     document.getElementById("count").innerHTML = date.total;
                 }
             }
@@ -38,15 +38,12 @@
         <hr color="red">
 
         <table border="1px" width="50%" align="center">
-
             <tr>
                 <th>员工编号</th>
                 <th>员工名字</th>
                 <th>员工薪资</th>
             </tr>
-            <tbody id="emptbody">
-
-            </tbody>
+            <tbody id="empTbody"></tbody>
         </table>
         总共<span id="count">0</span>条数
 </body>
