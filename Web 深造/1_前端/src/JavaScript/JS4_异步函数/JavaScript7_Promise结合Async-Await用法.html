@@ -6,13 +6,11 @@
 </head>
 <body>
     <script type="text/javascript">
-
         // TODO JS实现逻辑要求：以下两个延时函数。比如我想先延时1秒，在延迟2秒，再延时1秒，最后输出“完成”。
 
         const setDelay = (millisecond) => {
             return new Promise((resolve, reject) => {
-                if (typeof millisecond != 'number') reject(new
-             Error('参数必须是number类型'));
+                if (typeof millisecond != 'number') reject(new Error('参数必须是number类型'));
                 setTimeout(() => {
                     resolve(`我延迟了${millisecond}毫秒后输出的`)
                 }, millisecond);
@@ -20,8 +18,7 @@
         }
         const setDelaySecond = (seconds) => {
             return new Promise((resolve, reject) => {
-                if (typeof seconds != 'number' || seconds > 10) reject(new
-             Error('参数必须是number类型，并且小于等于10'));
+                if (typeof seconds != 'number' || seconds > 10) reject(new Error('参数必须是number类型，并且小于等于10'));
                 setTimeout(() => {
                     resolve(`我延迟了${seconds}秒后输出的，注意单位是秒`)
                 }, seconds * 1000);
@@ -49,8 +46,7 @@
 
         // 方法二：使用 async/await ，没有冗余的长长的链式代码，语义化也非常清楚，非常舒服
         const chainType = async () => {
-            const result = await setDelay(1000);
-            console.log(result);
+            console.log(await setDelay(1000));
             console.log(await setDelaySecond(2));
             console.log(await setDelay(1000));
             console.log('完成了');

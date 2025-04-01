@@ -11,6 +11,7 @@
             return new Promise((resolve, reject) => {
                 if (typeof millisecond != 'number') reject(new Error('参数必须是number类型'));
                 setTimeout(() => {
+                    // 注意⚠️：双引号和单引号括起来的 ${i} 是不支持的进行插值的，只有使用反引号才起作用
                     resolve(`我延迟了${millisecond}毫秒后输出的`)
                 }, millisecond)
             })

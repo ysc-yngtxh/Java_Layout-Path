@@ -6,12 +6,10 @@
 </head>
 <body>
     <script type="text/javascript">
-
         // TODO 期望的逻辑结果是：隔一秒输出 '我延迟了1000毫秒后输出的'，一共经过循环3次。
         const setDelay = (millisecond) => {
             return new Promise((resolve, reject) => {
-                if (typeof millisecond != 'number') reject(new
-             Error('参数必须是number类型'));
+                if (typeof millisecond != 'number') reject(new Error('参数必须是number类型'));
                 setTimeout(() => {
                     resolve(`我延迟了${millisecond}毫秒后输出的`)
                 }, millisecond)
@@ -51,8 +49,7 @@
 
         // 写法三：上述写法是不优雅的，次数一多then回调就多了。所以使用 for循环来优化。
         arr = [setDelay, setDelay, setDelay]
-        let temp;
-        temp = arr[0](1000)
+        let temp = arr[0](1000)
         for (let i = 1; i <= arr.length; i++) {
             if (i === arr.length) {
                 temp.then(() => {
@@ -62,7 +59,7 @@
             }
             temp = temp.then((result) => {
                 console.log(result);
-                return arr[i - 1](1000)
+                return arr[i-1](1000)
             });
         }
 

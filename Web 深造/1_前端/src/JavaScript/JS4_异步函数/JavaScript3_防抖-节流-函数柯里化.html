@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        #antiShaking,#throttle {
+            width: 200px;
+            height: 100px;
+            background-color: #9cb3ed;
+        }
+    </style>
 </head>
 <body>
-    <div id="antiShaking" style="width: 200px;height: 100px;background-color: #9cb3ed;">
+    <div id="antiShaking">
         <span>鼠标点击：防抖</span>
     </div><br/>
-    <div id="throttle" style="width: 200px;height: 100px;background-color: #9cb3ed;">
+    <div id="throttle">
         <span>鼠标点击：节流</span>
     </div>
 
     <script type="text/javascript">
-
         /* TODO 防抖：在处理那些可能频繁触发的事件时，比如输入框的输入事件、窗口大小改变事件等。
                      通过使用防抖，可以避免不必要的函数调用，减少计算资源的消耗。
          */
@@ -22,14 +28,13 @@
             let timer = null;            // 声明一个变量来接收延时器 初始值为null
             return function () {
                 clearTimeout(timer);
-             // 清除延时器，clearTimeout()取消了先前通过调用setTimeout()建立的定时器。
+                // 清除延时器，clearTimeout()取消了先前通过调用setTimeout()建立的定时器。
                 timer = setTimeout(() => {
                     fn();
                 }, wait);
             }
         }
-        let antiShaking1 = antiShaking(function(){console.log('你好，这里防抖功能被触发！')},
-         5000);
+        let antiShaking1 = antiShaking(function(){console.log('你好，这里防抖功能被触发！')}, 5000);
         document.getElementById('antiShaking').onclick = ()=>{ antiShaking1() };
 
 
@@ -50,7 +55,7 @@
 
         /* TODO 节流和防抖的区别:
                   防抖关注的是在一系列连续触发的操作中只执行一次，而节流则是确保函数不会在给定的时间间隔内被重复执行。
-                  防抖避免重复执行 只执行一次
+                  防抖 避免重复执行 只执行一次
                   节流 减少执行次数 执行多次
          */
 
@@ -74,16 +79,18 @@
         // TODO 改进后的柯里化函数
         function fnSum2(a, b, c) { return a + b + c }
         function curry2(fn) {
-            // Array.prototype.slice()：拆分数组的方法
-            // call()：是一个函数对象的方法，用于调用一个函数，并且显式地设置函数的 this 值以及提供若干个参数。
-            // 使用curry2()函数对象，并从下标 1开始，获取从第二个参数开始的所有参数
+            // arguments的类型是属于传入参数对象，js将我们传给函数的第一个参数的属性名取为“0”，第二个参数为“1”，以此类推，属性值为数字。
+            // Array.prototype.slice()：表示返回原数组所有数据
+            // call()：方法用于更改函数内部的this指向、传递参数、立即执行。
+            // 这段代码作用是获取 arguments(参数数组)从下标 1（第二个参数）开始往后的所有参数
             let args = Array.prototype.slice.call(arguments, 1); // [1, 2]
             return function () {
+                // 将内部函数的参数和外部的参数合并
                 let newArg = args.concat(Array.prototype.slice.call(arguments));
-             // 将内部函数的参数和外部的参数合并
                 return fn.apply(null, newArg); // 将内部函数自动指向 传入所有的参数
             }
         }
+        // JavaScript 函数本身不限制实参数量，调用时可传入任意数量的参数。
         let fnCurry2 = curry2(fnSum2, 1, 2);
         console.log( fnCurry2(3) ); // 6
 
