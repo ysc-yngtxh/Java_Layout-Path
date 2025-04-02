@@ -16,7 +16,7 @@ public interface StudentDao {
     List<Student> selectStudentsParam(Integer age, String name);
 
     // 插入方法
-    // 参数：student，表示要插入到数据库的数据
-    // 返回值：int，表示insert操作后的 影响数据库的行数
+    //     参数：student，表示要插入到数据库的数据
+    //     返回值：int，表示insert操作后的 影响数据库的行数
     int insertStudent(Student student);
 }

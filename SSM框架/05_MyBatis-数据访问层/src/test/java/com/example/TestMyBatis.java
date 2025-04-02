@@ -71,7 +71,7 @@ public class TestMyBatis {
 
     // 测试方法。插入操作
     @Test
-    public void testInsert() throws IOException {
+    public void testInsert() {
         // 1、通过工具类获取SqlSession对象，从SqlSessionFactory中获取SqlSession
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         // 2、【重要】指定要执行得sql语句的标识。sql映射文件中的 namespace + "." + 标签的id值

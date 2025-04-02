@@ -23,7 +23,8 @@ public class MySellHandler implements InvocationHandler {
         // 商家 需要加价，也就是代理要增加价格
         // price = price+25; // 增强功能，代理类在完成目标类方法调用后，增强了功能。
         if (res != null) {
-            float price = (Float) res;
+	        assert res instanceof float;
+	        float price = (float) res;
             price = price + 25;
             res = price;
         }

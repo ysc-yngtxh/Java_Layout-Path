@@ -7,6 +7,7 @@ public class WeiShangSanDi implements UsbSell {
 
     // 代理的是 闪迪，定义目标厂家类
     private UsbSanDiFactory factory = new UsbSanDiFactory();
+
     @Override
     public float sell(int amount) {
         // 调用目标方法

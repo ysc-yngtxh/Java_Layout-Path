@@ -5,7 +5,7 @@ package com.example;
  */
 public class MavenApp {
 
-    public int add(int n1, int n2){
+    public int add(int n1, int n2) {
         return n1+n2;
     }
 

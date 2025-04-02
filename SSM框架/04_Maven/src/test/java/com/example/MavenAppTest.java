@@ -9,7 +9,7 @@ import org.junit.Test;
 public class MavenAppTest {
 
     @Test
-    public void testAdd(){
+    public void testAdd() {
         System.out.println("====testAdd 测试add方法====");
         MavenApp hello = new MavenApp();
         int res = hello.add(10, 20);
@@ -18,7 +18,7 @@ public class MavenAppTest {
     }
 
     @Test
-    public void testAdd2(){
+    public void testAdd2() {
         System.out.println("====testAdd2 测试add方法====");
         MavenApp hello = new MavenApp();
         int res = hello.add(10, 20);

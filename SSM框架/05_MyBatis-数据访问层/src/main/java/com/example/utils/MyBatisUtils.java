@@ -14,12 +14,12 @@ public class MyBatisUtils {
 
     static {
         String config = "mybatis.xml"; // 需要和你得项目中的文件名一样
-        try {
-            InputStream in = Resources.getResourceAsStream(config);
+        try (InputStream in = Resources.getResourceAsStream(config)) {
+
             // 创建SqlSessionFactory对象，使用SqlSessionFactoryBuild
             factory = new SqlSessionFactoryBuilder().build(in);
         } catch (IOException e) {
-            e.printStackTrace();
+	        throw new RuntimeException(e);
         }
     }
 
