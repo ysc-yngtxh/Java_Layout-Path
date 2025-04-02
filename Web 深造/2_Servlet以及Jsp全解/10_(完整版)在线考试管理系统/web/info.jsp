@@ -11,13 +11,13 @@
     <title>Title</title>
 </head>
 <body>
-      <center>
+      <div style="text-align: center;">
           <%
               String result = (String)request.getAttribute("info");
           %>
-          <font style="color:red;font-size:45px">
+          <span style="color:red;font-size:45px">
               <%=result%>
-          </font>
-      </center>
+          </span>
+      </div>
 </body>
 </html>

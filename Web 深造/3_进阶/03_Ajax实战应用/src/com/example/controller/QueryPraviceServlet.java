@@ -1,27 +1,24 @@
 package com.example.controller;
 
 import com.example.dao.ProvinceDao;
-
-import javax.servlet.ServletException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 public class QueryPraviceServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {}
 
-    }
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        String strProid = request.getParameter("proid");
-        System.out.println("strProid:"+strProid);
+        String strProId = request.getParameter("proid");
+        System.out.println("strProId:"+strProId);
 
         String name = "";
-        if(strProid != null && !"".equals(strProid.trim())){
+        if(strProId != null && !strProId.trim().isEmpty()){
             ProvinceDao dao = new ProvinceDao();
-            name = dao.queryproviceNameById(Integer.valueOf(strProid));
+            name = dao.queryProvinceNameById(Integer.valueOf(strProId));
         }
 
         response.setContentType("text/html;charset=utf-8");

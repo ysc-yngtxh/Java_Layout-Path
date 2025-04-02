@@ -19,22 +19,22 @@ public class DBUtil {
       因为工具类当中的方法都是静态的，不需要new对象，直接采用类名调用。
     */
     public DBUtil() {}
-    final String url="jdbc:mysql://localhost:3306/example?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
-    final String user="root";
-    final String password="131474";
+    final String url = "jdbc:mysql://localhost:3306/example?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
+    final String user = "root";
+    final String password = "131474";
     Connection conn = null;
     PreparedStatement ps = null;
 
 
     //-----------通过全局作用域对象得到Connection--------------start
-    public Connection getCon(HttpServletRequest request){
+    public Connection getCon(HttpServletRequest request) {
         // 1、通过请求对象，得到全局作用域对象
         ServletContext application = request.getServletContext();
         // 2、从全局作用域对象得到map
-        Map map = (Map)application.getAttribute("key1");
+        Map map = (Map) application.getAttribute("key1");
         // 3、从map得到一个处于空闲状态Connection（拖鞋）
         Iterator it = map.keySet().iterator();
-        while(it.hasNext()){
+        while(it.hasNext()) {
             conn = (Connection)it.next();
             boolean flag = (boolean)map.get(conn);
             if(flag){
@@ -45,8 +45,8 @@ public class DBUtil {
         return conn;
     }
 
-    public PreparedStatement createStatement(String sql,HttpServletRequest request){
-        try{
+    public PreparedStatement createStatement(String sql,HttpServletRequest request) {
+        try {
             ps = getCon(request).prepareStatement(sql);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -72,9 +72,9 @@ public class DBUtil {
 
 
     /*
-      将jar包中driver实现类加载到Jvm中
-      静态代码块在类加载时执行，并且只执行一次
-    */
+     * 将jar包中driver实现类加载到Jvm中
+     * 静态代码块在类加载时执行，并且只执行一次
+     */
     static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -84,7 +84,7 @@ public class DBUtil {
     }
 
     // 封装连接通道到创建细节
-    public Connection getCon(){
+    public Connection getCon() {
         try {
             conn = DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {
@@ -94,8 +94,8 @@ public class DBUtil {
     }
 
     // 封装交通工具创建细节
-    public PreparedStatement createStatement(String sql){
-        try{
+    public PreparedStatement createStatement(String sql) {
+        try {
             ps = getCon().prepareStatement(sql);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -104,11 +104,11 @@ public class DBUtil {
     }
 
     /*
-      关闭资源
-      @param conn 连接对象
-      @param ps 数据库操作对象
-      @param rs 结果集
-    */
+     * 关闭资源
+     * @param conn 连接对象
+     * @param ps 数据库操作对象
+     * @param rs 结果集
+     */
     public void close() {
         if (ps != null) {
             try {

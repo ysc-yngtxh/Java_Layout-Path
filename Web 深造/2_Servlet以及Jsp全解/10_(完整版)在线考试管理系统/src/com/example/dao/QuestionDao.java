@@ -15,7 +15,7 @@ public class QuestionDao {
     // 注册试题
     public int add(Question question) {
         String sql = "insert into question(title, optionA, optionB, optionC, optionD, answer) " +
-                "values(?, ?, ?, ?, ?, ?)";
+                     "values(?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = util.createStatement(sql);
         int result = 0;
         try{
@@ -35,12 +35,12 @@ public class QuestionDao {
     }
 
     // 查询试题
-    public List findAll(){
+    public List findAll() {
         List questionlist = new ArrayList();
         String sql = "select * from question";
         PreparedStatement ps = util.createStatement(sql);
         ResultSet rs = null;
-        try{
+        try {
             rs = ps.executeQuery();
             while(rs.next()) {
                 Integer questionId = rs.getInt("questionId");
@@ -62,11 +62,11 @@ public class QuestionDao {
     }
 
     // 删除试题
-    public int delete(String questionId){
+    public int delete(String questionId) {
         String sql = "delete from question where questionId = ?";
         PreparedStatement ps = util.createStatement(sql);
         int result = 0;
-        try{
+        try {
             ps.setInt(1,Integer.valueOf(questionId));
             result = ps.executeUpdate();
         } catch (SQLException e) {
@@ -114,10 +114,10 @@ public class QuestionDao {
     // 更新试题
     public int update(Question question) {
         String sql = "update question set title = ?, optionA = ?, optionB = ?, optionC = ?, " +
-                "optionD = ?, answer = ? where questionId = ?";
+                     "optionD = ?, answer = ? where questionId = ?";
         PreparedStatement ps = util.createStatement(sql);
         int result = 0;
-        try{
+        try {
             ps.setString(1,question.getTitle());
             ps.setString(2,question.getOptionA());
             ps.setString(3,question.getOptionB());

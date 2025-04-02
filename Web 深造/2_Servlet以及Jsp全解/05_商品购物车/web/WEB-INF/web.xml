@@ -22,7 +22,6 @@
         <url-pattern>/one</url-pattern>
     </servlet-mapping>
 
-
     <session-config>
         <session-timeout>5</session-timeout><!--当前网站中每一个session最大空闲时间5分钟-->
     </session-config>

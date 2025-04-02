@@ -1,15 +1,19 @@
 package com.example.filter;
 
-import javax.servlet.*;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class OneFilter implements Filter {
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {}
 
-    }
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
@@ -19,7 +23,7 @@ public class OneFilter implements Filter {
         // 1、调用请求对象读取请求请求包中请求行中URI，了解用户访问的资源文件是谁
         String uri = request.getRequestURI();
         // 2、如果本次请求资源文件与登陆相关【login.html或者LoginServlet】，此时要无条件放行(因为此时的登录和提交页面进行过滤拦截，用户体验很差)
-        if(uri.indexOf("login") != -1 || "/myWeb/".equals(uri)){
+        if(uri.contains("login") || "/myWeb/".equals(uri)){
             filterChain.doFilter(servletRequest,servletResponse);
             return;
         }
@@ -34,7 +38,5 @@ public class OneFilter implements Filter {
     }
 
     @Override
-    public void destroy() {
-
-    }
+    public void destroy() {}
 }

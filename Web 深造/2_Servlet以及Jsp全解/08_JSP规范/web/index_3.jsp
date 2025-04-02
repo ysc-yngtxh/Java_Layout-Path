@@ -29,12 +29,12 @@
                作用：在JSP文件运行时,可以通过Session指向当前用户私人储物柜，添加共享数据，或者读取共享数据
 -->
 <%
-    //将共享数据添加到当前用户私人储物柜
-    //HttpSession session = request.HttpSession();
+    // 将共享数据添加到当前用户私人储物柜
+    // HttpSession session = request.HttpSession();
     session.setAttribute("key1",200);
 %>
 <%
-    //如果我这行代码写在一个新建的JSP里，即为同一个用户/浏览器提供服务。因此可以使用当前用户在服务端的私人储物柜进行数据共享
+    // 如果我这行代码写在一个新建的JSP里，即为同一个用户/浏览器提供服务。因此可以使用当前用户在服务端的私人储物柜进行数据共享
     Integer value = (Integer)session.getAttribute("key1");
 %>
 

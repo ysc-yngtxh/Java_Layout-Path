@@ -7,8 +7,7 @@ public class Province {
     private String jiancheng;
     private String shenghui;
 
-    public Province() {
-    }
+    public Province() {}
 
     public Province(Integer id, String name, String jiancheng, String shenghui) {
         this.id = id;

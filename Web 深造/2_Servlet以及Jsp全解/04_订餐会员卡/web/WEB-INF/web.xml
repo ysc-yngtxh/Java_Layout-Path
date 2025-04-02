@@ -8,22 +8,19 @@
         <servlet-name>OneServlet</servlet-name>
         <servlet-class>com.example.controller.OneServlet</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>OneServlet</servlet-name>
+        <url-pattern>/one</url-pattern>
+    </servlet-mapping>
 
 
     <servlet>
         <servlet-name>TwoServlet</servlet-name>
         <servlet-class>com.example.controller.TwoServlet</servlet-class>
     </servlet>
-
-
     <servlet-mapping>
         <servlet-name>TwoServlet</servlet-name>
         <url-pattern>/two</url-pattern>
     </servlet-mapping>
 
-
-    <servlet-mapping>
-        <servlet-name>OneServlet</servlet-name>
-        <url-pattern>/one</url-pattern>
-    </servlet-mapping>
 </web-app>

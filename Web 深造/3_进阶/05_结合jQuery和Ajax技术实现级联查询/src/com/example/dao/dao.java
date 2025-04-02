@@ -10,7 +10,7 @@ import java.util.List;
 public class dao {
 
     // 查询所有的省份，简称，以及城市
-    public List<Province> provinceList(){
+    public List<Province> provinceList() {
         List<Province> list = new ArrayList<>();
         String sql = "select * from province order by id";
         Connection conn = null;
@@ -60,7 +60,7 @@ public class dao {
     }
 
     // 根据请求头中的省份id查询city表的城市名
-    public List<City> cityList(Integer provinceId){
+    public List<City> cityList(Integer provinceId) {
         City city = null;
         List<City> list = new ArrayList<>();
 

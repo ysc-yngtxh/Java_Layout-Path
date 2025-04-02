@@ -1,18 +1,16 @@
-package src.com.bjpowernode.controllerr;
+package com.example.controller;
 
-import src.com.bjpowernode.entity.Student;
+import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import src.com.bjpowernode.entity.Student;
 
 public class TwoServlet extends HttpServlet {
     private static final long serialVersionUID = -1143759616744706403L;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {}
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 1、创建一个引用类型实例对象

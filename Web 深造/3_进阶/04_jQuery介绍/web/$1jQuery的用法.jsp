@@ -12,14 +12,14 @@
 
     <script type="text/javascript" src="scripts/jquery-3.4.1.js"></script>
     <script type="text/javascript">
-        function $(domo){  // 这里的$只是一个函数名，写这样的函数就是用来减少程序员多次重复写代码的繁琐性
-            var dom = document.getElementById(domo).value;
+        function $(domo) {  // 这里的$只是一个函数名，写这样的函数就是用来减少程序员多次重复写代码的繁琐性
+            let dom = document.getElementById(domo).value;
             return dom;
         }
-        function fun1(){
+        function fun1() {
             alert($("one"));
         }
-        function fun2(){
+        function fun2() {
             alert($("two"));
         }
     </script>

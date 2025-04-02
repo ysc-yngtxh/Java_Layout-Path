@@ -8,23 +8,22 @@ import java.sql.SQLException;
 
 public class DButil {
 
-    public DButil() {
-    }
-    final String url="jdbc:mysql://localhost:3306/springdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
-    final String user="root";
-    final String password="131474";
+    public DButil() {}
+    final String url = "jdbc:mysql://localhost:3306/springdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
+    final String user = "root";
+    final String password = "131474";
     Connection conn = null;
     PreparedStatement ps = null;
 
-    static{
-        try{
+    static {
+        try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public Connection getConn(){
+    public Connection getConn() {
         try {
             conn = DriverManager.getConnection(url,user,password);
         } catch (SQLException e) {
@@ -34,8 +33,8 @@ public class DButil {
         return conn;
     }
 
-    public PreparedStatement createStatement(String sql){
-        try{
+    public PreparedStatement createStatement(String sql) {
+        try {
             ps = getConn().prepareStatement(sql);
         } catch (SQLException e) {
             e.printStackTrace();

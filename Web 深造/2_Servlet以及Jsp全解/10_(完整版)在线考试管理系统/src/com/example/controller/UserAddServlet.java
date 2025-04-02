@@ -13,9 +13,7 @@ import java.util.Date;
 public class UserAddServlet extends HttpServlet {
     private static final long serialVersionUID = -3921769198819138521L;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {}
 
     // Tomcat负责销毁【请求对象】和【响应对象】
     // Tomcat负责将HTTP相应协议包推送到发起请求的浏览器上

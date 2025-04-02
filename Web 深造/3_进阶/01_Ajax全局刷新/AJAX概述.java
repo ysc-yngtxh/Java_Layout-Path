@@ -76,5 +76,4 @@
             异步：open(get,url,true),在send之后执行其他的代码，可以同时执行多个异步请求
             同步：open(get,url,false),一次只能执行一个异步请求，必须请求处理完成后，才能执行其他的请求处理
  */
-public class AJAX概述 {
-}
+public class AJAX概述 {}

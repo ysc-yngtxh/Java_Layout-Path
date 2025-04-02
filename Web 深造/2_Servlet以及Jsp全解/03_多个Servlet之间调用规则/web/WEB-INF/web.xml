@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>A1Servlet</servlet-name>
-        <servlet-class>com.example.controller.A1Servlet</servlet-class>
+        <servlet-class>com.example.controller.A1_Servlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>A1Servlet</servlet-name>
@@ -16,7 +16,7 @@
 
     <servlet>
         <servlet-name>B2Servlet</servlet-name>
-        <servlet-class>com.example.controller.B2Servlet</servlet-class>
+        <servlet-class>com.example.controller.B2_Servlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>B2Servlet</servlet-name>
@@ -26,17 +26,16 @@
 
     <servlet>
         <servlet-name>oneServlet</servlet-name>
-        <servlet-class>com.example.controller.oneServlet</servlet-class>
+        <servlet-class>com.example.controller.OneServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>oneServlet</servlet-name>
         <url-pattern>/one</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>twoServlet</servlet-name>
-        <servlet-class>com.example.controller.twoServlet</servlet-class>
+        <servlet-class>com.example.controller.TwoServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>twoServlet</servlet-name>

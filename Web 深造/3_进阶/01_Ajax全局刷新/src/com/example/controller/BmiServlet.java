@@ -7,14 +7,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-
 /**
  * @author 游家纨绔
  */
 public class BmiServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // 接受请求参数
         String strName = request.getParameter("name");
         String height = request.getParameter("h");
@@ -22,8 +21,8 @@ public class BmiServlet extends HttpServlet {
         System.out.println(strName);
 
         // 计算bmi:  bmi = 体重/身高的平方
-        float h = Float.valueOf(height);
-        float w = Float.valueOf(weight);
+        float h = Float.parseFloat(height);
+        float w = Float.parseFloat(weight);
         float bmi = w/(h*h);
 
         // 判断bmi的范围

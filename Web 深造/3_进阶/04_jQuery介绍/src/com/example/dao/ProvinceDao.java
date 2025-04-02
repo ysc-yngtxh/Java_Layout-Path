@@ -13,14 +13,14 @@ public class ProvinceDao {
     DButil util = new DButil();
 
     // 根据id获取一个完整的Province对象
-    public Province queryproviceById(Integer proviceId){
+    public Province queryProvinceById(Integer provinceId) {
         String sql = "select * from province where id=?";
         Connection conn = util.getConn();
         PreparedStatement ps = util.createStatement(sql);
         ResultSet rs = null;
         Province province = null;
         try{
-            ps.setInt(1,proviceId);
+            ps.setInt(1, provinceId);
             rs = ps.executeQuery();
             while(rs.next()){
                 province = new Province();

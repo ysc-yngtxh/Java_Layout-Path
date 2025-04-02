@@ -17,7 +17,7 @@ public class UserDao {
 
     // 用户注册
     // jdbc规范中，Connection创建与销毁最浪费时间
-    public int add(Users user, HttpServletRequest request){
+    public int add(Users user, HttpServletRequest request) {
         String sql = "insert into users(userName,password,sex,email) values(?,?,?,?)";
         Connection conn = null;
         PreparedStatement ps = util.createStatement(sql,request);
@@ -30,15 +30,15 @@ public class UserDao {
             result = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally{
+        } finally {
             util.close(request);
         }
         return result;
     }
 
     // 查询所有用户新消息
-    public List findAll(){
-        List userList = new ArrayList();
+    public List<Users> findAll() {
+        List<Users> userList = new ArrayList<>();
 
         String sql = "select * from users";
         Connection conn = null;
@@ -57,14 +57,14 @@ public class UserDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally{
+        } finally {
             util.close();
         }
         return userList;
     }
 
     // 根据用户编号删除用户信息
-    public int delete(String userId){
+    public int delete(String userId) {
         String sql = "delete from users where userId=?";
         Connection conn = null;
         PreparedStatement ps = util.createStatement(sql);
@@ -74,24 +74,24 @@ public class UserDao {
             result = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally{
+        } finally {
             util.close();
         }
         return result;
     }
 
     // 登陆验证
-    public int login(String userName,String password){
+    public int login(String userName,String password) {
         String sql = "select count(*) from users where userName=? and password=?";
         Connection conn = null;
         PreparedStatement ps = util.createStatement(sql);
         ResultSet rs = null;
         int result = 0;
-        try{
+        try {
             ps.setString(1,userName);
             ps.setString(2,password);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while(rs.next()) {
                 result = rs.getInt("count(*)");
             }
         } catch (SQLException e) {

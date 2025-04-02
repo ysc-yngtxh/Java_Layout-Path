@@ -1,11 +1,10 @@
 package com.example.controller;
 
-import javax.servlet.ServletException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * @author 游家纨绔
@@ -23,12 +22,10 @@ import java.io.PrintWriter;
  */
 public class BmiAjaxServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {}
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         System.out.println("发起了请求，局部刷新");
 
         // 接收参数
@@ -37,8 +34,8 @@ public class BmiAjaxServlet extends HttpServlet {
         String height = request.getParameter("h");
 
         // 计算bmi
-        float w = Float.valueOf(weight);
-        float h = Float.valueOf(height);
+        float w = Float.parseFloat(weight);
+        float h = Float.parseFloat(height);
         float bmi = w/(h*h);
 
         // 判断bmi的范围

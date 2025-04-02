@@ -3,4 +3,58 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <servlet>
+        <servlet-name>A1Servlet</servlet-name>
+        <servlet-class>com.example.controller.A1_Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>A1Servlet</servlet-name>
+        <url-pattern>/A1</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>B2Servlet</servlet-name>
+        <servlet-class>com.example.controller.B2_Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>B2Servlet</servlet-name>
+        <url-pattern>/B2</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>C3Servlet</servlet-name>
+        <servlet-class>com.example.controller.C3_Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>C3Servlet</servlet-name>
+        <url-pattern>/C3</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>D4Servlet</servlet-name>
+        <servlet-class>com.example.controller.D4_Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>D4Servlet</servlet-name>
+        <url-pattern>/D4</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>E5Servlet</servlet-name>
+        <servlet-class>com.example.controller.E5_Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>E5Servlet</servlet-name>
+        <url-pattern>/E5</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>F6Servlet</servlet-name>
+        <servlet-class>com.example.controller.F6_Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>F6Servlet</servlet-name>
+        <url-pattern>/F6</url-pattern>
+    </servlet-mapping>
 </web-app>

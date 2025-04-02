@@ -14,9 +14,19 @@ public class 流9_标准输出流 {
 
         // 分开写。标准输出流不需要手动 close() 关闭
         PrintStream ps = System.out;
+        ps.print("你好，这里是不换行的打印！！！");
         ps.println("叶诗琪");
         ps.println("没有你的每一天都好像无比煎熬");
         ps.println("我好想你啊");
+
+        // out.print()是字符输出流的方法（不换行输出）。例如：out.print(97); 输出97
+        // out.write()是字节输出流的方法（不换行输出。如果输出数字，显示的是其ASCII对应字符）例如：out.write(97); 输出a
+        ps.write(97); // 97 = a
+        // TODO 疑问：出现很奇怪的现象，控制台并没有打印'a'
+        //      回答：在Java中，PrintStream 的 write(int b) 方法会将指定的字节写入流中，但不会自动刷新缓冲区。
+        //      扩展：print()、println() 等方法在写入数据后会自动刷新缓冲区。
+        //      方案：1、执行强制刷新缓冲区：ps.flush();
+        //           2、重新执行 ps.println(); 方法，自动刷新缓冲区。
 
         /*
          * 这是之前 System类 使用过的方法和属性：

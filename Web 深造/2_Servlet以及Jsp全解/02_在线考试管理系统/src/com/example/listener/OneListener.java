@@ -20,11 +20,11 @@ public class OneListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         DBUtil util = new DBUtil();
-        Map map = new HashMap();
-        for(int i=1;i<=20;i++){
+        Map<Connection, Boolean> map = new HashMap<>();
+        for(int i=1; i<=20; i++){
             Connection conn = util.getCon();
             System.out.println("在Http服务器启动时，创建Connection"+conn);
-            map.put(conn,true); // true表示这个通道处于空闲状态，false表示通道正在被使用
+            map.put(conn, true); // true表示这个通道处于空闲状态，false表示通道正在被使用
         }
         // 为了在Http服务器运行期间，一直都可以使用20个Connection,将connection保存到全局作用域对象
         ServletContext application = sce.getServletContext();
@@ -37,7 +37,7 @@ public class OneListener implements ServletContextListener {
         ServletContext application = sce.getServletContext();
         Map map = (Map)application.getAttribute("key1");
         Iterator it = map.keySet().iterator();
-        while(it.hasNext()){
+        while(it.hasNext()) {
             Connection conn = (Connection) it.next();
             if(conn != null){
                 System.out.println("兄弟们，我" + conn + "先行一步，20年后老子又是一条好汉");

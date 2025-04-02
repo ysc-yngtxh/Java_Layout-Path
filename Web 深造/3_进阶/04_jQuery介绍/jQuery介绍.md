@@ -4,7 +4,7 @@
    2、使用jQuery，首先要将jQuery库引入
       <script type="text/javascript" src="scripts/jquery-3.4.1.js"></script>
 
-二、1、$(document),$是jQuery中的函数名称，document是函数的参数
+二、1、$(document)，$是jQuery中的函数名称，document是函数的参数
       作用是 document对象 变成 jQuery函数库可以使用的对象。
    2、ready:是jQuery中的函数，是准备的意思,当页面的dom对象加载成功后会执行ready函数的内容。
       ready相当于js中的onLoad事件。

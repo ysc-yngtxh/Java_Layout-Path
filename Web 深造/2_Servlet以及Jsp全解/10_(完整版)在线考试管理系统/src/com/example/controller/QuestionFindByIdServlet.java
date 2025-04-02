@@ -12,9 +12,7 @@ import java.io.IOException;
 public class QuestionFindByIdServlet extends HttpServlet {
     private static final long serialVersionUID = 2841989774475654655L;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {}
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

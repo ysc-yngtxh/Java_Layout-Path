@@ -14,9 +14,7 @@ import java.util.List;
 public class QuestionRandServlet extends HttpServlet {
     private static final long serialVersionUID = -8937054979399722608L;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {}
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         QuestionDao dao = new QuestionDao();

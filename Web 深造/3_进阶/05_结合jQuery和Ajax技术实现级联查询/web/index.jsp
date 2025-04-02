@@ -11,13 +11,13 @@
     <title>结合jQuery和Ajax技术实现级联查询</title>
     <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
     <script type="text/javascript">
-      function loadDataAjax(){
+      function loadDataAjax() {
         $.ajax({
-          url:"province",
-          dataType:"json",
-          success:function(resp){
+          url: "province",
+          dataType: "json",
+          success: function(resp) {
             $("#province").empty();
-            $.each(resp,function(i,n){
+            $.each(resp, function(i,n) {
               $("#province").append("<option value='"+n.id+"'>"+n.name+"</option>");
             })
           }
@@ -28,23 +28,23 @@
         // 这一步的作用是全局加载完后，直接显示省份信息，就不需要按钮点击后才显示。这样做用户体验会更好。
         loadDataAjax();
 
-        $("#btn").click(function(){
+        $("#btn").click(function() {
           loadDataAjax()
         })
 
         // 给省份的select绑定一个change事件，当select内容发生变化时，触发事件
-        $("#province").change(function(){
-          var  obj = $("#province>option:selected");
-          var provinceId = obj.val();
+        $("#province").change(function() {
+          let  obj = $("#province>option:selected");
+          let provinceId = obj.val();
           $.ajax({
               url:"city",
-              data:{
-                "proid":provinceId
+              data: {
+                "proid": provinceId
               },
-              dataType:"json",
-              success: function(resp){
+              dataType: "json",
+              success: function(resp) {
                 $("#city").empty();
-                $.each(resp,function(i,n){
+                $.each(resp, function(i,n){
                   $("#city").append("<option value='"+n.id+"'>"+n.name+"</option>");
                 })
               }

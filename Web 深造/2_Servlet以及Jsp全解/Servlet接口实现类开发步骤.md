@@ -51,18 +51,18 @@
   三：Servlet接口实现类开发步骤【参考A1Servlet】
          第一步：创建一个Java类继承与HttpServlet父类，使之成为一个Servlet接口实现类
          第二步：重写HttpServlet父类两个方法。doGet或者doPost
-                  浏览器---get---->com.example.controller.A1Servlet.doGet()
-                  浏览器---post--->com.example.controller.A1Servlet.doPost()
+                  浏览器---get---->com.example.controller.A1_Servlet.doGet()
+                  浏览器---post--->com.example.controller.A1_Servlet.doPost()
          第三步：将Servlet接口实现类信息【注册】到Tomcat服务器
                   【网站】-->【web】--->【WEB-INF】-->web.xml
 
                   <--将Servlet接口实现类类路径地址交给Tomcat-->
                   <servlet>
                     <servlet-name>mm</servlet-name>       <%--声明一个变量存储servlet接口实现类类路径-->
-                    <servlet-class>com.example.controller.A1Servlet</servlet-class>   <%--声明servlet接口-->
+                    <servlet-class>com.example.controller.A1_Servlet</servlet-class>   <%--声明servlet接口-->
                   </servlet>
 
-                  Tomcat String mm = "com.example.controller.A1Servlet";
+                  Tomcat String mm = "com.example.controller.A1_Servlet";
 
                     <%--为了降低用户访问Servlet接口实现类难度，需要设置简短请求别名-->
                   <servlet-mapping>
@@ -80,7 +80,7 @@
             在手动配置情况下，要求Http服务器在启动时自动创建某个Servlet接口实现类的实例对象
             <servlet>
                 <servlet-name>B2Servlet</servlet-name>
-                <servlet-class>com.example.controller.B2Servlet</servlet-class>
+                <servlet-class>com.example.controller.B2_Servlet</servlet-class>
                 <!--通知Tomcat在启动时负责创建B2Servlet实例对象-->
                 <load-on-startup>30</load-on-startup>   <!--填写一个大于0的整数即可-->
             </servlet>
@@ -136,10 +136,10 @@
                                <welcome-file>index.jsp</welcome-file>
                            </welcome-file-list>
          4、设置当前网站的默认欢迎资源文件规则
-                1)规则位置：网站/web/WEB-INF/web.xml
-                2)规则命令：<welcome-file-list>
+                1)、规则位置：网站/web/WEB-INF/web.xml
+                2)、规则命令：<welcome-file-list>
                                <welcome-file>login.html</welcome-file>
-                           </welcome-file-list>
+                            </welcome-file-list>
 
     九、HTTP状态码
          1、介绍:

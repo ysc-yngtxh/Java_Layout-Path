@@ -9,8 +9,7 @@ public class Users {
     private String email;
 
 
-    public Users() {
-    }
+    public Users() {}
 
     public Users(Integer userId, String userName, String password, String sex, String email) {
         this.userId = userId;

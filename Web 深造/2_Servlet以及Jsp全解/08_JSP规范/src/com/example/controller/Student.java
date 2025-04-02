@@ -1,4 +1,4 @@
-package src.com.bjpowernode.controller;
+package com.example.controller;
 
 public class Student {
     private Integer sid;
@@ -20,8 +20,7 @@ public class Student {
         this.sname = sname;
     }
 
-    public Student() {
-    }
+    public Student() {}
 
     public Student(Integer sid, String sname) {
         this.sid = sid;

@@ -12,7 +12,7 @@
 
 <!--制造数据-->
 <%
-    //创建一个Student类型对象
+    // 创建一个Student类型对象
     Student stu1 = new Student(10,"mike");
     Student stu2 = new Student(20,"alien");
     Student stu3 = new Student(30,"smith");

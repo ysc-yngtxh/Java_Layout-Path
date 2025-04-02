@@ -12,9 +12,7 @@ import java.io.IOException;
 public class QuestionAddServlet extends HttpServlet {
     private static final long serialVersionUID = -97778705170995943L;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {}
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String title, optionA, optionB, optionC, optionD, answer;

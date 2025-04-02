@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        span{
+        span {
             color:red;
             font-size:12px;
         }
@@ -53,84 +53,84 @@
       <script type="text/javascript">
           window.onload=function(){
 <!--用户名验证-->
-              //获取username文本框对象
-              var usernameElt = document.getElementById("username");
-              //获取username的span标签
-              var usernameEltspan = document.getElementById("usernamespan");
-              //给用户名文本框绑定blur事件
+              // 获取username文本框对象
+              let usernameElt = document.getElementById("username");
+              // 获取username的span标签
+              let usernameEltspan = document.getElementById("usernamespan");
+              // 给用户名文本框绑定blur事件
               usernameElt.onblur=function(){
-                  //获取用户名
-                  var username = usernameElt.value;
-                  //去除前后空白
+                  // 获取用户名
+                  let username = usernameElt.value;
+                  // 去除前后空白
                   username =username.trim();
-                  //判断用户名是否合法
+                  // 判断用户名是否合法
                   if (username ==="") {
                       usernameEltspan.innerText = "用户名不能为空"
-                  }else {
-                      if(username.length<3 || username.length>14){
+                  } else {
+                      if(username.length<3 || username.length>14) {
                           usernameEltspan.innerText="用户名长度必须在[3-14]之间";
-                      }else {
-                          //用户名的正则表达式
-                          var regElt = /^[a-zA-Z0-9]{3,14}$/;
-                          if(regElt.test(username)){
+                      } else {
+                          // 用户名的正则表达式
+                          let regElt = /^[a-zA-Z0-9]{3,14}$/;
+                          if(regElt.test(username)) {
                               usernameEltspan.innerText = "";   /*用户名最终合法*/
-                          }else{
+                          } else {
                               usernameEltspan.innerText = "用户名中含有特殊字符"
                           }
                       }
                   }
               };
-              //给username这个文本框绑定获得焦点事件
-              usernameElt.onfocus=function(){
-                  if(usernameEltspan.innerText !== ""){
+              // 给username这个文本框绑定获得焦点事件
+              usernameElt.onfocus = function() {
+                  if(usernameEltspan.innerText !== "") {
                       usernameElt.value = "";
                   }
-                  //清空span
+                  // 清空span
                   usernameEltspan.innerText = "";
               };
 
 
 <!--邮箱验证-->
-              //获取邮箱对象
-              var emailElt = document.getElementById("emailElt");
-              //获取邮箱的span标签
-              var emailEltspan = document.getElementById("emailEltspan");
-              //给邮箱文本框绑定blur事件
-              emailElt.onblur = function(){
-                  if(emailElt.value === ""){
+              // 获取邮箱对象
+              let emailElt = document.getElementById("emailElt");
+              // 获取邮箱的span标签
+              let emailEltspan = document.getElementById("emailEltspan");
+              // 给邮箱文本框绑定blur事件
+              emailElt.onblur = function() {
+                  if(emailElt.value === "") {
                       emailEltspan.innerText = "邮箱内容不能为空"
-                  }else{
-                      var emailEltspan1 = /^[\w][\w\d_]*@\w+\.[A-Za-z]+$/;
-                      if(emailEltspan1.test(emailElt.value)){
+                  } else {
+                      let emailEltspan1 = /^[\w][\w\d_]*@\w+\.[A-Za-z]+$/;
+                      if(emailEltspan1.test(emailElt.value)) {
                           emailEltspan.innerText = "";    /*邮箱格式正确*/
                       }else{
                           emailEltspan.innerText = "邮箱格式错误";
                       }
                   }
               };
-              //给邮箱文本框绑定获得焦点事件
+              // 给邮箱文本框绑定获得焦点事件
               emailElt.onfocus = function(){
-                  if(emailEltspan.innerText !== ""){
+                  if(emailEltspan.innerText !== "") {
                       emailElt.value = "";
                   }
                   emailEltspan.innerText = "";
               };
 
 
-              //给提交按钮绑定鼠标单击事件
-              var submitBtn = document.getElementById("submitBtn");
-              submitBtn.onclick = function(){
+              // 给提交按钮绑定鼠标单击事件
+              let submitBtn = document.getElementById("submitBtn");
+              submitBtn.onclick = function() {
                   usernameElt.focus();
                   usernameElt.blur();
 
                   emailElt.focus();
                   emailElt.blur();
 
-                  //当所有表单项都是合法的时候，提交表单
-                  if(usernameEltspan.innerText==="" && emailEltspan.innerText===""){
-                      //获取表单对象
-                      var userForm = document.getElementById("userForm");
-                      //提交表单
+                  // 当所有表单项都是合法的时候，提交表单
+                  if(usernameEltspan.innerText==="" && emailEltspan.innerText==="") {
+                      // 获取表单对象
+                      let userForm = document.getElementById("userForm");
+                      // 提交表单
                       userForm.submit();
                   }
               }

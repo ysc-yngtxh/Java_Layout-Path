@@ -9,13 +9,13 @@ import java.sql.SQLException;
 public class ProvinceDao {
     DButil util = new DButil();
 
-    //访问数据库,根据id获取名称
-    public String queryproviceNameById(Integer proviceId){
+    // 访问数据库,根据id获取名称
+    public String queryProvinceNameById(Integer proviceId) {
         String sql = "select name from province where id=?";
         PreparedStatement ps = util.createStatement(sql);
         ResultSet rs = null;
         String name = "";
-        try{
+        try {
             ps.setInt(1,proviceId);
             rs = ps.executeQuery();
             while(rs.next()){
@@ -37,7 +37,7 @@ public class ProvinceDao {
     }
 
     // 根据id获取一个完整的Province对象
-    public Province queryproviceById(Integer proviceId){
+    public Province queryProvinceById(Integer proviceId) {
         String sql = "select * from province where id=?";
         PreparedStatement ps = util.createStatement(sql);
         ResultSet rs = null;

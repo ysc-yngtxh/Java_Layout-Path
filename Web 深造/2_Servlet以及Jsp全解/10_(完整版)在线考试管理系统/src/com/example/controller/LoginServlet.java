@@ -13,7 +13,6 @@ public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 7435982006448853651L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String userName,password;
         UserDao dao = new UserDao();
         int result = 0;
@@ -34,7 +33,5 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {}
 }
