@@ -62,7 +62,7 @@
             一个mapper标签指定一个文件的位置。
             从类路径开始的路径信息。 target/class(类路径)
         -->
-        <mapper resource="mapper/TblEmployeeMapper.xml"/>
+        <mapper resource="mapper/EmployeeMapper.xml"/>
 
         <!--当你的sql映射文件特别的多，一百多个，一个个的写mapper文件太繁琐了-->
         <!--使用包名确定sql映射文件位置。

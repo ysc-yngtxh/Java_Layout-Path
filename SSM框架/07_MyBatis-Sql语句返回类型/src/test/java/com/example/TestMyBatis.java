@@ -14,7 +14,7 @@ import java.util.Map;
 public class TestMyBatis {
 
     @Test
-    public void testSelectByStudent(){
+    public void testSelectByStudent() {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         StudentDao dao = sqlSession.getMapper(StudentDao.class);
 
@@ -26,7 +26,7 @@ public class TestMyBatis {
 
     // 返回Map
     @Test
-    public void testSelectMap(){
+    public void testSelectMap() {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         StudentDao dao = sqlSession.getMapper(StudentDao.class);
 
@@ -37,7 +37,7 @@ public class TestMyBatis {
 
     // 列名和属性名不一样：第一种方法
     @Test
-    public void testSelectAll(){
+    public void testSelectAll() {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         StudentDao dao = sqlSession.getMapper(StudentDao.class);
 
@@ -50,7 +50,7 @@ public class TestMyBatis {
 
     // 列名和属性名不一样：第二种方法
     @Test
-    public void testSelectAliasCol(){
+    public void testSelectAliasCol() {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         StudentDao dao = sqlSession.getMapper(StudentDao.class);
 
@@ -63,7 +63,7 @@ public class TestMyBatis {
 
     // 模糊查询的第一种方式
     @Test
-    public void testSelectLikeOne(){
+    public void testSelectLikeOne() {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         StudentDao dao = sqlSession.getMapper(StudentDao.class);
 
@@ -79,7 +79,7 @@ public class TestMyBatis {
 
     // 模糊查询的第二种方式
     @Test
-    public void testSelectLikeTwo(){
+    public void testSelectLikeTwo() {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         StudentDao dao = sqlSession.getMapper(StudentDao.class);
 
@@ -95,7 +95,7 @@ public class TestMyBatis {
 
     // 模糊查询的第三种方式
     @Test
-    public void testSelectLikeThree(){
+    public void testSelectLikeThree() {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         StudentDao dao = sqlSession.getMapper(StudentDao.class);
 

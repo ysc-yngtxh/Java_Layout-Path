@@ -1,13 +1,11 @@
 package com.example.mapper;
 
 import com.example.pojo.Student;
-import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultType;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
-import org.apache.ibatis.cache.impl.PerpetualCache;
 
 /**
  * @author 游家纨绔

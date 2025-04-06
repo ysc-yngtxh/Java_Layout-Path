@@ -44,13 +44,13 @@
     <dependency>
       <groupId>com.github.pagehelper</groupId>
       <artifactId>pagehelper</artifactId>
-      <version>5.3.2</version>
+      <version>6.1.0</version>
     </dependency>
     <!--spring-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>6.0.9</version>
+      <version>6.1.14</version>
     </dependency>
   </dependencies>
 
@@ -72,5 +72,15 @@
         <filtering>false</filtering>
       </resource>
     </resources>
+      <plugins>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <configuration>
+                  <source>14</source>
+                  <target>14</target>
+              </configuration>
+          </plugin>
+      </plugins>
   </build>
 </project>

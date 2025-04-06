@@ -3,12 +3,12 @@ package com.example.entity;
 import java.io.Serializable;
 
 /**
- * (TblEmployee)实体类
+ * (Employee)实体类
  *
  * @author makejava
  * @since 2024-08-01 00:05:26
  */
-public class TblEmployee implements Serializable {
+public class Employee implements Serializable {
     private static final long serialVersionUID = 364552195684892347L;
 
     private Integer employeeId;
@@ -64,7 +64,7 @@ public class TblEmployee implements Serializable {
 
     @Override
     public String toString() {
-        return "TblEmployee{" +
+        return "Employee{" +
                 "employeeId=" + employeeId +
                 ", employeeName='" + employeeName + '\'' +
                 ", employeeDepartmentId=" + employeeDepartmentId +
@@ -73,4 +73,3 @@ public class TblEmployee implements Serializable {
                 '}';
     }
 }
-

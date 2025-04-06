@@ -8,7 +8,7 @@
 
     <resultMap id="myRole" type="com.example.pojo.Role" autoMapping="true">
         <id property="id" column="id"/>
-        <result property="role_desc" column="role_desc"/>
+        <result property="roleDesc" column="role_desc"/>
         <!--这后面还有映射属性没写，但是我加了 autoMapping="true" 属性，可以自动映射(必须是同名)-->
 
         <!--

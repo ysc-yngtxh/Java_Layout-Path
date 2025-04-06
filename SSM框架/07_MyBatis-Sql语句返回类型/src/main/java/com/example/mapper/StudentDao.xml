@@ -43,7 +43,7 @@
         select id as stuId, name as stuName, email as stuEmail, age as stuAge from student
     </select>
 
-    <!--第一种like，java代码指定like内容-->
+    <!--第一种like，Java代码指定like内容-->
     <select id="selectLikeOne" resultType="com.example.pojo.Student">
         select id,name,email,age from student where name like #{name}
     </select>

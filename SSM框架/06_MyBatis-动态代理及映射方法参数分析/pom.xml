@@ -40,17 +40,17 @@
 
   <build>
     <!-- 用于构建编译时的参数 -->
-    <!-- <plugins> -->
-    <!--   <plugin> -->
-    <!--     <groupId>org.apache.maven.plugins</groupId> -->
-    <!--     <artifactId>maven-compiler-plugin</artifactId> -->
-    <!--     <configuration> -->
-    <!--       <compilerArgs> -->
-    <!--         <arg>-parameters</arg> -->
-    <!--       </compilerArgs> -->
-    <!--     </configuration> -->
-    <!--   </plugin> -->
-    <!-- </plugins> -->
+     <plugins>
+       <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+         <artifactId>maven-compiler-plugin</artifactId>
+         <configuration>
+           <compilerArgs>
+             <arg>-parameters</arg>
+           </compilerArgs>
+         </configuration>
+       </plugin>
+     </plugins>
 
     <!-- 用于指定资源文件的位置 -->
     <resources>

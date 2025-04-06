@@ -14,7 +14,7 @@ import java.io.InputStream;
 public class MyBatisUtils {
 
     private static SqlSessionFactory factory = null;
-    static{
+    static {
         String config = "mybatis.xml"; // 需要和你得项目中的文件名一样
         try {
             InputStream in = Resources.getResourceAsStream(config);
@@ -26,9 +26,9 @@ public class MyBatisUtils {
     }
 
     // 获取SqlSession的方法
-    public static SqlSession getSqlSession(){
+    public static SqlSession getSqlSession() {
         SqlSession sqlSession = null;
-        if( factory != null ){
+        if( factory != null ) {
             sqlSession = factory.openSession();  // 非自动提交事务
         }
         return sqlSession;

@@ -11,9 +11,8 @@ import java.util.List;
 public class TestMappingParam {
 
     @Test
-    public void SelectStudents(){
-        /*
-         * 使用mybatis的动态及代理机制，使用SqlSession.getMapper(dao接口)
+    public void SelectStudents() {
+        /* 使用mybatis的动态及代理机制，使用SqlSession.getMapper(dao接口)
          * getMapper能获取dao接口对于的实现类对象
          */
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
@@ -32,7 +31,7 @@ public class TestMappingParam {
     // 单个参数可以直接通过 #{参数名}、#{_parameter} 传递参数值
     // MyBatis 可以直接将单个参数作为 SQL 语句的参数，无需额外的映射。
     @Test
-    public void SelectStudentsSingleParam(){
+    public void SelectStudentsSingleParam() {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         MappingParamDao dao = sqlSession.getMapper(MappingParamDao.class);
 
@@ -66,7 +65,7 @@ public class TestMappingParam {
     //                    </plugins>
     //                </build>
     @Test
-    public void selectStudentsParam(){
+    public void selectStudentsParam() {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         MappingParamDao dao = sqlSession.getMapper(MappingParamDao.class);
 
@@ -82,7 +81,7 @@ public class TestMappingParam {
 
     // 多个参数，通过参数名为 [arg0、arg1]、[param1、param2] 传递参数值
     @Test
-    public void selectStudentsReflect(){
+    public void selectStudentsReflect() {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         MappingParamDao dao = sqlSession.getMapper(MappingParamDao.class);
         // 这种写法可读性不高，不推荐使用
@@ -94,7 +93,7 @@ public class TestMappingParam {
 
     // 多个参数，通过注解 @Param 指定映射
     @Test
-    public void selectStudentsAnnotationParam(){
+    public void selectStudentsAnnotationParam() {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         MappingParamDao dao = sqlSession.getMapper(MappingParamDao.class);
         // 所以，基于上述存在的问题：当查询中存在多个参数值时，需要使用注解 @Param 进行指定映射
@@ -105,7 +104,7 @@ public class TestMappingParam {
     }
 
     @Test
-    public void InsertStudent(){
+    public void InsertStudent() {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         MappingParamDao dao = sqlSession.getMapper(MappingParamDao.class);
         Student student = new Student();

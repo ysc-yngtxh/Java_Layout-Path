@@ -11,7 +11,7 @@
     <resultMap id="myOrder" type="com.example.pojo.Order" autoMapping="true">
         <!--id标签：主键字段映射(必须要写)    result标签：非主键字段映射 (同名可不写,推荐写)-->
         <id property="id" column="id"/>
-        <result property="orderTime" column="ordertime"/>
+        <result property="orderTime" column="order_time"/>
         <!--这后面还有映射属性没写，但是我加了 autoMapping="true" 属性，可以自动映射(必须是同名)-->
 
         <!--
@@ -28,7 +28,7 @@
         -->
         <association property="user" javaType="com.example.pojo.User" autoMapping="true">
             <id property="id" column="uid"/>
-            <result property="username" column="username"/>
+            <result property="userName" column="user_name"/>
             <!--这后面还有映射属性没写，但是我加了 autoMapping="true" 属性，可以自动映射(必须是同名)-->
         </association>
     </resultMap>

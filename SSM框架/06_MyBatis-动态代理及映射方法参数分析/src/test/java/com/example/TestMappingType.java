@@ -11,7 +11,7 @@ public class TestMappingType {
 
     // 一个简单类型参数
     @Test
-    public void testSelectStudents(){
+    public void testSelectStudents() {
 
         /**
          * 使用mybatis的动态及代理机制，使用SqlSession.getMapper(dao接口)
@@ -25,13 +25,13 @@ public class TestMappingType {
          */
         // 调用dao的方法，执行数据库的操作
         Student student = dao.selectStudentsType(1);
-        System.out.println("student=" + student);
+        System.out.println("student = " + student);
         sqlSession.close();
     }
 
     // 多个参数，使用Java对象作为接口中方法的参数
     @Test
-    public void testSelectMultiStudent(){
+    public void testSelectMultiStudent() {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         MappingTypeDao dao = sqlSession.getMapper(MappingTypeDao.class);
 

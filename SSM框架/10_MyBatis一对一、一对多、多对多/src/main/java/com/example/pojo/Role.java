@@ -12,8 +12,8 @@ public class Role implements Serializable {
     private static final long serialVersionUID = -7073889195974955098L;
 
     private Integer id;
-    private String role_name;
-    private String role_desc;
+    private String roleName;
+    private String roleDesc;
 
     private List<User> userList; // 一个角色对应多个用户: 一对多
 
@@ -21,8 +21,8 @@ public class Role implements Serializable {
     public String toString() {
         return "Role{" +
                 "id=" + id +
-                ", role_name='" + role_name + '\'' +
-                ", role_desc='" + role_desc + '\'' +
+                ", roleName='" + roleName + '\'' +
+                ", roleDesc='" + roleDesc + '\'' +
                 ", userList=" + userList +
                 '}';
     }

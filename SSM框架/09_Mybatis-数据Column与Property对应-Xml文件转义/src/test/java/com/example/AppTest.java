@@ -1,7 +1,7 @@
 package com.example;
 
-import com.example.entity.TblEmployee;
-import com.example.mapper.TblEmployeeMapper;
+import com.example.entity.Employee;
+import com.example.mapper.EmployeeMapper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -22,10 +22,10 @@ public class AppTest {
     // TODO 在 xml 文件中，column 与 property 的对应关系，使用 resultMap 来进行映射
     @Test
     public void testApp1() throws IOException {
-        TblEmployeeMapper mapper = getSqlSessionFactory().getMapper(TblEmployeeMapper.class);
+        EmployeeMapper mapper = getSqlSessionFactory().getMapper(EmployeeMapper.class);
 
-        TblEmployee tblEmployees = mapper.queryById(8);
-        System.out.println(tblEmployees);
+        Employee employees = mapper.queryById(8);
+        System.out.println(employees);
 
         getSqlSessionFactory().close();
     }
@@ -36,13 +36,13 @@ public class AppTest {
     //              2、使用 Mybatis-Plus 的 @TableField 注解
     @Test
     public void testApp2() throws IOException {
-        TblEmployeeMapper mapper = getSqlSessionFactory().getMapper(TblEmployeeMapper.class);
+        EmployeeMapper mapper = getSqlSessionFactory().getMapper(EmployeeMapper.class);
 
-        TblEmployee tblEmployee = new TblEmployee();
-        tblEmployee.setEmployeeName("Lui Yu Ling");
+        Employee employee = new Employee();
+        employee.setEmployeeName("Hu Jiehong");
 
-        List<TblEmployee> tblEmployees = mapper.queryAllByLimit(tblEmployee, 0, 10);
-        tblEmployees.forEach(System.out::println);
+        List<Employee> employees = mapper.queryAllByLimit(employee, 0, 10);
+        employees.forEach(System.out::println);
 
         getSqlSessionFactory().close();
     }
@@ -50,15 +50,15 @@ public class AppTest {
     // TODO 对于在 xml 文件中，针对 Sql 组装语句的转义问题
     @Test
     public void testApp3() throws IOException {
-        TblEmployeeMapper mapper = getSqlSessionFactory().getMapper(TblEmployeeMapper.class);
+        EmployeeMapper mapper = getSqlSessionFactory().getMapper(EmployeeMapper.class);
 
-        TblEmployee tblEmployee = new TblEmployee();
-        tblEmployee.setEmployeeId(3);
-        tblEmployee.setEmployeeGradeId(100);
-        tblEmployee.setEmployeeSalary(700);
+        Employee employee = new Employee();
+        employee.setEmployeeId(3);
+        employee.setEmployeeGradeId(100);
+        employee.setEmployeeSalary(700);
 
-        List<TblEmployee> tblEmployees = mapper.findById(tblEmployee);
-        tblEmployees.forEach(System.out::println);
+        List<Employee> employees = mapper.findById(employee);
+        employees.forEach(System.out::println);
 
         getSqlSessionFactory().close();
     }

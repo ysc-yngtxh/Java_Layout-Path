@@ -161,7 +161,7 @@
         select * from student order by id
     </select>
 
-    <!--根据ID查询的一级缓存-->
+    <!--根据Id查询的一级缓存-->
     <select id="selectIdOne" parameterType="Integer" resultType="com.example.pojo.Student">
         select * from student where id=#{id}
     </select>

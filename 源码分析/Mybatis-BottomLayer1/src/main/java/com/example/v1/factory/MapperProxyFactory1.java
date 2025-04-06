@@ -39,7 +39,7 @@ public class MapperProxyFactory1 {
         return DriverManager.getConnection("jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC", "root", "131474");
     }
 
-    public static <T> T getMapper(Class<T> mapperInterface){
+    public static <T> T getMapper(Class<T> mapperInterface) {
         // JDK的动态代理
         Object proxyInstance = Proxy.newProxyInstance(
                 ClassLoader.getSystemClassLoader(), new Class[]{mapperInterface}
