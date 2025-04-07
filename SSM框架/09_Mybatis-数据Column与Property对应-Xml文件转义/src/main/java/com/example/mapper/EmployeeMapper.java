@@ -1,11 +1,11 @@
 package com.example.mapper;
 
-import com.example.entity.Employee;
+import com.example.entity.SSMEmployee;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 /**
- * (Employee)表数据库访问层
+ * (SSMEmployee)表数据库访问层
  *
  * @author makejava
  * @since 2024-08-01 00:05:26
@@ -18,21 +18,21 @@ public interface EmployeeMapper {
      * @param employeeId 主键
      * @return 实例对象
      */
-    Employee queryById(Integer employeeId);
+    SSMEmployee queryById(Integer employeeId);
 
     /**
      * 查询指定行数据
      *
-     * @param employee 查询条件
+     * @param SSMEmployee 查询条件
      * @return 对象列表
      */
-    List<Employee> queryAllByLimit(@Param("employee") Employee employee, @Param("offset") Integer offset, @Param("size") Integer size);
+    List<SSMEmployee> queryAllByLimit(@Param("SSMEmployee") SSMEmployee SSMEmployee, @Param("offset") Integer offset, @Param("size") Integer size);
 
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param employee
+     * @param SSMEmployee
      * @return
      */
-    List<Employee> findById(@Param("employee") Employee employee);
+    List<SSMEmployee> findById(@Param("SSMEmployee") SSMEmployee SSMEmployee);
 }

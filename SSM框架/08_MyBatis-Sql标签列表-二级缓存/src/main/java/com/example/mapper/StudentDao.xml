@@ -29,8 +29,8 @@
              2、当第一条的 if 标签不符合，第二条if标签符合条件时，那么第二条if标签中的 and|or 会造成语法上的错误
         解决：原始的在 where 语句后手动拼接 1=1
     -->
-    <select id="selectStudentIf" resultType="com.example.pojo.Student">
-        select id,name,email,age from student
+    <select id="selectStudentIf" resultType="com.example.pojo.SSMStudent">
+        select id,name,email,age from ssm_student
         where 1=1
         <if test="name!=null and name!='' ">
             and name=#{name}
@@ -46,8 +46,8 @@
             1、如果 <where>...</where> 中包含的子标签中有返回值的话，它就插入一个‘where’。否则不插入。
             2、如果 <where>...</where> 标签返回的内容是以 AND|OR 开头的，则它会剔除掉。
     -->
-    <select id="selectStudentWhere" resultType="com.example.pojo.Student">
-        select id,name,email,age from student
+    <select id="selectStudentWhere" resultType="com.example.pojo.SSMStudent">
+        select id,name,email,age from ssm_student
         <where>
             <if test="name!=null and name!='' ">
                 and name=#{name}
@@ -65,8 +65,8 @@
                       suffixOverrides(后缀覆盖)：作用是移除 SQL 片段中结尾部分指定的多余字符或关键字
 
     -->
-    <select id="selectStudentTrim" resultType="com.example.pojo.Student">
-        select id,name,email,age from student
+    <select id="selectStudentTrim" resultType="com.example.pojo.SSMStudent">
+        select id,name,email,age from ssm_student
         <trim prefix="where" prefixOverrides="AND|OR">
             <if test="name!=null and name!='' ">
                 AND name like concat('%', #{name,jdbcType=VARCHAR}, '%')
@@ -86,8 +86,8 @@
         当 <choose> 中所有 <when> 的条件都不满则时，则执行 otherwise 中的sql。
         类似于Java 的 switch 语句，choose 为 switch，when 为 case，otherwise 则为 default。
     -->
-    <select id="selectStudentChoose" resultType="com.example.pojo.Student">
-        select * from student
+    <select id="selectStudentChoose" resultType="com.example.pojo.SSMStudent">
+        select * from ssm_student
         <where>
             <choose>
                 <when test="name!=null and name!=''">
@@ -118,23 +118,23 @@
                MyBatis 会默认将这个参数视为一个名为 "list" 集合或者 "array" 数组，
                除非使用 @Param 注解在传参上指定一个不同的名称，这时 collection 属性的值就应与Mapper方法的参数名称相对应。
     -->
-    <select id="selectForEachOne" resultType="com.example.pojo.Student">
-        select * from student where id in
+    <select id="selectForEachOne" resultType="com.example.pojo.SSMStudent">
+        select * from ssm_student where id in
         <foreach collection="list" item="myId" open="(" close=")" separator=",">
             #{myId}
         </foreach>
     </select>
 
     <!--传递数组作为参数给 Mapper 方法，MyBatis 会默认将这个参数视为一个名为 "array" 的数组-->
-    <select id="selectForEachTwo" resultType="com.example.pojo.Student">
-        select * from student where id in
+    <select id="selectForEachTwo" resultType="com.example.pojo.SSMStudent">
+        select * from ssm_student where id in
         <foreach collection="array" item="myId" open="(" close=")" separator=",">
             #{myId}
         </foreach>
     </select>
 
-    <select id="selectForEachThree" resultType="com.example.pojo.Student">
-        select * from student where id in(  <!--open="(" close=")"可以省略，直接在sql语句中进行拼接-->
+    <select id="selectForEachThree" resultType="com.example.pojo.SSMStudent">
+        select * from ssm_student where id in(  <!--open="(" close=")"可以省略，直接在sql语句中进行拼接-->
         <foreach collection="stuList" item="stu" separator=","> <!--这里使用 @Param 注解，指定了传参名-->
             #{stu.id} <!--这里遍历后是个Java对象，可以通过.的方式获取属性-->
         </foreach>
@@ -143,10 +143,10 @@
 
     <!--动态sql-代码片段-->
     <sql id="selectSql">
-        select id,name,email,age from student
+        select id,name,email,age from ssm_student
     </sql>
     <!--以下代码是复制上面的，只用于理解，不做测试使用
-    <select id="selectForEachTwo" resultType="com.example.Student">
+    <select id="selectForEachTwo" resultType="com.example.ssm_student">
         <include refid="selectSql"/> where id in
         (
            <foreach collection="list" item="stu" separator=",">
@@ -157,19 +157,19 @@
     -->
 
     <!--查询所有-->
-    <select id="selectAll" resultType="com.example.pojo.Student">
-        select * from student order by id
+    <select id="selectAll" resultType="com.example.pojo.SSMStudent">
+        select * from ssm_student order by id
     </select>
 
     <!--根据Id查询的一级缓存-->
-    <select id="selectIdOne" parameterType="Integer" resultType="com.example.pojo.Student">
-        select * from student where id=#{id}
+    <select id="selectIdOne" parameterType="Integer" resultType="com.example.pojo.SSMStudent">
+        select * from ssm_student where id=#{id}
     </select>
 
     <!--根据ID查询的二级缓存-->
     <cache/> <!--开启二级缓存-->
-    <select id="selectIdTwo" parameterType="Integer" resultType="com.example.pojo.Student">
-        select * from student where id=#{id}
+    <select id="selectIdTwo" parameterType="Integer" resultType="com.example.pojo.SSMStudent">
+        select * from ssm_student where id=#{id}
     </select>
 
 </mapper>

@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.entity.Employee;
+import com.example.entity.SSMEmployee;
 import com.example.mapper.EmployeeMapper;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +24,7 @@ public class AppTest {
     public void testApp1() throws IOException {
         EmployeeMapper mapper = getSqlSessionFactory().getMapper(EmployeeMapper.class);
 
-        Employee employees = mapper.queryById(8);
+        SSMEmployee employees = mapper.queryById(8);
         System.out.println(employees);
 
         getSqlSessionFactory().close();
@@ -38,11 +38,11 @@ public class AppTest {
     public void testApp2() throws IOException {
         EmployeeMapper mapper = getSqlSessionFactory().getMapper(EmployeeMapper.class);
 
-        Employee employee = new Employee();
-        employee.setEmployeeName("Hu Jiehong");
+        SSMEmployee SSMEmployee = new SSMEmployee();
+        SSMEmployee.setEmployeeName("Hu Jiehong");
 
-        List<Employee> employees = mapper.queryAllByLimit(employee, 0, 10);
-        employees.forEach(System.out::println);
+        List<SSMEmployee> SSMEmployees = mapper.queryAllByLimit(SSMEmployee, 0, 10);
+        SSMEmployees.forEach(System.out::println);
 
         getSqlSessionFactory().close();
     }
@@ -52,13 +52,13 @@ public class AppTest {
     public void testApp3() throws IOException {
         EmployeeMapper mapper = getSqlSessionFactory().getMapper(EmployeeMapper.class);
 
-        Employee employee = new Employee();
-        employee.setEmployeeId(3);
-        employee.setEmployeeGradeId(100);
-        employee.setEmployeeSalary(700);
+        SSMEmployee SSMEmployee = new SSMEmployee();
+        SSMEmployee.setEmployeeId(3);
+        SSMEmployee.setEmployeeGradeId(100);
+        SSMEmployee.setEmployeeSalary(700);
 
-        List<Employee> employees = mapper.findById(employee);
-        employees.forEach(System.out::println);
+        List<SSMEmployee> SSMEmployees = mapper.findById(SSMEmployee);
+        SSMEmployees.forEach(System.out::println);
 
         getSqlSessionFactory().close();
     }

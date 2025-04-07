@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.pojo.Student;
+import com.example.pojo.SSMStudent;
 import com.example.utils.MyBatisUtils;
 import java.util.List;
 import org.apache.ibatis.io.Resources;
@@ -33,10 +33,10 @@ public class TestMyBatis {
         // 6、【重要】指定要执行得sql语句的标识。sql映射文件中的namespace+"."+标签的id值
         String sqlId = "com.example.mapper.StudentDao.selectStudents";
         // 7、【重要】执行sql语句，通过sqlId找到语句
-        List<Student> studentList = sqlSession.selectList(sqlId);
+        List<SSMStudent> SSMStudentList = sqlSession.selectList(sqlId);
         // 8、输出结果
-        // studentList.forEach( stu -> System.out.println(stu));
-        for (Student stu : studentList) {
+        // SSMStudentList.forEach( stu -> System.out.println(stu));
+        for (SSMStudent stu : SSMStudentList) {
             System.out.println("查询的学生 = " + stu);
         }
         // 查询操作不需要开启事务，所以就不需要提交事务
@@ -52,14 +52,14 @@ public class TestMyBatis {
         // 2、【重要】指定要执行得sql语句的标识。sql映射文件中的 namespace+"."+标签的id值
         String sqlId = "com.example.mapper.StudentDao.selectStudentsParam";
         // 3、构造参数
-        Student student = new Student();
-        student.setAge(10);
-        student.setName("终是%");
+        SSMStudent SSMStudent = new SSMStudent();
+        SSMStudent.setAge(10);
+        SSMStudent.setName("终是%");
         // 4、执行SQL语句，使用SqlSession类的方法，并通过sqlId找到语句
-        List<Student> studentList = sqlSession.selectList(sqlId, student);
+        List<SSMStudent> SSMStudentList = sqlSession.selectList(sqlId, SSMStudent);
         // 5、输出结果
-        // studentList.forEach( stu -> System.out.println(sqlId));
-        for (Student stu : studentList) {
+        // SSMStudentList.forEach( stu -> System.out.println(sqlId));
+        for (SSMStudent stu : SSMStudentList) {
             System.out.println(stu);
         }
 
@@ -77,18 +77,18 @@ public class TestMyBatis {
         // 2、【重要】指定要执行得sql语句的标识。sql映射文件中的 namespace + "." + 标签的id值
         String sqlId = "com.example.mapper.StudentDao.insertStudent";
         // 3、构造参数
-        Student student = new Student();
-        student.setName("曹操");
-        student.setEmail("caocao@163.com");
-        student.setAge(23);
+        SSMStudent SSMStudent = new SSMStudent();
+        SSMStudent.setName("曹操");
+        SSMStudent.setEmail("caocao@163.com");
+        SSMStudent.setAge(23);
         // 4、【重要】执行sql语句，通过sqlId找到语句
-        int nums = sqlSession.insert(sqlId, student);
+        int nums = sqlSession.insert(sqlId, SSMStudent);
 
         // 由于获取的SqlSession不是自动提交事务的，所以在insert,update,delete后要手工提交事务
         sqlSession.commit();
 
         // 5、输出结果
-        System.out.println("执行insert的结果：" + nums + "。返回增加数据的Id--" + student.getId());
+        System.out.println("执行insert的结果：" + nums + "。返回增加数据的Id--" + SSMStudent.getId());
         // 6、关闭资源
         sqlSession.close();
     }

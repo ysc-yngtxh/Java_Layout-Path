@@ -29,18 +29,18 @@
         resultType:表示结果类型的，是sql语句执行后得到ResultSet，得到Java对象的类型
                    值写的类型是全限定名称
     -->
-    <select id="selectStudents" resultType="com.example.pojo.Student">
-        select id,name,email,age from student order by id
+    <select id="selectStudents" resultType="com.example.pojo.SSMStudent">
+        select id,name,email,age from ssm_student order by id
     </select>
 
 
-    <select id="selectStudentsParam" resultType="com.example.pojo.Student">
-        select id,name,email,age from student where age > #{age} and name like #{name}
+    <select id="selectStudentsParam" resultType="com.example.pojo.SSMStudent">
+        select id,name,email,age from ssm_student where age > #{age} and name like #{name}
     </select>
 
 
     <insert id="insertStudent" useGeneratedKeys="true" keyProperty="id">
-        insert into student values(#{id}, #{name}, #{email}, #{age})
+        insert into ssm_student values(#{id}, #{name}, #{email}, #{age})
     </insert>
     <!--
         useGeneratedKeys = true 这个表示插入数据之后返回一个自增的主键id给你对应实体类中的主键属性。

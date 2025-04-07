@@ -1,7 +1,7 @@
 package com.example;
 
 import com.example.mapper.MappingTypeDao;
-import com.example.pojo.Student;
+import com.example.pojo.SSMStudent;
 import com.example.utils.MyBatisUtils;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
@@ -24,8 +24,8 @@ public class TestMappingType {
          * System.out.println("mapper=" + mapper.getClass().getName());
          */
         // 调用dao的方法，执行数据库的操作
-        Student student = dao.selectStudentsType(1);
-        System.out.println("student = " + student);
+        SSMStudent SSMStudent = dao.selectStudentsType(1);
+        System.out.println("SSMStudent = " + SSMStudent);
         sqlSession.close();
     }
 
@@ -35,12 +35,12 @@ public class TestMappingType {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         MappingTypeDao dao = sqlSession.getMapper(MappingTypeDao.class);
 
-        Student student = new Student();
-        student.setName("张飞");
-        student.setAge(23);
-        List<Student> students = dao.selectMultiObject(student);
+        SSMStudent SSMStudent = new SSMStudent();
+        SSMStudent.setName("张飞");
+        SSMStudent.setAge(23);
+        List<SSMStudent> SSMStudents = dao.selectMultiObject(SSMStudent);
 
-        for (Student stu : students) {
+        for (SSMStudent stu : SSMStudents) {
             System.out.println("学生" + stu);
         }
         sqlSession.close();

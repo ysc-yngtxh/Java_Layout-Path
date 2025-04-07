@@ -6,7 +6,7 @@
 <!-- 实体类的映射文件，namespace 指定接口的类全名-->
 <mapper namespace="com.example.mapper.RoleMapper">
 
-    <resultMap id="myRole" type="com.example.pojo.Role" autoMapping="true">
+    <resultMap id="myRole" type="com.example.pojo.SSMRole" autoMapping="true">
         <id property="id" column="id"/>
         <result property="roleDesc" column="role_desc"/>
         <!--这后面还有映射属性没写，但是我加了 autoMapping="true" 属性，可以自动映射(必须是同名)-->
@@ -24,7 +24,7 @@
 
              注意: 结果集同名字段的最左原则
         -->
-        <collection property="userList" ofType="com.example.pojo.User" autoMapping="true">
+        <collection property="userList" ofType="com.example.pojo.SSMUser" autoMapping="true">
             <id property="id" column="uid"/>
             <!--这后面还有映射属性没写，但是我加了 autoMapping="true" 属性，可以自动映射(必须是同名)-->
         </collection>
@@ -32,11 +32,11 @@
 
     <select id="RoleWithUsers" resultMap="myRole">
         select *
-        from role r
-            inner join user_role ur
-            inner join user u
+        from ssm_role r
+            inner join ssm_user_role ur
+            inner join ssm_user u
                 on r.id = ur.rid
-                       and u.id = ur.uid
+                and u.id = ur.uid
         where r.id = #{rid}
     </select>
 

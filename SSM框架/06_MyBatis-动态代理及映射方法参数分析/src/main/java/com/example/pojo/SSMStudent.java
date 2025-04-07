@@ -1,9 +1,7 @@
 package com.example.pojo;
 
-import java.io.Serializable;
+public class SSMStudent {
 
-public class Student implements Serializable {
-    private static final long serialVersionUID = -8000301231785820276L;
     private Integer id;
     private String name;
     private String email;
@@ -43,7 +41,7 @@ public class Student implements Serializable {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "SSMStudent{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +

@@ -1,7 +1,7 @@
 package com.example;
 
 import com.example.mapper.StudentDao;
-import com.example.pojo.Student;
+import com.example.pojo.SSMStudent;
 import com.example.utils.MyBatisUtils;
 import com.example.vo.MyStudent;
 import com.example.vo.ViewStudent;
@@ -41,8 +41,8 @@ public class TestMyBatis {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         StudentDao dao = sqlSession.getMapper(StudentDao.class);
 
-        List<Student> students = dao.selectAllStudent();
-        for (Student stu : students) {
+        List<SSMStudent> SSMStudents = dao.selectAllStudent();
+        for (SSMStudent stu : SSMStudents) {
             System.out.println("学生 = " + stu);
         }
         sqlSession.close();
@@ -69,9 +69,9 @@ public class TestMyBatis {
 
         // 准备好Like的内容
         String name = "%李%";
-        List<Student> students = dao.selectLikeOne(name);
+        List<SSMStudent> SSMStudents = dao.selectLikeOne(name);
 
-        for (Student stu : students) {
+        for (SSMStudent stu : SSMStudents) {
             System.out.println("###学生 = " + stu);
         }
         sqlSession.close();
@@ -85,9 +85,9 @@ public class TestMyBatis {
 
         // 准备好Like的内容
         String name = "李";
-        List<Student> students = dao.selectLikeTwo(name);
+        List<SSMStudent> SSMStudents = dao.selectLikeTwo(name);
 
-        for (Student stu : students) {
+        for (SSMStudent stu : SSMStudents) {
             System.out.println("###学生 = " + stu);
         }
         sqlSession.close();
@@ -101,9 +101,9 @@ public class TestMyBatis {
 
         // 准备好Like的内容
         String name = "李";
-        List<Student> students = dao.selectLikeThree(name);
+        List<SSMStudent> SSMStudents = dao.selectLikeThree(name);
 
-        for (Student stu : students) {
+        for (SSMStudent stu : SSMStudents) {
             System.out.println("###学生 = " + stu);
         }
         sqlSession.close();

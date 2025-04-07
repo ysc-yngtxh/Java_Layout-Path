@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 用户实体类
  */
-public class User implements Serializable {
+public class SSMUser implements Serializable {
     @Serial
     private static final long serialVersionUID = -2605710122888070653L;
 
@@ -18,7 +18,7 @@ public class User implements Serializable {
     private String sex;
     private String address;
 
-    private List<Order> orderList; // 一个用户可以拥有多个订单
+    private List<SSMOrder> orderList; // 一个用户可以拥有多个订单
 
     /* 1. mybatis看问题的角度不同
      *     a. 从user表的角度看问题 : 一对多(一个用户有多个订单)
@@ -31,7 +31,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "SSMUser{" +
                 "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", birthDay='" + birthDay + '\'' +

@@ -1,12 +1,12 @@
 package org.example;
 
-import com.example.pojo.Order;
+import com.example.pojo.SSMOrder;
 import org.apache.ibatis.session.SqlSession;
 import com.example.mapper.OrderMapper;
 import com.example.mapper.RoleMapper;
 import com.example.mapper.UserMapper;
-import com.example.pojo.Role;
-import com.example.pojo.User;
+import com.example.pojo.SSMRole;
+import com.example.pojo.SSMUser;
 import com.example.utils.MyBatisUtils;
 import org.junit.Test;
 
@@ -25,8 +25,8 @@ public class AppTest {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
         // 执行SQL语句，使用SqlSession类的方法
-        Order order = mapper.OrderWithUser(1);
-        System.out.println(order.toString());
+        SSMOrder SSMOrder = mapper.OrderWithUser(1);
+        System.out.println(SSMOrder.toString());
         // 关闭
         sqlSession.close();
     }
@@ -41,9 +41,9 @@ public class AppTest {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         // 执行SQL语句，使用SqlSession类的方法
-        // 查询用户id=41的用户以及拥有的订单
-        User user = mapper.UserWithOrders(41);
-        System.out.println(user.toString());
+        // 查询用户 id=8 的用户以及拥有的订单
+        SSMUser SSMUser = mapper.UserWithOrders(8);
+        System.out.println(SSMUser);
         // 关闭
         sqlSession.close();
     }
@@ -59,9 +59,9 @@ public class AppTest {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         RoleMapper mapper = sqlSession.getMapper(RoleMapper.class);
         // 执行SQL语句，使用SqlSession类的方法
-        // 查询角色id=1的角色以及对应的用户
-        Role role = mapper.RoleWithUsers(1);
-        System.out.println(role.toString());
+        // 查询角色 id=1 的角色以及对应的用户
+        SSMRole SSMRole = mapper.RoleWithUsers(1);
+        System.out.println(SSMRole.toString());
         // 关闭
         sqlSession.close();
     }

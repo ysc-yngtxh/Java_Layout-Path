@@ -15,24 +15,24 @@
           使用 #{} 之后，mybatis执行SQL使用的jdbc中的PreparedStatement对象
           由mybatis执行下面的代码：
               1、mybatis创建Connection、PreparedStatement对象
-                 String sql = "select id,name,email,age from student where id=?";
+                 String sql = "select id,name,email,age from ssm_student where id=?";
                  PreparedStatement ps = conn.prepareStatement(sql);
                  ps.setInt(1,1001);
-              2、执行SQL封装为 resultType="com.example.Student" 这个对象
+              2、执行SQL封装为 resultType="com.example.SSMStudent" 这个对象
                  ResultSet rs = ps.executeQuery();
-                 Student student = null;
+                 SSMStudent SSMStudent = null;
                  while(rs.next()) {
                     // 从数据库取表的一行数据，存到一个Java对象属性中
-                    student = new Student();
-                    student.setId(rs.getInt("id"));
-                    student.setName(rs.getString("name"));
-                    student.setEmail(rs.getString("email"));
-                    student.setAge(rs.getInt("age"));
+                    SSMStudent = new SSMStudent();
+                    SSMStudent.setId(rs.getInt("id"));
+                    SSMStudent.setName(rs.getString("name"));
+                    SSMStudent.setEmail(rs.getString("email"));
+                    SSMStudent.setAge(rs.getInt("age"));
                  }
-                 return student; // 赋给了dao方法调用的返回值
+                 return SSMStudent; // 赋给了dao方法调用的返回值
     -->
-    <select id="selectStudentsType" parameterType="int" resultType="com.example.pojo.Student">
-        select id,name,email,age from student where id=#{studentId}
+    <select id="selectStudentsType" parameterType="int" resultType="com.example.pojo.SSMStudent">
+        select id,name,email,age from ssm_student where id=#{studentId}
     </select>
 
     <!-- 多个参数，使用Java对象作为传参值。MyBatis 会使用反射机制来解析这个对象的属性，可以使用 #{} 语法直接来引用这些属性。
@@ -44,14 +44,14 @@
          我们使用的简化方式：#{属性名}，javaType,jdbcType的值mybatis反射能获取，不用提供
     -->
     <!--
-    <select id="selectMultiObject" resultType="com.example.Student">
-        select id,name,email,age from student where
+    <select id="selectMultiObject" resultType="com.example.SSMStudent">
+        select id,name,email,age from ssm_student where
         name=#{name, javaType=java.lang.String, jdbcType=VARCHAR}
         or age=#{age, javaType=java.lang.Integer, jdbcType=INTEGER}
     </select>
     -->
-    <select id="selectMultiObject" resultType="com.example.pojo.Student">
-        select id,name,email,age from student
+    <select id="selectMultiObject" resultType="com.example.pojo.SSMStudent">
+        select id,name,email,age from ssm_student
         where name=#{name} or age=#{age}
     </select>
 </mapper>

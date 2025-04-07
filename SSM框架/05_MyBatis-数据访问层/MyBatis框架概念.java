@@ -54,7 +54,7 @@
  *      2、提供了执行SQL语句的能力，不用你执行SQL
  *      3、提供了循环SQL，把SQL的结果转为Java对象，List集合的能力
  *         while(rs.next()) {
- *             Student stu = new Student();
+ *             SSMStudent stu = new SSMStudent();
  *             stu.setId(rs.getInt("id"));
  *             stu.setName(rs.getString("name"));
  *             stu.setEmail(rs.getString("email"));
@@ -102,17 +102,17 @@
  *  二、传入参数：从Java代码中把数据传入到mapper文件的SQL语句中。
  *      1、parameterType：写在mapper文件中的 一个属性。表示dao接口中方法的参数的数据类型。
  *         例如：StudentDao接口
- *         public Student selectStudentById(Integer id)
+ *         public SSMStudent selectStudentById(Integer id)
 
  *      2、一个简单类型的参数：
  *         简单类型：mybatis把Java的基本数据类型和String都叫简单类型。
  *         在mapper文件获取简单类型的第一个参数的值，使用#{任意字符}
 
- *         接口：Student selectStudents(Integer id);
+ *         接口：SSMStudent selectStudents(Integer id);
  *         mapper:select id,name,email,age from student where id=#{StudentId}
 
  *      3、多个参数，使用@param命名参数
- *         接口：public List<Student> selectMultiParam(@Param("mybatis") String name,@Param("mybatis") Integer age)
+ *         接口：public List<SSMStudent> selectMultiParam(@Param("mybatis") String name,@Param("mybatis") Integer age)
  *         使用 @param("参数名") String name
  *           mapper文件：
  *             <select>
@@ -121,9 +121,9 @@
 
  *      4、多个参数：使用Java对象作为接口中方法的参数。
  *                 MyBatis 会使用反射机制来解析这个对象的属性，可以直接使用 #{} 语法来引用这些属性。
- *         接口：List<Student> selectMultiObject(Student student);
+ *         接口：List<SSMStudent> selectMultiObject(SSMStudent student);
  *         mapper文件：
- *              <select id="selectMultiObject" resultType="com.example.pojo.Student">
+ *              <select id="selectMultiObject" resultType="com.example.pojo.SSMStudent">
  *                  select id,name,email,age from student where name=#{name} or age=#{age}
  *              </select>
 
@@ -180,7 +180,7 @@
  *      学生id是 1001，1002，1003的三个学生
 
  *      select * from student where id in (1001,1002,1003)
- *      public List<Student> selectFor(List<Integer> idlist)
+ *      public List<SSMStudent> selectFor(List<Integer> idlist)
  *      List<Integer> list = new ...
  *      list.add(1001);
  *      list.add(1002);
@@ -296,7 +296,7 @@
  *      并且每个命名空间（namespace）都可以有自己的二级缓存配置。
 
  *      开启步骤：①、使用mybatis二级缓存的实体类必须实现Serializable接口
- *                    public class Student implements Serializable {}
+ *                    public class SSMStudent implements Serializable {}
  *              ②、在 mybatis.xml 文件中开启二级缓存的全局配置项，它用于控制是否启用二级缓存的能力。
  *                  默认情况下该配置项的属性值为 true，所以即使未显式的指定配置，二级缓存的能力也是可用的。
  *                      <settings>
@@ -306,9 +306,9 @@
  *                     Ⅰ、注解模式：在 Mapper 接口类上，添加@CacheNamespace注解，通过注解开启二级缓存的分开关。
  *                           @CacheNamespace
  *                           public class StudentDao {
- *                              @ResultType(Student.class)
+ *                              @ResultType(SSMStudent.class)
  *                              @Select("select * from student where id=#{id}")
- *                              Student selectIdThree(Integer id);
+ *                              SSMStudent selectIdThree(Integer id);
  *                           }
  *                     Ⅱ、XML模式：在映射的 XML 文件中，使用<cache>标签，通过xml开启二级缓存的分开关。
  *                           <mapper namespace="com.example.mapper.StudentDao">

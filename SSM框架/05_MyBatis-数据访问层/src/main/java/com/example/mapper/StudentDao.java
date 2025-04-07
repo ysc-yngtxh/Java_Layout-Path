@@ -1,6 +1,6 @@
 package com.example.mapper;
 
-import com.example.pojo.Student;
+import com.example.pojo.SSMStudent;
 
 import java.util.List;
 
@@ -11,12 +11,12 @@ import java.util.List;
 public interface StudentDao {
 
     // 查询student表的所有的数据
-    List<Student> selectStudents();
+    List<SSMStudent> selectStudents();
 
-    List<Student> selectStudentsParam(Integer age, String name);
+    List<SSMStudent> selectStudentsParam(Integer age, String name);
 
     // 插入方法
-    //     参数：student，表示要插入到数据库的数据
+    //     参数：SSMStudent，表示要插入到数据库的数据
     //     返回值：int，表示insert操作后的 影响数据库的行数
-    int insertStudent(Student student);
+    int insertStudent(SSMStudent SSMStudent);
 }
