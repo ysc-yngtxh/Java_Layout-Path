@@ -14,7 +14,7 @@ public class AttrServiceImpl {
     @Autowired
     private InjectServiceImpl injectServiceImpl;
 
-    public void doSomething(){
+    public void doSomething() {
         System.out.println("AttrServiceImpl获取属性：" + injectServiceImpl.getClass());
     }
 }

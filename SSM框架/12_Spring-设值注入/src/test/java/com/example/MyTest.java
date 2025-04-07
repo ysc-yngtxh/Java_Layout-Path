@@ -11,7 +11,7 @@ public class MyTest {
 
     // 简单类型的set注入
     @Test
-    public void test01(){
+    public void test01() {
         String config = "applicationContext.xml";
         ApplicationContext ac = new ClassPathXmlApplicationContext(config);
 
@@ -21,7 +21,7 @@ public class MyTest {
 
     // -02-
     @Test
-    public void test02(){
+    public void test02() {
         String config = "applicationContext.xml";
         ApplicationContext ac = new ClassPathXmlApplicationContext(config);
 
@@ -31,7 +31,7 @@ public class MyTest {
 
     // 构造注入
     @Test
-    public void test03(){
+    public void test03() {
         String config = "applicationContext.xml";
         ApplicationContext ac = new ClassPathXmlApplicationContext(config);
 
@@ -47,7 +47,7 @@ public class MyTest {
 
     // 创建File，使用构造注入。可以创建文件对象
     @Test
-    public void test04(){
+    public void test04() {
         String config = "applicationContext.xml";
         ApplicationContext ac = new ClassPathXmlApplicationContext(config);
 

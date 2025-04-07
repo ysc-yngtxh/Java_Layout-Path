@@ -10,8 +10,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class AnnotationTest {
 
     @Test
-    public void test01(){
-        // 从spring容器中获取UserService类型的对象，mapper,service都是spring管理的
+    public void test01() {
+        // 从Spring容器中获取UserService类型的对象，mapper、service都是Spring管理的
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         Student service = (Student) ac.getBean("myStudent");
 
@@ -20,7 +20,7 @@ public class AnnotationTest {
 
     @Test
     public void test() {
-        // 从spring容器中获取UserService类型的对象，mapper,service都是spring管理的
+        // 从Spring容器中获取UserService类型的对象，mapper、service都是Spring管理的
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
         UserService service = (UserService) ctx.getBean("userService");
 

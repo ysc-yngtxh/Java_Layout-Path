@@ -8,6 +8,4 @@ import org.springframework.stereotype.Service;
  * @apiNote TODO
  */
 @Service("injectService")
-public class InjectServiceImpl {
-
-}
+public class InjectServiceImpl {}

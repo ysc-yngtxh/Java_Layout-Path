@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
  *     2、@Service   (用在业务层的上面)：放在service的实现类上面，创建service对象，service对象是做业务处理，可以有事务等功能的。
  *     3、@Controller(用在控制器的上面)：放在controller(控制器)类的上面，创建控制器对象的，控制器对象，能够接受用户提交的参数，显示请求的处理结果
  *     以上三个注解的子注解中都存在@Component，所以注解功能是包含@Component的，都能创建对象。但是这三个注解还有额外的功能。
- *     @Repository, @service, @Controller 是给项目的对象分层的。当你不确定类的功能时，可以使用@Component
+ *     @Repository、@service、@Controller 是给项目的对象分层的。当你不确定类的功能时，可以使用@Component
  *
  * Spring生成的Bean名称规则：
  *     1、优先取注解中 name 指定的名字 -- @Component(value="mySchool")

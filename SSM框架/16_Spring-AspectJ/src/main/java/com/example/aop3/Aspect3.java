@@ -1,11 +1,12 @@
 package com.example.aop3;
 
+import java.time.format.DateTimeFormatter;
+import javax.xml.crypto.Data;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
 import java.time.LocalDateTime;
-
 
 /**
  * @Aspect：是aspectj框架中的注解。
@@ -19,16 +20,13 @@ import java.time.LocalDateTime;
 @Aspect
 public class Aspect3 {
 
-    /**
-     * 环绕通知方法的定义格式
-     *   1、public
-     *   2、必须有一个返回值，推荐使用Object
-     *   3、方法名称自定义
-     *   4、方法有参数，固定的参数  ProceedingJoinPoint
-     */
-
-    /**
-     * @Around: 环绕通知
+    /** 环绕通知方法的定义格式
+     *     1、public
+     *     2、必须有一个返回值，推荐使用Object
+     *     3、方法名称自定义
+     *     4、方法有参数，固定的参数  ProceedingJoinPoint
+     *
+     *  @Around: 环绕通知
      *     属性：value  切入点表达式
      *     位置：在方法的定义什么
      *     特点：
@@ -61,17 +59,17 @@ public class Aspect3 {
 
         // 实现环绕通知
         Object result = null;
-        System.out.println("环绕通知，在目标方法之前，输出时间：" + LocalDateTime.now());
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        System.out.println("环绕通知，在目标方法之前，输出时间：" + LocalDateTime.now().format(dateTimeFormatter));
 
         // 1、目标方法调用
-        if ("小曹我like你".equals(name)) {
+        if ("小敏我喜欢你".equals(name)) {
             result = pjp.proceed();
         }
         System.out.println("环绕通知：在目标方法之后，提交事务");
 
-        // 2、在目标方法的前或者后加入功能
-        // 修改目标方法的执行结果，影响方法最后的调用结果
-        if(result != null){
+        // 2、在目标方法的前或者后加入功能（修改目标方法的执行结果，影响方法最后的调用结果）
+        if(result != null) {
             result = "Hello AspectJ AOP";
         }
 

@@ -13,8 +13,7 @@ public class BService {
         this.aService = aService;
     }
 
-    public BService() {
-    }
+    public BService() {}
 
     public BService(AService aService) {
         this.aService = aService;

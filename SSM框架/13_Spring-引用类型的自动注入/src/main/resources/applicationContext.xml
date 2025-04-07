@@ -12,7 +12,7 @@
 
     <!--byName-->
     <bean id="myStudent" class="com.example.repository.Student" autowire="byName">
-        <property name="name" value="曹玉敏"/>
+        <property name="name" value="敏敏"/>
         <property name="age" value="23"/>
         <!--
             <property name="school" ref="school"/>
@@ -21,7 +21,7 @@
             如果A类中新增或者删除了一些依赖，还需要手动去调整bean.xml中的依赖配置信息，总的来说就是不利于维护和扩展。
             为了解决这些问题，spring为我们提供了更强大的功能：自动注入
 
-            1、直接加上autowire="byName",自己会在class="com.example.mapperper.Student"这个类中寻找引用类型的引用school。
+            1、直接加上autowire="byName",自己会在class="com.example.mapper.Student"这个类中寻找引用类型的引用school。
             2、然后我们在其它bean语句的id中找到对应的引用类型的引用。
             这种语句就叫做：引用类型的自动注入(byName)
         -->
@@ -37,7 +37,7 @@
     <!--byType-->
     <!--
     <bean id="myStudent" class="com.example.mapperper.Student" autowire="byType">
-        <property name="name" value="曹玉敏"/>
+        <property name="name" value="敏敏"/>
         <property name="age" value="23"/>
 
             <property name="school" ref="mySchool"/>
