@@ -1,6 +1,6 @@
 package com.example.pojo;
 
-public class Sale {
+public class SSMSale {
 
     private Integer id;
     private Integer gid;
@@ -32,7 +32,7 @@ public class Sale {
 
     @Override
     public String toString() {
-        return "Sale{" +
+        return "SSMSale{" +
                 "id=" + id +
                 ", gid=" + gid +
                 ", nums=" + nums +

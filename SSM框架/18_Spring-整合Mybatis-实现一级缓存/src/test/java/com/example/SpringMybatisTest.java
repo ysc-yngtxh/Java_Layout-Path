@@ -25,7 +25,7 @@ public class SpringMybatisTest {
 
     // 遍历Spring容器中的所有的Bean
     @Test
-    public void test01(){
+    public void test01() {
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         String[] names = ac.getBeanDefinitionNames();
         for (String na : names) {
@@ -35,7 +35,7 @@ public class SpringMybatisTest {
 
     // 执行新增数据操作
     @Test
-    public void test02(){
+    public void test02() {
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         StudentMapper mapper = ac.getBean("studentMapper", StudentMapper.class);
         Student student = new Student();
@@ -51,7 +51,7 @@ public class SpringMybatisTest {
 
     // 通过同一个sqlSession，获取Mybatis的一级缓存
     @Test
-    public void test03(){
+    public void test03() {
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         // 获取 SqlSessionFactory
         SqlSessionFactory sqlSessionFactory = ac.getBean("sqlSessionFactory", SqlSessionFactory.class);
@@ -85,7 +85,7 @@ public class SpringMybatisTest {
     //    但是可以通过添加事务注解@Transactional，来保证两个查询方法在彻底执行完之前不关闭sqlSession，这样第二个查询就能获取一级缓存数据。
     @Test
     @Transactional
-    public void test04(){
+    public void test04() {
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
         StudentService studentService = ac.getBean("studentService", StudentService.class);
 
@@ -104,7 +104,7 @@ public class SpringMybatisTest {
 
     @Test
     @Transactional
-    public void test5(){
+    public void test5() {
         List<Student> students = service.selectStudents();
         students.forEach(System.out::println);
 

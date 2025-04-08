@@ -114,3 +114,42 @@ INSERT INTO `ssm`.`ssm_order` (`id`, `order_time`, `money`, `uid`) VALUES (7, '2
 INSERT INTO `ssm`.`ssm_order` (`id`, `order_time`, `money`, `uid`) VALUES (8, '2010-06-10 17:59:02', 501.8, 1);
 INSERT INTO `ssm`.`ssm_order` (`id`, `order_time`, `money`, `uid`) VALUES (9, '2022-05-10 22:15:21', 47.37, 4);
 INSERT INTO `ssm`.`ssm_order` (`id`, `order_time`, `money`, `uid`) VALUES (10, '2015-09-14 10:46:00', 596.7, 10);
+
+
+DROP TABLE IF EXISTS `ssm_goods`;
+CREATE TABLE `ssm_goods` (
+    `id`     int           NOT NULL AUTO_INCREMENT COMMENT '主键Id',
+    `name`   varchar(255)  DEFAULT NULL COMMENT '商品名称',
+    `amount` int           DEFAULT NULL COMMENT '商品库存',
+    `price`  decimal(10,2) DEFAULT NULL COMMENT '商品价格',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT '商品表';
+INSERT INTO `ssm`.`ssm_goods` (`id`, `name`, `amount`, `price`) VALUES (1, '曹嘉伦', 99, 248.42);
+INSERT INTO `ssm`.`ssm_goods` (`id`, `name`, `amount`, `price`) VALUES (2, '廖子韬', 74, 150.32);
+INSERT INTO `ssm`.`ssm_goods` (`id`, `name`, `amount`, `price`) VALUES (3, '崔秀英', 79, 90.38);
+INSERT INTO `ssm`.`ssm_goods` (`id`, `name`, `amount`, `price`) VALUES (4, '谢睿', 75, 815.73);
+INSERT INTO `ssm`.`ssm_goods` (`id`, `name`, `amount`, `price`) VALUES (5, '孟秀英', 94, 194.08);
+INSERT INTO `ssm`.`ssm_goods` (`id`, `name`, `amount`, `price`) VALUES (6, '谭子韬', 0, 988.26);
+INSERT INTO `ssm`.`ssm_goods` (`id`, `name`, `amount`, `price`) VALUES (7, '叶致远', 75, 231.64);
+INSERT INTO `ssm`.`ssm_goods` (`id`, `name`, `amount`, `price`) VALUES (8, '袁致远', 78, 771.78);
+INSERT INTO `ssm`.`ssm_goods` (`id`, `name`, `amount`, `price`) VALUES (9, '侯宇宁', 65, 462.09);
+INSERT INTO `ssm`.`ssm_goods` (`id`, `name`, `amount`, `price`) VALUES (10, '孔秀英', 51, 270.62);
+
+
+DROP TABLE IF EXISTS `ssm_sale`;
+CREATE TABLE `ssm_sale` (
+    `id` int NOT NULL AUTO_INCREMENT COMMENT '主键Id',
+    `gid` int NOT NULL COMMENT '商品Id',
+    `nums` int DEFAULT NULL COMMENT '销售数量',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT '销售表';
+INSERT INTO `ssm`.`ssm_sale` (`id`, `gid`, `nums`) VALUES (1, 5, 16);
+INSERT INTO `ssm`.`ssm_sale` (`id`, `gid`, `nums`) VALUES (2, 9, 12);
+INSERT INTO `ssm`.`ssm_sale` (`id`, `gid`, `nums`) VALUES (3, 7, 6);
+INSERT INTO `ssm`.`ssm_sale` (`id`, `gid`, `nums`) VALUES (4, 2, 15);
+INSERT INTO `ssm`.`ssm_sale` (`id`, `gid`, `nums`) VALUES (5, 2, 29);
+INSERT INTO `ssm`.`ssm_sale` (`id`, `gid`, `nums`) VALUES (6, 10, 39);
+INSERT INTO `ssm`.`ssm_sale` (`id`, `gid`, `nums`) VALUES (7, 8, 67);
+INSERT INTO `ssm`.`ssm_sale` (`id`, `gid`, `nums`) VALUES (8, 2, 7);
+INSERT INTO `ssm`.`ssm_sale` (`id`, `gid`, `nums`) VALUES (9, 5, 76);
+INSERT INTO `ssm`.`ssm_sale` (`id`, `gid`, `nums`) VALUES (10, 8, 11);

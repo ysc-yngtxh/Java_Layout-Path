@@ -8,8 +8,7 @@ public class Student implements Serializable {
     private String email;
     private Integer age;
 
-    public Student() {
-    }
+    public Student() {}
 
     public Student(Integer id, String name, String email, Integer age) {
         this.id = id;

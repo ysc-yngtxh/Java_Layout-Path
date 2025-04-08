@@ -20,6 +20,6 @@ public class BService {
     }
 
     public void sayHello() {
-        System.err.println("进入 BService sayHello 方法，且 AService 对象为：" + aService.getClass());
+        System.err.println("进入 BService 类的 sayHello() 方法，且 AService 对象为：" + aService.getClass());
     }
 }

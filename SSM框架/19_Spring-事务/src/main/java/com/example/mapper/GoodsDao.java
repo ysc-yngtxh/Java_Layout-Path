@@ -1,12 +1,12 @@
 package com.example.mapper;
 
-import com.example.pojo.Goods;
+import com.example.pojo.SSMGoods;
 
 public interface GoodsDao {
 
     // 更新库存。goods表示本次用户购买的商品信息，id，购买数量
-    int updateGoods(Goods goods);
+    int updateGoods(SSMGoods SSMGoods);
 
     // 查询商品的信息
-    Goods selectGoods(Integer id);
+    SSMGoods selectGoods(Integer id);
 }

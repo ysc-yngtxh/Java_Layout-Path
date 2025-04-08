@@ -8,7 +8,7 @@
   <artifactId>18_Spring-Mybatis</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>18_Spring-整合Mybatis</name>
+  <name>18_Spring-整合Mybatis-实现一级缓存</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 

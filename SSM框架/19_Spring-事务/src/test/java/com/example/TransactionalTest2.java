@@ -16,7 +16,7 @@ public class TransactionalTest2 {
 
     // 执行自定义事务方法。抛出异常：商品不存在异常。结果：sale 表插入失败，goods 表插入失败
     @Test
-    public void text01(){
+    public void text01() {
         String config = "applicationContext2.xml";
         ApplicationContext ac = new ClassPathXmlApplicationContext(config);
 
@@ -26,7 +26,7 @@ public class TransactionalTest2 {
 
     // 执行自定义事务方法。抛出异常：商品库存不足异常。结果：sale 表插入失败，goods 表插入失败
     @Test
-    public void text02(){
+    public void text02() {
         String config = "applicationContext2.xml";
         ApplicationContext ac = new ClassPathXmlApplicationContext(config);
 
@@ -36,7 +36,7 @@ public class TransactionalTest2 {
 
     // 执行自定义事务方法。正常运行。结果：sale 表插入成功，goods 表插入成功
     @Test
-    public void text03(){
+    public void text03() {
         String config = "applicationContext2.xml";
         ApplicationContext ac = new ClassPathXmlApplicationContext(config);
 

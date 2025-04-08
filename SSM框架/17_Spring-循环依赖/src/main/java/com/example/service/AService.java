@@ -19,7 +19,7 @@ public class AService {
         this.bService = bService;
     }
 
-    public void testProxy(){
-        System.err.println("进入 AService testProxy 方法，且 BService 对象为：" + bService.getClass());
+    public void testProxy() {
+        System.err.println("进入 AService 类的 testProxy() 方法，且 BService 对象为：" + bService.getClass());
     }
 }

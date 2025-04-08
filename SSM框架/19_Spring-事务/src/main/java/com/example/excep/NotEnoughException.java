@@ -1,13 +1,13 @@
 package com.example.excep;
 
-//自定义的运行时异常
-public class NotEnoughException extends RuntimeException{
+// 自定义的运行时异常
+public class NotEnoughException extends RuntimeException {
 
-    public NotEnoughException(){
+    public NotEnoughException() {
         super();
     }
 
-    public NotEnoughException(String message){
+    public NotEnoughException(String message) {
         super(message);
     }
 }

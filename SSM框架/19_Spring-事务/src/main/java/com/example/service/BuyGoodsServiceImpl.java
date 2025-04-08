@@ -2,8 +2,8 @@ package com.example.service;
 
 import com.example.mapper.GoodsDao;
 import com.example.mapper.SaleDao;
-import com.example.pojo.Goods;
-import com.example.pojo.Sale;
+import com.example.pojo.SSMGoods;
+import com.example.pojo.SSMSale;
 import com.example.excep.NotEnoughException;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +22,6 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
     public void setGoodsDao(GoodsDao goodsDao) {
         this.goodsDao = goodsDao;
     }
-
 
 
     // 这里调用同类中默认的事务方法，会导致其事务失效。因为事务是通过代理对象实现的，而不是通过真实对象(this)的方法
@@ -51,24 +50,24 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
     @Override
     public void buy(Integer goodsId, Integer nums) {
         // 记录销售信息，向sale表添加记录
-        Sale sale = new Sale();
-        sale.setGid(goodsId);
-        sale.setNums(nums);
-        saleDao.insertSale(sale);
+        SSMSale SSMSale = new SSMSale();
+        SSMSale.setGid(goodsId);
+        SSMSale.setNums(nums);
+        saleDao.insertSale(SSMSale);
 
         // 更新库存
-        Goods goods = goodsDao.selectGoods(goodsId);
-        if(goods == null){
+        SSMGoods SSMGoods = goodsDao.selectGoods(goodsId);
+        if(SSMGoods == null) {
             // 商品不存在
             throw new NullPointerException("编号是：" + goodsId + ",商品不存在");
-        } else if(goods.getAmount() < nums){
+        } else if(SSMGoods.getAmount() < nums) {
             // 商品库存不足
             throw new NotEnoughException("编号是：" + goodsId + ",商品库存不足");
         }
         // 修改库存了
-        Goods buyGoods = new Goods();
-        buyGoods.setId(goodsId);
-        buyGoods.setAmount(nums);
-        goodsDao.updateGoods(buyGoods);
+        SSMGoods buySSMGoods = new SSMGoods();
+        buySSMGoods.setId(goodsId);
+        buySSMGoods.setAmount(nums);
+        goodsDao.updateGoods(buySSMGoods);
     }
 }

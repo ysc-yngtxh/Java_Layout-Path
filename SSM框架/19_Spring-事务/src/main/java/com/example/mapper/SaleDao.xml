@@ -5,7 +5,7 @@
 
 <mapper namespace="com.example.mapper.SaleDao">
     <insert id="insertSale">
-        insert into sale(gid,nums) values(#{gid},#{nums})
+        insert into ssm_sale(gid,nums) values(#{gid},#{nums})
     </insert>
 
 </mapper>
