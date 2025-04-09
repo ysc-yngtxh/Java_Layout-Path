@@ -8,43 +8,51 @@
 		<version>2.3.4.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.bjpowernode.springboot</groupId>
-	<artifactId>01_SpringBoot-First</artifactId>
-	<version>1.0.0</version>
-	<name>01_SpringBoot-First</name>
-	<description>01_SpringBoot-First</description>
+
+	<groupId>com.example</groupId>
+	<artifactId>07_SpringBoot-Inject</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>07_SpringBoot-Inject</name>
+	<description>07_SpringBoot-Inject</description>
 
 	<properties>
 		<java.version>1.8</java.version>
-		<!--父工程管理依赖的版本号-->
 	</properties>
 
 	<dependencies>
-		<!--springboot框架web项目起步依赖-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!--springboot框架测试起步依赖-->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>2.3.0</version>
 		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
-			<!--springboot项目打包编译的插件-->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -5,15 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.4.RELEASE</version>
+		<version>2.7.18</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-
 	<groupId>com.example</groupId>
-	<artifactId>06_SpringBoot-Inject</artifactId>
+	<artifactId>01_AnnotationConfigApplicationContext</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>06_SpringBoot-Inject</name>
-	<description>06_SpringBoot-Inject</description>
+	<name>01_AnnotationConfigApplicationContext</name>
+	<description>01_AnnotationConfigApplicationContext</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -30,13 +29,9 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.mybatis.spring.boot</groupId>
-			<artifactId>mybatis-spring-boot-starter</artifactId>
-			<version>2.3.0</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

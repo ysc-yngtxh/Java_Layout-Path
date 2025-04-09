@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>02_SpringBoot-Configuration</artifactId>
+    <artifactId>03_SpringBoot-Configuration</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>02_SpringBoot-Configuration</name>
-    <description>02_SpringBoot-Configuration</description>
+    <name>03_SpringBoot-Configuration</name>
+    <description>03_SpringBoot-Configuration</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -57,9 +57,8 @@
     <build>
         <!--
             SpringBoot项目默认推荐使用的前端引擎是thymeleaf
-            现在我们要使用springboot集成jsp,手动指定jsp最后编译的路径
-            而且springboot集成jsp编译jsp的路径是springboot规定好的位置
-            META-INF/resources
+            现在我们要使用SpringBoot集成jsp,手动指定jsp最后编译的路径
+            而且SpringBoot集成jsp编译jsp的路径是SpringBoot规定好的位置 META-INF/resources
         -->
         <resources>
             <resource>

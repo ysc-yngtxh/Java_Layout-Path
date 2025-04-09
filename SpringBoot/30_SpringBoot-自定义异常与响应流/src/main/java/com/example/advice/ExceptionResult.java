@@ -14,7 +14,7 @@ public class ExceptionResult {
     private String message;
     private String timestamp;
 
-    public ExceptionResult(UserEnum em){
+    public ExceptionResult(UserEnum em) {
 
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS");
         long l = System.currentTimeMillis();

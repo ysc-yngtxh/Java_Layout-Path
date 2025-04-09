@@ -10,45 +10,42 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>04_SpringBoot-Mybatis2</artifactId>
+    <artifactId>04_SpringBoot-Mybatis</artifactId>
     <version>1.0.0</version>
-    <name>04_SpringBoot-Mybatis新增或更新</name>
-    <description>04_SpringBoot-Mybatis新增或更新</description>
+    <name>04_SpringBoot-Mybatis</name>
+    <description>04_SpringBoot-Mybatis</description>
 
     <properties>
         <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
-        <!--springboot框架web项目起步依赖-->
+        <!--SpringBoot框架web项目起步依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- 注意：lombok 使用的最新版本 -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.34</version>
-            <optional>true</optional>
-        </dependency>
-
-        <!--mysql驱动-->
+        <!--MySql驱动-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version>
+            <!--这里来不需要写MySQL版本号，是因为父工程管理有版本号-->
         </dependency>
 
-        <!--mybatis框架-->
+        <!--MyBatis整合SpringBoot框架的起步依赖-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.2.2</version>
         </dependency>
+
+        <!-- lombok依赖 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 
@@ -67,5 +64,26 @@
                 </configuration>
             </plugin>
         </plugins>
+
+        <!--手动指定文件夹为resources-->
+        <resources>
+            <resource>
+                <!--源文夹-->
+                <directory>src/main/java</directory>
+                <!--指定源文件夹中的哪个资源要编译进行-->
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
     </build>
+
 </project>
