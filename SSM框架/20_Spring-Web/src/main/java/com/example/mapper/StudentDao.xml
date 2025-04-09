@@ -5,10 +5,10 @@
 
 <mapper namespace="com.example.mapper.StudentDao">
     <insert id="insertStudent" useGeneratedKeys="true" keyProperty="id">
-        insert into student values(#{id},#{name},#{email},#{age})
+        insert into ssm_student values(#{id},#{name},#{email},#{age})
     </insert>
 
-    <select id="selectStudents" resultType="com.example.pojo.Student">
-        select id,name,email,age from student order by id desc
+    <select id="selectStudents" resultType="com.example.pojo.SSMStudent">
+        select id,name,email,age from ssm_student order by id desc
     </select>
 </mapper>

@@ -12,7 +12,7 @@
 
     <!--加载的是文件列表：隶属于一种包含关系-->
     <import resource="classpath:bean/spring-school.xml"/>
-    <import resource="classpath:bean/spring-student.xml"/>
+    <import resource="classpath:bean/spring-SSMStudent.xml"/>
     <!--或者可以使用通配符 *（表示任意字符）
         <import resource="spring-*.xml"/>
         注意：1、使用这种通配符时，不要将主的配置文件加入其中，要不然会出现死循环，报错

@@ -1,12 +1,12 @@
 package com.example.service;
 
-import com.example.pojo.Student;
+import com.example.pojo.SSMStudent;
 
 import java.util.List;
 
 public interface StudentService {
 
-    void addStudent(Student student);
+    void addStudent(SSMStudent SSMStudent);
 
-    List<Student> queryStudents();
+    List<SSMStudent> queryStudents();
 }

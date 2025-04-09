@@ -5,10 +5,10 @@
 
 <mapper namespace="com.example.mapper.StudentDao">
     <select id="selectStudents" resultType="Student">
-          select id,name,age from students order by id desc
+          select id,name,age from SSMStudents order by id desc
     </select>
 
     <insert id="insertStudent" >
-        insert into students(name,age) values(#{name},#{age})
+        insert into SSMStudents(name,age) values(#{name},#{age})
     </insert>
 </mapper>

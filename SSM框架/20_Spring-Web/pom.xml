@@ -15,40 +15,40 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>23</maven.compiler.source>
+    <maven.compiler.target>23</maven.compiler.target>
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.13.2</version>
-      <scope>test</scope>
-    </dependency>
     <!--spring依赖-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>5.3.39</version>
+      <version>6.1.14</version>
     </dependency>
     <!--做spring事务用到的-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-tx</artifactId>
-      <version>5.3.39</version>
+      <version>6.1.14</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
-      <version>5.3.39</version>
+      <version>6.1.14</version>
     </dependency>
-    <!--servlet依赖-->
+    <!--Spring框架中没有集成servlet依赖，javax已被弃用，推荐使用jakarta，需要自行添加-->
+    <!--<dependency>-->
+    <!--  <groupId>javax.servlet</groupId>-->
+    <!--  <artifactId>javax.servlet-api</artifactId>-->
+    <!--  <version>4.0.1</version>-->
+    <!--  <scope>compile</scope>-->
+    <!--</dependency>-->
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>4.0.1</version>
-      <scope>compile</scope>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>6.0.0</version>
+      <scope>provided</scope>
     </dependency>
     <!--jsp依赖-->
     <dependency>
@@ -85,8 +85,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
-      <version>5.3.39</version>
-      <scope>compile</scope>
+      <version>6.1.14</version>
     </dependency>
   </dependencies>
 

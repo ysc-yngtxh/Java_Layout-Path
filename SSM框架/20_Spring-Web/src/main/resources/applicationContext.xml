@@ -5,7 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
     <!--把数据库的配置信息，下写在一个独立的文件，编译修改数据库的配置内容
-        spring知道jdbc.properties文件的位置
+        Spring知道jdbc.properties文件的位置
     -->
     <context:property-placeholder location="classpath:jdbc.properties"/>
 

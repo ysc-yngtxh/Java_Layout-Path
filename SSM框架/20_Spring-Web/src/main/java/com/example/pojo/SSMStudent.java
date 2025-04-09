@@ -1,16 +1,15 @@
 package com.example.pojo;
 
-public class Student {
+public class SSMStudent {
 
     private Integer id;
     private String name;
     private String email;
     private Integer age;
 
-    public Student() {
-    }
+    public SSMStudent() {}
 
-    public Student(Integer id, String name, String email, Integer age) {
+    public SSMStudent(Integer id, String name, String email, Integer age) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -51,7 +50,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "SSMStudent{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +

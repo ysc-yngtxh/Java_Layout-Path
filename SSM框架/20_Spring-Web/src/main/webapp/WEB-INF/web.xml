@@ -4,15 +4,6 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <servlet>
-        <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>com.example.controller.RegisterServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>RegisterServlet</servlet-name>
-        <url-pattern>/reg</url-pattern>
-    </servlet-mapping>
-
     <!--注册监听器ContextLoaderListener
          监听器被创建对象后，会读取/WEB-INF/applicationContext.xml
          为什么要读取文件：因为在监听器中要创建ApplicationContext对象，需要加载配置文件
@@ -22,10 +13,9 @@
 
          配置监听器：目的是创建容器对象，创建了容器对象，就能把applicationContext.xml配置文件中的所有对象都创建好。
                     用户发起请求就可以直接使用对象了
-
+                    相当于：
                     WebApplicationContext ac = new ClassPathXMLApplication("applicationContext.xml");
-                    servletContext.serAttribute(WebApplicationContext,ac);
-                    创建好spring ioc容器
+                    servletContext.serAttribute(WebApplicationContext, ac);
     -->
     <context-param>
         <!--contextConfigLocation:表示配置文件的路径-->
@@ -36,5 +26,15 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+
+    <!--配置SpringMVC的前端控制器DispatcherServlet-->
+    <servlet>
+        <servlet-name>registerController</servlet-name>
+        <servlet-class>com.example.controller.RegisterController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>registerController</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
 
 </web-app>
