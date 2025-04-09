@@ -27,19 +27,19 @@
     <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-context</artifactId>
-        <version>5.3.39</version>
+        <version>6.2.5</version>
         <scope>compile</scope>
     </dependency>
     <!--做spring事务用到的-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-tx</artifactId>
-      <version>5.3.39</version>
+      <version>6.2.5</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
-      <version>5.3.39</version>
+      <version>6.2.5</version>
     </dependency>
     <!--mybatis依赖-->
     <dependency>
@@ -57,7 +57,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>5.3.39</version>
+      <version>6.2.5</version>
     </dependency>
     <!--jsp依赖-->
     <dependency>
@@ -66,13 +66,22 @@
       <version>2.2</version>
       <scope>provided</scope>
     </dependency>
-    <!--servlet依赖。实际上用不着，除非使用 Tomcat@8 以上的版本启动，就必须用得着这个依赖-->
+    <!--Spring框架中没有集成servlet依赖，如需使用需要自行添加。Tomcat@8 可使用javax（已被弃用）。
+        Tomcat@8 以上版本推荐使用jakarta
+    -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <version>4.0.1</version>
-      <scope>provided</scope>
+      <scope>compile</scope>
     </dependency>
+    <!--<dependency>-->
+    <!--  <groupId>jakarta.servlet</groupId>-->
+    <!--  <artifactId>jakarta.servlet-api</artifactId>-->
+    <!--  <version>6.1.0</version>-->
+    <!--  <scope>provided</scope>-->
+    <!--</dependency>-->
+
     <!--MySQL驱动-->
     <dependency>
       <groupId>mysql</groupId>
@@ -85,16 +94,10 @@
       <artifactId>druid</artifactId>
       <version>1.2.16</version>
     </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.13.2</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 
   <build>
-    <finalName>26_SpringMVC-开发步骤</finalName>
+    <finalName>21_SpringMVC-Jdk1.8-开发步骤</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <plugin>

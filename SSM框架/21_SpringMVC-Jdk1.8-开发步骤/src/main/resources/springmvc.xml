@@ -7,7 +7,7 @@
     <!--声明组件扫描器-->
     <context:component-scan base-package="com.example.controller"/>
 
-    <!--声明 springmvc框架中的视图解析器，帮助开发人员设置视图文件的路径-->
+    <!--声明 SpringMVC框架中的视图解析器，帮助开发人员设置视图文件的路径-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!--前缀：视图文件的路径-->
         <property name="prefix" value="/WEB-INF/view/"/>

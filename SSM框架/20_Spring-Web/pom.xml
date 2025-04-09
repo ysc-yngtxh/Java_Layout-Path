@@ -24,20 +24,22 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>6.1.14</version>
+      <version>6.2.5</version>
     </dependency>
     <!--做spring事务用到的-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-tx</artifactId>
-      <version>6.1.14</version>
+      <version>6.2.5</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
-      <version>6.1.14</version>
+      <version>6.2.5</version>
     </dependency>
-    <!--Spring框架中没有集成servlet依赖，javax已被弃用，推荐使用jakarta，需要自行添加-->
+    <!--Spring框架中没有集成servlet依赖，如需使用需要自行添加。Tomcat@8 可使用javax（已被弃用）。
+        Tomcat@8 以上版本推荐使用jakarta
+    -->
     <!--<dependency>-->
     <!--  <groupId>javax.servlet</groupId>-->
     <!--  <artifactId>javax.servlet-api</artifactId>-->
@@ -47,7 +49,7 @@
     <dependency>
       <groupId>jakarta.servlet</groupId>
       <artifactId>jakarta.servlet-api</artifactId>
-      <version>6.0.0</version>
+      <version>6.1.0</version>
       <scope>provided</scope>
     </dependency>
     <!--jsp依赖-->
@@ -85,7 +87,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
-      <version>6.1.14</version>
+      <version>6.2.5</version>
     </dependency>
   </dependencies>
 
