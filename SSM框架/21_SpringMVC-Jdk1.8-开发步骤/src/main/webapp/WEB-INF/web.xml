@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <!--声明：注册springMvc的核心对象DispatcherServlet
+    <!--声明：注册SpringMVC的核心对象 DispatcherServlet（注册中央调度器）
         需要在Tomcat服务器启动后，创建DispatcherServlet对象的实例。
 
         为什么要创建DispatcherServlet对象的实例呢？

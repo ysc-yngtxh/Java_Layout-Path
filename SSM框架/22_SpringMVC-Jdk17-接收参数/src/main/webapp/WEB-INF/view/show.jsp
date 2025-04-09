@@ -7,9 +7,9 @@
 <body>
       <%--之所以将jsp文件移到WEB-INF目录下，是因为避免在没有设置拦截器的情况下。恶意登录--%>
       <h3>/WEB-INF/view/show.jsp从request作用域获取数据</h3><br>
-      <h3>name数据：${myname}</h3><br>
-      <h3>age数据：${myage}</h3><br>
-      <h3>student数据：${mystudent}</h3>
+      <h3>name数据：${myName}</h3><br>
+      <h3>age数据：${myAge}</h3><br>
+      <h3>student数据：${myStudent}</h3>
 
       <h3>/WEB-INF/view/show.jsp从request作用域获取数据</h3><br>
       <h3>msg数据：${msg}</h3><br>

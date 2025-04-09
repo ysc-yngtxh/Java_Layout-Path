@@ -18,7 +18,7 @@
 </head>
 <body>
       <div align="center">
-          <form action="SSMStudent/addStudent.do" method="post">
+          <form action="student/addStudent.do" method="post">
               <table>
                   <tr>
                       <td>姓名：</td>

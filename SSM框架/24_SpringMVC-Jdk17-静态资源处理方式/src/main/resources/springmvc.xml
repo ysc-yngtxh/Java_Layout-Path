@@ -29,7 +29,7 @@
     <mvc:annotation-driven/>
 
     <!--第一种处理静态资源的方式：
-        需要在springMvc配置文件加入 <mvc:default-servlet-handler/>
+        需要在SpringMVC配置文件加入 <mvc:default-servlet-handler/>
         原理是：加入这个标签后，框架会创建控制器对象 DefaultServletHttpRequestHandler(类似我们自己创建的MyController)
         DefaultServletHttpRequestHandler  这个对象可以把接收的请求转发给tomcat的default这个servlet。
     -->

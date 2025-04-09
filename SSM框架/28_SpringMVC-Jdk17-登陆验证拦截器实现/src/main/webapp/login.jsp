@@ -13,7 +13,7 @@
 <body>
       模拟登录，zs登陆系统
 <%
-    session.setAttribute("name","zs");
+    session.setAttribute("name", "zs");
 %>
 </body>
 </html>

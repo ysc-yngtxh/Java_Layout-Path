@@ -13,10 +13,10 @@ public class MyController {
     @RequestMapping(value="/user/some.do")
     public ModelAndView doSome(String name, Integer age) {
 
-        System.out.println("doSome name="+name+"  age="+age);
+        System.out.println("doSome name= " + name + "  age = " + age);
         ModelAndView mv = new ModelAndView();
-        mv.addObject("myName",name);
-        mv.addObject("myAge",age);
+        mv.addObject("myName", name);
+        mv.addObject("myAge", age);
         mv.setViewName("show");
         return mv;
     }

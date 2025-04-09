@@ -23,23 +23,23 @@
   <packaging>war</packaging>
 
   <dependencies>
-    <!--spring依赖-->
+    <!--Spring依赖。使用Tomcat@8版本就集成Spring@6以下版本，Tomcat@8版本以上集成Spring6.2.5-->
     <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-context</artifactId>
-        <version>6.2.5</version>
+        <version>5.3.39</version>
         <scope>compile</scope>
     </dependency>
-    <!--做spring事务用到的-->
+    <!--做Spring事务用到的-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-tx</artifactId>
-      <version>6.2.5</version>
+      <version>5.3.39</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
-      <version>6.2.5</version>
+      <version>5.3.39</version>
     </dependency>
     <!--mybatis依赖-->
     <dependency>
@@ -57,7 +57,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>6.2.5</version>
+      <version>5.3.39</version>
     </dependency>
     <!--jsp依赖-->
     <dependency>

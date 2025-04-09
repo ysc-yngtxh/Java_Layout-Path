@@ -24,14 +24,14 @@
       </div>
 
       <p>Post请求方法返回ModelAndView实现forward</p>
-      <form action="SSMStudent/doForward.do" method="post">
+      <form action="student/doForward.do" method="post">
           姓名：<input type="text" name="name"/><br>
           年龄：<input type="text" name="age"/><br>
           <input type="submit" value="提交请求"/>
       </form>
 
       <p>Post请求方法返回ModelAndView实现redirect</p>
-      <form action="SSMStudent/doRedirect.do" method="post">
+      <form action="student/doRedirect.do" method="post">
           姓名：<input type="text" name="name"/><br>
           年龄：<input type="text" name="age"/><br>
           <input type="submit" value="提交请求"/>

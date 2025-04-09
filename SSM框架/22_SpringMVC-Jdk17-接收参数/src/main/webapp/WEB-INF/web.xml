@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <!-- 声明：注册springMvc的核心对象DispatcherServlet
-         需要在Tomcat服务器启动后，创建DispatcherServlet对象的实例。
+    <!-- 声明：注册 SpringMVC 的核心对象 DispatcherServlet（注册中央调度器）
+              需要在Tomcat服务器启动后，创建DispatcherServlet对象的实例。
 
-        为什么要创建DispatcherServlet对象的实例呢？
-          因为DispatcherServlet在他的创建过程中，会同时创建SpringMvc容器对象，
-          读取springMvc的配置文件，把这个配置文件中的对象都创建好，当用户发起请求时就可以直接使用对象了
+        为什么要创建 DispatcherServlet 对象的实例呢？
+          因为 DispatcherServlet 在它的创建过程中，会同时创建 SpringMVC 容器对象，
+          读取 SpringMVC 的配置文件，把这个配置文件中的对象都创建好，当用户发起请求时就可以直接使用对象了
 
-        servlet的初始化会执行init()方法。DispatcherServlet在 init() 中{
+        servlet的初始化会执行 init() 方法。DispatcherServlet在 init() 中 {
              // 创建容器，读取配置文件
              WebApplicationContext ac = new ClassPathXmlApplicationContext("springmvc.xml");
              // 把容器对象放入到ServletContext中

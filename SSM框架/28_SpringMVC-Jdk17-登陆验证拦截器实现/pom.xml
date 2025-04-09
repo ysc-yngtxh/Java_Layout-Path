@@ -27,14 +27,14 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>6.2.2</version>
+      <version>6.2.5</version>
       <scope>compile</scope>
     </dependency>
     <!--Spring MVC的实现：spring-webmvc依赖，其内含spring-web依赖，无需再显式添加spring-web-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>6.2.2</version>
+      <version>6.2.5</version>
     </dependency>
     <!--Servlet驱动-->
     <dependency>

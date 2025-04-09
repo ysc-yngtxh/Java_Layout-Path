@@ -28,7 +28,7 @@
 
         function loadStudentData(){
             $.ajax({
-                url: "SSMStudent/queryStudent.do",
+                url: "student/queryStudent.do",
                 type: "get",
                 dataType: "json",
                 success: function(data) {

@@ -2,6 +2,8 @@ package com.example.handler;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.Date;
@@ -12,7 +14,7 @@ import java.util.Date;
  */
 public class MyInterceptor implements HandlerInterceptor {
 
-    long btime;
+    long btime = 0;
     /**
      * preHandle叫做预处理方法
      * 参数：
@@ -21,15 +23,14 @@ public class MyInterceptor implements HandlerInterceptor {
      *            true
      *            false
      * 特点：
-     *     1、方法在控制器方法(StudentController的dosome)之前先执行的.
-     *        用户的请求首先到达此方法
+     *     1、方法在控制器方法（StudentController类的doSome()方法）之前先执行的，用户的请求首先到达此方法
      *     2、在这个方法中可以获取请求的信息，验证请求是否符合要求。
      *        可以验证用户是否登录，验证用户是否有权限访问某个连接地址(url)。
      *          如果验证失败，可以截断请求，请求不能被处理。
      *          如果验证成功，可以放行请求，此时控制器方法才能执行。
      */
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         btime = System.currentTimeMillis();
         System.out.println("拦截器的MyInterceptor的preHandle()");
         return true;
@@ -50,11 +51,12 @@ public class MyInterceptor implements HandlerInterceptor {
      *     3、主要是对原来的执行结果做二次修正
      */
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mv) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mv) {
         System.out.println("拦截器的MyInterceptor的postHandle()");
-        // 对原来的dosome执行结果，需要调整
-        if(mv != null){
-            mv.addObject("myDate", new Date());
+        // 对原来的 doSome() 方法执行结果进行补充
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        if(mv != null) {
+            mv.addObject("myDate", LocalDateTime.now().format(dtf));
             mv.setViewName("other");
         }
     }
@@ -69,11 +71,11 @@ public class MyInterceptor implements HandlerInterceptor {
      *     2、一般做资源回收工作的，程序请求过程中创建了一些对象，在这里可以删除，把占用的内存回收
      */
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
 
         System.out.println("拦截器的MyInterceptor的afterCompletion()");
 
         long etime = System.currentTimeMillis();
-        System.out.println("计算从preHandler到请求处理完成的时间："+(etime-btime));
+        System.out.println("计算从preHandler到请求处理完成的时间：" + (etime-btime));
     }
 }

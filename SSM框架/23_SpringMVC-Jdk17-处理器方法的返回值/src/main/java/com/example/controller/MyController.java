@@ -23,9 +23,7 @@ public class  MyController {
      * 处理器方法返回String--表示逻辑视图名称，需要配置视图解析器
      */
     @RequestMapping(value="/returnString-view.do", method= RequestMethod.POST)
-    public String doReturnView(HttpServletRequest request
-                             , String name
-                             , Integer age){
+    public String doReturnView(HttpServletRequest request, String name, Integer age) {
         System.out.println("doReturnView,name=" + name + "  age=" + age);
         request.setAttribute("myName",name);
         request.setAttribute("myAge",age);
@@ -47,10 +45,10 @@ public class  MyController {
 
         String json = "";
         // 把结果的对象转为json格式的数据
-        if(student != null){
+        if(student != null) {
             ObjectMapper om = new ObjectMapper();
             json = om.writeValueAsString(student);
-            System.out.println("student转换的json===" + json);
+            System.out.println("student转换的json ===" + json);
         }
 
         // 输出数据，响应Ajax的请求
@@ -71,7 +69,7 @@ public class  MyController {
     // 使用框架后，发送的Ajax请求
     @RequestMapping(value="/returnStudentJson.do")
     @ResponseBody
-    public Student doStudentJsonObject(String name, Integer age){
+    public Student doStudentJsonObject(String name, Integer age) {
         // 调用service，获取请求结果数据，Student对象表示结果数据
         Student student = new Student();
         student.setName("小曹同学");
@@ -85,7 +83,7 @@ public class  MyController {
      */
     @RequestMapping(value="/returnList.do")
     @ResponseBody
-    public List<Student> doOut(){
+    public List<Student> doOut() {
         List<Student> list = new ArrayList<>();
         Student student = new Student();
         student.setName("小曹同学");
@@ -109,19 +107,19 @@ public class  MyController {
      */
     @RequestMapping(value="/returnString1.do")
     @ResponseBody
-    public String doFirst1(){
+    public String doFirst1() {
         return "Hello SpringMVC 小曹你个大傻子!";
         // 这里不显示事件句柄是因为返回类型是json，但是默认使用"text/plain;charset=ISO-8859-1"作为contextType，导致无法显示
     }
     @RequestMapping(value="/returnString2.do")
     @ResponseBody
-    public String doFirst2(){
+    public String doFirst2() {
         return "Hello SpringMVC 小曹你个大傻子!";
         // 这里显示，但是事件句柄有中文乱码。是因为我在脚本中写上了返回值是文本类型，所以能显示，但是因为字符集不符，中文乱码
     }
     @RequestMapping(value="/returnString3.do", produces = "text/plain;charset=utf-8")
     @ResponseBody
-    public String doFirst3(){
+    public String doFirst3() {
         return "Hello SpringMVC 小曹你个大傻子!";
         // 这里我在RequestMapping中加入produces = "text/plain;charset=utf-8"语句，所以事件句柄显示正常
     }

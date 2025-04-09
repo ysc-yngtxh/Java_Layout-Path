@@ -12,8 +12,8 @@
 </head>
 <body>
       <h3>/WEB-INF/jsp/other.jsp从request作用域获取数据</h3><br>
-      <h3>myname数据：${myname}</h3><br>
-      <h3>myage数据：${myage}</h3><br>
+      <h3>myName数据：${myName}</h3><br>
+      <h3>myAge数据：${myAge}</h3><br>
       <h3>other新增的数据：${myDate}</h3><br>
 </body>
 </html>

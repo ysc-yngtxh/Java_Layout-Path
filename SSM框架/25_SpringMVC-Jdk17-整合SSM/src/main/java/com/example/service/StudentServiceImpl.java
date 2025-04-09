@@ -1,7 +1,7 @@
 package com.example.service;
 
 import com.example.mapper.StudentDao;
-import com.example.pojo.Student;
+import com.example.pojo.SSMStudent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +18,12 @@ public class StudentServiceImpl implements StudentService {
     private StudentDao studentDao;
 
     @Override
-    public int addStudent(Student student) {
-        return studentDao.insertStudent(student);
+    public int addStudent(SSMStudent SSMStudent) {
+        return studentDao.insertStudent(SSMStudent);
     }
 
     @Override
-    public List<Student> findStudents() {
+    public List<SSMStudent> findStudents() {
         return studentDao.selectStudents();
     }
 }

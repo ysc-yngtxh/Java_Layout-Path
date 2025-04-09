@@ -12,7 +12,7 @@
     <%--<base href="http://localhost:8080/myWeb"/>--%>
     <base href="<%=basePath%>"/> <%--动态获取协议地址--%>
 </head>
-<body align="center" background-size="100%">
+<body style="align-content: center; background-size: 100%;">
       <p>处理器方法返回String表示视图名称</p>
       <form action="user/some.do" method="post">
           姓名：<input type="text" name="name"/><br>

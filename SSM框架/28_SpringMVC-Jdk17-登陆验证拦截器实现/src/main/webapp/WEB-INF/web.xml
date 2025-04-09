@@ -48,7 +48,7 @@
     </filter>
     <filter-mapping>
         <filter-name>characterEncodingFilter</filter-name>
-        <!--  /*:表示强制所有的请求先通过过滤器处理  -->
+        <!-- ‘/*’：表示强制所有的请求先通过过滤器处理 -->
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 </web-app>

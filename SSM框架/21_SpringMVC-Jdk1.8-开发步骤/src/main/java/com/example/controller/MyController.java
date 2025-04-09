@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * @author 游家纨绔
  * @Controller：创建处理器对象，对象放在springMvc容器中
- * 位置：在类的上面，和Spring中讲的@Service、@Component
+ *         位置：在类的上面，和Spring中讲的@Service、@Component
  */
 @Controller
 public class MyController {
@@ -29,14 +29,14 @@ public class MyController {
         ModelAndView mv = new ModelAndView();
         // 添加数据，框架在请求的最后把数据放入到request作用域
         // request.setAttribute("msg", "欢迎使用SpringMvc做web开发");
-        mv.addObject("msg", "欢迎使用SpringMvc做web开发");
-        mv.addObject("fun", "执行的是doSome方法");
+        mv.addObject("msg", "欢迎使用 SpringMVC 做Web开发");
+        mv.addObject("fun", "执行的是 doSome() 方法");
 
-        // 指定视图，指定视图的完整路径
-        // 框架对视图执行的forward操作，request.getRequestDispatcher("/show.jsp").forward(...)
-        // mv.setViewName("/WEB-INF/view/show.jsp");这是没有声明视图解析器时
+        // 当没有声明视图解析器时，需要指定视图的完整路径。例如：框架对视图执行的forward操作
+        // request.getRequestDispatcher("/show.jsp").forward(...)
+        // mv.setViewName("/WEB-INF/view/show.jsp");
 
-        // 当配置了视图解析器后，可以使用逻辑名称(文件名)，指定视图。框架会使用视图解析器的前缀+逻辑名称+后缀 组成完成路径
+        // 当配置了视图解析器后，可以使用逻辑名称(文件名)，指定视图。框架会使用【视图解析器的前缀+逻辑名称+后缀】组成完成路径
         mv.setViewName("show");
 
         // 返回mv
@@ -46,8 +46,8 @@ public class MyController {
     @RequestMapping(value = {"/test/other.do","/test/second.do"})
     public ModelAndView doOther() {
         ModelAndView mv = new ModelAndView();
-        mv.addObject("msg", "欢迎使用SpringMvc做web开发");
-        mv.addObject("fun", "执行的是doOther方法");
+        mv.addObject("msg", "欢迎使用 SpringMVC 做web开发");
+        mv.addObject("fun", "执行的是 doOther() 方法");
         mv.setViewName("other");
         return mv;
     }

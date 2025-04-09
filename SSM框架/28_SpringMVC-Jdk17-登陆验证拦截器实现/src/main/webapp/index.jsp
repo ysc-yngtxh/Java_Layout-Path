@@ -7,7 +7,7 @@
 <html>
 <head>
     <title>功能入口</title>
-    <baase href="<%=basePath%>"/> <%--动态获取协议地址--%>
+    <baase href="<%=basePath%>"></baase> <%--动态获取协议地址--%>
 </head>
 <body>
 

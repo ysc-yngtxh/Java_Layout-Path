@@ -1,6 +1,6 @@
 package com.example.service;
 
-import com.example.pojo.Student;
+import com.example.pojo.SSMStudent;
 
 import java.util.List;
 
@@ -9,6 +9,6 @@ import java.util.List;
  */
 public interface StudentService {
 
-    int addStudent(Student student);
-    List<Student> findStudents();
+    int addStudent(SSMStudent SSMStudent);
+    List<SSMStudent> findStudents();
 }

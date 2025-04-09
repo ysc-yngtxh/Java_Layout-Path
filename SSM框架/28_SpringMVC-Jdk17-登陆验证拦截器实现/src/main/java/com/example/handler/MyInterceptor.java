@@ -6,7 +6,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 /**
  * @author 游家纨绔
- */ //拦截器类：拦截用户的请求
+ * @Desc 拦截器类：拦截用户的请求
+ */
 public class MyInterceptor implements HandlerInterceptor {
 
     @Override
@@ -17,11 +18,11 @@ public class MyInterceptor implements HandlerInterceptor {
         String loginName = "";
         // 从session中获取name的值
         Object attr = request.getSession().getAttribute("name");
-        if(attr != null){
-            loginName = (String)attr;
+        if(attr != null) {
+            loginName = (String) attr;
         }
         // 判断登陆的账户，是否符合要求
-        if(!"zs".equals(loginName)){
+        if(!"zs".equals(loginName)) {
             request.getRequestDispatcher("/tip.jsp").forward(request, response);
             return false;
         }

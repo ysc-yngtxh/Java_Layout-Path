@@ -3,13 +3,14 @@ package com.example.pojo;
 /**
  * @author 游家纨绔
  */
-public class Student {
+public class SSMStudent {
 
     private Integer id;
     private String name;
+    private String email;
     private Integer age;
 
-    public Student() {
+    public SSMStudent() {
         System.out.println("===Student的无参构造方法===");
     }
 
@@ -29,6 +30,14 @@ public class Student {
         this.name = name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public Integer getAge() {
         return age;
     }
@@ -39,9 +48,10 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "SSMStudent{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
                 ", age=" + age +
                 '}';
     }
