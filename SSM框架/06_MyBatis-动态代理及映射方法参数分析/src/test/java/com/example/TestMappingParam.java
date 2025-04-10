@@ -1,7 +1,7 @@
 package com.example;
 
 import com.example.mapper.MappingParamDao;
-import com.example.pojo.SSMStudent;
+import com.example.pojo.Student;
 import com.example.utils.MyBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
@@ -22,8 +22,8 @@ public class TestMappingParam {
          * System.out.println("mapper=" + mapper.getClass().getName());
          */
         // StudentDao类是接口，无法实例化，我们却能通过“接口对象dao”调用方法，很明显这里是jdk动态代理的对象执行数据库的操作
-        List<SSMStudent> SSMStudents = dao.selectStudents();
-        for (SSMStudent stu : SSMStudents) {
+        List<Student> Students = dao.selectStudents();
+        for (Student stu : Students) {
             System.out.println("学生 = " + stu);
         }
     }
@@ -35,8 +35,8 @@ public class TestMappingParam {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         MappingParamDao dao = sqlSession.getMapper(MappingParamDao.class);
 
-        List<SSMStudent> SSMStudents = dao.selectStudentsSingleParam("敏敏");
-        for (SSMStudent stu : SSMStudents) {
+        List<Student> Students = dao.selectStudentsSingleParam("敏敏");
+        for (Student stu : Students) {
             System.out.println("学生 = " + stu);
         }
     }
@@ -73,20 +73,22 @@ public class TestMappingParam {
         // jdk1.8之前：通过反射获取到的参数名为[arg0、arg1]、[param1、param2]
         // jdk1.8之后：可以在编译时添加 -parameters 参数来保留方法参数名。
         //            这样通过反射获取到的参数名为参数的变量名，即：name、age。。。
-        List<SSMStudent> SSMStudents = dao.selectStudentsPropertyParam("敏敏", 22);
-        for (SSMStudent stu : SSMStudents) {
+        List<Student> Students = dao.selectStudentsPropertyParam("敏敏", 22);
+        for (Student stu : Students) {
             System.out.println("学生 = " + stu);
         }
     }
 
-    // 多个参数，通过参数名为 [arg0、arg1]、[param1、param2] 传递参数值
+    // 多个参数，通过参数名为 [arg0、arg1]、[param1、pram2] 传递参数值
+    // 注意⚠️：当使用了 -parameters 编译选项，Mybatis通过反射获取到的参数名为参数的变量名，即：name、age。。。
+    //        因此[arg0、arg1]方式传递参数值失效，但[param1、pram2] 参数值还可使用。
     @Test
     public void selectStudentsReflect() {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         MappingParamDao dao = sqlSession.getMapper(MappingParamDao.class);
         // 这种写法可读性不高，不推荐使用
-        List<SSMStudent> SSMStudents = dao.selectStudentsReflect("敏敏", 22);
-        for (SSMStudent stu : SSMStudents) {
+        List<Student> Students = dao.selectStudentsReflect("敏敏", 22);
+        for (Student stu : Students) {
             System.out.println("学生 = " + stu);
         }
     }
@@ -97,8 +99,8 @@ public class TestMappingParam {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         MappingParamDao dao = sqlSession.getMapper(MappingParamDao.class);
         // 所以，基于上述存在的问题：当查询中存在多个参数值时，需要使用注解 @Param 进行指定映射
-        List<SSMStudent> SSMStudents = dao.selectStudentsAnnotationParam("敏敏", 22);
-        for (SSMStudent stu : SSMStudents) {
+        List<Student> Students = dao.selectStudentsAnnotationParam("敏敏", 22);
+        for (Student stu : Students) {
             System.out.println("学生 = " + stu);
         }
     }
@@ -107,12 +109,12 @@ public class TestMappingParam {
     public void InsertStudent() {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         MappingParamDao dao = sqlSession.getMapper(MappingParamDao.class);
-        SSMStudent SSMStudent = new SSMStudent();
-        SSMStudent.setId(1007);
-        SSMStudent.setName("诸葛亮");
-        SSMStudent.setEmail("zhugeliang@163.com");
-        SSMStudent.setAge(35);
-        int nums = dao.insertStudent(SSMStudent);
+        Student Student = new Student();
+        Student.setId(1007);
+        Student.setName("诸葛亮");
+        Student.setEmail("zhugeliang@163.com");
+        Student.setAge(35);
+        int nums = dao.insertStudent(Student);
         sqlSession.commit();
         System.out.println("添加对象的数量：" + nums);
     }

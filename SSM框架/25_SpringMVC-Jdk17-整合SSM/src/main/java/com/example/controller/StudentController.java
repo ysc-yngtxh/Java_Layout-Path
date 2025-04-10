@@ -1,9 +1,8 @@
 package com.example.controller;
 
-import com.example.pojo.SSMStudent;
+import com.example.pojo.Student;
 import com.example.service.StudentService;
 import jakarta.annotation.Resource;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,13 +23,13 @@ public class StudentController {
 
     // 注册学生
     @RequestMapping(value = "/addStudent.do")
-    public ModelAndView addStudent(SSMStudent SSMStudent) {
+    public ModelAndView addStudent(Student Student) {
         String tips = "注册失败";
         // 调用service处理student
-        int nums = service.addStudent(SSMStudent);
+        int nums = service.addStudent(Student);
         if (nums > 0) {
             // 注册成功
-            tips= "学生 【" + SSMStudent.getName() + "】注册成功";
+            tips= "学生 【" + Student.getName() + "】注册成功";
         }
         // 添加数据
         ModelAndView mv = new ModelAndView();
@@ -43,10 +42,10 @@ public class StudentController {
     // 处理查询学生，响应Ajax
     @RequestMapping("/queryStudent.do")
     @ResponseBody
-    public List<SSMStudent> queryStudent() {
+    public List<Student> queryStudent() {
         // 参数检查，简单的数据处理
-        List<SSMStudent> SSMStudents = service.findStudents();
-        return SSMStudents;
+        List<Student> Students = service.findStudents();
+        return Students;
     }
 
     /**

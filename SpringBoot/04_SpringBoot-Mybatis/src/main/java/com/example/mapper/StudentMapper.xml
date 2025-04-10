@@ -10,10 +10,10 @@
     -->
   <!--properties配置文件中设置了实体类的别名，因此不需要全限定类名，爆红不影响-->
   <resultMap id="BaseResultMap" type="com.example.domain.Student">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="age" jdbcType="INTEGER" property="age" />
+    <id column="id" property="id" jdbcType="INTEGER"/>
+    <result column="name" property="name" jdbcType="VARCHAR"/>
+    <result column="email" property="email" jdbcType="VARCHAR"/>
+    <result column="age" property="age" jdbcType="INTEGER"/>
   </resultMap>
 
   <!--sql语句片段，将公共的部分抽取出来-->
@@ -24,24 +24,22 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" /><!--这里就没有查询字段，而是采用SQL语句片段-->
-    from student
+    from db_student
     where id = #{id,jdbcType=INTEGER}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from student
-    where id = #{id,jdbcType=INTEGER}
+    delete from db_student where id = #{id,jdbcType=INTEGER}
   </delete>
 
   <insert id="insert" parameterType="com.example.domain.Student">
-    insert into student (id, name, email, age)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{age,jdbcType=INTEGER})
+    insert into db_student (id, name, email, age)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER})
   </insert>
 
   <!--选择性新增数据-->
   <insert id="insertSelective" parameterType="com.example.domain.Student">
-    insert into student
+    insert into db_student
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -73,7 +71,7 @@
   </insert>
 
   <update id="updateByPrimaryKeySelective" parameterType="com.example.domain.Student">
-    update student
+    update db_student
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
@@ -89,7 +87,7 @@
   </update>
 
   <update id="updateByPrimaryKey" parameterType="com.example.domain.Student">
-    update student
+    update db_student
     set name = #{name,jdbcType=VARCHAR},
         email = #{email,jdbcType=VARCHAR},
         age = #{age,jdbcType=INTEGER}

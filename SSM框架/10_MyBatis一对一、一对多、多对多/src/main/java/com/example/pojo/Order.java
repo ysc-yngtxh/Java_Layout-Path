@@ -6,7 +6,7 @@ import java.io.Serializable;
 /**
  * 订单实体类
  */
-public class SSMOrder implements Serializable {
+public class Order implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -9221786283390686766L;
@@ -16,16 +16,16 @@ public class SSMOrder implements Serializable {
     private Double money;
 
     private Integer uid;       // 外键
-    private SSMUser SSMUser;   // 一个订单属于一个用户
+    private User user;   // 一个订单属于一个用户
 
     @Override
     public String toString() {
-        return "SSMOrder{" +
+        return "Order{" +
                 "id=" + id +
                 ", orderTime='" + orderTime + '\'' +
                 ", money=" + money +
                 ", uid=" + uid +
-                ", SSMUser=" + SSMUser +
+                ", User=" + user +
                 '}';
     }
 }

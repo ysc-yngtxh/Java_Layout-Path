@@ -4,7 +4,7 @@ package com.example.pojo;
  * @author 游家纨绔
  */
 // 推荐和表名一样，容易记忆
-public class SSMStudent {
+public class Student {
 
     // 定义属性，目前要求是属性名和列名一样
     private Integer id;
@@ -46,7 +46,7 @@ public class SSMStudent {
 
     @Override
     public String toString() {
-        return "SSMStudent{" +
+        return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +

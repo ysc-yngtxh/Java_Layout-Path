@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MyController {
 
     @RequestMapping("/say")
-    public @ResponseBody String say(){
+    public @ResponseBody String say() {
         return "Hello SpringBoot!";
     }
 }

@@ -8,7 +8,7 @@
         insert into ssm_student values(#{id},#{name},#{email},#{age})
     </insert>
 
-    <select id="selectStudents" resultType="com.example.pojo.SSMStudent">
+    <select id="selectStudents" resultType="com.example.pojo.Student">
         select id,name,email,age from ssm_student order by id desc
     </select>
 </mapper>

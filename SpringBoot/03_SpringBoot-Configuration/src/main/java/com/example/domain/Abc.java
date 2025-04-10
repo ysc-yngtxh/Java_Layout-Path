@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class Abc {
 
     private String name;  // 所以这里就可以不用写前缀的
-    private String websit;
+    private String webSit;
 
     public String getName() {
         return name;
@@ -18,11 +18,11 @@ public class Abc {
         this.name = name;
     }
 
-    public String getWebsit() {
-        return websit;
+    public String getWebSit() {
+        return webSit;
     }
 
-    public void setWebsit(String websit) {
-        this.websit = websit;
+    public void setWebSit(String webSit) {
+        this.webSit = webSit;
     }
 }

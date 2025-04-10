@@ -4,9 +4,6 @@ import com.example.config.AppConfig;
 import com.example.pojo.Hello;
 import com.example.pojo.User;
 import com.example.pojo.World;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class SpringBootInjectApplication {

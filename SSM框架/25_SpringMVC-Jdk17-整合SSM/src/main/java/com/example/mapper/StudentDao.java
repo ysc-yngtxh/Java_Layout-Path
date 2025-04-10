@@ -1,6 +1,6 @@
 package com.example.mapper;
 
-import com.example.pojo.SSMStudent;
+import com.example.pojo.Student;
 import java.util.List;
 
 /**
@@ -8,7 +8,7 @@ import java.util.List;
  */
 public interface StudentDao {
 
-    int insertStudent(SSMStudent SSMStudent);
+    int insertStudent(Student Student);
 
-    List<SSMStudent> selectStudents();
+    List<Student> selectStudents();
 }

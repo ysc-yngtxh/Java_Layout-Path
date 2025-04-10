@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.pojo.SSMStudent;
+import com.example.pojo.Student;
 import com.example.service.StudentService;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -49,12 +49,12 @@ public class RegisterController extends HttpServlet {
 
         // 获取servlet
         StudentService service = ac.getBean("studentService", StudentService.class);
-        SSMStudent SSMStudent = new SSMStudent();
-        // SSMStudent.setId(Integer.parseInt(strId));
-        SSMStudent.setName(strName);
-        SSMStudent.setEmail(strEmail);
-        SSMStudent.setAge(Integer.valueOf(strAge));
-        service.addStudent(SSMStudent);
+        Student Student = new Student();
+        // Student.setId(Integer.parseInt(strId));
+        Student.setName(strName);
+        Student.setEmail(strEmail);
+        Student.setAge(Integer.valueOf(strAge));
+        service.addStudent(Student);
 
         // 给一个结果页面（请求转发）
         request.getRequestDispatcher("/result.jsp").forward(request, response);

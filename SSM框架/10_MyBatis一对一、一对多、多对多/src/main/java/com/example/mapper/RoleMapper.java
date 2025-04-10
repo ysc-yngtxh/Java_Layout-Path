@@ -1,6 +1,6 @@
 package com.example.mapper;
 
-import com.example.pojo.SSMRole;
+import com.example.pojo.Role;
 
 public interface RoleMapper {
 
@@ -12,7 +12,7 @@ public interface RoleMapper {
      *           on r.id = ur.rid and u.id = ur.uid
      *       where r.id = ?;
      *   1. 参数类型: Integer
-     *   2. 返回类型: SSMRole
+     *   2. 返回类型: Role
      */
-    SSMRole RoleWithUsers(Integer rid);
+    Role RoleWithUsers(Integer rid);
 }

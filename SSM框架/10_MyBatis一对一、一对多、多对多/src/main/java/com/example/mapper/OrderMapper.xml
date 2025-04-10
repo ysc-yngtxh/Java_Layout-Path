@@ -8,14 +8,14 @@
 
     <!--type：java类型的全限定名称
         autoMapping=true (自动映射): 当java实体类的属性名和mysql结果集的字段名一致, 自动映射-->
-    <resultMap id="myOrder" type="com.example.pojo.SSMOrder" autoMapping="true">
+    <resultMap id="myOrder" type="com.example.pojo.Order" autoMapping="true">
         <!--id标签：主键字段映射(必须要写)    result标签：非主键字段映射 (同名可不写,推荐写)-->
-        <id property="id" column="id"/>
-        <result property="orderTime" column="order_time"/>
+        <id column="id" property="id"/>
+        <result column="order_time" property="orderTime"/>
         <!--这后面还有映射属性没写，但是我加了 autoMapping="true" 属性，可以自动映射(必须是同名)-->
 
         <!--
-            重点在：SSMOrder.SSMUser 属性 跟 结果集某一段(user表查出来)的映射
+            重点在：Order.User 属性 跟 结果集某一段(user表查出来)的映射
                 1. 一对一: association  (使用)
                 2. 一对多: collection
 
@@ -26,21 +26,21 @@
                子标签: 设置user和结果集之间的映射
                    注意 最左原则
         -->
-        <association property="SSMUser" javaType="com.example.pojo.SSMUser" autoMapping="true">
-            <id property="id" column="uid"/>
-            <result property="userName" column="user_name"/>
+        <association property="user" javaType="com.example.pojo.User" autoMapping="true">
+            <id column="uid" property="id"/>
+            <result column="user_name" property="userName"/>
             <!--这后面还有映射属性没写，但是我加了 autoMapping="true" 属性，可以自动映射(必须是同名)-->
         </association>
     </resultMap>
 
     <!--
-        1. 直接写resultType=SSMOrder，返回类型=SSMOrder
+        1. 直接写resultType=Order，返回类型=Order
              但是这样会报错，因为order表中没有user属性
              解决办法：使用resultMap
              1.1. 直接写成 resultType: 返回类型
              1.2. 直接写成 resultMap: 结果集映射
         2. 要写成 resultMap: 结果集映射
-             指定查询结果集 跟 javabean (SSMOrder) 之间的映射关系
+             指定查询结果集 跟 javabean (Order) 之间的映射关系
     -->
     <select id="OrderWithUser" resultMap="myOrder">
         select *

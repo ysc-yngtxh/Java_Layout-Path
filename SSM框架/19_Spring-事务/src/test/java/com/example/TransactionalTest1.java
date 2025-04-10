@@ -41,7 +41,7 @@ public class TransactionalTest1 {
         ApplicationContext ac = new ClassPathXmlApplicationContext(config);
 
         BuyGoodsService service = ac.getBean("buyService", BuyGoodsService.class);
-        service.buy(1, 2);
+        service.buy(6, 2);
     }
 
     // 执行默认事务方法。正常运行。结果：sale 表插入成功，goods 表插入成功

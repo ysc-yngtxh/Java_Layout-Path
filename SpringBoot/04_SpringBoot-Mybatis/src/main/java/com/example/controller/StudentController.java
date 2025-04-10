@@ -16,7 +16,7 @@ public class StudentController {
     private StudentService studentService;
 
     @RequestMapping("/student")
-    public Student student(Integer id){
+    public Student student(Integer id) {
         Student student = studentService.queryStudentById(id);
         return student;
     }

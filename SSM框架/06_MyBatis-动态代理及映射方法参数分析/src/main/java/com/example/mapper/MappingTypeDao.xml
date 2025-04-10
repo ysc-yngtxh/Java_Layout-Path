@@ -18,20 +18,20 @@
                  String sql = "select id,name,email,age from ssm_student where id=?";
                  PreparedStatement ps = conn.prepareStatement(sql);
                  ps.setInt(1,1001);
-              2、执行SQL封装为 resultType="com.example.SSMStudent" 这个对象
+              2、执行SQL封装为 resultType="com.example.Student" 这个对象
                  ResultSet rs = ps.executeQuery();
-                 SSMStudent SSMStudent = null;
+                 Student Student = null;
                  while(rs.next()) {
                     // 从数据库取表的一行数据，存到一个Java对象属性中
-                    SSMStudent = new SSMStudent();
-                    SSMStudent.setId(rs.getInt("id"));
-                    SSMStudent.setName(rs.getString("name"));
-                    SSMStudent.setEmail(rs.getString("email"));
-                    SSMStudent.setAge(rs.getInt("age"));
+                    Student = new Student();
+                    Student.setId(rs.getInt("id"));
+                    Student.setName(rs.getString("name"));
+                    Student.setEmail(rs.getString("email"));
+                    Student.setAge(rs.getInt("age"));
                  }
-                 return SSMStudent; // 赋给了dao方法调用的返回值
+                 return Student; // 赋给了dao方法调用的返回值
     -->
-    <select id="selectStudentsType" parameterType="int" resultType="com.example.pojo.SSMStudent">
+    <select id="selectStudentsType" parameterType="int" resultType="com.example.pojo.Student">
         select id,name,email,age from ssm_student where id=#{studentId}
     </select>
 
@@ -44,13 +44,13 @@
          我们使用的简化方式：#{属性名}，javaType,jdbcType的值mybatis反射能获取，不用提供
     -->
     <!--
-    <select id="selectMultiObject" resultType="com.example.SSMStudent">
+    <select id="selectMultiObject" resultType="com.example.Student">
         select id,name,email,age from ssm_student where
         name=#{name, javaType=java.lang.String, jdbcType=VARCHAR}
         or age=#{age, javaType=java.lang.Integer, jdbcType=INTEGER}
     </select>
     -->
-    <select id="selectMultiObject" resultType="com.example.pojo.SSMStudent">
+    <select id="selectMultiObject" resultType="com.example.pojo.Student">
         select id,name,email,age from ssm_student
         where name=#{name} or age=#{age}
     </select>

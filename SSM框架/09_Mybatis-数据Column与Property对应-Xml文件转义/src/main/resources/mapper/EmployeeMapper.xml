@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.EmployeeMapper">
 
-    <resultMap type="com.example.entity.SSMEmployee" id="EmployeeMap">
-        <result property="employeeId" column="employee_id" jdbcType="INTEGER"/>
-        <result property="employeeName" column="employee_name" jdbcType="VARCHAR"/>
-        <result property="employeeDepartmentId" column="employee_department_id" jdbcType="INTEGER"/>
-        <result property="employeeGradeId" column="employee_grade_id" jdbcType="INTEGER"/>
-        <result property="employeeSalary" column="employee_salary" jdbcType="INTEGER"/>
+    <resultMap type="com.example.entity.Employee" id="EmployeeMap">
+        <result column="employee_id" property="employeeId" jdbcType="INTEGER"/>
+        <result column="employee_name" property="employeeName" jdbcType="VARCHAR"/>
+        <result column="employee_department_id" property="employeeDepartmentId" jdbcType="INTEGER"/>
+        <result column="employee_grade_id" property="employeeGradeId" jdbcType="INTEGER"/>
+        <result column="employee_salary" property="employeeSalary" jdbcType="INTEGER"/>
     </resultMap>
 
     <!--查询单个-->
@@ -19,25 +19,25 @@
     </select>
 
     <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultType="com.example.entity.SSMEmployee">
+    <select id="queryAllByLimit" resultType="com.example.entity.Employee">
         select
           employee_id,employee_name,employee_department_id,employee_grade_id,employee_salary
         from ssm_employee
         <where>
-            <if test="SSMEmployee.employeeId != null">
-                and employee_id = #{SSMEmployee.employeeId}
+            <if test="Employee.employeeId != null">
+                and employee_id = #{Employee.employeeId}
             </if>
-            <if test="SSMEmployee.employeeName != null and SSMEmployee.employeeName != ''">
-                and employee_name = #{SSMEmployee.employeeName}
+            <if test="Employee.employeeName != null and Employee.employeeName != ''">
+                and employee_name = #{Employee.employeeName}
             </if>
-            <if test="SSMEmployee.employeeDepartmentId != null">
-                and employee_department_id = #{SSMEmployee.employeeDepartmentId}
+            <if test="Employee.employeeDepartmentId != null">
+                and employee_department_id = #{Employee.employeeDepartmentId}
             </if>
-            <if test="SSMEmployee.employeeGradeId != null">
-                and employee_grade_id = #{SSMEmployee.employeeGradeId}
+            <if test="Employee.employeeGradeId != null">
+                and employee_grade_id = #{Employee.employeeGradeId}
             </if>
-            <if test="SSMEmployee.employeeSalary != null">
-                and employee_salary = #{SSMEmployee.employeeSalary}
+            <if test="Employee.employeeSalary != null">
+                and employee_salary = #{Employee.employeeSalary}
             </if>
         </where>
         limit #{offset}, #{size}
@@ -47,21 +47,21 @@
         select *
         from ssm_employee
         <where>
-            <if test="SSMEmployee.employeeId != null">
-                and employee_id >= #{SSMEmployee.employeeId}
+            <if test="Employee.employeeId != null">
+                and employee_id >= #{Employee.employeeId}
             </if>
-            <if test="SSMEmployee.employeeGradeId != null">
+            <if test="Employee.employeeGradeId != null">
                 <!-- 在 XML 文件中，小于号 '<' 是一个特殊的字符，因为它用于标记 XML 标签的开始。
                      小于号'<' 可以看成是标签的 '<'左符号，所以需要通过转义，使其能够正常解析成 Sql 语句。-->
-                <!-- and employee_grade_id < #{SSMEmployee.employeeGradeId} -->
+                <!-- and employee_grade_id < #{Employee.employeeGradeId} -->
             </if>
-            <if test="SSMEmployee.employeeSalary != null">
+            <if test="Employee.employeeSalary != null">
                 ### 第一种方式：使用xml 原生转义的方式进行转义
-                and employee_salary &lt; #{SSMEmployee.employeeSalary}
+                and employee_salary &lt; #{Employee.employeeSalary}
             </if>
-            <if test="SSMEmployee.employeeSalary != null">
+            <if test="Employee.employeeSalary != null">
                 ### 第二种方式：使用 <![CDATA[ 内容 ]]> 转义
-                and employee_salary <![CDATA[ < ]]> #{SSMEmployee.employeeSalary}
+                and employee_salary <![CDATA[ < ]]> #{Employee.employeeSalary}
             </if>
         </where>
     </select>

@@ -1,7 +1,7 @@
 package com.example;
 
 import com.example.mapper.StudentDao;
-import com.example.pojo.SSMStudent;
+import com.example.pojo.Student;
 import com.example.utils.MyBatisUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -19,11 +19,11 @@ public class TestMyBatis {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         StudentDao dao = sqlSession.getMapper(StudentDao.class);
 
-        SSMStudent SSMStudent = new SSMStudent();
-        SSMStudent.setName("李四");
-        SSMStudent.setAge(18);
-        List<SSMStudent> SSMStudents = dao.selectStudentIf(SSMStudent);
-        for (SSMStudent stu : SSMStudents) {
+        Student Student = new Student();
+        Student.setName("李四");
+        Student.setAge(18);
+        List<Student> Students = dao.selectStudentIf(Student);
+        for (Student stu : Students) {
             System.out.println("if===" + stu);
         }
         sqlSession.close();
@@ -35,11 +35,11 @@ public class TestMyBatis {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         StudentDao dao = sqlSession.getMapper(StudentDao.class);
 
-        SSMStudent SSMStudent = new SSMStudent();
-        SSMStudent.setName("李四");
-        SSMStudent.setAge(18);
-        List<SSMStudent> SSMStudents = dao.selectStudentWhere(SSMStudent);
-        for (SSMStudent stu : SSMStudents) {
+        Student Student = new Student();
+        Student.setName("李四");
+        Student.setAge(18);
+        List<Student> Students = dao.selectStudentWhere(Student);
+        for (Student stu : Students) {
             System.out.println("where===" + stu);
         }
         sqlSession.close();
@@ -51,11 +51,11 @@ public class TestMyBatis {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         StudentDao dao = sqlSession.getMapper(StudentDao.class);
 
-        SSMStudent SSMStudent = new SSMStudent();
-        SSMStudent.setName("李四");
-        SSMStudent.setAge(18);
-        List<SSMStudent> SSMStudents = dao.selectStudentTrim(SSMStudent);
-        for (SSMStudent stu : SSMStudents) {
+        Student Student = new Student();
+        Student.setName("李四");
+        Student.setAge(18);
+        List<Student> Students = dao.selectStudentTrim(Student);
+        for (Student stu : Students) {
             System.out.println("trim===" + stu);
         }
         sqlSession.close();
@@ -67,10 +67,10 @@ public class TestMyBatis {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         StudentDao dao = sqlSession.getMapper(StudentDao.class);
 
-        SSMStudent SSMStudent = new SSMStudent();
-        SSMStudent.setAge(18);
-        List<SSMStudent> SSMStudents = dao.selectStudentChoose(SSMStudent);
-        for (SSMStudent stu : SSMStudents) {
+        Student Student = new Student();
+        Student.setAge(18);
+        List<Student> Students = dao.selectStudentChoose(Student);
+        for (Student stu : Students) {
             System.out.println("choose===" + stu);
         }
         sqlSession.close();
@@ -111,8 +111,8 @@ public class TestMyBatis {
         list.add(12);
         list.add(13);
 
-        List<SSMStudent> SSMStudents = dao.selectForEachOne(list);
-        for (SSMStudent stu : SSMStudents) {
+        List<Student> Students = dao.selectForEachOne(list);
+        for (Student stu : Students) {
             System.out.println("foreach--one===" + stu);
         }
     }
@@ -125,8 +125,8 @@ public class TestMyBatis {
 
         Integer[] s = new Integer[]{11, 2};
 
-        List<SSMStudent> SSMStudents = dao.selectForEachTwo(s);
-        for (SSMStudent stu : SSMStudents) {
+        List<Student> Students = dao.selectForEachTwo(s);
+        for (Student stu : Students) {
             System.out.println("foreach--two===" + stu);
         }
     }
@@ -137,17 +137,17 @@ public class TestMyBatis {
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         StudentDao dao = sqlSession.getMapper(StudentDao.class);
 
-        List<SSMStudent> stulist = new ArrayList<>();
-        SSMStudent s = new SSMStudent();
+        List<Student> stulist = new ArrayList<>();
+        Student s = new Student();
         s.setId(11);
         stulist.add(s);
 
-        s = new SSMStudent();
+        s = new Student();
         s.setId(15);
         stulist.add(s);
 
-        List<SSMStudent> SSMStudents = dao.selectForEachThree(stulist);
-        for (SSMStudent stu : SSMStudents) {
+        List<Student> Students = dao.selectForEachThree(stulist);
+        for (Student stu : Students) {
             System.out.println("foreach--three===" + stu);
         }
     }
@@ -163,10 +163,10 @@ public class TestMyBatis {
         // pageSize：一页中有多少行数据
         PageHelper.startPage(2, 3);
 
-        List<SSMStudent> SSMStudents = dao.selectAll();
-        PageInfo<SSMStudent> info = new PageInfo<>(SSMStudents);
+        List<Student> Students = dao.selectAll();
+        PageInfo<Student> info = new PageInfo<>(Students);
         System.err.println("Page" + info);
-        for (SSMStudent stu : SSMStudents) {
+        for (Student stu : Students) {
             System.out.println("foreach--one=== " + stu);
         }
     }
@@ -180,12 +180,12 @@ public class TestMyBatis {
         StudentDao dao = sqlSession.getMapper(StudentDao.class);
 
         // 第一次查询Id为16的数据
-        SSMStudent stu1 = dao.selectIdOne(16);
+        Student stu1 = dao.selectIdOne(16);
         System.out.println(stu1);
         System.out.println("----------------------分割线-----------------------");
 
         // 第二次查询Id为16的数据
-        SSMStudent stu2 = dao.selectIdOne(16);
+        Student stu2 = dao.selectIdOne(16);
         System.out.println(stu2);
 
         sqlSession.close();
@@ -200,7 +200,7 @@ public class TestMyBatis {
         StudentDao dao = sqlSession.getMapper(StudentDao.class);
 
         // 第一次查询Id为16的数据
-        SSMStudent stu1 = dao.selectIdOne(16);
+        Student stu1 = dao.selectIdOne(16);
         System.out.println(stu1);
         System.out.println("----------------------分割线-----------------------");
 
@@ -208,7 +208,7 @@ public class TestMyBatis {
         sqlSession.clearCache();
 
         // 第二次查询Id为16的数据
-        SSMStudent stu2 = dao.selectIdOne(16);
+        Student stu2 = dao.selectIdOne(16);
         System.out.println(stu2);
 
         sqlSession.close();
@@ -222,7 +222,7 @@ public class TestMyBatis {
         // 获取 Mapper 对象
         StudentDao dao1 = sqlSession1.getMapper(StudentDao.class);
         // 第一次查询Id为1的数据
-        SSMStudent stu1 = dao1.selectIdTwo(1);
+        Student stu1 = dao1.selectIdTwo(1);
         System.out.println(stu1);
         sqlSession1.close();
 
@@ -233,7 +233,7 @@ public class TestMyBatis {
         // 获取 Mapper 对象
         StudentDao dao2 = sqlSession2.getMapper(StudentDao.class);
         // 第二次查询Id为1的数据
-        SSMStudent stu2 = dao2.selectIdTwo(1);
+        Student stu2 = dao2.selectIdTwo(1);
         System.out.println(stu2);
         sqlSession2.close();
     }
@@ -246,7 +246,7 @@ public class TestMyBatis {
         // 获取 Mapper 对象
         StudentDao dao1 = sqlSession1.getMapper(StudentDao.class);
         // 第一次查询Id为1的数据
-        SSMStudent stu1 = dao1.selectIdThree(1);
+        Student stu1 = dao1.selectIdThree(1);
         System.out.println(stu1);
         sqlSession1.close();
 
@@ -257,7 +257,7 @@ public class TestMyBatis {
         // 获取StudentDao的mapper
         StudentDao dao2 = sqlSession2.getMapper(StudentDao.class);
         // 第二次查询Id为1的数据
-        SSMStudent stu2 = dao2.selectIdThree(1);
+        Student stu2 = dao2.selectIdThree(1);
         System.out.println(stu2);
         sqlSession2.close();
     }

@@ -22,20 +22,20 @@ public class MyController {
     private Abc abc;
 
     @RequestMapping(value="/say")
-    public @ResponseBody String say(){
-        return "school.name=" + school.getName() + "-----school.websit=" + school.getWebsit();
+    public @ResponseBody String say() {
+        return "school.name=" + school.getName() + "-----school.webSit=" + school.getWebSit();
     }
 
     @RequestMapping(value="/solo")
-    public ModelAndView solo(){
+    public ModelAndView solo() {
         ModelAndView mv = new ModelAndView();
-        mv.addObject("message", "Hello,SpringBoot");
+        mv.addObject("message", "Hello，SpringBoot");
         mv.setViewName("solo");
         return mv;
     }
 
     @RequestMapping(value="/index")
-    public String index(Model model){
+    public String index(Model model) {
         model.addAttribute("message","Hello World");
         // 返回值是一个是视图
         return "solo";

@@ -5,5 +5,4 @@ package com.example.pojo;
  * @dateTime 2024-05-11 07:16
  * @apiNote TODO
  */
-public class Hello {
-}
+public class Hello {}

@@ -1,11 +1,18 @@
 package com.example.pojo;
 
-public class SSMStudent {
+/**
+ * @author 游家纨绔
+ */
+public class Student {
 
     private Integer id;
     private String name;
     private String email;
     private Integer age;
+
+    public Student() {
+        System.out.println("===Student的无参构造方法===");
+    }
 
     public Integer getId() {
         return id;
@@ -41,7 +48,7 @@ public class SSMStudent {
 
     @Override
     public String toString() {
-        return "SSMStudent{" +
+        return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +

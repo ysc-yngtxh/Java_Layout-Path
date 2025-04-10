@@ -1,6 +1,6 @@
 package com.example.mapper;
 
-import com.example.pojo.SSMStudent;
+import com.example.pojo.Student;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultType;
 import org.apache.ibatis.annotations.Select;
@@ -14,37 +14,37 @@ import java.util.List;
 public interface StudentDao {
 
     // <if>标签使用。动态SQL，使用Java对象作为参数
-    List<SSMStudent> selectStudentIf(SSMStudent SSMStudent);
+    List<Student> selectStudentIf(Student Student);
 
     // <where>标签使用
-    List<SSMStudent> selectStudentWhere(SSMStudent SSMStudent);
+    List<Student> selectStudentWhere(Student Student);
 
     // <trim>标签使用
-    List<SSMStudent> selectStudentTrim(SSMStudent SSMStudent);
+    List<Student> selectStudentTrim(Student Student);
 
     // <choose>标签使用
-    List<SSMStudent> selectStudentChoose(SSMStudent SSMStudent);
+    List<Student> selectStudentChoose(Student Student);
 
     // <foreach>标签--用法1
-    List<SSMStudent> selectForEachOne(List<Integer> idList);
+    List<Student> selectForEachOne(List<Integer> idList);
 
     // <foreach>标签--用法2
-    List<SSMStudent> selectForEachTwo(Integer[] stuArray);
+    List<Student> selectForEachTwo(Integer[] stuArray);
 
     // <foreach>标签--用法3
-    List<SSMStudent> selectForEachThree(@Param("stuList") List<SSMStudent> stuList);
+    List<Student> selectForEachThree(@Param("stuList") List<Student> stuList);
 
     // 使用pageHelper分页数据
-    List<SSMStudent> selectAll();
+    List<Student> selectAll();
 
     // Mybatis一级缓存
-    SSMStudent selectIdOne(Integer id);
+    Student selectIdOne(Integer id);
 
     // Mybatis二级缓存（XML配置）
-    SSMStudent selectIdTwo(Integer id);
+    Student selectIdTwo(Integer id);
 
     // Mybatis二级缓存（注解配置）
-    @ResultType(SSMStudent.class)
+    @ResultType(Student.class)
     @Select("select * from ssm_student where id=#{id}")
-    SSMStudent selectIdThree(Integer id);
+    Student selectIdThree(Integer id);
 }

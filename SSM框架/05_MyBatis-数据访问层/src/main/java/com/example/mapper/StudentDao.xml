@@ -29,12 +29,12 @@
         resultType:表示结果类型的，是sql语句执行后得到ResultSet，得到Java对象的类型
                    值写的类型是全限定名称
     -->
-    <select id="selectStudents" resultType="com.example.pojo.SSMStudent">
+    <select id="selectStudents" resultType="com.example.pojo.Student">
         select id,name,email,age from ssm_student order by id
     </select>
 
 
-    <select id="selectStudentsParam" resultType="com.example.pojo.SSMStudent">
+    <select id="selectStudentsParam" resultType="com.example.pojo.Student">
         select id,name,email,age from ssm_student where age > #{age} and name like #{name}
     </select>
 

@@ -1,6 +1,6 @@
 package com.example.service;
 
-import com.example.pojo.SSMStudent;
+import com.example.pojo.Student;
 import com.example.mapper.StudentDao;
 
 import java.util.List;
@@ -18,13 +18,13 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void addStudent(SSMStudent SSMStudent) {
-        studentDao.insertStudent(SSMStudent);
+    public void addStudent(Student Student) {
+        studentDao.insertStudent(Student);
     }
 
     @Override
-    public List<SSMStudent> queryStudents() {
-        List<SSMStudent> ssmStudents = studentDao.selectStudents();
-        return ssmStudents;
+    public List<Student> queryStudents() {
+        List<Student> students = studentDao.selectStudents();
+        return students;
     }
 }

@@ -4,8 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="myStudent" class="com.example.pojo.SSMStudent">
-        <property name="name" value="李四"/>  <!-- 相当于调用Student的setName("李四") -->
+    <bean id="myStudent" class="com.example.pojo.Student        <property name="name" value="李四"/>  <!-- 相当于调用Student的setName("李四") -->
         <property name="age" value="23"/>    <!-- 相当于调用Student的setAge(23) -->
         <!--我们想一想，为什么在这里会调用set方法啊？
 
@@ -25,8 +24,7 @@
     </bean>
 
     <!--引用类型的set注入-->
-    <bean id="myStudentBy" class="com.example.pojo.SSMStudent">
-        <property name="name" value="游诗成"/>
+    <bean id="myStudentBy" class="com.example.pojo.Student        <property name="name" value="游诗成"/>
         <property name="age" value="23"/>
         <property name="school" ref="mySchool"/>
     </bean>
@@ -56,22 +54,19 @@
 
 
     <!--使用name表示构造方法的形参名-->
-    <bean id="myStudentByIn1" class="com.example.pojo.SSMStudent">
-        <constructor-arg name="myName" value="张三"/>
+    <bean id="myStudentByIn1" class="com.example.pojo.Student        <constructor-arg name="myName" value="张三"/>
         <constructor-arg name="myAge" value="26"/>
         <constructor-arg name="mySchool" ref="mySchool"/>
     </bean>
 
     <!--使用index表示构造方法的形参名-->
-    <bean id="myStudentByIn2" class="com.example.pojo.SSMStudent">
-        <constructor-arg index="0" value="王五"/>
+    <bean id="myStudentByIn2" class="com.example.pojo.Student        <constructor-arg index="0" value="王五"/>
         <constructor-arg index="1" value="28"/>
         <constructor-arg index="2" ref="mySchool"/>
     </bean>
 
     <!--省略index也可表示构造方法的形参名-->
-    <bean id="myStudentByIn3" class="com.example.pojo.SSMStudent">
-        <constructor-arg value="赵六"/>
+    <bean id="myStudentByIn3" class="com.example.pojo.Student        <constructor-arg value="赵六"/>
         <constructor-arg value="30"/>
         <constructor-arg ref="mySchool"/>
     </bean>

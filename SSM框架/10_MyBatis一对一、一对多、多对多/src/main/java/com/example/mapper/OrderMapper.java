@@ -1,6 +1,6 @@
 package com.example.mapper;
 
-import com.example.pojo.SSMOrder;
+import com.example.pojo.Order;
 
 public interface OrderMapper {
 
@@ -12,7 +12,7 @@ public interface OrderMapper {
      *       where o.id = ?;
      *
      *    1. 参数类型:   Integer id
-     *    2. 返回值类型: SSMOrder
+     *    2. 返回值类型: Order
      */
-    SSMOrder OrderWithUser(Integer id);
+    Order OrderWithUser(Integer id);
 }

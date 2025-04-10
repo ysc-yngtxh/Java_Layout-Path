@@ -57,7 +57,7 @@
         <property name="studentMapper" ref="studentMapper"/>
     </bean>
 
-    <!--1、使用spring的事务处理：声明事务处理器[和源代码完全分离]-->
+    <!--1、使用Spring的事务处理：声明事务处理器[和源代码完全分离]-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <!--连接的数据库，指定数据源-->
         <property name="dataSource" ref="myDataSource"/>

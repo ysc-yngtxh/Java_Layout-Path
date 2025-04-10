@@ -2,8 +2,8 @@ package com.example.service;
 
 import com.example.mapper.GoodsDao;
 import com.example.mapper.SaleDao;
-import com.example.pojo.SSMGoods;
-import com.example.pojo.SSMSale;
+import com.example.pojo.Goods;
+import com.example.pojo.Sale;
 import com.example.excep.NotEnoughException;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,24 +50,24 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
     @Override
     public void buy(Integer goodsId, Integer nums) {
         // 记录销售信息，向sale表添加记录
-        SSMSale SSMSale = new SSMSale();
-        SSMSale.setGid(goodsId);
-        SSMSale.setNums(nums);
-        saleDao.insertSale(SSMSale);
+        Sale Sale = new Sale();
+        Sale.setGid(goodsId);
+        Sale.setNums(nums);
+        saleDao.insertSale(Sale);
 
         // 更新库存
-        SSMGoods SSMGoods = goodsDao.selectGoods(goodsId);
-        if(SSMGoods == null) {
+        Goods Goods = goodsDao.selectGoods(goodsId);
+        if(Goods == null) {
             // 商品不存在
             throw new NullPointerException("编号是：" + goodsId + ",商品不存在");
-        } else if(SSMGoods.getAmount() < nums) {
+        } else if(Goods.getAmount() < nums) {
             // 商品库存不足
             throw new NotEnoughException("编号是：" + goodsId + ",商品库存不足");
         }
         // 修改库存了
-        SSMGoods buySSMGoods = new SSMGoods();
-        buySSMGoods.setId(goodsId);
-        buySSMGoods.setAmount(nums);
-        goodsDao.updateGoods(buySSMGoods);
+        Goods buyGoods = new Goods();
+        buyGoods.setId(goodsId);
+        buyGoods.setAmount(nums);
+        goodsDao.updateGoods(buyGoods);
     }
 }

@@ -1,6 +1,6 @@
 package com.example.mapper;
 
-import com.example.pojo.SSMUser;
+import com.example.pojo.User;
 
 public interface UserMapper {
 
@@ -11,7 +11,7 @@ public interface UserMapper {
       *         on u.id = o.uid
       *     where u.id = ?;
       *  1. 参数类型: Integer
-      *  2. 返回值类型: SSMUser
+      *  2. 返回值类型: User
       */
-    SSMUser UserWithOrders(Integer uid);
+    User UserWithOrders(Integer uid);
 }
