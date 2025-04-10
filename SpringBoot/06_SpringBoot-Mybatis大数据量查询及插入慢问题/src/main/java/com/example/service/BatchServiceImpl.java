@@ -20,6 +20,10 @@ import java.util.List;
 @Service
 public class BatchServiceImpl implements BatchService {
 
+    @Resource
+    private SqlSessionFactory sqlSessionFactory;
+
+
     // 不使用批处理，分批进行多值插入
     public void insertForeach(List<Student> list) {
         StopWatch stopWatch = new StopWatch();
@@ -37,9 +41,6 @@ public class BatchServiceImpl implements BatchService {
     }
 
 
-    @Resource
-    private SqlSessionFactory sqlSessionFactory;
-
     // Mybatis的批处理
     public void batchInsert(List<Student> list) {
         // 1、在使用MyBatis进行批处理时，需要设置SqlSession的 ExecutorType 为 BATCH；
@@ -48,8 +49,8 @@ public class BatchServiceImpl implements BatchService {
         // 3、这个缓冲区是有大小限制的，当达到一定阈值或者所有 SQL语句都已被缓存时，需要手动进行提交操作，
         //    将缓存的 SQL语句和参数一起发送到数据库执行。
         //    这个过程是通过 JDBC 的 addBatch() 方法实现的，它允许将多个 SQL 语句添加到一个批次中。
-        // 4、相比之下，JDBC的批量插入操作更加原生和高效。使用JDBC的addBatch()方法可以将多个SQL语句添加到批处理中，
-        //    然后使用executeBatch()方法一次性执行这些SQL语句。
+        // 4、相比之下，JDBC的批量插入操作更加原生和高效。使用JDBC的 addBatch() 方法可以将多个SQL语句添加到批处理中，
+        //    然后使用 executeBatch() 方法一次性执行这些SQL语句。
         //    这种方式没有额外的框架层级的开销。因此，如果对于批量插入操作的性能要求较高，使用JDBC的批量插入方式可能更为适合。
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
@@ -74,7 +75,7 @@ public class BatchServiceImpl implements BatchService {
         System.out.println(stopWatch.getTotalTimeMillis());
     }
 
-    //
+    // Mybatis的批处理
     public void batchInsertForeach(List<Student> list) {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();

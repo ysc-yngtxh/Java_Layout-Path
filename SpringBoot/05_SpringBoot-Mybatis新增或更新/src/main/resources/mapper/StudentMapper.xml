@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.mapper.StudentMapper">
 
     <select id="selectByPrimaryKey" parameterType="int" resultType="Student">
-        SELECT id,name,email,age
-        FROM student
+        SELECT id, name, email, age
+        FROM db_student
         WHERE id = #{id,jdbcType=INTEGER}
     </select>
 
@@ -14,7 +15,7 @@
             （依据某个字段，比如Primary Key或Unique Key来确定是否重复）
              Mysql中有两种方式可以实现：①、replace into     ②、on duplicate key update(推荐)-->
 
-    <!--REPLACE INTO student(`id`, `name`, `email`, `age`) VALUES ( 1, "XiaoCao", "123@163.com", 25 )
+    <!--REPLACE INTO db_student(`id`, `name`, `email`, `age`) VALUES ( 1, "XiaoCao", "123@163.com", 25 )
         REPLACE INTO的功能是替代，即：如果有重复(主键或者唯一索引重复)的话就先删除，然后再插入；如果没有重复的则新增
         下列是数据库中数据：
                        1, "XiaoZhang", "123@163.com", 25
@@ -22,29 +23,31 @@
         这个时候执行语句：会先删除这两条数据行，然后再插入当前这一条语句数据。
                        因为该条语句中主键id跟唯一索引email都重复，且重复的不在同一条语句，因此出现修改多条语句的情况-->
     <insert id="insertReplaceInto">
-        REPLACE INTO student(`id`, `name`, `email`, `age`)
+        REPLACE
+        INTO db_student(`id`, `name`, `email`, `age`)
         VALUES (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
                 #{email,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER})
     </insert>
 
 
     <!--避免重复插入（存在则忽略）注意：没有 replace insert ignore into 这种写法
-        INSERT IGNORE INTO student(`id`, `name`, `email`, `age`) VALUES ( ?, ?, ?, ? )-->
+        INSERT IGNORE INTO db_student(`id`, `name`, `email`, `age`) VALUES ( ?, ?, ?, ? )-->
     <insert id="insertIgnoreInto" parameterType="java.util.List">
-        INSERT IGNORE INTO student(`id`, `name`, `email`, `age`)
+        INSERT
+        IGNORE INTO db_student(`id`, `name`, `email`, `age`)
         VALUES (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
                 #{email,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER})
     </insert>
 
 
     <!--不存在则插入，存在则更新
-        INSERT INTO student(`id`, `name`, `email`, `age`)
+        INSERT INTO db_student(`id`, `name`, `email`, `age`)
         VALUES(?, ?, ?, ?)
         ON DUPLICATE KEY UPDATE
         id = ?, name = ?, email = ?, age = ?;
         如果主键和唯一索引email列都重复了，但mysql以主键为主。-->
     <insert id="insertDuplicateKeyUpdate">
-        INSERT INTO student(`id`, `name`, `email`, `age`)
+        INSERT INTO db_student(`id`, `name`, `email`, `age`)
         VALUES (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
                 #{email,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER})
         ON DUPLICATE KEY UPDATE
@@ -66,7 +69,7 @@
 
 
     <!--不存在则插入，存在则更新(批量插入)
-        INSERT INTO student(`id`, `name`, `email`, `age`)
+        INSERT INTO db_student(`id`, `name`, `email`, `age`)
         VALUES(?, ?, ?, ?), (?, ?, ?, ?)
         ON DUPLICATE KEY UPDATE
             id = values(`id`),,
@@ -77,11 +80,11 @@
         要想批量插入，只能通过values()方式：表示 更新时的数据 引用 原本打算插入到对应列的值。
         如name = values(name)表示：如果插入操作因为重复主键而失败，那么更新 name 列的值为原本打算插入的 name 值。-->
     <insert id="insertDuplicateKeyUpdateBatch">
-        INSERT INTO student(`id`, `name`, `email`, `age`)
+        INSERT INTO db_student(`id`, `name`, `email`, `age`)
         VALUES
-        <foreach collection="students" item="item" separator=",">
-            (#{item.id,jdbcType=INTEGER}, #{item.name,jdbcType=VARCHAR},
-              #{item.email,jdbcType=VARCHAR}, #{item.age,jdbcType=INTEGER})
+        <foreach collection="students" item="item" open="(" close=")" separator=",">
+            #{item.id,jdbcType=INTEGER}, #{item.name,jdbcType=VARCHAR},
+            #{item.email,jdbcType=VARCHAR}, #{item.age,jdbcType=INTEGER}
         </foreach>
         ON DUPLICATE KEY UPDATE
             id = VALUES(`id`),

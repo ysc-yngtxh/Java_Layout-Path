@@ -7,27 +7,27 @@ import java.sql.SQLException;
  * @author 游家纨绔
  */
 /*
-JDBC事务机制：
-     1、JDBC中的事务是自动提交的，什么是自动提交？
-          只要执行任意一条DML语句，则自动提交一次。这是JDBC默认的事务行为
-          但是在实际的业务当中，通常都是N条DML语句共同联合才能完成的，必须保证他们这些DML语句在同一事物中同时成功或者同时失败
-     2、以下程序先来验证一下JDBC的事务是否是自动提交机制
-          测试结果：JDBC中只要执行任意一条DML语句，就提交一次。
-          重点三行代码：
-                     conn.setAutoCommit(false);  开启事务
-                     conn.commit();              提交事务
-                     conn.rollback();            回滚事务
-SQL脚本：
-       drop table if exists t_act;
-       create table t_act(
-           act_no bigint,
-           balance double(7, 2)      注意：7表示有效数字的个数，2表示小数位的个数
-       );
-       insert into t_act(act_no, balance) values(111, 20000);
-       insert into t_act(act_no, balance) values(222, 0);
-       commit;
-       select * from t_act;
-*/
+ * JDBC事务机制：
+ *      1、JDBC中的事务是自动提交的，什么是自动提交？
+ *           只要执行任意一条DML语句，则自动提交一次。这是JDBC默认的事务行为
+ *           但是在实际的业务当中，通常都是N条DML语句共同联合才能完成的，必须保证他们这些DML语句在同一事物中同时成功或者同时失败
+ *      2、以下程序先来验证一下JDBC的事务是否是自动提交机制
+ *           测试结果：JDBC中只要执行任意一条DML语句，就提交一次。
+ *           重点三行代码：
+ *                      conn.setAutoCommit(false);  开启事务
+ *                      conn.commit();              提交事务
+ *                      conn.rollback();            回滚事务
+ * SQL脚本：
+ *        drop table if exists t_act;
+ *        create table t_act(
+ *            act_no bigint,
+ *            balance double(7, 2)      注意：7表示有效数字的个数，2表示小数位的个数
+ *        );
+ *        insert into t_act(act_no, balance) values(111, 20000);
+ *        insert into t_act(act_no, balance) values(222, 0);
+ *        commit;
+ *        select * from t_act;
+ */
 public class I9_JDBC事务自动提交机制的演示 {
     public static void main(String[] args) {
 

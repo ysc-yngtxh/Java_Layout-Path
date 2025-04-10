@@ -15,7 +15,7 @@ public class DBUtil {
     /**
      * 静态代码块在类加载时执行，并且只执行一次
      */
-    static{
+    static {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -28,12 +28,12 @@ public class DBUtil {
      * @return  连接对象
      * @throws SQLException
      */
-    public static Connection getConnection() throws SQLException{
+    public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection("jdbc:mysql://localhost:3306/bjpowernode?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC","root","131474");
         /* 为什么这里不选择try...catch而是上抛异常呢？
-           因为这里只是一个JDBC的工具类，是会被外界需要时调用的.所以，在外界需要连接对象调用这个方法的时候，会采取捕捉(try...catch)的方式。
-           因此这里选择 try..catch 不合适，而选用上抛异常的话会更加合理。
-        */
+         *  因为这里只是一个JDBC的工具类，是会被外界需要时调用的.所以，在外界需要连接对象调用这个方法的时候，会采取捕捉(try...catch)的方式。
+         *  因此这里选择 try..catch 不合适，而选用上抛异常的话会更加合理。
+         */
     }
 
     /**
@@ -66,4 +66,3 @@ public class DBUtil {
         }
     }
 }
-

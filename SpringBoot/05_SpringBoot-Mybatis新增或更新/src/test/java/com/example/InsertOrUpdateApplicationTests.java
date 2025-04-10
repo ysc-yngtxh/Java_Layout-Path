@@ -17,14 +17,14 @@ class InsertOrUpdateApplicationTests {
 
     @Test
     void contextLoads() {
-        Student student = studentService.queryStudentByIdCacheL1(1);
+        studentService.queryStudentByIdCacheL1(1);
     }
 
     // 使用replace into方式新增或更新
     @Test
     public void replaceInto() {
         Student student = Student.builder()
-                .id(15).name("黄河以北，我曹最美").email("456@qq.com").age(22)
+                .name("黄河以北，我曹最美").email("456@qq.com").age(22)
                 .build();
         int insertReplaceInto = studentService.insertReplaceInto(student);
         System.out.println(insertReplaceInto);
@@ -34,7 +34,7 @@ class InsertOrUpdateApplicationTests {
     @Test
     public void ignore() {
         Student student = Student.builder()
-                .id(15).name("天大地大，敏敏胡话").email("456@qq.com").age(22)
+                .id(12).name("天大地大，敏敏胡话").email("456@qq.com").age(22)
                 .build();
         int insertIgnoreInto = studentService.insertIgnoreInto(student);
         System.out.println(insertIgnoreInto);
@@ -44,7 +44,7 @@ class InsertOrUpdateApplicationTests {
     @Test
     public void duplicate() {
         Student student = Student.builder()
-                .id(25).name("终是庄周梦了蝶，你是恩赐亦是劫").email("456@qq.com").age(22)
+                .name("终是庄周梦了蝶，你是恩赐亦是劫").email("456@qq.com").age(22)
                 .build();
         int insertedDuplicateKeyUpdate = studentService.insertDuplicateKeyUpdate(student);
         System.out.println(insertedDuplicateKeyUpdate);
@@ -55,15 +55,15 @@ class InsertOrUpdateApplicationTests {
     public void duplicateBatch() {
         List<Student> list = new ArrayList<Student>() {{
             add(Student.builder()
-                    .id(30).name("终是霸王别了姬，对着敏敏打飞机").email("567@qq.com").age(22)
+                    .name("终是霸王别了姬，对着敏敏打飞机").email("567@qq.com").age(22)
                     .build()
             );
             add(Student.builder()
-                    .id(31).name("终是悟空入了魔，踏破凌霄灭了佛").email("678@qq.com").age(22)
+                    .name("终是悟空入了魔，踏破凌霄灭了佛").email("678@qq.com").age(22)
                     .build()
             );
             add(Student.builder()
-                    .id(32).name("终是紫霞错了情，忘了情也忘了你").email("789@qq.com").age(22)
+                    .name("终是紫霞错了情，忘了情也忘了你").email("789@qq.com").age(22)
                     .build()
             );
         }};
@@ -75,7 +75,7 @@ class InsertOrUpdateApplicationTests {
     @Test
     public void insertOrUpdateOneUserInfo() {
         Student student = Student.builder()
-                .id(33).name("终是妲己祸了国，万里江山诉蹉跎").email("101112@qq.com").age(22)
+                .name("终是妲己祸了国，万里江山诉蹉跎").email("101112@qq.com").age(22)
                 .build();
         int insertOrUpdateOneUserInfo = studentService.insertOrUpdateOneUserInfo(student);
         System.out.println(insertOrUpdateOneUserInfo);

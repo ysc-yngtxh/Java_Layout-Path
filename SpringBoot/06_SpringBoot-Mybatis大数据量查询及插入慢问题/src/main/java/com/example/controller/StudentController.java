@@ -16,7 +16,7 @@ public class StudentController {
     private StudentService studentService;
 
     @RequestMapping("/studentMap")
-    public @ResponseBody Map<String, Student> queryStudentByIdMap(Integer id){
+    public @ResponseBody Map<String, Student> queryStudentByIdMap(Integer id) {
         Map<String, Student> student = studentService.queryStudentByIdMap(id);
         // String emails = student.get("游诗成").getEmail();     // 这样获取 email 会报错
         Map<String,String> email = (Map) student.get("游诗成");  // 这才是正确获取的写法

@@ -12,5 +12,6 @@ import java.util.List;
 public interface BatchMapper {
 
     void batchInsert(Student list);
+
     void insertForeach(List<Student> list);
 }

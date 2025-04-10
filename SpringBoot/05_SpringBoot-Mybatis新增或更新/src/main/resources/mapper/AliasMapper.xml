@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.mapper.StudentMapper">
-
     <insert id="insertOrUpdateOneUserInfo">
-        /* selectKey标签：在 MyBatis 中用于在插入数据前或后获取数据库生成的主键或其他值，通常与 insert 标签配合使用。
+        <!-- selectKey标签：在 MyBatis 中用于在插入数据前或后获取数据库生成的主键或其他值，通常与 insert 标签配合使用。
              keyProperty    表示查询结果赋值给代码中的哪个对象
              keyColumn      表示将查询结果赋值给数据库表中哪一列
              resultType     填入 keyProperty 的 Java 类型
@@ -13,14 +13,14 @@
 
              注意：使用MySQL的last_insert_id()函数时，order必为AFTER，
                   也就是说必须先插入然后执行last_insert_id()才能获得刚刚插入数据的ID
-         */
+        -->
         <selectKey keyProperty="count" resultType="int" order="BEFORE">
-            select count(*) as count from `student` where id = #{id}
+            select count(*) as count from `db_student` where id = #{id}
         </selectKey>
         <!-- 如果大于0则更新 -->
         <if test="count>0">
-            UPDATE `student`
-            <set >
+            UPDATE `db_student`
+            <set>
                 <if test="id != null and id != ''">
                     id = #{id},
                 </if>
@@ -38,13 +38,9 @@
         </if>
         <!-- 如果等于0则保存 -->
         <if test="count==0">
-            INSERT IGNORE INTO `student`(`id`, `name`, `email`, `age`)
-            VALUES
-            (
-              #{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
-              #{email,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}
-            )
+            INSERT IGNORE INTO `db_student`(`id`,`name`,`email`,`age`)
+            VALUES(#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+                   #{email,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER})
         </if>
     </insert>
 </mapper>
-

@@ -8,10 +8,10 @@ import java.util.ResourceBundle;
  * @author 游家纨绔
  */
 /*
-1、将连接数据库的所有信息配置到配置文件
-2、处理查询结果集
-     // int executeUpdate( insert/delete/update )
-     // ResultSet executeQuery( select )
+ * 1、将连接数据库的所有信息配置到配置文件
+ * 2、处理查询结果集
+ *      // int executeUpdate( insert/delete/update )
+ *      // ResultSet executeQuery( select )
  */
 public class D4_从属性资源文件中读取连接数据库信息 {
     public static void main(String[] args) {
@@ -43,17 +43,17 @@ public class D4_从属性资源文件中读取连接数据库信息 {
 
             // 5、处理查询结果集
             /*
-              Boolean flag = rs.next();    // rs.next()方法相当于一个动作，从表中一行一行的取数据，如果取到数据，返回结果true
-              System.out.println(rs.next());
-            */
+             * Boolean flag = rs.next();  // rs.next()方法相当于一个动作，从表中一行一行的取数据，如果取到数据，返回结果true
+             * System.out.println(rs.next());
+             */
             while (rs.next()) {
                 /*
-                  // getString()特点：不管数据库中的数据类型是什么，都以String的形式取出
-                  String no = rs.getString(1);      // JDBC中所有的下标都是从1开始的，不是从0开始
-                  String name = rs.getString(2);    // 后面括号里数字1，2，3代表的是表里的列
-                  String age = rs.getString(3);     // 很明显，上面的方法会更健壮，推荐上面的写法
-                  System.out.println(no + "," + name + "," + (age+1));
-                */
+                 * // getString()特点：不管数据库中的数据类型是什么，都以String的形式取出
+                 * String no = rs.getString(1);      // JDBC中所有的下标都是从1开始的，不是从0开始
+                 * String name = rs.getString(2);    // 后面括号里数字1，2，3代表的是表里的列
+                 * String age = rs.getString(3);     // 很明显，上面的方法会更健壮，推荐上面的写法
+                 * System.out.println(no + "," + name + "," + (age+1));
+                 */
                 // 取数据。除了可以以String类型取出之外，还可以以特定的类型取出，但是特定类型需要和数据库类型一致。
                 int no = rs.getInt("no");
                 String name = rs.getString("name");

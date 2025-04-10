@@ -22,7 +22,7 @@ public class StudentServiceImpl implements StudentService {
     //      所以，这里第二个查询语句是无法从Mybatis的一级缓存里获取数据
     // 在Mybatis源码中SqlSessionUtils.getSqlSession()时候执行一个sessionHolder()方法，在这个方法里判断是否执行的方法是事务性的，
     // 如果加了 @Transactional，则会把sqlSession暂存在ThreadLocal中，则当第二次执行相同的mapper、sql、参数的时候就会去ThreadLocal中去取有没有，
-    // 如果没有，那么直接返回SqlSession为null,那么当第二次执行相同的mapper就会新建一个新的SqlSession
+    // 如果没有，那么直接返回SqlSession为null，那么当第二次执行相同的mapper就会新建一个新的SqlSession
     @Override
     @Transactional
     public Student queryStudentByIdCacheL1(Integer id) {

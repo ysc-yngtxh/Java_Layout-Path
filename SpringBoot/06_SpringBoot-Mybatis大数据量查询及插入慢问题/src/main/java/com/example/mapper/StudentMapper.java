@@ -46,14 +46,14 @@ public interface StudentMapper {
     // 流式查询的第一种写法：指定Mapper方法的返回值为 Cursor 类型，这个查询方法就会被 MyBatis 定义为一个流式查询。
     //                     且Cursor迭代会进行多次查询，每次查询的数据量为一个。因此又叫做游标查询
     @ResultType(Student.class)
-    @Select("SELECT * FROM `student`")
+    @Select("SELECT * FROM `db_student`")
     // FORWARD_ONLY：结果集的游标只能向下滚动     fetchSize：表示要从数据库中每次检索的行数
     // @Options(resultSetType = ResultSetType.FORWARD_ONLY, fetchSize = 1000)
     // 以上@Options根据自己需要设置，也可以不设置。不设置的话，Cursor迭代会进行多次查询，每次查询的数据量为一个。
     Cursor<Student> streamingQuery1();
 
     @ResultType(Student.class)
-    @Select("SELECT * FROM `student`")
+    @Select("SELECT * FROM `db_student`")
     // fetchSize = Integer.MIN_VALUE 是一种特殊的设定值。
     // 表示让 JDBC 驱动程序基于自身的实现和数据库服务器的能力自动选择一个合适的 fetchSize 值，就不需要我们手动指定
     @Options(resultSetType = ResultSetType.FORWARD_ONLY, fetchSize = Integer.MIN_VALUE)
@@ -76,4 +76,3 @@ public interface StudentMapper {
     @ResultType(Student.class)
     void selectStudent(ResultHandler<Student> resultHandler);
 }
-

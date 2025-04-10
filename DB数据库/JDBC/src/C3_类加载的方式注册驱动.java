@@ -7,25 +7,25 @@ import java.sql.Statement;
  * @author 游家纨绔
  */
 /*
-public class Driver extends NonRegisteringDriver implements java.sql.Driver {
-    public Driver() throws SQLException {
-    }
-
-    static {
-        try {
-            DriverManager.registerDriver(new Driver());
-        } catch (SQLException var1) {
-            throw new RuntimeException("Can't register driver!");
-        }
-    }
-}
-以上代码是jdbc中的 com.mysql.cj.jdbc.Driver 类，且有一个静态代码块。
-而在学习 JavaSE反射机制 的时候我们就了解到。
-      如果你只希望一个类的静态代码块执行，其他代码一律不执行
-      你可以使用：
-               Class.forName("完整类名");
-      这个方法的执行会导致类加载，类加载时，静态代码块执行。
-      所以，我们在第一步注册驱动的时候还有一种写法：即Class.forName("完整类名"); 这种方法也是我们用来注册数据库的常用方法
+ * public class Driver extends NonRegisteringDriver implements java.sql.Driver {
+ *     public Driver() throws SQLException {
+ *     }
+ *
+ *     static {
+ *         try {
+ *             DriverManager.registerDriver(new Driver());
+ *         } catch (SQLException var1) {
+ *             throw new RuntimeException("Can't register driver!");
+ *         }
+ *     }
+ * }
+ * 以上代码是jdbc中的 com.mysql.cj.jdbc.Driver 类，且有一个静态代码块。
+ * 而在学习 JavaSE反射机制 的时候我们就了解到。
+ *       如果你只希望一个类的静态代码块执行，其他代码一律不执行
+ *       你可以使用：
+ *                Class.forName("完整类名");
+ *       这个方法的执行会导致类加载，类加载时，静态代码块执行。
+ *       所以，我们在第一步注册驱动的时候还有一种写法：即Class.forName("完整类名"); 这种方法也是我们用来注册数据库的常用方法
  */
 public class C3_类加载的方式注册驱动 {
     public static void main(String[] args) {

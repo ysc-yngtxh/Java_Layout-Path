@@ -9,13 +9,14 @@ import java.io.FileWriter;
 import java.io.IOException;  
   
 public class CsvResultHandler implements ResultHandler<Student> {
+    // CSV文件的写入器
     private BufferedWriter writer;  
   
     public CsvResultHandler(String fileName) {  
         try {  
             writer = new BufferedWriter(new FileWriter(fileName));  
             // 写入CSV文件头  
-            writer.write("ID, Name, Age, Email\n");
+            writer.write("Id, Name, Age, Email\n");
         } catch (IOException e) {  
             throw new RuntimeException("Could not create file writer", e);  
         }  

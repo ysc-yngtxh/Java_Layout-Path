@@ -5,20 +5,20 @@ import java.util.Scanner;
  * @author 游家纨绔
  */
 /*
-1、对比一下Statement和preparedStatement?
-    -- Statement 存在SQL注入问题，preparedStatement 解决了SQL注入问题
-    -- Statement 是编译一次执行一次。preparedStatement是编译一次，可执行N次。preparedStatement效率较高一些
-    -- preparedStatement 会在编译阶段做类型的安全检查
-
-    综上所述：preparedStatement使用较多。只有极少数的情况下需要使用Statement
-
-2、什么情况下必须使用Statement呢？
-    业务方面要求必须支持sql注入的时候。
-    Statement支持SQL注入，凡是业务方面要求是需要进行SQL语句拼接的，必须使用Statement
-
-    看一下代码程序，可以发现要进行拼接字符串到SQL语句中，而preparedStatement却无法做到，
-    因为传值过程中会自动加上单引号，但是加上了单引号又不符合SQL语法。
-    所以这个时候就需要使用到Statement…
+ * 1、对比一下Statement和preparedStatement?
+ *     -- Statement 存在SQL注入问题，preparedStatement 解决了SQL注入问题
+ *     -- Statement 是编译一次执行一次。preparedStatement是编译一次，可执行N次。preparedStatement效率较高一些
+ *     -- preparedStatement 会在编译阶段做类型的安全检查
+ *
+ *     综上所述：preparedStatement使用较多。只有极少数的情况下需要使用Statement
+ *
+ * 2、什么情况下必须使用Statement呢？
+ *     业务方面要求必须支持sql注入的时候。
+ *     Statement支持SQL注入，凡是业务方面要求是需要进行SQL语句拼接的，必须使用Statement
+ *
+ *     看一下代码程序，可以发现要进行拼接字符串到SQL语句中，而preparedStatement却无法做到，
+ *     因为传值过程中会自动加上单引号，但是加上了单引号又不符合SQL语法。
+ *     所以这个时候就需要使用到Statement…
  */
 public class G7_对比PreparedStatement和Statement {
     public static void main(String[] args) {
