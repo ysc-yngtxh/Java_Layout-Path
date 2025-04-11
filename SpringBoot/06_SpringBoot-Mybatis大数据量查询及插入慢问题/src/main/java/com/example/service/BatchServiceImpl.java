@@ -28,8 +28,8 @@ public class BatchServiceImpl implements BatchService {
     public void insertForeach(List<Student> list) {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
-        // foreach 遇到数量大，性能瓶颈。表的列数较多（超过20），建议遍历100个就ok了，不要太高。
-        List<List<Student>> partition = Lists.partition(list, 100);
+        // foreach 遇到数量大，性能会遭遇瓶颈。建议：表的列数不超过20，遍历次数不超过100个。
+        List<List<Student>> partition = Lists.partition(list, 100); // 按每份100个元素分割
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             BatchMapper batchMapper = sqlSession.getMapper(BatchMapper.class);
             // 使用并行流的方式循环执行，且使用了forEachOrdered，表示并行流是顺序执行

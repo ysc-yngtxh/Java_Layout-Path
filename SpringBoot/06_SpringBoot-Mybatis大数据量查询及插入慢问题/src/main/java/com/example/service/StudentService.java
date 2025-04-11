@@ -6,13 +6,11 @@ import java.util.Map;
 
 public interface StudentService {
 
-    Map<String, Student> queryStudentByIdMap(Integer id);
+    Map<String, Object> queryByIdBackMap(Integer id);
 
-    Map<String, Student> queryStudentByIdStudent(Integer id);
+    Map<String, Student> queryByPrimaryKeyMap(Integer id);
 
-    void streamingQuery1();
+    Student queryByIdBackStudent(Integer id);
 
-    void streamingQuery2();
-
-    void selectStudent();
+    Map<String, Student> queryByPrimaryKeyStudent(Integer id);
 }

@@ -11,10 +11,10 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableAsync
 @SpringBootApplication
 @MapperScan(basePackages = "com.example.mapper")
-public class CursorApplication {
+public class BatchCursorApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CursorApplication.class, args);
+        SpringApplication.run(BatchCursorApplication.class, args);
     }
 
     /** 在有的公司里，是不允许java包下出现配置文件的(.xml)。
