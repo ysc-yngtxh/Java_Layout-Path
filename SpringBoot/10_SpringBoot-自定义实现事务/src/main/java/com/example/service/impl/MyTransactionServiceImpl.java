@@ -23,17 +23,22 @@ public class MyTransactionServiceImpl implements MyTransactionService {
 
     // 一个事务中执行两个sql插入
     @Override
-    @CustomTransaction(rollbackFor = NullPointerException.class)
+    @CustomTransaction(rollbackFor = ArithmeticException.class)
     public void saveTest(String name) {
         saveWithParameters(name, "luozhou@gmail.com");
         saveWithParameters(name+"-cym", "luozhou@gmail.com");
+
+        // 这里模拟发生算术异常（结果发生异常，数据进行回滚）
         int str = 10 / 0;
+
+        // TODO 尝试：将自定义事务注解的异常类型改为 NullPointerException，可以观察到事务失败但数据还是插入正常。
+        //      原因：在自定义事务注解中，指定的异常类型是 NullPointerException，并非为算术异常类或子类，所以不会进行回滚。
     }
 
     // 执行sql
     @SneakyThrows
     private void saveWithParameters(String name, String email) {
-        String sql = "insert into student(name,email) values(?, ?)";
+        String sql = "insert into db_student(`name`,`email`) values(?, ?)";
         Connection connection = holder.getConnection();
 
         PreparedStatement stmt = connection.prepareStatement(sql);

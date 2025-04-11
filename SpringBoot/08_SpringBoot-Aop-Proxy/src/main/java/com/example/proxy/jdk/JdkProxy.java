@@ -12,12 +12,12 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
-public class JDKProxy implements InvocationHandler {
+public class JdkProxy implements InvocationHandler {
 
     private Object target;
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        return null;
+        return method.invoke(target, args);
     }
 }

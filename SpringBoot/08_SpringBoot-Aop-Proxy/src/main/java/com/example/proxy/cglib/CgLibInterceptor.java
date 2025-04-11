@@ -13,7 +13,7 @@ import org.springframework.cglib.proxy.MethodProxy;
  */
 @Data
 @AllArgsConstructor
-public class CglibInterceptor implements MethodInterceptor {
+public class CgLibInterceptor implements MethodInterceptor {
 
     private Object target;
 

@@ -8,6 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class MyThreadLocal {
     private final ConcurrentHashMap<Thread, Object> valueMap = new ConcurrentHashMap<>();
+
     public void set(Object newValue) {
         valueMap.put(Thread.currentThread(), newValue);
     }

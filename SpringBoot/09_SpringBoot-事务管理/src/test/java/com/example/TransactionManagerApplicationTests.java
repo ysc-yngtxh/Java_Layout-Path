@@ -19,9 +19,8 @@ class TransactionManagerApplicationTests {
         // update： 用于执行INSERT、UPDATE、DELETE等DML语句。
         // query：  用于DQL数据查询语句。
         jdbcTemplate.execute(
-                "INSERT INTO `user` " +
-                        "(`username`, `birthday`, `sex`, `address`) " +
-                        "VALUES ('剑来', '2024-05-27 11:44:00', '女', '西安雁塔');"
+                "INSERT INTO `db_student`(`name`, `email`, `age`) " +
+                    "VALUES ('剑来', 'abcdefg.163.com', '28');"
         );
         throw new NullPointerException("耶耶耶！不好意思，洒家报错了～");
     }

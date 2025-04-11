@@ -19,7 +19,7 @@ public class AspectAop {
 
     // 切面方法
     @Before("execution(* com.example.service.impl.ContainInterfaceServiceImpl.definition(..))")
-    public void beforeAdvice(JoinPoint jp){
+    public void beforeAdvice(JoinPoint jp) {
         System.out.println("进入切面 " + jp.getSignature().getName() + "()");
     }
 

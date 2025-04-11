@@ -46,7 +46,7 @@ public class DataSourceManagerConfig {
         // 只有在 SpringBoot 框架中才存在 DataSourceBuilder 这个类，单独的 Spring 框架是没有的。
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.cj.jdbc.Driver")
-                .url("jdbc:mysql://127.0.0.1:3306/springdb?useUnicode=true&characterEncoding=utf-8")
+                .url("jdbc:mysql://127.0.0.1:3306/springboot?useUnicode=true&characterEncoding=utf-8")
                 .username("root")
                 .password("131474")
                 // 可以通过 type 配置相应的类或属性来指定连接池的实现，例如HikariCP、Tomcat JDBC Pool、Apache DBCP等。

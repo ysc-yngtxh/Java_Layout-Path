@@ -10,9 +10,10 @@ import org.springframework.cglib.proxy.Enhancer;
  */
 public class TestExecutor2 {
 
+    // 这里执行的是静态main()方法，没有注入Spring容器中，切面逻辑不会生效
     public static void main(String[] args) {
         DirectServiceImpl directService = new DirectServiceImpl();
-        CglibInterceptor cglibInterceptor = new CglibInterceptor(directService);
+        CgLibInterceptor cglibInterceptor = new CgLibInterceptor(directService);
 
         Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(directService.getClass());

@@ -27,6 +27,7 @@ public class A_ThreadLocal {
      */
 
     private static final ThreadLocal<User> THREAD_LOCAL = new ThreadLocal<>();
+
     private static void setAndPrintData(User user) {
         THREAD_LOCAL.set(user);
         System.out.println("set数据，线程名：" + Thread.currentThread().getName());

@@ -11,16 +11,17 @@ import java.lang.reflect.Proxy;
  */
 public class TestExecutor1 {
 
+    // 这里执行的是静态main()方法，没有注入Spring容器中，切面逻辑不会生效
     public static void main(String[] args) {
         ContainInterfaceService containInterfaceService = new ContainInterfaceServiceImpl();
-        JDKProxy jdkProxy = new JDKProxy(containInterfaceService);
+        JdkProxy jdkProxy = new JdkProxy(containInterfaceService);
 
         ContainInterfaceService instance = (ContainInterfaceService) Proxy.newProxyInstance(
                 containInterfaceService.getClass().getClassLoader(),
                 containInterfaceService.getClass().getInterfaces(),
                 jdkProxy
         );
-        instance.definition();
+        System.out.println("Jdk动态代理的执行结果：" + instance.definition());
 
         System.out.println(instance.getClass().getName());
     }

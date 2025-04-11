@@ -57,8 +57,9 @@ public class MyTransactionAopHandler {
      * 异常处理，捕获的异常是目标异常或者其子类，就进行回滚，否则就提交事务。
      */
     private void completeTransactionAfterThrowing(Throwable throwable) {
-        if (exception != null && exception.length > 0) {
+        if (exception != null) {
             for (Class<? extends Throwable> e : exception) {
+                // isAssignableFrom是用来判断子类和父类的关系的，或者接口的实现类和接口的关系的
                 if (e.isAssignableFrom(throwable.getClass())) {
                     doRollBack();
                 }

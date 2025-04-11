@@ -7,6 +7,7 @@ public final class ScopeKey<T> {
 
     // 初始化器，参考 ThreadLocal 的 withInitial()
     private final Supplier<T> initializer;
+
 	public Supplier<T> initializer() {
 		return this.initializer;
 	}
