@@ -27,7 +27,7 @@ public class CsvResultHandler implements ResultHandler<Student> {
         Student student = resultContext.getResultObject();
         try {  
             // 将用户数据写入CSV文件  
-            writer.write(String.format("%d,%s,%d,%s\n", student.getId(), student.getName(), student.getAge(), student.getEmail()));
+            writer.write(String.format("%d, %s, %d, %s\n", student.getId(), student.getName(), student.getAge(), student.getEmail()));
         } catch (IOException e) {  
             throw new RuntimeException("Could not write to file", e);  
         }  

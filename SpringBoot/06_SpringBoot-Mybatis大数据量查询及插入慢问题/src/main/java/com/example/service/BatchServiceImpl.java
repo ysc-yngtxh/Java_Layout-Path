@@ -49,8 +49,9 @@ public class BatchServiceImpl implements BatchService {
         // 3、这个缓冲区是有大小限制的，当达到一定阈值或者所有 SQL语句都已被缓存时，需要手动进行提交操作，
         //    将缓存的 SQL语句和参数一起发送到数据库执行。
         //    这个过程是通过 JDBC 的 addBatch() 方法实现的，它允许将多个 SQL 语句添加到一个批次中。
-        // 4、相比之下，JDBC的批量插入操作更加原生和高效。使用JDBC的 addBatch() 方法可以将多个SQL语句添加到批处理中，
+        // 4、相比使用Mybatis的批处理，JDBC的批量插入操作更加原生和高效。使用JDBC的 addBatch() 方法可以将多个SQL语句添加到批处理中，
         //    然后使用 executeBatch() 方法一次性执行这些SQL语句。
+        //    建议每批次处理 1000-5000 条（根据数据大小调整），避免内存和性能问题。
         //    这种方式没有额外的框架层级的开销。因此，如果对于批量插入操作的性能要求较高，使用JDBC的批量插入方式可能更为适合。
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();

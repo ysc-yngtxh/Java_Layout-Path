@@ -39,11 +39,12 @@ public class BatchController {
         batchService.insertForeach(list);
     }
 
+
     // 使用Mybatis的批处理方式，且分批次的进行批处理。相当于：(1W/1000)次连接 + (1W/1000)次IO操作
     @RequestMapping("/batch") // 313ms
     public @ResponseBody void batch() {
         List<Student> list = new ArrayList<>();
-        for (int i = 1; i < 10000; i++) {
+        for (int i = 1; i < 100000; i++) {
             list.add(Student.builder().name("大灰狼"+i).email(i+"@163.com").age(i).build());
         }
         List<List<Student>> partition = Lists.partition(list, 1000);
@@ -51,11 +52,12 @@ public class BatchController {
         partition.parallelStream().forEach(batchService::batchInsert);
     }
 
+
     // 使用Mybatis的批处理方式，且分批次的进行批处理，并且还多值插入。相当于：(1W/1000)次连接 + (1W/1000)次IO操作
     @RequestMapping("/batchForeach") // 2.83s
     public @ResponseBody void batchForeach() {
         List<Student> list = new ArrayList<>();
-        for (int i = 1; i < 10000; i++) {
+        for (int i = 1; i < 100000; i++) {
             list.add(Student.builder().name("大灰狼"+i).email(i+"@163.com").age(i).build());
         }
         // XML解析foreach 遇到数量大，性能瓶颈。表的列数较多（超过20），建议遍历100个就ok了，不要太高。

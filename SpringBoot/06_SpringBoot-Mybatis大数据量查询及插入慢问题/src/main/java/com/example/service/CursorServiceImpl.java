@@ -33,7 +33,7 @@ public class CursorServiceImpl implements CursorService {
 			count++;
 		}
 
-		System.out.println(count);
+		System.out.println("数据量：" + count);
 	}
 
 	@Override
