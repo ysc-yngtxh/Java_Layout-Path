@@ -11,7 +11,7 @@ public class MyServiceImpl implements MyService {
     // TODO 使用构造方法注入
     private final StudentMapper studentMapper;
 
-    public MyServiceImpl(StudentMapper studentMapper){
+    public MyServiceImpl(StudentMapper studentMapper) {
         this.studentMapper = studentMapper;
     }
 
@@ -21,7 +21,7 @@ public class MyServiceImpl implements MyService {
         return i;
     }
 
-    public Student query(Integer id){
+    public Student query(Integer id) {
         return studentMapper.selectByPrimaryKey(id);
     }
 }

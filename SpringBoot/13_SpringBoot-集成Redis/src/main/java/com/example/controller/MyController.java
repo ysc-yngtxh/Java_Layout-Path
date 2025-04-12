@@ -16,15 +16,13 @@ public class MyController {
     private StudentService studentService;
 
     @RequestMapping(value="/put")
-    public @ResponseBody Object query(String key, String value){
-
+    public @ResponseBody Object query(String key, String value) {
         studentService.put(key, value);
         return "值已成功放入redis";
     }
 
     @RequestMapping(value="/get")
-    public @ResponseBody Object query1(String key, String value){
-
+    public @ResponseBody Object query1(String key, String value) {
         String count = studentService.get("count");
         return "数据count为：" + count;
     }
