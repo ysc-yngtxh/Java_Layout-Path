@@ -81,7 +81,7 @@ class ESHighLevelTests {
 
     // 测试删除索引
     @Test
-    void testDeleteIndex() throws IOException{
+    void testDeleteIndex() throws IOException {
         DeleteIndexRequest request = new DeleteIndexRequest("ysc");
         AcknowledgedResponse delete = hlClient.indices().delete(request, RequestOptions.DEFAULT);
         System.out.println(delete.isAcknowledged());

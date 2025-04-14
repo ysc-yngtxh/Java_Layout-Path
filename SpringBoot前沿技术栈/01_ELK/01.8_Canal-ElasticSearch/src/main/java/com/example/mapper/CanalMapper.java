@@ -9,6 +9,4 @@ import tk.mybatis.mapper.common.Mapper;
  * @author makejava
  * @since 2022-03-05 11:30:31
  */
-public interface CanalMapper extends Mapper<CanalPO> {
-
-}
+public interface CanalMapper extends Mapper<CanalPO> {}

@@ -1,28 +1,27 @@
 
-#å¯åŠ¨ç«¯å£è®¾ç½®
+# Æô¶¯¶Ë¿ÚÉèÖÃ
 server:
+  port: 8080
   servlet:
-    port: 8080
-    context:
-      path: /
-  application:
-    name: ${project.artifactId}
+    context-path: /
 
-#mybatisé…ç½®
+# ÅäÖÃÈÕÖ¾£¬¿É·½±ãmybatis²éÑ¯Êı¾İµÄĞÅÏ¢ÈÕÖ¾
 logging:
   level:
     com:
       example:
-        mapper: debug  #mybatisæŸ¥è¯¢æ•°æ®çš„ä¿¡æ¯æ—¥å¿—
+        mapper: debug
 
-#jdbcé…ç½®
+# jdbcÅäÖÃ
 spring:
+  application:
+    name: ${project.artifactId}
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC
     username: root
     password: 131474
-  data:     # Elasticsearch\u914D\u7F6E
+  data:     # ElasticsearchÅäÖÃ
     elasticsearch:
       repositories:
         enabled: true
@@ -30,9 +29,7 @@ spring:
     rest:
       uris: localhost:9200
       connection-timeout: 5000
-  devtools:   #javaçƒ­éƒ¨ç½²
+  devtools:   # javaÈÈ²¿Êğ
     restart:
       enabled: true
-      additional-paths: src/test/java     #çƒ­éƒ¨ç½²è·¯å¾„
-      #classpath\u76EE\u5F55\u4E0B\u7684WEB-INF\u6587\u4EF6\u5939\u5185\u5BB9\u4FEE\u6539\u4E0D\u91CD\u542F
-      #exclude: WEB-INF/**
+      additional-paths: src/test/java     # ÈÈ²¿ÊğÂ·¾¶

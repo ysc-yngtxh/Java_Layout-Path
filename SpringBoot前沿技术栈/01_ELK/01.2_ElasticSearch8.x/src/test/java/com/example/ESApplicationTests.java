@@ -84,7 +84,7 @@ public class ESApplicationTests {
     /**
      * Elasticsearch Java API Client 是 Elasticsearch 的官方 Java API，
      * 这个客户端为所有 Elasticsearch APIs 提供强类型的请求和响应。
-     * <p>
+     *
      * 这里跟大家解释下什么是强类型的请求和响应：
      * 因为所有的 Elasticsearch APIs 本质上都是一个 RESTFul 风格的 HTTP 请求，所以当我们调用这些 Elasticsearch APIs 的时候，
      * 可以就当成普通的 HTTP 接口来对待，例如使用 HttpUrlConnection 或者 RestTemplate 等工具来直接调用，如果使用这些工具直接调用，

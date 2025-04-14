@@ -4,13 +4,13 @@ LogStash
 
 启动命令：
 1、logstash -e 'input { stdin {} } output { stdout {} }'
-   -e：表示 “executor”，执行
-   input { stdin {} }：从标准输入（键盘）读取数据。
-   output { stdout {} }：将数据输出到标准输出（控制台）。
+   -e                    表示 “executor”，执行
+   input { stdin {} }    从标准输入（键盘）读取数据。
+   output { stdout {} }  将数据输出到标准输出（控制台）。
 2、logstash -e 'input { generator { count => 1 message => "哈啰" } } output { stdout {} }'
-   generator：生成器，生成数据。
-   count：生成数据的次数。
-   message：生成的数据。
+   generator  生成器，生成数据。
+   count      生成数据的次数。
+   message    生成的数据。
 3、logstash -f ./logstash.conf
    -f：指定配置文件。
    logstash.conf：需要自己提供的配置文件，指定输入、过滤、输出。

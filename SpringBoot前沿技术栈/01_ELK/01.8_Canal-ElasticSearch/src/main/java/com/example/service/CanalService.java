@@ -19,24 +19,24 @@ public class CanalService {
     @Autowired
     private CanalMapper canalMapper;
 
-   public CanalPO query(Integer id){
+   public CanalPO query(Integer id) {
        return canalMapper.selectByPrimaryKey(id);
    }
 
-   public List<CanalPO> queryList(){
+   public List<CanalPO> queryList() {
        return canalMapper.selectAll();
    }
 
-   public int save(CanalPO testysc){
+   public int save(CanalPO testysc) {
        return canalMapper.insert(testysc);
    }
 
-   public int update(CanalPO testysc){
+   public int update(CanalPO testysc) {
        int i = canalMapper.updateByPrimaryKey(testysc);
        return i;
    }
 
-    public boolean remove(Integer id){
+    public boolean remove(Integer id) {
         int i = canalMapper.deleteByPrimaryKey(id);
         return String.valueOf(i).isEmpty();
     }
