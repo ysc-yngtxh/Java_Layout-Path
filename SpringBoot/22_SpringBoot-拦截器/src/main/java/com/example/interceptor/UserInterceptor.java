@@ -33,8 +33,7 @@ public class UserInterceptor implements HandlerInterceptor {
             System.out.println("拦截的uri："+uri);
         }
 
-        // 编写业务拦截的规则
-        // 从session中获取用户的信息
+        // 编写业务拦截的规则，从session中获取用户的信息
         User user = (User) request.getSession().getAttribute("user");
 
         // 判断用户是否登录
@@ -48,12 +47,8 @@ public class UserInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-
-    }
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {}
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-
-    }
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {}
 }

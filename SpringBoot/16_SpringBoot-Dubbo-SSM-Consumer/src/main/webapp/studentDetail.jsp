@@ -11,8 +11,8 @@
     <title>学生详情</title>
 </head>
 <body>
-         <h3>学生编号：${student.id}</h3>
-         <h3>学生姓名：${student.name}</h3>
-         <h3>学生年龄：${student.age}</h3>
+    <h3>学生编号：${student.id}</h3>
+    <h3>学生姓名：${student.name}</h3>
+    <h3>学生年龄：${student.age}</h3>
 </body>
 </html>

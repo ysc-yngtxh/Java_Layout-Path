@@ -57,7 +57,7 @@
     <build>
         <!--
             SpringBoot项目默认推荐使用的前端引擎是thymeleaf
-            现在我们要使用SpringBoot集成jsp,手动指定jsp最后编译的路径
+            现在我们要使用SpringBoot集成jsp，手动指定jsp最后编译的路径
             而且SpringBoot集成jsp编译jsp的路径是SpringBoot规定好的位置 META-INF/resources
         -->
         <resources>

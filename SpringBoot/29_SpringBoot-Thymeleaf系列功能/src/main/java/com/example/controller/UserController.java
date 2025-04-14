@@ -15,8 +15,7 @@ public class UserController {
 
     // 条件判断
     @RequestMapping("/condition")
-    public String query(Model model){
-
+    public String query(Model model) {
         model.addAttribute("sex",1);
         model.addAttribute("flag",true);
         model.addAttribute("productType",0);
@@ -25,16 +24,14 @@ public class UserController {
 
     // 内敛表达式
     @RequestMapping("/inline")
-    public String query1(Model model){
-
+    public String query1(Model model) {
         model.addAttribute("data", "SpringBoot inline");
         return "inline";
     }
 
     // 字符串拼接
     @RequestMapping("/splice")
-    public String query2(Model model){
-
+    public String query2(Model model) {
         model.addAttribute("totalRows", 120);
         model.addAttribute("totalPage", 12);
         model.addAttribute("currentPage", 1);
@@ -43,8 +40,7 @@ public class UserController {
 
     // 基本表达式对象
     @RequestMapping("/tindex")
-    public String query3(HttpServletRequest request,Model model){
-
+    public String query3(HttpServletRequest request,Model model) {
         model.addAttribute("username", "lisi");
         request.getSession().setAttribute("data", "sessionData");
         return "tindex";
@@ -52,7 +48,7 @@ public class UserController {
 
     // 功能表达式对象
     @RequestMapping("/values")
-    public String query4(Model model){
+    public String query4(Model model) {
         model.addAttribute("time", new Date());
         model.addAttribute("data", "SpringBoot Hello World");
         return "values";

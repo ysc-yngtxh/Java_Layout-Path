@@ -15,20 +15,21 @@ import javax.persistence.Table;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tb_consumer")
+@Table(name = "db_user")
 public class User {
 
     @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;
-    private String username; // 用户名
-    private String password; // 密码，加密存储
-    private String alias;
-    private Integer age;
-    private String sex;
-    private String phone;
-    private String address;
-    @Column(name = "delete_flag")
-    private boolean deleteFlag;
 
+    private String username;    // 用户名
+    private String password;    // 密码
+    private String alias;       // 姓名
+    private Integer age;        // 年龄
+    private Integer sex;        // 性别（0为女性，1为男性）
+    private String phone;       // 手机号
+    private String address;     // 地址
+
+    @Column(name = "delete_flag")
+    private boolean deleteFlag; // 删除标记（0:存在；1:注销）
 }

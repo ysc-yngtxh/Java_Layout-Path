@@ -51,7 +51,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>32.0.1-android</version>
+            <version>33.4.7-jre</version>
         </dependency>
         <!--jwt依赖-->
         <dependency>

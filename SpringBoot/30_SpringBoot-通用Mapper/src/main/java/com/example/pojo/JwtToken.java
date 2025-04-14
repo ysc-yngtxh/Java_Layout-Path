@@ -21,19 +21,19 @@ public class JwtToken {
     // 返回数据
     private Object obj;
 
-    public JwtToken success(String message){
+    public JwtToken success(String message) {
         return new JwtToken(200, message, null);
     }
 
-    public JwtToken success(String message, Object obj){
+    public JwtToken success(String message, Object obj) {
         return new JwtToken(200, message, obj);
     }
 
-    public JwtToken error(String message){
+    public JwtToken error(String message) {
         return new JwtToken(403, message, null);
     }
 
-    public JwtToken error(String message, Object obj){
+    public JwtToken error(String message, Object obj) {
         return new JwtToken(500, message, obj);
     }
 }

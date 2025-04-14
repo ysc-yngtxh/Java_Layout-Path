@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.entity.TbConsumer;
+import com.example.entity.User;
 import com.example.service.ConsumerService;
 import com.example.utils.JwtUtils;
 import com.example.vo.PageVo;
@@ -14,14 +14,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * (TbConsumer)表控制层
+ * (User)表控制层
  *
  * @author makejava
  * @since 2023-07-09 09:17:24
  */
 @RestController
 @RequestMapping("/user")
-public class ConsumerController {
+public class UserController {
     /**
      * 服务对象
      */
@@ -42,13 +42,12 @@ public class ConsumerController {
 
     @GetMapping("/selectPage")
     public ResponseEntity<?> queryPage(@RequestParam Integer page, @RequestParam Integer size) {
-        List<TbConsumer> tbConsumerListPage = consumerService.queryPage(page, size);
-        if (CollectionUtils.isEmpty(tbConsumerListPage)) {
+        List<User> userListPage = consumerService.queryPage(page, size);
+        if (CollectionUtils.isEmpty(userListPage)) {
             return ResponseEntity.ok(ResponseVo.fail(400, "输入页数超过拥有数据分页页数"));
         }
         Integer countAll = consumerService.countAll();
-        PageVo info = PageVo.info(tbConsumerListPage, countAll);
+        PageVo info = PageVo.info(userListPage, countAll);
         return ResponseEntity.ok(ResponseVo.success(200, info, "分页数据返回成功"));
     }
 }
-

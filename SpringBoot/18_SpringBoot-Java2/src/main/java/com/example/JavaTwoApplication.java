@@ -20,7 +20,7 @@ public class JavaTwoApplication implements CommandLineRunner {
         SpringApplication.run(JavaTwoApplication.class, args);
     }
 
-    // 重写CommandLineRunner类中的run方法
+    // 重写 CommandLineRunner 类中的run方法
     @Override
     public void run(String... args) throws Exception {
 
@@ -30,9 +30,8 @@ public class JavaTwoApplication implements CommandLineRunner {
         System.out.println(sayHello);
     }
 
-    /*
-      这里来说明一下，为什么SpringBoot框架Java工程写法模式里第一种方法不需要注入引用，而第二种方法却需要？
-        因为第一种是在main方法里执行，main方法是一个静态方法，但是你用注解@Autowired的引用注入不是一个静态对象，
-        所以第一种方法不加注解注入的。而且，你在第一种方法里可以从spring容器里获取bean对象。
-    */
+    /* 这里来说明一下，为什么SpringBoot框架Java工程写法模式里第一种方法不需要注入引用，而第二种方法却需要？
+     *   因为第一种是在main方法里执行，main方法是一个静态方法，但是你用注解@Autowired的引用注入不是一个静态对象，
+     *   所以第一种方法不加注解注入的。而且，你在第一种方法里可以从spring容器里获取bean对象。
+     */
 }

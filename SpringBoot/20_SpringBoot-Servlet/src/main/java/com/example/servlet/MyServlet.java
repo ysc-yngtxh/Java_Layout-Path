@@ -13,7 +13,7 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/myServlet")   // Servlet注解
 public class MyServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.getWriter().println("My Springboot Servlet-1");
         resp.getWriter().flush();
         resp.getWriter().close();

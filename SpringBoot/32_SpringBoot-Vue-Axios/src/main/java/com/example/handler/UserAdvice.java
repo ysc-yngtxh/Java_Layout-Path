@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class UserAdvice {
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ResponseVo> returnData(){
+    public ResponseEntity<ResponseVo<?>> returnData() {
         return ResponseEntity.ok(ResponseVo.fail(401, "用户验证失败，请重新登录"));
     }
 }

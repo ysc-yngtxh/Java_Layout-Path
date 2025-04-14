@@ -26,6 +26,8 @@ public class MyController {
         return "school.name=" + school.getName() + "-----school.webSit=" + school.getWebSit();
     }
 
+    // TODO 返回视图是Jsp文件
+    //      ⚠️：使用Jsp文件：1、需要配置视图解析器 2、需要在Pom文件中提供编译Jsp文件的配置
     @RequestMapping(value="/solo")
     public ModelAndView solo() {
         ModelAndView mv = new ModelAndView();

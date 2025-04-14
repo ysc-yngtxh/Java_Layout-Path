@@ -18,13 +18,13 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/user/{id}")
-    public JwtToken register(@PathVariable("id") Integer id){
+    public JwtToken register(@PathVariable("id") Integer id) {
         User user = userService.queryById(id);
         return new JwtToken().success("我能得到返回数据吗？", user);
     }
 
     @RequestMapping("/login/{id}")
-    public User query(@PathVariable("id") Integer id){
+    public User query(@PathVariable("id") Integer id) {
         User user = userService.queryById(id);
         return user;
     }

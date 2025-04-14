@@ -23,7 +23,7 @@ public class MyController {
     }
 
     @RequestMapping("/user/detail")
-    public String userDetail1(Model model){
+    public String userDetail1(Model model) {
         User user = new User();
         user.setId(11);
         user.setUsername("曹玉敏");
@@ -33,18 +33,18 @@ public class MyController {
     }
 
     @RequestMapping("/url")
-    public String userDetail2(Model model, String username){
+    public String userDetail2(Model model, String username) {
         model.addAttribute("id", 11);
         return "url";
     }
 
     @RequestMapping("/test")
-    public @ResponseBody String userDetail3(Model model, String username){
+    public @ResponseBody String userDetail3(Model model, String username) {
         return "请求路径/test,参数username:" + username;
     }
 
     @RequestMapping("/text/{id}")
-    public @ResponseBody String userDetail3(@PathVariable("id") Integer id){
+    public @ResponseBody String userDetail3(@PathVariable("id") Integer id) {
         return "ID=" + id;
     }
 }

@@ -13,10 +13,9 @@ import lombok.Data;
 public class PageVo {
 
     private Object data;
-
     private Integer total;
 
-    public static PageVo info(Object data, Integer total){
+    public static PageVo info(Object data, Integer total) {
         return new PageVo(data, total);
     }
 }

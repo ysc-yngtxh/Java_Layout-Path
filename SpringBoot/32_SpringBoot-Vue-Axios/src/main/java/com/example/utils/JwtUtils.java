@@ -18,7 +18,7 @@ public class JwtUtils {
     /**
      * 生成Token
      */
-    public static String getJwtsToken(String username,String password){
+    public static String getJwtsToken(String username,String password) {
         JwtBuilder jwtBuilder = Jwts.builder();
         String jwtToken = jwtBuilder
                 // Header
@@ -38,7 +38,7 @@ public class JwtUtils {
     /**
      * 判断token是否过期
      */
-    public static boolean isExpire(String token){
+    public static boolean isExpire(String token) {
         JwtParser jwtParser = Jwts.parser();
         Jws<Claims> claimsJws = jwtParser.setSigningKey(salt).parseClaimsJws(token);
         Date expiration = claimsJws.getBody().getExpiration();
@@ -80,7 +80,7 @@ public class JwtUtils {
     /**
      * 校验Token
      */
-    public static boolean verifyToken(String token,String pwd){
+    public static boolean verifyToken(String token,String pwd) {
         try {
             JwtParser jwtParser = Jwts.parser();
             Jws<Claims> claimsJws = jwtParser.setSigningKey(salt).parseClaimsJws(token);

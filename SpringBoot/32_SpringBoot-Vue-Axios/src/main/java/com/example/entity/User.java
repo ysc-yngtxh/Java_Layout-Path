@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * (TbConsumer)实体类
+ * (User)实体类
  *
  * @author 游家纨绔
  * @since 2023-07-10 23:54:41
@@ -18,8 +18,8 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("tb_consumer")
-public class TbConsumer implements Serializable {
+@TableName("db_user")
+public class User implements Serializable {
     private static final long serialVersionUID = -25637857384418168L;
 
     /**
@@ -76,4 +76,3 @@ public class TbConsumer implements Serializable {
      */
     private Date updatedDate;
 }
-

@@ -17,7 +17,7 @@ public class StudentController {
     private StudentService studentService;
 
     @RequestMapping("/student/count")
-    public @ResponseBody String studentCount(){
+    public @ResponseBody String studentCount() {
 
         /* log方法级别从低到高 */
         log.trace("查询当前学生总人数");

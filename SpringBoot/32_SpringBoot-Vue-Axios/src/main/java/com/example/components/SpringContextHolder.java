@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Lazy(false)
 public class SpringContextHolder implements ApplicationContextAware {
+
     private static ApplicationContext APPLICATION_CONTEXT;
 
     @Override
@@ -18,5 +19,4 @@ public class SpringContextHolder implements ApplicationContextAware {
     public static ApplicationContext getApplicationContext() {
         return APPLICATION_CONTEXT;
     }
-
 }

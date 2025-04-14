@@ -18,7 +18,7 @@ public class UserController {
 
     // 循环遍历list集合
     @RequestMapping("/user")
-    public String each(Model model){
+    public String each(Model model) {
         List<User> list =new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             User user= new User();
@@ -35,7 +35,7 @@ public class UserController {
 
     // 循环遍历Map集合
     @RequestMapping("/each")
-    public String each1(Model model){
+    public String each1(Model model) {
         Map<Integer, Object> map = new HashMap<>();
         for (int i = 0; i < 10; i++) {
             User user= new User();
@@ -52,14 +52,14 @@ public class UserController {
 
     // 循环遍历复杂集合
     @RequestMapping("/each/all")
-    public String each2(Model model){
-        List<Map<Integer, List<User>>> myList =new ArrayList<Map<Integer, List<User>>>();
+    public String each2(Model model) {
+        List<Map<Integer, List<User>>> myList =new ArrayList<>();
 
         for (int i = 0; i < 2; i++) {
             Map<Integer,List<User>> myMap = new HashMap<>();
 
             for (int j = 0; j < 2; j++) {
-                List<User> myUserList = new ArrayList<User>();
+                List<User> myUserList = new ArrayList<>();
 
                 for (int k = 0; k < 3; k++) {
                     User user= new User();

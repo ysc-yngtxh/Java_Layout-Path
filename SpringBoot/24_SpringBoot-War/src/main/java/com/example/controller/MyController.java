@@ -15,7 +15,7 @@ import java.util.Map;
 public class MyController {
 
     @RequestMapping(value = "/user/detail")
-    public @ResponseBody Object userDetail(){
+    public @ResponseBody Object userDetail() {
         Map<String, Object> retMap = new HashMap<>();
         retMap.put("id", 1001);
         retMap.put("username", "lisi");
@@ -23,7 +23,7 @@ public class MyController {
     }
 
     @RequestMapping(value = "/user/page/detail")
-    public String userPageDetail(Model model){
+    public String userPageDetail(Model model) {
         model.addAttribute("id", 1001);
         model.addAttribute("username", "wangwu");
         return "userDetail";

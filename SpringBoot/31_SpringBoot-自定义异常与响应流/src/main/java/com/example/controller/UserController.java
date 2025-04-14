@@ -14,7 +14,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/user")
-public class TestController {
+public class UserController {
 
     @Autowired
     private UserService userService;
@@ -22,28 +22,28 @@ public class TestController {
     @GetMapping("/1/{id}")
     // 标注状态码。即正常访问接口返回的状态码为：302
     @ResponseStatus(value = HttpStatus.FOUND, reason = "参数错误")
-    public ResponseEntity<List<User>> queryUser1(@PathVariable("id") Integer id){
+    public ResponseEntity<List<User>> queryUser1(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(userService.queryUser1(id));
     }
 
     @GetMapping("/2/{id}")
-    public ResponseEntity<User> queryUser2(@PathVariable("id") Integer id){
+    public ResponseEntity<User> queryUser2(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(userService.queryUser2(id));
     }
 
     @GetMapping("/ysc")
-    public ResponseEntity<List<User>> queryUser3(User user){
+    public ResponseEntity<List<User>> queryUser3(User user) {
         return ResponseEntity.ok(userService.queryUser3(user));
     }
 
     @PostMapping
-    public ResponseEntity<String> saveUser1(User user){
+    public ResponseEntity<String> saveUser1(User user) {
         userService.saveUser1(user);
         return ResponseEntity.status(HttpStatus.CREATED).body("不好意思，添加商品失败！");
     }
 
-    @PostMapping("/Enpty")
-    public ResponseEntity<Void> saveUser2(User user){
+    @PostMapping("/empty")
+    public ResponseEntity<Void> saveUser2(User user) {
         userService.saveUser2(user);
         // 因为我们不需要返回值，所以可以不去写body，写上build会更合适
         return ResponseEntity.status(HttpStatus.CREATED).build();

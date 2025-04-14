@@ -5,10 +5,10 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.1</version>
+		<version>2.7.18</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.cn.example</groupId>
+	<groupId>com.example</groupId>
 	<artifactId>30_SpringBoot-Universal-Mapper</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<name>30_SpringBoot-通用Mapper</name>
@@ -25,47 +25,46 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-
 		<!--mysql驱动-->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.28</version>
+			<version>8.0.33</version>
 		</dependency>
 
-		<!--
-		  数据库连接池，之前我们使用的是阿里巴巴的连接池
-		  连接池的作用：比如说一个连接jdbc的线程，当不处理事务时，这个连接就会闲置。连接池允许闲置的连接被其它需要的线程使用。
-		              减少资源的浪费，而且还能减少创建连接的时间，提高连接执行效率。
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
-			<version>2.3.4.RELEASE</version>
-		</dependency>
+		<!-- 数据库连接池，之前我们使用的是阿里巴巴的连接池
+		     连接池的作用：比如说一个连接jdbc的线程，当不处理事务时，这个连接就会闲置。
+		                 连接池允许闲置的连接被其它需要的线程使用。
+		                 减少资源的浪费，而且还能减少创建连接的时间，提高连接执行效率。
+		-->
+		<!--<dependency>-->
+		<!--	<groupId>org.springframework.boot</groupId>-->
+		<!--	<artifactId>spring-boot-starter-jdbc</artifactId>-->
+		<!--	<version>2.3.4.RELEASE</version>-->
+		<!--</dependency>-->
 
-		mybatis集成springboot
-		<dependency>
-			<groupId>org.mybatis.spring.boot</groupId>
-			<artifactId>mybatis-spring-boot-starter</artifactId>
-			<version>2.0.0</version>
-		</dependency>-->
+		<!--mybatis集成springboot-->
+		<!--<dependency>-->
+		<!--	<groupId>org.mybatis.spring.boot</groupId>-->
+		<!--	<artifactId>mybatis-spring-boot-starter</artifactId>-->
+		<!--	<version>2.3.2</version>-->
+		<!--</dependency>-->
 
-		<!--通用mapper-->
+		<!-- 通用mapper
+		     使用通用mapper后就可以删掉数据库连接池和mybatis依赖，因为我们可以在Maven中看到有连接池
+		-->
 		<dependency>
 			<groupId>tk.mybatis</groupId>
 			<artifactId>mapper-spring-boot-starter</artifactId>
-			<version>2.1.5</version>
-			<!--我们使用通用mapper后就可以删掉数据库连接池和mybatis依赖，因为我们可以在Maven中看到有连接池-->
+			<version>4.3.0</version>
 		</dependency>
 
 		<!--Lombok依赖-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.22</version>
+			<version>1.18.36</version>
 		</dependency>
-
-
 	</dependencies>
 
 	<build>

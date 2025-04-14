@@ -18,5 +18,4 @@ public enum UserEnum {
 
     private Integer cord;
     private String msg;
-
 }

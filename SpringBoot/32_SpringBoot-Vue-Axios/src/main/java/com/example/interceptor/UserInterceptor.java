@@ -2,8 +2,8 @@ package com.example.interceptor;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.components.SpringContextHolder;
+import com.example.entity.User;
 import com.example.mapper.ConsumerDao;
-import com.example.entity.TbConsumer;
 import com.example.utils.JwtUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,15 +19,15 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserInterceptor implements HandlerInterceptor {
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String authorization = request.getHeader("X-Token");
         if (StringUtils.hasText(authorization)) {
             // 获取该用户密码
             String username = JwtUtils.getUsername(authorization);
             ConsumerDao consumerDao = (ConsumerDao) SpringContextHolder.getApplicationContext()
                                                                        .getBean("consumerDao");
-            String pwd = consumerDao.selectOne(new LambdaQueryWrapper<TbConsumer>()
-                                               .eq(TbConsumer::getUserName, username)).getPassWord();
+            String pwd = consumerDao.selectOne(new LambdaQueryWrapper<User>()
+                                               .eq(User::getUserName, username)).getPassWord();
             return JwtUtils.verifyToken(authorization, pwd);
         }
         return false;
