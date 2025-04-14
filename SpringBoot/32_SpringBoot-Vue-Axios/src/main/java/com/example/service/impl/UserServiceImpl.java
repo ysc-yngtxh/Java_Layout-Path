@@ -2,8 +2,8 @@ package com.example.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.entity.User;
-import com.example.mapper.ConsumerDao;
-import com.example.service.ConsumerService;
+import com.example.mapper.UserMapper;
+import com.example.service.UserService;
 import com.google.common.collect.Lists;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -18,15 +18,15 @@ import java.util.Objects;
  * @author makejava
  * @since 2023-07-09 09:16:58
  */
-@Service("consumerService")
-public class ConsumerServiceImpl implements ConsumerService {
+@Service("userService")
+public class UserServiceImpl implements UserService {
 
     @Resource
-    private ConsumerDao consumerDao;
+    private UserMapper userMapper;
 
     @Override
     public boolean check(String username, String password) {
-        User user = consumerDao.selectOne(new LambdaQueryWrapper<User>().eq(User::getUserName, username));
+        User user = userMapper.selectOne(new LambdaQueryWrapper<User>().eq(User::getUserName, username));
         if (Objects.nonNull(user)) {
             return user.getPassWord().equals(password);
         }
@@ -35,7 +35,7 @@ public class ConsumerServiceImpl implements ConsumerService {
 
     @Override
     public List<User> queryPage(Integer page, Integer size) {
-        List<User> userList = consumerDao.selectList(null);
+        List<User> userList = userMapper.selectList(null);
         List<List<User>> partition = Lists.partition(userList, size);
         if (partition.size() < page) {
             return Collections.emptyList();
@@ -45,7 +45,7 @@ public class ConsumerServiceImpl implements ConsumerService {
 
     @Override
     public Integer countAll() {
-        Long aLong = consumerDao.selectCount(null);
+        Long aLong = userMapper.selectCount(null);
         return aLong.intValue();
     }
 }

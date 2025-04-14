@@ -17,5 +17,4 @@ public class HandlerAdvice {
         return ResponseEntity.status(e.getUserEnum().getCord())
                 .body(new ExceptionResult(e.getUserEnum()));
     }
-
 }

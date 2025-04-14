@@ -1,5 +1,6 @@
 package com.example.components;
 
+import lombok.NonNull;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Lazy;
@@ -12,7 +13,7 @@ public class SpringContextHolder implements ApplicationContextAware {
     private static ApplicationContext APPLICATION_CONTEXT;
 
     @Override
-    public void setApplicationContext(ApplicationContext applicationContext) {
+    public void setApplicationContext(@NonNull ApplicationContext applicationContext) {
         APPLICATION_CONTEXT = applicationContext;
     }
 

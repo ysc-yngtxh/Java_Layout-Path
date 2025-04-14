@@ -11,7 +11,7 @@ import java.util.List;
  * @author makejava
  * @since 2023-07-09 09:16:49
  */
-public interface ConsumerDao extends BaseMapper<User> {
+public interface UserMapper extends BaseMapper<User> {
 
     /**
      * 批量新增或按主键更新数据（MyBatis原生foreach方法）

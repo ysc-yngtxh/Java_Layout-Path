@@ -3,7 +3,7 @@ package com.example.interceptor;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.components.SpringContextHolder;
 import com.example.entity.User;
-import com.example.mapper.ConsumerDao;
+import com.example.mapper.UserMapper;
 import com.example.utils.JwtUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,9 +24,9 @@ public class UserInterceptor implements HandlerInterceptor {
         if (StringUtils.hasText(authorization)) {
             // 获取该用户密码
             String username = JwtUtils.getUsername(authorization);
-            ConsumerDao consumerDao = (ConsumerDao) SpringContextHolder.getApplicationContext()
-                                                                       .getBean("consumerDao");
-            String pwd = consumerDao.selectOne(new LambdaQueryWrapper<User>()
+            UserMapper userMapper = (UserMapper) SpringContextHolder.getApplicationContext()
+                                                                    .getBean("consumerDao");
+            String pwd = userMapper.selectOne(new LambdaQueryWrapper<User>()
                                                .eq(User::getUserName, username)).getPassWord();
             return JwtUtils.verifyToken(authorization, pwd);
         }

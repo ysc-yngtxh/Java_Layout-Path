@@ -10,7 +10,7 @@ import java.util.List;
  * @author makejava
  * @since 2023-07-09 09:16:57
  */
-public interface ConsumerService {
+public interface UserService {
 
     boolean check(String username, String password);
 
