@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import javax.swing.Spring;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,27 +17,27 @@ public class InMemoryController {
     //      因此默认情况下，Spring Security和其他类似的框架不会对GET请求应用CSRF保护，因为GET请求不应该产生副作用。
     //      相应的，Spring Security 默认对 GET、HEAD、TRACE、OPTIONS 请求不进行 CSRF 保护
     @RequestMapping("/admin")
-    public String UserAdmin(){
+    public String UserAdmin() {
         return "admin";
     }
 
     @PostMapping(value = "/manager")
-    public String UserManager(){
+    public String UserManager() {
         return "manager";
     }
 
     @PostMapping(value = "/button")
-    public String UserButton(){
+    public String UserButton() {
         return "button";
     }
 
     @PostMapping(value = "/xor")
-    public @ResponseBody String UserXor(){
+    public @ResponseBody String UserXor() {
         return "xor";
     }
 
     @PostMapping(value = "/custom")
-    public @ResponseBody String UserCustom(){
+    public @ResponseBody String UserCustom() {
         return "custom";
     }
 }

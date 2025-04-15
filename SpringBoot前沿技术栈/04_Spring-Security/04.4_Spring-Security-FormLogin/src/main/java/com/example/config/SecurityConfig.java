@@ -1,7 +1,6 @@
 package com.example.config;
 
 import com.example.security.services.UserDetailsServiceImpl;
-import javax.swing.Spring;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -63,10 +62,10 @@ public class SecurityConfig {
 
 
     /**
-     * Spring Security的过滤器链(UsernamePasswordAuthenticationFilter=>ExceptionTranslationFilter=>AuthorizationFilter )
-     * 1、UsernamePasswordAuthenticationFilter 负责处理我们在登录页面填写了用户名密码后的登录请求，入门案例的认证工作主要由他负责
-     * 2、ExceptionTranslationFilter 处理过滤器链中抛出的任何AccessDeniedException和AuthenticationException
-     * 3、AuthorizationFilter  负责权限校验的过滤器
+     * Spring Security的过滤器链(UsernamePasswordAuthenticationFilter => ExceptionTranslationFilter => AuthorizationFilter)
+     * 1、UsernamePasswordAuthenticationFilter 负责处理我们在登录页面填写了用户名密码后的登录请求，入门案例的认证工作主要由它负责
+     * 2、ExceptionTranslationFilter 处理过滤器链中抛出的任何 AccessDeniedException 和 AuthenticationException
+     * 3、AuthorizationFilter 负责权限校验的过滤器
      * 
      * 注意：在配置类中引入了 SecurityFilterChain 类型的Bean，就不会显示Spring Security的默认登陆界面了。
      *      如果有使用默认的登陆界面的必要，可以在 securityFilterChain 方法中加上 .and().formLogin() 就可以显示默认。
@@ -178,5 +177,11 @@ public class SecurityConfig {
                 web.ignoring().requestMatchers("/static/**");
             }
         };
+    }
+
+
+    public static void main(String[] args) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        System.out.println(bCryptPasswordEncoder.encode("123456"));
     }
 }

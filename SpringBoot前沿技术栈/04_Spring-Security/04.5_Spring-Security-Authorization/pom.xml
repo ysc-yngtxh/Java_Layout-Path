@@ -33,7 +33,7 @@
 		<dependency>
 			<groupId>com.baomidou</groupId>
 			<artifactId>mybatis-plus-spring-boot3-starter</artifactId>
-			<version>3.5.9</version>
+			<version>3.5.11</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -49,13 +49,13 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>2.0.53</version>
+			<version>2.0.57</version>
 		</dependency>
 		<!--jwt依赖-->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
-			<version>0.9.1</version>
+			<version>0.12.6</version>
 		</dependency>
 		<!--thymeleaf依赖-->
 		<dependency>
@@ -71,7 +71,7 @@
 		<dependency>
 			<groupId>cn.hutool</groupId>
 			<artifactId>hutool-all</artifactId>
-			<version>5.8.21</version>
+			<version>5.8.37</version>
 		</dependency>
 		<dependency>
 			<groupId>io.vavr</groupId>

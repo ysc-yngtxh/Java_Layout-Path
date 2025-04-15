@@ -31,7 +31,7 @@ public class SecurityConfig {
      * 但在实际业务中可能还需要不进行编码的密码编码器，后续官方可能会将过时的类删除，所以可自定义一个明文的密码解码器。
      */
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         // return NoOpPasswordEncoder.getInstance(); 官方标记过时的密码编码器
         return new PlainTextPasswordEncoder(); // 自定义的不进行编码的密码编码器
     }
@@ -42,7 +42,7 @@ public class SecurityConfig {
      * @return UserDetailsService
      */
     @Bean
-    public UserDetailsService userDetailsService(){
+    public UserDetailsService userDetailsService() {
         // 不论是 'admin' 还是 'manager'，都是拥有对所有接口进行访问的权限。因为我们并没有对接口进行权限限制。
         InMemoryUserDetailsManager userDetailsManager = new InMemoryUserDetailsManager(
                 User.withUsername("admin").password("admin").authorities("admin").build(),

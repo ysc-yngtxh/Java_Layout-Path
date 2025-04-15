@@ -20,9 +20,9 @@ import java.util.Collection;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginUserDetails implements UserDetails {
-
     @Serial
     private static final long serialVersionUID = 3691360652528252534L;
+
     private transient User user;
 
     /**
@@ -42,7 +42,7 @@ public class LoginUserDetails implements UserDetails {
      */
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return user.getPassWord();
     }
 
     /**

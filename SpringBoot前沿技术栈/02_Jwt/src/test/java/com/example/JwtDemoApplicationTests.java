@@ -2,58 +2,81 @@ package com.example;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.JwtParser;
+import io.jsonwebtoken.JwsHeader;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.UUID;
+import javax.crypto.SecretKey;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.UUID;
 
 @Slf4j
 @SpringBootTest
 class JwtDemoApplicationTests {
 
-    private String signature = "csaydgcaisdyc"; // 加盐
+    private final String signature = "csaydgcaisdyc"; // 加盐
 
     @Test
     void contextLoads() {
-        // 获取jwt对象
-        JwtBuilder jwtBuilder = Jwts.builder();
-        String jwtToken = jwtBuilder
-                // Header
-                .setHeaderParam("tpy", "JWT")
-                .setHeaderParam("alg", "HS256")
-                // payload
-                .claim("name" ,"陈玉梅")
-                .claim("pwd", "514")
-                .setSubject("admin-test")  // 设置主题
-                .setExpiration(new Date(System.currentTimeMillis()+1000*60*60*24*7))  // 设置有效时间
-                .setId(UUID.randomUUID().toString())
-                // signature
-                .signWith(SignatureAlgorithm.HS256, signature)
-                .compact(); // 将所有信息紧凑起来
+        // 生成密钥【JWT 规范要求 HMAC-SHA 算法的密钥至少需要 256 位（32字节）】
+        // 方案一：填充到满足要求的最小长度
+        // 方案二：使用 JJWT 提供的密钥生成器（Jwts.SIG.HS256.key().build()）
+        SecretKey key = Keys.hmacShaKeyFor(Arrays.copyOf(signature.getBytes(StandardCharsets.UTF_8), 32));
 
-        log.info(jwtToken);
+        // 构建JWT
+        String jwtToken = Jwts.builder()
+                              // Header
+                              .header()
+                              .add("tpy", "JWT")
+                              .add("alg", "HS256")
+                              .and()
+                              // Payload
+                              .claims()
+                              .add("name", "陈玉梅")
+                              .add("pwd", "514")
+                              .subject("admin-test")  // 设置主题
+                              .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7))  // 设置有效时间
+                              .id(UUID.randomUUID().toString())
+                              .and()
+                              // Signature
+                              .signWith(key)
+                              .compact();
+
+        log.info("生成的JWT Token: {}", jwtToken);
     }
-
 
     @Test
     void parse() {
-        String token = "eyJ0cHkiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoi6ZmI546J5qKFIiwicHdkIjoiNTE0Iiwic3ViIjoiYWRtaW4tdGVzdCIsImV4cCI6MTYzNTM1MDE4NywianRpIjoiZjk1NjQ5ZmQtOGZlMS00NjMzLWJmNjctMTgyODNjZDkxNmUxIn0._yGitIWtGZ2LyD2wXIUGKNPqqqneWNxoVk8kdOtWdn0";
-        JwtParser jwtParser = Jwts.parser();
-        Jws<Claims> claimsJws = jwtParser.setSigningKey("csaydgcaisdyc").parseClaimsJws(token);
-        claimsJws.getHeader().get("tpy");
-        System.out.println(claimsJws.getHeader().get("tpy"));
-        Claims claims = claimsJws.getBody();
-        System.out.println(claims.get("name"));
-        System.out.println(claims.get("pwd"));
-        System.out.println(claims.getId());
-        System.out.println(claims.getSubject());
-        log.info(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(claims.getExpiration()));
+        String token = "eyJ0cHkiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoi6ZmI546J5qKFIiwicHdkIjoiNTE0Iiwic3ViIjoiYWRtaW4tdGVzdCIsImV4cCI6MTc0NTMzNTk2NSwianRpIjoiNjAxYWVkZTItYzY0Yi00OGVkLWE3NzItNThmMGZjOTEyNzc5In0.K3McDo4nJnXGtM0Ceb6RGZrqtVhGzpMHyJ4CxPAnRrE";
+
+        // 生成密钥【JWT 规范要求 HMAC-SHA 算法的密钥至少需要 256 位（32字节）】
+        //         // 方案一：填充到满足要求的最小长度
+        //         // 方案二：使用 JJWT 提供的密钥生成器（Jwts.SIG.HS256.key().build()）
+        SecretKey key = Keys.hmacShaKeyFor(Arrays.copyOf(signature.getBytes(StandardCharsets.UTF_8), 32));
+
+        // 解析JWT
+        Jws<Claims> claimsJws = Jwts.parser()
+                                    .verifyWith(key)
+                                    .build()
+                                    .parseSignedClaims(token);
+
+        // 获取Header信息
+        JwsHeader header = claimsJws.getHeader();
+        System.out.println("Header tpy: " + header.get("tpy"));
+        System.out.println("Header alg: " + header.get("alg"));
+
+        // 获取Payload信息
+        Claims claims = claimsJws.getPayload();
+        System.out.println("Name: " + claims.get("name"));
+        System.out.println("Password: " + claims.get("pwd"));
+        System.out.println("JWT ID: " + claims.getId());
+        System.out.println("Subject: " + claims.getSubject());
+
+        log.info("Expiration: {}", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(claims.getExpiration()));
     }
 }

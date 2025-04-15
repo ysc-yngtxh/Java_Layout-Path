@@ -45,7 +45,7 @@ public class UserController {
         Subject subject = SecurityUtils.getSubject();
         // 封装用户的登录数据
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-        // token.setRememberMe(true); //设置记住我
+        // token.setRememberMe(true); // 设置记住我
         try {
             subject.login(token); // 执行登陆方法,即Shiro开始进行认证授权的工作
             return "index";
@@ -59,7 +59,7 @@ public class UserController {
     }
 
     @RequestMapping("/noauto")
-    public @ResponseBody String auThorization(HttpServletResponse response) {
+    public @ResponseBody String authorization(HttpServletResponse response) {
         return "未经授权，无法访问相应页面!";
     }
 }

@@ -17,12 +17,11 @@ public class ShiroConfig {
     // 3、ShiroFilterFactoryBean   shiro过滤工厂(请求都在这儿过滤)
     @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean(@Qualifier("defaultWebSecurityManager") DefaultWebSecurityManager defaultWebSecurityManager) {
-
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
         // 设置安全管理器
         bean.setSecurityManager(defaultWebSecurityManager);
 
-        /*添加shiro的内置过滤器
+        /* 添加shiro的内置过滤器
          *    anon:无需认证就可以访问
          *    authc:必须认证了才能访问
          *    role:拥有某个角色权限才能访问
@@ -41,7 +40,6 @@ public class ShiroConfig {
 
         // 设置登陆的请求(未认证的请求会转到登录页面)
         bean.setLoginUrl("/toLogin");
-
         // 设置未授权的页面
         bean.setUnauthorizedUrl("/noauto");
 

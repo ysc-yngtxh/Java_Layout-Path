@@ -42,6 +42,7 @@
         }
 
         function toXor() {
+            // 从 Cookie 中提取 XSRF-TOKEN 的值
             const csrfToken = document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/, '$1');
             console.log("Cookie中解析出的 XSRF-TOKEN 值：" + csrfToken);
             console.log("从视图中解析出的 ${_csrf.token} 值：" + getCsrfToken());
@@ -88,7 +89,7 @@
         <div class="input-group">
             <input type="submit" name="manager" value="表单提交，跳转/manager。按钮🔘"/>
         </div>
-    </form></br>
+    </form><br/>
 
     <!-- 方法一：请求参数 _csrf 携带令牌 -->
     <form action="/button" method="post">
@@ -96,7 +97,7 @@
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
             <input type="submit" name="name" value="表单提交，跳转/button，请求参数中携带 _csrf 令牌。按钮🔘"/>
         </div>
-    </form></br>
+    </form><br/>
 
     <!-- 方法二：请求头 header 中携带 csrf 令牌 -->
     <div class="input-group">

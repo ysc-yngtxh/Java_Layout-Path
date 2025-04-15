@@ -30,13 +30,13 @@ public class LoginServiceImpl implements LoginService {
     private final RedisCache redisCache;
 
     @Override
-    public Map<Object, Object> login() {
+    public Map<String, Object> login() {
         System.out.println("登录认证执行标记==================");
         // 用户信息包装
         // UsernamePasswordAuthenticationToken authenticationToken =
         //         new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword());
 
-        // UserDetails是security提供的一个接口，一般实体类的用户需要去实现它，
+        // UserDetails是SpringSecurity提供的一个接口，一般实体类的用户需要去实现它，
         Authentication authenticationToken = SecurityContextHolder.getContext().getAuthentication();
 
         // 进行认证
@@ -47,13 +47,13 @@ public class LoginServiceImpl implements LoginService {
             throw new RuntimeException("登陆失败");
         }
         // 如果认证通过，根据我们的认证逻辑是获取该用户所有信息的
-        // principal参数代表认证的主体信息，通常为用户名或用户对象；
-        // credentials`参数代表认证的凭证信息，通常为密码或其他类似信息。
+        // principal   参数代表认证的主体信息，通常为用户名或用户对象；
+        // credentials 参数代表认证的凭证信息，通常为密码或其他类似信息。
         LoginUserDetails loginUserDetails = (LoginUserDetails) authenticationToken.getPrincipal();
         String userId = loginUserDetails.getUser().getId().toString();
         // 使用userId生成一个jwt，并将jwt放入ResponseResult返回
         String jwt = JwtUtil.createJwt(userId);
-        Map<Object, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         map.put("token", jwt);
         // 把完整的用户信息存入Redis,使用userId作为key
         redisCache.setCacheObject("login:" + userId, loginUserDetails);

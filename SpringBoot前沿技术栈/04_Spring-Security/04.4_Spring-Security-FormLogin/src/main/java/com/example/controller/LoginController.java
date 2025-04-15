@@ -25,21 +25,21 @@ public class LoginController {
     private LoginService loginService;
 
     @RequestMapping("/user/index")
-    public ModelAndView Hello(){
+    public ModelAndView Hello() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
         return modelAndView;
     }
 
     @RequestMapping(value = "/user/login", method = RequestMethod.POST)
-    public void login(@RequestBody User user){
+    public void login(@RequestBody User user) {
         // 这里只是提供一个表单提交接口，实际并不会执行这个接口的业务逻辑
         System.out.println("login");
     }
 
     @RequestMapping(value = "/toMain")
-    public ModelAndView toMain(){
-        Map<Object, Object> login = loginService.login();
+    public ModelAndView toMain() {
+        Map<String, Object> login = loginService.login();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("success");
         modelAndView.addObject("token", login.get("token"));

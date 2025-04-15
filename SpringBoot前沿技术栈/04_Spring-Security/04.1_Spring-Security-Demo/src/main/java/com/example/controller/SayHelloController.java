@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SayHelloController {
 
     @RequestMapping("/sayHello")
-    public String hello(){
+    public String hello() {
         return "十年生死两茫茫，不思量，自难忘";
     }
 

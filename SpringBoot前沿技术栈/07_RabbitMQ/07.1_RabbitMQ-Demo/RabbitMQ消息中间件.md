@@ -74,7 +74,7 @@
 <figure>
 
    ### 消息队列在使用过程中，面临着很多实际问题需要思考：
-   ![img](../09.2_RabbitMQ-SpringBoot/src/main/resources/static/img.png)
+   ![img](../07.2_RabbitMQ-SpringBoot/src/main/resources/static/img.png)
 
    ### 1、延迟队列（"x-message-ttl"）
    <figure>    
@@ -120,7 +120,7 @@
    ### 2、消息可靠性投递（消息投递的每一步都可能导致消息丢失）
    <figure>
 
-   ![img_1](../09.2_RabbitMQ-SpringBoot/src/main/resources/static/img_1.png)
+   ![img_1](../07.2_RabbitMQ-SpringBoot/src/main/resources/static/img_1.png)
    
    <h3 style="color: red">
     消息丢失原因：

@@ -13,14 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @RequestMapping("/sayHello")
-    public String Hello(){
+    public String Hello() {
         return "hello world!";
     }
 
     @RequestMapping("/test")
-    public String test(){
+    public String test() {
         return "Hello World";
     }
-
 }
-

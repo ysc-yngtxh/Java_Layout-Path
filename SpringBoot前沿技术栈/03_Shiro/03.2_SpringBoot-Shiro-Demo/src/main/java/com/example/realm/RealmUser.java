@@ -42,8 +42,7 @@ public class RealmUser extends AuthorizingRealm {
         // 获取当前用户对象
         Subject subject = SecurityUtils.getSubject();
         // 通过当前用户对象获取在认证中的参数一，进而获取数据库对象
-        User principal = (User)subject.getPrincipal();
-
+        User principal = (User) subject.getPrincipal();
 
         // 设置当前用户权限
         info.addStringPermission(principal.getPerms());
@@ -54,7 +53,6 @@ public class RealmUser extends AuthorizingRealm {
     // 认证
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-
         System.out.println("执行了--doGetAuthenticationInfo认证");
 
         // 通过token令牌获取到用户信息
@@ -72,10 +70,9 @@ public class RealmUser extends AuthorizingRealm {
         session.setAttribute("loginuser",query);
 
         return new SimpleAuthenticationInfo(query,query.getPwd(),"");
-        /*
-           参数一：用户的映射资源对象
-           参数二：认证用户密码
-           参数三：realm名字，随便取
-        */
+        /* 参数一：用户的映射资源对象
+         * 参数二：认证用户密码
+         * 参数三：realm名字，随便取
+         */
     }
 }

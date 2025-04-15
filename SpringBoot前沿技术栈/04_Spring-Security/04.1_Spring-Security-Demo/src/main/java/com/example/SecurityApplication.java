@@ -11,5 +11,4 @@ public class SecurityApplication {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(SecurityApplication.class, args);
         System.out.println(applicationContext.getEnvironment());
     }
-
 }

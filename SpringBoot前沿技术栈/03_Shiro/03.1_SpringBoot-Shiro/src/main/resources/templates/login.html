@@ -8,7 +8,7 @@
     <script type="text/javascript">
         $(function(){
             $("#loginBut").click(function(){
-                var v_md5password = $.md5($("#password").val());
+                let v_md5password = $.md5($("#password").val());
                 alert(v_md5password)
                 $("#md5Password").val(v_md5password)
             })
@@ -16,13 +16,12 @@
     </script>
 </head>
 <body>
-      <form action="login" method="post">
-          账号<input type="text" name="username"><br>
-          密码<input type="text" id="password"><br>
-          <input type="hidden" name="password" id="md5Password">
-          <input type="submit" value="登录" id="loginBut">
-      </form>
-      <span style="color: red" th:text="${errorMessage}"></span>
-
+    <form action="/login" method="post">
+        账号<input type="text" name="username"><br>
+        密码<input type="text" id="password"><br>
+        <input type="hidden" name="password" id="md5Password">
+        <input type="submit" value="登录" id="loginBut">
+    </form>
+    <span style="color: #e33434" th:text="${errorMessage}"></span>
 </body>
 </html>

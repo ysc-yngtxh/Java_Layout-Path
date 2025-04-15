@@ -8,6 +8,4 @@ import com.example.pojo.po.User;
  * @date 2022/07/07
  * @apiNote
  */
-public interface UserMapper extends BaseMapper<User> {
-
-}
+public interface UserMapper extends BaseMapper<User> {}

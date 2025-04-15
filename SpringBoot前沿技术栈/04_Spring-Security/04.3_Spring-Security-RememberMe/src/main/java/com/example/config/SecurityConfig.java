@@ -1,9 +1,7 @@
 package com.example.config;
 
 import jakarta.annotation.Resource;
-import java.util.UUID;
 import javax.sql.DataSource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -15,10 +13,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.RememberMeServices;
-import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 /**
@@ -39,7 +34,7 @@ public class SecurityConfig {
      * 但在实际业务中可能还需要不进行编码的密码编码器，后续版本可能会讲过时的类删除。所以可自定义一个明文的密码解码器。
      */
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance(); // 官方标记过时的密码编码器
     }
 
@@ -49,7 +44,7 @@ public class SecurityConfig {
      * @return UserDetailsService
      */
     @Bean
-    public UserDetailsService userDetailsService(){
+    public UserDetailsService userDetailsService() {
         // 不论是 'admin' 还是 'manager'，都是拥有对所有接口进行访问的权限。因为我们并没有对接口进行权限限制。
         InMemoryUserDetailsManager userDetailsManager = new InMemoryUserDetailsManager(
                 User.withUsername("admin").password("admin").authorities("admin").build(),
@@ -97,7 +92,7 @@ public class SecurityConfig {
         JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
         // 赋值数据源
         jdbcTokenRepository.setDataSource(dataSource);
-        // 自动创建表,第一次执行会创建，以后要执行就要删除掉！
+        // 自动创建表。第一次执行会创建，以后要执行就要删除掉！
         // jdbcTokenRepository.setCreateTableOnStartup(true);
         return jdbcTokenRepository;
     }

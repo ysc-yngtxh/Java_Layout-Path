@@ -30,5 +30,4 @@ public class ResponseResult<T> {
      * 返回的数据
      */
     private T data;
-
 }

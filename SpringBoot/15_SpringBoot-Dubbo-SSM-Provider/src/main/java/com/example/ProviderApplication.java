@@ -17,8 +17,7 @@ public class ProviderApplication {
         SpringApplication.run(ProviderApplication.class, args);
     }
 
-    /**
-     * Mac电脑使用HomeBrew安装Zookeeper注意事项：
+    /** Mac电脑使用HomeBrew安装Zookeeper注意事项：
      *    ZooKeeper 默认会从自己的安装目录（如 /opt/homebrew/Cellar/zookeeper/3.9.3/libexec/etc/zookeeper/）查找配置文件，
      *    但 Homebrew 将配置文件安装在了 /opt/homebrew/etc/zookeeper/
      *    因此需要将配置文件链接到 /opt/homebrew/Cellar/zookeeper/3.9.3/libexec/etc/zookeeper/zoo.cfg

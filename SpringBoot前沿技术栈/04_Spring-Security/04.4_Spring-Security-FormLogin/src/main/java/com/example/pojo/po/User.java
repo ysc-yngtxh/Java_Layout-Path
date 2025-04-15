@@ -45,7 +45,7 @@ public class User implements Serializable {
     /**
      * 密码
      */
-    private String password;
+    private String passWord;
 
     /**
      * 帐号状态(0正常，1停用)
@@ -60,7 +60,7 @@ public class User implements Serializable {
     /**
      * 手机号
      */
-    private String phonenumber;
+    private String phoneNumber;
 
     /**
      * 用户性别(0男， 1女， 2未知)
@@ -70,7 +70,7 @@ public class User implements Serializable {
     /**
      * 头像
      */
-    private String avatar;
+    private byte[] avatar;
 
     /**
      * 用户类型(0管理员，1普通用户)
@@ -81,7 +81,7 @@ public class User implements Serializable {
      * 用户权限
      */
     @TableField(typeHandler = FastjsonTypeHandler.class)
-    private List<String> permssion;
+    private List<String> permission;
 
     /**
      * 创建人的用户id

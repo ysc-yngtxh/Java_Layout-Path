@@ -37,11 +37,11 @@ public class MyRealm extends AuthorizingRealm {
         Set<String> roles = new HashSet<>();
         Set<String> permissions = new HashSet<>();
         // 设置角色，这里的操作应该是从数据库中读取数据。像："admin","user"...
-        if("admin".equals(obj)){
+        if("admin".equals(obj)) {
             roles.add("admin");
             permissions.add("admin:add");
         }
-        if("user".equals(obj)){
+        if("user".equals(obj)) {
             roles.add("user");
         }
 
@@ -72,41 +72,38 @@ public class MyRealm extends AuthorizingRealm {
         String password = new String(token.getPassword()); // 获取页面中的用户密码。实际工作中基本不需要获取
         System.out.println(username + "---" + password);
 
-        if(!"admin".equals(username) && !"zhangsan".equals(username) && !"user".equals(username)){
+        if(!"admin".equals(username) && !"zhangsan".equals(username) && !"user".equals(username)) {
             throw new UnknownAccountException(); // 抛出账号错误的异常
         }
-        if("zhangsan".equals(username)){
+        if("zhangsan".equals(username)) {
             throw new LockedAccountException(); // 抛出账号锁定异常
         }
 
-        /*
-          数据密码加密主要是防止数据在浏览器到后台服务器之间的数据传递时被篡改或被截获，因此应该在前端到后台的过程中进行加密，
-          而我们这里的加密一个事件，将浏览器中获取后台的明码加密和对数据库中的数据进行加密
-          // 认证帐号，这里应该从数据库中获取数据
-          HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
-          credentialsMatcher.setHashAlgorithmName("MD5");
-          credentialsMatcher.setHashIterations(2);
-          this.setCredentialsMatcher(credentialsMatcher);
-          // 对数据库中的密码进行加密
-          Object obj = new SimpleHash("MD5","123456","",2);
-        */
+        /* 数据密码加密主要是防止数据在浏览器到后台服务器之间的数据传递时被篡改或被截获，因此应该在前端到后台的过程中进行加密，
+         * 而我们这里的加密一个事件，将浏览器中获取后台的明码加密和对数据库中的数据进行加密
+         *    // 认证帐号，这里应该从数据库中获取数据
+         *    HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher();
+         *    credentialsMatcher.setHashAlgorithmName("MD5");
+         *    credentialsMatcher.setHashIterations(2);
+         *    this.setCredentialsMatcher(credentialsMatcher);
+         *    // 对数据库中的密码进行加密
+         *    Object obj = new SimpleHash("MD5","123456","",2);
+         */
 
         return new SimpleAuthenticationInfo(username, "e10adc3949ba59abbe56e057f20f883e", getName());
-            /*
-               创建密码认证对象，由Shiro自动认证密码
-               参数1：数据库中的账号(或页面账号均可)
-               参数2：为数据库中读取数据来的密码
-               参数3：为当前Realm的名字
-             */
+        /* 创建密码认证对象，由Shiro自动认证密码
+         *     参数1：数据库中的账号(或页面账号均可)
+         *     参数2：为数据库中读取数据来的密码
+         *     参数3：为当前Realm的名字
+         */
     }
 
     public static void main(String[] args) {
-        /*
-          创建密码认证对象，由Shiro自动认证密码
-            参数1：为加密的算法名 我们使用MD5这是一个不可逆的加密算法
-            参数2：为需要加密的数据
-            参数3：加密的盐值  用于改变加密结果的  不同的盐加密的数据是不一致的
-            参数4：为加密的次数
+        /* 创建密码认证对象，由Shiro自动认证密码
+         *   参数1：为加密的算法名 我们使用MD5这是一个不可逆的加密算法
+         *   参数2：为需要加密的数据
+         *   参数3：加密的盐值  用于改变加密结果的  不同的盐加密的数据是不一致的
+         *   参数4：为加密的次数
          */
         Object obj = new SimpleHash("MD5","123456", "", 1);
         System.out.println("123456使用MD5加密1次--" + obj);
