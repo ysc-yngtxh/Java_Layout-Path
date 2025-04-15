@@ -51,10 +51,11 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         String encodingId = "bcrypt";
         Map<String, PasswordEncoder> encoders = new HashMap<>();
-        encoders.put(encodingId, new BCryptPasswordEncoder());
+        encoders.put("bcrypt", new BCryptPasswordEncoder());
         // 可以添加其他编码器
         encoders.put("noop", NoOpPasswordEncoder.getInstance());  // 不推荐用于生产环境
-        return new DelegatingPasswordEncoder(encodingId, encoders);
+        // 参数一：用于指定使用的编码Id【必须是参数二中存在的编码Id】，参数二：用于指定所有的编码器
+        return new DelegatingPasswordEncoder("bcrypt", encoders);
     }
 
     @Bean

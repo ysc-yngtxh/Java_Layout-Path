@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
  * @date 2022/07/05
  * @apiNote
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseResult<T> {
 
     /**

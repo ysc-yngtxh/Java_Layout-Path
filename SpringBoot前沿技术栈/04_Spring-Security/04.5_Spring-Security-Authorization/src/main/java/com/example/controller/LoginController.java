@@ -64,14 +64,13 @@ public class LoginController {
 
     // 注销接口
     @GetMapping("/cancellation")
-    public @ResponseBody void cancellation(){
+    public @ResponseBody void cancellation() {
         // 这里只是提供一个表单注销接口，实际并不会执行这个接口的业务逻辑
         System.out.println("注销路径");
     }
 
     @GetMapping("/logout")
-    public @ResponseBody ResponseResult<String> logout(){
+    public @ResponseBody ResponseResult<String> logout() {
         return loginService.logout();
     }
-
 }

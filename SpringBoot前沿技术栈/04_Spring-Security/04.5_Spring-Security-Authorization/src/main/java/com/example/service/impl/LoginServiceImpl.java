@@ -19,8 +19,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class LoginServiceImpl implements LoginService {
 
-
-    public String login(){
+    public String login() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         // 如果认证没通过，给出对应的提示
         if (ObjectUtil.isNull(authentication)) {

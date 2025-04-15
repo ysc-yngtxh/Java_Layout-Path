@@ -8,12 +8,11 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 
 @SpringBootApplication
 @MapperScan("com.example.mapper")
-@EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true) //应该是启用接口方法的权限注解
+@EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true) // 应该是启用接口方法的权限注解
 public class AuthorizationApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(AuthorizationApplication.class, args);
         System.out.println(applicationContext);
     }
-
 }

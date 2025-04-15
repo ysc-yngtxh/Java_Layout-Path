@@ -27,8 +27,8 @@ public class LoginUserDetails implements UserDetails {
 
     private List<String> permission;
 
-    // 存储Security所需要的权限信息集合，这里权限敏感数据，不去做序列化
-    // 这里的SimpleGrantedAuthority 类是 GrantedAuthority 类的实现类
+    // 存储 SpringSecurity 所需要的权限信息集合，这里权限敏感数据，不去做序列化
+    // 这里的 SimpleGrantedAuthority 类是 GrantedAuthority 类的实现类
     // @JSONField(serialize = false)
     private transient List<SimpleGrantedAuthority> authorityList;
 

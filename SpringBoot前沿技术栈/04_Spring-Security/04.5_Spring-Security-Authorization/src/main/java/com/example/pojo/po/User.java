@@ -69,7 +69,7 @@ public class User implements Serializable {
     /**
      * 头像
      */
-    private String avatar;
+    private byte[] avatar;
 
     /**
      * 用户类型(0管理员，1普通用户)

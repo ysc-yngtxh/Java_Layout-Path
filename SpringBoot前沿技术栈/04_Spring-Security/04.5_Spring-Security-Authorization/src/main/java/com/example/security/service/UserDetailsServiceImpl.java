@@ -66,7 +66,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Optional.ofNullable(user)
                 .orElseThrow(() -> new RuntimeException("用户名不存在!!!"));
 
-        List<String> permsssion = user.getPermission();
+        List<String> permission = user.getPermission();
 
         /**
          * 这里需要注意的点就是：spring security把权限和角色放一起了
@@ -74,6 +74,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
          * 角色：授权代码需要加ROLE_前缀(数据库取出来的数据要有前缀ROLE_)，controller上使用时不要加前缀。
          */
 
-        return new LoginUserDetails(user, permsssion);
+        return new LoginUserDetails(user, permission);
     }
 }
