@@ -1,30 +1,54 @@
 server:
-    port: 8082
-    servlet:
-        context-path: /
+  port: 8082
+  servlet:
+    context-path: /
 
 spring:
-     sql:
-       init:
-         # SpringBoot启动时执行去执行的Sql脚本
-         schema-locations: classpath:/sql/*.sql
-         mode: always
+  sql:
+    init:
+      # SpringBoot启动时执行去执行的Sql脚本
+      schema-locations: classpath:/sql/*.sql
+      mode: always
 
-    datasource:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        password: mpw:tOuQTJfpXKEWbLY1fOJxqQ==
-        url: mpw:7rtYlSNgy+jVLRy6JLv8509gEPmSoMrwxM8kVPvD0kG2SfihsaKW436zUZLpdfPtBVp0mT9cwKLZgIetPFYWKquO4QfuXN+OuF4yZlU46KVXDWeV/KZQgyAMux4xbo5D8i1IsS67xEMSOFx2LVrQ1crL/7EuZ/bkw/N6hGRrhsTYZHzHfdtuJY/pXPhIyTvzu3R8nQLJu4wjrRRBLXF3uA==
-        username: mpw:Uwak4MyIBlTANPI/N9CasA==
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: mpw:tOuQTJfpXKEWbLY1fOJxqQ==
+    url: mpw:7rtYlSNgy+jVLRy6JLv8509gEPmSoMrwxM8kVPvD0kG2SfihsaKW436zUZLpdfPtBVp0mT9cwKLZgIetPFYWKquO4QfuXN+OuF4yZlU46KVXDWeV/KZQgyAMux4xbo5D8i1IsS67xEMSOFx2LVrQ1crL/7EuZ/bkw/N6hGRrhsTYZHzHfdtuJY/pXPhIyTvzu3R8nQLJu4wjrRRBLXF3uA==
+    username: mpw:Uwak4MyIBlTANPI/N9CasA==
 
+# mybatis-plus相关配置
 mybatis-plus:
-    mapper-locations: classpath:mapper/*.xml
-    configuration:
-        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    type-aliases-package: com.example.entity
-    global-config:
-        db-config:                         # 全局配置 db
-            id-type: assign_uuid             # 设置全局Id生成策略（注意：如果有局部Id生成策略，那局部策略生效，它是优先于全局策略）
-            logic-delete-field: deleteFlag   # 全局逻辑删除的实体字段名(注意：设置的是实体类中的字段名)
-            logic-delete-value: 1            # 逻辑已删除值(默认为 1)
-            logic-not-delete-value: 0        # 逻辑未删除值(默认为 0)
-            table-prefix: tb_                # 设置表前缀
+  # xml扫描，多个目录用逗号或者分号分隔（告诉 Mapper 所对应的 XML 文件位置）
+  mapper-locations: classpath:mapper/*.xml
+  # 指定 MyBatis 别名包扫描路径，用于给包中的类注册别名。
+  type-aliases-package: com.example.entity
+  # 指定 MyBatis 配置文件的位置。
+  # config-location: classpath:mybatis-config.xml
+  global-config: # 全局配置
+    banner: true # 是否打印 Mybatis-Plus 的 banner
+    db-config:
+      # 主键类型  AUTO:"数据库ID自增"  INPUT:"用户输入ID"  ID_WORKER:"全局唯一ID (数字类型唯一ID)"  UUID:"全局唯一ID UUID";
+      id-type: assign_uuid
+      table-prefix: tb_  # 表前缀
+      # 驼峰下划线转换
+      table-underline: true
+      # 自定义表主键生成器
+      key-generators: com.example.CustomKeyGenerator
+      # 全局的 Entity 逻辑删除字段属性名，仅在逻辑删除功能打开时有效。
+      logic-delete-field: deleteFlag
+      # 逻辑删除配置
+      logic-delete-value: 0     # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 1 # 逻辑未删除值(默认为 0)
+      insert-strategy: NEVER
+      update-strategy: ignored
+      where-strategy: ALWAYS
+  configuration:
+    # 是否开启自动驼峰命名规则映射：从数据库列名到Java属性驼峰命名的类似映射
+    map-underscore-to-camel-case: true
+    # cache-enabled: false
+    # 如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段
+    # call-setters-on-nulls: true
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 解决oracle更新数据为null时无法转换报错，mysql不会出现此情况
+    # jdbc-type-for-null: 'null'

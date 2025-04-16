@@ -8,5 +8,4 @@ import com.example.pojo.entity.SysRoleMenu;
  * @dateTime 2023-05-15 17:03
  * @apiNote TODO
  */
-public interface SysRoleMenuMapper extends BaseMapper<SysRoleMenu> {
-}
+public interface SysRoleMenuMapper extends BaseMapper<SysRoleMenu> {}

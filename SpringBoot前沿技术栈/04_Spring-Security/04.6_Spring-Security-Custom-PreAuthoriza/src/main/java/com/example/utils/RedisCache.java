@@ -94,7 +94,7 @@ public class RedisCache {
      * 删除集合对象
      * @param collection 多个对象
      */
-    public long dedleteObject(final Collection collection) {
+    public long deleteObject(final Collection collection) {
         return redisTemplate.delete(collection);
     }
 
@@ -104,7 +104,7 @@ public class RedisCache {
      * @param dataList 待缓存的List数据
      * @return 缓存的对象
      */
-    public <T> long setCcacheList(final String key, final List<T> dataList) {
+    public <T> long setCacheList(final String key, final List<T> dataList) {
         Long count = redisTemplate.opsForList().rightPushAll(key, dataList);
         return count == null ? 0 : count;
     }
@@ -127,7 +127,7 @@ public class RedisCache {
      * @param <T>
      * @return
      */
-    public <T> BoundSetOperations<String, T> setCaccheSet(final String key, final Set<T> dataSet) {
+    public <T> BoundSetOperations<String, T> setCacheSet(final String key, final Set<T> dataSet) {
         BoundSetOperations boundSetOperations = redisTemplate.boundSetOps(key);
         Iterator<T> it = dataSet.iterator();
         while (it.hasNext()) {

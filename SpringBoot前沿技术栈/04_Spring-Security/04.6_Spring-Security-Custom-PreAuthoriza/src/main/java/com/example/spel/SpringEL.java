@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 @Component("spel")
 public class SpringEL {
 
-    public boolean hasAuthorization(){
+    public boolean hasAuthorization() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         LoginUserDetails user = (LoginUserDetails) authentication.getAuthorities();
         List<String> permission = user.getPermission();

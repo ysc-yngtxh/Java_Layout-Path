@@ -49,13 +49,26 @@ public class SecurityConfig {
      */
     @Bean
     public PasswordEncoder passwordEncoder() {
-        String encodingId = "bcrypt";
         Map<String, PasswordEncoder> encoders = new HashMap<>();
-        encoders.put("bcrypt", new BCryptPasswordEncoder());
-        // 可以添加其他编码器
-        encoders.put("noop", NoOpPasswordEncoder.getInstance());  // 不推荐用于生产环境
-        // 参数一：用于指定使用的编码Id【必须是参数二中存在的编码Id】，参数二：用于指定所有的编码器
-        return new DelegatingPasswordEncoder("bcrypt", encoders);
+        BCryptPasswordEncoder cryptPasswordEncoder = new BCryptPasswordEncoder();
+        encoders.put("bcrypt", cryptPasswordEncoder);
+        // 添加明文编码器（不推荐用于生产环境）
+        encoders.put("noop", NoOpPasswordEncoder.getInstance());
+        encoders.put("null", cryptPasswordEncoder);
+
+        // DelegatingPasswordEncoder 用于创建委托模式的密码编码器。
+        // ①、加密密码时：会使用指定的编码器（构造方法的参数一）进行加密，且加密后得到的密码会有前缀（如 {bcrypt}、{noop}）。
+        //              需要注意的是：指定的编码器必须在 Map（构造方法的参数二） 中存在。
+        // ②、解析密码时：会先根据密码的前缀（如 {bcrypt}、{noop}）来选择对应的编码器（构造方法的参数二）进行解析。
+        //     问题：如果解析密码没有前缀，那么会默认尝试用 null 作为编码器Id，但 Map 中没有 null 这个 key，因此报错。
+        //     方案：
+        //       Ⅰ、提供一个 null 编码器：encoders.put("null", new BCryptPasswordEncoder());
+        //       Ⅱ、设置默认编码器：delegatingPasswordEncoder.setDefaultPasswordEncoderForMatches(new BCryptPasswordEncoder());
+        DelegatingPasswordEncoder delegatingPasswordEncoder =
+                     new DelegatingPasswordEncoder("bcrypt", encoders);
+        // 如果解析的密码没有前缀，配置使用 bcrypt 编码器方式进行解析
+        delegatingPasswordEncoder.setDefaultPasswordEncoderForMatches(cryptPasswordEncoder);
+        return delegatingPasswordEncoder;
     }
 
     @Bean
@@ -141,9 +154,9 @@ public class SecurityConfig {
                .defaultSuccessUrl("/user/index")
 
 
-               /** 可依照默认SpringSecurity的 LogoutConfigurer 类，不进行配置。如果自定义的前端登出接口是/logout，那么就会使用SpringSecurity的内置接口/logout
-                *  内置接口则会执行 logoutUrl("/logout"); 清除HttpSession，Cookie，用户信息SecurityContextHolder 等。
-                *  还会执行 logoutSuccessUrl("/toLoginForm?logout"); 这里的路径会根据自己的设置的登录路径替换。*/
+                /** 可依照默认SpringSecurity的 LogoutConfigurer 类，不进行配置。如果自定义的前端登出接口是/logout，那么就会使用SpringSecurity的内置接口/logout
+                 *  内置接口则会执行 logoutUrl("/logout"); 清除HttpSession，Cookie，用户信息SecurityContextHolder 等。
+                 *  还会执行 logoutSuccessUrl("/toLoginForm?logout"); 这里的路径会根据自己的设置的登录路径替换。*/
                 .and()
                 .logout()
                 // 表单退出登录的执行路径，类似于登录一样，存在一个提交路径，实际不会执行路径逻辑。
@@ -193,5 +206,9 @@ public class SecurityConfig {
     public static void main(String[] args) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         System.out.println(bCryptPasswordEncoder.encode("123456"));
+
+        PasswordEncoder passwordEncoder =
+                new SecurityConfig(null, null).passwordEncoder();
+        System.out.println(passwordEncoder.encode("123456"));
     }
 }

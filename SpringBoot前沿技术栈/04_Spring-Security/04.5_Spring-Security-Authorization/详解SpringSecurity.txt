@@ -51,8 +51,9 @@
      2、在我们认证成功后(即密码比对后)，我们得到最终的Authentication对象，里面有我们用户的所有信息，
         并且把这个对象交给SecurityContextHolder.getContext().setAuthentication方法存储
 
-   使用授权注解 @PreAuthorize("hasAuthority('admin')") 表示当前接口需要'admin'权限
-   或者在SecurityConfig类中的SecurityFilterChain方法，加上 .requestMatchers("/code").hasAuthority("admin")
+   使用授权注解 @PreAuthorize("hasAuthority('admin')") 表示当前接口需要 'admin' 权限
+   或者在 SecurityConfig 类中的SecurityFilterChain方法，加上 .requestMatchers("/code")
+   .hasAuthority("admin")
 
 三、CSRF攻击(跨域请求伪造 Cross-site request forgery)
         比如说，我们的有一个不是前后端分离的项目系统A，前后端都是通过Cookie或者JSESSIONID来校验用户信息的，

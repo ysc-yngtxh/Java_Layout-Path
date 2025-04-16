@@ -21,6 +21,7 @@ import java.io.Serializable;
 public class SysRoleMenu implements Serializable {
     @Serial
     private static final long serialVersionUID = -72023359821041803L;
+
     /**
      * 角色ID
      */
@@ -29,6 +30,4 @@ public class SysRoleMenu implements Serializable {
      * 菜单id
      */
     private Long menuId;
-
 }
-

@@ -32,18 +32,17 @@ public class LoginController {
 
     @PostMapping("/find/user")
     @ResponseBody
-    public ResponseEntity<ResponseResult<SysUser>> findByUser(@RequestBody(required = false) User user){
+    public ResponseEntity<ResponseResult<SysUser>> findByUser(@RequestBody(required = false) User user) {
         System.out.println("=========" + time);
         MyAuthorizationProperties properties = new MyAuthorizationProperties();
         System.out.println(properties.getTokenExpireTime());
         return ResponseEntity.ok()
-                .body(responseResult.success("访问成功",
-                        loginService.findByUser(user.getUserName())));
+                .body(responseResult.success("访问成功", loginService.findByUser(user.getUserName())));
     }
 
 
     @PostMapping("/logout")
-    public @ResponseBody ResponseResult<String> logout(){
+    public @ResponseBody ResponseResult<String> logout() {
         return loginService.logout();
     }
 }

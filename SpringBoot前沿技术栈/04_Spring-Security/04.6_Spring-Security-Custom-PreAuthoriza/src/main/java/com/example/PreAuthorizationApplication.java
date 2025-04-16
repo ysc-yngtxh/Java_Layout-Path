@@ -17,5 +17,4 @@ public class PreAuthorizationApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PreAuthorizationApplication.class, args);
 	}
-
 }

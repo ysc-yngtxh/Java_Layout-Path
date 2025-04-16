@@ -4,9 +4,6 @@ import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.WriteListener;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpServletResponseWrapper;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -55,9 +52,7 @@ public class MultiReadHttpServletResponse extends HttpServletResponseWrapper {
             }
 
             @Override
-            public void setWriteListener(WriteListener listener) {
-
-            }
+            public void setWriteListener(WriteListener listener) {}
 
             @Override
             public void write(int b) throws IOException {

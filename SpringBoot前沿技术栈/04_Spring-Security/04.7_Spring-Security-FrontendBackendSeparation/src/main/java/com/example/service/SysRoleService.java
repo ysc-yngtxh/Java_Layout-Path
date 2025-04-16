@@ -14,6 +14,4 @@ public interface SysRoleService {
 
     // 根据用户名查询该用户所有角色
     List<SysRole> findUserByRole(String userName);
-
 }
-

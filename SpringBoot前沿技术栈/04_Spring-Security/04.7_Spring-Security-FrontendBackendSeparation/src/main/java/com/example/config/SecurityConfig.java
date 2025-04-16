@@ -7,10 +7,8 @@ import com.example.pojo.vo.ResponseResult;
 import com.example.security.authorization.UrlAuthorizationManager;
 import com.example.security.handler.CustomFailureHandler;
 import com.example.utils.WebUtil;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -57,7 +55,7 @@ public class SecurityConfig {
     public AuthenticationEntryPoint authenticationEntryPoint() {
         return new AuthenticationEntryPoint() {
             @Override
-            public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+            public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) {
                 if (Objects.nonNull(authException)) {
                     ResponseResult<Void> result =
                             new ResponseResult<>(HttpStatus.UNAUTHORIZED.value(), authException.getMessage(), null);
@@ -76,7 +74,7 @@ public class SecurityConfig {
     public AccessDeniedHandler accessDeniedHandler() {
         return new AccessDeniedHandler() {
             @Override
-            public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
+            public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) {
                 ResponseResult<Void> result =
                         new ResponseResult<>(HttpStatus.FORBIDDEN.value(), "您的权限不足！", null);
                 String jsonString = JSON.toJSONString(result);
@@ -115,12 +113,12 @@ public class SecurityConfig {
                 )
 
 
-                // 设置哪些路径可以直接访问不需要认证(permitAll()表示允许所有人访问)
+                // 设置哪些路径可以直接访问不需要认证（permitAll()表示允许所有人访问）
                 .authorizeHttpRequests(authorized ->
                         authorized
                                 // 通过配置文件进行配置Spring Security的放行路径
                                 // 这里需要注意的是：转成String类型的数组，需要指定转成数组的容量，不能超出也不能少于实际元素个数，
-                                // 否则数组超出的容量部分会替换为null，Spring Security在匹配放行路径时会出现空指针异常。
+                                // 否则数组空余的容量部分会替换为null，Spring Security在匹配放行路径时会出现空指针异常。
                                 // 可以写成 toArray(new String[0]) 的方式，这样创建数组，可以确保返回的新数组会进行自动扩容，其大小与集合的大小相同
                                 .requestMatchers(myAuthorizationProperties.getIgnoreUrls().toArray(new String[8])).permitAll()
                                 // 同上述放行路径写法效果一样，但保留以上写法是为了谨记在设置数组容量过大时出现的空指针异常，为此花了两天才定位到BUG。难顶！！！

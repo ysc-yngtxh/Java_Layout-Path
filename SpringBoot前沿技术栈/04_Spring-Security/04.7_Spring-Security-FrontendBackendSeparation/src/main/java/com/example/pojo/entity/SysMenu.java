@@ -19,7 +19,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @TableName("sys_menu")
 public class SysMenu implements Serializable {
-
     @Serial
     private static final long serialVersionUID = 1L;
 

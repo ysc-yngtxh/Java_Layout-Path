@@ -33,9 +33,9 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-3-starter</artifactId>
-            <version>1.2.23</version>
+            <version>1.2.24</version>
         </dependency>
-        <!--SpringBoot3.3.0 集成 Druid1.2.23 依赖，
+        <!--SpringBoot3.3.0 集成 Druid1.2.24 依赖，
             使用代码方式配置 监控管理后台、web监控的filter 暂仅支持 javax.servlet.*，不支持 jakarta.servlet.*
             因此需要添加 javax.servlet-api 依赖-->
         <!-- <dependency> -->

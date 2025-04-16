@@ -10,7 +10,6 @@ spring:
         password: 131474
         username: root
 
-
 logging:
     level:
         com:

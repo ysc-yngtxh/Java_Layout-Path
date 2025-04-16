@@ -33,12 +33,11 @@ public class ResponseResult<T> {
      */
     private T data;
 
-    public ResponseResult<T> success(String msg, T data){
+    public ResponseResult<T> success(String msg, T data) {
         return new ResponseResult<T>(null, msg, data);
     }
 
-    public ResponseResult<T> failure(Integer code, String msg){
+    public ResponseResult<T> failure(Integer code, String msg) {
         return new ResponseResult<T>(400, msg, null);
     }
 }
-

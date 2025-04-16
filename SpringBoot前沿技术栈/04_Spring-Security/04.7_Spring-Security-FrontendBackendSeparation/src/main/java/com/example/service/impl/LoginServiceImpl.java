@@ -25,7 +25,7 @@ public class LoginServiceImpl implements LoginService {
 
     private final SysUserMapper sysUserMapper;
 
-    public SysUser findByUser(String userName){
+    public SysUser findByUser(String userName) {
         return sysUserMapper.selectOne(Wrappers.<SysUser>lambdaQuery().eq(SysUser::getUserName, userName));
     }
 

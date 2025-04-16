@@ -1,8 +1,13 @@
 package com.example.controller;
 
 import com.example.pojo.po.User;
+import com.example.security.bo.LoginUserDetails;
 import com.example.service.impl.LoginServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,6 +53,16 @@ public class LoginController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/user/img")
+    public ResponseEntity<byte[]> getAvatar() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        LoginUserDetails loginUserDetails = (LoginUserDetails) authentication.getPrincipal();
+        byte[] avatar = loginUserDetails.getUser().getAvatar();
+        return ResponseEntity.ok()
+                             .contentType(MediaType.IMAGE_JPEG) // 根据实际类型调整
+                             .body(avatar);
+    }
+
     @GetMapping("/level1/{id}")
     public String level1(@PathVariable("id") int id) {
         return "view/level1" + "/" + id;
@@ -63,4 +78,11 @@ public class LoginController {
         return "view/level3" + "/" + id;
     }
 
+
+    // 注销接口
+    @GetMapping("/cancellation")
+    public @ResponseBody void cancellation() {
+        // 这里只是提供一个表单注销接口，实际并不会执行这个接口的业务逻辑
+        System.out.println("注销路径");
+    }
 }

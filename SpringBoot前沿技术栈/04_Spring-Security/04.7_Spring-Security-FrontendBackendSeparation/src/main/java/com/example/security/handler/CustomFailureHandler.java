@@ -17,6 +17,7 @@ import java.io.IOException;
  */
 @Component
 public class CustomFailureHandler implements AuthenticationFailureHandler {
+
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         System.out.println("认证失败！");

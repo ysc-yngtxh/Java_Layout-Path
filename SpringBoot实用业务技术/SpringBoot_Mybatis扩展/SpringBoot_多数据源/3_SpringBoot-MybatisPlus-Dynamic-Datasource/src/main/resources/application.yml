@@ -3,31 +3,30 @@ server:
   servlet:
     context-path: /
 
-
 spring:
   datasource:
-     dynamic:
-       primary: master  # 设置默认的数据源,即主数据源,默认值即为master
-       strict: false    # 严格匹配数据源,默认false,表示使用默认数据源。 设置为true表示未匹配到指定数据源时抛异常
-       datasource:
-         master:
-           # 注意：这里配置多数据源的 url 改为 jdbc-url
-           url: jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
-           username: root
-           password: 131474
-           driver-class-name: com.mysql.cj.jdbc.Driver # 3.2.0开始支持SPI可省略此配置
-         slave_1:
-           url: jdbc:mysql://localhost:3306/yun6?serverTimezone=UTC&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
-           username: root
-           password: 131474
-           driver-class-name: com.mysql.cj.jdbc.Driver
-#         slave_2:
-#           url: ENC(xxxxx)
-#           username: ENC(xxxxx)
-#           password: ENC(xxxxx)
-#           driver-class-name: ENC(xxxxx)
-         # ......省略
-         # 以上会配置一个默认库master，一个组slave下有两个子库slave_1,slave_2
+    dynamic:
+      primary: master  # 设置默认的数据源,即主数据源,默认值即为master
+      strict: false    # 严格匹配数据源,默认false,表示使用默认数据源。 设置为true表示未匹配到指定数据源时抛异常
+      datasource:
+        master:
+          # 注意：这里配置多数据源的 url 改为 jdbc-url
+          url: jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+          username: root
+          password: 131474
+          driver-class-name: com.mysql.cj.jdbc.Driver # 3.2.0开始支持SPI可省略此配置
+        slave_1:
+          url: jdbc:mysql://localhost:3306/yun6?serverTimezone=UTC&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+          username: root
+          password: 131474
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        # slave_2:
+        #   url: ENC(xxxxx)
+        #   username: ENC(xxxxx)
+        #   password: ENC(xxxxx)
+        #   driver-class-name: ENC(xxxxx)
+        #   ......省略
+        # 以上会配置一个默认库master，一个组slave下有两个子库slave_1,slave_2
 
 mybatis-plus:
   configuration:

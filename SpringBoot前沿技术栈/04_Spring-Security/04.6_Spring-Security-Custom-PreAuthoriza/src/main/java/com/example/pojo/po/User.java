@@ -25,9 +25,9 @@ import java.util.List;
 @NoArgsConstructor
 @TableName(value = "sys_user", autoResultMap = true)
 public class User implements Serializable {
-
     @Serial
     private static final long serialVersionUID = 1134421647748519297L;
+
     /**
      * 主键
      */
@@ -64,7 +64,7 @@ public class User implements Serializable {
     /**
      * 手机号
      */
-    private String phone;
+    private String phoneNumber;
 
     /**
      * 用户性别(0男， 1女， 2未知)
@@ -74,7 +74,7 @@ public class User implements Serializable {
     /**
      * 头像
      */
-    private String avatar;
+    private byte[] avatar;
 
     /**
      * 用户类型(0管理员，1普通用户)
@@ -96,7 +96,7 @@ public class User implements Serializable {
     /**
      * 创建时间
      */
-    private LocalDateTime createDate;
+    private LocalDateTime createTime;
 
     /**
      * 更新人
@@ -106,7 +106,7 @@ public class User implements Serializable {
     /**
      * 更新时间
      */
-    private LocalDateTime updateDate;
+    private LocalDateTime updateTime;
 
     /**
      * 删除标志(0未删除， 1已删除)

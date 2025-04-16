@@ -20,27 +20,26 @@ public class UserController {
     @RequestMapping("/sayHello")
     // 权限注解，即：访问这个接口前需要当前用户有 'test123' 权限
     @PreAuthorize("hasAuthority('test123')")
-    public @ResponseBody String Hello(){
+    public @ResponseBody String Hello() {
         return "hello world!";
     }
 
     @RequestMapping("/test")
     // 权限注解，即：访问这个接口前需要当前用户有 'message' 权限
     @PreAuthorize("hasAuthority('test')")
-    public @ResponseBody String test(){
+    public @ResponseBody String test() {
         return "Hello World";
     }
 
     @RequestMapping("/role")
     // 权限注解，即：访问这个接口前需要当前用户有 'vip1' 角色
     @PreAuthorize("hasRole('vip1')")
-    public @ResponseBody String role(){
+    public @ResponseBody String role() {
         return "关关雎鸠，在河之洲;";
     }
 
     @RequestMapping("/code")
-    public @ResponseBody ResponseResult<String> code(){
+    public @ResponseBody ResponseResult<String> code() {
         return new ResponseResult<>(200, "无敌是多么，多么寂寞~", null);
     }
 }
-

@@ -48,7 +48,7 @@ public class LoginUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return currentSysUserInfo.getPassword();
+        return currentSysUserInfo.getPassWord();
     }
 
     @Override

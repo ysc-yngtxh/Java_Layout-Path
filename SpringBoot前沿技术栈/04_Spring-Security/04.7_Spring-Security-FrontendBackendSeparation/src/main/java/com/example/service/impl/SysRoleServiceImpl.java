@@ -25,9 +25,7 @@ public class SysRoleServiceImpl implements SysRoleService {
      * @param userName String
      * @return List<SysRole>
      */
-    public List<SysRole> findUserByRole(String userName){
+    public List<SysRole> findUserByRole(String userName) {
         return roleMapper.findUserByRole(userName);
     }
-
 }
-

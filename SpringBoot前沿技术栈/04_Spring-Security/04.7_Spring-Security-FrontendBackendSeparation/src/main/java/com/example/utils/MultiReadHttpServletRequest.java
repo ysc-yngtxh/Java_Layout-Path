@@ -46,7 +46,7 @@ public class MultiReadHttpServletRequest extends HttpServletRequestWrapper {
     }
 
     @Override
-    public ServletInputStream getInputStream() throws IOException {
+    public ServletInputStream getInputStream() {
 
         final ByteArrayInputStream bais = new ByteArrayInputStream(body);
 
@@ -79,7 +79,7 @@ public class MultiReadHttpServletRequest extends HttpServletRequestWrapper {
      * @param request
      * @return String
      */
-    public String getBodyString(ServletRequest request){
+    public String getBodyString(ServletRequest request) {
         InputStream inputStream = null;
         BufferedReader bf = null;
         StringBuilder str = new StringBuilder();
@@ -116,7 +116,7 @@ public class MultiReadHttpServletRequest extends HttpServletRequestWrapper {
      * @param request
      * @return String
      */
-    public String getFormToJsonString(ServletRequest request){
+    public String getFormToJsonString(ServletRequest request) {
         Map<String, String> map = new HashMap<>();
         try {
             Enumeration<String> parameterNames = request.getParameterNames();
@@ -131,7 +131,7 @@ public class MultiReadHttpServletRequest extends HttpServletRequestWrapper {
         return JSONObject.toJSONString(map);
     }
 
-    public String getJsonToJsonStr(ServletRequest request){
+    public String getJsonToJsonStr(ServletRequest request) {
         StringBuilder stringBuilder = new StringBuilder();
         try {
             BufferedReader reader = request.getReader();

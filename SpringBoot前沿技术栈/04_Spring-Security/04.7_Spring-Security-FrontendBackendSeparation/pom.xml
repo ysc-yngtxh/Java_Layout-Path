@@ -82,8 +82,8 @@
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.2.20</version>
+            <artifactId>druid-spring-boot-3-starter</artifactId>
+            <version>1.2.24</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

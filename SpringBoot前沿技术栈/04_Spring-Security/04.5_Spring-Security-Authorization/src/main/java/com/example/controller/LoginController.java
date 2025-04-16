@@ -1,9 +1,14 @@
 package com.example.controller;
 
-import com.example.pojo.vo.ResponseResult;
 import com.example.pojo.po.User;
+import com.example.pojo.vo.ResponseResult;
+import com.example.security.bo.LoginUserDetails;
 import com.example.service.impl.LoginServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,6 +49,16 @@ public class LoginController {
         modelAndView.addObject("token", loginJwt);
         modelAndView.setViewName("index");
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/user/img")
+    public ResponseEntity<byte[]> getAvatar() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        LoginUserDetails loginUserDetails = (LoginUserDetails) authentication.getPrincipal();
+        byte[] avatar = loginUserDetails.getUser().getAvatar();
+        return ResponseEntity.ok()
+                             .contentType(MediaType.IMAGE_JPEG) // 根据实际类型调整
+                             .body(avatar);
     }
 
     @GetMapping("/level1/{id}")

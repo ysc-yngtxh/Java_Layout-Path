@@ -69,7 +69,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         List<String> permission = user.getPermission();
 
         /**
-         * 这里需要注意的点就是：spring security把权限和角色放一起了
+         * 这里需要注意的点就是：Spring Security把权限和角色放一起了
          * 权限：设置和使用时，名称保持一至即可。
          * 角色：授权代码需要加ROLE_前缀(数据库取出来的数据要有前缀ROLE_)，controller上使用时不要加前缀。
          */

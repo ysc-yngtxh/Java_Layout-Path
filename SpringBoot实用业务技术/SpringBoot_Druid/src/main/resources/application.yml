@@ -1,85 +1,84 @@
-
 spring:
-    application:
-        name: SpringBoot_Druid
-    datasource:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        username: root
-        password: 131474
-        url: jdbc:mysql://localhost:3306/caoyumin?serverTimezone=UTC
+  application:
+    name: SpringBoot_Druid
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 131474
+    url: jdbc:mysql://localhost:3306/caoyumin?serverTimezone=UTC
 
-        # TODO SpringBoot3 以下版本集成 Druid ,支持 [url、username、password、driverClassName、type] 属性
-        # TODO 在 SpringBoot3 以上版本，不再支持。统一在 spring.datasource 路径下进行 数据库连接信息 配置
+    # TODO SpringBoot3 以下版本集成 Druid ,支持 [url、username、password、driverClassName、type] 属性
+    # TODO 在 SpringBoot3 以上版本，不再支持。统一在 spring.datasource 路径下进行 数据库连接信息 配置
 
-        # druid-spring-boot-starter 依赖自动生效 druid，可以不配置 type 属性，但建议配置
-        type: com.alibaba.druid.pool.DruidDataSource
-        #  ===================== ↓↓↓↓↓↓  使用 druid 配置  ↓↓↓↓↓↓ =====================
-        druid:
-            socket-timeout: 30000  # 连接超时时间
-            initial-size: 5   # 连接池初始化连接数量
-            min-idle: 5       # 连接池最小空闲数
-            max-active: 20    # 连接池最大连接数量
-            max-wait: 60000   # 连接池最大等待时间
-            time-between-eviction-runs-millis: 60000 # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
-            min-evictable-idle-time-millis: 300000   # 配置一个连接在池中最小生存的时间，单位是毫秒
-            validation-query: SELECT 1 FROM DUAL     # 连接是否有效的查询语句 必须是一个查询语句(oracle中为 select org.springframework.boot.autoconfigure.AutoConfiguration.imports from dual)
-            testWhileIdle: true
-            # 申请连接时会执行validationQuery检测连接是否有效,开启会降低性能,默认为true
-            testOnBorrow: false
-            # 归还连接时会执行validationQuery检测连接是否有效,开启会降低性能,默认为true
-            testOnReturn: false
-            # 是否缓存preparedStatement, 也就是PSCache,PSCache对支持游标的数据库性能提升巨大，比如说oracle,在mysql下建议关闭。
-            poolPreparedStatements: false  # 打开PSCache，并且指定每个连接上PSCache的大小
-            maxPoolPreparedStatementPerConnectionSize: 20
-            removeAbandoned: true
-            # 配置监控统计拦截的filters，去掉后监控界面sql无法统计【'stat':监控统计  'wall'：用于防火墙，防御sql注入  'slf4j':日志 】
-            filter:
-                stat:
-                    enabled: true
-                    db-type: mysql          # 数据库类型（实测没啥用，会自动根据上面的连接自动识别）
-                    log-slow-sql: true      # 记录慢日志（"SQL监控"面板中数值会标记为红色）
-                    slow-sql-millis: 3000   # 慢日志判定标准（单位：毫秒）
-                    slow-sql-log-level: ERROR # 自定义日志级别，默认日志级别"ERROR"
-                wall:
-                    enabled: true
-                slf4j:
-                    enabled: true
-            # 通过connectProperties属性来打开mergeSql功能、慢SQL记录
-            connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-            useGlobalDataSourceStat: true  # 合并多个DruidDataSource的监控数据
+    # druid-spring-boot-starter 依赖自动生效 druid，可以不配置 type 属性，但建议配置
+    type: com.alibaba.druid.pool.DruidDataSource
+    #  ===================== ↓↓↓↓↓↓  使用 druid 配置  ↓↓↓↓↓↓ =====================
+    druid:
+      socket-timeout: 30000  # 连接超时时间
+      initial-size: 5        # 连接池初始化连接数量
+      min-idle: 5            # 连接池最小空闲数
+      max-active: 20         # 连接池最大连接数量
+      max-wait: 60000        # 连接池最大等待时间
+      time-between-eviction-runs-millis: 60000 # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      min-evictable-idle-time-millis: 300000   # 配置一个连接在池中最小生存的时间，单位是毫秒
+      validation-query: SELECT 1 FROM DUAL     # 连接是否有效的查询语句 必须是一个查询语句(oracle中为 select org.springframework.boot.autoconfigure.AutoConfiguration.imports from dual)
+      testWhileIdle: true
+      # 申请连接时会执行validationQuery检测连接是否有效,开启会降低性能,默认为true
+      testOnBorrow: false
+      # 归还连接时会执行validationQuery检测连接是否有效,开启会降低性能,默认为true
+      testOnReturn: false
+      # 是否缓存preparedStatement, 也就是PSCache,PSCache对支持游标的数据库性能提升巨大，比如说oracle,在mysql下建议关闭。
+      poolPreparedStatements: false  # 打开PSCache，并且指定每个连接上PSCache的大小
+      maxPoolPreparedStatementPerConnectionSize: 20
+      removeAbandoned: true
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计【'stat':监控统计  'wall'：用于防火墙，防御sql注入  'slf4j':日志 】
+      filter:
+        stat:
+          enabled: true
+          db-type: mysql          # 数据库类型（实测没啥用，会自动根据上面的连接自动识别）
+          log-slow-sql: true      # 记录慢日志（"SQL监控"面板中数值会标记为红色）
+          slow-sql-millis: 3000   # 慢日志判定标准（单位：毫秒）
+          slow-sql-log-level: ERROR # 自定义日志级别，默认日志级别"ERROR"
+        wall:
+          enabled: true
+        slf4j:
+          enabled: true
+      # 通过connectProperties属性来打开mergeSql功能、慢SQL记录
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      useGlobalDataSourceStat: true  # 合并多个DruidDataSource的监控数据
 
-            aop-patterns: com.example.service.impl.* # Spring监控AOP切入点，多个用逗号分隔
+      aop-patterns: com.example.service.impl.* # Spring监控AOP切入点，多个用逗号分隔
 
-            # 配置可视化控制台页面(代码配置 优先级 大于 yml文件配置)
-            stat-view-servlet:
-                # 是否启用Druid监控面板,默认值true
-                enabled: true
-                # 访问路径为/druid时，跳转到StatViewServlet
-                url-pattern: /druid/*
-                # 是否能够重置数据，面板上的重置按钮（禁用后面板上重置按钮依然会显示和互动，但是不起作用）
-                reset-enable: false
-                # SQL监控后台登录用户名账号、密码才能访问控制台，默认为root
-                login-username: druid
-                login-password: druid
-                # IP白名单
-                allow: 127.0.0.1
-                # IP黑名单（共同存在时，deny优先于allow）
-                deny:
+      # 配置可视化控制台页面(代码配置 优先级 大于 yml文件配置)
+      stat-view-servlet:
+        # 是否启用Druid监控面板,默认值true
+        enabled: true
+        # 访问路径为/druid时，跳转到StatViewServlet
+        url-pattern: /druid/*
+        # 是否能够重置数据，面板上的重置按钮（禁用后面板上重置按钮依然会显示和互动，但是不起作用）
+        reset-enable: false
+        # SQL监控后台登录用户名账号、密码才能访问控制台，默认为root
+        login-username: druid
+        login-password: druid
+        # IP白名单
+        allow: 127.0.0.1
+        # IP黑名单（共同存在时，deny优先于allow）
+        deny:
 
-            # 配置过滤器，过滤掉静态文件(代码配置 优先级 大于 yml文件配置)
-            web-stat-filter:
-                # 是否启用StatFilter默认值true，启用"Web应用/URI监控/Session监控"面板
-                enabled: true
-                # 添加过滤规则
-                url-pattern: /*
-                # 忽略过滤的格式
-                exclusions: /druid/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico
+      # 配置过滤器，过滤掉静态文件(代码配置 优先级 大于 yml文件配置)
+      web-stat-filter:
+        # 是否启用StatFilter默认值true，启用"Web应用/URI监控/Session监控"面板
+        enabled: true
+        # 添加过滤规则
+        url-pattern: /*
+        # 忽略过滤的格式
+        exclusions: /druid/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico
 
 mybatis:
-    type-aliases-package: com.example.entity
-    mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.entity
+  mapper-locations: classpath:mapper/*.xml
 
 logging:
-    level:
-      com:
-          example: debug
+  level:
+    com:
+      example: debug

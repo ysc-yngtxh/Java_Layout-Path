@@ -8,6 +8,4 @@ import com.example.pojo.entity.SysUser;
  * @date 2022/07/07
  * @apiNote
  */
-public interface SysUserMapper extends BaseMapper<SysUser> {
-
-}
+public interface SysUserMapper extends BaseMapper<SysUser> {}

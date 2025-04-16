@@ -1,13 +1,16 @@
 package com.example.config;
 
 import com.alibaba.fastjson2.JSON;
-import com.example.security.bo.LoginUserDetails;
 import com.example.pojo.vo.ResponseResult;
+import com.example.security.bo.LoginUserDetails;
 import com.example.security.service.UserDetailsServiceImpl;
 import com.example.utils.WebUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,9 +31,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-
-import java.io.IOException;
-import java.util.Objects;
 
 /**
  * @author 游诗成
@@ -201,22 +201,22 @@ public class SecurityConfig {
                 //       这里配置了认证权限入口 AuthenticationEntryPoint ，登录认证成功前，除排除路径外，会拦截所有的接口,
                 //       因此有两种方法：一、在排除认证的路径加上requestMatchers("/","toLoginForm").permitAll()
                 //                    二、配置自己的logout，并允许所有人访问.permitAll()
-                // .and()
-                // .logout()
+                .and()
+                .logout()
                 // 表单退出登录的执行路径，类似于登录一样，存在一个提交路径，实际不会执行路径逻辑。
-                // .logoutUrl("/cancellation")
+                .logoutUrl("/cancellation")
                 // 表单退出登录，成功后执行的操作路径。这里不进行配置，就会默认的重定向到登陆路径/toLoginForm
-                // .logoutSuccessUrl("/logout")
+                .logoutSuccessUrl("/logout")
                 // 注销处理器
-                // .logoutSuccessHandler((req, resp, authentication) -> {
-                //     LoginUserDetails principal = (LoginUserDetails) authentication.getPrincipal();
-                //     resp.setContentType("application/json;charset=utf-8");
-                //     PrintWriter out = resp.getWriter();
-                //     out.write(principal.getUsername() + "退出登录！");
-                //     out.flush();
-                //     out.close();
-                // })
-                // .permitAll()
+                .logoutSuccessHandler((req, resp, authentication) -> {
+                    LoginUserDetails principal = (LoginUserDetails) authentication.getPrincipal();
+                    resp.setContentType("application/json;charset=utf-8");
+                    PrintWriter out = resp.getWriter();
+                    out.write(principal.getUsername() + "退出登录！");
+                    out.flush();
+                    out.close();
+                })
+                .permitAll()
                 ;
 
         return http.build();

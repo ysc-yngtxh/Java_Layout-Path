@@ -1,30 +1,34 @@
-logging:
-    level:
-        com:
-            example: debug
-mybatis:
-    mapper-locations: classpath:mapper/*.xml
+
 server:
-    port: 8081
-    servlet:
-        context-path: /
+  port: 8081
+  servlet:
+    context-path: /
+
 spring:
-    datasource:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        password: 131474
-        url: jdbc:mysql://localhost:3306/caoyumin?serverTimezone=UTC&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
-        username: root
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: 131474
+    url: jdbc:mysql://localhost:3306/caoyumin?serverTimezone=UTC&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+
+logging:
+  level:
+    com:
+      example: debug
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
 
 # 在这里设置允许不带WHERE条件删除/更新的表，可以避免全表的误操作，配合MybatisInterceptor拦截器使用
 allow-tables:
-    enable: true
-    delete:
-        - test
-        - sys_user
-        - sys_menu
-    update:
-        - test
+  enable: true
+  delete:
+    - test
+    - sys_user
+    - sys_menu
+  update:
+    - test
 lock-tables:
-    pessimistic:
-        - shop
-        - order
+  pessimistic:
+    - shop
+    - order

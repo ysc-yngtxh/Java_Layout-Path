@@ -18,5 +18,5 @@ public class User {
     /**
      * 密码
      */
-    private String password;
+    private String passWord;
 }
