@@ -1,11 +1,13 @@
 package com.example.pojo.entity;
 
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.Date;
-
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler;
+import java.io.Serial;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,7 +30,7 @@ public class SysMenu implements Serializable {
     /**
      * 菜单名
      */
-    private String menu_name;
+    private String menuName;
 
     /**
      * 路由地址
@@ -41,7 +43,7 @@ public class SysMenu implements Serializable {
     private String component;
 
     /**
-     * 菜单状态(0显示 1隐藏)
+     * 菜单可见性(0显示 1隐藏)
      */
     private String visible;
 
@@ -53,41 +55,41 @@ public class SysMenu implements Serializable {
     /**
      * 权限标识
      */
-    private String perms;
+    @TableField(typeHandler = FastjsonTypeHandler.class)
+    private List<String> permission;
 
     /**
      * 菜单图标
      */
-    private String icon;
+    private byte[] icon;
 
     /**
      * 创建人
      */
-    private Long create_by;
+    private Long createBy;
 
     /**
      * 创建时间
      */
-    private Date create_time;
+    private LocalDateTime createTime;
 
     /**
      * 更新人
      */
-    private Long update_by;
+    private Long updateBy;
 
     /**
      * 更新时间
      */
-    private Date update_time;
+    private LocalDateTime updateTime;
 
     /**
      * 是否删除(0未删除 1已删除)
      */
-    private Integer del_flag;
+    private Integer delFlag;
 
     /**
      * 备注
      */
     private String remark;
-
 }

@@ -9,5 +9,4 @@ public class RabbitMQAckApplication {
     public static void main(String[] args) {
         SpringApplication.run(RabbitMQAckApplication.class, args);
     }
-
 }

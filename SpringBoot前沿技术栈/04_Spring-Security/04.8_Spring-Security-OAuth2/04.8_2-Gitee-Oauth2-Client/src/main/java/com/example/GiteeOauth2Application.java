@@ -45,5 +45,4 @@ public class GiteeOauth2Application {
     // 2. OIDC 的 token 是 JWT 格式，而 OAuth2.0 的 token 是字符串格式。
     // 3. OIDC 的 token 包含了用户的身份信息，而 OAuth2.0 的 token 不包含用户的身份信息。
     // 4. OIDC 的 token 可以被验证、刷新、撤销，而 OAuth2.0 的 token 不能被验证、刷新、撤销。
-
 }

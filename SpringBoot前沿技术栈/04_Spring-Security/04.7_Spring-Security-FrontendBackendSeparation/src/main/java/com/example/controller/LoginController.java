@@ -30,9 +30,9 @@ public class LoginController {
     private String time;
 
 
-    @PostMapping("/find/user")
+    @PostMapping("/system/user")
     @ResponseBody
-    public ResponseEntity<ResponseResult<SysUser>> findByUser(@RequestBody(required = false) User user) {
+    public ResponseEntity<ResponseResult<SysUser>> findByUser(@RequestBody User user) {
         System.out.println("=========" + time);
         MyAuthorizationProperties properties = new MyAuthorizationProperties();
         System.out.println(properties.getTokenExpireTime());

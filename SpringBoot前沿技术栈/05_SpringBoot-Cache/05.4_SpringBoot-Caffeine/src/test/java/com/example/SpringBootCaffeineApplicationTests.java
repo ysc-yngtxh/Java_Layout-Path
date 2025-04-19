@@ -55,8 +55,8 @@ class SpringBootCaffeineApplicationTests {
     }
 
     // LoadingCache 是一种自动加载的缓存。
-    // 其和普通缓存不同的地方在于，当缓存不存在时，若调用 get()方法，则会自动调用 CacheLoader.load()方法加载最新值。
-    // 调用 getAll()方法将遍历所有的 key 调用 get()，除非实现了 CacheLoader.loadAll()方法。
+    // 其和普通缓存不同的地方在于，当缓存不存在时，若调用 get()方法，则会自动调用 CacheLoader.load() 方法加载最新值。
+    // 调用 getAll() 方法将遍历所有的 key 调用 get()，除非实现了 CacheLoader.loadAll()方法。
     // 使用LoadingCache时，需要指定CacheLoader，并实现其中的 load()方法供缓存缺失时自动加载。
     // 多线程情况下，当两个线程同时调用 get()则后一线程将被阻塞，直至前一线程更新缓存完成。
     @Test

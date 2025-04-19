@@ -16,7 +16,6 @@ public class BootRabbitMQConsumer {
     // 接收消息。这里监听的是基于插件的队列，这里当做是第一个消费者
     // queues：指定队列名  concurrency：设置并发消费者数量，不显性设置则默认线程数量为1
     @RabbitListener(queues = "delayedQueue", concurrency = "10")
-
     public void receive1(Message message, Channel channel) { // Message message 消息； Channel channel 通道
         String msg = new String(message.getBody());
 
@@ -42,7 +41,7 @@ public class BootRabbitMQConsumer {
     // 接收消息。这里监听的是死信队列，因为没有消费者，最终的消息都会流到死信中
     // 参数说明：String message 消息； Channel channel 通道
     @RabbitListener(queues = "deadQueue")
-    public void receive3(Message message, Channel channel){
+    public void receive3(Message message, Channel channel) {
         String msg = new String(message.getBody());
         log.info("当前时间：{},死信队列接收到消息：{}"
                 , new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(new Date())

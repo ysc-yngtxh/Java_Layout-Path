@@ -51,4 +51,5 @@ public class SysRole implements Serializable {
     private Date updateTime;
 
     // 备注
-    private String remark;}
+    private String remark;
+}

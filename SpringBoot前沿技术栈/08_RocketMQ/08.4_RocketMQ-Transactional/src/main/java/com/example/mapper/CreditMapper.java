@@ -8,5 +8,4 @@ import com.example.entity.Credit;
  * @dateTime 2025-02-08 21:00
  * @apiNote TODO
  */
-public interface CreditMapper extends BaseMapper<Credit> {
-}
+public interface CreditMapper extends BaseMapper<Credit> {}

@@ -16,54 +16,54 @@ public class BackupsConfig {
 
     // 交换机
     @Bean("backupsExchange")
-    public DirectExchange confirmExchange(){
+    public DirectExchange backupsExchange() {
         return ExchangeBuilder
                 .directExchange("backupsExchange")
                 .durable(true)
                 // 以下两种写法都表示声明备用交换机。"alternate-exchange"为固定写法，"fanoutExchange"为备用交换机的名称
                 // .alternate("fanoutExchange")
-                // .withArgument("alternate-exchange", "fanoutExchange")
+                .withArgument("alternate-exchange", "fanoutExchange")
                 .build();
     }
     // 队列
     @Bean("backupsQueue")
-    public Queue directQueue(){
+    public Queue backupsQueue() {
         return QueueBuilder.durable("backupsQueue").build();
     }
     // 绑定交换机和队列
     @Bean
-    public Binding queueBinding(@Qualifier("backupsExchange") DirectExchange backupsExchange,
-                                @Qualifier("backupsQueue") Queue backupsQueue){
+    public Binding backupsBinding(@Qualifier("backupsExchange") DirectExchange backupsExchange,
+                                  @Qualifier("backupsQueue") Queue backupsQueue) {
         return BindingBuilder.bind(backupsQueue).to(backupsExchange).with("backupsRoutingKey");
     }
 
 
     // 备份交换机
     @Bean("fanoutExchange")
-    public FanoutExchange fanoutExchange(){
+    public FanoutExchange fanoutExchange() {
         return ExchangeBuilder.fanoutExchange("fanoutExchange").durable(true).build();
     }
     // 备份队列
     @Bean("fanoutQueue")
-    public Queue fanoutQueue(){
+    public Queue fanoutQueue() {
         return QueueBuilder.durable("fanoutQueue").build();
     }
     // 警告队列
     @Bean("warningQueue")
-    public Queue waringQueue(){
+    public Queue waringQueue() {
         return QueueBuilder.durable("warningQueue").build();
     }
     // 绑定备份交换机和备份队列
     @Bean
     public Binding fanoutBinding(@Qualifier("fanoutExchange") FanoutExchange fanoutExchange,
-                                 @Qualifier("fanoutQueue") Queue fanoutQueue){
+                                 @Qualifier("fanoutQueue") Queue fanoutQueue) {
         // 这里没有routingKey,因为使用的是广播(Fanout)类型交换机，我对自己交换机类型下的所有队列开放进行广播，还需要什么路由key？
         return BindingBuilder.bind(fanoutQueue).to(fanoutExchange);
     }
     // 绑定备份交换机和警告队列
     @Bean
     public Binding warningBinding(@Qualifier("fanoutExchange") FanoutExchange fanoutExchange,
-                                  @Qualifier("warningQueue") Queue warningQueue){
+                                  @Qualifier("warningQueue") Queue warningQueue) {
         // 这里没有routingKey,因为使用的是广播(Fanout)类型交换机，我对自己交换机类型下的所有队列开放进行广播，还需要什么路由key？
         return BindingBuilder.bind(warningQueue).to(fanoutExchange);
     }

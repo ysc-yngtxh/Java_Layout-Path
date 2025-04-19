@@ -1,6 +1,5 @@
 package com.example;
 
-import jakarta.annotation.Resource;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -163,7 +162,7 @@ class SpringRedisLockApplicationTests {
                     redisTemplate.opsForValue().decrement("stock");
                 }
             }
-            // 这里使用的 Lua脚本，lua是不支持多线程的，保证获取锁,判断值,删除锁这三个操作是原子性操作。
+            // 这里使用的 Lua脚本，lua是不支持多线程的，保证获取锁、判断值、删除锁这三个操作是原子性操作。
             redisTemplate.execute(redisScript1, Collections.singletonList("K1"), value);
         } else {
             log.error("有线程在使用，请稍后再试！");

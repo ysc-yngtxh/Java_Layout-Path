@@ -91,7 +91,7 @@ public class MyAuthenticationFilter extends OncePerRequestFilter {
                 }
                 // 三个参数的构造方法，用以表明认证成功
                 UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(loginUserDetails, loginUserDetails.getCurrentSysUserInfo().getPassword(), loginUserDetails.getAuthorities());
+                        new UsernamePasswordAuthenticationToken(loginUserDetails, loginUserDetails.getCurrentSysUserInfo().getPassWord(), loginUserDetails.getAuthorities());
                 // 全局注入角色权限信息和登录用户基本信息
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }

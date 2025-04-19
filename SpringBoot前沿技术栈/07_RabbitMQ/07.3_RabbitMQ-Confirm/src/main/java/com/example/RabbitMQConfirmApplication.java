@@ -9,5 +9,4 @@ public class RabbitMQConfirmApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RabbitMQConfirmApplication.class, args);
 	}
-
 }

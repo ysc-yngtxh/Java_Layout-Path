@@ -11,5 +11,4 @@ public class RocketMQTxApplication {
     public static void main(String[] args) {
         SpringApplication.run(RocketMQTxApplication.class, args);
     }
-
 }

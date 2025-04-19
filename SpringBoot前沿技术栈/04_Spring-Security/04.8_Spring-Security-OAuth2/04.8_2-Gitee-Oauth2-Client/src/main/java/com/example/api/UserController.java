@@ -24,7 +24,7 @@ public class UserController {
                         @RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient client,
                         @AuthenticationPrincipal OAuth2User user) {
         request.setAttribute("userName", user.getName());
-        request.setAttribute("userAttrbutes", user.getAttributes());
+        request.setAttribute("userAttributes", user.getAttributes());
         request.setAttribute("clientName", client.getClientRegistration().getClientName());
         return "userinfo";
     }

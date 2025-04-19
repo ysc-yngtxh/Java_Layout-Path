@@ -1,11 +1,5 @@
 package com.example.callback;
 
-/**
- * @author 游家纨绔
- * @dateTime 2025-02-10 22:56
- * @apiNote TODO
- */
-
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.ReturnedMessage;
@@ -13,6 +7,11 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author 游家纨绔
+ * @dateTime 2025-02-10 22:56
+ * @apiNote TODO
+ */
 @Slf4j
 @Component
 public class TxCallBack implements RabbitTemplate.ReturnsCallback {

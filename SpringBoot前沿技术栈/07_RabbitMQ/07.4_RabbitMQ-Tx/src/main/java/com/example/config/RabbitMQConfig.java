@@ -19,7 +19,7 @@ public class RabbitMQConfig {
 
     // 配置一个Direct类型的普通交换机
     @Bean("txDirectExchange")
-    public DirectExchange directExchange(){
+    public DirectExchange directExchange() {
         // 交换机名称   是否持久化  是否自动删除
         return new DirectExchange("txDirectExchange", true, false);
     }

@@ -67,7 +67,7 @@ public class RabbitUtil {
      * @param unused 是否被使用
      * @param empty 内容是否为空
      */
-    public void deleteQueue(String queueName, boolean unused, boolean empty){
+    public void deleteQueue(String queueName, boolean unused, boolean empty) {
         rabbitAdmin.deleteQueue(queueName, unused, empty);
     }
 
@@ -75,7 +75,7 @@ public class RabbitUtil {
      * 清空某个队列中的消息。注意，清空的消息并没有被消费
      * @param queueName 队列名称
      */
-    public void purgeQueue(String queueName){
+    public void purgeQueue(String queueName) {
         rabbitAdmin.purgeQueue(queueName, false);
     }
 
@@ -84,7 +84,7 @@ public class RabbitUtil {
      * @param queueName 队列名称
      * @return 是否存在
      */
-    public boolean existQueue(String queueName){
+    public boolean existQueue(String queueName) {
         return rabbitAdmin.getQueueProperties(queueName) != null;
     }
 
@@ -97,10 +97,9 @@ public class RabbitUtil {
      * @param isWhereAll 是否匹配所有
      * @param headers EADERS模式类型设置，其他模式类型传空
      */
-    public void addBinding(String exchangeType, String exchangeName, String queueName,
-                           String routingKey, boolean isWhereAll, Map<String, Object> headers){
-        Binding binding = bindingBuilder(exchangeType, exchangeName, queueName,
-                                         routingKey, isWhereAll, headers);
+    public void addBinding(String exchangeType, String exchangeName, String queueName
+                         , String routingKey, boolean isWhereAll, Map<String, Object> headers) {
+        Binding binding = bindingBuilder(exchangeType, exchangeName, queueName, routingKey, isWhereAll, headers);
         rabbitAdmin.declareBinding(binding);
     }
 
@@ -108,7 +107,7 @@ public class RabbitUtil {
      * 声明绑定
      * @param binding 绑定关系
      */
-    public void addBinding(Binding binding){
+    public void addBinding(Binding binding) {
         rabbitAdmin.declareBinding(binding);
     }
 
@@ -121,7 +120,8 @@ public class RabbitUtil {
      * @param isWhereAll 是否匹配所有
      * @param headers EADERS模式类型设置，其他模式类型传空
      */
-    public void removeBinding(String exchangeType, String exchangeName, String queueName, String routingKey, boolean isWhereAll, Map<String, Object> headers){
+    public void removeBinding(String exchangeType, String exchangeName, String queueName
+                            , String routingKey, boolean isWhereAll, Map<String, Object> headers) {
         Binding binding = bindingBuilder(exchangeType, exchangeName, queueName, routingKey, isWhereAll, headers);
         removeBinding(binding);
     }
@@ -130,7 +130,7 @@ public class RabbitUtil {
      * 解除交换器与队列的绑定
      * @param binding 绑定关系
      */
-    public void removeBinding(Binding binding){
+    public void removeBinding(Binding binding) {
         rabbitAdmin.removeBinding(binding);
     }
 
@@ -143,7 +143,8 @@ public class RabbitUtil {
      * @param isWhereAll 是否匹配所有
      * @param headers EADERS模式类型设置，其他模式类型传空
      */
-    public void andExchangeBindingQueue(String exchangeType, String exchangeName, String queueName, String routingKey, boolean isWhereAll, Map<String, Object> headers){
+    public void andExchangeBindingQueue(String exchangeType, String exchangeName, String queueName
+                                      , String routingKey, boolean isWhereAll, Map<String, Object> headers) {
         // 声明交换器
         addExchange(exchangeType, exchangeName);
         // 声明队列
@@ -159,7 +160,7 @@ public class RabbitUtil {
      * @param msg 消息内容
      * @return 返回消息体
      */
-    public Message getMessage(String messageType, Object msg){
+    public Message getMessage(String messageType, Object msg) {
         MessageProperties messageProperties = new MessageProperties();
         messageProperties.setContentType(messageType);
         return new Message(msg.toString().getBytes(),messageProperties);
@@ -171,17 +172,17 @@ public class RabbitUtil {
      * @param exchangeName 交换机名称
      * @return 交换机对象
      */
-    private Exchange createExchange(String exchangeType, String exchangeName){
-        if(ExchangeType.DIRECT.equals(exchangeType)){
+    private Exchange createExchange(String exchangeType, String exchangeName) {
+        if (ExchangeType.DIRECT.equals(exchangeType)) {
             return new DirectExchange(exchangeName);
         }
-        if(ExchangeType.TOPIC.equals(exchangeType)){
+        if (ExchangeType.TOPIC.equals(exchangeType)) {
             return new TopicExchange(exchangeName);
         }
-        if(ExchangeType.HEADERS.equals(exchangeType)){
+        if (ExchangeType.HEADERS.equals(exchangeType)) {
             return new HeadersExchange(exchangeName);
         }
-        if(ExchangeType.FANOUT.equals(exchangeType)){
+        if (ExchangeType.FANOUT.equals(exchangeType)) {
             return new FanoutExchange(exchangeName);
         }
         return null;
@@ -192,7 +193,7 @@ public class RabbitUtil {
      * @param queueName 队列名称
      * @return 队列对象
      */
-    private Queue createQueue(String queueName){
+    private Queue createQueue(String queueName) {
         return new Queue(queueName);
     }
 
@@ -206,22 +207,22 @@ public class RabbitUtil {
      * @param headers EADERS模式类型设置，其他模式类型传空
      * @return 绑定关系
      */
-    private Binding bindingBuilder(String exchangeType, String exchangeName, String queueName,
-                                   String routingKey, boolean isWhereAll, Map<String, Object> headers){
-        if(ExchangeType.DIRECT.equals(exchangeType)) {
+    private Binding bindingBuilder(String exchangeType, String exchangeName, String queueName
+                                 , String routingKey, boolean isWhereAll, Map<String, Object> headers) {
+        if (ExchangeType.DIRECT.equals(exchangeType)) {
             return BindingBuilder.bind(new Queue(queueName)).to(new DirectExchange(exchangeName)).with(routingKey);
         }
-        if(ExchangeType.TOPIC.equals(exchangeType)) {
+        if (ExchangeType.TOPIC.equals(exchangeType)) {
             return BindingBuilder.bind(new Queue(queueName)).to(new TopicExchange(exchangeName)).with(routingKey);
         }
-        if(ExchangeType.HEADERS.equals(exchangeType)) {
+        if (ExchangeType.HEADERS.equals(exchangeType)) {
             if(isWhereAll) {
                 return BindingBuilder.bind(new Queue(queueName)).to(new HeadersExchange(exchangeName)).whereAll(headers).match();
             } else {
                 return BindingBuilder.bind(new Queue(queueName)).to(new HeadersExchange(exchangeName)).whereAny(headers).match();
             }
         }
-        if(ExchangeType.FANOUT.equals(exchangeType)) {
+        if (ExchangeType.FANOUT.equals(exchangeType)) {
             return BindingBuilder.bind(new Queue(queueName)).to(new FanoutExchange(exchangeName));
         }
         return null;

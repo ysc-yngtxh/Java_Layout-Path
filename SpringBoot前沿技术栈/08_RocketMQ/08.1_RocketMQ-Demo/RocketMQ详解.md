@@ -10,20 +10,20 @@
    > ##### 2.1、启动 Name Server 
    > <figure>
    >
-   > ##### RocketMQ解压后进入 bin 路径：nohup sh mqnamesrv & tail -f ~/logs/rocketmqlogs/namesrv.log  
+   > ##### RocketMQ解压后进入 bin 路径：nohup sh mqnamesrv & tail -f ~/Development/rocketmq/rocketmq-all-5.3.2-bin-release/logs/namesrv.log  
    > ①、nohup 命令用于在后台运行程序，并忽略 SIGHUP（终端关闭）信号。这意味着即使终端关闭，程序仍然会继续运行。  
-     ②、sh bin/mqnamesrv：运行bin目录下的mqnamesrv文件  
+     ②、sh mqnamesrv：运行bin目录下的mqnamesrv文件  
      ③、& 符号用于将前面的命令放入后台执行。   
-     ④、tail -f ~/logs/rocketmqlogs/namesrv.log：是用于实时查看指定日志文件的最新内容。-f 参数表示持续监视文件，并实时输出新增的日志内容。  
+     ④、tail -f ~/Development/rocketmq/rocketmq-all-5.3.1-bin-release/logs/namesrv.log ：是用于实时查看指定日志文件的最新内容。-f 参数表示持续监视文件，并实时输出新增的日志内容。  
    > </figure>
    > <hr/>
    >
    > ##### 2.2、启动 Broker
    > <figure>
    >
-   > ##### RocketMQ解压后进入 bin 路径：nohup sh mqbroker -n localhost:9876 & tail -f ~/logs/rocketmqlogs/broker.log  
+   > ##### RocketMQ解压后进入 bin 路径：nohup sh mqbroker -n localhost:9876 & tail -f ~/Development/rocketmq/rocketmq-all-5.3.2-bin-release/logs/namesrv.log
    > ①、nohup 命令用于在后台运行程序，并忽略 SIGHUP（终端关闭）信号。这意味着即使终端关闭，程序仍然会继续运行。  
-     ②、sh bin/mqbroker：运行bin目录下的mqbroker文件   
+     ②、sh mqbroker：运行bin目录下的mqbroker文件   
      ③、-n localhost:9876：指定了 Name Server 的地址。  
      ④、& 符号用于将前面的命令放入后台执行。  
      ⑤、tail -f ~/logs/rocketmqlogs/broker.log：是用于实时查看指定日志文件的最新内容。-f 参数表示持续监视文件，并实时输出新增的日志内容。
@@ -642,4 +642,3 @@
         如果消息最终进入了死信队列，则可以通过RocketMQ提供的相关接口从死信队列获取到相应的消息，保证了消息消费的可靠性。
 </h4>
 </figure>
-

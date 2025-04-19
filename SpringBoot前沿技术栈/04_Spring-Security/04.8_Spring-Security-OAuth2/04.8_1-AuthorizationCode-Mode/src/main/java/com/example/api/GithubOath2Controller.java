@@ -2,14 +2,12 @@ package com.example.api;
 
 import cn.hutool.core.lang.UUID;
 import cn.hutool.http.HttpRequest;
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
 import com.example.constant.Oauth2Property;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,7 +34,7 @@ public class GithubOath2Controller {
                 .append("&client_id=").append(Oauth2Property.GITHUB_CLIENT_ID)
                 .append("&scope=").append("repo%20user")
                 .append("&state=").append(UUID.randomUUID())
-                .append("&redirect_uri=").append(URLEncoder.encode(Oauth2Property.GITHUB_CALLBACK_URI));
+                .append("&redirect_uri=").append(URLEncoder.encode(Oauth2Property.GITHUB_CALLBACK_URI, StandardCharsets.UTF_8));
 
         // 重定向
         return "redirect:" + urlBuilder;

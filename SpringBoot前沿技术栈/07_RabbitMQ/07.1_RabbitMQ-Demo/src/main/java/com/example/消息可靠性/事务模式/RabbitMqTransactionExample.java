@@ -2,8 +2,6 @@ package com.example.消息可靠性.事务模式;
 
 import com.example.RabbitMqUtils;
 import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
 import java.io.IOException;
 
 /**
@@ -37,7 +35,9 @@ public class RabbitMqTransactionExample {
         } catch (Exception e) {
             // 回滚事务
             try {
-                channel.txRollback();
+	            if (channel != null) {
+		            channel.txRollback();
+	            }
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }

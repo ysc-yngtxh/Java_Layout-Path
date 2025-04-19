@@ -13,6 +13,7 @@ public class HandlerRegistry {
 
     // 使用构造器注入 DynamicMessageListener 对象
     private final DynamicMessageListener dynamicMessageListener;
+
     public HandlerRegistry(DynamicMessageListener dynamicMessageListener) {
         this.dynamicMessageListener = dynamicMessageListener;
     }

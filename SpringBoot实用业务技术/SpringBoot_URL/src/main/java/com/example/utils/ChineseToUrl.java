@@ -1,5 +1,7 @@
 package com.example.utils;
 
+import java.nio.charset.StandardCharsets;
+
 /**
  * @author 游家纨绔
  * @dateTime 2024-08-19 00:17
@@ -21,7 +23,7 @@ public class ChineseToUrl {
                 byte[] b;
                 try {
                     // 指定需要的编码类型
-                    b = String.valueOf(c).getBytes("utf-8");
+                    b = String.valueOf(c).getBytes(StandardCharsets.UTF_8);
                 } catch (Exception ex) {
                     System.out.println(ex);
                     b = new byte[0];

@@ -33,7 +33,7 @@ public class DynamicListener {
      * @param connectionFactory 连接工厂
      */
     @Bean
-    public SimpleMessageListenerContainer messageListenerContainer(ConnectionFactory connectionFactory){
+    public SimpleMessageListenerContainer messageListenerContainer(ConnectionFactory connectionFactory) {
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(connectionFactory);
         // 监听消息的消费逻辑
         container.setMessageListener(CustomMessageHandler());
@@ -114,9 +114,10 @@ public class DynamicListener {
                     ListenerExecutionFailedException ex = (ListenerExecutionFailedException) throwable;
                     // 消费失败的消息
                     Message failedMessage = ex.getFailedMessage();
-                    log.error("SimpleMessageListenerContainer监听到消息处理失败，异常原因: {}。消息内容：{}",
-                            throwable.getCause().getMessage(),
-                            new String(failedMessage.getBody()));
+                    log.error("SimpleMessageListenerContainer监听到消息处理失败，异常原因: {}。消息内容：{}"
+                            , throwable.getCause().getMessage()
+                            , new String(failedMessage.getBody())
+                    );
                 } else {
                     log.error("SimpleMessageListenerContainer监听器发生未知错误: {}", throwable.getMessage());
                 }

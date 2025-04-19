@@ -86,7 +86,8 @@ public class DynamicRabbitController {
      * 判断条件是所有的键值对都匹配成功才发送到队列
      */
     @PostMapping("andExchangeBindingQueueOfHeaderAll")
-    public void andExchangeBindingQueueOfHeaderAll(@RequestParam String exchangeName, @RequestParam String queueName) {
+    public void andExchangeBindingQueueOfHeaderAll(@RequestParam String exchangeName
+                                                 , @RequestParam String queueName) {
         HashMap<String, Object> header = new HashMap<>();
         header.put("queue", "queue");
         header.put("bindType", "whereAll");
@@ -98,7 +99,8 @@ public class DynamicRabbitController {
      * 判断条件是只要有一个键值对匹配成功就发送到队列
      */
     @PostMapping("andExchangeBindingQueueOfHeaderAny")
-    public void andExchangeBindingQueueOfHeaderAny(@RequestParam String exchangeName, @RequestParam String queueName) {
+    public void andExchangeBindingQueueOfHeaderAny(@RequestParam String exchangeName
+                                                 , @RequestParam String queueName) {
         HashMap<String, Object> header = new HashMap<>();
         header.put("queue", "queue");
         header.put("bindType", "whereAny");

@@ -58,15 +58,15 @@ mybatis-plus:
       # 驼峰下划线转换
       table-underline: true
       # 自定义表主键生成器
-      key-generators: com.example.CustomKeyGenerator
+      # key-generators: com.example.CustomKeyGenerator
       # 全局的 Entity 逻辑删除字段属性名，仅在逻辑删除功能打开时有效。
       logic-delete-field: delFlag
       # 逻辑删除配置
-      logic-delete-value: 0     # 逻辑已删除值(默认为 1)
-      logic-not-delete-value: 1 # 逻辑未删除值(默认为 0)
-      insert-strategy: NEVER
-      update-strategy: ignored
-      where-strategy: ALWAYS
+      logic-delete-value: 1     # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+      # insert-strategy: NEVER
+      # update-strategy: ignored
+      # where-strategy: ALWAYS
   configuration:
     # 是否开启自动驼峰命名规则映射：从数据库列名到Java属性驼峰命名的类似映射
     map-underscore-to-camel-case: true
@@ -83,7 +83,7 @@ logging:
     com:
       example: debug
 
-# 安全认证
+# 自定义的安全认证
 security:
   # token过期时间（分钟）
   tokenExpireTime: 60
@@ -95,7 +95,14 @@ security:
   loginAfterTime: 10
   ignoreUrls:
     - /toLogin
-    - /api/system/user/getCurrentUserInfo
+    - /dashboard
+    - /system/settings
+    - /data/management
+    - /order/management
+    - /product/management
+    - /customer/management
+    - /finance/management
+    - /reports/analytics
     - /index
     - /logout
     - /*/*.js

@@ -22,6 +22,7 @@ public class DynamicMessageListener implements ChannelAwareMessageListener {
 
     // 使用构造器注入 MessageConverter 对象
     private final MessageConverter messageConverter;
+
     public DynamicMessageListener(MessageConverter messageConverter) {
         this.messageConverter = messageConverter;
     }

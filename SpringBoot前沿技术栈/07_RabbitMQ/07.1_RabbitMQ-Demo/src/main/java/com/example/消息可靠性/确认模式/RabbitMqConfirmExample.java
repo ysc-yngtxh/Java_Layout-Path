@@ -2,8 +2,6 @@ package com.example.消息可靠性.确认模式;
 
 import com.example.RabbitMqUtils;
 import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
 
 /**
  * @author 游家纨绔
@@ -17,7 +15,7 @@ public class RabbitMqConfirmExample {
         try {
             Channel channel = RabbitMqUtils.getChannel();
 
-            // 设置信道为comfirm确认模式
+            // 设置信道为 confirm 确认模式
             channel.confirmSelect();
 
             String message = "Hello, RabbitMQ!";

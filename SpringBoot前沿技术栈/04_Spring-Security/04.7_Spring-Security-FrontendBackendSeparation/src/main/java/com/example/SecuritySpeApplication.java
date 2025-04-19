@@ -15,5 +15,4 @@ public class SecuritySpeApplication {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(SecuritySpeApplication.class, args);
         System.out.println(applicationContext);
     }
-
 }

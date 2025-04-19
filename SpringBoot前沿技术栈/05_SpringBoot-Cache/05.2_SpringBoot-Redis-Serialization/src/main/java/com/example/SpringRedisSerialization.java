@@ -9,5 +9,4 @@ public class SpringRedisSerialization {
     public static void main(String[] args) {
         SpringApplication.run(SpringRedisSerialization.class, args);
     }
-
 }

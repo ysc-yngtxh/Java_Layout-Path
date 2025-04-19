@@ -7,7 +7,7 @@
         [1]、整数类型：
              int         整数型 (对应Java中的int)
              bigint      长整型 (对应Java中的long)
-             tinyint(1)  布尔类型(对应Java中的boolean,用1代表true,0代表false)
+             tinyint(1)  布尔类型(对应Java中的boolean，用1代表true，0代表false)
              smallint    整数型 (对应Java中的short)
                    字段如果设置为UNSIGNED类型: 只能存储正整数,不能用来储存负数；例如：tinyint 类型只能存储0到255的整数
                    字段如果不设置UNSIGNED类型: 存储该类型范围的整数；例如：tinyint 类型只能存储-128到127的整数

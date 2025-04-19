@@ -1,6 +1,6 @@
 spring:
     application:
-        name: 07.5_SpringBoot-Redission
+        name: @project.artifactId@
     data:
         redis:
             host: 127.0.0.1

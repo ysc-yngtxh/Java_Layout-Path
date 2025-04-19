@@ -1,7 +1,6 @@
 package com.example.controller;
 
 import com.example.handler.HandlerRegistry;
-import com.example.handler.MessageHandler;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +13,7 @@ public class HandlerController {
 
     // 使用构造器注入 HandlerRegistry 对象
     private final HandlerRegistry handlerRegistry;
+
     public HandlerController(HandlerRegistry handlerRegistry) {
         this.handlerRegistry = handlerRegistry;
     }
@@ -36,7 +36,6 @@ public class HandlerController {
             channel.basicAck(deliveryTag, false);
         });
     }
-
 
     @DeleteMapping("/remove/{messageType}")
     public void unregisterHandler(@PathVariable String messageType) {

@@ -1,10 +1,8 @@
 package com.example.api;
 
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
@@ -27,7 +25,7 @@ public class UserController {
 
 
     // TODO 创建客户端授权应用。修改配置的 spring.sql.init.mode=always ,启动项目后会在指定的数据库下生成库表
-    //      启动后需要首先创建客户端授权应用，类似于 gitee、gihub 等第三方登录授权应用
+    //      启动后需要首先创建客户端授权应用，类似于 gitee、github 等第三方登录授权应用
     //      http://localhost:9090/create/app?clientName=yjwk&homePageUri=http%3A%2F%2F127.0.0.1%3A8080&redirectUri=http%3A%2F%2F127.0.0.1%3A8080%2Flogin%2Foauth2%2Fcode%2FmyClient&scopeSets=emalls,groups,pull_requests
     @RequestMapping("/create/app")
     public void createApp(@RequestParam String clientName,

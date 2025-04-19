@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class PriorityConsumer {
 
     @RabbitListener(queues = "priorityQueue")
-    public void priority(Message message){
+    public void priority(Message message) {
         log.info("接收到的消息：{}", new String(message.getBody()));
     }
 }

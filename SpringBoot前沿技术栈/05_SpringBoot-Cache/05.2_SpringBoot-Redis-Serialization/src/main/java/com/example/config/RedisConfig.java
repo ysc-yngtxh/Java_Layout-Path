@@ -17,6 +17,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  */
 @Configuration
 public class RedisConfig {
+
     // 初始化一个 RedisTemplate<Object, Object> 对象
     @Bean
     @SuppressWarnings("all")
@@ -45,7 +46,8 @@ public class RedisConfig {
         // template.setHashKeySerializer(new GenericToStringSerializer<>(Integer.class));
         // template.setHashValueSerializer(new GenericToStringSerializer<>(File.class));
 
+        // Redis初始化
+        template.afterPropertiesSet();
         return template;
     }
 }
- 

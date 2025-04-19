@@ -4,15 +4,11 @@ import cn.hutool.http.HttpRequest;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.example.constant.Oauth2Property;
-import jakarta.servlet.http.HttpServletRequest;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
-import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,9 +31,9 @@ public class GiteeOath2Controller {
         // TODO Step1：获取Authorization Code
         StringBuilder urlBuilder = new StringBuilder(Oauth2Property.AUTHORIZE_URL);
         urlBuilder.append("?response_type=").append("code")
-                .append("&client_id=").append(Oauth2Property.CLIENT_ID)
-                .append("&redirect_uri=").append(URLEncoder.encode(Oauth2Property.CALLBACK_URI))
-                .append("&scope=").append("user_info");
+                  .append("&client_id=").append(Oauth2Property.CLIENT_ID)
+                  .append("&redirect_uri=").append(URLEncoder.encode(Oauth2Property.CALLBACK_URI, StandardCharsets.UTF_8))
+                  .append("&scope=").append("user_info");
 
         // 重定向
         return "redirect:" + urlBuilder;
@@ -63,9 +59,9 @@ public class GiteeOath2Controller {
             params.put("redirect_uri", Oauth2Property.CALLBACK_URI);
 
             String authRequest = HttpRequest.post(Oauth2Property.TOKEN_URL)
-                    .form(params)      // 表单内容
-                    .timeout(20000)  // 超时，毫秒
-                    .execute().body();
+                                            .form(params)      // 表单内容
+                                            .timeout(20000)  // 超时，毫秒
+                                            .execute().body();
 
             JSONObject accessTokenJson = Optional.ofNullable(authRequest).map(JSONUtil::parseObj).get();
             System.out.println("accessTokenJson = " + accessTokenJson);
@@ -77,8 +73,8 @@ public class GiteeOath2Controller {
             String accessTokenStr = accessTokenJson.get("access_token").toString();
 
             // TODO Step3: 获取用户信息
-            HttpRequest httpRequest = HttpRequest.get(Oauth2Property.GET_USER_INFO_URL);
-            httpRequest.form("access_token", accessTokenStr);
+            HttpRequest httpRequest = HttpRequest.get(Oauth2Property.GET_USER_INFO_URL)
+                                                 .form("access_token", accessTokenStr);
             System.out.println("httpRequest = " + httpRequest);
             return httpRequest.execute().body();
         } catch (Exception e) {

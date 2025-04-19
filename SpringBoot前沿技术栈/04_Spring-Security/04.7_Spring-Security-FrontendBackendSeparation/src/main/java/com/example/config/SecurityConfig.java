@@ -5,10 +5,10 @@ import com.example.filter.AdminAuthenticationProcessingFilter;
 import com.example.filter.MyAuthenticationFilter;
 import com.example.pojo.vo.ResponseResult;
 import com.example.security.authorization.UrlAuthorizationManager;
-import com.example.security.handler.CustomFailureHandler;
 import com.example.utils.WebUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +23,10 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -45,9 +49,18 @@ public class SecurityConfig {
 
     private final UrlAuthorizationManager urlAuthorizationManager;
 
-    private final CustomFailureHandler customFailureHandler;
-
     private final MyAuthorizationProperties myAuthorizationProperties;
+
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        HashMap<String, PasswordEncoder> map = new HashMap<>();
+        map.put("bcrypt", new BCryptPasswordEncoder());
+        map.put("noop", NoOpPasswordEncoder.getInstance());
+        DelegatingPasswordEncoder delegatingPasswordEncoder = new DelegatingPasswordEncoder("bcrypt", map);
+        delegatingPasswordEncoder.setDefaultPasswordEncoderForMatches(new BCryptPasswordEncoder());
+        return delegatingPasswordEncoder;
+    }
 
 
     // 认证权限入口 - 未登录的情况下访问所有接口都会拦截到此(除了配置的不需要认证的路径) - 作为异常情况下的逻辑输出

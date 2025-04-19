@@ -33,7 +33,7 @@ public class RabbitListenerTest {
                     value = @Queue() // 这里没有给Queue的value值，表示是个暂时的队列
             )
     })
-    public void confirm(String message){
+    public void confirm(String message) {
         System.out.println("message = " + message);
     }
 }

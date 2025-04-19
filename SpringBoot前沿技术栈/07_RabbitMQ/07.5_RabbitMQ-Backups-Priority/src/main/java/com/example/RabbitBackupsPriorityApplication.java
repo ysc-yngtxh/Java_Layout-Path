@@ -9,5 +9,4 @@ public class RabbitBackupsPriorityApplication {
     public static void main(String[] args) {
         SpringApplication.run(RabbitBackupsPriorityApplication.class, args);
     }
-
 }

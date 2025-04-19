@@ -11,6 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -41,11 +42,15 @@ class SpringBootUrlApplicationTests {
     //    port为端口号，path为文件路径及文件名。
     //    例如：https://www.baidu.com/
     @Test
-    public void contextLoads() throws IOException, URISyntaxException, SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public void contextLoads() throws IOException, URISyntaxException {
         // 因为所携带路径中存在中文，因此辨识路径便会从中文部分断开
         URL url1 = new URL("https://devapi.qweather.com/v7/weather/now?location=101110101&key=f83cf5800baf480fa4c3bc6a474ffd90");
         URL url2 = new URL("http", "localhost", 8080, "/");
         URL url3 = new URL("file:" + ABSOLUTE_PATH + "/src/main/resources/application.properties");
+
+        // 上述的构造器在 Jdk20版本中被弃用，可使用如下方式
+        URL uri4 = new URI("https://example.com").toURL();
+        URL uri5 = URI.create("https://example.com").toURL();
 
         System.out.println("协议为：" + url3.getProtocol());
         System.out.println("验证信息：" + url3.getAuthority());

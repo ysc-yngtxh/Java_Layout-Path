@@ -60,15 +60,15 @@
          ②、队列达到最大程度 "x-max-length"（队列满了，无法再添加数据到mq中。通过消费者声明死信交换机的x-max-length为队列设置长度）
          ③、消息被拒绝（basic.reject 或 basic.nack） 并且 requeue=false
 
-                                (Binding绑定)
-                                (Channel信道)                              (Channel信道)
-       消息生产者 ---> Exchange交换器 ---> Queue消息队列 ------> Connection通道连接 ----> 消费者c1
-                                                       ||
-                                                       \/
-                                                    死信交换器
-                                                       ||
-                                                       \/
-                                                     死信队列 ---> Connection通道连接 ---> 消费者c2
+                                  (Binding绑定)
+                                  (Channel信道)                                 (Channel信道)
+       消息生产者 -----> Exchange交换器 -----> Queue消息队列 ------> Connection通道连接 -----> 消费者c1
+                                                           ||
+                                                           \/
+                                                        死信交换器
+                                                           ||
+                                                           \/
+                                                         死信队列 ---> Connection通道连接 ---> 消费者c2
 
 ## 四、MQ高级
 <figure>
@@ -110,9 +110,9 @@
     最后再重新启动，使插件生效。
     打开http://localhost:15672可以后台管理页面Exchange项的Type下拉，能找到 x-delayed-message 类型表示安装成功！
 
-                               (Binding绑定)
-                               (Channel信道)                                       (Channel信道)
-    消息生产者--->Exchange交换器--------------->Queue消息队列------>Connection通道连接--------------->消费者
+                                (Binding绑定)
+                                (Channel信道)                                     (Channel信道)
+    消息生产者 ---> Exchange交换器 ----------> Queue消息队列 ------> Connection通道连接 ---------> 消费者
 
     死信队列的延迟是在队列中进行的，而基于插件的延迟队列是在交换机中实现的
    </figure>
@@ -165,14 +165,12 @@
    <hr/>
 
     2.2、Conﬁrm模式
-      Ⅰ、概念：将 RabbitMQ 的 channel(信道) 设置为 conﬁrm模式，所有在该信道上发布的消息都将会被指派一个唯一的ID（从1开始），
-              一旦消息被投递到所有匹配的队列之后，RabbitMQ就会发送一个ACK给生产者(包含消息的唯一ID)，
-              这就使得生产者知道消息已经正确到达目的队列了。
-              如果 RabbitMQ 没能处理该消息，则会发送一个Nack消息给生产者，生产者可以进行重试操作。
+      Ⅰ、概念：Confirm 模式（Publisher Confirms）是 RabbitMQ 提供的一种消息可靠性投递机制，
+              用于确保生产者发送的消息成功到达 RabbitMQ 服务器（确切地说是到达交换机）。
 
-                                      (Binding绑定)
-                                      (Channel信道)                               (Channel信道)
-             消息生产者------->Exchange交换器----->Queue消息队列------>Connection通道连接-------->消费者
+                                        (Binding绑定)
+                                        (Channel信道)                                (Channel信道)
+             消息生产者 -----> Exchange交换器 -----> Queue消息队列 -----> Connection通道连接 ------> 消费者
                 ||                ||
                 ||(发送消息备份)    ||(当交换机收到消息，从缓存中清除已收到的消息)
                 ||                ||
@@ -236,9 +234,9 @@
             当交换机接收到一条不可路由消息时，将会把这条消息转发到备份交换机中，由备份交换机来转发和处理，通常备份交换机的类型为Fanout,
             这样就能把所有消息都投递到与其绑定的的队列中，然后我们在备份交换机下绑定一个队列，这样所有那些原交换机无法被路由的消息，
             就会都进入这个队列了。当然，我们还可以建立一个报警队列，用独立的消息着来进行检测和报警。
-                                     (Binding绑定)
-                                     (Channel信道)                              (Channel信道)
-            消息生产者----->Exchange交换器------>Queue消息队列------>Connection通道连接------>消费者
+                                       (Binding绑定)
+                                       (Channel信道)                                (Channel信道)
+            消息生产者 -----> Exchange交换器 -----> Queue消息队列 -----> Connection通道连接 -----> 消费者
                                ||
                                ||              备份队列
                                \/           /
@@ -252,6 +250,12 @@
 
              注意：mandatory参数和备份交换机一起使用时，消息该何去何从？是先回退给生产者还是先备份给交换机
              经过发现，备份交换机的优先级高于回退消息。有备份交换机的时候，ReturnsCallback是失效的
+
+      Ⅳ、总结
+         1、ConfirmCallback 只能确认消息是否到达交换机，不能确认是否路由到队列
+         2、setPublisherConfirmType(ConfirmType.correlated) 必须设置才能确保消息到达交换机时触发 ConfirmCallback
+         3、ReturnsCallback 只能确认消息是否路由到队列，不能确认是否到达交换机
+         4、setMandatory(true) 必须设置才能确保消息无法路由时触发 ReturnCallback
    </figure>
 </figure>
 

@@ -47,22 +47,24 @@ public class CaffeineConfig {
     private static Map<String, Object> getCacheType() {
         Map<String, Object> map = new ConcurrentHashMap<>();
         map.put("UnitCache", Caffeine.newBuilder()
-                .expireAfterWrite(10, TimeUnit.SECONDS)
-                .maximumSize(100)
-                .recordStats()
-                .build());
+                                     .expireAfterWrite(10, TimeUnit.SECONDS)
+                                     .maximumSize(100)
+                                     .recordStats()
+                                     .build()
+               );
         map.put("UnitCache2", Caffeine.newBuilder()
-                // 初始容量
-                .initialCapacity(100)
-                // 最大缓存数量
-                .maximumSize(500)
-                // 缓存过期时间：写入缓存后，经过某个时间缓存失效
-                .expireAfterWrite(60, TimeUnit.SECONDS)
-                // 缓存失效监听器
-                .removalListener((key, value, cause) -> System.out.println("key:" + key + " value:" + value + " cause:" + cause))
-                // 开启统计功能
-                .recordStats()
-                .build());
+                                      // 初始容量
+                                      .initialCapacity(100)
+                                      // 最大缓存数量
+                                      .maximumSize(500)
+                                      // 缓存过期时间：写入缓存后，经过某个时间缓存失效
+                                      .expireAfterWrite(60, TimeUnit.SECONDS)
+                                      // 缓存失效监听器
+                                      .removalListener((key, value, cause) -> System.out.println("key:" + key + " value:" + value + " cause:" + cause))
+                                      // 开启统计功能
+                                      .recordStats()
+                                      .build()
+               );
         return map;
     }
 }

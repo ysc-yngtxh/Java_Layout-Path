@@ -8,5 +8,4 @@ import com.example.entity.MQTxLog;
  * @dateTime 2025-02-08 21:00
  * @apiNote TODO
  */
-public interface MQTxLogMapper extends BaseMapper<MQTxLog> {
-}
+public interface MQTxLogMapper extends BaseMapper<MQTxLog> {}

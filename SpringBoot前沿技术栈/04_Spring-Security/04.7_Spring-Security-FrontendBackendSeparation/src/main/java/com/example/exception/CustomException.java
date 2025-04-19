@@ -12,7 +12,7 @@ import java.io.Serial;
  */
 @Getter
 @AllArgsConstructor
-public class CustomException extends RuntimeException{
+public class CustomException extends RuntimeException {
 
     @Serial
     private static final long serialVersionUID = -1538611574772578652L;

@@ -6,20 +6,18 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/backups")
 public class BackupsController {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
     // 开始发消息  测试确认
-    @GetMapping("/sendMessage/{message}")
-    public void sendBackups(@PathVariable String message){
+    @GetMapping("/backups/{message}")
+    public void sendBackups(@PathVariable String message) {
         CorrelationData correlationData1 = new CorrelationData("1");
         rabbitTemplate.convertAndSend("backupsExchange", "backupsRoutingKey", message, correlationData1);
         log.info("发送消息内容：{}，设置正常的绑定交换机与路由backupsRoutingKey", message);

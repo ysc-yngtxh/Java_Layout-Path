@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class RabbitMQCallBack implements RabbitTemplate.ConfirmCallback, RabbitTemplate.ReturnsCallback {
+
     // RabbitMQCallBack 实现的是内部接口 ConfirmCallback 是交换机消息确认。ReturnCallback 是实现消息回退模式
     // 通过实现 ConfirmCallback 接口，消息发送到 Exchange 后触发回调，确认是否正确到达 Exchange 中
     // 通过实现 ReturnCallback 接口，如果消息不可路由，通过其实现方法来让消息回退给生产者

@@ -9,5 +9,4 @@ public class SpringRedisLockApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringRedisLockApplication.class, args);
     }
-
 }

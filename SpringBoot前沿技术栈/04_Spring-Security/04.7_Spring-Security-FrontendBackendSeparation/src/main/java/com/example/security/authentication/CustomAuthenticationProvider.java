@@ -4,6 +4,7 @@ import com.example.security.bo.LoginUserDetails;
 import com.example.security.service.UserDetailsServiceImpl;
 import com.example.utils.JwtUtil;
 import jakarta.annotation.Resource;
+import java.util.Random;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,8 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
-
-import java.util.Random;
 
 /**
  * @author example

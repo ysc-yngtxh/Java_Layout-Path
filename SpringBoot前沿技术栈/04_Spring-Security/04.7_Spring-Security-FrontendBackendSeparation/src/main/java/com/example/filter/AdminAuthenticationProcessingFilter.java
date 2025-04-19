@@ -28,11 +28,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class AdminAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {
 
-    protected AdminAuthenticationProcessingFilter(
-            CustomAuthenticationManager customAuthenticationManager,
-            CustomSuccessHandler customSuccessHandler,
-            CustomFailureHandler customFailureHandler) {
-
+    protected AdminAuthenticationProcessingFilter(CustomAuthenticationManager customAuthenticationManager,
+                                                  CustomSuccessHandler customSuccessHandler,
+                                                  CustomFailureHandler customFailureHandler) {
         // AntPathRequestMatcher路径匹配器，拦截url为 "/toLogin" 的POST请求作为登录接口
         super(new AntPathRequestMatcher("/toLogin", "POST"), customAuthenticationManager);
         this.setAuthenticationSuccessHandler(customSuccessHandler);
@@ -56,7 +54,7 @@ public class AdminAuthenticationProcessingFilter extends AbstractAuthenticationP
             // 使用UsernamePasswordAuthenticationToken的静态方法unauthenticated()，而不使用三个参数的构造方法
             // 可以通过源码发现区别在于：三个参数的构造方法设置认证过，unauthenticated()设置未认证过的
             authRequest =
-                    UsernamePasswordAuthenticationToken.unauthenticated(sysUser.getUserName(), sysUser.getPassword());
+                    UsernamePasswordAuthenticationToken.unauthenticated(sysUser.getUserName(), sysUser.getPassWord());
 
             // 提供子类可以配置放入身份验证请求的详细信息属性的内容。
             // 参数：wrappedRequest – 正在为其创建身份验证请求

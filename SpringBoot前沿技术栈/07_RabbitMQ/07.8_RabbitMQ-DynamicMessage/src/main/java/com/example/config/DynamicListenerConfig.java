@@ -41,10 +41,10 @@ public class DynamicListenerConfig {
 
     /**
      * 动态消息监听器。消息处理逻辑
-     * @param jsonMessageConverter 消息转换器
+     * @param messageConverter 消息转换器
      */
     @Bean
-    public DynamicMessageListener dynamicMessageListener(MessageConverter jsonMessageConverter) {
-        return new DynamicMessageListener(jsonMessageConverter);
+    public DynamicMessageListener dynamicMessageListener(MessageConverter messageConverter) {
+        return new DynamicMessageListener(messageConverter);
     }
 }

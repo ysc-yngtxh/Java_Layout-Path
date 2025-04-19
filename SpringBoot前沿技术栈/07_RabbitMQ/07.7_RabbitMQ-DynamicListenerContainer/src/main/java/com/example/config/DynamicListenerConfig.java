@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * RabbitTemplete 可以不进行手动配置，SpringBoot会自动配置。直接通过 @Autowired 使用即可。
+ * RabbitTemplate 可以不进行手动配置，SpringBoot会自动配置。直接通过 @Autowired 使用即可。
  * RabbitAdmin 需要进行手动配置，通过 @Bean 注入到IOC容器中，才能使用。
  */
 @Slf4j
@@ -87,18 +87,18 @@ public class DynamicListenerConfig {
 
     // 配置一个Direct类型的死信交换机
     @Bean("deadExchange")
-    public DirectExchange deadExchange(){
+    public DirectExchange deadExchange() {
         return new DirectExchange("deadExchange", true, false);
     }
     // 配置一个死信队列
     @Bean("deadQueue")
-    public Queue deadQueue(){
+    public Queue deadQueue() {
         return new Queue("deadQueue");
     }
     // 配置一个死信队列和死信交换机的绑定
     @Bean
     public Binding deadBinding(@Qualifier("deadExchange") DirectExchange directExchange,
-                               @Qualifier("deadQueue") Queue directQueue){
+                               @Qualifier("deadQueue") Queue directQueue) {
         return BindingBuilder.bind(directQueue).to(directExchange).with("deadRoutingKey");
         /*
            BindingBuilder.bind(directQueue)：指定队列

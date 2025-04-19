@@ -38,5 +38,4 @@ public interface Oauth2Property {
     public String GITHUB_TOKEN_URL = "https://github.com/login/oauth/access_token";
     // 获取用户信息路径
     public String GITHUB_GET_USER_INFO_URL = "https://api.github.com/user";
-
 }

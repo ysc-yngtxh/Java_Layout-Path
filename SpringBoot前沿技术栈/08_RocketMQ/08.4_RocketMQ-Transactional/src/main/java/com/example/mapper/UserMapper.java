@@ -8,5 +8,4 @@ import com.example.entity.User;
  * @dateTime 2025-02-08 21:00
  * @apiNote TODO
  */
-public interface UserMapper extends BaseMapper<User> {
-}
+public interface UserMapper extends BaseMapper<User> {}
