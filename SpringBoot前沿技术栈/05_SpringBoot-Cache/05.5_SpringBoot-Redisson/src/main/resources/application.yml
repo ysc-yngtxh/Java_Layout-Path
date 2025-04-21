@@ -1,8 +1,8 @@
 spring:
-    application:
-        name: @project.artifactId@
-    data:
-        redis:
-            host: 127.0.0.1
-            port: 6379
-            password:
+  application:
+    name: @project.artifactId@
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password:
