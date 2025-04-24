@@ -1,6 +1,5 @@
 package com.example.service;
 
-import jakarta.annotation.Resource;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -8,17 +7,18 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-07-09 23:42
+ * @dateTime 2024-07-09 23:00
  * @apiNote TODO
  */
 @Service
 public class RedissonService {
 
-    @Resource
+    @Autowired
     private RedissonClient redissonClient;
 
     // 分布式锁
@@ -47,7 +47,7 @@ public class RedissonService {
     }
 
 
-    // TODO Redisson的看门狗机制在业务长时间阻塞时无限续期锁问题
+    // TODO Redisson的看门狗机制在业务长时间阻塞时无限续期锁问题：通过线程的中断来解决
     public void fixeLock(String lockName, long waitTime) {
         // 参数(lockName)为锁的名称，作为Redis中的key
         RLock rLock = redissonClient.getLock(lockName);

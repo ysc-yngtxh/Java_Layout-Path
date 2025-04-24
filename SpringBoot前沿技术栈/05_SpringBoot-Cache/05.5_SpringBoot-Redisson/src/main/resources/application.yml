@@ -6,3 +6,13 @@ spring:
       host: 127.0.0.1
       port: 6379
       password:
+
+  # 自定义属性
+  redis:
+    redisson:
+      # 使用 “|” 和文本内容缩进表示的块：保留块中已有的回车换行。相当于段落块
+      config: |
+        singleServerConfig:
+          address: redis://127.0.0.1:6379
+          password:
+          timeout: 3000

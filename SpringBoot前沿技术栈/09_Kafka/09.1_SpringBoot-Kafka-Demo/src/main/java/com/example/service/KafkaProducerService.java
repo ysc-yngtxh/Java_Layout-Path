@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-10-23 23:08
+ * @dateTime 2024-10-23 23:00
  * @apiNote TODO
  */
 @Service
 public class KafkaProducerService {
 
     @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaTemplate<String, Object> kafkaTemplate;
 
     // 发送默认Topic消息（默认Topic，即在 yml文件中配置的默认Topic）
     public void sendDefault(String message) {
@@ -29,7 +29,7 @@ public class KafkaProducerService {
     }
 
     // 发送带 Header 的消息（用于分区路由）
-    public void sendMessageWithKey(ProducerRecord<String, String> pr) {
+    public void sendMessageWithKey(ProducerRecord<String, Object> pr) {
         kafkaTemplate.send(pr);
     }
 }

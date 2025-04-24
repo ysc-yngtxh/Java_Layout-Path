@@ -15,7 +15,6 @@ import lombok.Data;
 @Builder
 @TableName("t_mq_transaction_log")
 public class MQTxLog implements Serializable {
-
     @Serial
     private static final long serialVersionUID = 5725561784226415175L;
 

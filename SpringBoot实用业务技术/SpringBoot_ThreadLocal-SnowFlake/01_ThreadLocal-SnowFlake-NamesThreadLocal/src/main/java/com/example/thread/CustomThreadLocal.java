@@ -1,4 +1,4 @@
-package com.example.local;
+package com.example.thread;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -6,7 +6,8 @@ import java.util.concurrent.ConcurrentHashMap;
  *  ThreadLocal 是如何做到为每一个线程维护变量的副本的呢？其实实现的思路很简单：
  *     在ThreadLocal类中有一个Map，用于存储每一个线程的变量副本，Map中元素的键为线程对象，而值对应线程的变量副本
  */
-public class MyThreadLocal {
+public class CustomThreadLocal {
+
     private final ConcurrentHashMap<Thread, Object> valueMap = new ConcurrentHashMap<>();
 
     public void set(Object newValue) {

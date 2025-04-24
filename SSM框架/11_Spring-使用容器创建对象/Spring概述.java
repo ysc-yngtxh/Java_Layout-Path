@@ -35,7 +35,7 @@ package com.example;
  *         spring是使用的di实现了ioc的功能，spring底层创建对象，使用的是反射机制。
  *         spring是一个容器，管理对象，给属性赋值，底层是反射创建对象。
  *
- *      5、spring实现步骤
+ *      5、Spring实现步骤
  *         1)、创建maven项目
  *         2)、加入maven的依赖
  *             spring的依赖，版本6.1.14版本
@@ -46,7 +46,7 @@ package com.example;
  *
  *      6、di的语法分两类：
  *         1)、set注入(设值注入)：spring调用类的set方法，在set方法可以实现属性的赋值。80左右都是使用的set注入。
- *         2)、构造注入：         spring调用类的有参构造方法，创建对象。在构造方法中完成赋值。
+ *         2)、构造注入：        spring调用类的有参构造方法，创建对象。在构造方法中完成赋值。
  *
  *      7、设值注入
  *         注入：就是赋值的意思
@@ -57,13 +57,13 @@ package com.example;
  *                 <bean id="XX" class="YYY">
  *                     <property name="属性名称" value="此属性的值"/>
  *                        一个property只能给一个属性赋值
- *                     <property......>
+ *                     <property>
  *                 </bean>
  *             [2]、引用类型的set注入：spring调用类的set方法
  *                 <bean id="XX" class="YYY">
  *                     <property name="属性名称" ref="bean的id(对象的名称)"/>
  *                 </bean>
- *          2)、构造注入：spring调用类有参数构造方法，在创建对象的同时，在构造方法中给属性赋值。
+ *          2)、构造注入：Spring调用类有参数构造方法，在创建对象的同时，在构造方法中给属性赋值。
  *              构造注入使用<constructor-arg>标签
  *              <constructor-arg>标签：一个<constructor-arg>表示构造方法一个参数。
  *              <constructor-arg>标签属性：
@@ -72,10 +72,10 @@ package com.example;
  *                  value:构造方法的形参类型是简单类型的，使用value
  *                  ref:构造方法的形参类型是引用类型的，使用ref
  *
- *          3)、引用类型的自动注入：spring框架根据某些规则可以给引用类型赋值。不用你再给引用类型赋值了
- *               使用规则常用的是byName,byType.
+ *          3)、引用类型的自动注入：Spring框架根据某些规则可以给引用类型赋值。不用你再给引用类型赋值了
+ *                              使用规则常用的是byName、byType.
  *               [1]、byName(按名称注入)：Java类中引用类型的属性名和spring容器中(配置文件)<bean>的id名称一样，
- *                                    且数据类型是一致的，这样的容器中的bean，spring能够赋值给引用类型。
+ *                                      且数据类型是一致的，这样的容器中的bean，spring能够赋值给引用类型。
  *                    语法：
  *                        <bean id="xx" class="yyy" autoName="byName">
  *                            简单类型属性赋值
@@ -102,7 +102,7 @@ package com.example;
  *         1)、使用注解的步骤
  *             [1]、加入maven的依赖 spring-context ，在你加入spring-context的同时，间接加入spring-aop的依赖。使用注解必须使用spring-aop依赖
  *             [2]、在类中加入spring的注解(多个不同功能的注解)
- *             [3]、在spring的配置文件中，加入一个组件扫描器的标签，说明注解在你的项目中的位置
+ *             [3]、在Spring的配置文件中，加入一个组件扫描器的标签，说明注解在你的项目中的位置
  *             [4]、学习的注解：
  *                     @Component: 创建对象的，等同于<bean>的功能
  *                     @Value: 简单类型的属性赋值
@@ -120,7 +120,7 @@ package com.example;
  *                     即在MyApp中：Student service = (Student) ac.getBean("student");
  *                     通过容器的 getBean() 方法，可以获取指定的Bean名称实例对象。
  *                  3、特殊情况：注解中没有指定value属性值，且类名是连续两个首字母大写的话，类名即为Bean名称，不会做其他处理。
- *                     比如：存在STudent类，那么 STudent student = (STudent) ac.getBean("STudent");
+ *                     比如：存在Student类，那么 Student student = (Student) ac.getBean("student");
  *
  * 二、aop
  *    1、动态代理
@@ -189,7 +189,7 @@ package com.example;
  *               execution(* com.example.service.*.*(..))  表示在Service包下任意类中的任意方法和任意参数
  *               execution(* *..service..*.*(..))          表示所有包中的Service包下的所有包任意方法和任意参数
  *
- * 三、把mybatis框架和spring集成在一起，像一个框架一样使用，用的技术是：ioc
+ * 三、把Mybatis框架和Spring集成在一起，像一个框架一样使用，用的技术是：ioc
  *     为什么是ioc：能把Mybatis和Spring集成在一起，像一个框架，是因为ioc能创建对象。
  *                 可以把Mybatis框架中的对象交给spring统一创建，开发人员从Spring中获取对象。
  *                 开发人员就不用同时面对两个或多个框架了，就面对一个Spring
@@ -219,7 +219,7 @@ package com.example;
  *        这样做的好处是可以确保每个线程都使用独立的SqlSession对象，从而保证线程安全性。
  *
  *
- * 四、spring的事务处理
+ * 四、Spring的事务处理
  *     1、什么是事务？
  *          在mysql的时候,提出了事务。事务是指一组sql语句的集合，集合中有多条sql语句
  *          可能是insert,update,select,delete，我们希望这些多个sql语句都能成功，

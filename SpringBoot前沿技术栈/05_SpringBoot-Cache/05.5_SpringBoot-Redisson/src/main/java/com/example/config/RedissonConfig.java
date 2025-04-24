@@ -40,15 +40,31 @@ public class RedissonConfig {
 	//             ...（以此类推）
 
 
+	// 定义 RedissonClient Bean，方法一
 	@Bean
-	public RedissonClient getRedisson() {
+	public RedissonClient redissonClient() {
 		Config config = new Config();
 		config.useSingleServer()
-		      .setAddress("redis://" + redisHost + ":" + port)
-		      .setPassword(password);
+		      .setAddress("redis://" + redisHost + ":" + port);
 		config.setCodec(new JsonJacksonCodec());
 		// 这里设置为 10秒，看门狗会每隔 timeout/3（即 3.33 秒）自动续期，将锁的过期时间重置为 10 秒。
 		config.setLockWatchdogTimeout(10_000);
+		System.out.println("Redisson 已启动");
 		return Redisson.create(config);
 	}
+
+
+	// 定义 RedissonClient Bean，方法二
+	// @Autowired
+	// private RedissonProperties redissonProperties;
+	//
+	// @Bean
+	// public RedissonClient redissonClient2() throws IOException {
+	// 	Config config = Config.fromYAML(redissonProperties.getConfig());
+	// 	config.setCodec(new JsonJacksonCodec());
+	// 	// 这里设置为 10秒，看门狗会每隔 timeout/3（即 3.33 秒）自动续期，将锁的过期时间重置为 10 秒。
+	// 	config.setLockWatchdogTimeout(10_000);
+	// 	System.out.println("Redisson 已启动");
+	// 	return Redisson.create(config);
+	// }
 }

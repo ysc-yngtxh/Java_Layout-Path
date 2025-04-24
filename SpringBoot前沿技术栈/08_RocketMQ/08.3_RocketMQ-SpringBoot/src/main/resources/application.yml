@@ -14,4 +14,4 @@ rocketmq:
   # 消费者全局配置（可选，会被 @RocketMQMessageListener 中的配置覆盖）
   consumer:
     group: springboot-consumer-group  # 默认消费者组（监听器未指定时生效）
-    message-model: CLUSTERING  # 消费模式：CLUSTERING（集群）/BROADCASTING（广播）
+    message-model: CLUSTERING         # 消费模式：CLUSTERING（集群）/BROADCASTING（广播）
