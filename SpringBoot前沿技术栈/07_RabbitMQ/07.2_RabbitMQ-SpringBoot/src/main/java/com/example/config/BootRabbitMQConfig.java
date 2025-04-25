@@ -38,7 +38,7 @@ public class BootRabbitMQConfig {
         return QueueBuilder
                 // .nonDurable("bootDirectQueueB") 交换机不进行持久化
                 .durable("bootDirectQueueB")
-                // 设置队列最大长度
+                // 设置队列最大长度（队列的默认长度是无限的）
                 .withArgument("x-max-length", 10)
                 // 死信交换机声明
                 .withArgument("x-dead-letter-exchange", "deadExchange")

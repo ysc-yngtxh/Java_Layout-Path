@@ -1,13 +1,14 @@
 xxl-job流程：
 一、启动xxl-job-admin启动类，进入xxl-job的管理后台
     1、首先需要新增一个执行器（导航中的执行器管理）
-    2、执行器的 appname 必须要与你的任务项目配置文件中xxl.job.executor.appname名称相同
-    3、执行器配置的机器地址尽量使用 192.168.x.x, 端口号与相应的配置文件中的xxl.job.executor.port保持一致
+    2、执行器管理中的 appname 必须要与你的任务项目配置文件中 xxl.job.executor.appname 名称相同
+    3、执行器配置的机器地址尽量使用 192.168.x.x, 端口号与相应的配置文件中的 xxl.job.executor.port 保持一致
     4、随后在导航的任务管理中新增一个定时任务
        ①、界面选项-报警邮件：即是你的收件人邮箱
-       ②、界面选项-Cron:即是定时任务间隔时间
+       ②、界面选项-Cron：即是定时任务间隔时间
        ③、界面选项-JobHandler：即是对应你的任务名称--@XxlJob注解的Value值
-       ④、其他的可以不动
+       ④、执行器参数：直接提供参数即可
+       ⑤、其他的可以不动
 
     5、另外就是自己的demo项目参照xxl-job-executor-sample-springboot的 config配置和properties文件的
     6、启动xxl-job-executor-sample-springboot项目，也可以实现定时任务的的效果，这个是xxl-job框架自带的demo

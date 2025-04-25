@@ -23,7 +23,8 @@ public class SystemController {
     // 推送数据接口
     @ResponseBody
     @RequestMapping("/push/{cid}")
-    public Map<String, Object> pushToWeb(@PathVariable String cid, @PathParam("message") String message) {
+    public Map<String, Object> pushToWeb(@PathVariable String cid
+                                       , @PathParam("message") String message) {
         Map<String, Object> result = new HashMap<>();
         try {
             WebSocketServer.sendInfo(message, cid);

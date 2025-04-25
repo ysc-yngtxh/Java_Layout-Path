@@ -27,7 +27,7 @@ public class Publish {
             channel = connection.createChannel();
 
             // 消息内容
-            String message = "游诗成";
+            String message = "游家纨绔";
             // 向指定的队列中发送消息
             channel.basicPublish("", QUEUE_NAME, null, message.getBytes(StandardCharsets.UTF_8));
             /*

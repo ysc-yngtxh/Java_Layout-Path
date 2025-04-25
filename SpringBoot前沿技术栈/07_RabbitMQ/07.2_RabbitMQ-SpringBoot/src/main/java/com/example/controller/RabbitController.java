@@ -46,7 +46,7 @@ public class RabbitController {
     }
 
 
-    // 2、开始发消息：在生产者中设置的消息延迟
+    // 2、开始发消息：在生产者中设置的消息过期时长
     @GetMapping("/sendExpirationMsg/{message}/{ttlTime}")
     public void sendMsg(@PathVariable String message, @PathVariable Integer ttlTime){
         log.info("当前时间：{},发送一条时长{}毫秒TTL信息给队列bootDirectQueueC：{}"

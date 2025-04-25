@@ -1,5 +1,6 @@
 package com.example.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serial;
 import java.io.Serializable;
@@ -20,6 +21,7 @@ public class User implements Serializable {
     @Serial
     private static final long serialVersionUID = 2558291062144434794L;
 
+    @TableId
     private Long id;
 
     // 姓名

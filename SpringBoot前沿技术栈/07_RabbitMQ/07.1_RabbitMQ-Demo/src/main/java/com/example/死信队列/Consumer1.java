@@ -36,7 +36,8 @@ public class Consumer1 {
             Map<String, Object> map = new HashMap<>(3); // map集合长度赋值3，提高性能
             map.put("x-dead-letter-exchange", DEAD_EXCHANGE); // 设置死信交换器(x-dead-letter-exchange是固定写法)
             map.put("x-dead-letter-routing-key", "lisi"); // 设置死信routing-key(x-dead-letter-routing-key是固定写法)
-            map.put("x-max-length", 6); // 设置正常队列的长度限制.正常队列只能积压6个，超过6条的会成为死信(x-max-length是固定写法)
+            // 设置正常队列的长度限制.正常队列只能积压6个，超过6条的会成为死信(x-max-length是固定写法)。队列的默认长度是无限的
+            map.put("x-max-length", 6);
             // map.put("x-message-ttl", 10000); // 过10秒没被消费就一旦超会成为死信
             channel.queueDeclare(NORMAL_QUEUE, false, false, false, map);
             // 声明死信队列

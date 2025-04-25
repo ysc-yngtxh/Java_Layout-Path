@@ -12,5 +12,4 @@ public class WebsocketApplication {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(WebsocketApplication.class, args);
         WebSocketServer.setApplicationContext(applicationContext);
     }
-
 }

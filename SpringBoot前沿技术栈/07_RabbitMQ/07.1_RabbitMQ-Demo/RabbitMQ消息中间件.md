@@ -33,8 +33,8 @@
     Queue：     消息队列，用来保存消息，供消费者消费。
 
 ## 二、消息流程：
-                                (Channel信道)                                (Channel信道)
-    消息生产者 ---> Exchange交换器 ------------> Queue消息队列 ---> Connection通道连接 ---> 消费者
+                               (Channel信道)                                  (Channel信道)
+    消息生产者 ---> Exchange交换器 ---------> Queue消息队列 -----> Connection通道连接 -----> 消费者
                         (Binding绑定交换器和队列的规则)
     交换器有四种策略：
            direct：生产者在生产消息的同时会有一个key产生，交换器会根据消息中的key的内容精准匹配，将消息发送给key完全一致的队列。

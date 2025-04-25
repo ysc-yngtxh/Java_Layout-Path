@@ -30,8 +30,8 @@ public class SpringConfig {
     // 声明为prototype（原型模式）时，在每次需要使用到该类的时候，Spring IoC容器都会初始化一个新的改类的实例。
     @Bean
     @Scope(value = "prototype")
-    public EventTListener eventListener(){
-        return new EventTListener();
+    public EventListener eventListener(){
+        return new EventListener();
     }
 
     public class EventSource {
@@ -40,10 +40,9 @@ public class SpringConfig {
         }
     }
 
-    public class EventTListener {
-        public EventTListener(){
+    public class EventListener {
+        public EventListener(){
             System.out.println("监听器创建");
         }
     }
 }
-

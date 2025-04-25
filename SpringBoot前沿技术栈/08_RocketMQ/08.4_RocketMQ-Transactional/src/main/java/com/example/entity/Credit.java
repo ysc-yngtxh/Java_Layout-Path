@@ -1,5 +1,6 @@
 package com.example.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serial;
 import java.io.Serializable;
@@ -18,6 +19,7 @@ public class Credit implements Serializable {
     @Serial
     private static final long serialVersionUID = -7640959112343922498L;
 
+    @TableId
     private Long id;
 
     // 用户id

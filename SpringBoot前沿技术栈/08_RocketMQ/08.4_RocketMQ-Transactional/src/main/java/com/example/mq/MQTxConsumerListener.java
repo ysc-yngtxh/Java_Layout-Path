@@ -39,11 +39,10 @@ public class MQTxConsumerListener implements RocketMQListener<UserCharge> {
                 .eq(Credit::getUserId, userCharge.getUserId())
                 .setSql("integration = integration + " + userCharge.getChargeAmount().intValue())
         );
-        if (1 == i) {
+        if (0 <= i) {
             log.info("【MQ消费】用户增加积分成功，userCharge={}", JSONObject.toJSONString(userCharge));
         } else {
             log.error("【MQ消费】用户充值增加积分消费失败，userCharge={}", JSONObject.toJSONString(userCharge));
         }
     }
 }
-

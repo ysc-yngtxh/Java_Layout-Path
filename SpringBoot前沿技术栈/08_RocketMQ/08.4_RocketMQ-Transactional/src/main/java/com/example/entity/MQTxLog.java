@@ -1,5 +1,6 @@
 package com.example.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serial;
 import java.io.Serializable;
@@ -19,6 +20,7 @@ public class MQTxLog implements Serializable {
     private static final long serialVersionUID = 5725561784226415175L;
 
     // 事务id
+    @TableId
     private String transactionId;
 
     // 日志

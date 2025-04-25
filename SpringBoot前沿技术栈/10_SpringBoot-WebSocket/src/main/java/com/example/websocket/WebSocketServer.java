@@ -1,6 +1,6 @@
 package com.example.websocket;
 
-import com.example.service.IdevService;
+import com.example.service.SocketService;
 import jakarta.websocket.OnClose;
 import jakarta.websocket.OnError;
 import jakarta.websocket.OnMessage;
@@ -30,7 +30,7 @@ public class WebSocketServer {
 
     // concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。
     @Getter
-    private static CopyOnWriteArraySet<WebSocketServer> webSocketSet = new CopyOnWriteArraySet<WebSocketServer>();
+    private static CopyOnWriteArraySet<WebSocketServer> webSocketSet = new CopyOnWriteArraySet<>();
 
     // 与某个客户端的连接会话，需要通过它来给客户端发送数据
     private Session session;
@@ -39,18 +39,18 @@ public class WebSocketServer {
     private String sid = "";
 
     /**
-     这中间我遇到一个问题，就是说WebSocket启动的时候优先于spring容器，从而导致在WebSocketServer中调用业务Service会报空指针异常
+     这中间我遇到一个问题，就是说WebSocket启动的时候优先于Spring容器，从而导致在WebSocketServer中调用业务Service会报空指针异常
      即在引用@Autowired注解下的对象时会报空指针
      方法一：新增一个ApplicationContext类型的属性，再提供一个静态的修改属性值的方法。
             最后再在启动类上获取容器对象，将容器对象赋值给WebSocketServer
-            从而IdevService devService = context.getBean(IdevService.class);获得引用
+            从而 SocketService devService = context.getBean(SocketService.class); 获得引用
 
-     方法二：提供一个工具类去实现ApplicationContextAware接口，并且加上一个懒加载注解@Lazy,
+     方法二：提供一个工具类去实现ApplicationContextAware接口，并且加上一个懒加载注解 @Lazy,
            重写其setApplicationContext方法，赋值给私有属性，而且提供一个静态的属性get方法
-           从而IdevService devService = ApplicationContextRegister.getApplicationContext().getBean(IdevService.class);获得引用
+           从而 SocketService devService = ApplicationContextRegister.getApplicationContext().getBean(SocketService.class);获得引用
      */
     @Autowired
-    private IdevService devService;
+    private SocketService devService;
     private static ApplicationContext context;
     public static void setApplicationContext(ApplicationContext applicationContext){
         context = applicationContext;
