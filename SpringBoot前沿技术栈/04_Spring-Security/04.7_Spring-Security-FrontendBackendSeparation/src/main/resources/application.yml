@@ -1,21 +1,21 @@
-
 server:
-    port: 8080
+  port: 8080
+
 spring:
-    profiles:
-        active: dev
-    datasource:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/technician?serverTimezone=UTC
-        password: 131474
-        username: root
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/technician?serverTimezone=UTC
+    password: 131474
+    username: root
 
 logging:
-    level:
-        com:
-            example: debug
+  level:
+    com:
+      example: debug
 
 mybatis-plus:
-    configuration:
-        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-        log-prefix: debug
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    log-prefix: debug

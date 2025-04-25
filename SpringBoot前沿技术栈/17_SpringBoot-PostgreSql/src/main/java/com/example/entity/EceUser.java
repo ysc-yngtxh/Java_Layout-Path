@@ -23,6 +23,7 @@ import lombok.ToString;
 public class EceUser implements Serializable {
     @Serial
     private static final long serialVersionUID = 893554974075705049L;
+
     /**
      * 用户ID
      */
@@ -80,4 +81,3 @@ public class EceUser implements Serializable {
      */
     private String status;
 }
-

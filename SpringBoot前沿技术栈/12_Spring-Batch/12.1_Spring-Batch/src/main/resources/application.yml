@@ -3,7 +3,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/spring_batch?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/technician?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
     username: root
     password: 131474
   sql:
@@ -16,4 +16,3 @@ spring:
       schema-locations: classpath:org/springframework/batch/core/schema-mysql.sql # 或者 classpath:schema-mysql.sql
       # 表示执行DML脚本 （一些insert、update、delete语句脚本）
       data-locations:
-
