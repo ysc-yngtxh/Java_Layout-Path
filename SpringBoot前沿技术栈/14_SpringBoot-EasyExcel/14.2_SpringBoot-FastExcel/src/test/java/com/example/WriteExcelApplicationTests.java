@@ -1,26 +1,26 @@
 package com.example;
 
-import com.alibaba.excel.EasyExcel;
-import com.alibaba.excel.ExcelWriter;
-import com.alibaba.excel.enums.CellDataTypeEnum;
-import com.alibaba.excel.metadata.data.CommentData;
-import com.alibaba.excel.metadata.data.FormulaData;
-import com.alibaba.excel.metadata.data.HyperlinkData;
-import com.alibaba.excel.metadata.data.ImageData;
-import com.alibaba.excel.metadata.data.RichTextStringData;
-import com.alibaba.excel.metadata.data.WriteCellData;
-import com.alibaba.excel.util.BooleanUtils;
-import com.alibaba.excel.util.FileUtils;
-import com.alibaba.excel.util.ListUtils;
-import com.alibaba.excel.write.handler.CellWriteHandler;
-import com.alibaba.excel.write.handler.RowWriteHandler;
-import com.alibaba.excel.write.handler.SheetWriteHandler;
-import com.alibaba.excel.write.handler.context.CellWriteHandlerContext;
-import com.alibaba.excel.write.handler.context.RowWriteHandlerContext;
-import com.alibaba.excel.write.handler.context.SheetWriteHandlerContext;
-import com.alibaba.excel.write.metadata.WriteSheet;
-import com.alibaba.excel.write.metadata.style.WriteCellStyle;
-import com.alibaba.excel.write.metadata.style.WriteFont;
+import cn.idev.excel.ExcelWriter;
+import cn.idev.excel.FastExcel;
+import cn.idev.excel.enums.CellDataTypeEnum;
+import cn.idev.excel.metadata.data.CommentData;
+import cn.idev.excel.metadata.data.FormulaData;
+import cn.idev.excel.metadata.data.HyperlinkData;
+import cn.idev.excel.metadata.data.ImageData;
+import cn.idev.excel.metadata.data.RichTextStringData;
+import cn.idev.excel.metadata.data.WriteCellData;
+import cn.idev.excel.util.BooleanUtils;
+import cn.idev.excel.util.FileUtils;
+import cn.idev.excel.util.ListUtils;
+import cn.idev.excel.write.handler.CellWriteHandler;
+import cn.idev.excel.write.handler.RowWriteHandler;
+import cn.idev.excel.write.handler.SheetWriteHandler;
+import cn.idev.excel.write.handler.context.CellWriteHandlerContext;
+import cn.idev.excel.write.handler.context.RowWriteHandlerContext;
+import cn.idev.excel.write.handler.context.SheetWriteHandlerContext;
+import cn.idev.excel.write.metadata.WriteSheet;
+import cn.idev.excel.write.metadata.style.WriteCellStyle;
+import cn.idev.excel.write.metadata.style.WriteFont;
 import com.example.pojo.write.WriteDemo1;
 import com.example.pojo.write.WriteDemo2;
 import com.example.pojo.write.WriteDemo3;
@@ -29,7 +29,7 @@ import com.example.pojo.write.WriteDemo5;
 import com.example.pojo.write.WriteDemo6;
 import java.io.File;
 import java.io.InputStream;
-import java.net.URL;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -95,7 +95,7 @@ public class WriteExcelApplicationTests {
     public void noModelWrite() {
         String fileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";
         // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
-        EasyExcel.write(fileName).head(head()).sheet("模板").doWrite( data() );
+        FastExcel.write(fileName).head(head()).sheet("模板").doWrite(data());
     }
 
     // 简单写入一个 Excel，创建对象的写入
@@ -104,7 +104,7 @@ public class WriteExcelApplicationTests {
     void writeExcel1() {
         String fileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";
         // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板1 然后文件流会自动关闭
-        EasyExcel.write(fileName, WriteDemo1.class)
+        FastExcel.write(fileName, WriteDemo1.class)
                 .sheet("模板1")
                 .doWrite( data() );
     }
@@ -115,9 +115,9 @@ public class WriteExcelApplicationTests {
         // 方法1: 如果写到同一个sheet
         String fileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";
         // 这里 需要指定写用哪个class去写
-        try (ExcelWriter excelWriter = EasyExcel.write(fileName, WriteDemo1.class).build()) {
+        try (ExcelWriter excelWriter = FastExcel.write(fileName, WriteDemo1.class).build()) {
             // 这里注意 如果同一个sheet只需要创建一次
-            WriteSheet writeSheet = EasyExcel.writerSheet("模板").build();
+            WriteSheet writeSheet = FastExcel.writerSheet("模板").build();
             // 去调用写入,这里我调用了五次，实际使用时根据数据库分页的总的页数来
             for (int i = 0; i < 5; i++) {
                 // 分页去数据库查询数据 这里可以去数据库查询每一页的数据
@@ -129,11 +129,11 @@ public class WriteExcelApplicationTests {
         // 方法2: 如果写到不同的sheet 同一个对象
         fileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";
         // 这里 指定文件
-        try (ExcelWriter excelWriter = EasyExcel.write(fileName, WriteDemo1.class).build()) {
+        try (ExcelWriter excelWriter = FastExcel.write(fileName, WriteDemo1.class).build()) {
             // 去调用写入,这里我调用了五次，实际使用时根据数据库分页的总的页数来。这里最终会写到5个sheet里面
             for (int i = 0; i < 5; i++) {
                 // 每次都要创建writeSheet 这里注意必须指定sheetNo 而且sheetName必须不一样
-                WriteSheet writeSheet = EasyExcel.writerSheet(i, "模板" + i).build();
+                WriteSheet writeSheet = FastExcel.writerSheet(i, "模板" + i).build();
                 // 分页去数据库查询数据 这里可以去数据库查询每一页的数据
                 List<WriteDemo1> data = data();
                 excelWriter.write(data, writeSheet);
@@ -143,12 +143,12 @@ public class WriteExcelApplicationTests {
         // 方法3 如果写到不同的sheet 不同的对象
         fileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";
         // 这里 指定文件
-        try (ExcelWriter excelWriter = EasyExcel.write(fileName).build()) {
+        try (ExcelWriter excelWriter = FastExcel.write(fileName).build()) {
             // 去调用写入,这里我调用了五次，实际使用时根据数据库分页的总的页数来。这里最终会写到5个sheet里面
             for (int i = 0; i < 5; i++) {
                 // 每次都要创建writeSheet; 这里注意必须指定 sheetNo ,而且 sheetName 必须不一样。
                 // 这里注意表头 head 可以每次都变，我这里为了方便 所以用的同一个class,实际上可以一直变
-                WriteSheet writeSheet = EasyExcel.writerSheet(i, "模板" + i).head(WriteDemo1.class).build();
+                WriteSheet writeSheet = FastExcel.writerSheet(i, "模板" + i).head(WriteDemo1.class).build();
                 // 分页去数据库查询数据 这里可以去数据库查询每一页的数据
                 List<WriteDemo1> data = data();
                 excelWriter.write(data, writeSheet);
@@ -161,7 +161,7 @@ public class WriteExcelApplicationTests {
     @Test
     void writeExcel11() {
         String fileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";
-        EasyExcel.write(fileName, WriteDemo1.class)
+        FastExcel.write(fileName, WriteDemo1.class)
                 .excludeColumnFieldNames(Set.of("date"))
                 .sheet("模板2")
                 .doWrite(data());
@@ -171,7 +171,7 @@ public class WriteExcelApplicationTests {
     @Test
     void writeExcel2() {
         String fileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";
-        EasyExcel.write(fileName, WriteDemo2.class)
+        FastExcel.write(fileName, WriteDemo2.class)
                 .sheet("模板2")
                 .doWrite(data());
     }
@@ -180,7 +180,7 @@ public class WriteExcelApplicationTests {
     @Test
     void writeExcel3() {
         String fileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";
-        EasyExcel.write(fileName, WriteDemo3.class)
+        FastExcel.write(fileName, WriteDemo3.class)
                 .sheet("模板3")
                 .doWrite(data());
     }
@@ -204,7 +204,7 @@ public class WriteExcelApplicationTests {
             writeDemo.setFile(new File(imagePath));
             writeDemo.setString(imagePath);
             writeDemo.setInputStream(inputStream);
-            writeDemo.setUrl(new URL("https://www.wohaoyun.com/img/M00/06/1F/wKjg2lvJRi6AUblsAAMb93MwhpY910.jpg"));
+            writeDemo.setUrl(new URI("https://www.wohaoyun.com/img/M00/06/1F/wKjg2lvJRi6AUblsAAMb93MwhpY910.jpg").toURL());
 
             // 这里演示的是额外的单元格，放入两张图片还有文字，个人觉得了解即可，不需要记忆
             // 第一个图片靠左
@@ -252,7 +252,7 @@ public class WriteExcelApplicationTests {
             imageData.setRelativeLastColumnIndex(1);
 
             // 写入数据
-            EasyExcel.write(fileName, WriteDemo4.class).sheet().doWrite(list);
+            FastExcel.write(fileName, WriteDemo4.class).sheet().doWrite(list);
         }
     }
 
@@ -321,7 +321,7 @@ public class WriteExcelApplicationTests {
 
         List<WriteDemo5> data = new ArrayList<>();
         data.add(writeCellDemoData);
-        EasyExcel.write(fileName, WriteDemo5.class).inMemory(true).sheet("模板").doWrite(data);
+        FastExcel.write(fileName, WriteDemo5.class).inMemory(true).sheet("模板").doWrite(data);
     }
 
     // 注解形式自定义单元格样式
@@ -329,20 +329,20 @@ public class WriteExcelApplicationTests {
     public void annotationStyleWrite6() {
         String fileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";
         // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
-        EasyExcel.write(fileName,  WriteDemo6.class).sheet("模板").doWrite(data());
+        FastExcel.write(fileName,  WriteDemo6.class).sheet("模板").doWrite(data());
     }
 
     // 根据模板写入（类似于追加数据）
     @Test
     public void templateWrite1() {
-        String templateFileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";;
+        String templateFileName = System.getProperty("user.dir") + "/工作簿WriteDemo1.xlsx";
         String fileName = System.getProperty("user.dir") + "/工作簿WriteDemo2.xlsx";
         // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
         // 这里要注意 withTemplate 的模板文件会全量存储在内存里面，所以尽量不要用于追加文件，如果文件模板文件过大会OOM（内存溢出）
         // 如果要在文件中追加（无法在一个线程里面处理，可以在一个线程的建议参照多次写入的demo） 建议临时存储到数据库 或者 磁盘缓存(ehcache) 然后再一次性写入
-        EasyExcel.write(fileName).withTemplate(templateFileName).sheet().doWrite(data());
+        FastExcel.write(fileName).withTemplate(templateFileName).sheet().doWrite(data());
         // 追加的有表头的数据
-        // EasyExcel.write(fileName, WriteDemo1.class).withTemplate(templateFileName).sheet().doWrite(data());
+        // FastExcel.write(fileName, WriteDemo1.class).withTemplate(templateFileName).sheet().doWrite(data());
     }
 
     // TODO 前面实现的超链接和批注都是在新建的扩展单元格中，这里我们实现在已定义好的表头数据里做超链接、批注等
@@ -354,7 +354,7 @@ public class WriteExcelApplicationTests {
     public void customHandlerWrite() {
         String fileName = System.getProperty("user.dir") + "/工作簿WriteDemo2.xlsx";
         // 这里 需要指定写用哪个class去写，然后写到第一个sheet，名字为模板 然后文件流会自动关闭
-        EasyExcel.write(fileName, WriteDemo3.class)
+        FastExcel.write(fileName, WriteDemo3.class)
                 // 这里我是用的是匿名内部类的方式注册写入处理器，将第一行第一列的表头超链接
                 .registerWriteHandler(new CellWriteHandler(){
                     @Override

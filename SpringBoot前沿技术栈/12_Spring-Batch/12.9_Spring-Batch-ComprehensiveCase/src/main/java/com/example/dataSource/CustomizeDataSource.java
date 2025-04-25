@@ -40,7 +40,7 @@ public class CustomizeDataSource {
 
     @Bean
     @Primary //  自动装配时当出现多个Bean候选者时，被注解为@Primary的Bean将作为首选者，否则将抛出异常
-    public DataSource batchDataSource(){
+    public DataSource batchDataSource() {
         HikariDataSource hikariDataSource = new HikariDataSource(); // DataSource子类实例化
         hikariDataSource.setDriverClassName(driverClassName);
         hikariDataSource.setJdbcUrl(url);
@@ -50,7 +50,7 @@ public class CustomizeDataSource {
     }
 
     @Bean
-    public PlatformTransactionManager batchTransactionManager(DataSource batchDataSource){
+    public PlatformTransactionManager batchTransactionManager(DataSource batchDataSource) {
         DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
         transactionManager.setDataSource(batchDataSource);
         return transactionManager;

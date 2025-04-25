@@ -1,12 +1,10 @@
 package com.example.partitioner;
 
 import com.example.config.SpringBatchConfig;
-import org.springframework.batch.core.partition.support.Partitioner;
-import org.springframework.batch.item.ExecutionContext;
-import org.springframework.web.bind.annotation.GetMapping;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.batch.core.partition.support.Partitioner;
+import org.springframework.batch.item.ExecutionContext;
 
 /**
  * @author 游家纨绔
@@ -15,6 +13,7 @@ import java.util.Map;
  */
 @SuppressWarnings("NullableProblems")
 public class DBToDBPartitioner implements Partitioner {
+
     // 约定分50个区， 每个区10000个数据
     @Override
     public Map<String, ExecutionContext> partition(int gridSize) {

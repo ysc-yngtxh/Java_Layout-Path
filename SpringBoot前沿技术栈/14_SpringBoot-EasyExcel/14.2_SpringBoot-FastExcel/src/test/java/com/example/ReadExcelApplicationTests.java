@@ -1,25 +1,24 @@
 package com.example;
 
-import com.alibaba.excel.EasyExcel;
-import com.alibaba.excel.ExcelReader;
-import com.alibaba.excel.context.AnalysisContext;
-import com.alibaba.excel.enums.CellExtraTypeEnum;
-import com.alibaba.excel.read.listener.PageReadListener;
-import com.alibaba.excel.read.listener.ReadListener;
-import com.alibaba.excel.read.metadata.ReadSheet;
-import com.alibaba.excel.util.ListUtils;
+import cn.idev.excel.FastExcel;
+import cn.idev.excel.ExcelReader;
+import cn.idev.excel.context.AnalysisContext;
+import cn.idev.excel.enums.CellExtraTypeEnum;
+import cn.idev.excel.read.listener.PageReadListener;
+import cn.idev.excel.read.listener.ReadListener;
+import cn.idev.excel.read.metadata.ReadSheet;
+import cn.idev.excel.util.ListUtils;
 import com.alibaba.fastjson.JSON;
 import com.example.listener.DemoDataListener;
 import com.example.pojo.read.ReadDemo1;
 import com.example.pojo.read.ReadDemo2;
 import com.example.pojo.read.ReadDemo3;
+import java.io.File;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.io.File;
-import java.util.List;
 
 @SpringBootTest
 class ReadExcelApplicationTests {
@@ -36,7 +35,7 @@ class ReadExcelApplicationTests {
     @Test
     void readExcel1() {
         File file = new File(parentPath + "/工作簿ReadDemo1.xlsx");
-        EasyExcel.read(
+        FastExcel.read(
                 file
                 , ReadDemo1.class
                 // ExcelReadListener监听器 不能被spring管理，要每次读取excel都要new.为什么呢？仔细想想高并发的情况下
@@ -53,7 +52,7 @@ class ReadExcelApplicationTests {
     @Test
     void readExcel2() {
         File file = new File(parentPath + "/工作簿ReadDemo2.xlsx");
-        EasyExcel.read(
+        FastExcel.read(
                 file
                 , ReadDemo2.class
                 , new PageReadListener<ReadDemo2>(dataList -> {
@@ -69,7 +68,7 @@ class ReadExcelApplicationTests {
     @Test
     void readExcel3() {
     	String fileString = parentPath + "/工作簿ReadDemo2.xlsx";
-    	EasyExcel.read(fileString, ReadDemo2.class, new ReadListener<ReadDemo2>(){
+    	FastExcel.read(fileString, ReadDemo2.class, new ReadListener<ReadDemo2>(){
             // 单次缓存的数据量
             public static final int BATCH_COUNT = 100;
             // 临时存储
@@ -96,12 +95,12 @@ class ReadExcelApplicationTests {
     @Test
     void readExcel4() {
         File fileName = new File(parentPath + "/工作簿ReadDemo2.xlsx");
-        try ( ExcelReader excelReader = EasyExcel.read(fileName).build() ) {
+        try ( ExcelReader excelReader = FastExcel.read(fileName).build() ) {
             // 这里为了简单 所以注册了 同样的head 和Listener 自己使用功能必须不同的Listener
             ReadSheet readSheet1 =
-                    EasyExcel.readSheet(0).head(ReadDemo2.class).registerReadListener(new DemoDataListener<ReadDemo2>()).build();
+                    FastExcel.readSheet(0).head(ReadDemo2.class).registerReadListener(new DemoDataListener<ReadDemo2>()).build();
             ReadSheet readSheet2 =
-                    EasyExcel.readSheet(1).head(ReadDemo2.class).registerReadListener(new DemoDataListener<ReadDemo2>()).build();
+                    FastExcel.readSheet(1).head(ReadDemo2.class).registerReadListener(new DemoDataListener<ReadDemo2>()).build();
             // 这里注意 一定要把sheet1 sheet2 一起传进去，不然有个问题就是03版的excel 会读取多次，浪费性能
             excelReader.read(readSheet1, readSheet2);
         }
@@ -112,7 +111,7 @@ class ReadExcelApplicationTests {
     public void extraRead() {
         File fileName = new File(parentPath + "/工作簿ReadDemo2.xlsx");
         // 这里 需要指定读用哪个class去读，然后读取第一个sheet
-        EasyExcel.read(fileName, ReadDemo2.class, new DemoDataListener<ReadDemo2>())
+        FastExcel.read(fileName, ReadDemo2.class, new DemoDataListener<ReadDemo2>())
                 // 需要读取批注 默认不读取
                 .extraRead(CellExtraTypeEnum.COMMENT)
                 // 需要读取超链接 默认不读取
@@ -125,6 +124,6 @@ class ReadExcelApplicationTests {
     @Test
     public void cellDataRead() {
         File fileName = new File(parentPath + "/工作簿ReadDemo3.xlsx");
-        EasyExcel.read(fileName, ReadDemo3.class, new DemoDataListener<ReadDemo3>()).sheet().doRead();
+        FastExcel.read(fileName, ReadDemo3.class, new DemoDataListener<ReadDemo3>()).sheet().doRead();
     }
 }

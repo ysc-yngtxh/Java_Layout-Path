@@ -99,7 +99,7 @@ public class SpringBatchConfig {
     public MyBatisPagingItemReader<Employee> dBToDBJobItemReader(
             @Value("#{stepExecutionContext[from]}") Integer from,
             @Value("#{stepExecutionContext[to]}") Integer to,
-            @Value("#{stepExecutionContext[range]}") Integer range){
+            @Value("#{stepExecutionContext[range]}") Integer range) {
 
         System.out.println("----------MyBatisPagingItemReader开始-----from: " + from + "  -----to:" + to + "  -----每片数量:" + range);
         MyBatisPagingItemReader<Employee> itemReader = new MyBatisPagingItemReader<Employee>();
@@ -116,7 +116,7 @@ public class SpringBatchConfig {
     }
     // 数据库写- 写入到employee 表中
     @Bean
-    public MyBatisBatchItemWriter<Employee> dbToDBItemWriter(){
+    public MyBatisBatchItemWriter<Employee> dbToDBItemWriter() {
         MyBatisBatchItemWriter<Employee> itemWriter = new MyBatisBatchItemWriter<>();
         itemWriter.setSqlSessionFactory(sqlSessionFactory);
         itemWriter.setStatementId("com.example.mapper.EmployeeDao.save");  // 操作sql
@@ -154,7 +154,7 @@ public class SpringBatchConfig {
                 .build();
     }
     @Bean
-    public Job dbToDBJob(){
+    public Job dbToDBJob() {
         return new JobBuilder("dbToDB-step-job", jobRepository)
                 .start(masterStep())
                 .incrementer(new RunIdIncrementer())

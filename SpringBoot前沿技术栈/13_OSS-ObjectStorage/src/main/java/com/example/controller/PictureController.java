@@ -3,18 +3,13 @@ package com.example.controller;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.ObjectMetadata;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
 import java.io.IOException;
 import java.util.Objects;
 import java.util.UUID;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author 游家纨绔
@@ -40,9 +35,9 @@ public class PictureController {
         String accessKeyId = "LTAI5tMGA97nbLGRdSVBqZxQcym";
         String accessKeySecret = "VPBZ6qcRNlFdJ5PE2eFlOQ87y0XKIO"; // 这里密钥有点问题，需要更改
         OSS ossClient = new OSSClientBuilder().build(
-                endpoint          // 地域节点
-                , accessKeyId     // 访问密钥 ID
-                , accessKeySecret // 连接秘钥
+                  endpoint          // 地域节点
+                , accessKeyId       // 访问密钥 ID
+                , accessKeySecret   // 连接秘钥
         );
 
         ObjectMetadata objectMetadata = new ObjectMetadata();
