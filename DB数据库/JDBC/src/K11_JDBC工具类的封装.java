@@ -9,7 +9,6 @@ import java.sql.*;
  */
 public class K11_JDBC工具类的封装 {
     public static void main(String[] args) {
-
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -18,20 +17,22 @@ public class K11_JDBC工具类的封装 {
             conn = DBUtil.getConnection();
 
             //获取预编译的数据库操作对象
-            String sql = "select no,name,age from t_student where name like ?";
-
+            String sql = "select no,name,age,height from t_student where name like ?";
             ps = conn.prepareStatement(sql);
-            ps.setString(1,"_h%");
-
+            ps.setString(1,"%游%");
             rs = ps.executeQuery();
 
-            while(rs.next()){
-                System.out.println(rs.getString("no")+" "+rs.getString("name")+" "+rs.getString("age"));
+            while (rs.next()) {
+                System.out.println("t_student{no=" + rs.getString("no") +
+                                           ", name=" + rs.getString("name") +
+                                           ", age=" + rs.getString("age") +
+                                           ", height=" + rs.getString("height") +
+                                           "}");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            //释放资源
+            // 释放资源
             DBUtil.close(conn,ps,rs);
         }
     }

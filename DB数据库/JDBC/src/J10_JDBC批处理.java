@@ -18,23 +18,24 @@ public class J10_JDBC批处理 {
             // 1、注册驱动
             Class.forName("com.mysql.cj.jdbc.Driver");
             // 2、获取驱动
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/springdb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC"
-                                               , "root"
-                                               , "131474");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_databash?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC"
+                                             , "root"
+                                             , "131474");
             // 3、获取预编译数据库操作对象
-            String sql = "insert into student(name,age) values(?,?)";
+            String sql = "insert into t_student(no,name,age) values(?,?,?)";
             ps = conn.prepareStatement(sql);
             for (int i = 0; i < 100000; i++) {
-                ps.setString(1, "大狼狗"+i);
-                ps.setInt(2, i);
+                ps.setInt(1, 10+i);
+                ps.setString(2, "大狼狗"+i);
+                ps.setInt(3, i);
                 ps.addBatch();
             }
             // 4、执行SQL语句
             int[] count = ps.executeBatch();
             // 5、处理查询结果集
             long stopTime = System.currentTimeMillis();
-            System.err.printf("批处理插入%d条数据，耗时：%dms%n", count.length, (stopTime - startTime));
-            System.out.println(Arrays.toString(count));
+            System.err.printf("批处理插入%d条数据，耗时：%dms%n", count.length, (stopTime-startTime));
+            System.out.println("批处理数据量：" + count.length);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

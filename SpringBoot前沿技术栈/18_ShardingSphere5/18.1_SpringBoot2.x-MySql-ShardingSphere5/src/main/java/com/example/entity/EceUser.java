@@ -2,7 +2,7 @@ package com.example.entity;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,6 +23,7 @@ import lombok.ToString;
 public class EceUser implements Serializable {
     @Serial
     private static final long serialVersionUID = 893554974075705049L;
+
     /**
      * 用户ID
      */
@@ -54,7 +55,7 @@ public class EceUser implements Serializable {
     /**
      * 生日
      */
-    private Date birthday;
+    private LocalDateTime birthday;
     /**
      * 年龄
      */
@@ -70,14 +71,13 @@ public class EceUser implements Serializable {
     /**
      * 创建时间
      */
-    private Date createDate;
+    private LocalDateTime createDate;
     /**
      * 更新时间
      */
-    private Date updateDate;
+    private LocalDateTime updateDate;
     /**
      * 用户状态
      */
     private String status;
 }
-

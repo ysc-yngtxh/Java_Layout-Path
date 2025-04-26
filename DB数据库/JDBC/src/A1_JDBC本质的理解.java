@@ -1,8 +1,7 @@
 /**
  * @author 游家纨绔
  */
-/*
- * 1、JDBC是什么？
+/* 1、JDBC是什么？
  *       Java DataBase Connectivity(Java语言连接数据库)
  *
  * 2、JDBC的本质是什么？

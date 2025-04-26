@@ -4,8 +4,7 @@ import java.util.Scanner;
 /**
  * @author 游家纨绔
  */
-/*
- * 1、对比一下Statement和preparedStatement?
+/* 1、对比一下Statement和preparedStatement?
  *     -- Statement 存在SQL注入问题，preparedStatement 解决了SQL注入问题
  *     -- Statement 是编译一次执行一次。preparedStatement是编译一次，可执行N次。preparedStatement效率较高一些
  *     -- preparedStatement 会在编译阶段做类型的安全检查
@@ -35,7 +34,7 @@ public class G7_对比PreparedStatement和Statement {
             // 1、注册驱动
             Class.forName("com.mysql.cj.jdbc.Driver");
             // 2、获取连接
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bjpowernode?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC", "root", "131474");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_databash?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC", "root", "131474");
             // 3、获取预编译数据库操作对象
             stmt = conn.createStatement();
             // 4、执行SQL语句

@@ -39,15 +39,15 @@ public class C3_类加载的方式注册驱动 {
 
             // 2、获取连接
             conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/bjpowernode?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC"
-                    , "root"
-                    , "131474");
+                    "jdbc:mysql://localhost:3306/db_databash?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC"
+                  , "root"
+                  , "131474");
 
             // 3、获取数据库操作对象
             stmt = conn.createStatement();
 
             // 4、执行SQL
-            String sql = "insert into t_student(no, name, age) values(10, 'shenfang', '28')";
+            String sql = "insert into t_student(no, name, age) values(10, '赵丽颖', '28')";
             int count = stmt.executeUpdate(sql);
             System.out.println(count == 1 ? "新增成功" : "新增失败");
 

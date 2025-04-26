@@ -2,9 +2,10 @@
 -- ----------------------------
 -- 字典表
 -- ----------------------------
+DROP TABLE IF EXISTS `ece_lookup_classify`;
 CREATE TABLE `ece_lookup_classify`(
     `classify_id`      BIGINT(20)   NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '类别ID',
-    `classify_code`    VARCHAR(20)  NOT NULL COMMENT '类别编码',
+    `classify_code`    VARCHAR(20)  NOT NULL UNIQUE COMMENT '类别编码',
     `classify_name`    VARCHAR(255) NOT NULL UNIQUE COMMENT '类别名称',
     `classify_type`    VARCHAR(255) NOT NULL UNIQUE COMMENT '类别类型',
     `status`           TINYINT      DEFAULT 0 COMMENT '状态：(0正常 1停用)',
@@ -35,9 +36,10 @@ insert into ece_lookup_classify values(11, 'USER_ROLE',           '用户角色'
 -- ----------------------------
 -- 字典数据表
 -- ----------------------------
+DROP TABLE IF EXISTS `ece_lookup_items`;
 CREATE TABLE ece_lookup_items (
     `item_id`        BIGINT(20)    NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '项ID',
-    `classify_code`  VARCHAR(20)   NOT NULL UNIQUE COMMENT '类别编码',
+    `classify_code`  VARCHAR(20)   NOT NULL COMMENT '类别编码',
     `item_code`      VARCHAR(255)  NOT NULL COMMENT '项编码',
     `item_name_zh`   VARCHAR(255)  NOT NULL COMMENT '中文项名称',
     `item_name_en`   VARCHAR(255)  NOT NULL COMMENT '英文项名称',
@@ -54,9 +56,11 @@ CREATE TABLE ece_lookup_items (
     `item_attr2`     VARCHAR(255)  DEFAULT NULL COMMENT '扩展属性2',
     `remark`         VARCHAR(500)  DEFAULT NULL COMMENT '备注',
     -- CONSTRAINT `fk_classify_code`：表示约束名
-    -- FOREIGN KEY (`classify_code`) REFERENCES ece_lookup_classify(`classify_code`)：表示外键，`classify_code`是外键，引用ece_lookup_classify表中的classify_code字段
+    -- FOREIGN KEY (`classify_code`) REFERENCES ece_lookup_classify(`classify_code`)：
+    --             表示外键，`classify_code`是外键，引用 ece_lookup_classify 表中的classify_code字段
+    --             需要注意⚠️：引用的ece_lookup_classify表中的classify_code字段必须是 PRIMARY KEY 或 UNIQUE KEY
     -- ON DELETE CASCADE：表示级联删除，当ece_lookup_classify表中的classify_code字段被删除时，ece_lookup_items表中的classify_code字段也会被删除
-    CONSTRAINT `fk_classify_code` FOREIGN KEY (`classify_code`) REFERENCES ece_lookup_classify(`classify_code`) ON DELETE CASCADE
+    CONSTRAINT `fk_classify_code` FOREIGN KEY (`classify_code`) REFERENCES `ece_lookup_classify`(`classify_code`) ON DELETE CASCADE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC COMMENT '字典数据表';
 
@@ -89,5 +93,3 @@ insert into ece_lookup_items values (26, 'USER_ROLE',           'ADMIN',        
 insert into ece_lookup_items values (27, 'USER_ROLE',           'USER',            '普通用户', 'User',            'ENUM',    '普通用户',          0, 2, 'UserRole',             'admin', NOW(), 'admin', NOW(), 'role_permission',     NULL, '普通用户');
 insert into ece_lookup_items values (28, 'USER_ROLE',           'GUEST',           '访客',    'Guest',           'ENUM',    '访问系统的访客',     0, 3, 'UserRole',             'admin', NOW(), 'admin', NOW(), 'role_permission',     NULL, '访客用户');
 insert into ece_lookup_items values (29, 'USER_ROLE',           'AUDITOR',         '审计员',  'Auditor',         'ENUM',     '负责审计的用户',     0, 4, 'UserRole',             'admin', NOW(), 'admin', NOW(), 'role_permission',     NULL, '审计员用户');
-
-

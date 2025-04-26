@@ -1,8 +1,10 @@
-mybatis:
-    mapper-locations: classpath:mapper/*.xml
+
 spring:
-    application:
-        name: SpringBoot3.x-ShardingSphere5
-    datasource:
-        driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
-        url: jdbc:shardingsphere:classpath:sharding-config.yml
+  application:
+    name: @project.artifactId@
+  datasource:
+    driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
+    url: jdbc:shardingsphere:classpath:sharding-config.yml
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml

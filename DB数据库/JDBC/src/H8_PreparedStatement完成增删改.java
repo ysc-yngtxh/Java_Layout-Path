@@ -6,23 +6,27 @@ import java.sql.*;
  */
 public class H8_PreparedStatement完成增删改 {
     public static void main(String[] args) {
-
         Connection conn = null;
         PreparedStatement ps = null;
         try {
             // 1、注册驱动
             Class.forName("com.mysql.cj.jdbc.Driver");
             // 2、获取驱动
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bjpowernode?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC", "root", "131474");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_databash?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC", "root", "131474");
             // 3、获取预编译数据库操作对象
-            String sql = "insert into t_student(name, age) values(?, ?)";
+            String sql = "insert into t_student(no, name, age) values(?, ?, ?)";
             ps = conn.prepareStatement(sql);
-            ps.setString(1, "liuyu");
-            ps.setString(2, "21");
+            ps.setInt(1, 11);
+            ps.setString(2, "liuyu");
+            ps.setString(3, "21");
             // 4、执行SQL语句
             int count = ps.executeUpdate();
             // 5、处理查询结果集
-            System.out.println(count);
+            if (count >= 1) {
+                System.out.println("插入数据成功");
+            } else {
+                System.out.println("插入数据失败");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

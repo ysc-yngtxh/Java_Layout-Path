@@ -2,6 +2,7 @@
 -- ----------------------------
 -- 用户表
 -- ----------------------------
+DROP TABLE IF EXISTS `ece_user`;
 CREATE TABLE `ece_user`(
     `id`          BIGINT           NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '用户ID',
     `ece_id`      INT              DEFAULT NULL COMMENT 'eceId',
@@ -16,7 +17,8 @@ CREATE TABLE `ece_user`(
     `address`     VARCHAR(256)     DEFAULT NULL COMMENT '地址',
     `create_date` TIMESTAMP        DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_date` TIMESTAMP        DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-    `status` ENUM('ACTIVE', 'INACTIVE', 'DELETED') NOT NULL DEFAULT 'ACTIVE' COMMENT '用户状态'
+    `status`      ENUM('ACTIVE', 'INACTIVE', 'DELETED')
+                                   NOT NULL DEFAULT 'ACTIVE' COMMENT '用户状态'
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC COMMENT = '用户表';
 
@@ -30,5 +32,3 @@ INSERT INTO ece_user VALUES (7,  346, 'IViyJBTXur', '于岚',   'GsxHCOQ8Yj', 's
 INSERT INTO ece_user VALUES (8,  76,  'wCcfjdVGLk', '秦杰宏', 'WHVsnOgJKI', 'tanjialun@outlook.com',    '(161) 604 6639', '2006-07-06 11:59:21', 4,  '女', '朝阳区三里屯路66号',         '2017-04-29 18:37:37', '2024-09-17 19:17:37', 'INACTIVE');
 INSERT INTO ece_user VALUES (9,  740, 'KjlLCCHkSd', '林晓明', 'nQ7AZp6mls', 'whkwok@gmail.com',         '134-5217-0482',  '2023-10-23 12:12:19', 53, '男', '坑美十五巷733号',           '2022-12-29 05:29:42', '2005-06-11 09:24:41', 'INACTIVE');
 INSERT INTO ece_user VALUES (10, 785, 'BNj5hOGTma', '沈晓明', 'Dy4VyOmdHK', 'ramomarie@icloud.com',     '614-578-9402',   '2008-01-21 23:52:35', 86, '女', '罗湖区清水河一路275号',      '2008-01-12 21:33:13', '2022-11-27 17:12:45', 'DELETED');
-
-

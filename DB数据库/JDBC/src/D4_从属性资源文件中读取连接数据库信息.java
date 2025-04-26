@@ -7,11 +7,10 @@ import java.util.ResourceBundle;
 /**
  * @author 游家纨绔
  */
-/*
- * 1、将连接数据库的所有信息配置到配置文件
+/* 1、将连接数据库的所有信息配置到配置文件
  * 2、处理查询结果集
- *      // int executeUpdate( insert/delete/update )
- *      // ResultSet executeQuery( select )
+ *       int executeUpdate( insert/delete/update )
+ *       ResultSet executeQuery( select )
  */
 public class D4_从属性资源文件中读取连接数据库信息 {
     public static void main(String[] args) {
@@ -35,7 +34,7 @@ public class D4_从属性资源文件中读取连接数据库信息 {
             // 3、获取数据库对象
             stmt = conn.createStatement();
             // 4、执行SQL
-            String sql = "select no,name,age from t_student";
+            String sql = "select no,name,age,height from t_student";
             rs = stmt.executeQuery(sql);    // 专门执行SQL语句的方法
 
             // int executeUpdate(insert/delete/update)
@@ -47,18 +46,19 @@ public class D4_从属性资源文件中读取连接数据库信息 {
              * System.out.println(rs.next());
              */
             while (rs.next()) {
-                /*
-                 * // getString()特点：不管数据库中的数据类型是什么，都以String的形式取出
-                 * String no = rs.getString(1);      // JDBC中所有的下标都是从1开始的，不是从0开始
-                 * String name = rs.getString(2);    // 后面括号里数字1，2，3代表的是表里的列
-                 * String age = rs.getString(3);     // 很明显，上面的方法会更健壮，推荐上面的写法
-                 * System.out.println(no + "," + name + "," + (age+1));
+                /* getString() 方法特点：不管数据库中的数据类型是什么，都以String的形式取出
+                 *    String no = rs.getString(1);      // JDBC中所有的下标都是从1开始的，不是从0开始
+                 *    String name = rs.getString(2);    // 后面括号里数字1，2，3代表的是表里的列
+                 *    String age = rs.getString(3);     // 很明显，上面的方法会更健壮，推荐上面的写法
+                 *    System.out.println(no + "," + name + "," + (age+1));
+                 *
+                 * 除了可以以String类型取出之外，还可以以特定的类型取出，但是特定类型需要和数据库类型一致。
                  */
-                // 取数据。除了可以以String类型取出之外，还可以以特定的类型取出，但是特定类型需要和数据库类型一致。
                 int no = rs.getInt("no");
                 String name = rs.getString("name");
-                double age = rs.getDouble("age");
-                System.out.println(no + "," + name + "," + (age + 1));
+                int age = rs.getInt("age");
+                double height = rs.getDouble("height");
+                System.out.println("t_student{no=" + no + ", name=" + name + ", age=" + age + ", height=" + height + "}");
             }
         } catch (Exception e) {
             e.printStackTrace();

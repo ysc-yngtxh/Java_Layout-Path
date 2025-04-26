@@ -2,6 +2,7 @@
 -- ----------------------------
 -- 产品管理表
 -- ----------------------------
+DROP TABLE IF EXISTS `ece_product`;
 CREATE TABLE ece_product(
     `product_id`     BIGINT         AUTO_INCREMENT PRIMARY KEY COMMENT '产品ID',
     `name`           VARCHAR(255)   NOT NULL COMMENT '产品名称',
@@ -25,6 +26,7 @@ INSERT INTO ece_product VALUES (3, '便携式充电宝', '容量为20000mAh的�
 -- ----------------------------
 -- 产品评论表
 -- ----------------------------
+DROP TABLE IF EXISTS `ece_product_review`;
 CREATE TABLE ece_product_review(
     review_id  BIGINT    AUTO_INCREMENT PRIMARY KEY COMMENT '评论ID',
     product_id BIGINT    NOT NULL COMMENT '产品ID',

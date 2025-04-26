@@ -2,9 +2,8 @@ package com.example;
 
 import com.example.entity.EceUser;
 import com.example.mapper.EceUserMapper;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,10 +15,10 @@ class SpringBoot2ShardingSphereApplicationTests {
     private EceUserMapper eceUserMapper;
 
     @Test
-    void contextLoads() throws ParseException {
+    void contextLoads() {
         String data = "2024-09-16 10:00:00";
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date parseData = format.parse(data);
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime localDateTime = LocalDateTime.parse(data, pattern);
         eceUserMapper.insert(
                 EceUser.builder()
                         .eceId(123456)
@@ -28,7 +27,7 @@ class SpringBoot2ShardingSphereApplicationTests {
                         .passWord("123456")
                         .email("123456@qq.com")
                         .phone("13888888888")
-                        .birthday(parseData)
+                        .birthday(localDateTime)
                         .age(22)
                         .sex("女")
                         .address("湖北武汉洪山区")
@@ -41,5 +40,4 @@ class SpringBoot2ShardingSphereApplicationTests {
     void contextLoads2() {
         System.out.println(eceUserMapper.queryById(1));
     }
-
 }

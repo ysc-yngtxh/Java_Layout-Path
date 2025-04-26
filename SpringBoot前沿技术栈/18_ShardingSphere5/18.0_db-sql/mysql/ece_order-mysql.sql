@@ -2,6 +2,7 @@
 -- ----------------------------
 -- 订单管理表
 -- ----------------------------
+DROP TABLE IF EXISTS `ece_order`;
 CREATE TABLE ece_order(
     `order_id`         BIGINT         AUTO_INCREMENT PRIMARY KEY COMMENT '订单ID',
     `user_id`          BIGINT         NOT NULL COMMENT '用户ID',
@@ -25,6 +26,7 @@ INSERT INTO ece_order VALUES (2, 2, 'ORD20240919002', NOW(), 799.99,  'DELIVERED
 -- ----------------------------
 -- 订单商品项表
 -- ----------------------------
+DROP TABLE IF EXISTS `ece_order_item`;
 CREATE TABLE ece_order_item(
     `order_item_id` BIGINT         AUTO_INCREMENT PRIMARY KEY COMMENT '订单商品项ID',
     `order_id`      BIGINT         NOT NULL COMMENT '订单ID',

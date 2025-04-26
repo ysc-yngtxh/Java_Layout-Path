@@ -10,8 +10,7 @@ import java.util.Scanner;
 /**
  * @author 游家纨绔
  */
-/*
- * 实现功能：
+/* 实现功能：
  *        1、需求：
  *             模拟用户登录功能的实现。
  *        2、业务描述：
@@ -57,7 +56,6 @@ public class E5_用户登陆业务 {
      * @return false表示失败，true表示成功
      */
     private static boolean login(Map<String, String> userLoginInfo) {
-
         // 打标记
         boolean loginSuccess = false;
         // JDBC代码
@@ -69,7 +67,7 @@ public class E5_用户登陆业务 {
             // 1、注册驱动
             Class.forName("com.mysql.cj.jdbc.Driver");
             // 2、获取驱动
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bjpowernode?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC", "root", "131474");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_databash?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC", "root", "131474");
             // 3、获取数据库操作对象
             stmt = conn.createStatement();
             // 4、执行SQL

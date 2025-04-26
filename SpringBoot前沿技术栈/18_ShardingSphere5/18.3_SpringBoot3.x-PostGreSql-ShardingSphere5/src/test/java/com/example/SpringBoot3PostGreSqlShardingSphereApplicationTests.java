@@ -3,8 +3,8 @@ package com.example;
 import com.example.entity.EceUser;
 import com.example.mapper.EceUserMapper;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,8 +18,8 @@ class SpringBoot3PostGreSqlShardingSphereApplicationTests {
     @Test
     void contextLoads() throws ParseException {
         String data = "2024-09-16 10:00:00";
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date parseData = format.parse(data);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime localDateTime = LocalDateTime.parse(data, formatter);
         eceUserMapper.insert(
                 EceUser.builder()
                         .eceId(123456)
@@ -28,7 +28,7 @@ class SpringBoot3PostGreSqlShardingSphereApplicationTests {
                         .passWord("123456")
                         .email("12345678@qq.com")
                         .phone("13888888867")
-                        .birthday(parseData)
+                        .birthday(localDateTime)
                         .age(22)
                         .sex("女")
                         .address("湖北武汉洪山区")

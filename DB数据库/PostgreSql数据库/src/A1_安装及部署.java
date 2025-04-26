@@ -3,7 +3,6 @@
  * @dateTime 2024-07-31 22:38
  * @apiNote TODO
  */
-public class A1_安装及部署 {}
 
 // TODO Mac环境下安装PostgreSql流程：
 //      1、使用 homebrew 下载安装 postgresql@17
@@ -45,3 +44,4 @@ public class A1_安装及部署 {}
 //                 WITH OWNER = your_username ENCODING = 'UTF8'
 //                      LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8'
 //                      TEMPLATE template0;
+public class A1_安装及部署 {}
