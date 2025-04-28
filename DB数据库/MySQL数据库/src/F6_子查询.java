@@ -14,16 +14,16 @@
  * ---------------------------------------------------------------------------------------------------------------
  *    2、WHERE 子句中使用子查询
  *         案例：找出高于平均薪资的员工信息
- *              SELECT * FROM emp WHERE sal > (SELECT AVG(sal) FROM emp);
+ *              SELECT * FROM t_emp WHERE sal > (SELECT AVG(sal) FROM emp);
  * ---------------------------------------------------------------------------------------------------------------
  *    3、FROM 后面嵌套子查询
  *         案例一：找出每个部门平均薪水的薪资等级。
  *                SELECT
  *                   t.*, s.grade
  *                FROM
- *                   (SELECT dept_no, AVG(sal) avgSal FROM emp GROUP BY dept_no) t
+ *                   (SELECT dept_no, AVG(sal) avgSal FROM t_emp GROUP BY dept_no) t
  *                JOIN
- *                   sal_grade s
+ *                   t_sal_grade s
  *                ON
  *                   t.avgSal BETWEEN s.loSal AND s.hiSal;
  *                // 使用子查询找出每个部门的平均薪水，然后将以上的查询结果(部门名称，平均薪水)当作临时表t，让t表和sal_grade表连接
@@ -34,12 +34,12 @@
  *                           SELECT                                   SELECT
  *                              e.ename, e.sal, e.dept_no, s.grade        t.dept_no, AVG(t.grade)
  *                           FROM                                     FROM
- *                              emp e                                    (SELECT
+ *                              t_emp e                                  (SELECT
  *                           JOIN                                            e.dept_no, AVG(s.grade)
- *                              sal_grade s                                FROM
- *                           ON                                              emp e
+ *                              t_sal_grade s                              FROM
+ *                           ON                                              t_emp e
  *                              e.sal BETWEEN loSal AND hiSal;            JOIN
- *                                                                           sal_grade s
+ *                                                                           t_sal_grade s
  *                                                                        ON
  *                                                                           e.sal BETWEEN s.loSal AND s.hiSal) t
  *                                                                    GROUP BY
@@ -48,9 +48,9 @@
  *                    SELECT
  *                       e.dept_no, AVG(s.grade)
  *                    FROM
- *                       emp e
+ *                       t_emp e
  *                    JOIN
- *                       sal_grade s   // 这里就没有使用from嵌套子查询，因为 emp e表 与 sal_grade s表 连接后需要查询的都在里面
+ *                       t_sal_grade s // 这里就没有使用from嵌套子查询，因为 emp e表 与 sal_grade s表 连接后需要查询的都在里面
  *                    ON                  就没有必要强行嵌套子查询，这种方法查询效率更高
  *                       e.sal BETWEEN s.loSal AND s.hiSal
  *                    GROUP BY
@@ -61,10 +61,10 @@
  *              通常写法：                     嵌套写法：
  *              SELECT                        SELECT
  *                 e.ename, d.d_name             e.ename,
- *              FROM                             (SELECT d.d_name FROM dept d WHERE e.dept_no = d.dept_no) AS d_name
- *                 emp e                      FROM
- *              JOIN                             emp e;
- *                 dept d
+ *              FROM                             (SELECT d.d_name FROM t_dept d WHERE e.dept_no = d.dept_no) AS d_name
+ *                 t_emp e                    FROM
+ *              JOIN                             t_emp e;
+ *                 t_dept d
  *              ON
  *                 e.dept_no = d.dept_no;
  */

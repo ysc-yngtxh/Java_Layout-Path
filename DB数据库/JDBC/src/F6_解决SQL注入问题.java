@@ -20,7 +20,7 @@ public class F6_解决SQL注入问题 {
             // 1、注册驱动
             Class.forName("com.mysql.cj.jdbc.Driver");
             // 2、获取驱动
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_databash?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC", "root", "131474");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_database?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC", "root", "131474");
             // 3、获取预编译数据库操作对象
             // SQL语句的框子。其中一个?表示一个占位符，一个"?"将来接收一个‘值’。注意：占位符不能使用单引号括起来
             String sql = "select * from t_student where name=? or height=?";

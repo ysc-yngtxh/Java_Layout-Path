@@ -12,7 +12,7 @@ public class H8_PreparedStatement完成增删改 {
             // 1、注册驱动
             Class.forName("com.mysql.cj.jdbc.Driver");
             // 2、获取驱动
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_databash?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC", "root", "131474");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_database?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC", "root", "131474");
             // 3、获取预编译数据库操作对象
             String sql = "insert into t_student(no, name, age) values(?, ?, ?)";
             ps = conn.prepareStatement(sql);

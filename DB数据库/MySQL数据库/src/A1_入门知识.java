@@ -40,16 +40,6 @@
  *                mysql> use 数据库名;             (这个不是SQL语句，属于MySQL命令)
  *       第五步 -- 查看当前使用的数据库中有哪些表
  *                mysql> show tables;             (这个不是SQL语句，属于MySQL命令)
- *                       +---------------------+
- *                       | Tables_in_employees |
- *                       +---------------------+
- *                       | departments         |
- *                       | dept_emp            |
- *                       | dept_manager        |
- *                       | employees           |
- *                       | salaries            |
- *                       | titles              |
- *                       +---------------------+
  *       第六步 -- 初始化数据(导入sql脚本)
  *                mysql> source D:\\......\\employees.sql
  *                       ①、什么是SQL脚本呢？
@@ -80,10 +70,10 @@
  *         语法格式：
  *            SELECT 字段名1, 字段名2, 字段名3, ... FORM 表名;
  *         提示：
- *            ①、任何一条SQL语句以";"结尾。
+ *            ①、任何一条SQL语句以 ";" 结尾。
  *            ②、SQL语句不区分大小写。
  *         示例：
- *            (1)、查询员工的年薪: SELECT ename,sal*12 FROM emp;（字段可以参与数学运算）
+ *            (1)、查询员工的年薪: SELECT ename,sal*12 FROM t_emp;（字段可以参与数学运算）
  *                         +-----------+-------------+
  *                         | ename     | sal*12      |
  *                         +-----------+-------------+
@@ -92,7 +82,7 @@
  *                         | WARD      | 15000.00    |
  *                         | JONES     | 34200.00    |
  *                         +-----------+-------------+
- *            (2)、给查询结果的列重命名: SELECT ename,sal*12 AS yearSal FROM emp;
+ *            (2)、给查询结果的列重命名: SELECT ename,sal*12 AS yearSal FROM t_emp;
  *                         +-----------+-------------+
  *                         | ename     | yearSal     |
  *                         +-----------+-------------+
@@ -101,7 +91,7 @@
  *                         | WARD      | 15000.00    |
  *                         | JONES     | 34200.00    |
  *                         +-----------+-------------+
- *            (3)、别名中命名中文: SELECT ename,sal*12 AS '年薪' FROM emp;
+ *            (3)、别名中命名中文: SELECT ename,sal*12 AS '年薪' FROM t_emp;
  *                         +-----------+-------------+
  *                         | ename     | 年薪         |
  *                         +-----------+-------------+
@@ -110,7 +100,7 @@
  *                         | WARD      | 15000.00    |
  *                         | JONES     | 34200.00    |
  *                         +-----------+-------------+
- *            (4)、别名AS关键字可以省略，用空格来代替: SELECT ename,sal*12 '年薪' FROM emp;
+ *            (4)、别名AS关键字可以省略，用空格来代替: SELECT ename,sal*12 '年薪' FROM t_emp;
  *                         +-----------+-------------+
  *                         | ename     | 年薪         |
  *                         +-----------+-------------+
@@ -119,10 +109,10 @@
  *                         | WARD      | 15000.00    |
  *                         | JONES     | 34200.00    |
  *                         +-----------+-------------+
- *            (5)、查询所有字段: SELECT * FROM emp;
+ *            (5)、查询所有字段: SELECT * FROM t_emp;
  *
- *      delete   用于删除表中的特定行。              delete from 表名 where 条件;
- *      truncate 用于删除表中的所有行，但不删除表本身。truncate table 表名称;
- *      drop     用于删除整个表，包括其结构和数据。   drop table 表名称;
+ *      delete   用于删除表中的特定行.               delete from 表名 where 条件;
+ *      truncate 用于删除表中的所有行,但不删除表本身.  truncate table 表名称;
+ *      drop     用于删除整个表,包括其结构和数据.      drop table 表名称;
  */
 public class A1_入门知识 {}

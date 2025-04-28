@@ -3,7 +3,7 @@
  */
 /* 三张表怎么连接查询？
  *       案例：找出每一个员工的部门名称、工资等级以及上级领导
- *            emp e表
+ *            t_emp e表
  *            +-------+-------+---------+--------+------+
  *            | emp_no| ename | sal     | dept_no| mgr  |  // 员工编号   员工姓名    工资    部门编号   员工的上级领导编号
  *            +-------+-------+---------+--------+------+
@@ -12,7 +12,7 @@
  *            | 4135  | WARD  | 2005.00 | 20     | 4563 |
  *            | 7263  | JONES | 1080.00 | 10     | 7839 |
  *            +-------+-------+-----------+-------------+
- *            dept d表
+ *            t_dept d表
  *            +-----------+-------------+-----------+
  *            | dept_no   | d_name      | loc       |       // 部门编号   部门名称   部门地址
  *            +-----------+-------------+-----------+
@@ -21,7 +21,7 @@
  *            | 30        | SALES       | CHICAGO   |
  *            | 40        | OPERATIONS  | BOSTON    |
  *            +-----------+-------------+-----------+
- *            sal_grade s表
+ *            t_sal_grade s表
  *            +-----------+-------------+-----------+
  *            | grade     | loSal       | hiSal     |      // 工资等级   员工最低金额   员工最高金额
  *            +-----------+-------------+-----------+
@@ -33,13 +33,13 @@
  *
  *            SELECT
  *               e.ename, d.d_name, s.grade, em.ename '领导'
- *            FROM emp e
+ *            FROM t_emp e
  *               INNER JOIN
- *                  dept d
+ *                  t_dept d
  *               ON
  *                  e.dept_no = d.dept_no
  *               INNER JOIN
- *                  sal_grade s
+ *                  t_sal_grade s
  *               ON
  *                  e.sal BETWEEN s.loSal AND s.hiSal
  *               LEFT OUTER JOIN                         // inner和outer可以省略

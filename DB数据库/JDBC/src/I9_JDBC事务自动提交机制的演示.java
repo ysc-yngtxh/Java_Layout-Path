@@ -35,7 +35,7 @@ public class I9_JDBC事务自动提交机制的演示 {
             // 1、注册驱动
             Class.forName("com.mysql.cj.jdbc.Driver");
             // 2、获取连接
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_databash?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC", "root", "131474");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_database?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC", "root", "131474");
             // 将自动提交机制修改为手动修改
             conn.setAutoCommit(false);
             // 3、获取预编译数据库操作对象

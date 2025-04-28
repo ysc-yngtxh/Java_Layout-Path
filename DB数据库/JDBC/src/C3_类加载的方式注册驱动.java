@@ -8,8 +8,7 @@ import java.sql.Statement;
  */
 /*
  * public class Driver extends NonRegisteringDriver implements java.sql.Driver {
- *     public Driver() throws SQLException {
- *     }
+ *     public Driver() throws SQLException {}
  *
  *     static {
  *         try {
@@ -39,7 +38,7 @@ public class C3_类加载的方式注册驱动 {
 
             // 2、获取连接
             conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/db_databash?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC"
+                    "jdbc:mysql://localhost:3306/db_database?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC"
                   , "root"
                   , "131474");
 

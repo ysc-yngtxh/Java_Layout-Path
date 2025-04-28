@@ -20,17 +20,17 @@ public class B2_JDBC编程六步概述 {
             // 2、获取连接
             /*
              * url:统一资源定位符（网络中某个资源的绝对路径）
-             * jdbc:mysql://localhost:3306/db_databash?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC 这就是URL
+             * jdbc:mysql://localhost:3306/db_database?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC 这就是URL
              * URL包括哪几部分?
              *    jdbc:mysql:   通信协议
              *    localhost：   IP地址
              *    3306:         MySQL数据库端口号
-             *    db_databash： 具体的数据库实例名
+             *    db_database： 具体的数据库实例名
              *    ?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC    这就是MySQL驱动8的新特性，加入了时区
              *
              * 说明：localhost和127.0.0.1都是本机IP地址
              */
-            String url = "jdbc:mysql://localhost:3306/db_databash?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
+            String url = "jdbc:mysql://localhost:3306/db_database?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
             String user = "root";
             String password = "131474";
             conn = DriverManager.getConnection(url, user, password);

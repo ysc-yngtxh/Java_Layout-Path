@@ -3,25 +3,24 @@
  * @dateTime 2023-09-19 17:58
  * @apiNote TODO
  */
-/* 一、单行处理函数（这里可以简单的理解为函数只处理单行字段，以此分类；那么后面就是分组函数或者叫聚集函数，意味处理多行字段，但是输出都是一行字段）
- *
- *     CREATE TABLE `tb_order`(
- *        `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '订单id',
- *        `subject` varchar(256) DEFAULT NULL COMMENT '订单标题',
- *        `order_no` varchar(50) DEFAULT NULL COMMENT '商户订单编号',
- *        `total_amount` double DEFAULT NULL COMMENT '订单金额',
- *        `status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '订单状态(WAIT_BUYER_PAY: 交易创建; TRADE_SUCCESS: 支付成功; TRADE_FINISHED: 交易完结; TRADE_CLOSED: 交易关闭)',
- *        `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
- *        `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
- *        `pay_type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '支付方式(支付宝; 微信; 银联)',
- *        PRIMARY KEY (`id`)
- *     ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='订单表';
- *
+/* 一、单行处理函数（简单理解为函数只处理单行字段，以此分类；那么后面就是分组函数或者叫聚集函数，意味处理多行字段，但是输出都是一行字段）
+ *     CREATE TABLE `t_order`(
+ *         `id`           bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '订单id',
+ *         `subject`      varchar(256) DEFAULT NULL COMMENT '订单标题',
+ *         `order_no`     varchar(50)  DEFAULT NULL COMMENT '商户订单编号',
+ *         `total_amount` double       DEFAULT NULL COMMENT '订单金额',
+ *         `status`       varchar(50)  DEFAULT NULL COMMENT '订单状态(WAIT_BUYER_PAY: 交易创建; TRADE_SUCCESS: 支付成功; TRADE_FINISHED: 交易完结; TRADE_CLOSED: 交易关闭)',
+ *         `create_time`  datetime     DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+ *         `update_time`  timestamp    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+ *         `pay_type`     varchar(10)  DEFAULT NULL COMMENT '支付方式(支付宝; 微信; 银联)',
+ *         PRIMARY KEY (`id`)
+ *     ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='订单表';
+ * ---------------------------------------------------------------------------------------------------------------
  *   Ⅰ、字符函数
  *      1、length 获取参数值的字节个数（每个英文一个字节；中文需要看编码，utf8编码一个中文3个字节）
  *         SELECT LENGTH(name) FROM tb_order;  -- 比如 name='游家纨绔' ，那么返回数据为 12; name='yjwk' ，那么返回数据为 4
  *
- *      2、concat 拼接字符串
+ *      2、concat 拼接字符串【concat_ws相较于concat可以用指定的分隔符连接多个字符串（ws是With Separator缩写）】
  *         [1]、SELECT CONCAT(name, alias) FROM tb_order;
  *              -- 比如 name='游家纨绔'，alias='小游'，返回结果为 ‘游家纨绔小游’
  *         [2]、SELECT CONCAT_WS("_", name, alias, status) FROM tb_order;
@@ -35,7 +34,7 @@
  *         [1]、SELECT SUBSTR(name, 1, 2) FROM tb_order;     -- 比如 name='齐天大圣孙悟空' 返回结果为 ‘齐天’
  *         [2]、SELECT SUBSTRING(name, 1, 2) FROM tb_order;  -- 比如 name='齐天大圣孙悟空' 返回结果为 ‘齐天’
  *
- *      5.instr 查询子串在主串中第一次出现的下标,找不到返回0
+ *      5.instr 查询子串在主串中第一次出现的下标，找不到返回0
  *         SELECT INSTR(name, '孙') FROM tb_order;
  *         -- 比如 name='齐天大圣孙悟空‘ 返回结果为  5 ; 如果name='齐天大圣悟空‘ 返回结果为  0
  *
