@@ -1,4 +1,5 @@
-DROP TABEL IF EXISTS `t_student`;
+
+DROP TABLE IF EXISTS `t_student`;
 CREATE TABLE `t_student`(
     `id`          int          NOT NULL AUTO_INCREMENT COMMENT '主键Id',
     `no`          int          NOT NULL COMMENT '编号',
@@ -15,7 +16,7 @@ CREATE TABLE `t_student`(
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='学生表';
 
 
-DROP TABEL IF EXISTS `t_act`;
+DROP TABLE IF EXISTS `t_act`;
 CREATE TABLE `t_act`(
     `id`      int NOT NULL AUTO_INCREMENT COMMENT '主键Id',
     `act_no`  int NOT NULL COMMENT '编号',
@@ -26,7 +27,7 @@ INSERT INTO `db_databash`.`t_act` (`id`, `act_no`, `balance`) VALUES (1, 111, '1
 INSERT INTO `db_databash`.`t_act` (`id`, `act_no`, `balance`) VALUES (2, 222, '10000.0');
 
 
-DROP TABEL IF EXISTS `t_emp`;
+DROP TABLE IF EXISTS `t_emp`;
 CREATE TABLE `t_emp`(
     `id`       int          NOT NULL AUTO_INCREMENT COMMENT '主键Id',
     `emp_no`   bigint       DEFAULT NULL COMMENT '员工编号',
@@ -41,6 +42,7 @@ CREATE TABLE `t_emp`(
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='员工信息表';
 
 
+DROP TABLE IF EXISTS `t_dict`;
 CREATE TABLE `t_dict`(
     `id`          int NOT NULL AUTO_INCREMENT COMMENT '主键Id',
     `dict_name`   varchar(255) DEFAULT NULL COMMENT '字典名称',
@@ -53,6 +55,7 @@ INSERT INTO `db_database`.`t_dict` (`id`, `dict_name`, `dict_code`, `description
 INSERT INTO `db_database`.`t_dict` (`id`, `dict_name`, `dict_code`, `description`, `del_flag`) VALUES (2, '订单状态', 'ORDER_STATUS', '订单状态', '0');
 
 
+DROP TABLE IF EXISTS `t_dict_item`;
 CREATE TABLE `t_dict_item`(
     `id`          int NOT NULL AUTO_INCREMENT COMMENT '主键Id',
     `dict_id`     int NOT NULL COMMENT '字典Id',

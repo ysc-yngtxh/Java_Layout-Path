@@ -2,7 +2,7 @@
  * @author 游家纨绔
  */
 /* 一、排序（order by 升序，降序）
- *     DROP TABEL IF EXISTS `t_emp`;
+ *     DROP TABLE IF EXISTS `t_emp`;
  *     CREATE TABLE `t_emp`(
  *         `id`       int          NOT NULL AUTO_INCREMENT COMMENT '主键Id',
  *         `emp_no`   bigint       DEFAULT NULL COMMENT '员工编号',
@@ -46,7 +46,7 @@
  *                      +-------------+
  *                      | job         |
  *                      +-------------+
- *                      | 信息技术支持部 |
+ *                      | 信息技术支持部｜
  *                      | 行政管理部    | 我们可以发现工作岗位中出现了重复的PRESIDENT，我们如何去除重复的呢？
  *                      | 产品质量部    |
  *                      | 产品质量部    |

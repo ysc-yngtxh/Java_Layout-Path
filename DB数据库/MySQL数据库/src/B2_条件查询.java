@@ -2,7 +2,7 @@
  * @author 游家纨绔
  */
 /* 一、条件查询
- *     DROP TABEL IF EXISTS `t_emp`;
+ *     DROP TABLE IF EXISTS `t_emp`;
  *     CREATE TABLE `t_emp`(                                          语法格式：
  *         `id`       int NOT NULL AUTO_INCREMENT COMMENT '主键Id',        SELECT
  *         `emp_no`   bigint       DEFAULT NULL COMMENT '员工编号',            字段1, 字段2...     3
@@ -38,7 +38,7 @@
  *               SELECT * FROM a WHERE a.id IN(SELECT b.id AS bid FROM b)
  *               如果b表数据中某个id在a表中不存在，那这个结果会忽略(不会出现异常也不会显示为null)
  *               +----+--------+                +----+---------+                +----+--------+
- *           a表 |  id | user   |           b表  | id | phone   |          结果  | id | user   |
+ *           a表 |  id | user  ｜           b表  | id | phone   |           结果 ｜ id | user   |
  *               +----+--------+                +----+---------+                +----+--------+
  *               |  0 | 杜子韬  |                |  0 | 4532534 |                |  0 | 杜子韬  |
  *               |  1 | 陈嘉琪  |                |  1 | 4356345 |                |  1 | 陈嘉琪  |
