@@ -178,12 +178,10 @@
  *      对于老版本的 MySQL 数据库，你需要升级到至少 8.0.16 版本才能使用这一功能。
  *      在此之前，通常的做法是通过触发器、存储过程或应用程序逻辑来强制执行这样的约束。
  *
- *            create table t_product(
- *                id      bigint    auto_increment primary key comment '评论ID',
- *                -- CHECK 约束用于确保列中的值满足特定条件。InnoDB 存储引擎中支持 CHECK 约束，但在 MyISAM 存储引擎中则不支持。
- *                rating  int       check (rating >= 1 AND rating <= 5) comment '评分',
- *            )
- *
- *
+ *      create table t_product(
+ *          id      bigint    auto_increment primary key comment '评论ID',
+ *          -- CHECK 约束用于确保列中的值满足特定条件。InnoDB 存储引擎中支持 CHECK 约束，但在 MyISAM 存储引擎中则不支持。
+ *          rating  int       check (rating >= 1 AND rating <= 5) comment '评分',
+ *      )
  */
 public class J10_约束 {}

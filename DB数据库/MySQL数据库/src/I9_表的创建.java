@@ -26,12 +26,14 @@
  *              datetime    客户端插入的时间不做任何改变，基本上是原样输入和输出。
  *              timestamp   把客户端插入的时间从当前时区转化为UTC（世界标准时间）进行存储。查询时，将其又转化为客户端当前时区进行返回。
  *
- *              timestamp所能存储的时间范围为：‘1970-01-01 00:00:01.000000’ 到 ‘2038-01-19 03:14:07.999999’。
  *              datetime所能存储的时间范围为：‘1000-01-01 00:00:00.000000’ 到 ‘9999-12-31 23:59:59.999999’。
+ *              timestamp所能存储的时间范围为：‘1970-01-01 00:00:01.000000’ 到 ‘2038-01-19 03:14:07.999999’。
  *              datetime和timestamp都表示日期和时间，格式都为 'YYYY-MM-DD HH:MM:SS'。
- *              总结：datetime和timestamp除了存储范围和存储方式不一样，没有太大区别。当然，对于跨时区的业务，TIMESTAMP更为合适。
+ *              datetime存储长度为8个字节，timestamp存储长度为4个字节。
+ *              32位有符号整数的最大值是 2³¹-1 = 2,147,483,647，这个数值对应的UTC时间是 2038-01-19 03:14:07
+ *         总结：datetime和timestamp除了存储范围和存储方式不一样，没有太大区别。当然，对于跨时区的业务，TIMESTAMP更为合适。
  *
- *         对于创建表时间字段：`update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+ *         对于创建表时间字段：`update_time` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
  *                          DEFAULT CURRENT_TIMESTAMP 表示创建时获取当前时间戳
  *                          ON UPDATE CURRENT_TIMESTAMP 表示根据当前时间戳更新
  *
@@ -49,20 +51,21 @@
  *           );                                          生日：char
  *                                                       入学时间：datetime（格式2023-09-25 14:30:00）
  *                                                       是否毕业：tinyint（1表示true，0表示false）
- *         drop table if exists t_students;   // 当这个t_student表存在的话就删除掉
- *         create table t_students(
- *               id int NOT NULL AUTO_INCREMENT COMMENT '序号',
- *               no bigint unsigned NOT NULL COMMENT '学号',
- *               name varchar(255) NOT NULL COMMENT '姓名',
- *               sex char(11) NOT NULL COMMENT '性别',
- *               class_no varchar(255) DEFAULT '' COMMENT '班级编号',
- *               birth char(10) NOT NULL COMMENT '生日',
- *               time datetime DEFAULT CURRENT_TIMESTAMP COMMENT '入学时间',
- *               update_time timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
- *               graduate tinyint(1) DEFAULT 1 COMMENT '是否毕业',
- *               PRIMARY KEY (`id`)
- *         ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4
- *           COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='学生信息表';
+ *         drop table if exists t_student;   // 当这个t_student表存在的话就删除掉
+ *         create table `t_student`(
+ *             `id`          int NOT NULL AUTO_INCREMENT COMMENT '主键Id',
+ *             `no`          int NOT NULL COMMENT '编号',
+ *             `name`        varchar(255) DEFAULT NULL COMMENT '用户名',
+ *             `age`         int          DEFAULT NULL COMMENT '年龄',
+ *             `height`      double DEFAULT NULL COMMENT '身高',
+ *             `sex`         char(11)     NOT NULL COMMENT '性别',
+ *             `class_no`    varchar(255) DEFAULT '' COMMENT '班级编号',
+ *             `birth`       char(10)     NOT NULL COMMENT '生日',
+ *             `time`        datetime     DEFAULT CURRENT_TIMESTAMP COMMENT '入学时间',
+ *             `update_time` timestamp    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+ *             `graduate`    tinyint(1)   DEFAULT 1 COMMENT '是否毕业',
+ *             PRIMARY KEY (`id`)
+ *         ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='学生表';
  *         // unsigned关键字：表示的是为“无符号”的意思，即为非负数，用此类型可以增加数据长度：
  *                           例如 tinyint的范围[-128,127] 最大值是127，tinyint unsigned的范围[0,127*2] 最大值就可以到127*2，
  *                           且unsigned只针对整型的数据类型。
@@ -87,7 +90,7 @@
  *         语法格式：INSERT INTO 表名(字段名1, 字段名2, 字段名3, ...) VALUES(值1, 值2, 值3, ...)
  *         注意：字段的数量和值的数量相同，并且数据类型要对应相同
  *
- *              INSERT INTO t_students(id, no, name, sex, class_no, birth, time, update_time, graduate)
+ *              INSERT INTO t_student(id, no, name, sex, class_no, birth, time, update_time, graduate)
  *              VALUES(1, 1, 'ZhangSan', '1', '高三1班', '1950-10-12', now(), now(), 1);
  *              +----+----+----------+-----+------------+------------+---------------------+--------------------+---------+
  *              | id | no | name     | sex | class_no   | birth      | time                | update_time        | graduate|
@@ -96,13 +99,13 @@
  *              +----+----+----------+-----+------------+------------+---------------------+--------------------+---------+
  *
  *              // 除no、name、sex、birth字段外，剩下的其他字段有默认值自动添加默认值，没有默认值自动插入null
- *                 INSERT INTO t_students(no, name, sex, birth) VALUES(2, 'lisi', 1, '1997-04-29');
+ *                 INSERT INTO t_student(no, name, sex, birth) VALUES(2, 'lisi', 1, '1997-04-29');
  *
  *              // 插入数据时字段可以省略不写，但是后面的values对数量和顺序都有要求(要一一对应，不能少也不能多)
- *                 INSERT INTO t_students VALUES(3, 3, 'ZhangSan2', '1', '高三1班', '1990-10-12', now(), now(), 1);
+ *                 INSERT INTO t_student VALUES(3, 3, 'ZhangSan2', '1', '高三1班', '1990-10-12', now(), now(), 1);
  *
  *              // 一次插入多行数据
- *                 INSERT INTO t_students(id, no, name, sex, class_no, birth, time, update_time, graduate)
+ *                 INSERT INTO t_student(id, no, name, sex, class_no, birth, time, update_time, graduate)
  *                 VALUES(4, 4, 'ZhangSan3', '1', '高三2班', '1991-10-12', now(), now(), 2),
  *                       (5, 5, 'ZhangSan4', '0', '高三3班', '1992-10-12', now(), now(), 2);
  *              +----+----+----------+-----+------------+------------+---------------------+--------------------+---------+
@@ -118,10 +121,10 @@
  *   4、表的复制
  *         语法：create table 表名 as select语句;
  *              将查询结果当作表创建出来;
- *         例如：create table t_student20230925 AS SELECT * FROM t_students;
+ *         例如：create table t_student20230925 AS (SELECT * FROM t_student);
  * ---------------------------------------------------------------------------------------------------------------
  *   5、批量插入
- *         INSERT INTO t_study SELECT * FROM t_students;
+ *         INSERT INTO t_study SELECT * FROM t_student;
  *         +----+----+----------+-----+------------+------------+---------------------+--------------------+---------+
  *         | id | no | name     | sex | class_no   | birth      | time                | update_time        | graduate|
  *         +----+----+----------+-----+------------+------------+---------------------+--------------------+---------+
@@ -143,7 +146,7 @@
  *         注意：如果没有where条件,那么将会把整张表数据全部更新
  *
  *              案例：将学号为1的class_no修改为高三3班，将sex修改为0
- *              UPDATE t_students SET class_no='高三3班',sex='0' WHERE no=1;
+ *              UPDATE t_student SET class_no='高三3班',sex='0' WHERE no=1;
  *              +----+----+----------+-----+------------+------------+---------------------+--------------------+---------+
  *              | id | no | name     | sex | class_no   | birth      | time                | update_time        | graduate|
  *              +----+----+----------+-----+------------+------------+---------------------+--------------------+---------+
@@ -155,7 +158,7 @@
  *              +----+----+----------+-----+------------+------------+---------------------+--------------------+---------+
  *
  *              更新所有记录：
- *              UPDATE t_students SET class_no='高三3班', sex='0';
+ *              UPDATE t_student SET class_no='高三3班', sex='0';
  *              +----+----+----------+-----+------------+------------+---------------------+--------------------+---------+
  *              | id | no | name     | sex | class_no   | birth      | time                | update_time        | graduate|
  *              +----+----+----------+-----+------------+------------+---------------------+--------------------+---------+
@@ -171,7 +174,7 @@
  *         注意：如果没有where条件，默认是全部删除
  *
  *              案例：删除学号1数据
- *              DELETE FROM t_students WHERE no = 1;
+ *              DELETE FROM t_student WHERE no = 1;
  *              +----+----+----------+-----+------------+------------+---------------------+--------------------+---------+
  *              | id | no | name     | sex | class_no   | birth      | time                | update_time        | graduate|
  *              +----+----+----------+-----+------------+------------+---------------------+--------------------+---------+
@@ -222,6 +225,6 @@
  *   9、备份表
  *         语法：mysqldump -u root -p [database] [table...] > [custom-path]
  *
- *         示例：mysqldump -u root -p springdb t_student > /Users/ysc/Desktop/t_student.sql
+ *         示例：mysqldump -u root -p da_database t_student > /Users/ysc/Desktop/t_student.sql
  */
 public class I9_表的创建 {}
