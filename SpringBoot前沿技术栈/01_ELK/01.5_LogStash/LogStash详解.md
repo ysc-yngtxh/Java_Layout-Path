@@ -1,4 +1,4 @@
-LogStash
+## LogStash
 
 配置环境变量：LS_JAVA_HOME
 
@@ -31,4 +31,21 @@ output {
     codec => json_lines # 指定编解码器，将字段解析为JSON字符串
   }
 }
+```
+
+## Mac电脑使用Homebrew安装LogStash
+  Logstash 9.x 默认要求 pipelines.yml 非空，而 Homebrew 安装可能未初始化此文件。
+  因此，需要在 pipelines.yml 文件中定义管道配置文件路径。
+```
+# 在 /opt/homebrew/etc/logstash/pipelines.yml 中添加以下内容
+- pipeline.id: main
+  path.config: "/opt/homebrew/etc/logstash/*.conf"
+  pipeline.workers: 1
+  
+pipeline.id：定义管道名称（这里是 main）
+path.config：指定了 Logstash 配置文件的路径（支持通配符 *.conf）
+pipeline.workers：设置工作线程数为 1（测试环境建议先用单线程）
+
+作用：启动一个名为 main 的管道，加载 /opt/homebrew/etc/logstash/ 目录下所有 .conf 文件作为配置，
+     使用单线程运行（避免复杂环境下的并发问题）
 ```

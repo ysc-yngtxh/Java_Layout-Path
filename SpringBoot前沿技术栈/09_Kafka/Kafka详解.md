@@ -47,6 +47,10 @@
   ```
   # 在目录 /opt/homebrew/Cellar/kafka/3.9.0/libexec/bin 下执行
   sh kafka-storage.sh format -t 【生成集群的唯一ID】 -c /opt/homebrew/etc/kafka/server.properties
+  
+  format：子命令，表示对 Kafka 的存储目录进行格式化操作。格式化会清空日志目录（log.dirs 配置项指定的路径），并写入一个新的集群 ID。
+  -t：该参数用于指定集群的唯一 ID。这个 ID 是在第一步中生成的 UUID。
+  -c：该参数用于指定 Kafka 的配置文件路径。这个配置文件包含了 Kafka 的各种配置项，包括 broker.id、listeners、log.dirs 等等。
   ```
   </figure>
 

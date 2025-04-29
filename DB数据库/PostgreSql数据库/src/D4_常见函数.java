@@ -64,7 +64,7 @@
  *            SELECT CHAR_LENGTH('date'), CHAR_LENGTH('egg');
  *        ②、使用LENGTH函数计算字符串长度，输入语句如下：
  *            SELECT LENGTH('date'), LENGTH('egg');
- *     2、合并字符串 CONCAT(s1,s2,…),CONCAT_WS(x,s1,s2,…)
+ *     2、合并字符串 CONCAT(s1,s2,…)、CONCAT_WS(x,s1,s2,…)
  *        ①、使用CONCAT函数连接字符串，输入语句如下：
  *            SELECT CONCAT('PostgreSQL', '9.15'), CONCAT('Postgre',NULL,'SQL');
  *        ②、使用CONCAT_WS函数连接带分隔符的字符串，输入语句如下：

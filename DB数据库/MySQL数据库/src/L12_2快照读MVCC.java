@@ -28,12 +28,12 @@
  *
  *    [3]、Undo Log日志
  *         ①、Undo：意为撤销或取消，undo即返回指定某个状态的操作。undo log顾名思义：回滚日志，用于记录数据被修改前的信息。
- *             undo log中主要保存了数据的基本信息，比如说：日志开始的位置、结束的位置，主键的长度、表id，日志编号、日志类型
+ *            undo log中主要保存了数据的基本信息，比如说：日志开始的位置、结束的位置，主键的长度、表id，日志编号、日志类型
  *            此外，undo log在记录日志时候也包含两个隐藏字段 trx_id 和 roll_pointer。
  *
  *         ②、Undo Log分类
- *            （1）insert undo log 是在 insert操作 中产生的 undo log。因为 insert操作 的记录只对事务本身可见，对于其它事务，
- *                此记录是不可见的，所以 insert undo log 可以在事务提交后直接删除而不需要进行purge操作。
+ *            （1）insert undo log 是在 insert操作 中产生的 undo log。因为 insert操作 的记录只对事务本身可见，
+ *                对于其它事务，此记录是不可见的，所以 insert undo log 可以在事务提交后直接删除而不需要进行purge操作。
  *            （2）update undo log 是 update或delete操作 中产生的 undo log。因为会对已经存在的记录产生影响，为了提供 MVCC机制，
  *                因此 update undo log 不能在事务提交时就进行删除，而是将事务提交时放到入history list上，等待purge线程进行最后的删除操作。
  *
