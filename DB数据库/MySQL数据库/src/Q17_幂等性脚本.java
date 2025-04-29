@@ -84,12 +84,11 @@
  *                       -- 当condition条件表达式为true，则返回expr_if_true，否则返回expr_if_false
  *        set @sql = (
  *            SELECT
- *                IF(
- *                    (SELECT COUNT(1) FROM information_schema.statistics WHERE table_schema = @schema AND table_name = @table AND index_name = @index) = 0
- *                    , CONCAT('ALTER TABLE ', @table, ' ADD UNIQUE INDEX ', @index, ' (`brand_name`, `delete_flag`) COMMENT "删除标识、集合编码联合唯一索引" USING BTREE;')
- *                    , 'select "索引已存在"'
- *                  )
- *            );
- *
+ *            IF(
+ *                (SELECT COUNT(1) FROM information_schema.statistics WHERE table_schema = @schema AND table_name = @table AND index_name = @index) = 0
+ *                , CONCAT('ALTER TABLE ', @table, ' ADD UNIQUE INDEX ', @index, ' (`brand_name`, `delete_flag`) COMMENT "删除标识、集合编码联合唯一索引" USING BTREE;')
+ *                , 'select "索引已存在"'
+ *            )
+ *        );
  */
 public class Q17_幂等性脚本 {}

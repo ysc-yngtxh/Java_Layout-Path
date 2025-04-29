@@ -31,7 +31,6 @@
  *                  确定性函数是指对于相同的输入参数，总是返回相同的结果。
  *                  在binlog启用后，创建的函数需要声明类型，因为binlog在主从复制需要知道这个函数创建语句是什么类型，否则同步数据会有不一致现象。
  *
- *
  *    [3]、示例：自定义函数 get_student_scores_by_id(sid INT, cid INT)
  *         -- 删除已经存在的函数 get_student_scores_by_id
  *         DROP FUNCTION IF EXISTS get_student_scores_by_id;

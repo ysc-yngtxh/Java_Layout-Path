@@ -2,32 +2,6 @@
  * @author 游家纨绔
  */
 /* MySQL作业题
- *    CREATE TABLE t_emp(
- *       `id` INT(20) PRIMARY KEY AUTO_INCREMENT COMMENT '主键Id',
- *       `emp_no` BIGINT(20) COMMENT '员工编号',
- *       `ename` VARCHAR(255) COMMENT '员工姓名',
- *       `mgr` BIGINT(20) COMMENT '领导编号',
- *       `sal` DOUBLE(10, 2) COMMENT '工资',
- *       `comm` DOUBLE(10, 2) COMMENT '津贴',
- *       `dept_no` BIGINT(20) COMMENT '部门编号',
- *       `job` VARCHAR(255) COMMENT '工作岗位',
- *       `province` VARCHAR(255) COMMENT '省份'
- *    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='员工信息表';
- *
- *    CREATE TABLE sal_grade(
- *       `id` BIGINT(20) PRIMARY KEY AUTO_INCREMENT COMMENT '主键Id',
- *       `grade` VARCHAR(255) COMMENT '工资等级',
- *       `loSal` DOUBLE(10, 2) COMMENT '最低金额',
- *       `hiSal` DOUBLE(10, 2) COMMENT '最高金额'
- *    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='工资等级表';
- *
- *    CREATE TABLE dept(
- *       `id` BIGINT(20) PRIMARY KEY AUTO_INCREMENT COMMENT '主键Id',
- *       `dept_no` VARCHAR(255) COMMENT '部门编号',
- *       `d_name` VARCHAR(255) COMMENT '部门名称',
- *       `loc` VARCHAR(255) COMMENT '部门地址'
- *    ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='部门信息表';
- *
  *        1、取得每个部门最高薪水的人员名称。
  *        2、哪些人的薪水在部门的平均薪水之上
  *        3、取得每个部门平均的薪水等级
@@ -38,15 +12,15 @@
  *        8、取得比普通员工（员工代码没有在mgr字段上出现的）的最高薪水还要高的领导人姓名.
  *        9、取得每个薪水级别有多少员工
  *        10、列出所有员工及领导的姓名
- *        11、求出部门名称中，带'S'字符的部门员工的工资合计、部门人数
+ *        11、求出部门名称中，带 'S' 字符的部门员工的工资合计、部门人数
  *        12、给员工加薪10%
  *        13、面试题
- *              有3个表 s(学生表),c(课程表),sc(学生选课表)
+ *              有3个表 s(学生表)、c(课程表)、sc(学生选课表)
  *                 s(sno, s_name) 代表 (学号，姓名)
  *                 c(cno, cname, c_teacher) 代表 (课号，课名，教师)
  *                 sc(sno, cno, sc_grade) 代表 (学号，课号，成绩)
  *              问题：
- *                  1)、找出没选过“黎明”老师的所有学生姓名
+ *                  1)、找出没选过 “黎明” 老师的所有学生姓名
  *                  2)、列出2门以上（含2门）不及格学生姓名及平均成绩
  *                  3)、既学过1号课程又学过2号课所有学生的姓名
  *

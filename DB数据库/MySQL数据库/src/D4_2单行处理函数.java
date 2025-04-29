@@ -34,11 +34,15 @@
  *         [1]、SELECT SUBSTR(name, 1, 2) FROM tb_order;     -- 比如 name='齐天大圣孙悟空' 返回结果为 ‘齐天’
  *         [2]、SELECT SUBSTRING(name, 1, 2) FROM tb_order;  -- 比如 name='齐天大圣孙悟空' 返回结果为 ‘齐天’
  *
- *      5.instr 查询子串在主串中第一次出现的下标，找不到返回0
- *         SELECT INSTR(name, '孙') FROM tb_order;
- *         -- 比如 name='齐天大圣孙悟空‘ 返回结果为  5 ; 如果name='齐天大圣悟空‘ 返回结果为  0
+ *      5.left、right 从 左边/右边 开始截取指定长度的字符
+ * 	       [1]、SELECT LEFT(name, 2) FROM tb_order;     -- 比如 name='齐天大圣孙悟空' 返回结果为 ‘齐天’
+ * 		   [2]、SELECT RIGHT(name, 2) FROM tb_order;    -- 比如 name='齐天大圣孙悟空' 返回结果为 ‘悟空’
  *
- *      6.trim 去掉前后空格/或指定字符
+ *      6.instr 查询子串在主串中第一次出现的下标，找不到返回0
+ *         SELECT INSTR(name, '孙') FROM tb_order;
+ *         -- 比如 name='齐天大圣孙悟空' 返回结果为  5 ; 如果 name='齐天大圣悟空' 返回结果为  0
+ *
+ *      7.trim 去掉前后空格/或指定字符
  *         [1]、SELECT TRIM(name) FROM tb_order;  -- 去除前后空白
  *         [2]、SELECT LTRIM(name) FROM tb_order; -- 去除前导空白
  *         [3]、SELECT RTRIM(name) FROM tb_order; -- 去除尾随空白
@@ -47,19 +51,19 @@
  *         [6]、SELECT TRIM(TRAILING 'a' FROM name) FROM tb_order    -- 去除尾随的'a'字符
  *         [7]、SELECT TRIM(BOTH 'a' from TRIM(name)) FROM tb_order  -- 去除前后空白后，再去除前后的'a'字符
  *
- *      7.lpad 用指定的字符实现左填充指定长度
+ *      8.lpad 用指定的字符实现左填充指定长度
  *         [1]、SELECT LPAD(subject, 2, "*") FROM tb_order
  *              -- 如果 subject=‘齐天大圣孙悟空’ 结果为： 齐天
  *         [2]、SELECT LPAD(subject, 10, "*") FROM tb_order
  *              -- 如果 subject=‘齐天大圣孙悟空’ 结果为： ***齐天大圣孙悟空
  *
- *      8.rpad 用指定的字符实现右填充指定长度
+ *      9.rpad 用指定的字符实现右填充指定长度
  *         [1]、SELECT RPAD(subject, 2, "*") FROM tb_order
  *              -- 如果 subject=‘齐天大圣孙悟空’ 结果为： 齐天
  *         [2]、SELECT RPAD(subject, 10, "*") FROM tb_order
  *              -- 如果 subject=‘齐天大圣孙悟空’ 结果为： 齐天大圣孙悟空***
  *
- *      9.replace 替换
+ *      10.replace 替换
  *        [1]、SELECT REPLACE(subject, '操', "*") FROM tb_order
  *             -- 如果 subject=‘中学生在操场上做早操’ 结果为： 中学生在*场上做早*
  *        [2]、UPDATE tb_order SET subject = REPLACE(subject, '曹', '*' ) WHERE id=1;
