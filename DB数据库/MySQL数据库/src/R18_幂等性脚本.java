@@ -43,10 +43,8 @@
  *            SELECT
  *                CASE
  *                    WHEN (SELECT count(1) FROM information_schema.COLUMNS WHERE table_schema = @schema AND table_name = @table AND column_name = @col) = 0
- *        			   THEN
- *                        CONCAT('ALTER TABLE ', @TABLE, ' ADD COLUMN ', @col, ' VARCHAR(200) DEFAULT NULL COMMENT "工作内容" AFTER remark;')
- *                    ELSE
- *                        'SELECT 1'
+ *        			  THEN CONCAT('ALTER TABLE ', @TABLE, ' ADD COLUMN ', @col, ' VARCHAR(200) DEFAULT NULL COMMENT "工作内容" AFTER remark;')
+ *                    ELSE 'SELECT 1'
  *                END
  *            );
  *        prepare stmt from @sql;    -- 使用变量@sql的值来准备一个动态SQL语句，并将其分配给stmt
@@ -91,4 +89,4 @@
  *            )
  *        );
  */
-public class Q17_幂等性脚本 {}
+public class R18_幂等性脚本 {}

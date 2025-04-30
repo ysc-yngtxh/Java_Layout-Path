@@ -18,45 +18,45 @@
  *           create procedure proc_init_status()
  *           -- 开始存储过程
  *           BEGIN
- *             -- 自定义变量，控制游标循环变量
- *             declare end_flag int default 0;
- *             -- 自定义变量my_name
- *             declare my_name varchar(100);
- *             -- 定义游标并输入结果集
- *             declare album_cursor cursor for
- *                                 -- 该sql为查询custom_database库中满足custom_form_表前缀，且不存在status字段的所有表名
- *                                 SELECT distinct table_name
- *                                 FROM information_schema.columns
- *                                 WHERE table_schema = 'custom_database'
- *                                       AND table_name LIKE 'custom_form_%'
- *                                       AND table_name NOT IN(SELECT table_name
- *                                                             FROM information_schema.columns
- *                                                             WHERE table_schema = 'custom_database'
- *                                                                   AND table_name LIKE 'custom_form_%'
- *                                                                   AND column_name = 'status'
- *                                                            );
- *             -- 绑定控制变量到游标,游标循环结束自动转1
- *             declare continue handler for not found set end_flag=1;
- *             --  打开游标
- *             open album_cursor;
- *             -- 遍历游标
- *             repeat
- *             -- 获取当前游标指针记录，取出值赋给自定义的变量my_name
- *             fetch album_cursor into my_name;
- *             -- 利用取到的值进行数据库的操作
- *             set @stmt = concat("ALTER TABLE ", my_name, " ADD COLUMN `status` varchar(20) DEFAULT NULL COMMENT '状态'");
- *             -- 定义预处理语句
- *             prepare stmt from @stmt;
- *             -- 执行预处理语句
- *             execute stmt;
- *             -- 输出sql
- *             select @stmt;
- *             -- 删除(释放)定义
- *             deallocate prepare stmt;
- *             -- 根据 end_flag 判断是否结束
- *             until end_flag end repeat;
- *             -- 关闭游标
- *             close album_cursor;
+ *               -- 自定义变量，控制游标循环变量
+ *               declare end_flag int default 0;
+ *               -- 自定义变量my_name
+ *               declare my_name varchar(100);
+ *               -- 定义游标并输入结果集
+ *               declare album_cursor cursor for
+ *                   -- 该sql为查询custom_database库中满足custom_form_表前缀，且不存在status字段的所有表名
+ *                   SELECT distinct table_name
+ *                   FROM information_schema.columns
+ *                   WHERE table_schema = 'custom_database'
+ *                         AND table_name LIKE 'custom_form_%'
+ *                         AND table_name NOT IN(SELECT table_name
+ *                                               FROM information_schema.columns
+ *                                               WHERE table_schema = 'custom_database'
+ *                                                     AND table_name LIKE 'custom_form_%'
+ *                                                     AND column_name = 'status'
+ *                                              );
+ *               -- 绑定控制变量到游标,游标循环结束自动转1
+ *               declare continue handler for not found set end_flag=1;
+ *               --  打开游标
+ *               open album_cursor;
+ *               -- 遍历游标
+ *               repeat
+ *               -- 获取当前游标指针记录，取出值赋给自定义的变量my_name
+ *               fetch album_cursor into my_name;
+ *               -- 利用取到的值进行数据库的操作
+ *               set @stmt = concat("ALTER TABLE ", my_name, " ADD COLUMN `status` varchar(20) DEFAULT NULL COMMENT '状态'");
+ *               -- 定义预处理语句
+ *               prepare stmt from @stmt;
+ *               -- 执行预处理语句
+ *               execute stmt;
+ *               -- 输出sql
+ *               select @stmt;
+ *               -- 删除(释放)定义
+ *               deallocate prepare stmt;
+ *               -- 根据 end_flag 判断是否结束
+ *               until end_flag end repeat;
+ *               -- 关闭游标
+ *               close album_cursor;
  *           -- 结束
  *           end;
  *         • 调用存储过程
@@ -72,7 +72,7 @@
  *         (1)、简单示例
  *              create procedure myPro1(in a int, in b int, out sum int)
  *              begin
- *                set sum = a+b;
+ *                  set sum = a+b;
  *              end;
  *              -- 语法解析：
  *                 create procedure 用来创建过程；myPro1 用来定义过程名称；
@@ -103,13 +103,13 @@
  *                 -- 创建过程
  *                 create procedure myPro2(in num int)
  *                 begin
- *                   if num<0 then -- 条件开始
- *                     select '负数';
- *                   elseif num=0 then  -- elseif要连写，中间不需要空格
- *                     select '不是正数也不是负数';
- *                   else
- *                     select '正数';
- *                   end if; -- 条件结束
+ *                     if num<0 then -- 条件开始
+ *                       select '负数';
+ *                     elseif num=0 then  -- elseif要连写，中间不需要空格
+ *                       select '不是正数也不是负数';
+ *                     else
+ *                       select '正数';
+ *                     end if; -- 条件结束
  *                 end;
  *                 -- 调用过程
  *                 call myPro2(-1);
@@ -120,11 +120,11 @@
  *                        -- 创建过程
  *                        create procedure myPro3(in num int)
  *                        begin
- *                          case -- 条件开始
- *                          when num<0 then select '负数';
- *                          when num=0 then select '不是正数也不是负数';
- *                          else select '正数';
- *                          end case; -- 条件结束
+ *                            case -- 条件开始
+ *                            when num<0 then select '负数';
+ *                            when num=0 then select '不是正数也不是负数';
+ *                            else select '正数';
+ *                            end case; -- 条件结束
  *                        end;
  *                        -- 调用过程
  *                        call myPro3(1);
@@ -132,11 +132,11 @@
  *                        -- 创建过程
  *                        create procedure myPro4(in num int)
  *                        begin
- *                          case num -- 条件开始
- *                          when 1 then select '数值是 1';
- *                          when 2 then select '数值是 2';
- *                          else select '不是 1 也不是 2';
- *                          end case; -- 条件结束
+ *                            case num -- 条件开始
+ *                            when 1 then select '数值是 1';
+ *                            when 2 then select '数值是 2';
+ *                            else select '不是 1 也不是 2';
+ *                            end case; -- 条件结束
  *                        end;
  *                        -- 调用过程
  *                        call myPro4(3);
@@ -147,12 +147,12 @@
  *                    -- 创建过程
  *                    create procedure myPro5(out sum int)
  *                    begin
- *                      declare num int default 0;
- *                      set sum = 0;
- *                      while num<10 do -- 循环开始
- *                      set num = num+1;
- *                      set sum = sum+num;
- *                      end while; -- 循环结束
+ *                        declare num int default 0;
+ *                        set sum = 0;
+ *                        while num<10 do -- 循环开始
+ *                        set num = num+1;
+ *                        set sum = sum+num;
+ *                        end while; -- 循环结束
  *                    end;
  *                    -- 调用过程
  *                    call myPro5(@sum);
@@ -166,13 +166,13 @@
  *                     -- 创建过程
  *                     create procedure myPro6(out sum int)
  *                     begin
- *                       declare num int default 0;
- *                       set sum = 0;
- *                       repeat -- repeat表示循环开始
- *                       set num = num+1;
- *                       set sum = sum+num;
- *                       until num>=10 -- until表示当满足 num>=10 循环结束
- *                       end repeat; -- 结束循环
+ *                         declare num int default 0;
+ *                         set sum = 0;
+ *                         repeat -- repeat表示循环开始
+ *                         set num = num+1;
+ *                         set sum = sum+num;
+ *                         until num>=10 -- until表示当满足 num>=10 循环结束
+ *                         end repeat; -- 结束循环
  *                     end;
  *                     -- 调用过程
  *                     call myPro6(@sum);
@@ -187,15 +187,15 @@
  *                   -- 创建过程
  *                   create procedure myPro7(out sum int)
  *                   begin
- *                     declare num int default 0;
- *                     set sum = 0;
- *                     loop_sum:loop -- 循环开始，loop_sum 相当于给循环贴个标签(可自定义名称)，方便多重循环时灵活操作。
- *                     set num = num+1;
- *                     set sum = sum+num;
- *                     if num>=10 then
- *                       leave loop_sum;
- *                     end if;
- *                     end loop loop_sum; -- 循环结束
+ *                       declare num int default 0;
+ *                       set sum = 0;
+ *                       loop_sum:loop -- 循环开始，loop_sum 相当于给循环贴个标签(可自定义名称)，方便多重循环时灵活操作。
+ *                       set num = num+1;
+ *                       set sum = sum+num;
+ *                       if num>=10 then
+ *                         leave loop_sum;
+ *                       end if;
+ *                       end loop loop_sum; -- 循环结束
  *                   end;
  *                   -- 调用过程
  *                   call myPro7(@sum);
@@ -214,4 +214,4 @@
  *              删除存储过程'myPro1'：
  *                  drop PROCEDURE myPro1;
  */
-public class R18_存储过程 {}
+public class S19_存储过程 {}

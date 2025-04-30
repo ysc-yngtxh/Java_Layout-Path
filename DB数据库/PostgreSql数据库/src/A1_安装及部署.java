@@ -27,7 +27,7 @@
  *     6、退出命令行
  *         \q
  *     7、明确指定以用户名 root 进行连接的数据库主机
- *             psql -h localhost -p 5432 -U root -d postgres -W;
+ *         psql -h localhost -p 5432 -U root -d postgres -W;
  *     8、角色或者用户 授予 CREATEDB(创建数据库) 权限
  *         授予角色 CREATEDB(创建数据库) 权限：ALTER ROLE [角色] CREATEDB;
  *         授予用户 CREATEDB(创建数据库) 权限：ALTER USER [用户] CREATEDB;

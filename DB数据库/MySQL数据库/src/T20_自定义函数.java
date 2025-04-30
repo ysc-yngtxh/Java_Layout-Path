@@ -3,22 +3,20 @@
  * @dateTime 2024-05-07 07:47
  * @apiNote TODO
  */
-
 /* 自定义函数
  *    [1]、语法
  *         create function 函数名([参数列表]) returns 数据类型
  *         begin
- *           sql语句;
- *           return 值;
+ *             sql语句;
+ *             return 值;
  *         end;
  *
  *    [2]、示例：自定义函数 NEXTVAL()
  *         CREATE DEFINER=`root`@`localhost` FUNCTION `NEXTVAL`() RETURNS BIGINT(20) DETERMINISTIC
  *         BEGIN
- *           DECLARE current BIGINT; -- 声明bigint 类型的变量
- *           INSERT INTO tpl_seq_property_s(seq_name) VALUES ('seq'); -- 插入数据
- *           SELECT last_insert_id() INTO current; -- 获取插入数据的id，并将其赋值给变量 current
- *           RETURN current; -- 返回变量 current 的值
+ *             DECLARE current BIGINT; -- 声明bigint 类型的变量
+ *             SELECT last_insert_id() INTO current; -- 获取插入数据的id，并将其赋值给变量 current
+ *             RETURN current; -- 返回变量 current 的值
  *         END;
  *
  *         语法解析：
@@ -40,19 +38,19 @@
  *         RETURNS VARCHAR(300)
  *         DETERMINISTIC
  *         BEGIN
- *         	DECLARE score INT;
- *         	-- 尝试从scores表中获取学生的成绩
- *         	SELECT sc.score INTO score
- *         	FROM scores AS sc
- *         	WHERE sc.sid = sid AND sc.cid = cid;
- *         	-- 根据成绩判断是否及格
- *         	IF score >= 60 THEN
- *         		RETURN '及格';
- *         	ELSEIF score > 0 AND score < 60 THEN
- *         		RETURN '不及格';
- *         	ELSE
- *         		RETURN '找不到该学生或该学生没有选课！';
- *         	END IF;
+ *             DECLARE score INT;
+ *             -- 尝试从scores表中获取学生的成绩
+ *             SELECT sc.score INTO score
+ *             FROM scores AS sc
+ *             WHERE sc.sid = sid AND sc.cid = cid;
+ *             -- 根据成绩判断是否及格
+ *             IF score >= 60 THEN
+ *             	RETURN '及格';
+ *             ELSEIF score > 0 AND score < 60 THEN
+ *             	RETURN '不及格';
+ *             ELSE
+ *             	RETURN '找不到该学生或该学生没有选课！';
+ *             END IF;
  *         END$$
  *         DELIMITER ;
  *         -- 调用函数
@@ -66,4 +64,4 @@
  *                 第三方工具(Navicat...)使用更改后的语句结束符$$会报错
  *                 DELIMITER 该语法仅作了解，不怎么使用。
  */
-public class S19_自定义函数 {}
+public class T20_自定义函数 {}
