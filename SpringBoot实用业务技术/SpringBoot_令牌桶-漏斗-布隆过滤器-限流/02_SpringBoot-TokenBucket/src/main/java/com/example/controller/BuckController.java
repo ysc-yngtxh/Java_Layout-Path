@@ -15,7 +15,7 @@ public class BuckController {
 
     @BucketAnnotation
     @RequestMapping(value = "/bucket")
-    public ResponseEntity<String> bucket(){
+    public ResponseEntity<String> bucket() {
         return ResponseEntity.ok("访问成功");
     }
 }

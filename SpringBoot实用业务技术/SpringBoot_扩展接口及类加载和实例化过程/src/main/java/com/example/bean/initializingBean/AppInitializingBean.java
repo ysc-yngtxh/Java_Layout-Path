@@ -30,7 +30,7 @@ public class AppInitializingBean implements InitializingBean {
     }
 
     @PostConstruct
-    public void methods(){
+    public void methods() {
         System.out.println("postConstruct注解方法执行");
     }
 
@@ -39,7 +39,7 @@ public class AppInitializingBean implements InitializingBean {
         System.out.println("接口initializingBean的实现方法执行");
     }
 
-    public void init11(){
+    public void init11() {
         System.out.println("我是init方法执行...");
     }
 
@@ -49,7 +49,7 @@ public class AppInitializingBean implements InitializingBean {
     }
 
     // 普通方法
-    public void init22(){
+    public void init22() {
         System.out.println("我是普通方法执行...");
     }
 

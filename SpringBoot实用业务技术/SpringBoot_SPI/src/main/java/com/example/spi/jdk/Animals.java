@@ -6,5 +6,6 @@ package com.example.spi.jdk;
  * @apiNote TODO
  */
 public interface Animals {
+
     void sayHello();
 }

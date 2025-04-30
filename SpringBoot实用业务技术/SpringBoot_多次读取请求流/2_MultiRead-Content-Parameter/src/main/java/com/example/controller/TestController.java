@@ -15,6 +15,7 @@ import org.springframework.web.util.ContentCachingRequestWrapper;
  */
 @Controller
 public class TestController {
+
     @RequestMapping(value = "/test1", method = RequestMethod.POST)
     public String TestHttpRequired(@RequestParam(value = "userName") String userName,
                                    @RequestParam(value = "passWord") String passWord,

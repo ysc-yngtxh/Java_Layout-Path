@@ -9,5 +9,6 @@ import com.alibaba.dubbo.common.extension.SPI;
  */
 @SPI  // TODO 注意⚠️：只有使用 Dubbo SPI 时才需要该@SPI注解
 public interface Car {
+
     void sayHello();
 }

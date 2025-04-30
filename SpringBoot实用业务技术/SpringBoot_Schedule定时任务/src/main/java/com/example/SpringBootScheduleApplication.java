@@ -12,5 +12,4 @@ public class SpringBootScheduleApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringBootScheduleApplication.class, args);
     }
-
 }

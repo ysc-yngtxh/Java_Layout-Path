@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class MyInitializingSingleton implements SmartInitializingSingleton {
+
     @Autowired
     private ApplicationContext applicationContext;
 

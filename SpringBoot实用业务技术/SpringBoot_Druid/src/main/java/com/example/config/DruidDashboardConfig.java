@@ -25,7 +25,7 @@ public class DruidDashboardConfig {
      */
     @Bean
     @ConditionalOnClass(DruidDataSource.class)
-    public ServletRegistrationBean druidServlet(){
+    public ServletRegistrationBean druidServlet() {
         // 这些参数可以在 http.StatViewServlet 的父类 ResourceServlet 中找到
         Map<String, String> initParams = new HashMap<>();
         // 设置控制台登录的用户名和密码
@@ -49,7 +49,7 @@ public class DruidDashboardConfig {
      */
     @Bean
     @ConditionalOnClass(DruidDataSource.class)
-    public FilterRegistrationBean druidFilter(){
+    public FilterRegistrationBean druidFilter() {
         Map<String, String> initParams = new HashMap<>();
         // 这些不进行统计
         initParams.put("exclusions", "*.js,*.css,/druid/*");

@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class TemplatesController {
+
     @Autowired
     private StaticService service;
 
     @RequestMapping("/login")
-    public String templatesResult(){
+    public String templatesResult() {
         // TODO 有一个细节需要注意：
         //  当你在配置文件中 spring.thymeleaf.prefix=classpath:/templates 时，这里return返回的视图得加斜杠"/login"。
         //  但这样配置 spring.thymeleaf.prefix=classpath:/templates/，就可以直接返回视图名称即可，否则报错。

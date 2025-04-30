@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @apiNote TODO
  */
 public class TenantContextHolderInterceptor implements HandlerInterceptor {
+
     @Override
     @SneakyThrows
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {

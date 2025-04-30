@@ -16,6 +16,7 @@ import java.util.Map;
  */
 @Service("tbUserService")
 public class TbUserServiceImpl implements TbUserService {
+
     @Resource
     private TbUserDao tbUserDao;
 

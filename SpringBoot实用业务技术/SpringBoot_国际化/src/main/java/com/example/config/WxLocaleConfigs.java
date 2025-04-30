@@ -70,9 +70,7 @@ public class WxLocaleConfigs implements LocaleResolver,InitializingBean {
      * @param locale                locale
      */
     @Override
-    public void setLocale(@NonNull HttpServletRequest request, @Nullable HttpServletResponse httpServletResponse, @Nullable Locale locale) {
-
-    }
+    public void setLocale(@NonNull HttpServletRequest request, @Nullable HttpServletResponse httpServletResponse, @Nullable Locale locale) {}
 
 
     /**

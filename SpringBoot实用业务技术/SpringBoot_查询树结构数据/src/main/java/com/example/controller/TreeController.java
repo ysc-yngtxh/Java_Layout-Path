@@ -22,12 +22,12 @@ public class TreeController {
     private final TreeChildrenService treeChildrenService;
 
     @RequestMapping("/treeChildrenSet")
-    public @ResponseBody Set<TreeChildren> TreeByJsonSet(){
+    public @ResponseBody Set<TreeChildren> TreeByJsonSet() {
         return treeChildrenService.findTreeBySetChildren();
     }
 
     @RequestMapping("/treeChildrenList")
-    public @ResponseBody List<TreeChildren> TreeByJsonList(){
+    public @ResponseBody List<TreeChildren> TreeByJsonList() {
         return treeChildrenService.findTreeByListChildren();
     }
 }

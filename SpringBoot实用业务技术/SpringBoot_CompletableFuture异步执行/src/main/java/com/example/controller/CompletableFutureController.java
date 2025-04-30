@@ -27,7 +27,7 @@ public class CompletableFutureController {
 
     // 简单的预加载类接口，用于 SpringBoot 项目启动第一次请求时间比较慢的预加载接口
     @RequestMapping("/load")
-    public String load(){
+    public String load() {
         brandService.getOne(1);
         return "已成功调用加载接口！";
     }

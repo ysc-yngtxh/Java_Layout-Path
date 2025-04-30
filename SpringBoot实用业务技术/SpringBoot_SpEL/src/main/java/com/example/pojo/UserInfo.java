@@ -14,9 +14,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserInfo {
+
     private Long id;
+
     private String sex;
+
     private Integer age;
+
     private Float height;
+
     private LocalDateTime birthday;
 }

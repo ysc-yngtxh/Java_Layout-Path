@@ -15,6 +15,7 @@ import java.util.List;
 @Component
 @ConfigurationProperties(prefix = "allow-tables")
 public class AllowTables {
+
     /**
      * 启用
      */

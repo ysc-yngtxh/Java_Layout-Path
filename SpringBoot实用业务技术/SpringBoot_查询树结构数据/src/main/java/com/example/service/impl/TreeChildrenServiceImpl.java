@@ -26,7 +26,7 @@ public class TreeChildrenServiceImpl implements TreeChildrenService {
     /**
      * @return Set<TreeChildren>
      */
-    public Set<TreeChildren> findTreeBySetChildren(){
+    public Set<TreeChildren> findTreeBySetChildren() {
         List<TreeChildren> treeChildren = treeChildrenDao.selectList(null);
         Set<TreeChildren> treeChildrenHashSet = new HashSet<>(treeChildren);
         return TreeChildrenUtil.buildTree(treeChildrenHashSet);
@@ -35,7 +35,7 @@ public class TreeChildrenServiceImpl implements TreeChildrenService {
     /**
      * @return List<TreeChildren>
      */
-    public List<TreeChildren> findTreeByListChildren(){
+    public List<TreeChildren> findTreeByListChildren() {
         List<TreeChildren> treeChildren = treeChildrenDao.selectList(null);
         return TreeChildrenUtil.buildMenuTree(treeChildren);
     }

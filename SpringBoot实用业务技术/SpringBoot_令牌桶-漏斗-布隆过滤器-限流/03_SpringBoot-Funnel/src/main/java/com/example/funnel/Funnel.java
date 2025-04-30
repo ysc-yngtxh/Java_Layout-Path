@@ -20,20 +20,20 @@ class Funnel {
         this.leftQuota = 0;
         this.leakingTs = System.currentTimeMillis();
     }
-    void makeSpace(){
+    void makeSpace() {
         long nowTs = System.currentTimeMillis();
         // 距离上一次漏水过去了多久
         long deltaTs = nowTs - leakingTs;
         // 当前时间距上次漏水时间内的水滴流量
         int deltaQuota = (int) (deltaTs * leakingRate);
         // 间隔时间过长，整数数字过大溢出（数字过大超出int数据范围就会成负数）
-        if(deltaQuota < 0){
+        if(deltaQuota < 0) {
             this.leftQuota = capacity;
             this.leakingTs = nowTs;
             return;
         }
         // 腾出空间太小，最小单位是1，那就等下次吧
-        if(deltaQuota < 1){
+        if(deltaQuota < 1) {
             return;
         }
         // 增加剩余空间
@@ -49,10 +49,10 @@ class Funnel {
     // 每次调用即意味着判断漏斗状态：是否满水，是否空漏斗，漏斗剩余水是否满足一次请求
     // 尝试灌水，返回是否成功
     // 如果成功，则减少剩余空间
-    boolean watering(int quota){
+    boolean watering(int quota) {
         makeSpace();
         // 判断剩余空间是否足够（就算剩余空间占满了容器，也能正常限流，不用担心。剩余空间满了就填满，正常执行保证限流就行）
-        if(this.leftQuota >= quota){
+        if(this.leftQuota >= quota) {
             this.leftQuota -= quota;
             return true;
         }

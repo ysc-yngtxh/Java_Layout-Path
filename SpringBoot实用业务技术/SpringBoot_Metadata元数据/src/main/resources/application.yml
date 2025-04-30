@@ -1,5 +1,3 @@
 spring:
     application:
-        name: SprigBoot_Metadata
-
-
+        name: @project.artifactId@

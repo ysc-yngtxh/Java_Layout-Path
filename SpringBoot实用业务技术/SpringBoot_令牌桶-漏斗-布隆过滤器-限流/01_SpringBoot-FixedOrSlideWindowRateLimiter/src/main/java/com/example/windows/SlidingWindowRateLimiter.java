@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class SlidingWindowRateLimiter {
+
     // 时间窗口大小，单位毫秒
     private long windowSize;
 

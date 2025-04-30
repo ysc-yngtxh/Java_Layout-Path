@@ -6,5 +6,6 @@ package com.example.spi.spring;
  * @apiNote TODO
  */
 public interface Robot {
+
     void sayHello();
 }

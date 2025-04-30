@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class TestController {
 
     @PostMapping("/test")
-    public @ResponseBody String test(){
+    public @ResponseBody String test() {
         return I18nUtil.getMessage("001", "喜欢", "总结");
     }
 
     @GetMapping("/test1")
-    public @ResponseBody String test1(){
+    public @ResponseBody String test1() {
         return I18nUtil.getMessage("001", I18nUtil.getMessage("002"), I18nUtil.getMessage("003"));
     }
 }

@@ -35,7 +35,7 @@ public class I18nUtil{
      * 第一种实现方式
      * 使用 application.properties 文件配置国际化语言
      */
-    public static Properties loadI18nProp(){
+    public static Properties loadI18nProp() {
         if (prop != null) {
             return prop;
         }
@@ -56,11 +56,11 @@ public class I18nUtil{
         }
         return prop;
     }
-    public static String getResourceLanguageString(String code){
+    public static String getResourceLanguageString(String code) {
         return loadI18nProp().getProperty(code);
     }
 
-    public static String getResourceLanguageArgsString(String code, Object... args){
+    public static String getResourceLanguageArgsString(String code, Object... args) {
         String property = loadI18nProp().getProperty(code);
         return MessageFormat.format(property, args);
     }

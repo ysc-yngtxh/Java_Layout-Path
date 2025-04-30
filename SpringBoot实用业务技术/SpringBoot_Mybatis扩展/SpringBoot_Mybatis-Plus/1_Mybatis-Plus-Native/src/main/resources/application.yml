@@ -12,9 +12,9 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    password: mpw:tOuQTJfpXKEWbLY1fOJxqQ==
-    url: mpw:7rtYlSNgy+jVLRy6JLv8509gEPmSoMrwxM8kVPvD0kG2SfihsaKW436zUZLpdfPtBVp0mT9cwKLZgIetPFYWKquO4QfuXN+OuF4yZlU46KVXDWeV/KZQgyAMux4xbo5D8i1IsS67xEMSOFx2LVrQ1crL/7EuZ/bkw/N6hGRrhsTYZHzHfdtuJY/pXPhIyTvzu3R8nQLJu4wjrRRBLXF3uA==
-    username: mpw:Uwak4MyIBlTANPI/N9CasA==
+    url: mpw:HwOEIkkmIDVRLrzoU+F6hKOGOca1YebJ2dO22nkLMahLMf/7rdweujxyIVwlWuj+t7OqNKafQZ8+Ol6TJE4cyTkBhUOCBj08AXm92E1yc9TEVJQA7mexorAnSo25wvAR51v3Q80rTABtqcY3/STgHOs6QMmeg5UGEo/g84YeiJwXTMn5vLeQDbCeuk1MemaNHymdwHG8tOw4DFxsAO0SzQ==
+    username: mpw:3dtfQ+7Vkb/mS7I7CECHHg==
+    password: mpw:ymXSV9eNjlB5K5gUx66tkg==
 
 # mybatis-plus相关配置
 mybatis-plus:

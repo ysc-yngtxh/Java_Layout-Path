@@ -1,7 +1,7 @@
 package com.example.service.impl;
 
 import com.example.entity.Employee;
-import com.example.mapper.springdb.EmployeeMapper;
+import com.example.mapper.business.EmployeeMapper;
 import com.example.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

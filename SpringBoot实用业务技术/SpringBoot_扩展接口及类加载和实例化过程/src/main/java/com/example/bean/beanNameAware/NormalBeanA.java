@@ -3,6 +3,7 @@ package com.example.bean.beanNameAware;
 import org.springframework.beans.factory.BeanNameAware;
 
 public class NormalBeanA implements BeanNameAware {
+
     public NormalBeanA() {      
         System.out.println("NormalBean constructor");      
     }      

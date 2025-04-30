@@ -24,6 +24,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("tbUser")
 public class TbUserController {
+
     /**
      * 服务对象
      */
@@ -101,6 +102,4 @@ public class TbUserController {
     public ResponseEntity<Boolean> deleteById(Long id) {
         return ResponseEntity.ok(this.tbUserService.deleteById(id));
     }
-
 }
-

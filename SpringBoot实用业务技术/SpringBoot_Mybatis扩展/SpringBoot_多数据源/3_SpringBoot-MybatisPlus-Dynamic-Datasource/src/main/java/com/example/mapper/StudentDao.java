@@ -8,7 +8,4 @@ import com.example.entity.Student;
  * @author 游家纨绔
  * @since 2023-09-02 21:59:40
  */
-public interface StudentDao extends BaseMapper<Student> {
-
-}
-
+public interface StudentDao extends BaseMapper<Student> {}

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import java.io.IOException;
 
 public class GenderJsonSerializer extends JsonSerializer<Integer> {
+
     @Override
     public void serialize(Integer o, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         if ( o.equals(1) ) {

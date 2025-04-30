@@ -21,7 +21,7 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @RequestMapping("/selectAll")
-    public List<Employee> selectAll(){
+    public List<Employee> selectAll() {
         return employeeService.selectAll();
     }
 }

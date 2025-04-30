@@ -22,6 +22,7 @@ import java.io.Serializable;
 public class TbUser implements Serializable {
     @Serial
     private static final long serialVersionUID = 882909710663298133L;
+
     /**
      * 主键
      */
@@ -71,4 +72,3 @@ public class TbUser implements Serializable {
      */
     private Integer version;
 }
-

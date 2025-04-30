@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @apiNote TODO 漏斗限流算法
  */
 public class FunnelRateLimiter {
+
     private Map<String, Funnel> funnelMap = new ConcurrentHashMap<>();
 
     /**
@@ -30,4 +31,3 @@ public class FunnelRateLimiter {
         return funnel.watering(1);
     }
 }
-

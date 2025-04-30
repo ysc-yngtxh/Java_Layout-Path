@@ -25,7 +25,7 @@ public class Cat {
     // 静态属性的初始化
     private static String color = getCatAge();
 
-    public Cat(){
+    public Cat() {
         System.out.println("父类Cat构造方法==========");
     }
 

@@ -23,7 +23,7 @@ public class HandlerException {
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<String> handlerException(MethodArgumentNotValidException exception){
+    public ResponseEntity<String> handlerException(MethodArgumentNotValidException exception) {
         List<ObjectError> allErrors = exception.getBindingResult().getAllErrors();
         String result = String.join(" | ", allErrors.stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList()));
         // String result = allErrors.stream().map(ObjectError::getDefaultMessage).collect(Collectors.joining(" | "));

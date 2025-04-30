@@ -14,6 +14,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         // 令牌桶拦截器 添加拦截器并选择拦截路径
         registry.addInterceptor(bucketInterceptor()).addPathPatterns("/**");
     }
+
     @Bean
     public BucketInterceptor bucketInterceptor() {
         return new BucketInterceptor();

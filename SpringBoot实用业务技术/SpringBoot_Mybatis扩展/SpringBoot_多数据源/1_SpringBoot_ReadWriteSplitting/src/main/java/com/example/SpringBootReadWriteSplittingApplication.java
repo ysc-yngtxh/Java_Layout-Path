@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan(basePackages = {"com.example.mapper.springdb", "com.example.mapper.yun6"})
+@MapperScan(basePackages = {"com.example.mapper.business", "com.example.mapper.business2"})
 public class SpringBootReadWriteSplittingApplication {
 
 	public static void main(String[] args) {

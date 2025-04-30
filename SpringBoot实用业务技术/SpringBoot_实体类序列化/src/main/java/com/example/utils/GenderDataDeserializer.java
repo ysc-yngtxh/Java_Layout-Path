@@ -10,6 +10,7 @@ import java.io.IOException;
 
 @SuppressWarnings("rawtypes")
 public class GenderDataDeserializer extends JsonDeserializer {
+
     @Override
     public Object deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
         if (ObjectUtils.isEmpty(jsonParser)) {

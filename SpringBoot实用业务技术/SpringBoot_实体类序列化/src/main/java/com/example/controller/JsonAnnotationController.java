@@ -8,18 +8,13 @@ import com.example.entity.Consumer3;
 import com.example.entity.Supplier;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author 游家纨绔
@@ -143,12 +138,12 @@ public class JsonAnnotationController {
                 .id(3)
                 .username("")
                 .password(" ")
-                .optional( Optional.empty() )
-                .atomicReference( new AtomicReference<>() )
-                .supplier( Supplier.builder().id(1).build() )
+                .optional(Optional.empty())
+                .atomicReference(new AtomicReference<>())
+                .supplier(Supplier.builder().id(1).build())
                 .gender(0)
-                .properties( Map.of("title", "标题") )
-                .propertiesJson( Map.of("id", "1", "user", "ysc") )
+                .properties(Map.of("title", "标题"))
+                .propertiesJson(Map.of("id", "1", "user", "ysc"))
                 .build();
         System.out.println("序列化: " + objectMapper.writer().writeValueAsString(consumer3));
         return consumer3;

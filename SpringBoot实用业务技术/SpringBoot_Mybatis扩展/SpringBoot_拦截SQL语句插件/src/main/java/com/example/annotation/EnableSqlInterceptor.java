@@ -14,6 +14,4 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Documented
 @Import(SqlAnnotationConfig.class) // SqlAnnotationConfig类 注入Spring 容器
-public @interface EnableSqlInterceptor {
-
-}
+public @interface EnableSqlInterceptor {}

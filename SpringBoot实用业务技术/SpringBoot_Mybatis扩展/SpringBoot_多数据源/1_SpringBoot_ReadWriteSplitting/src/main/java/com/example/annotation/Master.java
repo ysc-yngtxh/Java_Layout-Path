@@ -5,5 +5,4 @@ package com.example.annotation;
  * @dateTime 2024-09-24 23:22
  * @apiNote TODO
  */
-public @interface Master {
-}
+public @interface Master {}

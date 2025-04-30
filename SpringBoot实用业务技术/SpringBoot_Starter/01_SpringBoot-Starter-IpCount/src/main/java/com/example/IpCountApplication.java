@@ -24,5 +24,4 @@ public class IpCountApplication {
      *   自定义完成Starter后，使用Maven的 install 命令，将自定义starter安装到本地仓库
      *   随后就可以在本地的其他项目中引入相关依赖
      */
-
 }

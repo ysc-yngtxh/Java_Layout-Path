@@ -1,5 +1,6 @@
 package com.example.entity;
 
+import java.io.Serial;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,13 +17,13 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Brand implements Serializable {
-
+    @Serial
     private static final long serialVersionUID = 914776956171371836L;
 
     /**
      * 主键Id
      */
-    private Long id;
+    private Long Id;
     /**
      * 品牌名称
      */
@@ -40,4 +41,3 @@ public class Brand implements Serializable {
      */
     private String remark;
 }
-

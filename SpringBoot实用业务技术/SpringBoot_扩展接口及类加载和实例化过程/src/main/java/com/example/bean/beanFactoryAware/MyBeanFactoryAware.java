@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MyBeanFactoryAware implements BeanFactoryAware {
+
     @Getter
     private String brand;
 

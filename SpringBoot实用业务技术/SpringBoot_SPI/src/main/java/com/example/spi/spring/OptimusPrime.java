@@ -29,7 +29,5 @@ public class OptimusPrime implements Robot {
         return new CustomTemplate();
     }
 
-    class CustomTemplate {
-
-    }
+    class CustomTemplate {}
 }

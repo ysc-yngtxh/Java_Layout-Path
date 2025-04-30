@@ -122,15 +122,15 @@
  *
  *        4︎⃣、此外还有相关的函数来处理 json 数据：
  *            array_to_json('{{1,5},{99,100}}'::int[])	    返回结果：[[1,5],[99,100]]
- *            row_to_json(row(1,'foo'))	                返回结果：{"f1":1,"f2":"foo"}
+ *            row_to_json(row(1,'foo'))	                    返回结果：{"f1":1,"f2":"foo"}
  *
  *     ⑧、数组类型
  *         # PostgreSQL 允许将字段定义成变长的多维数组。数组类型可以是任何基本类型或用户定义类型，枚举类型或复合类型。
  *         1︎⃣、创建表的时候，我们可以声明数组，方式如下：              也可以使用 "ARRAY" 关键字，如下所示：
  *             CREATE TABLE sal_emp (                            CREATE TABLE sal_emp (
- *                 name            text,                             name text,
+ *                 name            text,                             name           text,
  *                 pay_by_quarter  integer[],                        pay_by_quarter integer ARRAY[4],
- *                 schedule        text[][]                          schedule text[][]
+ *                 schedule        text[][]                          schedule       text[][]
  *             );                                                );
  *             pay_by_quarter 为一维整型数组、schedule 为二维文本类型数组。
  *         2︎⃣、插入值使用花括号 {}，元素在 {} 使用逗号隔开：

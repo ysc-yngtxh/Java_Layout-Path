@@ -44,8 +44,7 @@ public class TimetableController {
      * 返回Druid的监控数据
      */
     @GetMapping("/druid-status")
-    public Object druidStat(){
+    public Object druidStat() {
         return DruidStatManagerFacade.getInstance().getDataSourceStatDataList();
     }
 }
-

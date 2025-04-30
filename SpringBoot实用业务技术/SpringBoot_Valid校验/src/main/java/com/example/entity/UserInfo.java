@@ -18,6 +18,7 @@ import org.hibernate.validator.constraints.Range;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserInfo {
+
     private Long id;
 
     private String sex;

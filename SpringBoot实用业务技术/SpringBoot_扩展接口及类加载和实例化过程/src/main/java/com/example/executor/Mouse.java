@@ -6,6 +6,7 @@ package com.example.executor;
  * @apiNote TODO
  */
 public class Mouse extends Cat{
+
     // TODO 构造(普通)代码块 和 普通属性 的初始化执行优先级一样，谁书写在前谁先执行。
     {
         // 构造(普通)代码块
@@ -24,7 +25,7 @@ public class Mouse extends Cat{
     // 静态属性的初始化
     private static String colors = getMouseAge();
 
-    public Mouse(){
+    public Mouse() {
         System.out.println("Mouse本类构造方法==========");
     }
 

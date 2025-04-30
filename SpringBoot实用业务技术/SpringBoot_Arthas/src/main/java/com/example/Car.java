@@ -15,6 +15,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Car {
+
     private String name;
+
     private long price;
 }

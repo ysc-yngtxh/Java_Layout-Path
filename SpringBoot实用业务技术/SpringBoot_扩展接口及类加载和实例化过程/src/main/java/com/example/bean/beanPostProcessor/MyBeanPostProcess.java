@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class MyBeanPostProcess implements BeanPostProcessor {
+
     // 实现BeanPostProcessor接口重写对指定Bean初始化的前置方法和后置方法
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {

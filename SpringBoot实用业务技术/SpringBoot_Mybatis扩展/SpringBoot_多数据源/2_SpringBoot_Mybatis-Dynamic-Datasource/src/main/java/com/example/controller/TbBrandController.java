@@ -21,17 +21,17 @@ public class TbBrandController {
     private final TbBrandService tbBrandService;
 
     @RequestMapping("/selectAll")
-    public List<TbBrand> selectAll(){
+    public List<TbBrand> selectAll() {
         return tbBrandService.selectAll();
     }
 
     @RequestMapping("/selectByName")
-    public TbBrand selectByName(){
+    public TbBrand selectByName() {
         return tbBrandService.selectByName();
     }
 
     @RequestMapping("/insertNameAndLetter")
-    public TbBrand insertNameAndLetter(){
+    public TbBrand insertNameAndLetter() {
         return tbBrandService.insertNameAndLetter();
     }
 }

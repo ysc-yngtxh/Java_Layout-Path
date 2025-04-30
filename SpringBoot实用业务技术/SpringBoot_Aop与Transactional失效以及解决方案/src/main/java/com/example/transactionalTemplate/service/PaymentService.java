@@ -18,7 +18,7 @@ public class PaymentService {
 
     // 在构造方法上注入PlatformTransactionManager
     @Autowired
-    public PaymentService(PlatformTransactionManager platformTransactionManager){
+    public PaymentService(PlatformTransactionManager platformTransactionManager) {
         this.transactionTemplate = new TransactionTemplate(platformTransactionManager);
         // 设置事务传播属性
         transactionTemplate.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
@@ -30,7 +30,7 @@ public class PaymentService {
         transactionTemplate.setTimeout(30000);
     }
 
-    public Order payOrder(Order order){
+    public Order payOrder(Order order) {
         // TransactionCallback() 有返回参数的事务
        Order result = transactionTemplate.execute(new TransactionCallback<Order>() {
             // 在该方法中的代码在一个事务中

@@ -29,9 +29,9 @@ public class BucketInterceptor implements HandlerInterceptor {
 
         // 加有@BucketAnnotation注解的接口，才会被进行限流
         BucketAnnotation methodAnnotation = method.getAnnotation(BucketAnnotation.class);
-        if ( Objects.nonNull(methodAnnotation) ){
+        if (Objects.nonNull(methodAnnotation)) {
         	// 在名为：bucket的令牌桶里取令牌 取到即放行 未取到即抛出异常
-            if(BucketUtil.buckets.get("bucket").getToken()){
+            if(BucketUtil.buckets.get("bucket").getToken()) {
                 return true;
             } else {
             	// 抛出自定义异常
@@ -44,11 +44,9 @@ public class BucketInterceptor implements HandlerInterceptor {
 
     // 接口调用之后，返回之前 使用
     @Override
-    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
-    }
+    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) {}
 
     // 整个请求完成后，在视图渲染前使用
     @Override
-    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
-    }
+    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) {}
 }

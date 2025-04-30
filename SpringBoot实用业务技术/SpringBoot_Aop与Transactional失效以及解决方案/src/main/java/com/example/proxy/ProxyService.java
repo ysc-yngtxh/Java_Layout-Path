@@ -6,7 +6,10 @@ package com.example.proxy;
  * @apiNote TODO
  */
 public interface ProxyService {
+
     void useInterface();
+
     void useSigInterface();
+
     void useAllInterface();
 }

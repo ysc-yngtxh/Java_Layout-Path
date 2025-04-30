@@ -9,7 +9,4 @@ import com.example.entity.Courses;
  * @author makejava
  * @since 2023-08-18 23:25:59
  */
-public interface CoursesDao extends BaseMapper<Courses> {
-
-}
-
+public interface CoursesDao extends BaseMapper<Courses> {}

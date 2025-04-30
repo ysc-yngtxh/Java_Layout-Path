@@ -32,7 +32,6 @@ public class CustomerFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, @NotNull HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
         if (request.getContentType() != null && request.getContentType().contains(Constants.REQUEST_CONTEXT_TYPE)) {
             MultiReadHttpServletRequest multiRequest = new MultiReadHttpServletRequest(request);
             MultiReadHttpServletResponse multiResponse = new MultiReadHttpServletResponse(response);

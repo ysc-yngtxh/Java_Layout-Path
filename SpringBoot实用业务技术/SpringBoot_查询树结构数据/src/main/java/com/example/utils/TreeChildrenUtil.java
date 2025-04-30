@@ -95,5 +95,4 @@ public class TreeChildrenUtil {
         treeNode.getChildrenList().addAll( childrenSorted );
         return treeNode;
     }
-
 }

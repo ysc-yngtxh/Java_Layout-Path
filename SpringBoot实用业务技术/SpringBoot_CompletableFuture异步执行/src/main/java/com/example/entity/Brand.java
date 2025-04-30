@@ -26,12 +26,16 @@ public class Brand extends Model<Brand> {
     // 主键Id
     @TableId("id")
     private Long id;
+
     // 品牌名称
     private String brandName;
+
     // 是否上架:0为true即上架,1为false下架
     private Integer racking;
+
     // 逻辑删除：0存在,1删除
     private Integer deleteFlag;
+
     // 备注
     private String remark;
 
@@ -39,5 +43,3 @@ public class Brand extends Model<Brand> {
     @TableField(exist = false)
     private Courses courses;
 }
-
-

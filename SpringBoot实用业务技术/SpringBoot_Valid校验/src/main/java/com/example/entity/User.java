@@ -12,6 +12,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import jakarta.validation.groups.Default;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.AllArgsConstructor;
@@ -30,7 +31,7 @@ import org.hibernate.validator.constraints.Range;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User implements Serializable {
-
+    @Serial
     private static final long serialVersionUID = -98875421927312539L;
 
     // 使用自定义的校验注解
@@ -77,4 +78,3 @@ public class User implements Serializable {
     public interface Student{}
     public interface Teacher{}
 }
-

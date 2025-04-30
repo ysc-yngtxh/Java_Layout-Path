@@ -43,5 +43,4 @@ public @interface IsLeek {
      * @return 负载
      */
     Class<? extends Payload>[] payload() default {};
-
 }

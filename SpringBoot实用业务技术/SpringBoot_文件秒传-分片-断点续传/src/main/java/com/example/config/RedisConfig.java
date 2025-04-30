@@ -34,6 +34,9 @@ public class RedisConfig {
 
         template.setHashKeySerializer(new GenericToStringSerializer<>(Integer.class));
         template.setHashValueSerializer(new GenericToStringSerializer<>(File.class));
+
+        // 手动进行 Redis 初始化
+        template.afterPropertiesSet();
         return template;
     }
 }

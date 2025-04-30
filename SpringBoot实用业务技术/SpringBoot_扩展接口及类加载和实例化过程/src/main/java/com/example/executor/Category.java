@@ -13,6 +13,7 @@ import java.io.Serializable;
 @AutoDiscoverClass  // 使用自定义注解
 public class Category implements Serializable {
     private static final long serialVersionUID = -79781314987912932L;
+
     /**
      * 主键Id
      */
@@ -86,4 +87,3 @@ public class Category implements Serializable {
                 '}';
     }
 }
-

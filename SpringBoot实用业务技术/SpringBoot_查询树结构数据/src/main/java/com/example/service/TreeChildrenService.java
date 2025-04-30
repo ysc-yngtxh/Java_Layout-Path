@@ -17,5 +17,4 @@ public interface TreeChildrenService {
     Set<TreeChildren> findTreeBySetChildren();
 
     List<TreeChildren> findTreeByListChildren();
-
 }

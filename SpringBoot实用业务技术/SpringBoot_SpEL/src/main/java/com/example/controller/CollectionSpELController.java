@@ -19,7 +19,7 @@ public class CollectionSpELController {
     //      从集合按条件筛选生成新集合：.?[selectionExpression]
     @RequestMapping("/collector1")
     @GetVal(value = "@{#user.phone.?[#this>50]}")
-    public String objects1(@RequestBody User user){
+    public String objects1(@RequestBody User user) {
         return "SpEL表达式结果：" +
                 user.getPhone().stream().filter(po -> po>50).toList();
     }
@@ -27,7 +27,7 @@ public class CollectionSpELController {
     // TODO 数组无法筛选元素数据，只能通过使用特殊的T运算符来指定java.util.Arrays的实例转为 List 集合，再进行筛选
     @RequestMapping("/collector2")
     @GetVal(value = "@{T(java.util.Arrays).asList(#user.money).?[#this>50]}")
-    public String objects2(@RequestBody User user){
+    public String objects2(@RequestBody User user) {
         return "SpEL表达式结果：" +
                 Arrays.stream(user.getMoney()).filter(po -> po>50).toList();
     }
@@ -36,7 +36,7 @@ public class CollectionSpELController {
     //  从集合按条件筛选后取第一个元素：.^[selectionExpression]
     @RequestMapping("/collector3")
     @GetVal(value = "@{#user.phone.^[#this>50]}")
-    public String objects3(@RequestBody User user){
+    public String objects3(@RequestBody User user) {
         return "SpEL表达式结果：" +
                 user.getPhone().stream().filter(po -> po>50).toList().getFirst();
     }
@@ -45,7 +45,7 @@ public class CollectionSpELController {
     //  从集合按条件筛选后取第一个元素：.$[selectionExpression]
     @RequestMapping("/collector4")
     @GetVal(value = "@{#user.phone.$[#this>50]}")
-    public String objects4(@RequestBody User user){
+    public String objects4(@RequestBody User user) {
         return "SpEL表达式结果：" +
                 user.getPhone().stream().filter(po -> po>50).toList().getLast();
     }

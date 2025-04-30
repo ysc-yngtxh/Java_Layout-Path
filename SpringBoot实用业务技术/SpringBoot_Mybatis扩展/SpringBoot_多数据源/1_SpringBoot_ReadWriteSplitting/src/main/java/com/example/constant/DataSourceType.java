@@ -6,6 +6,7 @@ package com.example.constant;
  * @apiNote TODO
  */
 public enum DataSourceType {
+
     MASTER,
     SLAVE;
 }

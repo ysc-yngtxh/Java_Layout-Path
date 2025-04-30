@@ -8,7 +8,4 @@ import com.example.entity.TreeChildren;
  * @author 游家纨绔
  * @since 2023-05-06 13:37:44
  */
-public interface TreeChildrenDao extends BaseMapper<TreeChildren> {
-
-}
-
+public interface TreeChildrenDao extends BaseMapper<TreeChildren> {}

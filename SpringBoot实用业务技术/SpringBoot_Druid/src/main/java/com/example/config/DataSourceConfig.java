@@ -22,7 +22,7 @@ public class DataSourceConfig {
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource.druid")
     @ConditionalOnProperty(name = "spring.datasource.type", havingValue = "com.alibaba.druid.pool.DruidDataSource")
-    public DataSource dataSource(){
+    public DataSource dataSource() {
         return DruidDataSourceBuilder.create().build();
     }
 

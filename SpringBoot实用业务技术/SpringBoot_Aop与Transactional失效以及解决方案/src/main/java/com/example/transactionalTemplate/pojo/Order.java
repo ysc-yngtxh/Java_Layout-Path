@@ -5,5 +5,4 @@ package com.example.transactionalTemplate.pojo;
  * @dateTime 2024-04-01 13:19
  * @apiNote TODO
  */
-public class Order {
-}
+public class Order {}

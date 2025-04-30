@@ -1,7 +1,7 @@
 package com.example.service.impl;
 
 import com.example.entity.TbBrand;
-import com.example.mapper.yun6.TbBrandMapper;
+import com.example.mapper.business2.TbBrandMapper;
 import com.example.service.TbBrandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

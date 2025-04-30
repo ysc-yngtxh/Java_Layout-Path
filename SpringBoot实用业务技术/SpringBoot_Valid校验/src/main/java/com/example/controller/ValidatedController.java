@@ -71,6 +71,4 @@ public class ValidatedController {
         }
         return "success";
     }
-
 }
-

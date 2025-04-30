@@ -9,6 +9,4 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.METHOD})
 // 表示该注解被保存在class文件中，并且可以被反射机制读取
 @Retention(RetentionPolicy.RUNTIME)
-public @interface AutoDiscoverClass {
-
-}
+public @interface AutoDiscoverClass {}

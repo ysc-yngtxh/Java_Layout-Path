@@ -11,12 +11,12 @@ spring:
       datasource:
         master:
           # 注意：这里配置多数据源的 url 改为 jdbc-url
-          url: jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+          url: jdbc:mysql://localhost:3306/business?serverTimezone=UTC&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
           username: root
           password: 131474
           driver-class-name: com.mysql.cj.jdbc.Driver # 3.2.0开始支持SPI可省略此配置
         slave_1:
-          url: jdbc:mysql://localhost:3306/yun6?serverTimezone=UTC&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+          url: jdbc:mysql://localhost:3306/business2?serverTimezone=UTC&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
           username: root
           password: 131474
           driver-class-name: com.mysql.cj.jdbc.Driver

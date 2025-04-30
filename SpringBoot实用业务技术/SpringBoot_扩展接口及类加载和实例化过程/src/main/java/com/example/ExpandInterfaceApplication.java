@@ -21,6 +21,5 @@ public class ExpandInterfaceApplication {
         // 初始化Mouse
         Mouse mouse = new Mouse();
         MyBeanPostProcess myBeanPostProcess = new MyBeanPostProcess();
-
     }
 }

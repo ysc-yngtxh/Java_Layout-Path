@@ -14,8 +14,8 @@ public class MybatisPlusApplication {
         // 生成十六位随机AES密钥，妥善保管
         String randomKey= AES.generateRandomKey();
         System.out.println(randomKey); // 163b68e7477292c0
-        // 使用随机密钥加密需要加密的数据，列如数据库url,username,password
-        String url = "jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
+        // 使用随机密钥加密需要加密的数据，列如数据库 url、username、password
+        String url = "jdbc:mysql://localhost:3306/business?serverTimezone=UTC&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false";
         String username = "root";
         String password = "131474";
         String aesUrl = AES.encrypt(url, randomKey);

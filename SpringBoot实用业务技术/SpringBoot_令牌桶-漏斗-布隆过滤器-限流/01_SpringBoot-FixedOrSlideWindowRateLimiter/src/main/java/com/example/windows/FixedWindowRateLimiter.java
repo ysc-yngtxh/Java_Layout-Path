@@ -6,12 +6,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 public class FixedWindowRateLimiter {
+
     // 时间窗口大小，单位毫秒
     private long windowSize;
+
     // 允许通过请求数
     private int maxRequestCount;
+
     // 窗口右边界
     private long windowBorder;
+
     // 当前窗口通过的请求计数
     private AtomicInteger count = new AtomicInteger(0);
 

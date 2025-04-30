@@ -18,9 +18,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Student implements Serializable {
-
     @Serial
     private static final long serialVersionUID = 7411154017460139062L;
+
     private Integer id;
 
     private String name;
@@ -29,4 +29,3 @@ public class Student implements Serializable {
 
     private Integer age;
 }
-

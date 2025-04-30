@@ -10,6 +10,4 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ConditionalOnProperty(value = "custom.spring.spi.enable", havingValue = "true")
-public class EnableCustomDependency {
-
-}
+public class EnableCustomDependency {}

@@ -13,7 +13,6 @@ import java.io.Serial;
 @Getter
 @AllArgsConstructor
 public class SqlException extends RuntimeException {
-
     @Serial
     private static final long serialVersionUID = 828553759112823740L;
 

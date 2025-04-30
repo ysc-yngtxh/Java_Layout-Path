@@ -15,6 +15,7 @@ import java.io.IOException;
  * @apiNote TODO 在SpringBoot启动的初期阶段，对应用程序的环境属性进行修改、添加、删除
  */
 public class MyEnvironmentPostProcessor implements EnvironmentPostProcessor {
+
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
         YamlPropertySourceLoader sourceLoader = new YamlPropertySourceLoader();

@@ -15,14 +15,14 @@ public class CustomAnnotationConfig {
 
     @Bean
     // 判断是否引入了Tomcat依赖
-    @BerConditionalOnClass("org.apache.catalina.startup.Tomcat")
+    @BerConditionalOnClass(name = "org.apache.catalina.startup.Tomcat", lenient = true)
     public Brand tomcatWebServer() {
         return new Brand(4L, "tomcatWebServer", null, null, "小游语录");
     }
 
     @Bean
     // 判断是否引入了Jetty依赖
-    @BerConditionalOnClass("org.eclipse.jetty.server.Server")
+    @BerConditionalOnClass(name = "org.eclipse.jetty.server.Server", lenient = true)
     public Brand jettyWebServer() {
         return new Brand(5L, "jettyWebServer", null, null, "小游语录");
     }

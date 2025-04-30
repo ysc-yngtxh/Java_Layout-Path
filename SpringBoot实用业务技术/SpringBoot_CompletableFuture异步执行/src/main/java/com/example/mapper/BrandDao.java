@@ -9,7 +9,4 @@ import com.example.entity.Brand;
  * @author makejava
  * @since 2023-08-18 23:15:47
  */
-public interface BrandDao extends BaseMapper<Brand> {
-
-}
-
+public interface BrandDao extends BaseMapper<Brand> {}

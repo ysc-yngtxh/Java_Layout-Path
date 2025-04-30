@@ -16,13 +16,22 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
+
     private String name;
+
     private String country;
+
     private String[] account;
+
     private Integer[] money;
+
     private String email;
+
     private List<String> address;
+
     private List<Integer> phone;
+
     private List<UserInfo> userInfos;
+
     private List<UserInfo> userInfoList;
 }
