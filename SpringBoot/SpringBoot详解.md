@@ -5,34 +5,38 @@
     可以通过 @SpringBootApplication(exclude={想要关闭的自动配置的类名.class}) 来关闭特定的自动配置，
     其中 @ComponentScan 让 SpringBoot 扫描到 Configuration类, 并把它加入到程序上下文。
    
-     
-    1. @ComponentScan：组件扫描器
-        @ComponentScan 注解默认会扫描当前配置类(启动类)所在的包及其子包。
-        也可以指定 @ComponentScan(basePackages="com.example")
-        个人理解相当于：扫描启动类所在包以及子包中带有 @Component、@Service、@Repository、@Controller 等注解的类，
-                     并将这些类注册为 Spring 容器管理的 bean。
-                     不用我们自己去手动配置 <context:component-scan base-package="**"/> 组件扫描器。
-     
-    2. @SpringBootConfiguration：配置文件  
-        本质上是一个 @Configuration 注解，表明该类是一个配置类。
-        而 @Configuration 又被 @Component 注解修饰，代表任何加了 @Configuration 注解的配置类，都会被注入进Spring容器中。
+    1. @EnableAutoConfiguration：自动配置
+         作用：启用Spring Boot的自动配置机制，根据项目的依赖（如JAR包、类路径、已存在的Bean）自动配置Spring应用程序所需的组件。
+              简单来说就是根据项目的依赖来自动配置Spring应用程序所需的Bean。
+         
+         原理：该注解包含两个主要的子注解 @AutoConfigurationPackage、@Import({AutoConfigurationImportSelector.class})
+              ①、@AutoConfigurationPackage
+                 前提知识：使用Spring的时候，通常需要在XML 文件中的 context:component-scan 中定义好 base-package（声明组件扫描器），
+                 @AutoConfigurationPackage 会将被注解标注的类，即主配置类（启动类）所在的包当作 base-package，返回主配置类所在的包路径交给 SpringBoot 容器管理。
+                 Ⅰ、一方面，通过SpringBoot 容器中返回的启动类包路径来指定 @ComponentScan 组件扫描器的扫描范围（这也就是为什么我们需要将主配置类放在项目的最外层目录中的原因）；
+                 Ⅱ、另一方面，确保SpringBoot的自动配置类(spring.factories)能够扫描到用户自定义的配置类(启动类所在包以及子包下的Bean)。
+                    这些自动配置类可能依赖于用户定义的Bean，而这些Bean是通过 @ComponentScan 扫描到的。
+                    如果没有 @AutoConfigurationPackage，那么自动配置类可能无法找到这些用户定义的Bean，从而导致自动配置失败。
+                    另外，@AutoConfigurationPackage 还允许通过 spring.factories 文件注册额外的自动配置类，这为用户提供了更灵活的方式来扩展或覆盖默认的自动配置。
+              ②、@Import({AutoConfigurationImportSelector.class}) （自动配置选择器）
+                 该注解导入 AutoConfigurationImportSelector 类，其中使用核心方法 SpringFactoriesLoader.loaderFactoryNames() 来扫描具有 META-INF/spring.factories 文件的jar包。
+                 然后基于 META-INF/spring.factories 中定义的 EnableAutoConfiguration 类，按条件（@ConditionalOnClass等）加载配置。
 
-    3. @EnableAutoConfiguration：自动配置  
-        此注解自动载入应用程序所需的所有Bean——这依赖于 SpringBoot 在类路径中的查找。  
-        该注解组合了 @AutoConfigurationPackage、@Import 等子注解，
-        ①、@AutoConfigurationPackage 注解会将标注的类，即主配置类(启动类)，返回主配置类所在的包路径，
-           一方面用来指定 @ComponentScan 组件扫描器的扫描范围（ @ComponentScan 注解默认就能扫描到主配置类所在的包路径）；
-           另一方面确保SpringBoot的自动配置类(spring.factories)能够扫描到用户自定义的配置类(启动类所在包以及子包下的Bean)。
-           这些自动配置类可能依赖于用户定义的Bean，而这些Bean是通过 @ComponentScan 扫描到的。
-           如果没有 @AutoConfigurationPackage，那么自动配置类可能无法找到这些用户定义的Bean，从而导致自动配置失败。
-           另外，@AutoConfigurationPackage 还允许通过 spring.factories 文件注册额外的自动配置类，
-           这为用户提供了更灵活的方式来扩展或覆盖默认的自动配置。
-        ②、@Import 注解导入了 AutoConfigurationImportSelector 类，
-           它使用 SpringFactoriesLoader.loaderFactoryNames 方法来扫描具有 META-INF/spring.factories 文件的jar包。
-           而 spring.factories 里声明了有哪些自动配置. 
+         -- 示例：META-INF/spring.factories 文件内容
+                 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+                 org.mybatis.spring.boot.autoconfigure.MybatisLanguageDriverAutoConfiguration,\
+                 org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration
+
+    2. @SpringBootConfiguration：配置文件
+           作用：标记一个类为Spring Boot的主配置类，等同于@Configuration注解，用于标识Spring Boot应用的配置源。
+
+    3. @ComponentScan：自动扫描
+           作用：自动扫描并注册Bean。
+                由于SpringBoot 容器在 @EnableAutoConfiguration的子注解 @AutoConfigurationPackage逻辑中获取到主配置包路径，
+                因此 @ComponentScan 注解通过 SpringBoot 容器获取到主配置包路径后，扫描所在包以及子包中带有 @Component、@Service、@Repository、@Controller 等这些注解标注的类，并将其注册为Spring容器中的Bean。
+                即可省略手动配置 <context:component-scan base-package="**"/> 组件扫描器 的工作。
     
     4. 具体参考：https://blog.csdn.net/qq_33591903/article/details/119843446
-
 
 ## 二、Spring中主要使用的设计模式：
 
@@ -88,7 +92,7 @@
        如果某个方法用 final 修饰了，那么在它的代理类中，就无法重写该方法，而添加事务功能。  
        如果一个方法被定义为static，意味着它属于类而不是对象。在Spring框架中，事务的处理是通过织入到对象的代理中，
        对代理对象的方法进行事务的切入。由于静态方法属于类，而不是对象，因此无法通过代理对象来对静态方法进行事务的切入，
-       这同样可能导致@Transactional注解不起作用，事务无法正确地开启、提交或回滚。
+       这同样可能导致 @Transactional 注解不起作用，事务无法正确地开启、提交或回滚。
    
     3. 方法内部调用  
        ```
@@ -109,13 +113,13 @@
        }
        ```
        Spring的事务管理功能是通过动态代理实现的，而Spring默认使用JDK动态代理，而JDK动态代理采用接口实现的方式，通过反射调用目标类。  
-       简单理解，就是saveUser()方法中调用this.doInsert(),这里的this是被真实对象，所以会直接走doInsert的业务逻辑，而不会走切面逻辑，所以事务失败。  
+       简单理解，就是 saveUser() 方法中调用this.doInsert(),这里的this是被真实对象，所以会直接走doInsert的业务逻辑，而不会走切面逻辑，所以事务失败。  
        解决方案：    
-              方案一：解决方法可以是直接在启动类中添加@Transactional注解saveUser()  
-              方案二：@EnableAspectJAutoProxy(exposeProxy = true)在启动类中添加
+              方案一：解决方法可以是直接在启动类中添加 @Transactional 注解 saveUser()  
+              方案二：@EnableAspectJAutoProxy(exposeProxy = true) 在启动类中添加
    
-    4. 未被 spring 管理  
-       使用 spring 事务的前提是：对象要被 spring 管理，需要创建 bean 实例。  
+    4. 未被 Spring 管理  
+       使用 Spring 事务的前提是：对象要被 Spring 管理，需要创建 bean 实例。  
    
     5. 多线程调用  
        spring 的事务是通过数据库连接来实现的。当前线程中保存了一个 map，key 是数据源，value 是数据库连接。  
@@ -123,7 +127,7 @@
        如果在不同的线程，拿到的数据库连接肯定是不一样的，所以是不同的事务。
   
     6. 表不支持事务  
-       在 mysql5 之前，默认的数据库引擎是myisam。它的好处就不用多说了：索引文件和数据文件是分开存储的，对于查多写少的单表操作，性能比 innodb 更好。  
+       在 Mysql5 之前，默认的数据库引擎是myisam。它的好处就不用多说了：索引文件和数据文件是分开存储的，对于查多写少的单表操作，性能比 innodb 更好。  
        但有个很致命的问题是：不支持事务。如果只是单表操作还好，不会出现太大的问题。但如果需要跨多张表操作，由于其不支持事务，数据极有可能会出现不完整的情况。  
        此外，myisam 还不支持行锁和外键。
  
@@ -145,15 +149,15 @@
            }
        }
        ```
-       spring事务，默认情况下只会回滚RuntimeException（运行时异常）和Error（错误），对于普通的Exception（非运行时异常），它不会回滚。  
-       解决方法也很简单。配置rollbackFor属性，例如@Transactional(rollbackFor = Exception.class)。
+       Spring事务，默认情况下只会回滚 RuntimeException（运行时异常）和 Error（错误），对于普通的Exception（非运行时异常），它不会回滚。  
+       解决方法也很简单。配置rollbackFor属性，例如 @Transactional(rollbackFor = Exception.class)。
    
     2. ### 业务方法本身捕获了异常
-       Spring是否进行回滚是根据你是否抛出异常决定的，所以如果你自己try...catch...捕获了异常，Spring 也无能为力。
+       Spring是否进行回滚是根据你是否抛出异常决定的，所以如果你自己 try...catch... 捕获了异常，Spring 也无能为力。
   
 
 ## 六、编程式事务
-    基于@Transactional注解的，主要讲的是它的事务问题，我们把这种事务叫做：声明式事务。
+    基于 @Transactional 注解的，主要讲的是它的事务问题，我们把这种事务叫做：声明式事务。
     
     其实，spring还提供了另外一种创建事务的方式，即通过手动编写代码实现的事务，我们把这种事务叫做：编程式事务。例如：
     ```
@@ -169,12 +173,12 @@
             return Boolean.TRUE;
         });
     }
-    在spring中为了支持编程式事务，专门提供了一个类：TransactionTemplate，在它的execute方法中，就实现了事务的功能。
+    在Spring中为了支持编程式事务，专门提供了一个类：TransactionTemplate，在它的execute方法中，就实现了事务的功能。
     ```
     
-    相较于@Transactional注解声明式事务，更建议大家使用，基于TransactionTemplate的编程式事务。主要原因如下：  
+    相较于 @Transactional 注解声明式事务，更建议大家使用，基于TransactionTemplate的编程式事务。主要原因如下：  
     ①、避免由于spring aop问题，导致事务失效的问题。
     ②、能够更小粒度的控制事务的范围，更直观。
 
-    建议在项目中少使用@Transactional注解开启事务。但并不是说一定不能用它，如果项目中有些业务逻辑比较简单，而且不经常变动，
-    使用@Transactional注解开启事务开启事务也无妨，因为它更简单，开发效率更高，但是千万要小心事务失效的问题。
+    建议在项目中少使用 @Transactional 注解开启事务。但并不是说一定不能用它，如果项目中有些业务逻辑比较简单，而且不经常变动，
+    使用 @Transactional 注解开启事务开启事务也无妨，因为它更简单，开发效率更高，但是千万要小心事务失效的问题。

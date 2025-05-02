@@ -27,14 +27,14 @@ public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> impleme
         try {
             Student student1 = new Student(10, "敏敏", "12345@11.com", 22);
             studentDao.updateById(student1);
-            // 数据库中已经存在Id=2的数据，因此这条数据插入会失败，会出现运行异常
+            // 数据库中已经存在 Id=2 的数据，因此这条数据插入会失败，会出现运行异常
             // 因此，只需要判断上述更新语句Id=10的这条数据是否被修改。如果修改，事务失效；如果没有修改，说明事务有效执行
             Student student2 = new Student(2, "敏敏", "12387@11.com", 22);
             studentDao.insert(student2);
         } catch (Exception e) {
             System.out.println("insert()方法故意抛异常，制造回滚");
             // 注意：事务默认回滚的异常为【RuntimeException】
-            // 如果使用@TransactionalrollbackFor = Exception.class),就不要使用try..catch。因为你捕获了异常，没办法进行回滚
+            // 如果使用@Transactional(rollbackFor = Exception.class),就不要使用try..catch。因为你捕获了异常，没办法进行回滚
             throw new RuntimeException();
         }
     }
@@ -48,7 +48,7 @@ public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> impleme
         } catch (Exception e) {
             System.out.println("updateById()方法更新异常");
         }
-        // 而事务是通过动态代理实现，因此需要代理对象才能生效。这里调用saveUser()方法是this对象，即为直接对象，事务不生效
+        // 事务是通过动态代理实现，因此需要代理对象才能生效。这里调用saveUser()方法是this对象，即为直接对象，事务不生效
         this.saveUser();
     }
 
@@ -68,4 +68,3 @@ public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> impleme
         currentProxy.saveUser();
     }
 }
-

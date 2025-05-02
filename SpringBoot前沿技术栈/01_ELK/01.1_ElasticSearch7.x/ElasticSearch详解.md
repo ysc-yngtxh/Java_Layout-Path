@@ -48,22 +48,37 @@
       使用 本地JDK（配置 $ES_JAVA_HOME）<br/>
       使用 自带JDK（配置 $ES_HOME）
    </h3>
+
+   <h3 style="color: #1983e0; line-height: 25px">
+       注意：Mac 电脑中安装的解压软件（我的解压软件是 MyZip）在进行解压 elasticsearch-x.x.x-darwin-aarch64.tar.gz 文件时，可能无法正确处理某些符号链接，导致解压后的文件结构不完整以致于报错弹窗。
+   </h3>
+
+   <figure>
+
+   ![输入图片说明](src/main/resources/static/img.png)<br/><br/>
+   </figure>
+
+   <h3 style="color: #ed0d0d; line-height: 25px">
+       推荐使用命令行进行解压：tar --no-same-owner -xzf elasticsearch-x.x.x-darwin-aarch64.tar.gz
+   </h3>
+
+
    </figure>
    <hr/>
 
    ### 2、基本 elasticsearch7.7 以上版本都可以设置安全验证登录使用。第一次解压启动，命令行会给你 密码 和 token令牌。需要注意的是只有在第一次启动的时候才会在命令行显示出来。
    <h3>
    <figure>
-
+   
    ![输入图片说明](src/main/resources/static/image-1.png)<br/><br/>
    进入 https://localhost:9200 (⚠️：https)地址会弹出用户名和密码登录界面：
       <figure>
          <h4 style="color: #1983e0; line-height: 25px">
             用户名 ==> elastic【固定的】<br/>
             <br/>
-            密码 ==> `I3ujEDdcgapGogzHIAet`<br/>
+            密码 ==> `Ilum*gumfsa76L0g-Q1l`<br/>
             <br/>
-            随机生成的提供给 Kibana 的注册Token令牌，30分钟的有效时限：`eyJ2ZXIiOiI4LjkuMCIsImFkciI6WyIxOTIuMTY4LjEuNTo5MjAwIl0sImZnciI6Ijg4MTQzOTk2NjgyNWNhNTg2N2YzNmE10TcxNGFiNWYzMTU0MGIwYTg5YzVkZjRiOGJiNDNiZTVhOGNjNTI30DIiLCrZXkiOiJpTkNrcklrQm1WNkZmek80S2dXVjpmS25laHpOWFFPLWdIX1AzU2VYdnV3In0=`
+            随机生成的提供给 Kibana 的注册Token令牌，30分钟的有效时限：`eyJ2ZXIiOiI4LjE0LjAiLCJhZHIiOlsiMTkyLjE2OC4yLjExMzo5MjAwIl0sImZnciI6IjA4MzUyNTJjNDZjMGFjMDZhZDFiNDU1MTNkMDM0NjEyNWM4NDU3Y2M1YzI5NzE5MTEyMjdiZWZmNGEyNzA4MjgiLCJrZXkiOiJzR2s1aXBZQlNsSFNDc0JlLWlCVTpVLXFJMW9CS1BjS3oyUHJyZGpQeHFnIn0=`
          </h4>
       </figure>
    </figure>

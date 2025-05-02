@@ -9,9 +9,8 @@
         <version>3.4.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
     <groupId>com.example</groupId>
-    <artifactId>01.5_LogStash</artifactId>
+    <artifactId>22_SpringBoot-Apifox</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <description>${project.artifactId}</description>
@@ -19,14 +18,7 @@
     <properties>
         <java.version>23</java.version>
     </properties>
-
     <dependencies>
-        <dependency>
-            <groupId>net.logstash.logback</groupId>
-            <artifactId>logstash-logback-encoder</artifactId>
-            <version>8.1</version>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -35,20 +27,16 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/*.yaml</include>
-                    <include>**/*.xml</include>
-                </includes>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -60,6 +48,18 @@
                             <artifactId>lombok</artifactId>
                         </path>
                     </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
                 </configuration>
             </plugin>
         </plugins>

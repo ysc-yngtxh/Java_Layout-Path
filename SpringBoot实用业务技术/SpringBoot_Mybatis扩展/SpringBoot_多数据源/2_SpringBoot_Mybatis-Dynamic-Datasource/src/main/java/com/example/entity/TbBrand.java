@@ -18,6 +18,7 @@ import java.io.Serializable;
 public class TbBrand implements Serializable {
     @Serial
     private static final long serialVersionUID = 968972510958796236L;
+
     /**
      * 品牌id
      */

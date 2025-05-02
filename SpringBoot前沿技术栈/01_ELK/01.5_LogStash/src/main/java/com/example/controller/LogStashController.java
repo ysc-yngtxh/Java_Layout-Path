@@ -25,5 +25,4 @@ public class LogStashController {
     public void testLog() {
         log.error("测试输出一个日志");
     }
-
 }

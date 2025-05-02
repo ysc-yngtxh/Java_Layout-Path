@@ -9,7 +9,4 @@ import com.example.transactional.entity.Student;
  * @author 游家纨绔
  * @since 2023-11-11 17:32:05
  */
-public interface StudentDao extends BaseMapper<Student> {
-
-}
-
+public interface StudentDao extends BaseMapper<Student> {}
