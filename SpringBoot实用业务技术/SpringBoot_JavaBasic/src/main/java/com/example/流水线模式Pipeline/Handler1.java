@@ -6,7 +6,7 @@ package com.example.流水线模式Pipeline;
  * @description: TODO
  * @date 2023/1/11 22:58
  */
-public class Handler1 implements Handler{
+public class Handler1 implements Handler<PipelineContext> {
 
     @Override
     public Boolean handler(PipelineContext context) {

@@ -23,7 +23,7 @@ import org.springframework.context.annotation.Configuration;
 @AutoConfigureAfter(DruidDataSourceAutoConfigure.class)
 public class DruidLogoExclusionConfig {
 
-    // 带有广告的common.js全路径
+    // 带有广告的 common.js 全路径
     private static final String COMMON_JS_PATH = "support/http/resources/js/common.js";
     // 原始脚本，JS中构建广告Logo的方法
     private static final String OLD_JS = "this.buildFooter();";

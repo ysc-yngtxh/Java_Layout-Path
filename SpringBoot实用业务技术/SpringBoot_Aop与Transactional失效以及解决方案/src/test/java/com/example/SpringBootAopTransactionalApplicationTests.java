@@ -2,9 +2,6 @@ package com.example;
 
 import com.example.proxy.ProxyService;
 import com.example.transactional.service.StudentService;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

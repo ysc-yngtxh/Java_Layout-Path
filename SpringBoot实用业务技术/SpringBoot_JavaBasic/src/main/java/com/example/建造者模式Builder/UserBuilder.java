@@ -6,31 +6,31 @@ public class UserBuilder {
 
     private UserBuilder() {}
 
-    public static IdStep builder(){
+    public static IdStep builder() {
         return new UserSteps();
     }
 
-    interface IdStep{
+    interface IdStep {
         NameStep withId(Long Id);
     }
 
-    interface NameStep{
+    interface NameStep {
         EmailStep withName(String name);
     }
 
-    interface EmailStep{
+    interface EmailStep {
         AgeStep withEmail(String email);
     }
 
-    interface AgeStep{
+    interface AgeStep {
         BuildStep withAge(int age);
     }
 
-    interface BuildStep{
+    interface BuildStep {
         User build();
     }
 
-    public static class UserSteps implements IdStep,NameStep,EmailStep,AgeStep,BuildStep{
+    public static class UserSteps implements IdStep,NameStep,EmailStep,AgeStep,BuildStep {
        private User user;
 
         public UserSteps() {
@@ -63,7 +63,7 @@ public class UserBuilder {
 
         @Override
         public User build() {
-            return this.user; //返回当前类实例的user对象
+            return this.user; // 返回当前类实例的user对象
         }
     }
 }

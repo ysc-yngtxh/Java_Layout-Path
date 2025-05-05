@@ -20,7 +20,7 @@
 
 ### 三、Arthas快速入门
 
-1. #### 进入Arthas 官网下载（https://arthas.aliyun.com/doc/install-detail.html）
+1. #### 进入Arthas 官网下载 https://arthas.aliyun.com/doc/install-detail.html
 
 2. #### 选择自己合适的下载方式(这里我是选择的手动安装)
    ![img](src/main/resources/static/img.png)
@@ -57,6 +57,17 @@
 
 9. #### 执行ArthasDemo类中的 seeProductionCode() 方法并重新启动Arthas。jad是最简单的class反编译为java文件的小工具，使用 jad 命令进行反编译查看线上文件（避免中文乱码：java -Dfile.encoding=UTF-8 -jar arthas-boot.jar）
    ![img_11](src/main/resources/static/img_11.png)
+
+10. #### sc 命令功能：查看 JVM 已加载的类信息。
+        输入：sc com.example.*
+        结果：打印出 com.example 包下的所有类信息
+
+        输入：sc -d com.example.SpringBootArthasApplication
+        结果：打印出 SpringBootArthasApplication类详细信息
+
+        输入：sc -d -f com.example.SpringBootArthasApplication
+        结果：打印出 SpringBootArthasApplication类详细信息，还有类的 Field 信息
+   ![img_27](src/main/resources/static/img_27.png)
 
 
 ### 四、Arthas进阶使用

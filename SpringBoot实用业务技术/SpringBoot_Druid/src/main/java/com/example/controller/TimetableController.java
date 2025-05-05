@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-
 /**
  * (Timetable)表控制层
  *
@@ -33,9 +32,9 @@ public class TimetableController {
     @GetMapping("/{id}")
     public ResponseEntity<Timetable> queryById(@PathVariable("id") Integer id) {
         DruidDataSource druidDataSource = (DruidDataSource) dataSource;
-        System.out.println(druidDataSource.getMaxActive());
-        System.out.println(druidDataSource.getInitialSize());
-        System.out.println(druidDataSource.getMinIdle());
+        System.out.println("获取连接池的最大活跃连接数：" + druidDataSource.getMaxActive());
+        System.out.println("获取连接池的初始连接数：" + druidDataSource.getInitialSize());
+        System.out.println("获取连接池的最小空闲连接数：" + druidDataSource.getMinIdle());
 
         return ResponseEntity.ok(timetableService.queryById(id));
     }

@@ -1,9 +1,9 @@
 package com.example.建造者模式Builder;
 
-import cn.hutool.log.Log;
-import cn.hutool.log.LogFactory;
 import com.example.vo.User;
 import lombok.SneakyThrows;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author 游家纨绔
@@ -12,8 +12,12 @@ import lombok.SneakyThrows;
  * @date 2022/11/29 23:03
  */
 public class StepBuilder {
+    public static final Logger log = LoggerFactory.getLogger(StepBuilder.class);
 
-    public static final Log log = LogFactory.get(StepBuilder.class);
+    static {
+        // 默认情况下，SLF4J 的日志级别是 INFO。强制设置日志级别为 DEBUG（适用于 Logback）
+        ((ch.qos.logback.classic.Logger) log).setLevel(ch.qos.logback.classic.Level.DEBUG);
+    }
 
     @SneakyThrows
     public static void main(String[] args) {

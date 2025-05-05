@@ -13,7 +13,7 @@ public class SpringBootBeanFactoryFactoryBeanApplication {
         // BeanFactory: 一个 Bean 工厂，负责 Bean 的生产和管理
         ConfigurableApplicationContext applicationContext = SpringApplication.run(SpringBootBeanFactoryFactoryBeanApplication.class, args);
         // 直接从Bean工厂中获取Bean
-        StableServiceImpl testService = (StableServiceImpl) applicationContext.getBean("stableServiceImpl");
+        StableServiceImpl testService = applicationContext.getBean("stableServiceImpl", StableServiceImpl.class);
         testService.doService();
 
         // 获取Bean对象ServiceFactory(实现接口FactoryBean的类)，但是这里获取的是FactoryBean的装饰对象

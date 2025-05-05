@@ -1,6 +1,8 @@
 package com.example.entity;
 
+import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Timetable implements Serializable {
-
+    @Serial
     private static final long serialVersionUID = -10198259057004572L;
 
     /**
@@ -25,11 +27,11 @@ public class Timetable implements Serializable {
     /**
      * 用户id
      */
-    private Integer objectId;
+    private Integer userId;
     /**
      * 课程id
      */
-    private Integer code;
+    private Integer courseId;
     /**
      * 区别老师和学生
      */
@@ -41,14 +43,13 @@ public class Timetable implements Serializable {
     /**
      * 课程上课时间
      */
-    private Integer start;
+    private LocalDateTime start;
     /**
      * 下课时间
      */
-    private Long finish;
+    private LocalDateTime finish;
     /**
      * 删除字段
      */
     private Integer deleteFlag;
 }
-

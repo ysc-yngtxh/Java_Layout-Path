@@ -1,13 +1,13 @@
 package com.example.Objects工具包;
 
-import cn.hutool.log.Log;
-import cn.hutool.log.LogFactory;
 import com.example.vo.User;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.Objects;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author 游家纨绔
@@ -16,8 +16,12 @@ import java.util.Objects;
  * @date 2022/11/28 23:45
  */
 public class ObjectsApi {
+    public static final Logger log = LoggerFactory.getLogger(ObjectsApi.class);
 
-    public static final Log log = LogFactory.get(ObjectsApi.class);
+    static {
+        // 默认情况下，SLF4J 的日志级别是 INFO。强制设置日志级别为 DEBUG（适用于 Logback）
+        ((ch.qos.logback.classic.Logger) log).setLevel(ch.qos.logback.classic.Level.DEBUG);
+    }
 
     /**
      * 自定义的Comparator实现类
@@ -50,8 +54,8 @@ public class ObjectsApi {
         int compare = Objects.compare(123, 456, new Comp());
         log.info(String.valueOf(compare));
 
-        // deepEquals如果两个参数都相等，则返回true。否则，它返回false。如果两个参数都为null，则返回true。
-        // equals如果两参数相等返回true，否则返回false。但是这里的equals比较对象是比较对象地址
+        // deepEquals()  如果两个参数都相等，则返回true。否则，它返回false。如果两个参数都为null，则返回true。
+        // equals()      如果两参数相等返回true，否则返回false。但是这里的equals比较对象是比较对象地址
         String[][] name = {{"G", "a", "o"}, {"H", "u", "a", "n"}, {"j", "i", "e"}};
         String[][] names = {{"G", "a", "o"}, {"H", "u", "a", "n"}, {"j", "i", "e"}};
         boolean deepEquals1 = Objects.deepEquals(name, names);

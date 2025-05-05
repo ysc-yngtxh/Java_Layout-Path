@@ -52,7 +52,7 @@ public class CompletableFutureController {
         brand.setCourses(courses);
 
         stopWatch.stop();
-        System.out.println("正常耗时：" + stopWatch.getLastTaskTimeMillis());
+        System.out.println("正常耗时：" + stopWatch.getTotalTimeMillis());
 
         return brand;
     }
@@ -90,7 +90,7 @@ public class CompletableFutureController {
 
         Brand brand = combine.get();
         stopWatch.stop();
-        System.out.println("CompletableFuture耗时：" + stopWatch.getLastTaskTimeMillis());
+        System.out.println("CompletableFuture耗时：" + stopWatch.getTotalTimeMillis());
 
         return brand;
     }

@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>2_Mybatis-Plus-Pro</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>2_Mybatis-Plus-Pro</name>
-    <description>2_Mybatis-Plus-Pro</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>23</java.version>

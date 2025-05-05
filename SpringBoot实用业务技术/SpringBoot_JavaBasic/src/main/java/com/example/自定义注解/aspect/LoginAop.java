@@ -30,7 +30,7 @@ public class LoginAop {
      */
 
     @Around("@annotation(com.example.自定义注解.annotation.LoginRequired)")
-    public Object loginAopTest(ProceedingJoinPoint point) throws Throwable{
+    public Object loginAopTest(ProceedingJoinPoint point) throws Throwable {
         MethodSignature name = (MethodSignature) point.getSignature();
         Method method = name.getMethod();
         System.out.println(method.toString());
@@ -40,7 +40,7 @@ public class LoginAop {
     }
 
     @Before(value="execution(* *..loginController.login1())")
-    public void loginAopTest1(JoinPoint point) throws Throwable{
+    public void loginAopTest1(JoinPoint point) {
         MethodSignature name = (MethodSignature) point.getSignature();
         Method method = name.getMethod();
         System.out.println(method.toString());

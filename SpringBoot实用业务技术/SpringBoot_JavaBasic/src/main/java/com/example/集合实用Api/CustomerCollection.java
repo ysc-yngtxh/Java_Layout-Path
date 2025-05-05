@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author 游家纨绔
@@ -23,8 +25,12 @@ import java.util.stream.Stream;
  * @date 2022/11/26 14:54
  */
 public class CustomerCollection {
+    public static final Logger log = LoggerFactory.getLogger(CustomerCollection.class);
 
-    public static final Log log = LogFactory.get(CustomerCollection.class);
+    static {
+        // 默认情况下，SLF4J 的日志级别是 INFO。强制设置日志级别为 DEBUG（适用于 Logback）
+        ((ch.qos.logback.classic.Logger) log).setLevel(ch.qos.logback.classic.Level.DEBUG);
+    }
 
     @Test
     public void test1() {
@@ -62,18 +68,15 @@ public class CustomerCollection {
 
     @Test
     public void test3() {
-        // TODO 集合引用小问题
-        /**
-         * 为什么要用List list = new ArrayList(),而不用ArrayList list = new ArrayList()呢?
-         */
-        // 1、问题就在于List接口有多个实现类，现在你用的是ArrayList，也许哪一天你需要换成其它的实现类，如LinkedList或者Vector等等，
-        //    这时你只要改变这一行就行了： List list = new LinkedList(); 其它使用了list地方的代码根本不需要改动。
-        // 2、假设你开始用ArrayList list = new ArrayList(), 这下你有的改了，特别是如果你使用了ArrayList实现类特有的方法和属性。
-        // 3、这样的好处是为了代码的可维护性，可复用性，可扩展性以及灵活性，再者就是这符合了里氏代换原则和开闭原则。
+        // TODO 集合引用小问题：为什么要用List list = new ArrayList()，而不用ArrayList list = new ArrayList()呢?
+        //      1、问题就在于List接口有多个实现类，现在你用的是ArrayList，也许哪一天你需要换成其它的实现类，如LinkedList或者Vector等等，
+        //         这时你只要改变这一行就行了： List list = new LinkedList(); 其它使用了list地方的代码根本不需要改动。
+        //      2、假设你开始用ArrayList list = new ArrayList(), 这下你有的改了，特别是如果你使用了ArrayList实现类特有的方法和属性。
+        //      3、这样的好处是为了代码的可维护性，可复用性，可扩展性以及灵活性，再者就是这符合了里氏代换原则和开闭原则。
 
         // 集合拆分partition
-        List<String> arrayList1 = Lists.newArrayList("123", "456", "789"
-                , "101112", "131415", "161718", "192021", "222324", "252627", "282930");
+        List<String> arrayList1 = Lists.newArrayList("123", "456", "789", "101112", "131415", "161718", "192021", "222324", "252627", "282930");
+        // Guava的Lists工具类，拆分集合（拆分为每 2 个元素为一个集合）
         List<List<String>> partition = Lists.partition(arrayList1, 2);
         log.info(partition.toString());
 

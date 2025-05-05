@@ -11,11 +11,11 @@
 	<groupId>com.example</groupId>
 	<artifactId>2_SpringBoot_Mybatis-Dynamic-Datasource</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>2_SpringBoot_Mybatis-Dynamic-Datasource</name>
-	<description>2_SpringBoot_Mybatis-Dynamic-Datasource</description>
+	<name>${project.artifactId}</name>
+	<description>${project.artifactId}</description>
 
 	<properties>
-		<java.version>21</java.version>
+		<java.version>23</java.version>
 	</properties>
 
 	<dependencies>

@@ -11,10 +11,11 @@
     <groupId>com.example</groupId>
     <artifactId>3_SpringBoot-Properties-Config</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>3_SpringBoot-Properties-Config</name>
-    <description>3_SpringBoot-Properties-Config</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
+
     <properties>
-        <java.version>21</java.version>
+        <java.version>23</java.version>
     </properties>
 
     <dependencies>

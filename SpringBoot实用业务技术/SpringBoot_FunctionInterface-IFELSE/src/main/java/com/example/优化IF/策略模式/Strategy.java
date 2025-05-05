@@ -6,5 +6,6 @@ package com.example.优化IF.策略模式;
  * @apiNote TODO 策略类的公共接口
  */
 public abstract class Strategy {
+
     protected abstract String quest();
 }

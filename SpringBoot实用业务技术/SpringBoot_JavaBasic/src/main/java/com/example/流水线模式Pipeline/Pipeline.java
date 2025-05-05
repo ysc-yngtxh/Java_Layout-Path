@@ -21,10 +21,10 @@ public interface Pipeline {
     /**
      * 添加handler到队首
      */
-    void addHead(Handler ... handlers);
+    void addHead(Handler<?>... handlers);
 
     /**
      * 添加handler到队尾
      */
-    void addTail(Handler ... handlers);
+    void addTail(Handler<?>... handlers);
 }

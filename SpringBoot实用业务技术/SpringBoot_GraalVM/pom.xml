@@ -5,17 +5,19 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.0</version>
+        <version>3.4.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
     <artifactId>SpringBoot_GraalVM</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot_GraalVM</name>
-    <description>SpringBoot_GraalVM</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
+
     <properties>
-        <java.version>21</java.version>
+        <java.version>24</java.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -54,5 +56,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

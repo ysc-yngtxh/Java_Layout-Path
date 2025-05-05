@@ -9,5 +9,6 @@ package com.example.函数式接口.interfaces;
  */
 @FunctionalInterface
 public interface ThrowExceptionFunction {
+
     void throwMessage(String message);
 }

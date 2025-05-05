@@ -9,6 +9,7 @@ package com.example.函数式接口.interfaces;
  */
 @FunctionalInterface
 public interface BranchHandler {
+
     // Runnable也可看作是第五大函数区别于Function、Predicate、Supplier、Consumer：不需要出入参
     void trueOrFalseHandler(Runnable trueHandler, Runnable falseHandler);
 }

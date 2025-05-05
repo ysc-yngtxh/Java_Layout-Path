@@ -12,11 +12,11 @@
 	<groupId>com.example</groupId>
 	<artifactId>1_SpringBoot_CustomReactive</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>1_SpringBoot_CustomReactive</name>
-	<description>1_SpringBoot_CustomReactive</description>
+	<name>${project.artifactId}</name>
+	<description>${project.artifactId}</description>
 
 	<properties>
-		<java.version>21</java.version>
+		<java.version>23</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

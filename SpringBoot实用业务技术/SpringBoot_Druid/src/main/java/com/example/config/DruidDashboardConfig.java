@@ -25,7 +25,7 @@ public class DruidDashboardConfig {
      */
     @Bean
     @ConditionalOnClass(DruidDataSource.class)
-    public ServletRegistrationBean druidServlet() {
+    public ServletRegistrationBean<?> druidServlet() {
         // 这些参数可以在 http.StatViewServlet 的父类 ResourceServlet 中找到
         Map<String, String> initParams = new HashMap<>();
         // 设置控制台登录的用户名和密码
@@ -33,13 +33,13 @@ public class DruidDashboardConfig {
         initParams.put("loginPassword", "123456");
         // 是否能够重置数据
         initParams.put("resetEnable", "false");
-        // IP白名单(为空表示，所有的都可以访问，多个IP的时候用逗号隔开)
+        // IP白名单 (为空表示，所有的都可以访问，多个IP的时候用逗号隔开)
         initParams.put("allow", ""); // 后面参数为空则所有人都能访问，一般会写一个具体的ip或ip段
         // IP黑名单 (存在共同时，deny优先于allow)
         initParams.put("deny", "192.168.10.132");
 
         // 注册一个servlet，同时表明/druid/* 这个请求会走到这个servlet，而druid内置了这个请求的接收
-        ServletRegistrationBean bean = new ServletRegistrationBean(new StatViewServlet(), "/druid/*");
+        ServletRegistrationBean<?> bean = new ServletRegistrationBean<>(new StatViewServlet(), "/druid/*");
         bean.setInitParameters(initParams);
         return bean;
     }
@@ -49,7 +49,7 @@ public class DruidDashboardConfig {
      */
     @Bean
     @ConditionalOnClass(DruidDataSource.class)
-    public FilterRegistrationBean druidFilter() {
+    public FilterRegistrationBean<?> druidFilter() {
         Map<String, String> initParams = new HashMap<>();
         // 这些不进行统计
         initParams.put("exclusions", "*.js,*.css,/druid/*");
@@ -58,7 +58,7 @@ public class DruidDashboardConfig {
         initParams.put("principalSessionName", "");
         initParams.put("aopPatterns", "com.example.service");
 
-        FilterRegistrationBean bean = new FilterRegistrationBean(new WebStatFilter());
+        FilterRegistrationBean<?> bean = new FilterRegistrationBean<>(new WebStatFilter());
         bean.setInitParameters(initParams);
         bean.addUrlPatterns("/*");
         bean.setInitParameters(initParams);

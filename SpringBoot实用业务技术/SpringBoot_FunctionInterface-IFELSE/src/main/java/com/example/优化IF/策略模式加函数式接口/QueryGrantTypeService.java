@@ -23,7 +23,7 @@ public class QueryGrantTypeService {
      *  value: lambda表达式,最终会获得该优惠券的发放方式
      */
     @PostConstruct
-    public void dispatcherInit(){
+    public void dispatcherInit() {
         grantTypeMap.put("红包", (resourceId) -> grantTypeService.redPaper(resourceId));
         grantTypeMap.put("购物券", (resourceId) -> grantTypeService.shopping(resourceId));
         grantTypeMap.put("qq会员", (resourceId) -> grantTypeService.QQVip(resourceId));
@@ -31,7 +31,7 @@ public class QueryGrantTypeService {
  
     public String getResult(String resourceType) {
         Function<String, String> result = grantTypeMap.get(resourceType);
-        if(result != null) {
+        if (result != null) {
             return result.apply(resourceType);
         }
         return "查询不到该优惠券的发放方式";

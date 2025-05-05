@@ -12,14 +12,14 @@ import lombok.Data;
 public class HandlerNode {
 
     // 处理器
-    private Handler handler;
+    private Handler<PipelineContext> handler;
 
     // 指向下一个上下文处理器（类似于链表的指针）
     private HandlerNode next;
 
-    public void exec(PipelineContext context){
+    public void exec(PipelineContext context) {
         Boolean ret = handler.handler(context);
-        if (ret){
+        if (ret) {
             if (next != null) {
                 next.exec(context);
             }

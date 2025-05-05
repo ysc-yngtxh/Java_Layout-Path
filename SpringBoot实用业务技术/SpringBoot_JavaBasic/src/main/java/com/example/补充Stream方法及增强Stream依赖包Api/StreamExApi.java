@@ -11,7 +11,6 @@ import one.util.streamex.DoubleStreamEx;
 import one.util.streamex.EntryStream;
 import one.util.streamex.IntStreamEx;
 import one.util.streamex.StreamEx;
-import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -23,6 +22,9 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author 游家纨绔
@@ -30,14 +32,17 @@ import java.util.stream.Stream;
  * @date 2022/11/28 0:03
  */
 public class StreamExApi {
+    public static final Logger log = LoggerFactory.getLogger(StreamExApi.class);
 
-    public static final Log log = LogFactory.get(StreamExApi.class);
+    static {
+        // 默认情况下，SLF4J 的日志级别是 INFO。强制设置日志级别为 DEBUG（适用于 Logback）
+        ((ch.qos.logback.classic.Logger) log).setLevel(ch.qos.logback.classic.Level.DEBUG);
+    }
 
     List<User> users = Arrays.asList(
-            new User(null, null, null, 0, null
-                    ,new Models(new ModelView("WUHAN"),null),null)
-            ,new User(1L, "YouShiCheng", "google@163.com", 25, null
-                    ,new Models(new ModelView("SHENZHEN"),null),null));
+            new User(null, null, null, 0, null,new Models(new ModelView("WUHAN"),null),null),
+            new User(1L, "YouShiCheng", "google@163.com", 25, null,new Models(new ModelView("SHENZHEN"),null),null)
+    );
 
     @Test
     public void test1() {

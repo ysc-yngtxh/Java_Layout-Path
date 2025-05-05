@@ -12,8 +12,8 @@
     <groupId>com.example</groupId>
     <artifactId>SpringBoot_Mybatis-Plus</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot_Mybatis-Plus</name>
-    <description>SpringBoot_Mybatis-Plus</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <modules>
         <module>1_Mybatis-Plus-Native</module>

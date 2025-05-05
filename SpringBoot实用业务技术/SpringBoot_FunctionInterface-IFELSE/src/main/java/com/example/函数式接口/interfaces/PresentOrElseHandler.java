@@ -10,7 +10,7 @@ import java.util.function.Consumer;
  *               default方法和static方法因为带有实现体，所有也不受此限制。
  */
 @FunctionalInterface
-public interface PresentOrElseHandler<T extends Object> {
+public interface PresentOrElseHandler<T> {
 
     void presentOrElseHandler(Consumer<? super T> action, Runnable falseHandler);
 }

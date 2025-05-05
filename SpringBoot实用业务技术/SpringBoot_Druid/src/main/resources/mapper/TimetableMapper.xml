@@ -4,19 +4,19 @@
 
     <resultMap type="Timetable" id="TimetableMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="objectId" column="object_id" jdbcType="INTEGER"/>
-        <result property="code" column="code" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="courseId" column="course_id" jdbcType="INTEGER"/>
         <result property="tenant" column="tenant" jdbcType="VARCHAR"/>
         <result property="week" column="week" jdbcType="INTEGER"/>
-        <result property="start" column="start" jdbcType="INTEGER"/>
-        <result property="finish" column="finish" jdbcType="INTEGER"/>
+        <result property="start" column="start" jdbcType="TIMESTAMP"/>
+        <result property="finish" column="finish" jdbcType="TIMESTAMP"/>
         <result property="deleteFlag" column="delete_flag" jdbcType="INTEGER"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="TimetableMap">
         select
-          id,object_id,code,tenant,week,start,finish,delete_flag
+          id,user_id,course_id,tenant,week,start,finish,delete_flag
         from time_table
         where id = #{id}
     </select>
@@ -30,10 +30,10 @@
                 and id = #{id}
             </if>
             <if test="objectId != null">
-                and object_id = #{objectId}
+                and user_id = #{objectId}
             </if>
-            <if test="code != null">
-                and code = #{code}
+            <if test="course_id != null">
+                and course_id = #{course_id}
             </if>
             <if test="tenant != null and tenant != ''">
                 and tenant = #{tenant}
@@ -55,27 +55,27 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into time_table(object_id,code,tenant,week,start,finish,delete_flag)
-        values (#{objectId},#{code},#{tenant},#{week},#{start},#{finish},#{deleteFlag})
+        insert into time_table(user_id,course_id,tenant,week,start,finish,delete_flag)
+        values (#{objectId},#{course_id},#{tenant},#{week},#{start},#{finish},#{deleteFlag})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into time_table(object_id,code,tenant,week,start,finish,delete_flag)
+        insert into time_table(user_id,course_id,tenant,week,start,finish,delete_flag)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.objectId},#{entity.code},#{entity.tenant},#{entity.week},#{entity.start},#{entity.finish},#{entity.deleteFlag})
+        (#{entity.objectId},#{entity.course_id},#{entity.tenant},#{entity.week},#{entity.start},#{entity.finish},#{entity.deleteFlag})
         </foreach>
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into time_table(object_id,code,tenant,week,start,finish,delete_flag)
+        insert into time_table(user_id,course_id,tenant,week,start,finish,delete_flag)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.objectId},#{entity.code},#{entity.tenant},#{entity.week},#{entity.start},#{entity.finish},#{entity.deleteFlag})
+            (#{entity.objectId},#{entity.course_id},#{entity.tenant},#{entity.week},#{entity.start},#{entity.finish},#{entity.deleteFlag})
         </foreach>
         on duplicate key update
-            object_id = values(objectId),
-            code = values(code),
+            user_id = values(objectId),
+            course_id = values(course_id),
             tenant = values(tenant),
             week = values(week),
             start = values(start),
@@ -88,10 +88,10 @@
         update time_table
         <set>
             <if test="objectId != null">
-                object_id = #{objectId},
+                user_id = #{objectId},
             </if>
-            <if test="code != null">
-                code = #{code},
+            <if test="course_id != null">
+                course_id = #{course_id},
             </if>
             <if test="tenant != null and tenant != ''">
                 tenant = #{tenant},
@@ -118,4 +118,3 @@
     </delete>
 
 </mapper>
-

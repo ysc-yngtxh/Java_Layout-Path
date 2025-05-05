@@ -15,31 +15,32 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @date 2022/12/1 12:52
  */
 @Controller
+@LoginRequired
 public class LoginController {
 
     // 登录接口
     @RequestMapping(value="/login/{id}", produces="text/json;charset=utf-8")
-    public @ResponseBody String login(@PathVariable String id, HttpServletRequest request){
+    public @ResponseBody String login(@PathVariable String id, HttpServletRequest request) {
         request.getSession().setAttribute("login", id);
         return "登陆成功!!!";
     }
 
     // 排除拦截器的接口
     @RequestMapping(value="/login1", produces="text/json;charset=utf-8")
-    public @ResponseBody String login1(){
+    public @ResponseBody String login1() {
         return "访问成功--login1";
     }
 
     // 被拦截其所拦截
     @RequestMapping(value="/login2", produces="text/json;charset=utf-8")
-    public @ResponseBody String login2(){
+    public @ResponseBody String login2() {
         return "访问成功--login2";
     }
 
     // 自定义的注解(白名单接口)
     @LoginRequired
     @RequestMapping(value="/login3", produces="text/json;charset=utf-8")
-    public @ResponseBody String login3(String str){
+    public @ResponseBody String login3() {
         return "访问成功--login3";
     }
 }

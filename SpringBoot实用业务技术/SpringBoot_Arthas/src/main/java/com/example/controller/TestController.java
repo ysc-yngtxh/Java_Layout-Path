@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.Car;
+import com.example.arthas.Car;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -8,22 +8,26 @@ import com.example.vo.Models;
 import com.example.vo.User;
 import com.example.vo.Users;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 class SpringBootJavaBasicApplicationTests {
-	public static final Log log = LogFactory.get(SpringBootJavaBasicApplicationTests.class);
+	public static final Logger log = LoggerFactory.getLogger(SpringBootJavaBasicApplicationTests.class);
+
+	static {
+		// 默认情况下，SLF4J 的日志级别是 INFO。强制设置日志级别为 DEBUG（适用于 Logback）
+		((ch.qos.logback.classic.Logger) log).setLevel(ch.qos.logback.classic.Level.DEBUG);
+	}
 
 	@Autowired
 	private MapStructExample mapStructExample;
 
-	// 测试Mapstruct功能
+	// 测试 Mapstruct 功能
 	@Test
 	public void mapStructs() {
 		// 方式一：通过Mapper实例对象的方式
@@ -49,5 +53,4 @@ class SpringBootJavaBasicApplicationTests {
 		Users users3 = mapStructExample.toUsers(user2);
 		log.error(users3.toString());
 	}
-
 }

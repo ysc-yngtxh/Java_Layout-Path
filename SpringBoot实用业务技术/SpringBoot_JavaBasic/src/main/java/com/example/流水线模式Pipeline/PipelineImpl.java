@@ -6,13 +6,13 @@ package com.example.流水线模式Pipeline;
  * @description: TODO
  * @date 2022/11/30 15:44
  */
-public class OrderPipeline implements Pipeline {
+public class PipelineImpl implements Pipeline {
 
     private HandlerNode head = new HandlerNode();
     private HandlerNode tail;
     private PipelineContext context;
 
-    public OrderPipeline(PipelineContext context) {
+    public PipelineImpl(PipelineContext context) {
         this.context = context;
     }
 
@@ -31,7 +31,7 @@ public class OrderPipeline implements Pipeline {
      * @param handlers
      */
     @Override
-    public void addHead(Handler... handlers) {
+    public void addHead(Handler<?>... handlers) {
         // (handler1, handler2...)
         HandlerNode next = head.getNext();
         for (Handler handler : handlers) {
@@ -50,7 +50,7 @@ public class OrderPipeline implements Pipeline {
      * @param handlers
      */
     @Override
-    public void addTail(Handler... handlers) {
+    public void addTail(Handler<?>... handlers) {
         HandlerNode node = tail;
         for (Handler handler : handlers) {
             HandlerNode handlerNode = new HandlerNode();

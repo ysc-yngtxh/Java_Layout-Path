@@ -11,6 +11,4 @@ import com.example.entity.Brand;
 public interface BrandService {
 
     Brand getOne(Integer id);
-
 }
-

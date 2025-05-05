@@ -1,6 +1,5 @@
 
-
 # switch:
 #   isTurnOn: true
- switch:
-     isTurnOn: false
+switch:
+  isTurnOn: false

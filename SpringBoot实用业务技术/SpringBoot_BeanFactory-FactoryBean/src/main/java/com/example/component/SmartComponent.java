@@ -11,19 +11,19 @@ import org.springframework.stereotype.Component;
 @Primary
 public class SmartComponent implements TestService, ApplicationContextAware {
 
-    private ApplicationContext applicationContext;
-	
-    private TestService autoSelect() {
-        return (TestService) applicationContext.getBean("serviceFactory");
-    }
-   
-    @Override
-    public void doService() {
-        autoSelect().doService();
-    }
+	private ApplicationContext applicationContext;
 
-     @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
-    }
+	private TestService autoSelect() {
+		return applicationContext.getBean("serviceFactory", TestService.class);
+	}
+
+	@Override
+	public void doService() {
+		autoSelect().doService();
+	}
+
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.applicationContext = applicationContext;
+	}
 }

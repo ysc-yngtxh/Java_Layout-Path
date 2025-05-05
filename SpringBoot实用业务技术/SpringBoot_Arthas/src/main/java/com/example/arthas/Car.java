@@ -1,4 +1,4 @@
-package com.example;
+package com.example.arthas;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

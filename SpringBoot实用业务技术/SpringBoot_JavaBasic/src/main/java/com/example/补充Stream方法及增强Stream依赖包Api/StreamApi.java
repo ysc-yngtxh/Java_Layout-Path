@@ -16,6 +16,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author 游家纨绔
@@ -24,14 +26,17 @@ import java.util.stream.Stream;
  * @date 2022/11/28 15:54
  */
 public class StreamApi {
+    public static final Logger log = LoggerFactory.getLogger(StreamApi.class);
 
-    public static final Log log = LogFactory.get(StreamApi.class);
+    static {
+        // 默认情况下，SLF4J 的日志级别是 INFO。强制设置日志级别为 DEBUG（适用于 Logback）
+        ((ch.qos.logback.classic.Logger) log).setLevel(ch.qos.logback.classic.Level.DEBUG);
+    }
 
     List<User> users = Arrays.asList(
-            new User(1L, null, null, 0, null
-                    , new Models(new ModelView("WUHAN"), null), null)
-            , new User(2L, "YouShiCheng", "google@163.com", 25, null
-                    , new Models(new ModelView("shenzhen"), null), null));
+            new User(1L, null, null, 0, null, new Models(new ModelView("WUHAN"), null), null),
+            new User(2L, "YouShiCheng", "google@163.com", 25, null, new Models(new ModelView("shenzhen"), null), null)
+    );
 
     @Test
     public void test1() {
@@ -46,9 +51,9 @@ public class StreamApi {
         System.out.println(isValid + "\n" + isValidOne + "\n" + isValidTwo);
 
         /** TODO 2、归集 Reduction
-         * Stream API中使用reduce()方法可以根据指定的方法将一系列元素归集为某个值，
-         * 该方法接收两个参数：第一个是初始值，第二个是累加器函数。
-         * 假设您有一个整数列表，并且想要在某个初始值（这里使用23）基础上计算所有元素的总和，运行得到结果为26（23+1+1+1）
+         *  Stream API中使用reduce()方法可以根据指定的方法将一系列元素归集为某个值，
+         *  该方法接收两个参数：第一个是初始值，第二个是累加器函数。
+         *  假设您有一个整数列表，并且想要在某个初始值（这里使用23）基础上计算所有元素的总和，运行得到结果为26（23+1+1+1）
          */
         List<Integer> integers = Arrays.asList(1, 1, 1);
         Integer reduced1 = integers.stream().reduce(23, (a, b) -> a + b);

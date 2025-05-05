@@ -1,11 +1,11 @@
 spring:
   application:
-    name: SpringBoot_Druid
+    name: @project.artifactId@
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 131474
-    url: jdbc:mysql://localhost:3306/caoyumin?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/business?serverTimezone=UTC
 
     # TODO SpringBoot3 以下版本集成 Druid ,支持 [url、username、password、driverClassName、type] 属性
     # TODO 在 SpringBoot3 以上版本，不再支持。统一在 spring.datasource 路径下进行 数据库连接信息 配置
@@ -21,7 +21,7 @@ spring:
       max-wait: 60000        # 连接池最大等待时间
       time-between-eviction-runs-millis: 60000 # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
       min-evictable-idle-time-millis: 300000   # 配置一个连接在池中最小生存的时间，单位是毫秒
-      validation-query: SELECT 1 FROM DUAL     # 连接是否有效的查询语句 必须是一个查询语句(oracle中为 select org.springframework.boot.autoconfigure.AutoConfiguration.imports from dual)
+      validation-query: SELECT 1 FROM BUSINESS # 连接是否有效的查询语句 必须是一个查询语句(oracle中为 select org.springframework.boot.autoconfigure.AutoConfiguration.imports from dual)
       testWhileIdle: true
       # 申请连接时会执行validationQuery检测连接是否有效,开启会降低性能,默认为true
       testOnBorrow: false
@@ -35,9 +35,9 @@ spring:
       filter:
         stat:
           enabled: true
-          db-type: mysql          # 数据库类型（实测没啥用，会自动根据上面的连接自动识别）
-          log-slow-sql: true      # 记录慢日志（"SQL监控"面板中数值会标记为红色）
-          slow-sql-millis: 3000   # 慢日志判定标准（单位：毫秒）
+          db-type: mysql            # 数据库类型（实测没啥用，会自动根据上面的连接自动识别）
+          log-slow-sql: true        # 记录慢日志（"SQL监控"面板中数值会标记为红色）
+          slow-sql-millis: 3000     # 慢日志判定标准（单位：毫秒）
           slow-sql-log-level: ERROR # 自定义日志级别，默认日志级别"ERROR"
         wall:
           enabled: true
@@ -51,7 +51,7 @@ spring:
 
       # 配置可视化控制台页面(代码配置 优先级 大于 yml文件配置)
       stat-view-servlet:
-        # 是否启用Druid监控面板,默认值true
+        # 是否启用Druid监控面板，默认值true
         enabled: true
         # 访问路径为/druid时，跳转到StatViewServlet
         url-pattern: /druid/*
