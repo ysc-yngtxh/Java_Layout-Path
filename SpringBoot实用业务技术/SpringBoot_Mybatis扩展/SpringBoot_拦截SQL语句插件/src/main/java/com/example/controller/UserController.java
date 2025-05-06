@@ -1,7 +1,7 @@
 package com.example.controller;
 
-import com.example.entity.TbUser;
-import com.example.service.TbUserService;
+import com.example.entity.User;
+import com.example.service.UserService;
 import jakarta.annotation.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,20 +16,20 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 /**
- * (TbUser)表控制层
+ * (User)表控制层
  *
  * @author makejava
  * @since 2023-08-25 00:19:30
  */
 @RestController
-@RequestMapping("tbUser")
-public class TbUserController {
+@RequestMapping("/user")
+public class UserController {
 
     /**
      * 服务对象
      */
     @Resource
-    private TbUserService tbUserService;
+    private UserService userService;
 
     /**
      * 通过主键查询单条数据
@@ -38,8 +38,8 @@ public class TbUserController {
      * @return 单条数据
      */
     @GetMapping("{id}")
-    public ResponseEntity<TbUser> queryById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(this.tbUserService.queryById(id));
+    public ResponseEntity<User> queryById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(this.userService.queryById(id));
     }
 
     /**
@@ -48,48 +48,48 @@ public class TbUserController {
      * @param id 主键
      * @return 单条数据
      */
-    @GetMapping("/IgnoreTenant/{id}")
-    public ResponseEntity<TbUser> queryByIdIgnoreTenant(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(this.tbUserService.queryByIdIgnoreTenant(id));
+    @GetMapping("/ignoreTenant/{id}")
+    public ResponseEntity<User> queryByIdIgnoreTenant(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(this.userService.queryByIdIgnoreTenant(id));
     }
 
-    @GetMapping("/query")
-    public ResponseEntity<Map<String, TbUser>> query() {
-        return ResponseEntity.ok(this.tbUserService.query());
+    @GetMapping("/queryAll")
+    public ResponseEntity<Map<String, User>> queryAll() {
+        return ResponseEntity.ok(this.userService.queryAll());
     }
 
     /**
      * 新增数据
      *
-     * @param tbUser 实体
+     * @param user 实体
      * @return 新增结果
      */
     @PostMapping
-    public ResponseEntity<TbUser> add(TbUser tbUser) {
-        return ResponseEntity.ok(this.tbUserService.insert(tbUser));
+    public ResponseEntity<User> add(User user) {
+        return ResponseEntity.ok(this.userService.insert(user));
     }
 
     /**
      * 编辑数据
      *
-     * @param tbUser 实体
+     * @param user 实体
      * @return 编辑结果
      */
     @PutMapping("/update")
-    public ResponseEntity<TbUser> edit(@RequestBody TbUser tbUser) {
-        return ResponseEntity.ok(this.tbUserService.update(tbUser));
+    public ResponseEntity<User> edit(@RequestBody User user) {
+        return ResponseEntity.ok(this.userService.update(user));
     }
 
 
     /**
      * 编辑数据
      *
-     * @param tbUser 实体
+     * @param user 实体
      * @return 编辑结果
      */
     @PutMapping("/fullUpdate")
-    public ResponseEntity<TbUser> editFull(@RequestBody TbUser tbUser) {
-        return ResponseEntity.ok(this.tbUserService.fullTableUpdate(tbUser));
+    public ResponseEntity<User> editFull(@RequestBody User user) {
+        return ResponseEntity.ok(this.userService.fullTableUpdate(user));
     }
 
     /**
@@ -100,6 +100,6 @@ public class TbUserController {
      */
     @DeleteMapping
     public ResponseEntity<Boolean> deleteById(Long id) {
-        return ResponseEntity.ok(this.tbUserService.deleteById(id));
+        return ResponseEntity.ok(this.userService.deleteById(id));
     }
 }

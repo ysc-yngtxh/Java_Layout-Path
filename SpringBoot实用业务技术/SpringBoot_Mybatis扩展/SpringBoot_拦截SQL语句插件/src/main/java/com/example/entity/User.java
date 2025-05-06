@@ -10,7 +10,7 @@ import java.util.Date;
 import java.io.Serializable;
 
 /**
- * (TbUser)实体类
+ * (User)实体类
  *
  * @author 游家纨绔
  * @since 2023-08-25 00:19:30
@@ -19,7 +19,7 @@ import java.io.Serializable;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TbUser implements Serializable {
+public class User implements Serializable {
     @Serial
     private static final long serialVersionUID = 882909710663298133L;
 

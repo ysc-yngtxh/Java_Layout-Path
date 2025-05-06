@@ -343,7 +343,7 @@ CREATE TABLE `employee` (
     `sex`  tinyint      NOT NULL COMMENT '性别',
     PRIMARY KEY (`id`) USING BTREE,
     KEY `FK_Department_ID_idx` (`age`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='员工表';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='员工表';
 INSERT INTO `business`.`employee` (`id`, `name`, `age`, `sex`) VALUES (1, 'Anthony Stevens', 65, '0');
 INSERT INTO `business`.`employee` (`id`, `name`, `age`, `sex`) VALUES (2, 'Song Ziyi', 50, '1');
 INSERT INTO `business`.`employee` (`id`, `name`, `age`, `sex`) VALUES (3, 'Lui Yu Ling', 40, '1');
@@ -356,6 +356,34 @@ INSERT INTO `business`.`employee` (`id`, `name`, `age`, `sex`) VALUES (9, 'Otsuk
 INSERT INTO `business`.`employee` (`id`, `name`, `age`, `sex`) VALUES (10, 'Wei Jiehong', 17, '0');
 
 
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+    `id`           bigint        NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+    `tenant_id`    int           NOT NULL COMMENT '租户ID',
+    `user_name`    varchar(50)   NOT NULL COMMENT '用户名',
+    `pass_word`    varchar(100)  NOT NULL COMMENT '密码',
+    `commodity`    varchar(100)  DEFAULT NULL COMMENT '商品',
+    `color`        varchar(20)   DEFAULT NULL COMMENT '颜色',
+    `number`       int           DEFAULT '0' COMMENT '数量',
+    `price`        decimal(10,2) DEFAULT NULL COMMENT '价格',
+    `create_date`  datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_date` datetime      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    `delete_flag`  tinyint       DEFAULT '0' COMMENT '逻辑删除(0:未删除,1:已删除)',
+    `version`      int           DEFAULT '0' COMMENT '版本号(乐观锁)',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户表';
+INSERT INTO `user` (`tenant_id`, `user_name`, `pass_word`, `commodity`, `color`, `number`, `price`, `delete_flag`, `version`) VALUES (1, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'MacBook Pro', '深空灰', 1, 12999.00, 0, 1);
+INSERT INTO `user` (`tenant_id`, `user_name`, `pass_word`, `commodity`, `color`, `number`, `price`, `delete_flag`, `version`) VALUES (1, 'zhangsan', 'e10adc3949ba59abbe56e057f20f883e', 'iPhone 13', '白色', 2, 5999.00, 0, 1);
+INSERT INTO `user` (`tenant_id`, `user_name`, `pass_word`, `commodity`, `color`, `number`, `price`, `delete_flag`, `version`) VALUES (2, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'iPad Air', '蓝色', 1, 4799.00, 0, 1);
+INSERT INTO `user` (`tenant_id`, `user_name`, `pass_word`, `commodity`, `color`, `number`, `price`, `delete_flag`, `version`) VALUES (2, 'lisi', 'e10adc3949ba59abbe56e057f20f883e', 'AirPods Pro', '白色', 1, 1999.00, 0, 1);
+INSERT INTO `user` (`tenant_id`, `user_name`, `pass_word`, `commodity`, `color`, `number`, `price`, `delete_flag`, `version`) VALUES (3, 'wangwu', 'e10adc3949ba59abbe56e057f20f883e', 'Apple Watch', '黑色', 1, 3199.00, 1, 1);
+INSERT INTO `user` (`tenant_id`, `user_name`, `pass_word`, `commodity`, `color`, `number`, `price`, `delete_flag`, `version`) VALUES (1, 'test_user', 'e10adc3949ba59abbe56e057f20f883e', 'iMac', '绿色', 1, 9999.00, 0, 1);
+INSERT INTO `user` (`tenant_id`, `user_name`, `pass_word`, `commodity`, `color`, `number`, `price`, `delete_flag`, `version`) VALUES (4, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'Mac mini', '银色', 1, 5299.00, 0, 1);
+INSERT INTO `user` (`tenant_id`, `user_name`, `pass_word`, `commodity`, `color`, `number`, `price`, `delete_flag`, `version`) VALUES (1, 'vip_user', 'e10adc3949ba59abbe56e057f20f883e', 'iPhone 14 Pro', '金色', 1, 8999.00, 0, 1);
+INSERT INTO `user` (`tenant_id`, `user_name`, `pass_word`, `commodity`, `color`, `number`, `price`, `delete_flag`, `version`) VALUES (5, 'zhaoliu', 'e10adc3949ba59abbe56e057f20f883e', 'HomePod mini', '黄色', 2, 749.00, 0, 1);
+INSERT INTO `user` (`tenant_id`, `user_name`, `pass_word`, `commodity`, `color`, `number`, `price`, `delete_flag`, `version`) VALUES (1, 'multi_buyer', 'e10adc3949ba59abbe56e057f20f883e', 'Apple Pencil', '白色', 3, 999.00, 0, 1);
+
+
 DROP TABLE IF EXISTS `tree_children`;
 CREATE TABLE `tree_children` (
     `id`       int         NOT NULL AUTO_INCREMENT COMMENT '主键',
@@ -364,7 +392,7 @@ CREATE TABLE `tree_children` (
     `remake`   varchar(20) DEFAULT NULL COMMENT '备注',
     `sort`     int         DEFAULT NULL COMMENT '排序',
     PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='节点表';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC COMMENT='节点表';
 INSERT INTO `tree_children` (`id`, `address`, `parentId`, `remake`, `sort`) VALUES (1, '湖北', 0, '省份', 2);
 INSERT INTO `tree_children` (`id`, `address`, `parentId`, `remake`, `sort`) VALUES (2, '黄冈', 1, '城市', 2);
 INSERT INTO `tree_children` (`id`, `address`, `parentId`, `remake`, `sort`) VALUES (3, '武汉', 1, '城市', 1);

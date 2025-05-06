@@ -1,16 +1,16 @@
 package com.example.tenant;
 
-import com.example.entity.TbUser;
+import com.example.entity.User;
 
 public class TenantContextHolder {
 
-    private static final ThreadLocal<TbUser> CONTEXT = new ThreadLocal<>();
+    private static final ThreadLocal<User> CONTEXT = new ThreadLocal<>();
 
-    public static void setTbUser(TbUser tbUser) {
-        CONTEXT.set(tbUser);
+    public static void setTbUser(User user) {
+        CONTEXT.set(user);
     }
 
-    public static TbUser getTbUser() {
+    public static User getTbUser() {
         return CONTEXT.get();
     }
 

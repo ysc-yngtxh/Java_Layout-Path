@@ -14,6 +14,8 @@ import org.springframework.context.annotation.Primary;
 import javax.sql.DataSource;
 
 @Configuration
+// @MapperScan 的 sqlSessionTemplateRef 属性指定了每个Mapper接口使用的模板。
+// 并且通过 basePackages 属性将不同包的Mapper绑定到不同数据源，以实现动态多数据源的支持。
 @MapperScan(basePackages = "com.example.mapper.business", sqlSessionTemplateRef = "businessSqlSessionTemplate")
 public class DataSourceBusiness1Config {
 

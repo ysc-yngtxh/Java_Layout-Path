@@ -2,7 +2,7 @@ package com.example.tenant;
 
 import com.example.advice.SqlEnum;
 import com.example.advice.SqlException;
-import com.example.entity.TbUser;
+import com.example.entity.User;
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-08-25 15:05
+ * @dateTime 2023-08-25 15:00
  * @apiNote TODO
  */
 public class TenantContextHolderInterceptor implements HandlerInterceptor {
@@ -25,7 +25,7 @@ public class TenantContextHolderInterceptor implements HandlerInterceptor {
         if (StringUtils.isBlank(tenant)) {
             throw new SqlException(SqlEnum.TENANT_NULL);
         }
-        TenantContextHolder.setTbUser( TbUser.builder().tenantId(Integer.parseInt(tenant)).build() );
+        TenantContextHolder.setTbUser(User.builder().tenantId(Integer.parseInt(tenant)).build());
         return true;
     }
 
