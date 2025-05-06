@@ -24,7 +24,7 @@ public interface EmployeeMapper {
             @Result(column = "id", property = "id", jdbcType = JdbcType.INTEGER, id = true), // id = true表示是否为主键
             @Result(column = "name", property = "name", jdbcType = JdbcType.VARCHAR),
             @Result(column = "age", property = "age", jdbcType = JdbcType.INTEGER),
-            @Result(column = "sex", property = "sex", jdbcType = JdbcType.VARCHAR)
+            @Result(column = "sex", property = "sex", jdbcType = JdbcType.TINYINT)
     })
     List<Employee> selectAll();
 }

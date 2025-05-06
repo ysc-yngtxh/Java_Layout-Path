@@ -10,5 +10,6 @@ import java.util.List;
  * @since 2023-09-02 14:47:54
  */
 public interface EmployeeService {
+
     List<Employee> selectAll();
 }

@@ -17,6 +17,7 @@ import java.util.List;
 @RequestMapping("user")
 @RequiredArgsConstructor
 public class UserController {
+
     private final UserService userService;
 
     @RequestMapping("/findMasterByIds")
@@ -28,5 +29,4 @@ public class UserController {
     public List<User> findSlave_1ByIds() {
         return userService.findSlave_1ByIds();
     }
-
 }

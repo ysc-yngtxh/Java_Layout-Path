@@ -1,11 +1,11 @@
 DROP TABLE IF EXISTS `brand`;
 CREATE TABLE `brand`(
-    `Id`          bigint NOT NULL AUTO_INCREMENT COMMENT '主键Id',
+    `Id`          bigint       NOT NULL AUTO_INCREMENT COMMENT '主键Id',
     `brand_name`  varchar(255) DEFAULT NULL COMMENT '品牌名称',
-    `racking`     int          DEFAULT NULL COMMENT '是否上架:0为true即上架,1为false下架',
+    `racking`     int          DEFAULT NULL COMMENT '是否上架：0为true即上架,1为false下架',
     `delete_flag` int          DEFAULT NULL COMMENT '逻辑删除：0存在,1删除',
     `remark`      varchar(500) DEFAULT NULL COMMENT '备注',
-    PRIMARY KEY (`Id`,
+    PRIMARY KEY (`Id`),
     UNIQUE KEY `品牌名称唯一索引` (`brand_name`) USING BTREE COMMENT '品牌名称索引'
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='品牌表';
 INSERT INTO `brand` (`id`, `brand_name`, `racking`, `delete_flag`, `remark`) VALUES (1, 'Apple', 0, 0, NULL);
@@ -335,26 +335,25 @@ INSERT INTO `spu` (`id`, `category_id`, `brand_id`, `title`, `img`, `details`, `
 INSERT INTO `spu` (`id`, `category_id`, `brand_id`, `title`, `img`, `details`, `saleable`) VALUES (30, 2, 25, '2023全新英特尔四核手提笔记本电脑15英寸女大学生款超薄商务办公设计专用吃鸡游戏本', 'https://g-search3.alicdn.com/img/bao/uploaded/i4/i1/2208305407700/O1CN01o36yK526keRVIFMbF_!!0-item_pic.jpg_580x580Q90.jpg', NULL, '1');
 
 
-DROP TABLE IF EXISTS `tb_employee`;
-CREATE TABLE `tb_employee` (
-    `employee_id`            int NOT NULL AUTO_INCREMENT,
-    `employee_name`          varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-    `employee_department_id` int NOT NULL,
-    `employee_grade_id`      int NOT NULL,
-    `employee_salary`        int NOT NULL,
-    PRIMARY KEY (`employee_id`),
-    KEY `FK_Department_ID_idx` (`employee_department_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='员工表';
-INSERT INTO `tb_employee` (`employee_id`, `employee_name`, `employee_department_id`, `employee_grade_id`, `employee_salary`) VALUES (1, 'Anthony Stevens', 965, 3, 253);
-INSERT INTO `tb_employee` (`employee_id`, `employee_name`, `employee_department_id`, `employee_grade_id`, `employee_salary`) VALUES (2, 'Song Ziyi', 150, 692, 799);
-INSERT INTO `tb_employee` (`employee_id`, `employee_name`, `employee_department_id`, `employee_grade_id`, `employee_salary`) VALUES (3, 'Lui Yu Ling', 402, 712, 419);
-INSERT INTO `tb_employee` (`employee_id`, `employee_name`, `employee_department_id`, `employee_grade_id`, `employee_salary`) VALUES (4, 'Sugiyama Misaki', 41, 499, 205);
-INSERT INTO `tb_employee` (`employee_id`, `employee_name`, `employee_department_id`, `employee_grade_id`, `employee_salary`) VALUES (5, 'Ishida Ayano', 798, 865, 706);
-INSERT INTO `tb_employee` (`employee_id`, `employee_name`, `employee_department_id`, `employee_grade_id`, `employee_salary`) VALUES (6, 'Otsuka Itsuki', 902, 251, 416);
-INSERT INTO `tb_employee` (`employee_id`, `employee_name`, `employee_department_id`, `employee_grade_id`, `employee_salary`) VALUES (7, 'Carmen Jones', 561, 781, 745);
-INSERT INTO `tb_employee` (`employee_id`, `employee_name`, `employee_department_id`, `employee_grade_id`, `employee_salary`) VALUES (8, 'Tao Wing Kuen', 572, 104, 824);
-INSERT INTO `tb_employee` (`employee_id`, `employee_name`, `employee_department_id`, `employee_grade_id`, `employee_salary`) VALUES (9, 'Otsuka Seiko', 798, 296, 492);
-INSERT INTO `tb_employee` (`employee_id`, `employee_name`, `employee_department_id`, `employee_grade_id`, `employee_salary`) VALUES (10, 'Wei Jiehong', 197, 23, 257);
+DROP TABLE IF EXISTS `employee`;
+CREATE TABLE `employee` (
+    `id`   int          NOT NULL AUTO_INCREMENT COMMENT '主键 Id',
+    `name` varchar(255) NOT NULL COMMENT '姓名',
+    `age`  int          NOT NULL COMMENT '年龄',
+    `sex`  tinyint      NOT NULL COMMENT '性别',
+    PRIMARY KEY (`id`) USING BTREE,
+    KEY `FK_Department_ID_idx` (`age`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='员工表';
+INSERT INTO `business`.`employee` (`id`, `name`, `age`, `sex`) VALUES (1, 'Anthony Stevens', 65, '0');
+INSERT INTO `business`.`employee` (`id`, `name`, `age`, `sex`) VALUES (2, 'Song Ziyi', 50, '1');
+INSERT INTO `business`.`employee` (`id`, `name`, `age`, `sex`) VALUES (3, 'Lui Yu Ling', 40, '1');
+INSERT INTO `business`.`employee` (`id`, `name`, `age`, `sex`) VALUES (4, 'Sugiyama Misaki', 41, '1');
+INSERT INTO `business`.`employee` (`id`, `name`, `age`, `sex`) VALUES (5, 'Ishida Ayano', 98, '0');
+INSERT INTO `business`.`employee` (`id`, `name`, `age`, `sex`) VALUES (6, 'Otsuka Itsuki', 2, '1');
+INSERT INTO `business`.`employee` (`id`, `name`, `age`, `sex`) VALUES (7, 'Carmen Jones', 1, '1');
+INSERT INTO `business`.`employee` (`id`, `name`, `age`, `sex`) VALUES (8, 'Tao Wing Kuen', 52, '0');
+INSERT INTO `business`.`employee` (`id`, `name`, `age`, `sex`) VALUES (9, 'Otsuka Seiko', 79, '1');
+INSERT INTO `business`.`employee` (`id`, `name`, `age`, `sex`) VALUES (10, 'Wei Jiehong', 17, '0');
 
 
 DROP TABLE IF EXISTS `tree_children`;

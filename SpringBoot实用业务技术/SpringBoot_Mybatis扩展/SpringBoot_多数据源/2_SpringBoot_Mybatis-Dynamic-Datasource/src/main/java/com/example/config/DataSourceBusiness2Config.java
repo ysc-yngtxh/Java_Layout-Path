@@ -11,14 +11,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
+import org.springframework.context.annotation.Primary;
 
 @Configuration
 @MapperScan(basePackages = "com.example.mapper.business2", sqlSessionTemplateRef = "business2SqlSessionTemplate")
 public class DataSourceBusiness2Config {
 
     // application.yml文件配置好之后，我们创建两个配置类来加载配置信息，初始化数据源
-    // 1）类注解@MapperScan的属性basePackages配置的为对应DA层dao的位置
-    // 2）@Primary注解指定了主数据源
+    //   1）类注解 @MapperScan 的属性basePackages配置的为对应 DAO层mapper接口 的位置
+    //   2）@Primary注解修改优先权，表示发现相同类型bean，优先使用该方法。
+    @Primary
     @Bean(name = "business2DataSource")
     @ConfigurationProperties(prefix = "spring.datasource.slave")
     public DataSource userDataSource() {

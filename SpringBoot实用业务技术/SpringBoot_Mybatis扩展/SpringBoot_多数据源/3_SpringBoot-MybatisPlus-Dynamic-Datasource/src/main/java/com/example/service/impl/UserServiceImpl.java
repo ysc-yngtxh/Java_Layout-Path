@@ -2,7 +2,7 @@ package com.example.service.impl;
 
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.mapper.UserDao;
+import com.example.mapper.UserMapper;
 import com.example.entity.User;
 import com.example.service.UserService;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.List;
  * @since 2023-09-02 22:23:03
  */
 @Service("userService")
-public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     // 类和方法上都没有@DS 注解，就会使用默认的数据源
     public List<User> findByMasterIds() {
@@ -30,4 +30,3 @@ public class UserServiceImpl extends ServiceImpl<UserDao, User> implements UserS
         return baseMapper.selectBatchIds(ids);
     }
 }
-

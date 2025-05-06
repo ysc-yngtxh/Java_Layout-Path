@@ -20,5 +20,4 @@ class SpringBootReadWriteSplittingApplicationTests {
 	void contextLoads2() {
 		System.out.println(readWriteService.listAllBrand());
 	}
-
 }

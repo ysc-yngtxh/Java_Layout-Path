@@ -2,8 +2,8 @@ package com.example.service;
 
 import com.example.annotation.Master;
 import com.example.annotation.Slave;
+import com.example.entity.Brand;
 import com.example.entity.Employee;
-import com.example.entity.TbBrand;
 import com.example.mapper.business.EmployeeMapper;
 import com.example.mapper.business2.BrandMapper;
 import java.util.List;
@@ -20,7 +20,7 @@ public class ReadWriteService {
     private EmployeeMapper employeeMapper;
 
     @Master
-    public TbBrand getUserByBrand(String username) {
+    public Brand getUserByBrand(String username) {
         return brandMapper.selectByName(username);
     }
 
@@ -30,7 +30,7 @@ public class ReadWriteService {
     }
 
     @Master
-    public void saveBrand(TbBrand Brand) {
+    public void saveBrand(Brand Brand) {
         brandMapper.insert(Brand);
     }
 }

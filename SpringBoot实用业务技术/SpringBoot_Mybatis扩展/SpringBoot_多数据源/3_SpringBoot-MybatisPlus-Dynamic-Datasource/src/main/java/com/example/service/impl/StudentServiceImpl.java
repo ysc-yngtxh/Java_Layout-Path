@@ -2,7 +2,7 @@ package com.example.service.impl;
 
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.mapper.StudentDao;
+import com.example.mapper.StudentMapper;
 import com.example.entity.Student;
 import com.example.service.StudentService;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 @DS("master")
 @Service("studentService")
-public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> implements StudentService {
+public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> implements StudentService {
 
     // 使用 @DS注解，通过AOP进行切换数据源。@DS注解可写在类上和方法上
     // 当类上出现 @DS注解，表示该类的所有方法都使用类上指定的数据源；如果不想指定所有的方法数据源，就写在方法上
@@ -36,4 +36,3 @@ public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> impleme
         return baseMapper.selectBatchIds(ids);
     }
 }
-
