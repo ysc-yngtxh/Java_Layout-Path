@@ -14,7 +14,6 @@ import java.util.Map;
  * @author 游家纨绔
  * @since 2023-08-25 00:19:30
  */
-@Mapper
 public interface UserMapper {
 
     /**

@@ -25,7 +25,7 @@ public class TenantContextHolderInterceptor implements HandlerInterceptor {
         if (StringUtils.isBlank(tenant)) {
             throw new SqlException(SqlEnum.TENANT_NULL);
         }
-        TenantContextHolder.setTbUser(User.builder().tenantId(Integer.parseInt(tenant)).build());
+        TenantContextHolder.setUser(User.builder().tenantId(Integer.parseInt(tenant)).build());
         return true;
     }
 

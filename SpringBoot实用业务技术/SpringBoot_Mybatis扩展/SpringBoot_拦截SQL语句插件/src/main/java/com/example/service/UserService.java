@@ -28,6 +28,10 @@ public interface UserService {
      */
     User queryByIdIgnoreTenant(Long id);
 
+    /**
+     * 查询所有数据
+     * @return Map<String, User>
+     */
     Map<String, User> queryAll();
 
     /**
@@ -61,5 +65,4 @@ public interface UserService {
      * @return 是否成功
      */
     boolean deleteById(Long id);
-
 }

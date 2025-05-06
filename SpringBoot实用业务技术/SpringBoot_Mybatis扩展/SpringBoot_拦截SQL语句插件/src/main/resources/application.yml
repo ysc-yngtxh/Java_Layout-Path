@@ -4,20 +4,21 @@ server:
   servlet:
     context-path: /
 
-spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/business?serverTimezone=UTC&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
-    password: 131474
-    username: root
-
 logging:
   level:
     com:
       example: debug
 
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/business?serverTimezone=UTC&allowPublicKeyRetrieval=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: 131474
+
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.entity
 
 # 在这里设置允许不带 WHERE条件删除/更新的表，可以避免全表的误操作，配合MybatisInterceptor拦截器使用
 allow-tables:

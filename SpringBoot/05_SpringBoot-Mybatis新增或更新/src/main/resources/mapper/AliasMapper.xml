@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.mapper.StudentMapper">
     <insert id="insertOrUpdateOneUserInfo">
@@ -40,7 +40,7 @@
         <if test="count==0">
             INSERT IGNORE INTO `db_student`(`id`,`name`,`email`,`age`)
             VALUES(#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
-                   #{email,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER})
+            #{email,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER})
         </if>
     </insert>
 </mapper>

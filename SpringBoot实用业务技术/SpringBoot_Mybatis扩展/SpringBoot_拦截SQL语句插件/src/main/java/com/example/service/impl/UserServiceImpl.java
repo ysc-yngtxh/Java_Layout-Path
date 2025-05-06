@@ -14,7 +14,7 @@ import java.util.Map;
  * @author makejava
  * @since 2023-08-25 00:19:30
  */
-@Service("tbUserService")
+@Service("userService")
 public class UserServiceImpl implements UserService {
 
     @Resource

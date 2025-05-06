@@ -29,47 +29,48 @@ import java.util.Properties;
  *          - args：在定义拦截方法的基础之上在定义拦截的方法对应的参数，方法可能重载，故注意参数的类型和顺序（可以在拦截器中预览需要的方法参数）
  */
 @Intercepts(
-        @Signature(type = ResultSetHandler.class, method = "handleResultSets", args = {Statement.class})
+		@Signature(type = ResultSetHandler.class, method = "handleResultSets", args = {Statement.class})
 )
 public class ResultInterceptor implements Interceptor {
-    private static final Logger log = LoggerFactory.getLogger(ResultInterceptor.class);
+	private static final Logger log = LoggerFactory.getLogger(ResultInterceptor.class);
 
-    // 每一次 CRUD 操作都会经过mybatis拦截器，拦截器对象有以上四个，并且依次顺序执行
-    // 每经过一个拦截器对象就会调用插件的plugin方法，也就是说该方法会调用4次。根据 @Intercepts 注解来决定是否进行拦截处理
-    @Override
-    public Object plugin(Object target) {
-        log.info("ResultInterceptor Plugin >>>>>>> {}", target);
-        // 判断一下目标类型，是本插件要拦截的对象时才执行Plugin.wrap方法，否则的话，直接返回目标本身
-        // 我们要拦截的对象是定义在 @Signature 中的第一个参数 type 值
-        if (target instanceof ResultSetHandler) {
-            // 返回一个拦截器代理对象，这里的 this 就是我们的 ResultInterceptor 类，作为代理对象会去执行我们重写的拦截 intercept() 方法
-            return Plugin.wrap(target, this);
-        }
-        // 返回目标对象，表示执行自己原有的内部拦截逻辑，也就不会去执行我们定义的 intercept(Invocation invocation) 方法
-        return target;
-    }
-    @Override
-    public Object intercept(Invocation invocation) throws Throwable {
-        log.info("触发自定义的Mybatis拦截器 ResultSetHandler");
+	// 每一次 CRUD 操作都会经过mybatis拦截器，拦截器对象有以上四个，并且依次顺序执行
+	// 每经过一个拦截器对象就会调用插件的plugin方法，也就是说该方法会调用4次。根据 @Intercepts 注解来决定是否进行拦截处理
+	@Override
+	public Object plugin(Object target) {
+		log.info("ResultInterceptor Plugin >>>>>>> {}", target);
+		// 判断一下目标类型，是本插件要拦截的对象时才执行Plugin.wrap方法，否则的话，直接返回目标本身
+		// 我们要拦截的对象是定义在 @Signature 中的第一个参数 type 值
+		if (target instanceof ResultSetHandler) {
+			// 返回一个拦截器代理对象，这里的 this 就是我们的 ResultInterceptor 类，作为代理对象会去执行我们重写的拦截 intercept() 方法
+			return Plugin.wrap(target, this);
+		}
+		// 返回目标对象，表示执行自己原有的内部拦截逻辑，也就不会去执行我们定义的 intercept(Invocation invocation) 方法
+		return target;
+	}
 
-        // ResultSetHandler resultSetHandler1 = (ResultSetHandler) invocation.getTarget();
-        // 通过java反射获得mappedStatement属性值
-        // 可以获得mybatis里的 resultType
-        Object result = invocation.proceed();
-        if (result instanceof ArrayList<?> resultList) {
-            for (Object oi : resultList) {
-                Class<?> c = oi.getClass();
-                Class<?>[] types = {Double.class};
-                Method method = c.getMethod("setPrice", types);
-                // 调用obj对象的 method 方法
-                method.invoke(oi, 1000.0);
-            }
-        }
-        return result;
-    }
+	@Override
+	public Object intercept(Invocation invocation) throws Throwable {
+		log.info("触发自定义的Mybatis拦截器 ResultSetHandler");
 
-    @Override
-    public void setProperties(Properties properties) {
-        Interceptor.super.setProperties(properties);
-    }
+		// ResultSetHandler resultSetHandler1 = (ResultSetHandler) invocation.getTarget();
+		// 通过java反射获得mappedStatement属性值
+		// 可以获得mybatis里的 resultType
+		Object result = invocation.proceed();
+		if (result instanceof ArrayList<?> resultList) {
+			for (Object oi : resultList) {
+				Class<?> c = oi.getClass();
+				Class<?>[] types = {Double.class};
+				Method method = c.getMethod("setPrice", types);
+				// 调用obj对象的 method 方法
+				method.invoke(oi, 1000.0);
+			}
+		}
+		return result;
+	}
+
+	@Override
+	public void setProperties(Properties properties) {
+		Interceptor.super.setProperties(properties);
+	}
 }

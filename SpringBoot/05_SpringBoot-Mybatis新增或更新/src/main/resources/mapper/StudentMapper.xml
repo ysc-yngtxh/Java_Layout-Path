@@ -49,7 +49,7 @@
     <insert id="insertDuplicateKeyUpdate">
         INSERT INTO db_student(`id`, `name`, `email`, `age`)
         VALUES (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
-                #{email,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER})
+        #{email,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER})
         ON DUPLICATE KEY UPDATE
         <trim prefix="" suffixOverrides=",">
             <if test="id != null and id != ''">

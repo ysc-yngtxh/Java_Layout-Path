@@ -31,56 +31,56 @@ import java.util.Properties;
  *          - args：在定义拦截方法的基础之上在定义拦截的方法对应的参数，方法可能重载，故注意参数的类型和顺序（可以在拦截器中预览需要的方法参数）
  */
 @Intercepts(
-        @Signature(type = ParameterHandler.class, method = "setParameters", args = PreparedStatement.class)
+		@Signature(type = ParameterHandler.class, method = "setParameters", args = PreparedStatement.class)
 )
 public class ParameterInterceptor implements Interceptor {
-    private static final Logger log = LoggerFactory.getLogger(ParameterInterceptor.class);
+	private static final Logger log = LoggerFactory.getLogger(ParameterInterceptor.class);
 
-    // 每一次 CRUD 操作都会经过mybatis拦截器，拦截器对象有以上四个，并且依次顺序执行
-    // 每经过一个拦截器对象就会调用插件的plugin方法，也就是该方法会调用4次。根据 @Intercepts 注解来决定是否进行拦截处理
-    @Override
-    public Object plugin(Object target) {
-        log.info("ParameterInterceptor Plugin >>>>>>> {}", target);
-        // 判断一下目标类型，是本插件要拦截的对象时才执行Plugin.wrap方法，否则的话，直接返回目标本身
-        // 我们要拦截的对象是定义在 @Signature 中的第一个参数 type 值
-        if (target instanceof ParameterHandler) {
-            // 返回一个拦截器代理对象，这里的 this 就是我们的 ParameterInterceptor 类，作为代理对象会去执行我们重写的拦截 intercept() 方法
-            return Plugin.wrap(target, this);
-        }
-        // 返回目标对象，表示执行自己原有的内部拦截逻辑，也就不会去执行我们定义的 intercept(Invocation invocation) 方法
-        return target;
-    }
+	// 每一次 CRUD 操作都会经过mybatis拦截器，拦截器对象有以上四个，并且依次顺序执行
+	// 每经过一个拦截器对象就会调用插件的plugin方法，也就是该方法会调用4次。根据 @Intercepts 注解来决定是否进行拦截处理
+	@Override
+	public Object plugin(Object target) {
+		log.info("ParameterInterceptor Plugin >>>>>>> {}", target);
+		// 判断一下目标类型，是本插件要拦截的对象时才执行Plugin.wrap方法，否则的话，直接返回目标本身
+		// 我们要拦截的对象是定义在 @Signature 中的第一个参数 type 值
+		if (target instanceof ParameterHandler) {
+			// 返回一个拦截器代理对象，这里的 this 就是我们的 ParameterInterceptor 类，作为代理对象会去执行我们重写的拦截 intercept() 方法
+			return Plugin.wrap(target, this);
+		}
+		// 返回目标对象，表示执行自己原有的内部拦截逻辑，也就不会去执行我们定义的 intercept(Invocation invocation) 方法
+		return target;
+	}
 
-    @Override
-    public Object intercept(Invocation invocation) throws Throwable {
-        log.info("触发自定义的Mybatis拦截器 ParameterHandler");
+	@Override
+	public Object intercept(Invocation invocation) throws Throwable {
+		log.info("触发自定义的Mybatis拦截器 ParameterHandler");
 
-        ParameterHandler parameterHandler = (ParameterHandler) invocation.getTarget();
-        PreparedStatement ps = (PreparedStatement) invocation.getArgs()[0];
-        // 通过反射获取 BoundSql 对象，此对象包含生成的sql和sql的参数map映射
-        Field boundSqlField = parameterHandler.getClass().getDeclaredField("boundSql");
-        boundSqlField.setAccessible(true);
-        BoundSql boundSql = (BoundSql) boundSqlField.get(parameterHandler);
-        // 通过反射获取参数对象
-        Field parameterField =
-                parameterHandler.getClass().getDeclaredField("parameterObject");
-        parameterField.setAccessible(true);
-        Object parameterObject = parameterField.get(parameterHandler);
-        if (parameterObject instanceof Map) {
-            // 将参数中的name值改为2
-            ((Map) parameterObject).put("number", "2");
-        }
-        // 改写的参数设置到原parameterHandler对象
-        parameterField.set(parameterHandler, parameterObject);
-        parameterHandler.setParameters(ps);
-        log.error(JSON.toJSONString(boundSql.getParameterMappings()));
-        log.error(JSON.toJSONString(parameterObject));
+		ParameterHandler parameterHandler = (ParameterHandler) invocation.getTarget();
+		PreparedStatement ps = (PreparedStatement) invocation.getArgs()[0];
+		// 通过反射获取 BoundSql 对象，此对象包含生成的sql和sql的参数map映射
+		Field boundSqlField = parameterHandler.getClass().getDeclaredField("boundSql");
+		boundSqlField.setAccessible(true);
+		BoundSql boundSql = (BoundSql) boundSqlField.get(parameterHandler);
+		// 通过反射获取参数对象
+		Field parameterField =
+				parameterHandler.getClass().getDeclaredField("parameterObject");
+		parameterField.setAccessible(true);
+		Object parameterObject = parameterField.get(parameterHandler);
+		if (parameterObject instanceof Map) {
+			// 将参数中的name值改为2
+			((Map) parameterObject).put("number", "2");
+		}
+		// 改写的参数设置到原parameterHandler对象
+		parameterField.set(parameterHandler, parameterObject);
+		parameterHandler.setParameters(ps);
+		log.error(JSON.toJSONString(boundSql.getParameterMappings()));
+		log.error(JSON.toJSONString(parameterObject));
 
-        return invocation.proceed();
-    }
+		return invocation.proceed();
+	}
 
-    @Override
-    public void setProperties(Properties properties) {
-        Interceptor.super.setProperties(properties);
-    }
+	@Override
+	public void setProperties(Properties properties) {
+		Interceptor.super.setProperties(properties);
+	}
 }
