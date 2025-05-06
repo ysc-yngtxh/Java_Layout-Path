@@ -66,7 +66,7 @@ public class SpringBootMockitoApplicationTests {
 		System.out.println(mockPositionDto1.getStr("美女"));
 
 		// 验证 positionService 的 getStr()这个方法是否被调用过
-		Mockito.verify(mockPositionDto1).getStr("刘亦菲");
+		Mockito.verify(mockPositionDto1).getStr("美女");
 
 		// 检查调用 positionService 的 getStr() 方法，且参数为 “3” 的次数是否为1次
 		Mockito.verify(mockPositionDto1, Mockito.times(1)).getStr(Mockito.eq("3"));

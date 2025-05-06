@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @SpringBootApplication
-@MapperScan(basePackages = "com.example.mapper")
 @EnableAspectJAutoProxy
+@MapperScan(basePackages = "com.example.mapper")
 public class SpringBootMockitoApplication {
 
 	public static void main(String[] args) {

@@ -1,6 +1,8 @@
 package com.example.pojo;
 
+import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +18,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Sku implements Serializable {
-
+    @Serial
     private static final long serialVersionUID = 892788188735402403L;
 
     /**
@@ -38,7 +40,7 @@ public class Sku implements Serializable {
     /**
      * 销售价格，单位为分
      */
-    private Double price;
+    private BigDecimal price;
     /**
      * sku的特有规格参数键值对，json格式，反序列化时请使用linkedHashMap，保证有序
      */

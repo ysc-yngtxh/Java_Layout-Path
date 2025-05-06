@@ -11,6 +11,7 @@ import java.util.Random;
 
 @Slf4j
 public class MyTenantLineHandler implements TenantLineHandler {
+
     private final List<String> IGNORE_TENANT_TABLE = Arrays.asList("tb_consumer", "tb_sku", "tb_order");
 
     /**
@@ -46,4 +47,3 @@ public class MyTenantLineHandler implements TenantLineHandler {
         return IGNORE_TENANT_TABLE.contains(tableName);
     }
 }
-

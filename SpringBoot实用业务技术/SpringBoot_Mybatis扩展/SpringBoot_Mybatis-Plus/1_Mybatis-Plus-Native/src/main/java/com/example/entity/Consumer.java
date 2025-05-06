@@ -13,7 +13,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * (Tb1_Consumer)实体类
+ * (Consumer)实体类
  * @author 游家纨绔
  * @since 2023-08-29 06:30:48
  */
@@ -31,7 +31,7 @@ import java.util.Date;
 //            参数五：keepGlobalPrefix  表示该映射表名是否保留在配置文件中设置的全局表名前缀(true表示保留)
 //            参数六：excludeProperty 表示需要排除的属性字段。插入数据的时候会排除该字段数据
 @TableName(value = "consumer", keepGlobalPrefix = true)
-public class Tb1_Consumer implements Serializable {
+public class Consumer implements Serializable {
     @Serial
     private static final long serialVersionUID = 692869694057194050L;
 

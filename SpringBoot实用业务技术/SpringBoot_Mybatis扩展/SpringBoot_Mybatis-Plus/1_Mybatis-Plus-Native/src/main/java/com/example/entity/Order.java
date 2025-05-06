@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 订单详情表(Tb3_Order)实体类
+ * 订单详情表(Order)实体类
  * @author 游家纨绔
  * @since 2023-08-31 19:36:39
  */
@@ -40,7 +40,7 @@ import java.util.Map;
 //            参数五：keepGlobalPrefix  表示该映射表名是否保留在配置文件中设置的全局表名前缀(true表示保留)
 //            参数六：excludeProperty 表示需要排除的属性字段。插入数据的时候会排除该字段数据
 @TableName(value = "order", autoResultMap = true, keepGlobalPrefix = true)
-public class Tb3_Order implements Serializable {
+public class Order implements Serializable {
     @Serial
     private static final long serialVersionUID = -53428860068885420L;
 
@@ -59,7 +59,7 @@ public class Tb3_Order implements Serializable {
 
     // 菜单
     // TODO @TableName(autoResultMap = true)开启映射注解,选择 FastjsonTypeHandler处理器(fastjson依赖)解析数据
-    //  也可以选择 JacksonTypeHandler(jackson-core依赖)处理器 或者 GsonTypeHandler内置处理器
+    //      也可以选择 JacksonTypeHandler(jackson-core依赖)处理器 或者 GsonTypeHandler内置处理器
     @TableField(value = "menu", typeHandler = FastjsonTypeHandler.class)
     private List<String> menuList;
 
@@ -105,4 +105,3 @@ public class Tb3_Order implements Serializable {
     @TableField(value = "sku_json", typeHandler = JacksonTypeHandler.class)
     private Map<String, Object> skuJson;
 }
-

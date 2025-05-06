@@ -2,7 +2,7 @@ package com.example.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.example.entity.Tb3_Order;
+import com.example.entity.Order;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.TypeHandler;
 import org.springframework.stereotype.Component;
@@ -18,27 +18,28 @@ import java.sql.SQLException;
  * @apiNote TODO
  */
 @Component
-public class TbOrderHandler implements TypeHandler<Tb3_Order> {
+public class TbOrderHandler implements TypeHandler<Order> {
+
     @Override
-    public void setParameter(PreparedStatement ps, int i, Tb3_Order parameter, JdbcType jdbcType) throws SQLException {
+    public void setParameter(PreparedStatement ps, int i, Order parameter, JdbcType jdbcType) throws SQLException {
         ps.setString(i, JSON.toJSONString(parameter));
     }
 
     @Override
-    public Tb3_Order getResult(ResultSet rs, String columnName) throws SQLException {
-        Tb3_Order parseTb3Order = JSONObject.parseObject(rs.getString(columnName), Tb3_Order.class);
-        return parseTb3Order;
+    public Order getResult(ResultSet rs, String columnName) throws SQLException {
+        Order parseOrder = JSONObject.parseObject(rs.getString(columnName), Order.class);
+        return parseOrder;
     }
 
     @Override
-    public Tb3_Order getResult(ResultSet rs, int columnIndex) throws SQLException {
-        Tb3_Order parseTb3Order = JSONObject.parseObject(rs.getString(columnIndex), Tb3_Order.class);
-        return parseTb3Order;
+    public Order getResult(ResultSet rs, int columnIndex) throws SQLException {
+        Order parseOrder = JSONObject.parseObject(rs.getString(columnIndex), Order.class);
+        return parseOrder;
     }
 
     @Override
-    public Tb3_Order getResult(CallableStatement cs, int columnIndex) throws SQLException {
-        Tb3_Order parseTb3Order = JSONObject.parseObject(cs.getString(columnIndex), Tb3_Order.class);
-        return parseTb3Order;
+    public Order getResult(CallableStatement cs, int columnIndex) throws SQLException {
+        Order parseOrder = JSONObject.parseObject(cs.getString(columnIndex), Order.class);
+        return parseOrder;
     }
 }

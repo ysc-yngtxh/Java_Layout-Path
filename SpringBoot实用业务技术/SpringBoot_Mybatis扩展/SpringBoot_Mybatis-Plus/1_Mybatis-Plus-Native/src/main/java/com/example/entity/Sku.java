@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * (Tb2_Sku)实体类
+ * (Sku)实体类
  * @author 游家纨绔
  * @since 2023-08-31 19:37:00
  */
@@ -26,7 +26,7 @@ import java.util.List;
 //            参数五：keepGlobalPrefix  表示该映射表名是否保留在配置文件中设置的全局表名前缀(true表示保留)
 //            参数六：excludeProperty 表示需要排除的属性字段。插入数据的时候会排除该字段数据
 @TableName(value = "sku", resultMap = "TbSkuMap", keepGlobalPrefix = true, excludeProperty = {"context"})
-public class Tb2_Sku implements Serializable {
+public class Sku implements Serializable {
     @Serial
     private static final long serialVersionUID = 436500863014955490L;
 
@@ -66,12 +66,12 @@ public class Tb2_Sku implements Serializable {
     private Integer deleteFlag;
 
     // 订单数据
-    // TODO 通过注解@TableName的属性resultMap映射xml文件，并且使用自定义数据类型处理器TbOrderStringHandler进行 String转 Tb3_Order
+    // TODO 通过注解@TableName的属性resultMap映射xml文件，并且使用自定义数据类型处理器TbOrderStringHandler进行 String转 Order
     //  这里有一个坑点：我的 Json字符串数据 中有一个menu属性，但是在Tb3_Order实体类中对应的是menuList属性，
     //               因为我这个字段的返回类型是Tb3_Order，无法精准的映射字段属性，导致无法赋值。
     //  解决：方法一、将映射字段一一对应
     //       方法二、不使用实体类映射，使用 Map<String, Object>
-    private Tb3_Order orderJson;
+    private Order orderJson;
 
     /**
      * 使用 @TableField(exist = false) ，表示该字段在数据库中不存在 ，所以不会插入数据库中
@@ -82,4 +82,3 @@ public class Tb2_Sku implements Serializable {
     private String context;
     public transient String text;
 }
-

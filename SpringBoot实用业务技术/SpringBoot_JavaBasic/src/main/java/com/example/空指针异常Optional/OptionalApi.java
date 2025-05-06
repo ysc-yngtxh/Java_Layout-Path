@@ -76,8 +76,7 @@ public class OptionalApi {
 
     @Test
     public void test3() {
-        User user3 = new User(null, null, null, 0, null, null
-                , Optional.of(new Models(null, Optional.of(new ModelView("湖北武汉洪山区")))));
+        User user3 = new User(null, null, null, 0, null, null, Optional.of(new Models(null, Optional.of(new ModelView("湖北武汉洪山区")))));
 
         // TODO map() 与 flatMap() 方法的区别
         //      map()：像“翻译器”，直接转换内容，但保留外包装。

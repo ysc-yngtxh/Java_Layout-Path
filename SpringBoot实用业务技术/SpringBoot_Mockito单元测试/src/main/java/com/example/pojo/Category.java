@@ -1,5 +1,6 @@
 package com.example.pojo;
 
+import java.io.Serial;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,7 +17,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Category implements Serializable {
-
+    @Serial
     private static final long serialVersionUID = 483640959410582653L;
 
     /**

@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.mapper.Tb2_SkuMapper">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.SkuMapper">
 
-    <resultMap id="TbSkuMap" type="Tb2_Sku">
+    <resultMap id="TbSkuMap" type="Sku">
         <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="image" column="image" jdbcType="VARCHAR"/>
         <result property="price" column="price" jdbcType="NUMERIC"/>
         <result property="inventory" column="inventory" jdbcType="INTEGER"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
         <result property="shelves" column="shelves" jdbcType="INTEGER"/>
-        <result property="menuList" column="menu" jdbcType="INTEGER" typeHandler="com.example.handler.ListStringHandler"/>
+        <result property="menuList" column="menu" jdbcType="INTEGER"
+                typeHandler="com.example.handler.ListStringHandler"/>
         <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
         <result property="updatedDate" column="updated_date" jdbcType="TIMESTAMP"/>
         <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
         <result property="updatedBy" column="updated_by" jdbcType="VARCHAR"/>
         <result property="deleteFlag" column="delete_flag" jdbcType="INTEGER"/>
-        <result property="orderJson" column="order_json" jdbcType="VARCHAR" typeHandler="com.example.handler.TbOrderHandler"/>
+        <result property="orderJson" column="order_json" jdbcType="VARCHAR"
+                typeHandler="com.example.handler.TbOrderHandler"/>
     </resultMap>
 </mapper>

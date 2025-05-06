@@ -12,9 +12,9 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: mpw:HwOEIkkmIDVRLrzoU+F6hKOGOca1YebJ2dO22nkLMahLMf/7rdweujxyIVwlWuj+t7OqNKafQZ8+Ol6TJE4cyTkBhUOCBj08AXm92E1yc9TEVJQA7mexorAnSo25wvAR51v3Q80rTABtqcY3/STgHOs6QMmeg5UGEo/g84YeiJwXTMn5vLeQDbCeuk1MemaNHymdwHG8tOw4DFxsAO0SzQ==
-    username: mpw:3dtfQ+7Vkb/mS7I7CECHHg==
-    password: mpw:ymXSV9eNjlB5K5gUx66tkg==
+    url: mpw:FC6kd0l3I4EFRIq9CB9/sL9ClH0CR6qP3pNWewTZZN0RM09d0DJQn0Nq8gXMnE0O2Cr5pF+9b/itVyq2xtCEePKAKl5A4loSaXQyqTgkf8GzLKu0B745ocXGE12jQ799V5k7dLTRx1kN/lBgI0NenO0Y5khgIeHpsg/0aVdwjz6JukefPMdMek3GBlHIjM0P9bNUgdMfXRJWiS3Vo/EFAw==
+    username: mpw:vlhA4jITPaSB51rtJZB6nQ==
+    password: mpw:lGLnALu7RvsMAPNRBf8YMQ==
 
 # mybatis-plus相关配置
 mybatis-plus:
@@ -33,12 +33,12 @@ mybatis-plus:
       # 驼峰下划线转换
       table-underline: true
       # 自定义表主键生成器
-      key-generators: com.example.CustomKeyGenerator
+      # key-generators: com.example.CustomKeyGenerator
       # 全局的 Entity 逻辑删除字段属性名，仅在逻辑删除功能打开时有效。
       logic-delete-field: deleteFlag
       # 逻辑删除配置
-      logic-delete-value: 0     # 逻辑已删除值(默认为 1)
-      logic-not-delete-value: 1 # 逻辑未删除值(默认为 0)
+      logic-delete-value: 1     # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
       insert-strategy: NEVER
       update-strategy: ignored
       where-strategy: ALWAYS

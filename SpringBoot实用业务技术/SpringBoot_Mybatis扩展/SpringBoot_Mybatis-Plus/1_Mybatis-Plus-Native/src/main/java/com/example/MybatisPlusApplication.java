@@ -25,8 +25,8 @@ public class MybatisPlusApplication {
         System.out.println("username: " + aesUsername);
         System.out.println("password: " + aesPassword);
         // TODO yml文件进行加密配置之后，我们想正常启动，要在加密数据前加上前缀 mpw:
-        //  情况一：在 Idea 上启动项目的话设置 Program arguments = --mpw.key=163b68e7477292c0
-        //  情况二：项目为jar包，并利用命令行启动 java -jar 项目名.jar --mpw.key=163b68e7477292c0
+        //  情况一：在 Idea 上启动项目的话设置 Program arguments = --mpw.key=fa081f0944c82413
+        //  情况二：项目为jar包，并利用命令行启动 java -jar 项目名.jar --mpw.key=fa081f0944c82413
 
         SpringApplication.run(MybatisPlusApplication.class, args);
     }

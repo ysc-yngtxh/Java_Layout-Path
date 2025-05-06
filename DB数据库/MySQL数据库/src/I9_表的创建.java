@@ -31,12 +31,13 @@
  *              datetime和timestamp都表示日期和时间，格式都为 'YYYY-MM-DD HH:MM:SS'。
  *              datetime存储长度为8个字节，timestamp存储长度为4个字节。
  *              32位有符号整数的最大值是 2³¹-1 = 2,147,483,647，这个数值对应的UTC时间是 2038-01-19 03:14:07
- *         总结：datetime和timestamp除了存储范围和存储方式不一样，没有太大区别。当然，对于跨时区的业务，TIMESTAMP更为合适。
  *
- *         对于创建表时间字段：`update_time` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
- *                          DEFAULT CURRENT_TIMESTAMP 表示创建时获取当前时间戳
- *                          ON UPDATE CURRENT_TIMESTAMP 表示根据当前时间戳更新
+ *              总结：datetime和timestamp除了存储范围和存储方式不一样，没有太大区别。当然，对于跨时区的业务，TIMESTAMP更为合适。
  *
+ *              对于创建表时间字段：`update_time` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+ *                               DEFAULT CURRENT_TIMESTAMP 表示创建时获取当前时间戳
+ *                               ON UPDATE CURRENT_TIMESTAMP 表示根据当前时间戳更新
+
  *         char和varchar怎么选择？
  *             在实际的开发中，当某个字段中的数据长度不发生改变的时候，是定长的，例如：性别、生日等都是采用char
  *             当一个字段的数据长度不确定，例如：简介、姓名等都是采用varchar

@@ -5,7 +5,7 @@ import com.example.annotation.Slave;
 import com.example.entity.Employee;
 import com.example.entity.TbBrand;
 import com.example.mapper.business.EmployeeMapper;
-import com.example.mapper.business2.TbBrandMapper;
+import com.example.mapper.business2.BrandMapper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,14 +14,14 @@ import org.springframework.stereotype.Service;
 public class ReadWriteService {
 
     @Autowired
-    private TbBrandMapper tbBrandMapper;
+    private BrandMapper brandMapper;
 
     @Autowired
     private EmployeeMapper employeeMapper;
 
     @Master
     public TbBrand getUserByBrand(String username) {
-        return tbBrandMapper.selectByName(username);
+        return brandMapper.selectByName(username);
     }
 
     @Slave
@@ -31,6 +31,6 @@ public class ReadWriteService {
 
     @Master
     public void saveBrand(TbBrand Brand) {
-        tbBrandMapper.insert(Brand);
+        brandMapper.insert(Brand);
     }
 }

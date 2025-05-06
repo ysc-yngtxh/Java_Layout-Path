@@ -1,3 +1,7 @@
 spring:
   application:
     name: @project.artifactId@
+metadata:
+  properties:
+    authors: sas
+    sexEnum: dfasd

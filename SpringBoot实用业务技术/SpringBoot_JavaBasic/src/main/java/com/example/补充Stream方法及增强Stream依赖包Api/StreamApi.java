@@ -139,7 +139,9 @@ public class StreamApi {
 
     @Test
     public void test5() {
-        // TODO 7、flatMap (对流扁平化处理)
+        // TODO 7、map() 与 flatMap() 方法的区别
+        //        map()：像“翻译器”，直接转换内容，但保留外包装。
+        //        flatMap()：像“拆箱器”，先拆开一层包装，再转换。⚠️flatMap 的参数必须返回为 Optional或者 Stream
         List<List<String>> lists = Lists.newArrayList(Arrays.asList("AB", "Amla", "Faf"), Arrays.asList("Virat", "Dhoni", "Jadeja"));
         // 以下两种写法都可以。flatMap其实就相当于将List<List<String>>转为List<String>，将外层的List元素全部依次放入List<String>中
         List<String> flatMapList1 = lists.stream()
@@ -155,7 +157,7 @@ public class StreamApi {
                 .filter(ObjectUtil::isNotEmpty)
                 .collect(Collectors.toMap(User::getId, y -> y));
         log.error(collect1.toString());
-        // 这里第三个参数表示：当key值重复了，取下标靠前的值;如果这里(v1, v2) -> v2，则表示key值重复了，取下标靠后的值
+        // 这里第三个参数表示：当key值重复了，取下标靠前的值；如果这里(v1, v2) -> v2，则表示key值重复了，取下标靠后的值
         Map<Long, User> collect2 = users.stream()
                 .filter(ObjectUtil::isNotEmpty)
                 .collect(Collectors.toMap(User::getId, y -> y, (v1, v2) -> v2));

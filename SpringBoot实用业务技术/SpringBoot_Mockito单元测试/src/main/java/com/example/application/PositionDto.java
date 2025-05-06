@@ -2,7 +2,7 @@ package com.example.application;
 
 public class PositionDto {
 
-    public String getStr(String str){
+    public String getStr(String str) {
         return str;
     }
 

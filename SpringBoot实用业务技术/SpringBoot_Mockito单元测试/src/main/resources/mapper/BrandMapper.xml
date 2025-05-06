@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.BrandMapper">
 
-    <resultMap type="Brand" id="BrandMap">
-        <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="brandName" column="brand_name" jdbcType="VARCHAR"/>
-        <result property="racking" column="racking" jdbcType="INTEGER"/>
+    <resultMap id="BrandMap"  type="Brand">
+        <result property="id"         column="id"          jdbcType="INTEGER"/>
+        <result property="brandName"  column="brand_name"  jdbcType="VARCHAR"/>
+        <result property="racking"    column="racking"     jdbcType="INTEGER"/>
         <result property="deleteFlag" column="delete_flag" jdbcType="INTEGER"/>
-        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="remark"     column="remark"      jdbcType="VARCHAR"/>
     </resultMap>
 
-    <select id="findById1" resultMap="BrandMap">
+    <select id="findById" resultMap="BrandMap">
         select * from brand where id = #{id}
     </select>
-
-    <select id="findById" resultType="BrandMap">
-        select * from brand where id = #{id}
-    </select>
-
 </mapper>
-

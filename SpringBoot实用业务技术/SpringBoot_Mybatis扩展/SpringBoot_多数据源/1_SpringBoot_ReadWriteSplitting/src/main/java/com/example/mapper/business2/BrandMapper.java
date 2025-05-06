@@ -17,7 +17,7 @@ import org.apache.ibatis.type.JdbcType;
  * @author 游家纨绔
  * @since 2023-09-02 14:48:25
  */
-public interface TbBrandMapper {
+public interface BrandMapper {
 
     /** @Results用法
      * 当数据库字段名与实体类对应的属性名不一致时，可以使用@Results映射来将其对应起来。
