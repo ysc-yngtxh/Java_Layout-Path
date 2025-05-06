@@ -15,6 +15,7 @@ public interface StudentMapper {
     // 返回一个key为name值，value为Map的Map集合；相当于Map<String, Map>
     @MapKey("name")
     Map<String, Student> selectByPrimaryKeyMap(Integer id);
+    // 实际为：Map<String, Map<String,Object>> selectByPrimaryKeyMap(Integer id);
 
 
     // XML文件的返回值类型为Student（即 column 与 column值 对应Student的属性及属性值）

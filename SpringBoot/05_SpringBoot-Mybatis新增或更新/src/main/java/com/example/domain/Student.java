@@ -12,7 +12,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Student implements Serializable {
-
     private static final long serialVersionUID = 2458336762628477632L;
 
     private Integer id;

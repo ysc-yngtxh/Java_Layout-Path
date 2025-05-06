@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface StudentMapper {
+
     // 根据Id查询数据
     Student selectByPrimaryKey(Integer id);
 

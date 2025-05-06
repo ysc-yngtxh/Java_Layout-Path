@@ -1,6 +1,8 @@
 package com.example.config;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.concurrent.TimeUnit;
 import lombok.Data;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
@@ -18,6 +20,7 @@ public class ScheduleTimerConfig implements SchedulingConfigurer {
 
     private Long timer = 10000L;
 
+    // 根据 毫秒值 来设置定时任务
     @Override
     public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
         taskRegistrar.addTriggerTask(
@@ -25,7 +28,8 @@ public class ScheduleTimerConfig implements SchedulingConfigurer {
                     System.out.println("定义毫秒的定时任务执行了：" + LocalDateTime.now());
                 },
                 triggerContext -> {
-                    return new PeriodicTrigger(timer).nextExecution(triggerContext);
+                    PeriodicTrigger periodicTrigger = new PeriodicTrigger(Duration.ofMillis(timer));
+                    return periodicTrigger.nextExecution(triggerContext);
                 }
         );
     }

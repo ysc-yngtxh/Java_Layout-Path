@@ -20,7 +20,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class SqlPostConstructConfig implements WebMvcConfigurer {
 
     String[] addPath = {
-            "/tbUser/**"
+            "/user/**"
     };
 
     @Override

@@ -6,8 +6,12 @@ package com.example.pojo;
  * @apiNote TODO
  */
 public class User {
+
     private String userName;
+
     private String passWord;
+
     private Long age;
+
     private String sex;
 }

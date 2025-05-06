@@ -77,7 +77,7 @@ public class ExecutorTenantInterceptor implements Interceptor {
 		Object[] args = invocation.getArgs();
 		// 获取的 MappedStatement对象 对应Mapper.xml配置文件中的一个select/update/insert/delete节点
 		MappedStatement statements = (MappedStatement) args[0];
-		// 获取实体类操作对象 (类型先不转为具体的TbUser)
+		// 获取实体类操作对象 (类型先不转为具体的User)
 		Object parameter = args[1];
 		// RowBounds类：是用来将所有符合条件的数据全都查询到内存中，然后在内存中对数据进行分页，也就是逻辑分页
 		// 但是这里我们并没有进行内存配置，仅仅只是获取一个对象而已
