@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>SpringBoot_Json-Annotation</artifactId>
+	<artifactId>SpringBoot_实体类序列化</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SpringBoot_实体类序列化</name>
-	<description>SpringBoot_实体类序列化</description>
+	<name>${project.artifactId}</name>
+	<description>${project.artifactId}</description>
 
 	<properties>
 		<java.version>23</java.version>

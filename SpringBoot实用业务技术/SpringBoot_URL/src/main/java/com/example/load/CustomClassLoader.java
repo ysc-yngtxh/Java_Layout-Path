@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class CustomClassLoader extends ClassLoader {
 
-    private String classPath;
+    private final String classPath;
 
     public CustomClassLoader(String classPath) {
         this.classPath = classPath;

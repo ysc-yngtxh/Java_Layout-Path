@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot_Mybatis-MultiDataSource</artifactId>
+    <artifactId>SpringBoot_多数据源</artifactId>
     <version>1.0.0</version>
-    <name>SpringBoot_多数据源</name>
-    <description>SpringBoot_多数据源</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <modules>
         <module>01_SpringBoot_ReadWriteSplitting</module>

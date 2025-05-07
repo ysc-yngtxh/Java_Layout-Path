@@ -18,14 +18,17 @@ import java.net.URLClassLoader;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.sql.SQLException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Map;
+import javax.net.ssl.SSLContext;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.test.context.SpringBootTest;
 
-// @SpringBootTest
+@SpringBootTest
 class SpringBootUrlApplicationTests {
 
     private static final Logger log = LoggerFactory.getLogger(SpringBootUrlApplicationTests.class);
@@ -47,7 +50,6 @@ class SpringBootUrlApplicationTests {
         URL url1 = new URL("https://devapi.qweather.com/v7/weather/now?location=101110101&key=f83cf5800baf480fa4c3bc6a474ffd90");
         URL url2 = new URL("http", "localhost", 8080, "/");
         URL url3 = new URL("file:" + ABSOLUTE_PATH + "/src/main/resources/application.properties");
-
         // 上述的构造器在 Jdk20版本中被弃用，可使用如下方式
         URL uri4 = new URI("https://example.com").toURL();
         URL uri5 = URI.create("https://example.com").toURL();
@@ -86,18 +88,19 @@ class SpringBootUrlApplicationTests {
 
 
         // 将码转为字是解码
-        System.out.println("使用URLDecoder解码：" + URLDecoder.decode("%E7%BD%97%E5%BE%B7", "utf-8"));
+        System.out.println("使用URLDecoder解码：" + URLDecoder.decode("%E7%BD%97%E5%BE%B7", StandardCharsets.UTF_8));
     }
 
     // TODO URLConnection类
     @Test
-    public void contextLoads1() throws IOException {
-        URL url1 = new URL("http://localhost:8081/treeChildrenSet");
-        HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
+    public void contextLoads1() throws IOException, URISyntaxException {
+        // 创建URL对象
+        URL url = new URI("http://ip-api.com/json").toURL();
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         // 设置连接通道的请求方法：GET、POST、PUT、DELETE等
         conn.setRequestMethod("GET");
         // 设置请求参数
-        conn.setRequestProperty("contentType", "application/json;charset=utf-8");
+        conn.setRequestProperty("contentType", "application/json; charset=UTF-8");
         // 设置连接超时时间，单位毫秒
         conn.setConnectTimeout(360000);
         // 设置读取超时时间，单位毫秒
@@ -106,10 +109,10 @@ class SpringBootUrlApplicationTests {
         if (conn.getResponseCode() == 200) {
             // 获取响应的头字段
             Map<String, List<String>> headers = conn.getHeaderFields();
-            System.out.println(headers);
+            System.out.println("获取响应头信息：" + headers);
             // 获取响应的字节流
             InputStream inputStream = conn.getInputStream();
-            System.out.println(inputStream);
+            System.out.println("获取响应字节流：" + inputStream);
             InputStreamReader isr = new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8);
             BufferedReader br = new BufferedReader(isr);
             String str;
@@ -117,6 +120,7 @@ class SpringBootUrlApplicationTests {
                 System.err.println(str);
             }
 
+            // 关闭流
             br.close();
             isr.close();
             conn.disconnect();
@@ -141,18 +145,21 @@ class SpringBootUrlApplicationTests {
     public void contextLoads2() throws MalformedURLException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         URL url = new File(System.getProperty("user.dir")).toURI().toURL();
         // 三种写法：1️⃣隐式使用默认的应用类父加载器 2️⃣指定当前上下文的类加载器作为父加载器 3️⃣指定系统类加载器作为父加载器
-        ClassLoader loader1 = new URLClassLoader(new URL[]{url});
-        ClassLoader loader2 = new URLClassLoader(new URL[]{url}, this.getClass().getClassLoader());
-        ClassLoader loader3 = new URLClassLoader(new URL[]{url}, ClassLoader.getSystemClassLoader());
-
-        // 按理来说：URL 的地址跟加载的全限定名称路径并不能完美匹配上（缺少/target/classes）,并且累加载器只能加载 class 文件，不能加载 Java 文件。
-        //         所以这里应该会报异常找不到指定的 Hello 类。但是执行结果是正常输出，说明使用了父加载器从默认路径 CLASSPATH 下加载类
-        Class<?> clazz = loader1.loadClass("com.example.pojo.Hello");
-        System.out.println("使用 URLClassLoader(URL[] urls)，当前类加载器：" + clazz.getClassLoader());
-        System.out.println("使用 URLClassLoader(URL[] urls)，父类加载器：" + clazz.getClassLoader().getParent());
-        Object instance = clazz.getDeclaredConstructor().newInstance();
-        Method method = clazz.getMethod("sayHello");
-        method.invoke(instance);
+        try (URLClassLoader loader1 = new URLClassLoader(new URL[]{url});
+             URLClassLoader loader2 = new URLClassLoader(new URL[]{url}, this.getClass().getClassLoader());
+             URLClassLoader loader3 = new URLClassLoader(new URL[]{url}, ClassLoader.getSystemClassLoader())
+        ) {
+            // 按理来说：URL 的地址跟加载的全限定名称路径并不能完美匹配上（缺少/target/classes）,并且累加载器只能加载 class 文件，不能加载 Java 文件。
+            //         所以这里应该会报异常找不到指定的 Hello 类。但是执行结果是正常输出，说明使用了父加载器从默认路径 CLASSPATH 下加载类
+            Class<?> clazz = loader1.loadClass("com.example.pojo.Hello");
+            System.out.println("使用 URLClassLoader(URL[] urls)，当前类加载器：" + clazz.getClassLoader());
+            System.out.println("使用 URLClassLoader(URL[] urls)，父类加载器：" + clazz.getClassLoader().getParent());
+            Object instance = clazz.getDeclaredConstructor().newInstance();
+            Method method = clazz.getMethod("sayHello");
+            method.invoke(instance);
+        } catch (Exception e) {
+            log.error("URLClassLoader加载类失败", e);
+        }
 
 
         // 第四种写法：指定父类加载器为 null，即不使用任何父类加载器，独立地尝试加载传参 URL[] urls 路径下的类
@@ -161,7 +168,7 @@ class SpringBootUrlApplicationTests {
         Class<?> clazz3 = loaderAndNull.loadClass("com.example.pojo.Hello");
         System.out.println("使用 URLClassLoader(new URL[]{url}, null)，当前类加载器：" + clazz3.getClassLoader());
         System.out.println("使用 URLClassLoader(new URL[]{url}, null)，父类加载器：" + clazz3.getClassLoader().getParent());
-        clazz3.newInstance();
+        clazz3.getDeclaredConstructor().newInstance();
 
 
         // 第五种写法：自定义类加载器
@@ -169,6 +176,6 @@ class SpringBootUrlApplicationTests {
         Class<?> clazz2 = customClassLoader.loadClass("com.example.pojo.Hello");
         System.out.println("使用自定义的加载器后，当前类加载器：" + clazz2.getClassLoader());
         System.out.println("使用自定义的加载器后，父类加载器：" + clazz2.getClassLoader().getParent());
-        clazz2.newInstance();
+        clazz2.getDeclaredConstructor().newInstance();
     }
 }

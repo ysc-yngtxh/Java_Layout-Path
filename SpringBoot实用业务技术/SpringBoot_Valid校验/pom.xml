@@ -11,10 +11,10 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot_Valid</artifactId>
+    <artifactId>SpringBoot_Valid校验</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot_Valid校验</name>
-    <description>SpringBoot_Valid校验</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>23</java.version>

@@ -11,10 +11,10 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot_Upload</artifactId>
+    <artifactId>SpringBoot_文件秒传-分片-断点续传</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot_文件秒传-分片-断点续传</name>
-    <description>SpringBoot_文件秒传-分片-断点续传</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>23</java.version>

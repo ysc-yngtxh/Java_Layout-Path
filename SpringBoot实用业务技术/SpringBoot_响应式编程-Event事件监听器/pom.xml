@@ -10,10 +10,10 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot-Reactive-EventListener</artifactId>
+    <artifactId>SpringBoot_响应式编程-Event事件监听器</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot-响应式编程-Event事件监听器</name>
-    <description>SpringBoot-响应式编程-Event事件监听器</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <modules>
         <module>01_SpringBoot_CustomReactive</module>

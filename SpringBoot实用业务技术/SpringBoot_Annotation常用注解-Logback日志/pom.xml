@@ -10,10 +10,10 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot_Annotation-Logback</artifactId>
+    <artifactId>SpringBoot_Annotation常用注解-Logback日志</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot_Annotation常用注解-Logback日志</name>
-    <description>SpringBoot_Annotation常用注解-Logback日志</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>23</java.version>

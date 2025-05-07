@@ -4,16 +4,16 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.example</groupId>
-        <artifactId>SpringBoot-Reactive-EventListener</artifactId>
+        <artifactId>SpringBoot_响应式编程-Event事件监听器</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>03_SpringBoot-EventListener</artifactId>
+    <artifactId>03_SpringBoot-Event事件监听</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>3_SpringBoot-Event事件监听</name>
-    <description>3_SpringBoot-Event事件监听</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>23</java.version>

@@ -10,10 +10,10 @@
 	</parent>
 
 	<groupId>com.example</groupId>
-	<artifactId>SpringBoot_Accesing-StaticResource</artifactId>
+	<artifactId>SpringBoot_访问静态资源</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SpringBoot_访问静态资源</name>
-	<description>SpringBoot_访问静态资源</description>
+	<name>${project.artifactId}</name>
+	<description>${project.artifactId}</description>
 
 	<modules>
 		<module>01_SpringBoot-StaticLocal-Properties</module>

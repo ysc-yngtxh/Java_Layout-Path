@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot_TreeBuilder</artifactId>
+    <artifactId>SpringBoot_查询树结构数据</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot_查询树结构数据</name>
-    <description>SpringBoot_查询树结构数据</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>23</java.version>

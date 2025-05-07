@@ -9,10 +9,10 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <groupId>com.example</groupId>
-  <artifactId>SpringBoot_Expand-Interface</artifactId>
+  <artifactId>SpringBoot_扩展接口及类加载和实例化过程</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>SpringBoot_扩展接口以及类加载过程</name>
-  <description>SpringBoot_扩展接口以及类加载过程</description>
+  <name>${project.artifactId}</name>
+  <description>${project.artifactId}</description>
 
   <properties>
     <java.version>23</java.version>

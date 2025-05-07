@@ -10,10 +10,10 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot_HttpRequired-MultiReadStream</artifactId>
+    <artifactId>SpringBoot_多次读取请求流</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot_多次读取请求流</name>
-    <description>SpringBoot_多次读取请求流</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <modules>
         <module>01_MultiRead-Content-InputStream</module>

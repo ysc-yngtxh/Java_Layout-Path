@@ -11,10 +11,10 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot_Aop-Transactional</artifactId>
+    <artifactId>SpringBoot_Aop与Transactional失效以及解决方案</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot_Aop与Transactional失效以及解决方案</name>
-    <description>SpringBoot_Aop与Transactional失效以及解决方案</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>23</java.version>

@@ -11,10 +11,10 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot_BlockFlow</artifactId>
+    <artifactId>SpringBoot_令牌桶-漏斗-布隆过滤器-限流</artifactId>
     <version>1.0.0</version>
-    <name>SpringBoot_令牌桶-漏斗-布隆过滤器-限流</name>
-    <description>SpringBoot_令牌桶-漏斗-布隆过滤器-限流</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <modules>
         <module>01_SpringBoot-FixedOrSlideWindowRateLimiter</module>
