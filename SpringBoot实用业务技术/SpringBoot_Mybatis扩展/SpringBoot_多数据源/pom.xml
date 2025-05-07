@@ -15,9 +15,9 @@
     <description>SpringBoot_多数据源</description>
 
     <modules>
-        <module>1_SpringBoot_ReadWriteSplitting</module>
-        <module>2_SpringBoot_Mybatis-Dynamic-Datasource</module>
-        <module>3_SpringBoot-MybatisPlus-Dynamic-Datasource</module>
+        <module>01_SpringBoot_ReadWriteSplitting</module>
+        <module>02_SpringBoot_Mybatis-Dynamic-Datasource</module>
+        <module>03_SpringBoot-MybatisPlus-Dynamic-Datasource</module>
     </modules>
     <packaging>pom</packaging>
 
