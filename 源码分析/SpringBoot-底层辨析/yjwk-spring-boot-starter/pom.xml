@@ -3,17 +3,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.0</version>
+        <groupId>com.example</groupId>
+        <artifactId>SpringBoot-底层辨析</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>Mybatis-BottomLayer3</artifactId>
+    <artifactId>yjwk-spring-boot-starter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Mybatis-BottomLayer3</name>
-    <description>Mybatis-BottomLayer3</description>
+    <name>yjwk-Spring-boot-starter</name>
+    <description>yjwk-Spring-boot-starter</description>
 
     <properties>
         <java.version>23</java.version>
@@ -21,13 +21,29 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>Mybatis-BottomLayer2</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <!--这里设置为 可选 项。即：对于当前项目无影响，但是对于引用当前项目作为依赖的，则不会引入该 jetty-->
             <optional>true</optional>
         </dependency>
     </dependencies>

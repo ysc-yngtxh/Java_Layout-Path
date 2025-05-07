@@ -2,34 +2,43 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot-BottomLayer</artifactId>
+    <artifactId>Spring-MVC-底层剖析1</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot-BottomLayer</name>
-    <description>SpringBoot-BottomLayer</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
+    <!--Tomcat服务器是专门用来运行Java Web应用的容器，它部署的是 war 文件或者是已解压的Web应用目录。
+        因此在使用Tomcat服务器时，项目应该打包成 war 包部署-->
+    <packaging>war</packaging>
 
     <properties>
         <java.version>23</java.version>
     </properties>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>yjwk-Spring-boot-starter</module>
-        <module>Register-CustomDependency</module>
-    </modules>
 
     <dependencies>
+        <!--Spring MVC的实现：spring-webmvc依赖，其内含spring-web依赖，无需再显式添加spring-web-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>6.1.8</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.32</version>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>3.3.0</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

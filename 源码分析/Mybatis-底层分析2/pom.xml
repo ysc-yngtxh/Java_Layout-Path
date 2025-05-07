@@ -4,10 +4,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.example</groupId>
-	<artifactId>Mybatis-BottomLayer2</artifactId>
+	<artifactId>Mybatis-底层分析2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Mybatis-BottomLayer2</name>
-	<description>Mybatis-BottomLayer2</description>
+	<name>${project.artifactId}</name>
+	<description>${project.artifactId}</description>
 
 	<properties>
 		<java.version>23</java.version>

@@ -144,7 +144,7 @@ class SpringBootUrlApplicationTests {
     @Test
     public void contextLoads2() throws MalformedURLException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         URL url = new File(System.getProperty("user.dir")).toURI().toURL();
-        // 三种写法：1️⃣隐式使用默认的应用类父加载器 2️⃣指定当前上下文的类加载器作为父加载器 3️⃣指定系统类加载器作为父加载器
+        // 三种写法：1️⃣、隐式使用默认的应用类父加载器 2️⃣、指定当前上下文的类加载器作为父加载器 3️⃣、指定系统类加载器作为父加载器
         try (URLClassLoader loader1 = new URLClassLoader(new URL[]{url});
              URLClassLoader loader2 = new URLClassLoader(new URL[]{url}, this.getClass().getClassLoader());
              URLClassLoader loader3 = new URLClassLoader(new URL[]{url}, ClassLoader.getSystemClassLoader())
