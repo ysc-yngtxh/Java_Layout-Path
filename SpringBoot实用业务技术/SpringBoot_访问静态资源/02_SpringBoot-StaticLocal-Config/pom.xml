@@ -8,19 +8,12 @@
         <version>3.4.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot-Reactive-EventListener</artifactId>
+    <artifactId>02_SpringBoot-StaticLocal-Config</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>SpringBoot-响应式编程-Event事件监听器</name>
-    <description>SpringBoot-响应式编程-Event事件监听器</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
-    <modules>
-        <module>01_SpringBoot_CustomReactive</module>
-        <module>02_SpringBoot-Reactor</module>
-        <module>03_SpringBoot-Event事件监听</module>
-    </modules>
-    <packaging>pom</packaging>
     <properties>
         <java.version>23</java.version>
     </properties>
@@ -28,13 +21,7 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
     </dependencies>
 

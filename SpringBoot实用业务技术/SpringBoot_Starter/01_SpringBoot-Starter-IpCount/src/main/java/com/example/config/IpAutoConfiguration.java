@@ -38,6 +38,8 @@ public class IpAutoConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        // registry.addInterceptor(new IpCountInterceptor()).addPathPatterns("/**");
+        // ⚠️：正常应用拦截器逻辑类是无需注入到Spring容器，但是 IpCountInterceptor 类中使用了 @Autowired 注解，所以需要将其注入到Spring容器中。
         registry.addInterceptor(ipCountInterceptor()).addPathPatterns("/**");
     }
 }

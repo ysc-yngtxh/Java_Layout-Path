@@ -16,8 +16,8 @@
     <description>SpringBoot_多次读取请求流</description>
 
     <modules>
-        <module>1_MultiRead-Content-InputStream</module>
-        <module>2_MultiRead-Content-Parameter</module>
+        <module>01_MultiRead-Content-InputStream</module>
+        <module>02_MultiRead-Content-Parameter</module>
     </modules>
     <packaging>pom</packaging>
 

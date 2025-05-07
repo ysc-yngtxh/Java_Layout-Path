@@ -1,6 +1,5 @@
 package com.example.filter;
 
-import com.example.thread.CustomNamedThreadLocal;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

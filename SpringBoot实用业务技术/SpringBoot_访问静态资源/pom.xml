@@ -16,10 +16,10 @@
 	<description>SpringBoot_访问静态资源</description>
 
 	<modules>
-		<module>1_SpringBoot-StaticLocal-Properties</module>
-		<module>2_SpringBoot-StaticLocal-Config</module>
-		<module>3_SpringBoot-Properties-Config</module>
-		<module>4_SpringBoot-Templates-Controller</module>
+		<module>01_SpringBoot-StaticLocal-Properties</module>
+		<module>02_SpringBoot-StaticLocal-Config</module>
+		<module>03_SpringBoot-Properties-Config</module>
+		<module>04_SpringBoot-Templates-Controller</module>
 	</modules>
 	<packaging>pom</packaging>
 
