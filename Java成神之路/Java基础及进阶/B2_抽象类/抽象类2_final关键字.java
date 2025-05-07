@@ -72,12 +72,13 @@ public class 抽象类2_final关键字 {
     public static void main(String[] args) {
         T c = new Y();   // 多态，父类引用子类对象
 
-        // c.dOoSome();    // 不能被调用，T类引用中没有dOoSome() 方法
+        // c.dOoSome();  // 不能被调用，T类引用中没有dOoSome() 方法
 
-        if(c instanceof Y){
+        if (c instanceof Y) {
+            // 向下强制转型
             Y d1 = (Y)c;
             d1.dOoSome();
-        }     //向下强制转型
+        }
 
         //或者
         Y d = new Y();
@@ -89,9 +90,8 @@ public class 抽象类2_final关键字 {
         final person p2 = new person(20);
         // p2 = new person(50);
 		/* 编译错误，new person(20)可以看成地址x0111,所以final p2 = x0111
-		   final 关键字的p2重新赋值new person(50)可以看作p2 = x4567;
-		   所以编译错误
-		*/
-
+		 *  final 关键字的p2重新赋值new person(50)可以看作p2 = x4567;
+		 *  所以编译错误
+	     */
     }
 }

@@ -6,5 +6,6 @@ package com.example.service;
  * @apiNote TODO
  */
 public interface IpCountService {
+
     void IpCount();
 }

@@ -10,11 +10,8 @@ import org.slf4j.LoggerFactory;
  */
 public class Dog implements Animals {
 
-    private final Logger log = LoggerFactory.getLogger(Dog.class);
-
     @Override
     public void sayHello() {
-        log.debug("Hello, I am Dog.");
         System.out.println("Hello, I am Dog.");
     }
 }

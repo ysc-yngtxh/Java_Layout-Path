@@ -8,13 +8,10 @@ import org.slf4j.LoggerFactory;
  * @dateTime 2024-08-12 20:00
  * @apiNote TODO
  */
-public class White implements Color{
-
-    private final Logger log = LoggerFactory.getLogger(White.class);
+public class White implements Color {
 
     @Override
     public void takeColor() {
-        log.debug("Hello, I am White.");
         System.out.println("Hello, I am White.");
     }
 }

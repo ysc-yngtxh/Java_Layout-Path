@@ -10,11 +10,8 @@ import org.slf4j.LoggerFactory;
  */
 public class Honey implements Food {
 
-    private final Logger log = LoggerFactory.getLogger(Honey.class);
-
     @Override
     public void sayHello() {
-        log.debug("Hello, I am Honey.");
         System.out.println("Hello, I am Honey.");
     }
 }

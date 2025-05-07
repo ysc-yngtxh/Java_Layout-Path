@@ -10,11 +10,8 @@ import org.slf4j.LoggerFactory;
  */
 public class Red implements Color {
 
-    private final Logger log = LoggerFactory.getLogger(Red.class);
-
     @Override
     public void takeColor() {
-        log.debug("Hello, I am Red.");
         System.out.println("Hello, I am Red.");
     }
 }

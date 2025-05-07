@@ -10,11 +10,8 @@ import org.slf4j.LoggerFactory;
  */
 public class Train implements Car {
 
-    private final Logger log = LoggerFactory.getLogger(Train.class);
-
     @Override
     public void sayHello() {
-        log.debug("Hello, I am Train.");
         System.out.println("Hello, I am Train.");
     }
 }

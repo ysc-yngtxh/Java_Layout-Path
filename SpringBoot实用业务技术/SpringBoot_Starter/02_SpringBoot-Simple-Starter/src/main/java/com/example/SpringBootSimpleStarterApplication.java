@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @SpringBootApplication
-public class SpringBootTestApplication {
+public class SpringBootSimpleStarterApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootTestApplication.class, args);
+        SpringApplication.run(SpringBootSimpleStarterApplication.class, args);
     }
 
     @Autowired
@@ -28,5 +28,4 @@ public class SpringBootTestApplication {
     public String test1() {
         return "自定义的轮子 -- 开箱即用！";
     }
-
 }

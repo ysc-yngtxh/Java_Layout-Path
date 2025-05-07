@@ -22,7 +22,7 @@
 
     <modules>
         <module>01_SpringBoot-Starter-IpCount</module>
-        <module>02_SpringBoot-Test</module>
+        <module>02_SpringBoot-Simple-Starter</module>
     </modules>
     <packaging>pom</packaging>
 

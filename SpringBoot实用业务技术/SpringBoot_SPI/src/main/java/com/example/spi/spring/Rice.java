@@ -16,12 +16,9 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnClass({EnableCustomDependency.class})
 public class Rice implements Food {
 
-    private final Logger log = LoggerFactory.getLogger(Rice.class);
-
     @Override
     public void sayHello() {
-        log.debug("Hello, I am Optimus Prime.");
-        System.out.println("Hello, I am Optimus Prime.");
+        System.out.println("Hello, I am Rice.");
     }
 
     @Bean

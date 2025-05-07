@@ -22,7 +22,7 @@ public class IpCountServiceImpl implements IpCountService {
     @Autowired
     private IpAutoConfiguration ipAutoConfiguration;
 
-    private Map<String, Integer> map = new HashMap<>();
+    private final Map<String, Integer> map = new HashMap<>();
 
     public void IpCount() {
         // 获得客户端的ip地址
@@ -39,8 +39,8 @@ public class IpCountServiceImpl implements IpCountService {
             } else {
                 System.out.println("\t\t\tip访问监控");
                 System.out.println("+----------ip----------+----count----+");
-                System.out.println("|\t\t" + key + "\t\t\t\t" + value);
-                System.out.println("+----------------------+-------------+");
+                System.out.println("|\t\t" + key + "\t\t|\t\t" + value + "\t\t|");
+                System.out.println("+----------------------+-------------+\n");
             }
         });
     }

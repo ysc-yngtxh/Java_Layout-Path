@@ -8,7 +8,7 @@ public enum DisplayModeEnum {
     SIMPLE("simple"),
     DETAILED("detailed");
 
-    private String mode;
+    private final String mode;
 
     DisplayModeEnum(String mode) {
         this.mode = mode;
