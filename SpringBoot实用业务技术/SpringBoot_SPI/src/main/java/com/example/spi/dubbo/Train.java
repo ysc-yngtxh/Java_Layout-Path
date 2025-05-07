@@ -8,13 +8,13 @@ import org.slf4j.LoggerFactory;
  * @dateTime 2024-02-19 08:00
  * @apiNote TODO
  */
-public class Motorcycle implements Car {
+public class Train implements Car {
 
-    private final Logger log = LoggerFactory.getLogger(Motorcycle.class);
+    private final Logger log = LoggerFactory.getLogger(Train.class);
 
     @Override
     public void sayHello() {
-        log.debug("Hello, I am Motorcycle.");
-        System.out.println("Hello, I am Motorcycle.");
+        log.debug("Hello, I am Train.");
+        System.out.println("Hello, I am Train.");
     }
 }

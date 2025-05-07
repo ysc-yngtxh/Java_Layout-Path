@@ -1,21 +1,15 @@
 package com.example.aop;
 
 import com.example.annotation.GetVal;
-import com.example.controller.ObjectsSpELController;
 import com.example.registry.ApplicationContextRegister;
 import java.util.Random;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.expression.BeanFactoryResolver;
-import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.ParserContext;
@@ -26,19 +20,15 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-08-07 22:25
+ * @dateTime 2024-08-07 22:00
  * @apiNote TODO
  */
 @Aspect
 @Component
 public class AspectAop {
 
-    @Autowired
-    private ApplicationContextRegister applicationContextRegister;
-
     @Pointcut(value = "@annotation(com.example.annotation.GetVal)")
-    public void pointCut() {
-    }
+    public void pointCut() {}
 
     @Before(value = "pointCut()")
     public void before(JoinPoint joinPoint) throws NoSuchMethodException {
@@ -97,10 +87,11 @@ public class AspectAop {
                 // 设置解析器上下文中表达式的前缀和后缀
                 parserContext = new TemplateParserContext("@{", "}");
             }
-            // 3、解析表达式
+            // 3、解析表达式，传入解析器上下文
             expression = parser.parseExpression(annotationValue, parserContext);
         } else {
-            // 3、解析表达式
+            // 3、解析表达式，没有传入解析器上下文，即使用默认的解析器上下文
+            //    默认的解析器上下文是没有前后缀的，即直接解析纯表达式。
             expression = parser.parseExpression(annotationValue);
         }
         // 4、设置计算上下文（SpEL解析器默认不知道这个表达式是取哪个对象的值，如果不指定解析对象，就无法进行解析。）
@@ -109,11 +100,12 @@ public class AspectAop {
             // 解析表达式后，对应的对象进行赋值
             context.setVariable(parameterNames[i], args[i]);
         }
+        // 5、SpEL表达式可能需要访问Spring容器中的Bean。例如：@GetVal("#{@myService.doSomething()}")
+        //    默认情况下，SpEL表达式并不知道如何从Spring容器中查找Bean，因此需要通过BeanResolver来让SpEL表达式能够访问Spring容器中的Bean。
         ApplicationContext applicationContext = ApplicationContextRegister.getApplicationContext();
         // 解析 Bean：需要注入一个BeanResolver来解析bean引用，此处注入 BeanFactoryResolver
         context.setBeanResolver(new BeanFactoryResolver(applicationContext));
-        // 5、获取解析结果
-        System.out.println("SpEl表达式的值：" + expression.getValue(context));
+        // 6、获取解析结果
+        System.out.println("SpEL表达式的值：" + expression.getValue(context));
     }
 }
-

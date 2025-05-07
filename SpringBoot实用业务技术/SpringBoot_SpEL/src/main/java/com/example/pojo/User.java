@@ -1,6 +1,5 @@
 package com.example.pojo;
 
-import java.math.BigDecimal;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,10 +7,9 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-08-07 22:24
+ * @dateTime 2024-08-07 22:00
  * @apiNote TODO
  */
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

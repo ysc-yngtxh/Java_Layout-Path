@@ -4,7 +4,7 @@ import com.alibaba.dubbo.common.extension.ExtensionLoader;
 import com.example.spi.custom.Color;
 import com.example.spi.dubbo.Car;
 import com.example.spi.jdk.Animals;
-import com.example.spi.spring.Robot;
+import com.example.spi.spring.Food;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.ServiceLoader;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,8 +30,7 @@ public class SpringBootSpiApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(SpringBootSpiApplication.class, args);
-        List<String> collect = Arrays.stream(context.getBeanDefinitionNames())
-                .collect(Collectors.toList());
+        List<String> collect = Arrays.stream(context.getBeanDefinitionNames()).toList();
         System.out.println("customTemplate是否存在：" + collect.contains("customTemplate"));
     }
 
@@ -65,9 +63,9 @@ public class SpringBootSpiApplication implements CommandLineRunner {
         //   区别：在是否实例化实现类的层面上，SpringBoot会依据@Conditional注解来判断是否进行实例化并注入进容器中，
         //        而jdk会在next方法内部懒加载实现类。
         //   缺陷：和Java SPI一样，Spring SPI也无法获取某个固定的实现，只能按顺序获取所有实现
-        // List<Robot> robots = SpringFactoriesLoader.loadFactories(Robot.class, Thread.currentThread().getContextClassLoader());
-        List<Robot> robots = SpringFactoriesLoader.loadFactories(Robot.class, null); // 第二个参数为null表示使用当前的类加载器
-        robots.forEach(Robot::sayHello);
+        // List<Food> foods = SpringFactoriesLoader.loadFactories(Food.class, Thread.currentThread().getContextClassLoader());
+        List<Food> foods = SpringFactoriesLoader.loadFactories(Food.class, null); // 第二个参数为null表示使用当前的类加载器
+        foods.forEach(Food::sayHello);
 
 
         System.out.println("=======================================================");

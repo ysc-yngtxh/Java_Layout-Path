@@ -1,15 +1,13 @@
 package com.example.controller;
 
 import com.example.annotation.GetVal;
-import com.example.pojo.User;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-08-07 22:31
+ * @dateTime 2024-08-07 22:00
  * @apiNote TODO 解析文本
  */
 @RestController
@@ -33,7 +31,7 @@ public class TestSpELController {
     @RequestMapping("/test3")
     @GetVal(value = "@{'Hello World -- '.toUpperCase() + #name}", enable = "false")
     public String test3(@RequestParam String name) {
-        // 很明显，这个接口报错。因为使用默认解析表达式无法解析 @{} 符号
+        // 很明显，这个接口报错。因为使用的默认解析表达式中的前后缀为 #{} 符号
         return "程序报错500！！！";
     }
     @RequestMapping("/test4")

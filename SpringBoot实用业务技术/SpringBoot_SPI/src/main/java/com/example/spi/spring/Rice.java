@@ -9,14 +9,14 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-02-19 08:42
+ * @dateTime 2024-02-19 08:00
  * @apiNote TODO
  */
 @Configuration
 @ConditionalOnClass({EnableCustomDependency.class})
-public class OptimusPrime implements Robot {
+public class Rice implements Food {
 
-    private final Logger log = LoggerFactory.getLogger(OptimusPrime.class);
+    private final Logger log = LoggerFactory.getLogger(Rice.class);
 
     @Override
     public void sayHello() {
