@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>12_Springboot-Restful</artifactId>
+    <artifactId>12_Springboot-使用RESTful</artifactId>
     <version>1.0.0</version>
-    <name>12_Springboot-使用RESTful</name>
-    <description>12_Springboot-使用RESTful</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>1.8</java.version>

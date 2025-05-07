@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.bjpowernode.springboot</groupId>
-    <artifactId>29_SpringBoot-Thymeleaf-Loop</artifactId>
+    <artifactId>29_SpringBoot-Thymeleaf系列功能</artifactId>
     <version>1.0.0</version>
-    <name>29_SpringBoot-Thymeleaf系列功能</name>
-    <description>29_SpringBoot-Thymeleaf系列功能</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>1.8</java.version>

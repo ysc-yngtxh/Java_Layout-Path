@@ -6,5 +6,6 @@ package com.example.config;
  * @apiNote TODO
  */
 public interface UserService {
+
     void test();
 }

@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>23_SpringBoot-UTF8</artifactId>
+    <artifactId>23_SpringBoot-字符编码</artifactId>
     <version>1.0.0</version>
-    <name>23_SpringBoot-字符编码</name>
-    <description>23_SpringBoot-字符编码</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>1.8</java.version>

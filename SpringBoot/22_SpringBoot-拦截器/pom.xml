@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>22_SpringBoot-Interceptor</artifactId>
+    <artifactId>22_SpringBoot-拦截器</artifactId>
     <version>1.0.0</version>
-    <name>22_SpringBoot-拦截器</name>
-    <description>22_SpringBoot-拦截器</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>1.8</java.version>
