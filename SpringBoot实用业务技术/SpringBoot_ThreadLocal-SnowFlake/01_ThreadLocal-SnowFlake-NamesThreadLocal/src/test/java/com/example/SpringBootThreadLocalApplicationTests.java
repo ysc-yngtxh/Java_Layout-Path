@@ -32,7 +32,7 @@ class SpringBootThreadLocalApplicationTests {
 		Runnable A = () -> {
 			for (int i = 0; i < 5; i++) {
 				// 方法入口处，设置一个变量和当前线程绑定
-				setAndPrintData(new User(i, "游诗成" + i));
+				setAndPrintData(new User(i, "游家纨绔" + i));
 				// 调用其它方法，其它方法内部也能获取到刚放进去的变量
 				getAndPrintData();
 				THREAD_LOCAL.remove();
@@ -43,7 +43,7 @@ class SpringBootThreadLocalApplicationTests {
 		Runnable B = () -> {
 			for (int i = 0; i < 5; i++) {
 				// 方法入口处，设置一个变量和当前线程绑定
-				setAndPrintData(new User(i, "曹玉敏" + i));
+				setAndPrintData(new User(i, "曹家千金" + i));
 				// 调用其它方法，其它方法内部也能获取到刚放进去的变量
 				getAndPrintData();
 				THREAD_LOCAL.remove();

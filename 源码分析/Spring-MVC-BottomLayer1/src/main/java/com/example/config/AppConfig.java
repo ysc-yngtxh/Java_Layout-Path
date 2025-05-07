@@ -8,5 +8,4 @@ import org.springframework.context.annotation.Configuration;
  * @apiNote TODO
  */
 @Configuration
-public class AppConfig {
-}
+public class AppConfig {}

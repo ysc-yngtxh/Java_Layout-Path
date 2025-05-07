@@ -1,5 +1,6 @@
 package com.example.v1.entity;
 
+import java.io.Serial;
 import lombok.Data;
 import lombok.ToString;
 
@@ -13,7 +14,7 @@ import java.io.Serializable;
 @Data
 @ToString
 public class Student implements Serializable {
-
+    @Serial
     private static final long serialVersionUID = 884930802771289886L;
 
     private Integer id;
@@ -30,4 +31,3 @@ public class Student implements Serializable {
      */
     private String age;
 }
-
