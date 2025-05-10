@@ -21,8 +21,8 @@ import java.util.Locale;
 
 /**
  * 自定义本地解析器
- *  默认使用的环境解析器是 AcceptHeaderLocaleResolver
- *  自定义语言环境解析器，然后在引入到WebMvc配置类中，来替代原有的语言环境解析器
+ * 默认使用的环境解析器是 AcceptHeaderLocaleResolver
+ * 自定义语言环境解析器，然后在引入到WebMvc配置类中，来替代原有的语言环境解析器
  */
 @Slf4j
 @Configuration

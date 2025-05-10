@@ -15,7 +15,9 @@ public class SpringBootZhCnApplication {
                 I18nUtil.getResourceLanguageArgsString(
                         "001"
                         , I18nUtil.getResourceLanguageString("002")
-                        , I18nUtil.getResourceLanguageString("003")));
+                        , I18nUtil.getResourceLanguageString("003")
+                )
+        );
     }
 
     /**
@@ -24,10 +26,10 @@ public class SpringBootZhCnApplication {
      * Locale在很多文化背景和语言敏感型的数据操作上的要求很严格.
      * Locale(String language, String country, String variant)
      *       language：这个是一个必须的参数，初始化需要使用的语言。
-     *       比如：en（英语），zh（中文）, de（德语）等等。
+     *       比如：zh（中文）、en（英语）、de（德语）等等。
      *
      *       country：国家，指定语言的国家版本。
-     *       比如：US,CA等等。
+     *       比如：CN、US、CA等等。
      *
      *       variant：个人把这个理解为类别，比如有四川话，湖南话等等，但都是中文。
      */

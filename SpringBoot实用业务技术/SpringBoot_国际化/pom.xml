@@ -10,7 +10,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot_zh-CN</artifactId>
+    <artifactId>SpringBoot_ZH-CN</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>SpringBoot_国际化</name>
     <description>SpringBoot_国际化</description>

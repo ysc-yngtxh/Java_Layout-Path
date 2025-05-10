@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author 游家纨绔
- * @version 1.0
  * @description: TODO
- * @date 2023/3/10 21:47
+ * @date 2023/3/10 21:00
  */
 @Controller
 @RequestMapping("/ysc")

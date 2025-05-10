@@ -11,18 +11,16 @@ import java.util.Arrays;
 
 /**
  * @author 游家纨绔
- * @version 1.0
  * @description: TODO
- * @date 2023/3/9 23:24
+ * @date 2023/3/9 23:00
  */
 @Configuration
 public class AppI18nConfig implements InitializingBean {
 
-    /**
-     * InitializingBean是Spring提供的拓展性接口，InitializingBean接口为bean提供了属性初始化后的处理方法，
-     * 它只有一个afterPropertiesSet方法，凡是继承该接口的类，在bean的属性初始化后都会执行该方法。
-     * 执行顺序优先级：构造方法、注解postConstruct，实现InitializingBean方法afterPropertiesSet，bean初始化init方法
-     *              构造方法 > postConstruct > afterPropertiesSet > init11方法。
+    /** InitializingBean是Spring提供的拓展性接口，InitializingBean接口为bean提供了属性初始化后的处理方法，
+     *  它只有一个afterPropertiesSet方法，凡是继承该接口的类，在bean的属性初始化后都会执行该方法。
+     *  执行顺序优先级：构造方法、注解postConstruct，实现InitializingBean方法afterPropertiesSet，bean初始化init方法
+     *               构造方法 > postConstruct > afterPropertiesSet > init11方法。
      */
 
     private static AppI18nConfig appI18nConfig;

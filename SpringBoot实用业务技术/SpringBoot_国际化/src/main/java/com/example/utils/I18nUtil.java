@@ -24,10 +24,10 @@ import java.util.stream.Collectors;
 /**
  * @author 游家纨绔
  * @version 1.0
- * @date 2023/3/9 23:19
+ * @date 2023/3/9 23:00
  */
 @Slf4j
-public class I18nUtil{
+public class I18nUtil {
     private static final Logger logger = LoggerFactory.getLogger(I18nUtil.class);
     private static Properties prop = null;
 
