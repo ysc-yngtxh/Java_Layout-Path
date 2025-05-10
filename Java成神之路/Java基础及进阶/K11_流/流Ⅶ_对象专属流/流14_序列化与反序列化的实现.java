@@ -1,4 +1,4 @@
-package K11_流.流Ⅵ_对象专属流;
+package K11_流.流Ⅶ_对象专属流;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -45,12 +45,12 @@ public class 流14_序列化与反序列化的实现 {
         // 创建Java对象
         Student s = new Student(111, "游诗成", "男");
         // 序列化
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/流Ⅵ_对象专属流/ObjectFile"));
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/流Ⅶ_对象专属流/ObjectFile"));
         // 序列化对象
         oos.writeObject(s);
 
         // 反序列化
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/流Ⅵ_对象专属流/ObjectFile"));
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/流Ⅶ_对象专属流/ObjectFile"));
         Object obj = ois.readObject();
         // 反序列化回来时一个学生对象，所以会调用学生对象的toString方法
         System.out.println(obj);

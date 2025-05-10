@@ -19,8 +19,8 @@ import java.util.Set;
 /**
  * 节点表(TreeChildren)实体类
  *
- * @author makejava
- * @since 2023-05-06 13:37:47
+ * @author 游家纨绔
+ * @since 2023-05-06 13:30:00
  */
 @Data
 @AllArgsConstructor
@@ -63,4 +63,3 @@ public class TreeChildren implements Serializable {
     private transient List<TreeChildren> childrenList = new ArrayList<>();
 
 }
-

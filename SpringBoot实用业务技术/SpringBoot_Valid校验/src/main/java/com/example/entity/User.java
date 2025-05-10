@@ -25,7 +25,7 @@ import org.hibernate.validator.constraints.Range;
  * 用户表(User)实体类
  *
  * @author 游家纨绔
- * @since 2024-08-03 16:25:15
+ * @since 2024-08-03 16:00:00
  */
 @Data
 @AllArgsConstructor
@@ -58,12 +58,15 @@ public class User implements Serializable {
     @Email(message = "请提供一个有效的电子邮件地址")
     private String email;
 
+    // 被校验的对象必须为true
     @AssertTrue(message = "属性valid只能为true", groups = {Student.class})
     private boolean valid;
 
+    // 被校验的对象必须为true
     @AssertFalse(message = "属性deleted只能为false", groups = {Teacher.class})
     private boolean deleted;
 
+    // 被校验的对象必须匹配正则表达式
     @Pattern(regexp = "^[1-9]]\\d*$", message = "regex参数值必须是正整数")
     private String regex;
 

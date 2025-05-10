@@ -9,10 +9,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 自定义校验注解
+ * @desc TODO 自定义校验注解
  */
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
+// 通过在自定义注解上添加 @Constraint 注解，可以将该注解标记为一个自定义约束注解。
+// 同时，需要指定一个实现了 ConstraintValidator 接口的验证器类，用于验证该注解所标记的字段或参数是否符合自定义的校验规则。
 @Constraint(validatedBy = IsLeekValidator.class)
 public @interface IsLeek {
 

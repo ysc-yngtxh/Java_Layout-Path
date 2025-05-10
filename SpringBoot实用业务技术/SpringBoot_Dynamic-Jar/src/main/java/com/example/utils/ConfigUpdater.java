@@ -19,6 +19,7 @@ import java.util.Map;
  */
 @Component
 public class ConfigUpdater {
+
     public void updateLoadJars(List<String> jarNames) throws IOException {
         // 读取bootstrap.yml
         Yaml yaml = new Yaml();

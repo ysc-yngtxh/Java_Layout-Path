@@ -4,8 +4,7 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/*
- * File类的常用方法：
+/* File类的常用方法：
  *         getName()       获取文件名，不是目录名
  *         isDirectory()   判断是否是一个目录(文件名)
  *         isFile()        判断是否是一个文件

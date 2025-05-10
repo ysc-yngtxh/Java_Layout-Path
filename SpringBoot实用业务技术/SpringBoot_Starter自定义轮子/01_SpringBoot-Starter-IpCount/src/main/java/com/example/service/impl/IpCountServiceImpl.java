@@ -39,7 +39,7 @@ public class IpCountServiceImpl implements IpCountService {
             } else {
                 System.out.println("\t\t\tip访问监控");
                 System.out.println("+----------ip----------+----count----+");
-                System.out.println("|\t\t" + key + "\t\t|\t\t" + value + "\t|");
+                System.out.println("|      " + key + "       |      " + value + "      |");
                 System.out.println("+----------------------+-------------+\n");
             }
         });

@@ -1,4 +1,4 @@
-package K11_流.流Ⅶ_处理大文件或高性能操作;
+package K11_流.流Ⅷ_处理大文件或高性能操作;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,7 +13,7 @@ import java.nio.file.StandardOpenOption;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-08-21 22:05
+ * @dateTime 2024-08-21 22:00
  * @apiNote TODO
  */
 public class 流19_FileChannel通道 {

@@ -1,7 +1,6 @@
 package M13_反射.反射Ⅰ_获取Class实例化对象;
 
-/*
- * 关于JDK自带的类加载器：
+/* 关于Jdk自带的类加载器：
  *      1、什么是类加载器？
  *            专门负责加载类的命令/工具 -- ClassLoader
  *
@@ -21,11 +20,11 @@ package M13_反射.反射Ⅰ_获取Class实例化对象;
  *                用户可以通过 ClassLoader.getSystemClassLoader() 方法获取到这个类加载器的实例。
  *            自定义类加载器。
  *
- *         双亲（parent）委托机制
- *         指的是 Java 类加载器在加载一个类时，会首先将加载请求委托给它的父类加载器去处理，只有在父类加载器无法完成加载请求时，
- *         子类加载器才会尝试自己加载。这个机制的主要目的是避免类的重复加载和保证 Java 核心类库的正确性。
- *         所以加载顺序一般是:
- *         BootstrapClassLoader -> ExtensionClassLoader -> AppClassLoader -> 自定义类加载器（默认）
+ *         双亲（parent）委托机制工作过程为：
+ *                指的是 Java 类加载器在加载一个类时，会首先将加载请求委托给它的父类加载器去处理，只有在父类加载器无法完成加载请求时，
+ *                子类加载器才会尝试自己加载。这个机制的主要目的是避免类的重复加载和保证 Java 核心类库的正确性。
+ *                所以加载顺序一般是:
+ *                BootstrapClassLoader -> ExtensionClassLoader -> AppClassLoader -> 自定义类加载器（默认）
  *
  *         一般在加载器的构造函数中可以指定父加载器：
  *            没指定父加载器则默认为AppClassLoader ，

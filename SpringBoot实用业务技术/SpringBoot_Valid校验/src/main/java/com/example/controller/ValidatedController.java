@@ -19,8 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
  * 用户表(User)表控制层
  *
  * @author 游家纨绔
- * @since 2024-08-03 16:25:15
+ * @since 2024-08-03 16:00:00
  */
+// @Validated
 @RestController
 public class ValidatedController {
 
@@ -30,14 +31,17 @@ public class ValidatedController {
     // TODO 校验普通参数
     @RequestMapping("/validated1")
     public List<User> queryByPage1(@RequestParam
-                                   @NotNull
+                                   @NotNull(message = "名称不能为空")
                                    @Length(message = "名称不能超过个 {max} 字符", max = 10) String name) {
         return Collections.emptyList();
     }
 
 
-    // 没有指定显示分组的被校验字段和校验注解，默认都是 Default 组（即 Default.class）
-    // 以 @Validated 中定义的分组为准，校验字段没有定义到对应的分组将不会进行校验
+    // TODO 分组校验【Spring的 @Validated 支持分组，而JSR标准的 @Valid 不支持分组】
+    //      分组概念：@Validated中定义的分组，表示会在对应的DTO（实体类）中只校验分组的字段。
+    //              例如：@Validated({User.Student.class})，表示只校验 User 类中 Student 分组的字段，
+    //                   校验字段没有定义到对应的分组将不会进行校验。
+    //      注意：没有指定显示分组的被校验字段和校验注解，默认都是 Default 组（即 Default.class）
 
     // TODO 使用 @Validated 注解，无法实现嵌套校验。因此，User 类中的 UserInfo 属性中的校验规则无法实现
     @RequestMapping("/validated2")

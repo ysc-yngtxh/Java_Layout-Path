@@ -27,7 +27,7 @@ public class IsLeekValidator implements ConstraintValidator<IsLeek, String> {
     public boolean isValid(String name, ConstraintValidatorContext constraintValidatorContext) {
         if (required) {
             // 名字以"新韭菜"开头的则校验通过
-            return !StringUtils.isEmpty(name) && name.startsWith("新韭菜");
+            return !StringUtils.hasText(name) && name.startsWith("新韭菜");
         }
         return false;
     }

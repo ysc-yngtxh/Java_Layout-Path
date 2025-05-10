@@ -1,4 +1,4 @@
-package K11_流.流Ⅵ_对象专属流;
+package K11_流.流Ⅶ_对象专属流;
 
 import java.io.FileReader;
 import java.util.Properties;
@@ -21,7 +21,7 @@ public class 流16_IO和Properties联合使用 {
          * 想将userinfo文件中的数据加载到Properties对象当中
          */
         // 新建一个输入字符流对象
-        FileReader fr = new FileReader(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/流Ⅵ_对象专属流/userinfo.properties");
+        FileReader fr = new FileReader(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/流Ⅶ_对象专属流/userinfo.properties");
 
         // 新建一个Map集合
         Properties pro = new Properties();

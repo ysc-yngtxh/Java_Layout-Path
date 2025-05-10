@@ -1,12 +1,11 @@
-package K11_流.流Ⅶ_处理大文件或高性能操作;
+package K11_流.流Ⅷ_处理大文件或高性能操作;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
 public class 流17_RandomAccessFile {
 
-    /*
-     * RandomAccessFile 是Java中的一个类，它属于 java.io 包。
+    /* RandomAccessFile 是Java中的一个类，它属于 java.io 包。
      * 这个类提供了一种方式来访问文件，允许你读取和写入文件的任意位置，因此被称为“随机访问”。
      *
      * 构造函数：

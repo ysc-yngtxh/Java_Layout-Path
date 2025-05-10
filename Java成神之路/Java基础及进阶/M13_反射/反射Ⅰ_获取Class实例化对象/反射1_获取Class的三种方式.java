@@ -13,12 +13,11 @@ import java.util.Date;
  */
 public class 反射1_获取Class的三种方式 {
     public static void main(String[] args) {
-        /*
-         * 第一种：Class.forName()
-         *  1、静态方法
-         *  2、方法的参数是一个字符串
-         *  3、字符串需要的是一个完整类名
-         *  4、完整类名必须带有包名。java.lang包也不能省略
+        /* 第一种：Class.forName()
+         *     1、静态方法
+         *     2、方法的参数是一个字符串
+         *     3、字符串需要的是一个完整类名
+         *     4、完整类名必须带有包名。java.lang包也不能省略
          */
         Class<?> c1 = null;
         Class<?> c4 = null;

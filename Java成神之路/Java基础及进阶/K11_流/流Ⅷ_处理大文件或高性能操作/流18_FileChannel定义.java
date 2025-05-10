@@ -1,4 +1,4 @@
-package K11_流.流Ⅶ_处理大文件或高性能操作;
+package K11_流.流Ⅷ_处理大文件或高性能操作;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -7,8 +7,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 
-/*
- *  FileChannel 介绍：（用于读取、写入、映射和操作文件的通道。）
+/*  FileChannel 介绍：（用于读取、写入、映射和操作文件的通道。）
  *        在开发中，我们经常需要与文件打交道，以往我们使用传统方式如 FileInputStream 和 FileOutputStream 来读写文件。
  *    但是，当我们处理大文件或需要高性能操作时，这些传统方式可能会显得捉襟见肘。
  *        为了解决传统方式的瓶颈，Java NIO 库引入了 FileChannel，它就像一把锋利的武器，可以让你以更高的效率读写文件。
