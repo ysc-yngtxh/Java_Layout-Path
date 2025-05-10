@@ -6,11 +6,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>19_Spring-事务</artifactId>
+    <artifactId>19_Spring-Transactional</artifactId>
+    <name>19_Spring-事务</name>
+    <description>19_Spring-事务</description>
     <version>1.0-SNAPSHOT</version>
 
-    <name>${project.artifactId}</name>
-    <description>${project.artifactId}</description>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 

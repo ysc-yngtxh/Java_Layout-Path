@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>10_SpringBoot-自定义实现事务</artifactId>
+    <artifactId>10_SpringBoot-CustomTransactional</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>${project.artifactId}</name>
-    <description>${project.artifactId}</description>
+    <name>10_SpringBoot-自定义实现事务</name>
+    <description>10_SpringBoot-自定义实现事务</description>
 
     <properties>
         <java.version>1.8</java.version>

@@ -1,9 +1,0 @@
-
-logging:
-  # 控制台日志输出格式
-  pattern:
-    console: Level-%level %msg%n
-  level:
-    # 控制Spring Boot启动时显示的日志级别
-    root: info
-    com.example: debug

@@ -6,10 +6,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>08_MyBatis-Sql标签列表-二级缓存</artifactId>
+    <artifactId>08_MyBatis-SqlTitle-TwoCache</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>${project.artifactId}</name>
-    <description>${project.artifactId}</description>
+    <name>08_MyBatis-Sql标签列表-二级缓存</name>
+    <description>08_MyBatis-Sql标签列表-二级缓存</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

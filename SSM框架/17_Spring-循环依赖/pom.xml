@@ -6,11 +6,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>17_Spring-循环依赖</artifactId>
+    <artifactId>17_Spring-CircularDependencies</artifactId>
+    <name>17_Spring-循环依赖</name>
+    <description>17_Spring-循环依赖</description>
     <version>1.0-SNAPSHOT</version>
 
-    <name>${project.artifactId}</name>
-    <description>${project.artifactId}</description>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 

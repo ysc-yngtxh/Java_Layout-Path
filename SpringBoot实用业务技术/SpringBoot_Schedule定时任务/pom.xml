@@ -10,10 +10,10 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot_Schedule定时任务</artifactId>
+    <artifactId>SpringBoot_Schedule</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>${project.artifactId}</name>
-    <description>${project.artifactId}</description>
+    <name>SpringBoot_Schedule定时任务</name>
+    <description>SpringBoot_Schedule定时任务</description>
 
     <properties>
         <java.version>23</java.version>

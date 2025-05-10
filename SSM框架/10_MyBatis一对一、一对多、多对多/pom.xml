@@ -6,12 +6,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>10_MyBatis一对一、一对多、多对多</artifactId>
+    <artifactId>10_MyBatisOneToOne,OneToMany,ManyToMany</artifactId>
+    <name>10_MyBatis一对一、一对多、多对多</name>
+    <description>10_MyBatis一对一、一对多、多对多</description>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>${project.artifactId}</name>
-    <description>${project.artifactId}</description>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 

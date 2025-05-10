@@ -10,10 +10,10 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>Mybatis-底层分析3</artifactId>
+    <artifactId>Mybatis-BottomLayer3</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>${project.artifactId}</name>
-    <description>${project.artifactId}</description>
+    <name>Mybatis-底层分析3</name>
+    <description>Mybatis-底层分析3</description>
 
     <properties>
         <java.version>23</java.version>

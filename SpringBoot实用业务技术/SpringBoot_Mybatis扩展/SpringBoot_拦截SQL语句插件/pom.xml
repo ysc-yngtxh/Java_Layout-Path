@@ -11,10 +11,10 @@
 	</parent>
 
 	<groupId>com.example</groupId>
-	<artifactId>SpringBoot_拦截SQL语句插件</artifactId>
+	<artifactId>SpringBoot_InterceptingSQLStatementsPlugin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>${project.artifactId}</name>
-	<description>${project.artifactId}</description>
+	<name>SpringBoot_拦截SQL语句插件</name>
+	<description>SpringBoot_拦截SQL语句插件</description>
 
 	<properties>
 		<java.version>23</java.version>

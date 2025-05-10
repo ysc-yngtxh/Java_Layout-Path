@@ -11,16 +11,16 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot_令牌桶-漏斗-布隆过滤器-限流</artifactId>
+    <artifactId>SpringBoot_Limiting</artifactId>
     <version>1.0.0</version>
-    <name>${project.artifactId}</name>
-    <description>${project.artifactId}</description>
+    <name>SpringBoot_限流</name>
+    <description>SpringBoot_限流</description>
 
     <modules>
-        <module>01_SpringBoot-FixedOrSlideWindowRateLimiter</module>
-        <module>02_SpringBoot-TokenBucket</module>
-        <module>03_SpringBoot-Funnel</module>
-        <module>04_SpringBoot-BloomFilter</module>
+        <module>01_SpringBoot-固定窗口-滑动窗口限流算法</module>
+        <module>02_SpringBoot-令牌桶</module>
+        <module>03_SpringBoot-漏斗</module>
+        <module>04_SpringBoot-布隆过滤器</module>
     </modules>
     <packaging>pom</packaging>
 

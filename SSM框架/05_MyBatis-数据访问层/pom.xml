@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>05_MyBatis-数据访问层</artifactId>
+    <artifactId>05_MyBatis-AccessDateBase</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>${project.artifactId}</name>
-    <description>${project.artifactId}</description>
+    <name>05_MyBatis-数据访问层</name>
+    <description>05_MyBatis-数据访问层</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

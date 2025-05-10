@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>Spring-底层解析1</artifactId>
+    <artifactId>Spring-BottomLayer1</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>${project.artifactId}</name>
-    <description>${project.artifactId}</description>
+    <name>Spring-底层解析1</name>
+    <description>Spring-底层解析1</description>
 
     <properties>
         <java.version>23</java.version>

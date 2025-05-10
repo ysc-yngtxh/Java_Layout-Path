@@ -6,11 +6,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>26_SpringMVC-Jdk17-异常处理类</artifactId>
+    <artifactId>26_SpringMVC-Jdk17-ExceptionHandling</artifactId>
+    <name>26_SpringMVC-Jdk17-异常处理类</name>
+    <description>26_SpringMVC-Jdk17-异常处理类</description>
     <version>1.0-SNAPSHOT</version>
 
-    <name>${project.artifactId}</name>
-    <description>${project.artifactId}</description>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 

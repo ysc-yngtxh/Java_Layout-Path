@@ -6,11 +6,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>12_Spring-设值注入</artifactId>
+    <artifactId>12_Spring-SetValueInject</artifactId>
+    <name>12_Spring-设值注入</name>
+    <description>12_Spring-设值注入</description>
     <version>1.0-SNAPSHOT</version>
 
-    <name>${project.artifactId}</name>
-    <description>${project.artifactId}</description>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 

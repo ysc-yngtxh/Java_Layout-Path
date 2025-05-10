@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>22_SpringMVC-Jdk17-接收参数</artifactId>
+    <artifactId>22_SpringMVC-Jdk17</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <name>${project.artifactId}</name>
-    <description>${project.artifactId}</description>
+    <name>22_SpringMVC-Jdk17-接收参数</name>
+    <description>22_SpringMVC-Jdk17-接收参数</description>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 

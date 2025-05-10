@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>Spring-MVC-底层剖析1</artifactId>
+    <artifactId>Spring-MVC-BottomLayer1</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>${project.artifactId}</name>
-    <description>${project.artifactId}</description>
+    <name>Spring-MVC-底层剖析1</name>
+    <description>Spring-MVC-底层剖析1</description>
     <!--Tomcat服务器是专门用来运行Java Web应用的容器，它部署的是 war 文件或者是已解压的Web应用目录。
         因此在使用Tomcat服务器时，项目应该打包成 war 包部署-->
     <packaging>war</packaging>

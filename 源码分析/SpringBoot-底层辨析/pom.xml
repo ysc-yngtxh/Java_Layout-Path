@@ -10,10 +10,10 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot-底层辨析</artifactId>
+    <artifactId>SpringBoot-BottomLayer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>${project.artifactId}</name>
-    <description>${project.artifactId}</description>
+    <name>SpringBoot-底层辨析</name>
+    <description>SpringBoot-底层辨析</description>
 
     <properties>
         <java.version>23</java.version>

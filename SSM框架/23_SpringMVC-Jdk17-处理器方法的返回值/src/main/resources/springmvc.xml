@@ -17,5 +17,5 @@
     </bean>
 
     <!--注解驱动-->
-    <mvc:annotation-driven/><!--结尾要是mvc的-->
+    <mvc:annotation-driven/> <!--结尾要是mvc的-->
 </beans>

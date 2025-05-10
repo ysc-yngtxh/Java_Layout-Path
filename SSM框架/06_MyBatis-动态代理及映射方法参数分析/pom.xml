@@ -6,10 +6,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>06_MyBatis-动态代理及映射方法参数分析</artifactId>
+    <artifactId>06_MyBatis-DynamicProxy-MappinggMethodParam</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>${project.artifactId}</name>
-    <description>${project.artifactId}</description>
+    <name>06_MyBatis-动态代理及映射方法参数分析</name>
+    <description>06_MyBatis-动态代理及映射方法参数分析</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

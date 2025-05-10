@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>SpringBoot_Java-Agent探针技术</artifactId>
+	<artifactId>SpringBoot_Java-Agent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>${project.artifactId}</name>
-	<description>${project.artifactId}</description>
+	<name>SpringBoot_Java-Agent探针技术</name>
+	<description>SpringBoot_Java-Agent探针技术</description>
 
 	<properties>
 		<java.version>23</java.version>

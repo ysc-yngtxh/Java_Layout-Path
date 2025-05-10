@@ -11,10 +11,10 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot_文件秒传-分片-断点续传</artifactId>
+    <artifactId>SpringBoot_SecondsDown-Split-BreakContinuation</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>${project.artifactId}</name>
-    <description>${project.artifactId}</description>
+    <name>SpringBoot_文件秒传-分片-断点续传</name>
+    <description>SpringBoot_文件秒传-分片-断点续传</description>
 
     <properties>
         <java.version>23</java.version>

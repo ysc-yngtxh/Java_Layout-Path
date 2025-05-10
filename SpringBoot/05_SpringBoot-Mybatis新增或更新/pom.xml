@@ -10,10 +10,10 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>05_SpringBoot-Mybatis新增或更新</artifactId>
+    <artifactId>05_SpringBoot-Mybatis-InsertOrupdate</artifactId>
     <version>1.0.0</version>
-    <name>${project.artifactId}</name>
-    <description>${project.artifactId}</description>
+    <name>05_SpringBoot-Mybatis新增或更新</name>
+    <description>05_SpringBoot-Mybatis新增或更新</description>
 
     <properties>
         <java.version>1.8</java.version>

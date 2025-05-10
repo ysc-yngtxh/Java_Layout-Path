@@ -11,10 +11,10 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>SpringBoot_Starter自定义轮子</artifactId>
+    <artifactId>SpringBoot_Starter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>${project.artifactId}</name>
-    <description>${project.artifactId}</description>
+    <name>SpringBoot_Starter自定义轮子</name>
+    <description>SpringBoot_Starter自定义轮子</description>
 
     <properties>
         <java.version>23</java.version>

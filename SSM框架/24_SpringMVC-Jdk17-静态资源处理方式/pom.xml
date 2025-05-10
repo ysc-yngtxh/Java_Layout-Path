@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>24_SpringMVC-Jdk17-静态资源处理方式</artifactId>
+    <artifactId>24_SpringMVC-Jdk17-StaticResourceHandling</artifactId>
+    <name>24_SpringMVC-Jdk17-静态资源处理方式</name>
+    <description>24_SpringMVC-Jdk17-静态资源处理方式</description>
     <version>1.0-SNAPSHOT</version>
 
-    <name>${project.artifactId}</name>
-    <description>${project.artifactId}</description>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 

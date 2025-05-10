@@ -6,11 +6,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>27_SpringMVC-Jdk17-拦截器</artifactId>
+    <artifactId>27_SpringMVC-Jdk17-Interceptor</artifactId>
+    <name>27_SpringMVC-Jdk17-拦截器</name>
+    <description>27_SpringMVC-Jdk17-拦截器</description>
     <version>1.0-SNAPSHOT</version>
 
-    <name>${project.artifactId}</name>
-    <description>${project.artifactId}</description>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
