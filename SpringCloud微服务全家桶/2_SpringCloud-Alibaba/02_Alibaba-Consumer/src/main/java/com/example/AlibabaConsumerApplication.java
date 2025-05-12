@@ -17,7 +17,7 @@ public class AlibabaConsumerApplication {
     // 接口调用需要微服务方式的：需要以负载均衡的方式调用(添加@LoadBalanced注解)；
     // 接口调用是直连方式的：则不需要负载均衡。直连的时候必须删除注解@LoadBalanced，否则访问失败
     @LoadBalanced
-    public RestTemplate restTemplate(){
+    public RestTemplate restTemplate() {
         return new RestTemplate();
     }
 }

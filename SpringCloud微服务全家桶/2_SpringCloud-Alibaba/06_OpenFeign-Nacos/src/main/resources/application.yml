@@ -1,4 +1,3 @@
-
 server:
   port: 8085
 
@@ -45,7 +44,7 @@ spring:
         request:
           # 开启请求压缩
           enabled: true
-          mime-types: ["text/xml", "application/xml", "application/json", "video/mp4"]
+          mime-types: [ "text/xml", "application/xml", "application/json", "video/mp4" ]
           # 请求类型为["text/xml", "application/xml", "application/json", "video/mp4"]的请求，请求数据大小达到了1024K的进行压缩
           min-request-size: 1024
         response:

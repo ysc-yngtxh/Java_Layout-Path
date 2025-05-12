@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class UserServiceImpl implements UserService {
+
     @Override
     public User queryById(Integer id) {
         return User.builder().alias("不好意思嗷，熔断了！！！").build();

@@ -22,7 +22,7 @@ public class SentinelController {
     // 接口"/getDefaultHandler"默认被定义为 Sentinel的资源，属于URL限流。
     // 但这资源不属于Controller层，而是属于Web资源(DispatcherServlet)
     @GetMapping("/getDefaultHandler")
-    public String getDefaultHandler(){
+    public String getDefaultHandler() {
         return defaultHandlerService.defaultBlockRule();
     }
 
@@ -31,7 +31,7 @@ public class SentinelController {
     // 接口"/getDefaultHandler"默认被定义为 Sentinel的资源，属于URL限流。
     // 但这资源不属于Controller层，而是属于Web资源(DispatcherServlet)
     @GetMapping("/getDefinitionBlockRule")
-    public String getDefinitionBlockRule(){
+    public String getDefinitionBlockRule() {
         return defaultHandlerService.definitionBlockRule();
     }
 
@@ -40,7 +40,7 @@ public class SentinelController {
     // 接口"/getDefaultHandler"默认被定义为 Sentinel的资源，属于URL限流。
     // 但这资源不属于Controller层，而是属于Web资源(DispatcherServlet)
     @GetMapping("/getMethodById")
-    public String getMethodById(@RequestParam Integer id){
+    public String getMethodById(@RequestParam Integer id) {
         return methodService.selectMethodById(id);
     }
 
@@ -48,7 +48,7 @@ public class SentinelController {
     // 基于Class方式的限流、熔断降级写法。
     // 接口"/getClassById"已经被定义为 Sentinel的资源，但这资源不属于Controller，而是属于Web资源(DispatcherServlet)
     @GetMapping("/getClassById")
-    public String getClassById(@RequestParam Integer id){
+    public String getClassById(@RequestParam Integer id) {
         return classService.selectClassById(id);
     }
 }

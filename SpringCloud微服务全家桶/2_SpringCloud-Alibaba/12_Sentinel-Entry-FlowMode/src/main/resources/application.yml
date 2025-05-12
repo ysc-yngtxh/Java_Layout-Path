@@ -1,4 +1,3 @@
-
 server:
   port: 9500
 
@@ -20,10 +19,9 @@ spring:
         # 控制台仪表盘地址
         dashboard: 127.0.0.1:8010
       # 关闭URL资源
-#     filter:
-#       enabled: false
+      #     filter:
+      #       enabled: false
 
       # 默认该设置为true，会收敛所有URL入口，即对同一请求URL到了Sentinel后会自动统一(unify)为一个URL。
       # 即Sentinel只关心被访问资源，不需要区分请求的来源。设置为false后，就可以区分请求来源了。用于流控中的链路模式
       web-context-unify: false
-

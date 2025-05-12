@@ -15,10 +15,11 @@ import java.util.List;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-02-19 21:01
+ * @dateTime 2024-02-19 21:00
  * @apiNote TODO 动态流控规则
  */
 public class FlowRule {
+
     public void readWriteRuleFileFlow(String ruleFilePath) throws IOException {
         String ruleFile = ruleFilePath + "/flow-rule.csv";
         createRuleFile(ruleFile);

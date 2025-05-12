@@ -2,31 +2,27 @@ package com.example.config;
 
 import com.alibaba.cloud.nacos.NacosConfigManager;
 import com.alibaba.cloud.nacos.NacosConfigProperties;
-import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.shaded.com.google.common.util.concurrent.ThreadFactoryBuilder;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.context.annotation.Configuration;
-
 import java.util.concurrent.Executor;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @author 游家纨绔
  * @dateTime 2024-02-26 22:30
  * @apiNote TODO SpringBoot + Nacos 实现了一个动态化线程池
  */
-/** 这个@RefreshScope 是Spring Cloud中的一个注解，用来实现Bean中属性的动态刷新。
- *  使用 @RefreshScope 注解的会生成一个代理对象，当属性发生变更的时候，代理对象会将原先的属性Bean清除，
- *  然后重新创建Bean，代理对象会从重新创建的Bean中获取属性数据。
- */
+// 这个@RefreshScope 是Spring Cloud中的一个注解，用来实现Bean中属性的动态刷新。
+// 使用 @RefreshScope 注解的会生成一个代理对象，当属性发生变更的时候，代理对象会将原先的属性Bean清除，
+// 然后重新创建Bean，代理对象会从重新创建的Bean中获取属性数据。
 @RefreshScope
 @Configuration
 public class DynamicThreadPool implements InitializingBean {

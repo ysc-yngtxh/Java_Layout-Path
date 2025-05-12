@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;;
 
-    public User queryById(Integer id){
+    public User queryById(Integer id) {
         /*try {
             TimeUnit.SECONDS.sleep(2);
         } catch (InterruptedException e) {
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public void insertUser(User user){
+    public void insertUser(User user) {
         userMapper.insert(user);
     }
 }

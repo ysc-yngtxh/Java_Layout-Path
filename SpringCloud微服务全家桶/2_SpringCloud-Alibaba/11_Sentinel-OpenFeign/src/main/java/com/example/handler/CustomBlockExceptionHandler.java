@@ -19,6 +19,7 @@ import java.io.PrintWriter;
  * @apiNote TODO 自定义熔断降级异常处理(返回响应流)
  */
 public class CustomBlockExceptionHandler implements BlockExceptionHandler {
+
     @Override
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, BlockException e) throws Exception {
         httpServletResponse.setStatus(429);

@@ -37,7 +37,7 @@ public class MyController {
     private String username;
 
     @GetMapping("/{id}")
-    public User query(@PathVariable("id") Integer id){
+    public User query(@PathVariable("id") Integer id) {
         System.err.println("name -- " + username);
         return userService.queryById(id);
     }

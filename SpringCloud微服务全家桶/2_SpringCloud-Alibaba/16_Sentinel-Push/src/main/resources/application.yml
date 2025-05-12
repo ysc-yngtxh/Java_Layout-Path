@@ -20,7 +20,7 @@ spring:
 
       # 配置Sentinel在Nacos中的数据源配置
       datasource:
-        flows:  # 这个是自定义的名称，可随意取名
+        flows: # 这个是自定义的名称，可随意取名
           nacos:
             server-addr: localhost:8848
             username: nacos

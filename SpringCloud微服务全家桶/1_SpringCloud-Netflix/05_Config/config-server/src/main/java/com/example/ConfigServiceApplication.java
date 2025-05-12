@@ -13,12 +13,12 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 */
 @SpringBootApplication
 public class ConfigServiceApplication {
+
     public static void main(String[] args) {
         SpringApplication.run(ConfigServiceApplication.class,args);
     }
 }
-/**
- * 步骤：
+/** 步骤：
  *     1、查看在Eureka服务中是否有Config Server服务
  *     2、打开 http://localhost:8888/test_config/default/master    default运行版本
  *        或者 http://localhost:8888/test_config/dev/master        dev测试版本

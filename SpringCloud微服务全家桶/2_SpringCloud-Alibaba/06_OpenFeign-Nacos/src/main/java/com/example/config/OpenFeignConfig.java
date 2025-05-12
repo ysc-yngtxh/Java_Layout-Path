@@ -37,7 +37,7 @@ public class OpenFeignConfig {
 
     // 当OpenFeign进行重试，我们发现日志只有一条信息。所以要想查看重试的每一条日志信息，就必须将OpenFeign的日志级别修改为最高
     @Bean
-    public Logger.Level level(){
+    public Logger.Level level() {
         return Logger.Level.FULL;
     }
 }

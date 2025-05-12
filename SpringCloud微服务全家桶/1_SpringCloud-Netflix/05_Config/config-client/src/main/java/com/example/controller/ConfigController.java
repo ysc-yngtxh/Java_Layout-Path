@@ -20,7 +20,7 @@ public class ConfigController {
     private String str;
 
     @RequestMapping("/test")
-    public String test(){
+    public String test() {
         return "测试控制类！i = " + i + ";str = " + str;
     }
 }

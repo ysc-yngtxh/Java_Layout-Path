@@ -3,14 +3,13 @@ package com.example.filter;
 import com.google.common.util.concurrent.RateLimiter;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
+import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 
 /**
  * @author 游家纨绔
@@ -52,7 +51,7 @@ public class LoginFilter extends ZuulFilter {
         String token = request.getParameter("token");
         log.info(token);
         // 判断是否存在
-        if(StringUtils.isEmpty(token)){
+        if (StringUtils.isEmpty(token)) {
             // 不存在，未登录，则拦截
             ctx.setSendZuulResponse(false);
             // 返回403
@@ -69,7 +68,7 @@ public class LoginFilter extends ZuulFilter {
              首先我们会有个桶，如果里面没有满那么就会以一定 固定的速率 会往里面放令牌，一个请求过来首先要从桶中获取令牌，
              如果没有获取到，那么这个请求就拒绝，如果获取到那么就放行。*/
         /*
-        if(!RATE_LIMITER.tryAcquire()) {
+        if (!RATE_LIMITER.tryAcquire()) {
             log.warn("访问量超载");
             // 指定当前请求未通过过滤
             ctx.setSendZuulResponse(false);

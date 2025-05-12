@@ -1,4 +1,3 @@
-
 # 启动导引配置
 # 在Spring Boot启动时，第一个加载的配置文件，application.yml 优先级———1
 # 为Spring Boot初始化环境，提供一个预加载配置
@@ -13,7 +12,7 @@ spring:
       name: config_application  # 要加载的配置文件主体命名
       label: master             # 要加载的配置，所在分支命名，默认为null，相当于master
       profile: default          # 要加载的配置的profile是什么，默认default
-                                # 上述配置组装文件就是：config_application.yml
+      # 上述配置组装文件就是：config_application.yml
 
 # 这里的热刷新配置信息写在客户端，并增加了基于bus提供的全局热刷新(搭配RabbitMq实现)
 management:

@@ -1,4 +1,3 @@
-
 server:
   port: 9299
 
@@ -20,8 +19,8 @@ spring:
         # 控制台仪表盘地址
         dashboard: 127.0.0.1:8010
       # 关闭URL资源
-#     filter:
-#       enabled: false
+    #     filter:
+    #       enabled: false
     nacos:
       discovery:
         server-addr: localhost:8848

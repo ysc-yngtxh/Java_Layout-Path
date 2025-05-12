@@ -8,140 +8,140 @@ spring:
         # TODO 1、path路径路由   地址格式：http://host[:port]/[abs_path]   断言规则首字母都是大写
         - id: my_route-1             # 自定义的路由名称，无特殊意义
           uri: http://localhost:8081
-          predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 localhost:8081
+          predicates: # 以下predicates断言为true，则 localhost:8086 跳转 localhost:8081
             # path路径为 /provider/*，表示可以访问并跳转到 localhost:8081/provider/*
             # path路径为 /consumer/*，表示可以访问并跳转到 localhost:8081/consumer/*
             - Path=/provider/**, /consumer/**, /tb
 
         # TODO 2、前置断言路由
-#        - id: my_route-2             # 自定义的路由名称
-#          uri: https://baidu.com
-#          predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 https://baidu.com
-#            # 在指定日期时间之前的请求可以访问
-#            # 下列时间中 '+08:00[Asia/Shanghai]' 表示中国上海的时区。
-#            # 意味着当国际标准时间（UTC）为 2023-10-16T10:00:00.000 时，中国上海的时间为2023-10-16T18:00:00.000+08:00
-#            - Before=2023-10-16T18:00:00.000+08:00[Asia/Shanghai]
+        #        - id: my_route-2             # 自定义的路由名称
+        #          uri: https://baidu.com
+        #          predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 https://baidu.com
+        #            # 在指定日期时间之前的请求可以访问
+        #            # 下列时间中 '+08:00[Asia/Shanghai]' 表示中国上海的时区。
+        #            # 意味着当国际标准时间（UTC）为 2023-10-16T10:00:00.000 时，中国上海的时间为2023-10-16T18:00:00.000+08:00
+        #            - Before=2023-10-16T18:00:00.000+08:00[Asia/Shanghai]
 
         # TODO 3、后置断言路由
-#        - id: my_route-3             # 自定义的路由名称
-#          uri: https://taobao.com
-#          predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 https://taobao.com
-#            # 在指定日期时间之后的请求可以访问
-#            - After=2023-10-20T18:00:00.000+08:00[Asia/Shanghai]
+        #        - id: my_route-3             # 自定义的路由名称
+        #          uri: https://taobao.com
+        #          predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 https://taobao.com
+        #            # 在指定日期时间之后的请求可以访问
+        #            - After=2023-10-20T18:00:00.000+08:00[Asia/Shanghai]
 
         # TODO 4、范围断言路由
-#        - id: my_route-4             # 自定义的路由名称
-#          uri: https://jd.com
-#          predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 https://jd.com
-#            # 在指定日期时间内的请求可以访问（应用场景：促销[在规定时间内才可以访问请求]）
-#            - Between=2023-10-16T18:00:00.000+08:00[Asia/Shanghai], 2023-10-17T18:00:00.000+08:00[Asia/Shanghai]
+        #        - id: my_route-4             # 自定义的路由名称
+        #          uri: https://jd.com
+        #          predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 https://jd.com
+        #            # 在指定日期时间内的请求可以访问（应用场景：促销[在规定时间内才可以访问请求]）
+        #            - Between=2023-10-16T18:00:00.000+08:00[Asia/Shanghai], 2023-10-17T18:00:00.000+08:00[Asia/Shanghai]
 
         # TODO 5、请求头Cookie路由
-#        - id: my_route-5_1           # 自定义的路由名称
-#          uri: https://tmall.com
-#          predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 https://tmall.com
-#            # 请求头中Cookie携带的数据 HuBei_WuHan=BeiJing 才能访问
-#            - Cookie=HuBei_WuHan, BeiJing
-#        - id: my_route-5_2           # 自定义的路由名称
-#          uri: https://tmall.com
-#          predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 https://tmall.com
-#            # Cookie展开写法，请求头中Cookie携带的数据 HongShan=ShangHai 才能访问
-#            - name: Cookie
-#              args:
-#                name: HongShan
-#                regexp: ShangHai
+        #        - id: my_route-5_1           # 自定义的路由名称
+        #          uri: https://tmall.com
+        #          predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 https://tmall.com
+        #            # 请求头中Cookie携带的数据 HuBei_WuHan=BeiJing 才能访问
+        #            - Cookie=HuBei_WuHan, BeiJing
+        #        - id: my_route-5_2           # 自定义的路由名称
+        #          uri: https://tmall.com
+        #          predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 https://tmall.com
+        #            # Cookie展开写法，请求头中Cookie携带的数据 HongShan=ShangHai 才能访问
+        #            - name: Cookie
+        #              args:
+        #                name: HongShan
+        #                regexp: ShangHai
 
         # TODO 6、请求头Header路由
-#        - id: my_route-6             # 自定义的路由名称
-#          uri: https://auth.alipay.com/
-#          predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 https://auth.alipay.com/
-#            # 请求头中Header携带的数据 X-Request-Id=123 才能访问。当下述有多个Header，表示要同时满足才能访问
-#            - Header=X-Request-Id, 123
-#            - Header=Color, gr.+         # + 表示任意字符长度，gr.+表示gr开头的字符串
-#            - Header=AGE, \d+            # \d 表示数字，+ 表示任意字符长度
+        #        - id: my_route-6             # 自定义的路由名称
+        #          uri: https://auth.alipay.com/
+        #          predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 https://auth.alipay.com/
+        #            # 请求头中Header携带的数据 X-Request-Id=123 才能访问。当下述有多个Header，表示要同时满足才能访问
+        #            - Header=X-Request-Id, 123
+        #            - Header=Color, gr.+         # + 表示任意字符长度，gr.+表示gr开头的字符串
+        #            - Header=AGE, \d+            # \d 表示数字，+ 表示任意字符长度
 
         # TODO 7、请求路径Host路由
-#        - id: my_route-7             # 自定义的路由名称
-#          uri: https://auth.alipay.com/
-#          predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 https://auth.alipay.com/
-#            # 请求头中Host为 localhost:8086 才能访问
-#            # 这里还可以通过SwitchHosts设置 localhost[127.0.0.1] 映射路径
-#            - Host=localhost:8086
+        #        - id: my_route-7             # 自定义的路由名称
+        #          uri: https://auth.alipay.com/
+        #          predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 https://auth.alipay.com/
+        #            # 请求头中Host为 localhost:8086 才能访问
+        #            # 这里还可以通过SwitchHosts设置 localhost[127.0.0.1] 映射路径
+        #            - Host=localhost:8086
 
         # TODO 8、请求方法Method路由
-#        - id: my_route-8             # 自定义的路由名称
-#          uri: https://auth.alipay.com/
-#          predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 https://auth.alipay.com/
-#            # 请求方法为Get或者Post可以访问
-#            - Method=GET, POST
+        #        - id: my_route-8             # 自定义的路由名称
+        #          uri: https://auth.alipay.com/
+        #          predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 https://auth.alipay.com/
+        #            # 请求方法为Get或者Post可以访问
+        #            - Method=GET, POST
 
         # TODO 9、请求参数Query路由
-#        - id: my_route-9             # 自定义的路由名称
-#          uri: https://auth.alipay.com/
-#          predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 https://auth.alipay.com/
-#            # 请求参数Query携带的数据 color=gr.开头的字符串 才能访问
-#            - Query=color, gr.+
+        #        - id: my_route-9             # 自定义的路由名称
+        #          uri: https://auth.alipay.com/
+        #          predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 https://auth.alipay.com/
+        #            # 请求参数Query携带的数据 color=gr.开头的字符串 才能访问
+        #            - Query=color, gr.+
 
         # TODO 10、权重占比高的uri大概率被访问，权重Weight路由。
-#        - id: my_route-10_1          # 自定义的路由名称
-#          uri: https://im.qq.com/
-#          predicates:
-#            # 权重为2
-#            - Weight=group1, 2
-#        - id: my_route-10_2          # 自定义的路由名称
-#          uri: https://mac.weixin.qq.com/
-#          predicates:
-#            # 权重为8
-#            - Weight=group1, 8
+        #        - id: my_route-10_1          # 自定义的路由名称
+        #          uri: https://im.qq.com/
+        #          predicates:
+        #            # 权重为2
+        #            - Weight=group1, 2
+        #        - id: my_route-10_2          # 自定义的路由名称
+        #          uri: https://mac.weixin.qq.com/
+        #          predicates:
+        #            # 权重为8
+        #            - Weight=group1, 8
 
         # TODO 11、RemoteAddr客户端访问地址路由
-#        - id: my_route-11            # 自定义的路由名称
-#          uri: https://im.qq.com/
-#          predicates:
-#            # 客户端访问地址，相当于服务访问白名单
-#            - RemoteAddr=192.168.1.1/24, 192.168.0.105
+        #        - id: my_route-11            # 自定义的路由名称
+        #          uri: https://im.qq.com/
+        #          predicates:
+        #            # 客户端访问地址，相当于服务访问白名单
+        #            - RemoteAddr=192.168.1.1/24, 192.168.0.105
 
         # TODO 12、XForwardedRemoteAddr客户端访问地址路由
-#        - id: my_route-12            # 自定义的路由名称
-#          uri: https://im.qq.com/
-#          predicates:
-#            # 客户端代理访问服务的最终地址。
-#            # 比如：我翻墙访问海外网站，我在武汉发起请求通过上海服务器代理请求，这个时候XForwardedRemoteAddr表示的就是上海的网络地址
-#            - XForwardedRemoteAddr=192.168.1.1/24, 192.168.0.105
+        #        - id: my_route-12            # 自定义的路由名称
+        #          uri: https://im.qq.com/
+        #          predicates:
+        #            # 客户端代理访问服务的最终地址。
+        #            # 比如：我翻墙访问海外网站，我在武汉发起请求通过上海服务器代理请求，这个时候XForwardedRemoteAddr表示的就是上海的网络地址
+        #            - XForwardedRemoteAddr=192.168.1.1/24, 192.168.0.105
 
         # TODO 13、AddRequestHeader、AddResponseHeader添加请求头Header网关过滤器工厂
-#        - id: my_route-13
-#          uri: http://localhost:8081
-#          predicates:
-#            - Path=/**
-#          filters:
-#            # 添加请求头Header属性 X-Request-Color=[red,blue]
-#            - AddRequestHeader=X-Request-Color, red
-#            - AddRequestHeader=X-Request-Color, blue
-#            # 添加响应头Header属性 X-Response-Red=YSC
-#            - AddResponseHeader=X-Response-Red, YSC
+        #        - id: my_route-13
+        #          uri: http://localhost:8081
+        #          predicates:
+        #            - Path=/**
+        #          filters:
+        #            # 添加请求头Header属性 X-Request-Color=[red,blue]
+        #            - AddRequestHeader=X-Request-Color, red
+        #            - AddRequestHeader=X-Request-Color, blue
+        #            # 添加响应头Header属性 X-Response-Red=YSC
+        #            - AddResponseHeader=X-Response-Red, YSC
 
         # TODO 14、AddRequestHeadersIfNotPresent添加请求头Header网关过滤器工厂
-#        - id: my_route-14
-#          uri: http://localhost:8081
-#          predicates:
-#            - Path=/**
-#          filters:
-#            # 添加请求头Header属性 X-Request-Color=blue和City:湖北
-#            # IfNotPresent直译：如果不显示。所以前一条属性添加成功，后一条 X-Request-Color:red, City:北京 不会添加到请求头header
-#            - AddRequestHeadersIfNotPresent=X-Request-Color:blue, City:湖北
-#            - AddRequestHeadersIfNotPresent=X-Request-Color:red, City:北京
+        #        - id: my_route-14
+        #          uri: http://localhost:8081
+        #          predicates:
+        #            - Path=/**
+        #          filters:
+        #            # 添加请求头Header属性 X-Request-Color=blue和City:湖北
+        #            # IfNotPresent直译：如果不显示。所以前一条属性添加成功，后一条 X-Request-Color:red, City:北京 不会添加到请求头header
+        #            - AddRequestHeadersIfNotPresent=X-Request-Color:blue, City:湖北
+        #            - AddRequestHeadersIfNotPresent=X-Request-Color:red, City:北京
 
         # TODO 15、AddRequestParameter添加请求参数网关过滤器工厂
-#        - id: my_route-15
-#          uri: http://localhost:8081
-#          predicates:
-#            - Path=/**
-#          filters:
-#            # 添加请求参数 color=red 和 city=[Wuhan,Beijing]
-#            - AddRequestParameter=color, red
-#            - AddRequestParameter=city, Wuhan
-#            - AddRequestParameter=city, Beijing
+        #        - id: my_route-15
+        #          uri: http://localhost:8081
+        #          predicates:
+        #            - Path=/**
+        #          filters:
+        #            # 添加请求参数 color=red 和 city=[Wuhan,Beijing]
+        #            - AddRequestParameter=color, red
+        #            - AddRequestParameter=city, Wuhan
+        #            - AddRequestParameter=city, Beijing
 
         # TODO 16、CircuitBreaker断路器网关过滤器工厂(需要添加依赖：spring-cloud-starter-circuitbreaker-reactor-resilience4j)
         - id: my_route-16
@@ -156,40 +156,40 @@ spring:
                 fallbackUri: forward:/fallback1
 
         # TODO 17、PrefixPath添加前缀路径网关过滤器工厂
-#        - id: my_route-17
-#          uri: http://localhost:8081
-#          predicates:
-#            - Path=/**
-#          filters:
-#            # 明面上我们访问路径 http://localhost:8086/5，实际上自动会添加前缀路径 http://localhost:8086/provider/5
-#            - PrefixPath=/provider
+        #        - id: my_route-17
+        #          uri: http://localhost:8081
+        #          predicates:
+        #            - Path=/**
+        #          filters:
+        #            # 明面上我们访问路径 http://localhost:8086/5，实际上自动会添加前缀路径 http://localhost:8086/provider/5
+        #            - PrefixPath=/provider
 
         # TODO 18、StripPrefix跳过前缀路径网关过滤器工厂
-#        - id: my_route-18
-#          uri: http://localhost:8081
-#          predicates:
-#            - Path=/ooo/xxx/**
-#          filters:
-#            # 表示明面上访问路径 http://localhost:8086/ooo/xxx/provider/5，
-#            # 现在需要跳过两个前缀路径，即跳过/ooo/xxx。所以实际访问路径为 http://localhost:8086/provider/5
-#            - StripPrefix=2
+        #        - id: my_route-18
+        #          uri: http://localhost:8081
+        #          predicates:
+        #            - Path=/ooo/xxx/**
+        #          filters:
+        #            # 表示明面上访问路径 http://localhost:8086/ooo/xxx/provider/5，
+        #            # 现在需要跳过两个前缀路径，即跳过/ooo/xxx。所以实际访问路径为 http://localhost:8086/provider/5
+        #            - StripPrefix=2
 
         # TODO 19、RewritePath跳过前缀路径网关过滤器工厂
-#        - id: my_route-19
-#          uri: http://localhost:8081
-#          predicates:
-#            - Path=/**
-#          filters:
-#            # 表示明面上访问路径 http://localhost:8086/red/5，
-#            # 现在会将路径/red替换掉为/provider。所以实际访问路径为 http://localhost:8086/provider/5
-#            - RewritePath=/red, /provider
-#            - RewritePath=/blue, /provider
+      #        - id: my_route-19
+      #          uri: http://localhost:8081
+      #          predicates:
+      #            - Path=/**
+      #          filters:
+      #            # 表示明面上访问路径 http://localhost:8086/red/5，
+      #            # 现在会将路径/red替换掉为/provider。所以实际访问路径为 http://localhost:8086/provider/5
+      #            - RewritePath=/red, /provider
+      #            - RewritePath=/blue, /provider
 
       # TODO 20、default-filters默认的网关过滤器，对以上所有的路由生效
-#      default-filters:
-#        # 这里配置的默认过滤器是服务降级，也可以配置上述所有的其他类型的过滤器工厂
-#        # 请求路径服务降级优先选择这里设置的默认过滤器，但是请求路径为 /info/** 时，局部的服务降级会优先选择 转为16、CircuitBreaker断路器网关过滤器工厂
-#        - name: CircuitBreaker
-#          args:
-#            name: myCircuitBreaker
-#            fallbackUri: forward:/fallback2
+      #      default-filters:
+      #        # 这里配置的默认过滤器是服务降级，也可以配置上述所有的其他类型的过滤器工厂
+      #        # 请求路径服务降级优先选择这里设置的默认过滤器，但是请求路径为 /info/** 时，局部的服务降级会优先选择 转为16、CircuitBreaker断路器网关过滤器工厂
+      #        - name: CircuitBreaker
+      #          args:
+      #            name: myCircuitBreaker
+      #            fallbackUri: forward:/fallback2

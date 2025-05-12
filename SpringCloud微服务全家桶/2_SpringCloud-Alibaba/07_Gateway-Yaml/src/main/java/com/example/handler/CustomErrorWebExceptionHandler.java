@@ -22,7 +22,7 @@ import java.util.Map;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-01-05 23:41
+ * @dateTime 2024-01-05 23:00
  * @apiNote TODO
  */
 @Component
@@ -45,12 +45,12 @@ public class CustomErrorWebExceptionHandler extends AbstractErrorWebExceptionHan
         return RouterFunctions.route(RequestPredicates.all(), this::renderErrorResponse);
     }
 
-    private Mono<ServerResponse> renderErrorResponse(ServerRequest request){
+    private Mono<ServerResponse> renderErrorResponse(ServerRequest request) {
         // 获取异常信息
         Map<String, Object> map = getErrorAttributes(request, ErrorAttributeOptions.defaults());
         // 构建响应
-        return ServerResponse.status(HttpStatus.NOT_FOUND)  // 404状态码
+        return ServerResponse.status(HttpStatus.NOT_FOUND)       // 404状态码
                 .contentType(MediaType.APPLICATION_JSON)    // 以 JSON 格式显示响应
-                .body(BodyInserters.fromValue(map));        // 响应体(响应内容)
+                .body(BodyInserters.fromValue(map));      // 响应体(响应内容)
     }
 }

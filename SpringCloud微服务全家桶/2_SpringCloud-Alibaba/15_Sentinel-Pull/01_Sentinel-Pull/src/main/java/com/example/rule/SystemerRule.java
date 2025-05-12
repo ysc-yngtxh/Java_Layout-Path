@@ -1,28 +1,25 @@
 package com.example.rule;
 
-import com.alibaba.csp.sentinel.command.handler.ModifyParamFlowRulesCommandHandler;
 import com.alibaba.csp.sentinel.datasource.FileRefreshableDataSource;
 import com.alibaba.csp.sentinel.datasource.FileWritableDataSource;
 import com.alibaba.csp.sentinel.datasource.ReadableDataSource;
 import com.alibaba.csp.sentinel.datasource.WritableDataSource;
-import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowRule;
-import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowRuleManager;
 import com.alibaba.csp.sentinel.slots.system.SystemRule;
 import com.alibaba.csp.sentinel.slots.system.SystemRuleManager;
 import com.alibaba.csp.sentinel.transport.util.WritableDataSourceRegistry;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-02-19 22:34
+ * @dateTime 2024-02-19 22:30
  * @apiNote TODO 动态系统规则
  */
 public class SystemerRule {
+
     public void readWriteRuleFileFlow(String ruleFilePath) throws IOException {
         String ruleFile = ruleFilePath + "/system-rule.csv";
         createRuleFile(ruleFile);

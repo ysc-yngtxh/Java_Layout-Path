@@ -23,12 +23,12 @@ spring:
         use404: true
 
       # 跨域CORS问题的全局解决方案
-#      globalcors:
-#        cors-configurations:
-#          '[/**]':
-#            allowedOrigins: "http://localhost:8081"
-#            allowedMethods:
-#              - GET
+      #      globalcors:
+      #        cors-configurations:
+      #          '[/**]':
+      #            allowedOrigins: "http://localhost:8081"
+      #            allowedMethods:
+      #              - GET
 
       routes:
         - id: my_route             # 自定义的路由名称
@@ -42,7 +42,7 @@ spring:
         - id: cors_route
           uri: lb://nacos-provider
           predicates:
-           - Path=/provider/**
+            - Path=/provider/**
           # 跨域CORS问题的局部解决方案
           metadata:
             cors:

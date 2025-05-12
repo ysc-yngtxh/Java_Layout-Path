@@ -8,12 +8,13 @@ import reactor.core.publisher.Mono;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-01-05 14:31
+ * @dateTime 2024-01-05 14:30
  * @apiNote TODO
  */
 @Component
 @Slf4j
 public class TwoGatewayFilterFactory extends AbstractNameValueGatewayFilterFactory {
+
     @Override
     public GatewayFilter apply(NameValueConfig config) {
         return (exchange, chain) -> {

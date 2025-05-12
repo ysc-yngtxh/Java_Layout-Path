@@ -9,12 +9,13 @@ import reactor.core.publisher.Mono;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-01-05 14:31
+ * @dateTime 2024-01-05 14:30
  * @apiNote TODO
  */
 @Component
 @Slf4j
 public class OneGatewayFilterFactory extends AbstractNameValueGatewayFilterFactory {
+
     // 所有“预”过滤器逻辑都会被执行。然后发出代理请求。在发出代理请求之后，将运行“post”过滤器逻辑。
     @Override
     public GatewayFilter apply(NameValueConfig config) {
@@ -29,8 +30,7 @@ public class OneGatewayFilterFactory extends AbstractNameValueGatewayFilterFacto
                     Mono.fromRunnable(() -> { // 创建一个Mono对象，它表示一个延迟执行的任务。
                         stopWatch.stop();
                         log.info(config.getName() + "-" + config.getValue() + " - post 执行时间(毫秒):" + System.currentTimeMillis());
-                        log.info(config.getName() + "-" + config.getValue()
-                                + " - post 执行完毕。该filter执行链总用时(毫秒)：" + stopWatch.getLastTaskTimeMillis());
+                        log.info(config.getName() + "-" + config.getValue() + " - post 执行完毕。该filter执行链总用时(毫秒)：" + stopWatch.getLastTaskTimeMillis());
                     })
             );
         };

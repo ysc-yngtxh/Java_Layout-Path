@@ -16,10 +16,11 @@ import java.util.List;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-02-19 21:12
+ * @dateTime 2024-02-19 21:10
  * @apiNote TODO 动态熔断规则
  */
 public class FallbackRule {
+
     public void readWriteRuleFileFlow(String ruleFilePath) throws IOException {
         String ruleFile = ruleFilePath + "/fallback-rule.csv";
         createRuleFile(ruleFile);

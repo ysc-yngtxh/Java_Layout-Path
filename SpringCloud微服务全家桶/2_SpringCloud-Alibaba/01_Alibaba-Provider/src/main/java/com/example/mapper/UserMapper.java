@@ -6,6 +6,4 @@ import com.example.pojo.User;
 /**
  * @author 游家纨绔
  */
-public interface UserMapper extends BaseMapper<User> {
-
-}
+public interface UserMapper extends BaseMapper<User> {}

@@ -20,7 +20,7 @@ spring:
         # TODO 1、path路径路由   地址格式：http://host[:port]/[abs_path]   断言规则首字母都是大写
         - id: my_route-1             # 自定义的路由名称，无特殊意义
           uri: http://localhost:8081
-          predicates:                # 以下predicates断言为true，则 localhost:8086 跳转 localhost:8081
+          predicates: # 以下predicates断言为true，则 localhost:8086 跳转 localhost:8081
             # path路径为 /provider/*，表示可以访问并跳转到 localhost:8081/provider/*
             # path路径为 /consumer/*，表示可以访问并跳转到 localhost:8081/consumer/*
             - Path=/provider/**, /consumer/**, /tb

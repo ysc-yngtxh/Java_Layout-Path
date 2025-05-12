@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-01-11 10:27
+ * @dateTime 2024-01-11 10:30
  * @apiNote TODO 定义熔断降级异常处理是否开启
  */
 @Retention(RetentionPolicy.RUNTIME)
@@ -19,6 +19,4 @@ import java.lang.annotation.Target;
 //    1、返回响应流：CustomBlockExceptionHandler
 //    2、跳转到页面：CustomBlockExceptionHandlerPage）
 @Import(CustomBlockExceptionHandlerPage.class)
-public @interface EnableCustomBlockException {
-
-}
+public @interface EnableCustomBlockException {}

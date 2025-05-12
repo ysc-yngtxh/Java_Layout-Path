@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-10-15 00:24
+ * @dateTime 2023-10-15 00:00
  * @apiNote TODO
  */
 @FeignClient(value = "nacos-provider", path = "/provider", fallback = UserServiceImpl.class)

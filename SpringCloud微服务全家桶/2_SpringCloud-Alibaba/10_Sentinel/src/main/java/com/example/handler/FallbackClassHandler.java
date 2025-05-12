@@ -2,7 +2,7 @@ package com.example.handler;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-01-08 14:57
+ * @dateTime 2024-01-08 15:00
  * @apiNote TODO Sentinel的 Class方式 熔断降级
  */
 public class FallbackClassHandler {

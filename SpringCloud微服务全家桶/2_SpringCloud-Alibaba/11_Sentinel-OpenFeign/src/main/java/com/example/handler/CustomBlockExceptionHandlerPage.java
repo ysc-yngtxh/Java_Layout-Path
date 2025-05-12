@@ -12,10 +12,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-01-11 10:33
+ * @dateTime 2024-01-11 10:30
  * @apiNote TODO 自定义熔断降级异常处理(跳转到页面)
  */
 public class CustomBlockExceptionHandlerPage implements BlockExceptionHandler {
+
     @Override
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, BlockException e) throws Exception {
 

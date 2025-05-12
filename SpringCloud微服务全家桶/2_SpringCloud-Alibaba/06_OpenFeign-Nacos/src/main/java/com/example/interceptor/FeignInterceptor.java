@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-02-18 10:06
+ * @dateTime 2024-02-18 10:00
  * @apiNote TODO OpenFeign拦截器
  */
 @Configuration

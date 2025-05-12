@@ -1,4 +1,3 @@
-
 nacos:
   core:
     size: 3
@@ -35,15 +34,15 @@ spring:
           data-id: extension_config-two.yml
           group: DEFAULT_GROUP
           refresh: true
-# 1、工程特定的配置文件：通过工程的应用名来定位的配置文件通常具有最高的优先级。（provider_config-dev.yml）
-#    例如：${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
-# 2、扩展配置：项目中可能会依赖其他模块的配置文件，这些依赖的Nacos配置构成了扩展配置（extension-configs）。
-#            这些配置文件的优先级次于工程特定的配置文件。
-# 3、共享配置文件：某些配置是多个工程或模块共享的，如shared_config.yml，这些公共配置文件在优先级上低于工程特定和扩展配置。
-# 4、本地配置文件：例如bootstrap.yaml中的配置，在Nacos配置加载完毕后，本地的配置会被加载。如果没有特别设置，本地配置的优先级是最低的。
+  # 1、工程特定的配置文件：通过工程的应用名来定位的配置文件通常具有最高的优先级。（provider_config-dev.yml）
+  #    例如：${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+  # 2、扩展配置：项目中可能会依赖其他模块的配置文件，这些依赖的Nacos配置构成了扩展配置（extension-configs）。
+  #            这些配置文件的优先级次于工程特定的配置文件。
+  # 3、共享配置文件：某些配置是多个工程或模块共享的，如shared_config.yml，这些公共配置文件在优先级上低于工程特定和扩展配置。
+  # 4、本地配置文件：例如bootstrap.yaml中的配置，在Nacos配置加载完毕后，本地的配置会被加载。如果没有特别设置，本地配置的优先级是最低的。
 
-# 配置文件优先级顺序：
-# 工程特定配置文件(provider_config-dev.yml) > 扩展配置(extension-configs) > 共享配置(shared-configs) > 本地配置文件(bootstrap.yml)
+  # 配置文件优先级顺序：
+  # 工程特定配置文件(provider_config-dev.yml) > 扩展配置(extension-configs) > 共享配置(shared-configs) > 本地配置文件(bootstrap.yml)
 
 
   # spring.config.import 属性是 Spring Boot 2.4 及更高版本中引入的一个新特性，它支持在配置加载的早期阶段导入和处理外部配置源。

@@ -17,10 +17,8 @@ public interface UserClient {
 
     /* 流程就相当于是先去执行 FeignClient中的 http://provider-service/user/{id},
        如果这个链接接口访问失败就会执行降级处理 UserClientImpl.class 中的 queryByIdLL()方法*/
-
 }
 
-/*
-  我在provider-service服务里加了一个延迟来模拟超时异常，所以在请求这个服务时候会直接触发降级处理。
-  去掉延迟，服务正常访问！！！
+/* 我在provider-service服务里加了一个延迟来模拟超时异常，所以在请求这个服务时候会直接触发降级处理。
+ * 去掉延迟，服务正常访问！！！
  */

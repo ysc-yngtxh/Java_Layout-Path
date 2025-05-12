@@ -23,7 +23,7 @@ public class SentinelFeignController {
     // Sentinel集成OpenFeign
     @GetMapping("/sentinelFeign/{id}")
     @ResponseBody
-    public String sentinelFeignById(@PathVariable Integer id){
+    public String sentinelFeignById(@PathVariable Integer id) {
         return echoService.echo(id);
     }
 }

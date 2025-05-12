@@ -7,11 +7,12 @@ import org.springframework.util.StringUtils;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-02-01 16:09
+ * @dateTime 2024-02-01 16:00
  * @apiNote TODO 定义流控中的请求来源
  */
 @Component
 public class AuthorityRequestOriginParser implements RequestOriginParser {
+
     // 假设请求来源标识是以请求参数的形式出现
     // Sentinel会自动根据parserOrigin()方法将请求解析，并且将方法返回结果设置为请求来源
     @Override

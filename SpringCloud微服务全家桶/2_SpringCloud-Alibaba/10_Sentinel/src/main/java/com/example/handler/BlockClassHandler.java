@@ -4,7 +4,7 @@ import com.alibaba.csp.sentinel.slots.block.BlockException;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-01-08 14:32
+ * @dateTime 2024-01-08 14:30
  * @apiNote TODO Sentinel的 Class方式 限流
  */
 public class BlockClassHandler {

@@ -25,7 +25,7 @@ public class ProviderController {
 
     @GetMapping("/{id}")
     public User query(@PathVariable("id") Integer id
-                    , @RequestHeader(value = "Authorization", required = false) String authorization) throws InterruptedException {
+                    , @RequestHeader(value = "Authorization", required = false) String authorization) {
         // TimeUnit.SECONDS.sleep(8);
         if (!Objects.isNull(authorization)) {
             String decode = URLDecoder.decode(authorization, StandardCharsets.UTF_8);

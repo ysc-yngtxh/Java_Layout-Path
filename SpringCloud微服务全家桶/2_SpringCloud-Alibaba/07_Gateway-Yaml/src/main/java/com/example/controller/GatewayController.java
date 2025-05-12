@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-10-18 15:02
+ * @dateTime 2023-10-18 15:00
  * @apiNote TODO 实现Spring Cloud Gateway的路由以及过滤规则
  */
 @RestController

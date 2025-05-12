@@ -17,10 +17,11 @@ import java.util.List;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-02-19 22:05
+ * @dateTime 2024-02-19 22:00
  * @apiNote TODO 动态授权规则
  */
 public class AuthorizationRule {
+
     public void readWriteRuleFileFlow(String ruleFilePath) throws IOException {
         String ruleFile = ruleFilePath + "/authority-rule.csv";
         createRuleFile(ruleFile);
