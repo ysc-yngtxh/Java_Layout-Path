@@ -20,8 +20,8 @@ public class MyController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/{id}")  // method方法为get,且采用了RESTful风格
-    public User query(@PathVariable("id") Integer id){
+    @GetMapping("/{id}")  // method方法为get，且采用了RESTful风格
+    public User query(@PathVariable("id") Integer id) {
         return userService.queryById(id);
     }
 }

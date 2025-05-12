@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.utils.OkHttpUtil;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -159,12 +160,8 @@ class SpringBootCommunicationApplicationTests {
 	@Test
 	void OkHttpClientTest() throws IOException {
 		// OkHttpClient okHttpClient = new OkHttpClient();
-		// OkHttpClient调优
-		OkHttpClient okHttpClient = new OkHttpClient.Builder()
-				.connectionPool(new ConnectionPool(50, 5, TimeUnit.MINUTES))
-				.connectTimeout(10, TimeUnit.SECONDS)
-				.readTimeout(30, TimeUnit.SECONDS)
-				.build();
+		// 使用自定义连接池的OkHttpClient
+		OkHttpClient okHttpClient = OkHttpUtil.getDefaultOkHttpClient();
 		Request request = new Request.Builder()
 				                     .url("https://jsonplaceholder.typicode.com/posts/1")
 				                     .get()   // 默认就是GET请求，可以不写

@@ -5,6 +5,7 @@ import com.alibaba.fastjson2.JSONObject;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.ConnectionPool;
 import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -31,16 +32,18 @@ public class OkHttpUtil {
 	 *
 	 * @return
 	 */
-	public static OkHttpClient getOkHttpClient() {
-		return getOkHttpClient(60, 60, 60);
+	public static OkHttpClient getDefaultOkHttpClient() {
+		return getOkHttpClient(20, 5, 60, 60, 60);
 	}
 
-	public static OkHttpClient getOkHttpClient(int connectTimeout, int readTimeOut, int writeTimeOut) {
-		OkHttpClient.Builder builder = new okhttp3.OkHttpClient().newBuilder();
-		builder.connectTimeout(connectTimeout, TimeUnit.SECONDS);
-		builder.readTimeout(readTimeOut, TimeUnit.SECONDS);
-		builder.writeTimeout(writeTimeOut, TimeUnit.SECONDS);
-		return builder.build();
+	public static OkHttpClient getOkHttpClient(int maxConn, int keepAlive, int connectTimeout, int readTimeOut, int writeTimeOut) {
+		OkHttpClient okHttpClient = new OkHttpClient.Builder()
+				.connectionPool(new ConnectionPool(maxConn, keepAlive, TimeUnit.MINUTES))
+				.connectTimeout(connectTimeout, TimeUnit.SECONDS)
+				.readTimeout(readTimeOut, TimeUnit.SECONDS)
+				.writeTimeout(writeTimeOut, TimeUnit.SECONDS)
+				.build();
+		return okHttpClient;
 	}
 
 	/**
@@ -72,7 +75,7 @@ public class OkHttpUtil {
 	 * @return
 	 */
 	public static String get(String url) {
-		OkHttpClient okHttpClient = getOkHttpClient();
+		OkHttpClient okHttpClient = getDefaultOkHttpClient();
 		Headers headers = new Headers.Builder().build();
 		return get(okHttpClient, url, headers);
 	}
@@ -111,7 +114,7 @@ public class OkHttpUtil {
 	 */
 	public static String post(String url, JSONObject bodyJson) {
 		// 使用默认的 okHttpClient
-		OkHttpClient okHttpClient = getOkHttpClient();
+		OkHttpClient okHttpClient = getDefaultOkHttpClient();
 		Headers headers = new Headers.Builder().build();
 		// 如果需要自定义 okHttpClient或headers传参，可以调用以下方法
 		return post(okHttpClient, url, bodyJson, headers);
@@ -180,7 +183,7 @@ public class OkHttpUtil {
 	public static String uploadFile(String url,
 	                                String fileKey, MultipartFile multipartFile, JSONObject formDataJson) {
 		// 使用默认的okHttpClient
-		OkHttpClient okHttpClient = getOkHttpClient();
+		OkHttpClient okHttpClient = getDefaultOkHttpClient();
 		Headers headers = new Headers.Builder().build();
 		return uploadFile(okHttpClient, url, fileKey, getFile(multipartFile), formDataJson, headers);
 	}
@@ -204,7 +207,7 @@ public class OkHttpUtil {
 	public static String uploadFile(String url,
 	                                String fileKey, File file, JSONObject formDataJson) {
 		// 使用默认的okHttpClient
-		OkHttpClient okHttpClient = getOkHttpClient();
+		OkHttpClient okHttpClient = getDefaultOkHttpClient();
 		Headers headers = new Headers.Builder().build();
 		return uploadFile(okHttpClient, url, fileKey, file, formDataJson, headers);
 	}
