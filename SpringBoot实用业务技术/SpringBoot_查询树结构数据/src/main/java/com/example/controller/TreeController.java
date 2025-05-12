@@ -12,7 +12,7 @@ import java.util.Set;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-05-06 14:03
+ * @dateTime 2023-05-06 14:00
  * @apiNote TODO 接口类
  */
 @Controller
@@ -21,13 +21,28 @@ public class TreeController {
 
     private final TreeChildrenService treeChildrenService;
 
-    @RequestMapping("/treeChildrenSet")
+    @RequestMapping("/RecursionSet")
     public @ResponseBody Set<TreeChildren> TreeByJsonSet() {
-        return treeChildrenService.findTreeBySetChildren();
+        return treeChildrenService.findTreeBySetRecursion();
     }
 
-    @RequestMapping("/treeChildrenList")
+    @RequestMapping("/RecursionList")
     public @ResponseBody List<TreeChildren> TreeByJsonList() {
+        return treeChildrenService.findTreeByListRecursion();
+    }
+
+    @RequestMapping("/treeList")
+    public @ResponseBody List<TreeChildren> TreeByJsonList2() {
         return treeChildrenService.findTreeByListChildren();
+    }
+
+    @RequestMapping("/treeListStream")
+    public @ResponseBody List<TreeChildren> TreeByJsonList3() {
+        return treeChildrenService.findTreeWithStream();
+    }
+
+    @RequestMapping("/treeListOptimized")
+    public @ResponseBody List<TreeChildren> TreeByJsonList4() {
+        return treeChildrenService.findTreeOptimized();
     }
 }

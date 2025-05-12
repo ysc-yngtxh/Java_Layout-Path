@@ -42,8 +42,8 @@ public class WxLocaleConfigs implements LocaleResolver,InitializingBean {
     @Override
     public @NonNull Locale resolveLocale(HttpServletRequest httpServletRequest) {
         // 获取请求中的请求头Header参数
-        // 这里有坑,不能使用getParameter()方法,因为LocaleResolver只实现了五种场景解析,可以看源码
-        // 其中不包括参数解析,所以不要把请求语言放入参数中
+        // 这里有坑，不能使用getParameter()方法，因为LocaleResolver只实现了五种场景解析，可以看源码
+        // 其中不包括参数解析，所以不要把请求语言放入参数中
         String language = httpServletRequest.getHeader("X-Language");
         // 如果没有就使用默认的（根据主机的语言环境生成一个 Locale)
         Locale locale = LocaleContextHolder.getLocale();
@@ -52,7 +52,7 @@ public class WxLocaleConfigs implements LocaleResolver,InitializingBean {
             // zh_CN
             String[] s = language.split("_");
             // 国家，地区
-            locale = new Locale(s[0], s[1]);
+            locale = Locale.of(s[0], s[1]);
         }
         return locale;
     }

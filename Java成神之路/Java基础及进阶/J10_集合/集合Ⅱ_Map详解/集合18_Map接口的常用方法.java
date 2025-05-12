@@ -3,10 +3,10 @@ package J10_集合.集合Ⅱ_Map详解;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
-/*
- * java.util.Map接口中常用方法：
+/* java.util.Map接口中常用方法：
  *    1、Map和Collection没有继承关系
  *    2、Map集合以key和value的方式存储数据：键值对
  *        key和value都是引用数据类型
@@ -58,12 +58,31 @@ public class 集合18_Map接口的常用方法 {
         map.put(3, "王五");
         map.put(4, "赵六");
 
+        // 尝试计算指定键的新映射值（不管键是否存在）
+        String compute1 = map.compute(4, (k, v) -> Objects.isNull(v) ? "钱七" : v);
+        String compute2 = map.compute(5, (k, v) -> Objects.isNull(v) ? "钱七" : v);
+        // 仅在【键不存在】或对应的值为 null 时执行计算
+        //     key为5的值存在，不会执行 Function计算，返回值为原值"钱七"；
+        //     key为6的值不存在，所以执行 Function计算 并将键值对放入Map，返回值为新值"朱八"。
+        String computedIfAbsent1 = map.computeIfAbsent(5, (key) -> "朱八");
+        String computedIfAbsent2 = map.computeIfAbsent(6, (key) -> "朱八");
+        // 仅在【键存在】且对应的值不为 null 时执行计算
+        //     key为6的值存在，会执行 BiFunction计算 并将键值对放入Map，返回值为新值"郑九"；
+        //     key为7的值不存在，不会执行 BiFunction计算，返回值为null。
+        String computedIfPresent1 = map.computeIfPresent(6, (k, v) -> "郑九");
+        String computedIfPresent2 = map.computeIfPresent(7, (k, v) -> "郑九");
+        // 获取指定键的值，如果键不存在则返回默认值
+        String mapOrDefault = map.getOrDefault(8, "吴十");
+        // 合并指定键的当前值和给定值
+        //     如果key为4的值已经存在，则将key为4的value值和 "萧十一" 进行拼接，并更新Map值
+        String merge = map.merge(4, "萧十一", (oldValue, newValue) -> oldValue + newValue);
+
         // 第一种方式：获取所有的key，通过遍历key,来遍历value
         Set<Integer> keys = map.keySet();
 
         // 方法一：建立迭代器对象，遍历key，可以通过key获取value，
         Iterator<Integer> it = keys.iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             Integer key = it.next();
             String value = map.get(key);
             System.out.println(key + "=" + value);
@@ -82,7 +101,7 @@ public class 集合18_Map接口的常用方法 {
 
         // 方法一：迭代器
         Iterator<Map.Entry<Integer, String>> it1 = set.iterator();
-        while(it1.hasNext()){
+        while (it1.hasNext()) {
             Map.Entry<Integer, String> node = it1.next();
             Integer key = node.getKey();
             String value = node.getValue();

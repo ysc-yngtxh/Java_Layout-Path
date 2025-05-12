@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -13,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-08-15 20:59
+ * @dateTime 2024-08-15 21:00
  * @apiNote TODO 上传
  */
 @Controller

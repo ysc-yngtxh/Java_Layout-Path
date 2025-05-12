@@ -8,9 +8,8 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author 游家纨绔
- * @version 1.0
  * @description: TODO
- * @date 2023/3/9 23:24
+ * @date 2023/3/9 23:00
  */
 @Component
 public class AppInitializingBean implements InitializingBean {

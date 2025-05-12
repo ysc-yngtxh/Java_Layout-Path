@@ -1,9 +1,10 @@
 package com.example.service.impl;
 
-import com.example.mapper.TreeChildrenDao;
+import com.example.mapper.TreeChildrenMapper;
 import com.example.entity.TreeChildren;
 import com.example.service.TreeChildrenService;
-import com.example.utils.TreeChildrenUtil;
+import com.example.utils.TreeCommonUtil;
+import com.example.utils.TreeRecursionUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,29 +15,38 @@ import java.util.Set;
 /**
  * 节点表(TreeChildren)表服务实现类
  *
- * @author makejava
- * @since 2023-05-06 13:38:02
+ * @author 游家纨绔
+ * @since 2023-05-06 13:00:00
  */
 @Service
 @RequiredArgsConstructor
 public class TreeChildrenServiceImpl implements TreeChildrenService {
 
-    private final TreeChildrenDao treeChildrenDao;
+    private final TreeChildrenMapper treeChildrenMapper;
 
-    /**
-     * @return Set<TreeChildren>
-     */
-    public Set<TreeChildren> findTreeBySetChildren() {
-        List<TreeChildren> treeChildren = treeChildrenDao.selectList(null);
+    public Set<TreeChildren> findTreeBySetRecursion() {
+        List<TreeChildren> treeChildren = treeChildrenMapper.selectList(null);
         Set<TreeChildren> treeChildrenHashSet = new HashSet<>(treeChildren);
-        return TreeChildrenUtil.buildTree(treeChildrenHashSet);
+        return TreeRecursionUtil.buildTree(treeChildrenHashSet);
     }
 
-    /**
-     * @return List<TreeChildren>
-     */
+    public List<TreeChildren> findTreeByListRecursion() {
+        List<TreeChildren> treeChildren = treeChildrenMapper.selectList(null);
+        return TreeRecursionUtil.buildMenuTree(treeChildren);
+    }
+
     public List<TreeChildren> findTreeByListChildren() {
-        List<TreeChildren> treeChildren = treeChildrenDao.selectList(null);
-        return TreeChildrenUtil.buildMenuTree(treeChildren);
+        List<TreeChildren> treeChildren = treeChildrenMapper.selectList(null);
+        return TreeCommonUtil.buildTree(treeChildren);
+    }
+
+    public List<TreeChildren> findTreeWithStream() {
+        List<TreeChildren> treeChildren = treeChildrenMapper.selectList(null);
+        return TreeCommonUtil.listToTreeWithStream(treeChildren);
+    }
+
+    public List<TreeChildren> findTreeOptimized() {
+        List<TreeChildren> treeChildren = treeChildrenMapper.selectList(null);
+        return TreeCommonUtil.listToTreeOptimized(treeChildren);
     }
 }

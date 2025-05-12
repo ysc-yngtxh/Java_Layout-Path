@@ -6,7 +6,7 @@ import lombok.Data;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-08-19 23:24
+ * @dateTime 2023-08-19 23:00
  * @apiNote TODO Consumer 实体类的 子级实体
  */
 @Data

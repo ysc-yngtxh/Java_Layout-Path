@@ -14,8 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
  * @dateTime 2023-05-01 11:48
  * @apiNote TODO 测试拦截器
  */
-public class TestInterceptor implements HandlerInterceptor {
-    public final Logger log = LoggerFactory.getLogger(TestInterceptor.class);
+public class DefinitionInterceptor implements HandlerInterceptor {
+    public final Logger log = LoggerFactory.getLogger(DefinitionInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

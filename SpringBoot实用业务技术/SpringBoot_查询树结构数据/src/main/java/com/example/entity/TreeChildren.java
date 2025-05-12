@@ -61,5 +61,4 @@ public class TreeChildren implements Serializable {
     private transient Set<TreeChildren> childrenSet = new HashSet<>();
 
     private transient List<TreeChildren> childrenList = new ArrayList<>();
-
 }

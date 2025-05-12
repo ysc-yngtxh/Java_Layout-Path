@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-02-27 15:08
+ * @dateTime 2024-02-27 15:00
  * @apiNote TODO 目前没有具体场景使用过
  */
 public class MyApplicationContextInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {

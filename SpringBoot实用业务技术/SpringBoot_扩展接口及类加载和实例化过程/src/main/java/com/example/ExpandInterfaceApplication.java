@@ -16,7 +16,7 @@ public class ExpandInterfaceApplication {
         springApplication.addInitializers(new MyApplicationContextInitializer());
         ConfigurableApplicationContext applicationContext = springApplication.run(args);
         // MyEnvironmentPostProcessor配置环境Environment
-        System.out.println(applicationContext.getEnvironment().getProperty("app.who"));
+        System.out.println("获取环境后处理器数据：" + applicationContext.getEnvironment().getProperty("app.who"));
 
         // 初始化Mouse
         Mouse mouse = new Mouse();

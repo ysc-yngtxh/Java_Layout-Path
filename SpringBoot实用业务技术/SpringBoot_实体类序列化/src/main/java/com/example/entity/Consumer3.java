@@ -24,7 +24,7 @@ import java.util.concurrent.atomic.AtomicReference;
 /**
  * Consumer3 实体类
  * @author 游家纨绔
- * @since 2023-08-19 17:30:49
+ * @since 2023-08-19 17:30:00
  */
 @Data
 @Builder
@@ -39,8 +39,7 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 @JsonInclude( JsonInclude.Include.NON_EMPTY )  // 实际效果就是返回给前端的的Json字符串中值为 null 和 空 的字段不显示
 // @JsonPropertyOrder 可以指定json映射名称属性在 json 字符串中的顺序
-@JsonPropertyOrder({"consumerId", "username", "password", "optional"
-        , "atomicReference", "supplier", "gender", "properties", "propertiesJson"})
+@JsonPropertyOrder({"consumerId", "username", "password", "optional", "atomicReference", "supplier", "gender", "properties", "propertiesJson"})
 public class Consumer3 implements Serializable {
     @Serial
     private static final long serialVersionUID = 424381199466784776L;
@@ -72,4 +71,3 @@ public class Consumer3 implements Serializable {
     @JsonAnyGetter  // 序列化时Map加上该属性可以将map中的属性序列化为指定字符串
     private Map<String, Object> propertiesJson;
 }
-

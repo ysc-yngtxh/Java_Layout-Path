@@ -19,8 +19,7 @@ public class GenderDataDeserializer extends JsonDeserializer {
         int gender = 0;
         switch (jsonParser.getText()) { // 通过getText获取参数
             case "男" -> gender = 1;
-            case "女" -> {
-            }
+            case "女" -> {}
             default -> throw new RuntimeException("传入的性别为非法字符");
         }
 

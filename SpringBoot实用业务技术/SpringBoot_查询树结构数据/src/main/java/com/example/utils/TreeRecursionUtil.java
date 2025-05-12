@@ -1,20 +1,23 @@
 package com.example.utils;
 
 import com.example.entity.TreeChildren;
-import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Collectors;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-05-06 14:51
+ * @dateTime 2023-05-06 14:00
  * @apiNote TODO 解析节点工具类
  */
-public class TreeChildrenUtil {
+public class TreeRecursionUtil {
 
     /**
      * 使用递归方法解析List集合数据节点
@@ -41,13 +44,13 @@ public class TreeChildrenUtil {
      * @param treeNodes
      * @return
      */
-    private static TreeChildren findChildren(TreeChildren treeNode, Set<TreeChildren> treeNodes) {
+    private static TreeChildren findChildren(TreeChildren parentNode, Set<TreeChildren> treeNodes) {
         for (TreeChildren it : treeNodes) {
-            if (treeNode.getId().equals(it.getParentId())) {
-                treeNode.getChildrenSet().add(findChildren(it, treeNodes));
+            if (parentNode.getId().equals(it.getParentId())) {
+                parentNode.getChildrenSet().add(findChildren(it, treeNodes));
             }
         }
-        return treeNode;
+        return parentNode;
     }
 
 
@@ -82,17 +85,17 @@ public class TreeChildrenUtil {
      * @param treeNodes
      * @return
      */
-    private static TreeChildren findMenuChildren(TreeChildren treeNode, List<TreeChildren> treeNodes) {
+    private static TreeChildren findMenuChildren(TreeChildren parentNode, List<TreeChildren> treeNodes) {
         for (TreeChildren it : treeNodes) {
-            if (treeNode.getId().equals(it.getParentId())) {
-                treeNode.getChildrenList().add(findMenuChildren(it, treeNodes));
+            if (parentNode.getId().equals(it.getParentId())) {
+                parentNode.getChildrenList().add(findMenuChildren(it, treeNodes));
             }
         }
         // 对子节点排序
-        List<TreeChildren> childrenSorted = treeNode.getChildrenList().stream().sorted( Comparator.comparing( TreeChildren::getSort ) ).toList();
+        List<TreeChildren> childrenSorted = parentNode.getChildrenList().stream().sorted(Comparator.comparing(TreeChildren::getSort)).toList();
         // 先清空，在添加
-        treeNode.getChildrenList().clear();
-        treeNode.getChildrenList().addAll( childrenSorted );
-        return treeNode;
+        parentNode.getChildrenList().clear();
+        parentNode.getChildrenList().addAll(childrenSorted);
+        return parentNode;
     }
 }

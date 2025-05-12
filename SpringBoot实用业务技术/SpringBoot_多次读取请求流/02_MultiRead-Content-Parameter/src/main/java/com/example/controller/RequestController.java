@@ -14,7 +14,7 @@ import org.springframework.web.util.ContentCachingRequestWrapper;
  * @apiNote TODO 测试应用层
  */
 @Controller
-public class TestController {
+public class RequestController {
 
     @RequestMapping(value = "/test1", method = RequestMethod.POST)
     public String TestHttpRequired(@RequestParam(value = "userName") String userName,

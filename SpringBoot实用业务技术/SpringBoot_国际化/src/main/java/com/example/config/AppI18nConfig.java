@@ -38,6 +38,7 @@ public class AppI18nConfig implements InitializingBean {
         System.out.println("postConstruct注解方法执行");
     }
 
+
     @Override
     public void afterPropertiesSet() {
         appI18nConfig = this;
@@ -49,6 +50,7 @@ public class AppI18nConfig implements InitializingBean {
         System.out.println("我是init方法执行...");
     }
 
+    // @Bean 注解的 initMethod 属性用于指定 Bean 初始化完成后要调用的方法。
     @Bean(initMethod = "init11")
     public AppI18nConfig test() {
         return new AppI18nConfig();

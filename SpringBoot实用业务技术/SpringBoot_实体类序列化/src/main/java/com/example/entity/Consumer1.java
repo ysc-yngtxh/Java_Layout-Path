@@ -38,8 +38,7 @@ import java.util.concurrent.atomic.AtomicReference;
 // @JsonIgnoreProperties 可以 忽略指定属性 的 序列化 和 反序列化
 @JsonIgnoreProperties({"age", "deleteFlag"})
 // @JsonPropertyOrder 可以指定json映射名称属性在 json 字符串中的顺序
-@JsonPropertyOrder({"consumerId", "username", "password", "alias", "age", "sex", "phone", "address"
-        , "deleteFlag", "date", "price", "optional", "atomicReference", "supplier"})
+@JsonPropertyOrder({"consumerId", "username", "password", "alias", "age", "sex", "phone", "address", "deleteFlag", "date", "price", "optional", "atomicReference", "supplier"})
 public class Consumer1 implements Serializable {
     @Serial
     private static final long serialVersionUID = 424381199466784776L;
@@ -88,4 +87,3 @@ public class Consumer1 implements Serializable {
     @JsonSerialize(using = CustomDateSerialize.class)
     private Date customer;
 }
-

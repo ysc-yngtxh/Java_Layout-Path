@@ -11,7 +11,7 @@ import java.util.Date;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-08-20 20:02
+ * @dateTime 2023-08-20 20:00
  * @apiNote TODO 日期序列化工具, 直接将时间类型的转为yyyy-MM-dd类型的数据
  */
 public class CustomDateSerialize extends JsonSerializer<Date> {
@@ -24,4 +24,3 @@ public class CustomDateSerialize extends JsonSerializer<Date> {
         jsonGenerator.writeString(simpleDateFormat.format(date));
     }
 }
-

@@ -2,10 +2,10 @@ package com.example.executor;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-01-13 22:13
+ * @dateTime 2024-01-13 22:00:00
  * @apiNote TODO
  */
-public class Mouse extends Cat{
+public class Mouse extends Cat {
 
     // TODO 构造(普通)代码块 和 普通属性 的初始化执行优先级一样，谁书写在前谁先执行。
     {

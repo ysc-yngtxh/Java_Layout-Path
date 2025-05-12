@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>文件上传示例</title>
+    <meta charset="UTF-8">
+    <title>文件上传示例</title>
 </head>
 <body>
 
 <form enctype="multipart/form-data">
-  <h2>正常文件上传</h2>
-  <input type="file" name="fileInput" id="fileInput">
-  <input type="button" value="上传" onclick="uploadFile()">
+    <h2>正常文件上传</h2>
+    <input type="file" name="fileInput" id="fileInput">
+    <input type="button" value="上传" onclick="uploadFile()">
 </form>
 
 上传结果:<br/>
 <span id="uploadResult"></span>
 
 <script>
-  let uploadResult = document.getElementById("uploadResult")
+    let uploadResult = document.getElementById("uploadResult")
 
-  function uploadFile() {
-    let fileInput = document.getElementById('fileInput');
-    let file = fileInput.files[0];
-    if (!file) {
-      uploadResult.innerHTML = "<h1 style='background-color: chocolate; width: 200px'>请选择文件！</h1>";
-      return;
-    }
+    function uploadFile() {
+        let fileInput = document.getElementById('fileInput');
+        let file = fileInput.files[0];
+        if (!file) {
+            uploadResult.innerHTML = "<h1 style='background-color: chocolate; width: 200px'>请选择文件！</h1>";
+            return;
+        }
 
-    let xhr = new XMLHttpRequest();
-    // 处理上传进度
-    xhr.upload.onprogress = function (event) {
-      let percent = 100 * event.loaded / event.total;
-      uploadResult.innerHTML = '上传进度：' + percent + '%';
-    };
-    // 当上传完成时调用
-    xhr.onload = function () {
-      if (xhr.status === 200) {
-        let parse = JSON.parse(xhr.responseText);
-        uploadResult.innerHTML = '上传成功：【' + parse.path + '】';
-      }
+        let xhr = new XMLHttpRequest();
+        // 处理上传进度
+        xhr.upload.onprogress = function (event) {
+            let percent = 100 * event.loaded / event.total;
+            uploadResult.innerHTML = '上传进度：' + percent + '%';
+        };
+        // 当上传完成时调用
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                let parse = JSON.parse(xhr.responseText);
+                uploadResult.innerHTML = '上传成功：【' + parse.path + '】';
+            }
+        }
+        xhr.onerror = function () {
+            uploadResult.innerHTML = '上传失败';
+        }
+        // 发送请求
+        xhr.open('POST', '/upload', true);
+        let formData = new FormData();
+        formData.append('file', file);
+        xhr.send(formData);
     }
-    xhr.onerror = function () {
-      uploadResult.innerHTML = '上传失败';
-    }
-    // 发送请求
-    xhr.open('POST', '/upload', true);
-    let formData = new FormData();
-    formData.append('file', file);
-    xhr.send(formData);
-  }
 </script>
 </body>
 </html>

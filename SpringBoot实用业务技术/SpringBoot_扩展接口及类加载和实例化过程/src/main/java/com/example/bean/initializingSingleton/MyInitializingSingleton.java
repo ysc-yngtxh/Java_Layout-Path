@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-04-21 上午10:46
+ * @dateTime 2024-04-21 上午10:00
  * @apiNote TODO 在Spring容器对所有单例Bean初始化完成后执行一些自定义的初始化逻辑
  */
 @Component

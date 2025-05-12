@@ -13,11 +13,11 @@ import org.springframework.context.annotation.Configuration;
 @ToString
 @Configuration
 //（如 metadata.properties.unknownField），但 ContextProperties 类中没有对应的字段，启动时会抛出异常。
-// 如果 ignoreUnknownFields 属性设置为 false，则会抛出异常，启动失败。
-// 如果 ignoreUnknownFields 属性设置为 true（默认值），则会忽略这些字段，启动不会抛出异常。
+//     如果 ignoreUnknownFields 属性设置为 false，则会抛出异常，启动失败。
+//     如果 ignoreUnknownFields 属性设置为 true（默认值），则会忽略这些字段，启动不会抛出异常。
 //（如 metadata.properties.sexEnum=123），但 ContextProperties 类的sexEnum属性类型不匹配或格式错误，启动时会抛出异常。
-// 如果 ignoreInvalidFields 属性设置为 false（默认值），则会抛出异常，启动失败。
-// 如果 ignoreInvalidFields 属性设置为 true，则会忽略这些字段，启动不会抛出异常。
+//     如果 ignoreInvalidFields 属性设置为 false（默认值），则会抛出异常，启动失败。
+//     如果 ignoreInvalidFields 属性设置为 true，则会忽略这些字段，启动不会抛出异常。
 @ConfigurationProperties(value = ContextProperties.PREFIX, ignoreInvalidFields = true, ignoreUnknownFields = true)
 public class ContextProperties {
 

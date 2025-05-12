@@ -16,7 +16,7 @@ import java.util.Map;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-02-27 14:17
+ * @dateTime 2024-02-27 14:00
  * @apiNote TODO 动态注册Bean到Spring容器
  */
 @Component
@@ -46,8 +46,8 @@ public class AnnotationScannerConfigurer implements BeanDefinitionRegistryPostPr
 		// 如果不想定义属性，可以直接创建一个bean(Category.class)的定义类的对象RootBeanDefinition
 		// RootBeanDefinition rootBeanDefinition = new RootBeanDefinition(Category.class);
 
-		// 将Bean 的定义注册到Spring环境，并定义该Bean的名称为"testService"
-		beanDefinitionRegistry.registerBeanDefinition("testService", beanDefinition);
+		// 将Bean 的定义注册到Spring环境，并定义该Bean的名称为"categoryBean"
+		beanDefinitionRegistry.registerBeanDefinition("categoryBean", beanDefinition);
 	}
 
 	// 这个方法通常用于处理已经加载到容器中的Bean
@@ -56,6 +56,6 @@ public class AnnotationScannerConfigurer implements BeanDefinitionRegistryPostPr
 		// 获取每一个含有自定义注解@AutoDiscoverClass的Bean。bean的名字为key, bean的实例为value
 		Map<String, Object> beanMap =
 				configurableListableBeanFactory.getBeansWithAnnotation(AutoDiscoverClass.class);
-		System.err.println(beanMap.get("testService"));
+		System.err.println(beanMap.get("categoryBean"));
 	}
 }

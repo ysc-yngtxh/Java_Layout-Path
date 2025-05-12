@@ -1,10 +1,13 @@
 package com.example.executor;
 
+import lombok.ToString;
+
 /**
  * @author 游家纨绔
- * @dateTime 2024-01-13 14:41
+ * @dateTime 2024-01-13 14:00:00
  * @apiNote TODO
  */
+@ToString
 public class Cat {
 
     // TODO 构造(普通)代码块 和 普通属性 的初始化执行优先级一样，谁书写在前谁先执行。
@@ -37,12 +40,5 @@ public class Cat {
     private static String getCatAge() {
         System.out.println("父类Cat静态属性的初始化");
         return "白色";
-    }
-
-    @Override
-    public String toString() {
-        return "Cat{" +
-                "name='" + name + '\'' +
-                '}';
     }
 }
