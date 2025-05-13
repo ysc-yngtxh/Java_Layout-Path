@@ -1,0 +1,44 @@
+# 设置端口号
+server:
+  port: 8080
+
+spring:
+  application:
+    name: consumer-service
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+
+# 设置日志级别
+logging:
+  level:
+    com:
+      example: debug
+
+# 设置Eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka/
+
+consumer-ribbon:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+    ConnectTimeout: 3000
+    ReadTimeout: 3000
+    MaxAutoRetries: 1
+    MaxAutoRetriesNextServer: 2
+    ServerListRefreshInterval: 2000
+    # listOfServers: localhost:8081,localhost:8082  # 静态服务器列表(不推荐)
+
+
+# 设置hystrix的超时时长
+
+ribbon:
+  eager-load:
+    enabled: true
+
+hystrix:
+  metrics:
+    enabled: true
