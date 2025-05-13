@@ -11,8 +11,8 @@
     <groupId>org.example</groupId>
     <artifactId>07_Gateway-Yaml</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>07_Gateway-Yaml</name>
-    <description>07_Gateway-Yaml</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>23</java.version>
@@ -33,7 +33,12 @@
         <!--     <artifactId>spring-boot-starter-web</artifactId> -->
         <!-- </dependency> -->
 
-        <!--网关请求服务降级所需依赖：断路器-->
+        <!--网关请求服务降级所需依赖：断路器。
+        ⚠️：spring-cloud-starter-circuitbreaker-resilience4j
+                适用于普通Spring MVC应用（非响应式编程）同步阻塞
+            spring-cloud-starter-circuitbreaker-reactor-resilience4j
+                适用于Spring WebFlux应用（响应式编程）。异步非阻塞，支持 Mono/Flux
+        -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>

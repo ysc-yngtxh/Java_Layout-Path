@@ -12,7 +12,7 @@
     function accessDepart() {
         // 注意：这里不直接跨域，而是通过访问网关的方式让 Gateway 做路由进行跨域操作，并且通过配置解决CORS问题
         // 另外，Query参数是为避免走全局过滤器 UrlValidateGlobalFilter 逻辑
-        $.get("http://localhost:8088/provider/1?token=123", function (data) {
+        $.get("http://localhost:8081/provider/1?token=123", function (data) {
             alert(JSON.stringify(data))
         })
     }

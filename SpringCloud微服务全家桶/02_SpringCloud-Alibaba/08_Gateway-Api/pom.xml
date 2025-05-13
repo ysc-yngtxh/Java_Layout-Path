@@ -10,8 +10,8 @@
 
     <artifactId>08_Gateway-Api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>08_Gateway-Api</name>
-    <description>08_Gateway-Api</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>23</java.version>

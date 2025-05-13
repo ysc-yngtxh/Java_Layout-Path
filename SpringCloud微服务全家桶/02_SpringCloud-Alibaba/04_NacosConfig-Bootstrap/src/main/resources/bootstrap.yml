@@ -1,3 +1,8 @@
+server:
+  port: 8090
+  servlet:
+    context-path: /
+
 spring:
   application:
     name: provider_config
@@ -5,11 +10,14 @@ spring:
     active: dev
   cloud:
     nacos:
+      username: nacos
+      password: nacos
+      server-addr: 127.0.0.1:8848
       # 注意⚠️：添加nacos配置中心的客户端依赖的，这里的 discovery 换成 config
       config:
-        server-addr: localhost:8848
-        username: nacos
-        password: nacos
+        # username: nacos
+        # password: nacos
+        # server-addr: 127.0.0.1:8848
         group: DEFAULT_GROUP
         namespace: public
         # 默认指定的config配置文件类型为properties，现在更改为yaml或者yml。注意拼接的Nacos文件名要一致
@@ -28,6 +36,7 @@ spring:
           data-id: extension_config-two.yml
           group: DEFAULT_GROUP
           refresh: true
+
 # 1、工程特定的配置文件：通过工程的应用名来定位的配置文件通常具有最高的优先级。（provider_config-dev.yml）
 #    例如：${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
 # 2、扩展配置：项目中可能会依赖其他模块的配置文件，这些依赖的Nacos配置构成了扩展配置（extension-configs）。

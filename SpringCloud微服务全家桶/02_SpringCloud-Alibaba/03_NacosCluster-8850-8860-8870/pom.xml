@@ -11,8 +11,8 @@
 
     <artifactId>03_NacosCluster-8850-8860-8870</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>03_NacosCluster-8850-8860-8870</name>
-    <description>03_NacosCluster-8850-8860-8870</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>23</java.version>

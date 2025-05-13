@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`(
     `id`           int(11)      NOT NULL AUTO_INCREMENT COMMENT '主键Id',
     `superior_id`  int(11)      DEFAULT NULL COMMENT '上级Id',

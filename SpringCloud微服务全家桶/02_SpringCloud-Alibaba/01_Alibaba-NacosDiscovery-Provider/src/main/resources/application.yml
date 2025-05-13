@@ -1,0 +1,51 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: nacos-discovery-provider
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springcloud?serverTimezone=UTC
+    username: root
+    password: 131474
+  cloud:
+    nacos:
+      discovery:
+        # nacos服务地址
+        server-addr: 127.0.0.1:8848
+        # nacos登陆用户名
+        username: nacos
+        # nacos登陆密码
+        password: nacos
+
+logging:
+  level:
+    com:
+      example: debug
+
+# Nacos 会定期调用客户端的健康检查端点来确认服务实例是否健康
+# 负载均衡器会根据健康状态决定是否将请求路由到该实例（不健康的实例会被标记为 "DOWN" 并从负载均衡池中移除）
+management:
+  endpoint:
+    health:
+      # 控制健康检查端点的详细信息显示方式
+      # 其他可选值：
+      #     never：从不显示详细信息（默认值）
+      #     when-authorized：仅对授权用户显示
+      #     always：总是显示详细信息
+      show-details: always
+  endpoints:
+    web:
+      base-path: /manage  # 修改默认路径 '/actuator' 为 '/manage'
+      exposure:
+        # Spring Boot Actuator 默认不通过 Web 暴露任何端点，这里只配置了 health 端点，表示只公开健康检查端点
+        # 其他常用端点：
+        #     info：应用基本信息
+        #     metrics：应用指标
+        #     prometheus：Prometheus 格式的指标
+        #     env：环境变量
+        #     beans：所有 Spring beans
+        include: '*'

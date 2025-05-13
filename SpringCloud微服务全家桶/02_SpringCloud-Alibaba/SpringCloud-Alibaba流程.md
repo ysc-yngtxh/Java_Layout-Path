@@ -7,27 +7,65 @@
    ![img.png_2](01_Alibaba-Provider/src/main/resources/static/img_1.png)
 
 ## 二、Nacos（ http://localhost:8848/nacos ）
-#### 1. 配置Nacos文件
-- > 用户鉴权：进入nacos文件 ../nacos/conf/application.properties 配置编辑鉴权信息。具体规则也可参考官网：https://nacos.io/zh-cn/docs/v2/guide/user/auth.html
-  >
-  > ![img.png_3](01_Alibaba-Provider/src/main/resources/static/img_7.png)
-  
-- > 外置数据库Mysql：进入nacos文件 ../nacos/conf/application.properties 配置编辑外置MySQL来存储配置数据   
-  > 另外需要在建立合适的数据库，以及执行 Nacos 提供的建表语句。路径通常为：bin 同级包下 ../conf/**-schema.sql
+#### 1. 配置Nacos文件  
+- > 外置数据库Mysql：进入nacos文件 ../nacos/conf/application.properties 配置编辑外置MySQL来存储配置数据     
+  > 另外需要在建立合适的数据库，以及手动执行 Nacos 提供的建表语句，路径通常为：bin 同级包下 ../conf/**-schema.sql
   > ![img.png_3](01_Alibaba-Provider/src/main/resources/static/img_6.png)
+
+- > Nacos文件配置：进入nacos文件 ../nacos/conf/application.properties
+  > ![img.png_3](01_Alibaba-Provider/src/main/resources/static/img_7.png)
+
+  ```
+  # 数据库类型
+  spring.datasource.platform=mysql
+  spring.sql.init.platform=mysql
+  
+  # 数据库个数
+  db.num=1
+  
+  # 数据库配置
+  db.url.0=jdbc:mysql://127.0.0.1:3306/springcloud?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=Asia/Shanghai
+  db.user.0=root
+  db.password.0=131474
+  
+  # 数据库连接配置
+  db.pool.config.connectionTimeout=30000
+  db.pool.config.validationTimeout=10000
+  db.pool.config.maximumPoolSize=20
+  db.pool.config.minimumIdle=2
+  
+  # 开启用户认证
+  nacos.core.auth.enabled=true
+  # 开启用户认证缓存
+  nacos.core.auth.caching.enabled=true
+  # 用户身份密钥（可随意搭配）
+  nacos.core.auth.server.identity.key=xxx
+  nacos.core.auth.server.identity.value=ooo
+  # 输入默认token
+  nacos.core.auth.plugin.nacos.token.secret.key=VGhpc0lzTXlDdXN0b21TZWNyZXRLZXkwMTIzNDU2Nzg=
+  
+  ######################## 以下为Nacos3.x.x版本中的配置 ########################
+  # Nacos3.x.x控制台端口（默认端口号：8080）
+  nacos.console.port=
+  # Nacos3.x.x控制台上下文路径（默认上下文：/）
+  nacos.console.contextPath=
+  ```
 #### 2. 启动Nacos命令
 - > ①、Windows系统使用命令提示符窗口：  
-    >>  启动Nacos命令：sh startup.sh -m standalone（standalone代表着单机模式运行，非集群模式）  
-        启动Nacos命令：sh startup.sh（集群模式，使用这种方式启动）  
-        关闭Nacos命令：sh shutdown.sh  
+    >>  启动Nacos命令：startup.cmd -m standalone（standalone代表着单机模式运行，非集群模式）  
+        启动Nacos命令：startup.cmd（集群模式，使用这种方式启动）  
+        关闭Nacos命令：shutdown.cmd  
         也可以直接点击 startup.cmd 启动Nacos（非集群模式），点击 shutdown.cmd 关闭Nacos服务     
   >
   > ②、Mac系统在Nacos的bin文件夹下进入终端：  
-    >>  启动Nacos命令：sh startup.sh -m standalone(standalone代表着单机模式运行，非集群模式)  
+    >>  启动Nacos命令：sh startup.sh -m standalone（standalone代表着单机模式运行，非集群模式）  
         启动Nacos命令：sh startup.sh（集群模式，使用这种方式启动）  
         关闭Nacos命令：sh shutdown.sh   
   > 
-  > ③、访问Nacos地址：http://localhost:8848/nacos
+  > ③、访问Nacos控制台页面    
+    >> Nacos2.x.x版本：http://localhost:8848/nacos    
+       Nacos3.x.x版本：http://localhost:8080/index.html   
+       Nacos3.x.x版本控制台地址可通过 /nacos/conf/application.properties 文件中进行修改端口和路径前缀
 #### 3. 注册表缓存
 - > 1️⃣、服务在启动后，当发生调用时会自动从 Nacos注册中心 下载并缓存注册表到本地，将服务的实例信息缓存在消费者端。  
   > 2️⃣、简单来说：只要微服务方式调用过一次，http://nacos-provider/user/ 就会缓存到消费端为 http://localhost:8081/user/  

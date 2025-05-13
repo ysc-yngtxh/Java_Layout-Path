@@ -30,4 +30,7 @@ public class NacosConfig {
 
     @Value(value = "${nacos.server.port}")
     public String port;
+
+    @Value(value = "${nacos.properties.file}")
+    public String file;
 }

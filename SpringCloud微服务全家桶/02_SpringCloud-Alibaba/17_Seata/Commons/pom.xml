@@ -12,8 +12,8 @@
     <groupId>com.example</groupId>
     <artifactId>Commons</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Commons</name>
-    <description>Commons</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>23</java.version>

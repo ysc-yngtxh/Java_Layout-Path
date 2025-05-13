@@ -1,9 +1,11 @@
 nacos:
   core:
-    size: 3
+    size: 0
   max:
-    size: 20
+    size: 10
   config:
     username: 念念不忘
   server:
-    port: 8848
+    port: 8850
+  properties:
+    file: classpath:application.properties

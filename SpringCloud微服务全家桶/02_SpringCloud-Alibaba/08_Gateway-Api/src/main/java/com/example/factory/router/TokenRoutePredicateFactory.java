@@ -42,7 +42,7 @@ public class TokenRoutePredicateFactory extends AbstractRoutePredicateFactory<To
     // 支持断言路由的重写方法
     @Override
     public List<String> shortcutFieldOrder() {
-        return Arrays.asList("Token");
+        return List.of("Token");
     }
 
     @Data

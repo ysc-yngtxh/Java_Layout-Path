@@ -23,8 +23,7 @@ public class ThreeGatewayFilterFactory extends AbstractNameValueGatewayFilterFac
             return chain.filter(exchange).then(
                     // post-filter
                     Mono.fromRunnable(() -> {
-                        log.info(config.getName() + "-" + config.getValue()
-                                + " - post 执行完毕。");
+                        log.info(config.getName() + "-" + config.getValue() + " - post 执行完毕。");
                     })
             );
         };
