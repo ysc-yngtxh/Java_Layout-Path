@@ -1,0 +1,31 @@
+server:
+  port: 9500
+
+spring:
+  application:
+    name: sentinel-entry
+  cloud:
+    sentinel:
+      # 取消控制台懒加载，这样就可以在访问Sentinel控制台的时候，不需要通过访问资源，就能在控制台显示资源信息
+      eager:
+        true
+      transport:
+        # 启动一个与Dashboard通信的进程，默认端口为8719
+        # 这里的 spring.cloud.sentinel.transport.port 端口配置会在应用对应的机器上启动一个 Http Server，
+        # 该Server会与 Sentinel控制台做交互。比如 Sentinel控制台添加了一个限流规则，会把规则数据push给这个Http Server接收，
+        # Http Server 再将规则注册到 Sentinel 中。
+        # 理解以下两个端口：8888相当于Sentinel的前端服务；8719相当于Sentinel的后端服务
+        port: 8719
+        # 控制台仪表盘地址
+        dashboard: 127.0.0.1:8888
+
+      # 表示是否启用 Sentinel 配置（如流量控制、熔断降级、系统保护等规则生效）
+      # 该配置项的默认值为true，表示启用自动配置；配置值为false时，表示完全关闭 Sentinel 功能
+      enabled: true
+      # 表示是否启用 Web 拦截（即针对接口路径的拦截）默认值为true
+      filter:
+        enabled: true
+
+      # 默认该设置为true，会收敛所有URL入口，即对同一请求URL到了Sentinel后会自动统一(unify)为一个URL。
+      # 即Sentinel只关心被访问资源，不需要区分请求的来源。设置为false后，就可以区分请求来源了。用于流控中的链路模式
+      web-context-unify: false

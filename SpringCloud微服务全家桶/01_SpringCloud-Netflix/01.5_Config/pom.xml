@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>01_SpringCloud-Netflix</artifactId>
+        <groupId>com.example</groupId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>01.5_Config</artifactId>
+    <version>1.0.0</version>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
+
+    <properties>
+        <maven.compiler.source>23</maven.compiler.source>
+        <maven.compiler.target>23</maven.compiler.target>
+    </properties>
+
+    <modules>
+        <module>01.5.1_config-server</module>
+        <module>01.5.2_config-client</module>
+        <module>01.5.3_config-client-refresh</module>
+        <module>01.5.4_config-client-refresh-bus</module>
+    </modules>
+    <packaging>pom</packaging>
+
+</project>

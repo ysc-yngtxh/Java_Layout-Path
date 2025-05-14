@@ -1,19 +1,19 @@
 
 ## 一、获取对应项目版本号
 #### 1、Spring官网 Https://spring.io 可以看到 SpringBoot3.0.x、3.1.x版本对应 SpringCloud2022.0.x版本，且当前最新SpringCloud最新版本为 2022.0.4
-   ![img_1](01_Alibaba-Provider/src/main/resources/static/img.png)
+   ![img_1](01_Alibaba-NacosDiscovery-Provider/src/main/resources/static/img.png)
 
 #### 2、GitHub搜索alibaba，进入 spring-cloud-alibaba 的文档版本说明。适配 SpringBoot 3.0 版本及以上的 Spring Cloud Alibaba 版本为 2022.0.0.0
-   ![img.png_2](01_Alibaba-Provider/src/main/resources/static/img_1.png)
+   ![img.png_2](01_Alibaba-NacosDiscovery-Provider/src/main/resources/static/img_1.png)
 
 ## 二、Nacos（ http://localhost:8848/nacos ）
 #### 1. 配置Nacos文件  
 - > 外置数据库Mysql：进入nacos文件 ../nacos/conf/application.properties 配置编辑外置MySQL来存储配置数据     
   > 另外需要在建立合适的数据库，以及手动执行 Nacos 提供的建表语句，路径通常为：bin 同级包下 ../conf/**-schema.sql
-  > ![img.png_3](01_Alibaba-Provider/src/main/resources/static/img_6.png)
+  > ![img.png_3](01_Alibaba-NacosDiscovery-Provider/src/main/resources/static/img_6.png)
 
 - > Nacos文件配置：进入nacos文件 ../nacos/conf/application.properties
-  > ![img.png_3](01_Alibaba-Provider/src/main/resources/static/img_7.png)
+  > ![img.png_3](01_Alibaba-NacosDiscovery-Provider/src/main/resources/static/img_7.png)
 
   ```
   # 数据库类型
@@ -79,17 +79,17 @@
   > 服务实例不仅会注册到Nacos内存，同时也会被持久化到Nacos磁盘。其健康监测机制为Server模式，即Server会主动去检测Client的健康状态，
   > 默认每20秒检测一次。健康检测失败后服务实例会被标记为"不健康"状态，但不会被清除，因为其是持久化在磁盘的。
   >
-  >![img.png_3](01_Alibaba-Provider/src/main/resources/static/img_2.png)
+  >![img.png_3](01_Alibaba-NacosDiscovery-Provider/src/main/resources/static/img_2.png)
 
 - > ```
   > 注册服务对Nacos实例配置
   > spring:
-  >      cloud:
-  >          nacos:
-  >              discovery:
-  >                  ephemeral: false  # 是否设置为临时实例：默认为true，表示当前服务注册到Nacos中为临时实例
+  >   cloud:
+  >     nacos:
+  >       discovery:
+  >         ephemeral: false  # 是否设置为临时实例：默认为true，表示当前服务注册到Nacos中为临时实例
   > ```
-  > ![img.png_4](01_Alibaba-Provider/src/main/resources/static/img_3.png)
+  > ![img.png_4](01_Alibaba-NacosDiscovery-Provider/src/main/resources/static/img_3.png)
 
 - > 还有就是一旦注册了持久实例，无法通过停掉服务的方式(不健康状态自动清除临时实例)，或者是Nacos界面的方式手动点击删除。  
   > 需要通过一下CURL命令才能进行删除持久实例 -- 注意配置数据需要对应上.具体参考官网 https://nacos.io/zh-cn/docs/v2/guide/user/open-api.html
@@ -102,7 +102,7 @@
   > -d 'password=nacos' \
   > -X DELETE 'http://127.0.0.1:8848/nacos/v2/ns/instance'
   > ```
-  > ![img.png_6](01_Alibaba-Provider/src/main/resources/static/img_5.png)
+  > ![img.png_6](01_Alibaba-NacosDiscovery-Provider/src/main/resources/static/img_5.png)
 #### 5. Nacos集群搭建
 - > ```
   > ①、在各个nacos的解压目录nacos/的conf目录下，将配置文件cluster.conf.example复制一份，重命名为cluster.conf文件，每行配置成ip:port。（请配置3个或3个以上节点）
@@ -114,15 +114,15 @@
   > ③、启动各个nacos服务，注意：不要使用 非集群模式 启动 -- sh startup.sh
   > ④、nacos集群启动后，服务注册到指定的nacos中，可同时注册到集群中多个nacos中心
   >          spring:
-  >              cloud:
-  >                  nacos:
-  >                      discovery:
-  >                          server-addr: 192.168.2.101:8850,192.168.2.101:8860,192.168.2.101:8870
-  >                              - 192.168.2.101:8850 这种写法不生效，setServerAddr参数为String类型，这样写表示一个数组或者集合
-  >                              - 192.168.2.101:8860 这种写法不生效，setServerAddr参数为String类型，这样写表示一个数组或者集合
-  >                              - 192.168.2.101:8870 这种写法不生效，setServerAddr参数为String类型，这样写表示一个数组或者集合
+  >            cloud:
+  >              nacos:
+  >                discovery:
+  >                  server-addr: 192.168.2.101:8850, 192.168.2.101:8860, 192.168.2.101:8870
+  >                    - 192.168.2.101:8850 这种写法不生效，setServerAddr参数为String类型，这样写表示一个数组或者集合
+  >                    - 192.168.2.101:8860 这种写法不生效，setServerAddr参数为String类型，这样写表示一个数组或者集合
+  >                    - 192.168.2.101:8870 这种写法不生效，setServerAddr参数为String类型，这样写表示一个数组或者集合
   > ```
-  > ![img.png_6](01_Alibaba-Provider/src/main/resources/static/img_4.png)
+  > ![img.png_6](01_Alibaba-NacosDiscovery-Provider/src/main/resources/static/img_4.png)
 #### 6. Nacos的CAP模式
 - > 1、CAP即：Consistency（一致性）、Availability（可用性）、Partition tolerance（分区容忍性）  
     2、这三个性质对应了分布式系统的三个指标：而CAP理论说的就是：一个分布式系统，不可能同时做到这三点。  
@@ -139,8 +139,8 @@
   >> 3、Nacos的配置管理还可以通过group来进行分组的。
   >>    spring.cloud.nacos.discovery.group=My_Group
 -  > ##### 创建实例测试
-   > ![img.png_6](01_Alibaba-Provider/src/main/resources/static/img_8.png)
-     ![img.png_6](01_Alibaba-Provider/src/main/resources/static/img_9.png)
+   > ![img.png_6](01_Alibaba-NacosDiscovery-Provider/src/main/resources/static/img_8.png)
+     ![img.png_6](01_Alibaba-NacosDiscovery-Provider/src/main/resources/static/img_9.png)
 #### 8. Nacos Config配置中心
 - > 1、配置中心中的配置数据一般都是持久化在第三方服务器的，例如存放到DBMS、Git远程库等。由于这些配置中心Server中根本就不存放数据，
        所以它们的集群中就不存在数据一致性问题。但像Zookeeper，其作为配置中心，配置数据是存放在自己本地的。所以该集群中的节点是存在数据一致性问题的。
@@ -148,7 +148,7 @@
     2、作为注册中心，这些Server集群间是存在数据一致性问题的，它们采用的模式是不同的。
        Zookeeper(CP)、Eureka(AP)、Consul(AP)、Nacos(默认AP，也支持CP)
   >
-  >![img.png_6](01_Alibaba-Provider/src/main/resources/static/img_10.png)
+  >![img.png_6](01_Alibaba-NacosDiscovery-Provider/src/main/resources/static/img_10.png)
 
 ## 二、OpenFeign
 -  #### 1、概述：  
@@ -206,11 +206,11 @@
     该处理程序通过特定于该请求的过滤器链运行请求。过滤器用虚线分隔的原因是，过滤器可以在发送代理请求之前和之后运行逻辑。
     所有“预”过滤器逻辑都会被执行。然后发出代理请求。在发出代理请求之后，将运行“post”过滤器逻辑。
 
-- ![img_11.png_11](01_Alibaba-Provider/src/main/resources/static/img_11.png)
+- ![img_11.png_11](01_Alibaba-NacosDiscovery-Provider/src/main/resources/static/img_11.png)
 
 - > 在 07_Gateway-Api 项目中的 OneGatewayFilterFactory、TwoGatewayFilterFactory、ThreeGatewayFilterFactory
   > 都是先进行的 pre预逻辑处理，然后代理请求执行完毕后，才会去执行 post过滤器逻辑
-  ![img_12.png_12](01_Alibaba-Provider/src/main/resources/static/img_12.png)
+  ![img_12.png_12](01_Alibaba-NacosDiscovery-Provider/src/main/resources/static/img_12.png)
 
 ## 五、Sentinel流量防卫兵
 #### 1、简介  
@@ -244,10 +244,10 @@
     
  ```
  启动Sentinel控制台需要JDK版本为1.8及以上版本。在Sentinel控制jar包所在目录中打开cmd窗口，执行启动命令:
- java -Dserver.port=8888 
- -Dsentinel.dashboard.auth.username=sentinel  # 这一段设置登陆Sentinel账号密码，可以不写，默认用户名和密码就是sentinel
- -Dsentinel.dashboard.auth.password=123456
- -jar sentinel-dashboard-1.8.6.jar
+ java -Dserver.port=8888 \
+ -Dsentinel.dashboard.auth.username=sentinel \ # 这一段设置登陆Sentinel账号密码，可以不写，默认用户名和密码就是sentinel
+ -Dsentinel.dashboard.auth.password=123456 \
+ -jar sentinel-dashboard-1.8.8.jar
  ```
 
 #### 4、Sentinel的使用  
@@ -262,16 +262,16 @@
       sentinel:
         transport:
           port: 8719
-          dashboard: localhost:8080
+          dashboard: localhost:8888
   
       这里的 spring.cloud.sentinel.transport.port 端口配置会在应用对应的机器上启动一个 Http Server，
   该Server会与 Sentinel控制台做交互。比如 Sentinel控制台添加了一个限流规则，会把规则数据push给这个Http Server接收，
   Http Server 再将规则注册到 Sentinel 中。
       这里的 spring.cloud.sentinel.transport.dashboard 设置就是Sentinel仪表盘路径
   ```
-  - ![img_15.png_15](01_Alibaba-Provider/src/main/resources/static/img_15.png)
+  - ![img_15.png_15](01_Alibaba-NacosDiscovery-Provider/src/main/resources/static/img_15.png)
 
-  - ![img_13.png_13](01_Alibaba-Provider/src/main/resources/static/img_13.png)
+  - ![img_13.png_13](01_Alibaba-NacosDiscovery-Provider/src/main/resources/static/img_13.png)
 
   - ```
     当然，以上这种还需要手动操作的话，体验是不理想的，因此，我们可以在配置上去取消懒加载。
@@ -282,8 +282,8 @@
           eager: true
     ```
 
-  - ![img_14.png_14](01_Alibaba-Provider/src/main/resources/static/img_14.png)
-  - ![img_16.png_16](01_Alibaba-Provider/src/main/resources/static/img_16.png)
+  - ![img_14.png_14](01_Alibaba-NacosDiscovery-Provider/src/main/resources/static/img_14.png)
+  - ![img_16.png_16](01_Alibaba-NacosDiscovery-Provider/src/main/resources/static/img_16.png)
 
   ```
   注意点：
@@ -293,10 +293,10 @@
 
 #### 5、Sentinel不同限流方式的差异
  > ##### 第一种情况：基于 URL资源 作为限流
- > - ![img_17.png_17](01_Alibaba-Provider/src/main/resources/static/img_17.png)
+ > - ![img_17.png_17](01_Alibaba-NacosDiscovery-Provider/src/main/resources/static/img_17.png)
 
  > ##### 第二种情况：基于 资源名称 作为限流
- > - ![img_18.png_18](01_Alibaba-Provider/src/main/resources/static/img_18.png)
+ > - ![img_18.png_18](01_Alibaba-NacosDiscovery-Provider/src/main/resources/static/img_18.png)
 
 > ##### 结合以上两种结果：
 > ##### 1、接口URL限流超过阈值时的行为：  

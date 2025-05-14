@@ -1,0 +1,53 @@
+server:
+  port: 9700
+
+spring:
+  application:
+    name: sentinel-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+
+    gateway:
+      # 开启 gateway 在注册中心进行发现其他服务的功能，默认为 false
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        # TODO 1、path路径路由   地址格式：http://host[:port]/[abs_path]   断言规则首字母都是大写
+        - id: my_route-1             # 自定义的路由名称，无特殊意义
+          uri: http://localhost:8081
+          predicates: # 以下predicates断言为true，则 localhost:8086 跳转 localhost:8081
+            # path路径为 /provider/*，表示可以访问并跳转到 localhost:8081/provider/*
+            # path路径为 /consumer/*，表示可以访问并跳转到 localhost:8081/consumer/*
+            - Path=/provider/**, /consumer/**, /tb
+
+    sentinel:
+      # 取消控制台懒加载，这样就可以在访问Sentinel控制台的时候，不需要通过访问资源，就能在控制台显示资源信息
+      eager:
+        true
+      transport:
+        port: 8719
+        # 控制台仪表盘地址
+        dashboard: 127.0.0.1:8888
+
+      # 表示是否启用 Sentinel 配置（如流量控制、熔断降级、系统保护等规则生效）
+      # 该配置项的默认值为true，表示启用自动配置；配置值为false时，表示完全关闭 Sentinel 功能
+      enabled: true
+      # 表示是否启用 Web 拦截（即针对接口路径的拦截）默认值为true
+      filter:
+        enabled: true
+
+      # 自定义异常返回接口（同API方式。如两种方式都存在，API方式优先级高）
+      scg:
+        fallback:
+          mode: response  # 响应流模式
+          content-type: 'application/json'
+          response-status: 429
+          response-body: '{"msg": "访问量过大", "status": "429"}'
+
+         # mode: redirect  # 重定向模式
+         # redirect: https://baidu.com

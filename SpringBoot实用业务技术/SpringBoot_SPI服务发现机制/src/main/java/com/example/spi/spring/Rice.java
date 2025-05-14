@@ -1,8 +1,6 @@
 package com.example.spi.spring;
 
 import com.example.dependency.EnableCustomDependency;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

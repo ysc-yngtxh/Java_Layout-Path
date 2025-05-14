@@ -1,0 +1,74 @@
+server:
+  port: 8110
+
+logging:
+  level:
+    com:
+      example: debug
+
+spring:
+  application:
+    name: nacos-discovery-openfeign
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+    # OpenFeign相关配置
+    openfeign:
+      okhttp:
+        # 使用okhttp作为openFeign的请求客户端
+        enabled: true
+      # 开启熔断机制（需要添加断路器 circuitbreaker-resilience4j 依赖）
+      circuitbreaker:
+        enabled: true
+      client:
+        config:
+          # 配置全局(其他所有的提供者服务配置)
+          default:
+            # openFeign连接超时
+            connect-timeout: 1000
+            # openFeign读取超时
+            read-timeout: 3000
+          # 配置局部(指定的提供者服务配置)
+          nacos-discovery-provider:
+            # openFeign连接超时
+            connect-timeout: 1000
+            # openFeign读取超时
+            read-timeout: 1000
+      # 请求与响应压缩配置
+      compression:
+        request:
+          # 开启请求压缩
+          enabled: true
+          mime-types: [ "text/xml", "application/xml", "application/json", "video/mp4" ]
+          # 请求类型为["text/xml", "application/xml", "application/json", "video/mp4"]的请求，请求数据大小达到了1024K的进行压缩
+          min-request-size: 1024
+        response:
+          # 开启响应压缩
+          enabled: true
+
+# 配置resilience4j熔断器
+# Resilience4j CircuitBreaker 按照次数：COUNT_BASED 的例子
+#  6次访问中当执行方法的失败率达到 50% 时，CircuitBreaker将进入开启OPEN状态(保险丝跳闸断电)拒绝所有请求。
+#  等待5秒后，CircuitBreaker 将自动从开启 OPEN状态 过渡到 半开HALF_OPEN状态，允许一些请求通过以测试服务是否恢复正常。
+#  如还是异常CircuitBreaker 将重新进入开启 OPEN状态；如正常将进入关闭CLOSE闭合状态恢复正常处理请求。
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      failure-rate-threshold: 50       # 设置50%的调用失败时打开断路器，超过失败请求百分比，CircuitBreaker变为OPEN状态
+      slow-call-duration-threshold: 2s # 设置慢调用阈值为2s
+      sliding-window-type: COUNT_BASED # 滑动窗口类型
+      sliding-window-size: 6           # 缓动窗口配置，COUNT_BASED 6 表示6个请求，配置TIME_BASED 6 表示6s
+      minimum-number-of-calls: 6       # 断路器最小样本（6，表示至少计算6个样本，才计算调用失败）
+      automatic-transition-from-open-to-half-open-enabled: true # 是否启用半开状态，默认为true
+      wait-duration-in-open-state: 5s  # 从OPEN到HALF_OPEN需要等待的时间
+      permitted-number-of-calls-in-half-open-state: 2 # 半开状态下允许的最大请求数，默认值10。如果其中任意一个请求失败，将重新进入开启状态
+      record-exceptions: # 捕获的异常种类
+        - java.lang.Exception
+        - feign.FeignException.ServiceUnavailable
+        - org.springframework.web.client.ResourceAccessException
+  instances: # 熔断器使用实例
+    nacos-discovery-provider: # 这里定义的是在Nacos注册的服务实例名称，非固定写法
+      base-config: default # 引用默认配置

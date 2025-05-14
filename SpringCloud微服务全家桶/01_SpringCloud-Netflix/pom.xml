@@ -2,7 +2,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -13,16 +12,18 @@
 
     <groupId>com.example</groupId>
     <artifactId>01_SpringCloud-Netflix</artifactId>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
     <version>1.0.0</version>
-    <packaging>pom</packaging>
 
     <modules>
-        <module>01_Provider</module>
-        <module>02_Consumer</module>
-        <module>03_Eureka</module>
-        <module>04_Gateway</module>
-        <module>05_Config</module>
+        <module>01.1_Provider</module>
+        <module>01.2_Consumer</module>
+        <module>01.3_Eureka</module>
+        <module>01.4_Gateway</module>
+        <module>01.5_Config</module>
     </modules>
+    <packaging>pom</packaging>
 
     <!--父管理依赖的版本号-->
     <properties>

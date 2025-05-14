@@ -16,22 +16,22 @@
     <description>${project.artifactId}</description>
 
     <modules>
-        <module>01_Alibaba-NacosDiscovery-Provider</module>
-        <module>02_Alibaba-NacosDiscovery-Consumer</module>
-        <module>03_NacosCluster-8850-8860-8870</module>
-        <module>04_NacosConfig-Bootstrap</module>
-        <module>05_NacosConfig-ConfigImport-DynamicThreadPool</module>
-        <module>06_NacosDiscovery-OpenFeign</module>
-        <module>07_Gateway-Yaml</module>
-        <module>08_Gateway-Api</module>
-        <module>09_Gateway-Nacos</module>
-        <module>10_Sentinel</module>
-        <module>11_Sentinel-OpenFeign</module>
-        <module>12_Sentinel-Entry-FlowMode</module>
-        <module>13_Sentinel-Authorization-ParamMode</module>
-        <module>14_Sentinel-Gateway-Route-API</module>
-        <module>15_Sentinel-Pull</module>
-        <module>16_Sentinel-Push</module>
+        <module>02.1_Alibaba-NacosDiscovery-Provider</module>
+        <module>02.2_Alibaba-NacosDiscovery-Consumer</module>
+        <module>02.3_NacosCluster-8850-8860-8870</module>
+        <module>02.4_NacosConfig-Bootstrap</module>
+        <module>02.5_NacosConfig-ConfigImport-DynamicThreadPool</module>
+        <module>02.6_NacosDiscovery-OpenFeign</module>
+        <module>02.7_Gateway-Yaml</module>
+        <module>02.8_Gateway-Api</module>
+        <module>02.9_Gateway-Nacos</module>
+        <module>02.10_Sentinel</module>
+        <module>02.11_Sentinel-OpenFeign</module>
+        <module>02.12_Sentinel-Entry-FlowMode</module>
+        <module>02.13_Sentinel-Authorization-ParamMode</module>
+        <module>02.14_Sentinel-Gateway-Route-API</module>
+        <module>02.15_Sentinel-Pull</module>
+        <module>02.16_Sentinel-Push</module>
     </modules>
     <packaging>pom</packaging>
 
