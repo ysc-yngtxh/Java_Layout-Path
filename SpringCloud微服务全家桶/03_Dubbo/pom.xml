@@ -1,0 +1,39 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>03_Dubbo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>03.Dubbo</name>
+    <url>http://maven.apache.org</url>
+
+    <modules>
+        <module>03.1_dubbo-link1</module>
+        <module>03.2_dubbo-link2</module>
+        <module>03.3_dubbo-interface</module>
+        <module>03.4_dubbo-provider</module>
+        <module>03.5_dubbo-consumer</module>
+        <module>03.6_dubbo-zookeeper-interface</module>
+        <module>03.7_dubbo-zookeeper-provider</module>
+        <module>03.8_dubbo-zookeeper-consumer</module>
+        <module>03.9_dubbo-version-provider</module>
+        <module>03.10_dubbo-version-consumer</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
