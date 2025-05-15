@@ -22,5 +22,5 @@
     <dubbo:service interface="com.example.dubbo.service.UserService" ref="userService" registry="N/A"/>
 
     <!--将接口的实现类加载到spring容器中-->
-    <bean id="userService" class="com.bjpowernode.dubbo.service.UserServiceImpl"/>
+    <bean id="userService" class="com.example.dubbo.service.UserServiceImpl"/>
 </beans>

@@ -18,6 +18,6 @@
     <dubbo:service interface="com.example.dubbo.service.UserService" ref="userServiceImpl2" version="2.0.0"/>
 
     <!--将接口的实现类加载到spring容器中-->
-    <bean id="userServiceImpl" class="com.bjpowernode.dubbo.service.Impl.UserServiceImpl"/>
-    <bean id="userServiceImpl2" class="com.bjpowernode.dubbo.service.Impl.UserServiceImpl2"/>
+    <bean id="userServiceImpl" class="com.example.dubbo.service.Impl.UserServiceImpl"/>
+    <bean id="userServiceImpl2" class="com.example.dubbo.service.Impl.UserServiceImpl2"/>
 </beans>
