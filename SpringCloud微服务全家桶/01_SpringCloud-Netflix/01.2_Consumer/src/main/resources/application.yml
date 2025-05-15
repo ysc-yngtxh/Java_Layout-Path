@@ -6,8 +6,8 @@ spring:
   application:
     name: consumer-service
   cloud:
-    openfeign:
-      circuitbreaker:
+    circuitbreaker:
+      hystrix:
         enabled: true
 
 # 设置日志级别
@@ -18,27 +18,62 @@ logging:
 
 # 设置Eureka
 eureka:
+  instance:
+    prefer-ip-address: true  # 首选 IP 地址
+    hostname: localhost
   client:
+    fetch-registry: true       # 表示是否从Eureka Server获取注册的服务信息
+    register-with-eureka: true # 表示是否将自己注册到Eureka Server
     service-url:
-      defaultZone: http://localhost:10086/eureka/
+      defaultZone: http://${eureka.instance.hostname}:10086/eureka/
 
-consumer-ribbon:
-  ribbon:
-    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
-    ConnectTimeout: 3000
-    ReadTimeout: 3000
-    MaxAutoRetries: 1
-    MaxAutoRetriesNextServer: 2
-    ServerListRefreshInterval: 2000
-    # listOfServers: localhost:8081,localhost:8082  # 静态服务器列表(不推荐)
-
-
-# 设置hystrix的超时时长
-
+# 设置ribbon的
 ribbon:
   eager-load:
     enabled: true
 
+feign:
+  circuitbreaker:
+    enabled: true  # 启用 Feign 的断路器功能
+  httpclient:
+    connection-timeout: 1000  # 设置连接超时时间（单位：毫秒）
+    max-connections: 100      # 设置最大连接数
+
+# 注意⚠️：以下的 Hystrix 的配置虽然存在下划波浪线，但它们是合法且生效的
 hystrix:
-  metrics:
-    enabled: true
+  command:
+    default:  # 全局默认配置
+      execution:
+        isolation:
+          strategy: THREAD  # 隔离策略（THREAD 或 SEMAPHORE）
+          thread:
+            timeoutInMilliseconds: 1000  # 超时时间（默认 1000ms）
+      circuitBreaker:
+        requestVolumeThreshold: 20       # 触发熔断的最小请求数（默认 20）
+        errorThresholdPercentage: 50     # 错误率阈值（默认 50%）
+        sleepWindowInMilliseconds: 5000  # 熔断后恢复时间（默认 5000ms）
+
+
+# Eureka Server 会定期调用客户端的健康检查端点来确认服务实例是否健康
+# 负载均衡器会根据健康状态决定是否将请求路由到该实例（不健康的实例会被标记为 "DOWN" 并从负载均衡池中移除）
+management:
+  endpoint:
+    health:
+      # 控制健康检查端点的详细信息显示方式
+      # 其他可选值：
+      #     never：从不显示详细信息（默认值）
+      #     when-authorized：仅对授权用户显示
+      #     always：总是显示详细信息
+      show-details: always
+  endpoints:
+    web:
+      base-path: /manage  # 修改默认路径 '/actuator' 为 '/manage'
+      exposure:
+        # Spring Boot Actuator 默认不通过 Web 暴露任何端点，这里只配置了 health 端点，表示只公开健康检查端点
+        # 其他常用端点：
+        #     info：应用基本信息
+        #     metrics：应用指标
+        #     prometheus：Prometheus 格式的指标
+        #     env：环境变量
+        #     beans：所有 Spring beans
+        include: '*'

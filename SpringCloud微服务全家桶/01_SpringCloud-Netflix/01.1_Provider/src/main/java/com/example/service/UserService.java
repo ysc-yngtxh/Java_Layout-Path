@@ -17,11 +17,11 @@ public class UserService {
     private UserMapper userMapper;;
 
     public User queryById(Integer id) {
-        // try {
-        //     TimeUnit.SECONDS.sleep(3);   // 模拟用户访问超时，这个时候就触发了Hystrix的服务降级
-        // } catch (InterruptedException e) {
-        //     e.printStackTrace();
-        // }
+        try {
+            TimeUnit.SECONDS.sleep(3);   // 模拟用户访问超时，这个时候就触发了Hystrix的服务降级
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return userMapper.selectByPrimaryKey(id);
     }
 

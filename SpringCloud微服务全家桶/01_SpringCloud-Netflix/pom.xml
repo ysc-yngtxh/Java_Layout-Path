@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.5</version>
+        <version>2.4.13</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -29,14 +29,18 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>23</java.version>
-        <spring-cloud.version>2024.0.1</spring-cloud.version>
-        <spring-cloud-netflix-eureka-client.version>4.2.1</spring-cloud-netflix-eureka-client.version>
+        <java.version>1.8</java.version>
+        <spring-cloud.version>2020.0.6</spring-cloud.version><!-- 最后一个支持Hystrix的版本2020.0.6 -->
         <spring-cloud-netflix-hystrix.version>2.2.10.RELEASE</spring-cloud-netflix-hystrix.version>
-        <mapper.starter.version>5.0.1</mapper.starter.version>
+        <spring-cloud-netflix-ribbon.version>2.2.10.RELEASE</spring-cloud-netflix-ribbon.version>
+        <spring-cloud-netflix-zuul.version>2.2.10.RELEASE</spring-cloud-netflix-zuul.version>
+        <mapper.starter-version>4.3.0</mapper.starter-version>
+        <mysql-connector-j-version>9.2.0</mysql-connector-j-version>
     </properties>
 
-    <!--父工程要加强管理子模块的所有依赖-->
+    <!--Spring Cloud Dependencies 是一个用于管理 Spring Cloud 项目中依赖版本的工具。
+        它通过在父项目的 pom.xml 文件中引入 spring-cloud-dependencies，可以统一管理所有子项目的依赖版本，从而简化项目的依赖管理
+    -->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -46,22 +50,28 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!--注册中心Eureka依赖-->
-            <!--<dependency>-->
-            <!--    <groupId>org.springframework.cloud</groupId>-->
-            <!--    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>-->
-            <!--    <version>${spring-cloud-netflix-eureka-client.version}</version>-->
-            <!--</dependency>-->
-            <!--Hystrix依赖-->
+            <!-- 最后一个支持的Hystrix依赖版本（其中包含Ribbon依赖） -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
                 <version>${spring-cloud-netflix-hystrix.version}</version>
             </dependency>
+            <!-- 最后一个支持的Zuul依赖版本 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+                <version>${spring-cloud-netflix-zuul.version}</version>
+            </dependency>
+            <!-- 通用mapper -->
             <dependency>
                 <groupId>tk.mybatis</groupId>
                 <artifactId>mapper-spring-boot-starter</artifactId>
-                <version>${mapper.starter.version}</version>
+                <version>${mapper.starter-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mysql</groupId>
+                <artifactId>mysql-connector-j</artifactId>
+                <version>${mysql-connector-j-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -71,6 +81,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>

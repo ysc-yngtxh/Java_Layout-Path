@@ -2,23 +2,40 @@
 server:
   port: 10010
 
-logging:
-  level:
-    org.springframework.cloud.netflix.zuul: DEBUG
-    com.netflix.zuul: DEBUG
-
-# 设置Eureka
 spring:
   application:
     name: eureka-zuul
+
+logging:
+  level:
+    org.springframework.cloud.netflix.ribbon: DEBUG
+
+# 配置Ribbon
+ribbon:
+  eureka:
+    enabled: true       # 确保Ribbon使用Eureka进行服务发现
+  eager-load:
+    enabled: true       # 启动时立即加载服务列表
+  ReadTimeout: 60000    # 读超时时间
+  ConnectTimeout: 60000 # 连接超时时间
+  MaxAutoRetries: 0     # 重试次数
+  MaxAutoRetriesNextServer: 1 # 切换实例的重试次数
+
+# 设置Eureka
 eureka:
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:10086/eureka/
+    fetch-registry: true       # 表示是否从Eureka Server获取注册的服务信息
+    register-with-eureka: true # 表示是否将自己注册到Eureka Server
+    registry-fetch-interval-seconds: 5  # 缩短服务列表获取间隔
   instance:
     prefer-ip-address: true  # 首选 IP 地址
-  client:
-    fetch-registry: true     # 表示是否从Eureka Server获取注册的服务信息
-    service-url:
-      defaultZone: http://localhost:10086/eureka/
-
+    hostname: localhost
+    ip-address: localhost
+    metadata-map:
+      ribbon:
+        enable: true         # 显式启用 Ribbon
 
 # 路由.规则.路由ip.path相当于只要路径中有 /provider-service/** 将会被请求转发为 serviceId中的路由地址。
 # 连起来就是：http://localhost:10010/provider-service/**  ===> 转发到 provider-service上的 http://localhost:8088/**
@@ -46,22 +63,52 @@ zuul:
   # 为所有通过Zuul的请求都添加统一的前缀 /api
   prefix: /api
   routes:
-    provider-service-name: # 这个名字没意义，随便取
+    # 这个名字没意义，随便取
+    provider-service-name:
       # 定义匹配路径模式 /provider/**（**表示多级路径）http://localhost:10010/api/provider/user/1 ===> 转发到 provider-service上的 http://localhost:8088/user/1
       path: /provider/**
       # url: http://localhost:8088/ 这种写法是静态地址，但是我们需要动态的服务ip。
       # 绑定动态服务Id
-      serviceId: provider-service
+      serviceId: PROVIDER-SERVICE
       # 表示最终访问路径是否移除匹配的前缀，默认值为true
       # true表示去除 '/api' 这个前缀：http://localhost:10010/api/provider/user/1 ==> http://localhost:8088/user/1
       # false表示保留完整路径转发：http://localhost:10010/api/provider/user/1 ==> http://localhost:8088/api/user/1
-      strip-prefix: true
+      strip-prefix: true   # 移除前缀 /api/provider
   # 剔除指定服务的默认简化配置
-  ignored-services:
-    - provider-service  # 服务provider-service存在自定义配置，禁止Zuul创建默认路由，避免冲突
+  ignored-services: '*'
+    # 服务provider-service存在自定义配置，禁止Zuul创建默认路由，避免冲突
+    # - PROVIDER-SERVICE
     # - consumer-service 这里consumer-service的路由配置没有进行自定义，所以不剔除默认简化配置
   ribbon:
     eager-load:
-      enabled: true # 启用加载ribbon
+      enabled: true   # Zuul 启动时预加载 Ribbon 配置
   host:
     connect-timeout-millis: 5000   # 连接超时时长
+    socket-timeout-millis: 10000   # 响应超时时长
+  semaphore:
+    max-semaphores: 200
+
+
+# Eureka Server 会定期调用客户端的健康检查端点来确认服务实例是否健康
+# 负载均衡器会根据健康状态决定是否将请求路由到该实例（不健康的实例会被标记为 "DOWN" 并从负载均衡池中移除）
+management:
+  endpoint:
+    health:
+      # 控制健康检查端点的详细信息显示方式
+      # 其他可选值：
+      #     never：从不显示详细信息（默认值）
+      #     when-authorized：仅对授权用户显示
+      #     always：总是显示详细信息
+      show-details: always
+  endpoints:
+    web:
+      base-path: /manage  # 修改默认路径 '/actuator' 为 '/manage'
+      exposure:
+        # Spring Boot Actuator 默认不通过 Web 暴露任何端点，这里只配置了 health 端点，表示只公开健康检查端点
+        # 其他常用端点：
+        #     info：应用基本信息
+        #     metrics：应用指标
+        #     prometheus：Prometheus 格式的指标
+        #     env：环境变量
+        #     beans：所有 Spring beans
+        include: '*'

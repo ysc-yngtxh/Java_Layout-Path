@@ -3,8 +3,8 @@ package com.example.filter;
 import com.google.common.util.concurrent.RateLimiter;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import jakarta.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
@@ -37,7 +37,7 @@ public class LoginFilter extends ZuulFilter {
     // 要不要过滤
     @Override
     public boolean shouldFilter() {
-        return true;
+        return false;
     }
 
     // 过滤逻辑
@@ -46,7 +46,7 @@ public class LoginFilter extends ZuulFilter {
         // 获取请求上下文
         RequestContext ctx = RequestContext.getCurrentContext();
         // 获取request
-        HttpServletRequest request = (HttpServletRequest) ctx.getRequest();
+        HttpServletRequest request = ctx.getRequest();
         // 获取请求参数access-token
         String token = request.getParameter("token");
         log.info(token);
@@ -58,7 +58,7 @@ public class LoginFilter extends ZuulFilter {
             ctx.setResponseStatusCode(HttpStatus.FORBIDDEN.value());
             // 把提示信息显示到 页面
             try {
-                ctx.getResponse().getWriter().print("token is invalid");
+                ctx.getResponse().getWriter().print("Please provide the 【token】 as verification");
             } catch (IOException e) {
                 e.printStackTrace();
             }
