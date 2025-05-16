@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * 角色表(SysRole)表数据库访问层
  *
- * @author makejava
- * @since 2023-05-13 16:49:36
+ * @author 游家纨绔
+ * @since 2023-05-13 16:50:00
  */
 public interface SysRoleMapper extends BaseMapper<SysRole> {
 

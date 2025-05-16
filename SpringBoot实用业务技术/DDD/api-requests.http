@@ -2,7 +2,11 @@
 POST http://localhost:8080/message
 Content-Type: application/json; charset=UTF-8
 
-{"sender":1, "receiver":2, "content":"http://www.baidu.com"}
+{
+  "sender": 1,
+  "receiver": 2,
+  "content": "http://www.baidu.com"
+}
 
 ###
 #撤回消息

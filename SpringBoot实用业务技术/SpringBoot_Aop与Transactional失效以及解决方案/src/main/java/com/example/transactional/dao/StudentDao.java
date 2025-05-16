@@ -7,6 +7,6 @@ import com.example.transactional.entity.Student;
  * (Student)表数据库访问层
  *
  * @author 游家纨绔
- * @since 2023-11-11 17:32:05
+ * @since 2023-11-11 17:30:00
  */
 public interface StudentDao extends BaseMapper<Student> {}

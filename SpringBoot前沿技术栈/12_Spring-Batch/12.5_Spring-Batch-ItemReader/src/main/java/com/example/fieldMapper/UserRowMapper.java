@@ -12,12 +12,13 @@ import java.sql.SQLException;
  * @apiNote TODO 自定义映射
  */
 public class UserRowMapper implements RowMapper<User1> {
-    @Override
-    public User1 mapRow(ResultSet rs, int rowNum) throws SQLException {
-        User1 user1 = new User1();
-        user1.setId(rs.getLong("id"));
-        user1.setName(rs.getString("name"));
-        user1.setAge(rs.getInt("age"));
-        return user1;
-    }
+
+	@Override
+	public User1 mapRow(ResultSet rs, int rowNum) throws SQLException {
+		User1 user1 = new User1();
+		user1.setId(rs.getLong("id"));
+		user1.setName(rs.getString("name"));
+		user1.setAge(rs.getInt("age"));
+		return user1;
+	}
 }

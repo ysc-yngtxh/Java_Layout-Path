@@ -9,19 +9,19 @@ import org.mapstruct.Mappings;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-04-21 下午11:36
+ * @dateTime 2024-04-21 下午11:40
  * @apiNote TODO
  */
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface OrderToOrderPO {
 
-    @Mappings({
-            @Mapping(target = "orderId", source = "orderId"),
-            @Mapping(target = "buyerId", source = "buyerId"),
-            @Mapping(target = "sellerId", source = "sellerId"),
-            @Mapping(target = "shippingFee", source = "shippingFee"),
-            @Mapping(target = "discountAmount", source = "discountAmount"),
-            @Mapping(target = "address", source = "address")
-    })
-    OrderPO toOrderPO(OrderDDD orderDDD);
+	@Mappings({
+			@Mapping(target = "orderId", source = "orderId"),
+			@Mapping(target = "buyerId", source = "buyerId"),
+			@Mapping(target = "sellerId", source = "sellerId"),
+			@Mapping(target = "shippingFee", source = "shippingFee"),
+			@Mapping(target = "discountAmount", source = "discountAmount"),
+			@Mapping(target = "address", source = "address")
+	})
+	OrderPO toOrderPO(OrderDDD orderDDD);
 }

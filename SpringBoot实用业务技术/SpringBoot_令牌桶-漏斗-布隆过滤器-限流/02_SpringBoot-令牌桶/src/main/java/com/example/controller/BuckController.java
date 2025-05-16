@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class BuckController {
 
-    @BucketAnnotation
-    @RequestMapping(value = "/bucket")
-    public ResponseEntity<String> bucket() {
-        return ResponseEntity.ok("访问成功");
-    }
+	@BucketAnnotation
+	@RequestMapping(value = "/bucket")
+	public ResponseEntity<String> bucket() {
+		return ResponseEntity.ok("访问成功");
+	}
 }

@@ -139,7 +139,8 @@ class SpringBootUrlApplicationTests {
 	//       注意⚠️：当第二个传参数 ClassLoader parent 父类加载器为 null 时
 	//              那么 URLClassLoader 将独立地尝试加载传参 URL[] urls 路径下的类，而不会委托给其他类加载器。
 	@Test
-	public void contextLoads2() throws MalformedURLException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+	public void contextLoads2() throws MalformedURLException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException,
+			InvocationTargetException {
 		URL url = new File(System.getProperty("user.dir")).toURI().toURL();
 		// 三种写法：1️⃣、隐式使用默认的应用类父加载器 2️⃣、指定当前上下文的类加载器作为父加载器 3️⃣、指定系统类加载器作为父加载器
 		try (URLClassLoader loader1 = new URLClassLoader(new URL[]{url});
@@ -170,7 +171,8 @@ class SpringBootUrlApplicationTests {
 
 	// TODO 自定义类加载器
 	@Test
-	public void contextLoads3() throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, ClassNotFoundException, MalformedURLException, URISyntaxException {
+	public void contextLoads3() throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, ClassNotFoundException,
+			MalformedURLException, URISyntaxException {
 		URL url = new File(System.getProperty("user.dir")).toURI().toURL();
 		// 自定义类加载器调用 loadClass() 方法，使用的是父类加载器（AppClassLoader）的加载逻辑，同URLClassLoader()同理。
 		CustomClassLoader customClassLoader = new CustomClassLoader(url.getPath());

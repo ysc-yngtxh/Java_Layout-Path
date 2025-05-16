@@ -11,34 +11,34 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/handlers")
 public class HandlerController {
 
-    // 使用构造器注入 HandlerRegistry 对象
-    private final HandlerRegistry handlerRegistry;
+	// 使用构造器注入 HandlerRegistry 对象
+	private final HandlerRegistry handlerRegistry;
 
-    public HandlerController(HandlerRegistry handlerRegistry) {
-        this.handlerRegistry = handlerRegistry;
-    }
+	public HandlerController(HandlerRegistry handlerRegistry) {
+		this.handlerRegistry = handlerRegistry;
+	}
 
 
-    @PostMapping("/order/{messageType}")
-    public void registerHandler(@PathVariable String messageType) {
-        handlerRegistry.addHandler(messageType, (payload, channel, deliveryTag) -> {
-            // Order order = (Order) payload;
-            // 处理订单逻辑...
-            channel.basicAck(deliveryTag, false);
-        });
-    }
+	@PostMapping("/order/{messageType}")
+	public void registerHandler(@PathVariable String messageType) {
+		handlerRegistry.addHandler(messageType, (payload, channel, deliveryTag) -> {
+			// Order order = (Order) payload;
+			// 处理订单逻辑...
+			channel.basicAck(deliveryTag, false);
+		});
+	}
 
-    @PostMapping("/payment/{messageType}")
-    public void registerHandler2(@PathVariable String messageType) {
-        handlerRegistry.addHandler(messageType, (payload, channel, deliveryTag) -> {
-            // Payment payment = (Payment) payload;
-            // 处理支付逻辑...
-            channel.basicAck(deliveryTag, false);
-        });
-    }
+	@PostMapping("/payment/{messageType}")
+	public void registerHandler2(@PathVariable String messageType) {
+		handlerRegistry.addHandler(messageType, (payload, channel, deliveryTag) -> {
+			// Payment payment = (Payment) payload;
+			// 处理支付逻辑...
+			channel.basicAck(deliveryTag, false);
+		});
+	}
 
-    @DeleteMapping("/remove/{messageType}")
-    public void unregisterHandler(@PathVariable String messageType) {
-        handlerRegistry.removeHandler(messageType);
-    }
+	@DeleteMapping("/remove/{messageType}")
+	public void unregisterHandler(@PathVariable String messageType) {
+		handlerRegistry.removeHandler(messageType);
+	}
 }

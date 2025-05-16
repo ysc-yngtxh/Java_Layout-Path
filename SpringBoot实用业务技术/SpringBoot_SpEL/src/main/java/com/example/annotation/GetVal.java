@@ -11,9 +11,9 @@ import java.lang.annotation.Target;
 @Documented
 public @interface GetVal {
 
-    String value();
+	String value();
 
-    String key() default "key";
+	String key() default "key";
 
-    String enable() default "true";
+	String enable() default "true";
 }

@@ -23,47 +23,47 @@ import org.springframework.transaction.PlatformTransactionManager;
 @SpringBootTest
 public class SpringBatchApplicationTests {
 
-    @Autowired
-    private JobRepository jobRepository;  // SpringBatch数据库的操作
-    @Autowired
-    private JobLauncher jobLauncher;
-    @Autowired
-    private PlatformTransactionManager batchTransactionManager;  // 事务管理器
+	@Autowired
+	private JobRepository jobRepository;  // SpringBatch数据库的操作
+	@Autowired
+	private JobLauncher jobLauncher;
+	@Autowired
+	private PlatformTransactionManager batchTransactionManager;  // 事务管理器
 
 
-    // 批处理中的一部分任务
-    public Tasklet tasklet(){
-        return new Tasklet() {
-            @Override
-            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-                System.out.println("Spring Batch 执行 Job Test");
-                // 每个步骤都会包含一个完整的执行状态。这个状态通过RepeatStatus来表示
-                return RepeatStatus.FINISHED;
-            }
-        };
-    }
+	// 批处理中的一部分任务
+	public Tasklet tasklet() {
+		return new Tasklet() {
+			@Override
+			public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+				System.out.println("Spring Batch 执行 Job Test");
+				// 每个步骤都会包含一个完整的执行状态。这个状态通过RepeatStatus来表示
+				return RepeatStatus.FINISHED;
+			}
+		};
+	}
 
-    // 批处理中的顺序步骤
-    public Step step(){
-        return new StepBuilder("Spring Batch Step", jobRepository)
-                .tasklet(tasklet(), batchTransactionManager)
-                .build();
-    }
+	// 批处理中的顺序步骤
+	public Step step() {
+		return new StepBuilder("Spring Batch Step", jobRepository)
+				.tasklet(tasklet(), batchTransactionManager)
+				.build();
+	}
 
-    public Job job(){
-        return new JobBuilder("Spring Batch Job Test", jobRepository)
-                .start(step())
-                .build();
-    }
+	public Job job() {
+		return new JobBuilder("Spring Batch Job Test", jobRepository)
+				.start(step())
+				.build();
+	}
 
-    @Test
-    void contextLoads() {
-        try {
-            jobLauncher.run(job(), new JobParameters());
-        } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException |
-                 JobParametersInvalidException e) {
-            throw new RuntimeException(e);
-        }
-    }
+	@Test
+	void contextLoads() {
+		try {
+			jobLauncher.run(job(), new JobParameters());
+		} catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException |
+		         JobParametersInvalidException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 }

@@ -1,32 +1,30 @@
 package com.example.event;
 
+import java.io.Serial;
+import java.util.concurrent.CountDownLatch;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.ApplicationEvent;
 
-import java.io.Serial;
-import java.util.concurrent.CountDownLatch;
-
 /**
  * @author 游家纨绔
- * @dateTime 2024-04-01 22:51
+ * @dateTime 2024-04-01 22:50:00
  * @apiNote TODO
  */
-@Getter
 @Setter
+@Getter
 public class MessageEvent extends ApplicationEvent {
+	@Serial
+	private static final long serialVersionUID = 3997212674591540223L;
 
-    @Serial
-    private static final long serialVersionUID = 3997212674591540223L;
+	private String message;
+	private int code;
+	private CountDownLatch countDownLatch;
 
-    private String message;
-    private int code;
-    private CountDownLatch countDownLatch;
-
-    public MessageEvent(Object source, String message, int code, CountDownLatch countDownLatch){
-        super(source);
-        this.message = message;
-        this.code = code;
-        this.countDownLatch = countDownLatch;
-    }
+	public MessageEvent(Object source, String message, int code, CountDownLatch countDownLatch) {
+		super(source);
+		this.message = message;
+		this.code = code;
+		this.countDownLatch = countDownLatch;
+	}
 }

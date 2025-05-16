@@ -1,37 +1,37 @@
 server:
-    port: 8080
-    address: localhost
+  port: 8080
+  address: localhost
 
 logging:
-    level:
-        org.springframework.security: DEBUG
+  level:
+    org.springframework.security: DEBUG
 
 spring:
-    datasource:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/technician?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
-        username: root
-        password: 131474
-    security:
-        oauth2:
-            client:
-                registration:
-                    gitee:
-                        client-id: 8def619da68a212d02a36d471cef229ab3b80c81222e76ed2e581de76f9a6d0a
-                        client-secret: 1f5276f0abd9c8b8b5eee50356ca912d61e62a59d0b8ad285dc49b4879b0ddad
-                        # SpringSecurity 默认规定的回调地址为：/login/oauth2/code/* ，否则不识别。但也可以自定义回调地址。
-                        # 如果确认配置的回调地址一致后还是不识别，有可能是 {baseUrl} 中的 127.0.0.1 与 localhost 不一致导致的。可以通过在 yml 文件中指定 server.address 属性来解决
-                        redirect-uri: '{baseUrl}/{action}/oauth2/code/{registrationId}'
-                        authorization-grant-type: authorization_code
-                        scope: user_info
-                        client-name: Gitee
-                        provider: gitee
-                provider:
-                    # provider 中各个uri的默认值可通过 AuthorizationServerSettings 查看得知；
-                    gitee:
-                        authorization-uri: https://gitee.com/oauth/authorize
-                        token-uri: https://gitee.com/oauth/token
-                        user-info-uri: https://gitee.com/api/v5/user
-                        # user-name-attribute: login 的作用是告诉 Spring Security OAuth2 将 OAuth2 提供商返回的用户信息中的 login 属性视为用户的用户名。
-                        # 如果不设置 user-name-attribute，Spring Security OAuth2 将默认使用 OAuth2 提供商返回的用户信息中的 sub 属性作为用户的用户名。
-                        user-name-attribute: login
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/technician?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 131474
+  security:
+    oauth2:
+      client:
+        registration:
+          gitee:
+            client-id: 8def619da68a212d02a36d471cef229ab3b80c81222e76ed2e581de76f9a6d0a
+            client-secret: 1f5276f0abd9c8b8b5eee50356ca912d61e62a59d0b8ad285dc49b4879b0ddad
+            # SpringSecurity 默认规定的回调地址为：/login/oauth2/code/* ，否则不识别。但也可以自定义回调地址。
+            # 如果确认配置的回调地址一致后还是不识别，有可能是 {baseUrl} 中的 127.0.0.1 与 localhost 不一致导致的。可以通过在 yml 文件中指定 server.address 属性来解决
+            redirect-uri: '{baseUrl}/{action}/oauth2/code/{registrationId}'
+            authorization-grant-type: authorization_code
+            scope: user_info
+            client-name: Gitee
+            provider: gitee
+        provider:
+          # provider 中各个uri的默认值可通过 AuthorizationServerSettings 查看得知；
+          gitee:
+            authorization-uri: https://gitee.com/oauth/authorize
+            token-uri: https://gitee.com/oauth/token
+            user-info-uri: https://gitee.com/api/v5/user
+            # user-name-attribute: login 的作用是告诉 Spring Security OAuth2 将 OAuth2 提供商返回的用户信息中的 login 属性视为用户的用户名。
+            # 如果不设置 user-name-attribute，Spring Security OAuth2 将默认使用 OAuth2 提供商返回的用户信息中的 sub 属性作为用户的用户名。
+            user-name-attribute: login

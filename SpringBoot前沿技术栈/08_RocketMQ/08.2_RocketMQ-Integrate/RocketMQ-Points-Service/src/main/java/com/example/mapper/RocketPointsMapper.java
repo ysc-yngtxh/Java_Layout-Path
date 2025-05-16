@@ -8,7 +8,4 @@ import com.example.entity.RocketPoints;
  * @dateTime 2023-10-20 00:00
  * @apiNote TODO 积分表(RocketPoints)表数据库访问层
  */
-public interface RocketPointsMapper extends BaseMapper<RocketPoints> {
-
-}
-
+public interface RocketPointsMapper extends BaseMapper<RocketPoints> {}

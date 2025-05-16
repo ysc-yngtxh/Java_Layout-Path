@@ -11,8 +11,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @MapperScan("com.example.transactional.dao")
 public class SpringBootAopTransactionalApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(SpringBootAopTransactionalApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(SpringBootAopTransactionalApplication.class, args);
+	}
 
 }

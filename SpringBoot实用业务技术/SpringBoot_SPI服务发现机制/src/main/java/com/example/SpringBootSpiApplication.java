@@ -2,7 +2,6 @@ package com.example;
 
 import com.example.load.CustomLoader;
 import com.example.spi.custom.Color;
-import com.example.spi.custom.Red;
 import com.example.spi.dubbo.Car;
 import com.example.spi.jdk.Animals;
 import com.example.spi.spring.Food;

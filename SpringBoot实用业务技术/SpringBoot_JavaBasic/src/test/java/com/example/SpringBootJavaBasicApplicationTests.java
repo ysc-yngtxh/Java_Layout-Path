@@ -1,19 +1,16 @@
 package com.example;
 
-import cn.hutool.log.Log;
-import cn.hutool.log.LogFactory;
 import com.example.MapStruct映射实体类.MapStructExample;
 import com.example.vo.ModelView;
 import com.example.vo.Models;
 import com.example.vo.User;
 import com.example.vo.Users;
+import java.util.Date;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.Date;
 
 @SpringBootTest
 class SpringBootJavaBasicApplicationTests {
@@ -41,11 +38,11 @@ class SpringBootJavaBasicApplicationTests {
 		log.error(users1.toString());
 
 		User user2 = User.builder()
-				.id(123L)
-				.name("小娘皮曹家千金")
-				.email("google@163.com")
-				.models(new Models(new ModelView("湖北武汉红花三区"), null))
-				.build();
+		                 .id(123L)
+		                 .name("小娘皮曹家千金")
+		                 .email("google@163.com")
+		                 .models(new Models(new ModelView("湖北武汉红花三区"), null))
+		                 .build();
 		Users users2 = MapStructExample.mapStr.toUsers2(user2);
 		log.error(users2.toString());
 

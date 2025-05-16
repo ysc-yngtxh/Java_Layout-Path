@@ -8,18 +8,20 @@ import lombok.Getter;
  */
 @Getter
 public class Agreement {
-    private int agreementId;
-    private int buyerId;
-    private int sellerId;
-    private Status status;
 
-    // 退货/退款协议状态
-    public interface Status {
+	private int agreementId;
+	private int buyerId;
+	private int sellerId;
+	private Status status;
 
-        String REFUNDING = "Refunding"; // 申请退款中
-        String REFUND_REJECTED = "RefundRejected";  // 拒绝退款中
-    }
-    public void refunding(){
-        // 更新退货退款协议状态
-    }
+	public void refunding() {
+		// 更新退货退款协议状态
+	}
+
+	// 退货/退款协议状态
+	public interface Status {
+
+		String REFUNDING = "Refunding"; // 申请退款中
+		String REFUND_REJECTED = "RefundRejected";  // 拒绝退款中
+	}
 }

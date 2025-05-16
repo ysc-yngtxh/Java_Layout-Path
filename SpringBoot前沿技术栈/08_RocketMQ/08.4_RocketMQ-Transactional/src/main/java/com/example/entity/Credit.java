@@ -16,18 +16,18 @@ import lombok.Data;
 @Builder
 @TableName("t_credit")
 public class Credit implements Serializable {
-    @Serial
-    private static final long serialVersionUID = -7640959112343922498L;
+	@Serial
+	private static final long serialVersionUID = -7640959112343922498L;
 
-    @TableId
-    private Long id;
+	@TableId
+	private Long id;
 
-    // 用户id
-    private Long userId;
+	// 用户id
+	private Long userId;
 
-    // 用户姓名
-    private String username;
+	// 用户姓名
+	private String username;
 
-    // 积分
-    private Integer integration;
+	// 积分
+	private Integer integration;
 }

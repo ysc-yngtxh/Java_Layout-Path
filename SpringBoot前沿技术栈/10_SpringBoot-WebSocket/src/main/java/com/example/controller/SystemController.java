@@ -17,40 +17,40 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/api/socket")
 public class SystemController {
 
-    @Resource
-    private WebSocketServer webSocket;
+	@Resource
+	private WebSocketServer webSocket;
 
-    // 推送数据接口
-    @ResponseBody
-    @RequestMapping("/push/{cid}")
-    public Map<String, Object> pushToWeb(@PathVariable String cid
-                                       , @PathParam("message") String message) {
-        Map<String, Object> result = new HashMap<>();
-        try {
-            WebSocketServer.sendInfo(message, cid);
-            result.put("code", cid);
-            result.put("msg", message);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
+	// 推送数据接口
+	@ResponseBody
+	@RequestMapping("/push/{cid}")
+	public Map<String, Object> pushToWeb(@PathVariable String cid,
+	                                     @PathParam("message") String message) {
+		Map<String, Object> result = new HashMap<>();
+		try {
+			WebSocketServer.sendInfo(message, cid);
+			result.put("code", cid);
+			result.put("msg", message);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
-    @RequestMapping("/toJinDuTiao")
-    public String toJinDuTiao(){
-        return "jinDuTiao";
-    }
+	@RequestMapping("/toJinDuTiao")
+	public String toJinDuTiao() {
+		return "jinDuTiao";
+	}
 
-    @RequestMapping("/jinDuTiao")
-    public void test() throws InterruptedException, IOException {
-        String msg = "";
-        int a = 0;
-        for (int i = 0; i <= 100; i++) {
-            msg = String.valueOf(a);
-            TimeUnit.SECONDS.sleep(1);
-            webSocket.sendMessage(msg);
-            a = a+1;
-        }
-        webSocket.onClose();
-    }
+	@RequestMapping("/jinDuTiao")
+	public void test() throws InterruptedException, IOException {
+		String msg = "";
+		int a = 0;
+		for (int i = 0; i <= 100; i++) {
+			msg = String.valueOf(a);
+			TimeUnit.SECONDS.sleep(1);
+			webSocket.sendMessage(msg);
+			a = a + 1;
+		}
+		webSocket.onClose();
+	}
 }

@@ -8,10 +8,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class SpringBootMetadataApplication {
 
-    public static void main(String[] args) {
-        ConfigurableApplicationContext applicationContext = SpringApplication.run(SpringBootMetadataApplication.class, args);
-        ContextProperties bean = applicationContext.getBean(ContextProperties.class);
-        System.out.println(bean);
-    }
+	public static void main(String[] args) {
+		ConfigurableApplicationContext applicationContext = SpringApplication.run(SpringBootMetadataApplication.class, args);
+		ContextProperties bean = applicationContext.getBean(ContextProperties.class);
+		System.out.println(bean);
+	}
 
 }

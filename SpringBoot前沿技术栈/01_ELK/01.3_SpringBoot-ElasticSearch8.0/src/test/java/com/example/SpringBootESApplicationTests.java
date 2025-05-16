@@ -89,7 +89,7 @@ class SpringBootESApplicationTests {
 
 	// 删
 	@Test
-	void deleteById(){
+	void deleteById() {
 		String result = elasticsearchOperations.delete("99", Produce.class);
 		System.out.println("删除ES中指定Id的数据：" + result);
 	}

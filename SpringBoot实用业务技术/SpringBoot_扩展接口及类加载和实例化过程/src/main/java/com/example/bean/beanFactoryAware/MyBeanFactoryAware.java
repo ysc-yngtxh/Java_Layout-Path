@@ -9,20 +9,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyBeanFactoryAware implements BeanFactoryAware {
 
-    @Getter
-    private String brand;
+	@Getter
+	private String brand;
 
-    private BeanFactory beanFactory;
+	private BeanFactory beanFactory;
 
-    public void setBrand(final String brand) {
-        System.out.println("调用Car的setBrand属性");
-        this.brand = brand;
-    }
+	public void setBrand(final String brand) {
+		System.out.println("调用Car的setBrand属性");
+		this.brand = brand;
+	}
 
-    // BeanFactoryAware接口是用来获取Spring框架自动初始化的Bean工厂
-    @Override
-    public void setBeanFactory(final BeanFactory beanFactory) throws BeansException {
-        System.out.println("调用BeanFactoryAware的setBeanFactory方法--->" + beanFactory.containsBean("myBeanFactoryAware"));
-        this.beanFactory = beanFactory;
-    }
+	// BeanFactoryAware接口是用来获取Spring框架自动初始化的Bean工厂
+	@Override
+	public void setBeanFactory(final BeanFactory beanFactory) throws BeansException {
+		System.out.println("调用BeanFactoryAware的setBeanFactory方法--->" + beanFactory.containsBean("myBeanFactoryAware"));
+		this.beanFactory = beanFactory;
+	}
 }

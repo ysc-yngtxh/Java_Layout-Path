@@ -1,10 +1,9 @@
 package com.example.config;
 
+import java.util.List;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * @author 游家纨绔
@@ -16,5 +15,5 @@ import java.util.List;
 @ConfigurationProperties(prefix = "lock-tables")
 public class LockTables {
 
-    private List<String> pessimistic;
+	private List<String> pessimistic;
 }

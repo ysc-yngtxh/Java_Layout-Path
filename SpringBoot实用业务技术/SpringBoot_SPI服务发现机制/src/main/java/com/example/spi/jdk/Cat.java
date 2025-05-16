@@ -7,8 +7,8 @@ package com.example.spi.jdk;
  */
 public class Cat implements Animals {
 
-    @Override
-    public void sayHello() {
-        System.out.println("Hello, I am Cat.");
-    }
+	@Override
+	public void sayHello() {
+		System.out.println("Hello, I am Cat.");
+	}
 }

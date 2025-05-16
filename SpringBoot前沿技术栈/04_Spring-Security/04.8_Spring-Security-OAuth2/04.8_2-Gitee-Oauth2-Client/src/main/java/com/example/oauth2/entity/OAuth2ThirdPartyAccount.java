@@ -10,23 +10,23 @@ import lombok.Data;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-11-29 12:41
+ * @dateTime 2024-11-29 12:40
  * @apiNote TODO OAuth2的映射信息类
  */
 @Data
 @TableName("oauth2_account")
 public class OAuth2ThirdPartyAccount implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 3304750105828784062L;
+	@Serial
+	private static final long serialVersionUID = 3304750105828784062L;
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
-    private Integer uniqueId;
-    private String login;
-    private String name;
-    private String avatarUrl;
-    private String registrationId;
-    private String credentials;
-    private Timestamp credentialsExpiresAt;
-    private Timestamp createTime;
+	@TableId(value = "id", type = IdType.AUTO)
+	private Long id;
+	private Integer uniqueId;
+	private String login;
+	private String name;
+	private String avatarUrl;
+	private String registrationId;
+	private String credentials;
+	private Timestamp credentialsExpiresAt;
+	private Timestamp createTime;
 }

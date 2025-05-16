@@ -6,7 +6,7 @@ import com.example.entity.EceUser;
  * (User)表数据库访问层
  *
  * @author 游家纨绔
- * @since 2024-09-11 22:37:34
+ * @since 2024-09-11 22:30:00
  */
 public interface EceUserMapper {
 
@@ -44,4 +44,3 @@ public interface EceUserMapper {
     int deleteById(Integer id);
 
 }
-

@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-11-13 21:56
+ * @dateTime 2024-11-13 21:50
  * @apiNote TODO
  */
 @Controller
 public class UserController {
 
-    @RequestMapping("/user/info")
-    public @ResponseBody String index() {
-        return "index";
-    }
+	@RequestMapping("/user/info")
+	public @ResponseBody String index() {
+		return "index";
+	}
 }

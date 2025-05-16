@@ -10,33 +10,35 @@ import java.util.List;
  */
 public interface MessageRepository {
 
-    /**
-     * 查询消息
-     *
-     * @param messageId
-     */
-    Message find(long messageId);
+	/**
+	 * 查询消息
+	 *
+	 * @param messageId
+	 */
+	Message find(long messageId);
 
-    /**
-     * 保存消息
-     *
-     * @param message
-     */
-    void save(Message message);
+	/**
+	 * 保存消息
+	 *
+	 * @param message
+	 */
+	void save(Message message);
 
-    /**
-     * 获取未读消息的数量
-     * @param userId
-     * @return
-     */
-    int getUnreadMessageTotal(int userId);
+	/**
+	 * 获取未读消息的数量
+	 *
+	 * @param userId
+	 * @return
+	 */
+	int getUnreadMessageTotal(int userId);
 
-    /**
-     * 获取往来消息列表
-     * @param userId
-     * @param contactId
-     * @param size
-     * @return
-     */
-    List<Message> getContactMessageList(int userId, int contactId, int size);
+	/**
+	 * 获取往来消息列表
+	 *
+	 * @param userId
+	 * @param contactId
+	 * @param size
+	 * @return
+	 */
+	List<Message> getContactMessageList(int userId, int contactId, int size);
 }

@@ -20,31 +20,30 @@ import java.io.Serial;
 @TableName("ROCKET_ORDER")
 public class RocketOrder extends BaseEntity {
 
-    @Serial
-    private static final long serialVersionUID = 2371703871089055413L;
+	@Serial
+	private static final long serialVersionUID = 2371703871089055413L;
 
-    /**
-     * 订单id
-     */
-    @TableId("ORDER_ID")
-    private Long orderId;
+	/**
+	 * 订单id
+	 */
+	@TableId("ORDER_ID")
+	private Long orderId;
 
-    /**
-     * 用户id
-     */
-    @TableField("USER_ID")
-    private Long userId;
+	/**
+	 * 用户id
+	 */
+	@TableField("USER_ID")
+	private Long userId;
 
-    /**
-     * 订单金额
-     */
-    @TableField("ORDER_AMOUT")
-    private Long orderAmout;
+	/**
+	 * 订单金额
+	 */
+	@TableField("ORDER_AMOUT")
+	private Long orderAmout;
 
-    /**
-     * 发送消息类型
-     */
-    @TableField(exist = false)
-    private Integer messageType;
+	/**
+	 * 发送消息类型
+	 */
+	@TableField(exist = false)
+	private Integer messageType;
 }
-

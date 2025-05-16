@@ -12,34 +12,34 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class SpringBoot3PostGreSqlShardingSphereApplicationTests {
 
-    @Autowired
-    private EceUserMapper eceUserMapper;
+	@Autowired
+	private EceUserMapper eceUserMapper;
 
-    @Test
-    void contextLoads() throws ParseException {
-        String data = "2024-09-16 10:00:00";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime localDateTime = LocalDateTime.parse(data, formatter);
-        eceUserMapper.insert(
-                EceUser.builder()
-                        .eceId(123456)
-                        .userCode("ECE-RPT")
-                        .userName("李四")
-                        .passWord("123456")
-                        .email("12345678@qq.com")
-                        .phone("13888888867")
-                        .birthday(localDateTime)
-                        .age(22)
-                        .sex("女")
-                        .address("湖北武汉洪山区")
-                        .status("ACTIVE")
-                        .build()
-        );
-    }
+	@Test
+	void contextLoads() throws ParseException {
+		String data = "2024-09-16 10:00:00";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime localDateTime = LocalDateTime.parse(data, formatter);
+		eceUserMapper.insert(
+				EceUser.builder()
+				       .eceId(123456)
+				       .userCode("ECE-RPT")
+				       .userName("李四")
+				       .passWord("123456")
+				       .email("12345678@qq.com")
+				       .phone("13888888867")
+				       .birthday(localDateTime)
+				       .age(22)
+				       .sex("女")
+				       .address("湖北武汉洪山区")
+				       .status("ACTIVE")
+				       .build()
+		                    );
+	}
 
-    @Test
-    void contextLoads2() {
-        // 使用 PostgreSql 来进行数据分片，有个注意点：public架构中必须要创建分片的表(可以没数据，但必须要建表)
-        System.out.println(eceUserMapper.queryById(76));
-    }
+	@Test
+	void contextLoads2() {
+		// 使用 PostgreSql 来进行数据分片，有个注意点：public架构中必须要创建分片的表(可以没数据，但必须要建表)
+		System.out.println(eceUserMapper.queryById(76));
+	}
 }

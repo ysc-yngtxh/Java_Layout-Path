@@ -13,7 +13,7 @@ import javax.crypto.SecretKey;
 
 /**
  * @author 游家纨绔
- * @date 2022/07/06
+ * @date 2022-07-06 14:30
  * @apiNote
  */
 public class JwtUtil {

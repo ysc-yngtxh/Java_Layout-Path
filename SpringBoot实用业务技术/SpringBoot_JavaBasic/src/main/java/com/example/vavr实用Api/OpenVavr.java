@@ -20,18 +20,18 @@ import static io.vavr.API.Match;
 /**
  * @author 游家纨绔
  * @description: TODO
- * @date 2022/11/27 0:45
+ * @date 2022/11/27 0:40:00
  */
 public class OpenVavr {
+
 	public static final Logger log = LoggerFactory.getLogger(OpenVavr.class);
+	static final String NAME_ERR = "Invalid Characters In Name: ";
+	static final String AGE_ERR = "Age Must Be At Least 0";
 
 	static {
 		// 默认情况下，SLF4J 的日志级别是 INFO。强制设置日志级别为 DEBUG（适用于 Logback）
 		((ch.qos.logback.classic.Logger) log).setLevel(ch.qos.logback.classic.Level.DEBUG);
 	}
-
-	static final String NAME_ERR = "Invalid Characters In Name: ";
-	static final String AGE_ERR = "Age Must Be At Least 0";
 
 	@Test
 	public void test1() {
@@ -69,7 +69,7 @@ public class OpenVavr {
 		Validation<Seq<String>, User> users1 = Validation.combine(
 				invalidChars1.isEmpty() ? Validation.valid(user1.getName()) : Validation.invalid(NAME_ERR + invalidChars1),
 				user1.getAge() >= 0 ? Validation.valid(user1.getAge()) : Validation.invalid(AGE_ERR)
-		).ap(User::new);
+		                                                         ).ap(User::new);
 		// 返回所有错误信息
 		log.info(String.valueOf(users1.getError().size()));
 		log.info(users1.getError().get(0) + " && " + users1.getError().get(1));
@@ -94,7 +94,7 @@ public class OpenVavr {
 				, Case($(2), "two")  // 写法效果是一样的的
 				, Case($(3), "three")
 				, Case($(), "other......")    // 除开1、2、3的其他情况会走这里
-		);
+		                               );
 		log.info(output);
 
 		int i = 5;
@@ -102,27 +102,27 @@ public class OpenVavr {
 				Case($(n -> List.of(2, 4, 6, 8).contains(n)), "Even Single Digit")
 				, Case($(n -> List.of(1, 3, 5, 7, 9).contains(n)), "Odd Single Digit")
 				, Case($(), "Out of range")
-		);
+		                      );
 
 		log.info(s);
 		String s1 = Match(i).of(
 				Case($(instanceOf(Integer.class)), "Integer matched")
 				, Case($(), "not int")
-		);
+		                       );
 		log.info(s1);
 
 		Integer i1 = 3;
 		String s2 = Match(i1).of(
 				Case($(n -> n != null && Set.of(1, 2, 3, null).contains(n)), "Number found")
 				, Case($(), "Not found")
-		);
+		                        );
 		log.info(s2);
 
 		Integer year = 1990;
 		String s3 = Match(year).of(
 				Case($(y -> Set.of(1990, 1991, 1992).contains(y) || y == 1986), "Age match")
 				, Case($(), "No age match")
-		);
+		                          );
 		log.info(s3);
 	}
 }

@@ -7,17 +7,17 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-11-11 14:31
+ * @dateTime 2023-11-11 14:30:00
  * @apiNote TODO 切面代码
  */
 @Aspect
 @Component
 public class MyAop {
 
-    @Around("execution(* *..ProxyServiceImpl.useInterface())")
-    public Object MyTest(ProceedingJoinPoint pjp) throws Throwable {
-        pjp.proceed();
-        System.out.println("执行useInterface()的Aop切面代码逻辑");
-        return null;
-    }
+	@Around("execution(* *..ProxyServiceImpl.useInterface())")
+	public Object MyTest(ProceedingJoinPoint pjp) throws Throwable {
+		pjp.proceed();
+		System.out.println("执行useInterface()的Aop切面代码逻辑");
+		return null;
+	}
 }

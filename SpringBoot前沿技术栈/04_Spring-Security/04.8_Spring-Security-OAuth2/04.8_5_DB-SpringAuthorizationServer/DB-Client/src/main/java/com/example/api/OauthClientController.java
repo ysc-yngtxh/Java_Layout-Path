@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OauthClientController {
 
-    @RequestMapping("/hello")
-    public String Hello() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        log.info("authentication: {}", authentication);
-        return "hello";
-    }
+	@RequestMapping("/hello")
+	public String Hello() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		log.info("authentication: {}", authentication);
+		return "hello";
+	}
 }

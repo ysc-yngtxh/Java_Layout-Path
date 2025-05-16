@@ -1,9 +1,8 @@
 package com.example.mvc.entity;
 
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.math.BigDecimal;
 
 /**
  * @author 游家纨绔
@@ -13,7 +12,8 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 public class OrderItem {
-    private long orderId;
-    private long itemId;
-    private BigDecimal price;
+
+	private long orderId;
+	private long itemId;
+	private BigDecimal price;
 }

@@ -10,9 +10,8 @@ import org.springframework.core.NamedThreadLocal;
 
 @SpringBootTest
 class SpringBootThreadLocalApplicationTests {
-	private final Logger log = LoggerFactory.getLogger(SpringBootThreadLocalApplicationTests.class);
-
 	private static final ThreadLocal<User> THREAD_LOCAL = new ThreadLocal<>();
+	private final Logger log = LoggerFactory.getLogger(SpringBootThreadLocalApplicationTests.class);
 
 	private static void setAndPrintData(User user) {
 		THREAD_LOCAL.set(user);
@@ -74,7 +73,7 @@ class SpringBootThreadLocalApplicationTests {
 		log.info("当前线程：{}，上下文中的变量副本为: {}"
 				, Thread.currentThread().getName()
 				, transactionId.get()
-		);
+		        );
 		transactionId.remove();
 	}
 }

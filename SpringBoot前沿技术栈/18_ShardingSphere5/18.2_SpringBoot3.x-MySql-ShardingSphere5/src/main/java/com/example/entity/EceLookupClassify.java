@@ -13,7 +13,7 @@ import lombok.ToString;
  * 字典类别表(EceLookupClassify)实体类
  *
  * @author 游家纨绔
- * @since 2024-09-20 21:11:08
+ * @since 2024-09-20 21:10:00
  */
 @Data
 @Builder
@@ -73,4 +73,3 @@ public class EceLookupClassify implements Serializable {
      */
     private String remark;
 }
-

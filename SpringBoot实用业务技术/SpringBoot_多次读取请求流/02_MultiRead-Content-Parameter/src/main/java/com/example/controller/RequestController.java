@@ -10,22 +10,22 @@ import org.springframework.web.util.ContentCachingRequestWrapper;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-04-29 15:46
+ * @dateTime 2023-04-29 15:50:00
  * @apiNote TODO 测试应用层
  */
 @Controller
 public class RequestController {
 
-    @RequestMapping(value = "/test1", method = RequestMethod.POST)
-    public String TestHttpRequired(@RequestParam(value = "userName") String userName,
-                                   @RequestParam(value = "passWord") String passWord,
-                                   Model model,
-                                   ServletRequest request) {
-        model.addAttribute("userName", userName);
-        model.addAttribute("passWord", passWord);
-        ContentCachingRequestWrapper req = (ContentCachingRequestWrapper) request;
-        String user = new String(req.getContentAsByteArray());
-        System.out.println("接口/test1参数"+user);
-        return "test1";
-    }
+	@RequestMapping(value = "/test1", method = RequestMethod.POST)
+	public String TestHttpRequired(@RequestParam(value = "userName") String userName,
+	                               @RequestParam(value = "passWord") String passWord,
+	                               Model model,
+	                               ServletRequest request) {
+		model.addAttribute("userName", userName);
+		model.addAttribute("passWord", passWord);
+		ContentCachingRequestWrapper req = (ContentCachingRequestWrapper) request;
+		String user = new String(req.getContentAsByteArray());
+		System.out.println("接口/test1参数" + user);
+		return "test1";
+	}
 }

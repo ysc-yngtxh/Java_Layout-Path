@@ -13,10 +13,11 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 @Component
 public class InProcessMessageIdGenerator implements MessageIdGenerator {
-    private final AtomicLong idGenerator = new AtomicLong(1);
 
-    @Override
-    public long generate() {
-        return this.idGenerator.getAndIncrement();
-    }
+	private final AtomicLong idGenerator = new AtomicLong(1);
+
+	@Override
+	public long generate() {
+		return this.idGenerator.getAndIncrement();
+	}
 }

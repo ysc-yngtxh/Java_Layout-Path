@@ -1,7 +1,6 @@
 package com.example.service;
 
 import com.example.entity.TreeChildren;
-
 import java.util.List;
 import java.util.Set;
 
@@ -13,13 +12,13 @@ import java.util.Set;
  */
 public interface TreeChildrenService {
 
-    Set<TreeChildren> findTreeBySetRecursion();
+	Set<TreeChildren> findTreeBySetRecursion();
 
-    List<TreeChildren> findTreeByListRecursion();
+	List<TreeChildren> findTreeByListRecursion();
 
-    List<TreeChildren> findTreeByListChildren();
+	List<TreeChildren> findTreeByListChildren();
 
-    List<TreeChildren> findTreeWithStream();
+	List<TreeChildren> findTreeWithStream();
 
-    List<TreeChildren> findTreeOptimized();
+	List<TreeChildren> findTreeOptimized();
 }

@@ -1,27 +1,26 @@
-
 custom:
-    property:
-        content: Jasypt加密
+  property:
+    content: Jasypt加密
 
 spring:
-    application:
-        name: SpringBoot_Jasypt
-    # =========================== ↓↓↓↓↓↓ 配置数据源 ↓↓↓↓↓↓ ===========================
-    datasource:
-        # MySQL在高版本需要指明是否进行SSL连接 解决则加上 &useSSL=false
-        url: jdbc:mysql://localhost:3306/springdb?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false
-        # 加密组件 jasypt 会自动将默认语法 ENC() 包裹的配置项加密字段自动解密，数据得以还原。这里的加密前缀进行了自定义。
-        username: JASYPT_YSC(buPp3xV6l/a09A/19Txdczguz3b85gRbl/9u0KKV+g+vgmV25G5sUS8muqvMSkOQ)
-        password: JASYPT_YSC(Lb0+/VQLTOMtnMjXu5jatxZeFiTjaQtepEJmTQPyxG/KwD7yo8fV25CIfU0kks6H)
-        driver-class-name: com.mysql.cj.jdbc.Driver
-    sql:
-        init:
-            platform: mysql
+  application:
+    name: @project.artifactId@
+  # =========================== ↓↓↓↓↓↓ 配置数据源 ↓↓↓↓↓↓ ===========================
+  datasource:
+    # MySQL在高版本需要指明是否进行SSL连接 解决则加上 &useSSL=false
+    url: jdbc:mysql://localhost:3306/springdb?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    # 加密组件 jasypt 会自动将默认语法 ENC() 包裹的配置项加密字段自动解密，数据得以还原。这里的加密前缀进行了自定义。
+    username: JASYPT_YSC(buPp3xV6l/a09A/19Txdczguz3b85gRbl/9u0KKV+g+vgmV25G5sUS8muqvMSkOQ)
+    password: JASYPT_YSC(Lb0+/VQLTOMtnMjXu5jatxZeFiTjaQtepEJmTQPyxG/KwD7yo8fV25CIfU0kks6H)
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      platform: mysql
 
 # 配置加密密钥
 jasypt:
-    encryptor:
-        property:
-            prefix: JASYPT_YSC(  # TODO 加密前缀
-            suffix: )            # TODO 加密后缀
-        password: yjwk           # TODO 加密密钥
+  encryptor:
+    property:
+      prefix: JASYPT_YSC(  # TODO 加密前缀
+      suffix: )            # TODO 加密后缀
+    password: yjwk           # TODO 加密密钥

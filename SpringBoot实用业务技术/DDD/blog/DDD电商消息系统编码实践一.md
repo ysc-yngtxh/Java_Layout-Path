@@ -15,7 +15,6 @@
 
 ![发送消息流程](https://gitee.com/izhengyin/ddd-message/raw/master/blog/images/message/send-message-flow.png)
 
-
 在这个需求中，你可以把发送端理解为淘宝店主，接收端就是你的设备，你可能通过旺旺，也可能通过APP通知收到店主给你发的消息。
 
 ## 依据六边形架构来建立工程结构
@@ -41,12 +40,12 @@
 
 还记得六边形的图吗? 我放在这里给大家回忆一下
 
-
 ![六边形架构](https://gitee.com/izhengyin/ddd-message/raw/master/blog/images/liubianxing.png)
 
 ## 领域层
 
-> 源码 https://gitee.com/izhengyin/ddd-message/tree/part1/src/main/java/com/izhengyin/dddmessage/domain
+>
+源码 https://gitee.com/izhengyin/ddd-message/tree/part1/src/main/java/com/izhengyin/dddmessage/domain
 
 ```
 └── src
@@ -67,15 +66,15 @@
 ```
 
 * aggregate 存放领域聚合，一个聚合中包括（实体、值对象、仓储抽象等）
-* service 存放领域服务，领域服务不是必须的，领域服务可以帮助处理一些实体不便处理的事情，比如需要多个实体之间的配合来完成的事情，或者作为实体工厂来创建实体对象，在我们的示例中，[MessageDomainService](https://gitee.com/izhengyin/ddd-message/blob/part1/src/main/java/com/izhengyin/dddmessage/domain/service/impl/MessageDomainServiceImpl.java)就可以看做Message实体的工厂类。
+* service
+  存放领域服务，领域服务不是必须的，领域服务可以帮助处理一些实体不便处理的事情，比如需要多个实体之间的配合来完成的事情，或者作为实体工厂来创建实体对象，在我们的示例中，[MessageDomainService](https://gitee.com/izhengyin/ddd-message/blob/part1/src/main/java/com/izhengyin/dddmessage/domain/service/impl/MessageDomainServiceImpl.java)
+  就可以看做Message实体的工厂类。
 * shared 领域之间共享的工具、常量，接口等，可以根据应用自行的扩展
-    * Entity.java 实体接口声明
-    * ValueObject.java 值对象接口声明
-    * constant 常量、枚举类等
-    * event 事件相应的接口封装
-    * facade 外部服务门口接口抽象，实现由基础层实现
-
-
+	* Entity.java 实体接口声明
+	* ValueObject.java 值对象接口声明
+	* constant 常量、枚举类等
+	* event 事件相应的接口封装
+	* facade 外部服务门口接口抽象，实现由基础层实现
 
 ### 领域聚合划分
 
@@ -106,13 +105,13 @@
 
 * MessageIdGenerator 消息ID生成抽象接口,由基础层实现
 * entity（实体包）
-    * Message.java 消息实体
-    * valueobject （值对象包）
-        * User.java 用户值对象
-    * event (事件包)
-        * MessageCreatedEvent.java 消息已创建事件
-    * repository (仓储包)
-        * MessageRepository.java 消息存储接口抽象
+	* Message.java 消息实体
+	* valueobject （值对象包）
+		* User.java 用户值对象
+	* event (事件包)
+		* MessageCreatedEvent.java 消息已创建事件
+	* repository (仓储包)
+		* MessageRepository.java 消息存储接口抽象
 
 #### notice聚合
 
@@ -140,16 +139,17 @@
 * AppMessagePublisher 移动端消息发布接口抽象
 * SocketMessagePublisher 站内Socket消息发布接口抽象
 * entity（实体包）
-    * Notice.java 通知实体
-    * valueobject （值对象包）
-        * AppMessage.java 移动端消息值对象
-        * SocketMessage.java  站内消息值对象
-    * repository (仓储包)
-        * NoticeRepository.java 通知存储接口抽象
+	* Notice.java 通知实体
+	* valueobject （值对象包）
+		* AppMessage.java 移动端消息值对象
+		* SocketMessage.java 站内消息值对象
+	* repository (仓储包)
+		* NoticeRepository.java 通知存储接口抽象
 
 ## 应用层
 
-> 源码 https://gitee.com/izhengyin/ddd-message/tree/part1/src/main/java/com/izhengyin/dddmessage/application
+>
+源码 https://gitee.com/izhengyin/ddd-message/tree/part1/src/main/java/com/izhengyin/dddmessage/application
 
 ```
 └── src
@@ -167,26 +167,29 @@
     │       │           │   │   └── NoticeServiceImpl.java
 ```
 
-在应用层我们使用简单版本的CQRS(查询与命令分离的设计方式),这里的命令可以理解为更新，目前我们只抽象出Command接口，CQRS是为了解决相同的数据模型用于查询和更新，在这种情况模型会变得复杂（想象一下在一个传统应用下的Service层提供的getByXXX方法），完整的CQRS实现是比较复杂的，本文旨在用简单的实现体现CQRS的思想。
+在应用层我们使用简单版本的CQRS(查询与命令分离的设计方式)
+,这里的命令可以理解为更新，目前我们只抽象出Command接口，CQRS是为了解决相同的数据模型用于查询和更新，在这种情况模型会变得复杂（想象一下在一个传统应用下的Service层提供的getByXXX方法），完整的CQRS实现是比较复杂的，本文旨在用简单的实现体现CQRS的思想。
 
-> 更多CQRS介绍，请阅读参考文章 : https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs
+>
+更多CQRS介绍，请阅读参考文章 : https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs
 
 * MessageCommandService.java 创建消息命令接口
 * NoticeCommandService.java 创建通知命令接口
 * impl
-    * MessageServiceImpl.java 实现 MessageCommandService 接口
-    * NoticeServiceImpl.java 实现 NoticeCommandService 接口
-* MessagePublisher 实现了在领域层通知聚合中定义的AppMessagePublisher ，SocketMessagePublisher 接口，此处考虑到可以通过应用接口直接发生通知的灵活性。
-
+	* MessageServiceImpl.java 实现 MessageCommandService 接口
+	* NoticeServiceImpl.java 实现 NoticeCommandService 接口
+* MessagePublisher 实现了在领域层通知聚合中定义的AppMessagePublisher
+  ，SocketMessagePublisher 接口，此处考虑到可以通过应用接口直接发生通知的灵活性。
 
 ## 领域层与应用层的交互
 
 写了这么多的文件描述，大家看起来可能会有点抽象了，那么在介绍基础层与接口层之前，我们先将领域层与应用层串联一下，加深对以上代码的理解。
 
-
 ### 创建一条新消息的流程
 
-创建新消息由接口层，调用 MessageCommandService:createMessage 接口,MessageCommandService的实现调用MessageDomainService领域服务创建完成消息，最后发送消息已创建的事件 MessageCreatedEvent。
+创建新消息由接口层，调用 MessageCommandService:createMessage
+接口,MessageCommandService的实现调用MessageDomainService领域服务创建完成消息，最后发送消息已创建的事件
+MessageCreatedEvent。
 
 ![创建一条新消息的流程](https://gitee.com/izhengyin/ddd-message/raw/master/blog/images/message/MessageCommandService_createMessage.png)
 
@@ -196,10 +199,10 @@ NoticeCommandService的实现监听MessageCreatedEvent的事件，创建通知�
 
 ![消息通知的流程](https://gitee.com/izhengyin/ddd-message/raw/master/blog/images/message/NoticeCommandService_createNotice.png)
 
-
 ## 基础层
 
-> 源码 : https://gitee.com/izhengyin/ddd-message/tree/part1/src/main/java/com/izhengyin/dddmessage/infrastructure
+>
+源码 : https://gitee.com/izhengyin/ddd-message/tree/part1/src/main/java/com/izhengyin/dddmessage/infrastructure
 
 ```
 └── src
@@ -231,23 +234,26 @@ NoticeCommandService的实现监听MessageCreatedEvent的事件，创建通知�
 ```
 DIP:高层模块不应该依赖于底层模块，二者都应该依赖于抽象。抽象不应该依赖于细节，细节应该依赖于抽象。
 ```
+
 * InProcessMessageIdGenerator.java 这个类是对，消息实体唯一ID生成器的实现
 * client(外部调用的客户端)
-    * ApnsServiceFacadeClient.java 模拟调用APNS服务接口
-    * HuaweiServiceFacadeClient.java 模拟调用华为推送服务接口
-    * ImSocketServiceFacadeClient.java 模拟调用ImSocketService推送接口
-    * UserServiceFacadeClient.java 模拟调用用户服务接口，查询用户的信息
+	* ApnsServiceFacadeClient.java 模拟调用APNS服务接口
+	* HuaweiServiceFacadeClient.java 模拟调用华为推送服务接口
+	* ImSocketServiceFacadeClient.java 模拟调用ImSocketService推送接口
+	* UserServiceFacadeClient.java 模拟调用用户服务接口，查询用户的信息
 * persistence(持久层)
-    * InMemoryMessageRepository.java 基于内存的消息仓储实现
-    * InMemoryNoticeRepository.java 基于内存的通知仓储实现
+	* InMemoryMessageRepository.java 基于内存的消息仓储实现
+	* InMemoryNoticeRepository.java 基于内存的通知仓储实现
 * utils（工具包）
-    * SnowflakeIdGenerator.java SnowflakeId生成器
+	* SnowflakeIdGenerator.java SnowflakeId生成器
 
 ## 接口层
 
-> 源码 : https://gitee.com/izhengyin/ddd-message/tree/part1/src/main/java/com/izhengyin/dddmessage/interfaces
+>
+源码 : https://gitee.com/izhengyin/ddd-message/tree/part1/src/main/java/com/izhengyin/dddmessage/interfaces
 
-接口层在六边形架构中担任着适配不同输入 接口的角色，通过适配器将来着不同接口的输入进行转换，在交由应用层处理。然而接口的输入可能是有很大差别的，比如MQ的输入是一个有MQ所封装的Message对象，WEB的输入是由我们自定义的一个Command或者Query,如果将不同的适配器直接对接应用层，当应用层发生改变时，就会导致所有适配器的变更，显然是不合理的。
+接口层在六边形架构中担任着适配不同输入
+接口的角色，通过适配器将来着不同接口的输入进行转换，在交由应用层处理。然而接口的输入可能是有很大差别的，比如MQ的输入是一个有MQ所封装的Message对象，WEB的输入是由我们自定义的一个Command或者Query,如果将不同的适配器直接对接应用层，当应用层发生改变时，就会导致所有适配器的变更，显然是不合理的。
 因此我在接口层，引入一个facede门面，来封装应用层可能的变化，对适配器提供统一的入口。
 
 ```
@@ -272,21 +278,19 @@ DIP:高层模块不应该依赖于底层模块，二者都应该依赖于抽象�
     │       │                       └── MessageController.java
 ```
 
-
 * command (存放命令类的包)
-    * SendMessageCommand.java 发送消息命令
+	* SendMessageCommand.java 发送消息命令
 * facade(适配应用层门面)
-    * MessageServiceFacade.java 消息服务门面接口
-    * impl
-        * MessageServiceFacadeImpl.java 消息服务门面接口实现
+	* MessageServiceFacade.java 消息服务门面接口
+	* impl
+		* MessageServiceFacadeImpl.java 消息服务门面接口实现
 * web (web接口适配）
-    *  Response.java web接口Response包装类
-    *  RestControllerAdvice.java AOP统一异常处理类
-    *  controller
-        *  MessageController.java 消息web接口
+	* Response.java web接口Response包装类
+	* RestControllerAdvice.java AOP统一异常处理类
+	* controller
+		* MessageController.java 消息web接口
 
 ## 测试
-
 
 ### 单元测试
 
@@ -307,7 +311,6 @@ DDD单元测试可以按照工程接口编写相应的单元测试类，因为DD
                             │   │   │   └── MessageTest.java
 ```
 
-
 ### 集成测试
 
 我们使用Idea,http接口测试插件编写,api-request.http文件,进行测试，读者可以根据源码在自己的电脑上完成。
@@ -323,7 +326,6 @@ Content-Type: application/json; charset=UTF-8
 ### 发送消息完整的流程 （图大，新窗口查看）
 
 ![ 发送消息](https://gitee.com/izhengyin/ddd-message/raw/master/blog/images/message/MessageController_sendMessage.png)
-
 
 ### 消息通知完整的流程（图大，新窗口查看）
 

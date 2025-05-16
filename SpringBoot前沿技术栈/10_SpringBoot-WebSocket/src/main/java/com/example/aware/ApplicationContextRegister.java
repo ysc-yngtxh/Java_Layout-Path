@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 @Component
 @Lazy(false)
 public class ApplicationContextRegister implements ApplicationContextAware {
-    private static ApplicationContext APPLICATION_CONTEXT;
+	private static ApplicationContext APPLICATION_CONTEXT;
 
-    @Override
-    public void setApplicationContext(@NonNull ApplicationContext applicationContext) {
-        APPLICATION_CONTEXT = applicationContext;
-    }
+	@Override
+	public void setApplicationContext(@NonNull ApplicationContext applicationContext) {
+		APPLICATION_CONTEXT = applicationContext;
+	}
 
-    public static ApplicationContext getApplicationContext() {
-        return APPLICATION_CONTEXT;
-    }
+	public static ApplicationContext getApplicationContext() {
+		return APPLICATION_CONTEXT;
+	}
 }

@@ -12,15 +12,15 @@ import java.io.IOException;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-05-15 11:41
+ * @dateTime 2023-05-15 11:40
  * @apiNote TODO 登录失败处理器
  */
 @Component
 public class CustomFailureHandler implements AuthenticationFailureHandler {
 
-    @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-        System.out.println("认证失败！");
-        WebUtil.renderText(response, exception.getMessage());
-    }
+	@Override
+	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+		System.out.println("认证失败！");
+		WebUtil.renderText(response, exception.getMessage());
+	}
 }

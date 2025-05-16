@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan(basePackages = {"com.example.ddd.infrastucture.dao", "com.example.mvc.dao"})
 public class DddDemo1Application {
 
-    public static void main(String[] args) {
-        SpringApplication.run(DddDemo1Application.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(DddDemo1Application.class, args);
+	}
 
 }

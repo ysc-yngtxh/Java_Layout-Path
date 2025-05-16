@@ -22,25 +22,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("rocketOrder")
 public class RocketOrderController {
 
-    @Autowired
-    private RocketOrderService orderService;
+	@Autowired
+	private RocketOrderService orderService;
 
-    /**
-     * 新增订单
-     **/
-    @PostMapping
-    public Result<RocketOrder> addOrder(@RequestBody RocketOrder order) {
-        return Result.success(orderService.addOrder(order));
-    }
+	/**
+	 * 新增订单
+	 **/
+	@PostMapping
+	public Result<RocketOrder> addOrder(@RequestBody RocketOrder order) {
+		return Result.success(orderService.addOrder(order));
+	}
 
-    /**
-     * 根据用户id查询订单列表
-     **/
-    @GetMapping("/{userId}")
-    public Result<List<RocketOrder>> getOrders(@PathVariable Integer userId) {
-        QueryWrapper<RocketOrder> pointsQueryWrapper = new QueryWrapper<>();
-        pointsQueryWrapper.lambda().eq(RocketOrder::getUserId, userId);
-        return Result.success(orderService.list(pointsQueryWrapper));
-    }
+	/**
+	 * 根据用户id查询订单列表
+	 **/
+	@GetMapping("/{userId}")
+	public Result<List<RocketOrder>> getOrders(@PathVariable Integer userId) {
+		QueryWrapper<RocketOrder> pointsQueryWrapper = new QueryWrapper<>();
+		pointsQueryWrapper.lambda().eq(RocketOrder::getUserId, userId);
+		return Result.success(orderService.list(pointsQueryWrapper));
+	}
 }
-

@@ -8,5 +8,4 @@ import com.example.entity.OAth2AuthorizationConsent;
  * @dateTime 2024-12-05 12:20
  * @apiNote TODO
  */
-public interface OAuth2AuthorizationConsentMapper extends BaseMapper<OAth2AuthorizationConsent> {
-}
+public interface OAuth2AuthorizationConsentMapper extends BaseMapper<OAth2AuthorizationConsent> {}

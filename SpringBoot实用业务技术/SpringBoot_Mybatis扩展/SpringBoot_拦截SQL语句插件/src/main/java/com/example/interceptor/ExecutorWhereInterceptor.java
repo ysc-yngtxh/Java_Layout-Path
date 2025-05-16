@@ -3,6 +3,9 @@ package com.example.interceptor;
 import com.example.advice.SqlEnum;
 import com.example.advice.SqlException;
 import com.example.config.AllowTables;
+import java.util.List;
+import java.util.Objects;
+import java.util.Properties;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import net.sf.jsqlparser.statement.delete.Delete;
 import net.sf.jsqlparser.statement.update.Update;
@@ -17,10 +20,6 @@ import org.apache.ibatis.plugin.Plugin;
 import org.apache.ibatis.plugin.Signature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.Properties;
 
 /* TODO Mybatis 拦截器
  *      @Intercepts：标识该类是一个拦截器,需要一个Signature(拦截点)参数数组。通过Signature来指定拦截哪个对象里面的哪个方法，只有符合拦截点的条件才会进入到拦截器

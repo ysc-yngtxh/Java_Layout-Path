@@ -6,7 +6,7 @@ import com.example.entity.EceLookupClassify;
  * 字典表(EceLookup)表数据库访问层
  *
  * @author 游家纨绔
- * @since 2024-09-17 23:59:31
+ * @since 2024-09-17 00:00:00
  */
 public interface EceLookupClassifyMapper {
 
@@ -42,4 +42,3 @@ public interface EceLookupClassifyMapper {
     int deleteById(Long lookupId);
 
 }
-

@@ -8,21 +8,21 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Consumer1 实体类
+ *
  * @author 游家纨绔
- * @since 2023-08-19 17:30:49
+ * @since 2023-08-19 17:30:50
  */
 @Data
 @Builder
@@ -40,50 +40,50 @@ import java.util.concurrent.atomic.AtomicReference;
 // @JsonPropertyOrder 可以指定json映射名称属性在 json 字符串中的顺序
 @JsonPropertyOrder({"consumerId", "username", "password", "alias", "age", "sex", "phone", "address", "deleteFlag", "date", "price", "optional", "atomicReference", "supplier"})
 public class Consumer1 implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 424381199466784776L;
+	@Serial
+	private static final long serialVersionUID = 424381199466784776L;
 
-    @JsonProperty("consumerId")  // 指定某个属性和json映射的名称
-    private Integer id;
+	@JsonProperty("consumerId")  // 指定某个属性和json映射的名称
+	private Integer id;
 
-    private String username;
+	private String username;
 
-    private String password;
+	private String password;
 
-    @JsonIgnore  // 用来完全忽略被注解的字段和方法对应的属性
-    private String alias;
+	@JsonIgnore  // 用来完全忽略被注解的字段和方法对应的属性
+	private String alias;
 
-    private Integer age;
+	private Integer age;
 
-    private String sex;
+	private String sex;
 
-    private String phone;
+	private String phone;
 
-    private String address;
+	private String address;
 
-    private Integer deleteFlag;
+	private Integer deleteFlag;
 
-    // JsonFormat默认是格林威治时间，需要添加八个时区【我们所在东八区】
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss SSS", timezone = "GMT+8")  // 格式化 时间数据
-    private Date date;
+	// JsonFormat默认是格林威治时间，需要添加八个时区【我们所在东八区】
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss SSS", timezone = "GMT+8")  // 格式化 时间数据
+	private Date date;
 
-    /**
-     * Style.CURRENCY：货币类型
-     * Style.NUMBER：正常数字类型
-     * Style.PERCENT：百分比类型
-     */
-    @JsonFormat(pattern = "#.##%")  // 格式化 数字数据
-    private double price;
+	/**
+	 * Style.CURRENCY：货币类型
+	 * Style.NUMBER：正常数字类型
+	 * Style.PERCENT：百分比类型
+	 */
+	@JsonFormat(pattern = "#.##%")  // 格式化 数字数据
+	private double price;
 
-    // Optional 类是一个可以为null的容器对象
-    private Optional<String> optional;
+	// Optional 类是一个可以为null的容器对象
+	private Optional<String> optional;
 
-    // AtomicReference 类是提供了对象引用的非阻塞原子性读写操作，可以为 null 的包装类
-    private AtomicReference<String> atomicReference;
+	// AtomicReference 类是提供了对象引用的非阻塞原子性读写操作，可以为 null 的包装类
+	private AtomicReference<String> atomicReference;
 
-    private Supplier supplier;
+	private Supplier supplier;
 
-    // 用于属性或getter方法，在序列化时嵌入自定义代码
-    @JsonSerialize(using = CustomDateSerialize.class)
-    private Date customer;
+	// 用于属性或getter方法，在序列化时嵌入自定义代码
+	@JsonSerialize(using = CustomDateSerialize.class)
+	private Date customer;
 }

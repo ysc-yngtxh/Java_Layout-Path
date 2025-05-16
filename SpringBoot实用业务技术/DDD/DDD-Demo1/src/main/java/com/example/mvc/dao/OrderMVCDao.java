@@ -8,7 +8,10 @@ import com.example.mvc.entity.OrderMVC;
  * @description TODO 订单DAO层
  */
 public interface OrderMVCDao {
-    OrderMVC find(long orderId);
-    void insert(OrderMVC orderMVC);
-    void updateByPrimaryKey(OrderMVC orderMVC);
+
+	OrderMVC find(long orderId);
+
+	void insert(OrderMVC orderMVC);
+
+	void updateByPrimaryKey(OrderMVC orderMVC);
 }

@@ -11,9 +11,9 @@ import lombok.Data;
 @Data
 public class UserCharge {
 
-    // 用户id
-    Long userId;
+	// 用户id
+	Long userId;
 
-    // 充值金额
-    BigDecimal chargeAmount;
+	// 充值金额
+	BigDecimal chargeAmount;
 }

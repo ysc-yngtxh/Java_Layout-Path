@@ -19,53 +19,53 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
-    }
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return NoOpPasswordEncoder.getInstance();
+	}
 
-    @Bean
-    @Order(1)
-    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
-        // 授权服务器的安全交给 SpringSecurity 的过滤器处理
-        OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
-        // 自定义授权服务器的配置
-        http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
-                // 自定义授权同意页（解决 OAuth2 因网络原因导致授权同意页刷新缓慢的问题）
-                .authorizationEndpoint(auth -> auth
-                        .consentPage("/consent")
-                )
-                .oidc(Customizer.withDefaults());    // Initialize `OidcConfigurer`
+	@Bean
+	@Order(1)
+	public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
+		// 授权服务器的安全交给 SpringSecurity 的过滤器处理
+		OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
+		// 自定义授权服务器的配置
+		http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
+		    // 自定义授权同意页（解决 OAuth2 因网络原因导致授权同意页刷新缓慢的问题）
+		    .authorizationEndpoint(auth -> auth
+				                           .consentPage("/consent")
+		                          )
+		    .oidc(Customizer.withDefaults());    // Initialize `OidcConfigurer`
 
-        // 配置异常处理器：将未认证的异常请求重定向到 /login
-        http
-                .exceptionHandling(ex -> ex
-                        .authenticationEntryPoint(
-                                new LoginUrlAuthenticationEntryPoint("/login")
-                        )
-                );
+		// 配置异常处理器：将未认证的异常请求重定向到 /login
+		http
+				.exceptionHandling(ex -> ex
+						                   .authenticationEntryPoint(
+								                   new LoginUrlAuthenticationEntryPoint("/login")
+						                                            )
+				                  );
 
-        return http.build();
-    }
+		return http.build();
+	}
 
-    @Bean
-    @Order(2)
-    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http
-                // 禁用 csrf 保护，则不会向用户显示注销确认页面，而是直接执行注销
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorize ->
-                        authorize.requestMatchers(
-                                new AntPathRequestMatcher("/static/**")
-                                ).permitAll()
-                                .anyRequest().authenticated()
-                )
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .loginProcessingUrl("/login")
-                        .permitAll()
-                );
+	@Bean
+	@Order(2)
+	public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+		http
+				// 禁用 csrf 保护，则不会向用户显示注销确认页面，而是直接执行注销
+				.csrf(AbstractHttpConfigurer::disable)
+				.authorizeHttpRequests(authorize ->
+						                       authorize.requestMatchers(
+								                                new AntPathRequestMatcher("/static/**")
+						                                                ).permitAll()
+						                                .anyRequest().authenticated()
+				                      )
+				.formLogin(form -> form
+						           .loginPage("/login")
+						           .loginProcessingUrl("/login")
+						           .permitAll()
+				          );
 
-        return http.build();
-    }
+		return http.build();
+	}
 }

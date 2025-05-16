@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -24,11 +23,11 @@ public class 上传 {
     public static final String UPLOAD_PATH = System.getProperty("user.dir")
             + "/SpringBoot_文件秒传-分片-断点续传/src/main/resources/";
 
-    @RequestMapping("/upload")
-    public ResponseEntity<Map<String, String>> upload(@RequestParam MultipartFile file) throws IOException {
-        File dstFile = new File(UPLOAD_PATH, String.format("%s.%s", UUID.randomUUID(), StringUtils.getFilename(file.getOriginalFilename())));
-        // 使用 Spring 框架transferTo()方法：将所指向的 'file' 文件上传到对应的 'dstFile' 目录下
-        file.transferTo(dstFile);
-        return ResponseEntity.ok(Map.of("path", dstFile.getAbsolutePath()));
-    }
+	@RequestMapping("/upload")
+	public ResponseEntity<Map<String, String>> upload(@RequestParam MultipartFile file) throws IOException {
+		File dstFile = new File(UPLOAD_PATH, String.format("%s.%s", UUID.randomUUID(), StringUtils.getFilename(file.getOriginalFilename())));
+		// 使用 Spring 框架transferTo()方法：将所指向的 'file' 文件上传到对应的 'dstFile' 目录下
+		file.transferTo(dstFile);
+		return ResponseEntity.ok(Map.of("path", dstFile.getAbsolutePath()));
+	}
 }

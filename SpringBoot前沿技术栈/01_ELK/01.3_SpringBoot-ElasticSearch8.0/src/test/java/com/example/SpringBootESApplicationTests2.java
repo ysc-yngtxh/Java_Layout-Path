@@ -58,8 +58,8 @@ class SpringBootESApplicationTests2 {
 		Query query = new CriteriaQuery(
 				// 查询星中路地铁站2公里内的、商品类型是【电子产品】、价格在【1800～3000】的商品品牌地。
 				new Criteria("brandLocation").within(location, "2km")
-				    .and(new Criteria("type").is("电子产品"))
-				    .and(new Criteria("price").lessThan(3000).greaterThanEqual(1800))
+				                             .and(new Criteria("type").is("电子产品"))
+				                             .and(new Criteria("price").lessThan(3000).greaterThanEqual(1800))
 		);
 		// 可选写法
 		// Query query1 = CriteriaQuery.builder(
@@ -75,7 +75,7 @@ class SpringBootESApplicationTests2 {
 			                      Produce hero = searchHit.getContent();
 			                      log.info("{}\n{}", searchHit.getScore(), JSON.toJSONString(hero, JSONWriter.Feature.PrettyFormat));
 		                      }
-		);
+		                     );
 	}
 
 
@@ -83,16 +83,16 @@ class SpringBootESApplicationTests2 {
 	@Test
 	public void stringQuery() {
 		String dsl = """
-                     {"bool":{"must":[{"match":{"city":"上海"}},{"match":{"sex":"男"}},{"range":{"age":{"gte":40,"lte":60}}}]}}
-                     """;
+				{"bool":{"must":[{"match":{"city":"上海"}},{"match":{"sex":"男"}},{"range":{"age":{"gte":40,"lte":60}}}]}}
+				""";
 		Query query = new StringQuery(dsl);
 
 		List<SearchHit<Produce>> searchHitList = elasticsearchOperations.search(query, Produce.class).getSearchHits();
 		searchHitList.forEach(searchHit ->
-				System.out.println(JSON.toJSONString(searchHit.getContent(),
-				                                     JSONWriter.Feature.PrettyFormat)
-				)
-		);
+				                      System.out.println(JSON.toJSONString(searchHit.getContent(),
+				                                                           JSONWriter.Feature.PrettyFormat)
+				                                        )
+		                     );
 	}
 
 
@@ -101,7 +101,7 @@ class SpringBootESApplicationTests2 {
 	public void nativeQuery() {
 		// 按距离和价格排序，选择最近的和最便宜的
 		Sort sort = Sort.by(
-				new GeoDistanceOrder("brandLocation", new GeoPoint(31.163862, 121.375569)))
+				                new GeoDistanceOrder("brandLocation", new GeoPoint(31.163862, 121.375569)))
 		                .ascending()
 		                .and(Sort.by("price").ascending());
 

@@ -17,25 +17,25 @@ import java.util.function.Consumer;
 @Component
 public class StopWordSpecification extends AbstractSpecification<Message> implements InteractiveSpecification<Message, MessageStatus> {
 
-    @Override
-    public void notSatisfiedHandleBy(Message message, Consumer<MessageStatus> handle) {
-        if (isSatisfiedBy(message)) {
-            return;
-        }
-        handle.accept(MessageStatus.HAS_STOP_WORD);
-    }
+	@Override
+	public void notSatisfiedHandleBy(Message message, Consumer<MessageStatus> handle) {
+		if (isSatisfiedBy(message)) {
+			return;
+		}
+		handle.accept(MessageStatus.HAS_STOP_WORD);
+	}
 
-    @Override
-    public boolean isSatisfiedBy(Message message) {
-        // 只验证聊天消息,系统消息不校验违禁
-        if(!MessageCategory.CHAT.sameValueAs(message.getCategory())){
-            return true;
-        }
-        String content = message.getContent().getContent();
-        // TODO 通过系统违禁词列表，匹配消息内容是否包含违禁词
-        if(content.contains("线下交易")){
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public boolean isSatisfiedBy(Message message) {
+		// 只验证聊天消息,系统消息不校验违禁
+		if (!MessageCategory.CHAT.sameValueAs(message.getCategory())) {
+			return true;
+		}
+		String content = message.getContent().getContent();
+		// TODO 通过系统违禁词列表，匹配消息内容是否包含违禁词
+		if (content.contains("线下交易")) {
+			return false;
+		}
+		return true;
+	}
 }

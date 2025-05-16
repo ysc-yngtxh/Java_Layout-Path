@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class OidcClientController {
 
-    @RequestMapping("/access")
-    public @ResponseBody String access() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        log.info("authentication: {}", authentication);
-        return "<h1>这是 SSO-Client-1 </h1>";
-    }
+	@RequestMapping("/access")
+	public @ResponseBody String access() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		log.info("authentication: {}", authentication);
+		return "<h1>这是 SSO-Client-1 </h1>";
+	}
 }

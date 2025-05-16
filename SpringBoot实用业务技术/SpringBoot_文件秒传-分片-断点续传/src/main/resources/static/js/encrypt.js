@@ -1,4 +1,3 @@
-
 // 计算文件的 MD5 校验值
 function calculateMD5(fileChunk) {
     return new Promise((resolve, reject) => {

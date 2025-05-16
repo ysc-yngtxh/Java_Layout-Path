@@ -8,7 +8,8 @@ import com.example.dddmessage.domain.shared.event.AbstractEvent;
  * @since 2024-04-18 07:20:00
  */
 public class MessageCreatedEvent extends AbstractEvent<Message> {
-    public MessageCreatedEvent(Message message) {
-        super(message);
-    }
+
+	public MessageCreatedEvent(Message message) {
+		super(message);
+	}
 }

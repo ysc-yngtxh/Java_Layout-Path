@@ -5,9 +5,10 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.0</version>
+        <version>3.4.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.example</groupId>
     <artifactId>05_SpringBoot-Cache</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -24,6 +25,7 @@
         <module>05.3_SpringBoot-Redis-Lock</module>
         <module>05.4_SpringBoot-Caffeine</module>
         <module>05.5_SpringBoot-Redisson</module>
+        <module>05.6_SpringBoot-LRU</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -36,7 +38,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

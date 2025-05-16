@@ -5,7 +5,7 @@ import com.example.pojo.entity.SysUser;
 
 /**
  * @author 游家纨绔
- * @date 2022/07/07
+ * @date 2022-07-07 12:00
  * @apiNote
  */
 public interface SysUserMapper extends BaseMapper<SysUser> {}

@@ -16,69 +16,71 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-11-03 09:01
+ * @dateTime 2024-11-03 09:00
  * @apiNote TODO
  */
 @Controller
 public class GiteeOath2Controller {
 
-    // TODO https://api.gitee.com/api/v5/oauth_doc#/
-    /**
-     * gitee 请求授权页面
-     */
-    @RequestMapping("/gitee/auth")
-    public String giteeAuth() {
-        // TODO Step1：获取Authorization Code
-        StringBuilder urlBuilder = new StringBuilder(Oauth2Property.AUTHORIZE_URL);
-        urlBuilder.append("?response_type=").append("code")
-                  .append("&client_id=").append(Oauth2Property.CLIENT_ID)
-                  .append("&redirect_uri=").append(URLEncoder.encode(Oauth2Property.CALLBACK_URI, StandardCharsets.UTF_8))
-                  .append("&scope=").append("user_info");
+	// TODO https://api.gitee.com/api/v5/oauth_doc#/
 
-        // 重定向
-        return "redirect:" + urlBuilder;
-    }
+	/**
+	 * gitee 请求授权页面
+	 */
+	@RequestMapping("/gitee/auth")
+	public String giteeAuth() {
+		// TODO Step1：获取Authorization Code
+		StringBuilder urlBuilder = new StringBuilder(Oauth2Property.AUTHORIZE_URL);
+		urlBuilder.append("?response_type=").append("code")
+		          .append("&client_id=").append(Oauth2Property.CLIENT_ID)
+		          .append("&redirect_uri=").append(URLEncoder.encode(Oauth2Property.CALLBACK_URI, StandardCharsets.UTF_8))
+		          .append("&scope=").append("user_info");
 
-    /**
-     * 授权回调
-     * @param code 授权编码
-     */
-    @RequestMapping("/login/oauth2/code/gitee")
-    @ResponseBody
-    public String AuthCallback(@RequestParam("code") String code) {
-        try {
-            // 得到Authorization Code
-            System.out.println("授权服务器的Authorization code = " + code);
+		// 重定向
+		return "redirect:" + urlBuilder;
+	}
 
-            // TODO Step2：通过Authorization Code获取Access Token
-            Map<String, Object> params = new HashMap<>();
-            params.put("grant_type", "authorization_code");
-            params.put("client_id", Oauth2Property.CLIENT_ID);
-            params.put("client_secret", Oauth2Property.CLIENT_SECRET);
-            params.put("code", code);
-            params.put("redirect_uri", Oauth2Property.CALLBACK_URI);
+	/**
+	 * 授权回调
+	 *
+	 * @param code 授权编码
+	 */
+	@RequestMapping("/login/oauth2/code/gitee")
+	@ResponseBody
+	public String AuthCallback(@RequestParam("code") String code) {
+		try {
+			// 得到Authorization Code
+			System.out.println("授权服务器的Authorization code = " + code);
 
-            String authRequest = HttpRequest.post(Oauth2Property.TOKEN_URL)
-                                            .form(params)      // 表单内容
-                                            .timeout(20000)  // 超时，毫秒
-                                            .execute().body();
+			// TODO Step2：通过Authorization Code获取Access Token
+			Map<String, Object> params = new HashMap<>();
+			params.put("grant_type", "authorization_code");
+			params.put("client_id", Oauth2Property.CLIENT_ID);
+			params.put("client_secret", Oauth2Property.CLIENT_SECRET);
+			params.put("code", code);
+			params.put("redirect_uri", Oauth2Property.CALLBACK_URI);
 
-            JSONObject accessTokenJson = Optional.ofNullable(authRequest).map(JSONUtil::parseObj).get();
-            System.out.println("accessTokenJson = " + accessTokenJson);
-            if (!accessTokenJson.containsKey("access_token")) {
-                throw new RuntimeException("获取accessToken失败");
-            }
+			String authRequest = HttpRequest.post(Oauth2Property.TOKEN_URL)
+			                                .form(params)      // 表单内容
+			                                .timeout(20000)  // 超时，毫秒
+			                                .execute().body();
 
-            // 授权服务器提供的访问Token
-            String accessTokenStr = accessTokenJson.get("access_token").toString();
+			JSONObject accessTokenJson = Optional.ofNullable(authRequest).map(JSONUtil::parseObj).get();
+			System.out.println("accessTokenJson = " + accessTokenJson);
+			if (!accessTokenJson.containsKey("access_token")) {
+				throw new RuntimeException("获取accessToken失败");
+			}
 
-            // TODO Step3: 获取用户信息
-            HttpRequest httpRequest = HttpRequest.get(Oauth2Property.GET_USER_INFO_URL)
-                                                 .form("access_token", accessTokenStr);
-            System.out.println("httpRequest = " + httpRequest);
-            return httpRequest.execute().body();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+			// 授权服务器提供的访问Token
+			String accessTokenStr = accessTokenJson.get("access_token").toString();
+
+			// TODO Step3: 获取用户信息
+			HttpRequest httpRequest = HttpRequest.get(Oauth2Property.GET_USER_INFO_URL)
+			                                     .form("access_token", accessTokenStr);
+			System.out.println("httpRequest = " + httpRequest);
+			return httpRequest.execute().body();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

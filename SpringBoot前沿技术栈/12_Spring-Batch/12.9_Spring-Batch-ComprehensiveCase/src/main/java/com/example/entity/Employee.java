@@ -10,8 +10,8 @@ import java.io.Serializable;
 /**
  * (Employee)实体类
  *
- * @author makejava
- * @since 2023-06-27 23:55:21
+ * @author 游家纨绔
+ * @since 2023-06-27 23:55:00
  */
 @Data
 @AllArgsConstructor
@@ -29,4 +29,3 @@ public class Employee implements Serializable {
     private Integer sex;
 
 }
-

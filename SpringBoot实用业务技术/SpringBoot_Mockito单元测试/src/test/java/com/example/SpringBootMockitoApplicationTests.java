@@ -90,7 +90,7 @@ public class SpringBootMockitoApplicationTests {
 
 		// 打桩：如果方法没有返回值的话（即是方法定义为 public void myMethod() {…}），要改用 doThrow() 抛出 Exception
 		Mockito.doThrow(new RuntimeException("mock throw exception when method is void"))
-			   .when(mockPositionDto3).getVoid();
+		       .when(mockPositionDto3).getVoid();
 		// 会抛出一个RuntimeException
 		mockPositionDto3.getVoid();
 	}

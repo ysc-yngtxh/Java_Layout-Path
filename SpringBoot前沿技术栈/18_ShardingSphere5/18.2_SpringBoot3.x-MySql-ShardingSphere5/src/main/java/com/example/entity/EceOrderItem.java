@@ -13,7 +13,7 @@ import lombok.ToString;
  * 订单商品项表(EceOrderItem)实体类
  *
  * @author 游家纨绔
- * @since 2024-09-20 21:24:31
+ * @since 2024-09-20 21:20:30
  */
 @Data
 @Builder
@@ -111,4 +111,3 @@ public class EceOrderItem implements Serializable {
     }
 
 }
-

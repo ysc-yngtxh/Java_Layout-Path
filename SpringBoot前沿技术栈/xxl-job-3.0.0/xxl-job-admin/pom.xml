@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.xuxueli</groupId>
-		<artifactId>0</artifactId>
+		<artifactId>xxl-job-3.0.0</artifactId>
 		<version>3.0.0</version>
 	</parent>
 	<artifactId>xxl-job-admin</artifactId>

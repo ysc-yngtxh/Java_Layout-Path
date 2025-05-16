@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class ImSocketServiceFacadeClient implements ImSocketServiceFacade {
 
-    @Override
-    public void publish(SocketMessage socketMessage) {
-        log.info(socketMessage.toString());
-    }
+	@Override
+	public void publish(SocketMessage socketMessage) {
+		log.info(socketMessage.toString());
+	}
 }

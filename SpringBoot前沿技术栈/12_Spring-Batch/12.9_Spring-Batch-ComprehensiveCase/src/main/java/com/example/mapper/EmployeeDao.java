@@ -7,8 +7,8 @@ import java.util.List;
 /**
  * (Employee)表数据库访问层
  *
- * @author makejava
- * @since 2023-06-27 23:55:16
+ * @author 游家纨绔
+ * @since 2023-06-27 23:55:10
  */
 public interface EmployeeDao {
 
@@ -37,4 +37,3 @@ public interface EmployeeDao {
      */
     List<Employee> selectTemp();
 }
-

@@ -1,9 +1,8 @@
 package com.example.advice;
 
+import java.io.Serial;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import java.io.Serial;
 
 /**
  * @author 游家纨绔
@@ -13,8 +12,8 @@ import java.io.Serial;
 @Getter
 @AllArgsConstructor
 public class SqlException extends RuntimeException {
-    @Serial
-    private static final long serialVersionUID = 828553759112823740L;
+	@Serial
+	private static final long serialVersionUID = 828553759112823740L;
 
-    private SqlEnum sqlEnum;
+	private SqlEnum sqlEnum;
 }

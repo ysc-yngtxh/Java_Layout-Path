@@ -11,20 +11,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class HandlerRegistry {
 
-    // 使用构造器注入 DynamicMessageListener 对象
-    private final DynamicMessageListener dynamicMessageListener;
+	// 使用构造器注入 DynamicMessageListener 对象
+	private final DynamicMessageListener dynamicMessageListener;
 
-    public HandlerRegistry(DynamicMessageListener dynamicMessageListener) {
-        this.dynamicMessageListener = dynamicMessageListener;
-    }
+	public HandlerRegistry(DynamicMessageListener dynamicMessageListener) {
+		this.dynamicMessageListener = dynamicMessageListener;
+	}
 
-    // 提供动态注册方法
-    public void addHandler(String messageType, MessageHandler handler) {
-        dynamicMessageListener.getHandlers().put(messageType, handler);
-    }
+	// 提供动态注册方法
+	public void addHandler(String messageType, MessageHandler handler) {
+		dynamicMessageListener.getHandlers().put(messageType, handler);
+	}
 
-    // 提供动态注销方法
-    public void removeHandler(String messageType) {
-        dynamicMessageListener.getHandlers().remove(messageType);
-    }
+	// 提供动态注销方法
+	public void removeHandler(String messageType) {
+		dynamicMessageListener.getHandlers().remove(messageType);
+	}
 }

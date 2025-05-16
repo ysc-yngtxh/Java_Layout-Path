@@ -17,34 +17,36 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DynamicListenerConfig {
 
-    /**
-     * 消息监听容器。使用 SimpleMessageListenerContainer 实现动态监听
-     * @param connectionFactory 连接工厂
-     */
-    @Bean
-    public SimpleMessageListenerContainer messageListenerContainer(ConnectionFactory connectionFactory,
-                                                                   DynamicMessageListener dynamicMessageListener) {
-        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(connectionFactory);
-        // 监听消息的消费逻辑
-        container.setMessageListener(dynamicMessageListener);
+	/**
+	 * 消息监听容器。使用 SimpleMessageListenerContainer 实现动态监听
+	 *
+	 * @param connectionFactory 连接工厂
+	 */
+	@Bean
+	public SimpleMessageListenerContainer messageListenerContainer(ConnectionFactory connectionFactory,
+	                                                               DynamicMessageListener dynamicMessageListener) {
+		SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(connectionFactory);
+		// 监听消息的消费逻辑
+		container.setMessageListener(dynamicMessageListener);
 
-        // 使用内置错误处理器：处理消息在消费过程中的异常
-        // container.setErrorHandler(new ConditionalRejectingErrorHandler());
-        // 自定义消息消费过程中的异常处理
-        // container.setErrorHandler(errorHandlerToDead());
+		// 使用内置错误处理器：处理消息在消费过程中的异常
+		// container.setErrorHandler(new ConditionalRejectingErrorHandler());
+		// 自定义消息消费过程中的异常处理
+		// container.setErrorHandler(errorHandlerToDead());
 
-        // 添加重试拦截器
-        // container.setAdviceChain(retryInterceptor());
+		// 添加重试拦截器
+		// container.setAdviceChain(retryInterceptor());
 
-        return container;
-    }
+		return container;
+	}
 
-    /**
-     * 动态消息监听器。消息处理逻辑
-     * @param messageConverter 消息转换器
-     */
-    @Bean
-    public DynamicMessageListener dynamicMessageListener(MessageConverter messageConverter) {
-        return new DynamicMessageListener(messageConverter);
-    }
+	/**
+	 * 动态消息监听器。消息处理逻辑
+	 *
+	 * @param messageConverter 消息转换器
+	 */
+	@Bean
+	public DynamicMessageListener dynamicMessageListener(MessageConverter messageConverter) {
+		return new DynamicMessageListener(messageConverter);
+	}
 }

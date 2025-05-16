@@ -10,8 +10,8 @@ import javax.persistence.Table;
 /**
  * (CanalPO)实体类
  *
- * @author makejava
- * @since 2022-03-05 11:30:32
+ * @author 游家纨绔
+ * @since 2022-03-05 11:30:00
  */
 @Data
 @NoArgsConstructor
@@ -19,19 +19,19 @@ import javax.persistence.Table;
 @Table(name = "testysc")
 public class CanalPO {
 
-    @Id
-    private Integer id;
-    
-    private String name;
-    
-    private String address;
+	@Id
+	private Integer id;
 
-    @Override
-    public String toString() {
-        return "CanalPO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                '}';
-    }
+	private String name;
+
+	private String address;
+
+	@Override
+	public String toString() {
+		return "CanalPO{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", address='" + address + '\'' +
+				'}';
+	}
 }

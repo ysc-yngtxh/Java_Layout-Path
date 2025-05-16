@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 /**
  * @Author 游家纨绔
  * @Description TODO
- * @Date 2025-03-05 10:55:59
+ * @Date 2025-03-05 10:55:00
  */
 @Repository
 public interface ESRepository extends ElasticsearchRepository<User, String> {

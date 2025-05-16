@@ -1,6 +1,10 @@
 package com.example.interceptor;
 
 import com.alibaba.fastjson2.JSON;
+import java.lang.reflect.Field;
+import java.sql.PreparedStatement;
+import java.util.Map;
+import java.util.Properties;
 import org.apache.ibatis.executor.parameter.ParameterHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.plugin.Interceptor;
@@ -10,11 +14,6 @@ import org.apache.ibatis.plugin.Plugin;
 import org.apache.ibatis.plugin.Signature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.lang.reflect.Field;
-import java.sql.PreparedStatement;
-import java.util.Map;
-import java.util.Properties;
 
 /* TODO Mybatis 拦截器
  *      @Intercepts：标识该类是一个拦截器,需要一个Signature(拦截点)参数数组。通过Signature来指定拦截哪个对象里面的哪个方法，只有符合拦截点的条件才会进入到拦截器

@@ -21,21 +21,21 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- Table structure for tb_sku
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_sku`;
-CREATE TABLE `tb_sku` (
-  `id` int NOT NULL AUTO_INCREMENT COMMENT '主键Id',
-  `image` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '图片',
-  `price` decimal(10,2) DEFAULT NULL COMMENT '价格',
-  `inventory` int DEFAULT NULL COMMENT '库存',
-  `title` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '标题',
-  `shelves` tinyint DEFAULT NULL COMMENT '是否上架',
-  `menu` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '菜单',
-  `create_date` datetime DEFAULT NULL COMMENT '创建时间',
-  `updated_date` datetime DEFAULT NULL COMMENT '更新时间',
-  `create_by` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '创建人',
-  `updated_by` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '更新人',
-  `delete_flag` tinyint DEFAULT NULL COMMENT '逻辑删除',
-  `order_json` varchar(5000) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '订单数据',
-  PRIMARY KEY (`id`)
+CREATE TABLE `tb_sku`(
+    `id`           int NOT NULL AUTO_INCREMENT COMMENT '主键Id',
+    `image`        varchar(255) CHARACTER SET utf8mb4                      DEFAULT NULL COMMENT '图片',
+    `price`        decimal(10, 2)                                          DEFAULT NULL COMMENT '价格',
+    `inventory`    int                                                     DEFAULT NULL COMMENT '库存',
+    `title`        varchar(255) CHARACTER SET utf8mb4                      DEFAULT NULL COMMENT '标题',
+    `shelves`      tinyint                                                 DEFAULT NULL COMMENT '是否上架',
+    `menu`         varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '菜单',
+    `create_date`  datetime                                                DEFAULT NULL COMMENT '创建时间',
+    `updated_date` datetime                                                DEFAULT NULL COMMENT '更新时间',
+    `create_by`    varchar(255) CHARACTER SET utf8mb4                      DEFAULT NULL COMMENT '创建人',
+    `updated_by`   varchar(255) COLLATE utf8mb4_bin                        DEFAULT NULL COMMENT '更新人',
+    `delete_flag`  tinyint                                                 DEFAULT NULL COMMENT '逻辑删除',
+    `order_json`   varchar(5000) COLLATE utf8mb4_bin                       DEFAULT NULL COMMENT '订单数据',
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1001 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------

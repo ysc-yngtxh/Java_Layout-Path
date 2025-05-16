@@ -23,12 +23,12 @@ public class SqlPostConstructConfig implements WebMvcConfigurer {
             "/user/**"
     };
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new TenantContextHolderInterceptor())
-                .addPathPatterns(addPath)
-                .excludePathPatterns();
-    }
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new TenantContextHolderInterceptor())
+		        .addPathPatterns(addPath)
+		        .excludePathPatterns();
+	}
 
     // 第二种方式：将自定义的拦截器添加进 mybatis 配置中
     @Resource

@@ -7,5 +7,5 @@ package com.example.spi.spring;
  */
 public interface Food {
 
-    void sayHello();
+	void sayHello();
 }

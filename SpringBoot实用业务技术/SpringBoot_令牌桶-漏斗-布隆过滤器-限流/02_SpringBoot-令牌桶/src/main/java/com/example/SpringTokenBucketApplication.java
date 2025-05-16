@@ -2,11 +2,8 @@ package com.example;
 
 import com.example.utils.BucketUtil;
 import jakarta.annotation.PostConstruct;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -28,7 +25,7 @@ public class SpringTokenBucketApplication {
 
 	@Scheduled(fixedRate = 1000) // 定时1s
 	public void timer() {
-		if (BucketUtil.buckets.containsKey("bucket")){
+		if (BucketUtil.buckets.containsKey("bucket")) {
 			// 名为：bucket的令牌桶 开始不断生成令牌
 			BucketUtil.buckets.get("bucket").incrTokens();
 		}

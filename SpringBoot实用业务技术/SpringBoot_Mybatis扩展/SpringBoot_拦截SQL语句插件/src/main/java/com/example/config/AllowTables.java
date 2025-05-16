@@ -1,10 +1,9 @@
 package com.example.config;
 
+import java.util.List;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * @author 游家纨绔
@@ -16,18 +15,18 @@ import java.util.List;
 @ConfigurationProperties(prefix = "allow-tables")
 public class AllowTables {
 
-    /**
-     * 启用
-     */
-    private boolean enable = false;
+	/**
+	 * 启用
+	 */
+	private boolean enable = false;
 
-    /**
-     * 允许全表删除的表
-     */
-    private List<String> delete;
+	/**
+	 * 允许全表删除的表
+	 */
+	private List<String> delete;
 
-    /**
-     * 允许全表更新的表
-     */
-    private List<String> update;
+	/**
+	 * 允许全表更新的表
+	 */
+	private List<String> update;
 }

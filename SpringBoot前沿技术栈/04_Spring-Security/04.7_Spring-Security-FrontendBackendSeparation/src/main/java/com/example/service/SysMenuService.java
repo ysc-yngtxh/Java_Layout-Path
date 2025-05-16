@@ -5,8 +5,8 @@ import com.example.pojo.entity.SysMenu;
 import java.util.List;
 
 /**
- * @author example
- * @dateTime 2023-05-13 22:55
+ * @author 游家纨绔
+ * @dateTime 2023-05-13 22:50
  * @apiNote TODO
  */
 public interface SysMenuService {

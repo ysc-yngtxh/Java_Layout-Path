@@ -14,15 +14,16 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnClass({EnableCustomDependency.class})
 public class Rice implements Food {
 
-    @Override
-    public void sayHello() {
-        System.out.println("Hello, I am Rice.");
-    }
+	@Override
+	public void sayHello() {
+		System.out.println("Hello, I am Rice.");
+	}
 
-    @Bean
-    public CustomTemplate customTemplate() {
-        return new CustomTemplate();
-    }
+	@Bean
+	public CustomTemplate customTemplate() {
+		return new CustomTemplate();
+	}
 
-    class CustomTemplate {}
+	class CustomTemplate {
+	}
 }

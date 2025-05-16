@@ -10,16 +10,16 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class ExpandInterfaceApplication {
 
-    public static void main(String[] args) {
-        SpringApplication springApplication = new SpringApplication(ExpandInterfaceApplication.class);
-        // ApplicationContextInitializer接口扩展生效配置
-        springApplication.addInitializers(new MyApplicationContextInitializer());
-        ConfigurableApplicationContext applicationContext = springApplication.run(args);
-        // MyEnvironmentPostProcessor配置环境Environment
-        System.out.println("获取环境后处理器数据：" + applicationContext.getEnvironment().getProperty("app.who"));
+	public static void main(String[] args) {
+		SpringApplication springApplication = new SpringApplication(ExpandInterfaceApplication.class);
+		// ApplicationContextInitializer接口扩展生效配置
+		springApplication.addInitializers(new MyApplicationContextInitializer());
+		ConfigurableApplicationContext applicationContext = springApplication.run(args);
+		// MyEnvironmentPostProcessor配置环境Environment
+		System.out.println("获取环境后处理器数据：" + applicationContext.getEnvironment().getProperty("app.who"));
 
-        // 初始化Mouse
-        Mouse mouse = new Mouse();
-        MyBeanPostProcess myBeanPostProcess = new MyBeanPostProcess();
-    }
+		// 初始化Mouse
+		Mouse mouse = new Mouse();
+		MyBeanPostProcess myBeanPostProcess = new MyBeanPostProcess();
+	}
 }

@@ -1,7 +1,7 @@
 package com.example.mvc.entity;
-import lombok.Data;
 
 import java.math.BigDecimal;
+import lombok.Data;
 
 /**
  * @author 游家纨绔
@@ -10,12 +10,13 @@ import java.math.BigDecimal;
  */
 @Data
 public class OrderMVC {
-    private long orderId;
-    private int buyerId;
-    private int sellerId;
-    private BigDecimal amount;
-    private BigDecimal shippingFee;
-    private BigDecimal discountAmount;
-    private BigDecimal payAmount;
-    private String address;
+
+	private long orderId;
+	private int buyerId;
+	private int sellerId;
+	private BigDecimal amount;
+	private BigDecimal shippingFee;
+	private BigDecimal discountAmount;
+	private BigDecimal payAmount;
+	private String address;
 }

@@ -1,31 +1,31 @@
 server:
-    port: 8081
+  port: 8081
 
 spring:
-    application:
-        name: @project.artifactId@
+  application:
+    name: @project.artifactId@
 
-    kafka:
-        # Kafka 集群地址（多个用逗号分隔）
-        bootstrap-servers: localhost:9092
-        # 将消息发送到的默认主题，KafkaTemplate.sendDefault
-        template:
-            default-topic: default-topic
-        # 监听器类型，可选值有：SINGLE（单条消费[默认配置]）、BATCH（批量消息）
-        listener:
-            type: batch
-        # 生产者配置
-        producer:
-            key-serializer: org.apache.kafka.common.serialization.StringSerializer
-            value-serializer: org.apache.kafka.common.serialization.StringSerializer
-            retries: 3  # 发送失败重试次数
-            # 消息确认机制（all=leader和follower都确认）
-            acks: all
-        # 消费者配置
-        consumer:
-            group-id: my-group  # 消费者组
-            auto-offset-reset: earliest  # 无偏移量时从最早消息开始消费
-            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-            value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-            max-poll-records: 500  # 单次拉取最大消息数
-            fetch-max-wait: 5000   # 等待时间（ms）
+  kafka:
+    # Kafka 集群地址（多个用逗号分隔）
+    bootstrap-servers: localhost:9092
+    # 将消息发送到的默认主题，KafkaTemplate.sendDefault
+    template:
+      default-topic: default-topic
+    # 监听器类型，可选值有：SINGLE（单条消费[默认配置]）、BATCH（批量消息）
+    listener:
+      type: batch
+    # 生产者配置
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      retries: 3  # 发送失败重试次数
+      # 消息确认机制（all=leader和follower都确认）
+      acks: all
+    # 消费者配置
+    consumer:
+      group-id: my-group  # 消费者组
+      auto-offset-reset: earliest  # 无偏移量时从最早消息开始消费
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      max-poll-records: 500  # 单次拉取最大消息数
+      fetch-max-wait: 5000   # 等待时间（ms）

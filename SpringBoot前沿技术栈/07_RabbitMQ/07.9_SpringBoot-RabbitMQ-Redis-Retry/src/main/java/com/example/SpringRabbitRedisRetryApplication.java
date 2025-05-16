@@ -7,8 +7,9 @@ import org.springframework.retry.annotation.EnableRetry;
 @EnableRetry
 @SpringBootApplication
 public class SpringRabbitRedisRetryApplication {
+
     public static void main(String[] args) {
         SpringApplication.run(SpringRabbitRedisRetryApplication.class, args);
     }
-}
 
+}

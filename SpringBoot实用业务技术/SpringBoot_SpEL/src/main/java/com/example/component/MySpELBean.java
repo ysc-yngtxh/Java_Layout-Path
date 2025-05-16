@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component("mySpELBean")
 public class MySpELBean {
 
-    public boolean hasAuthorization(String str) {
-        return Pattern.matches("^\\d+$", str);
-    }
+	public boolean hasAuthorization(String str) {
+		return Pattern.matches("^\\d+$", str);
+	}
 }

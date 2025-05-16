@@ -10,7 +10,8 @@ import java.math.BigDecimal;
  */
 @AllArgsConstructor
 public class AccountJournal {
-    private String type;
-    private BigDecimal oldBalance;
-    private BigDecimal newBalance;
+
+	private String type;
+	private BigDecimal oldBalance;
+	private BigDecimal newBalance;
 }

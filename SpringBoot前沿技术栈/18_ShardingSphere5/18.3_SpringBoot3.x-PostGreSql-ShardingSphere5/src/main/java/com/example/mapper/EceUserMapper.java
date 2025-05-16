@@ -5,8 +5,8 @@ import com.example.entity.EceUser;
 /**
  * (EceUser)表数据库访问层
  *
- * @author makejava
- * @since 2024-09-11 22:37:34
+ * @author 游家纨绔
+ * @since 2024-09-11 22:30:30
  */
 public interface EceUserMapper {
 
@@ -44,4 +44,3 @@ public interface EceUserMapper {
     int deleteById(Integer id);
 
 }
-

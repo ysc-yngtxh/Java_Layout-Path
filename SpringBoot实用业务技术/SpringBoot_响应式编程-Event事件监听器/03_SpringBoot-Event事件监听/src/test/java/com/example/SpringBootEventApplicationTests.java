@@ -14,32 +14,32 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 class SpringBootEventApplicationTests {
 
-    @Autowired
-    private ApplicationEventPublisher applicationEventPublisher;
+	@Autowired
+	private ApplicationEventPublisher applicationEventPublisher;
+	@Autowired
+	private MessageServiceImpl messageServiceImpl;
 
-    @Test
-    void contextLoads() {
-        for (int i = 0; i < 5; i++) {
-            applicationEventPublisher.publishEvent(
-                    new AnnotationEvent<>("你若为我繁华，你好呀：" + (i + 1))
-            );
-        }
-    }
+	@Test
+	void contextLoads() {
+		for (int i = 0; i < 5; i++) {
+			applicationEventPublisher.publishEvent(
+					new AnnotationEvent<>("你若为我繁华，你好呀：" + (i + 1))
+			                                      );
+		}
+	}
 
-    @Test
-    void contextLoads1() {
-        for (int i = 0; i < 5; i++) {
-            applicationEventPublisher.publishEvent(
-                    new CodeLogicEvent<>("你若为我繁华，你好呀：" + (i + 1))
-            );
-        }
-    }
+	@Test
+	void contextLoads1() {
+		for (int i = 0; i < 5; i++) {
+			applicationEventPublisher.publishEvent(
+					new CodeLogicEvent<>("你若为我繁华，你好呀：" + (i + 1))
+			                                      );
+		}
+	}
 
-    @Autowired
-    private MessageServiceImpl messageServiceImpl;
-    @Test
-    void contextLoads2() {
-        messageServiceImpl.publish();
-    }
+	@Test
+	void contextLoads2() {
+		messageServiceImpl.publish();
+	}
 
 }

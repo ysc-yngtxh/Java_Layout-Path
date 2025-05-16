@@ -10,22 +10,22 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 /**
- * @author example
- * @dateTime 2023-05-12 19:55
+ * @author 游家纨绔
+ * @dateTime 2023-05-12 19:50
  * @apiNote TODO 自定义认证管理器
  */
 @Component
 public class CustomAuthenticationManager implements AuthenticationManager {
 
-    @Resource
-    private CustomAuthenticationProvider authenticationProvider;
+	@Resource
+	private CustomAuthenticationProvider authenticationProvider;
 
-    @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        Authentication result = authenticationProvider.authenticate(authentication);
-        if (Objects.nonNull(result)) {
-            return result;
-        }
-        throw new ProviderNotFoundException("Authentication failed!");
-    }
+	@Override
+	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+		Authentication result = authenticationProvider.authenticate(authentication);
+		if (Objects.nonNull(result)) {
+			return result;
+		}
+		throw new ProviderNotFoundException("Authentication failed!");
+	}
 }

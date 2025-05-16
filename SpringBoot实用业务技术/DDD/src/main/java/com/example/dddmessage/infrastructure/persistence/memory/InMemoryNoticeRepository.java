@@ -13,10 +13,11 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Repository
 public class InMemoryNoticeRepository implements NoticeRepository {
-    private final Map<Long, Notice> noticeRepositories = new ConcurrentHashMap<>();
 
-    @Override
-    public void save(Notice notice) {
-        noticeRepositories.put(notice.getMessageId(), notice);
-    }
+	private final Map<Long, Notice> noticeRepositories = new ConcurrentHashMap<>();
+
+	@Override
+	public void save(Notice notice) {
+		noticeRepositories.put(notice.getMessageId(), notice);
+	}
 }

@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class StableServiceImpl implements TestService {
 
-    private final static Logger log = LoggerFactory.getLogger(StableServiceImpl.class);
+	private final static Logger log = LoggerFactory.getLogger(StableServiceImpl.class);
 
-    @Override
-    public void doService() {
-        log.info("我是稳定版  纵天崩地裂 我依旧稳如狗....");
-    }
+	@Override
+	public void doService() {
+		log.info("我是稳定版  纵天崩地裂 我依旧稳如狗....");
+	}
 }

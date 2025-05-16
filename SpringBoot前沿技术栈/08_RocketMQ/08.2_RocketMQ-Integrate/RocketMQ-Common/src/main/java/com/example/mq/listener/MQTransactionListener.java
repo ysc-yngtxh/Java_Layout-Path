@@ -19,51 +19,51 @@ import java.util.Map;
  */
 public class MQTransactionListener implements TransactionListener {
 
-    @Autowired
-    private Map<String, MQTransactionHandler> mqTransactionHandlerMap;
+	@Autowired
+	private Map<String, MQTransactionHandler> mqTransactionHandlerMap;
 
-    /**
-     * 用于执行本地事务的方法
-     */
-    @Override
-    public LocalTransactionState executeLocalTransaction(Message message, Object obj) {
-        MQTransactionHandler mqTransactionHandler = getListener(message.getTopic(), message.getTags());
-        return mqTransactionHandler.executeLocalTransaction(message, obj);
-    }
+	/**
+	 * 用于执行本地事务的方法
+	 */
+	@Override
+	public LocalTransactionState executeLocalTransaction(Message message, Object obj) {
+		MQTransactionHandler mqTransactionHandler = getListener(message.getTopic(), message.getTags());
+		return mqTransactionHandler.executeLocalTransaction(message, obj);
+	}
 
-    /**
-     * 用于回查本地事务执行结果的方法
-     */
-    @Override
-    public LocalTransactionState checkLocalTransaction(MessageExt messageExt) {
-        MQTransactionHandler mqTransactionHandler = getListener(messageExt.getTopic(), messageExt.getTags());
-        return mqTransactionHandler.checkLocalTransaction(messageExt);
-    }
+	/**
+	 * 用于回查本地事务执行结果的方法
+	 */
+	@Override
+	public LocalTransactionState checkLocalTransaction(MessageExt messageExt) {
+		MQTransactionHandler mqTransactionHandler = getListener(messageExt.getTopic(), messageExt.getTags());
+		return mqTransactionHandler.checkLocalTransaction(messageExt);
+	}
 
-    private MQTransactionHandler getListener(String topic, String tags) {
-        MQTransactionHandler mqTransactionHandler = null;
-        for (Map.Entry<String, MQTransactionHandler> entry : mqTransactionHandlerMap.entrySet()) {
-            MQHandlerActualizer msgHandlerActualizer = entry.getValue().getClass().getAnnotation(MQHandlerActualizer.class);
-            if (msgHandlerActualizer != null) {
-                String annotationTopic  = msgHandlerActualizer.topic();
-                String[] annotationTags = msgHandlerActualizer.tags();
-                if (!StringUtils.equals(topic, annotationTopic)) {
-                    // 非该主题处理类
-                    continue;
-                }
-                if(StringUtils.equals(annotationTags[0], "*")){
-                    // 获取该实例
-                    mqTransactionHandler = entry.getValue();
-                    break;
-                }
-                boolean isContains = Arrays.asList(annotationTags).contains(tags);
-                if(isContains){
-                    // 注解类中包含tag则获取该实例
-                    mqTransactionHandler = entry.getValue();
-                    break;
-                }
-            }
-        }
-        return mqTransactionHandler;
-    }
+	private MQTransactionHandler getListener(String topic, String tags) {
+		MQTransactionHandler mqTransactionHandler = null;
+		for (Map.Entry<String, MQTransactionHandler> entry : mqTransactionHandlerMap.entrySet()) {
+			MQHandlerActualizer msgHandlerActualizer = entry.getValue().getClass().getAnnotation(MQHandlerActualizer.class);
+			if (msgHandlerActualizer != null) {
+				String annotationTopic = msgHandlerActualizer.topic();
+				String[] annotationTags = msgHandlerActualizer.tags();
+				if (!StringUtils.equals(topic, annotationTopic)) {
+					// 非该主题处理类
+					continue;
+				}
+				if (StringUtils.equals(annotationTags[0], "*")) {
+					// 获取该实例
+					mqTransactionHandler = entry.getValue();
+					break;
+				}
+				boolean isContains = Arrays.asList(annotationTags).contains(tags);
+				if (isContains) {
+					// 注解类中包含tag则获取该实例
+					mqTransactionHandler = entry.getValue();
+					break;
+				}
+			}
+		}
+		return mqTransactionHandler;
+	}
 }

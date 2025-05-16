@@ -1,17 +1,16 @@
 package com.example.conditional;
 
 import com.example.annotation.BerConditionalOnClass;
+import java.util.Map;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;
-
-import java.util.Map;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-06-02 09:17
+ * @dateTime 2024-06-02 09:10
  * @apiNote TODO
  */
 public class BerOnClassCondition implements Condition {

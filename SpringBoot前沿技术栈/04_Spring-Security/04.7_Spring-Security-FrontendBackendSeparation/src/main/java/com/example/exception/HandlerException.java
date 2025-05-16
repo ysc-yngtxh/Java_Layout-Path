@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
- * @author example
- * @dateTime 2023-05-08 16:49
+ * @author 游家纨绔
+ * @dateTime 2023-05-08 16:50
  * @apiNote TODO 全局异常处理
  */
 @ControllerAdvice

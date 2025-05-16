@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 //                         custom.application.property.enable = havingValue = "true"，
 //                         与配置文件中属性值比较，如果配置文件中的属性值等于havingValue，则加载Bean
 //                         如果在配置文件中没有该配置项，是否加载Bean: matchIfMissing = true 表示加载，默认值是 false。
-@ConditionalOnProperty(value="custom.application.property.enable", havingValue="true", matchIfMissing=true)
+@ConditionalOnProperty(value = "custom.application.property.enable", havingValue = "true", matchIfMissing = true)
 
 // prefix表示配置文件里节点前缀，name用来从application.properties中读取某个属性值，havingValue表示目标值。
 // prefix + name为空，则返回false;
@@ -38,27 +38,27 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnResource(resources = "logback-spring.xml")
 public class ConditionalConfig {
 
-    // @Conditional给定的类，在一些需要条件满足才是实例化的类中，使用此@Conditional注解，
-    // 比如项目中需要根据不同的场景使用不同的消息中间件，在消息队列的实例化bean上，
-    // 使用@Conditional注解，根据配置文件的不同，来判断哪个bean需要加载到Spring容器中。
-    @Bean
-    @Conditional(ZHCondition.class) // 中文
-    public Brand brandZH() {
-        return new Brand(1L, "红楼梦", null, null, "中国古典书籍");
-    }
+	// @Conditional给定的类，在一些需要条件满足才是实例化的类中，使用此@Conditional注解，
+	// 比如项目中需要根据不同的场景使用不同的消息中间件，在消息队列的实例化bean上，
+	// 使用@Conditional注解，根据配置文件的不同，来判断哪个bean需要加载到Spring容器中。
+	@Bean
+	@Conditional(ZHCondition.class) // 中文
+	public Brand brandZH() {
+		return new Brand(1L, "红楼梦", null, null, "中国古典书籍");
+	}
 
-    @Bean
-    @Conditional(ENCondition.class) // 英文
-    public Brand brandCN() {
-        return new Brand(2L, "哈姆雷特", null, null, "外国经典名著");
-    }
+	@Bean
+	@Conditional(ENCondition.class) // 英文
+	public Brand brandCN() {
+		return new Brand(2L, "哈姆雷特", null, null, "外国经典名著");
+	}
 
-    // @ConditionalOnExpression：可以给定多个配置属性一起进行判断,只有当所有属性都为 true 的时候才注册 brandExpression，
-    // 其中 :true 表示如果没有为该属性设置值，则为该属性设置默认值true, 其实这就是@Vaue注解的规范，一切 SpEL 都可以应用在这里.
-    @Bean
-    @ConditionalOnExpression("${custom.expression.enable1:true} and ${custom.expression.enable2:true}")
-    // @ConditionalOnExpression("${custom.expression.enable2:true} or ${custom.expression.enable3:false}")
-    public Brand brandExpression() {
-        return new Brand(3L, "小游驾到", null, null, "小游语录");
-    }
+	// @ConditionalOnExpression：可以给定多个配置属性一起进行判断,只有当所有属性都为 true 的时候才注册 brandExpression，
+	// 其中 :true 表示如果没有为该属性设置值，则为该属性设置默认值true, 其实这就是@Vaue注解的规范，一切 SpEL 都可以应用在这里.
+	@Bean
+	@ConditionalOnExpression("${custom.expression.enable1:true} and ${custom.expression.enable2:true}")
+	// @ConditionalOnExpression("${custom.expression.enable2:true} or ${custom.expression.enable3:false}")
+	public Brand brandExpression() {
+		return new Brand(3L, "小游驾到", null, null, "小游语录");
+	}
 }

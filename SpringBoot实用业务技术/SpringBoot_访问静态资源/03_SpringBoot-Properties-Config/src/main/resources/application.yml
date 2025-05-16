@@ -1,4 +1,3 @@
-
 server:
   port: 8082
 
@@ -14,4 +13,3 @@ spring:
   # 上述配置解析：
   # spring.web.resources.static-locations=classpath:/static 表示默认的四种静态文件包只保留classpath:/static。
   # spring.mvc.static-path-pattern: /resource/prefix/** 表示为只剩下的classpath:/static资源文件包访问路径添加前缀
-

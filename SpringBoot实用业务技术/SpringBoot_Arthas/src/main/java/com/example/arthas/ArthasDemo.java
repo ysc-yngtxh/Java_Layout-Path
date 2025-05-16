@@ -1,10 +1,9 @@
 package com.example.arthas;
 
-import lombok.SneakyThrows;
-
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.concurrent.TimeUnit;
+import lombok.SneakyThrows;
 
 /**
  * @author 游家纨绔
@@ -13,73 +12,74 @@ import java.util.concurrent.TimeUnit;
  */
 public class ArthasDemo {
 
-    @SneakyThrows
-    public static void main(String[] args) {
-        ArthasDemo demo = new ArthasDemo();
-        // demo.justRun();
-        // demo.seeThread();
-        demo.seeProductionCode();
-        // demo.printCarInfo();
-        // demo.deadLoop();
-        // demo.deadLock();
-    }
+	@SneakyThrows
+	public static void main(String[] args) {
+		ArthasDemo demo = new ArthasDemo();
+		// demo.justRun();
+		// demo.seeThread();
+		demo.seeProductionCode();
+		// demo.printCarInfo();
+		// demo.deadLoop();
+		// demo.deadLock();
+	}
 
-    @SneakyThrows
-    private void justRun() {
-        while (Instant.now().isBefore(Instant.now().plus(1, ChronoUnit.DAYS))) {
-            System.out.println("running");
-            TimeUnit.SECONDS.sleep(1);
-        }
-    }
+	@SneakyThrows
+	private void justRun() {
+		while (Instant.now().isBefore(Instant.now().plus(1, ChronoUnit.DAYS))) {
+			System.out.println("running");
+			TimeUnit.SECONDS.sleep(1);
+		}
+	}
 
-    @SneakyThrows
-    private void seeThread() {
-        Thread thread = new Thread(() -> {
-            System.out.println("this is in a thread");
-            try {
-                TimeUnit.HOURS.sleep(1);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }, "THREAD_DEMO");
-        thread.start();
-    }
+	@SneakyThrows
+	private void seeThread() {
+		Thread thread = new Thread(() -> {
+			System.out.println("this is in a thread");
+			try {
+				TimeUnit.HOURS.sleep(1);
+			} catch (InterruptedException e) {
+				throw new RuntimeException(e);
+			}
+		}, "THREAD_DEMO");
+		thread.start();
+	}
 
-    /**
-     * 查看生产的代码（反编译）
-     */
-    @SneakyThrows
-    void seeProductionCode() {
-        // 代码没执行是没有提交吗？还是分支搞错了？
-        // jad
-        // 使用 arthas 替换 class，实现热部署
-        GoodHabit goodHabit = new GoodHabit();
-        goodHabit.doSomething();
-        TimeUnit.HOURS.sleep(1);
-    }
+	/**
+	 * 查看生产的代码（反编译）
+	 */
+	@SneakyThrows
+	void seeProductionCode() {
+		// 代码没执行是没有提交吗？还是分支搞错了？
+		// jad
+		// 使用 arthas 替换 class，实现热部署
+		GoodHabit goodHabit = new GoodHabit();
+		goodHabit.doSomething();
+		TimeUnit.HOURS.sleep(1);
+	}
 
-    Car getCar(String carName, long carPrice) {
-        Car car = new Car();
-        car.setName(carName);
-        car.setPrice(carPrice);
-        return car;
-    }
-    @SneakyThrows
-    void printCarInfo() {
-        for (int i = 0; i < 1000; i++) {
-            System.out.println(getCar("catName-" + i, Long.parseLong(i+"")));
-            TimeUnit.SECONDS.sleep(1);
-        }
-    }
+	Car getCar(String carName, long carPrice) {
+		Car car = new Car();
+		car.setName(carName);
+		car.setPrice(carPrice);
+		return car;
+	}
 
-    /**
-     * 死循环
-     */
-    private void deadLoop() {
-        while (true) {
-            System.out.println("this is in dead loop");
-        }
-    }
+	@SneakyThrows
+	void printCarInfo() {
+		for (int i = 0; i < 1000; i++) {
+			System.out.println(getCar("catName-" + i, Long.parseLong(i + "")));
+			TimeUnit.SECONDS.sleep(1);
+		}
+	}
+
+	/**
+	 * 死循环
+	 */
+	private void deadLoop() {
+		while (true) {
+			System.out.println("this is in dead loop");
+		}
+	}
 
 
     private static final String A = "A";

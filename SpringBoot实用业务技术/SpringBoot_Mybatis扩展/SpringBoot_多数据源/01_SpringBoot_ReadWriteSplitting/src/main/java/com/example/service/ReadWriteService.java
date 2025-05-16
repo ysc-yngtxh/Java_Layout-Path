@@ -13,24 +13,24 @@ import org.springframework.stereotype.Service;
 @Service
 public class ReadWriteService {
 
-    @Autowired
-    private BrandMapper brandMapper;
+	@Autowired
+	private BrandMapper brandMapper;
 
-    @Autowired
-    private EmployeeMapper employeeMapper;
+	@Autowired
+	private EmployeeMapper employeeMapper;
 
-    @Master
-    public Brand getUserByBrand(String username) {
-        return brandMapper.selectByName(username);
-    }
+	@Master
+	public Brand getUserByBrand(String username) {
+		return brandMapper.selectByName(username);
+	}
 
-    @Slave
-    public List<Employee> listAllBrand() {
-        return employeeMapper.selectAll();
-    }
+	@Slave
+	public List<Employee> listAllBrand() {
+		return employeeMapper.selectAll();
+	}
 
-    @Master
-    public void saveBrand(Brand Brand) {
-        brandMapper.insert(Brand);
-    }
+	@Master
+	public void saveBrand(Brand Brand) {
+		brandMapper.insert(Brand);
+	}
 }

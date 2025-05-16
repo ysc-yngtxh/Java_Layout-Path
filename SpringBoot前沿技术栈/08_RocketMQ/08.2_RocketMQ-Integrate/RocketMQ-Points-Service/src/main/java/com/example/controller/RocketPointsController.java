@@ -18,14 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("rocketPoints")
 public class RocketPointsController {
 
-    @Autowired
-    private RocketPointsService pointsService;
+	@Autowired
+	private RocketPointsService pointsService;
 
-    @GetMapping("/{orderId}")
-    public RocketPoints getPointsByOrderId(@PathVariable String orderId) {
-        QueryWrapper<RocketPoints> pointsQueryWrapper = new QueryWrapper<>();
-        pointsQueryWrapper.lambda().eq(RocketPoints::getOrderId, orderId);
-        return pointsService.getOne(pointsQueryWrapper);
-    }
+	@GetMapping("/{orderId}")
+	public RocketPoints getPointsByOrderId(@PathVariable String orderId) {
+		QueryWrapper<RocketPoints> pointsQueryWrapper = new QueryWrapper<>();
+		pointsQueryWrapper.lambda().eq(RocketPoints::getOrderId, orderId);
+		return pointsService.getOne(pointsQueryWrapper);
+	}
 }
-

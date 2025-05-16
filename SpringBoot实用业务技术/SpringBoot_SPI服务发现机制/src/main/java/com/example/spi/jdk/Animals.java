@@ -7,5 +7,5 @@ package com.example.spi.jdk;
  */
 public interface Animals {
 
-    void sayHello();
+	void sayHello();
 }

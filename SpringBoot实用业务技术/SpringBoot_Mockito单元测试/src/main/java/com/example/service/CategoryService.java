@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class CategoryService {
 
-    @Autowired
-    private CategoryMapper categoryMapper;
+	@Autowired
+	private CategoryMapper categoryMapper;
 
-    public Category findCategoryById(Integer id) {
-        Category category = categoryMapper.findById(id);
-        return category;
-    }
+	public Category findCategoryById(Integer id) {
+		Category category = categoryMapper.findById(id);
+		return category;
+	}
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 /**
  * @author 游家纨绔
  * @description: TODO
- * @date 2023/3/9 23:00
+ * @date 2023-03-09 23:00
  */
 @Component
 public class AppInitializingBean implements InitializingBean {
@@ -24,37 +24,37 @@ public class AppInitializingBean implements InitializingBean {
      * 原因在于注册该类的@Bean标注的方法test，new了当前对象，相当于再初始化了一次
      */
 
-    public AppInitializingBean() {
-        System.out.println("InitializingBean实现类的构造方法执行");
-    }
+	public AppInitializingBean() {
+		System.out.println("InitializingBean实现类的构造方法执行");
+	}
 
-    @PostConstruct
-    public void methods() {
-        System.out.println("postConstruct注解方法执行");
-    }
+	@PostConstruct
+	public void methods() {
+		System.out.println("postConstruct注解方法执行");
+	}
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        System.out.println("接口initializingBean的实现方法执行");
-    }
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		System.out.println("接口initializingBean的实现方法执行");
+	}
 
-    public void init11() {
-        System.out.println("我是init方法执行...");
-    }
+	public void init11() {
+		System.out.println("我是init方法执行...");
+	}
 
-    @Bean(initMethod = "init11")
-    public AppInitializingBean test() {
-        return new AppInitializingBean();
-    }
+	@Bean(initMethod = "init11")
+	public AppInitializingBean test() {
+		return new AppInitializingBean();
+	}
 
-    // 普通方法
-    public void init22() {
-        System.out.println("我是普通方法执行...");
-    }
+	// 普通方法
+	public void init22() {
+		System.out.println("我是普通方法执行...");
+	}
 
-    // 销毁
-    @PreDestroy
-    public void preDestory() {
-        System.out.println("InitializingBean执行了销毁方法");
-    }
+	// 销毁
+	@PreDestroy
+	public void preDestory() {
+		System.out.println("InitializingBean执行了销毁方法");
+	}
 }

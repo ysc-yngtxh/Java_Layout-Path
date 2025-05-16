@@ -7,7 +7,7 @@ import lombok.ToString;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-09-17 22:01
+ * @dateTime 2023-09-17 22:00
  * @apiNote TODO
  */
 @Data
@@ -16,7 +16,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class Car {
 
-    private String name;
+	private String name;
 
-    private long price;
+	private long price;
 }

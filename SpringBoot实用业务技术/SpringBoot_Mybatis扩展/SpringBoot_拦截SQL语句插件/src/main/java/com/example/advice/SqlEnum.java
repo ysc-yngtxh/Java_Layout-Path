@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public enum SqlEnum {
 
-    TENANT_NULL(500, "请在请求头中携带租户：Global-TenantId值"),
-    SQL_UPDATE_WHERE_NULL(500, "该表不允许全表操作,不支持不带where条件的更新语句"),
-    SQL_DELETE_WHERE_NULL(500, "该表不允许全表操作,不支持不带where条件的删除语句");
+	TENANT_NULL(500, "请在请求头中携带租户：Global-TenantId值"),
+	SQL_UPDATE_WHERE_NULL(500, "该表不允许全表操作,不支持不带where条件的更新语句"),
+	SQL_DELETE_WHERE_NULL(500, "该表不允许全表操作,不支持不带where条件的删除语句");
 
-    private Integer code;
-    private String message;
+	private Integer code;
+	private String message;
 }

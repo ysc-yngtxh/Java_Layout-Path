@@ -7,8 +7,8 @@ import java.util.List;
 /**
  * 角色表(SysRole)表服务接口
  *
- * @author makejava
- * @since 2023-05-13 16:49:50
+ * @author 游家纨绔
+ * @since 2023-05-13 16:50:50
  */
 public interface SysRoleService {
 

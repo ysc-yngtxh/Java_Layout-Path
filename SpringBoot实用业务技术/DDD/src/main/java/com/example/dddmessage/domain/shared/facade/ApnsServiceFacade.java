@@ -7,10 +7,11 @@ import com.example.dddmessage.domain.aggregate.notice.entity.valueobject.AppMess
  * @since 2024-04-18 07:20:00
  */
 public interface ApnsServiceFacade {
-    /**
-     * 发布消息到Apns
-     *
-     * @param appMessage
-     */
-    void publish(AppMessage appMessage);
+
+	/**
+	 * 发布消息到Apns
+	 *
+	 * @param appMessage
+	 */
+	void publish(AppMessage appMessage);
 }

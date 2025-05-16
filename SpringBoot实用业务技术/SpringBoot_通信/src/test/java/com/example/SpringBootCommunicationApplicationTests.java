@@ -14,8 +14,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
-import okhttp3.ConnectionPool;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -54,6 +52,26 @@ class SpringBootCommunicationApplicationTests {
 			}
 			""";
 
+	private static void getResponseContent(String requestType, HttpURLConnection connection) throws IOException {
+		// 检查响应码
+		int responseCode = connection.getResponseCode();
+		System.out.println(requestType + " Response Code: " + responseCode);
+		// 读取响应
+		if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_CREATED) {
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			String inputLine;
+			StringBuilder strBuilder = new StringBuilder();
+
+			while ((inputLine = in.readLine()) != null) {
+				strBuilder.append(inputLine);
+			}
+			in.close();
+
+			System.out.println(requestType + " Response: " + strBuilder);
+		} else {
+			System.out.println(requestType + " request failed.");
+		}
+	}
 
 	@Test
 	void URLConnectionTest() throws IOException, URISyntaxException {
@@ -92,27 +110,6 @@ class SpringBootCommunicationApplicationTests {
 		}
 		// 获取响应内容
 		getResponseContent("POST", postConnection);
-	}
-
-	private static void getResponseContent(String requestType, HttpURLConnection connection) throws IOException {
-		// 检查响应码
-		int responseCode = connection.getResponseCode();
-		System.out.println(requestType + " Response Code: " + responseCode);
-		// 读取响应
-		if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_CREATED) {
-			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-			String inputLine;
-			StringBuilder strBuilder = new StringBuilder();
-
-			while ((inputLine = in.readLine()) != null) {
-				strBuilder.append(inputLine);
-			}
-			in.close();
-
-			System.out.println(requestType + " Response: " + strBuilder);
-		} else {
-			System.out.println(requestType + " request failed.");
-		}
 	}
 
 	@Test
@@ -163,9 +160,9 @@ class SpringBootCommunicationApplicationTests {
 		// 使用自定义连接池的OkHttpClient
 		OkHttpClient okHttpClient = OkHttpUtil.getDefaultOkHttpClient();
 		Request request = new Request.Builder()
-				                     .url("https://jsonplaceholder.typicode.com/posts/1")
-				                     .get()   // 默认就是GET请求，可以不写
-				                     .build();
+				.url("https://jsonplaceholder.typicode.com/posts/1")
+				.get()   // 默认就是GET请求，可以不写
+				.build();
 		try (Response response = okHttpClient.newCall(request).execute()) {
 			String string = response.body().string();
 			System.out.println(string);

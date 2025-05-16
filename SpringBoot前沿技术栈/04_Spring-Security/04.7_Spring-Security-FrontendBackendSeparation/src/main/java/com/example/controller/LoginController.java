@@ -15,34 +15,34 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author 游家纨绔
- * @date 2022/07/03
+ * @date 2022-07-03 14:30
  * @apiNote
  */
 @Controller
 @RequiredArgsConstructor
 public class LoginController {
 
-    private final LoginService loginService;
+	private final LoginService loginService;
 
-    private final ResponseResult<SysUser> responseResult;
+	private final ResponseResult<SysUser> responseResult;
 
-    @Value("${security.saveLoginTime}")
-    private String time;
-
-
-    @PostMapping("/system/user")
-    @ResponseBody
-    public ResponseEntity<ResponseResult<SysUser>> findByUser(@RequestBody User user) {
-        System.out.println("=========" + time);
-        MyAuthorizationProperties properties = new MyAuthorizationProperties();
-        System.out.println(properties.getTokenExpireTime());
-        return ResponseEntity.ok()
-                .body(responseResult.success("访问成功", loginService.findByUser(user.getUserName())));
-    }
+	@Value("${security.saveLoginTime}")
+	private String time;
 
 
-    @PostMapping("/logout")
-    public @ResponseBody ResponseResult<String> logout() {
-        return loginService.logout();
-    }
+	@PostMapping("/system/user")
+	@ResponseBody
+	public ResponseEntity<ResponseResult<SysUser>> findByUser(@RequestBody User user) {
+		System.out.println("=========" + time);
+		MyAuthorizationProperties properties = new MyAuthorizationProperties();
+		System.out.println(properties.getTokenExpireTime());
+		return ResponseEntity.ok()
+		                     .body(responseResult.success("访问成功", loginService.findByUser(user.getUserName())));
+	}
+
+
+	@PostMapping("/logout")
+	public @ResponseBody ResponseResult<String> logout() {
+		return loginService.logout();
+	}
 }

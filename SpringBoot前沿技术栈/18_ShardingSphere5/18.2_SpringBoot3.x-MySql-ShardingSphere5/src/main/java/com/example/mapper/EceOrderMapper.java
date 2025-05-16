@@ -1,14 +1,12 @@
 package com.example.mapper;
 
 import com.example.entity.EceOrder;
-import org.apache.ibatis.annotations.Param;
-import java.util.List;
 
 /**
  * 订单管理表(EceOrder)表数据库访问层
  *
  * @author 游家纨绔
- * @since 2024-09-20 21:31:59
+ * @since 2024-09-20 21:30:00
  */
 public interface EceOrderMapper {
 
@@ -45,4 +43,3 @@ public interface EceOrderMapper {
     int deleteById(Long orderId);
 
 }
-

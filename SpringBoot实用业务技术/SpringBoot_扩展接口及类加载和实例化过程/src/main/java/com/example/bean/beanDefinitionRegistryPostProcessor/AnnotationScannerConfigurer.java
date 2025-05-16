@@ -2,6 +2,7 @@ package com.example.bean.beanDefinitionRegistryPostProcessor;
 
 import com.example.annotation.AutoDiscoverClass;
 import com.example.executor.Category;
+import java.util.Map;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -11,8 +12,6 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import org.springframework.stereotype.Component;
-
-import java.util.Map;
 
 /**
  * @author 游家纨绔

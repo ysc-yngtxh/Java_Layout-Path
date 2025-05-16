@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.EmployeeDao">
 
-    <resultMap  id="EmployeeMap" type="com.example.entity.Employee">
+    <resultMap id="EmployeeMap" type="com.example.entity.Employee">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="age" column="age" jdbcType="INTEGER"/>
@@ -28,7 +29,9 @@
     </delete>
 
     <select id="selectTemp" resultMap="EmployeeMap">
-        select * from employee_temp where id between #{from} and #{to}  limit #{_pagesize} OFFSET #{_skiprows}
+        select *
+        from employee_temp
+        where id between #{from} and #{to} limit #{_pagesize}
+        OFFSET #{_skiprows}
     </select>
 </mapper>
-

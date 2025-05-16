@@ -7,11 +7,12 @@ import com.example.dddmessage.domain.aggregate.message.entity.valueobject.User;
  * @since 2024-04-18 07:20:00
  */
 public interface UserServiceFacade {
-    /**
-     * 获取用户
-     *
-     * @param userId
-     * @return
-     */
-    User getUser(int userId);
+
+	/**
+	 * 获取用户
+	 *
+	 * @param userId
+	 * @return
+	 */
+	User getUser(int userId);
 }

@@ -27,7 +27,7 @@
 2、可以监控数据库访问性能
 3、获得SQL执行日志
 
-> 更多可参考官方文档：[https://github.com/alibaba/druid/](https://github.com/alibaba/druid/)
+>
+更多可参考官方文档：[https://github.com/alibaba/druid/](https://github.com/alibaba/druid/)
 
 #### 4、访问 [http://127.0.0.1:8080/druid/login.html](http://127.0.0.1:8080/druid/login.html) 查看监控信息
-

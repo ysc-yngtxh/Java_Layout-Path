@@ -12,20 +12,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SendMessageCommand {
-    private long messageId;
-    private int catId;
-    private int sender;
-    private int receiver;
-    private String content;
 
-    @Override
-    public String toString() {
-        return "SendMessageCommand{" +
-                "messageId=" + messageId +
-                ", catId=" + catId +
-                ", sender=" + sender +
-                ", receiver=" + receiver +
-                ", content='" + content + '\'' +
-                '}';
-    }
+	private long messageId;
+	private int catId;
+	private int sender;
+	private int receiver;
+	private String content;
+
+	@Override
+	public String toString() {
+		return "SendMessageCommand{" +
+				"messageId=" + messageId +
+				", catId=" + catId +
+				", sender=" + sender +
+				", receiver=" + receiver +
+				", content='" + content + '\'' +
+				'}';
+	}
 }

@@ -33,7 +33,7 @@ public class SpringBatchHighLevelApplication {
 	private final Job job3;
 
 	@Bean
-	public CommandLineRunner commandLineRunner1(){
+	public CommandLineRunner commandLineRunner1() {
 		return args -> {
 			JobParameters jobParameters = new JobParametersBuilder().addLocalDateTime("CurrentTime", LocalDateTime.now()).toJobParameters();
 			jobLauncher.run(job3, jobParameters);

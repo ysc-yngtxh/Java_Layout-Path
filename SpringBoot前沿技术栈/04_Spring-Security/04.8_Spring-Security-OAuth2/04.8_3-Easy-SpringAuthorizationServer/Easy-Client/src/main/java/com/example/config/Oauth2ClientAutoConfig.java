@@ -11,14 +11,14 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class Oauth2ClientAutoConfig {
 
-    @Bean
-    public SecurityFilterChain authorizationClientSecurityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().authenticated()
-                )
-                .oauth2Login(Customizer.withDefaults());
+	@Bean
+	public SecurityFilterChain authorizationClientSecurityFilterChain(HttpSecurity http) throws Exception {
+		http
+				.authorizeHttpRequests(authorize -> authorize
+						                       .anyRequest().authenticated()
+				                      )
+				.oauth2Login(Customizer.withDefaults());
 
-        return http.build();
-    }
+		return http.build();
+	}
 }

@@ -7,9 +7,8 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author 游家纨绔
- * @version 1.0
  * @description: TODO
- * @date 2022/11/27 10:52
+ * @date 2022-11-27 10:50:00
  */
 @Data
 @Builder
@@ -17,5 +16,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ModelView {
 
-    private String address;
+	private String address;
 }

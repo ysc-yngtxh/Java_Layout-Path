@@ -14,14 +14,14 @@ public class SqlAnnotationConfig implements ApplicationContextAware {
      *    用来获取Spring启动时相关的对象，在项目启动后需要用到时直接调用
      */
 
-    // 第一种方式：将自定义的拦截器添加进 Mybatis 配置中，配合注解使用
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        SqlSessionFactory sqlSessionFactory = applicationContext.getBean(SqlSessionFactory.class);
+	// 第一种方式：将自定义的拦截器添加进 Mybatis 配置中，配合注解使用
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		SqlSessionFactory sqlSessionFactory = applicationContext.getBean(SqlSessionFactory.class);
 
-        sqlSessionFactory.getConfiguration().addInterceptor(new ExecutorTenantInterceptor());
+		sqlSessionFactory.getConfiguration().addInterceptor(new ExecutorTenantInterceptor());
 
-        AllowTables allowTables = applicationContext.getBean(AllowTables.class);
-        sqlSessionFactory.getConfiguration().addInterceptor(new ExecutorWhereInterceptor(allowTables));
-    }
+		AllowTables allowTables = applicationContext.getBean(AllowTables.class);
+		sqlSessionFactory.getConfiguration().addInterceptor(new ExecutorWhereInterceptor(allowTables));
+	}
 }

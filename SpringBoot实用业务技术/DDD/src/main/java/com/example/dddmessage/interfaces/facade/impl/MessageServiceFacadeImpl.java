@@ -18,40 +18,41 @@ import java.util.stream.Collectors;
  */
 @Service
 public class MessageServiceFacadeImpl implements MessageServiceFacade {
-    private final MessageCommandService messageCommandService;
-    private final MessageQueryService messageQueryService;
 
-    public MessageServiceFacadeImpl(MessageCommandService messageCommandService,MessageQueryService messageQueryService) {
-        this.messageCommandService = messageCommandService;
-        this.messageQueryService = messageQueryService;
-    }
+	private final MessageCommandService messageCommandService;
+	private final MessageQueryService messageQueryService;
 
-    @Override
-    public void sendMessage(SendMessageCommand cmd) {
-        this.messageCommandService.createMessage(
-                cmd.getMessageId(),
-                cmd.getCatId(),
-                cmd.getSender(),
-                cmd.getReceiver(),
-                cmd.getContent()
-        );
-    }
+	public MessageServiceFacadeImpl(MessageCommandService messageCommandService, MessageQueryService messageQueryService) {
+		this.messageCommandService = messageCommandService;
+		this.messageQueryService = messageQueryService;
+	}
 
-    @Override
-    public Result<Void> recallMessage(int userId, long messageId) {
-        return this.messageCommandService.recallMessage(userId,messageId);
-    }
+	@Override
+	public void sendMessage(SendMessageCommand cmd) {
+		this.messageCommandService.createMessage(
+				cmd.getMessageId(),
+				cmd.getCatId(),
+				cmd.getSender(),
+				cmd.getReceiver(),
+				cmd.getContent()
+		                                        );
+	}
 
-    @Override
-    public int getUnreadMessageTotal(int userId) {
-        return this.messageQueryService.getUnreadMessageTotal(userId);
-    }
+	@Override
+	public Result<Void> recallMessage(int userId, long messageId) {
+		return this.messageCommandService.recallMessage(userId, messageId);
+	}
 
-    @Override
-    public List<MessageDTO> getContactMessageList(int userId, int contactId, int size) {
-        return this.messageQueryService.getContactMessageList(userId,contactId,size)
-                .stream()
-                .map(MessageDTOAssembler::toDTO)
-                .collect(Collectors.toList());
-    }
+	@Override
+	public int getUnreadMessageTotal(int userId) {
+		return this.messageQueryService.getUnreadMessageTotal(userId);
+	}
+
+	@Override
+	public List<MessageDTO> getContactMessageList(int userId, int contactId, int size) {
+		return this.messageQueryService.getContactMessageList(userId, contactId, size)
+		                               .stream()
+		                               .map(MessageDTOAssembler::toDTO)
+		                               .collect(Collectors.toList());
+	}
 }

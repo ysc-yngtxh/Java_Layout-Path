@@ -6,7 +6,7 @@ import com.example.entity.EceProduct;
  * 产品管理表(EceProduct)表数据库访问层
  *
  * @author 游家纨绔
- * @since 2024-09-20 21:32:16
+ * @since 2024-09-20 21:30:00
  */
 public interface EceProductMapper {
 
@@ -43,4 +43,3 @@ public interface EceProductMapper {
     int deleteById(Long productId);
 
 }
-

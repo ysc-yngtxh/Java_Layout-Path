@@ -9,23 +9,23 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-12-04 20:46
+ * @dateTime 2024-12-04 20:40
  * @apiNote TODO
  */
 @Service
 public class OidcUserServiceImpl extends OidcUserService {
 
-    @Override
-    public OidcUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
-        OidcUser oidcUser = super.loadUser(userRequest);
+	@Override
+	public OidcUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
+		OidcUser oidcUser = super.loadUser(userRequest);
 
-        System.out.println("oidcUser = " + oidcUser);
+		System.out.println("oidcUser = " + oidcUser);
 
-        //  可以获取 OIDC 的 id_token
-        OidcIdToken idToken = userRequest.getIdToken();
+		//  可以获取 OIDC 的 id_token
+		OidcIdToken idToken = userRequest.getIdToken();
 
-        // 基于不同的 provider 做判断，然后保存用户
-        return oidcUser;
-    }
+		// 基于不同的 provider 做判断，然后保存用户
+		return oidcUser;
+	}
 
 }

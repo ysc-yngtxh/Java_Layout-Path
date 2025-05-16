@@ -12,10 +12,8 @@
         <result property="color" column="color" jdbcType="VARCHAR"/>
         <result property="number" column="number" jdbcType="INTEGER"/>
         <result property="price" column="price" jdbcType="NUMERIC"/>
-        <result property="createDate" column="create_date"
-                jdbcType="TIMESTAMP"/>
-        <result property="updatedDate" column="updated_date"
-                jdbcType="TIMESTAMP"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="updatedDate" column="updated_date" jdbcType="TIMESTAMP"/>
         <result property="deleteFlag" column="delete_flag" jdbcType="INTEGER"/>
         <result property="version" column="version" jdbcType="INTEGER"/>
     </resultMap>

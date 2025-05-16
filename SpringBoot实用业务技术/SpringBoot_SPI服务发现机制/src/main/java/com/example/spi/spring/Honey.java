@@ -7,8 +7,8 @@ package com.example.spi.spring;
  */
 public class Honey implements Food {
 
-    @Override
-    public void sayHello() {
-        System.out.println("Hello, I am Honey.");
-    }
+	@Override
+	public void sayHello() {
+		System.out.println("Hello, I am Honey.");
+	}
 }

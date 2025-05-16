@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-04-29 15:57
+ * @dateTime 2023-04-29 16:00
  * @apiNote TODO 承接请求数据的实体类
  */
 @Data
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class User {
 
-    private String userName;
+	private String userName;
 
-    private String passWord;
+	private String passWord;
 }

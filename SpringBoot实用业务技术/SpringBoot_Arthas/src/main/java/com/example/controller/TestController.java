@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-09-18 08:32
+ * @dateTime 2023-09-18 08:30:00
  * @apiNote TODO
  */
 @Controller
 public class TestController {
 
-    @ResponseBody
-    @RequestMapping(value = "/test", method = RequestMethod.POST)
-    public String test(@RequestBody Car car) {
-        System.out.println(car.toString());
-        return car.toString();
-    }
+	@ResponseBody
+	@RequestMapping(value = "/test", method = RequestMethod.POST)
+	public String test(@RequestBody Car car) {
+		System.out.println(car.toString());
+		return car.toString();
+	}
 }

@@ -18,31 +18,31 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Sku implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 892788188735402403L;
+	@Serial
+	private static final long serialVersionUID = 892788188735402403L;
 
-    /**
-     * 主键id
-     */
-    private Integer id;
-    /**
-     * spu的id
-     */
-    private Integer spuId;
-    /**
-     * 图片地址
-     */
-    private String img;
-    /**
-     * 标题
-     */
-    private String title;
-    /**
-     * 销售价格，单位为分
-     */
-    private BigDecimal price;
-    /**
-     * sku的特有规格参数键值对，json格式，反序列化时请使用linkedHashMap，保证有序
-     */
-    private String ownSpec;
+	/**
+	 * 主键id
+	 */
+	private Integer id;
+	/**
+	 * spu的id
+	 */
+	private Integer spuId;
+	/**
+	 * 图片地址
+	 */
+	private String img;
+	/**
+	 * 标题
+	 */
+	private String title;
+	/**
+	 * 销售价格，单位为分
+	 */
+	private BigDecimal price;
+	/**
+	 * sku的特有规格参数键值对，json格式，反序列化时请使用linkedHashMap，保证有序
+	 */
+	private String ownSpec;
 }

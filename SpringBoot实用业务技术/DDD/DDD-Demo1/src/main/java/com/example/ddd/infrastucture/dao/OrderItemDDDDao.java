@@ -1,7 +1,6 @@
 package com.example.ddd.infrastucture.dao;
 
 import com.example.ddd.infrastucture.po.OrderItemPO;
-
 import java.util.List;
 
 /**
@@ -10,8 +9,12 @@ import java.util.List;
  * @Description TODO OrderItem DAO层
  */
 public interface OrderItemDDDDao {
-    int insert(OrderItemPO orderItem);
-    int batchInsert(List<OrderItemPO> orderItem);
-    int update(OrderItemPO orderItem);
-    List<OrderItemPO> getOrderItems(long orderId);
+
+	int insert(OrderItemPO orderItem);
+
+	int batchInsert(List<OrderItemPO> orderItem);
+
+	int update(OrderItemPO orderItem);
+
+	List<OrderItemPO> getOrderItems(long orderId);
 }

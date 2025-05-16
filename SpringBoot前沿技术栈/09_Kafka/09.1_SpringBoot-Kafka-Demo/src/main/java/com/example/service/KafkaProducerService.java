@@ -13,23 +13,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaProducerService {
 
-    @Autowired
-    private KafkaTemplate<String, Object> kafkaTemplate;
+	@Autowired
+	private KafkaTemplate<String, Object> kafkaTemplate;
 
-    // 发送默认Topic消息（默认Topic，即在 yml文件中配置的默认Topic）
-    public void sendDefault(String message) {
-        // 异步发送消息
-        kafkaTemplate.sendDefault( message);
-    }
+	// 发送默认Topic消息（默认Topic，即在 yml文件中配置的默认Topic）
+	public void sendDefault(String message) {
+		// 异步发送消息
+		kafkaTemplate.sendDefault(message);
+	}
 
-    // 发送普通消息
-    public void sendMessage(String topic, String message) {
-        // 异步发送消息
-        kafkaTemplate.send(topic, message);
-    }
+	// 发送普通消息
+	public void sendMessage(String topic, String message) {
+		// 异步发送消息
+		kafkaTemplate.send(topic, message);
+	}
 
-    // 发送带 Header 的消息（用于分区路由）
-    public void sendMessageWithKey(ProducerRecord<String, Object> pr) {
-        kafkaTemplate.send(pr);
-    }
+	// 发送带 Header 的消息（用于分区路由）
+	public void sendMessageWithKey(ProducerRecord<String, Object> pr) {
+		kafkaTemplate.send(pr);
+	}
 }

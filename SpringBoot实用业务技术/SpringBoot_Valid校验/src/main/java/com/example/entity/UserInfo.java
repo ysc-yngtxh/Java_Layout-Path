@@ -20,21 +20,21 @@ import org.hibernate.validator.constraints.Range;
 @NoArgsConstructor
 public class UserInfo {
 
-    private Long id;
+	private Long id;
 
-    private String sex;
+	private String sex;
 
-    @Range(message = "年龄范围为 {min} 到 {max} 之间", min = 10, max = 100, groups = {User.Student.class, User.Teacher.class})
-    private Integer age;
+	@Range(message = "年龄范围为 {min} 到 {max} 之间", min = 10, max = 100, groups = {User.Student.class, User.Teacher.class})
+	private Integer age;
 
-    @DecimalMax(value = "2.00", message = "身高不能超过2.00", groups = {Default.class, User.Student.class})
-    private Float height;
+	@DecimalMax(value = "2.00", message = "身高不能超过2.00", groups = {Default.class, User.Student.class})
+	private Float height;
 
-    // 日期必须在当前日期的过去
-    @Past(message = "生日日期birthday必须是过去时间")
-    private LocalDateTime birthday;
+	// 日期必须在当前日期的过去
+	@Past(message = "生日日期birthday必须是过去时间")
+	private LocalDateTime birthday;
 
-    // 日期必须在当前日期的未来
-    @Future(message = "日期future必须是未来时间")
-    private LocalDateTime future;
+	// 日期必须在当前日期的未来
+	@Future(message = "日期future必须是未来时间")
+	private LocalDateTime future;
 }

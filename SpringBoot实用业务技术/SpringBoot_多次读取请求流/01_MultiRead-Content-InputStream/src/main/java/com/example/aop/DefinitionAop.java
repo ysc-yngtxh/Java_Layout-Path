@@ -1,14 +1,13 @@
 package com.example.aop;
 
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
-
-import java.util.Arrays;
-import java.util.Objects;
 
 /**
  * @author 游家纨绔
@@ -20,23 +19,23 @@ import java.util.Objects;
 @Component
 public class DefinitionAop {
 
-    HttpServletRequest request = null;
+	HttpServletRequest request = null;
 
-    @Around(value = "execution(* *..RequestController.*(..))")
-    public Object test(ProceedingJoinPoint jp) throws Throwable {
-        Object[] args = jp.getArgs();
-        Arrays.stream(args).forEach(item -> {
-            if (item instanceof HttpServletRequest){
-                request = (HttpServletRequest) item;
-            }
-            System.out.println("环绕通知" + item);
-        });
-        if (Objects.isNull(request) || request.getMethod().equalsIgnoreCase("get")){
-            return jp.proceed();
-        }
-        Object proceed = jp.proceed();
-        String userName1 = request.getParameter("userName");
-        System.out.println("环绕通知2"+userName1);
-        return proceed;
-    }
+	@Around(value = "execution(* *..RequestController.*(..))")
+	public Object test(ProceedingJoinPoint jp) throws Throwable {
+		Object[] args = jp.getArgs();
+		Arrays.stream(args).forEach(item -> {
+			if (item instanceof HttpServletRequest) {
+				request = (HttpServletRequest) item;
+			}
+			System.out.println("环绕通知" + item);
+		});
+		if (Objects.isNull(request) || request.getMethod().equalsIgnoreCase("get")) {
+			return jp.proceed();
+		}
+		Object proceed = jp.proceed();
+		String userName1 = request.getParameter("userName");
+		System.out.println("环绕通知2" + userName1);
+		return proceed;
+	}
 }

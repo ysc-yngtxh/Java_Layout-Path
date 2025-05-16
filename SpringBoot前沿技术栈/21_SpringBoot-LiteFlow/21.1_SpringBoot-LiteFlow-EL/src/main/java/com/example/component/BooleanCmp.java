@@ -11,8 +11,8 @@ import com.yomahub.liteflow.core.NodeBooleanComponent;
 @LiteflowComponent("y")
 public class BooleanCmp extends NodeBooleanComponent {
 
-    @Override
-    public boolean processBoolean() throws Exception {
-        return true;
-    }
+	@Override
+	public boolean processBoolean() throws Exception {
+		return true;
+	}
 }

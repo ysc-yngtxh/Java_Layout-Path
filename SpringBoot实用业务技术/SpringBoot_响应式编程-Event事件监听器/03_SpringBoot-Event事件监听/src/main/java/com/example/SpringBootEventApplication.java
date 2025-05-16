@@ -10,11 +10,11 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @SpringBootApplication
 public class SpringBootEventApplication {
 
-    public static void main(String[] args) {
-        SpringApplication springApplication = new SpringApplication(SpringBootEventApplication.class);
-        // 添加自定义监听器
-        springApplication.addListeners(new CodeLogicEventListener());
-        springApplication.run(args);
-    }
+	public static void main(String[] args) {
+		SpringApplication springApplication = new SpringApplication(SpringBootEventApplication.class);
+		// 添加自定义监听器
+		springApplication.addListeners(new CodeLogicEventListener());
+		springApplication.run(args);
+	}
 
 }

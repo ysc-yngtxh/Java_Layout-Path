@@ -1,9 +1,11 @@
+
 server:
-    port: 8080
+  port: 8080
+
 spring:
-    thymeleaf:
-        prefix: classpath:/templates/
-        suffix: .html
-    mvc:
-        # 添加静态资源访问路径前缀 /static
-        static-path-pattern: /static/**
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+  mvc:
+    # 添加静态资源访问路径前缀 /static
+    static-path-pattern: /static/**

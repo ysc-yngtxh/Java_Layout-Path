@@ -12,10 +12,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * sys_menu
- * @author 
- */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

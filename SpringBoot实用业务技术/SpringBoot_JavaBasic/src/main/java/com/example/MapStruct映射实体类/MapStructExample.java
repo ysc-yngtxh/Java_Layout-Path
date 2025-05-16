@@ -11,7 +11,7 @@ import org.mapstruct.factory.Mappers;
 /**
  * @author 游家纨绔
  * @description: TODO
- * @date 2022/11/30 17:29
+ * @date 2022-11-30 17:30:00
  */
 @Mapper(componentModel = "spring")
 // @Mapper(componentModel = MappingConstants.ComponentModel.SPRING) // 写法二
@@ -19,27 +19,27 @@ import org.mapstruct.factory.Mappers;
 //                            就不需要下面的实例对象 MapStructExample mapStr = Mappers.getMapper(MapStructExample.class);
 public interface MapStructExample {
 
-    // 这里是获取mapStruct实例对象，肯定是代理对象 [接口是无法实例化的]
-    MapStructExample mapStr = Mappers.getMapper(MapStructExample.class);
+	// 这里是获取mapStruct实例对象，肯定是代理对象 [接口是无法实例化的]
+	MapStructExample mapStr = Mappers.getMapper(MapStructExample.class);
 
-    @Mappings({
-            @Mapping(source = "id", target = "idVO", numberFormat = "#.00"),
-            @Mapping(source = "name", target = "nameVO"),
-            @Mapping(source = "email", target = "emailVO"),
-            @Mapping(source = "date", target = "dateVO", dateFormat = "yyyy-MM-dd HH:mm:ss")})
-    Users toUsers(User user);
+	@Mappings({
+			@Mapping(source = "id", target = "idVO", numberFormat = "#.00"),
+			@Mapping(source = "name", target = "nameVO"),
+			@Mapping(source = "email", target = "emailVO"),
+			@Mapping(source = "date", target = "dateVO", dateFormat = "yyyy-MM-dd HH:mm:ss")})
+	Users toUsers(User user);
 
-    @Mappings({
-            @Mapping(source = "user.id", target = "idVO"),
-            @Mapping(source = "user.name", target = "nameVO"),
-            @Mapping(source = "user.email", target = "emailVO"),
-            @Mapping(source = "modelView.address", target = "addressVO")})
-    Users toUsers1(User user, ModelView modelView);
+	@Mappings({
+			@Mapping(source = "user.id", target = "idVO"),
+			@Mapping(source = "user.name", target = "nameVO"),
+			@Mapping(source = "user.email", target = "emailVO"),
+			@Mapping(source = "modelView.address", target = "addressVO")})
+	Users toUsers1(User user, ModelView modelView);
 
-    @Mappings({
-            @Mapping(source = "user.id", target = "idVO"),
-            @Mapping(source = "user.name", target = "nameVO"),
-            @Mapping(source = "user.email", target = "emailVO"),
-            @Mapping(source = "user.models.modelView.address", target = "addressVO")})
-    Users toUsers2(User user);
+	@Mappings({
+			@Mapping(source = "user.id", target = "idVO"),
+			@Mapping(source = "user.name", target = "nameVO"),
+			@Mapping(source = "user.email", target = "emailVO"),
+			@Mapping(source = "user.models.modelView.address", target = "addressVO")})
+	Users toUsers2(User user);
 }

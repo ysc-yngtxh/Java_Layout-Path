@@ -6,7 +6,7 @@ import lombok.Data;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-08-19 23:00
+ * @dateTime 2023-08-19 23:00:00
  * @apiNote TODO Consumer 实体类的 子级实体
  */
 @Data
@@ -14,5 +14,5 @@ import lombok.Data;
 @JsonIgnoreType  // 该类作为别的类的属性时，该属性忽略序列化和反序列化。与@JsonIgnore效果相似
 public class Supplier {
 
-    private Integer id;
+	private Integer id;
 }

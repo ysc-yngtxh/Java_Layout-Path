@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderTransferServiceImpl {
 
-    private final OrderRepository orderRepository;
+	private final OrderRepository orderRepository;
 
-    public OrderTransferServiceImpl(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
-    }
+	public OrderTransferServiceImpl(OrderRepository orderRepository) {
+		this.orderRepository = orderRepository;
+	}
 
 }

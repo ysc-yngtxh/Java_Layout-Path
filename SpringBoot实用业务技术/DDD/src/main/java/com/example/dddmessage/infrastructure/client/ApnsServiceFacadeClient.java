@@ -13,9 +13,9 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class ApnsServiceFacadeClient implements ApnsServiceFacade {
 
-    @Override
-    public void publish(AppMessage appMessage) {
-        // 调用apns接口发布消息
-        log.info(appMessage.toString());
-    }
+	@Override
+	public void publish(AppMessage appMessage) {
+		// 调用apns接口发布消息
+		log.info(appMessage.toString());
+	}
 }

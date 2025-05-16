@@ -9,30 +9,30 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * @author 游家纨绔
- * @date 2022/07/05
+ * @date 2022-07-05 14:30:00
  * @apiNote
  */
 @Configuration
 public class RedisConfig {
 
-    @Bean
-    @SuppressWarnings(value = {"unchecked", "rawtypes"})
-    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
-        RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
-        redisTemplate.setConnectionFactory(connectionFactory);
+	@Bean
+	@SuppressWarnings(value = {"unchecked", "rawtypes"})
+	public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
+		RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
+		redisTemplate.setConnectionFactory(connectionFactory);
 
-        FastJsonRedisSerializer serializer = new FastJsonRedisSerializer(Object.class);
+		FastJsonRedisSerializer serializer = new FastJsonRedisSerializer(Object.class);
 
-        // 使用StringRedisSerializer来序列化和反序列化redis的key值
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer(serializer);
+		// 使用StringRedisSerializer来序列化和反序列化redis的key值
+		redisTemplate.setKeySerializer(new StringRedisSerializer());
+		redisTemplate.setValueSerializer(serializer);
 
-        // Hash的key也使用StringRedisSerializer来序列化和反序列化
-        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
-        redisTemplate.setHashValueSerializer(serializer);
+		// Hash的key也使用StringRedisSerializer来序列化和反序列化
+		redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+		redisTemplate.setHashValueSerializer(serializer);
 
-        // 手动触发初始化
-        redisTemplate.afterPropertiesSet();
-        return redisTemplate;
-    }
+		// 手动触发初始化
+		redisTemplate.afterPropertiesSet();
+		return redisTemplate;
+	}
 }

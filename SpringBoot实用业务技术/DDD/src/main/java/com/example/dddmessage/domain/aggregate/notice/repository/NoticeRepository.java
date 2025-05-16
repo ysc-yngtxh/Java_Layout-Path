@@ -7,10 +7,11 @@ import com.example.dddmessage.domain.aggregate.notice.entity.Notice;
  * @since 2024-04-18 07:20:00
  */
 public interface NoticeRepository {
-    /**
-     * 保存消息
-     *
-     * @param notice
-     */
-    void save(Notice notice);
+
+	/**
+	 * 保存消息
+	 *
+	 * @param notice
+	 */
+	void save(Notice notice);
 }

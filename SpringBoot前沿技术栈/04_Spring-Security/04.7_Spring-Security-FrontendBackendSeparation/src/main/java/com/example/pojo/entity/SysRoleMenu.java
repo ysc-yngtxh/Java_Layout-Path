@@ -11,8 +11,8 @@ import java.io.Serializable;
 /**
  * 角色菜单关系表(SysRoleMenu)实体类
  *
- * @author makejava
- * @since 2023-05-15 17:01:58
+ * @author 游家纨绔
+ * @since 2023-05-15 17:00:00
  */
 @Data
 @AllArgsConstructor

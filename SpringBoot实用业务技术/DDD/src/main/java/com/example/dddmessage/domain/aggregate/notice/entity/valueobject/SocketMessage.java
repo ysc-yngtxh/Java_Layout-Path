@@ -11,7 +11,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class SocketMessage {
-    private final int receiver;
-    private final String channel;
-    private final JSONObject data;
+
+	private final int receiver;
+	private final String channel;
+	private final JSONObject data;
 }

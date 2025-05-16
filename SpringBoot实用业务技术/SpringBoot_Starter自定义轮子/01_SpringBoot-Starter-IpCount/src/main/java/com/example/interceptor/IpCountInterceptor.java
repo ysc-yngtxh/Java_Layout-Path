@@ -8,17 +8,17 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-02-20 21:29
+ * @dateTime 2024-02-20 21:30:00
  * @apiNote TODO 轮子拦截器
  */
 public class IpCountInterceptor implements HandlerInterceptor {
 
-    @Autowired
-    private IpCountService ipCountService;
+	@Autowired
+	private IpCountService ipCountService;
 
-    @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        ipCountService.IpCount();
-        return true;
-    }
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		ipCountService.IpCount();
+		return true;
+	}
 }

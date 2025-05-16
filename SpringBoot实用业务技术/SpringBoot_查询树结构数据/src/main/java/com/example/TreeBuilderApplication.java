@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan("com.example.mapper")
 public class TreeBuilderApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(TreeBuilderApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(TreeBuilderApplication.class, args);
+	}
 
 }

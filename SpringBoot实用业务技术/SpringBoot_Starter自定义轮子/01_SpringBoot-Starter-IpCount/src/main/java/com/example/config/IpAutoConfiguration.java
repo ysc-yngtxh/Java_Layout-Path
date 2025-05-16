@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-02-20 19:38
+ * @dateTime 2024-02-20 19:40:00
  * @apiNote TODO
  */
 @Data
@@ -23,23 +23,23 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @ConfigurationProperties("tools.ip")
 public class IpAutoConfiguration implements WebMvcConfigurer {
 
-    // 轮子默认模式为 simple
-    private String display = DisplayModeEnum.SIMPLE.getMode();
+	// 轮子默认模式为 simple
+	private String display = DisplayModeEnum.SIMPLE.getMode();
 
-    @Bean
-    public IpCountService ipCountService() {
-        return new IpCountServiceImpl();
-    }
+	@Bean
+	public IpCountService ipCountService() {
+		return new IpCountServiceImpl();
+	}
 
-    @Bean
-    public IpCountInterceptor ipCountInterceptor() {
-        return new IpCountInterceptor();
-    }
+	@Bean
+	public IpCountInterceptor ipCountInterceptor() {
+		return new IpCountInterceptor();
+	}
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        // registry.addInterceptor(new IpCountInterceptor()).addPathPatterns("/**");
-        // ⚠️：正常应用拦截器逻辑类是无需注入到Spring容器，但是 IpCountInterceptor 类中使用了 @Autowired 注解，所以需要将其注入到Spring容器中。
-        registry.addInterceptor(ipCountInterceptor()).addPathPatterns("/**");
-    }
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		// registry.addInterceptor(new IpCountInterceptor()).addPathPatterns("/**");
+		// ⚠️：正常应用拦截器逻辑类是无需注入到Spring容器，但是 IpCountInterceptor 类中使用了 @Autowired 注解，所以需要将其注入到Spring容器中。
+		registry.addInterceptor(ipCountInterceptor()).addPathPatterns("/**");
+	}
 }

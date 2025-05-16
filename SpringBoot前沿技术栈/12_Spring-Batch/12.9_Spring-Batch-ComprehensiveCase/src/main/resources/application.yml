@@ -1,4 +1,3 @@
-
 server:
   port: 8095
 
@@ -10,13 +9,13 @@ spring:
     password: 131474
     druid:
       # 连接池配置
-      #初始化连接池的连接数量大小，最小，最大
+      # 初始化连接池的连接数量大小，最小，最大
       initial-size: 10
       min-idle: 10
       max-active: 20
-      #配置获取连接等待超时的时间
+      # 配置获取连接等待超时的时间
       max-wait: 60000
-      #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
       time-between-eviction-runs-millis: 60000
       # 配置一个连接在池中最小生存的时间，单位是毫秒
       min-evictable-idle-time-millis: 30000
@@ -54,4 +53,4 @@ mybatis:
 # 配置文件设置文件地址路径
 job:
   data:
-    path: /19_Spring-Batch/09_Spring-Batch-ComprehensiveCase
+    path: /19_Spring-Batch/12.9_Spring-Batch-ComprehensiveCase

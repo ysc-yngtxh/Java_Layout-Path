@@ -13,29 +13,29 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 /**
- * @author example
+ * @author 游家纨绔
  * @description TODO 登录逻辑
- * @create 2023-04-16 下午12:14
+ * @create 2023-04-16 下午12:10
  */
 @Service
 @RequiredArgsConstructor
 public class LoginServiceImpl implements LoginService {
 
-    private final RedisCache redisCache;
+	private final RedisCache redisCache;
 
-    private final SysUserMapper sysUserMapper;
+	private final SysUserMapper sysUserMapper;
 
-    public SysUser findByUser(String userName) {
-        return sysUserMapper.selectOne(Wrappers.<SysUser>lambdaQuery().eq(SysUser::getUserName, userName));
-    }
+	public SysUser findByUser(String userName) {
+		return sysUserMapper.selectOne(Wrappers.<SysUser>lambdaQuery().eq(SysUser::getUserName, userName));
+	}
 
-    public ResponseResult<String> logout() {
-        // 获取SecurityContextHolder中的用户id
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        LoginUserDetails loginUserDetails = (LoginUserDetails) authentication.getPrincipal();
-        String userId = loginUserDetails.getCurrentSysUserInfo().getId().toString();
-        // 删除redis中的值
-        redisCache.deleteObject("login:" + userId);
-        return new ResponseResult<>(200, "登出成功", null);
-    }
+	public ResponseResult<String> logout() {
+		// 获取SecurityContextHolder中的用户id
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		LoginUserDetails loginUserDetails = (LoginUserDetails) authentication.getPrincipal();
+		String userId = loginUserDetails.getCurrentSysUserInfo().getId().toString();
+		// 删除redis中的值
+		redisCache.deleteObject("login:" + userId);
+		return new ResponseResult<>(200, "登出成功", null);
+	}
 }

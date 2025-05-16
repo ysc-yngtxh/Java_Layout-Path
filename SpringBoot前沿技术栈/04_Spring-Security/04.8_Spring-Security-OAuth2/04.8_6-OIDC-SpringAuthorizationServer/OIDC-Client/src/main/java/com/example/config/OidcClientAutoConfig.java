@@ -14,24 +14,24 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class OidcClientAutoConfig {
 
-    // 负责处理从授权服务器获取到的用户信息，并将其转换为应用程序可以使用的用户对象。
-    // 该类有两个实现类：DefaultOAuth2UserService、OidcUserService
-    @Autowired
-    private OAuth2UserService<OidcUserRequest, OidcUser> oAuth2UserService;
+	// 负责处理从授权服务器获取到的用户信息，并将其转换为应用程序可以使用的用户对象。
+	// 该类有两个实现类：DefaultOAuth2UserService、OidcUserService
+	@Autowired
+	private OAuth2UserService<OidcUserRequest, OidcUser> oAuth2UserService;
 
-    @Bean
-    public SecurityFilterChain authorizationClientSecurityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().authenticated()
-                )
-                .oauth2Login(oauth2 ->
-                        // 自定义配置OIDC提供的用户信息端点。
-                        oauth2.userInfoEndpoint(userInfo ->
-                                userInfo.oidcUserService(oAuth2UserService)
-                        )
-                );
+	@Bean
+	public SecurityFilterChain authorizationClientSecurityFilterChain(HttpSecurity http) throws Exception {
+		http
+				.authorizeHttpRequests(authorize -> authorize
+						                       .anyRequest().authenticated()
+				                      )
+				.oauth2Login(oauth2 ->
+						             // 自定义配置OIDC提供的用户信息端点。
+						             oauth2.userInfoEndpoint(userInfo ->
+								                                     userInfo.oidcUserService(oAuth2UserService)
+						                                    )
+				            );
 
-        return http.build();
-    }
+		return http.build();
+	}
 }

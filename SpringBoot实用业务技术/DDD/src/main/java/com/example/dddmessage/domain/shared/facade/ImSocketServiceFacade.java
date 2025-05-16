@@ -8,10 +8,10 @@ import com.example.dddmessage.domain.aggregate.notice.entity.valueobject.SocketM
  */
 public interface ImSocketServiceFacade {
 
-    /**
-     * 发布消息到Im推送渠道
-     *
-     * @param socketMessage
-     */
-    void publish(SocketMessage socketMessage);
+	/**
+	 * 发布消息到Im推送渠道
+	 *
+	 * @param socketMessage
+	 */
+	void publish(SocketMessage socketMessage);
 }

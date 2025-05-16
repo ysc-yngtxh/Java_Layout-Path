@@ -8,7 +8,8 @@ import lombok.Getter;
  */
 @Getter
 public class Address {
-    private String name;
-    private String zipCode;
-    private String mobile;
+
+	private String name;
+	private String zipCode;
+	private String mobile;
 }

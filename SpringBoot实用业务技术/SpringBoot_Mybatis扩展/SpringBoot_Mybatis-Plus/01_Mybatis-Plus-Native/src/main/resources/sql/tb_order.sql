@@ -21,20 +21,20 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- Table structure for tb_order
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_order`;
-CREATE TABLE `tb_order` (
-  `order_id` bigint NOT NULL AUTO_INCREMENT COMMENT '订单id ',
-  `sku_id` bigint NOT NULL COMMENT 'sku商品id',
-  `num` int NOT NULL COMMENT '购买数量',
-  `buy_price` decimal(10,2) NOT NULL COMMENT '购买价格',
-  `menu` varchar(5000) DEFAULT NULL COMMENT '菜单',
-  `create_date` datetime DEFAULT NULL COMMENT '创建时间',
-  `updated_date` datetime DEFAULT NULL COMMENT '更新时间',
-  `create_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '创建人',
-  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '更新人',
-  `delete_flag` tinyint DEFAULT '0' COMMENT '逻辑删除',
-  `sku_json` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'sku数据',
-  `version` int DEFAULT '0' COMMENT '版本号',
-  PRIMARY KEY (`order_id`)
+CREATE TABLE `tb_order`(
+    `order_id`     bigint         NOT NULL AUTO_INCREMENT COMMENT '订单id ',
+    `sku_id`       bigint         NOT NULL COMMENT 'sku商品id',
+    `num`          int            NOT NULL COMMENT '购买数量',
+    `buy_price`    decimal(10, 2) NOT NULL COMMENT '购买价格',
+    `menu`         varchar(5000)                                                  DEFAULT NULL COMMENT '菜单',
+    `create_date`  datetime                                                       DEFAULT NULL COMMENT '创建时间',
+    `updated_date` datetime                                                       DEFAULT NULL COMMENT '更新时间',
+    `create_by`    varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci  DEFAULT NULL COMMENT '创建人',
+    `updated_by`   varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin         DEFAULT NULL COMMENT '更新人',
+    `delete_flag`  tinyint                                                        DEFAULT '0' COMMENT '逻辑删除',
+    `sku_json`     varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'sku数据',
+    `version`      int                                                            DEFAULT '0' COMMENT '版本号',
+    PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='订单详情表';
 
 -- ----------------------------

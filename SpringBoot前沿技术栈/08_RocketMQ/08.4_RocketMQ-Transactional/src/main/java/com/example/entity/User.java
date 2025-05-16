@@ -18,30 +18,30 @@ import lombok.Data;
 @Builder
 @TableName("t_user")
 public class User implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 2558291062144434794L;
+	@Serial
+	private static final long serialVersionUID = 2558291062144434794L;
 
-    @TableId
-    private Long id;
+	@TableId
+	private Long id;
 
-    // 姓名
-    private String name;
+	// 姓名
+	private String name;
 
-    // 身份证号
-    private String idCard;
+	// 身份证号
+	private String idCard;
 
-    // 余额
-    private BigDecimal balance;
+	// 余额
+	private BigDecimal balance;
 
-    // 状态（1在线，0离线）
-    private boolean state;
+	// 状态（1在线，0离线）
+	private boolean state;
 
-    // VIP用户标识（1是，0否）
-    private boolean vipFlag;
+	// VIP用户标识（1是，0否）
+	private boolean vipFlag;
 
-    // 创建时间
-    private Date createTime;
+	// 创建时间
+	private Date createTime;
 
-    // 最后一次登录时间
-    private Date lastLoginTime;
+	// 最后一次登录时间
+	private Date lastLoginTime;
 }

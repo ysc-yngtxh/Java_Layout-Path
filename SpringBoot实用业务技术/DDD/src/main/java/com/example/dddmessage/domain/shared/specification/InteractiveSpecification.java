@@ -9,11 +9,13 @@ import java.util.function.Consumer;
  * @author 游家纨绔
  * @since 2024-04-18 07:20:00
  */
-public interface InteractiveSpecification<T,R> extends Specification<T>{
-    /**
-     * 当验证结果不满意时，调用 handle 进行处理
-     * @param t
-     * @param handle
-     */
-    void notSatisfiedHandleBy(T t, Consumer<R> handle);
+public interface InteractiveSpecification<T, R> extends Specification<T> {
+
+	/**
+	 * 当验证结果不满意时，调用 handle 进行处理
+	 *
+	 * @param t
+	 * @param handle
+	 */
+	void notSatisfiedHandleBy(T t, Consumer<R> handle);
 }

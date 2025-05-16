@@ -14,28 +14,29 @@ import java.util.Date;
 
 @SpringBootTest
 public class RecallSpecificationTest {
-    @Autowired
-    private RecallSpecification recallSpecification;
 
-    @Test
-    public void isSatisfiedByTest(){
-        Message message1 = new Message(
-                1L,
-                MessageCategory.CHAT,
-                new User(1, "", ""),
-                new User(2, "", ""),
-                 new Content(MessageCategory.CHAT, "xxx"),
-                new Date()
-        );
-        Assertions.assertTrue(recallSpecification.isSatisfiedBy(message1));
-        Message message2 = new Message(
-                1L,
-                MessageCategory.CHAT,
-                new User(1, "", ""),
-                new User(2, "", ""),
-                new Content(MessageCategory.CHAT, "xxx"),
-                new Date(System.currentTimeMillis() - 60 * 6 * 1000)
-        );
-        Assertions.assertFalse(recallSpecification.isSatisfiedBy(message2));
-    }
+	@Autowired
+	private RecallSpecification recallSpecification;
+
+	@Test
+	public void isSatisfiedByTest() {
+		Message message1 = new Message(
+				1L,
+				MessageCategory.CHAT,
+				new User(1, "", ""),
+				new User(2, "", ""),
+				new Content(MessageCategory.CHAT, "xxx"),
+				new Date()
+		);
+		Assertions.assertTrue(recallSpecification.isSatisfiedBy(message1));
+		Message message2 = new Message(
+				1L,
+				MessageCategory.CHAT,
+				new User(1, "", ""),
+				new User(2, "", ""),
+				new Content(MessageCategory.CHAT, "xxx"),
+				new Date(System.currentTimeMillis() - 60 * 6 * 1000)
+		);
+		Assertions.assertFalse(recallSpecification.isSatisfiedBy(message2));
+	}
 }

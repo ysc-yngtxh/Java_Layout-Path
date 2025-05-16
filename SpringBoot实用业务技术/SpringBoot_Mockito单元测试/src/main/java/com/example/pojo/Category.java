@@ -17,27 +17,27 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Category implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 483640959410582653L;
+	@Serial
+	private static final long serialVersionUID = 483640959410582653L;
 
-    /**
-     * 主键Id
-     */
-    private Long id;
-    /**
-     * 类别名称
-     */
-    private String categoryName;
-    /**
-     * 类别英文名称
-     */
-    private String categoryNameEn;
-    /**
-     * 逻辑删除：0存在,1删除
-     */
-    private Integer deleteFlag;
-    /**
-     * 备注
-     */
-    private String remark;
+	/**
+	 * 主键Id
+	 */
+	private Long id;
+	/**
+	 * 类别名称
+	 */
+	private String categoryName;
+	/**
+	 * 类别英文名称
+	 */
+	private String categoryNameEn;
+	/**
+	 * 逻辑删除：0存在,1删除
+	 */
+	private Integer deleteFlag;
+	/**
+	 * 备注
+	 */
+	private String remark;
 }

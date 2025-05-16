@@ -21,21 +21,21 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- Table structure for tb_consumer
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_consumer`;
-CREATE TABLE `tb_consumer` (
-  `id` int NOT NULL AUTO_INCREMENT COMMENT '主键Id',
-  `superior_id` int NOT NULL COMMENT '上级Id',
-  `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '用户名',
-  `pass_word` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '密码',
-  `alias` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '别名',
-  `age` int DEFAULT NULL COMMENT '年龄',
-  `sex` tinyint DEFAULT NULL COMMENT '性别',
-  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '手机号',
-  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '地址',
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '邮件',
-  `delete_flag` tinyint DEFAULT NULL COMMENT '逻辑删除',
-  `created_date` datetime DEFAULT NULL COMMENT '创建时间',
-  `updated_date` datetime DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`)
+CREATE TABLE `tb_consumer`(
+    `id`           int NOT NULL AUTO_INCREMENT COMMENT '主键Id',
+    `superior_id`  int NOT NULL COMMENT '上级Id',
+    `user_name`    varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '用户名',
+    `pass_word`    varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '密码',
+    `alias`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '别名',
+    `age`          int                                                    DEFAULT NULL COMMENT '年龄',
+    `sex`          tinyint                                                DEFAULT NULL COMMENT '性别',
+    `phone`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '手机号',
+    `address`      varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '地址',
+    `email`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '邮件',
+    `delete_flag`  tinyint                                                DEFAULT NULL COMMENT '逻辑删除',
+    `created_date` datetime                                               DEFAULT NULL COMMENT '创建时间',
+    `updated_date` datetime                                               DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- ----------------------------

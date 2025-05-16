@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author 游家纨绔
- * @date 2022/07/05
+ * @date 2022-07-05
  * @apiNote
  */
 @Data
@@ -16,18 +16,18 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseResult<T> {
 
-    /**
-     * 状态码
-     */
-    private Integer code;
+	/**
+	 * 状态码
+	 */
+	private Integer code;
 
-    /**
-     * 提示信息，如果有错误时，前端可以获取该字段进行提示
-     */
-    private String msg;
+	/**
+	 * 提示信息，如果有错误时，前端可以获取该字段进行提示
+	 */
+	private String msg;
 
-    /**
-     * 返回的数据
-     */
-    private T data;
+	/**
+	 * 返回的数据
+	 */
+	private T data;
 }

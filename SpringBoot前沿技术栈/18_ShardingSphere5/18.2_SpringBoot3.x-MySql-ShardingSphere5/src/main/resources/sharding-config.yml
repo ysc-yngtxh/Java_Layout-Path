@@ -34,15 +34,15 @@ dataSources:
 rules:
   - !SHARDING # 分片规则
     shardingAlgorithms: # TODO 定义分片算法
-      database_inline:  # 自定义分片算法名称，自定义名称【随便取】
+      database_inline: # 自定义分片算法名称，自定义名称【随便取】
         type: INLINE # 内敛算法
         props:
           algorithm-expression: ds_$->{ece_id % 3}
-      table_inline:  # 自定义分片算法名称，自定义名称【随便取】
+      table_inline: # 自定义分片算法名称，自定义名称【随便取】
         type: INLINE
         props:
           algorithm-expression: ece_order_$->{ece_id % 3}
-      complex_inline:  # 自定义分片算法名称，自定义名称【随便取】
+      complex_inline: # 自定义分片算法名称，自定义名称【随便取】
         type: INLINE
         props:
           algorithm-expression: ds_$->{ece_id % 3}.$->{age % 2}
@@ -51,7 +51,7 @@ rules:
         props:
           sharding-count: 4
     keyGenerators: # TODO 定义主键生成策略
-      snowflake:   # 自定义主键生成策略名称，自定义名称【随便取】
+      snowflake: # 自定义主键生成策略名称，自定义名称【随便取】
         type: SNOWFLAKE
         props:
           worker.id: 1     # 根据实际需要设置不同的 worker.id
@@ -67,9 +67,9 @@ rules:
           column: id
           keyGeneratorName: snowflake
         tableStrategy: # TODO 分表策略，同分库策略
-          # standard:
-          #   shardingColumn:
-          #   shardingAlgorithmName:
+        # standard:
+        #   shardingColumn:
+        #   shardingAlgorithmName:
       ece_order:
         actualDataNodes: ds_$->{0..2}.ece_order
         databaseStrategy:
@@ -89,7 +89,7 @@ rules:
     dataSources:
       readwrite_ds: # 读写分离逻辑数据源名称，自定义名称【随便取】
         writeDataSourceName: ds_0 # 写库数据源名称【只支持单个数据源】
-        readDataSourceNames:      # 读库数据源名称，多个从数据源用逗号分隔
+        readDataSourceNames: # 读库数据源名称，多个从数据源用逗号分隔
           - ds_1
           - ds_2
         # 事务内读请求的路由策略，默认值：DYNAMIC。
@@ -111,4 +111,3 @@ rules:
     tables:
       - ece_lookup_classify
       - ece_lookup_items
-

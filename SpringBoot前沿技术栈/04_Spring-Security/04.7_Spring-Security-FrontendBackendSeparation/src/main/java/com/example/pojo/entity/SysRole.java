@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 /**
  * 角色表(SysRole)表实体类
  *
- * @author makejava
- * @since 2023-05-13 16:49:44
+ * @author 游家纨绔
+ * @since 2023-05-13 16:50:00
  */
 @Data
 @AllArgsConstructor

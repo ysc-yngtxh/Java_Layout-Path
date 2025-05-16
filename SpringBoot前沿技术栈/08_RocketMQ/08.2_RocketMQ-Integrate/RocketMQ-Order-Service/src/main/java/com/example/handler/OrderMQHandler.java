@@ -13,8 +13,8 @@ import org.apache.rocketmq.common.message.MessageExt;
 @MQHandlerActualizer(topic = "order")
 public class OrderMQHandler implements MQHandler {
 
-    @Override
-    public ConsumeConcurrentlyStatus handle(String tag, MessageExt messageExt) {
-        return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
-    }
+	@Override
+	public ConsumeConcurrentlyStatus handle(String tag, MessageExt messageExt) {
+		return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+	}
 }

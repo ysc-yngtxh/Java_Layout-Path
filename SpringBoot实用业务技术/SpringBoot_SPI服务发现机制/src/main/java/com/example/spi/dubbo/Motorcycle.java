@@ -7,8 +7,8 @@ package com.example.spi.dubbo;
  */
 public class Motorcycle implements Car {
 
-    @Override
-    public void sayHello() {
-        System.out.println("Hello, I am Motorcycle.");
-    }
+	@Override
+	public void sayHello() {
+		System.out.println("Hello, I am Motorcycle.");
+	}
 }

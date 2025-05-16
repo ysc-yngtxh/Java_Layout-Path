@@ -10,7 +10,8 @@ import java.math.BigDecimal;
  */
 @Getter
 public class OrderItem {
-    private long orderId;
-    private long itemId;
-    private BigDecimal price;
+
+	private long orderId;
+	private long itemId;
+	private BigDecimal price;
 }

@@ -2,7 +2,6 @@
 
 本篇文章我们将在项目中添加一些查询接口，来展示在DDD的项目中查询逻辑的编写。
 
-
 ## 需求概览
 
 1. 增加一个查询未读数量的接口
@@ -10,7 +9,8 @@
 
 ## CQRS架构
 
-CQRS（Cammand-Query Responsibility Segregation），CQRS是将紧缩（Stringent）对象（或者组件）设计原则和命令-查询分离（CQS）应用在架构模式中的结果。
+CQRS（Cammand-Query Responsibility
+Segregation），CQRS是将紧缩（Stringent）对象（或者组件）设计原则和命令-查询分离（CQS）应用在架构模式中的结果。
 
 ### 命令-查询分离（CQS）
 
@@ -27,7 +27,6 @@ CQRS（Cammand-Query Responsibility Segregation），CQRS是将紧缩（Stringen
 
 此种模式咋一看起来，与常见的应用开发没有太多差别，无非是写完了以后在读，但实际上因为将读写模型进行了抽象，即使存储在一起，我们完全可以对写与读采用不同的数据结
 构，关于这一点我们接着往下看。
-
 
 ![cqrs-separate-stores](https://gitee.com/izhengyin/ddd-message/raw/master/blog/images/command-and-query-responsibility-segregation-cqrs-separate-stores.png)
 
@@ -51,7 +50,8 @@ CQRS（Cammand-Query Responsibility Segregation），CQRS是将紧缩（Stringen
 2. 在一个进程上同时实现读写两个模型，但存储分离
 3. 读写模型分开在不同的进程实现，且存储分离
 
-而存储分离的方式，可以是同为一种媒介，比如mysql主从，也可以是不同媒介比如mysql + ES。
+而存储分离的方式，可以是同为一种媒介，比如mysql主从，也可以是不同媒介比如mysql +
+ES。
 
 ## 需求实现
 
@@ -121,8 +121,6 @@ public interface MessageQueryService {
     List<MessageDTO> getContactMessageList(int userId, int contactId, int size);
 
 ```
-
-
 
 ### 接口实现
 
@@ -248,7 +246,6 @@ public interface MessageQueryService {
 ```
 
 ## 测试
-
 
 ### 应用层测试
 

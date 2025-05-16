@@ -1,7 +1,6 @@
 package com.example.mvc.dao;
 
 import com.example.mvc.entity.OrderItem;
-
 import java.util.List;
 
 /**
@@ -10,7 +9,10 @@ import java.util.List;
  * @description TODO 订单商品DAO层
  */
 public interface OrderItemMVCDao {
-    void insert(OrderItem orderItem);
-    void update(OrderItem orderItem);
-    List<OrderItem> getOrderItems(long orderId);
+
+	void insert(OrderItem orderItem);
+
+	void update(OrderItem orderItem);
+
+	List<OrderItem> getOrderItems(long orderId);
 }

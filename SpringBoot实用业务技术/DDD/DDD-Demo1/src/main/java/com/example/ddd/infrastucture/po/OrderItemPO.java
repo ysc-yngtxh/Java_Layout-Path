@@ -1,8 +1,7 @@
 package com.example.ddd.infrastucture.po;
 
-import lombok.Data;
-
 import java.math.BigDecimal;
+import lombok.Data;
 
 /**
  * @author 游家纨绔
@@ -11,7 +10,8 @@ import java.math.BigDecimal;
  */
 @Data
 public class OrderItemPO {
-    private long orderId;
-    private long itemId;
-    private BigDecimal price;
+
+	private long orderId;
+	private long itemId;
+	private BigDecimal price;
 }

@@ -9,11 +9,12 @@ import org.springframework.stereotype.Component;
  * @author 游家纨绔
  * @since 2024-04-18 07:20:00
  */
-@Component
 @Slf4j
+@Component
 public class HuaweiServiceFacadeClient implements HuaweiServiceFacade {
-    @Override
-    public void publish(AppMessage appMessage) {
-        log.info(appMessage.toString());
-    }
+
+	@Override
+	public void publish(AppMessage appMessage) {
+		log.info(appMessage.toString());
+	}
 }

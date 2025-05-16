@@ -9,7 +9,7 @@ import com.example.ddd.domain.entity.OrderDDD;
  */
 public interface OrderRepository {
 
-    void save(OrderDDD orderDDD);
+	void save(OrderDDD orderDDD);
 
-    OrderDDD findById(Long id);
+	OrderDDD findById(Long id);
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.EceOrderMapper">
 
     <resultMap type="com.example.entity.EceOrder" id="EceOrderMap">
@@ -33,9 +34,11 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="orderId" useGeneratedKeys="true">
-        insert into ece_order(user_id, order_number, order_date, total_amount, status, shopping_address,
+        insert into ece_order(user_id, order_number, order_date, total_amount,
+                              status, shopping_address,
                               billing_address, created_at, updated_at)
-        values (#{userId}, #{orderNumber}, #{orderDate}, #{totalAmount}, #{status}, #{shoppingAddress},
+        values (#{userId}, #{orderNumber}, #{orderDate}, #{totalAmount},
+                #{status}, #{shoppingAddress},
                 #{billingAddress}, #{createdAt}, #{updatedAt})
     </insert>
 
@@ -82,4 +85,3 @@
     </delete>
 
 </mapper>
-

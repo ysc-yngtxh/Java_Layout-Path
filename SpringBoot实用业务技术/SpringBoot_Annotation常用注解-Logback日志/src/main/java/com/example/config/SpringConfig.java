@@ -15,33 +15,33 @@ import org.springframework.core.annotation.Order;
 @Configuration
 public class SpringConfig {
 
-    // @DependsOn注解可以定义在类和方法上，可以配置Spring IOC容器在初始化一个Bean之前，先初始化其他的Bean对象。
-    // 比如正常情况下，Bean初始化为（事件源创建 -> 监听器创建），加上该注解后Bean初始化为（监听器创建 -> 事件源创建）
-    // 前提是给定先初始化的Bean对象必须存在能够注入Spring容器中
-    @Bean
-    @DependsOn(value = {"eventListener"})
-    public EventSource eventSource() {
-        return new EventSource();
-    }
+	// @DependsOn注解可以定义在类和方法上，可以配置Spring IOC容器在初始化一个Bean之前，先初始化其他的Bean对象。
+	// 比如正常情况下，Bean初始化为（事件源创建 -> 监听器创建），加上该注解后Bean初始化为（监听器创建 -> 事件源创建）
+	// 前提是给定先初始化的Bean对象必须存在能够注入Spring容器中
+	@Bean
+	@DependsOn(value = {"eventListener"})
+	public EventSource eventSource() {
+		return new EventSource();
+	}
 
-    // @Scope注解可以用来定义@Component标注的类的作用范围以及@Bean所标记的类的作用范围。
-    // @Scope所限定的作用范围有：singleton、prototype、request、session、globalSession或者其他的自定义范围。
-    // 声明为prototype（原型模式）时，在每次需要使用到该类的时候，Spring IoC容器都会初始化一个新的改类的实例。
-    @Bean
-    @Scope(value = "prototype")
-    public EventListener eventListener() {
-        return new EventListener();
-    }
+	// @Scope注解可以用来定义@Component标注的类的作用范围以及@Bean所标记的类的作用范围。
+	// @Scope所限定的作用范围有：singleton、prototype、request、session、globalSession或者其他的自定义范围。
+	// 声明为prototype（原型模式）时，在每次需要使用到该类的时候，Spring IoC容器都会初始化一个新的改类的实例。
+	@Bean
+	@Scope(value = "prototype")
+	public EventListener eventListener() {
+		return new EventListener();
+	}
 
-    public class EventSource {
-        public EventSource() {
-            System.out.println("事件源创建");
-        }
-    }
+	public class EventSource {
+		public EventSource() {
+			System.out.println("事件源创建");
+		}
+	}
 
-    public class EventListener {
-        public EventListener() {
-            System.out.println("监听器创建");
-        }
-    }
+	public class EventListener {
+		public EventListener() {
+			System.out.println("监听器创建");
+		}
+	}
 }

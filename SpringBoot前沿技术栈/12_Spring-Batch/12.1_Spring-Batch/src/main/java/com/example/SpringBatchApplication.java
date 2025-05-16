@@ -9,13 +9,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableBatchProcessing(dataSourceRef = "batchDataSource", transactionManagerRef = "batchTransactionManager")
 public class SpringBatchApplication {
 
-    /**
-     * 需要注意的是：我们的任务每执行一次，所以在数据库中会有相关的任务名称--(Spring Batch Job)
-     * 重新启动SpringBoot项目后，Spring Batch检索到有相同的任务，不会执行。
-     * 因此，为了能够让我们的任务能够再次执行。需要我们把spring-batch数据库的所有表都删除掉然后重新生成
-     */
-    public static void main(String[] args) {
-        SpringApplication.run(SpringBatchApplication.class, args);
-    }
+	/**
+	 * 需要注意的是：我们的任务每执行一次，所以在数据库中会有相关的任务名称--(Spring Batch Job)
+	 * 重新启动SpringBoot项目后，Spring Batch检索到有相同的任务，不会执行。
+	 * 因此，为了能够让我们的任务能够再次执行。需要我们把spring-batch数据库的所有表都删除掉然后重新生成
+	 */
+	public static void main(String[] args) {
+		SpringApplication.run(SpringBatchApplication.class, args);
+	}
 
 }

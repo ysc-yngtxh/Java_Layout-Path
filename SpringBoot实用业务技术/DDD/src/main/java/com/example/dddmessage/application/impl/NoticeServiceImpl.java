@@ -16,30 +16,31 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class NoticeServiceImpl implements NoticeCommandService {
-    private final AppMessagePublisher appMessagePublisher;
-    private final SocketMessagePublisher socketMessagePublisher;
-    private final NoticeRepository noticeRepository;
 
-    public NoticeServiceImpl(
-            DomainEventPublisher domainEventPublisher,
-            AppMessagePublisher appMessagePublisher,
-            SocketMessagePublisher socketMessagePublisher,
-            NoticeRepository noticeRepository
-    ) {
-        this.appMessagePublisher = appMessagePublisher;
-        this.socketMessagePublisher = socketMessagePublisher;
-        this.noticeRepository = noticeRepository;
-        domainEventPublisher.register(this);
-    }
+	private final AppMessagePublisher appMessagePublisher;
+	private final SocketMessagePublisher socketMessagePublisher;
+	private final NoticeRepository noticeRepository;
 
-    @Override
-    @Subscribe
-    public void createNotice(MessageCreatedEvent messageCreatedEvent) {
-        Notice notice = new Notice(messageCreatedEvent.getData());
-        notice.createImMessage()
-                .forEach(socketMessagePublisher::publish);
-        notice.createAppMessages()
-                .forEach(appMessagePublisher::publish);
-        noticeRepository.save(notice);
-    }
+	public NoticeServiceImpl(
+			DomainEventPublisher domainEventPublisher,
+			AppMessagePublisher appMessagePublisher,
+			SocketMessagePublisher socketMessagePublisher,
+			NoticeRepository noticeRepository
+	                        ) {
+		this.appMessagePublisher = appMessagePublisher;
+		this.socketMessagePublisher = socketMessagePublisher;
+		this.noticeRepository = noticeRepository;
+		domainEventPublisher.register(this);
+	}
+
+	@Override
+	@Subscribe
+	public void createNotice(MessageCreatedEvent messageCreatedEvent) {
+		Notice notice = new Notice(messageCreatedEvent.getData());
+		notice.createImMessage()
+		      .forEach(socketMessagePublisher::publish);
+		notice.createAppMessages()
+		      .forEach(appMessagePublisher::publish);
+		noticeRepository.save(notice);
+	}
 }

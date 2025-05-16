@@ -14,16 +14,16 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User implements ValueObject<User> {
-    private int userId;
-    private String nickname;
-    private String photo;
+	private int userId;
+	private String nickname;
+	private String photo;
 
-    @Override
-    public boolean sameValueAs(User other) {
-        return other != null && new EqualsBuilder().
-                append(this.userId, other.userId).
-                append(this.nickname, other.nickname).
-                append(this.photo, other.photo).
-                isEquals();
-    }
+	@Override
+	public boolean sameValueAs(User other) {
+		return other != null && new EqualsBuilder().
+				append(this.userId, other.userId).
+				append(this.nickname, other.nickname).
+				append(this.photo, other.photo).
+				isEquals();
+	}
 }

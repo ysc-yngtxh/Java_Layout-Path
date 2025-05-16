@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LogStashController {
 
-    /**
-     * 获取日志输出对象
-     */
-    private static final Logger log = LoggerFactory.getLogger(LogStashController.class);
+	/**
+	 * 获取日志输出对象
+	 */
+	private static final Logger log = LoggerFactory.getLogger(LogStashController.class);
 
-    /**
-     * 测试输出log的访问方法
-     */
-    @GetMapping("/LogStash")
-    public void testLog() {
-        log.error("测试输出一个日志");
-    }
+	/**
+	 * 测试输出log的访问方法
+	 */
+	@GetMapping("/LogStash")
+	public void testLog() {
+		log.error("测试输出一个日志");
+	}
 }

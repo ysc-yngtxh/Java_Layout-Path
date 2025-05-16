@@ -9,6 +9,7 @@ import org.dromara.easyes.annotation.IndexName;
 @Data
 @IndexName("document")
 public class Document {
+
     /**
      * es中的唯一id
      */

@@ -1,26 +1,24 @@
 package com.example.entity;
 
-import lombok.Data;
-
 import java.io.Serial;
 import java.io.Serializable;
+import lombok.Data;
 
 /**
  * (User)表实体类
  * @author 游家纨绔
- * @since 2023-09-02 22:23:03
+ * @since 2023-09-02 22:00:00
  */
 @Data
-public class User implements Serializable{
-    @Serial
-    private static final long serialVersionUID = 6315928930985335023L;
+public class User implements Serializable {
+	@Serial
+	private static final long serialVersionUID = 6315928930985335023L;
 
-    private Integer id;
+	private Integer id;
 
-    private String name;
+	private String name;
 
-    private String pwd;
+	private String pwd;
 
-    private String perms;
+	private String perms;
 }
-

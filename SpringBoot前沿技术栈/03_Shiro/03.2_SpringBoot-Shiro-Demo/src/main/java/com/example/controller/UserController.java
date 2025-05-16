@@ -16,50 +16,50 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class UserController {
 
-    @RequestMapping({"/", "/index"})
-    public String toIndex(Model model) {
-        model.addAttribute("msg", "hello Shiro");
-        return "index";
-    }
+	@RequestMapping({"/", "/index"})
+	public String toIndex(Model model) {
+		model.addAttribute("msg", "hello Shiro");
+		return "index";
+	}
 
-    @RequiresPermissions("user:add")
-    @RequestMapping("/user/add")
-    public String add() {
-        return "user/add";
-    }
+	@RequiresPermissions("user:add")
+	@RequestMapping("/user/add")
+	public String add() {
+		return "user/add";
+	}
 
-    // @RequiresPermissions("update")
-    @RequestMapping("/user/update")
-    public String update() {
-        return "user/update";
-    }
+	// @RequiresPermissions("update")
+	@RequestMapping("/user/update")
+	public String update() {
+		return "user/update";
+	}
 
-    @RequestMapping("/toLogin")
-    public String toLogin() {
-        return "login";
-    }
+	@RequestMapping("/toLogin")
+	public String toLogin() {
+		return "login";
+	}
 
-    @RequestMapping("/login")
-    public String login(String username, String password, Model model) {
-        // 获取当前的用户
-        Subject subject = SecurityUtils.getSubject();
-        // 封装用户的登录数据
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-        // token.setRememberMe(true); // 设置记住我
-        try {
-            subject.login(token); // 执行登陆方法,即Shiro开始进行认证授权的工作
-            return "index";
-        } catch (UnknownAccountException e) {
-            model.addAttribute("msg", "用户名错误");
-            return "login";
-        } catch (IncorrectCredentialsException e) {
-            model.addAttribute("msg", "密码错误");
-            return "login";
-        }
-    }
+	@RequestMapping("/login")
+	public String login(String username, String password, Model model) {
+		// 获取当前的用户
+		Subject subject = SecurityUtils.getSubject();
+		// 封装用户的登录数据
+		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+		// token.setRememberMe(true); // 设置记住我
+		try {
+			subject.login(token); // 执行登陆方法,即Shiro开始进行认证授权的工作
+			return "index";
+		} catch (UnknownAccountException e) {
+			model.addAttribute("msg", "用户名错误");
+			return "login";
+		} catch (IncorrectCredentialsException e) {
+			model.addAttribute("msg", "密码错误");
+			return "login";
+		}
+	}
 
-    @RequestMapping("/noauto")
-    public @ResponseBody String authorization(HttpServletResponse response) {
-        return "未经授权，无法访问相应页面!";
-    }
+	@RequestMapping("/noauto")
+	public @ResponseBody String authorization(HttpServletResponse response) {
+		return "未经授权，无法访问相应页面!";
+	}
 }

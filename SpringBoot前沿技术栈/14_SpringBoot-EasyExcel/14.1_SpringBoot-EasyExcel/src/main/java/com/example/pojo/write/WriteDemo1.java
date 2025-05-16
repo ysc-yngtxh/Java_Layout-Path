@@ -12,7 +12,7 @@ import java.util.Date;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-08-16 09:09
+ * @dateTime 2023-08-16 09:00
  * @apiNote TODO
  */
 @Data
@@ -26,22 +26,22 @@ import java.util.Date;
 // @OnceAbsoluteMerge(firstRowIndex = 5, lastRowIndex = 6, firstColumnIndex = 1, lastColumnIndex = 2)
 public class WriteDemo1 {
 
-    // 这一列 每隔2行 合并单元格
-    @ContentLoopMerge(eachRow = 2)
-    // 单个列宽
-    @ColumnWidth(50)
-    @ExcelProperty("字符串标题")
-    private String string;
+	// 这一列 每隔2行 合并单元格
+	@ContentLoopMerge(eachRow = 2)
+	// 单个列宽
+	@ColumnWidth(50)
+	@ExcelProperty("字符串标题")
+	private String string;
 
-    @ExcelProperty("日期标题")
-    private Date date;
+	@ExcelProperty("日期标题")
+	private Date date;
 
-    @ExcelProperty("数字标题")
-    private Double doubleData;
+	@ExcelProperty("数字标题")
+	private Double doubleData;
 
-    /**
-     * 忽略这个字段
-     */
-    @ExcelIgnore
-    private String ignore;
+	/**
+	 * 忽略这个字段
+	 */
+	@ExcelIgnore
+	private String ignore;
 }

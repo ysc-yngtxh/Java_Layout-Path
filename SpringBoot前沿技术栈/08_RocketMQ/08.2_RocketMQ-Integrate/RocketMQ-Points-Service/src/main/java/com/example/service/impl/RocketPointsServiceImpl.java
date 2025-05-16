@@ -12,6 +12,4 @@ import org.springframework.stereotype.Service;
  * @apiNote TODO 积分表(RocketPoints)表服务实现类
  */
 @Service("rocketPointsService")
-public class RocketPointsServiceImpl extends ServiceImpl<RocketPointsMapper, RocketPoints> implements RocketPointsService {
-
-}
+public class RocketPointsServiceImpl extends ServiceImpl<RocketPointsMapper, RocketPoints> implements RocketPointsService {}

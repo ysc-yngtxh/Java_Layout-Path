@@ -6,7 +6,7 @@ import com.example.entity.EceOrderItem;
  * 订单商品项表(EceOrderItem)表数据库访问层
  *
  * @author 游家纨绔
- * @since 2024-09-20 21:32:08
+ * @since 2024-09-20 21:30:00
  */
 public interface EceOrderItemMapper {
 
@@ -43,4 +43,3 @@ public interface EceOrderItemMapper {
     int deleteById(Long orderItemId);
 
 }
-

@@ -2,7 +2,7 @@ package com.example.constant;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-11-06 14:16
+ * @dateTime 2024-11-06 14:00
  * @apiNote TODO gitee授权信息
  */
 public interface Oauth2Property {

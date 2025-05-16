@@ -5,17 +5,17 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import lombok.Data;
 
 /**
  * (Sku)实体类
+ *
  * @author 游家纨绔
- * @since 2023-08-31 19:37:00
+ * @since 2023-08-31 19:30:00
  */
 @Data
 // @TableName 参数一：value 表示映射表名

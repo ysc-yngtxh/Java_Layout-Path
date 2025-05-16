@@ -1,6 +1,7 @@
 # DDD电商消息系统编码实践（三）
 
-上篇文章中，我们通过对消息的一些业务规则处理，了解了规约模式在DDD中的应用 在这篇文章中，我们将一起来看下，对已存在实体进行操作时如何实现。
+上篇文章中，我们通过对消息的一些业务规则处理，了解了规约模式在DDD中的应用
+在这篇文章中，我们将一起来看下，对已存在实体进行操作时如何实现。
 
 ## 需求概览
 
@@ -99,15 +100,19 @@ public class RecallSpecification extends AbstractSpecification<Message> {
     Result<Void> recallMessage(int userId , long messageId);
 ```
 
-需要特别说明的是，通常在实际业务场景中需要通过返回的ERROR类别、错误信息来告知用户失败的原因，然而在CQRS中对于Command并不推荐使用返回值，command方法返回值应该定义为void , 那么如何传递错误的信息呢。
+需要特别说明的是，通常在实际业务场景中需要通过返回的ERROR类别、错误信息来告知用户失败的原因，然而在CQRS中对于Command并不推荐使用返回值，command方法返回值应该定义为void ,
+那么如何传递错误的信息呢。
 
 * 第一种做法是作为特定的异常抛出，然而通过异常来控制业务的分支并不是编码规范（阿里巴巴JAVA开发指南）所推荐的。
 
 * 第二种做法是，在方法签名中增加一个参数来传递，比如
+
 ```
 void recallMessage(int userId , long messageId , Result executeResult);
 ```
+
 * 第三种做法是，在Command增加一个属性，比如
+
 ```
 @Data
 public class RecallCommand {
@@ -165,7 +170,6 @@ public class Result<T> {
         return Result.create(Error.NOT_ALLOW_RECALL);
     }
 ```
-
 
 > MessageCommandServiceImpl (MessageService)
 
@@ -226,7 +230,6 @@ public class Result<T> {
         return Response.failed(result.getError().getMsg());
     }
 ```
-
 
 ## 测试
 

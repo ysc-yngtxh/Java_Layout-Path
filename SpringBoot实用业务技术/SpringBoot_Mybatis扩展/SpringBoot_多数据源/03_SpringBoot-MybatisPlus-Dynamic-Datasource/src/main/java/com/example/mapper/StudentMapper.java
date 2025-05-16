@@ -6,6 +6,6 @@ import com.example.entity.Student;
 /**
  * (Student)表数据库访问层
  * @author 游家纨绔
- * @since 2023-09-02 21:59:40
+ * @since 2023-09-02 22:00:00
  */
 public interface StudentMapper extends BaseMapper<Student> {}

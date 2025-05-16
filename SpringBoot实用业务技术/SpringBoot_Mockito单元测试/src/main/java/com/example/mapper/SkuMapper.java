@@ -4,10 +4,10 @@ import com.example.pojo.Sku;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-06-25 00:13
+ * @dateTime 2024-06-25 00:00
  * @apiNote TODO
  */
 public interface SkuMapper {
 
-    Sku findById(Integer id);
+	Sku findById(Integer id);
 }

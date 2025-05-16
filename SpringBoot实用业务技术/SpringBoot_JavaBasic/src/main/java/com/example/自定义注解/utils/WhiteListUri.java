@@ -2,29 +2,25 @@ package com.example.自定义注解.utils;
 
 import com.example.流水线模式Pipeline.Handler;
 import com.example.自定义注解.annotation.LoginRequired;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.regex.Pattern;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.reflections.Reflections;
-import org.reflections.scanners.MethodAnnotationsScanner;
-import org.reflections.scanners.MethodParameterNamesScanner;
 import org.reflections.scanners.Scanners;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.regex.Pattern;
-
 /**
  * @author 游家纨绔
- * @version 1.0
+ * @date 2022-12-1 20:00:00
  * @description: 获取标注了@LogRequired注解的所有Url：白名单列表
- * @date 2022/12/1 19:59
  */
 @Slf4j
 public class WhiteListUri {
@@ -33,12 +29,12 @@ public class WhiteListUri {
 	public static void getKnowledgePoints() {
 		// 扫包
 		Reflections reflections = new Reflections(new ConfigurationBuilder()
-				      .forPackages("com.example")              // 指定路径URL，即Reflections 扫描的起始位置，只会扫描该包及其子包下的类/资源。
-				      .addScanners(Scanners.SubTypes)          // 添加 子类扫描工具
-				      .addScanners(Scanners.Resources)         // 添加 资源扫描工具
-				      .addScanners(Scanners.FieldsAnnotated)   // 添加 属性注解扫描工具
-				      .addScanners(Scanners.MethodsAnnotated)  // 添加 方法注解扫描工具
-				      .addScanners(Scanners.MethodsParameter)  // 添加 方法参数扫描工具
+				                                          .forPackages("com.example")              // 指定路径URL，即Reflections 扫描的起始位置，只会扫描该包及其子包下的类/资源。
+				                                          .addScanners(Scanners.SubTypes)          // 添加 子类扫描工具
+				                                          .addScanners(Scanners.Resources)         // 添加 资源扫描工具
+				                                          .addScanners(Scanners.FieldsAnnotated)   // 添加 属性注解扫描工具
+				                                          .addScanners(Scanners.MethodsAnnotated)  // 添加 方法注解扫描工具
+				                                          .addScanners(Scanners.MethodsParameter)  // 添加 方法参数扫描工具
 		);
 
 		// 反射出子类
@@ -76,11 +72,11 @@ public class WhiteListUri {
 		List<String> whiteUrls = new ArrayList<>();
 		// 设置扫描的包的路径
 		Reflections reflections = new Reflections(new ConfigurationBuilder()
-				      .setUrls(ClasspathHelper.forPackage(packageName)) // 指定路径URL
-				      .setScanners(
-							  Scanners.MethodsAnnotated,                // 添加 方法注解扫描工具
-							  Scanners.MethodsParameter                 // 添加 方法参数扫描工具
-				      )
+				                                          .setUrls(ClasspathHelper.forPackage(packageName)) // 指定路径URL
+				                                          .setScanners(
+						                                          Scanners.MethodsAnnotated,                // 添加 方法注解扫描工具
+						                                          Scanners.MethodsParameter                 // 添加 方法参数扫描工具
+				                                                      )
 		);
 
 		// 扫描指定包带有@LoginRequired注解的方法集合

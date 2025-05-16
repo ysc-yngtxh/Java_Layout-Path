@@ -15,21 +15,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class User {
 
-    private String name;
+	private String name;
 
-    private String country;
+	private String country;
 
-    private String[] account;
+	private String[] account;
 
-    private Integer[] money;
+	private Integer[] money;
 
-    private String email;
+	private String email;
 
-    private List<String> address;
+	private List<String> address;
 
-    private List<Integer> phone;
+	private List<Integer> phone;
 
-    private List<UserInfo> userInfos;
+	private List<UserInfo> userInfos;
 
-    private List<UserInfo> userInfoList;
+	private List<UserInfo> userInfoList;
 }

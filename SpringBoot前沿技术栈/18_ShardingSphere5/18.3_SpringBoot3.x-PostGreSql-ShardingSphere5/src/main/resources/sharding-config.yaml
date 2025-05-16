@@ -1,4 +1,3 @@
-
 # ShardingSphere 配置文件
 
 mode:
@@ -49,12 +48,12 @@ rules:
         #     shardingColumn: id
         #     shardingAlgorithmName:
     shardingAlgorithms: # TODO 定义分片算法
-      database_inline:  # 自定义分片算法名称，自定义名称【随便取】
+      database_inline: # 自定义分片算法名称，自定义名称【随便取】
         type: INLINE
         props:
           algorithm-expression: ds_$->{ece_id % 3}
     keyGenerators: # TODO 定义主键生成策略
-      snowflake:   # 自定义主键生成策略名称，自定义名称【随便取】
+      snowflake: # 自定义主键生成策略名称，自定义名称【随便取】
         type: SNOWFLAKE
         props:
           worker.id: 1     # 根据实际需要设置不同的 worker.id

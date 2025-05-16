@@ -21,60 +21,60 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(value = ContextProperties.PREFIX, ignoreInvalidFields = true, ignoreUnknownFields = true)
 public class ContextProperties {
 
-    public static final String PREFIX = "metadata.properties";
+	public static final String PREFIX = "metadata.properties";
 
-    /**
-     * 作者
-     **/
-    private String author = "游家纨绔";
+	/**
+	 * 作者
+	 **/
+	private String author = "游家纨绔";
 
-    /**
-     * 描述
-     **/
-    @Deprecated // 被该 @Deprecated 注解标注的[属性、方法、类]已废弃、暂时可用
-    private String description = "";
+	/**
+	 * 描述
+	 **/
+	@Deprecated // 被该 @Deprecated 注解标注的[属性、方法、类]已废弃、暂时可用
+	private String description = "";
 
-    /**
-     * 版本
-     **/
-    private String version = "v1";
+	/**
+	 * 版本
+	 **/
+	private String version = "v1";
 
-    /**
-     * 性别
-     */
-    private SexEnum sexEnum;
+	/**
+	 * 性别
+	 */
+	private SexEnum sexEnum;
 
-    /**
-     * 爱好
-     */
-    private String[] hobbies;
+	/**
+	 * 爱好
+	 */
+	private String[] hobbies;
 
-    /**
-     * 规格内容
-     */
-    private Map<String, Object> contexts;
+	/**
+	 * 规格内容
+	 */
+	private Map<String, Object> contexts;
 
-    /**
-     * 扫描的路径
-     **/
-    private List<String> basePaths = Arrays.asList("com.example.service", "com.example.controller");
+	/**
+	 * 扫描的路径
+	 **/
+	private List<String> basePaths = Arrays.asList("com.example.service", "com.example.controller");
 
-    /**
-     * 学校
-     **/
-    // 配置类的数据结构比较复杂时，比如说一层嵌套一层，或者有List，Map这种结构的，需要使用 @NestedConfigurationProperty 注解完成配置。
-    @NestedConfigurationProperty
-    private School school;
+	/**
+	 * 学校
+	 **/
+	// 配置类的数据结构比较复杂时，比如说一层嵌套一层，或者有List，Map这种结构的，需要使用 @NestedConfigurationProperty 注解完成配置。
+	@NestedConfigurationProperty
+	private School school;
 
 
-    enum SexEnum {
-        MAN,
-        WOMAN
-    }
+	enum SexEnum {
+		MAN,
+		WOMAN
+	}
 
-    @Data
-    public static class School {
-        private String name;
-        private String address;
-    }
+	@Data
+	public static class School {
+		private String name;
+		private String address;
+	}
 }

@@ -3,10 +3,8 @@ package com.example.config;
 import com.example.trigger.CustomTrigger;
 import java.time.LocalDateTime;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
-import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
 
 /**
@@ -30,6 +28,6 @@ public class ScheduleTriggerConfig implements SchedulingConfigurer {
 				triggerContext -> {
 					return new CustomTrigger(trigger).nextExecution(triggerContext);
 				}
-		);
+		                            );
 	}
 }

@@ -2,8 +2,13 @@ package com.example.utils;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.ConnectionPool;
 import okhttp3.Headers;
@@ -14,18 +19,14 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class OkHttpUtil {
 
 	public static final String MEDIA_TYPE_JSON = "application/json; charset=utf-8";
 
-	private OkHttpUtil() {}
+	private OkHttpUtil() {
+	}
 
 	/**
 	 * 获取默认的OkHttpClient

@@ -5,8 +5,6 @@ import com.example.config.ScheduleTimerConfig;
 import java.time.LocalDateTime;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -19,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-09-27 22:53
+ * @dateTime 2024-09-27 23:00
  * @apiNote TODO
  */
 @RestController
@@ -73,7 +71,7 @@ public class TaskController {
 					}
 					, 10
 					, TimeUnit.SECONDS
-			);
+			                                                                  );
 			System.out.println(scheduledFuture.get());
 
 			ScheduledFuture<?> scheduledFuture2 = executorService.scheduleAtFixedRate(
@@ -81,7 +79,7 @@ public class TaskController {
 					, 0
 					, 5000
 					, TimeUnit.MILLISECONDS
-			);
+			                                                                         );
 			System.out.println(scheduledFuture2.get());
 		} catch (Exception e) {
 			throw new RuntimeException(e);

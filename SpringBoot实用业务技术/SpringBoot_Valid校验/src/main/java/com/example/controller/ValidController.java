@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ValidController {
 
-    // TODO 注解 @Valid 只能校验默认分组(即Default.class)，同时 @Valid 不支持分组的功能。
-    //      并且，想实现嵌套校验功能，需要在嵌套的属性中添加 @Valid 注解
-    @RequestMapping("/valid")
-    public List<User> queryByPage(@RequestBody @Valid User user) {
-        return Collections.emptyList();
-    }
+	// TODO 注解 @Valid 只能校验默认分组(即Default.class)，同时 @Valid 不支持分组的功能。
+	//      并且，想实现嵌套校验功能，需要在嵌套的属性中添加 @Valid 注解
+	@RequestMapping("/valid")
+	public List<User> queryByPage(@RequestBody @Valid User user) {
+		return Collections.emptyList();
+	}
 }

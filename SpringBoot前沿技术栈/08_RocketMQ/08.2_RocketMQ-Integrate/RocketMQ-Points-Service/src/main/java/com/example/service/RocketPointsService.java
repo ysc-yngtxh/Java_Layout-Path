@@ -8,6 +8,4 @@ import com.example.entity.RocketPoints;
  * @dateTime 2023-10-20 00:00
  * @apiNote TODO 积分表(RocketPoints)表服务接口
  */
-public interface RocketPointsService extends IService<RocketPoints> {
-
-}
+public interface RocketPointsService extends IService<RocketPoints> {}

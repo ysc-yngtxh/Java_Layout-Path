@@ -5,10 +5,9 @@ import lombok.Data;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-08-16 17:48
+ * @dateTime 2023-08-16 17:50
  * @apiNote TODO
  */
-
 @Data
 public class WriteDemo5 {
 

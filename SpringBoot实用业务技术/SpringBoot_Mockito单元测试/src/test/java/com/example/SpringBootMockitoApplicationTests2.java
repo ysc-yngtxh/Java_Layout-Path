@@ -87,7 +87,7 @@ public class SpringBootMockitoApplicationTests2 {
 
 		// 使用 @InjectMocks 注解，Mockito会自动将使用 @Mock 或 @Spy 注解创建的模拟对象或注入到被测试类的对应字段中。
 		Mockito.when(brandMapper.findById(1))
-				.thenReturn(new Brand(1L, "华为 meta", 1, 0, null));
+		       .thenReturn(new Brand(1L, "华为 meta", 1, 0, null));
 		System.err.println("注入的模拟对象打桩，返回值为打桩返回值：" + brandService.findBrandById(1));
 	}
 
@@ -102,7 +102,7 @@ public class SpringBootMockitoApplicationTests2 {
 
 		// @MockBean 模拟调用打桩。这里的效果同@Mock、@InjectMocks 一样，不同的是注解来源不同
 		Mockito.when(categoryMapper.findById(2))
-				.thenReturn(new Category(2L, "小曹哇小曹1～", "Cao", 0, null));
+		       .thenReturn(new Category(2L, "小曹哇小曹1～", "Cao", 0, null));
 		System.err.println(categoryService.findCategoryById(2));
 	}
 

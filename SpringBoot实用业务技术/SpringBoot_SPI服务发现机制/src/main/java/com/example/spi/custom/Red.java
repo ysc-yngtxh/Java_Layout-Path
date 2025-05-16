@@ -7,8 +7,8 @@ package com.example.spi.custom;
  */
 public class Red implements Color {
 
-    @Override
-    public void takeColor() {
-        System.out.println("Hello, I am Red.");
-    }
+	@Override
+	public void takeColor() {
+		System.out.println("Hello, I am Red.");
+	}
 }

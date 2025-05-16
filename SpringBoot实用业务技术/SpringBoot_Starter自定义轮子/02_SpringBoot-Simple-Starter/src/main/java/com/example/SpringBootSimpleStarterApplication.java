@@ -11,21 +11,21 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 public class SpringBootSimpleStarterApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(SpringBootSimpleStarterApplication.class, args);
-    }
+	@Autowired
+	private IpCountService ipCountService;
 
-    @Autowired
-    private IpCountService ipCountService;
+	public static void main(String[] args) {
+		SpringApplication.run(SpringBootSimpleStarterApplication.class, args);
+	}
 
-    @RequestMapping("/test")
-    public String test() {
-        ipCountService.IpCount();
-        return "自定义的轮子 -- 需要调用！";
-    }
+	@RequestMapping("/test")
+	public String test() {
+		ipCountService.IpCount();
+		return "自定义的轮子 -- 需要调用！";
+	}
 
-    @RequestMapping("/test1")
-    public String test1() {
-        return "自定义的轮子 -- 开箱即用！";
-    }
+	@RequestMapping("/test1")
+	public String test1() {
+		return "自定义的轮子 -- 开箱即用！";
+	}
 }

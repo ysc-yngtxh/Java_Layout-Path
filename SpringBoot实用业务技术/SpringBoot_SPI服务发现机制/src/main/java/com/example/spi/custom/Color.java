@@ -7,5 +7,5 @@ package com.example.spi.custom;
  */
 public interface Color {
 
-    public void takeColor();
+	public void takeColor();
 }
