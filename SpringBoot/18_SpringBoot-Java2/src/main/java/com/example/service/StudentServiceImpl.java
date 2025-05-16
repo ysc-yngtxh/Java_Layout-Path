@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    @Override
-    public String sayHello(String msg) {
-        return "Say World";
-    }
+	@Override
+	public String sayHello(String msg) {
+		return "Say World";
+	}
 }

@@ -11,8 +11,8 @@ import tk.mybatis.spring.annotation.MapperScan;
 @MapperScan(basePackages = "com.example.mapper")
 public class ExceptionApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(ExceptionApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(ExceptionApplication.class, args);
+	}
 
 }

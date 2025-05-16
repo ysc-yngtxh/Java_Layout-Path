@@ -11,8 +11,8 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 @ServletComponentScan(basePackages = "com.example.servlet")
 public class EncoderApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(EncoderApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(EncoderApplication.class, args);
+	}
 
 }

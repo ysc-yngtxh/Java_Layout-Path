@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class LyException extends RuntimeException {
 
-    private static final long serialVersionUID = 5660628920800317941L;
+	private static final long serialVersionUID = 5660628920800317941L;
 
-    private UserEnum userEnum;
+	private UserEnum userEnum;
 }

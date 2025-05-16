@@ -13,33 +13,33 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-07-11 06:57
+ * @dateTime 2023-07-11 07:00:00
  * @apiNote TODO 拦截器
  */
 public class UserInterceptor implements HandlerInterceptor {
 
-    @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        String authorization = request.getHeader("X-Token");
-        if (StringUtils.hasText(authorization)) {
-            // 获取该用户密码
-            String username = JwtUtils.getUsername(authorization);
-            UserMapper userMapper = (UserMapper) SpringContextHolder.getApplicationContext()
-                                                                    .getBean("consumerDao");
-            String pwd = userMapper.selectOne(new LambdaQueryWrapper<User>()
-                                               .eq(User::getUserName, username)).getPassWord();
-            return JwtUtils.verifyToken(authorization, pwd);
-        }
-        return false;
-    }
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+		String authorization = request.getHeader("X-Token");
+		if (StringUtils.hasText(authorization)) {
+			// 获取该用户密码
+			String username = JwtUtils.getUsername(authorization);
+			UserMapper userMapper = (UserMapper) SpringContextHolder.getApplicationContext()
+			                                                        .getBean("consumerDao");
+			String pwd = userMapper.selectOne(new LambdaQueryWrapper<User>()
+					                                  .eq(User::getUserName, username)).getPassWord();
+			return JwtUtils.verifyToken(authorization, pwd);
+		}
+		return false;
+	}
 
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
-    }
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+		HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
+	}
 
-    @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
-    }
+	@Override
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+		HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
+	}
 }

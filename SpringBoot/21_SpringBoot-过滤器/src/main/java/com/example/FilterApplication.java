@@ -11,8 +11,8 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 @ServletComponentScan(basePackages = "com.example.filter")
 public class FilterApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(FilterApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(FilterApplication.class, args);
+	}
 
 }

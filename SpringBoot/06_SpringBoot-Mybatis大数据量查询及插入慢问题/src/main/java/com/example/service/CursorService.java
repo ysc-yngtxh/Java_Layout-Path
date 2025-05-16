@@ -2,9 +2,9 @@ package com.example.service;
 
 public interface CursorService {
 
-    void streamingQuery1();
+	void streamingQuery1();
 
-    void streamingQuery2();
+	void streamingQuery2();
 
-    void selectStudentOnResultHandler();
+	void selectStudentOnResultHandler();
 }

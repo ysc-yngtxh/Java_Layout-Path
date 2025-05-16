@@ -10,14 +10,14 @@ import org.springframework.stereotype.Component;
 @Lazy(false)
 public class SpringContextHolder implements ApplicationContextAware {
 
-    private static ApplicationContext APPLICATION_CONTEXT;
+	private static ApplicationContext APPLICATION_CONTEXT;
 
-    @Override
-    public void setApplicationContext(@NonNull ApplicationContext applicationContext) {
-        APPLICATION_CONTEXT = applicationContext;
-    }
+	public static ApplicationContext getApplicationContext() {
+		return APPLICATION_CONTEXT;
+	}
 
-    public static ApplicationContext getApplicationContext() {
-        return APPLICATION_CONTEXT;
-    }
+	@Override
+	public void setApplicationContext(@NonNull ApplicationContext applicationContext) {
+		APPLICATION_CONTEXT = applicationContext;
+	}
 }

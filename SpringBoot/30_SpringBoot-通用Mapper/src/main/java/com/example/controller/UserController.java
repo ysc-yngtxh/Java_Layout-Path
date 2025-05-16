@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
 
-    @RequestMapping("/user/{id}")
-    public JwtToken register(@PathVariable("id") Integer id) {
-        User user = userService.queryById(id);
-        return new JwtToken().success("我能得到返回数据吗？", user);
-    }
+	@RequestMapping("/user/{id}")
+	public JwtToken register(@PathVariable("id") Integer id) {
+		User user = userService.queryById(id);
+		return new JwtToken().success("我能得到返回数据吗？", user);
+	}
 
-    @RequestMapping("/login/{id}")
-    public User query(@PathVariable("id") Integer id) {
-        User user = userService.queryById(id);
-        return user;
-    }
+	@RequestMapping("/login/{id}")
+	public User query(@PathVariable("id") Integer id) {
+		User user = userService.queryById(id);
+		return user;
+	}
 }

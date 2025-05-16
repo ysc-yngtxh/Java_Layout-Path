@@ -1,43 +1,44 @@
 package com.example.domain;
 
 public class Student {
-    private Integer id;
 
-    private String name;
+	private Integer id;
 
-    private String email;
+	private String name;
 
-    private Integer age;
+	private String email;
 
-    public Integer getId() {
-        return id;
-    }
+	private Integer age;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public Integer getAge() {
-        return age;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
 }

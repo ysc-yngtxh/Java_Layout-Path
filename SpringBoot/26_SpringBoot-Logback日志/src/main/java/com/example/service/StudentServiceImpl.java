@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    @Autowired
-    private StudentMapper studentMapper;
+	@Autowired
+	private StudentMapper studentMapper;
 
-    @Override
-    public Integer queryStudentCount() {
-        return studentMapper.selectStudentCount();
-    }
+	@Override
+	public Integer queryStudentCount() {
+		return studentMapper.selectStudentCount();
+	}
 }

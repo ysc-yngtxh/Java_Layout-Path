@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan("com.example.mapper")
 public class SpringVueApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(SpringVueApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(SpringVueApplication.class, args);
+	}
 
 }

@@ -14,7 +14,7 @@ public class BackLogicMock implements StudentService {
 	public Student queryStudentById(Integer id) {
 		// 当服务不可用时返回默认值
 		return Student.builder()
-				      .id(0)
+		              .id(0)
 		              .name("降级用户")
 		              .age(100)
 		              .build();

@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class StudentController {
 
-    @Autowired
-    private StudentService studentService;
+	@Autowired
+	private StudentService studentService;
 
-    @RequestMapping("/student")
-    public Student student(Integer id) {
-        Student student = studentService.queryStudentById(id);
-        return student;
-    }
+	@RequestMapping("/student")
+	public Student student(Integer id) {
+		Student student = studentService.queryStudentById(id);
+		return student;
+	}
 }

@@ -7,22 +7,22 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "abc")  // 这里是将配置文件中的key值前缀写出来
 public class Abc {
 
-    private String name;  // 所以这里就可以不用写前缀的
-    private String webSit;
+	private String name;  // 所以这里就可以不用写前缀的
+	private String webSit;
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getWebSit() {
-        return webSit;
-    }
+	public String getWebSit() {
+		return webSit;
+	}
 
-    public void setWebSit(String webSit) {
-        this.webSit = webSit;
-    }
+	public void setWebSit(String webSit) {
+		this.webSit = webSit;
+	}
 }

@@ -11,8 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan(basePackages = "com.example.mapper")
 public class LogbackApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(LogbackApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(LogbackApplication.class, args);
+	}
 
 }

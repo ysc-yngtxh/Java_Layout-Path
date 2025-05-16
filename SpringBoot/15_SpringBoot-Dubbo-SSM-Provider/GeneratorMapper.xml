@@ -4,7 +4,8 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
     <!--指定连接数据库的JDBC驱动包所在位置，指定到你本机的完整路径-->
-    <classPathEntry location="D:\JDBC连接数据库\mysql-connector-java-8.0.21\mysql-connector-java-8.0.21.jar"/>
+    <classPathEntry
+            location="D:\JDBC连接数据库\mysql-connector-java-8.0.21\mysql-connector-java-8.0.21.jar"/>
 
     <!--配置table表信息内容体，targetRuntime指定采用 MyBatis3 的版本-->
     <context id="tables" targetRuntime="MyBatis3">

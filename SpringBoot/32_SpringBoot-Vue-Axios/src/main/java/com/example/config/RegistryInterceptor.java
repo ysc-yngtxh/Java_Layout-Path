@@ -7,24 +7,24 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-07-11 07:51
+ * @dateTime 2023-07-11 07:50:00
  * @apiNote TODO 注册拦截器
  */
 @Configuration
 public class RegistryInterceptor implements WebMvcConfigurer {
 
-    String[] addPath = {
-            "/user/**"
-    };
+	String[] addPath = {
+			"/user/**"
+	};
 
-    String[] excludePath = {
-            "/user/login"
-    };
+	String[] excludePath = {
+			"/user/login"
+	};
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new UserInterceptor())
-                .addPathPatterns(addPath)
-                .excludePathPatterns(excludePath);
-    }
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new UserInterceptor())
+		        .addPathPatterns(addPath)
+		        .excludePathPatterns(excludePath);
+	}
 }

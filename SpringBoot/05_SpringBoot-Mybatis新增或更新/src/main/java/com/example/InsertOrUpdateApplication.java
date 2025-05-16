@@ -13,9 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan(basePackages = "com.example.mapper")
 public class InsertOrUpdateApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(InsertOrUpdateApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(InsertOrUpdateApplication.class, args);
+	}
 
 }
 

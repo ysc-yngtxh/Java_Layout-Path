@@ -25,8 +25,12 @@
     <insert id="insertReplaceInto">
         REPLACE
         INTO db_student(`id`, `name`, `email`, `age`)
-        VALUES (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
-                #{email,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER})
+        VALUES (
+        #{id,jdbcType=INTEGER},
+        #{name,jdbcType=VARCHAR},
+        #{email,jdbcType=VARCHAR},
+        #{age,jdbcType=INTEGER}
+        )
     </insert>
 
 
@@ -35,8 +39,12 @@
     <insert id="insertIgnoreInto" parameterType="java.util.List">
         INSERT
         IGNORE INTO db_student(`id`, `name`, `email`, `age`)
-        VALUES (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
-                #{email,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER})
+        VALUES (
+        #{id,jdbcType=INTEGER},
+        #{name,jdbcType=VARCHAR},
+        #{email,jdbcType=VARCHAR},
+        #{age,jdbcType=INTEGER}
+        )
     </insert>
 
 
@@ -82,14 +90,15 @@
     <insert id="insertDuplicateKeyUpdateBatch">
         INSERT INTO db_student(`id`, `name`, `email`, `age`)
         VALUES
-        <foreach collection="students" item="item" open="(" close=")" separator=",">
+        <foreach collection="students" item="item" open="(" close=")"
+                 separator=",">
             #{item.id,jdbcType=INTEGER}, #{item.name,jdbcType=VARCHAR},
             #{item.email,jdbcType=VARCHAR}, #{item.age,jdbcType=INTEGER}
         </foreach>
         ON DUPLICATE KEY UPDATE
-            id = VALUES(`id`),
-            name = VALUES(`name`),
-            email = VALUES(`email`),
-            age = VALUES(`age`)
+        id = VALUES(`id`),
+        name = VALUES(`name`),
+        email = VALUES(`email`),
+        age = VALUES(`age`)
     </insert>
 </mapper>

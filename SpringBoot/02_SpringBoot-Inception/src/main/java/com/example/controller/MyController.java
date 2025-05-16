@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class MyController {
 
-    @RequestMapping("/say")
-    public @ResponseBody String say() {
-        return "Hello SpringBoot!";
-    }
+	@RequestMapping("/say")
+	public @ResponseBody String say() {
+		return "Hello SpringBoot!";
+	}
 }

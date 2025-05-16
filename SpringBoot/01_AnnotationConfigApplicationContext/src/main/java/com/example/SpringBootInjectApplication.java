@@ -9,7 +9,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class SpringBootInjectApplication {
 
 	public static void main(String[] args) {
-
 		// 创建一个AnnotationConfigApplicationContext的实例，并传入AppConfig.class作为参数。
 		AnnotationConfigApplicationContext applicationContext =
 				new AnnotationConfigApplicationContext(AppConfig.class);
@@ -27,7 +26,7 @@ public class SpringBootInjectApplication {
 		applicationContext.getBeanFactory().registerSingleton("world", new World());
 
 		// 获取bean
-        System.out.println("获取注册的 Bean：" + applicationContext.getBean("hello", Hello.class));
+		System.out.println("获取注册的 Bean：" + applicationContext.getBean("hello", Hello.class));
 		System.out.println("获取注册的 Bean：" + applicationContext.getBean("world", World.class));
 	}
 

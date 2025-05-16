@@ -7,17 +7,17 @@ import lombok.Data;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-09-27 22:26
+ * @dateTime 2024-09-27 22:20:00
  * @apiNote TODO
  */
 @Data
 @AllArgsConstructor
 public class JdkProxy implements InvocationHandler {
 
-    private Object target;
+	private Object target;
 
-    @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        return method.invoke(target, args);
-    }
+	@Override
+	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+		return method.invoke(target, args);
+	}
 }

@@ -1,7 +1,6 @@
 package com.example.service;
 
 import com.example.domain.Student;
-
 import java.util.List;
 
 /**
@@ -11,9 +10,9 @@ import java.util.List;
  */
 public interface BatchService {
 
-    void insertForeach(List<Student> list);
+	void insertForeach(List<Student> list);
 
-    void batchInsert(List<Student> list);
+	void batchInsert(List<Student> list);
 
-    void batchInsertForeach(List<Student> list);
+	void batchInsertForeach(List<Student> list);
 }

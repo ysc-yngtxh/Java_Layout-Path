@@ -5,5 +5,5 @@ package com.example.service;
  */
 public interface StudentService {
 
-    String sayHello(String msg);
+	String sayHello(String msg);
 }

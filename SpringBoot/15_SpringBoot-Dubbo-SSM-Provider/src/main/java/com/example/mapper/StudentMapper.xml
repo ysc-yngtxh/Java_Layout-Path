@@ -12,12 +12,14 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, name, email, age
+        id
+        , name, email, age
     </sql>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+            resultMap="BaseResultMap">
         select
-            <include refid="Base_Column_List"/>
+        <include refid="Base_Column_List"/>
         from db_student
         where id = #{id,jdbcType=INTEGER}
     </select>
@@ -67,7 +69,8 @@
         </trim>
     </insert>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.example.domain.Student">
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.example.domain.Student">
         update db_student
         <set>
             <if test="name != null">
@@ -93,6 +96,7 @@
 
     <!--获取学生总人数-->
     <select id="selectAllStudentCount" resultType="java.lang.Integer">
-        select count(*) from db_student
+        select count(*)
+        from db_student
     </select>
 </mapper>

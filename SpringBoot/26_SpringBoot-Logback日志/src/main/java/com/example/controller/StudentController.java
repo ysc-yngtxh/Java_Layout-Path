@@ -13,23 +13,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @Slf4j
 public class StudentController {
-    @Autowired
-    private StudentService studentService;
 
-    @RequestMapping("/student/count")
-    public @ResponseBody String studentCount() {
+	@Autowired
+	private StudentService studentService;
 
-        /* log方法级别从低到高 */
-        log.trace("查询当前学生总人数");
-        log.debug("查询当前学生总人数");
-        log.info("查询当前学生总人数");
-        log.warn("查询当前学生总人数");
-        log.error("查询当前学生总人数");
+	@RequestMapping("/student/count")
+	public @ResponseBody String studentCount() {
 
-        // SpringBoot默认是INFO，因此低于INFO的TRACE和DEBUG都不会输出
+		/* log方法级别从低到高 */
+		log.trace("查询当前学生总人数");
+		log.debug("查询当前学生总人数");
+		log.info("查询当前学生总人数");
+		log.warn("查询当前学生总人数");
+		log.error("查询当前学生总人数");
 
-        Integer studentCount = studentService.queryStudentCount();
+		// SpringBoot默认是INFO，因此低于INFO的TRACE和DEBUG都不会输出
 
-        return "学生总人数为：" + studentCount;
-    }
+		Integer studentCount = studentService.queryStudentCount();
+
+		return "学生总人数为：" + studentCount;
+	}
 }

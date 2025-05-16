@@ -7,18 +7,18 @@ import com.example.domain.Student;
  */
 public interface StudentMapper {
 
-    int deleteByPrimaryKey(Integer id);
+	int deleteByPrimaryKey(Integer id);
 
-    int insert(Student record);
+	int insert(Student record);
 
-    int insertSelective(Student record);
+	int insertSelective(Student record);
 
-    Student selectByPrimaryKey(Integer id);
+	Student selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(Student record);
+	int updateByPrimaryKeySelective(Student record);
 
-    int updateByPrimaryKey(Student record);
+	int updateByPrimaryKey(Student record);
 
-    // 获取学生总人数
-    Integer selectAllStudentCount();
+	// 获取学生总人数
+	Integer selectAllStudentCount();
 }

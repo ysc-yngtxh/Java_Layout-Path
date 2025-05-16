@@ -11,7 +11,7 @@ import org.apache.ibatis.session.ResultHandler;
 /**
  * @Author 游家纨绔
  * @Description TODO
- * @Date 2025-04-11 09:06:30
+ * @Date 2025-04-11 09:00:00
  */
 public interface CursorMapper {
 
@@ -54,14 +54,15 @@ public interface CursorMapper {
 	@Options(resultSetType = ResultSetType.FORWARD_ONLY, fetchSize = Integer.MIN_VALUE)
 	Cursor<Student> streamingQuery2();
 
-	/** streamingQuery2() 效率以及性能是优于 streamingQuery1() ，
-	 *  因为指定了Cursor每次从数据库中读取的数据量，减少了迭代次数
+	/**
+	 * streamingQuery2() 效率以及性能是优于 streamingQuery1() ，
+	 * 因为指定了Cursor每次从数据库中读取的数据量，减少了迭代次数
 	 */
 
 
 	// 流式查询的第二种写法：方法入参为 ResultHandler<?> 类型，
 	//                    一定要加上@ResultType，以便在ResultHandler的实现类中handler方法里用作入参类型
-	@Select("SELECT * FROM db_student union all SELECT * FROM db_student" )
+	@Select("SELECT * FROM db_student union all SELECT * FROM db_student")
 	@ResultType(Student.class)
 	@Options(resultSetType = ResultSetType.FORWARD_ONLY, fetchSize = Integer.MIN_VALUE)
 	void selectStudentOnResultHandler(ResultHandler<Student> resultHandler);

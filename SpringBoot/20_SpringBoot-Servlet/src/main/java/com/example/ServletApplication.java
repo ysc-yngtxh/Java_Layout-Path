@@ -11,8 +11,8 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 @ServletComponentScan(basePackages = "com.example.servlet")  // 扫描servlet类
 public class ServletApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(ServletApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(ServletApplication.class, args);
+	}
 
 }

@@ -9,15 +9,15 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper // 扫描mapper接口到spring容器
 public interface StudentMapper {
 
-    int deleteByPrimaryKey(Integer id);
+	int deleteByPrimaryKey(Integer id);
 
-    int insert(Student record);
+	int insert(Student record);
 
-    int insertSelective(Student record);
+	int insertSelective(Student record);
 
-    Student selectByPrimaryKey(Integer id);
+	Student selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(Student record);
+	int updateByPrimaryKeySelective(Student record);
 
-    int updateByPrimaryKey(Student record);
+	int updateByPrimaryKey(Student record);
 }

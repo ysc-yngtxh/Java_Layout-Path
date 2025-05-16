@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 /**
  * @author: 游家纨绔
- * @create: 2024-05-27 22:56
+ * @create: 2024-05-27 22:00:00
  * @description: 自定义事务注解
  **/
 @Inherited
@@ -18,6 +18,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CustomTransaction {
 
-    // 指定异常回滚
-    Class<? extends Throwable>[] rollbackFor() default {};
+	// 指定异常回滚
+	Class<? extends Throwable>[] rollbackFor() default {};
 }

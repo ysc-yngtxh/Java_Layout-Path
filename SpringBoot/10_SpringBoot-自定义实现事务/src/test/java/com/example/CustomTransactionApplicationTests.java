@@ -8,11 +8,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class CustomTransactionApplicationTests {
 
-    @Autowired
-    private MyTransactionService myTransactionService;
+	@Autowired
+	private MyTransactionService myTransactionService;
 
-    @Test
-    void contextLoads() {
-        myTransactionService.saveTest("ysc");
-    }
+	@Test
+	void contextLoads() {
+		myTransactionService.saveTest("ysc");
+	}
 }

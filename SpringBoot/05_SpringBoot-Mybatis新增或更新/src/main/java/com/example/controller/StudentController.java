@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class StudentController {
 
-    @Autowired
-    private StudentService studentService;
+	@Autowired
+	private StudentService studentService;
 
-    // 这里体现了Mybatis的一级缓存
-    @RequestMapping("/cache")
-    public @ResponseBody Student cache(@RequestParam Integer id) {
-        return studentService.queryStudentByIdCacheL1(id);
-    }
+	// 这里体现了Mybatis的一级缓存
+	@RequestMapping("/cache")
+	public @ResponseBody Student cache(@RequestParam Integer id) {
+		return studentService.queryStudentByIdCacheL1(id);
+	}
 }

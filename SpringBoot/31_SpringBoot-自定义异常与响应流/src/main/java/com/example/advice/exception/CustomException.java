@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(value = HttpStatus.NOT_MODIFIED, reason = "参数错误")
 public class CustomException extends RuntimeException {
 
-    private static final long serialVersionUID = 1928685874042929655L;
+	private static final long serialVersionUID = 1928685874042929655L;
 
-    private String message;
+	private String message;
 }

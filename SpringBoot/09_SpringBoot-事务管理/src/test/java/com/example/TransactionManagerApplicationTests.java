@@ -9,20 +9,20 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest
 class TransactionManagerApplicationTests {
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 
-    @Test
-    @Transactional
-    void contextLoads() {
-        // execute：可以执行所有SQL语句，一般用于执行DDL语句。
-        // update： 用于执行INSERT、UPDATE、DELETE等DML语句。
-        // query：  用于DQL数据查询语句。
-        jdbcTemplate.execute(
-                "INSERT INTO `db_student`(`name`, `email`, `age`) " +
-                    "VALUES ('剑来', 'abcdefg.163.com', '28');"
-        );
-        throw new NullPointerException("耶耶耶！不好意思，洒家报错了～");
-    }
+	@Test
+	@Transactional
+	void contextLoads() {
+		// execute：可以执行所有SQL语句，一般用于执行DDL语句。
+		// update： 用于执行INSERT、UPDATE、DELETE等DML语句。
+		// query：  用于DQL数据查询语句。
+		jdbcTemplate.execute(
+				"INSERT INTO `db_student`(`name`, `email`, `age`) " +
+						"VALUES ('剑来', 'abcdefg.163.com', '28');"
+		);
+		throw new NullPointerException("耶耶耶！不好意思，洒家报错了～");
+	}
 
 }

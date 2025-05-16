@@ -12,15 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserMapper userMapper;
+	@Autowired
+	private UserMapper userMapper;
 
-    public User queryById(Integer id) {
-        return userMapper.selectByPrimaryKey(id);
-    }
+	public User queryById(Integer id) {
+		return userMapper.selectByPrimaryKey(id);
+	}
 
-    @Transactional
-    public void insertUser(User user) {
-        userMapper.insert(user);
-    }
+	@Transactional
+	public void insertUser(User user) {
+		userMapper.insert(user);
+	}
 }

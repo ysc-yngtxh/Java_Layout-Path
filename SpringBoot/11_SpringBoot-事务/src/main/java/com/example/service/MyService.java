@@ -4,7 +4,7 @@ import com.example.domain.Student;
 
 public interface MyService {
 
-    int queryStudentById(Student student);
+	int queryStudentById(Student student);
 
-    Student query(Integer id);
+	Student query(Integer id);
 }

@@ -11,12 +11,14 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, name, email, age
+        id
+        , name, email, age
     </sql>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+            resultMap="BaseResultMap">
         select
-            <include refid="Base_Column_List"/>
+        <include refid="Base_Column_List"/>
         from student
         where id = #{id,jdbcType=INTEGER}
     </select>
@@ -66,7 +68,8 @@
         </trim>
     </insert>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.example.domain.Student">
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.example.domain.Student">
         update student
         <set>
             <if test="name != null">

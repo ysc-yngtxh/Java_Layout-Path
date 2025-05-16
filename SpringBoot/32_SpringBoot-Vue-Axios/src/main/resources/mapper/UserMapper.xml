@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.example.mapper.UserMapper">
 
     <resultMap id="userMap" type="User">
-        <result column="id"           property="id"          jdbcType="INTEGER"/>
-        <result column="superior_id"  property="superiorId"  jdbcType="INTEGER"/>
-        <result column="user_name"    property="userName"    jdbcType="VARCHAR"/>
-        <result column="pass_word"    property="passWord"    jdbcType="VARCHAR"/>
-        <result column="alias"        property="alias"       jdbcType="VARCHAR"/>
-        <result column="age"          property="age"         jdbcType="INTEGER"/>
-        <result column="sex"          property="sex"         jdbcType="INTEGER"/>
-        <result column="phone"        property="phone"       jdbcType="VARCHAR"/>
-        <result column="address"      property="address"     jdbcType="VARCHAR"/>
-        <result column="email"        property="email"       jdbcType="VARCHAR"/>
-        <result column="delete_flag"  property="deleteFlag"  jdbcType="INTEGER"/>
-        <result column="created_date" property="createdDate" jdbcType="TIMESTAMP"/>
-        <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP"/>
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="superior_id" property="superiorId" jdbcType="INTEGER"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="pass_word" property="passWord" jdbcType="VARCHAR"/>
+        <result column="alias" property="alias" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
+        <result column="created_date" property="createdDate"
+                jdbcType="TIMESTAMP"/>
+        <result column="updated_date" property="updatedDate"
+                jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">

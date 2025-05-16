@@ -5,11 +5,11 @@ import lombok.Data;
 @Data
 public class Student {
 
-    private Integer id;
+	private Integer id;
 
-    private String name;
+	private String name;
 
-    private String email;
+	private String email;
 
-    private Integer age;
+	private Integer age;
 }

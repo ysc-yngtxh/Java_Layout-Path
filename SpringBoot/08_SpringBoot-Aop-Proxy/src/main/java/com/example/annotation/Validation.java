@@ -9,5 +9,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Validation {
 
-    boolean required() default false;
+	boolean required() default false;
 }
