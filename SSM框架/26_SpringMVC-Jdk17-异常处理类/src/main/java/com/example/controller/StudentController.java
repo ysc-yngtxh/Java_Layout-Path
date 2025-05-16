@@ -1,7 +1,7 @@
 package com.example.controller;
 
-import com.example.exception.custom.AgeException;
 import com.example.exception.MyUserException;
+import com.example.exception.custom.AgeException;
 import com.example.exception.custom.NameException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,7 @@ public class StudentController {
 
 	@RequestMapping(value = "/some.do")
 	public ModelAndView doSome(@RequestParam("name") String name,
-	                           @RequestParam(value = "age", required=false) Integer age) throws MyUserException {
+	                           @RequestParam(value = "age", required = false) Integer age) throws MyUserException {
 		ModelAndView mv = new ModelAndView();
 		// 根据请求参数抛出异常
 		if (!"zs".equals(name)) {

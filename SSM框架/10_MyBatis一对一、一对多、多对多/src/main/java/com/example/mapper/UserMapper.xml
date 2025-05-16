@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <!--实体类的映射文件 namespace 指定接口的类全名-->
 <mapper namespace="com.example.mapper.UserMapper">
 
@@ -29,15 +28,14 @@
     </resultMap>
 
     <select id="UserWithOrders" resultMap="myUser">
-        select
-            u.*,
-            o.id as oid,
-            o.uid,
-            o.order_time as orderTime,
-            o.money
+        select u.*,
+               o.id         as oid,
+               o.uid,
+               o.order_time as orderTime,
+               o.money
         from ssm_user u
-            inner join ssm_order o
-                on u.id = o.uid
+                 inner join ssm_order o
+                            on u.id = o.uid
         where u.id = #{uid}
     </select>
 </mapper>

@@ -4,5 +4,5 @@ import com.example.pojo.SysUser;
 
 public interface UserService {
 
-    void addUser(SysUser user);
+	void addUser(SysUser user);
 }

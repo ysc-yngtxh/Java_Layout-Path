@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.example.mapper.GoodsDao">
+
     <select id="selectGoods" resultType="com.example.pojo.Goods">
         select id,name,amount,price from ssm_goods where id=#{gid}
     </select>

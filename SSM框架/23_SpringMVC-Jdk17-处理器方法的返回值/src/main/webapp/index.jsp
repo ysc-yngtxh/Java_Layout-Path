@@ -5,7 +5,7 @@
     <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
     <script type="text/javascript">
         $(function() {
-            $("#btn1").click(function(){
+            $("#btn1").click(function() {
                 $.ajax({
                     url: "returnVoid-ajax.do",
                     data: {
@@ -14,12 +14,12 @@
                     },
                     type: "post",
                     dataType: "json",
-                    success: function(resp){
+                    success: function(resp) {
                         alert(resp.name + "  " + resp.age);
                     }
                 })
             })
-            $("#btn2").click(function(){
+            $("#btn2").click(function() {
                 $.ajax({
                     url: "returnStudentJson.do",
                     data: {
@@ -28,13 +28,13 @@
                     },
                     type: "post",
                     dataType: "json",
-                    success: function(resp){
+                    success: function(resp) {
                         alert(resp.name + "  " + resp.age);
 
                     }
                 })
             })
-            $("#btn3").click(function(){
+            $("#btn3").click(function() {
                 $.ajax({
                     url: "returnList.do",
                     data: {
@@ -43,7 +43,7 @@
                     },
                     type: "post",
                     dataType: "json",
-                    success: function(resp){
+                    success: function(resp) {
                         $.each(resp, function(i,n){
                             alert(n.name + "  " + n.age);
                         })
@@ -56,28 +56,28 @@
                     data: {},
                     type: "post",
                     dataType: "json",
-                    success: function(resp){
+                    success: function (resp) {
                         alert(resp);
                     }
                 })
             })
-            $("#btn5").click(function(){
+            $("#btn5").click(function () {
                 $.ajax({
                     url: "returnString2.do",
                     data: {},
                     type: "post",
                     dataType: "text",
-                    success: function(resp){
+                    success: function (resp) {
                         alert(resp);
                     }
                 })
             })
-            $("#btn6").click(function(){
+            $("#btn6").click(function () {
                 $.ajax({
                     url: "returnString3.do",
                     data: {},
                     type: "post",
-                    success: function(resp){
+                    success: function (resp) {
                         alert(resp);
                     }
                 })

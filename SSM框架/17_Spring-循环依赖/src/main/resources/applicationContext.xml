@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- TODO Setter方法注入方式 在 Spring 中是不会产生循环依赖问题的，这主要是靠 三级缓存 机制-->
@@ -40,7 +41,7 @@
         expose-proxy="true"：      表示强制AOP代理创建器暴露代理对象为ThreadLocal模式。使其能在被代理的对象内部通过AopContext访问。
                                    可以使用AopContext.currentProxy()方法获取方法内部调用的代理对象。
     -->
-    <aop:aspectj-autoproxy proxy-target-class="true" expose-proxy="true" />
+    <aop:aspectj-autoproxy proxy-target-class="true" expose-proxy="true"/>
 
 
     <!--TODO 扫描具有 @Component 注解的aop类-->

@@ -1,5 +1,5 @@
-
 ## 一、Spring中单例bean的创建流程：
+
       1、bean实例化（使用构造器、或者instanceSupplier、或者@Bean方法）
       2、属性赋值（set方法，不同于类实例化中的属性直接赋值）
       3、依赖注入（IOC：set注入或者构造注入）
@@ -10,15 +10,17 @@
             4>、获得一个完整的对象，并将对象放入map容器中（通过Context.getBean()可以获取到Bean对象并使用）
 
 ## 二、Spring Bean是如何产生循环依赖？
+
       AService 和 BService 的依赖关系，
       当 AService 创建Bean时，会先对 AService 进行实例化生成一个原始对象，
       然后在进行属性注入时发现了需要 BService 对应的 Bean，此时就会去为 BService 进行创建Bean，
       在 BService 实例化后生成一个原始对象后进行属性注入，此时会发现也需要 AService 对应的 Bean。
       这样就会造成 AService 和 BService 的 Bean 都无法创建，就会产生 循环依赖 问题。
 
-   ![img_1](src/main/resources/static/img_1.png)
+![img_1](src/main/resources/static/img_1.png)
 
 ## 三、Spring的一二三级缓存是什么？
+
    ```
    注意：这里的 创建Bean实例流程 与 类的实例化流程 是有区别的。
    
@@ -33,6 +35,7 @@
    ```
 
 ## 四、Spring 是如何解决Bean的循环依赖问题？
+
       上述中可以看到 AService 和 BService 的循环依赖问题是因为 
       AService的创建 需要 BService的注入，
       BService的注入 需要 BService的创建，
@@ -43,10 +46,11 @@
       在创建 AService 的Bean对象时，实例化后将 AService代理对象 存放到缓存中(提早暴露)，然后依赖注入时发现需要 BService，
       然后去创建 BService，实例化后同样将 BService代理对象 存放到缓存中，然后依赖注入时发现需要 AService 便会从缓存中取出并注入，
       这样 BService 就完成了创建，随后 AService 也就能完成属性注入，最后也完成创建。这样就打破了环形调用，避免循环依赖问题。
-   
-   ![img_2](src/main/resources/static/img.png)
+
+![img_2](src/main/resources/static/img.png)
 
 ## 五、Spring 中不能解决 Bean 的循环依赖场景
+
      单例(Sigleton)作用域下的 构造器注入 出现的循环依赖
         原因：因为 构造器注入 发生在 实例化阶段，而 Spring 解决循环依赖问题依靠的 三级缓存 在 属性注入阶段，
              也就是说调用构造函数时还未能放入三级缓存中，所以无法解决 构造器注入 的循环依赖问题。
@@ -63,6 +67,7 @@
              但@Async标注的类不会提前生成代理对象
 
 ## 六、Spring 如何解决Bean的AOP循环依赖问题？
+
       问题：
           通过上面的分析可以发现只需要一个存放 代理对象 的缓存就可以解决循环依赖问题。
           也就是说只要二级缓存（earlySingletonObjects）就够了，
@@ -82,7 +87,8 @@
 
           问题：为什么使用 Aop 切面操作后，就得使用代理对象来取代原始对象？
           解答：因为动态代理可以在目标类源代码不改变的情况下，增加功能，无需影响业务逻辑代码，实现解耦
-   ![img_4](src/main/resources/static/img_3.png)
+
+![img_4](src/main/resources/static/img_3.png)
 
     Spring解决带有AOP的循环依赖分析：
         1️⃣、假如 A 和 B 循环依赖，A 和 C 也循环依赖，所以当创建 A 的bean的时候，为避免 B和C 拿到不同的代理对象，
@@ -104,4 +110,4 @@
         5️⃣、Spring 利用 三级缓存 巧妙地将出现 循环依赖 时的 AOP切面 操作，提前到了 属性注入 之前，
             这样就不会导致后面生成的代理对象与属性注入时的对象的不一致，从而解决了带有AOP的循环依赖。
 
-   ![img_3](src/main/resources/static/img_2.png)
+![img_3](src/main/resources/static/img_2.png)

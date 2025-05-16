@@ -32,6 +32,7 @@ import org.springframework.stereotype.Component;
  */
 @Component("mySchool")
 public class School {
+
     /**
      * @Value：简单类型的属性赋值
      *     属性：value是String类型的，表示简单类型的属性值
@@ -77,27 +78,27 @@ public class School {
     // @Resource(name="myTeacher") // 这种写法表示只使用byName方式，需要增加一个属性name，name的值是bean的id(名称)
     private Teacher teacher;
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getAddress() {
-        return address;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    @Override
-    public String toString() {
-        return "School{" +
-                "name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "School{" +
+				"name='" + name + '\'' +
+				", address='" + address + '\'' +
+				'}';
+	}
 }

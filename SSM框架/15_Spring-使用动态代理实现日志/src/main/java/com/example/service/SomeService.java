@@ -1,6 +1,8 @@
 package com.example.service;
 
 public interface SomeService {
-    void doSome();
-    void doOther();
+
+	void doSome();
+
+	void doOther();
 }

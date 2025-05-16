@@ -2,16 +2,16 @@ package com.example.proxy;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-11-11 10:07
+ * @dateTime 2023-11-11 10:00:00
  * @apiNote TODO
  */
 public interface ProxyService {
 
-    void saveRpc();
+	void saveRpc();
 
-    void saveUser();
+	void saveUser();
 
-    void saveSigUser();
+	void saveSigUser();
 
-    void saveAllUser();
+	void saveAllUser();
 }

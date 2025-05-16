@@ -59,13 +59,13 @@ public class MyController {
     public ModelAndView First(@RequestParam(value="rname", required = false) String name,
                               @RequestParam(value="rage", required = false) Integer age) {
 
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("myName", name);
-        mv.addObject("myAge", age);
-        // show是视图文件的逻辑名称
-        mv.setViewName("show");
-        return mv;
-    }
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("myName", name);
+		mv.addObject("myAge", age);
+		// show是视图文件的逻辑名称
+		mv.setViewName("show");
+		return mv;
+	}
 
     /** 对象接收参数：
      *    1、处理器方法形参是Java对象，这个对象的属性名和请求中参数名一样的

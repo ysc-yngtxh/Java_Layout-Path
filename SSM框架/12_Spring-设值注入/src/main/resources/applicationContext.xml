@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
@@ -26,7 +26,7 @@
 
     <!--引用类型的set注入-->
     <bean id="myStudentBy" class="com.example.pojo.Student">
-    <property name="name" value="游家纨绔"/>
+        <property name="name" value="游家纨绔"/>
         <property name="age" value="23"/>
         <property name="school" ref="mySchool"/>
     </bean>
@@ -35,19 +35,19 @@
     <bean id="mySchool" class="com.example.pojo.School">
         <property name="name" value="湖北武汉"/>
         <property name="address" value="华中科技大学"/>
-        <property name="arrayList" >  <!--List标签：注入集合-->
+        <property name="arrayList">  <!--List标签：注入集合-->
             <list>
                 <value>hello</value>
                 <value>你好</value>
                 <value>1234</value>
             </list>
         </property>
-        <property name="arrays" >  <!--Array标签：注入数组-->
+        <property name="arrays">  <!--Array标签：注入数组-->
             <array>
                 <value>笨笨</value>
             </array>
         </property>
-        <property name="hashMap" >  <!--Map标签：注入Map类型的集合-->
+        <property name="hashMap">  <!--Map标签：注入Map类型的集合-->
             <map>
                 <entry key="小朋友" value="小曹"/>
             </map>

@@ -11,21 +11,21 @@ import org.springframework.web.servlet.ModelAndView;
 // 拦截器类：拦截用户的请求
 public class MyInterceptor2 implements HandlerInterceptor {
 
-    @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        System.out.println("拦截器的MyInterceptor2的preHandle()");
-        return true;
-    }
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+		System.out.println("拦截器的MyInterceptor2的preHandle()");
+		return true;
+	}
 
 
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mv) {
-        System.out.println("拦截器的MyInterceptor2的postHandle()");
-    }
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView mv) {
+		System.out.println("拦截器的MyInterceptor2的postHandle()");
+	}
 
 
-    @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-        System.out.println("拦截器的MyInterceptor2的afterCompletion()");
-    }
+	@Override
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
+		System.out.println("拦截器的MyInterceptor2的afterCompletion()");
+	}
 }

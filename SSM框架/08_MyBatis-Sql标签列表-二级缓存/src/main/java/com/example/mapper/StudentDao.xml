@@ -92,13 +92,13 @@
             <choose>
                 <when test="name!=null and name!=''">
                     AND name like concat('%', #{name,jdbcType=VARCHAR}, '%')
-                </when >
+                </when>
                 <when test="age==10">
                     AND age = #{age, jdbcType=INTEGER}
-                </when >
+                </when>
                 <when test="email!=null and email!=''">
                     OR email = #{email, jdbcType=VARCHAR}
-                </when >
+                </when>
                 <otherwise>
                     AND id = 1
                 </otherwise>

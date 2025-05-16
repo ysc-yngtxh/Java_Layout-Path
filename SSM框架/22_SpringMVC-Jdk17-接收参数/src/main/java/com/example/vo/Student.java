@@ -4,34 +4,35 @@ package com.example.vo;
  * @author 游家纨绔
  */
 public class Student {
-    private String name;
-    private Integer age;
 
-    public Student() {
-        System.out.println("===Student的无参构造方法===");
-    }
+	private String name;
+	private Integer age;
 
-    public String getName() {
-        return name;
-    }
+	public Student() {
+		System.out.println("===Student的无参构造方法===");
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Integer getAge() {
-        return age;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
+	public Integer getAge() {
+		return age;
+	}
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                '}';
-    }
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	@Override
+	public String toString() {
+		return "Student{" +
+				"name='" + name + '\'' +
+				", age=" + age +
+				'}';
+	}
 }

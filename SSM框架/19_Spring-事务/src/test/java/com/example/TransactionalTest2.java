@@ -14,33 +14,33 @@ public class TransactionalTest2 {
      *        从而造成数据不完整，不一致的情况。
      */
 
-    // 执行自定义事务方法。抛出异常：商品不存在异常。结果：sale 表插入失败，goods 表插入失败
-    @Test
-    public void text01() {
-        String config = "applicationContext2.xml";
-        ApplicationContext ac = new ClassPathXmlApplicationContext(config);
+	// 执行自定义事务方法。抛出异常：商品不存在异常。结果：sale 表插入失败，goods 表插入失败
+	@Test
+	public void text01() {
+		String config = "applicationContext2.xml";
+		ApplicationContext ac = new ClassPathXmlApplicationContext(config);
 
-        BuyGoodsService service = ac.getBean("buyService", BuyGoodsService.class);
-        service.buy(1005,10);
-    }
+		BuyGoodsService service = ac.getBean("buyService", BuyGoodsService.class);
+		service.buy(1005, 10);
+	}
 
-    // 执行自定义事务方法。抛出异常：商品库存不足异常。结果：sale 表插入失败，goods 表插入失败
-    @Test
-    public void text02() {
-        String config = "applicationContext2.xml";
-        ApplicationContext ac = new ClassPathXmlApplicationContext(config);
+	// 执行自定义事务方法。抛出异常：商品库存不足异常。结果：sale 表插入失败，goods 表插入失败
+	@Test
+	public void text02() {
+		String config = "applicationContext2.xml";
+		ApplicationContext ac = new ClassPathXmlApplicationContext(config);
 
-        BuyGoodsService service = ac.getBean("buyService", BuyGoodsService.class);
-        service.buy(1,50);
-    }
+		BuyGoodsService service = ac.getBean("buyService", BuyGoodsService.class);
+		service.buy(1, 50);
+	}
 
-    // 执行自定义事务方法。正常运行。结果：sale 表插入成功，goods 表插入成功
-    @Test
-    public void text03() {
-        String config = "applicationContext2.xml";
-        ApplicationContext ac = new ClassPathXmlApplicationContext(config);
+	// 执行自定义事务方法。正常运行。结果：sale 表插入成功，goods 表插入成功
+	@Test
+	public void text03() {
+		String config = "applicationContext2.xml";
+		ApplicationContext ac = new ClassPathXmlApplicationContext(config);
 
-        BuyGoodsService service = ac.getBean("buyService", BuyGoodsService.class);
-        service.buy(3, 3);
-    }
+		BuyGoodsService service = ac.getBean("buyService", BuyGoodsService.class);
+		service.buy(3, 3);
+	}
 }

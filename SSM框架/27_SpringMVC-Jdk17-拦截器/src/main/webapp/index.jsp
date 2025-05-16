@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String basePath = request.getScheme() + "://" +
-            request.getServerName() + ":" +request.getServerPort() +
+            request.getServerName() + ":" + request.getServerPort() +
             request.getContextPath() + "/";
 %>
 <html>
@@ -10,7 +10,6 @@
     <base href="<%=basePath%>"/> <%--动态获取协议地址--%>
 </head>
 <body>
-
       <p>一个拦截器</p>
       <form action="some.do" method="post">
           姓名：<input type="text" name="name"/><br>

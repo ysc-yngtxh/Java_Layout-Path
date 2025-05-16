@@ -1,12 +1,10 @@
 package com.example.aop3;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import javax.xml.crypto.Data;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-
-import java.time.LocalDateTime;
 
 /**
  * @Aspect：是aspectj框架中的注解。
@@ -50,30 +48,30 @@ public class Aspect3 {
         // 获取的是代理类
         System.out.println("Aop底层实现为动态代理，因此代理类为：" + pjp.getThis().getClass().getName());
 
-        String name = null;
-        // 获取第一个参数值
-        Object[] args = pjp.getArgs();
-        if(args!=null && args.length>1){
-            name = (String)args[0];
-        }
+		String name = null;
+		// 获取第一个参数值
+		Object[] args = pjp.getArgs();
+		if (args != null && args.length > 1) {
+			name = (String) args[0];
+		}
 
-        // 实现环绕通知
-        Object result = null;
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        System.out.println("环绕通知，在目标方法之前，输出时间：" + LocalDateTime.now().format(dateTimeFormatter));
+		// 实现环绕通知
+		Object result = null;
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		System.out.println("环绕通知，在目标方法之前，输出时间：" + LocalDateTime.now().format(dateTimeFormatter));
 
-        // 1、目标方法调用
-        if ("小敏我喜欢你".equals(name)) {
-            result = pjp.proceed();
-        }
-        System.out.println("环绕通知：在目标方法之后，提交事务");
+		// 1、目标方法调用
+		if ("小敏我喜欢你".equals(name)) {
+			result = pjp.proceed();
+		}
+		System.out.println("环绕通知：在目标方法之后，提交事务");
 
-        // 2、在目标方法的前或者后加入功能（修改目标方法的执行结果，影响方法最后的调用结果）
-        if(result != null) {
-            result = "Hello AspectJ AOP";
-        }
+		// 2、在目标方法的前或者后加入功能（修改目标方法的执行结果，影响方法最后的调用结果）
+		if (result != null) {
+			result = "Hello AspectJ AOP";
+		}
 
-        // 返回目标方法的执行结果
-        return result;
-    }
+		// 返回目标方法的执行结果
+		return result;
+	}
 }

@@ -5,8 +5,8 @@ package com.example.aop1;
  */
 public class OneServiceImpl implements OneService {
 
-    @Override
-    public void doSome(String name, Integer age) {
-        System.out.println("====目标方法doSome()====");
-    }
+	@Override
+	public void doSome(String name, Integer age) {
+		System.out.println("====目标方法doSome()====");
+	}
 }

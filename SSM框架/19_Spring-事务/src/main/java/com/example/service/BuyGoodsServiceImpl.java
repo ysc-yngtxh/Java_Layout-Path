@@ -1,10 +1,10 @@
 package com.example.service;
 
+import com.example.excep.NotEnoughException;
 import com.example.mapper.GoodsDao;
 import com.example.mapper.SaleDao;
 import com.example.pojo.Goods;
 import com.example.pojo.Sale;
-import com.example.excep.NotEnoughException;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -12,22 +12,22 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public class BuyGoodsServiceImpl implements BuyGoodsService {
 
-    private SaleDao saleDao;
-    private GoodsDao goodsDao;
+	private SaleDao saleDao;
+	private GoodsDao goodsDao;
 
-    public void setSaleDao(SaleDao saleDao) {
-        this.saleDao = saleDao;
-    }
+	public void setSaleDao(SaleDao saleDao) {
+		this.saleDao = saleDao;
+	}
 
-    public void setGoodsDao(GoodsDao goodsDao) {
-        this.goodsDao = goodsDao;
-    }
+	public void setGoodsDao(GoodsDao goodsDao) {
+		this.goodsDao = goodsDao;
+	}
 
 
-    // 这里调用同类中默认的事务方法，会导致其事务失效。因为事务是通过代理对象实现的，而不是通过真实对象(this)的方法
-    public void callBuy(Integer goodsId, Integer nums) {
-        this.buy(goodsId, nums);
-    }
+	// 这里调用同类中默认的事务方法，会导致其事务失效。因为事务是通过代理对象实现的，而不是通过真实对象(this)的方法
+	public void callBuy(Integer goodsId, Integer nums) {
+		this.buy(goodsId, nums);
+	}
 
     /**
      * @Transactional (
@@ -55,19 +55,19 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
         Sale.setNums(nums);
         saleDao.insertSale(Sale);
 
-        // 更新库存
-        Goods Goods = goodsDao.selectGoods(goodsId);
-        if(Goods == null) {
-            // 商品不存在
-            throw new NullPointerException("编号是：" + goodsId + ",商品不存在");
-        } else if(Goods.getAmount() < nums) {
-            // 商品库存不足
-            throw new NotEnoughException("编号是：" + goodsId + ",商品库存不足");
-        }
-        // 修改库存了
-        Goods buyGoods = new Goods();
-        buyGoods.setId(goodsId);
-        buyGoods.setAmount(nums);
-        goodsDao.updateGoods(buyGoods);
-    }
+		// 更新库存
+		Goods Goods = goodsDao.selectGoods(goodsId);
+		if (Goods == null) {
+			// 商品不存在
+			throw new NullPointerException("编号是：" + goodsId + ",商品不存在");
+		} else if (Goods.getAmount() < nums) {
+			// 商品库存不足
+			throw new NotEnoughException("编号是：" + goodsId + ",商品库存不足");
+		}
+		// 修改库存了
+		Goods buyGoods = new Goods();
+		buyGoods.setId(goodsId);
+		buyGoods.setAmount(nums);
+		goodsDao.updateGoods(buyGoods);
+	}
 }

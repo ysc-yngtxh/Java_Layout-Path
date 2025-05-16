@@ -66,15 +66,15 @@ public class AppTest {
         sqlSession.close();
     }
 
-    /* 总结：
-     *     1. 一对一配置：使用<resultMap> + <association>做配置
-     *                  association：
-     *                  property：关联的实体类属性名
-     *                  javaType：关联的实体类型（别名）
-     *     2. 一对多配置：使用<resultMap> + <collection>做配置
-     *                  collection：
-     *                  property：关联的集合属性名
-     *                  ofType：关联的集合元素类型（别名）
-     *     3. 多对多的配置跟一对多很相似，难度在于SQL语句的编写。
-     */
+	/* 总结：
+	 *     1. 一对一配置：使用<resultMap> + <association>做配置
+	 *                  association：
+	 *                  property：关联的实体类属性名
+	 *                  javaType：关联的实体类型（别名）
+	 *     2. 一对多配置：使用<resultMap> + <collection>做配置
+	 *                  collection：
+	 *                  property：关联的集合属性名
+	 *                  ofType：关联的集合元素类型（别名）
+	 *     3. 多对多的配置跟一对多很相似，难度在于SQL语句的编写。
+	 */
 }

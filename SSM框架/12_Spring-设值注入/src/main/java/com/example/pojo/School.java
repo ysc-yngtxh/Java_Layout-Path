@@ -5,60 +5,61 @@ import java.util.List;
 import java.util.Map;
 
 public class School {
-    private String name;
-    private String address;
-    private List<String> arrayList;
-    private String[] arrays;
-    private Map<String, Object> hashMap;
 
-    public String getName() {
-        return name;
-    }
+	private String name;
+	private String address;
+	private List<String> arrayList;
+	private String[] arrays;
+	private Map<String, Object> hashMap;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getAddress() {
-        return address;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public List<String> getArrayList() {
-        return arrayList;
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    public void setArrayList(List<String> arrayList) {
-        this.arrayList = arrayList;
-    }
+	public List<String> getArrayList() {
+		return arrayList;
+	}
 
-    public String[] getArrays() {
-        return arrays;
-    }
+	public void setArrayList(List<String> arrayList) {
+		this.arrayList = arrayList;
+	}
 
-    public void setArrays(String[] arrays) {
-        this.arrays = arrays;
-    }
+	public String[] getArrays() {
+		return arrays;
+	}
 
-    public Map<String, Object> getHashMap() {
-        return hashMap;
-    }
+	public void setArrays(String[] arrays) {
+		this.arrays = arrays;
+	}
 
-    public void setHashMap(Map<String, Object> hashMap) {
-        this.hashMap = hashMap;
-    }
+	public Map<String, Object> getHashMap() {
+		return hashMap;
+	}
 
-    @Override
-    public String toString() {
-        return "School{" +
-                "name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", arrayList=" + arrayList +
-                ", arrays=" + Arrays.toString(arrays) +
-                ", hashMap=" + hashMap +
-                '}';
-    }
+	public void setHashMap(Map<String, Object> hashMap) {
+		this.hashMap = hashMap;
+	}
+
+	@Override
+	public String toString() {
+		return "School{" +
+				"name='" + name + '\'' +
+				", address='" + address + '\'' +
+				", arrayList=" + arrayList +
+				", arrays=" + Arrays.toString(arrays) +
+				", hashMap=" + hashMap +
+				'}';
+	}
 }

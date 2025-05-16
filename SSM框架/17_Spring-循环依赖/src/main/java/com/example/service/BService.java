@@ -2,12 +2,12 @@ package com.example.service;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-11-11 22:08
+ * @dateTime 2023-11-11 22:00:00
  * @apiNote TODO
  */
 public class BService {
 
-    private AService aService;
+	private AService aService;
 
     public void setAService(AService aService) {
         this.aService = aService;

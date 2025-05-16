@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import java.util.Date;
 
 /**
  * @author 游家纨绔
@@ -73,9 +72,9 @@ public class MyInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
 
-        System.out.println("拦截器的MyInterceptor的afterCompletion()");
+		System.out.println("拦截器的MyInterceptor的afterCompletion()");
 
-        long etime = System.currentTimeMillis();
-        System.out.println("计算从preHandler到请求处理完成的时间：" + (etime-btime));
-    }
+		long etime = System.currentTimeMillis();
+		System.out.println("计算从preHandler到请求处理完成的时间：" + (etime - btime));
+	}
 }

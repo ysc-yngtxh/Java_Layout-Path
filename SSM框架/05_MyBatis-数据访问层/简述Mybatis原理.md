@@ -1,4 +1,5 @@
 ## mybatis重要组件和运行流程图
+
     Configuration 
            MyBatis所有的配置信息都保存在Configuration对象之中，配置文件中的大部分配置都会存储到该类中
     SqlSession 
@@ -21,6 +22,7 @@
            表示动态生成的SQL语句以及相应的参数信息
 
 ## 工作流程总结
+
     1、获取sqlSessionFactory对象：  new SqlSessionFactoryBuilder().build(in); 
 
        1）这里的build()方法中会创建一个 XMLConfigBuilder 对象，这个对象的作用就是解析主配置文件用的。
@@ -49,22 +51,27 @@
        6）返回包含Configuration的DefaultSqlSession；
 
        注意：【MappedStatement】：代表一个sql节点(<select> <insert> <update> <delete>)的详细信息。
-   ![1.png](src/main/resources/img/1.png)
-    
+
+![1.png](src/main/resources/img/1.png)
+
     2、获取sqlSession对象
        返回一个DefaultSQlSession对象，包含Executor和Configuration;
        这一步会创建Executor对象；
-   ![2.png](src/main/resources/img/2.png)
+
+![2.png](src/main/resources/img/2.png)
 
     3、获取接口的代理对象（MapperProxy）
        getMapper，使用MapperProxyFactory创建一个MapperProxy的代理对象
        代理对象里面包含了，DefaultSqlSession（Executor）
-   ![3.png](src/main/resources/img/3.png)
+
+![3.png](src/main/resources/img/3.png)
 
     4、执行增删改查方法
-   ![4.png](src/main/resources/img/4.png)
-    
+
+![4.png](src/main/resources/img/4.png)
+
 ## 总结
+
     1、根据配置文件（全局，sql映射）初始化出Configuration对象
     2、创建一个DefaultSqlSession对象，
        他里面包含Configuration以及Executor（根据全局配置文件中的defaultExecutorType创建出对应的Executor）
@@ -78,8 +85,6 @@
        5）、ResultSetHandler 封装结果
     注意：
     四大对象每个创建的时候都有一个interceptorChain.pluginAll(parameterHandler);
-
-
 
 ![5.png](src/main/resources/img/5.png)
 ![6.png](src/main/resources/img/6.jpg)

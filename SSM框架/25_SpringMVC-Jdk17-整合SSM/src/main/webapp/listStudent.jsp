@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String basePath = request.getScheme() + "://"
-            + request.getServerName() + ":" +request.getServerPort()
+            + request.getServerName() + ":" + request.getServerPort()
             + request.getContextPath() + "/";
 %>
 <html>
@@ -17,16 +17,16 @@
     <base href="<%=basePath%>"/> <%--动态获取协议地址--%>
     <script type="text/javascript" src="script/jquery-3.4.1.js"></script>
     <script>
-        $(function(){
+        $(function() {
             // 在当前页面dom对象加载后，执行loadStudentData();
             loadStudentData();
 
-            $("#btnLoader").click(function(){
+            $("#btnLoader").click(function () {
                 loadStudentData();
             })
         })
 
-        function loadStudentData(){
+        function loadStudentData() {
             $.ajax({
                 url: "student/queryStudent.do",
                 type: "get",
@@ -35,12 +35,12 @@
                     // 清除旧的数据
                     $("#info").html("");
                     // 增加新的数据
-                    $.each(data, function(i,n) {
+                    $.each(data, function(i, n) {
                         $("#info").append("<tr>")
-                                  .append("<td>" + n.id + "</td>")
-                                  .append("<td>" + n.name + "</td>")
-                                  .append("<td>" + n.age + "</td>")
-                                  .append("</tr>")
+                            .append("<td>" + n.id + "</td>")
+                            .append("<td>" + n.name + "</td>")
+                            .append("<td>" + n.age + "</td>")
+                            .append("</tr>")
                     })
                 }
             })
