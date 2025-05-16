@@ -18,7 +18,7 @@ class SpringRedisApplicationTests1 {
 
     @Test
     public void test() {
-        redisTemplate.opsForValue().set("redisDemo1", "ysc-游诗成");
+        redisTemplate.opsForValue().set("redisDemo1", "ysc-游家纨绔");
         log.info("内存数据：{}", redisTemplate.opsForValue().get("redisDemo1"));
     }
 }

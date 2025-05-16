@@ -36,7 +36,7 @@ public class A四大函数 {
          * };
          */
         Function function = (str) -> {return str;};
-        System.out.println( function.apply("游诗成") );
+        System.out.println( function.apply("游家纨绔") );
 
         /*
          * Predicate = new Predicate<String>() {

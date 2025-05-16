@@ -15,7 +15,7 @@ public class 流9_标准输出流 {
         // 分开写。标准输出流不需要手动 close() 关闭
         PrintStream ps = System.out;
         ps.print("你好，这里是不换行的打印！！！");
-        ps.println("叶诗琪");
+        ps.println("曹家千金");
         ps.println("没有你的每一天都好像无比煎熬");
         ps.println("我好想你啊");
 
@@ -50,8 +50,8 @@ public class 流9_标准输出流 {
             // 再输出
             System.out.println("今天是");
             System.out.println("2020年6月13号");
-            System.out.println("我游诗成又想她了");
-            System.out.println("曹玉敏，我好想你啊！");
+            System.out.println("我游家纨绔又想她了");
+            System.out.println("曹家千金，我好想你啊！");
 
             // 刷新流
             fos.flush();

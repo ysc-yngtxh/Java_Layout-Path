@@ -43,7 +43,7 @@ public class 流14_序列化与反序列化的实现 {
     public static void main(String[] args) throws Exception{
 
         // 创建Java对象
-        Student s = new Student(111, "游诗成", "男");
+        Student s = new Student(111, "游家纨绔", "男");
         // 序列化
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/流Ⅶ_对象专属流/ObjectFile"));
         // 序列化对象

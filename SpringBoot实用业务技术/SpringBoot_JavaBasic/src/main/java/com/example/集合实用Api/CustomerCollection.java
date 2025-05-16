@@ -55,9 +55,9 @@ public class CustomerCollection {
         ImmutableList<String> copyOfList = ImmutableList.copyOf(immutableList1);
 
         // ImmutableMap是一个不可变、线程安全的Map集合(静态方法、集合元素类型保持一致)
-        ImmutableMap<String, String> immutableMap1 = ImmutableMap.of("name", "游诗成", "age", "25");
+        ImmutableMap<String, String> immutableMap1 = ImmutableMap.of("name", "游家纨绔", "age", "25");
         // ImmutableMap是一个不可变、线程安全的Map集合(静态内部类、集合元素类型可不相同)
-        ImmutableMap<Object, Object> immutableMap2 = ImmutableMap.builder().put("name", "游诗成").put("age", 25).build();
+        ImmutableMap<Object, Object> immutableMap2 = ImmutableMap.builder().put("name", "游家纨绔").put("age", 25).build();
         // 使用copy
         ImmutableMap<String, String> copyOfMap = ImmutableMap.copyOf(immutableMap1);
 

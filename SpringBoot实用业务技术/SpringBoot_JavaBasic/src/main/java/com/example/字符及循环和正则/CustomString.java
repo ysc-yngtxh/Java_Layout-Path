@@ -34,10 +34,10 @@ public class CustomString {
         String item = "%s，你会一直喜欢我吗?";
         // join() 用于将多个字符串用指定的分隔符连接起来。
         String joinStr = String.join("会吗？", item, null);
-        String format = String.format(Locale.ROOT, joinStr, "叶诗琪");
+        String format = String.format(Locale.ROOT, joinStr, "曹家千金");
         log.info(format);
 
-        System.out.printf("%s，你会一直喜欢我吗?%n", "叶诗琪");
+        System.out.printf("%s，你会一直喜欢我吗?%n", "曹家千金");
 
 
         // TODO Guava的字符串工具

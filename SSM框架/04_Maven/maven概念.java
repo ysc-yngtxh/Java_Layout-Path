@@ -65,14 +65,14 @@
  *                   conf:maven工具本身的配置文件 settings.xml
  *         3、配置环境变量
  *            在系统的环境变量中，指定一个M2_HOME的名称，指定它的值是maven工具安装目录，bin之前的目录
- *            M2_HOME=C:\Users\游诗成\Desktop\Ajax-Json工具包\apache-maven-3.3.9
+ *            M2_HOME=C:\Users\游家纨绔\Desktop\Ajax-Json工具包\apache-maven-3.3.9
  *            再把M2_HOME加入到path之中，在所有路径之前加入 %M2_HOME%\bin;
  *         4、验证，新的命令行中，执行mvn -v
  *            注意：需要配置JAVA_HOME,指定jdk路径
  *            出现如下内容，maven安装、配置正确
- *                C:\Users\游诗成>mvn -v
+ *                C:\Users\游家纨绔>mvn -v
  *                Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-11T00:41:47+08:00)
- *                Maven home: C:\Users\游诗成\Desktop\Ajax-Json工具包\apache-maven-3.3.9
+ *                Maven home: C:\Users\游家纨绔\Desktop\Ajax-Json工具包\apache-maven-3.3.9
  *                Java version: 1.8.0_261, vendor: Oracle Corporation
  *                Java home: C:\Program Files\Java\jdk1.8.0_261\jre
  *                Default locale: zh_CN, platform encoding: GBK

@@ -18,8 +18,8 @@ import java.util.List;
 public class 流15_序列化多个对象 {
     public static void main(String[] args) throws Exception{
         List<User> u = new ArrayList<>();
-        u.add(new User(1, "游诗成"));
-        u.add(new User(2, "曹玉敏"));
+        u.add(new User(1, "游家纨绔"));
+        u.add(new User(2, "曹家千金"));
         u.add(new User(3, "我想你"));
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/流Ⅶ_对象专属流/ObjectFile"));
         oos.writeObject(u);

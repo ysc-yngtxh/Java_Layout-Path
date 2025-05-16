@@ -9,7 +9,7 @@ public class MyAnnotationClass1 {
      */
 
     // @MyAnnotation1(属性名 = 属性值)。指定name属性的值就好了
-    @MyAnnotation1(name = "游诗成", color = "yellow")  // 属性默认值可以不写，所以age可以不写
+    @MyAnnotation1(name = "游家纨绔", color = "yellow")  // 属性默认值可以不写，所以age可以不写
     public void doSome(){
 
     }

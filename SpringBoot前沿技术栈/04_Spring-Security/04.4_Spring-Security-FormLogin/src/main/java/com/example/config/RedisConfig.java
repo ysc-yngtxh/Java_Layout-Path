@@ -8,7 +8,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
- * @author 游诗成
+ * @author 游家纨绔
  * @date 2022/07/05
  * @apiNote
  */

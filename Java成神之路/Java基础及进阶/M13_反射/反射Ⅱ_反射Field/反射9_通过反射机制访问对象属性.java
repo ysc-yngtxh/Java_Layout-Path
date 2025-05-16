@@ -15,7 +15,7 @@ public class 反射9_通过反射机制访问对象属性 {
         // 获取name属性
         Field nameField = studentClass.getDeclaredField("name");
         // 给 obj对象(Student对象) 的name属性赋值。
-        nameField.set(obj, "游诗成");
+        nameField.set(obj, "游家纨绔");
         // 读取属性的值
         System.out.println(nameField.get(obj));
 

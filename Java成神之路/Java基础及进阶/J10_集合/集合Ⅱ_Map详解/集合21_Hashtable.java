@@ -53,10 +53,10 @@ public class 集合21_Hashtable {
         System.out.println(map);
 
         Map<Object, Object> map2 = new Hashtable<>();
-        map2.put("",   "游诗成");
-        map2.put(null, "游诗成");
+        map2.put("",   "游家纨绔");
+        map2.put(null, "游家纨绔");
         map2.put(222,  "null");
-        map2.put(333,  "曹玉敏");
+        map2.put(333,  "曹家千金");
         // Hashtable的key和value不允许null的，否则会出现空指针异常：java.lang.NullPointerException
         System.out.println(map.get(null));
         System.out.println(map.get(222));

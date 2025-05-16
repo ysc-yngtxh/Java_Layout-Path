@@ -48,11 +48,11 @@ class Address{
 
 public class Object类6_练习 {
     public static void main(String[] args) {
-        User u1 = new User("游诗成", new Address("武汉", "江夏区", "111111"));
-        User u2 = new User("游诗成", new Address("武汉", "江夏区", "111111"));
+        User u1 = new User("游家纨绔", new Address("武汉", "江夏区", "111111"));
+        User u2 = new User("游家纨绔", new Address("武汉", "江夏区", "111111"));
         System.out.println(u1.equals(u2));   // true
 
-        User u3 = new User("游诗成", new Address("武汉", "江岸区", "111222"));
+        User u3 = new User("游家纨绔", new Address("武汉", "江岸区", "111222"));
         System.out.println(u1.equals(u3));   // false
     }
 }

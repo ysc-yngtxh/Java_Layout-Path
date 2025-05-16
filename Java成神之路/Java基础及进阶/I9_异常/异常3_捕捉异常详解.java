@@ -13,7 +13,7 @@ import java.io.IOException;
 public class 异常3_捕捉异常详解 {
     public static void main(String[] args) {
         try {
-            FileInputStream fis = new FileInputStream("D:\\游诗成\\文档\\数据库作业sql");
+            FileInputStream fis = new FileInputStream("D:\\游家纨绔\\文档\\数据库作业sql");
         } catch(FileNotFoundException e) {
             System.out.println("文件不存在");
         } catch(IOException e) {     // IOException是FileNotFoundException的父类型

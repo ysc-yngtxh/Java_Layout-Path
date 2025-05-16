@@ -213,7 +213,7 @@ class ESHighLevelTests {
         bulkRequest.timeout("10s");  // timeout用于请求超时设置
 
         ArrayList<User> userList = new ArrayList<>();
-        userList.add(new User(999, "游诗成", "4520", 3, new Date()));
+        userList.add(new User(999, "游家纨绔", "4520", 3, new Date()));
         userList.add(new User(1000, "邵荣珍", "2454", 3, new Date()));
         userList.add(new User(1001, "陈嘉琪", "45000", 3, new Date()));
         userList.add(new User(1002, "李晶晶", "54000", 3, new Date()));

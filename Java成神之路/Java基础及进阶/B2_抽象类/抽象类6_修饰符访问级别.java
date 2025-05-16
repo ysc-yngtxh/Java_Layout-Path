@@ -26,7 +26,7 @@ public class 抽象类6_修饰符访问级别 {
     public static void main(String[] args) {
         // TODO 同一个包下（不能访问到被private修饰的属性）
         PageInternal pageInternal = new PageInternal();
-        pageInternal.name = "叶诗琪";
+        pageInternal.name = "曹家千金";
         pageInternal.age = 21;
         pageInternal.sex = false;
 

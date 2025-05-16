@@ -14,7 +14,7 @@ public class HelloServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=utf-8");
         PrintWriter pw = response.getWriter();
-        pw.print("曹玉敏，你要等我啊。我会很快去找你的！");
+        pw.print("曹家千金，你要等我啊。我会很快去找你的！");
         pw.flush();
         pw.close();
     }

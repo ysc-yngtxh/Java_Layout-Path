@@ -26,7 +26,7 @@ public class B2_Servlet extends HttpServlet {
         String result =  "hello world"; // 执行结果
         int money = 50;
         String result1 = "<br>Java<br>MySQL<br>HTML<br>";
-        String result2 = "红烧排骨<br>糖醋里脊<br>清水白菜<br>我好想你曹玉敏";
+        String result2 = "红烧排骨<br>糖醋里脊<br>清水白菜<br>我好想你曹家千金";
 
         // 设置响应头content-type
         response.setContentType("text/html;charset=utf-8");

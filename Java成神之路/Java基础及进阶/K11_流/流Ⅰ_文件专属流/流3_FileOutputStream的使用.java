@@ -20,7 +20,7 @@ public class 流3_FileOutputStream的使用 {
 			fos1.write(b, 0, 2);
 
 			// fos2 开始写
-			String str = "我好想你，曹玉敏！";
+			String str = "我好想你，曹家千金！";
 			// 将字符串转换成byte数组
 			byte[] bytes = str.getBytes();
 			fos2.write(bytes);

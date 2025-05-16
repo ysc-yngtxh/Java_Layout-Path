@@ -26,7 +26,7 @@ public class MyController {
     public String userDetail1(Model model) {
         User user = new User();
         user.setId(11);
-        user.setUsername("曹玉敏");
+        user.setUsername("曹家千金");
         user.setAge(21);
         model.addAttribute("user", user);
         return "message";

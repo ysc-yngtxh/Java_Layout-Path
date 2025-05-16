@@ -26,14 +26,14 @@ public class MybatisBottomLayer1ApplicationTests {
     @Test
     public void mybatis2() {
         StudentMapper2 mapper = MapperProxyFactory2.getMapper(StudentMapper2.class);
-        System.out.println(mapper.queryUser("游诗成", 25));
+        System.out.println(mapper.queryUser("游家纨绔", 25));
         System.out.println(mapper.queryUserById(7));
     }
 
     @Test
     public void mybatis3() {
         StudentMapper3 mapper = MapperProxyFactory3.getMapper(StudentMapper3.class);
-        System.out.println(mapper.queryUser("游诗成", 25));
+        System.out.println(mapper.queryUser("游家纨绔", 25));
         System.out.println(mapper.queryUserById(7));
     }
 }

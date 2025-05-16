@@ -21,7 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * @author 游诗成
+ * @author 游家纨绔
  * @date 2022/07/30 20:53
  * @apiNote
  */

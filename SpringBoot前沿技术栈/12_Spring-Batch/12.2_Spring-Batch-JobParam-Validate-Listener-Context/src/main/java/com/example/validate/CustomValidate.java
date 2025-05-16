@@ -19,7 +19,7 @@ public class CustomValidate implements JobParametersValidator {
 
         if (!StringUtils.hasText(parametersString)) {
             throw new JobParametersInvalidException("批处理name参数不能为null或者空");
-        } else if (parametersString.equals("游诗成")) {
+        } else if (parametersString.equals("游家纨绔")) {
             throw new JobParametersInvalidException("批处理name参数不合法");
         }
     }

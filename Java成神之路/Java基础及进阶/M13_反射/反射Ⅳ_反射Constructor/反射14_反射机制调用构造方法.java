@@ -9,7 +9,7 @@ public class 反射14_反射机制调用构造方法 {
     public static void main(String[] args) throws Exception {
         // 不使用反射机制怎么创建对象
         Vip v1 = new Vip();
-        Vip v2 = new Vip(10, "曹玉敏", "2001-10-11", true);
+        Vip v2 = new Vip(10, "曹家千金", "2001-10-11", true);
 
         // 使用反射机制怎么创建对象
         Class<?> c = Class.forName("M13_反射.反射Ⅳ_反射Constructor.Vip");
@@ -20,7 +20,7 @@ public class 反射14_反射机制调用构造方法 {
         // 第一步：先获取到这个有参数的构造方法
         Constructor<?> con = c.getDeclaredConstructor(int.class, String.class, String.class, boolean.class);
         // 第二步：想要调用构造方法，就相当于是new对象
-        Object newObj = con.newInstance(110, "游诗成", "1997-03-22", true);
+        Object newObj = con.newInstance(110, "游家纨绔", "1997-03-22", true);
         System.out.println(newObj);
 
         // 调用无参构造方法

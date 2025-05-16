@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.pojo.entity.SysUser;
 
 /**
- * @author 游诗成
+ * @author 游家纨绔
  * @date 2022/07/07
  * @apiNote
  */

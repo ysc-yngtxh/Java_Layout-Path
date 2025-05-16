@@ -19,12 +19,12 @@ public class 集合5_remove详解 {
         System.out.println(c.remove(i3)); // Integer类中的equals方法已重写
 
 
-        User1 u1 = new User1("游诗成");
-        User1 u2 = new User1("曹玉敏，我好想你！");
+        User1 u1 = new User1("游家纨绔");
+        User1 u2 = new User1("曹家千金，我好想你！");
         c.add(u1);
         c.add(u2);
         System.out.println("元素的个数是：" + c.size());
-        User1 u3 = new User1("游诗成");
+        User1 u3 = new User1("游家纨绔");
         System.out.println(c.contains(u3));
         System.out.println(c.remove(u3));
         // User1类中的equals方法没有重写，所以调用的会是Object的equals方法，比较的是对象内存地址。

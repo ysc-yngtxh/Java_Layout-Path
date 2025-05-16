@@ -31,18 +31,18 @@ class SpringBootJavaBasicApplicationTests {
 	@Test
 	public void mapStructs() {
 		// 方式一：通过Mapper实例对象的方式
-		User user = User.builder().id(123L).name("小娘皮叶诗琪").email("google@163.com").date(new Date()).build();
+		User user = User.builder().id(123L).name("小娘皮曹家千金").email("google@163.com").date(new Date()).build();
 		Users users = MapStructExample.mapStr.toUsers(user);
 		log.error(users.toString());
 
-		User user1 = User.builder().id(123L).name("小娘皮叶诗琪").email("google@163.com").build();
+		User user1 = User.builder().id(123L).name("小娘皮曹家千金").email("google@163.com").build();
 		ModelView modelView = ModelView.builder().address("珞狮路狮城名居").build();
 		Users users1 = MapStructExample.mapStr.toUsers1(user1, modelView);
 		log.error(users1.toString());
 
 		User user2 = User.builder()
 				.id(123L)
-				.name("小娘皮叶诗琪")
+				.name("小娘皮曹家千金")
 				.email("google@163.com")
 				.models(new Models(new ModelView("湖北武汉红花三区"), null))
 				.build();

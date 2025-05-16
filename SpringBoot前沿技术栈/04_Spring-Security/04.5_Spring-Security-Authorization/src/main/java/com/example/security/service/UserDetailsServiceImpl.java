@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * @author 游诗成
+ * @author 游家纨绔
  * @date 2022/07/07
  * @apiNote 用户详情服务实现类(UserDetailsService 这个类是Spring Security提供的, 用于获取用户详情)
  * 实现这个类并重写其方法，是为了可以不使用Spring Security的登录认证机制，而是自己实现登录认证机制

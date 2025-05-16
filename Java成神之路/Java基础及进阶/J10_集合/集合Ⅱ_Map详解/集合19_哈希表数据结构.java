@@ -94,7 +94,7 @@ public class 集合19_哈希表数据结构 {
         map.put(666, "李四");
         map.put(777, "王五");
         map.put(222, "赵六");
-        map.put(222, "游诗成"); // key重复，value覆盖
+        map.put(222, "游家纨绔"); // key重复，value覆盖
         System.out.println(map.size());
 
         // 遍历方法一：获取所有的key，来遍历value

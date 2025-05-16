@@ -4,58 +4,59 @@ package com.example.pojo;
  * @author 游家纨绔
  */
 public class Student {
-    private String name;
-    private int age;
-    // 声明一个引用类型
-    private School school;
 
-    // 自定义一个方法
-    public void setEmail(String email){
-        System.out.println("setEmail=" + email);
-    }
+	private String name;
+	private int age;
+	// 声明一个引用类型
+	private School school;
 
-    // Student的无参构造方法
-    public Student() {
-        System.out.println("调用Student的无参构造方法");
-    }
+	// 自定义一个方法
+	public void setEmail(String email) {
+		System.out.println("setEmail=" + email);
+	}
 
-    // Student的有参构造方法
-    public Student(String myName, int myAge, School mySchool) {
-        this.name = myName;
-        this.age = myAge;
-        this.school = mySchool;
-    }
+	// Student的无参构造方法
+	public Student() {
+		System.out.println("调用Student的无参构造方法");
+	}
 
-    public String getName() {
-        return name;
-    }
+	// Student的有参构造方法
+	public Student(String myName, int myAge, School mySchool) {
+		this.name = myName;
+		this.age = myAge;
+		this.school = mySchool;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public int getAge() {
-        return age;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setAge(int age) {
-        this.age = age;
-    }
+	public int getAge() {
+		return age;
+	}
 
-    public School getSchool() {
-        return school;
-    }
+	public void setAge(int age) {
+		this.age = age;
+	}
 
-    public void setSchool(School school) {
-        this.school = school;
-    }
+	public School getSchool() {
+		return school;
+	}
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", school=" + school +
-                '}';
-    }
+	public void setSchool(School school) {
+		this.school = school;
+	}
+
+	@Override
+	public String toString() {
+		return "Student{" +
+				"name='" + name + '\'' +
+				", age=" + age +
+				", school=" + school +
+				'}';
+	}
 }

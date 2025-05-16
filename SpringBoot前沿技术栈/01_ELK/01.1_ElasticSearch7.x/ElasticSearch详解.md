@@ -502,7 +502,7 @@
                    {"match": {"title": "apple"}}
                  ],
                  "filter": {
-                   "term": {"name.keyword": "游诗成"},  # 精准匹配name值为游诗成的数据，并进行过滤掉(name为可分词的字段属性，精准匹配则需加上keyword)
+                   "term": {"name.keyword": "游家纨绔"},  # 精准匹配name值为游家纨绔的数据，并进行过滤掉(name为可分词的字段属性，精准匹配则需加上keyword)
                    "terms": {"context": ["123", "456"]},  # 多数据精准匹配
                    "range": {"price": {"gte": 3000}},     # 取范围price值大于3000的数据
                    "bool": {
@@ -589,7 +589,7 @@
               "group_by_title": {  # 自定义的名字
                 "filter": {        # 第二个桶：filter--一个用来过滤的桶。用法与上述布尔中filter一致
                   "term": {
-                    "title": "游诗成"
+                    "title": "游家纨绔"
                 }
               }
             }

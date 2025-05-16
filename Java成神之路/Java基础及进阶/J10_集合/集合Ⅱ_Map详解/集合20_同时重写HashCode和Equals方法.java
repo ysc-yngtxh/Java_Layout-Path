@@ -41,8 +41,8 @@ import java.util.Set;
  */
 public class 集合20_同时重写HashCode和Equals方法 {
     public static void main(String[] args) {
-        Student s1 = new Student("曹玉敏");
-        Student s2 = new Student("曹玉敏");
+        Student s1 = new Student("曹家千金");
+        Student s2 = new Student("曹家千金");
         System.out.println(s1.equals(s2));
 
         // hashCode是用来在散列存储结构中确定对象的存储地址的；

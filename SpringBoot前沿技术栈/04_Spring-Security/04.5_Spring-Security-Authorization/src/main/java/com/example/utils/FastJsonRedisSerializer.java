@@ -13,7 +13,7 @@ import java.nio.charset.Charset;
 
 
 /**
- * @author 游诗成
+ * @author 游家纨绔
  * @date 2022/07/05
  * @apiNote
  * Redis使用FastJson序列化

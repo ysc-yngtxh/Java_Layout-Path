@@ -17,7 +17,7 @@ public class ThreeServlet extends HttpServlet {
         session.setAttribute("key", "菲菲");
 
         // 2、向当前请求作用域对象添加一个共享数据
-        request.setAttribute("key", "游诗成");
+        request.setAttribute("key", "游家纨绔");
 
         // 3、请求转发，申请调用index_03.jsp
         request.getRequestDispatcher("/index_03.jsp").forward(request, response);

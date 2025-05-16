@@ -121,6 +121,6 @@ public class OptionalApi {
                 .stream().filter(Objects::nonNull).forEach(System.out::println);
 
         // TODO 为空返回一个异常
-        Optional.ofNullable(user4).orElseThrow(() -> new NullPointerException("从未见过有如此厚颜无耻之人！--叶诗琪"));
+        Optional.ofNullable(user4).orElseThrow(() -> new NullPointerException("从未见过有如此厚颜无耻之人！--曹家千金"));
     }
 }

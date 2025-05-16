@@ -33,7 +33,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 /**
- * @author 游诗成
+ * @author 游家纨绔
  * @date 2022/07/30 20:53
  * @apiNote
  */

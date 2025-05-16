@@ -26,7 +26,7 @@ public class StudentController {
     public @ResponseBody Map<String, Student> queryStudentByIdMap(Integer id) {
         Map<String, Student> map = studentService.queryByPrimaryKeyMap(id);
 
-        // String emails = map.get("游诗成").getEmail();      // 这样获取 email 会报错
+        // String emails = map.get("游家纨绔").getEmail();      // 这样获取 email 会报错
         Map<String, String> email = (Map) map.get("秦岚");   // 这才是正确获取的写法
         System.out.println(email.get("email"));
 
