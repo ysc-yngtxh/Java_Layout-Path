@@ -18,38 +18,51 @@
 
 JWT--全称Json Web Token
      1、JWT包含三部分：
-
-             头部：声明类型，加密算法
-             Header:{
-                "tpy" : 'JWT',
-                "alg" : 'HS256'
+        ①、Header（头部）声明类型，加密算法
+            令牌类型（typ）：通常是"JWT"
+            签名算法（alg）：如HMAC SHA256或RSA
+            Header: {
+               "tpy": 'JWT',
+               "alg": 'HS256'
+            }
+        ②、装载的数据：包含声明（claims）。声明是关于实体（通常是用户）和其他数据的语句。
+           有三种类型的声明：
+             注册声明（Registered claims）：预定义的声明，不是强制的但建议使用
+                 iss (issuer)：签发者
+                 exp (expiration time)：过期时间
+                 sub (subject)：主题
+                 aud (audience)：受众
+                 nbf (not before)：生效时间
+                 iat (issued at)：签发时间
+                 jti (JWT ID)：唯一标识
+             公共声明（Public claims）：可以随意定义
+             私有声明（Private claims）：用于在同意使用它们的各方之间共享信息
+             Payload: {
+                 "sub": "1234567890",
+                 "name": "John Doe",
+                 "admin": true,
+                 "iat": 1516239022
              }
-
-             装载的数据：用户身份信息，注册声明
-             Payload:{
-                 "sub" : '1234567890',
-                 "name" : 'john',
-                 "admin" : true
-             }
-
-             验证签名：是整个数据的认证信息
-             Signature:{
+        ③、验证签名：签名用于验证消息在传递过程中没有被篡改。
+             要创建签名部分，你需要：取编码后的header，取编码后的payload，使用header中指定的算法进行签名
+             例如，使用 HMACSHA256 算法：
+             Signature: {
                   var encdedString = base64UrlEncode(header) + '.' + base64urlEncode(payload);
                   var signature = HMACSHA256(encodedString,'secret');
              }
 
-             Jwt与token最大的区别：
-                token依赖于Redis查询数据信息，token存放value数据比较安全的。
-                Jwt不需要依赖与服务器端，将数据信息内容直接存放在客户端
 
-             Jwt优点：
-                1、无需在服务器存放用户数据，减轻服务器端压力
-                2、轻量级、json风格比较简单
-                3、跨语言
-             Jwt缺点：
-                jwt一旦生成后期无法修改：
-                1、无法更新jwt有效期
-                2、无法销毁一个jwt
+     Jwt与token最大的区别：
+        token依赖于Redis查询数据信息，token存放value数据比较安全的。
+        Jwt不需要依赖与服务器端，将数据信息内容直接存放在客户端
+     Jwt优点：
+        1、无需在服务器存放用户数据，减轻服务器端压力
+        2、轻量级、json风格比较简单
+        3、跨语言
+     Jwt缺点：
+        jwt一旦生成后期无法修改：
+        1、无法更新jwt有效期
+        2、无法销毁一个jwt
 
 
      2、流程：

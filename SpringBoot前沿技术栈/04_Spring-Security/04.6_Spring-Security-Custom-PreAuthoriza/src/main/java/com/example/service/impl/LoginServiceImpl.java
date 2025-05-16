@@ -4,6 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.example.security.bo.LoginUserDetails;
 import com.example.service.LoginService;
 import com.example.utils.JwtUtil;
+import java.util.Map;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,6 @@ public class LoginServiceImpl implements LoginService {
 
 		String userId = loginUserDetails.getUser().getId().toString();
 		// 使用userId生成一个jwt，并将jwt放入ResponseResult返回
-		return JwtUtil.createJwt(userId);
+		return JwtUtil.createJwt(Map.of("id", userId));
 	}
 }

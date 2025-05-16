@@ -37,7 +37,7 @@ class JwtDemoApplicationTests {
 		                      .and()
 		                      // Payload
 		                      .claims()
-		                      .add("name", "陈玉梅")
+		                      .add("name", "陈麻麻")
 		                      .add("pwd", "514")
 		                      .subject("admin-test")  // 设置主题
 		                      .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7))  // 设置有效时间
@@ -52,9 +52,7 @@ class JwtDemoApplicationTests {
 
 	@Test
 	void parse() {
-		String token = "eyJ0cHkiOiJKV1QiLCJhbGciOiJIUzI1NiJ9" +
-                ".eyJuYW1lIjoi6ZmI546J5qKFIiwicHdkIjoiNTE0Iiwic3ViIjoiYWRtaW4tdGVzdCIsImV4cCI6MTc0NTMzNTk2NSwianRpIjoiNjAxYWVkZTItYzY0Yi00OGVkLWE3NzItNThmMGZjOTEyNzc5In0" +
-                ".K3McDo4nJnXGtM0Ceb6RGZrqtVhGzpMHyJ4CxPAnRrE";
+		String token = "eyJ0cHkiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoi6ZmI6bq76bq7IiwicHdkIjoiNTE0Iiwic3ViIjoiYWRtaW4tdGVzdCIsImV4cCI6MTc0ODAwNzQwMCwianRpIjoiOGNjZTAxOTktNWE5My00M2ZmLTkwZTgtZThlYTc4MDFlN2U4In0.pv0_TuntJp4zBoP87_klHfbWDSUQZ8fTpL2Zw_sYiA4";
 
 		// 生成密钥【JWT 规范要求 HMAC-SHA 算法的密钥至少需要 256 位（32字节）】
 		//         // 方案一：填充到满足要求的最小长度

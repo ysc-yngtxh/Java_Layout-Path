@@ -23,4 +23,4 @@ jasypt:
     property:
       prefix: JASYPT_YSC(  # TODO 加密前缀
       suffix: )            # TODO 加密后缀
-    password: yjwk           # TODO 加密密钥
+    password: yjwk         # TODO 加密密钥

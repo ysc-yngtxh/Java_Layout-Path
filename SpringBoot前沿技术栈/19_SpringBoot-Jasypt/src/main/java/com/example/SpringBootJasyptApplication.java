@@ -38,6 +38,5 @@ public class SpringBootJasyptApplication implements ApplicationRunner {
 		System.out.println("自定义内容原始明文为：" + oldPassword);
 		System.out.println("====================================");
 		System.out.println("自定义内容原始明文加密后的结果为：" + encryptPassword);
-
 	}
 }

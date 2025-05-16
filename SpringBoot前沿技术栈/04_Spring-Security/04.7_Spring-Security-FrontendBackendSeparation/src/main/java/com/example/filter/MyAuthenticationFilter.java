@@ -75,8 +75,8 @@ public class MyAuthenticationFilter extends OncePerRequestFilter {
 				// 解析token
 				String userId = null;
 				try {
-					Claims claims = JwtUtil.parseJwt(token);
-					userId = claims.getSubject();
+					Claims claims = JwtUtil.parseJwt(null, token);
+					userId = claims.get("id").toString();
 				} catch (Exception e) {
 					throw new RuntimeException("token非法");
 				}
