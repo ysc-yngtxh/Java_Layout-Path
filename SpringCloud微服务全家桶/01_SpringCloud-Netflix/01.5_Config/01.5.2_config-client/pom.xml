@@ -7,7 +7,6 @@
         <artifactId>01.5_Config</artifactId>
         <groupId>com.example</groupId>
         <version>1.0.0</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>01.5.2_config-client</artifactId>
@@ -34,4 +33,5 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
     </dependencies>
+
 </project>

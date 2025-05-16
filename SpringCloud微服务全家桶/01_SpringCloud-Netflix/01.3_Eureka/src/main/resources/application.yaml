@@ -7,9 +7,6 @@ spring:
 
 # 注册Eureka Server自己
 eureka:
-  server:
-    enable-self-preservation: false      # 关闭自我保护模式
-    eviction-interval-timer-in-ms: 5000  # 清理无效实例的时间间隔
   instance:
     prefer-ip-address: true
     hostname: localhost

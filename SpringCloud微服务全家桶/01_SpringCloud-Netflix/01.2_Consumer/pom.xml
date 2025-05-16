@@ -14,7 +14,7 @@
     <description>${project.artifactId}</description>
 
     <dependencies>
-        <!--springboot框架web项目起步依赖-->
+        <!--SpringBoot框架web项目起步依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

@@ -6,7 +6,8 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.13</version>
+        <!--对应SpringCloud Hoxton.SR12版本的SpringBoot版本为【2.2.x, 2.3.x】-->
+        <version>2.3.12.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -30,10 +31,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <spring-cloud.version>2020.0.6</spring-cloud.version><!-- 最后一个支持Hystrix的版本2020.0.6 -->
-        <spring-cloud-netflix-hystrix.version>2.2.10.RELEASE</spring-cloud-netflix-hystrix.version>
-        <spring-cloud-netflix-ribbon.version>2.2.10.RELEASE</spring-cloud-netflix-ribbon.version>
+        <!-- 注意⚠️：SpringCloud 支持Zuul、Ribbon、Hystrix的最后一个 spring-cloud-dependencies 版本为Hoxton.SR12 -->
+        <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
+        <!--Zuul、Ribbon、Hystrix依赖已经被官方弃用，且最后一个版本为2.2.10.RELEASE
+            spring-cloud-dependencies的 Hoxton.SR12 版本中其实也包含Zuul、Ribbon、Hystrix依赖，但是包含的版本是2.2.9.RELEASE。
+            咱要用就用最新的版本，所以引入最后一个版本提供给子项目使用
+        -->
         <spring-cloud-netflix-zuul.version>2.2.10.RELEASE</spring-cloud-netflix-zuul.version>
+        <spring-cloud-netflix-hystrix.version>2.2.10.RELEASE</spring-cloud-netflix-hystrix.version>
         <mapper.starter-version>4.3.0</mapper.starter-version>
         <mysql-connector-j-version>9.2.0</mysql-connector-j-version>
     </properties>
@@ -56,7 +61,7 @@
                 <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
                 <version>${spring-cloud-netflix-hystrix.version}</version>
             </dependency>
-            <!-- 最后一个支持的Zuul依赖版本 -->
+            <!-- 最后一个支持的Zuul依赖版本（其中包含Web、Ribbon、Hystrix依赖） -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-netflix-zuul</artifactId>

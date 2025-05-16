@@ -69,7 +69,7 @@ zuul:
       path: /provider/**
       # url: http://localhost:8088/ 这种写法是静态地址，但是我们需要动态的服务ip。
       # 绑定动态服务Id
-      serviceId: PROVIDER-SERVICE
+      serviceId: provider-service
       # 表示最终访问路径是否移除匹配的前缀，默认值为true
       # true表示去除 '/api' 这个前缀：http://localhost:10010/api/provider/user/1 ==> http://localhost:8088/user/1
       # false表示保留完整路径转发：http://localhost:10010/api/provider/user/1 ==> http://localhost:8088/api/user/1
@@ -77,7 +77,7 @@ zuul:
   # 剔除指定服务的默认简化配置
   ignored-services: '*'
     # 服务provider-service存在自定义配置，禁止Zuul创建默认路由，避免冲突
-    # - PROVIDER-SERVICE
+    # - provider-service
     # - consumer-service 这里consumer-service的路由配置没有进行自定义，所以不剔除默认简化配置
   ribbon:
     eager-load:

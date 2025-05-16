@@ -14,7 +14,7 @@
     <description>${project.artifactId}</description>
 
     <dependencies>
-        <!--我们可以在zuul依赖中看到web、hystrix、ribbon的依赖包-->
+        <!--zuul依赖中包含web、hystrix、ribbon的依赖包-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
@@ -24,7 +24,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-            <version>2.2.10.RELEASE</version>
         </dependency>
 
         <!--添加判断是否存在的一个依赖-->
