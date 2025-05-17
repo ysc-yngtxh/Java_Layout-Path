@@ -2,15 +2,15 @@
   Created by IntelliJ IDEA.
   User: 游家纨绔
   Date: 2020/8/19
-  Time: 11:28
+  Time: 11:30
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    Integer sid = (Integer)application.getAttribute("sid");
-    String sname = (String)session.getAttribute("sname");
-    String home = (String)request.getAttribute("home");
+    Integer sid = (Integer) application.getAttribute("sid");
+    String sname = (String) session.getAttribute("sname");
+    String home = (String) request.getAttribute("home");
 %>
 学员ID:<%=sid%><br>
 学员姓名:<%=sname%><br>

@@ -1,30 +1,31 @@
 package com.example.entity;
 
 public class Student {
-    int sid;
-    String sname;
 
-    public int getSid() {
-        return sid;
-    }
+	int sid;
+	String sname;
 
-    public void setSid(int sid) {
-        this.sid = sid;
-    }
+	public Student() {}
 
-    public String getSname() {
-        return sname;
-    }
+	public Student(int sid, String sname) {
+		this.sid = sid;
+		this.sname = sname;
+	}
 
-    public void setSname(String sname) {
-        this.sname = sname;
-    }
+	public int getSid() {
+		return sid;
+	}
 
-    public Student() {
-    }
+	public void setSid(int sid) {
+		this.sid = sid;
+	}
 
-    public Student(int sid, String sname) {
-        this.sid = sid;
-        this.sname = sname;
-    }
+	public String getSname() {
+		return sname;
+	}
+
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
+
 }

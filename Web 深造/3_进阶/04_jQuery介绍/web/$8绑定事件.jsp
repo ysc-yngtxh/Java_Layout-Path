@@ -13,8 +13,8 @@
     <script type="text/javascript" src="scripts\jquery-3.4.1.js"></script>
     <script type="text/javascript" src="scripts\md5.js"></script>
     <script type="text/javascript">
-        $(function(){
-            $("#loginBut").click(function(){
+        $(function () {
+            $("#loginBut").click(function () {
                 var v_md5password = $.md5($("#password").val());
                 alert(v_md5password);
                 $("#md5password").val(v_md5password);

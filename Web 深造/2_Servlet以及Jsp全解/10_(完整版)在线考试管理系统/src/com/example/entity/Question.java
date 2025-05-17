@@ -2,80 +2,80 @@ package com.example.entity;
 
 public class Question {
 
-    private  Integer questionId;
-    private  String title;
-    private  String optionA;
-    private  String optionB;
-    private  String optionC;
-    private  String optionD;
-    private  String answer;
+	private Integer questionId;
+	private String title;
+	private String optionA;
+	private String optionB;
+	private String optionC;
+	private String optionD;
+	private String answer;
 
-    public Integer getQuestionId() {
-        return questionId;
-    }
+	public Question() {}
 
-    public void setQuestionId(Integer questionId) {
-        this.questionId = questionId;
-    }
+	public Question(Integer questionId, String title, String optionA, String optionB, String optionC, String optionD, String answer) {
+		this.questionId = questionId;
+		this.title = title;
+		this.optionA = optionA;
+		this.optionB = optionB;
+		this.optionC = optionC;
+		this.optionD = optionD;
+		this.answer = answer;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public Integer getQuestionId() {
+		return questionId;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public void setQuestionId(Integer questionId) {
+		this.questionId = questionId;
+	}
 
-    public String getOptionA() {
-        return optionA;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public void setOptionA(String optionA) {
-        this.optionA = optionA;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public String getOptionB() {
-        return optionB;
-    }
+	public String getOptionA() {
+		return optionA;
+	}
 
-    public void setOptionB(String optionB) {
-        this.optionB = optionB;
-    }
+	public void setOptionA(String optionA) {
+		this.optionA = optionA;
+	}
 
-    public String getOptionC() {
-        return optionC;
-    }
+	public String getOptionB() {
+		return optionB;
+	}
 
-    public void setOptionC(String optionC) {
-        this.optionC = optionC;
-    }
+	public void setOptionB(String optionB) {
+		this.optionB = optionB;
+	}
 
-    public String getOptionD() {
-        return optionD;
-    }
+	public String getOptionC() {
+		return optionC;
+	}
 
-    public void setOptionD(String optionD) {
-        this.optionD = optionD;
-    }
+	public void setOptionC(String optionC) {
+		this.optionC = optionC;
+	}
 
-    public String getAnswer() {
-        return answer;
-    }
+	public String getOptionD() {
+		return optionD;
+	}
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
+	public void setOptionD(String optionD) {
+		this.optionD = optionD;
+	}
 
-    public Question() {
-    }
+	public String getAnswer() {
+		return answer;
+	}
 
-    public Question(Integer questionId, String title, String optionA, String optionB, String optionC, String optionD, String answer) {
-        this.questionId = questionId;
-        this.title = title;
-        this.optionA = optionA;
-        this.optionB = optionB;
-        this.optionC = optionC;
-        this.optionD = optionD;
-        this.answer = answer;
-    }
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+
 }

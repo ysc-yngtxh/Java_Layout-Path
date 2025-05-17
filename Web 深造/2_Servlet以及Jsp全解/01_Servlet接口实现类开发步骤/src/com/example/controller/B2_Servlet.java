@@ -1,10 +1,10 @@
 package com.example.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 /* 1）问题一描述：浏览器接收到数据money是2，不是50
  *    问题原因：
@@ -21,24 +21,26 @@ import java.io.PrintWriter;
  *                  response.setContentType("text/html");
  */
 public class B2_Servlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String result =  "hello world"; // 执行结果
-        int money = 50;
-        String result1 = "<br>Java<br>MySQL<br>HTML<br>";
-        String result2 = "红烧排骨<br>糖醋里脊<br>清水白菜<br>我好想你曹家千金";
 
-        // 设置响应头content-type
-        response.setContentType("text/html;charset=utf-8");
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String result = "hello world"; // 执行结果
+		int money = 50;
+		String result1 = "<br>Java<br>MySQL<br>HTML<br>";
+		String result2 = "红烧排骨<br>糖醋里脊<br>清水白菜<br>我好想你曹家千金";
 
-        // --------响应对象-----------start
-        // 1、通过响应对象，向Tomcat索要输出流
-        PrintWriter out = response.getWriter();
-        // 2、通过输出流，将执行结果以二进制形式写入到响应体
-        out.write(result);
-        out.write(money);
-        out.print(money);
-        out.print(result1);
-        out.print(result2);
-    }
+		// 设置响应头content-type
+		response.setContentType("text/html;charset=utf-8");
+
+		// --------响应对象-----------start
+		// 1、通过响应对象，向Tomcat索要输出流
+		PrintWriter out = response.getWriter();
+		// 2、通过输出流，将执行结果以二进制形式写入到响应体
+		out.write(result);
+		out.write(money);
+		out.print(money);
+		out.print(result1);
+		out.print(result2);
+	}
+
 }

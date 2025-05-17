@@ -1,29 +1,31 @@
 package com.example.entity;
 
 public class City {
-    private Integer id;
-    private String name;
 
-    public City() {}
+	private Integer id;
+	private String name;
 
-    public City(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+	public City() {}
 
-    public Integer getId() {
-        return id;
-    }
+	public City(Integer id, String name) {
+		this.id = id;
+		this.name = name;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 }

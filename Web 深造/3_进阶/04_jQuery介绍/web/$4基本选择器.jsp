@@ -10,42 +10,43 @@
 <head>
     <title>jquery中的选择器</title>
     <style type="text/css">
-        div{
+        div {
             background: gray;
-            width:200px;
-            height:100px;
+            width: 200px;
+            height: 100px;
         }
-        #one{
+        #one {
             font-size: 35px;
         }
-        .two{
+
+        .two {
             background: yellow;
         }
     </style>
 
     <script type="text/javascript" src="scripts/jquery-3.4.1.js"></script>
     <script type="text/javascript">
-        function fun1(){
+        function fun1() {
             // id选择器
             var obj = $("#one");
             obj.css("background", "red");
         }
-        function fun2(){
+        function fun2() {
             // 样式选择器
             var obj = $(".two");
             obj.css("background", "green");
         }
-        function fun3(){
+        function fun3() {
             // 标签选择器
             var obj = $("div"); // 数组有3个对象
             obj.css("background", "blue");
         }
-        function fun4(){
+        function fun4() {
             // 所有选择器
             var obj = $("*");
             obj.css("background", "pink");
         }
-        function fun5(){
+        function fun5() {
             // 组合选择器
             var obj = $("#one,.two,span");
             obj.css("background", "orange");

@@ -8,30 +8,30 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>ajax根据省分id获取名称</title>
+    <title>ajax根据省分id获取名称</title>
 
-  <script type="text/javascript">
-    function search() {
-      //发起Ajax请求，传递参数给服务器，服务器返回数据
-      //1、创建异步对象
-      var xmlHttp = new XMLHttpRequest();
-      //2、绑定事件
-      xmlHttp.onreadystatechange = function(){
-        if(xmlHttp.readyState==4 && xmlHttp.status==200){
+    <script type="text/javascript">
+        function search() {
+            //发起Ajax请求，传递参数给服务器，服务器返回数据
+            //1、创建异步对象
+            var xmlHttp = new XMLHttpRequest();
+            //2、绑定事件
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
 
-          //这一步是拿到数据
-          alert(xmlHttp.responseText);
-          //更新页面，就是更新dom对象
-          document.getElementById("proname").value = xmlHttp.responseText;
+                    //这一步是拿到数据
+                    alert(xmlHttp.responseText);
+                    //更新页面，就是更新dom对象
+                    document.getElementById("proname").value = xmlHttp.responseText;
+                }
+            }
+            //3、初始异步对象
+            var proid = document.getElementById("proid").value;
+            xmlHttp.open("get", "querypravice?proid=" + proid, true);
+            //4、发送请求
+            xmlHttp.send();
         }
-      }
-      //3、初始异步对象
-      var proid = document.getElementById("proid").value;
-      xmlHttp.open("get", "querypravice?proid="+proid, true);
-      //4、发送请求
-      xmlHttp.send();
-    }
-  </script>
+    </script>
 </head>
 <body>
       <p>ajax根据省分id获取名称</p>
@@ -50,4 +50,3 @@
       </table>
 </body>
 </html>
-

@@ -11,130 +11,130 @@
     </style>
 </head>
 <body>
-      <form id="userForm" action="/myWeb/user/add" method="get">
-          <table align="center">
-              <tr>
-                  <td>用户姓名</td>
-                  <td>
-                      <input type="text" id="username" name="userName"/>
-                      <span id="usernamespan"></span>
-                  </td>
-              </tr>
-              <tr>
-                  <td>用户密码</td>
-                  <td>
-                      <input type="password" name="password"/>
-                  </td>
-              </tr>
-              <tr>
-                  <td>用户性别</td>
-                  <td>
-                      <input type="radio" name="sex" value="男" checked/>男
-                      <input type="radio" name="sex" value="女"/>女
-                  </td>
-              </tr>
-              <tr>
-                  <td>用户邮箱</td>
-                  <td>
-                      <input type="text" id="emailElt" name="email"/>
-                      <span id="emailEltspan"></span>
-                  </td>
-              </tr>
-              <tr align="center">
-                  <td colspan="2">
-                      <input type="submit" id="submitBtn" value="注册"/>&nbsp;&nbsp;&nbsp;&nbsp;
-                      <input type="reset" value="重置"/>
-                  </td>
-              </tr>
-          </table>
-      </form>
+    <form action="/myWeb/user/add" id="userForm" method="get">
+        <table align="center">
+            <tr>
+                <td>用户姓名</td>
+                <td>
+                    <input id="username" name="userName" type="text"/>
+                    <span id="usernamespan"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>用户密码</td>
+                <td>
+                    <input name="password" type="password"/>
+                </td>
+            </tr>
+            <tr>
+                <td>用户性别</td>
+                <td>
+                    <input checked name="sex" type="radio" value="男"/>男
+                    <input name="sex" type="radio" value="女"/>女
+                </td>
+            </tr>
+            <tr>
+                <td>用户邮箱</td>
+                <td>
+                    <input id="emailElt" name="email" type="text"/>
+                    <span id="emailEltspan"></span>
+                </td>
+            </tr>
+            <tr align="center">
+                <td colspan="2">
+                    <input id="submitBtn" type="submit" value="注册"/>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="reset" value="重置"/>
+                </td>
+            </tr>
+        </table>
+    </form>
 
 
-      <script type="text/javascript">
-          window.onload=function(){
+    <script type="text/javascript">
+        window.onload = function () {
 <!--用户名验证-->
-              //获取username文本框对象
-              let usernameElt = document.getElementById("username");
-              //获取username的span标签
-              let usernameEltSpan = document.getElementById("usernamespan");
-              //给用户名文本框绑定blur事件
-              usernameElt.onblur=function(){
-                  //获取用户名
-                  let username = usernameElt.value;
-                  //去除前后空白
-                  username =username.trim();
-                  //判断用户名是否合法
-                  if (username ==="") {
-                      usernameEltSpan.innerText = "用户名不能为空"
-                  }else {
-                      if(username.length<3 || username.length>14){
-                          usernameEltSpan.innerText="用户名长度必须在[3-14]之间";
-                      }else {
-                          //用户名的正则表达式
-                          let regElt = /^[a-zA-Z0-9]{3,14}$/;
-                          if(regElt.test(username)){
-                              usernameEltSpan.innerText = "";   /*用户名最终合法*/
-                          }else{
-                              usernameEltSpan.innerText = "用户名中含有特殊字符"
-                          }
-                      }
-                  }
-              };
-              //给username这个文本框绑定获得焦点事件
-              usernameElt.onfocus=function(){
-                  if(usernameEltSpan.innerText !== ""){
-                      usernameElt.value = "";
-                  }
-                  //清空span
-                  usernameEltSpan.innerText = "";
-              };
+            // 获取username文本框对象
+            let usernameElt = document.getElementById("username");
+            // 获取username的span标签
+            let usernameEltSpan = document.getElementById("usernamespan");
+            // 给用户名文本框绑定blur事件
+            usernameElt.onblur = function () {
+                // 获取用户名
+                let username = usernameElt.value;
+                // 去除前后空白
+                username = username.trim();
+                // 判断用户名是否合法
+                if (username === "") {
+                    usernameEltSpan.innerText = "用户名不能为空"
+                } else {
+                    if (username.length < 3 || username.length > 14) {
+                        usernameEltSpan.innerText = "用户名长度必须在[3-14]之间";
+                    } else {
+                        // 用户名的正则表达式
+                        let regElt = /^[a-zA-Z0-9]{3,14}$/;
+                        if (regElt.test(username)) {
+                            usernameEltSpan.innerText = "";   /*用户名最终合法*/
+                        } else {
+                            usernameEltSpan.innerText = "用户名中含有特殊字符"
+                        }
+                    }
+                }
+            };
+            // 给username这个文本框绑定获得焦点事件
+            usernameElt.onfocus = function () {
+                if (usernameEltSpan.innerText !== "") {
+                    usernameElt.value = "";
+                }
+                // 清空span
+                usernameEltSpan.innerText = "";
+            };
 
 
 <!--邮箱验证-->
-              //获取邮箱对象
-              let emailElt = document.getElementById("emailElt");
-              //获取邮箱的span标签
-              let emailEltspan = document.getElementById("emailEltspan");
-              //给邮箱文本框绑定blur事件
-              emailElt.onblur = function(){
-                  if(emailElt.value === ""){
-                      emailEltspan.innerText = "邮箱内容不能为空"
-                  }else{
-                      let emailEltspan1 = /^[\w][\w\d_]*@\w+\.[A-Za-z]+$/;
-                      if(emailEltspan1.test(emailElt.value)){
-                          emailEltspan.innerText = "";    /*邮箱格式正确*/
-                      }else{
-                          emailEltspan.innerText = "邮箱格式错误";
-                      }
-                  }
-              };
-              //给邮箱文本框绑定获得焦点事件
-              emailElt.onfocus = function(){
-                  if(emailEltspan.innerText !== ""){
-                      emailElt.value = "";
-                  }
-                  emailEltspan.innerText = "";
-              };
+            // 获取邮箱对象
+            let emailElt = document.getElementById("emailElt");
+            // 获取邮箱的span标签
+            let emailEltspan = document.getElementById("emailEltspan");
+            // 给邮箱文本框绑定blur事件
+            emailElt.onblur = function () {
+                if (emailElt.value === "") {
+                    emailEltspan.innerText = "邮箱内容不能为空"
+                } else {
+                    let emailEltspan1 = /^[\w][\w\d_]*@\w+\.[A-Za-z]+$/;
+                    if (emailEltspan1.test(emailElt.value)) {
+                        emailEltspan.innerText = "";    /*邮箱格式正确*/
+                    } else {
+                        emailEltspan.innerText = "邮箱格式错误";
+                    }
+                }
+            };
+            // 给邮箱文本框绑定获得焦点事件
+            emailElt.onfocus = function () {
+                if (emailEltspan.innerText !== "") {
+                    emailElt.value = "";
+                }
+                emailEltspan.innerText = "";
+            };
 
 
-              //给提交按钮绑定鼠标单击事件
-              let submitBtn = document.getElementById("submitBtn");
-              submitBtn.onclick = function(){
-                  usernameElt.focus();
-                  usernameElt.blur();
+            // 给提交按钮绑定鼠标单击事件
+            let submitBtn = document.getElementById("submitBtn");
+            submitBtn.onclick = function() {
+                usernameElt.focus();
+                usernameElt.blur();
 
-                  emailElt.focus();
-                  emailElt.blur();
+                emailElt.focus();
+                emailElt.blur();
 
-                  //当所有表单项都是合法的时候，提交表单
-                  if(usernameEltSpan.innerText==="" && emailEltspan.innerText===""){
-                      //获取表单对象
-                      let userForm = document.getElementById("userForm");
-                      //提交表单
-                      userForm.submit();
-                  }
-              }
-          };
-      </script>
+                // 当所有表单项都是合法的时候，提交表单
+                if (usernameEltSpan.innerText === "" && emailEltspan.innerText === "") {
+                    // 获取表单对象
+                    let userForm = document.getElementById("userForm");
+                    // 提交表单
+                    userForm.submit();
+                }
+            }
+        };
+    </script>
 </body>
 </html>

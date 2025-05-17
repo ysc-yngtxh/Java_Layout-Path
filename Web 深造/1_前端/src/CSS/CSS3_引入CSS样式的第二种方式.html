@@ -5,61 +5,61 @@
     <title>HTML中引入CSS样式的第二种方式：样式块</title>
 
     <style type="text/css"> /* type属性已被弃用，因为浏览器默认会将 <style> 内容视为 CSS，不需要额外声明 */
-        /*  id选择器
-         *  语法格式：
-         *        #id {
-         *            样式名: 样式值;
-         *            样式名: 样式值;
-         *             ...
-         *        }
-         */
-        #username {
-            color: red;
-            font-size: 30px;
-        }
+    /*  id选择器
+     *  语法格式：
+     *        #id {
+     *            样式名: 样式值;
+     *            样式名: 样式值;
+     *             ...
+     *        }
+     */
+    #username {
+        color: red;
+        font-size: 30px;
+    }
 
-        /*  标签选择器（标签选择起作用的范围比id选择器广）
-         *  语法格式：
-         *         标签名 {
-         *              样式名: 样式值
-         *              样式名: 样式值
-         *              ...
-         *         }
-         */
-        div {
-            background-color: deepskyblue;
-            border: 1px solid red;
-            width: 100px;
-            height: 100px;
-        }
+    /*  标签选择器（标签选择起作用的范围比id选择器广）
+     *  语法格式：
+     *         标签名 {
+     *              样式名: 样式值
+     *              样式名: 样式值
+     *              ...
+     *         }
+     */
+    div {
+        background-color: deepskyblue;
+        border: 1px solid red;
+        width: 100px;
+        height: 100px;
+    }
 
-        /*  类选择器
-         *  语法格式：
-         *         .类名{
-         *              样式名: 样式值
-         *              样式名: 样式值
-         *              ...
-         *         }
-         */
-        .student {
-            border: 1px solid red;
-            width: 400px;
-            height: 20px;
-        }
+    /*  类选择器
+     *  语法格式：
+     *         .类名{
+     *              样式名: 样式值
+     *              样式名: 样式值
+     *              ...
+     *         }
+     */
+    .student {
+        border: 1px solid red;
+        width: 400px;
+        height: 20px;
+    }
     </style>
 </head>
 <body>
-        <!--设置样式字体大小30px,颜色为红色-->
-        <span id="username">对不起，用户名不能为空！</span>
+<!--设置样式字体大小30px,颜色为红色-->
+<span id="username">对不起，用户名不能为空！</span>
 
-        <div></div>
-        <div></div>
-        <div></div>
+<div></div>
+<div></div>
+<div></div>
 
-        <input type="text" class="student"/>
-        <select class="student">
-            <option>专科</option>
-            <option>本科</option>
-        </select><br><br><br>
+<input class="student" type="text"/>
+<select class="student">
+    <option>专科</option>
+    <option>本科</option>
+</select><br><br><br>
 </body>
 </html>

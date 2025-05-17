@@ -13,24 +13,22 @@
 --%>
 <html>
 <head>
-  <title>$Title$</title>
+    <title>$Title$</title>
 </head>
 <body>
-
       <%
         // 在jsp文件中，只有书写在执行标记中的内容才会被当作Java命令
         // 1、声明Java变量
         int num1 = 100;
         int num2 = 200;
         // 2、声明运行表达式：数学运算，关系运算，逻辑运算
-        int num3 = num1+num2;
-        int num4 = num2>=num1?num2:num1;
+        int num3 = num1 + num2;
+        int num4 = num2>=num1 ? num2 : num1;
         boolean num5 = num2>=200 && num1>=100;
       %>
 
-
       <%
-        if(num3>300) {
+        if (num3 > 300) {
       %>
 
           <font style="color:red;font_size:80px">谢绝入内</font>
@@ -44,6 +42,5 @@
       <%
         }
       %>
-
 </body>
 </html>

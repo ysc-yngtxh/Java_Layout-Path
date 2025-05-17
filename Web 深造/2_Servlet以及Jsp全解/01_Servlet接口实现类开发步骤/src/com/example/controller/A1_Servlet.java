@@ -30,18 +30,19 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class A1_Servlet extends HttpServlet {
 
-    public A1_Servlet() {
-        System.out.println("A1Servlet类被创建实例对象");
-    }
+	public A1_Servlet() {
+		System.out.println("A1Servlet类被创建实例对象");
+	}
 
-    // 浏览器中有七种请求方式，CTRL+O可以看到，选择get和post方式进行重写
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        System.out.println("A1_Servlet类针对浏览器发送Get请求方式处理");
-    }
+	// 浏览器中有七种请求方式，CTRL+O可以看到，选择get和post方式进行重写
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+		System.out.println("A1_Servlet类针对浏览器发送Get请求方式处理");
+	}
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-        System.out.println("A1_Servlet类针对浏览器发送Post请求方式处理");
-    }
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+		System.out.println("A1_Servlet类针对浏览器发送Post请求方式处理");
+	}
+
 }

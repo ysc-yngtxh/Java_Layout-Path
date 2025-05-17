@@ -2,28 +2,28 @@
   Created by IntelliJ IDEA.
   User: 游家纨绔
   Date: 2020/8/19
-  Time: 16:21
+  Time: 16:20
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!--传统Java命令方式实现关系运算输出-->
 <%
-    String num1 = (String)session.getAttribute("key1");
-    Integer num2 = (Integer)session.getAttribute("key2");
+    String num1 = (String) session.getAttribute("key1");
+    Integer num2 = (Integer) session.getAttribute("key2");
     int sum = Integer.valueOf(num1) + num2;  //全部转换成Integer包装类，然后自动拆箱成int类型
 %>
 传统的Java命令计算后的结果：<%=sum%>
 
 <%
-    String age = (String)session.getAttribute("age");
+    String age = (String) session.getAttribute("age");
     if (Integer.valueOf(age) >= 18) {
 %>
-       欢迎光临<br>
+       欢迎光临<br/>
 <%
     } else {
 %>
-       谢绝入内<br>
+       谢绝入内<br/>
 <%
     }
 %>

@@ -23,39 +23,39 @@ public class DButil {
         }
     }
 
-    public Connection getConn() {
-        try {
-            conn = DriverManager.getConnection(url,user,password);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+	public Connection getConn() {
+		try {
+			conn = DriverManager.getConnection(url, user, password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-        return conn;
-    }
+		return conn;
+	}
 
-    public PreparedStatement createStatement(String sql) {
-        try {
-            ps = getConn().prepareStatement(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return ps;
-    }
+	public PreparedStatement createStatement(String sql) {
+		try {
+			ps = getConn().prepareStatement(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ps;
+	}
 
-    public void close() {
-        if (ps != null) {
-            try {
-                ps.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+	public void close() {
+		if (ps != null) {
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

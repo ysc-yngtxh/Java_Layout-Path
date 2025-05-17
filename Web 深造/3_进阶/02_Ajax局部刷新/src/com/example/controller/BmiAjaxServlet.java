@@ -21,42 +21,44 @@ import javax.servlet.http.HttpServletResponse;
  * 2、创建服务器的servlet，接收并处理数据，把数据输出给异步对象
  */
 public class BmiAjaxServlet extends HttpServlet {
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {}
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println("发起了请求，局部刷新");
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) {}
 
-        // 接收参数
-        String strName = request.getParameter("name");
-        String weight = request.getParameter("w");
-        String height = request.getParameter("h");
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		System.out.println("发起了请求，局部刷新");
 
-        // 计算bmi
-        float w = Float.parseFloat(weight);
-        float h = Float.parseFloat(height);
-        float bmi = w/(h*h);
+		// 接收参数
+		String strName = request.getParameter("name");
+		String weight = request.getParameter("w");
+		String height = request.getParameter("h");
 
-        // 判断bmi的范围
-        String msg = "";
-        if(bmi <= 18.5) {
-            msg = "您比较瘦";
-        } else if(bmi > 18.5 && bmi <= 23.9) {
-            msg = "你的bmi是正常的";
-        } else if(bmi >24 && bmi <=27) {
-            msg = "你的身体比较胖";
-        } else {
-            msg = "您的身体肥胖";
-        }
-        System.out.println("msg=" + msg);
-        msg = "您好:" + strName + "先生/女士，您的bmi值是:" + bmi + "," + msg;
+		// 计算bmi
+		float w = Float.parseFloat(weight);
+		float h = Float.parseFloat(height);
+		float bmi = w / (h * h);
 
-        // 响应Ajax需要的数据，使用HttpServletResponse输出数据
-        response.setContentType("text/html;charset=utf-8");
-        PrintWriter pw = response.getWriter();
-        pw.println(msg);
-        pw.flush();
-        pw.close();
-    }
+		// 判断bmi的范围
+		String msg = "";
+		if (bmi <= 18.5) {
+			msg = "您比较瘦";
+		} else if (bmi > 18.5 && bmi <= 23.9) {
+			msg = "你的bmi是正常的";
+		} else if (bmi > 24 && bmi <= 27) {
+			msg = "你的身体比较胖";
+		} else {
+			msg = "您的身体肥胖";
+		}
+		System.out.println("msg=" + msg);
+		msg = "您好:" + strName + "先生/女士，您的bmi值是:" + bmi + "," + msg;
+
+		// 响应Ajax需要的数据，使用HttpServletResponse输出数据
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter pw = response.getWriter();
+		pw.println(msg);
+		pw.flush();
+		pw.close();
+	}
+
 }

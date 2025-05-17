@@ -5,67 +5,70 @@
     <title>Title</title>
 </head>
 <body>
-        <script type="text/javascript">
-            window.onload = function() {
+    <script type="text/javascript">
+        window.onload = function () {
             <!--TODO 复选框全选和取消全选-->
-                // 获取第一个复选框的选中状态
-                let first = document.getElementById("first");
-                // 根据name获取所有元素
-                let habit = document.getElementsByName("habit");
-                first.onclick = function() {
-                    for(let i=0; i<habit.length; i++) {
-                        habit[i].checked = first.checked;
-                    }
-                };
-
-                // 对以上数组进行遍历
-                let all = habit.length;
-                for(let i=0; i<habit.length; i++) {  // 这个for循环表示的是habit数组遍历，鼠标点击事件
-                    habit[i].onclick = function() {  // onclick表示的是鼠标点击后才会执行
-                        let checkedCount = 0;
-                        // 总数量和选中的数量相等的时候，第一个复选框选中
-                        for(let i=0; i<habit.length; i++) {   // 这个for循环是用来判断复选框打勾的个数
-                            if(habit[i].checked) { // if语句判断里如果是其他的内容将自动转换成Boolean()函数，这就是与Java语法的区别
-                                checkedCount++;    // 鼠标点击打勾为true，取消为false
-                            }
-                        }
-                        first.checked = (all===checkedCount);
-                    }
+            // 获取第一个复选框的选中状态
+            let first = document.getElementById("first");
+            // 根据name获取所有元素
+            let habit = document.getElementsByName("habit");
+            first.onclick = function () {
+                for (let i = 0; i < habit.length; i++) {
+                    habit[i].checked = first.checked;
                 }
+            };
+
+            // 对以上数组进行遍历
+            let all = habit.length;
+            for (let i = 0; i < habit.length; i++) {
+             // 这个for循环表示的是habit数组遍历，鼠标点击事件
+                habit[i].onclick = function () {  // onclick表示的是鼠标点击后才会执行
+                    let checkedCount = 0;
+                    // 总数量和选中的数量相等的时候，第一个复选框选中
+                    for (let i = 0; i < habit.length; i++) {
+                     // 这个for循环是用来判断复选框打勾的个数
+                        if (habit[i].checked) {
+                         // if语句判断里如果是其他的内容将自动转换成Boolean()函数，这就是与Java语法的区别
+                            checkedCount++;    // 鼠标点击打勾为true，取消为false
+                        }
+                    }
+                    first.checked = (all === checkedCount);
+                }
+            }
 
 
             <!--TODO change下拉列表选中项改变，或文本框内容改变-->
-                let pro = document.getElementById("provinceList");
-                pro.onchange = function(){
-                    alert(pro.value);
-                }
+            let pro = document.getElementById("provinceList");
+            pro.onchange = function () {
+                alert(pro.value);
             }
-        </script>
-        <input type="checkbox" id="first"/>
-            <label for="first" style="color: #1e8edf">全选或取消全选</label><br>
-        <input type="checkbox" name="habit" value="smoke"/>抽烟<br>
-        <input type="checkbox" name="habit" value="drink" checked/>喝酒<br>
-        <input type="checkbox" name="habit" value="fireHair"/>烫头<br><br><br>
+        }
+    </script>
+    <input id="first" type="checkbox"/>
+    <label for="first" style="color: #1e8edf">全选或取消全选</label><br>
+    <input name="habit" type="checkbox" value="smoke"/>抽烟<br>
+    <input checked name="habit" type="checkbox" value="drink"/>喝酒<br>
+    <input name="habit" type="checkbox" value="fireHair"/>烫头<br><br><br>
 
-        <select id="provinceList" multiple size="3"> <!--multiple表示多选，size表示下拉列表的高度-->
-            <option value="">--请选择省份--</option>
-            <option value="001">武汉</option>
-            <option value="002">北京</option>
-            <option value="003">上海</option>
-            <option value="004">深圳</option>
-            <option value="005">广州</option>
-            <option value="006">珠海</option>
-        </select>&emsp;&emsp;&emsp;
+    <select id="provinceList" multiple size="3"> <!--multiple表示多选，size表示下拉列表的高度-->
+        <option value="">--请选择省份--</option>
+        <option value="001">武汉</option>
+        <option value="002">北京</option>
+        <option value="003">上海</option>
+        <option value="004">深圳</option>
+        <option value="005">广州</option>
+        <option value="006">珠海</option>
+    </select>&emsp;&emsp;&emsp;
 
-        <!--获取下拉列表选中项的value第二种方式-->
-        <select onchange="alert(this.value)">
-            <option value="">--请选择省份--</option>
-            <option value="001">武汉</option>
-            <option value="002">北京</option>
-            <option value="003">上海</option>
-            <option value="004">深圳</option>
-            <option value="005">广州</option>
-            <option value="006">珠海</option>
-        </select>
+    <!--获取下拉列表选中项的value第二种方式-->
+    <select onchange="alert(this.value)">
+        <option value="">--请选择省份--</option>
+        <option value="001">武汉</option>
+        <option value="002">北京</option>
+        <option value="003">上海</option>
+        <option value="004">深圳</option>
+        <option value="005">广州</option>
+        <option value="006">珠海</option>
+    </select>
 </body>
 </html>

@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: 游诗成
   Date: 2020/8/27
-  Time: 16:42
+  Time: 16:40
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -43,6 +43,5 @@
               <td><input type="button" value="点击按钮2" onclick="fun2()"/></td>
           </tr>
       </table>
-
 </body>
 </html>

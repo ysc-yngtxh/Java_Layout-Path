@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: 游诗成
   Date: 2020/8/29
-  Time: 16:51
+  Time: 16:50
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,7 +11,7 @@
     <title>Title</title>
 
     <style type="text/css">
-        div{
+        div {
             background: gray;
         }
     </style>
@@ -19,49 +19,49 @@
     <script type="text/javascript" src="scripts/jquery-3.4.1.js"></script>
     <script type="text/javascript">
         // $(document).ready(函数):当页面中的dom对象加载成功后，会执行ready()。相当于是onLoad()
-        $(function(){
+        $(function () {
             // 当页面dom对象加载后，给对象绑定事件，因为此时button对象已经在内存中创建好了，才能使用
-            $("#btn1").click(function(){
+            $("#btn1").click(function () {
                 // 过滤器
                 var obj = $("div:first");
-                obj.css("background","red")
+                obj.css("background", "red")
             })
 
-            $("#btn2").click(function(){
+            $("#btn2").click(function () {
                 var obj = $("div:last");
-                obj.css("background","green")
+                obj.css("background", "green")
             })
 
-            $("#btn3").click(function(){
+            $("#btn3").click(function () {
                 var obj = $("div:eq(3)");
-                obj.css("background","blue")
+                obj.css("background", "blue")
             })
 
-            $("#btn4").click(function(){
+            $("#btn4").click(function () {
                 var obj = $("div:gt(3)");
-                obj.css("background","orange")
+                obj.css("background", "orange")
             })
 
-            $("#btn5").click(function(){
+            $("#btn5").click(function () {
                 var obj = $("div:lt(3)");
-                obj.css("background","yellow")
+                obj.css("background", "yellow")
             })
 
             // 表单过滤器
-            $("#btn6").click(function(){
+            $("#btn6").click(function () {
                 var obj = $(":text:enabled")
                 obj.val("hello")
             })
 
-            $("#btn7").click(function(){
+            $("#btn7").click(function () {
                 var obj = $(":checkbox:checked");
-                for(var i=0; i<obj.length; i++){
+                for (var i = 0; i < obj.length; i++) {
                     // alert( obj[i].value );这里的obj为什么不是jQuery对象呢？本来的(obj)是jQuery对象，但是jQuery数组(obj[i])就转变为dom对象
-                    alert( $(obj[i]).val() );
+                    alert($(obj[i]).val());
                 }
             })
 
-            $("#btn8").click(function(){
+            $("#btn8").click(function () {
                 var obj = $("select>option:selected");
                 alert(obj.val());
             })

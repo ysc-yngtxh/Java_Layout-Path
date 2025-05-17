@@ -5,6 +5,8 @@
   Time: 10:46
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="java.lang.Integer" %>
+<%@ page import="java.lang.String" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!--
     JSP文件内置对象：request
@@ -31,13 +33,12 @@
 <%
     // 将共享数据添加到当前用户私人储物柜
     // HttpSession session = request.HttpSession();
-    session.setAttribute("key1",200);
+    session.setAttribute("key1", 200);
 %>
 <%
     // 如果我这行代码写在一个新建的JSP里，即为同一个用户/浏览器提供服务。因此可以使用当前用户在服务端的私人储物柜进行数据共享
-    Integer value = (Integer)session.getAttribute("key1");
+    Integer value = (Integer) session.getAttribute("key1");
 %>
-
 
 
 <!--
@@ -46,5 +47,5 @@
     JSP文件内置对象：application
 -->
 <%
-    application.setAttribute("key2","hello world");
+    application.setAttribute("key2", "hello world");
 %>

@@ -138,7 +138,7 @@
             };
             // 给username这个文本框绑定获得焦点事件
             usernameElt.onfocus = function() {
-                if(usernameEltspan.innerText !== ""){
+                if (usernameEltspan.innerText !== "") {
                     usernameElt.value = "";
                 }
                 // 清空span
@@ -157,8 +157,8 @@
                 }
             };
             // 给确认密码文本框绑定获得焦点事件
-            userped.onfocus = function(){
-                if(ped.innerText !== ""){
+            userped.onfocus = function() {
+                if (ped.innerText !== "") {
                     userped.value = "";
                 }
                 ped.innerText = "";
@@ -173,7 +173,7 @@
             email.onblur = function() {
                 if(email.value === ""){
                     emailElt.innerText = "邮箱内容不能为空"
-                }else{
+                } else {
                     let emailElt1 = /^[\w][\w\d_]*@\w+\.[A-Za-z]+$/;
                     if(emailElt1.test(email.value)) {
                         emailElt.innerText = "";    // 邮箱格式正确
@@ -184,7 +184,7 @@
             };
             // 给邮箱文本框绑定获得焦点事件
             email.onfocus = function() {
-                if(emailElt.innerText !== "") {
+                if (emailElt.innerText !== "") {
                     email.value = "";
                 }
                 emailElt.innerText = "";
@@ -203,12 +203,11 @@
                 email.focus();
                 email.blur();
 
-                //当所有表单项都是合法的时候，提交表单
-                if(usernameEltspan.innerText==="" && ped.innerText==="" &&
-                 emailElt.innerText==="") {
-                    //获取表单对象
+                // 当所有表单项都是合法的时候，提交表单
+                if (usernameEltspan.innerText==="" && ped.innerText==="" && emailElt.innerText==="") {
+                    // 获取表单对象
                     let userForm = document.getElementById("userForm");
-                    //提交表单
+                    // 提交表单
                     userForm.submit();
                 }
             }

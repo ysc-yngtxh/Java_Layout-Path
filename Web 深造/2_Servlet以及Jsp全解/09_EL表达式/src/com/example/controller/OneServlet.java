@@ -9,16 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class OneServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {}
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ServletContext application = request.getServletContext();
-        HttpSession session = request.getSession();
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) {}
 
-        application.setAttribute("sid", 10);
-        session.setAttribute("sname", "mike");
-        request.setAttribute("home", "新起屯");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ServletContext application = request.getServletContext();
+		HttpSession session = request.getSession();
 
-        request.getRequestDispatcher("/index_01.jsp").forward(request,response);
-    }
+		application.setAttribute("sid", 10);
+		session.setAttribute("sname", "mike");
+		request.setAttribute("home", "新起屯");
+
+		request.getRequestDispatcher("/index_01.jsp").forward(request, response);
+	}
+
 }

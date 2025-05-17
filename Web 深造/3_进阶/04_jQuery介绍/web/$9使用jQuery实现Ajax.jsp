@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: 游诗成
   Date: 2020/8/27
-  Time: 15:18
+  Time: 15:20
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,18 +12,18 @@
 
     <script type="text/javascript" src="scripts\jquery-3.4.1.js"></script>
     <script type="text/javascript">
-        $(function(){
-            $("#btn").click(function(){
+        $(function () {
+            $("#btn").click(function () {
                 //获取dom的value值
                 var proid = $("#proid").val();
                 //发送Ajax请求
                 $.ajax({
-                    url:"queryjson",
-                    data:{
-                        "proid":proid
+                    url: "queryjson",
+                    data: {
+                        "proid": proid
                     },
-                    dataType:"json",
-                    success:function(resp){
+                    dataType: "json",
+                    success: function (resp) {
                         alert(resp);
                         $("#proname").val(resp.name);
                         $("#projiancheng").val(resp.jiancheng);
