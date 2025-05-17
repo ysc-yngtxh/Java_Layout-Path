@@ -7,12 +7,13 @@ import java.lang.annotation.Target;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-05-07 23:15
+ * @dateTime 2024-05-07 23:10:00
  * @apiNote TODO Bean注入容器注解
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface Component {
 
-    String value() default "";
+	String value() default "";
+
 }

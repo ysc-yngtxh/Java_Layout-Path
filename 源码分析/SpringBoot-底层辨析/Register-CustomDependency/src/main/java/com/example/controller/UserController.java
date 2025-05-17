@@ -5,14 +5,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-06-01 22:05
+ * @dateTime 2024-06-01 22:00:00
  * @apiNote TODO
  */
 @RestController
 public class UserController {
 
-    @GetMapping("/test")
-    public String test(){
-        return "test";
-    }
+	@GetMapping("/test")
+	public String test() {
+		return "test";
+	}
+
 }

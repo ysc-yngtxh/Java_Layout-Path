@@ -5,16 +5,17 @@ package com.example.session;
  */
 public class SqlSessionFactory {
 
-    private Configuration configuration;
+	private Configuration configuration;
 
-    public SqlSessionFactory(Configuration configuration) {
-        this.configuration = configuration;
-    }
+	public SqlSessionFactory(Configuration configuration) {
+		this.configuration = configuration;
+	}
 
-    /**
-     * 获取SqlSession
-     */
-    public SqlSession openSession() {
-        return new SqlSession(configuration);
-    }
+	/**
+	 * 获取SqlSession
+	 */
+	public SqlSession openSession() {
+		return new SqlSession(configuration);
+	}
+
 }

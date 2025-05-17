@@ -14,5 +14,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface Intercepts {
 
-    String value();
+	String value();
+
 }

@@ -15,46 +15,47 @@ import org.apache.catalina.startup.Tomcat;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-04-07 下午7:26
+ * @dateTime 2024-04-07 下午7:30:00
  * @apiNote TODO
  */
 public class HttpServer {
 
-    public void start(String hostName, Integer port) {
-        // 读取用户的配置
-        Tomcat tomcat = new Tomcat();
+	public void start(String hostName, Integer port) {
+		// 读取用户的配置
+		Tomcat tomcat = new Tomcat();
 
-        Server server = tomcat.getServer();
-        Service service = server.findService("Tomcat");
+		Server server = tomcat.getServer();
+		Service service = server.findService("Tomcat");
 
-        Connector connector = new Connector();
-        connector.setPort(port);
+		Connector connector = new Connector();
+		connector.setPort(port);
 
-        Engine engine = new StandardEngine();
-        engine.setDefaultHost(hostName);
+		Engine engine = new StandardEngine();
+		engine.setDefaultHost(hostName);
 
-        Host host = new StandardHost();
-        host.setName(hostName);
+		Host host = new StandardHost();
+		host.setName(hostName);
 
-        String contextPath = "";
-        Context context = new StandardContext();
-        context.setPath(contextPath);
-        context.addLifecycleListener(new Tomcat.FixContextListener());
+		String contextPath = "";
+		Context context = new StandardContext();
+		context.setPath(contextPath);
+		context.addLifecycleListener(new Tomcat.FixContextListener());
 
-        host.addChild(context);
-        engine.addChild(host);
+		host.addChild(context);
+		engine.addChild(host);
 
-        service.setContainer(engine);
-        service.addConnector(connector);
+		service.setContainer(engine);
+		service.addConnector(connector);
 
-        tomcat.addServlet(contextPath, "dispatcher", new DispatcherServlet());
-        context.addServletMappingDecoded("/*", "dispatcher");
+		tomcat.addServlet(contextPath, "dispatcher", new DispatcherServlet());
+		context.addServletMappingDecoded("/*", "dispatcher");
 
-        try {
-            tomcat.start();
-            tomcat.getServer().await();
-        } catch (LifecycleException e) {
-            throw new RuntimeException(e);
-        }
-    }
+		try {
+			tomcat.start();
+			tomcat.getServer().await();
+		} catch (LifecycleException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 }

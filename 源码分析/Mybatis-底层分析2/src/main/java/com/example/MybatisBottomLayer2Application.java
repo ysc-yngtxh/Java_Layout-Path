@@ -6,7 +6,6 @@ import com.example.mapper.UserMapper;
 import com.example.session.SqlSession;
 import com.example.session.SqlSessionFactory;
 import com.example.session.SqlSessionFactoryBuilder;
-
 import java.io.InputStream;
 
 public class MybatisBottomLayer2Application {

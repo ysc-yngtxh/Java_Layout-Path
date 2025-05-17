@@ -5,13 +5,14 @@ package com.example.plugin;
  */
 public interface Interceptor {
 
-    /**
-     * 插件的核心逻辑实现
-     */
-    Object intercept(Invocation invocation) throws Throwable;
+	/**
+	 * 插件的核心逻辑实现
+	 */
+	Object intercept(Invocation invocation) throws Throwable;
 
-    /**
-     * 对被拦截对象进行代理
-     */
-    Object plugin(Object target);
+	/**
+	 * 对被拦截对象进行代理
+	 */
+	Object plugin(Object target);
+
 }

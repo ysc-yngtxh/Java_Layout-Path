@@ -13,11 +13,12 @@ import java.lang.reflect.Method;
 @AllArgsConstructor
 public class Invocation {
 
-    private Object target;
-    private Method method;
-    private Object[] args;
+	private Object target;
+	private Method method;
+	private Object[] args;
 
-    public Object proceed() throws InvocationTargetException, IllegalAccessException {
-        return method.invoke(target, args);
-    }
+	public Object proceed() throws InvocationTargetException, IllegalAccessException {
+		return method.invoke(target, args);
+	}
+
 }

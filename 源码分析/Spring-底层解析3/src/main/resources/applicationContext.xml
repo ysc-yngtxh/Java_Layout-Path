@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
     <!--组件扫描器：将包下被 @Component 注解标注的所属类注入容器并创建对象bean-->
     <context:component-scan base-package="com.example"/>
@@ -16,6 +17,6 @@
         proxy-target-class="true"：表示要使用cglib动态代理。默认值为false，表示使用的jdk动态代理，除非代理对象没有接口
         expose-proxy="true"：表示暴露当前代理对象为ThreadLocal模式。可以使用AopContext.currentProxy()方法获取方法内部调用的代理对象
     -->
-    <aop:aspectj-autoproxy proxy-target-class="false" expose-proxy="true" />
+    <aop:aspectj-autoproxy proxy-target-class="false" expose-proxy="true"/>
 
 </beans>

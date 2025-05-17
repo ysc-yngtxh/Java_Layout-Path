@@ -7,18 +7,19 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-05-20 23:49
+ * @dateTime 2024-05-20 23:50:00
  * @apiNote TODO 商品各类
  */
 @Service("productService")
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired
-    private ItemService itemService;
+	@Autowired
+	private ItemService itemService;
 
-    @Override
-    public void test(){
-        double price = itemService.price();
-        System.out.println("商品价格：" + price);
-    }
+	@Override
+	public void test() {
+		double price = itemService.price();
+		System.out.println("商品价格：" + price);
+	}
+
 }

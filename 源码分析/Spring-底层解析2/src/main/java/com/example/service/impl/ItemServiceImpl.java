@@ -5,14 +5,15 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-05-21 00:33
+ * @dateTime 2024-05-21 00:00:00
  * @apiNote TODO
  */
 @Service
 public class ItemServiceImpl implements ItemService {
 
-    @Override
-    public double price() {
-        return 1.22;
-    }
+	@Override
+	public double price() {
+		return 1.22;
+	}
+
 }

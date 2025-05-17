@@ -7,12 +7,12 @@ import com.example.service.HelloServiceImpl;
 
 public class ProviderApplication {
 
-    public static void main(String[] args) {
-        // 本地注册具体服务实现类
-        LocalRegister.register(HelloService.class.getSimpleName(), "1.0.0",  HelloServiceImpl.class);
+	public static void main(String[] args) {
+		// 本地注册具体服务实现类
+		LocalRegister.register(HelloService.class.getSimpleName(), "1.0.0", HelloServiceImpl.class);
 
-        HttpServer httpServer = new HttpServer();
-        httpServer.start("localhost", 8080);
-    }
+		HttpServer httpServer = new HttpServer();
+		httpServer.start("localhost", 8080);
+	}
 
 }

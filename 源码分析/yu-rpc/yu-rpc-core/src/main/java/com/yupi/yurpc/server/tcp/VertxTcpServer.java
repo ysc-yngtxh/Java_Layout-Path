@@ -14,27 +14,27 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class VertxTcpServer {
 
-    public void doStart(int port) {
-        // 创建 Vert.x 实例
-        Vertx vertx = Vertx.vertx();
+	public static void main(String[] args) {
+		new VertxTcpServer().doStart(8888);
+	}
 
-        // 创建 TCP 服务器
-        NetServer server = vertx.createNetServer();
+	public void doStart(int port) {
+		// 创建 Vert.x 实例
+		Vertx vertx = Vertx.vertx();
 
-        // 处理请求
-        server.connectHandler(new TcpServerHandler());
+		// 创建 TCP 服务器
+		NetServer server = vertx.createNetServer();
 
-        // 启动 TCP 服务器并监听指定端口
-        server.listen(port, result -> {
-            if (result.succeeded()) {
-                log.info("TCP webServer started on port " + port);
-            } else {
-                log.info("Failed to start TCP webServer: " + result.cause());
-            }
-        });
-    }
+		// 处理请求
+		server.connectHandler(new TcpServerHandler());
 
-    public static void main(String[] args) {
-        new VertxTcpServer().doStart(8888);
-    }
+		// 启动 TCP 服务器并监听指定端口
+		server.listen(port, result -> {
+			if (result.succeeded()) {
+				log.info("TCP webServer started on port " + port);
+			} else {
+				log.info("Failed to start TCP webServer: " + result.cause());
+			}
+		});
+	}
 }

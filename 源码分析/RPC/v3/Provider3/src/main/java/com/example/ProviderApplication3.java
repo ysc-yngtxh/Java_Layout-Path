@@ -9,15 +9,16 @@ import com.example.service.HelloServiceImpl;
 
 public class ProviderApplication3 {
 
-    public static void main(String[] args) {
-        // 本地注册具体服务实现类
-        LocalRegister.register(HelloService.class.getSimpleName(), "1.0.0",  HelloServiceImpl.class);
+	public static void main(String[] args) {
+		// 本地注册具体服务实现类
+		LocalRegister.register(HelloService.class.getSimpleName(), "1.0.0", HelloServiceImpl.class);
 
-        // 注册中心注册服务器地址
-        URL url = new URL("localhost", 8080);
-        MapRemoveRegister.register(HelloService.class.getSimpleName(), url);
+		// 注册中心注册服务器地址
+		URL url = new URL("localhost", 8080);
+		MapRemoveRegister.register(HelloService.class.getSimpleName(), url);
 
-        HttpServer httpServer = new HttpServer();
-        httpServer.start("localhost", 8080);
-    }
+		HttpServer httpServer = new HttpServer();
+		httpServer.start("localhost", 8080);
+	}
+
 }
