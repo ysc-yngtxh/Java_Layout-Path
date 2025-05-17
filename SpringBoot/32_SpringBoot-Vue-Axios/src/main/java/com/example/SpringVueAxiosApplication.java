@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("com.example.mapper")
-public class SpringVueApplication {
+public class SpringVueAxiosApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringVueApplication.class, args);
+		SpringApplication.run(SpringVueAxiosApplication.class, args);
 	}
 
 }

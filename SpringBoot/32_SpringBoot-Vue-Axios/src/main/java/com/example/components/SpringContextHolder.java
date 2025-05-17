@@ -20,4 +20,5 @@ public class SpringContextHolder implements ApplicationContextAware {
 	public void setApplicationContext(@NonNull ApplicationContext applicationContext) {
 		APPLICATION_CONTEXT = applicationContext;
 	}
+
 }

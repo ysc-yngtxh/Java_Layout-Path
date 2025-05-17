@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.lang.Collections;
 import io.jsonwebtoken.security.Keys;
 import java.util.Arrays;
 import java.util.Base64;
@@ -75,6 +76,10 @@ public class JwtUtil {
 		}
 		long expMillis = nowMillis + ttlMillis;      // 过期毫秒值：当前时间毫秒值+有效时间毫秒值
 		Date expDate = new Date(expMillis);     // 有效时间
+
+		if (Collections.isEmpty(headerMap)) {
+			headerMap = JWT_HEADER;
+		}
 
 		return Jwts.builder()
 		           .header().add(headerMap).and()    // 头部header

@@ -18,4 +18,5 @@ public class UserAdvice {
 	public ResponseEntity<ResponseVo<?>> returnData() {
 		return ResponseEntity.ok(ResponseVo.fail(401, "用户验证失败，请重新登录"));
 	}
+
 }

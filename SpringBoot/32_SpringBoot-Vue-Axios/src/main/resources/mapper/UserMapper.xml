@@ -15,20 +15,18 @@
         <result column="address" property="address" jdbcType="VARCHAR"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>
         <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER"/>
-        <result column="created_date" property="createdDate"
-                jdbcType="TIMESTAMP"/>
-        <result column="updated_date" property="updatedDate"
-                jdbcType="TIMESTAMP"/>
+        <result column="created_date" property="createdDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updatedDate" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
         insert into
-        db_user(superior_id,user_name,pass_word,alias,age,sex,phone,address,email,delete_flag,created_date,updated_date)
+        db_user(superior_id,user_name,pass_word,alias,age,sex,phone,address,email,delete_flag,created_date,update_date)
         values
         <foreach collection="entities" item="entity" separator=",">
             (#{entity.superior_id},#{entity.userName},#{entity.passWord},#{entity.alias},#{entity.age},
             #{entity.sex},#{entity.phone},#{entity.address},#{entity.email},#{entity.deleteFlag},
-            #{entity.createdDate},#{entity.updatedDate})
+            #{entity.createdDate},#{entity.updateDate})
         </foreach>
         on duplicate key update
         superior_id = values(superior_id),
@@ -42,6 +40,6 @@
         email = values(email),
         delete_flag = values(delete_flag),
         created_date = values(created_date),
-        updated_date = values(updated_date)
+        update_date = values(update_date)
     </insert>
 </mapper>

@@ -2,6 +2,7 @@ package com.example.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @TableName("db_user")
 public class User implements Serializable {
+	@Serial
 	private static final long serialVersionUID = -25637857384418168L;
 
 	/**
@@ -73,5 +75,5 @@ public class User implements Serializable {
 	/**
 	 * 更新时间
 	 */
-	private Date updatedDate;
+	private Date updateDate;
 }

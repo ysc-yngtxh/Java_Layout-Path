@@ -2,7 +2,7 @@ package com.example.controller;
 
 import com.example.entity.User;
 import com.example.service.UserService;
-import com.example.utils.JwtUtils;
+import com.example.utils.JwtUtil;
 import com.example.vo.PageVo;
 import com.example.vo.ResponseVo;
 import jakarta.annotation.Resource;
@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
 	/**
 	 * 服务对象
 	 */
@@ -38,7 +39,8 @@ public class UserController {
 		String password = map.get("password").toString();
 		boolean check = userService.check(username, password);
 		if (check) {
-			String token = JwtUtils.getJwtsToken(username, password);
+			Map<String, Object> strMap = Map.of("username", username, "password", password);
+			String token = JwtUtil.createJwt(strMap);
 			return ResponseEntity.ok(ResponseVo.success(200, token, "登录成功"));
 		}
 		return ResponseEntity.ok(ResponseVo.fail(401, "登录失败"));
@@ -54,4 +56,5 @@ public class UserController {
 		PageVo info = PageVo.info(userListPage, countAll);
 		return ResponseEntity.ok(ResponseVo.success(200, info, "分页数据返回成功"));
 	}
+
 }

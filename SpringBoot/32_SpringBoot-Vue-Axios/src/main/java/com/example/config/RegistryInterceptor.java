@@ -27,4 +27,5 @@ public class RegistryInterceptor implements WebMvcConfigurer {
 		        .addPathPatterns(addPath)
 		        .excludePathPatterns(excludePath);
 	}
+
 }

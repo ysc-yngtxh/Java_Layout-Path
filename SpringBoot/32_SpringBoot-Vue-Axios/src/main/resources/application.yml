@@ -3,7 +3,6 @@ server:
   servlet:
     context-path: /api
 
-
 spring:
   application:
     name: @project.artifactId@

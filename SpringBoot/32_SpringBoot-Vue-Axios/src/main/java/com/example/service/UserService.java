@@ -16,4 +16,5 @@ public interface UserService {
 	List<User> queryPage(Integer page, Integer size);
 
 	Integer countAll();
+
 }

@@ -1,11 +1,11 @@
 package com.example.controller;
 
 public class Student {
+
 	private Integer sid;
 	private String sname;
 
-	public Student() {
-	}
+	public Student() {}
 
 	public Student(Integer sid, String sname) {
 		this.sid = sid;
@@ -27,4 +27,5 @@ public class Student {
 	public void setSname(String sname) {
 		this.sname = sname;
 	}
+
 }

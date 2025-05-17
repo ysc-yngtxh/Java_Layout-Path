@@ -47,4 +47,5 @@ public class UserServiceImpl implements UserService {
 		Long aLong = userMapper.selectCount(null);
 		return aLong.intValue();
 	}
+
 }
