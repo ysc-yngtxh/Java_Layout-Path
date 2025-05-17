@@ -15,38 +15,40 @@ import java.util.Date;
  *         listFiles()     获取当前目录下所有的子文件及子目录
  */
 public class 流12_File类的常用方法 {
-    public static void main(String[] args) {
-        // 获取该路径下的文件或者目录，如果不存在也不会自行创建
-        File f1 = new File(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/流Ⅴ_File类"
-                         + "/myFile");
-        // getName()：获取文件名
-        System.out.println("文件名：" + f1.getName());
 
-        // isDirectory()：判断是否是一个目录(文件名)
-        System.out.println(f1.isDirectory());
+	public static void main(String[] args) {
+		// 获取该路径下的文件或者目录，如果不存在也不会自行创建
+		File f1 = new File(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/流Ⅴ_File类"
+				                   + "/myFile");
+		// getName()：获取文件名
+		System.out.println("文件名：" + f1.getName());
 
-        // isFile()：判断是否是一个文件
-        System.out.println(f1.isFile());
+		// isDirectory()：判断是否是一个目录(文件名)
+		System.out.println(f1.isDirectory());
 
-        // lastModified()：获取文件最后一次修改时间
-        long millis = f1.lastModified();
-        // 将总毫秒数转换成日期
-        Date time = new Date(millis);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss sss");
-        String s = sdf.format(time);
-        System.out.println("文件最后一次修改时间：" + s);
+		// isFile()：判断是否是一个文件
+		System.out.println(f1.isFile());
 
-        // length()：获取文件大小
-        System.out.println("文件大小：" + f1.length());
+		// lastModified()：获取文件最后一次修改时间
+		long millis = f1.lastModified();
+		// 将总毫秒数转换成日期
+		Date time = new Date(millis);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss sss");
+		String s = sdf.format(time);
+		System.out.println("文件最后一次修改时间：" + s);
 
-        System.out.println("=========================================================================================");
+		// length()：获取文件大小
+		System.out.println("文件大小：" + f1.length());
 
-        // File[] listFiles()：获取当前目录下所有的子文件及子目录
-        File f2 = new File(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/流Ⅴ_File类");
-        File[] files = f2.listFiles();
-        assert files != null;
-        for (File file : files) {
-            System.out.println(file.getAbsolutePath());
-        }
-    }
+		System.out.println("=========================================================================================");
+
+		// File[] listFiles()：获取当前目录下所有的子文件及子目录
+		File f2 = new File(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/流Ⅴ_File类");
+		File[] files = f2.listFiles();
+		assert files != null;
+		for (File file : files) {
+			System.out.println(file.getAbsolutePath());
+		}
+	}
+
 }

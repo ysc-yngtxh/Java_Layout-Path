@@ -41,139 +41,141 @@ public class Lock锁 {
             }
         }, "YSC").start();
 
-        new Thread(() -> {
-            for (int i = 0; i < 10; i++) {
-                try {
-                    data.demo1();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, "A").start();
+		new Thread(() -> {
+			for (int i = 0; i < 10; i++) {
+				try {
+					data.demo1();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}, "A").start();
 
-        new Thread(() -> {
-            for (int i = 0; i < 10; i++) {
-                try {
-                    data.demo2();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, "B").start();
+		new Thread(() -> {
+			for (int i = 0; i < 10; i++) {
+				try {
+					data.demo2();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}, "B").start();
 
-        new Thread(() -> {
-            for (int i = 0; i < 10; i++) {
-                try {
-                    data.demo3();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, "C").start();
+		new Thread(() -> {
+			for (int i = 0; i < 10; i++) {
+				try {
+					data.demo3();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}, "C").start();
 
-        new Thread(() -> {
-            for (int i = 0; i < 10; i++) {
-                try {
-                    data.demo4();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, "D").start();
-    }
+		new Thread(() -> {
+			for (int i = 0; i < 10; i++) {
+				try {
+					data.demo4();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}, "D").start();
+	}
 }
 
 class Dataes {
-    private int num = 1;
-    final Lock lock = new ReentrantLock();   // 创建lock锁，相当于Synchronized关键字，默认不公平锁
-    // Lock lock1 = new ReentrantLock(true); // 创建lock锁，赋值为true表示使用公平锁
-    Condition condition0 = lock.newCondition(); // 获得lock锁的监听器
-    Condition condition1 = lock.newCondition();
-    Condition condition2 = lock.newCondition();
-    Condition condition3 = lock.newCondition();
 
-    public void demo0() throws InterruptedException {
-        try {
-            while (num != 1) {
-                condition0.await(); // 线程等待
-            }
-            // 尝试获取锁，如果锁不可用，不会导致当前线程被禁用，当前线程仍然会继续往下执行代码
-            if (lock.tryLock()) {
-                System.out.println(Thread.currentThread().getName() + " --- demo0正在尝试获取锁...");
-                lock.unlock();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            lock.unlock(); // 解锁
-        }
-    }
+	final Lock lock = new ReentrantLock();   // 创建lock锁，相当于Synchronized关键字，默认不公平锁
+	// Lock lock1 = new ReentrantLock(true); // 创建lock锁，赋值为true表示使用公平锁
+	Condition condition0 = lock.newCondition(); // 获得lock锁的监听器
+	Condition condition1 = lock.newCondition();
+	Condition condition2 = lock.newCondition();
+	Condition condition3 = lock.newCondition();
+	private int num = 1;
 
-    public void demo1() throws InterruptedException {
-        // 启动线程
-        lock.lock();
-        try {
-            while (num != 1) {
-                condition0.await(); // 线程等待
-            }
-            System.out.println(Thread.currentThread().getName() + " --- demo1");
-            num = 2;
-            // condition1.signalAll(); // 唤醒所有线程
-            condition2.signal(); // 唤醒指定线程
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            lock.unlock(); // 解锁
-        }
-    }
+	public void demo0() throws InterruptedException {
+		try {
+			while (num != 1) {
+				condition0.await(); // 线程等待
+			}
+			// 尝试获取锁，如果锁不可用，不会导致当前线程被禁用，当前线程仍然会继续往下执行代码
+			if (lock.tryLock()) {
+				System.out.println(Thread.currentThread().getName() + " --- demo0正在尝试获取锁...");
+				lock.unlock();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			lock.unlock(); // 解锁
+		}
+	}
 
-    public void demo2() throws InterruptedException {
-        // 启动线程
-        lock.lock();
-        try {
-            while (num != 2) {
-                condition0.await(); // 线程等待
-            }
-            System.out.println(Thread.currentThread().getName() + " --- demo2");
-            num = 3;
-            // condition2.signalAll(); // 唤醒所有线程
-            condition3.signal(); // 唤醒指定线程
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            lock.unlock();
-        }
-    }
+	public void demo1() throws InterruptedException {
+		// 启动线程
+		lock.lock();
+		try {
+			while (num != 1) {
+				condition0.await(); // 线程等待
+			}
+			System.out.println(Thread.currentThread().getName() + " --- demo1");
+			num = 2;
+			// condition1.signalAll(); // 唤醒所有线程
+			condition2.signal(); // 唤醒指定线程
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			lock.unlock(); // 解锁
+		}
+	}
 
-    public void demo3() throws InterruptedException {
-        // 启动线程
-        lock.lock();
-        try {
-            while (num != 3) {
-                condition0.await(); // 线程等待
-            }
-            System.out.println(Thread.currentThread().getName() + " --- demo3");
-            num = 1;
-            // condition3.signalAll(); // 唤醒所有线程
-            condition1.signal(); // 唤醒指定线程
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            lock.unlock();
-        }
-    }
+	public void demo2() throws InterruptedException {
+		// 启动线程
+		lock.lock();
+		try {
+			while (num != 2) {
+				condition0.await(); // 线程等待
+			}
+			System.out.println(Thread.currentThread().getName() + " --- demo2");
+			num = 3;
+			// condition2.signalAll(); // 唤醒所有线程
+			condition3.signal(); // 唤醒指定线程
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			lock.unlock();
+		}
+	}
 
-    public void demo4() throws InterruptedException {
-        // 启动线程
-        lock.lock();
-        try {
-            System.out.println(Thread.currentThread().getName() + " --- demo4");
-            // condition3.signalAll(); // 唤醒所有线程
-            condition1.signal(); // 唤醒指定线程
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            lock.unlock();
-        }
-    }
+	public void demo3() throws InterruptedException {
+		// 启动线程
+		lock.lock();
+		try {
+			while (num != 3) {
+				condition0.await(); // 线程等待
+			}
+			System.out.println(Thread.currentThread().getName() + " --- demo3");
+			num = 1;
+			// condition3.signalAll(); // 唤醒所有线程
+			condition1.signal(); // 唤醒指定线程
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	public void demo4() throws InterruptedException {
+		// 启动线程
+		lock.lock();
+		try {
+			System.out.println(Thread.currentThread().getName() + " --- demo4");
+			// condition3.signalAll(); // 唤醒所有线程
+			condition1.signal(); // 唤醒指定线程
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			lock.unlock();
+		}
+	}
+
 }

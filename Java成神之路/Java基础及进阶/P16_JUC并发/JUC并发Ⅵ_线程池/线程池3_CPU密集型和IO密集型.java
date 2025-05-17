@@ -37,27 +37,28 @@ public class 线程池3_CPU密集型和IO密集型 {
         int availableProcessors = Runtime.getRuntime().availableProcessors();
         System.out.println( availableProcessors );
 
-        ExecutorService threadPoolExecutor = new ThreadPoolExecutor(
-                Runtime.getRuntime().availableProcessors() + 1,  // 根据用户的CPU核数来设置核心线程池大小
-                Runtime.getRuntime().availableProcessors() * 2,  // 根据用户的CPU核数来设置最大核心线程池大小
-                3,                                    // 超时时间,超过核心线程的线程在此时间后会被释放
-                TimeUnit.SECONDS,                     // 超时单位
-                new LinkedBlockingDeque<>(3), // 阻塞队列，容量为3
-                Executors.defaultThreadFactory(),     // 线程工厂（创建线程的，一般不动）
-                new ThreadPoolExecutor.AbortPolicy()  // 拒绝策略
-        );
+		ExecutorService threadPoolExecutor = new ThreadPoolExecutor(
+				Runtime.getRuntime().availableProcessors() + 1,  // 根据用户的CPU核数来设置核心线程池大小
+				Runtime.getRuntime().availableProcessors() * 2,  // 根据用户的CPU核数来设置最大核心线程池大小
+				3,                                    // 超时时间,超过核心线程的线程在此时间后会被释放
+				TimeUnit.SECONDS,                     // 超时单位
+				new LinkedBlockingDeque<>(3), // 阻塞队列，容量为3
+				Executors.defaultThreadFactory(),     // 线程工厂（创建线程的，一般不动）
+				new ThreadPoolExecutor.AbortPolicy()  // 拒绝策略
+		);
 
-        try {
-            for (int i = 1; i <= availableProcessors*10/2; i++) { // 最大任务数 = 阻塞队列数 + 最大线程池大小
-                threadPoolExecutor.execute(() -> {
-                    // 运行可以发现同步线程数最大值是19
-                    System.out.println(Thread.currentThread().getName()+" -- OK");
-                });
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            threadPoolExecutor.shutdown();
-        }
-    }
+		try {
+			for (int i = 1; i <= availableProcessors * 10 / 2; i++) { // 最大任务数 = 阻塞队列数 + 最大线程池大小
+				threadPoolExecutor.execute(() -> {
+					// 运行可以发现同步线程数最大值是19
+					System.out.println(Thread.currentThread().getName() + " -- OK");
+				});
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			threadPoolExecutor.shutdown();
+		}
+	}
+
 }

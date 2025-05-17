@@ -1,7 +1,6 @@
 package I9_异常;
 
-/*
- * 一、什么是异常，Java提供异常处理机制有什么用？
+/* 一、什么是异常，Java提供异常处理机制有什么用？
  *    以下程序执行过程中的发生了不正常的情况，而这种不正常的情况叫做：异常
  *    Java把异常信息打印输出到控制台，供程序员参考。程序员看到异常信息之后，可以对程序进行修改，让程序更加的健壮
  *
@@ -37,16 +36,18 @@ package I9_异常;
  *                                       NullPointerException ：对某个 null 的对象调用方法或字段；
  */
 public class 异常1_异常概述 {
-    public static void main(String[] args) {
-        int a = 10;
-        int b = 0;
-        // 实际上JVM在执行到此处的时候，会new异常对象（算术异常）：new ArithmeticException("by zero")
-        // 并且JVN将new的异常对象，打印输出信息到控制台
-        int c = a/b;
-        System.out.println(a + "/" + b + "=" + c);
 
-        // 发生异常时，JVM执行内容
-        NullPointerException npe = new NullPointerException("空指针异常发生了");
-        System.out.println(npe);
-    }
+	public static void main(String[] args) {
+		int a = 10;
+		int b = 0;
+		// 实际上JVM在执行到此处的时候，会new异常对象（算术异常）：new ArithmeticException("by zero")
+		// 并且JVN将new的异常对象，打印输出信息到控制台
+		int c = a / b;
+		System.out.println(a + "/" + b + "=" + c);
+
+		// 发生异常时，JVM执行内容
+		NullPointerException npe = new NullPointerException("空指针异常发生了");
+		System.out.println(npe);
+	}
+
 }

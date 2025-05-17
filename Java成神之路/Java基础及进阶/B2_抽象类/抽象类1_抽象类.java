@@ -31,73 +31,92 @@ package B2_抽象类;
  *          抽象类中的非抽象方法(正常方法)不用重写，其他方法(即抽象方法)必须重写。
  */
 abstract class A {
-    // 这个是构造方法，不是方法体
-    A() {
-        System.out.println("A,无参构造函数");
-    }
+
+	// 这个是构造方法，不是方法体
+	A() {
+		System.out.println("A,无参构造函数");
+	}
 }
-class B extends A{
-    B() {
-        System.out.println("A,无参构造函数");
-    }
+
+class B extends A {
+	B() {
+		System.out.println("A,无参构造函数");
+	}
+
 }
 
 
 abstract class Animal {              // 动物类
-    private int data;
-    public Animal(int data) {
-        this.data = data;
-    }
 
-    // 抽象方法
-    public abstract void move();
+	private int data;
 
-    // 正常方法体
-    public void abc() {
-        System.out.println("ff");
-    };
+	public Animal(int data) {
+		this.data = data;
+	}
+
+	// 抽象方法
+	public abstract void move();
+
+	// 正常方法体
+	public void abc() {
+		System.out.println("ff");
+	}
+
 }
+
 class Bird extends Animal {          // 小鸟类
-    public Bird(int data) {          // 父类没有无参构造器只有有参构造器，因此子类必须通过 super 赋值 data 值，完成父类构造
-        super(data);
-    }
-    public void move() {             // 必须要将父类的抽象方法进行方法覆盖
-        System.out.println("鸟儿在飞翔");
-    }
+
+	public Bird(int data) {          // 父类没有无参构造器只有有参构造器，因此子类必须通过 super 赋值 data 值，完成父类构造
+		super(data);
+	}
+
+	public void move() {             // 必须要将父类的抽象方法进行方法覆盖
+		System.out.println("鸟儿在飞翔");
+	}
+
 }
+
 abstract class Cat extends Animal {  // 小猫类
-    public Cat(int data) {           // 父类没有无参构造器只有有参构造器，因此子类必须通过 super 赋值 data 值，完成父类构造
-        super(data);
-    }
-    public void move() {             // 必须要将父类的抽象方法进行方法覆盖
-        System.out.println("猫在吃鱼");
-    }
+
+	public Cat(int data) {           // 父类没有无参构造器只有有参构造器，因此子类必须通过 super 赋值 data 值，完成父类构造
+		super(data);
+	}
+
+	public void move() {             // 必须要将父类的抽象方法进行方法覆盖
+		System.out.println("猫在吃鱼");
+	}
+
 }
 
 class Master extends Animal {
-    public Master(int data) {
-        super(data);
-    }
-    public void move() {             // 必须要将父类的抽象方法进行方法覆盖
-        System.out.println("小曹爱吃肉");
-    }
+
+	public Master(int data) {
+		super(data);
+	}
+
+	public void move() {             // 必须要将父类的抽象方法进行方法覆盖
+		System.out.println("小曹爱吃肉");
+	}
+
 }
 
 public class 抽象类1_抽象类 {
-    public static void feed(Animal an) {
-        an.move();
-    }
-    
-    // 多态：就是指一个引用（类型）在不同的情况下的多种状态。
-    //      也可以理解为，多态是指通过指向父类的指针，来调用在不同子类中实现的方法。
-    public static void main(String[] args) {
-        Animal a = new Bird(10);   // 多态：父类引用指向子类对象
-        a.move();
-        a.abc();
-        // Animal a = new Cat(); // 为什么无法创建Cat对象，记住：抽象类不能创建对象。
 
-        // 这个时候多态的功能就体现出来了，只需要定义一个函数就可以传入不同的对象，调用相同方法的不同实现
-        feed(new Bird(20));
-        feed(new Master(30));
-    }
+	public static void feed(Animal an) {
+		an.move();
+	}
+
+	// 多态：就是指一个引用（类型）在不同的情况下的多种状态。
+	//      也可以理解为，多态是指通过指向父类的指针，来调用在不同子类中实现的方法。
+	public static void main(String[] args) {
+		Animal a = new Bird(10);   // 多态：父类引用指向子类对象
+		a.move();
+		a.abc();
+		// Animal a = new Cat(); // 为什么无法创建Cat对象，记住：抽象类不能创建对象。
+
+		// 这个时候多态的功能就体现出来了，只需要定义一个函数就可以传入不同的对象，调用相同方法的不同实现
+		feed(new Bird(20));
+		feed(new Master(30));
+	}
+
 }

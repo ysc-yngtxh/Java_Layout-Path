@@ -42,73 +42,82 @@ import java.util.logging.Logger;
  *     注意，调用的 interrupt() 方法，一定是调用被阻塞线程的interrupt方法。如在线程a中调用线程t.interrupt()。
  */
 public class 线程11_中断线程 {
-    public static void main(String[] args) {
-        Thread t = new Thread(new MyRunnable2(), "t");
-        t.start();
-        try {
-            Thread.sleep(1000 *  3); // 睡眠 3000 毫秒
-        } catch(InterruptedException e) {
-            e.printStackTrace();
-        }
-        // 中断 t线程 的睡眠
-        t.interrupt();
-        System.out.println("main线程调用t线程的interrupt()方法后，此时t线程的中断标志位为：" + t.isInterrupted());
 
-        Thread interrupted = new Thread(new InterruptedTask(), "m");
-        interrupted.start();
-        try {
-            Thread.sleep(1000);  // 睡眠 1000 毫秒
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        // 中断 m线程 的睡眠
-        interrupted.interrupt();
-        System.out.println("main线程调用m线程的interrupt()方法后，此时t线程的中断标志位为：" + t.isInterrupted());
-    }
+	public static void main(String[] args) {
+		Thread t = new Thread(new MyRunnable2(), "t");
+		t.start();
+		try {
+			Thread.sleep(1000 * 3); // 睡眠 3000 毫秒
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		// 中断 t线程 的睡眠
+		t.interrupt();
+		System.out.println("main线程调用t线程的interrupt()方法后，此时t线程的中断标志位为：" + t.isInterrupted());
+
+		Thread interrupted = new Thread(new InterruptedTask(), "m");
+		interrupted.start();
+		try {
+			Thread.sleep(1000);  // 睡眠 1000 毫秒
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		// 中断 m线程 的睡眠
+		interrupted.interrupt();
+		System.out.println("main线程调用m线程的interrupt()方法后，此时t线程的中断标志位为：" + t.isInterrupted());
+	}
+
 }
+
 class MyRunnable2 implements Runnable {
-    // 重点：run() 当中的异常不能throw，只能 try-catch
-    //      因为 run() 方法在父类中没有抛出任何异常，子类不能比父类抛出更多的异常
-    @Override
-    public void run() {
-        Thread thread = Thread.currentThread();
-        System.out.println(thread.getName() + " --> begin"
-                + "\nt线程开始时的中断标志位为：" + Thread.currentThread().isInterrupted());
-        try {
-            // 睡眠一年
-            Thread.sleep(1000L * 60 * 60 * 24 * 365);
-        } catch(InterruptedException e){
-            e.printStackTrace();
-        }
-        // 一年后才会执行在这儿
-        System.out.println("t线程结束时的中断标志位为：" + Thread.currentThread().isInterrupted() + "\n"
-                + thread.getName() + " --> end");
-    }
+
+	// 重点：run() 当中的异常不能throw，只能 try-catch
+	//      因为 run() 方法在父类中没有抛出任何异常，子类不能比父类抛出更多的异常
+	@Override
+	public void run() {
+		Thread thread = Thread.currentThread();
+		System.out.println(thread.getName() + " --> begin"
+				                   + "\nt线程开始时的中断标志位为：" + Thread.currentThread().isInterrupted());
+		try {
+			// 睡眠一年
+			Thread.sleep(1000L * 60 * 60 * 24 * 365);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		// 一年后才会执行在这儿
+		System.out.println("t线程结束时的中断标志位为：" + Thread.currentThread().isInterrupted() + "\n"
+				                   + thread.getName() + " --> end");
+	}
+
 }
+
 class InterruptedTask implements Runnable {
-    public static final Logger log = Logger.getLogger(InterruptedTask.class.getName());
-    @Override
-    public void run() {
-        Thread currentThread = Thread.currentThread();
-        System.out.println("m线程开始时的中断标志位为：" + currentThread.isInterrupted());
-        while (true) {
-            if(currentThread.isInterrupted()) {
-                break;
-            }
-            try {
-                Thread.sleep(100);
-            } catch (Exception e) {
-                log.severe("m线程的睡眠已经被中断了，此时中断标志为：" + currentThread.isInterrupted());
-                // TODO
-                //  问题：由于我们会在main线程里中断了当前线程阻塞，该线程的中断标志位值理应为 true，但实际结果为 false。
-                //  原因：Java官方就是设计成在抛出 Interrupted Exception 异常后清除标志位。
-                //       即触发 Interrupted Exception 异常的同时，JVM会把执行线程的中断状态自动重置为false。
-                //  目的：是为了能让开发者显式处理线程的中断请求，避免中断状态在开发过程中被忽略、遗忘。造成应用程序的不稳定。
-                //  方案：如果需要 显氏传递中断标志位，可以在 catch 中再次调用 interrupt() 方法
-                currentThread.interrupt();
-                break;
-            }
-        }
-        System.out.println("m线程结束时的中断标志位为：" + currentThread.isInterrupted());
-    }
+
+	public static final Logger log = Logger.getLogger(InterruptedTask.class.getName());
+
+	@Override
+	public void run() {
+		Thread currentThread = Thread.currentThread();
+		System.out.println("m线程开始时的中断标志位为：" + currentThread.isInterrupted());
+		while (true) {
+			if (currentThread.isInterrupted()) {
+				break;
+			}
+			try {
+				Thread.sleep(100);
+			} catch (Exception e) {
+				log.severe("m线程的睡眠已经被中断了，此时中断标志为：" + currentThread.isInterrupted());
+				// TODO
+				//  问题：由于我们会在main线程里中断了当前线程阻塞，该线程的中断标志位值理应为 true，但实际结果为 false。
+				//  原因：Java官方就是设计成在抛出 Interrupted Exception 异常后清除标志位。
+				//       即触发 Interrupted Exception 异常的同时，JVM会把执行线程的中断状态自动重置为false。
+				//  目的：是为了能让开发者显式处理线程的中断请求，避免中断状态在开发过程中被忽略、遗忘。造成应用程序的不稳定。
+				//  方案：如果需要 显氏传递中断标志位，可以在 catch 中再次调用 interrupt() 方法
+				currentThread.interrupt();
+				break;
+			}
+		}
+		System.out.println("m线程结束时的中断标志位为：" + currentThread.isInterrupted());
+	}
+
 }

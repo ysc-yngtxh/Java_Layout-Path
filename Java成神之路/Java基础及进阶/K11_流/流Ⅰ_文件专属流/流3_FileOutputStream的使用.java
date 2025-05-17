@@ -4,14 +4,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class 流3_FileOutputStream的使用 {
+
 	public static void main(String[] args) {
 		try (// 当写入文件不存在时会自动新建。
 		     // 当写入文件存在时，会将原文件内容清空，然后重新写入，请谨慎使用。
 		     FileOutputStream fos1 = new FileOutputStream(System.getProperty("user.dir")
-			                                            + "/Java基础及进阶/K11_流/WriterFile");
+				                                                  + "/Java基础及进阶/K11_流/WriterFile");
 		     // 写入文件存在时，第二个参数设置为 true，表示以追加的方式在文件末尾写入，不会清空源文件内容
 		     FileOutputStream fos2 = new FileOutputStream(System.getProperty("user.dir")
-				                                        + "/Java基础及进阶/K11_流/WriterFile", true)
+				                                                  + "/Java基础及进阶/K11_流/WriterFile", true)
 		) {
 			// fos1 开始写
 			byte[] b = {97, 98, 99, 100, 101, 102}; // 将byte[]数组全部写出
@@ -32,4 +33,5 @@ public class 流3_FileOutputStream的使用 {
 			throw new RuntimeException(e);
 		}
 	}
+
 }

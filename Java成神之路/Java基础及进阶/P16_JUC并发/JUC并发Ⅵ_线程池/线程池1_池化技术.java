@@ -31,50 +31,51 @@ public class 线程池1_池化技术 {
         ExecutorService executorService3 = Executors.newCachedThreadPool();          // 可伸缩线程，随用户需要去扩展线程数
         ScheduledExecutorService executorService4 = Executors.newScheduledThreadPool(3);
 
-        try {
-            // 可以在运行后发现线程启动最多只有一个
-            for (int i = 1; i <= 10; i++) {
-                executorService1.execute(() -> {
-                    System.out.println(Thread.currentThread().getName() + " -- OK");
-                });
-            }
+		try {
+			// 可以在运行后发现线程启动最多只有一个
+			for (int i = 1; i <= 10; i++) {
+				executorService1.execute(() -> {
+					System.out.println(Thread.currentThread().getName() + " -- OK");
+				});
+			}
 
-            TimeUnit.SECONDS.sleep(2);
-            System.out.println("==========2==========");
+			TimeUnit.SECONDS.sleep(2);
+			System.out.println("==========2==========");
 
-            // 可以在运行后发现线程启动最多有五个
-            for (int i = 1; i <= 10; i++) {
-                executorService2.execute(() -> {
-                    System.out.println(Thread.currentThread().getName() + " -- OK");
-                });
-            }
+			// 可以在运行后发现线程启动最多有五个
+			for (int i = 1; i <= 10; i++) {
+				executorService2.execute(() -> {
+					System.out.println(Thread.currentThread().getName() + " -- OK");
+				});
+			}
 
-            TimeUnit.SECONDS.sleep(2);
-            System.out.println("==========3==========");
+			TimeUnit.SECONDS.sleep(2);
+			System.out.println("==========3==========");
 
-            // 可以在运行后发现线程启动最多有十个，原因是for循环只有十次，线程池会自动扩展线程数
-            for (int i = 1; i <= 10; i++) {
-                executorService3.execute(() -> {
-                    System.out.println(Thread.currentThread().getName() + " -- OK");
-                });
-            }
+			// 可以在运行后发现线程启动最多有十个，原因是for循环只有十次，线程池会自动扩展线程数
+			for (int i = 1; i <= 10; i++) {
+				executorService3.execute(() -> {
+					System.out.println(Thread.currentThread().getName() + " -- OK");
+				});
+			}
 
-            System.out.println("===========4=========");
+			System.out.println("===========4=========");
 
-            // 定时(延时)执行线程任务
-            ScheduledFuture<String> schedule = executorService4.schedule(() -> {
-                return "call";
-            }, 10, TimeUnit.SECONDS);
-            System.out.println(schedule.get());
+			// 定时(延时)执行线程任务
+			ScheduledFuture<String> schedule = executorService4.schedule(() -> {
+				return "call";
+			}, 10, TimeUnit.SECONDS);
+			System.out.println(schedule.get());
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            // 线程池用完一定要记得关闭
-            executorService1.shutdown();
-            executorService2.shutdown();
-            executorService3.shutdown();
-            executorService4.shutdown();
-        }
-    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 线程池用完一定要记得关闭
+			executorService1.shutdown();
+			executorService2.shutdown();
+			executorService3.shutdown();
+			executorService4.shutdown();
+		}
+	}
+
 }

@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author 游家纨绔
- * @dateTime 2023-08-21 07:00
+ * @dateTime 2023-08-21 07:00:00
  * @apiNote TODO 高并发环境下的性能优势 LongAdder，AtomicLong
  */
 public class Atomic2_AtomicReference示例 {
@@ -60,9 +60,11 @@ public class Atomic2_AtomicReference示例 {
 }
 
 class AtomicReference简易示例 {
+
 	// 定义AtomicReference并且初始值为 DebitCard("ZhangSan", 0)
 	static AtomicReference<DebitCard> debitCardRef =
 			new AtomicReference<>(new DebitCard("ZhangSan", 0));
+
 	public static void main(String[] args) {
 		/** TODO 使用 AtomicReference 的非阻塞原子性解决方案（写法上有缺陷）
 		 * synchronized是一种阻塞式的解决方案，同一时刻只能有一个线程真正在工作，其他线程都将陷入阻塞。
@@ -102,9 +104,11 @@ class AtomicReference简易示例 {
 }
 
 class AtomicReference手动循环重试版 {
+
 	// 定义AtomicReference并且初始值为 DebitCard("ZhangSan", 0)
 	static AtomicReference<DebitCard> debitCardRef =
 			new AtomicReference<>(new DebitCard("ZhangSan", 0));
+
 	public static void main(String[] args) {
 		// TODO 使用 AtomicReference 循环重试 CAS（最终版）
 		for (int i = 0; i < 10; i++) {
@@ -136,9 +140,11 @@ class AtomicReference手动循环重试版 {
 }
 
 class AtomicReference限制循环重试版 {
+
 	// 定义AtomicReference并且初始值为 DebitCard("ZhangSan", 0)
 	static AtomicReference<DebitCard> debitCardRef =
 			new AtomicReference<>(new DebitCard("ZhangSan", 0));
+
 	public static void main(String[] args) {
 		int maxRetries = 5; // 设置最大重试次数
 		int retryCount = 0;
@@ -167,6 +173,7 @@ class AtomicReference限制循环重试版 {
 }
 
 class AtomicReference自动循环重试版 {
+
 	public static void main(String[] args) {
 		// TODO 利用 getAndUpdate() 方法自动重试 CAS，简化循环逻辑。
 		// 定义AtomicReference并且初始值为 DebitCard("ZhangSan", 0)
@@ -180,8 +187,8 @@ class AtomicReference自动循环重试版 {
 					// 但在高竞争场景中可能导致忙等待（busy waiting），可能长时间自旋，浪费 CPU 资源
 					debitCardRefUpdateAndGet.getAndUpdate(
 							dc ->
-							new DebitCard(dc.getAccount(), dc.getAmount() + 10)
-					);
+									new DebitCard(dc.getAccount(), dc.getAmount() + 10)
+					                                     );
 					System.out.println("使用 getAndUpdate 打印的金额：" + debitCardRefUpdateAndGet.get());
 				}
 			}.start();

@@ -5,8 +5,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-/*
- * HashMap集合：
+/* HashMap集合：
  *    1、HashMap集合底层是哈希表/散列表的数据结构
  *
  *    2、哈希表是一个怎样的数据结构:
@@ -77,43 +76,44 @@ import java.util.Set;
  *                   这是因为散列分布均匀，为了提高HashMap集合的存取效率所必须的
  */
 public class 集合19_哈希表数据结构 {
-    public static void main(String[] args) {
-        /*
-          为什么哈希表的随机增删，以及查询效率都很高？
-             增删是在链表上完成
-             查询是在数组上进行的，不需要都扫描，只需要部分扫描
 
-          重点：通过讲解可以得出HashMap集合的key，会先后调用两个方法，
-                一个是hashCode(),一个方法是equals()，那么这两个方法都需要重写
-        */
+	public static void main(String[] args) {
+        /* 为什么哈希表的随机增删，以及查询效率都很高？
+         *    增删是在链表上完成
+         *    查询是在数组上进行的，不需要都扫描，只需要部分扫描
+         *
+         * 重点：通过讲解可以得出HashMap集合的key，会先后调用两个方法，
+         *       一个是hashCode(),一个方法是equals()，那么这两个方法都需要重写
+         */
 
-        // 测试HashMap集合key部分的元素特点
-        // Integer是key，他的hashCode和equals都重写了
-        Map<Integer,String> map = new HashMap<>();
-        map.put(111, "张三");
-        map.put(666, "李四");
-        map.put(777, "王五");
-        map.put(222, "赵六");
-        map.put(222, "游家纨绔"); // key重复，value覆盖
-        System.out.println(map.size());
+		// 测试HashMap集合key部分的元素特点
+		// Integer是key，他的hashCode和equals都重写了
+		Map<Integer, String> map = new HashMap<>();
+		map.put(111, "张三");
+		map.put(666, "李四");
+		map.put(777, "王五");
+		map.put(222, "赵六");
+		map.put(222, "游家纨绔"); // key重复，value覆盖
+		System.out.println(map.size());
 
-        // 遍历方法一：获取所有的key，来遍历value
-        Set<Integer> s = map.keySet();
-        Iterator<Integer> it = s.iterator();
-        while(it.hasNext()){
-            Integer key = it.next();
-            String value = map.get(key);
-            System.out.println(key + "==" + value);
-        }
-        // 遍历方法二：将Map集合转换成Set集合
-        Set<Map.Entry<Integer, String>> set = map.entrySet();
-        Iterator<Map.Entry<Integer, String>> it1 = set.iterator();
-        while(it1.hasNext()){
-            Map.Entry<Integer, String> node = it1.next();
-            Integer get1 = node.getKey();
-            String value1 = node.getValue();
-            System.out.println(get1 + "---" + value1);
-            System.out.println(node);
-        }
-    }
+		// 遍历方法一：获取所有的key，来遍历value
+		Set<Integer> s = map.keySet();
+		Iterator<Integer> it = s.iterator();
+		while (it.hasNext()) {
+			Integer key = it.next();
+			String value = map.get(key);
+			System.out.println(key + "==" + value);
+		}
+		// 遍历方法二：将Map集合转换成Set集合
+		Set<Map.Entry<Integer, String>> set = map.entrySet();
+		Iterator<Map.Entry<Integer, String>> it1 = set.iterator();
+		while (it1.hasNext()) {
+			Map.Entry<Integer, String> node = it1.next();
+			Integer get1 = node.getKey();
+			String value1 = node.getValue();
+			System.out.println(get1 + "---" + value1);
+			System.out.println(node);
+		}
+	}
+
 }

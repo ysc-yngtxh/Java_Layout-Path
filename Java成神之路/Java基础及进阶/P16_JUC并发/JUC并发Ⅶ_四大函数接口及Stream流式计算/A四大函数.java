@@ -38,38 +38,42 @@ public class A四大函数 {
         Function function = (str) -> {return str;};
         System.out.println( function.apply("游家纨绔") );
 
-        /*
-         * Predicate = new Predicate<String>() {
-         *     @Override
-         *     public boolean Test(String str) {
-         *         return false;
-         *     }
-         * };
-         */
-        Predicate predicate = (str) -> {return str.toString().isEmpty();};
-        System.out.println( predicate.test("") );
+		/*
+		 * Predicate = new Predicate<String>() {
+		 *     @Override
+		 *     public boolean Test(String str) {
+		 *         return false;
+		 *     }
+		 * };
+		 */
+		Predicate predicate = (str) -> {
+			return str.toString().isEmpty();
+		};
+		System.out.println(predicate.test(""));
 
-        /*
-         * Consumer = new Consumer<String>() {
-         *     @Override
-         *     public void accept(String str) {
-         *         System.out.println(str);
-         *     }
-         * };
-         */
-        Consumer consumer = (str) -> {System.out.println(str);};
-        consumer.accept( "YouShiCheng" );
+		/*
+		 * Consumer = new Consumer<String>() {
+		 *     @Override
+		 *     public void accept(String str) {
+		 *         System.out.println(str);
+		 *     }
+		 * };
+		 */
+		Consumer consumer = (str) -> {
+			System.out.println(str);
+		};
+		consumer.accept("YouShiCheng");
 
-        /*
-         * Supplier supplier = new Supplier() {
-         *     @Override
-         *     public Object get() {
-         *         System.out.println("get()");
-         *         return 2021;
-         *     }
-         * };
-         */
-        Supplier supplier = () -> {return 2021;};
-        System.out.println( supplier.get() );
-    }
+		/*
+		 * Supplier supplier = new Supplier() {
+		 *     @Override
+		 *     public Object get() {
+		 *         System.out.println("get()");
+		 *         return 2021;
+		 *     }
+		 * };
+		 */
+		Supplier supplier = () -> {return 2021;};
+		System.out.println(supplier.get());
+	}
 }

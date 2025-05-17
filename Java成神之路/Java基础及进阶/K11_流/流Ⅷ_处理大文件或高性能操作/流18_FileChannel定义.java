@@ -57,48 +57,49 @@ public class 流18_FileChannel定义 {
     private static final String filePath = System.getProperty("user.dir")
                                          + "/Java基础及进阶/K11_流/FileTemp";
 
-    public static void main(String[] args) throws IOException {
-        // 获取一个只读FileChannel通道
-        FileChannel inChannel = new FileInputStream(filePath).getChannel();
-        // 获取一个只写FileChannel通道
-        FileChannel outChannel = new FileOutputStream(filePath).getChannel();
+	public static void main(String[] args) throws IOException {
+		// 获取一个只读FileChannel通道
+		FileChannel inChannel = new FileInputStream(filePath).getChannel();
+		// 获取一个只写FileChannel通道
+		FileChannel outChannel = new FileOutputStream(filePath).getChannel();
 
-        // 创建一个1024字节大小的 ByteBuffer（内存缓冲区，不同于其他缓冲区），用于读取或写入数据。
-        ByteBuffer buffer = ByteBuffer.allocate(1024);
-        inChannel.read(buffer);
-        // 向 buffer缓冲区 中写入了一些数据.
-        // 打印出的数据有很多空格，因为 buffer缓冲区 的容量是1024字节，但实际写入的数据并没有占满。
-        buffer.put("\nNew String to write to file...".getBytes(StandardCharsets.UTF_8));
-        // 从写模式切换到读模式。这会将位置（position）设置为0，并将限制（limit）设置为当前位置。
-        buffer.flip();
-        // 将缓冲区中的数据读取到控制台。不要使用 Arrays.toString(buffer.array())，因为这样打印的是ASCII码。
-        System.out.println(new String(buffer.array()));
-        // get()方法读取数据，读取操作会更新位置（position）。
-        System.out.println("get()方法读取数据，且读取操作会更新位置（position）：" + (char) buffer.get());
-        System.out.println("get()方法读取数据，且读取操作会更新位置（position）：" + (char) buffer.get());
-        System.out.println("get()方法读取数据，且读取操作会更新位置（position）：" + (char) buffer.get());
-        // 重置缓冲区，准备再次写入数据。这会将位置（position）设置为0。
-        buffer.rewind();
-        System.out.println("重置缓冲区后，读取的数据：" + (char) buffer.get());
-        System.out.println("重置缓冲区后，读取的数据：" + (char) buffer.get());
-        System.out.println("重置缓冲区后，读取的数据：" + (char) buffer.get());
+		// 创建一个1024字节大小的 ByteBuffer（内存缓冲区，不同于其他缓冲区），用于读取或写入数据。
+		ByteBuffer buffer = ByteBuffer.allocate(1024);
+		inChannel.read(buffer);
+		// 向 buffer缓冲区 中写入了一些数据.
+		// 打印出的数据有很多空格，因为 buffer缓冲区 的容量是1024字节，但实际写入的数据并没有占满。
+		buffer.put("\nNew String to write to file...".getBytes(StandardCharsets.UTF_8));
+		// 从写模式切换到读模式。这会将位置（position）设置为0，并将限制（limit）设置为当前位置。
+		buffer.flip();
+		// 将缓冲区中的数据读取到控制台。不要使用 Arrays.toString(buffer.array())，因为这样打印的是ASCII码。
+		System.out.println(new String(buffer.array()));
+		// get()方法读取数据，读取操作会更新位置（position）。
+		System.out.println("get()方法读取数据，且读取操作会更新位置（position）：" + (char) buffer.get());
+		System.out.println("get()方法读取数据，且读取操作会更新位置（position）：" + (char) buffer.get());
+		System.out.println("get()方法读取数据，且读取操作会更新位置（position）：" + (char) buffer.get());
+		// 重置缓冲区，准备再次写入数据。这会将位置（position）设置为0。
+		buffer.rewind();
+		System.out.println("重置缓冲区后，读取的数据：" + (char) buffer.get());
+		System.out.println("重置缓冲区后，读取的数据：" + (char) buffer.get());
+		System.out.println("重置缓冲区后，读取的数据：" + (char) buffer.get());
 
-        // 检查是否还有未读的数据，这里的 位置（position）< 限制（limit），所以这里返回true，表示存在未读的数据
-        while (buffer.hasRemaining()) {
-            // 重置缓冲区，否则下面的写文件会从已经变动的位置（position）开始写
-            buffer.rewind();
-            // 将缓冲区中的数据通过通道写入到文件中（从位置(position)开始写）
-            outChannel.write(buffer);
-        }
+		// 检查是否还有未读的数据，这里的 位置（position）< 限制（limit），所以这里返回true，表示存在未读的数据
+		while (buffer.hasRemaining()) {
+			// 重置缓冲区，否则下面的写文件会从已经变动的位置（position）开始写
+			buffer.rewind();
+			// 将缓冲区中的数据通过通道写入到文件中（从位置(position)开始写）
+			outChannel.write(buffer);
+		}
 
-        // 重置到初始状态，即位置（position）设置为0，限制（limit）会被重置为容量，不会删除原内容数据，准备接收新数据。
-        buffer.clear();
-        System.out.println("clear()方法读取数据，且读取操作会更新位置（position）" + (char) buffer.get());
+		// 重置到初始状态，即位置（position）设置为0，限制（limit）会被重置为容量，不会删除原内容数据，准备接收新数据。
+		buffer.clear();
+		System.out.println("clear()方法读取数据，且读取操作会更新位置（position）" + (char) buffer.get());
 
-        // 关闭通道
-        inChannel.close();
-        // 在对文件进行重要的操作之后，应该将数据刷出刷出(force)到磁盘，避免操作系统崩溃导致的数据丢失。
-        outChannel.force(false); // 将数据刷出到磁盘，但不包括元数据[修改人，时间，地点等等]
-        outChannel.close();
-    }
+		// 关闭通道
+		inChannel.close();
+		// 在对文件进行重要的操作之后，应该将数据刷出刷出(force)到磁盘，避免操作系统崩溃导致的数据丢失。
+		outChannel.force(false); // 将数据刷出到磁盘，但不包括元数据[修改人，时间，地点等等]
+		outChannel.close();
+	}
+
 }

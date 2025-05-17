@@ -1,7 +1,6 @@
 package D4_匿名内部类;
 
-/*
- * 匿名内部类：
+/* 匿名内部类：
  *     1、内部类：在类的内部有定义了一个新的类。被称为内部类
  *
  *     2、内部类的分类：
@@ -55,7 +54,7 @@ interface Compute {
     int sum(int a, int b);
 }
 // 数学类
-class MyMath{
+class MyMath {
     // 数学求和方法
     public void mysum(Compute c, int x, int y){
         int retValue = c.sum(x, y);

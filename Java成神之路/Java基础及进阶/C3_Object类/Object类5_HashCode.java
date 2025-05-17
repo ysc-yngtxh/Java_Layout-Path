@@ -14,39 +14,46 @@ import java.util.Objects;
  *            所以hashCode()方法的执行结果可以等同看作一个Java对象的内存地址
  */
 class Myclass {
-    private Integer id;
-    @Override
-    public String toString() {
-        return "Myclass{" +
-                "id=" + id +
-                '}';
-    }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Myclass myclass = (Myclass) o;
-        return Objects.equals(id, myclass.id);
-    }
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+
+	private Integer id;
+
+	@Override
+	public String toString() {
+		return "Myclass{" +
+				"id=" + id +
+				'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Myclass myclass = (Myclass) o;
+		return Objects.equals(id, myclass.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
 }
 
 public class Object类5_HashCode {
-    public static void main(String[] args) {
-        Object obj = new Object();
-        int hashCodeValue = obj.hashCode();
 
-        // 对象内存地址经过哈希算法转换的一串数字。可以等同看作内存地址。
-        System.out.println(hashCodeValue);   // 1442002549
+	public static void main(String[] args) {
+		Object obj = new Object();
+		int hashCodeValue = obj.hashCode();
 
-        Myclass mc = new Myclass();
-        System.out.println(mc.hashCode());   // 1701381926
+		// 对象内存地址经过哈希算法转换的一串数字。可以等同看作内存地址。
+		System.out.println(hashCodeValue);   // 1442002549
 
-        System.out.println(new Myclass().hashCode());
-    }
-    // 现在我们不需要去弄懂哈希表，哈希码，哈希算法，后面会讲到。
-    // 我们现在只需要知道hashCode是将对象的内存地址通过哈希算法转换的数字
+		Myclass mc = new Myclass();
+		System.out.println(mc.hashCode());   // 1701381926
+
+		System.out.println(new Myclass().hashCode());
+	}
+	// 现在我们不需要去弄懂哈希表，哈希码，哈希算法，后面会讲到。
+	// 我们现在只需要知道hashCode是将对象的内存地址通过哈希算法转换的数字
+
 }

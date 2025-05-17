@@ -10,29 +10,31 @@ package M13_反射.反射Ⅲ_反射Method;
  *    3、可变长度参数可以当作一个数组来看待
  */
 public class 反射10_可变长度参数 {
-    public static void main(String[] args) {
-        m();
-        m(10);
-        m(20);
 
-        m2(100);
-        m2(200, "abc");
-        m2(300, "abc", "def", "xyz");
+	public static void main(String[] args) {
+		m();
+		m(10);
+		m(20);
 
-        m3("ab", "cd", "ef", "gh");
-    }
+		m2(100);
+		m2(200, "abc");
+		m2(300, "abc", "def", "xyz");
 
-    public static void m(int... args) {
-        System.out.println("m方法执行了！");
-    }
+		m3("ab", "cd", "ef", "gh");
+	}
 
-    public static void m2(int a, String... args1) {    // 可变长度参数一定要写在形参后面，并且一个方法里只能写一个
+	public static void m(int... args) {
+		System.out.println("m方法执行了！");
+	}
 
-    }
+	public static void m2(int a, String... args1) {    // 可变长度参数一定要写在形参后面，并且一个方法里只能写一个
 
-    public static void m3(String... args) {
-        for (int i = 0; i < args.length; i++) {
-            System.out.println(args[i]);
-        }
-    }
+	}
+
+	public static void m3(String... args) {
+		for (int i = 0; i < args.length; i++) {
+			System.out.println(args[i]);
+		}
+	}
+
 }

@@ -1,6 +1,6 @@
 package C3_Object类;
 
-/*关于Object类中的finalize（）方法
+/* 关于Object类中的finalize（）方法
  *   1、在Object类中的源代码
  *      protected void finalize() throws Throwable{  }
  *      GC：负责调用finalize（）方法
@@ -32,19 +32,24 @@ package C3_Object类;
  * 项目开发中有这样的业务需求：所有对象在JVM中被释放的时候，请记录一下施放时间！！！
  * 记录对象被释放的时间点，这个负责记录的代码写在finalize（）方法中
  */
-class Person{
-    protected void finalize() throws Throwable{
-        System.out.println("即将被销毁");
-    }
+class Person {
+
+	protected void finalize() throws Throwable {
+		System.out.println("即将被销毁");
+	}
+
 }
+
 public class Object类4_Finalize {
-    public static void main(String[] args) {
-        for(int i = 0; i < 1000; i++){
-            Person p = new Person();
-            p = null;
-            if (i % 2 == 0) {
-                System.gc();
-            }
-        }
-    }
+
+	public static void main(String[] args) {
+		for (int i = 0; i < 1000; i++) {
+			Person p = new Person();
+			p = null;
+			if (i % 2 == 0) {
+				System.gc();
+			}
+		}
+	}
+
 }

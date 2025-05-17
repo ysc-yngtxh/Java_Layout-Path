@@ -35,26 +35,29 @@ package E5_数组.数组Ⅲ_算法;
  *     3、二分法查找算法是基于排序的基础之上。(没有排序的数据是无法查找的)
  */
 public class 数组23_二分法算法 {
-    public static void main(String[] args) {
-        int[] arr = {100, 200, 300, 235, 600, 1000, 2000, 9999};
-        int index = binarySear(arr, 600);
-        System.out.println(index == -1 ? "该元素不存在!" : "该元素下标是:" + index);
-    }
-    private static int binarySear(int[] arr, int ele) {
-        int begin = 0;            // 开始下标
-        int end = arr.length-1;   // 结束下标
-        while (begin <= end) {
-            int mid = (begin + end)/2; // 中间下标
-            System.out.println(mid);
 
-            if (arr[mid] == ele) {
-                return mid;
-            } else if (arr[mid] < ele) {
-                begin = mid + 1;
-            } else {
-                end = mid - 1;
-            }
-        }
-        return -1;
-    }
+	public static void main(String[] args) {
+		int[] arr = {100, 200, 300, 235, 600, 1000, 2000, 9999};
+		int index = binarySear(arr, 600);
+		System.out.println(index == -1 ? "该元素不存在!" : "该元素下标是:" + index);
+	}
+
+	private static int binarySear(int[] arr, int ele) {
+		int begin = 0;            // 开始下标
+		int end = arr.length - 1;   // 结束下标
+		while (begin <= end) {
+			int mid = (begin + end) / 2; // 中间下标
+			System.out.println(mid);
+
+			if (arr[mid] == ele) {
+				return mid;
+			} else if (arr[mid] < ele) {
+				begin = mid + 1;
+			} else {
+				end = mid - 1;
+			}
+		}
+		return -1;
+	}
+
 }

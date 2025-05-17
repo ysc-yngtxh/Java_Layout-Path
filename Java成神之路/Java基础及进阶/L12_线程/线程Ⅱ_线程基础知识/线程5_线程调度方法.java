@@ -1,7 +1,6 @@
 package L12_线程.线程Ⅱ_线程基础知识;
 
-/*
- * 关于线程的调度
+/* 关于线程的调度
  *   1、常见的线程调度模型有哪些?
  *        抢占式调度模型：
  *            哪个线程的优先级比较高，抢到的CPU时间片的效率就高一些/多一些
@@ -38,36 +37,41 @@ package L12_线程.线程Ⅱ_线程基础知识;
  *                    当线程 A 调用线程 B 的 join() 方法时，线程 A 会进入阻塞状态，直到线程 B 执行完毕。所以是需要释放锁操作的。
  */
 class YSC implements Runnable {
-    @Override
-    public void run() {
-        // 默认的优先级是5
-        for (int i = 1; i <= 100; i++) {
-            // 每10个让位一次
-            if(i % 10 == 0) {
-                Thread.yield();   // 当前线程时间片让掉，和其它线程重新争抢时间片
-            }
-            System.out.println(Thread.currentThread().getName() + " --> " + i);
-        }
-    }
+
+	@Override
+	public void run() {
+		// 默认的优先级是5
+		for (int i = 1; i <= 100; i++) {
+			// 每10个让位一次
+			if (i % 10 == 0) {
+				Thread.yield();   // 当前线程时间片让掉，和其它线程重新争抢时间片
+			}
+			System.out.println(Thread.currentThread().getName() + " --> " + i);
+		}
+	}
+
 }
+
 public class 线程5_线程调度方法 {
-    public static void main(String[] args) {
-        Thread t = new Thread(new YSC());
-        t.setName("t");
-        t.start();
-        t.setPriority(10);  // 优先级较高的，只是抢到的CPU时间片相对多一些。大概率方向更偏向优先级比较高的
 
-        for (int i = 1; i <= 100; i++) {
-            System.out.println(Thread.currentThread().getName() + "--->" + i);
-        }
+	public static void main(String[] args) {
+		Thread t = new Thread(new YSC());
+		t.setName("t");
+		t.start();
+		t.setPriority(10);  // 优先级较高的，只是抢到的CPU时间片相对多一些。大概率方向更偏向优先级比较高的
 
-        try {
-            // 主线程能执行到这儿，说明主线程的for循环已经执行完毕了
-            // 主程序执行t线程的join()方法，表示这条语句后主线程的代码不执行，直到t线程结束，主线程才可以继续。
-            t.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("main over!");  // 所以这条语句是最后执行的
-    }
+		for (int i = 1; i <= 100; i++) {
+			System.out.println(Thread.currentThread().getName() + "--->" + i);
+		}
+
+		try {
+			// 主线程能执行到这儿，说明主线程的for循环已经执行完毕了
+			// 主程序执行t线程的join()方法，表示这条语句后主线程的代码不执行，直到t线程结束，主线程才可以继续。
+			t.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("main over!");  // 所以这条语句是最后执行的
+	}
+
 }

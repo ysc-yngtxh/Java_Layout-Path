@@ -10,9 +10,11 @@ import java.lang.annotation.Target;
 // 表示该注解被保存在class文件中，并且可以被反射机制读取
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MyAnnotation {
-    String value() default "湖北武汉市";
 
-    String username();
+	String value() default "湖北武汉市";
 
-    String password();
+	String username();
+
+	String password();
+
 }

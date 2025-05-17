@@ -26,72 +26,74 @@ import java.util.Properties;
  *         代码是灵活的，不需要改动，可以通过修改配置文件，来创建出不同的实例对象
  */
 public class 反射2_实例化对象 {
-    public static void main(String[] args) {
-        // 第一种方式
-        // 这不是用反射机制，创建对象
-        User user = new User();
-        System.out.println(user);
 
-        System.out.println("==================================================================");
+	public static void main(String[] args) {
+		// 第一种方式
+		// 这不是用反射机制，创建对象
+		User user = new User();
+		System.out.println(user);
 
-        // 第二种方式
-        // 下面这段代码是以反射机制的方式创建对象
-        try {
-            // 通过反射机制获取Class，通过Class来实例化对象
-            Class<?> c = Class.forName("M13_反射.反射Ⅰ_获取Class实例化对象.实例化对象2.User");
-            System.out.println(c);
+		System.out.println("==================================================================");
 
-            // newInstance() 这个方法会调用 User类 的无参构造方法，完成对象的创建
-            // 重点是：newInstance() 调用的是无参构造，必须保证无参构造是存在的
-            Object obj = c.newInstance();  // 这种方法在JDK9之后就过时了，改为 c.getDeclaredConstructor().newInstance();
-            System.out.println(obj);
+		// 第二种方式
+		// 下面这段代码是以反射机制的方式创建对象
+		try {
+			// 通过反射机制获取Class，通过Class来实例化对象
+			Class<?> c = Class.forName("M13_反射.反射Ⅰ_获取Class实例化对象.实例化对象2.User");
+			System.out.println(c);
 
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
+			// newInstance() 这个方法会调用 User类 的无参构造方法，完成对象的创建
+			// 重点是：newInstance() 调用的是无参构造，必须保证无参构造是存在的
+			Object obj = c.newInstance();  // 这种方法在JDK9之后就过时了，改为 c.getDeclaredConstructor().newInstance();
+			System.out.println(obj);
 
-        System.out.println("=========================================================================================");
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
 
-        // 第三种方式
-        // 通过 IO流 读取 *.properties 配置文件
-        FileInputStream fis = null;
-        try {
-            // 创建输入流对象。
-            fis = new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/M13_反射/反射Ⅰ_获取Class实例化对象/实例化对象2/application.properties");
-            // 创建属性类对象Map
-            Properties pro = new Properties();
-            // 加载
-            pro.load(fis);
-            System.out.println(pro);
-            // 通过 Key 获取 Value
-            String className11 = pro.getProperty("className1");
-            String className22 = pro.getProperty("className2");
+		System.out.println("=========================================================================================");
 
-            // 通过反射机制实例化对象
-            Class<?> c1 = Class.forName(className11);
-            Object obj1 = c1.newInstance();
-            System.out.println(obj1);
+		// 第三种方式
+		// 通过 IO流 读取 *.properties 配置文件
+		FileInputStream fis = null;
+		try {
+			// 创建输入流对象。
+			fis = new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/M13_反射/反射Ⅰ_获取Class实例化对象/实例化对象2/application.properties");
+			// 创建属性类对象Map
+			Properties pro = new Properties();
+			// 加载
+			pro.load(fis);
+			System.out.println(pro);
+			// 通过 Key 获取 Value
+			String className11 = pro.getProperty("className1");
+			String className22 = pro.getProperty("className2");
 
-            Class<?> c2 = Class.forName(className22);
-            Object obj2 = c2.newInstance();
-            System.out.println(obj2);
+			// 通过反射机制实例化对象
+			Class<?> c1 = Class.forName(className11);
+			Object obj1 = c1.newInstance();
+			System.out.println(obj1);
 
-        } catch (IOException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
+			Class<?> c2 = Class.forName(className22);
+			Object obj2 = c2.newInstance();
+			System.out.println(obj2);
 
-    static class User {
-        public User() {
-            System.out.println("无参构造方法");
-        }
-    }
+		} catch (IOException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (fis != null) {
+				try {
+					fis.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	static class User {
+		public User() {
+			System.out.println("无参构造方法");
+		}
+	}
+
 }

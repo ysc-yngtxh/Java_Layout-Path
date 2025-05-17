@@ -9,36 +9,38 @@ package E5_数组.数组Ⅰ_详解;
  *                  可以再创建数组对象的时候预估计一下多长合适，最好预估准确，这样可以减少数组的扩容次数，提高效率。
  */
 public class 数组6_数组的扩容与拷贝 {
-    public static void main(String[] args) {
-        // 拷贝源（从这个数组中拷贝）
-        int[] src = {1, 11, 22, 3, 4};
 
-        // 拷贝目标
-        int[] dest = new int[20];     // 动态初始化一个长度为20的数组，每一个元素默认值为0
+	public static void main(String[] args) {
+		// 拷贝源（从这个数组中拷贝）
+		int[] src = {1, 11, 22, 3, 4};
 
-        // 调用JDK System类中的 arraycopy() 方法，来完成数组的拷贝
-        // System.arraycopy(源数组，从下标1开始，目标数组，从下标3开始，拷贝几个元素);
-        System.arraycopy(src, 1, dest, 3, 2);
+		// 拷贝目标
+		int[] dest = new int[20];     // 动态初始化一个长度为20的数组，每一个元素默认值为0
 
-        // 遍历目标数组
-        for (int i = 0; i < dest.length; i++) {
-            System.out.println(dest[i]);
-        }
+		// 调用JDK System类中的 arraycopy() 方法，来完成数组的拷贝
+		// System.arraycopy(源数组，从下标1开始，目标数组，从下标3开始，拷贝几个元素);
+		System.arraycopy(src, 1, dest, 3, 2);
 
-        // 数组中如果存储的元素是引用，可以拷贝吗？当然可以。
-        String[] str = {"hello", "world!", "study", "java", "mysql", "jdbc", "oracle"};
-        String[] newStr = new String[20];
-        System.arraycopy(str, 0, newStr, 0, str.length);
-        for (int i = 0; i < newStr.length; i++) {
-            System.out.println(newStr[i]);
-        }
+		// 遍历目标数组
+		for (int i = 0; i < dest.length; i++) {
+			System.out.println(dest[i]);
+		}
 
-        // 还有数组拷贝的是对象地址
-        Object[] objs = {new Object(), new Object(), new Object()};
-        Object[] newObjs = new Object[10];
-        System.arraycopy(objs, 0, newObjs, 0, objs.length);
-        for (int i = 0; i < newObjs.length; i++) {
-            System.out.println(newObjs[i]);
-        }
-    }
+		// 数组中如果存储的元素是引用，可以拷贝吗？当然可以。
+		String[] str = {"hello", "world!", "study", "java", "mysql", "jdbc", "oracle"};
+		String[] newStr = new String[20];
+		System.arraycopy(str, 0, newStr, 0, str.length);
+		for (int i = 0; i < newStr.length; i++) {
+			System.out.println(newStr[i]);
+		}
+
+		// 还有数组拷贝的是对象地址
+		Object[] objs = {new Object(), new Object(), new Object()};
+		Object[] newObjs = new Object[10];
+		System.arraycopy(objs, 0, newObjs, 0, objs.length);
+		for (int i = 0; i < newObjs.length; i++) {
+			System.out.println(newObjs[i]);
+		}
+	}
+
 }

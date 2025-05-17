@@ -51,69 +51,71 @@ import java.util.Set;
  *                                 直白点说就是 hashmap.get(key) 走了一个弯路，所以它慢一些；
  */
 public class 集合18_Map接口的常用方法 {
-    public static void main(String[] args) {
-        Map<Integer, String> map = new HashMap<>();
-        map.put(1, "张三"); // 1在这里自动装箱
-        map.put(2, "李四");
-        map.put(3, "王五");
-        map.put(4, "赵六");
 
-        // 尝试计算指定键的新映射值（不管键是否存在）
-        String compute1 = map.compute(4, (k, v) -> Objects.isNull(v) ? "钱七" : v);
-        String compute2 = map.compute(5, (k, v) -> Objects.isNull(v) ? "钱七" : v);
-        // 仅在【键不存在】或对应的值为 null 时执行计算
-        //     key为5的值存在，不会执行 Function计算，返回值为原值"钱七"；
-        //     key为6的值不存在，所以执行 Function计算 并将键值对放入Map，返回值为新值"朱八"。
-        String computedIfAbsent1 = map.computeIfAbsent(5, (key) -> "朱八");
-        String computedIfAbsent2 = map.computeIfAbsent(6, (key) -> "朱八");
-        // 仅在【键存在】且对应的值不为 null 时执行计算
-        //     key为6的值存在，会执行 BiFunction计算 并将键值对放入Map，返回值为新值"郑九"；
-        //     key为7的值不存在，不会执行 BiFunction计算，返回值为null。
-        String computedIfPresent1 = map.computeIfPresent(6, (k, v) -> "郑九");
-        String computedIfPresent2 = map.computeIfPresent(7, (k, v) -> "郑九");
-        // 获取指定键的值，如果键不存在则返回默认值
-        String mapOrDefault = map.getOrDefault(8, "吴十");
-        // 合并指定键的当前值和给定值
-        //     如果key为4的值已经存在，则将key为4的value值和 "萧十一" 进行拼接，并更新Map值
-        String merge = map.merge(4, "萧十一", (oldValue, newValue) -> oldValue + newValue);
+	public static void main(String[] args) {
+		Map<Integer, String> map = new HashMap<>();
+		map.put(1, "张三"); // 1在这里自动装箱
+		map.put(2, "李四");
+		map.put(3, "王五");
+		map.put(4, "赵六");
 
-        // 第一种方式：获取所有的key，通过遍历key,来遍历value
-        Set<Integer> keys = map.keySet();
+		// 尝试计算指定键的新映射值（不管键是否存在）
+		String compute1 = map.compute(4, (k, v) -> Objects.isNull(v) ? "钱七" : v);
+		String compute2 = map.compute(5, (k, v) -> Objects.isNull(v) ? "钱七" : v);
+		// 仅在【键不存在】或对应的值为 null 时执行计算
+		//     key为5的值存在，不会执行 Function计算，返回值为原值"钱七"；
+		//     key为6的值不存在，所以执行 Function计算 并将键值对放入Map，返回值为新值"朱八"。
+		String computedIfAbsent1 = map.computeIfAbsent(5, (key) -> "朱八");
+		String computedIfAbsent2 = map.computeIfAbsent(6, (key) -> "朱八");
+		// 仅在【键存在】且对应的值不为 null 时执行计算
+		//     key为6的值存在，会执行 BiFunction计算 并将键值对放入Map，返回值为新值"郑九"；
+		//     key为7的值不存在，不会执行 BiFunction计算，返回值为null。
+		String computedIfPresent1 = map.computeIfPresent(6, (k, v) -> "郑九");
+		String computedIfPresent2 = map.computeIfPresent(7, (k, v) -> "郑九");
+		// 获取指定键的值，如果键不存在则返回默认值
+		String mapOrDefault = map.getOrDefault(8, "吴十");
+		// 合并指定键的当前值和给定值
+		//     如果key为4的值已经存在，则将key为4的value值和 "萧十一" 进行拼接，并更新Map值
+		String merge = map.merge(4, "萧十一", (oldValue, newValue) -> oldValue + newValue);
 
-        // 方法一：建立迭代器对象，遍历key，可以通过key获取value，
-        Iterator<Integer> it = keys.iterator();
-        while (it.hasNext()) {
-            Integer key = it.next();
-            String value = map.get(key);
-            System.out.println(key + "=" + value);
-        }
-        // 方法二：增强for循环
-        for (Integer key : keys) {
-            System.out.println(map);
-            System.out.println(key + "=" + map.get(key));
-        }
+		// 第一种方式：获取所有的key，通过遍历key,来遍历value
+		Set<Integer> keys = map.keySet();
 
-        System.out.println("=========================================================================================");
+		// 方法一：建立迭代器对象，遍历key，可以通过key获取value，
+		Iterator<Integer> it = keys.iterator();
+		while (it.hasNext()) {
+			Integer key = it.next();
+			String value = map.get(key);
+			System.out.println(key + "=" + value);
+		}
+		// 方法二：增强for循环
+		for (Integer key : keys) {
+			System.out.println(map);
+			System.out.println(key + "=" + map.get(key));
+		}
 
-        // 第二种方式：Set<Map.Entry<K,V>> entrySet()。这个方法是把Map集合直接全部转换成Set集合，效率比KeySet高
-        Set<Map.Entry<Integer,String>> set = map.entrySet();
-        // 遍历Set集合，每一次取出一个Node
+		System.out.println("=========================================================================================");
 
-        // 方法一：迭代器
-        Iterator<Map.Entry<Integer, String>> it1 = set.iterator();
-        while (it1.hasNext()) {
-            Map.Entry<Integer, String> node = it1.next();
-            Integer key = node.getKey();
-            String value = node.getValue();
-            System.out.println(key + "===" + value);
-        }
-        // 方法二：增强for循环
-        // 这种方式效率比较高，因为获取key和value都是直接从node对象中获取的属性值
-        // 这种方式比较适合于大数据量
-        for (Map.Entry<Integer, String> node: set) {
-            System.out.println(node.getKey() + "--->" + node.getValue());
-            System.out.println(node);
-            System.out.println(map);
-        }
-    }
+		// 第二种方式：Set<Map.Entry<K,V>> entrySet()。这个方法是把Map集合直接全部转换成Set集合，效率比KeySet高
+		Set<Map.Entry<Integer, String>> set = map.entrySet();
+		// 遍历Set集合，每一次取出一个Node
+
+		// 方法一：迭代器
+		Iterator<Map.Entry<Integer, String>> it1 = set.iterator();
+		while (it1.hasNext()) {
+			Map.Entry<Integer, String> node = it1.next();
+			Integer key = node.getKey();
+			String value = node.getValue();
+			System.out.println(key + "===" + value);
+		}
+		// 方法二：增强for循环
+		// 这种方式效率比较高，因为获取key和value都是直接从node对象中获取的属性值
+		// 这种方式比较适合于大数据量
+		for (Map.Entry<Integer, String> node : set) {
+			System.out.println(node.getKey() + "--->" + node.getValue());
+			System.out.println(node);
+			System.out.println(map);
+		}
+	}
+
 }

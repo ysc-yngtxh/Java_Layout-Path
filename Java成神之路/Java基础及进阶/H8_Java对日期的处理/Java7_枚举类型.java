@@ -12,37 +12,39 @@ package H8_Java对日期的处理;
  *            例如：颜色，四季，星期等都可以使用枚举类型
  */
 public class Java7_枚举类型 {
-    public static void main(String[] args) {
-        Result R = divide(10, 2);
-        System.out.println(R == Result.SUCCESS ? "计算成功" : "计算失败");
 
-        System.out.println("=========================================================================================");
+	public static void main(String[] args) {
+		Result R = divide(10, 2);
+		System.out.println(R == Result.SUCCESS ? "计算成功" : "计算失败");
 
-        // switch也能进行枚举，但好像低版本是不可以的
-        switch(Season.SUMMER) {
-            case SPRING:
-                System.out.println("春天");
-                break;
-            case SUMMER:
-                System.out.println("夏天");
-                break;
-            case AUTUMN:
-                System.out.println("秋天");
-                break;
-            case WINTER:
-                System.out.println("冬天");
-                break;
-        }
-    }
+		System.out.println("=========================================================================================");
 
-    public static Result divide(int a, int b) {
-        try {
-            int c = a/b;
-            return Result.SUCCESS;
-        } catch (Exception e) {
-            return Result.FAIL;
-        }
-    }
+		// switch也能进行枚举，但好像低版本是不可以的
+		switch (Season.SUMMER) {
+			case SPRING:
+				System.out.println("春天");
+				break;
+			case SUMMER:
+				System.out.println("夏天");
+				break;
+			case AUTUMN:
+				System.out.println("秋天");
+				break;
+			case WINTER:
+				System.out.println("冬天");
+				break;
+		}
+	}
+
+	public static Result divide(int a, int b) {
+		try {
+			int c = a / b;
+			return Result.SUCCESS;
+		} catch (Exception e) {
+			return Result.FAIL;
+		}
+	}
+
 }
 
 enum Result {

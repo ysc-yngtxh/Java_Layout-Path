@@ -16,29 +16,36 @@ package B2_抽象类;
  *      也可以理解为，多态是指通过指向父类的指针，来调用在不同子类中实现的方法。
  */
 class Person {
-    static {
-        System.out.println("这里是静态代码块");
-    }
-    {
-        System.out.println("这里是构造(普通)代码块，在构造函数之前执行");
-    }
-    public Person() {
-        System.out.println("这里是构造函数");
-    }
-    public final void finalMethod() {
-        // 这是一个 final 方法，子类将无法重写它
-    }
-    public void methodToBeOverridden() {
-        // 这是一个可被重写的方法
-    }
+
+	static {
+		System.out.println("这里是静态代码块");
+	}
+
+	{
+		System.out.println("这里是构造(普通)代码块，在构造函数之前执行");
+	}
+
+	public Person() {
+		System.out.println("这里是构造函数");
+	}
+
+	public final void finalMethod() {
+		// 这是一个 final 方法，子类将无法重写它
+	}
+
+	public void methodToBeOverridden() {
+		// 这是一个可被重写的方法
+	}
+
 }
+
 class Child extends Person {
-    @Override
-    public void methodToBeOverridden() {
-        // 这是重写父类中可被重写的方法的实现
-    }
+
+	@Override
+	public void methodToBeOverridden() {
+		// 这是重写父类中可被重写的方法的实现
+	}
+
 }
 
-
-public class 抽象类0_类继承 {
-}
+public class 抽象类0_类继承 {}

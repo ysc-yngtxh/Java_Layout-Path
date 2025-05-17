@@ -33,11 +33,11 @@ public class B单例模式详解 {
 
     private static B单例模式详解 B = new B单例模式详解();
 
-    public static B单例模式详解 getInstance() {
-        return B;
-    }
+	public static B单例模式详解 getInstance() {
+		return B;
+	}
 }
-    
+
 
 /**
  * 线程不安全的懒汉式单例
@@ -51,28 +51,29 @@ public class B单例模式详解 {
  */
 @SuppressWarnings("InstantiationOfUtilityClass")
 class LazyMan {
-    private LazyMan() {}
 
-    private static LazyMan lazyMan;
+	private static LazyMan lazyMan;
 
-    public static LazyMan getInstance() {
-        if (null == lazyMan) {
-            lazyMan = new LazyMan();
-        }
-        return lazyMan;
-    }
+	private LazyMan() {}
 
-    public static void main(String[] args) {
-        for (int i = 0; i < 10; i++) {
-            new Thread(() -> {
-                System.out.println( Thread.currentThread().getName() + "--" + LazyMan.getInstance() );
-            }, "a").start();
-        }
+	public static LazyMan getInstance() {
+		if (null == lazyMan) {
+			lazyMan = new LazyMan();
+		}
+		return lazyMan;
+	}
 
-        new Thread(() -> {
-            System.out.println( Thread.currentThread().getName() + "--" + LazyMan.getInstance() );
-        }, "b").start();
-    }
+	public static void main(String[] args) {
+		for (int i = 0; i < 10; i++) {
+			new Thread(() -> {
+				System.out.println(Thread.currentThread().getName() + "--" + LazyMan.getInstance());
+			}, "a").start();
+		}
+
+		new Thread(() -> {
+			System.out.println(Thread.currentThread().getName() + "--" + LazyMan.getInstance());
+		}, "b").start();
+	}
 }
 
 
@@ -80,6 +81,7 @@ class LazyMan {
  * 线程安全的懒汉式单例
  */
 class Singleton {
+
     private String str;
     public String getStr() {
         return str;

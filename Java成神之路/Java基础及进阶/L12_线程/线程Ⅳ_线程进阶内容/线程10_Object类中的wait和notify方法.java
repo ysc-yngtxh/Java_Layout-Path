@@ -3,8 +3,7 @@ package L12_线程.线程Ⅳ_线程进阶内容;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
- * 一、关于Object类中的 wait() 和 notify() 方法。（生产者和消费者模式！）
+/* 一、关于Object类中的 wait() 和 notify() 方法。（生产者和消费者模式！）
  *     第一：wait() 和 notify() 方法不是线程对象的方法，是Java中任何一个Java对象都有的方法，因为这两个方式是Object类中自带的。
  *          wait() 和 notify() 方法不是通过线程对象调用的。不是这样的：t.wait()、t.notify();...
  *
@@ -39,75 +38,87 @@ import java.util.List;
  *         保证List集合中永远都是最多存储1个元素
  */
 public class 线程10_Object类中的wait和notify方法 {
-    public static void main(String[] args) {
-        // 创建List仓库集合对象，共享的
-        List<Object> list = new ArrayList<>();
 
-        // 创建生产者线程对象
-        Thread t1 = new Thread(new Producer(list), "生产者线程");
-        // 创建消费者线程对象
-        Thread t2 = new Thread(new Consumer(list), "消费者线程");
+	public static void main(String[] args) {
+		// 创建List仓库集合对象，共享的
+		List<Object> list = new ArrayList<>();
 
-        // t1.setName("生产者线程");
-        // t2.setName("消费者线程");
-        t1.start();
-        t2.start();
-    }
+		// 创建生产者线程对象
+		Thread t1 = new Thread(new Producer(list), "生产者线程");
+		// 创建消费者线程对象
+		Thread t2 = new Thread(new Consumer(list), "消费者线程");
+
+		// t1.setName("生产者线程");
+		// t2.setName("消费者线程");
+		t1.start();
+		t2.start();
+	}
+
 }
+
 // 生产线程
 class Producer implements Runnable {
-    private List<Object> list;
-    public Producer(List<Object> list) {
-        this.list = list;
-    }
-    @Override
-    public void run() {
-        // 一直生产(使用死循环来模拟一直生产)
-        while(true) {
-            // 给仓库对象list加一把锁
-            synchronized(list) {
-                if(list.size() > 0) {  // 大于0，说明仓库中已经有1个元素了。
-                    try {
-                        // 当前线程进入等待状态，并且释放list集合的锁
-                        list.wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                // 程序能够执行到此处，说明仓库是空的，可以生产
-                Object obj = new Object();
-                list.add(obj);
-                System.out.println(Thread.currentThread().getName() + " --> " + obj);
-                // 唤醒消费者消费
-                list.notifyAll();
-            }
-        }
-    }
+
+	private List<Object> list;
+
+	public Producer(List<Object> list) {
+		this.list = list;
+	}
+
+	@Override
+	public void run() {
+		// 一直生产(使用死循环来模拟一直生产)
+		while (true) {
+			// 给仓库对象list加一把锁
+			synchronized (list) {
+				if (list.size() > 0) {  // 大于0，说明仓库中已经有1个元素了。
+					try {
+						// 当前线程进入等待状态，并且释放list集合的锁
+						list.wait();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				// 程序能够执行到此处，说明仓库是空的，可以生产
+				Object obj = new Object();
+				list.add(obj);
+				System.out.println(Thread.currentThread().getName() + " --> " + obj);
+				// 唤醒消费者消费
+				list.notifyAll();
+			}
+		}
+	}
+
 }
+
 // 消费线程
 class Consumer implements Runnable {
-    private List<Object> list;
-    public Consumer(List<Object> list) {
-        this.list = list;
-    }
-    @Override
-    public void run() {
-        while(true) {
-            synchronized(list) {
-                if(list.size() == 0) {
-                    // 仓库空了，消费者线程等待，释放掉list集合的锁
-                    try {
-                        list.wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                // 程序能执行到此处，说明仓库中有数据，进行消费
-                Object obj = list.remove(0);   // 删除指定下标的元素
-                System.out.println(Thread.currentThread().getName() + " --> " + obj);
-                // 唤醒生产者生产
-                list.notifyAll();
-            }
-        }
-    }
+
+	private List<Object> list;
+
+	public Consumer(List<Object> list) {
+		this.list = list;
+	}
+
+	@Override
+	public void run() {
+		while (true) {
+			synchronized (list) {
+				if (list.size() == 0) {
+					// 仓库空了，消费者线程等待，释放掉list集合的锁
+					try {
+						list.wait();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				// 程序能执行到此处，说明仓库中有数据，进行消费
+				Object obj = list.remove(0);   // 删除指定下标的元素
+				System.out.println(Thread.currentThread().getName() + " --> " + obj);
+				// 唤醒生产者生产
+				list.notifyAll();
+			}
+		}
+	}
+
 }

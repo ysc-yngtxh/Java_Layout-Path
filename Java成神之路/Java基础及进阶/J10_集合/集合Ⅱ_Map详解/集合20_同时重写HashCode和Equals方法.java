@@ -5,8 +5,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-/*
- * 1、向Map集合中存取，都是先调用key的 HashCode() 方法，然后再选择是否调用 equals() 方法！
+/* 1、向Map集合中存取，都是先调用key的 HashCode() 方法，然后再选择是否调用 equals() 方法！
  *       拿put(K,V)举例，什么时候equals不调用？
  *            K.hashCode()方法返回哈希值
  *            哈希值经过哈希算法转换成数组下标
@@ -40,49 +39,54 @@ import java.util.Set;
  *         这种方式也是为了提高检索效率，二叉树的检索会再次缩小扫描范围，进而提高效率。
  */
 public class 集合20_同时重写HashCode和Equals方法 {
-    public static void main(String[] args) {
-        Student s1 = new Student("曹家千金");
-        Student s2 = new Student("曹家千金");
-        System.out.println(s1.equals(s2));
 
-        // hashCode是用来在散列存储结构中确定对象的存储地址的；
-        System.out.println("s1的hashCode: " + s1.hashCode());
-        System.out.println("s2的hashCode: " + s2.hashCode());
+	public static void main(String[] args) {
+		Student s1 = new Student("曹家千金");
+		Student s2 = new Student("曹家千金");
+		System.out.println(s1.equals(s2));
 
-        // s1.equals(s2)的结果已经是true了，那么往HashSet集合中放（HashSet集合特点：无序不可重复）
-        Set<Student> set = new HashSet<>();
-        Collections.addAll(set, s1, s2);
-        System.out.println(set);
-    }
+		// hashCode是用来在散列存储结构中确定对象的存储地址的；
+		System.out.println("s1的hashCode: " + s1.hashCode());
+		System.out.println("s2的hashCode: " + s2.hashCode());
+
+		// s1.equals(s2)的结果已经是true了，那么往HashSet集合中放（HashSet集合特点：无序不可重复）
+		Set<Student> set = new HashSet<>();
+		Collections.addAll(set, s1, s2);
+		System.out.println(set);
+	}
+
 }
+
 class Student {
-    private String name;
 
-    public Student(String name) {
-        this.name = name;
-    }
+	private String name;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Student student = (Student) o;
-        return Objects.equals(name, student.name);
-    }
+	public Student(String name) {
+		this.name = name;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Student student = (Student) o;
+		return Objects.equals(name, student.name);
+	}
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "name='" + name + '\'' +
-                '}';
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hash(name);
+	}
+
+	@Override
+	public String toString() {
+		return "Student{" +
+				"name='" + name + '\'' +
+				'}';
+	}
+
 }

@@ -1,7 +1,6 @@
 package L12_线程.线程Ⅳ_线程进阶内容;
 
-/*
- * 守护线程
+/* 守护线程
  *   Java语言中线程分为两大类：
  *        一类是：用户线程
  *        一类是：守护线程（后台线程）
@@ -17,37 +16,42 @@ package L12_线程.线程Ⅳ_线程进阶内容;
  *         一直在那里看着，每到00：00的时候就备份一次，所有的用户线程如果结束了，守护线程自动退出，没有必要进行数据备份了
  */
 public class 线程12_守护线程 {
-    public static void main(String[] args) {
-        Thread t = new BakDataThread();
-        t.setName("备份数据的线程");
 
-        // 启动线程之前，将线程设置为守护线程
-        t.setDaemon(true);
+	public static void main(String[] args) {
+		Thread t = new BakDataThread();
+		t.setName("备份数据的线程");
 
-        t.start();
+		// 启动线程之前，将线程设置为守护线程
+		t.setDaemon(true);
 
-        // 主线程：主线程是用户线程
-        for (int i = 0; i < 10; i++) {
-            System.out.println(Thread.currentThread().getName() + "-->" + i);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+		t.start();
+
+		// 主线程：主线程是用户线程
+		for (int i = 0; i < 10; i++) {
+			System.out.println(Thread.currentThread().getName() + "-->" + i);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 }
-class BakDataThread extends Thread{
-    public void run() {
-        int i = 0;
-        // 虽然while是死循环，但是守护线程会随着主线程的结束而结束
-        while(true) {
-            System.out.println(Thread.currentThread().getName() + "-->" + (++i));
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+
+class BakDataThread extends Thread {
+
+	public void run() {
+		int i = 0;
+		// 虽然while是死循环，但是守护线程会随着主线程的结束而结束
+		while (true) {
+			System.out.println(Thread.currentThread().getName() + "-->" + (++i));
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 }

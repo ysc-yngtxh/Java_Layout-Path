@@ -72,25 +72,25 @@ public class 锁升级 {
      *    当后续线程尝试获取锁时，发现被占用的锁是重量级锁，则直接将自己挂起（而不是忙等），等待将来被唤醒。
      */
 
+	// 锁对象
+	private static Object obj = new Object();
 
-    // 锁对象
-    private static Object obj = new Object();
+	// 可重入就是说某个线程已经获得某个锁，可以再次获取锁而不会出现死锁。synchronized和ReentrantLock都是可重入的，可重入降低了编程复杂性
+	public static void main(String[] args) {
+		// 自定义Runnable对象
+		Runnable runnable = () -> {
+			//  使用嵌套的同步代码块，实现 synchronized 的可重入锁
+			synchronized (obj) {
+				System.out.println(Thread.currentThread().getName() + "第一次获取锁资源...");
+				synchronized (obj) {
+					System.out.println(Thread.currentThread().getName() + "第二次获取锁资源...");
+					synchronized (obj) {
+						System.out.println(Thread.currentThread().getName() + "第三次获取锁资源...");
+					}
+				}
+			}
+		};
+		new Thread(runnable, "t1").start();
+	}
 
-    // 可重入就是说某个线程已经获得某个锁，可以再次获取锁而不会出现死锁。synchronized和ReentrantLock都是可重入的，可重入降低了编程复杂性
-    public static void main(String[] args) {
-        // 自定义Runnable对象
-        Runnable runnable = () -> {
-            //  使用嵌套的同步代码块，实现 synchronized 的可重入锁
-            synchronized (obj) {
-                System.out.println(Thread.currentThread().getName() + "第一次获取锁资源...");
-                synchronized (obj) {
-                    System.out.println(Thread.currentThread().getName() + "第二次获取锁资源...");
-                    synchronized (obj) {
-                        System.out.println(Thread.currentThread().getName() + "第三次获取锁资源...");
-                    }
-                }
-            }
-        };
-        new Thread(runnable, "t1").start();
-    }
 }

@@ -20,52 +20,52 @@ import java.util.Scanner;
  *           byte，short,char可以自动转换成int类型
  */
 public class Switch {
+
 	public static void main(String[] args) {
-		
 		Scanner a = new Scanner(System.in);
 		System.out.println("请输入数字：");
 		int c = a.nextInt();
-		switch(c) {
-		    case 1:case 0:                     // case合并
-		    	System.out.println("星期一");
-		    	                               // 没有 break; 被称为case穿透
-		    case 2:
-		    	System.out.println("星期二");
-		    	break;
-		    case 3:
-		    	System.out.println("星期三");
-		    	break;
-		    case 4:
-		    	System.out.println("星期四");
-		    	break;
-		    case 5:
-		    	System.out.println("星期五");
-		    	break;
-		    case 6:
-		    	System.out.println("星期六");
-		    	break;
-		    case 7:
-		    	System.out.println("星期七");
-		    	break;
-		    default :
-		    	System.out.println("对不起，你输入的数字非法");
-		}
-		
-		double d = 90.0;
-		switch((int)d) {      // double类型加上了强制转换符，转成int类型
-		    case 90:
-		    	System.out.println("高级");
+		switch (c) {
+			case 1:
+			case 0:                     // case合并
+				System.out.println("星期一");
+				// 没有 break; 被称为case穿透
+			case 2:
+				System.out.println("星期二");
+				break;
+			case 3:
+				System.out.println("星期三");
+				break;
+			case 4:
+				System.out.println("星期四");
+				break;
+			case 5:
+				System.out.println("星期五");
+				break;
+			case 6:
+				System.out.println("星期六");
+				break;
+			case 7:
+				System.out.println("星期七");
+				break;
+			default:
+				System.out.println("对不起，你输入的数字非法");
 		}
 
-		char s='A';
-		switch(s) {           // ASCⅡ码  'A'=65     所以s不是int,string类型会转成int类型
-		    case 'A':
-		    	System.out.println("中级");
-		    /*
-		    case 65:
-		    	System.out.println("中级");*/
+		double d = 90.0;
+		switch ((int) d) {      // double类型加上了强制转换符，转成int类型
+			case 90:
+				System.out.println("高级");
 		}
-		
+
+		char s = 'A';
+		switch (s) {           // ASCⅡ码  'A'=65     所以s不是int,string类型会转成int类型
+			case 'A':
+				System.out.println("中级");
+		    // case 65:
+		    // 	System.out.println("中级");
+		}
+
 		System.out.println("欢迎使用简单计算机系统");
 		System.out.print("请输入第一个数字：");
 		int a1 = a.nextInt();
@@ -74,25 +74,26 @@ public class Switch {
 		System.out.print("请输入第二个数字：");
 		int c1 = a.nextInt();
 		int result = 0;
-		switch(b1) {
-		    case "+":
-		    	result = a1 + c1;
-		        break;
-		    case "-":
-		    	result = a1 - c1;
-		        break;
-		    case "*":
-		    	result = a1 * c1;
-		        break;
-		    case "/":
-		    	result = a1 / c1;
-		        break;
-		    case "%":
-		    	result = a1 % c1;
-		        break;
-		    default :
-		    	System.out.println("你输入的运算符不合法");
+		switch (b1) {
+			case "+":
+				result = a1 + c1;
+				break;
+			case "-":
+				result = a1 - c1;
+				break;
+			case "*":
+				result = a1 * c1;
+				break;
+			case "/":
+				result = a1 / c1;
+				break;
+			case "%":
+				result = a1 % c1;
+				break;
+			default:
+				System.out.println("你输入的运算符不合法");
 		}
-		System.out.println("运算结果：" + a1+b1+c1+ "=" + result);
+		System.out.println("运算结果：" + a1 + b1 + c1 + "=" + result);
 	}
+
 }

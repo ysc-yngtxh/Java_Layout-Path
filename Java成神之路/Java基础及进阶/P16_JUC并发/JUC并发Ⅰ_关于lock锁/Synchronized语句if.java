@@ -30,53 +30,58 @@ public class Synchronized语句if {
             }
         }, "A").start();
 
-        new Thread(() -> {
-            for (int i = 0; i < 10; i++) {
-                try {
-                    data.demo2();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, "B").start();
+		new Thread(() -> {
+			for (int i = 0; i < 10; i++) {
+				try {
+					data.demo2();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}, "B").start();
 
-        new Thread(() -> {
-            for (int i = 0; i < 10; i++) {
-                try {
-                    data.demo1();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, "C").start();
+		new Thread(() -> {
+			for (int i = 0; i < 10; i++) {
+				try {
+					data.demo1();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}, "C").start();
 
-        new Thread(() -> {
-            for (int i = 0; i < 10; i++) {
-                try {
-                    data.demo2();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, "D").start();
-    }
+		new Thread(() -> {
+			for (int i = 0; i < 10; i++) {
+				try {
+					data.demo2();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}, "D").start();
+	}
 }
+
 class Data {
-    volatile int num = 0;
-    public synchronized void demo1() throws InterruptedException {
-        if(num == 0) {
-            this.wait(); // wait() 方法会释放对象锁，并使得当前线程进入该对象的等待锁定池
-        }
-        num--;
-        System.out.println(Thread.currentThread().getName() + " --- num值= " + num);
-        this.notifyAll();
-    }
-    public synchronized void demo2() throws InterruptedException {
-        if(num != 0) {
-            this.wait(); // wait() 方法会释放对象锁，并使得当前线程进入该对象的等待锁定池
-        }
-        num++;
-        System.out.println(Thread.currentThread().getName() + " --- num值= " + num);
-        this.notifyAll();
-    }
+
+	volatile int num = 0;
+
+	public synchronized void demo1() throws InterruptedException {
+		if (num == 0) {
+			this.wait(); // wait() 方法会释放对象锁，并使得当前线程进入该对象的等待锁定池
+		}
+		num--;
+		System.out.println(Thread.currentThread().getName() + " --- num值= " + num);
+		this.notifyAll();
+	}
+
+	public synchronized void demo2() throws InterruptedException {
+		if (num != 0) {
+			this.wait(); // wait() 方法会释放对象锁，并使得当前线程进入该对象的等待锁定池
+		}
+		num++;
+		System.out.println(Thread.currentThread().getName() + " --- num值= " + num);
+		this.notifyAll();
+	}
+
 }

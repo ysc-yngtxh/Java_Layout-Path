@@ -40,74 +40,78 @@ import java.io.Serializable;
  *       2、网络通信时需要用套接字在网络中传送对象时，如我们使用RPC协议进行网络通信时;
  */
 public class 流14_序列化与反序列化的实现 {
-    public static void main(String[] args) throws Exception{
 
-        // 创建Java对象
-        Student s = new Student(111, "游家纨绔", "男");
-        // 序列化
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/流Ⅶ_对象专属流/ObjectFile"));
-        // 序列化对象
-        oos.writeObject(s);
+	public static void main(String[] args) throws Exception {
 
-        // 反序列化
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/流Ⅶ_对象专属流/ObjectFile"));
-        Object obj = ois.readObject();
-        // 反序列化回来时一个学生对象，所以会调用学生对象的toString方法
-        System.out.println(obj);
-        oos.flush();
-        oos.close();
-    }
+		// 创建Java对象
+		Student s = new Student(111, "游家纨绔", "男");
+		// 序列化
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/流Ⅶ_对象专属流/ObjectFile"));
+		// 序列化对象
+		oos.writeObject(s);
+
+		// 反序列化
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/流Ⅶ_对象专属流/ObjectFile"));
+		Object obj = ois.readObject();
+		// 反序列化回来时一个学生对象，所以会调用学生对象的toString方法
+		System.out.println(obj);
+		oos.flush();
+		oos.close();
+	}
+
 }
 
 class Student implements Serializable {
 
-    // IDEA工具快捷键生成的固定序化版本号
-    private static final long serialVersionUID = -3199561984941795299L;
+	// IDEA工具快捷键生成的固定序化版本号
+	private static final long serialVersionUID = -3199561984941795299L;
 
-    private int no;
-    private String name;
+	private int no;
+	private String name;
 
-    // transient关键字是不参加序列化操作
-    private transient String sex;
+	// transient关键字是不参加序列化操作
+	private transient String sex;
 
-    public Student() {}
+	public Student() {
+	}
 
-    public Student(int no, String name, String sex) {
-        this.no = no;
-        this.name = name;
-        this.sex = sex;
-    }
+	public Student(int no, String name, String sex) {
+		this.no = no;
+		this.name = name;
+		this.sex = sex;
+	}
 
-    public int getNo() {
-        return no;
-    }
+	public int getNo() {
+		return no;
+	}
 
-    public void setNo(int no) {
-        this.no = no;
-    }
+	public void setNo(int no) {
+		this.no = no;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getSex() {
-        return sex;
-    }
+	public String getSex() {
+		return sex;
+	}
 
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "no=" + no +
-                ", name='" + name + '\'' +
-                ", sex='" + sex + '\'' +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "Student{" +
+				"no=" + no +
+				", name='" + name + '\'' +
+				", sex='" + sex + '\'' +
+				'}';
+	}
+
 }

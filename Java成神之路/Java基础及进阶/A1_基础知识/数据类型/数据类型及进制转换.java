@@ -92,8 +92,10 @@ package A1_基础知识.数据类型;
  *            Java语言采用的是哪一种编码方式呢？
  *               Java语言源代码采用的是unicode编码方式，所以“常识”可以用中文。
  */
-public class 数据类型及进制转换{
+public class 数据类型及进制转换 {
+
 	static int j;              // 成员变量，没赋值
+
 	public static void main(String[] args) {
 		System.out.println(j); // 初始化发现"j"没赋值，如果是局部变量就会出错，但成员变量会输出int默认值.即结果为0.
 		char c = '\u0000';     // \u0000是char的默认值
@@ -178,4 +180,5 @@ public class 数据类型及进制转换{
 		// TODO 综上可发现
 		//      使用异或^运算符可有效解决一些算法问题。例如：两个相同数字异或的结果为0；0异或任何数字的结果为该数字本身。
 	}
+
 }

@@ -1,8 +1,11 @@
 ## 1、IO流，什么是IO？
-> #### &emsp;&emsp;&emsp;&emsp;I：Input  
-> #### &emsp;&emsp;&emsp;&emsp;O：Output  
+
+> #### &emsp;&emsp;&emsp;&emsp;I：Input
+> #### &emsp;&emsp;&emsp;&emsp;O：Output
 > #### &emsp;&emsp;&emsp;&emsp;通过IO可以完成硬盘文件的读和写
+
 ## 2、IO流的分类
+
       一种方式是按照流的方向进行分类：
           以内存作为参照物，
             往内存中去，叫做输入（Input）.或者叫做读（Read）.
@@ -23,17 +26,19 @@
           字节流，字符流
 
 ## 3、Java中的IO流都已经写好了，我们程序员不需要关心，我们最主要是掌握，
+
     Java中所有的流都在：java.io.*,下
         Java中主要还是研究：
                         怎么new流对象
                         调用流对象的哪个方法是读，哪个方法是写
-            
+
 ## 4、java IO流这块有四大家族：
+
 > 四大家族的首领：  
-> &emsp;&emsp;&emsp;&emsp;java.io.InputStream  字节输入流  
+> &emsp;&emsp;&emsp;&emsp;java.io.InputStream 字节输入流  
 > &emsp;&emsp;&emsp;&emsp;java.io.OutputStream 字节输出流  
-> &emsp;&emsp;&emsp;&emsp;java.io.Reader  字符输入流  
-> &emsp;&emsp;&emsp;&emsp;java.io.Writer  字符输出流
+> &emsp;&emsp;&emsp;&emsp;java.io.Reader 字符输入流  
+> &emsp;&emsp;&emsp;&emsp;java.io.Writer 字符输出流
 
         四大家族的首领都是抽象类。(abstract class)
 
@@ -48,7 +53,8 @@
              强行输出完(清空管道！)刷新的作用就是清空管道
              注意：如果没有flush()可能会导致丢失数据
 
-- ***注意：在java中只要"类名"以stream结尾的都是字节流，以"Reader/Writer" 结尾的都是字符流***
+- ***注意：在java中只要"类名"以stream结尾的都是字节流，以"Reader/Writer" 结尾的都是字符流
+  ***
 
 ## 5、java.io包下需要掌握的流有16个
 

@@ -54,48 +54,50 @@ public class A关于Volatile的详解 {
         }
     }
 
-    public static void main(String[] args) {
-        new Thread(A关于Volatile的详解::write, "A").start();
-        // 这种写法看起来很奇怪，因为Thread方法中要有Runnable接口的实现类，而这里直接写了一个方法引用
-        // 其实这里是lambda方法引用，等价于 new Thread(()-> A关于Volatile的详解.write(), "A").start();
-        new Thread(A关于Volatile的详解::multiply, "B").start();
-        // 简单分析一下这些代码，最后会打印什么？
-        // 第一感觉就是：输出为：4; 毕竟 a 赋值为 2 --> 2 * 2 可不就等于 4 嘛
-        // 正确结果确实是 4; 但是如果把变量flag的关键字 volatile 去掉; 结果还会是 4 嘛？
-        // 1、假如 write() 方法中 进行了指令重排 先执行 flag = true; 后执行的 a = 2;
-        // 2、而此时线程 A 和线程 B 又同时执行，那么就会有可能出现线程 A 在执行write()方法中的 flag = true; 后就挂起了。
-        //   此时线程 B 再去执行multiply()方法，导致最后打印输出结果就会是 0 * 0 = 0
-    }
+	public static void main(String[] args) {
+		new Thread(A关于Volatile的详解::write, "A").start();
+		// 这种写法看起来很奇怪，因为Thread方法中要有Runnable接口的实现类，而这里直接写了一个方法引用
+		// 其实这里是lambda方法引用，等价于 new Thread(()-> A关于Volatile的详解.write(), "A").start();
+		new Thread(A关于Volatile的详解::multiply, "B").start();
+		// 简单分析一下这些代码，最后会打印什么？
+		// 第一感觉就是：输出为：4; 毕竟 a 赋值为 2 --> 2 * 2 可不就等于 4 嘛
+		// 正确结果确实是 4; 但是如果把变量flag的关键字 volatile 去掉; 结果还会是 4 嘛？
+		// 1、假如 write() 方法中 进行了指令重排 先执行 flag = true; 后执行的 a = 2;
+		// 2、而此时线程 A 和线程 B 又同时执行，那么就会有可能出现线程 A 在执行write()方法中的 flag = true; 后就挂起了。
+		//   此时线程 B 再去执行multiply()方法，导致最后打印输出结果就会是 0 * 0 = 0
+	}
 
-    static class Visibility {
-        private volatile static int num = 0; // 保证了主存数据的可见性
-        public static void add() {
-            num++;
-        }
-        public static void main(String[] args) {
-            for (int i = 1; i <= 20; i++) {
-                new Thread(() -> {
-                    for (int j = 0; j < 1000; j++) {
-                        add();
-                    }
-                }, "A").start();
-            }
-            while (Thread.activeCount() > 2) {
-                Thread.yield();
-            }
-            System.out.println(Thread.currentThread().getName() + " " + num); // 结果总是小于20000,没办法保证
-        }
-        // 我们分析一下，为什么执行程序的结果总是小于 20000
-        // 1、按理来说我们把共享变量num加上了 volatile 关键字后，每次我们去修改 num 值之前读取出来都会是最新值
-        // 2、也就是说我现在有 20 条线程开始执行，由于 volatile 的可见性保证了在读取的时候总是最新值
-        // 3、而我们执行的 add() 方法不是一个原子操作：
-        //    ①、首先从主内存中读取到共享变量 num 最新值，并将最新值复制到自己的工作内存中;
-        //    ②、然后在工作内存中将 num 自增;
-        //    ③、最后将工作内存里 num 自增后的结果 刷新到主内存的共享变量 num 里
-        // 4、所以可能会出现同一时间片里有多个线程去执行 add() 方法
-        //    设：线程1、2同时执行，线程1执行完第②步后被挂起、线程2执行完并且把num自增后的值刷回主存，此时主存中num的值为1
-        //       随后线程1的开始执行第③步，这时线程1的工作内存已经读取到共享变量 num 最新值，但是这个 num 最新值影响不了已经自增后的 num 值。
-        //       所以线程1工作内存中 num 自增后的结果值1 刷新到主存 = 1。即 num++ 执行了2次，但2次都是从0变为1，主存num的值最终为1
-        // 5、根据上述分析可知：两个线程执行 add()，但 num 值的结果只自增了一次。所以，程序执行结果总是小于 20000 的。
-    }
+	static class Visibility {
+		private volatile static int num = 0; // 保证了主存数据的可见性
+
+		public static void add() {
+			num++;
+		}
+
+		public static void main(String[] args) {
+			for (int i = 1; i <= 20; i++) {
+				new Thread(() -> {
+					for (int j = 0; j < 1000; j++) {
+						add();
+					}
+				}, "A").start();
+			}
+			while (Thread.activeCount() > 2) {
+				Thread.yield();
+			}
+			System.out.println(Thread.currentThread().getName() + " " + num); // 结果总是小于20000,没办法保证
+		}
+		// 我们分析一下，为什么执行程序的结果总是小于 20000
+		// 1、按理来说我们把共享变量num加上了 volatile 关键字后，每次我们去修改 num 值之前读取出来都会是最新值
+		// 2、也就是说我现在有 20 条线程开始执行，由于 volatile 的可见性保证了在读取的时候总是最新值
+		// 3、而我们执行的 add() 方法不是一个原子操作：
+		//    ①、首先从主内存中读取到共享变量 num 最新值，并将最新值复制到自己的工作内存中;
+		//    ②、然后在工作内存中将 num 自增;
+		//    ③、最后将工作内存里 num 自增后的结果 刷新到主内存的共享变量 num 里
+		// 4、所以可能会出现同一时间片里有多个线程去执行 add() 方法
+		//    设：线程1、2同时执行，线程1执行完第②步后被挂起、线程2执行完并且把num自增后的值刷回主存，此时主存中num的值为1
+		//       随后线程1的开始执行第③步，这时线程1的工作内存已经读取到共享变量 num 最新值，但是这个 num 最新值影响不了已经自增后的 num 值。
+		//       所以线程1工作内存中 num 自增后的结果值1 刷新到主存 = 1。即 num++ 执行了2次，但2次都是从0变为1，主存num的值最终为1
+		// 5、根据上述分析可知：两个线程执行 add()，但 num 值的结果只自增了一次。所以，程序执行结果总是小于 20000 的。
+	}
 }

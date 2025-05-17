@@ -7,32 +7,38 @@ import java.util.concurrent.TimeUnit;
  *        先打印出来的是 "发短信" 还是 "打电话" ？
  */
 public class d四 {
-    public static void main(String[] args) {
-        Test4 test1 = new Test4();
-        Test4 test2 = new Test4();
-        new Thread(test1::Send, "A").start();
 
-        try {
-            TimeUnit.SECONDS.sleep(1);  // 睡眠，不再使用Thread.sleep()
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+	public static void main(String[] args) {
+		Test4 test1 = new Test4();
+		Test4 test2 = new Test4();
+		new Thread(test1::Send, "A").start();
 
-        new Thread(test2::Call, "B").start();
-    }
+		try {
+			TimeUnit.SECONDS.sleep(1);  // 睡眠，不再使用Thread.sleep()
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		new Thread(test2::Call, "B").start();
+	}
+
 }
-class Test4{
-    public synchronized void Send() {
-        try {
-            TimeUnit.SECONDS.sleep(2);  // 睡眠，不再使用Thread.sleep()
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("发短信");
-    }
-    public void Call(){
-        System.out.println("打电话");
-    }
+
+class Test4 {
+
+	public synchronized void Send() {
+		try {
+			TimeUnit.SECONDS.sleep(2);  // 睡眠，不再使用Thread.sleep()
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("发短信");
+	}
+
+	public void Call() {
+		System.out.println("打电话");
+	}
+
 }
 
 /**

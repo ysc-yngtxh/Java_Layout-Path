@@ -1,8 +1,9 @@
 package L12_线程.线程Ⅲ_线程安全.线程7_模拟两个线程的账户类;
 
 public class Account {
-    private String action;   // 账号
-    private double balance;  // 余额
+
+	private String action;   // 账号
+	private double balance;  // 余额
 
     // 取款方法
     public boolean withdraw(double money) {
@@ -52,15 +53,15 @@ public class Account {
         return action;
     }
 
-    public void setAction(String action) {
-        this.action = action;
-    }
+	public void setAction(String action) {
+		this.action = action;
+	}
 
-    public double getBalance() {
-        return balance;
-    }
+	public double getBalance() {
+		return balance;
+	}
 
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
- }
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+}

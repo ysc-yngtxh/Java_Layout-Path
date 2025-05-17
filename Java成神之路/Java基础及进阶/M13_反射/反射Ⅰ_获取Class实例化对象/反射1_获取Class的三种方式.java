@@ -12,43 +12,45 @@ import java.util.Date;
  *         第三种：class c = 任何类型.class;
  */
 public class 反射1_获取Class的三种方式 {
-    public static void main(String[] args) {
-        /* 第一种：Class.forName()
-         *     1、静态方法
-         *     2、方法的参数是一个字符串
-         *     3、字符串需要的是一个完整类名
-         *     4、完整类名必须带有包名。java.lang包也不能省略
-         */
-        Class<?> c1 = null;
-        Class<?> c4 = null;
-        try {
-            c1 = Class.forName("java.lang.String");           // c1代表String.class文件，或者说c1代表String类型
-            Class<?> c2 = Class.forName("java.lang.Integer"); // c2代表Integer类型
-            Class<?> c3 = Class.forName("java.lang.System");  // c3代表System类型
-            c4 = Class.forName("java.util.Date");             // c4代表Date类型
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
-        System.out.println("========================================================================================");
+	public static void main(String[] args) {
+		/* 第一种：Class.forName()
+		 *     1、静态方法
+		 *     2、方法的参数是一个字符串
+		 *     3、字符串需要的是一个完整类名
+		 *     4、完整类名必须带有包名。java.lang包也不能省略
+		 */
+		Class<?> c1 = null;
+		Class<?> c4 = null;
+		try {
+			c1 = Class.forName("java.lang.String");           // c1代表String.class文件，或者说c1代表String类型
+			Class<?> c2 = Class.forName("java.lang.Integer"); // c2代表Integer类型
+			Class<?> c3 = Class.forName("java.lang.System");  // c3代表System类型
+			c4 = Class.forName("java.util.Date");             // c4代表Date类型
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 
-        // 第二种方式：Java中任何一个对象都有一个方法 getClass()
-        String s = "abcd";
-        Class<?> x = s.getClass();     // x代表String.class字节码文件。x代表String类型
-        System.out.println(c1 == x);   // true(==判断的是对象的内存地址)
+		System.out.println("========================================================================================");
 
-        Date t = new Date();
-        Class<?> a = t.getClass();
-        System.out.println(c4 == a);
+		// 第二种方式：Java中任何一个对象都有一个方法 getClass()
+		String s = "abcd";
+		Class<?> x = s.getClass();     // x代表String.class字节码文件。x代表String类型
+		System.out.println(c1 == x);   // true(==判断的是对象的内存地址)
 
-        System.out.println("========================================================================================");
+		Date t = new Date();
+		Class<?> a = t.getClass();
+		System.out.println(c4 == a);
 
-        // 第三种方式：Java语言中任何一种类型，包括基本数据类型，它都有.class属性。
-        Class<?> z = String.class;      // z代表String类型
-        Class<?> k = int.class;         // k代表int类型
-        Class<?> f = double.class;      // f代表double类型
-        Class<?> e = Date.class;        // e代表Date类型
-        Class<?> m = 反射1_获取Class的三种方式.class; // 包括自定义的类也可以这样获取Class
-        System.out.println(x == z);
-    }
+		System.out.println("========================================================================================");
+
+		// 第三种方式：Java语言中任何一种类型，包括基本数据类型，它都有.class属性。
+		Class<?> z = String.class;      // z代表String类型
+		Class<?> k = int.class;         // k代表int类型
+		Class<?> f = double.class;      // f代表double类型
+		Class<?> e = Date.class;        // e代表Date类型
+		Class<?> m = 反射1_获取Class的三种方式.class; // 包括自定义的类也可以这样获取Class
+		System.out.println(x == z);
+	}
+
 }

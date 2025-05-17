@@ -2,10 +2,7 @@ package P16_JUC并发.JUC并发Ⅶ_四大函数接口及Stream流式计算;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 public class B关于Stream流式计算 {
     /**
@@ -109,26 +106,28 @@ public class B关于Stream流式计算 {
          */
     }
 }
+
 class User {
-    private int id;
-    private String name;
-    private int age;
 
-    public User(int id, String name, int age) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-    }
+	private int id;
+	private String name;
+	private int age;
 
-    public int getId() {
-        return id;
-    }
+	public User(int id, String name, int age) {
+		this.id = id;
+		this.name = name;
+		this.age = age;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public int getAge() {
-        return age;
-    }
+	public String getName() {
+		return name;
+	}
+
+	public int getAge() {
+		return age;
+	}
 }

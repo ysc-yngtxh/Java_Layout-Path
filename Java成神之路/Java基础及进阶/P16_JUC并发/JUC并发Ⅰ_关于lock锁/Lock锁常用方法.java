@@ -38,56 +38,57 @@ public class Lock锁常用方法 {
      *     15. tryLock(long timeout TimeUnit unit)：如果锁在给定等待时间内没有被另一个线程持有，则获取该锁。
      */
 
-    private final Lock lock = new ReentrantLock();
+	private final Lock lock = new ReentrantLock();
 
-    public static void main(String[] args) throws InterruptedException {
-        Lock锁常用方法 example = new Lock锁常用方法();
+	public static void main(String[] args) throws InterruptedException {
+		Lock锁常用方法 example = new Lock锁常用方法();
 
-        Thread thread = new Thread(() -> {
-            try {
-                example.doSomething();
-            } catch (InterruptedException e) {
-                System.out.println("Thread was interrupted!");
-                // 线程可以选择退出或继续执行其他操作
-                // throw new RuntimeException(e);
-            }
-        });
+		Thread thread = new Thread(() -> {
+			try {
+				example.doSomething();
+			} catch (InterruptedException e) {
+				System.out.println("Thread was interrupted!");
+				// 线程可以选择退出或继续执行其他操作
+				// throw new RuntimeException(e);
+			}
+		});
 
-        Thread thread2 = new Thread(() -> {
-            try {
-                example.doSomething();
-            } catch (InterruptedException e) {
-                System.out.println("Thread was interrupted!");
-                // 线程可以选择退出或继续执行其他操作
-                // throw new RuntimeException(e);
-            }
-        });
+		Thread thread2 = new Thread(() -> {
+			try {
+				example.doSomething();
+			} catch (InterruptedException e) {
+				System.out.println("Thread was interrupted!");
+				// 线程可以选择退出或继续执行其他操作
+				// throw new RuntimeException(e);
+			}
+		});
 
-        thread.start();
-        thread2.start();
+		thread.start();
+		thread2.start();
 
-        // 让主线程休眠一会儿，以确保子线程已经开始执行
-        Thread.sleep(100);
+		// 让主线程休眠一会儿，以确保子线程已经开始执行
+		Thread.sleep(100);
 
-        // 中断子线程
-        thread.interrupt();
+		// 中断子线程
+		thread.interrupt();
 
-        System.out.println("主线程执行完毕！！！");
-    }
+		System.out.println("主线程执行完毕！！！");
+	}
 
-    public void doSomething() throws InterruptedException {
-        // 获取锁，且支持中断锁
-        lock.lockInterruptibly();
-        try {
-            // 执行一些需要锁的操作
-            System.out.println(Thread.currentThread() + " -- 你好，这里做一些锁操作1");
+	public void doSomething() throws InterruptedException {
+		// 获取锁，且支持中断锁
+		lock.lockInterruptibly();
+		try {
+			// 执行一些需要锁的操作
+			System.out.println(Thread.currentThread() + " -- 你好，这里做一些锁操作1");
 
-            TimeUnit.SECONDS.sleep(2);
+			TimeUnit.SECONDS.sleep(2);
 
-            // 这里并没有在控制台打印，说明已经被中断锁了
-            System.out.println(Thread.currentThread() + " -- 你好，这里做一些锁操作2");
-        } finally {
-            lock.unlock(); // 确保释放锁
-        }
-    }
+			// 这里并没有在控制台打印，说明已经被中断锁了
+			System.out.println(Thread.currentThread() + " -- 你好，这里做一些锁操作2");
+		} finally {
+			lock.unlock(); // 确保释放锁
+		}
+	}
+
 }

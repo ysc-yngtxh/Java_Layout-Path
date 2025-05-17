@@ -15,15 +15,15 @@ public class CountDownLatch辅助类 {
         // 创建一个值为7 的计数器。
         CountDownLatch count = new CountDownLatch(7);
 
-        for (int i = 0; i < 7; i++) {
-            new Thread(() -> {
-                System.out.println(Thread.currentThread().getName() + " -- Go Out");
-                count.countDown(); // 计数器-1
-            }, String.valueOf(i)).start();
-        }
+		for (int i = 0; i < 7; i++) {
+			new Thread(() -> {
+				System.out.println(Thread.currentThread().getName() + " -- Go Out");
+				count.countDown(); // 计数器-1
+			}, String.valueOf(i)).start();
+		}
 
-        count.await(); // 等待计数器归零，主线程才会向下执行。但是我只有6个线程，因此主线程会一直被阻塞
-        // count.await(3, TimeUnit.SECONDS); // 参数表示 等待的最长时间。如果在等待的最长时间里计数器还没有归零，将释放所有阻塞线程。
-        System.out.println("Close Door");
-    }
+		count.await(); // 等待计数器归零，主线程才会向下执行。但是我只有6个线程，因此主线程会一直被阻塞
+		// count.await(3, TimeUnit.SECONDS); // 参数表示 等待的最长时间。如果在等待的最长时间里计数器还没有归零，将释放所有阻塞线程。
+		System.out.println("Close Door");
+	}
 }

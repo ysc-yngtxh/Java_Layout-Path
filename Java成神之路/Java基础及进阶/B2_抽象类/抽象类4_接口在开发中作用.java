@@ -28,7 +28,9 @@ package B2_抽象类;
  *              A implements B
  */
 public class 抽象类4_接口在开发中作用 {
-    public static void main(String[] args) {
-        System.out.println("单继承用抽象类，多实现用接口");
-    }
+
+	public static void main(String[] args) {
+		System.out.println("单继承用抽象类，多实现用接口");
+	}
+
 }

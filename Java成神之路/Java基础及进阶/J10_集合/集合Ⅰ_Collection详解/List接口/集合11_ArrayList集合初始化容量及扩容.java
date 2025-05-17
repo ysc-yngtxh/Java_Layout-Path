@@ -5,8 +5,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
-/*
- * ArrayList集合：是非线程安全的
+/* ArrayList集合：是非线程安全的
  *   1、默认初始化容量是10
  *   2、集合底层是Object[]
  *   3、构造方法：
@@ -30,30 +29,32 @@ import java.util.List;
  *            另外，我们检索/查找某个元素的操作比较多
  */
 public class 集合11_ArrayList集合初始化容量及扩容 {
-    public static void main(String[] args) {
-        // 默认初始化容量10
-        List<Object> list = new ArrayList<>();
-        System.out.println(list.size());  // 0
 
-        // 指定初始化容量20
-        List<Object> list2 = new ArrayList<>(100); // ArrayList集合扩容
-        System.out.println(list2.size()); // 0
-        // 集合的size()方法是获取当前集合中元素的个数。不是获取集合的容量
+	public static void main(String[] args) {
+		// 默认初始化容量10
+		List<Object> list = new ArrayList<>();
+		System.out.println(list.size());  // 0
 
-        // 创建一个HashSet集合
-        Collection<Object> set = new HashSet<>();
-        set.add(100);
-        set.add(200);
-        set.add(900);
-        set.add(50);
+		// 指定初始化容量20
+		List<Object> list2 = new ArrayList<>(100); // ArrayList集合扩容
+		System.out.println(list2.size()); // 0
+		// 集合的size()方法是获取当前集合中元素的个数。不是获取集合的容量
 
-        // 通过构造方法传入参数【HashSet集合对象set】，将HashSet集合转换成List集合。
-        List<Object> list3 = new ArrayList<>(set);
-        for (int i = 0; i < list3.size(); i++) {
-            System.out.println(list3.get(i));
-        }
+		// 创建一个HashSet集合
+		Collection<Object> set = new HashSet<>();
+		set.add(100);
+		set.add(200);
+		set.add(900);
+		set.add(50);
 
-        System.out.println(10 >> 1);   // 5
-        // 右移1位   即00001010-->00000101
-    }
+		// 通过构造方法传入参数【HashSet集合对象set】，将HashSet集合转换成List集合。
+		List<Object> list3 = new ArrayList<>(set);
+		for (int i = 0; i < list3.size(); i++) {
+			System.out.println(list3.get(i));
+		}
+
+		System.out.println(10 >> 1);   // 5
+		// 右移1位   即00001010-->00000101
+	}
+
 }

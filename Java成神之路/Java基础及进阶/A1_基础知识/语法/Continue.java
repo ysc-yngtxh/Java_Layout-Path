@@ -7,15 +7,17 @@ package A1_基础知识.语法;
  *           break表示循环结束，不执行了
  *           continue表示当前语句结束，直接进入下一次循环执行
  */
-public class Continue{
+public class Continue {
+
 	public static void main(String[] args) {
-		for(int i = 0; i < 10; i++) {
-			if(i == 5) {
+		for (int i = 0; i < 10; i++) {
+			if (i == 5) {
 				continue;
 			}
 			// 1 2 3 4 6 7 8 9  结果打印中没有5。Continue当前语句循环结束，直接进入下一次循环“继续”执行。
-			System.out.println("i="+i);
+			System.out.println("i=" + i);
 		}
 		System.out.println("Hello World!");
 	}
+
 }

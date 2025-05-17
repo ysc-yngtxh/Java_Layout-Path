@@ -32,56 +32,58 @@ package E5_数组.数组Ⅰ_详解;
  */
 
 public class 数组2_初始化数组 {
-    public static void main(String[] args) {
-        // 声明一个int类型的数组，使用静态初始化的方式
-        int[] a = {1, 100, 10, 20, 55, 689};
-        // 所有的数组对象都有length属性
-        System.out.println("数组中元素的个数 = " + a.length);
-        System.out.println("第一个元素 = " + a[0]);
-        System.out.println("最后一个元素 = " + a[5]);
-        System.out.println("最后一个元素 = " + a[a.length-1]);
 
-        // 把第一个元素修改为111
-        a[0] = 111;
-        // 把最后一个元素修改为0
-        a[a.length-1] = 0;
-        System.out.println("第一个元素 = " + a[0]);
-        System.out.println("最后一个元素 = " + a[5]);
+	public static void main(String[] args) {
+		// 声明一个int类型的数组，使用静态初始化的方式
+		int[] a = {1, 100, 10, 20, 55, 689};
+		// 所有的数组对象都有length属性
+		System.out.println("数组中元素的个数 = " + a.length);
+		System.out.println("第一个元素 = " + a[0]);
+		System.out.println("最后一个元素 = " + a[5]);
+		System.out.println("最后一个元素 = " + a[a.length - 1]);
 
-        // 一维数组怎么遍历呢？
-        for (int i = 0; i < a.length; i++){
-            System.out.println("顺序输出第" + i + "个元素：" + a[i]);
-        }
+		// 把第一个元素修改为111
+		a[0] = 111;
+		// 把最后一个元素修改为0
+		a[a.length - 1] = 0;
+		System.out.println("第一个元素 = " + a[0]);
+		System.out.println("最后一个元素 = " + a[5]);
 
-        // 从最后一个元素遍历到第一个元素
-        for (int i = a.length-1; i >= 0; i--){
-            System.out.println("倒序输出第" + i + "个元素：" + a[i]);
-        }
+		// 一维数组怎么遍历呢？
+		for (int i = 0; i < a.length; i++) {
+			System.out.println("顺序输出第" + i + "个元素：" + a[i]);
+		}
 
-        System.out.println("==========================================================");
+		// 从最后一个元素遍历到第一个元素
+		for (int i = a.length - 1; i >= 0; i--) {
+			System.out.println("倒序输出第" + i + "个元素：" + a[i]);
+		}
+
+		System.out.println("==========================================================");
 
 
-        // 声明/定义一个数组，采用动态初始化的方式创建
-        int[] a1 = new int[4];     // 创建长度为4的int数据，数据中每个元素的默认值是0
-        for (int i = 0; i < a1.length; i++){
-            System.out.println("数组中下标为" + i + "的元素是：" + a1[i]);  // 4个元素都是0
-        }
+		// 声明/定义一个数组，采用动态初始化的方式创建
+		int[] a1 = new int[4];     // 创建长度为4的int数据，数据中每个元素的默认值是0
+		for (int i = 0; i < a1.length; i++) {
+			System.out.println("数组中下标为" + i + "的元素是：" + a1[i]);  // 4个元素都是0
+		}
 
-        // 初始化一个Object类型的数组，采用动态初始化方式
-        Object[] objs = new Object[3];     // 3个长度，动态初始化，所以每个元素默认值是null
-        for (int i = 0; i < objs.length; i++){
-            System.out.println(objs[i]);  // 3个元素都是null
-        }
+		// 初始化一个Object类型的数组，采用动态初始化方式
+		Object[] objs = new Object[3];     // 3个长度，动态初始化，所以每个元素默认值是null
+		for (int i = 0; i < objs.length; i++) {
+			System.out.println(objs[i]);  // 3个元素都是null
+		}
 
-        String[] stra = new String[3];
-        for (int i = 0; i < stra.length; i++) {
-            System.out.println(stra[i]);
-        }
+		String[] stra = new String[3];
+		for (int i = 0; i < stra.length; i++) {
+			System.out.println(stra[i]);
+		}
 
-        // 静态初始化
-        String[] str = {"abc", "def", "hij"};
-        for (int i = 0; i < str.length; i++) {
-            System.out.println(str[i]);
-        }
-    }
+		// 静态初始化
+		String[] str = {"abc", "def", "hij"};
+		for (int i = 0; i < str.length; i++) {
+			System.out.println(str[i]);
+		}
+	}
+
 }

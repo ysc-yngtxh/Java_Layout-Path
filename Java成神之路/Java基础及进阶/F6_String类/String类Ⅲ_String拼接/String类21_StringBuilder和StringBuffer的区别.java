@@ -10,15 +10,17 @@ package F6_String类.String类Ⅲ_String拼接;
  *     StringBuilder是非线程安全的。
  */
 public class String类21_StringBuilder和StringBuffer的区别 {
-    public static void main(String[] args) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("a");
-        sb.append("b");
-        sb.append("c");
-        sb.append("Hello");
-        sb.append("World");
-        sb.append(100);
-        sb.append(true);
-        System.out.println(sb.reverse());
-    }
+
+	public static void main(String[] args) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("a");
+		sb.append("b");
+		sb.append("c");
+		sb.append("Hello");
+		sb.append("World");
+		sb.append(100);
+		sb.append(true);
+		System.out.println(sb.reverse());
+	}
+
 }

@@ -49,8 +49,10 @@ package N14_注解.注解Ⅰ_注解概论;
  *        @Documented   表示该注解可以被 javadoc 工具提取成文档。
  */
 public class 注解1_定义注解 {
-    @Override
-    public String toString() {
-        return "toString";
-    }
+
+	@Override
+	public String toString() {
+		return "toString";
+	}
+
 }

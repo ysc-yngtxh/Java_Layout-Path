@@ -1,4 +1,5 @@
 ## 一、AtomicLong
+
 <figure>
 <h4>
 
@@ -16,14 +17,16 @@
        atomicLong.getAndDecrement();
        atomicLong.getAndAdd(10);
        atomicLong.getAndSet(10);
+
 </h4>
 </figure>
 
 ## 二、LongAdder
+
 <figure>
 
+### 1、什么是LongAdder？
 
-  ### 1、什么是LongAdder？
   <figure>
   <h4>
 
@@ -32,10 +35,12 @@
     并且在极高并发的场景中，CAS操作可能会导致大量线程进行重试，从而降低性能。
        而 LongAdder 通过将计数分散到多个单独的变量中，并在最后累加，减少了竞争。
     本质上是通过空间换时间，优化高并发写入性能，LongAdder 适用于频繁累加但较少实时读取结果的场景（如统计请求量）
+
   </h4>
   </figure>
 
-  ### 2、LongAdder 的工作原理（可参考文章：https://zhuanlan.zhihu.com/p/269240636）
+### 2、LongAdder 的工作原理（可参考文章：https://zhuanlan.zhihu.com/p/269240636）
+
   <figure>
   <h4>
 
@@ -51,10 +56,12 @@
         如果第二个线程成功了，第三个线程就会去rehash自己的hash值，如果得到的新的hash值对应的是另一个元素为null的数组下标，那么就new一个Cell对象并对value值进行累加。
     ④、如果此时有线程4同时参与竞争，那么对于线程4来说，即使rehash后还是可能在和线程3的竞争过程中cas失败，
         此时如果当前数组的容量小于系统可用的cpu的数量，那么它就会对数组进行扩容，之后再次rehash，重复尝试对Cell数组中某个下标对象的累加
+
   </h4>
   </figure>
 
-  ### 3、LongAdder的使用方式如下：
+### 3、LongAdder的使用方式如下：
+
   <figure>
   <h4>
 
@@ -68,10 +75,12 @@
     longAdder.sumThenReset();
     longAdder.sumThenReset();
     longAdder.sumThenReset();
+
   </h4>
   </figure>
 
-  ### 4、LongAdder的优缺点
+### 4、LongAdder的优缺点
+
   <figure>
   <h4>
 
@@ -81,19 +90,23 @@
     缺点：
       1、LongAdder的内存占用比AtomicLong大，因为它使用了一个Cell数组来存储计数。
       2、LongAdder的读取操作不是原子性的，如果需要获取当前值，需要调用sum()方法，这个方法会遍历Cell数组进行累加，性能较差。
+
   </h4>
   </figure>
 
-  ### 5、LongAdder的使用场景
+### 5、LongAdder的使用场景
+
   <figure>
   <h5>
-  
+
       适用于高并发的计数场景，如统计请求量、访问量等。
       不适用于需要频繁读取当前值的场景，因为LongAdder的读取操作不是原子性的，性能较差。
+
   </h5>
   </figure>
 
-  ### 6、LongAdder的简单使用
+### 6、LongAdder的简单使用
+
   <figure>
   <h4>
 
@@ -155,6 +168,7 @@
        System.out.println("Total count: " + counter.sum());
    }
    ```
+
   </h4>
   </figure>
 </figure>

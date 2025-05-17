@@ -39,44 +39,46 @@ package A1_基础知识.初识Java;
  *             - 哈希表/散列表
  */
 public class 方法 {
-	
+
 	public static void sumInt(int a, int b) {         // (int a,int b)形参列表
 		int c = a + b;
 		System.out.println(a + "+" + b + "=" + c);    // 方法只有在调用的时候才会执行
 	}
-	
+
 	public static void main(String[] args) {
 		方法.sumInt(10, 23);      // 方法调用的时候实参和形参要求个数对应相同，数据类型相同
 		方法.sumInt(111, 666);    // (111, 666)实参列表
 		sumInt(888, 555);        // 方法.可以省略，但sumInt()必须要在类中找到
-		A.M();                         // 这里调用的是外界A类的函数，所以不能省类名.
+		A.M();                   // 这里调用的是外界A类的函数，所以不能省类名.
 		System.out.println();
 
 		System.out.println("100以内的所有素数");
-		int count = 0;                  // count表示的是控制台一行的输出值个数；
-		for(int i = 2; i <= 100; i++){  // 素数只能被1和自身整除，所以最小的素数是2
-			boolean sushu = true;       // 定义一个Boolean类型的sushu变量为真
-			for(int j = 2; j < i; j++) {
-				if(i%j == 0) {
+		int count = 0;                    // count表示的是控制台一行的输出值个数；
+		for (int i = 2; i <= 100; i++) {  // 素数只能被1和自身整除，所以最小的素数是2
+			boolean sushu = true;         // 定义一个Boolean类型的sushu变量为真
+			for (int j = 2; j < i; j++) {
+				if (i%j == 0) {
 					sushu = false;      // 当 i%j == 0 成立时，即表明i为非素数
 					break;              // break表示结束该语句循环
 				}
 			}
-			if(sushu) {
-				System.out.print(i+" ");
+			if (sushu) {
+				System.out.print(i + " ");
 				count++;                // 每输出一个i,即控制台输出个数加1
-				if(count == 8) {
+				if (count == 8) {
 					System.out.println();
 					count = 0;          // 每8个循环一行
 				}
 			}
 		}
 	}
+
 }
 
 class A {
+
 	public static void M() {
 		System.out.println("Hello World!");
 	}
-	
+
 }

@@ -47,8 +47,8 @@ public class 字面值 {
 		    
 		 */
 		int j; // 作用于是main方法，成员变量
-		for(j = 0; j < 10; j++) {
-			
+		for (j = 0; j < 10; j++) {
+
 		}
 		System.out.println(j);  // 访问的是main方法中的变量
 		/*

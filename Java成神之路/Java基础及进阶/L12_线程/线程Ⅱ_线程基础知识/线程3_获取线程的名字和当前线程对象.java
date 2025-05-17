@@ -21,38 +21,43 @@ package L12_线程.线程Ⅱ_线程基础知识;
  *       ...
  */
 class MyThread extends Thread {
-    @Override
-    public void run() {
-        for (int i = 0; i < 100; i++) {
-            // currentThread 就是当前线程对象
-            // 当 m线程 执行 run() 方法，那么这个当前线程就是 m
-            // 当 mf线程 执行 run() 方法，那么这个当前线程就是 mf
-            Thread c = Thread.currentThread();
-            System.out.println(c.getName() + " --> " + i);
-        }
-    }
+
+	@Override
+	public void run() {
+		for (int i = 0; i < 100; i++) {
+			// currentThread 就是当前线程对象
+			// 当 m线程 执行 run() 方法，那么这个当前线程就是 m
+			// 当 mf线程 执行 run() 方法，那么这个当前线程就是 mf
+			Thread c = Thread.currentThread();
+			System.out.println(c.getName() + " --> " + i);
+		}
+	}
+
 }
+
 public class 线程3_获取线程的名字和当前线程对象 {
-    public static void main(String[] args) {
-        // 这个代码出现在 main() 方法当中，所以当前线程就是主线程
-        Thread t = Thread.currentThread();
-        System.out.println(t.getName());
 
-        // 创建线程对象
-        MyThread m = new MyThread();
+	public static void main(String[] args) {
+		// 这个代码出现在 main() 方法当中，所以当前线程就是主线程
+		Thread t = Thread.currentThread();
+		System.out.println(t.getName());
 
-        // 设置线程名字
-        m.setName("m1");
+		// 创建线程对象
+		MyThread m = new MyThread();
 
-        // 获取线程名字
-        System.out.println(m.getName());
+		// 设置线程名字
+		m.setName("m1");
 
-        // 启动线程
-        m.start();
+		// 获取线程名字
+		System.out.println(m.getName());
 
-        MyThread mf = new MyThread();
-        mf.setName("m2");
-        System.out.println(mf.getName());
-        mf.start();
-    }
+		// 启动线程
+		m.start();
+
+		MyThread mf = new MyThread();
+		mf.setName("m2");
+		System.out.println(mf.getName());
+		mf.start();
+	}
+
 }

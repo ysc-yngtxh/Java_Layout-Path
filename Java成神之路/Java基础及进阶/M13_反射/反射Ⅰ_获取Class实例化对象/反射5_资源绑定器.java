@@ -12,10 +12,10 @@ import java.util.ResourceBundle;
  */
 public class 反射5_资源绑定器 {
 
-    public static void main(String[] args) throws UnsupportedEncodingException {
-        // 资源绑定器，只能绑定 xxx.properties 文件。并且这个文件必须在类路径下
-        // 并且在写路径的时候，路径后面的扩展名不能写
-        ResourceBundle bundle1 = ResourceBundle.getBundle("classInfo");
+	public static void main(String[] args) throws UnsupportedEncodingException {
+		// 资源绑定器，只能绑定 xxx.properties 文件。并且这个文件必须在类路径下
+		// 并且在写路径的时候，路径后面的扩展名不能写
+		ResourceBundle bundle1 = ResourceBundle.getBundle("classInfo");
 
         String className1 = bundle1.getString("className1");
         System.out.println(className1);
@@ -25,10 +25,11 @@ public class 反射5_资源绑定器 {
         );
 
 
-        // 如果需要读取其他的属性配置文件，需要使用带有Locale参数的方法。拼接的文件名：xxx_en_US.properties
-        ResourceBundle bundle3 = ResourceBundle.getBundle("classInfo", Locale.US);
+		// 如果需要读取其他的属性配置文件，需要使用带有Locale参数的方法。拼接的文件名：xxx_en_US.properties
+		ResourceBundle bundle3 = ResourceBundle.getBundle("classInfo", Locale.US);
 
-        String className3 = bundle3.getString("className1");
-        System.out.println(className3);
-    }
+		String className3 = bundle3.getString("className1");
+		System.out.println(className3);
+	}
+
 }

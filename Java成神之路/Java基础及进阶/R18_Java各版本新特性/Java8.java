@@ -5,7 +5,6 @@ package R18_Java各版本新特性;
  * @dateTime 2023-08-22 08:00
  * @apiNote TODO
  */
-public class Java8 {
 /*
  * Java8新特性
  *     1、现在的方法区在Java8之前是属于堆中的一部分叫作永久区
@@ -87,4 +86,4 @@ public class Java8 {
  *                 .forEach(System.out::println);
  *     }
  */
-}
+public class Java8 {}

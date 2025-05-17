@@ -28,65 +28,67 @@ public class ReadWriteLock读写锁 {
     public static void main(String[] args) {
         MyCache myCache = new MyCache();
 
-        // 写入
-        for (int i = 0; i < 10; i++) {
-            final int temp = i;
-            new Thread(() -> myCache.put(temp + "", temp), String.valueOf(i)).start();
-        }
+		// 写入
+		for (int i = 0; i < 10; i++) {
+			final int temp = i;
+			new Thread(() -> myCache.put(temp + "", temp), String.valueOf(i)).start();
+		}
 
-        // 读取
-        for (int i = 0; i < 10; i++) {
-            final int temp = i;
-            new Thread(() -> myCache.get(temp + ""), String.valueOf(i)).start();
-        }
+		// 读取
+		for (int i = 0; i < 10; i++) {
+			final int temp = i;
+			new Thread(() -> myCache.get(temp + ""), String.valueOf(i)).start();
+		}
 
-        System.out.println("主线程执行完毕！！！");
-    }
+		System.out.println("主线程执行完毕！！！");
+	}
 }
 
 class MyCache {
-    // volatile：可见性
-    private volatile Map<String, Object> map = new HashMap<>();
-    // 读写锁：更加细粒度的控制
-    private ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
-    // 存。写入的时候，只希望同时只有一个线程写
-    public void put(String key, Object value) {
-        // System.out.println(Thread.currentThread().getName() + "写入" + key);
-        // map.put(key, value);
-        // System.out.println(Thread.currentThread().getName() + "写入完成");
+	// volatile：可见性
+	private volatile Map<String, Object> map = new HashMap<>();
+	// 读写锁：更加细粒度的控制
+	private ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
 
-        // 当不使用'写锁'的时候，我们在运行时发现：比如写入1时会插入其他线程，然后才写入完成。这就很尴尬了啊，线程不安全了呀
-        readWriteLock.writeLock().lock();
-        try {
-            System.out.println(Thread.currentThread().getName() + "写入" + key);
-            map.put(key, value);
-            System.out.println(Thread.currentThread().getName() + "写入完成");
-            TimeUnit.MILLISECONDS.sleep(2000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            readWriteLock.writeLock().unlock();
-        }
-    }
+	// 存。写入的时候，只希望同时只有一个线程写
+	public void put(String key, Object value) {
+		// System.out.println(Thread.currentThread().getName() + "写入" + key);
+		// map.put(key, value);
+		// System.out.println(Thread.currentThread().getName() + "写入完成");
 
-    // 取，读，所有人都可以读
-    public void get(String key) {
-        /*
-         * System.out.println(Thread.currentThread().getName() + "读取" + key);
-         * Object o = map.get(key);
-         * System.out.println(Thread.currentThread().getName() + "读取完成");
-         */
-        readWriteLock.readLock().lock();
-        try {
-            System.out.println(Thread.currentThread().getName() + "读取" + key);
-            map.get(key);
-            System.out.println(Thread.currentThread().getName() + "读取完成");
-            TimeUnit.MILLISECONDS.sleep(2000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            readWriteLock.readLock().unlock();
-        }
-    }
+		// 当不使用'写锁'的时候，我们在运行时发现：比如写入1时会插入其他线程，然后才写入完成。这就很尴尬了啊，线程不安全了呀
+		readWriteLock.writeLock().lock();
+		try {
+			System.out.println(Thread.currentThread().getName() + "写入" + key);
+			map.put(key, value);
+			System.out.println(Thread.currentThread().getName() + "写入完成");
+			TimeUnit.MILLISECONDS.sleep(2000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			readWriteLock.writeLock().unlock();
+		}
+	}
+
+	// 取，读，所有人都可以读
+	public void get(String key) {
+		/*
+		 * System.out.println(Thread.currentThread().getName() + "读取" + key);
+		 * Object o = map.get(key);
+		 * System.out.println(Thread.currentThread().getName() + "读取完成");
+		 */
+		readWriteLock.readLock().lock();
+		try {
+			System.out.println(Thread.currentThread().getName() + "读取" + key);
+			map.get(key);
+			System.out.println(Thread.currentThread().getName() + "读取完成");
+			TimeUnit.MILLISECONDS.sleep(2000);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			readWriteLock.readLock().unlock();
+		}
+	}
+
 }

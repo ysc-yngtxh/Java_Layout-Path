@@ -1,7 +1,6 @@
 package A1_基础知识.初识Java;
 
-/*
- * 关于Java编程中运算符
+/* 关于Java编程中运算符
  *      一、算术运算符：++出现变量后，先做赋值运算，再进行自加1操作。
  *           int m = 20;                      int  m = 20;                  int e = 20;                              int s=20;
  *           int n = m++;                     int n = ++m;                  System.out.println(e++); // 20           System.out.println(++s);//21
@@ -40,24 +39,25 @@ package A1_基础知识.初识Java;
  *                       布尔表达式 ? 表达式1 : 表达式2
  */
 public class 方法运算符 {
+
 	public static void main(String[] args) {
 		int x = 10;
 		int y = 8;
-		
-		System.out.println(5>3 & 5>2);    // true 逻辑与
 
-		System.out.println(5>3 | 5>2);    // true 逻辑或
+		System.out.println(5 > 3 & 5 > 2);    // true 逻辑与
+
+		System.out.println(5 > 3 | 5 > 2);    // true 逻辑或
 
 		System.out.println(!true);        // false 逻辑非
 
-		System.out.println(5>3 ^ 5>2);    // false 逻辑异或
+		System.out.println(5 > 3 ^ 5 > 2);    // false 逻辑异或
 
-		System.out.println(x<y && ++x<y); // false 短路与
+		System.out.println(x < y && ++x < y); // false 短路与
 		System.out.println(x); // 10   x<y结果是false，整个表达式结果已经确定是false，所以后面++a表达式没有再执行，这种现象被称为短路现象
-		
-		System.out.println(x>y || ++x<y); // true  短路或。
+
+		System.out.println(x > y || ++x < y); // true  短路或。
 		System.out.println(x); // 10   x>y结果是true，整个表达式结果已经确定是true，所以后面++a表达式没有再执行，这种现象被称为短路现象
-		
+
 		x += 5; // 等同于 x = x+5
 		System.out.println(x);
 		x -= 5; // 等同于 x = x-5
@@ -66,10 +66,10 @@ public class 方法运算符 {
 		System.out.println(x);
 		x /= 5; // 等同于 x = x/5
 		System.out.println(x);
-		
-		
+
+
 		byte b = 5;
-		b = (byte) (b+5); // b是byte类型，5是int类型，编译器在执行语法是不通过，所以要在前面加一个强制转换符byte
+		b = (byte) (b + 5); // b是byte类型，5是int类型，编译器在执行语法是不通过，所以要在前面加一个强制转换符byte
 		System.out.println(b);
 		b += 5;           // 等同于b=byte(b+5)
 		System.out.println(b);
@@ -77,23 +77,24 @@ public class 方法运算符 {
 		System.out.println(b);*/
 		b += 113;
 		System.out.println(b); // -128   本来的结果是128，但是超出了byte类型的取值范围，所以会损失精度。
-		
-		
+
+
 		int a1 = 10;
 		int b1 = 20;
-		System.out.println(a1 + "+" + b1 + "=" + (a1+b1));     // 控制台输出10+20=30  是一个是“动态输出”
+		System.out.println(a1 + "+" + b1 + "=" + (a1 + b1));     // 控制台输出10+20=30  是一个是“动态输出”
 		int a2 = 50;
 		int b2 = 90;
-		System.out.println(a2 + " + " + b2 + " = " + (a2+b2)); // 50+90=140  变量要连接字符串必须要加上“+”
-		
-		
+		System.out.println(a2 + " + " + b2 + " = " + (a2 + b2)); // 50+90=140  变量要连接字符串必须要加上“+”
+
+
 		boolean sex = true;
 		char c = sex ? '男' : '女';
 		System.out.println(c);                 // 男
 		System.out.println(sex ? '男' : '女');  // 男
 		System.out.println(sex ? '男' : "女");  // 男     在println括号中字符或者字符号都可以运行
 		System.out.println(a1 > b1 ? a1 : b1); // 20
-		String  s = sex ? "男" : "女";
+		String s = sex ? "男" : "女";
 		System.out.println(sex ? "猛男的" : "淑女的"); // 猛男的
 	}
+
 }
