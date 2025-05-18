@@ -48,4 +48,14 @@ public class UserServiceImpl implements UserService {
 		return aLong.intValue();
 	}
 
+	@Override
+	public int updateUser(User user) {
+		return userMapper.updateById(user);
+	}
+
+	@Override
+	public void deleteUser(Integer id) {
+		userMapper.deleteById(id);
+	}
+
 }

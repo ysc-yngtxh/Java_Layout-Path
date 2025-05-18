@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +34,7 @@ public class UserController {
 	@Resource
 	private UserService userService;
 
+	// 登录
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody Map<String, Object> map) {
 		String username = map.get("username").toString();
@@ -46,6 +48,7 @@ public class UserController {
 		return ResponseEntity.ok(ResponseVo.fail(401, "登录失败"));
 	}
 
+	// 查询所有用户
 	@GetMapping("/selectPage")
 	public ResponseEntity<?> queryPage(@RequestParam Integer page, @RequestParam Integer size) {
 		List<User> userListPage = userService.queryPage(page, size);
@@ -55,6 +58,23 @@ public class UserController {
 		Integer countAll = userService.countAll();
 		PageVo info = PageVo.info(userListPage, countAll);
 		return ResponseEntity.ok(ResponseVo.success(200, info, "分页数据返回成功"));
+	}
+
+	// 编辑用户
+	@PostMapping("/updateUser")
+	public ResponseEntity<?> edit(@RequestBody User user) {
+		int updatedUser = userService.updateUser(user);
+		if (updatedUser > 0) {
+			return ResponseEntity.ok(ResponseVo.success(200, null, "编辑数据成功"));
+		}
+		return ResponseEntity.ok(ResponseVo.fail(400, "用户信息更新失败"));
+	}
+
+	// 删除用户
+	@DeleteMapping("/deleteUser")
+	public ResponseEntity<?> delete(@RequestParam("id") Integer userId) {
+		userService.deleteUser(userId);
+		return ResponseEntity.ok(ResponseVo.success(200, null, "删除数据成功"));
 	}
 
 }
