@@ -9,17 +9,20 @@ import java.lang.reflect.Proxy;
 public class MapperProxyFactory<T> {
 
 	private Class<T> mapperInterface;
-	private Class object;
+	private Class<?> object;
 
-	public MapperProxyFactory(Class<T> mapperInterface, Class object) {
+	public MapperProxyFactory(Class<T> mapperInterface, Class<?> object) {
 		this.mapperInterface = mapperInterface;
 		this.object = object;
 	}
 
 	public T newInstance(SqlSession sqlSession) {
-		return (T) Proxy.newProxyInstance(mapperInterface.getClassLoader()
-				, new Class[]{mapperInterface}
-				, new MapperProxy(sqlSession, object));
+		return mapperInterface.cast(
+				Proxy.newProxyInstance(mapperInterface.getClassLoader()
+						, new Class[]{mapperInterface}
+						, new MapperProxy(sqlSession, object)
+		        )
+		);
 	}
 
 }

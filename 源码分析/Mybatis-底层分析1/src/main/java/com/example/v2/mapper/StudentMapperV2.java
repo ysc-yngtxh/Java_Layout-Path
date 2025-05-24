@@ -1,8 +1,8 @@
-package com.example.v3.mapper;
+package com.example.v2.mapper;
 
-import com.example.v3.annotation.Param;
-import com.example.v3.annotation.Select;
-import com.example.v3.entity.Student;
+import com.example.v2.annotation.Param;
+import com.example.v2.annotation.Select;
+import com.example.v2.entity.Student;
 import java.util.List;
 
 /**
@@ -10,7 +10,7 @@ import java.util.List;
  * @dateTime 2024-04-04 23:50:00
  * @apiNote TODO 自定义Mapper
  */
-public interface StudentMapper3 {
+public interface StudentMapperV2 {
 
 	@Select("select * from student where name = #{name} and age = #{age}")
 	public List<Student> queryUserReflect(String name, Integer age);

@@ -24,9 +24,9 @@ public class Configuration {
 	// 维护接口与工厂类关系
 	public static final MapperRegistry mapperRegistry = new MapperRegistry();
 
-	// 所有Mapper接口
+	// 获取所有Mapper接口的Class
 	private List<Class<?>> mapperList = new ArrayList<>();
-	// 类所有文件
+	// 获取所有Mapper接口的绝对路径
 	private List<String> classList = new ArrayList<>();
 
 	/**
@@ -36,7 +36,6 @@ public class Configuration {
 	public Configuration(Map<String, Object> map) {
 		// 1、初始化配置
 		properties.putAll(map);
-
 		// 2、解析接口上的注解
 		String mapperPackagePath = properties.get("mapper.path").toString();
 		// 扫描指定包下所有的mapper接口，并存入mapperList集合
@@ -45,28 +44,6 @@ public class Configuration {
 			// 解析所有的接口类方法，并且方法上存在 @Select 注解的，将 Sql语句 和 全限定名称 绑定作为Map存入
 			// 并且注册当前接口
 			parsingClass(mapper);
-		}
-	}
-
-	/**
-	 * 解析Mapper接口上配置的注解（SQL语句）
-	 */
-	private void parsingClass(Class<?> mapper) {
-		// 解析方法上的注解
-		Method[] methods = mapper.getMethods();
-		for (Method method : methods) {
-			// 解析 @Select 注解的SQL语句
-			if (method.isAnnotationPresent(Select.class)) {
-				for (Annotation annotation : method.getDeclaredAnnotations()) {
-					if (annotation.annotationType().equals(Select.class)) {
-						// 注册接口类型+方法名（全限定名称）和SQL语句的映射关系
-						String statementId = method.getDeclaringClass().getName() + "." + method.getName();
-						mappedStatements.put(statementId, ((Select) annotation).value());
-						// 注册接口与实体类的映射关系
-						mapperRegistry.addMapper(mapper, method.getReturnType());
-					}
-				}
-			}
 		}
 	}
 
@@ -86,7 +63,6 @@ public class Configuration {
 			if (clazz.isInterface()) {
 				mapperList.add(clazz);
 			}
-
 		}
 	}
 
@@ -104,6 +80,28 @@ public class Configuration {
 			// 文件，直接添加
 			if (file.getName().endsWith(".class")) {
 				classList.add(file.getPath());
+			}
+		}
+	}
+
+	/**
+	 * 解析Mapper接口上配置的注解（SQL语句）
+	 */
+	private void parsingClass(Class<?> mapper) {
+		// 解析方法上的注解
+		Method[] methods = mapper.getMethods();
+		for (Method method : methods) {
+			// 解析 @Select 注解的SQL语句
+			if (method.isAnnotationPresent(Select.class)) {
+				for (Annotation annotation : method.getDeclaredAnnotations()) {
+					if (annotation.annotationType().equals(Select.class)) {
+						// 注册接口类型+方法名（全限定名称）和SQL语句的映射关系
+						String statementId = method.getDeclaringClass().getName() + "." + method.getName();
+						mappedStatements.put(statementId, ((Select) annotation).value());
+						// 注册接口与Mapper方法返回值的映射关系
+						mapperRegistry.addMapper(mapper, method.getReturnType());
+					}
+				}
 			}
 		}
 	}

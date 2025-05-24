@@ -30,7 +30,7 @@ import lombok.SneakyThrows;
  * @dateTime 2024-04-05 00:00
  * @apiNote TODO Mapper工厂
  */
-public class MapperProxyFactory2 {
+public class MapperProxyFactoryV2 {
 
 	private static Map<Class<?>, TypeHandler> typeHandlerMap = new HashMap<>();
 
@@ -48,7 +48,7 @@ public class MapperProxyFactory2 {
 
 	@SneakyThrows
 	public static Connection getConnection() {
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC", "root", "131474");
+		return DriverManager.getConnection("jdbc:mysql://localhost:3306/bottom_layer?serverTimezone=UTC", "root", "131474");
 	}
 
 	public static <T> T getMapper(Class<T> mapperInterface) {
@@ -104,15 +104,15 @@ public class MapperProxyFactory2 {
 					Object result = null;
 
 					// JDBC处理结果集 TODO 优化结果解析的部分，动态解析成mapper方法的返回类型
-					Class resultType = null;
+					Class<?> resultType = null;
 					Type genericReturnType = method.getGenericReturnType();
 					if (genericReturnType instanceof Class) {
 						// 不是泛型
-						resultType = (Class) genericReturnType;
+						resultType = (Class<?>) genericReturnType;
 					} else if (genericReturnType instanceof ParameterizedType) {
 						// 是泛型
 						Type[] actualTypeArguments = ((ParameterizedType) genericReturnType).getActualTypeArguments();
-						resultType = (Class) actualTypeArguments[0];
+						resultType = (Class<?>) actualTypeArguments[0];
 					}
 
 					ResultSetMetaData metaData = resultSet.getMetaData();
@@ -139,7 +139,8 @@ public class MapperProxyFactory2 {
 						for (int i = 0; i < columnList.size(); i++) {
 							String column = columnList.get(i);
 							Method setterMethod = setterMethodMapping.get(column);
-							setterMethod.invoke(newInstance, resultSet.getObject(column));
+							Object object = resultSet.getObject(column);
+							setterMethod.invoke(newInstance, object);
 						}
 						list.add(newInstance);
 					}

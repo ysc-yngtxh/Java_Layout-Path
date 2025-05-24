@@ -25,7 +25,7 @@ public class SqlSession {
 
 	/**
 	 * @param statement Sql的全限定名称
-	 * @param parameter SqL的参数
+	 * @param parameter Sql的参数
 	 * @param pojo      Sql的返回类型
 	 */
 	public <T> T selectOne(String statement, Object[] parameter, Class<T> pojo) {

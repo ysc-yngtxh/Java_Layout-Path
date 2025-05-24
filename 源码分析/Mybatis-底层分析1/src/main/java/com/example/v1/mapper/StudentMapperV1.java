@@ -10,7 +10,7 @@ import java.util.List;
  * @dateTime 2024-04-04 23:50:00
  * @apiNote TODO 自定义Mapper
  */
-public interface StudentMapper1 {
+public interface StudentMapperV1 {
 
 	@Select("select * from student where id = #{id}")
 	public List<Student> queryUserById(Integer id);

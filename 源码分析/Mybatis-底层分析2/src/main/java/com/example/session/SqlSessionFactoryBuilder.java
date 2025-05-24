@@ -14,7 +14,7 @@ public class SqlSessionFactoryBuilder {
 	private static Map<String, Object> getResult() {
 		Map<String, Object> map = new HashMap<>();
 		map.put("jdbc.driver", "com.mysql.cj.jdbc.Driver");
-		map.put("jdbc.url", "jdbc:mysql://localhost:3306/springdb?characterEncoding=utf-8&serverTimezone=UTC&rewriteBatchedStatements=true");
+		map.put("jdbc.url", "jdbc:mysql://localhost:3306/bottom_layer?characterEncoding=utf-8&serverTimezone=UTC&rewriteBatchedStatements=true");
 		map.put("jdbc.username", "root");
 		map.put("jdbc.password", "131474");
 		map.put("mapper.path", "com.example.mapper");

@@ -29,7 +29,7 @@ public class StatementHandler {
 
 			result = resultSetHandler.handle(preparedStatement.getResultSet(), pojo);
 
-			return (T) result;
+			return pojo.cast(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

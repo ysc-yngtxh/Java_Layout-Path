@@ -8,7 +8,7 @@ import java.util.List;
  * @dateTime 2024-04-04 23:50:00
  * @apiNote TODO 动态参数处理器
  */
-public class PlaceholderTokenHandler implements TokenHandler {
+public class PlatformHolderTokenHandler implements TokenHandler {
 
 	// 当前这个List里面存的是 ParameterMapping对象，每个 ParameterMapping对象 代表一个 #{} 参数映射
 	private final List<ParameterMapping> parameterMappings = new ArrayList<>();
@@ -17,6 +17,7 @@ public class PlaceholderTokenHandler implements TokenHandler {
 		return this.parameterMappings;
 	}
 
+	@Override
 	public String handleToken(String content) {
 		this.parameterMappings.add(new ParameterMapping(content));
 		return "?";

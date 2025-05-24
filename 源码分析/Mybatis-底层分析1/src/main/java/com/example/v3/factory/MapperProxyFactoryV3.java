@@ -30,9 +30,9 @@ import lombok.SneakyThrows;
  * @dateTime 2024-04-05 00:00
  * @apiNote TODO Mapper工厂
  */
-public class MapperProxyFactory3 {
+public class MapperProxyFactoryV3 {
 
-	private static Map<Class<?>, TypeHandler> typeHandlerMap = new HashMap<>();
+	private static final Map<Class<?>, TypeHandler> typeHandlerMap = new HashMap<>();
 
 	static {
 		typeHandlerMap.put(String.class, new StringTypeHandler());
@@ -48,7 +48,7 @@ public class MapperProxyFactory3 {
 
 	@SneakyThrows
 	public static Connection getConnection() {
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC", "root", "131474");
+		return DriverManager.getConnection("jdbc:mysql://localhost:3306/bottom_layer?serverTimezone=UTC", "root", "131474");
 	}
 
 	public static <T> T getMapper(Class<T> mapperInterface) {
@@ -104,15 +104,15 @@ public class MapperProxyFactory3 {
 					Object result = null;
 
 					// JDBC处理结果集
-					Class resultType = null;
+					Class<?> resultType = null;
 					Type genericReturnType = method.getGenericReturnType();
 					if (genericReturnType instanceof Class) {
 						// 不是泛型
-						resultType = (Class) genericReturnType;
+						resultType = (Class<?>) genericReturnType;
 					} else if (genericReturnType instanceof ParameterizedType) {
 						// 是泛型
 						Type[] actualTypeArguments = ((ParameterizedType) genericReturnType).getActualTypeArguments();
-						resultType = (Class) actualTypeArguments[0];
+						resultType = (Class<?>) actualTypeArguments[0];
 					}
 
 					ResultSetMetaData metaData = resultSet.getMetaData();
@@ -124,6 +124,7 @@ public class MapperProxyFactory3 {
 
 					// 获取查询数据对应的实体类的setter方法，并包装到Map中：[name, setName]
 					Map<String, Method> setterMethodMapping = new HashMap<>();
+					assert resultType != null;
 					for (Method declaredMethod : resultType.getDeclaredMethods()) {
 						if (declaredMethod.getName().startsWith("set")) {
 							String propertyName = declaredMethod.getName().substring(3);
@@ -141,9 +142,9 @@ public class MapperProxyFactory3 {
 							String column = columnList.get(i);
 							Method setterMethod = setterMethodMapping.get(column);
 							// 获取setter方法中的参数类型：setter方法只有一个参数
-							Class clazz = setterMethod.getParameterTypes()[0];
+							Class<?> clazz = setterMethod.getParameterTypes()[0];
 							// 通过setter方法的参数类型，动态选择类型处理器
-							TypeHandler typeHandler = typeHandlerMap.get(clazz);
+							TypeHandler<?> typeHandler = typeHandlerMap.get(clazz);
 							setterMethod.invoke(newInstance, typeHandler.getResult(resultSet, column));
 						}
 						list.add(newInstance);

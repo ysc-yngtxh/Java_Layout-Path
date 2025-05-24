@@ -4,7 +4,7 @@ import com.example.v1.annotation.Param;
 import com.example.v1.annotation.Select;
 import com.example.v1.entity.Student;
 import com.example.v1.parser.GenericTokenParser;
-import com.example.v1.parser.PlaceholderTokenHandler;
+import com.example.v1.parser.PlatformHolderTokenHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.lang.reflect.Proxy;
@@ -22,7 +22,7 @@ import lombok.SneakyThrows;
  * @dateTime 2024-04-05 00:00
  * @apiNote TODO Mapper工厂
  */
-public class MapperProxyFactory1 {
+public class MapperProxyFactoryV1 {
 
 	static {
 		try {
@@ -35,7 +35,7 @@ public class MapperProxyFactory1 {
 
 	@SneakyThrows
 	public static Connection getConnection() {
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/springdb?serverTimezone=UTC", "root", "131474");
+		return DriverManager.getConnection("jdbc:mysql://localhost:3306/bottom_layer?serverTimezone=UTC", "root", "131474");
 	}
 
 	public static <T> T getMapper(Class<T> mapperInterface) {
@@ -64,7 +64,7 @@ public class MapperProxyFactory1 {
 					}
 
 					// 解析Sql：将 #{} 解析为 ？占位符。这里解析过程参考了 MyBatis 提供的解析器，自己做了些许改动
-					PlaceholderTokenHandler tokenHandler = new PlaceholderTokenHandler();
+					PlatformHolderTokenHandler tokenHandler = new PlatformHolderTokenHandler();
 					GenericTokenParser genericTokenParser = new GenericTokenParser("#{", "}", tokenHandler);
 					String parseSql = genericTokenParser.parse(sql);
 

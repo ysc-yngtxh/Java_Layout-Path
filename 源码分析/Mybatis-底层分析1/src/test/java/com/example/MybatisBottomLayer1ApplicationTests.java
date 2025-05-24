@@ -1,12 +1,12 @@
 package com.example;
 
 import com.example.v1.entity.Student;
-import com.example.v1.factory.MapperProxyFactory1;
-import com.example.v1.mapper.StudentMapper1;
-import com.example.v2.factory.MapperProxyFactory2;
-import com.example.v2.mapper.StudentMapper2;
-import com.example.v3.factory.MapperProxyFactory3;
-import com.example.v3.mapper.StudentMapper3;
+import com.example.v1.factory.MapperProxyFactoryV1;
+import com.example.v1.mapper.StudentMapperV1;
+import com.example.v2.factory.MapperProxyFactoryV2;
+import com.example.v2.mapper.StudentMapperV2;
+import com.example.v3.factory.MapperProxyFactoryV3;
+import com.example.v3.mapper.StudentMapperV3;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,22 +17,22 @@ public class MybatisBottomLayer1ApplicationTests {
 	// 测试方法，测试功能
 	@Test
 	public void mybatis1() {
-		StudentMapper1 mapper = MapperProxyFactory1.getMapper(StudentMapper1.class);
-		List<Student> studentList = mapper.queryUser("敏敏", 22);
+		StudentMapperV1 mapper = MapperProxyFactoryV1.getMapper(StudentMapperV1.class);
+		List<Student> studentList = mapper.queryUser("张三", 20);
 		System.out.println(studentList);
 	}
 
 	@Test
 	public void mybatis2() {
-		StudentMapper2 mapper = MapperProxyFactory2.getMapper(StudentMapper2.class);
-		System.out.println(mapper.queryUser("游家纨绔", 25));
+		StudentMapperV2 mapper = MapperProxyFactoryV2.getMapper(StudentMapperV2.class);
+		System.out.println(mapper.queryUser("赵六", 19));
 		System.out.println(mapper.queryUserById(7));
 	}
 
 	@Test
 	public void mybatis3() {
-		StudentMapper3 mapper = MapperProxyFactory3.getMapper(StudentMapper3.class);
-		System.out.println(mapper.queryUser("游家纨绔", 25));
+		StudentMapperV3 mapper = MapperProxyFactoryV3.getMapper(StudentMapperV3.class);
+		System.out.println(mapper.queryUser("吴十", 22));
 		System.out.println(mapper.queryUserById(7));
 	}
 

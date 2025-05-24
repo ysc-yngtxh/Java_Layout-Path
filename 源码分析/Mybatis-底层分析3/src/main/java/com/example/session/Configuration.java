@@ -1,5 +1,6 @@
 package com.example.session;
 
+import com.example.MybatisBottomLayer2Application;
 import com.example.MybatisBottomLayer3Application;
 import com.example.annotation.Select;
 import com.example.proxy.MapperRegistry;
@@ -30,9 +31,9 @@ public class Configuration {
 	// 维护接口与工厂类关系
 	public static final MapperRegistry mapperRegistry = new MapperRegistry();
 
-	// 所有Mapper接口
+	// 获取所有Mapper接口的Class
 	private List<Class<?>> mapperList = new ArrayList<>();
-	// 类所有文件
+	// 获取所有Mapper接口的绝对路径
 	private List<String> classList = new ArrayList<>();
 
 	// 插件
@@ -45,22 +46,80 @@ public class Configuration {
 	public Configuration(Map<String, Object> map) {
 		// 1、初始化配置
 		properties.putAll(map);
-
-		// 2、解析接口上的注解（会覆盖properties中的接口与实体类的关系）
+		// 2、解析接口上的注解
 		String mapperPackagePath = properties.get("mapper.path").toString();
+		// 扫描指定包下所有的mapper接口，并存入mapperList集合
 		scanPackage(mapperPackagePath);
 		for (Class<?> mapper : mapperList) {
+			// 解析所有的接口类方法，并且方法上存在 @Select 注解的，将 Sql语句 和 全限定名称 绑定作为Map存入
+			// 并且注册当前接口
 			parsingClass(mapper);
 		}
-
 		// 3、解析插件，可配置多个插件
 		String pluginPathValue = properties.get("plugin.path").toString();
 		String[] pluginPaths = pluginPathValue.split(",");
-		if (pluginPaths != null) {
-			// 将插件添加到interceptorChain中
-			for (String plugin : pluginPaths) {
-				Interceptor interceptor = (Interceptor) Class.forName(plugin).getDeclaredConstructor().newInstance();
-				interceptorChain.addInterceptor(interceptor);
+		// 将插件添加到interceptorChain中
+		for (String plugin : pluginPaths) {
+			Interceptor interceptor = (Interceptor) Class.forName(plugin).getDeclaredConstructor().newInstance();
+			interceptorChain.addInterceptor(interceptor);
+		}
+	}
+
+	/**
+	 * 根据全局配置文件的Mapper接口路径，扫描所有接口
+	 */
+	@SneakyThrows
+	private void scanPackage(String mapperPath) {
+		String classPath = MybatisBottomLayer3Application.class.getResource("/").toURI().getPath();
+		mapperPath = mapperPath.replace(".", File.separator);
+		String mainPath = classPath + mapperPath;
+		doPath(new File(mainPath));
+		for (String className : classList) {
+			// 替换掉classPath中的包路径，得到全限定名称
+			className = className.replace(classPath, "").replace(".class", "").replace(File.separator, ".");
+			Class<?> clazz = Class.forName(className);
+			if (clazz.isInterface()) {
+				mapperList.add(clazz);
+			}
+		}
+	}
+
+	/**
+	 * 获取文件或文件夹下所有的类.class
+	 */
+	private void doPath(File file) {
+		// 文件夹，遍历
+		if (file.isDirectory()) {
+			File[] files = file.listFiles();
+			for (File f1 : files) {
+				doPath(f1);
+			}
+		} else {
+			// 文件，直接添加
+			if (file.getName().endsWith(".class")) {
+				classList.add(file.getPath());
+			}
+		}
+	}
+
+	/**
+	 * 解析Mapper接口上配置的注解（SQL语句）
+	 */
+	private void parsingClass(Class<?> mapper) {
+		// 解析方法上的注解
+		Method[] methods = mapper.getMethods();
+		for (Method method : methods) {
+			// 解析 @Select 注解的SQL语句
+			if (method.isAnnotationPresent(Select.class)) {
+				for (Annotation annotation : method.getDeclaredAnnotations()) {
+					if (annotation.annotationType().equals(Select.class)) {
+						// 注册接口类型 + 方法名和SQL语句的映射关系（全限定名称）
+						String statement = method.getDeclaringClass().getName() + "." + method.getName();
+						mappedStatements.put(statement, ((Select) annotation).value());
+						// 注册接口与实体类的映射关系
+						mapperRegistry.addMapper(mapper, method.getReturnType());
+					}
+				}
 			}
 		}
 	}
@@ -89,7 +148,7 @@ public class Configuration {
 	 */
 	public Executor newExecutor() {
 		Executor executor = null;
-		if (properties.get("cache.enabled").equals("true")) {
+		if ((boolean) properties.get("cache.enabled")) {
 			executor = new CachingExecutor(new SimpleExecutor());
 		} else {
 			executor = new SimpleExecutor();
@@ -100,64 +159,6 @@ public class Configuration {
 			return (Executor) interceptorChain.pluginAll(executor);
 		}
 		return executor;
-	}
-
-	/**
-	 * 解析Mapper接口上配置的注解（SQL语句）
-	 */
-	private void parsingClass(Class<?> mapper) {
-		// 解析方法上的注解
-		Method[] methods = mapper.getMethods();
-		for (Method method : methods) {
-			// 解析 @Select 注解的SQL语句
-			if (method.isAnnotationPresent(Select.class)) {
-				for (Annotation annotation : method.getDeclaredAnnotations()) {
-					if (annotation.annotationType().equals(Select.class)) {
-						// 注册接口类型 + 方法名和SQL语句的映射关系（全限定名称）
-						String statement = method.getDeclaringClass().getName() + "." + method.getName();
-						mappedStatements.put(statement, ((Select) annotation).value());
-						// 注册接口与实体类的映射关系
-						mapperRegistry.addMapper(mapper, method.getReturnType());
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * 根据全局配置文件的Mapper接口路径，扫描所有接口
-	 */
-	@SneakyThrows
-	private void scanPackage(String mapperPath) {
-		String classPath = MybatisBottomLayer3Application.class.getResource("/").getPath();
-		mapperPath = mapperPath.replace(".", File.separator);
-		String mainPath = classPath + mapperPath;
-		doPath(new File(mainPath));
-		for (String className : classList) {
-			className = className.replace(classPath.replace("/", "\\").replaceFirst("\\\\", ""), "").replace("\\", ".").replace(".class", "");
-			Class<?> clazz = Class.forName(className);
-			if (clazz.isInterface()) {
-				mapperList.add(clazz);
-			}
-		}
-	}
-
-	/**
-	 * 获取文件或文件夹下所有的类.class
-	 */
-	private void doPath(File file) {
-		// 文件夹，遍历
-		if (file.isDirectory()) {
-			File[] files = file.listFiles();
-			for (File f1 : files) {
-				doPath(f1);
-			}
-		} else {
-			// 文件，直接添加
-			if (file.getName().endsWith(".class")) {
-				classList.add(file.getPath());
-			}
-		}
 	}
 
 }

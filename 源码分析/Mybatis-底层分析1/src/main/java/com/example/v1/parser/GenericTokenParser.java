@@ -1,21 +1,18 @@
 package com.example.v1.parser;
 
+import lombok.AllArgsConstructor;
+
 /**
  * @author 游家纨绔
  * @dateTime 2024-04-04 23:50:00
  * @apiNote TODO 通用标记解析器
  */
+@AllArgsConstructor
 public class GenericTokenParser {
 
 	private final String openToken;
 	private final String closeToken;
 	private final TokenHandler handler;
-
-	public GenericTokenParser(String openToken, String closeToken, TokenHandler handler) {
-		this.openToken = openToken;
-		this.closeToken = closeToken;
-		this.handler = handler;
-	}
 
 	public String parse(String text) {
 		if (text != null && !text.isEmpty()) {
@@ -30,7 +27,7 @@ public class GenericTokenParser {
 				StringBuilder expression = null;
 
 				do {
-					// 判断 src[start] 前一个字符是否为转义字符‘\’。确保动态SQL中的参数正确地被解析和转义，避免SQL注入或语法错误。
+					// 判断 src[start] 前一个字符是否为转义字符‘\’。确保动态SQL中的参数正确地被解析和转义，避免SQL注入或语法错误。（例如：\#{name}）
 					if (start > 0 && src[start - 1] == '\\') {
 						builder.append(src, offset, start - offset - 1).append(this.openToken);
 						offset = start + this.openToken.length();

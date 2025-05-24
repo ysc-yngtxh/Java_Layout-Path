@@ -22,7 +22,7 @@ public class MybatisBottomLayer2Application {
 
 		// 获取包含了MapperProxy代理
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-		User user = mapper.selectOne(41);
+		User user = mapper.selectOne(4);
 
 		System.out.println("查询: " + user);
 	}

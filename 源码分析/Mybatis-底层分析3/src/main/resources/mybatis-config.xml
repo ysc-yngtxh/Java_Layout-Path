@@ -34,7 +34,7 @@
                           3)、JNDI:java命名和目录服务(windows注册表)
                 -->
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/springdb?useSSL=false&amp;allowPublicKeyRetrieval=true"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/bottom_layer?useSSL=false&amp;allowPublicKeyRetrieval=true"/>
                 <property name="username" value="root"/>
                 <property name="password" value="131474"/>
             </dataSource>

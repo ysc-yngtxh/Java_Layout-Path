@@ -44,7 +44,7 @@ public class ResultSetHandler {
 			}
 		}
 
-		return (T) pojo;
+		return type.cast(pojo);
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class ResultSetHandler {
 	 */
 	private Object getResult(ResultSet rs, Field field) throws SQLException {
 		// TODO TypeHandler
-		Class type = field.getType();
+		Class<?> type = field.getType();
 		String dataName = HumpToUnderline(field.getName()); // 驼峰转下划线
 		// TODO 类型判断不够全
 		if (Integer.class == type) {
