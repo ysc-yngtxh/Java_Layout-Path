@@ -37,7 +37,7 @@ public class Plugin implements InvocationHandler {
 
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-		// 自定义的插件上有@Intercepts注解，指定了拦截的方法
+		// 自定义的插件上有 @Intercepts 注解，指定了拦截的方法
 		if (interceptor.getClass().isAnnotationPresent(Intercepts.class)) {
 			// 如果是被拦截的方法，则进入自定义拦截器的逻辑
 			if (method.getName().equals(interceptor.getClass().getAnnotation(Intercepts.class).value())) {
@@ -47,4 +47,5 @@ public class Plugin implements InvocationHandler {
 		// 非被拦截方法，执行原逻辑
 		return method.invoke(target, method, args);
 	}
+
 }

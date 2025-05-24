@@ -57,9 +57,11 @@ public class Configuration {
 		String mainPath = classPath + mapperPath;
 		doPath(new File(mainPath));
 		for (String className : classList) {
-			String subPath = className.substring(className.indexOf("com/example"), className.indexOf(".class"));
-			String classAbsolutePath = subPath.replace("/", ".");
-			Class<?> clazz = Class.forName(classAbsolutePath);
+			// 替换掉classPath中的包路径，得到全限定名称
+			className = className.replace(classPath, "")
+			                     .replace(".class", "")
+			                     .replace(File.separator, ".");
+			Class<?> clazz = Class.forName(className);
 			if (clazz.isInterface()) {
 				mapperList.add(clazz);
 			}

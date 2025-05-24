@@ -5,7 +5,7 @@ import com.example.domain.User;
 
 public interface UserMapper {
 
-	// 这里简化Sql的写法，省略了解析 #{} 的逻辑，直接使用 ? 作为占位符
+	// 这里省略了解析 #{} 的逻辑，直接使用 ? 作为占位符
 	@Select("select * from user where id = ?")
 	public User selectOne(Object id);
 

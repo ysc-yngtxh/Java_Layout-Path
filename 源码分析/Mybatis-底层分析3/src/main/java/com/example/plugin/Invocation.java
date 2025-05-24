@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import lombok.SneakyThrows;
 
 /**
  * 包装类，对被代理对象进行包装
@@ -17,7 +18,8 @@ public class Invocation {
 	private Method method;
 	private Object[] args;
 
-	public Object proceed() throws InvocationTargetException, IllegalAccessException {
+	@SneakyThrows
+	public Object proceed() {
 		return method.invoke(target, args);
 	}
 

@@ -76,7 +76,9 @@ public class Configuration {
 		doPath(new File(mainPath));
 		for (String className : classList) {
 			// 替换掉classPath中的包路径，得到全限定名称
-			className = className.replace(classPath, "").replace(".class", "").replace(File.separator, ".");
+			className = className.replace(classPath, "")
+			                     .replace(".class", "")
+			                     .replace(File.separator, ".");
 			Class<?> clazz = Class.forName(className);
 			if (clazz.isInterface()) {
 				mapperList.add(clazz);

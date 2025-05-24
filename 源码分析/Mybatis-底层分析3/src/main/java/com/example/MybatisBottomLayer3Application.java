@@ -11,7 +11,7 @@ import java.io.InputStream;
 
 public class MybatisBottomLayer3Application {
 
-	// 引入了 Mybatis-BottomLayer2 项目依赖，所以可使用部分重复代码
+	// TODO 引入了 Mybatis-BottomLayer2 项目依赖，所以可使用部分重复代码
 	public static void main(String[] args) {
 		// 1、读取mybatis配置文件
 		InputStream in = Resources.getResourceAsStream("mybatis-config.xml");
@@ -21,13 +21,12 @@ public class MybatisBottomLayer3Application {
 		SqlSessionFactory factory = factoryBuilder.build(in);
 		// 4、获取SqlSession对象，从SqlSessionFactory中获取SqlSession
 		SqlSession sqlSession = factory.openSession();
-
-		// 获取包含了MapperProxy代理
+		// 5、获取包含了Mapper代理对象
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+		// 6、执行查询方法
 		User user = mapper.selectOne(4);
 
-		System.out.println("第一次查询: " + user);
-		System.out.println();
+		System.out.println("第一次查询: " + user + "\n");
 		user = mapper.selectOne(4);
 		System.out.println("第二次查询: " + user);
 	}
