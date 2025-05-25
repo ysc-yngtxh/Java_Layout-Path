@@ -63,4 +63,5 @@ public class LoginServiceImpl implements LoginService {
 		requestAttributes.setAttribute("token", map.get("token"), SCOPE_REQUEST);
 		return map;
 	}
+
 }

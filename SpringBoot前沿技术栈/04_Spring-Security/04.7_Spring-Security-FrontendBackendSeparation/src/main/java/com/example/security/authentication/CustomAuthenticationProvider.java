@@ -4,6 +4,7 @@ import com.example.security.bo.LoginUserDetails;
 import com.example.security.service.UserDetailsServiceImpl;
 import com.example.utils.JwtUtil;
 import jakarta.annotation.Resource;
+import java.util.Map;
 import java.util.Random;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -43,13 +44,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 		// 前后端分离情况下 处理逻辑...
 		// 更新登录令牌
-		//  String token = PasswordUtils.encodePassword(String.valueOf(System.currentTimeMillis()), userInfo.getCurrentSysUserInfo().getSalt());
+		// String token = PasswordUtils.encodePassword(String.valueOf(System.currentTimeMillis()), userInfo.getCurrentSysUserInfo().getSalt());
 
 		// 生成jwt访问令牌
-		String jwt = JwtUtil.createJwt(
-				String.valueOf(new Random(5).nextInt())
-				, userInfo.getCurrentSysUserInfo().getId().toString()
-				, null);
+		Map<String, Object> stringMap = Map.of(
+				"random", String.valueOf(new Random(5).nextInt()),
+		        "id", userInfo.getCurrentSysUserInfo().getId().toString()
+		);
+		String jwt = JwtUtil.createJwt(stringMap);
 
 		userInfo.getCurrentSysUserInfo().setToken(jwt);
 		// 使用三个参数的构造方法，用以表示为通过认证

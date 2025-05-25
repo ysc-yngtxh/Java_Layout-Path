@@ -15,13 +15,13 @@ public class MyPlugin implements Interceptor {
 
 	@Override
 	public Object intercept(Invocation invocation) {
-		String statement = (String) invocation.getArgs()[0];     // 获取SQL语句
-		Object[] parameter = (Object[]) invocation.getArgs()[1]; // 获取参数
-		Class<?> pojo = (Class<?>) invocation.getArgs()[2];      // 获取返回类型
+		String statement = (String) invocation.getArgs()[0];      // 获取SQL语句
+		Object[] parameter = (Object[]) invocation.getArgs()[1];  // 获取参数
+		Class<?> returnType = (Class<?>) invocation.getArgs()[2]; // 获取返回类型
 		System.out.println("进入自定义插件：MyPlugin");
 		System.out.println("SQL：[" + statement + "]");
 		System.out.println("Parameters：" + Arrays.toString(parameter));
-		System.out.println("ReturnType：" + pojo.getName());
+		System.out.println("ReturnType：" + returnType.getName());
 
 		return invocation.proceed();
 	}

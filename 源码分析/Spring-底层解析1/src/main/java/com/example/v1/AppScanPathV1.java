@@ -4,9 +4,8 @@ import com.example.framework.annotation.ComponentScan;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-05-07 23:18
+ * @dateTime 2024-05-07 23:20:00
  * @apiNote TODO 扫描 v1 的 service 包路径
  */
 @ComponentScan("com.example.v1.service")
-public class AppScanPath1 {
-}
+public class AppScanPathV1 {}

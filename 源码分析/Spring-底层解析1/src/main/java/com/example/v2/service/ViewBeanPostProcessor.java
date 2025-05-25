@@ -42,7 +42,7 @@ public class ViewBeanPostProcessor implements BeanPostProcessor {
 							return method.invoke(bean, args);
 						}
 					}
-			                                                                );
+			);
 			return proxyInstance;
 		}
 		return bean;

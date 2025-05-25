@@ -26,9 +26,9 @@ import java.util.function.Supplier;
 /**
  * <p> 对访问url进行权限认证处理 </p>
  *
- * @author : 游家纨绔
- * @description : 鉴权管理器
- * @date : 2023/05/15 14:20
+ * @author: 游家纨绔
+ * @description: 鉴权管理器
+ * @date: 2023-05-15 14:20
  */
 @Component
 public class UrlAuthorizationManager implements AuthorizationManager<RequestAuthorizationContext> {

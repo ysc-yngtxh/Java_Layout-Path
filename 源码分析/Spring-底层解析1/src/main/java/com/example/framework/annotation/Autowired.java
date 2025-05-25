@@ -12,5 +12,4 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.CONSTRUCTOR, ElementType.FIELD, ElementType.METHOD})
-public @interface Autowired {
-}
+public @interface Autowired {}

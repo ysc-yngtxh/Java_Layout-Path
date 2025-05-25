@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
  * 死信消费者C2
  */
 public class Consumer2 {
+
 	// 死信队列名称
 	public static final String DEAD_QUEUE = "dead_queue";
 

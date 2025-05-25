@@ -25,4 +25,5 @@ public class SpringEL {
 		// 只要有任一权限满足正则匹配，即可访问
 		return permission.stream().anyMatch(item -> compile.matcher(item).matches());
 	}
+
 }

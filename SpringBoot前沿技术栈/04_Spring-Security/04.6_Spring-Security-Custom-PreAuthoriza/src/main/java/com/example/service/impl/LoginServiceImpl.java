@@ -30,4 +30,5 @@ public class LoginServiceImpl implements LoginService {
 		// 使用userId生成一个jwt，并将jwt放入ResponseResult返回
 		return JwtUtil.createJwt(Map.of("id", userId));
 	}
+
 }

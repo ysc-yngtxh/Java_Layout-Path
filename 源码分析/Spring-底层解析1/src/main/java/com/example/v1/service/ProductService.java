@@ -5,11 +5,9 @@ import com.example.framework.annotation.Scope;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-05-08 20:25
+ * @dateTime 2024-05-08 20:30:00
  * @apiNote TODO
  */
 @Component("userService1")
 @Scope("protoType")
-public class ProductService {
-
-}
+public class ProductService {}

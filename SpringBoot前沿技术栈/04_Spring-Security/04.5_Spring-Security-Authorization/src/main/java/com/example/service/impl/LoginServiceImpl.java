@@ -37,4 +37,5 @@ public class LoginServiceImpl implements LoginService {
 	public ResponseResult<String> logout() {
 		return new ResponseResult<>(200, "登出成功", null);
 	}
+
 }

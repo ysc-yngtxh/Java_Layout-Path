@@ -44,20 +44,20 @@ public class TransactionServiceImpl implements TransactionService {
 	/**
 	 * Spring中的事务管理是基于AOP（面向切面编程）实现的，它通过动态代理来拦截方法调用并管理事务。
 	 * 疑问：为什么事务方法 saveTransaction() 中调用传播级别为 NEVER 的 updateNonTransactional() 方法，
-	 * 按理来说，本应该抛出异常的，但实际上却没有抛出异常？并且插入数据还成功了，数据库没有进行回滚?
+	 *      按理来说，本应该抛出异常的，但实际上却没有抛出异常？并且插入数据还成功了，数据库没有进行回滚?
 	 * 解答：事务是基于 AOP 实现的，也就是说当我加上 @Transactional 注解，该方法已经被切面。
-	 * 此时我去调用 saveTransaction() 方法，实际上是通过代理对象调用的。
-	 * 但是具体的方法逻辑是通过代理对象中的 target(原始对象transactionService) 属性调用。
-	 * public class proxy extends TransactionServiceImpl {
-	 * private TransactionServiceImpl target;
-	 * public void saveTransaction() {
-	 * // 在这里执行切面前置逻辑......
-	 * target.saveTransaction(); // 这里执行目标对象的方法
-	 * // 在这里执行切面后置逻辑......
-	 * }
-	 * }
-	 * 由此，在执行在执行 saveTransaction() 是通过代理对象执行，代理对象是能执行切面逻辑的，因此事务是能够生效的。
-	 * 而执行 updateNonTransactional() 方法是通过原始对象调用，原始对象无法进入到切面逻辑当中，所以事务会失效。
+	 *      此时我去调用 saveTransaction() 方法，实际上是通过代理对象调用的。
+	 *      但是具体的方法逻辑是通过代理对象中的 target(原始对象transactionService) 属性调用。
+	 *      public class proxy extends TransactionServiceImpl {
+	 *          private TransactionServiceImpl target;
+	 *          public void saveTransaction() {
+	 *              // 在这里执行切面前置逻辑......
+	 *              target.saveTransaction(); // 这里执行目标对象的方法
+	 *              // 在这里执行切面后置逻辑......
+	 *          }
+	 *      }
+	 *      由此，在执行在执行 saveTransaction() 是通过代理对象执行，代理对象是能执行切面逻辑的，因此事务是能够生效的。
+	 *      而执行 updateNonTransactional() 方法是通过原始对象调用，原始对象无法进入到切面逻辑当中，所以事务会失效。
 	 */
 
 
