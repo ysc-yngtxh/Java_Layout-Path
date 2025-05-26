@@ -20,9 +20,11 @@ public class TransactionServiceTargetBean {
 	// 事务传播级别 NEVER：以非事务方式执行，如果当前存在事务，则抛出异常。
 	@Transactional(propagation = Propagation.NEVER)
 	public void updateNonTransactional() {
-		jdbcTemplate.update(
-				"INSERT INTO `user` (`username`, `birthday`, `sex`, `address`) " +
-						"VALUES ('牛牛栏目', '2024-04-27 11:44:00', '女', '雁塔区兴贺佳苑')");
+		jdbcTemplate.update("""
+				            INSERT INTO `user` (`username`, `birthday`, `sex`, `address`)
+				                        VALUES ('牛牛栏目', '2024-04-27 11:44:00', '女', '雁塔区兴贺佳苑')
+				            """
+		);
 	}
 
 }

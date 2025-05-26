@@ -1,6 +1,6 @@
 package com.example.loadbalance;
 
-import com.example.common.URL;
+import com.example.common.RPC_URL;
 import java.util.List;
 import java.util.Random;
 
@@ -11,10 +11,10 @@ import java.util.Random;
  */
 public class LoadBalance {
 
-	public static URL random(List<URL> urlList) {
+	public static RPC_URL random(List<RPC_URL> RPCUrlList) {
 		Random random = new Random();
-		int nextInt = random.nextInt(urlList.size());
-		return urlList.get(nextInt);
+		int nextInt = random.nextInt(RPCUrlList.size());
+		return RPCUrlList.get(nextInt);
 	}
 
 }

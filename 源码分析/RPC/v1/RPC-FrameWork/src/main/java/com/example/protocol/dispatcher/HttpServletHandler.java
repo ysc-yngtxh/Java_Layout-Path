@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.ObjectInputStream;
 import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
 import lombok.SneakyThrows;
 import org.apache.commons.io.IOUtils;
 
@@ -22,13 +23,14 @@ public class HttpServletHandler {
 		Invocation invocation = (Invocation) new ObjectInputStream(req.getInputStream()).readObject();
 
 		// 获取实现类
-		Class<?> classImpl = LocalRegister.get(invocation.getInterfaceName(), "1.0.0");
+		Class<?> classImpl = LocalRegister.get(invocation.getInterfaceName(), invocation.getVersion());
 		// 获取实现类中指定的方法
 		Method method = classImpl.getMethod(invocation.getMethodName(), invocation.getParameterTypes());
 		// 利用反射执行方法
 		String result = (String) method.invoke(classImpl.getDeclaredConstructor().newInstance(), invocation.getParameters());
 		// 将执行结果写入响应体
-		IOUtils.write(result, resp.getOutputStream());
+		IOUtils.write(result, resp.getOutputStream(), StandardCharsets.UTF_8);
+		// resp.getWriter().println(result);
 	}
 
 }

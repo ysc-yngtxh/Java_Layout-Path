@@ -11,7 +11,7 @@
 ### 1、使用代码方法连接服务端发送消息
 
    ```
-   try{
+   try {
        Socket socket = new Socket("127.0.0.1", 8080);
        String message;
        Scanner sc = new Scanner(System.in);

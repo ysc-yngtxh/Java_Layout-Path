@@ -10,7 +10,7 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
  * @dateTime 2024-06-01 21:30:00
  * @apiNote TODO
  */
-public class YjwkSpringApplication {
+public class CustomSpringApplication {
 
 	public static void run(Class<?> clazz, String... args) {
 		// 创建 Spring 容器

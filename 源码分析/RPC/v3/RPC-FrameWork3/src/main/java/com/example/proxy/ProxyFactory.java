@@ -1,7 +1,7 @@
 package com.example.proxy;
 
 import com.example.common.Invocation;
-import com.example.common.URL;
+import com.example.common.RPC_URL;
 import com.example.loadbalance.LoadBalance;
 import com.example.protocol.HttpClient;
 import com.example.register.MapRemoveRegister;
@@ -28,22 +28,23 @@ public class ProxyFactory {
 							, method.getName()
 							, new Class[]{String.class}
 							, arg
-							, "1.0.0");
+							, "1.0.0"
+					);
 
 					HttpClient client = new HttpClient();
 
 					// 服务发现
-					List<URL> urls = MapRemoveRegister.get(interfaceName.getSimpleName());
+					List<RPC_URL> RPCUrls = MapRemoveRegister.get(interfaceName.getSimpleName());
 
 					// 负载均衡
-					URL url = LoadBalance.random(urls);
+					RPC_URL RPCUrl = LoadBalance.random(RPCUrls);
 
 					// 服务调用
-					String res = client.sendRequest(url.getHostName(), url.getPort(), invocation);
+					String res = client.sendRequest(RPCUrl.getHostName(), RPCUrl.getPort(), invocation);
 					return res;
 				});
-
-		return (T) proxyInstance;
+		// 返回代理对象，并将代理对象强制转换为接口类型【Object --> T】
+		return interfaceName.cast(proxyInstance);
 	}
 
 }

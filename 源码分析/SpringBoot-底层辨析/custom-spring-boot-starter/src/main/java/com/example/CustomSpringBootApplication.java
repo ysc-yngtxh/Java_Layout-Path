@@ -20,4 +20,4 @@ import org.springframework.context.annotation.Import;
 @Import(WebServerAutoConfiguration.class)
 // TODO 但是这样就会有一个问题，如果后续自动配置类增多，那需要在这里引入的 @Import 就越多。
 //      很明显这样的程序设计是不符合我们编程规范的。那有什么办法没有？答案是：AutoConfigurationImportSelector
-public @interface YjwkSpringBootApplication {}
+public @interface CustomSpringBootApplication {}

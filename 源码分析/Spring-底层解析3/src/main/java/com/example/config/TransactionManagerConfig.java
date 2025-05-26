@@ -27,7 +27,7 @@ public class TransactionManagerConfig {
 	public DataSource dataSource() {
 		SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
 		dataSource.setDriver(new Driver());
-		dataSource.setUrl("jdbc:mysql://localhost:3306/springdb?useSSL=false&serverTimezone=UTC");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/bottom_layer?useSSL=false&serverTimezone=UTC");
 		dataSource.setUsername("root");
 		dataSource.setPassword("131474");
 		return dataSource;

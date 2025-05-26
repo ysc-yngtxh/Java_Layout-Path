@@ -10,16 +10,16 @@
 
     NIO中3个非常重要的组件，选择器（Selector）、缓冲区（Buffer） 和 通道（Channel）：
 
-    通道（Channel）：Channel是NIO中用于数据读写的双向通道，可以从通道中读取数据，也可以将数据写入通道。
-                   与传统的IO不同，Channel是双向的，可以同时进行读写操作，而传统的IO只能通过InputStream或OutputStream进行单向读写。
-                   Java NIO中常见的Channel有：FileChannel（文件读写）、DatagramChannel（UDP协议）、SocketChannel（TCP协议）和ServerSocketChannel（监听TCP连接请求）等。
-    缓冲区（Buffer）：Buffer是NIO中用于存储数据的缓冲区，可以理解为一个容器，可以从中读取数据，也可以将数据写入其中。
-                    Buffer具有一组指针来跟踪当前位置、限制和容量等属性。
-                    Java NIO中提供了多种类型的Buffer，例如ByteBuffer、CharBuffer、ShortBuffer、IntBuffer等。
-                    每种类型的Buffer都有自己特定的读写方法，可以使用get()和put()等方法来读写缓冲区中的数据。
-    选择器（Selector）：Selector是NIO中用于监控多个Channel的选择器，可以实现单线程管理多个Channel。
-                      Selector可以检测多个Channel是否有事件发生，包括连接、接收、读取和写入等事件，并根据不同的事件类型进行相应处理。
-                      Selector可以有效地减少单线程管理多个Channel时的资源占用，提高程序的运行效率。
+    通道（Channel）:    Channel是NIO中用于数据读写的双向通道，可以从通道中读取数据，也可以将数据写入通道。
+                       与传统的IO不同，Channel是双向的，可以同时进行读写操作，而传统的IO只能通过InputStream或OutputStream进行单向读写。
+                       Java NIO中常见的Channel有：FileChannel（文件读写）、DatagramChannel（UDP协议）、SocketChannel（TCP协议）和ServerSocketChannel（监听TCP连接请求）等。
+    缓冲区（Buffer）:   Buffer是NIO中用于存储数据的缓冲区，可以理解为一个容器，可以从中读取数据，也可以将数据写入其中。
+                       Buffer具有一组指针来跟踪当前位置、限制和容量等属性。
+                       Java NIO中提供了多种类型的Buffer，例如ByteBuffer、CharBuffer、ShortBuffer、IntBuffer等。
+                       每种类型的Buffer都有自己特定的读写方法，可以使用get()和put()等方法来读写缓冲区中的数据。
+    选择器（Selector）: Selector是NIO中用于监控多个Channel的选择器，可以实现单线程管理多个Channel。
+                       Selector可以检测多个Channel是否有事件发生，包括连接、接收、读取和写入等事件，并根据不同的事件类型进行相应处理。
+                       Selector可以有效地减少单线程管理多个Channel时的资源占用，提高程序的运行效率。
 
 ## 三、NIO的客户端发送消息
 

@@ -23,14 +23,15 @@ public class ProxyFactory {
 							, method.getName()
 							, new Class[]{String.class}
 							, arg
-							, "1.0.0");
+							, "1.0.0"
+					);
 
 					HttpClient client = new HttpClient();
 					String res = client.sendRequest("localhost", 8080, invocation);
 					return res;
 				});
-
-		return (T) proxyInstance;
+		// 返回代理对象，并将代理对象强制转换为接口类型【Object --> T】
+		return interfaceName.cast(proxyInstance);
 	}
 
 }

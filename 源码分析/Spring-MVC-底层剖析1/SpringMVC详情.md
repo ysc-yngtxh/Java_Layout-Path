@@ -182,7 +182,7 @@ protected void initStrategies(ApplicationContext context) {
 	initLocaleResolver(context);
 	// 主题view层
 	initThemeResolver(context);
-	// 解析 url 和 Method 的对应关系
+	// 解析 RPCUrl 和 Method 的对应关系
 	initHandlerMappings(context);
 	// 适配器匹配
 	initHandlerAdapters(context);

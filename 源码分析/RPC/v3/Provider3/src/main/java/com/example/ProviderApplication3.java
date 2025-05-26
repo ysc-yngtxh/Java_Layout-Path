@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.common.URL;
+import com.example.common.RPC_URL;
 import com.example.protocol.HttpServer;
 import com.example.register.LocalRegister;
 import com.example.register.MapRemoveRegister;
@@ -14,8 +14,8 @@ public class ProviderApplication3 {
 		LocalRegister.register(HelloService.class.getSimpleName(), "1.0.0", HelloServiceImpl.class);
 
 		// 注册中心注册服务器地址
-		URL url = new URL("localhost", 8080);
-		MapRemoveRegister.register(HelloService.class.getSimpleName(), url);
+		RPC_URL RPCUrl = new RPC_URL("localhost", 8080);
+		MapRemoveRegister.register(HelloService.class.getSimpleName(), RPCUrl);
 
 		HttpServer httpServer = new HttpServer();
 		httpServer.start("localhost", 8080);

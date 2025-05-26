@@ -11,10 +11,10 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>Register-CustomDependency</artifactId>
+    <artifactId>register-dependency</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Register-CustomDependency</name>
-    <description>Register-CustomDependency</description>
+    <name>register-dependency</name>
+    <description>register-dependency</description>
 
     <properties>
         <java.version>23</java.version>
@@ -24,7 +24,7 @@
         <!--默认使用 Tomcat服务器-->
         <dependency>
             <groupId>com.example</groupId>
-            <artifactId>yjwk-spring-boot-starter</artifactId>
+            <artifactId>custom-spring-boot-starter</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 

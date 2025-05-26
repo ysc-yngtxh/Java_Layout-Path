@@ -25,7 +25,7 @@ public class NioSelectorServer {
 		serverSocketChannel.bind(new InetSocketAddress(9999));
 		// 设置为非阻塞模式
 		serverSocketChannel.configureBlocking(false);
-		// 打开Selector处理Channel，
+		// 打开Selector处理Channel
 		Selector selector = Selector.open();
 		// 将ServerSocketChannel注册到Selector上，并监听OP_ACCEPT事件
 		serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);

@@ -27,7 +27,7 @@ public class ExecutorApp {
 				target.getClass().getClassLoader(),
 				target.getClass().getInterfaces(),
 				handler
-		                                                );
+		);
 
 		// 动态代理对象的本质是在运行时生成的一个实现了指定接口的代理类的实例。
 		// 当你打印一个动态代理对象时，它的toString()方法默认会输出对象的类名和哈希码。

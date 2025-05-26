@@ -1,6 +1,6 @@
 package com.example.register;
 
-import com.example.common.URL;
+import com.example.common.RPC_URL;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -19,26 +19,20 @@ import lombok.SneakyThrows;
 public class MapRemoveRegister {
 
 	// 模拟注册中心，存储服务提供者信息
-	public static Map<String, List<URL>> map = new HashMap<>();
+	public static Map<String, List<RPC_URL>> map = new HashMap<>();
 	// 模拟注册中心在调用服务后的缓存，文件存储路径
 	public static String path = System.getProperty("user.dir") + "/RPC/v4/temp.txt";
 
 	// 注册服务
-	public static void register(String interfaceName, URL url) {
-		List<URL> list = map.get(interfaceName);
+	public static void register(String interfaceName, RPC_URL RPCUrl) {
+		List<RPC_URL> list = map.get(interfaceName);
 		if (list == null) {
 			list = new ArrayList<>();
 		}
-		list.add(url);
+		list.add(RPCUrl);
 
 		map.put(interfaceName, list);
 		saveFile();
-	}
-
-	// 获取注册的服务
-	public static List<URL> get(String interfaceName) {
-		map = getFile();
-		return map.get(interfaceName);
 	}
 
 	// 正常注册中心比如Nacos，为了能提高接口响应，会在访问过后在本地进行服务缓存。这里就是模拟的保存缓存信息
@@ -50,12 +44,19 @@ public class MapRemoveRegister {
 		objectOutputStream.writeObject(map);
 	}
 
+
+	// 获取注册的服务
+	public static List<RPC_URL> get(String interfaceName) {
+		map = getFile();
+		return map.get(interfaceName);
+	}
+
 	// 正常注册中心比如Nacos，为了能提高接口响应，会在访问过后在本地进行服务缓存。这里就是模拟的获取缓存信息
 	@SneakyThrows
-	private static Map<String, List<URL>> getFile() {
+	private static Map<String, List<RPC_URL>> getFile() {
 		FileInputStream fileInputStream = new FileInputStream(path);
 		ObjectInputStream objectOutputStream = new ObjectInputStream(fileInputStream);
-		return (Map<String, List<URL>>) objectOutputStream.readObject();
+		return (Map<String, List<RPC_URL>>) objectOutputStream.readObject();
 	}
 
 }

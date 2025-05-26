@@ -26,7 +26,7 @@ public class HttpServletHandler {
 		// 获取实现类中指定的方法
 		Method method = classImpl.getMethod(invocation.getMethodName(), invocation.getParameterTypes());
 		// 利用反射执行方法
-		String result = (String) method.invoke(classImpl.newInstance(), invocation.getParameters());
+		String result = (String) method.invoke(classImpl.getDeclaredConstructor().newInstance(), invocation.getParameters());
 		// 将执行结果写入响应体
 		IOUtils.write(result, resp.getOutputStream());
 	}

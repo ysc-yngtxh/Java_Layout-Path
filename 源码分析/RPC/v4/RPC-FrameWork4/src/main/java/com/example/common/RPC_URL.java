@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class URL implements Serializable {
+public class RPC_URL implements Serializable {
 	@Serial
 	private static final long serialVersionUID = 3951293658407109323L;
 

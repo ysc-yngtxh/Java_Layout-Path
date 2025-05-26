@@ -36,7 +36,7 @@ public class SpringBottomLayer2Tests {
 		//       如果将 Aop 切面代码注释掉，那么在控制台显示的 productService 对象值会是确切对应的原始对象
 		// 问题1：对于原始 productService Bean对象来说，注入的属性 itemService 是存在值的。
 		//       如果 productService 对象值是代理对象，该 ProductService 中注入的属性 itemService 值为 null。
-		// 解答1：代理对象并没有对任何属性进行依赖注入。因此这里 代理对象 中属性 itemService 为 null
+		// 解答1：代理对象并没有对任何属性进行依赖注入，因此这里 代理对象 中属性 itemService 为 null。
 		ProductService productService = applicationContext.getBean("productService", ProductService.class);
 
 		// 问题2：既然代理对象属性值 itemService 为null，那通过代理对象去执行方法，为什么在方法中打印出 itemService 属性却是有值的？

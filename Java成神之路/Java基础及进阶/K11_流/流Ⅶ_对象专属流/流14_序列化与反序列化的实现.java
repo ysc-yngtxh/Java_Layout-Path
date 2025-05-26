@@ -72,8 +72,7 @@ class Student implements Serializable {
 	// transient关键字是不参加序列化操作
 	private transient String sex;
 
-	public Student() {
-	}
+	public Student() {}
 
 	public Student(int no, String name, String sex) {
 		this.no = no;

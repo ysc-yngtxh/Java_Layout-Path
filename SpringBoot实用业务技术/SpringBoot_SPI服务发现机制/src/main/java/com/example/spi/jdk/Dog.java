@@ -11,4 +11,5 @@ public class Dog implements Animals {
 	public void sayHello() {
 		System.out.println("Hello, I am Dog.");
 	}
+
 }

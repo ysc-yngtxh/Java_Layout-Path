@@ -6,7 +6,10 @@ import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 
 /**
@@ -34,7 +37,7 @@ public class HttpClient {
 			oos.close();
 
 			InputStream inputStream = httpUrlConnection.getInputStream();
-			String result = IOUtils.toString(inputStream);
+			String result = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
 
 			return result;
 		} catch (IOException e) {

@@ -1,5 +1,6 @@
 package com.example.common;
 
+import java.io.Serial;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,7 +17,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Invocation implements Serializable {
-
+	@Serial
 	private static final long serialVersionUID = 3068662031159582351L;
 
 	private String interfaceName;

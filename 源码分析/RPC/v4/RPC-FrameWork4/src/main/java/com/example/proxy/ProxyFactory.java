@@ -1,7 +1,7 @@
 package com.example.proxy;
 
 import com.example.common.Invocation;
-import com.example.common.URL;
+import com.example.common.RPC_URL;
 import com.example.loadbalance.LoadBalance;
 import com.example.protocol.HttpClient;
 import com.example.register.MapRemoveRegister;
@@ -40,21 +40,21 @@ public class ProxyFactory {
 					HttpClient client = new HttpClient();
 
 					// 服务发现
-					List<URL> urls = MapRemoveRegister.get(interfaceName.getSimpleName());
+					List<RPC_URL> RPCUrls = MapRemoveRegister.get(interfaceName.getSimpleName());
 
 					String res = null;
-					List<URL> list = new ArrayList<>();
+					List<RPC_URL> list = new ArrayList<>();
 					// 模拟有三台服务器
 					int max = 3;
 					while (max > 0) {
-						urls.remove(list);
+						RPCUrls.remove(list);
 						// 负载均衡
-						URL url = LoadBalance.random(urls);
-						list.add(url);
+						RPC_URL RPCUrl = LoadBalance.random(RPCUrls);
+						list.add(RPCUrl);
 
 						// 服务调用
 						try {
-							res = client.sendRequest(url.getHostName(), url.getPort(), invocation);
+							res = client.sendRequest(RPCUrl.getHostName(), RPCUrl.getPort(), invocation);
 						} catch (Exception e) {
 							if (max-- != 0) {
 								continue;
@@ -66,8 +66,8 @@ public class ProxyFactory {
 					}
 					return res;
 				});
-
-		return (T) proxyInstance;
+		// 返回代理对象，并将代理对象强制转换为接口类型【Object --> T】
+		return interfaceName.cast(proxyInstance);
 	}
 
 }

@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import org.apache.commons.io.IOUtils;
 
 /**
@@ -25,7 +26,7 @@ public class HttpClient {
 			httpUrlConnection.setRequestMethod("POST");
 			httpUrlConnection.setDoOutput(true);
 
-			// 配置
+			// 配置请求头参数
 			OutputStream outputStream = httpUrlConnection.getOutputStream();
 			ObjectOutputStream oos = new ObjectOutputStream(outputStream);
 
@@ -34,7 +35,7 @@ public class HttpClient {
 			oos.close();
 
 			InputStream inputStream = httpUrlConnection.getInputStream();
-			String result = IOUtils.toString(inputStream);
+			String result = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
 
 			return result;
 		} catch (IOException e) {

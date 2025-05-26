@@ -5,8 +5,10 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author 游家纨绔
@@ -19,6 +21,7 @@ public class NioServer {
 	public static List<SocketChannel> channelList = new ArrayList<>();
 
 	public static void main(String[] args) {
+		// 分配缓存区容量
 		ByteBuffer byteBuffer = ByteBuffer.allocate(128);
 		try {
 			// 创建NIO，为非阻塞设置的类
@@ -34,7 +37,7 @@ public class NioServer {
 				if (socketChannel == null) {
 					// 表示没人连接
 					System.out.println("正在等待客户端请求连接...");
-					Thread.sleep(3000);
+					TimeUnit.SECONDS.sleep(3);
 				} else {
 					System.out.println("当前接收到客户端请求连接...");
 					// 设置为非阻塞

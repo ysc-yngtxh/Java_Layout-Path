@@ -21,8 +21,8 @@
     </properties>
 
     <modules>
-        <module>yjwk-Spring-boot-starter</module>
-        <module>Register-CustomDependency</module>
+        <module>custom-spring-boot-starter</module>
+        <module>register-dependency</module>
     </modules>
     <packaging>pom</packaging>
 

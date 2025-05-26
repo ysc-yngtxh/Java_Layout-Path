@@ -34,6 +34,6 @@
 
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name> <!--servlet映射名称-->
-        <url-pattern>/*</url-pattern>          <!--匹配访问路径 URL-->
+        <RPCUrl-pattern>/*</RPCUrl-pattern>          <!--匹配访问路径 URL-->
     </servlet-mapping>
 </web-app>

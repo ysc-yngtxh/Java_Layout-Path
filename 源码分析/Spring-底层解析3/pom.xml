@@ -19,6 +19,7 @@
     <properties>
         <java.version>23</java.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>

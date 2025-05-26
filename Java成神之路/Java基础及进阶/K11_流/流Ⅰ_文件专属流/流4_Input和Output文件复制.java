@@ -11,12 +11,10 @@ public class 流4_Input和Output文件复制 {
 
 	public static void main(String[] args) {
 		try (// ⚠️：当读取文件不存在时会抛出异常 FileNotFoundException
-		     FileInputStream fis = new FileInputStream(System.getProperty("user.dir")
-				                                               + "/Java基础及进阶/K11_流/IO流概述.md");
+		     FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/IO流概述.md");
 		     // 当写入文件不存在时会自动新建。
 		     // 当写入文件存在时，会将原文件内容清空，然后重新写入，请谨慎使用。
-		     FileOutputStream fos = new FileOutputStream(System.getProperty("user.dir")
-				                                                 + "/Java基础及进阶/K11_流/IO流概述(副本).md")
+		     FileOutputStream fos = new FileOutputStream(System.getProperty("user.dir") + "/Java基础及进阶/K11_流/IO流概述(副本).md")
 		) {
 			// 一边读一边写
 			byte[] bytes = new byte[1024 * 1024];
