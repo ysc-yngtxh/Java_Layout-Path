@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: @project.artifactId@
+  # 访问 SiliconFlow 模型列表（https://cloud.siliconflow.cn/），选择一个免费的 AI 模型。
+  ai:
+    deepseek:
+      api-key: sk-rvapdexvsytqwpljauvotwbasjqmaxeqrildqyumzalsgjpr  # 替换为你的 API 密钥
+      base-url: https://api.siliconflow.cn  # DeepSeek API 地址
+      chat:
+        options:
+          model: deepseek-ai/DeepSeek-R1-Distill-Qwen-7B  # 选择的模型
+          temperature: 0.7  # 控制生成文本的随机性，范围是 0 到 1
+          max-tokens: 1024  # 最大生成 token 数量
+
+logging:
+  level:
+    org:
+      springframework:
+        ai:
+          chat:
+            client:
+              advisor: DEBUG
