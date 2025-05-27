@@ -77,7 +77,7 @@ class MyRunnable2 implements Runnable {
 	public void run() {
 		Thread thread = Thread.currentThread();
 		System.out.println(thread.getName() + " --> begin"
-				                   + "\nt线程开始时的中断标志位为：" + Thread.currentThread().isInterrupted());
+				         + "\nt线程开始时的中断标志位为：" + Thread.currentThread().isInterrupted());
 		try {
 			// 睡眠一年
 			Thread.sleep(1000L * 60 * 60 * 24 * 365);
@@ -86,7 +86,7 @@ class MyRunnable2 implements Runnable {
 		}
 		// 一年后才会执行在这儿
 		System.out.println("t线程结束时的中断标志位为：" + Thread.currentThread().isInterrupted() + "\n"
-				                   + thread.getName() + " --> end");
+				         + thread.getName() + " --> end");
 	}
 
 }
@@ -113,7 +113,7 @@ class InterruptedTask implements Runnable {
 				//       即触发 Interrupted Exception 异常的同时，JVM会把执行线程的中断状态自动重置为false。
 				//  目的：是为了能让开发者显式处理线程的中断请求，避免中断状态在开发过程中被忽略、遗忘。造成应用程序的不稳定。
 				//  方案：如果需要 显氏传递中断标志位，可以在 catch 中再次调用 interrupt() 方法
-				currentThread.interrupt();
+				currentThread.interrupt();  // 再次设置中断标志位为 true
 				break;
 			}
 		}

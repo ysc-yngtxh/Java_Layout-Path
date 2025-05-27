@@ -28,7 +28,7 @@ package L12_线程.线程Ⅱ_线程基础知识;
  *                    void join() 插队
  *                    join()是 Thread 类中的一个方法，当我们需要让线程按照自己指定的顺序执行的时候，就可以利用这个方法。
  *                    class MyThread1 extends Thread {
- *                       public void doSome(){
+ *                       public void doSome() {
  *                          MyThread2 t = new MyThread2()
  *                          t.join();  // t线程先执行，主线程阻塞。直到t线程结束，主线程才可以继续执行。
  *                       }
