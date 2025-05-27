@@ -12,6 +12,7 @@
 // import java.util.concurrent.atomic.AtomicReference;
 // import java.util.concurrent.locks.LockSupport;
 // import java.util.concurrent.locks.ReentrantLock;
+// import lombok.NonNull;
 //
 // /**
 //  * @author 游家纨绔
@@ -19,16 +20,21 @@
 //  * @apiNote TODO 自定义发布者
 //  */
 // public class SimplePublisher<T> implements Flow.Publisher<T>, AutoCloseable {
+//
+// 	/**
+// 	 * 该类实现了发布者Publisher和链接订阅者关系Subscription功能，
+// 	 * 并且Subscription功能实现的BufferedSubscription类默认使用的是FJ线程池，
+// 	 * 当我们提交完成后submit 方法结束后，任务就给到了 FJ线程池(默认线程池) 或者 自己的线程池 里执行。
+// 	 */
 //     private static final Executor ASYNC_POOL =
 //             (ForkJoinPool.getCommonPoolParallelism() > 1) ?
 //                     ForkJoinPool.commonPool() : new SimplePublisher.ThreadPerTaskExecutor();
 //
 //     private static final class ThreadPerTaskExecutor implements Executor {
-//         ThreadPerTaskExecutor() {
-//         }
+//         ThreadPerTaskExecutor() {}
 //
-//         public void execute(Runnable r) {
-//             new Thread(r).start();
+//         public void execute(@NonNull Runnable runnable) {
+//             new Thread(runnable).start();
 //         }
 //     }
 //
@@ -189,9 +195,8 @@
 //             return lag;
 //     }
 //
-//     private int retryOffer(T item, long nanos,
-//                            SimpleSubscription<T> retries, int lag,
-//                            boolean cleanMe) {
+//     private int retryOffer(T item, long nanos, SimpleSubscription<T> retries,
+//                            int lag, boolean cleanMe) {
 //         for (SimpleSubscription<T> r = retries; r != null;) {
 //             SimpleSubscription<T> nextRetry = r.nextRetry;
 //             r.nextRetry = null;
@@ -247,13 +252,13 @@
 //         AtomicInteger waiting = new AtomicInteger(0);
 //
 //         // ctl bit values
-//         static final int CLOSED = 0x01;  // 1 如果设置，则忽略其他位
-//         static final int ACTIVE = 0x02;  // 2 消费者任务的保持活动状态
-//         static final int REQS = 0x04;    // 4 非零消费请求 [request方法]
-//         static final int ERROR = 0x08;   // 8 注意到错误时出现问题
+//         static final int CLOSED = 0x01;    // 1 如果设置，则忽略其他位
+//         static final int ACTIVE = 0x02;    // 2 消费者任务的保持活动状态
+//         static final int REQS = 0x04;      // 4 非零消费请求 [request方法]
+//         static final int ERROR = 0x08;     // 8 注意到错误时出现问题
 //         static final int COMPLETE = 0x10;  // 16 完成后出现 onComplete 问题
-//         static final int RUN = 0x20;     // 32 任务正在或将要运行
-//         static final int OPEN = 0x40;    // 64 订阅后为真
+//         static final int RUN = 0x20;       // 32 任务正在或将要运行
+//         static final int OPEN = 0x40;      // 64 订阅后为真
 //
 //         static final long INTERRUPTED = -1L; // 超时与中断哨兵
 //

@@ -23,7 +23,7 @@ public class NioSelectorServer {
 		// 创建一个ServerSocketChannel并绑定到指定的端口
 		ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
 		serverSocketChannel.bind(new InetSocketAddress(9999));
-		// 设置为非阻塞模式
+		// 设置连接为非阻塞模式
 		serverSocketChannel.configureBlocking(false);
 		// 打开Selector处理Channel
 		Selector selector = Selector.open();
@@ -31,11 +31,10 @@ public class NioSelectorServer {
 		serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
 		System.out.println("服务器已启动，等待客户端连接...");
 
-		// TODO 很明显在这个while循环中，不会出现将没有收发事件的SocketChannel进行遍历，并且在遍历处理完逻辑之后进行删除
+		// TODO 很明显在这个while循环中，不会出现没有收发事件的SocketChannel进行遍历，并且在遍历处理完逻辑之后进行删除
 		while (true) {
 			// 阻塞等待需要处理的事件发生。这个事件收发可能是 [连接、发送消息、读取消息]
 			selector.select();
-
 			// 获取Selector中注册的全部事件的 SelectionKey实例
 			Set<SelectionKey> selectedKeys = selector.selectedKeys();
 			Iterator<SelectionKey> iterator = selectedKeys.iterator();
@@ -45,7 +44,7 @@ public class NioSelectorServer {
 				if (key.isAcceptable()) {
 					// 处理连接请求事件。accept()接受客户端的连接请求，并返回一个SocketChannel实例
 					SocketChannel socketChannel = serverSocketChannel.accept();
-					// 设置为非阻塞
+					// 设置读写模式（是否阻塞）为非阻塞
 					socketChannel.configureBlocking(false);
 					// 表示这个连接只注册读事件，如果想要给客户端发送消息可以注册写事件
 					socketChannel.register(selector, SelectionKey.OP_READ);

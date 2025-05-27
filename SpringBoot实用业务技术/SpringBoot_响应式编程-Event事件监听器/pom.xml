@@ -18,10 +18,12 @@
 
     <modules>
         <module>01_SpringBoot_CustomReactive</module>
-        <module>02_SpringBoot-Reactor</module>
-        <module>03_SpringBoot-Event事件监听</module>
+        <module>02_SpringBoot-Reactor-Annotation</module>
+        <module>03_SpringBoot-Reactor-Function</module>
+        <module>04_SpringBoot-Event事件监听</module>
     </modules>
     <packaging>pom</packaging>
+
     <properties>
         <java.version>23</java.version>
     </properties>

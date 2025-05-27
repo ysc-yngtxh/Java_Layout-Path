@@ -31,4 +31,5 @@ public class KafkaConfig {
 		User obj = objectMapper.readValue(message, User.class);
 		System.out.println("Message: " + obj + " from partition: " + partition);
 	}
+
 }

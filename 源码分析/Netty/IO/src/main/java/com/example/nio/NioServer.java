@@ -5,7 +5,6 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -40,7 +39,7 @@ public class NioServer {
 					TimeUnit.SECONDS.sleep(3);
 				} else {
 					System.out.println("当前接收到客户端请求连接...");
-					// 设置为非阻塞
+					// 设置读写模式（是否阻塞）为非阻塞
 					socketChannel.configureBlocking(false);
 					// 保存客户端连接到List中
 					channelList.add(socketChannel);
