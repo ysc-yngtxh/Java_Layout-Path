@@ -89,3 +89,24 @@ INSERT INTO `db_database`.`t_dict_item` (`id`, `dict_id`, `item_text`, `item_val
 INSERT INTO `db_database`.`t_dict_item` (`id`, `dict_id`, `item_text`, `item_value`, `description`) VALUES (7, 2, '退款成功', 'REFUSE_SUCCESS', '退款成功');
 INSERT INTO `db_database`.`t_dict_item` (`id`, `dict_id`, `item_text`, `item_value`, `description`) VALUES (8, 2, '退款失败', 'REFUSE_FAIL', '退款失败');
 INSERT INTO `db_database`.`t_dict_item` (`id`, `dict_id`, `item_text`, `item_value`, `description`) VALUES (9, 2, '订单已关闭', 'TRADE_CLOSED', '订单已关闭');
+
+
+DROP TABLE IF EXISTS `tbl_users`;
+CREATE TABLE `tbl_users` (
+    `uuid`         int          NOT NULL,
+    `customerId`   varchar(200) DEFAULT NULL,
+    `pwd`          varchar(20)  DEFAULT NULL,
+    `showName`     varchar(100) DEFAULT NULL,
+    `trueName`     varchar(100) DEFAULT NULL,
+    `registerTime` varchar(100) DEFAULT NULL,
+    PRIMARY KEY (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='字典类别表'
+(PARTITION p0 VALUES LESS THAN (5) ENGINE = InnoDB,
+ PARTITION p1 VALUES LESS THAN (10) ENGINE = InnoDB,
+ PARTITION p2 VALUES LESS THAN (15) ENGINE = InnoDB,
+ PARTITION p3 VALUES LESS THAN MAXVALUE ENGINE = InnoDB);
+
+INSERT INTO `tbl_users` (`uuid`, `customerId`, `pwd`, `showName`, `trueName`, `registerTime`) VALUES (1, '只为你', '123456', 'qzp', 'quezhipeng', '20200808');
+INSERT INTO `tbl_users` (`uuid`, `customerId`, `pwd`, `showName`, `trueName`, `registerTime`) VALUES (6, '人生', '123456', '人生', '无名', '20200808');
+INSERT INTO `tbl_users` (`uuid`, `customerId`, `pwd`, `showName`, `trueName`, `registerTime`) VALUES (12, '无须终有', '123456', '无须终有', '无声', '20200808');
+INSERT INTO `tbl_users` (`uuid`, `customerId`, `pwd`, `showName`, `trueName`, `registerTime`) VALUES (100, '坚持', '123456', '胜利', '坚持', '20200808');
