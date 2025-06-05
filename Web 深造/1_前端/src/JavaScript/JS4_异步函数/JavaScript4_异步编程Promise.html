@@ -23,7 +23,7 @@
         // pending -> resolved 【状态转换时间太短，无法复现属性转换过程。打印的PromiseState属性为'fulfilled'】
         const p1 = new Promise((resolve, reject) => {
             // 调用resolve方法，Promise变为操作成功状态（fulfilled）
-            resolve("你好，这里是状态'resolved'");
+            resolve("你好，这里是状态 'resolved'");
         })
         console.log('p1', p1);
 
@@ -31,16 +31,16 @@
         // pending -> rejected 【状态转换时间太短，无法复现属性转换过程。打印的PromiseState属性为'rejected'】
         const p2 = new Promise((resolve, reject) => {
             // 调用reject方法，Promise变为操作成功状态（rejected）
-            reject("你好，这里是状态'rejected'");
+            reject("你好，这里是状态 'rejected'");
         })
         console.log('p2', p2);
 
 
-        // 延时10秒后，状态转换 pending -> resolved【打印的PromiseState属性由'pending'转变为'fulfilled'】
+        // 延时10秒后，状态转换 pending -> resolved【打印的PromiseState属性由'pending'转变为 'fulfilled'】
         const p3 = new Promise((resolve, reject) => {
             console.log('进入 promise');
             setTimeout(() => {
-                resolve("你好，这里是状态'pending'转变为'resolved'");
+                resolve("你好，这里是状态 'pending' 转变为 'resolved'");
                 console.log('蒸发 promise');
             }, 10000)
             console.log('离开 promise');
