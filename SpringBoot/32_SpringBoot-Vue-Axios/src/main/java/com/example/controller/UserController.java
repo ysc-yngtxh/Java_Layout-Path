@@ -50,7 +50,8 @@ public class UserController {
 
 	// 查询所有用户
 	@GetMapping("/selectPage")
-	public ResponseEntity<?> queryPage(@RequestParam Integer page, @RequestParam Integer size) {
+	public ResponseEntity<?> queryPage(@RequestParam(required = false, defaultValue = "1") Integer page,
+	                                   @RequestParam(required = false, defaultValue = "10") Integer size) {
 		List<User> userListPage = userService.queryPage(page, size);
 		if (CollectionUtils.isEmpty(userListPage)) {
 			return ResponseEntity.ok(ResponseVo.fail(400, "输入页数超过拥有数据分页页数"));

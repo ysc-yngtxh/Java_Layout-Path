@@ -1,6 +1,5 @@
 package P16_JUC并发.JUC并发Ⅶ_四大函数接口及Stream流式计算;
 
-import java.io.Serial;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
@@ -8,7 +7,6 @@ import java.util.concurrent.RecursiveTask;
 import java.util.stream.LongStream;
 
 public class ForkJoinDemo extends RecursiveTask<Long> {
-    @Serial
     private static final long serialVersionUID = 2947412188376658390L;
     /**
      * ForkJoin在Jdk1.7，并行执行任务并合并任务！在大数据量中提高效率。ForkJoinPool是线程池的一种实现，因此它使用了线程池技术。

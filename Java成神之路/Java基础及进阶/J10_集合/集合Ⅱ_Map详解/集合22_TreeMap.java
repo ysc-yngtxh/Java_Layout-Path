@@ -24,7 +24,7 @@ public class 集合22_TreeMap {
 	 */
 	public static void main(String[] args) {
 		// TreeMap的元素在存进去后，会根据键进行排序
-		SortedMap<String, Object> treeMap = new TreeMap<>() {{
+		SortedMap<String, Object> treeMap = new TreeMap<String, Object>() {{
 			put("D", "D");
 			put("E", "E");
 			put("C", "C");
@@ -46,7 +46,7 @@ public class 集合22_TreeMap {
 
 		// 自定义比较器
 		TreeMap<Integer, QueueUp> treeMap2 =
-				new TreeMap<>(Comparator.comparing(Integer::intValue)) {{
+				new TreeMap<Integer, QueueUp>(Comparator.comparing(Integer::intValue)) {{
 					put(3, new QueueUp("C", 22));
 					put(1, new QueueUp("A", 20));
 					put(2, new QueueUp("B", 21));

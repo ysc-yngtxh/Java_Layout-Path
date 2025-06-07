@@ -30,7 +30,7 @@ public class 数组11_选择排序算法 {
 		int count2 = 0; // 记录交换次数
 		for (int i = 0; i < arr.length - 1; i++) {
 			int min = i;
-			for (int j = i + 1; j < arr.length; j++) {
+			for (int j = i+1; j < arr.length; j++) {
 				count++;
 				if (arr[j] < arr[min]) {
 					min = j;

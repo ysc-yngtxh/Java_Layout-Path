@@ -26,7 +26,7 @@ public class J_链表结构 {
         int pivot = scanner.nextInt();
         scanner.nextLine();
         String nextLine = scanner.nextLine();
-        String[] strList = nextLine.trim().split(" ");
+        String[] strList = nextLine.trim().split(", ");
 
 		Node head = new Node(Integer.parseInt(strList[0]));
 		Node cur = head;

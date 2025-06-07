@@ -18,9 +18,9 @@ public class G_括号有效性 {
 		int[] angle = new int[s.length()];
 		for (int i = 1; i < s.length(); i++) {
 			if (s.charAt(i) == ')') {
-				if (s.charAt(i - 1) == '(') {
-					angle[i] = (i > 2 ? angle[i - 2] : 0) + 2;
-				} else if (i - angle[i - 1] - 1 >= 0 && s.charAt(i - angle[i - 1] - 1) == '(') {
+				if (s.charAt(i-1) == '(') {
+					angle[i] = (i > 2 ? angle[i-2] : 0) + 2;
+				} else if (i - angle[i-1] - 1 >= 0 && s.charAt(i - angle[i-1] - 1) == '(') {
 					angle[i] = angle[i - 1] + 2;
 				}
 			}

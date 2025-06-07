@@ -6,13 +6,15 @@ import java.util.Scanner;
  * @author 游家纨绔
  * @dateTime 2024-03-28 00:00
  * @apiNote TODO 给定一个整型数组arr，再给定一个整数k，打印所有出现次数大于n/k的数，如果没有这样的数，请打印”-1“。
- *               输入包含两行，第一行输入包含两个整数n和k，第二行包含n个整数，代表数组arr。
+ *               输入包含两行，第一行输入整数k，第二行包含n个整数，代表数组arr。
  */
 public class D_次数大于n除以k的数 {
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		while (scanner.hasNext()) {
+			int k = scanner.nextInt();
+			scanner.nextLine(); // 消耗换行符
 			String s = scanner.nextLine();
 			String[] split = s.split(", ");
 			int[] arr = new int[split.length];
@@ -22,7 +24,6 @@ public class D_次数大于n除以k的数 {
 			}
 
 			int n = arr.length;
-			int k = 4;
 
 			if (arr == null || arr.length == 0 || k <= 0) {
 				System.out.println("-1");

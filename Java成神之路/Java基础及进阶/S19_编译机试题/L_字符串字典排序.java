@@ -9,27 +9,27 @@ package S19_编译机试题;
 public class L_字符串字典排序 {
 
 	public static void main(String[] args) {
-		// String[] strings = {"banana", "apple", "cherry", "date", "elderberry"};
-		String[] strings = {"card", "cap", "two", "too", "boat", "cadr"};
-		bubbleSort(strings);
+		// String[] arr = {"banana", "apple", "cherry", "date", "elderberry"};
+		String[] arr = {"card", "cap", "two", "too", "boat", "cadr"};
+		bubbleSort(arr);
 
 		// 打印排序后的数组
-		for (String str : strings) {
+		for (String str : arr) {
 			System.out.println(str);
 		}
 	}
 
-	public static void bubbleSort(String[] strings) {
-		int n = strings.length;
+	public static void bubbleSort(String[] arr) {
+		int n = arr.length;
 		// 冒泡排序，这个还是比较好理解的
 		for (int i = 0; i < n - 1; i++) {
 			for (int j = 0; j < n - i - 1; j++) {
 				// 可查看 compareTo() 源码，是通过字典顺序比较两个字符串的
-				if (strings[j].compareTo(strings[j + 1]) > 0) {
-					// 交换 strings[j] 和 strings[j+1]
-					String temp = strings[j];
-					strings[j] = strings[j + 1];
-					strings[j + 1] = temp;
+				if (arr[j].compareTo(arr[j + 1]) > 0) {
+					// 交换 arr[j] 和 arr[j+1]
+					String temp = arr[j];
+					arr[j] = arr[j + 1];
+					arr[j + 1] = temp;
 				}
 			}
 		}

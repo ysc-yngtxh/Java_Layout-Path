@@ -46,7 +46,7 @@ public class 集合23_LinkedHashMap {
 		//     accessOrder：设置访问顺序模式。
 		//                  当 accessOrder = true 时，每次访问（get 或 put）一个键值对，该条目会被移动到链表尾部。
 		//                  当 accessOrder = false（默认值）时，链表仅维护插入顺序。
-		Map<String, Integer> lruCache = new LinkedHashMap<>(10, 0.75f, true) {
+		Map<String, Integer> lruCache = new LinkedHashMap<String, Integer>(10, 0.75f, true) {
 			@Override
 			protected boolean removeEldestEntry(Map.Entry<String, Integer> eldest) {
 				return size() > 5; // 最多保留5个条目

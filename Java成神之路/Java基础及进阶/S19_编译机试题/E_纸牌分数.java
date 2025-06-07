@@ -50,3 +50,59 @@ public class E_纸牌分数 {
 	}
 
 }
+
+class 纯逻辑写法_动态规划 {
+
+	public static void main(String[] args) {
+		int[] arr1 = {1, 2, 100, 4};
+		System.out.println(getWinnerScore(arr1)); // 输出：101
+
+		int[] arr2 = {1, 100, 2};
+		System.out.println(getWinnerScore(arr2)); // 输出：100
+	}
+
+	public static int getWinnerScore(int[] arr) {
+		if (arr == null || arr.length == 0) {
+			return 0;
+		}
+		int n = arr.length;
+		int[][] dp = new int[n][n]; // dp[i][j] 表示：纸牌剩余 arr[i...j]
+
+		// 初始化：只有一张牌时，直接拿走
+		for (int i = 0; i < n; i++) {
+			dp[i][i] = arr[i];
+		}
+
+		// 初始化：两张牌时，拿较大的那张
+		for (int i = 0; i < n - 1; i++) {
+			dp[i][i + 1] = Math.max(arr[i], arr[i + 1]);
+		}
+
+		// 填充dp表，从子问题长度为3开始
+		for (int len = 3; len <= n; len++) {
+			for (int i = 0; i <= n - len; i++) {
+				int j = i + len - 1;
+				// 当前玩家拿左端牌，对手在[i+1...j]上拿最优
+				int pickLeft = arr[i] + Math.min(
+						(i + 2 <= j ? dp[i + 2][j] : 0),
+						(i + 1 <= j - 1 ? dp[i + 1][j - 1] : 0)
+				);
+				// 当前玩家拿右端牌，对手在[i...j-1]上拿最优
+				int pickRight = arr[j] + Math.min(
+						(i + 1 <= j - 1 ? dp[i + 1][j - 1] : 0),
+						(i <= j - 2 ? dp[i][j - 2] : 0)
+				);
+				dp[i][j] = Math.max(pickLeft, pickRight);
+			}
+		}
+
+		int totalSum = 0;
+		for (int num : arr) {
+			totalSum += num;
+		}
+		int playerAScore = dp[0][n-1];
+		int playerBScore = totalSum - playerAScore;
+
+		return Math.max(playerAScore, playerBScore);
+	}
+}

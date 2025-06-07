@@ -15,7 +15,7 @@ public class 集合15_HashSet集合 {
 
 	public static void main(String[] args) {
 		// 演示一下HashSet集合特点
-		Set<String> s = new HashSet<>() {{
+		Set<String> s = new HashSet<String>() {{
 			add("hello3");
 			add("hello4");
 			add("hello1");

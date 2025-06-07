@@ -12,8 +12,7 @@ import java.util.List;
  * @apiNote TODO 两种比较排序方法
  */
 public class 集合16_Comparable与Comparator比较器 {
-	/*
-	 * 1、Comparable：可以直接在需要进行排序的类中实现，重写compareTo(T o)方法；缺点是要实现Comparable接口
+	/* 1、Comparable：可以直接在需要进行排序的类中实现，重写compareTo(T o)方法；缺点是要实现Comparable接口
 	 * 2、Comparator：需要另外一个实现 Comparator 接口的实现类来作为 “比较器”。不用实现接口，直接编写排序逻辑
 	 * 3、Comparable 和 Comparator 如何选择？
 	 *     Comparable 可以直接在需要进行排序的类中实现，重写compareTo(T o)方法；缺点是要实现Comparable接口
@@ -38,16 +37,50 @@ public class 集合16_Comparable与Comparator比较器 {
 		int[] arr = {4, 6, 8, 786, 432, 768, 42};
 		Arrays.sort(arr);
 
-		List<Available> arrayList = new ArrayList<>() {{
-			add(new Available(1000));
-			add(new Available(5000));
-			add(new Available(400));
-			add(new Available(8000));
+		List<Available> arrayList = new ArrayList<Available>() {{
+			add(new Available(1000, "马克"));
+			add(new Available(5000, "冉冰"));
+			add(new Available(400, "麦朵"));
+			add(new Available(8000, "白月魁"));
 		}};
 		// 使用Comparable接口实现排序，前提要实现Comparable接口，并重写compareTo()方法
 		Collections.sort(arrayList);
 		// 假如Available没有实现Comparable接口。可以使用Comparator实现排序，直接在代码中实现排序逻辑，比较灵活
 		Collections.sort(arrayList, Comparator.comparing(Available::getAge));
+
+		// 返回相反的排序规则
+		Collections.sort(arrayList, Comparator.comparing(Available::getName).reversed());
+		// 当集合中存在null元素时，null元素排在集合的最前面
+		Collections.sort(arrayList, Comparator.nullsFirst(Comparator.comparing(Available::getName)));
+		// 当集合中存在null元素时，null元素排在集合的最后面
+		Collections.sort(arrayList, Comparator.nullsLast(Comparator.comparing(Available::getName)));
+		// 首先使用 ege 排序，紧接着在使用 name 排序
+		Collections.sort(arrayList, Comparator.comparing(Available::getAge).thenComparing(Available::getName));
+
+
+		List<List<Integer>> result = new ArrayList<List<Integer>>() {{
+			add(Arrays.asList(1, 3));
+			add(Arrays.asList(1, 2));
+			add(Arrays.asList(2, 3));
+			add(Arrays.asList(5, 6, 7));
+			add(Arrays.asList());
+			add(Arrays.asList(1));
+		}};
+		// 对嵌套集合进行排序：先进行子集合的个数排序，然后对子集合的字典排序
+		// ⚠️：Comparator.comparing() 和 thenComparing() 是泛型方法，需要根据上下文推断类型 T。
+		//     当嵌套泛型（如 List<List<Integer>>）时，编译器可能无法正确推断 a 和 b 的具体类型。
+		//     因此需要显式指定泛型类型 <List<Integer>, Integer>
+		//     < T > - 要比较的元素类型
+		//     < U > - Comparable排序键的类型
+		result.sort(Comparator.<List<Integer>, Integer>comparing(List::size)
+		                      .thenComparing((a, b) -> {
+			                      for (int i = 0; i < Math.min(a.size(), b.size()); i++) {
+				                      int cmp = Integer.compare(a.get(i), b.get(i));
+				                      if (cmp != 0) return cmp;
+			                      }
+			                      return Integer.compare(a.size(), b.size());
+		                      })
+		           );
 	}
 
 }
@@ -55,18 +88,27 @@ public class 集合16_Comparable与Comparator比较器 {
 class Available implements Comparable<Available> {
 
 	int age;
+	String name;
 
-	public Available(int age) {
+	public Available(int age, String name) {
 		this.age = age;
+		this.name = name;
 	}
 
 	public int getAge() {
 		return age;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	@Override
 	public String toString() {
-		return "Available{" + "age=" + age + '}';
+		return "Available{" +
+				"age=" + age +
+				", name='" + name + '\'' +
+				'}';
 	}
 
 	@Override

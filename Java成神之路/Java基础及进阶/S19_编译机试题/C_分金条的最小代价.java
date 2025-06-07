@@ -28,7 +28,7 @@ public class C_分金条的最小代价 {
 	//       5    5   8   9
 	//      / \      / \
 	//     2   3    4   4
-	// 非叶子节点总和：5 + 8 + 10 + 17 + 27=67
+	// 非叶子节点总和：5 + 8 + 10 + 17 + 27 = 67
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		while (scanner.hasNext()) {
@@ -52,7 +52,7 @@ public class C_分金条的最小代价 {
     }
 }
 
-class 纯逻辑代码_C {
+class 纯逻辑代码_双指针法 {
 
 	public static void main(String[] args) {
 		int[] arr = {3, 9, 5, 2, 4, 4};
@@ -87,5 +87,34 @@ class 纯逻辑代码_C {
 		}
 		ans[index] = arr[i] + arr[j];
 		return ans;
+	}
+}
+
+class 纯逻辑代码_循环 {
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		String str = scanner.nextLine();
+		String[] arr = str.split(", ");
+		int[] array = Arrays.stream(arr).mapToInt(Integer::parseInt).toArray(); // 将字符串数组转换为整数数组
+		Arrays.sort(array); // 排序数组
+		int totalCost = 0;
+
+		// 循环直到只剩一个有效元素
+		for (int i = 0; i < array.length-1; i++) {
+			// 取出前两个最小的数（arr[i] 和 arr[i+1]）
+			int cost = array[i] + array[i+1];
+			totalCost += cost;
+
+			// 将合并后的数插入到合适位置（保持有序）
+			int j = i + 2;
+			while (j < array.length && array[j] < cost) {
+				// 将数组中没有进行运算的元素向前替换一位，并插入合并后的数
+				array[j-1] = array[j];
+				j++;
+			}
+			array[j-1] = cost;
+		}
+		System.out.println(totalCost);
 	}
 }

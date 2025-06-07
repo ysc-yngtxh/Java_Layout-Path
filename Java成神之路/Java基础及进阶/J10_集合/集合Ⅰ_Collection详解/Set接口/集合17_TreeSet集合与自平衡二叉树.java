@@ -60,7 +60,7 @@ public class 集合17_TreeSet集合与自平衡二叉树 {
 		// 第三种写法：使用Comparator的静态方法。推荐
 		TreeSet<Person> person2 = new TreeSet<>(Comparator.comparing(Person::getAge).reversed());
 		// 第四种写法：匿名内部类，把比较规则写在了匿名内部类中。可读性太差，但会更加灵活
-		TreeSet<Person> person4 = new TreeSet<>(new Comparator<Person>() {
+		TreeSet<Person> person4 = new TreeSet<Person>(new Comparator<Person>() {
 			@Override
 			public int compare(Person o1, Person o2) {
 				// 年龄相同时按照名字排序
