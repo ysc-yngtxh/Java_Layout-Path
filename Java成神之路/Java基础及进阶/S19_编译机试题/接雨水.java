@@ -33,24 +33,28 @@ public class 接雨水 {
 	}
 
 	// 方法一：动态规划
+	// 解析：对于每个柱子i，它能接的雨水量取决于它左边最高的柱子和右边最高的柱子中的较小值
+	//     （因为水的高度不能超过两者中的较小值），然后减去当前柱子的高度。
+	//      即：对于每个位置 i，能接住的雨水量等于 min(下标i左边最大高度, 下标i右边最大高度) - height[i]。
 	public static int trap(int[] height) {
 		int n = height.length;
-		if (n == 0) {
-			return 0;
-		}
+		if (n == 0) return 0;
 
+		// 获取每个下标位置左边的最大高度
 		int[] leftMax = new int[n];
 		leftMax[0] = height[0];
 		for (int i = 1; i < n; ++i) {
 			leftMax[i] = Math.max(leftMax[i - 1], height[i]);
 		}
 
+		// 获取每个下标位置左边的最大高度
 		int[] rightMax = new int[n];
 		rightMax[n - 1] = height[n - 1];
 		for (int i = n - 2; i >= 0; --i) {
 			rightMax[i] = Math.max(rightMax[i + 1], height[i]);
 		}
 
+		// 获取到每个下标位置左右两边的最大高度后，取其最小值，然后减去当前柱子的高度。即为当前下标位置的接水量
 		int ans = 0;
 		for (int i = 0; i < n; ++i) {
 			ans += Math.min(leftMax[i], rightMax[i]) - height[i];
@@ -61,7 +65,7 @@ public class 接雨水 {
 	// 方法二：单调栈
 	public static int trap2(int[] height) {
 		int ans = 0;
-		Deque<Integer> stack = new LinkedList<Integer>();
+		Deque<Integer> stack = new LinkedList<>();
 		int n = height.length;
 		for (int i = 0; i < n; ++i) {
 			while (!stack.isEmpty() && height[i] > height[stack.peek()]) {
@@ -83,15 +87,15 @@ public class 接雨水 {
 	public static int trap3(int[] height) {
 		int ans = 0;
 		int left = 0, right = height.length - 1;
-		int leftMax = 0, rightMax = 0;
+		int lMax = 0, rMax = 0;
 		while (left < right) {
-			leftMax = Math.max(leftMax, height[left]);
-			rightMax = Math.max(rightMax, height[right]);
+			lMax = Math.max(lMax, height[left]);
+			rMax = Math.max(rMax, height[right]);
 			if (height[left] < height[right]) {
-				ans += leftMax - height[left];
+				ans += lMax - height[left];
 				++left;
 			} else {
-				ans += rightMax - height[right];
+				ans += rMax - height[right];
 				--right;
 			}
 		}

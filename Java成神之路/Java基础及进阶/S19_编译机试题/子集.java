@@ -16,31 +16,28 @@ import java.util.List;
 public class 子集 {
 
 	// 方法：回溯算法
-	private List<List<Integer>> res = new ArrayList<>();
+	private static List<List<Integer>> res = new ArrayList<>();
 
 	public static void main(String[] args) {
 		int[] nums = {1, 2, 3};
-		System.out.println(new 子集().subsets(nums));
-	}
-
-	public List<List<Integer>> subsets(int[] nums) {
 		List<Integer> selectList = new ArrayList<>();
-		int start = 0;
-		dfs(nums, start, selectList);
-		return res;
+		dfs(nums, 0, selectList);
+		System.out.println(res);
 	}
 
-	private void dfs(int[] nums, int start, List<Integer> selectList) {
+	private static void dfs(int[] nums, int start, List<Integer> selectList) {
 		// 无临界条件，添加当前子集
 		res.add(new ArrayList<>(selectList));
 		// 遍历
 		for (int i = start; i < nums.length; i++) {
 			// 选择当前数字
 			selectList.add(nums[i]);
+			System.out.println("add last -- " + selectList);
 			// 下一层，递归处理后续数字
 			dfs(nums, i + 1, selectList);
 			// 撤销选择（回溯）
 			selectList.remove(selectList.size() - 1);
+			System.out.println("remove last -- " + selectList);
 		}
 	}
 
@@ -53,6 +50,7 @@ class 逐步扩展法 {
 		int[] nums = {1, 2, 3};
 		for (int num : nums) {
 			int size = result.size();
+			// 分析每次循环：{}、{1} / {2}、{1,2} / {3}、{1,3}、{2,3}、{1,2,3}
 			for (int i = 0; i < size; i++) {
 				List<Integer> newSubset = new ArrayList<>(result.get(i)); // 添加子集
 				newSubset.add(num);
