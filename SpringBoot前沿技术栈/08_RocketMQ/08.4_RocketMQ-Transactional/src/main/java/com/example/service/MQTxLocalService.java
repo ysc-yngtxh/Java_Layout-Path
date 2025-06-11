@@ -42,7 +42,7 @@ public class MQTxLocalService implements RocketMQLocalTransactionListener {
 		try {
 			UserCharge userCharge = (UserCharge) obj;
 			userService.addBalance(userCharge, transactionId);
-			return RocketMQLocalTransactionState.COMMIT; // 正常：向MQ Server发送commit消息
+			return RocketMQLocalTransactionState.COMMIT;   // 正常：向MQ Server发送commit消息
 		} catch (Exception e) {
 			log.error("【执行本地事务】发生异常，消息将被回滚", e);
 			return RocketMQLocalTransactionState.ROLLBACK; // 异常：向MQ Server发送rollback消息
@@ -60,7 +60,7 @@ public class MQTxLocalService implements RocketMQLocalTransactionListener {
 
 		// 根据事务id查询事务日志表
 		MQTxLog MQTxLog = mqTxLogMapper.selectById(transactionId);
-		if (Objects.isNull(MQTxLog)) { // 没查到表明本地事务执行失败,通知回滚
+		if (Objects.isNull(MQTxLog)) {           // 没查到表明本地事务执行失败，通知回滚
 			return RocketMQLocalTransactionState.ROLLBACK;
 		}
 		return RocketMQLocalTransactionState.COMMIT; // 查到表明本地事务执行成功，提交

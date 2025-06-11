@@ -47,13 +47,13 @@ public class 最少操作数 {
 		// 动态规划填表
 		for (int i = 1; i <= m; i++) {
 			for (int j = 1; j <= n; j++) {
-				if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
-					dp[i][j] = dp[i - 1][j - 1];   // 字符相同，无需操作
+				if (word1.charAt(i-1) == word2.charAt(j-1)) {
+					dp[i][j] = dp[i-1][j-1];     // 字符相同，无需操作
 				} else {
 					dp[i][j] = Math.min(
-							dp[i - 1][j - 1],      // 替换
-							Math.min(dp[i][j - 1], // 插入
-							         dp[i - 1][j]  // 删除
+							dp[i-1][j-1],        // 替换
+							Math.min(dp[i][j-1], // 插入
+							         dp[i-1][j]  // 删除
 							)
 					) + 1;
 				}

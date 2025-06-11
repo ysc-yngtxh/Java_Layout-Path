@@ -41,7 +41,7 @@ public class MQTxProducerSend {
 				Topic + ":" + Tag
 				, MessageBuilder.withPayload(userCharge).setHeader(RocketMQHeaders.TRANSACTION_ID, transactionId).build()
 				, userCharge
-		                                                                            );
+		);
 		log.info("【发送半消息】sendResult={}", JSON.toJSONString(sendResult));
 		return sendResult;
 	}

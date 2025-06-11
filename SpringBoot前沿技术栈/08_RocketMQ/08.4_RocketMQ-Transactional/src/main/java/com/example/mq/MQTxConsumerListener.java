@@ -38,7 +38,7 @@ public class MQTxConsumerListener implements RocketMQListener<UserCharge> {
 		int i = creditMapper.update(Wrappers.<Credit>lambdaUpdate()
 		                                    .eq(Credit::getUserId, userCharge.getUserId())
 		                                    .setSql("integration = integration + " + userCharge.getChargeAmount().intValue())
-		                           );
+		);
 		if (0 <= i) {
 			log.info("【MQ消费】用户增加积分成功，userCharge={}", JSONObject.toJSONString(userCharge));
 		} else {
