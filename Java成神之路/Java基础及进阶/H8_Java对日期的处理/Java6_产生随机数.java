@@ -3,6 +3,9 @@ package H8_Java对日期的处理;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
+import javax.sound.midi.Soundbank;
 
 public class Java6_产生随机数 {
 
@@ -52,6 +55,13 @@ public class Java6_产生随机数 {
 		String format = decimalFormat.format(new Random().nextDouble());
 		double parseDouble = Double.parseDouble(format);
 		System.out.printf("%.2f%n", parseDouble);
+
+		// 使用 ThreadLocalRandom，性能极高（无锁，线程安全，适合高并发场景）
+		int randomNum = ThreadLocalRandom.current().nextInt(0, 100); // 生成0~99的随机数（左闭右开原则）
+		System.err.println("ThreadLocalRandom：" + randomNum);
+		// 使用 UUID
+		String uuidStr = UUID.randomUUID().toString();
+		System.err.println("UUID：" + uuidStr);
 	}
 
 	// 编写方法用来判断数组中是否包含某个元素

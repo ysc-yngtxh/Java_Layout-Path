@@ -55,7 +55,7 @@ import java.util.Set;
  *         HashMap集合的key和value都是可以为null的
  *
  *         放在HashMap集合的key部分元素其实就是放到HashMap集合中了
- *         所以HashMap集合中的元素也需要同时重写hashCode()+equals()方法
+ *         所以HashMap集合中的元素也需要同时重写 hashCode() + equals() 方法
  *
  *   6、哈希表HashMap使用不当时无法发挥性能！
  *       假设将所有的hashCode()方法返回值固定为某个值，那么会导致底层哈希表变成了纯单向链表。这种情况我们称为：散列分布不均匀

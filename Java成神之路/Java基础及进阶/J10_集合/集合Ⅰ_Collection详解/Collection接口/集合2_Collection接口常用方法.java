@@ -24,7 +24,7 @@ public class 集合2_Collection接口常用方法 {
 
 	public static void main(String[] args) {
 		Collection<Object> c = new ArrayList<>();
-		c.add(100); // 自动装箱（Java5的新特性），实际上放进去了
+		c.add(100);  // 自动装箱（Java5的新特性），实际上放进去了
 		// 一个对象的内存地址。Integer x = new Integer();
 		c.add(3.14); // 自动装箱
 		c.add(new Object());

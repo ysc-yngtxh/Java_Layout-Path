@@ -163,8 +163,13 @@
        for (int i = 0; i < 10000; i++) {
            executor.submit(task);
        }
-       executor.shutdown();
-       executor.awaitTermination(1, TimeUnit.MINUTES);
+       executor.shutdown(); // 等待所有线程全部执行完毕后关闭线程池
+	   // 注意：awaitTermination()方法需结合shutdown()方法使用，并在shutdown()方法后调用。
+	   //      表示线程池的有效执行时间为1min，1min之后不管子任务有没有执行完毕，都要关闭线程池。
+	   if (!es.awaitTermination(1, TimeUnit.MINUTES)) {
+		   System.out.println(" 到达指定时间，还有线程没执行完，不再等待，关闭线程池!");
+		   es.shutdownNow();
+	   }
        System.out.println("Total count: " + counter.sum());
    }
    ```

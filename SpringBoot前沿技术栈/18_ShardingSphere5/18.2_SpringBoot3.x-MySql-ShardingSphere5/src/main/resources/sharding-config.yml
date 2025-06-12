@@ -34,33 +34,33 @@ dataSources:
 rules:
   - !SHARDING # 分片规则
     shardingAlgorithms: # TODO 定义分片算法
-      database_inline: # 自定义分片算法名称，自定义名称【随便取】
-        type: INLINE # 内敛算法
+      database_inline:  # 自定义分片算法名称，自定义名称【随便取】
+        type: INLINE    # 内敛算法
         props:
           algorithm-expression: ds_$->{ece_id % 3}
-      table_inline: # 自定义分片算法名称，自定义名称【随便取】
+      table_inline:     # 自定义分片算法名称，自定义名称【随便取】
         type: INLINE
         props:
           algorithm-expression: ece_order_$->{ece_id % 3}
-      complex_inline: # 自定义分片算法名称，自定义名称【随便取】
+      complex_inline:   # 自定义分片算法名称，自定义名称【随便取】
         type: INLINE
         props:
           algorithm-expression: ds_$->{ece_id % 3}.$->{age % 2}
       auto_mod:
-        type: MOD # 取模算法
+        type: MOD       # 取模算法
         props:
           sharding-count: 4
-    keyGenerators: # TODO 定义主键生成策略
-      snowflake: # 自定义主键生成策略名称，自定义名称【随便取】
+    keyGenerators:      # TODO 定义主键生成策略
+      snowflake:        # 自定义主键生成策略名称，自定义名称【随便取】
         type: SNOWFLAKE
         props:
           worker.id: 1     # 根据实际需要设置不同的 worker.id
           datacenter.id: 1 # 可选，如果不需要可以不设置
     tables:
-      ece_user: # 逻辑表名称
+      ece_user:            # 逻辑表名称
         actualDataNodes: ds_$->{0..2}.ece_user # 数据节点：默认只支持两层结构，即【逻辑数据源名.逻辑表名】的形式
         databaseStrategy: # TODO 分库策略
-          standard: # standard：用于单分片键的标准分片场景
+          standard:       # standard：用于单分片键的标准分片场景
             shardingColumn: ece_id # 分片列名称
             shardingAlgorithmName: database_inline # 分片算法名称
         keyGenerateStrategy: # TODO 主键生成策略

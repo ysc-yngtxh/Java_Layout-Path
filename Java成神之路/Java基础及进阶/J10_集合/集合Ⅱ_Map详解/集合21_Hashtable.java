@@ -24,7 +24,7 @@ import java.util.Properties;
  *         这种二义性在单线程环境中可以通过调用 containsKey(key)方法 来消除，
  *         但在多线程环境中，由于并发操作的存在，这种判断可能变得不准确，从而引发线程安全问题。
  *         因此在源码中：putVal(K key, V value, boolean onlyIfAbsent) {
- *                 		  // 首先会判断 key 和 value 是否为 null,如果是则抛出异常
+ *                 		   // 首先会判断 key 和 value 是否为 null,如果是则抛出异常
  *                         if (key == null || value == null) throw new NullPointerException();
  *                     }
  *         至于 “空” 的概念，它通常指的是一个对象的内容为空，而不是对象引用本身为null。

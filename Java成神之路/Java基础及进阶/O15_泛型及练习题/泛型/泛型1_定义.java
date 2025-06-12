@@ -15,6 +15,7 @@ public class 泛型1_定义 {
      *
      *     ? 表示不确定的泛型类型
      *     T (type) 表示具体的一个泛型类型
+     *     U (Another Type) 通常用于表示第二个泛型类型。当类或方法需要处理多个不同类型时使用（如 Pair<T, U>）。
      *     K V (key value) 分别代表 Map 中的键值 Key Value
      *     E (element) 代表元素，例如 ArrayList 中的元素
      *     R (return) 代表返回值类型.

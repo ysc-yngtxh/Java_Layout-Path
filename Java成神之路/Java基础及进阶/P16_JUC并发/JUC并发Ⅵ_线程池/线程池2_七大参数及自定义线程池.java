@@ -69,7 +69,7 @@ public class 线程池2_七大参数及自定义线程池 {
 		 *        第9~13个任务触发创建非核心线程（最大线程数为10，可创建10-5=5个非核心线程），
 		 *        第14个任务提交时，线程数已达最大值（10），队列已满（3），触发AbortPolicy抛出RejectedExecutionException。
 		 *
-		 * 引发java.util.concurrent.RejectedExecutionException的场景：
+		 * 引发 java.util.concurrent.RejectedExecutionException 的场景：
 		 *   1、当你的排队策略为有界队列，并且配置的拒绝策略是 ThreadPoolExecutor.AbortPolicy，
 		 *      当线程池的线程数量已经达到了maximumPoolSize的时候，你再向它提交任务，就会抛出ThreadPoolExecutor.AbortPolicy异常。
 		 *      从而引发 java.util.concurrent.RejectedExecutionException
@@ -130,8 +130,7 @@ public class 线程池2_七大参数及自定义线程池 {
 
 		System.out.println("-----------------------------------------------------------------------");
 
-		/*
-		 * 线程池提交任务的两种方式：execute() 与 submit() 的区别
+		/* 线程池提交任务的两种方式：execute() 与 submit() 的区别
 		 *    execute：只能提交 Runnable 类型的任务，无返回值，如果遇到异常会直接抛出。
 		 *    submit： 既可以提交 Runnable 类型的任务，也可以提交 Callable 类型的任务，如果遇到异常不会直接抛出。
 		 *             提交 Callable 类型的任务时会有一个类型为Future的返回值，但当任务类型为 Runnable 时，返回值为null。
@@ -153,7 +152,7 @@ public class 线程池2_七大参数及自定义线程池 {
 		System.out.println("线程池中的所有任务是否已经执行完毕并且已经关闭：" + executorService.isTerminated());
 
 		// 调用shutdown()后，线程池会逐渐停止，但不会立即停止。
-		// 当线程池中的任务都执行完毕后，shutdown()会将所有的线程都关闭，这时线程池就终止了。
+		// 当线程池中的任务都执行完毕后，shutdown()才会将所有的线程都关闭，这时线程池就终止了。
 		executorService.shutdown();
 		TimeUnit.SECONDS.sleep(1);
 		System.out.println("线程池中的所有任务是否已经执行完毕并且已经关闭：" + executorService.isTerminated());

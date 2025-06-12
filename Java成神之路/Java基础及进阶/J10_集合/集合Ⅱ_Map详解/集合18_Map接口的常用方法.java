@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-/* java.util.Map接口中常用方法：
+/* java.util.Map 接口中常用方法：
  *    1、Map和Collection没有继承关系
  *    2、Map集合以key和value的方式存储数据：键值对
  *        key和value都是引用数据类型
@@ -55,8 +55,8 @@ public class 集合18_Map接口的常用方法 {
 	public static void main(String[] args) {
 		Map<Integer, String> map = new HashMap<>();
 		map.put(1, "张三"); // 1在这里自动装箱
-		map.put(2, "李四");
 		map.put(3, "王五");
+		map.put(2, "李四");
 		map.put(4, "赵六");
 
 		// 尝试计算指定键的新映射值（不管键是否存在）
