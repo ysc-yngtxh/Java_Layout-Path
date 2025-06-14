@@ -52,7 +52,7 @@ class YSC implements Runnable {
 
 }
 
-public class 线程5_线程调度方法 {
+public class 线程5_线程调度join方法 {
 
 	public static void main(String[] args) {
 		Thread t = new Thread(new YSC());

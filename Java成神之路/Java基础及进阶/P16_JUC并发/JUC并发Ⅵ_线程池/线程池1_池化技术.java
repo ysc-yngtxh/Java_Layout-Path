@@ -26,15 +26,15 @@ public class 线程池1_池化技术 {
      */
     public static void main(String[] args) {
         // 不建议使用这种形式去创建线程池
-        ExecutorService executorService1 = Executors.newSingleThreadExecutor();      // Single单例线程
-        ExecutorService executorService2 = Executors.newFixedThreadPool(5); // 固定线程，5个线程
-        ExecutorService executorService3 = Executors.newCachedThreadPool();          // 可伸缩线程，随用户需要去扩展线程数
-        ScheduledExecutorService executorService4 = Executors.newScheduledThreadPool(3);
+        ExecutorService singleExecutor = Executors.newSingleThreadExecutor();     // Single单例线程
+        ExecutorService fixedExecutor = Executors.newFixedThreadPool(5); // 固定线程，5个线程
+        ExecutorService cacheExecutor = Executors.newCachedThreadPool();          // 可伸缩线程，随用户需要去扩展线程数
+        ScheduledExecutorService scheduledExecutor = Executors.newScheduledThreadPool(3); // 定时线程池，3个线程
 
 		try {
 			// 可以在运行后发现线程启动最多只有一个
 			for (int i = 1; i <= 10; i++) {
-				executorService1.execute(() -> {
+				singleExecutor.execute(() -> {
 					System.out.println(Thread.currentThread().getName() + " -- OK");
 				});
 			}
@@ -44,7 +44,7 @@ public class 线程池1_池化技术 {
 
 			// 可以在运行后发现线程启动最多有五个
 			for (int i = 1; i <= 10; i++) {
-				executorService2.execute(() -> {
+				fixedExecutor.execute(() -> {
 					System.out.println(Thread.currentThread().getName() + " -- OK");
 				});
 			}
@@ -54,7 +54,7 @@ public class 线程池1_池化技术 {
 
 			// 可以在运行后发现线程启动最多有十个，原因是for循环只有十次，线程池会自动扩展线程数
 			for (int i = 1; i <= 10; i++) {
-				executorService3.execute(() -> {
+				cacheExecutor.execute(() -> {
 					System.out.println(Thread.currentThread().getName() + " -- OK");
 				});
 			}
@@ -62,7 +62,7 @@ public class 线程池1_池化技术 {
 			System.out.println("===========4=========");
 
 			// 定时(延时)执行线程任务
-			ScheduledFuture<String> schedule = executorService4.schedule(() -> {
+			ScheduledFuture<String> schedule = scheduledExecutor.schedule(() -> {
 				return "call";
 			}, 10, TimeUnit.SECONDS);
 			System.out.println(schedule.get());
@@ -71,10 +71,10 @@ public class 线程池1_池化技术 {
 			e.printStackTrace();
 		} finally {
 			// 线程池用完一定要记得关闭
-			executorService1.shutdown();
-			executorService2.shutdown();
-			executorService3.shutdown();
-			executorService4.shutdown();
+			singleExecutor.shutdown();
+			fixedExecutor.shutdown();
+			cacheExecutor.shutdown();
+			scheduledExecutor.shutdown();
 		}
 	}
 

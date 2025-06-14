@@ -16,11 +16,11 @@ public class 阻塞队列5_同步队列 {
 
 		new Thread(() -> {
 			try {
-				System.out.println(Thread.currentThread().getName() + "->" + "put 1");
+				System.out.println(Thread.currentThread().getName() + " -> put 1");
 				queue.put("1");
-				System.out.println(Thread.currentThread().getName() + "->" + "put 2");
+				System.out.println(Thread.currentThread().getName() + " -> put 2");
 				queue.put("2");
-				System.out.println(Thread.currentThread().getName() + "->" + "put 3");
+				System.out.println(Thread.currentThread().getName() + " -> put 3");
 				queue.put("3");
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -30,11 +30,11 @@ public class 阻塞队列5_同步队列 {
 
 		new Thread(() -> {
 			try {
-				System.out.println(Thread.currentThread().getName() + "->take " + queue.take());
+				System.out.println(Thread.currentThread().getName() + " -> take " + queue.take());
 				TimeUnit.SECONDS.sleep(3);
-				System.out.println(Thread.currentThread().getName() + "->take " + queue.take());
+				System.out.println(Thread.currentThread().getName() + " -> take " + queue.take());
 				TimeUnit.SECONDS.sleep(3);
-				System.out.println(Thread.currentThread().getName() + "->take " + queue.take());
+				System.out.println(Thread.currentThread().getName() + " -> take " + queue.take());
 				TimeUnit.SECONDS.sleep(3);
 			} catch (InterruptedException e) {
 				e.printStackTrace();

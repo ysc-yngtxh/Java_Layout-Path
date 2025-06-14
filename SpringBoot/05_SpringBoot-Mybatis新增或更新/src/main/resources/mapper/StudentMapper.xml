@@ -90,8 +90,7 @@
     <insert id="insertDuplicateKeyUpdateBatch">
         INSERT INTO db_student(`id`, `name`, `email`, `age`)
         VALUES
-        <foreach collection="students" item="item" open="(" close=")"
-                 separator=",">
+        <foreach collection="students" item="item" open="(" close=")" separator=",">
             #{item.id,jdbcType=INTEGER}, #{item.name,jdbcType=VARCHAR},
             #{item.email,jdbcType=VARCHAR}, #{item.age,jdbcType=INTEGER}
         </foreach>

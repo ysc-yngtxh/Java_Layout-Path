@@ -31,12 +31,10 @@ class RocketBootApplicationTests {
 		// 2、异步消息
 		rocketMQTemplate.asyncSend("bootTestTopic", "我是bootTest的一个异步消息", new SendCallback() {
 			@Override
-			public void onSuccess(SendResult sendResult) {
-			}
+			public void onSuccess(SendResult sendResult) {}
 
 			@Override
-			public void onException(Throwable throwable) {
-			}
+			public void onException(Throwable throwable) {}
 		});
 
 		// 3、单向消息（只负责发送消息，不等待应答，不关心发送结果，如日志）
@@ -55,12 +53,12 @@ class RocketBootApplicationTests {
 				new MsgModel("华为问界M7", 2, "下单"),
 				new MsgModel("华为问界M7", 2, "付款"),
 				new MsgModel("华为问界M7", 2, "物流")
-		                                           );
+		);
 		msgModelList.forEach(msgModel -> {
 			rocketMQTemplate.syncSendOrderly("bootOrderlyTopic"
 					, JSON.toJSONString(msgModel)
 					, msgModel.getOrderSn()
-			                                );
+			);
 		});
 
 		// 6、带有消息头的消息
@@ -76,8 +74,8 @@ class RocketBootApplicationTests {
 		System.out.printf("RocketMQ 消息发送到Broker，Broker会将消息进行持久化处理。" +
 				                  "持久化成功后，Broker给生产者响应消息写入结果（ACK响应）。通过返回的结果判断是否成功送达。" +
 				                  "返回的结果为：%s %n"
-				, sendResult.getSendStatus()
-		                 );
+				        , sendResult.getSendStatus()
+		);
 		System.out.printf("消息 Id（RocketMQ系统生成） = %s %n", sendResult.getMsgId());
 		System.out.printf("消息队列 = %s %n", sendResult.getMessageQueue());
 	}

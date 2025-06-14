@@ -48,7 +48,7 @@ public class 方法运算符 {
 
 		System.out.println(5 > 3 | 5 > 2);    // true 逻辑或
 
-		System.out.println(!true);        // false 逻辑非
+		System.out.println(!true);            // false 逻辑非
 
 		System.out.println(5 > 3 ^ 5 > 2);    // false 逻辑异或
 
@@ -71,7 +71,7 @@ public class 方法运算符 {
 		byte b = 5;
 		b = (byte) (b + 5); // b是byte类型，5是int类型，编译器在执行语法是不通过，所以要在前面加一个强制转换符byte
 		System.out.println(b);
-		b += 5;           // 等同于b=byte(b+5)
+		b += 5;             // 等同于b=byte(b+5)
 		System.out.println(b);
 		/*b = b + (byte) 5;这种写法编译器不兼容不合法
 		System.out.println(b);*/

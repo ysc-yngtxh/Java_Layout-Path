@@ -43,4 +43,5 @@
             #{email,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER})
         </if>
     </insert>
+
 </mapper>

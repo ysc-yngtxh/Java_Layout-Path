@@ -11,12 +11,12 @@
  * 一、在Linux系统里安装redis
  *     1、将redis压缩包通过Xftp传到Linux系统文件里，比如：/opt/mysoftwares包下
  *        在Linux系统里执行终端 输入：cd /opt/mysoftwares  目的是在mysoftwares包下执行命令
- *     2、然后在mysoftwares包下执行命令 输入：tar -zxvf redei-5.0.9.tar.gz
+ *     2、然后在mysoftwares包下执行命令（解压文件） 输入：tar -zxvf redei-5.0.9.tar.gz
  *     3、可以发现redis压缩包已经解压在 /opt/mysoftwares包下
  *     4、然后我们还需要gcc jar包，可以在终端命令行里下载 输入：yum -y install gcc
  *     5、可以顺带的查看一下gcc版本号 输入：gcc -v
- *     6、然后执行命令 ：cd redis-5.0.9  目的是进入redis解压包目录下
- *     7、终端输入 ：make 命令进行编译
+ *     6、然后执行命令：cd redis-5.0.9  目的是进入redis解压包目录下
+ *     7、终端输入：make 命令进行编译
  *     8、如果出现提示 输入：make install
  *
  * 二、启动redis服务：
@@ -32,14 +32,13 @@
  *        redis-cli shutdown
  *
  * 四、redis客户端：用来连接redis服务，向redis服务端发送命令，并且显示redis服务处理结果。
- *     1、简单的来说。例如：navicat就是面向MySQL的第三方可视化的客户端
- *                      MySQL自带的客户端命令：mysql -uroot -p
- *     2、redis-cli:是redis自带客户端，使用命令redis-cli就可以启动redis的客户端程序。
- *        redis-cli:默认连接127.0.0.1(本机)的6379端口上的redis服务
- *
+ *     1、类比：Navicat App就是面向MySQL的第三方可视化的客户端
+ *             MySQL自带的客户端命令：mysql -uroot -p
+ *     2、【redis-cli】是redis自带客户端，使用命令redis-cli就可以启动redis的客户端程序。
+ *         redis-cli：默认连接127.0.0.1(本机)的6379端口上的redis服务
  *     3、当主机上有多个redis服务时，需要指定redis的端口号，用来连接需要的redis
- *         redis-cli -p 端口号：连接127.0.0.1(本机)的指定端口上的redis服务
- *         redis-cli -h ip地址 -p 端口：连接指定ip主机上的指定端口的redis服务
+ *         redis-cli -p 端口号         ==> 连接127.0.0.1(本机)的指定端口上的redis服务
+ *         redis-cli -h ip地址 -p 端口 ==> 连接指定ip主机上的指定端口的redis服务
  *
  * 五、退出客户端：在客户端执行命令：exit或者quit
  *
@@ -95,7 +94,7 @@
  *          f、查看指定key的数据类型：type key
  *          g、重命名key：rename key1 key2
  *          h、删除指定的key：del key [key key...]
- *                       返回值是实际删除的key的数量
+ *                         返回值是实际删除的key的数量
  *     2、redis中有关string类型数据的操作命令(单key:单value)
  *          a、将string类型的数据设置到redis中：set 键 值
  *             如果key已经存在，则后来的value会把以前的value覆盖掉
@@ -133,7 +132,7 @@
  *                    mget k1 v1 k2 v2...
  *     3、redis中有关list类型数据的操作命令(单key:多有序value)
  *          a、将一个或者多个只一次插入到列表的表头(左侧)：lpush key value [value value...]
- *              **存储的数据在读取时候，遵循栈内存规律：先进后出**
+ *              ** 存储的数据在读取时候，遵循栈内存规律：先进后出 **
  *                lpush list01 1 2 3   结果：3 2 1
  *                lpush list01 4 5     结果：5 4 3 2 1
  *          b、获取指定列表中指定下标区间的元素：lrange key startIndex endIndex
@@ -255,11 +254,11 @@
  *          f、获取指定有序集合中分数在指定区间内元素的个数：zcount key min max
  *                zcount zset01 20 50
  *          g、获取指定有序集合中指定元素的排名(排名从0开始)：zrank key member
- *                zscore zset01 z4  ==>2
+ *                zscore zset01 z4  ==> 2
  *          h、获取指定有序集合中指定元素的分数：zscore key member
  *                zscore zset01 z4
  *          i、获取指定有序集合中指定元素的排名(按照分数从大到小的排名)：zrevrank key member
- *                zrevrank zset01 z4  ==>1
+ *                zrevrank zset01 z4  ==> 1
  *
  * 九、redis的配置信息
  *     1、常规配置
@@ -277,7 +276,7 @@
  *
  *          a、RDB策略：（原理是将Redis在内存中的数据快照（snapshot）定时dump到磁盘的持久化）
  *                核心机制
- *                    快照生成：RDB通过生成某一时间点的数据快照（二进制文件）进行持久化。
+ *                    快照生成：RDB在指定时间间隔内，将内存中的数据集生成二进制快照（.rdb文件）保存到磁盘。
  *                触发条件：
  *                    手动触发：通过SAVE（阻塞主进程）或BGSAVE（后台子进程）命令。
  *                    自动触发：在配置文件中设置save <seconds> <changes>，例如save 900 1表示若900秒内有至少1次写操作，则触发快照。
@@ -544,7 +543,42 @@
  *           设置reids key的过期时间：redisTemplate.expire(key, time, TimeUnit.SECONDS);
  *           检测 是否 存在该键：redisTemplate.hasKey(key);
  *
- * 十七、分布式的脑裂问题
+ * 十七、Redis的过期删除策略和内存淘汰策略
+ * 	    1、过期删除策略
+ * 	       Redis支持三种过期删除策略：惰性删除、定期删除。
+ * 	       (1)、惰性删除
+ * 	            - 当客户端访问一个key时，Redis会检查该key是否过期，如果过期则删除该key。
+ * 	            - 这种方式只在访问key时检查过期时间，可能导致一些过期的key在一段时间内仍然存在。
+ * 	       (2)、定期删除
+ * 	            - Redis会定期扫描所有的key，检查是否有过期的key，并删除它们。
+ * 	            - 这种方式可以在一定程度上减少惰性删除的影响，但仍然可能存在一些过期的key在一段时间内仍然存在。
+ * 		2、内存淘汰策略
+ * 		   当Redis的内存使用达到限制时，需要选择一些key进行淘汰，以释放内存空间。
+ * 		   Redis提供了多种内存淘汰策略，可以通过配置文件或命令行参数进行设置。
+ * 		   (1)、常见的内存淘汰策略包括：
+ * 		       ①、不进行数据淘汰的策略
+ * 		            - noeviction（Redis3.0之后，默认的内存淘汰策略）：当内存不足时，不淘汰任何key，直接返回错误。
+ * 		       ②、在设置了过期时间的数据中进行淘汰：
+ *                  - volatile-random：随机淘汰设置了过期时间的任意键值；
+ *                  - volatile-ttl：优先淘汰更早过期的键值。
+ *                  - volatile-lru（Redis3.0 之前，默认的内存淘汰策略）：淘汰所有设置了过期时间的键值中，最久未使用的键值；
+ *                  - volatile-lfu（Redis 4.0 后新增的内存淘汰策略）：淘汰所有设置了过期时间的键值中，最少使用的键值；
+ * 		       ③、在所有数据范围内进行淘汰：
+ * 		            - allkeys-random：随机淘汰任意键值;
+ *                  - allkeys-lru：淘汰整个键值中最久未使用的键值；
+ *                  - allkeys-lfu（Redis 4.0 后新增的内存淘汰策略）：淘汰整个键值中最少使用的键值。
+ *         (2)、查看当前 Redis 使用的内存淘汰策略
+ *                 可以使用 config get maxmemory-policy 命令，来查看当前 Redis 的内存淘汰策略
+ *         (3)、修改 Redis 内存淘汰策略有两种方法：
+ *                 方式一：通过“config set maxmemory-policy <策略>”命令设置。
+ *                        它的优点是设置之后立即生效，不需要重启 Redis 服务，缺点是重启 Redis 之后，设置就会失效。
+ *                 方式二：通过修改Redis配置 redis.conf文件 修改，设置“maxmemory-policy <策略>”，
+ *                        它的优点是重启 Redis 服务后配置不会丢失，缺点是必须重启 Redis 服务，设置才能生效。
+ *
+ * 十八、跳表结构
+ *      参考资料：https://blog.csdn.net/lzhcoder/article/details/122539972
+ *
+ * 十九、分布式的脑裂问题
  *      脑裂问题得名于人脑左右半球被分割后可能产生独立意识的医学现象。
  *          场景1：主从架构中的脑裂
  *                [原始集群]
@@ -576,5 +610,14 @@
  *          3、设置共享锁
  *             leader在选举通过后，要尝试获取一个共享锁，也即是增加一个第三方的仲裁机制，leader选举出来之后，要同时再去获取一个共享锁，达到两个条件，才能成为一个新的leader。
  *             但是此方法会有一个问题，当原leader挂了之后，对共享锁没有释放，这个时候是选举不出新的leader，会造成集群不可用，只能等原leader恢复才可以。
+ *
+ * 二十、红锁 RedLock
+ *      RedLock 是 Redis 官方提出的一种分布式锁算法，用于在分布式 Redis 环境中实现跨多个节点的互斥锁。
+ *      它由 Redis 作者 Salvatore Sanfilippo (antirez) 设计，旨在解决单节点 Redis 锁在故障转移时可能出现的锁失效问题。
+ *      在单节点或主从架构中使用 SETNX 实现的锁存在以下问题：
+ *      1、主从切换导致锁丢失：主节点获取锁后未同步到从节点时主节点宕机
+ *      2、时钟漂移问题：不同节点间系统时间不一致
+ *      3、客户端阻塞导致锁超时：业务处理时间超过锁有效期
+ *
  */
 public class Redis概述 {}

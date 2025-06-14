@@ -18,7 +18,7 @@ public class 阻塞队列3_阻塞等待API {
 			queue.put("a");
 			queue.put("b");
 			queue.put("c");   // 这里是没有返回值的，所以没办法打印
-			// queue.put("d"); // 队列卡槽只有3个，所以程序执行到这儿，会阻塞等待
+			// queue.put("d");   // 队列卡槽只有3个，所以程序执行到这儿，会阻塞等待
 
 			System.out.println(queue.take());
 			System.out.println(queue.take());

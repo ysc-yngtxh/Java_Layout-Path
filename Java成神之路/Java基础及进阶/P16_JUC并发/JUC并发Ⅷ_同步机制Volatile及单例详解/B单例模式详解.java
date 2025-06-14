@@ -93,11 +93,16 @@ class Singleton {
     private static volatile Singleton singleton; // 第二层锁，volatile关键字禁止指令重排
     public static Singleton getInstance() {
         if(singleton == null) {              // 第一层检查，检查是否有引用指向对象，高并发情况下会有多个线程同时进入
-            synchronized (Singleton.class) { //第一层锁，保证只有一个线程进入
+            synchronized (Singleton.class) { // 第一层锁，保证只有一个线程进入
                 // 双重检查，防止多个线程同时进入第一层检查(因单例模式只允许存在一个对象，故在创建对象之前无引用指向对象，所有线程均可进入第一层检查)
                 // 当某一线程获得锁创建一个Singleton对象时,即已有引用指向对象，singleton不为空，从而保证只会创建一个对象
                 if(singleton == null) {      // 第二层检查。假设没有第二层检查，那么第一个线程创建完对象释放锁后，后面进入对象也会创建对象，会产生多个对象
-                    // volatile关键字作用为禁止指令重排，保证返回Singleton对象一定在创建对象后
+	                // 在没有禁止重排序的情况下，singleton = new Singleton(); 可能被分解为：
+	                //     1、分配对象内存空间
+	                //     2、将引用指向内存空间（此时 instance 不为 null）
+	                //     3、初始化对象
+	                // 如果步骤2和3被重排序，其他线程可能访问到未完全初始化的对象。
+	                // 加了 volatile 后，对象的初始化过程被禁止指令重排，保证了其他线程看到的 singleton 一定是完全构造好的对象。
                     singleton = new Singleton();
                     // singleton = new Singleton 语句为非原子性，实际上会执行以下内容：
                     // (1)、在堆上开辟空间；(2)、属性初始化；(3)、引用指向对象

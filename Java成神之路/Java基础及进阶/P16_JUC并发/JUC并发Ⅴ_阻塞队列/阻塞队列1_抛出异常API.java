@@ -12,11 +12,12 @@ import java.util.concurrent.ArrayBlockingQueue;
  * 二.阻塞队列的种类和方法
  *    阻塞队列有主要以下几种：
  *       ArrayBlockingQueue: 由数组结构组成的有界阻塞队列
- *       LinkedBlockingDeque: 由链表结构组成的有界(但大小默认值Integer>MAX_VALUE)阻塞队列
+ *       LinkedBlockingQueue: 由链表结构组成的可选有界(但大小默认值Integer>MAX_VALUE)阻塞队列
  *       PriorityBlockingQueue: 支持优先级排序的无界阻塞队列。默认情况下，优先级由对象的自然顺序决定。队列构建时提供的比较器可以覆盖默认优先级。
  *       DelayQueue: 使用优先级队列实现的延迟无界阻塞队列
  *       SynchronousQueue: 不存储元素的阻塞队列，即是单个元素的队列
  *       LinkedTransferQueue: 由链表结构组成的无界阻塞队列
+ *       LinkedBlockingDeque: 由链表结构组成的双端阻塞队列
  */
 public class 阻塞队列1_抛出异常API {
     /**

@@ -13,7 +13,7 @@ public class 线程池2_七大参数及自定义线程池 {
      * public ThreadPoolExecutor(
      *        核心线程池大小                              int corePoolSize,
      *        最大核心线程池大小                           int maximumPoolSize,
-     *        空闲线程存活时间                             long keepAliveTime,
+     *        空闲线程存活时间                            long keepAliveTime,
      *        超时时间单位                                TimeUnit unit,
      *        工作队列（阻塞队列）                         BlockingQueue<Runnable> workQueue,
      *        线程工厂（创建新线程的，一般不动）             ThreadFactory threadFactory,
@@ -34,22 +34,22 @@ public class 线程池2_七大参数及自定义线程池 {
      *
      * public static ExecutorService newCachedThreadPool() {
      *       return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
-     *                                     60L,TimeUnit.SECONDS,
-     *                                    new SynchronousQueue<Runnable>());
+     *                                     60L, TimeUnit.SECONDS,
+     *                                     new SynchronousQueue<Runnable>());
      * }
      */
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        // 自定义线程池！工作中推荐使用ThreadPoolExecutor
+        // 自定义线程池！工作中推荐使用 ThreadPoolExecutor
         // TODO 注意：上述中方法返回类型 ExecutorService 是一个接口,而 ThreadPoolExecutor 是 ExecutorService 的一个具体实现类。
         //           ThreadPoolExecutor提供了对线程池的细粒度控制，例如核心线程数、最大线程数、空闲线程存活时间、工作队列等。
         ThreadPoolExecutor executorService = new ThreadPoolExecutor(
                 5,    // 核心线程池大小。
-                10,         /* 最大核心线程池大小。
-                               当任务数大于核心线程数大小，并不会立马去创建线程供任务使用，而是把任务放到下面我们定义的阻塞队列中。
-                               当阻塞队列也满了，还有多余的任务时，这个时候才会去创建新线程。并且创建的新线程数始终不能超过(10-5)个。
-                               如果创建的新线程处于空闲状态，且超过设置的存活时间，那么会被进行销毁处理。*/
-				3,          /* 空闲线程存活时间（超时时间）
-                               当线程数大于核心线程数时，多余的空闲线程存活的最长时间，超过该时间则会销毁该线程。*/
+                10,    /* 最大核心线程池大小。
+                          当任务数大于核心线程数大小，并不会立马去创建线程供任务使用，而是把任务放到下面我们定义的阻塞队列中。
+                          当阻塞队列也满了，还有多余的任务时，这个时候才会去创建新线程。并且创建的新线程数始终不能超过(10-5)个。
+                          如果创建的新线程处于空闲状态，且超过设置的存活时间，那么会被进行销毁处理。*/
+				3,     /* 空闲线程存活时间（超时时间）
+                          当线程数大于核心线程数时，多余的空闲线程存活的最长时间，超过该时间则会销毁该线程。*/
 				TimeUnit.SECONDS,    // 超时时间单位（如：TimeUnit.SECONDS[秒]、TimeUnit.MILLISECONDS[毫秒]...）
 				new LinkedBlockingDeque<>(3), // 工作队列（任务等待队列）。任务队列用于存放等待执行的任务，当线程池中的线程都在忙碌时，新任务会进入阻塞队列等待。
 				Executors.defaultThreadFactory(),     /* 线程工厂（用于创建新线程）

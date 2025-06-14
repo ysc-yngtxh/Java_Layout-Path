@@ -22,8 +22,8 @@ public class ConcurrentHashMap线程安全 {
 	 *     造成了数据被覆盖丢失，从而引发线程不安全。
 	 *
 	 *     HashMap的线程不安全主要体现在下面两个方面：
-	 *       1.在Jdk1.7中，当并发执行扩容操作时会造成环形链和数据丢失的情况。
-	 *       2.在Jdk1.8中，在并发执行put操作时会发生数据覆盖的情况。
+	 *       1、在Jdk1.7中，当并发执行扩容操作时会造成环形链和数据丢失的情况。
+	 *       2、在Jdk1.8中，在并发执行put操作时会发生数据覆盖的情况。
 	 *
 	 *       HashMap死链问题‌主要发生在 Jdk1.7 版本中，由于多线程并发扩容时使用头插法导致链表顺序反转，从而形成死循环。‌
 	 *       ①、‌线程T1 和 线程T2 同时对 HashMap 进行扩容操作‌。假设原链表顺序为A → B → C，线程T1 使用头插法将链表变为C → B → A。
@@ -44,6 +44,13 @@ public class ConcurrentHashMap线程安全 {
 	 *
 	 *    此外，Jdk1.8中的 ConcurrentHashMap 还引入了CAS算法(无锁算法)来进一步提高并发性能。它可以在多线程环境下实现无锁的数据修改。
 	 *    在 ConcurrentHashMap 中，CAS算法 主要用于确保节点链接的原子性，从而避免在链表或红黑树的修改过程中产生线程安全问题。
+	 *    CAS算法 在 ConcurrentHashMap 中的具体应用场景。
+	 *        1、节点插入时的 CAS 应用
+     *           空桶位插入（最典型应用：HashMap 在多线程下的 put 操作中，是可能会出现数据覆盖的问题）
+     *        2、计数操作中的 CAS
+     *           sizeCtl 控制变量
+     *        3、扩容操作中的 CAS
+     *           协调多个线程共同完成哈希表扩容
 	 *
 	 *    总的来说，Jdk1.8中 ConcurrentHashMap 通过采用更细粒度的桶级别锁和CAS算法，实现了更高的并发性能和更好的线程安全性。
 	 *    这种优化使得 ConcurrentHashMap 在多线程环境下能够更有效地处理大量的并发读写操作。
@@ -59,7 +66,7 @@ public class ConcurrentHashMap线程安全 {
 	 *         这种二义性在单线程环境中可以通过调用containsKey(key)方法来消除，
 	 *         但在多线程环境中，由于并发操作的存在，这种判断可能变得不准确，从而引发线程安全问题。
 	 *         因此在源码中：putVal(K key, V value, boolean onlyIfAbsent) {
-	 *                 		   // 首先会判断 key 和 value 是否为 null,如果是则抛出异常
+	 *                 	       // 首先会判断 key 和 value 是否为 null,如果是则抛出异常
 	 *                         if (key == null || value == null) throw new NullPointerException();
 	 *                     }
 	 *
