@@ -2,7 +2,7 @@ package Q17_23种设计模式.A工厂模式.C_抽象工厂模式;
 
 /**
  * @Author 游家纨绔
- * @Description TODO 抽象产品-燃油车
+ * @Description TODO 抽象产品族-燃油车
  * @Date 2025-06-16 19:00:00
  */
 public interface ProductA {
