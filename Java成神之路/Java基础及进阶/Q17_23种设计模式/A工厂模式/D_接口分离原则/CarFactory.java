@@ -33,7 +33,7 @@ class TeslaFactory implements CarFactory {
 
 	@Override
 	public ProductB createProductB() {
-		return new ProductElectricity2();
+		return new ProductNewEnergy2();
 	}
 }
 // 品牌-小米
@@ -45,6 +45,6 @@ class XiaomiFactory implements CarFactory {
 
 	@Override
 	public ProductB createProductB() {
-		return new ProductElectricity2();
+		return new ProductNewEnergy2();
 	}
 }

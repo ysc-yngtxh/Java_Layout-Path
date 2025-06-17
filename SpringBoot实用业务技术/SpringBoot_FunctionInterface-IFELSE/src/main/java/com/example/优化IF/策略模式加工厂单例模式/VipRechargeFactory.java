@@ -10,7 +10,7 @@ public class VipRechargeFactory {
 		map = Map.of("充值一个月会员", new OneMonthVipStrategy(),
 		             "充值三个月会员", new ThreeMonthVipStrategy(),
 		             "充值六个月会员", new SixMonthVipStrategy()
-		            );
+		);
 	}
 
 	public static VipRechargeFactory getInstance() {
