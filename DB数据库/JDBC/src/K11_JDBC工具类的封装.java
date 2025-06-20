@@ -13,10 +13,10 @@ public class K11_JDBC工具类的封装 {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try{
-            //获取连接
+            // 获取连接
             conn = DBUtil.getConnection();
 
-            //获取预编译的数据库操作对象
+            // 获取预编译的数据库操作对象
             String sql = "select no,name,age,height from t_student where name like ?";
             ps = conn.prepareStatement(sql);
             ps.setString(1,"%游%");

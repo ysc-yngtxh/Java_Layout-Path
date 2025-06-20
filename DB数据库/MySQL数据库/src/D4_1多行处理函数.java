@@ -29,7 +29,7 @@
  *            找出最高工资: SELECT MAX(sal) FROM t_emp;
  *            找出最低工资: SELECT MIN(sal) FROM t_emp;
  *            找出平均工资: SELECT AVG(sal) FROM t_emp;
- *            找出总人数:   SELECT COUNT(*) FROM t_emp;     -- 不是统计某个字段中数据的个数，而是统计总记录条数（和某个字段无关）
+ *            找出总人数:   SELECT COUNT(*) FROM t_emp;      -- 不是统计某个字段中数据的个数，而是统计总记录条数（和某个字段无关）
  *                        SELECT COUNT(ename) FROM t_emp;  -- 表示统计comm字段中不为 null 的数据总数量
  *
  *            分组函数自动忽略null
@@ -48,9 +48,9 @@
  *                 原因：SQL语句当中有一个语法规则，分组函数不可直接使用在where字句当中，why？------ 链接到下面 group by 和 having
  *
  *     TODO SQL中的 count(1)、count(*) 与 count(列名) 到底有什么区别？
- *     count(列名)：只包括列名那一列，在统计结果的时候，会忽略该列值为null的记录
- *     count(*)：包括了所有的列，相当于行数，在统计结果的时候，不会忽略为NULL的值。
- *     count(1)：包括了忽略所有列，在统计结果的时候，不会忽略为NULL的值。
+ *     count(列名)：统计指定列名的所有行数，不包括 NULL 值行
+ *     count(*)：包括了所有的列，相当于行数，在统计结果的时候，不会忽略为NULL行的值。
+ *     count(1)：包括了忽略所有列，在统计结果的时候，不会忽略为NULL行的值。
  *               这个 1 代表什么呢？最开始我以为表示列的下标(1表示第一列)，后来查阅资料发现并不是。
  *               这里的 1 是指把每一行的数据用 1 表示，假如我有十行数据，那么我就有十个1，用1代表数据行，最后再统计有多少个 1 就行。
  *               ⚠️：这里的 1 只是作为一个常量值，你也可以是count(2)、count(3)、count(4)
@@ -185,10 +185,10 @@
  *        [1]、SELECT JSON_ARRAYAGG( province ) FROM t_emp;
  *             -- 查询省份结果为: ["北京", "北京", "太原", "河南省", "湖北省", "湖北省"]
  *        [2]、SELECT JSON_ARRAYAGG( province ) FROM t_emp GROUP BY province;
- *             -- 查询去重省份结果为：["北京"]
+ *             -- 查询去重省份结果为：["北京", "北京"]
  *                                 ["太原"]
  *                                 ["河南省"]
- *                                 ["湖北省"]
+ *                                 ["湖北省", "湖北省"]
  *
  *     3、JSON_OBJECTAGG(key, value)	用于创建一个JSON对象，其中包含指定的键值对。
  *        [1]、SELECT JSON_OBJECTAGG(id, ename) FROM t_emp;

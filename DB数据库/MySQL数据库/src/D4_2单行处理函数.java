@@ -18,7 +18,7 @@
  * ---------------------------------------------------------------------------------------------------------------
  *   Ⅰ、字符函数
  *      1、length 获取参数值的字节个数（每个英文一个字节；中文需要看编码，utf8编码一个中文3个字节）
- *         SELECT LENGTH(name) FROM tb_order;  -- 比如 name='游家纨绔' ，那么返回数据为 12; name='yjwk' ，那么返回数据为 4
+ *         SELECT LENGTH(name) FROM tb_order;  -- 比如 name='游家纨绔'，那么返回数据为 12; name='yjwk'，那么返回数据为 4
  *
  *      2、concat 拼接字符串【concat_ws相较于concat可以用指定的分隔符连接多个字符串（ws是With Separator缩写）】
  *         [1]、SELECT CONCAT(name, alias) FROM tb_order;
@@ -111,21 +111,29 @@
  *      6.date_format 将日期转换成字符
  *           SELECT DATE_FORMAT('2023/09/20', '%Y年%m月%d日');  -- 返回 2023年09月20日
  *
- *      7. 时间间隔加减
+ *      7. 使用时间间隔进行加减
  *           -- date_add 加
- *           select date_add('2025-1-9', interval 1 day) dayTime,
+ *           select date_add('2023-05-15 14:30:00', interval 3 HOUR) hourTime,
+ *                  date_add('2025-1-9', interval 1 day) dayTime,
  *                  date_add('2025-1-9', interval 1 month) monthTime,
- *                  date_add('2025-1-9', interval 1 year) yearTime;
- *           -- date_add 减
+ *                  date_add('2025-1-9', interval 1 year) yearTime
+ *                  date_add('2023-05-15', interval '1-2-3' YEAR_MONTH_DAY);
+ *           -- date_sub 减
  *           select date_sub('2025-1-9', interval 1 day) dayTime,
  *                  date_sub('2025-1-9', interval 1 month) monthTime,
  *                  date_sub('2025-1-9', interval 1 year) yearTime;
  *
- *      8. 日期时间减法
+ *      8. 支持使用 + INTERVAL 进行日期时间加减法运算
+ *           -- 当前日期加1周
+ *           SELECT CURDATE() + interval 1 WEEK;
+ *           -- 指定日期加15分钟
+ *           SELECT '2023-05-15 14:30:00' - interval 15 MINUTE;
+ *
+ *      9. 计算两个日期或时间之间的差值
  *           -- datediff 日期减
- *           select datediff('2025-1-9', '2025-1-5') intervfalDay;
+ *           select datediff('2025-1-9', '2025-1-5') intervalDay;
  *           -- timediff 时间减
- *           select timediff('12:00:00', '11:10:00') intervfalTime;
+ *           select timediff('12:00:00', '11:10:00') intervalTime;
  * ---------------------------------------------------------------------------------------------------------------
  *   Ⅳ、其它函数
  *      1.if(condition, expr_if_true, expr_if_false) 函数

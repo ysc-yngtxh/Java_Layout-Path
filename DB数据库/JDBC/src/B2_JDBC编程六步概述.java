@@ -26,7 +26,7 @@ public class B2_JDBC编程六步概述 {
              *    localhost：   IP地址
              *    3306:         MySQL数据库端口号
              *    db_database： 具体的数据库实例名
-             *    ?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC    这就是MySQL驱动8的新特性，加入了时区
+             *    ?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC    MySQL驱动8的新特性，加入了时区
              *
              * 说明：localhost和127.0.0.1都是本机IP地址
              */
