@@ -25,7 +25,7 @@
  *                JOIN
  *                   t_sal_grade s
  *                ON
- *                   t.avgSal BETWEEN s.loSal AND s.hiSal;
+ *                   t.avg_sal BETWEEN s.lo_sal AND s.hi_sal;
  *                // 使用子查询找出每个部门的平均薪水，然后将以上的查询结果(部门名称，平均薪水)当作临时表t，让t表和sal_grade表连接
  *
  *         案例二：找出每个部门平均的薪资等级。
@@ -38,10 +38,10 @@
  *                           JOIN                                            e.dept_no, AVG(s.grade)
  *                              t_sal_grade s                              FROM
  *                           ON                                              t_emp e
- *                              e.sal BETWEEN loSal AND hiSal;            JOIN
+ *                              e.sal BETWEEN loSal AND hi_sal;           JOIN
  *                                                                           t_sal_grade s
  *                                                                        ON
- *                                                                           e.sal BETWEEN s.loSal AND s.hiSal) t
+ *                                                                           e.sal BETWEEN s.lo_sal AND s.hi_sal) t
  *                                                                    GROUP BY
  *                                                                       t.dept_no;
  *                方法二：
@@ -52,7 +52,7 @@
  *                    JOIN
  *                       t_sal_grade s // 这里就没有使用from嵌套子查询，因为 emp e表 与 sal_grade s表 连接后需要查询的都在里面
  *                    ON                  就没有必要强行嵌套子查询，这种方法查询效率更高
- *                       e.sal BETWEEN s.loSal AND s.hiSal
+ *                       e.sal BETWEEN s.lo_sal AND s.hi_sal
  *                    GROUP BY
  *                       e.dept_no;
  * ---------------------------------------------------------------------------------------------------------------

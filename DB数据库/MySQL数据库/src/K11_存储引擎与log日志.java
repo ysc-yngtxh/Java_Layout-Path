@@ -17,7 +17,7 @@
  *   2、查看当前MySQL支持的存储引擎
  *        show engines \G;
  *
- *        目前Mysql8.0.34版本支持的存储引擎有9个
+ *        目前 MySql 8.x.x 版本支持的存储引擎有9个
  * ---------------------------------------------------------------------------------------------------------------
  *   3、常见的存储引擎
  *              第一个: InnoDB
@@ -97,6 +97,29 @@
  *         逻辑日志：可以简单理解为记录的就是Sql语句。
  *         物理日志：因为MySQL数据最终是保存在数据页中的，物理日志记录的就是数据页变更。
  *
+ *         Binlog 有三种格式记录信息，其中 STATEMENT 格式最接近"记录相反操作"的概念：
+ *         (1) STATEMENT 格式（MySQL 5.7.7 之前的默认格式）
+ *             记录原始SQL语句，回放时会通过执行原始SQL实现恢复
+ *             INSERT INTO accounts VALUES (1, 'Alice', 1000);
+ *             UPDATE accounts SET balance=1500 WHERE id=1;
+ *             DELETE FROM accounts WHERE id=1;
+ *         (2) ROW 格式（MySQL 5.7.7 及以后版本的默认格式）
+ *             INSERT: id=1,name='Alice',balance=1000
+ *             UPDATE: before(id=1,name='Alice',balance=1000) after(id=1,name='Alice',balance=1500)
+ *             DELETE: id=1,name='Alice',balance=1500
+ *         (3) MIXED 格式
+ *             混合使用STATEMENT和ROW格式
+ *
+ *         在一些特定的场景下可能需要通过 binlog 进行回滚操作：
+ *            <1> 错误地运行了全表更新语句
+ *            <2> 执行了错误的 DELETE/UPDATE 语句影响了大量数据
+ *            <3> 应用程序bug导致数据被错误修改
+ *         比如在以上场景下，可以通过 binlog 的回滚来撤销错误操作：
+ *            # 使用 mysqlbinlog 工具生成反向SQL
+ *            mysqlbinlog --start-position=位置 --stop-position=位置 binlog.000123 | mysql -u root -p
+ *            # 或先导出为SQL文件审查后再执行
+ *            mysqlbinlog --start-datetime="2025-06-20 14:00:00" --stop-datetime="2025-06-21 20:42:00" --base64-output=decode-rows -v binlog.000022 > analyze.txt
+ *
  *         Ⅰ、binlog使用场景
  *            主从复制：在Master端开启binlog，然后将binlog发送到各个Slave端，Slave端回放binlog从而达到主从数据一致。
  *            数据恢复：通过使用mysqlbinlog工具来恢复数据。
@@ -111,15 +134,14 @@
  *            但是设置一个大一些的值可以提升数据库性能，因此实际情况下也可以将值适当调大，牺牲一定的一致性来获取更好的性能。
  *
  *     ②、Undo log
- *        Undo Log是InnoDB存储引擎内部用于实现事务原子性和一致性的重要机制，它记录了事务对数据库所做的更改的相反操作。
- *        例如：如果事务执行了一条INSERT语句，那么Undo Log会记录一个DELETE操作；
- *             若执行UPDATE，则记录一个相反的UPDATE操作。
- *             主要记录“修改前的值”，用于回滚和一致性读（如MVCC）。
+ *        Undo Log是InnoDB存储引擎内部用于实现事务原子性和一致性的重要机制，它保存的是数据被修改前的状态，采用高效的数据快照方式来实现回滚操作。
+ *        例如：假设有一个数据行，初始值为A。事务T修改该行值为B，那么就会在undo log中记录数据行值A。
+ *             主要就是为了记录“修改前的值”，用于回滚和一致性读（如MVCC）。
  *
  *        应用场景：
- *        回滚事务：当事务需要被回滚时，通过Undo Log可以恢复到事务开始前的数据状态。
- *        MVCC（多版本并发控制）：InnoDB利用Undo Log来提供不同事务之间的一致性读视图，
- *                             使得事务可以看到其他事务未提交之前的旧版本数据，从而避免锁竞争，提高并发性能。
+ *             回滚事务：当事务需要被回滚时，通过Undo Log可以恢复到事务开始前的数据状态。
+ *             MVCC（多版本并发控制）：InnoDB利用Undo Log来提供不同事务之间的一致性读视图，
+ *                                  使得事务可以看到其他事务未提交之前的旧版本数据，从而避免锁竞争，提高并发性能。
  *
  *        redo log保证事务的持久性，undo log用来帮助事务回滚及MVCC的功能。
  *
@@ -137,5 +159,9 @@
  *
  *        InnoDB 的 redo log 是固定大小的，比如可以配置为一组 4 个文件，每个文件的大小是1GB，
  *        那么redo log总共就可以记录 4GB 的操作。从头开始写，写到末尾就又回到开头循环写。
+ *     ④、总结
+ *        Undo Log：用于事务回滚，记录修改前的数据状态，是InnoDB引擎层实现的
+ *        Binlog：用于复制和恢复，记录数据变化操作，是MySQL Server层实现的
+ *        Redo Log：用于崩溃恢复，记录物理页的修改（这里没有提到但也很重要）
  */
 public class K11_存储引擎与log日志 {}

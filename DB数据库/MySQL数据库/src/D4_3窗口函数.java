@@ -25,8 +25,8 @@
  *
  *       需要注意：
  *          SQL标准规定：
- *              当有 ORDER BY 时，默认窗口框架是 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW，       框架范围：动态扩展(分区开始->当前行)
- *              当无 ORDER BY 时，默认窗口框架是 ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING，框架范围：固定(整个分区)
+ *             当有 ORDER BY 时，默认窗口框架是 RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW，       框架范围：动态扩展(分区开始->当前行)
+ *             当无 ORDER BY 时，默认窗口框架是 ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING，框架范围：固定(整个分区)
  *           设计逻辑：
  *              有排序时，假设您可能想计算"到目前为止"的累计值
  *              无排序时，假设您想查看整个分区的值
@@ -189,9 +189,92 @@
  *              FROM t_emp
  *              window w as (partition by wind);   -- 命名窗口定义;
  *        示例2：SELECT id, ename, sal, province,
- * 					   SUM(sal) over(w ORDER BY val DESC) sum_sal     -- 通过名称 w 引用窗口
+ * 					   SUM(sal) over(w ORDER BY sal DESC) sum_sal     -- 通过名称 w 引用窗口
  *              FROM t_emp
  *              window w as (partition by wind);   -- 命名窗口定义;
  *
+ *     5、窗口函数框架
+ *        ①、框架的定义语法：由 frame_units（框架单位）和 frame_extent（框架范围）两子句组成。
+ *        ②、框架单位（frame_units 子句）可以有 2 种选择：
+ *               rows：通过起始行和结束行来划定框架的范围，边界是明确的一行。具体参考示例 1、2。
+ *               range：通过具有相同值的行来划定框架的范围，边界是一个范围，具有相同值的行作为一个整体看待。具体参考示例 3、4。
+ *        ③、框架范围（frame_extent 子句）也有两种定义方式：
+ *               只定义起始点（frame_start），而终止点（frame_end）默认就会是当前行。
+ *               通过 between frame_start and frame_end 子句，同时定义起始点（frame_start）和终止点 （frame_end）。
+ *        ④、框架范围的起始点（frame_start）和终止点（frame_end）可以是以下几种：
+ * 		         current row：当框架单位是 rows 时，即当前行。当框架单位是 range 时，包含当前行和当前行相同的行（一个范围）。
+ * 		         unbound preceding：窗口内第 1 行。
+ * 		         unbound following：窗口内最后 1 行。
+ * 		         expr preceding：当框架单位是 rows 时，边界是当前行的前 expr 行。
+ *                               当框架单位是 range 时，边界是值和 "当前行的值 - expr" 相等的行，
+ *                                                   如果当前行的值是 null，那边界就是和当前行相等的行。
+ *               expr following：当框架单位是 rows 时，边界是当前行的后 expr 行。
+ *                               当框架单位是 range 时，边界是和 "当前行的值 + expr" 相等的行，
+ *                                                   如果当前行的值是 null，那边界就是和当前行相等的行。
+ *        ⑤、示例 1：SELECT id, ename, sal, province,
+ *                          LAST_VALUE(sal*10) OVER(PARTITION BY province ORDER BY sal rows unbounded preceding) AS last_sal
+ *                  FROM t_emp;
+ *                  框架的定义是 rows unbouned preceding。
+ *                  框架单位是 rows（行），框架范围是 unbounded preceding（组内第 1 行）。
+ *                  这里采用了仅定义起始点的方式，框架的终止点默认就是当前行（current row），
+ *                  定义等同于：rows between unbound preceding and current row
+ *           示例 2：SELECT id, ename, sal, province,
+ *                         SUM(sal*10) OVER(PARTITION BY province ORDER BY sal rows 1 preceding) AS sum_sal1,
+ *                         SUM(sal*10) OVER(PARTITION BY province ORDER BY sal rows between 1 preceding and current row) AS sum_sal2
+ *                  FROM t_emp;
+ *                  第一个框架的定义是 rows 1 preceding，框架单位是 rows（行），
+ *                  第一个框架范围是 1 preceding（当框架单位为 rows 时，1 preceding 代表当前行的前 1 行）.
+ *                  第一个框架采用了仅定义起始点的方式，框架的终止点默认就是当前行。
+ *                  第二个框架采用了 between 1 preceding and current row 的方式，显式指定了框架的起始和结束范围，效果是相同的。
+ *           示例 3：SELECT id, ename, sal, province,
+ *                         SUM(sal) OVER(PARTITION BY province ORDER BY sal range 1 preceding) AS sum_sal,
+ *                         FIRST_VALUE(sal) OVER(PARTITION BY province ORDER BY sal range 1 preceding) AS first_sal,
+ *                         LAST_VALUE(sal) OVER(PARTITION BY province ORDER BY sal range 1 preceding) AS last_sal
+ *                  FROM t_emp;
+ *                  +----+----------------+----------+-----------+-----------+-----------+----------+
+ *                  | id | ename          | sal      | province  | sum_sal   | first_sal | last_sal |
+ *                  +----+----------------+----------+-----------+-----------+-----------+----------+
+ *                  |  3 | WARD           |  1250.00 | 上海市     |   1250.00 |   1250.00 |  1250.00 |
+ *                  |  4 | JONES          |  2850.00 | 上海市     |   2850.00 |   2850.00 |  2850.00 |
+ *                  |  9 | Tiffany Stone  | 28986.97 | 东莞       |  28986.97 |  28986.97 | 28986.97 |
+ *                  |  7 | Inoue Momoka   | 54929.11 | 东莞       | 109858.22 |  54929.11 | 54929.11 |
+ *                  |  8 | Cheng Chi Ming | 54929.11 | 东莞       | 109858.22 |  54929.11 | 54929.11 |
+ *                  | 10 | Saito Takuya   | 59816.50 | 东莞       |  59816.50 |  59816.50 | 59816.50 |
+ *                  |  1 | SMITH          |   800.00 | 北京市     |    800.00 |    800.00 |   800.00 |
+ *                  |  2 | ALLEN          |  1600.00 | 深圳       |   1600.00 |   1600.00 |  1600.00 |
+ *                  |  5 | Yau Wai Yee    | 31047.97 | 深圳       |  31047.97 |  31047.97 | 31047.97 |
+ *                  |  6 | Gong Jiehong   | 44757.87 | 深圳       |  44757.87 |  44757.87 | 44757.87 |
+ *                  +----+----------------+----------+-----------+-----------+-----------+----------+
+ *                  框架定义为 range 1 preceding，等价于 range between 1 preceding and current row。
+ *                  当框架单位为 range 时，这里的 1 preceding 不再是前 1 行的意思，而是 当前窗口函数【如：sum(sal)】中的sal值 - 1"。
+ *                  而 range between 1 preceding and current row 代表值的范围落在区间 [当前sal值-1，sal值] 内所有行。
+ *                  示例说明：在 province=‘东莞’ 情况下，
+ *                     第一行 sal 值为 28986.97，因此框架包含值在 [28986.97-1, 28986.97] 范围内的所有行，
+ *                                             即 只有第一行（28986.97）在此范围内，所以 sum 求和结果为 28986.97。
+ * 				       第二行 sal 值为 54929.11，因此框架包含值在 [54929.11-1, 54929.11] 范围内的所有行，
+ *                                             即 第二（54929.11）和第三（54929.11）两行，sum 求和结果为 54929.11+54929.11=109858.22。
+ * 				       第三行 sal 值为 54929.11，因此框架包含值在 [54929.11-1, 54929.11] 范围内的所有行，
+ *                                             即 第二（54929.11）和第三（54929.11）两行，sum 求和结果为 54929.11+54929.11=109858.22。
+ * 				       第四行 sal 值为 59816.50，因此框架包含值在 [59816.50-1, 59816.50] 范围内的所有行，
+ *                                             即 第四行（59816.50），sum 求和结果为 59816.50。
+ *           示例 4：SELECT id, ename, sal, province,
+ *                         SUM(sal) OVER(PARTITION BY province ORDER BY sal range 100 preceding) AS sum_sal,
+ *                         FIRST_VALUE(sal) OVER(PARTITION BY province ORDER BY sal range 100 preceding) AS first_sal,
+ *                         LAST_VALUE(sal) OVER(PARTITION BY province ORDER BY sal range 100 preceding) AS last_sal
+ *                  FROM t_emp;
+ *                  示例说明：在 province=‘东莞’ 情况下，
+ *                     第一行 sal 值为 28986.97，因此框架包含值在 [28986.97-100, 28986.97] 范围内的所有行，
+ *                                             即 只有第一行（28986.97）在此范围内，所以 sum 求和结果为 28986.97。
+ * 				       第二行 sal 值为 54929.11，因此框架包含值在 [54929.11-100, 54929.11] 范围内的所有行，
+ *                                             即 第二（54929.11）和第三（54929.11）两行，sum 求和结果为 54929.11+54929.11=109858.22。
+ * 				       第三行 sal 值为 54929.11，因此框架包含值在 [54929.11-100, 54929.11] 范围内的所有行，
+ *                                             即 第二（54929.11）和第三（54929.11）两行，sum 求和结果为 54929.11+54929.11=109858.22。
+ * 				       第四行 sal 值为 59816.50，因此框架包含值在 [59816.50-100, 59816.50] 范围内的所有行，
+ *                                             即 第四行（59816.50），sum 求和结果为 59816.50。
+ *
+ *     6、LeetCode 窗口函数题目
+ *        ①、178. 分数排名 [https://leetcode.cn/problems/rank-scores/description/]
+ *        ②、184. 最高工资 [https://leetcode.cn/problems/department-highest-salary/description/]
+ *        ③、185. 前三工资 [https://leetcode.cn/problems/department-top-three-salaries/description/]
  */
 class D4_3窗口函数 {}
