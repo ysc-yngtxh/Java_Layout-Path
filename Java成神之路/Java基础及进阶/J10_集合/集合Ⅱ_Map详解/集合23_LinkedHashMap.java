@@ -13,6 +13,8 @@ import java.util.Map;
  */
 public class 集合23_LinkedHashMap {
 	/* LinkedHashMap 可以认为是 HashMap+LinkedList，即它既使用HashMap操作数据结构，又使用LinkedList维护插入元素的先后顺序。
+	 *   HashMap 数组部分为"桶"，哈希冲突部分为节点，LinkedHashMap 是 HashMap 的子类，底层使用双向链表维护节点的插入顺序。
+	 *   特点：
 	 *   1、Key 和 Value值 都允许为null或者空
 	 *   2、Key值 重复会覆盖、Value值 允许重复
 	 *   3、有序 --> 指的是存进去的数据跟取出来的数据顺序是一样的【这与HashMap最大的区别】

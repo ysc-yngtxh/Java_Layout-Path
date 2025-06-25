@@ -31,7 +31,7 @@ public class ConcurrentHashMap线程安全 {
 	 *       ③、‌当 T1 完成扩容后，T2恢复执行‌，此时 T2 将A插入新链表的头部，接着处理B时，B.next指向A，形成A ↔︎ B的循环，导致死循环。
 	 *
 	 * 二、ConcurrentHashMap是如何保证线程安全的？
-	 *    在 Jdk1.8 中，ConcurrentHashMap放弃了之前版本中使用的分段锁技术，转而采用 桶级别锁+Node数组+链表+红黑树 的结构。
+	 *    在 Jdk1.8 中，ConcurrentHashMap放弃了之前版本中使用的分段锁技术，转而采用 桶级别锁+Node数组+链表/红黑树 的结构。
 	 *    分段锁：
 	 *        在 Jdk1.7 中，ConcurrentHashMap采用了分段锁技术，且数据结构类似于HashMap，只是在Node数组之上还有一个Segment。
 	 *        首先将Node数组分成一段一段的存储（比如：3个Node数组为一段），然后给每一段数据配一把锁，

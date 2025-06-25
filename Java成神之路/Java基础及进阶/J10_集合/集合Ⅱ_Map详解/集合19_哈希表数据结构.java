@@ -15,7 +15,7 @@ import java.util.Set;
  *         哈希表将以上的两种数据结构融合在一起，充分发挥他们各自的优点
  *
  *    3、HashMap集合底层的源码：
- *       public class HashMap{
+ *       public class HashMap {
  *            // HashMap底层实际上就是一个数组（一维数组）
  *            Node<K,V>[] table;
  *            // 静态的内部类HashMap.Node

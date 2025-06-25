@@ -17,10 +17,10 @@
  *
  * 二、创建JSON列
  *     CREATE TABLE products (
- *         id INT AUTO_INCREMENT PRIMARY KEY,
- *         name VARCHAR(100),
+ *         id         INT AUTO_INCREMENT PRIMARY KEY,
+ *         name       VARCHAR(100),
  *         attributes JSON,  -- JSON类型列
- *         price DECIMAL(10,2)
+ *         price      DECIMAL(10,2)
  *     );
  *
  * 三、插入JSON数据
@@ -29,10 +29,10 @@
  *                      VALUES ('iPhone 13', '{"color": "black", "memory": "128GB", "network": ["5G", "4G"]}', 5999.00);
  *     2. 使用JSON函数
  *        INSERT INTO products (name, attributes, price)
- *                      VALUES ('iPad Pro', JSON_OBJECT('color', 'silver',
- *                                                      'storage', '256GB',
- *                                                      'accessories', JSON_ARRAY('Pencil', 'Keyboard'))
- *                             , 6999.00);
+ *                      VALUES ('iPad Pro',
+ *                              JSON_OBJECT('color', 'silver', 'storage', '256GB', 'accessories', JSON_ARRAY('Pencil', 'Keyboard')),
+ *                              6999.00
+ *                      );
  *
  * 四、查询JSON数据
  *     1. 提取JSON元素（-> 操作符）

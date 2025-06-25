@@ -1,6 +1,6 @@
 /**
  * @author 游家纨绔
- * @dateTime 2024-12-16 20:43
+ * @dateTime 2024-12-16 20:40:00
  * @apiNote TODO
  */
 /* 一、创建表格式
@@ -57,7 +57,7 @@
  *         interval [ fields ] [ (p) ]	            12 字节	         时间间隔
  *
  *     ⑤、布尔类型
- *         boolean 类型只有1字节，有"true"(真)或"false"(假)两个状态， 第三种"unknown"(未知)状态，用 NULL 表示。
+ *         boolean 类型只有1字节，有 "true"(真) 或 "false"(假) 两个状态， 第三种 "unknown"(未知) 状态，用 NULL 表示。
  *
  *     ⑥、枚举类型
  *         枚举类型是一个包含静态合值的有序集合的数据类型。

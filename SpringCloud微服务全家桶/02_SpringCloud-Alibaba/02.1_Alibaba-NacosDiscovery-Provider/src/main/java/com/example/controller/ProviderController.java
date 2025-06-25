@@ -2,7 +2,7 @@ package com.example.controller;
 
 import com.example.pojo.User;
 import com.example.service.UserService;
-import java.util.concurrent.TimeUnit;
+import java.io.UnsupportedEncodingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,10 +26,10 @@ public class ProviderController {
 
     @GetMapping("/{id}")
     public User query(@PathVariable("id") Integer id
-                    , @RequestHeader(value = "Authorization", required = false) String authorization) {
+                    , @RequestHeader(value = "Authorization", required = false) String authorization) throws UnsupportedEncodingException {
         // TimeUnit.SECONDS.sleep(8);
         if (!Objects.isNull(authorization)) {
-            String decode = URLDecoder.decode(authorization, StandardCharsets.UTF_8);
+            String decode = URLDecoder.decode(authorization, String.valueOf(StandardCharsets.UTF_8));
             System.out.println(decode);
         }
         return userService.queryById(id);

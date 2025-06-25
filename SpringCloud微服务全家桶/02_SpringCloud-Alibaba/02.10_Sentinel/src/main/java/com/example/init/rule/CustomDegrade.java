@@ -44,4 +44,5 @@ public class CustomDegrade implements CommandLineRunner {
         rules.add(rule);
         DegradeRuleManager.loadRules(rules);
     }
+
 }

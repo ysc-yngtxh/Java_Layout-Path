@@ -9,7 +9,7 @@ import java.util.Arrays;
  *
  * 2、注意：财务软件中double是不够的。
  *          你处理过财务数据吗！？用的是哪一种类型？
- *          千万别说double，说java.math.BigDecimal
+ *          千万别说double，说 java.math.BigDecimal
  */
 public class Java4_高精度BigDecimal {
 
@@ -62,6 +62,10 @@ public class Java4_高精度BigDecimal {
 		BigDecimal v10 = new BigDecimal("3.140");
 		System.out.println("使用equals方法，数值比较会加入精度：" + v9.equals(v10));
 		System.out.println("使用compareTo方法，比较数值大小：" + v9.compareTo(v10));
+
+		// BigDecimal.ONE，表示精度极高的1。
+		// 相比 new BigDecimal(1) 会创建新对。BigDecimal.ONE是Java中预定义的常量，直接复用对象，性能更好。
+		System.out.println(BigDecimal.ONE);
 	}
 
 }

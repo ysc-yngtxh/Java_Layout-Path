@@ -1,6 +1,6 @@
 /**
  * @author 游家纨绔
- * @dateTime 2024-12-15 11:45
+ * @dateTime 2024-12-15 11:40:00
  * @apiNote TODO
  */
 /* 一、常用命令说明
@@ -33,6 +33,7 @@
  *                 -p #（默认5432）数据库的监听端口
  *                 -U # 用户名
  *                 -d # 数据库名称
+ * 		           -W # 提示输入密码
  *        ②、使用操作系统的默认配置
  *            psql [数据库名];
  *            例如：psql smartmatch_ece;
@@ -41,7 +42,7 @@
  *         # 在Postgresql中 USER(用户) 与 ROLE(角色) 没有太大的区别。
  *         # 不同的是 CREATE USER 定义的用户默认就有 'LOGIN' 权限，而 CREATE ROLE 默认没有 'LOGIN' 权限（默认没有，但是可以自定义加上）
  *         # 'LOGIN' 权限：表示的是登录数据库的权限。
- *         ①、创建角色：create role [角色名] with login password '密码'; (这里的角色加上了'LOGIN'权限)
+ *         ①、创建角色：create role [角色名] with login password '密码'; (这里的角色加上了 'LOGIN' 权限)
  *         ②、创建用户：create user [用户名] password '密码';
  *
  *     3、创建数据库

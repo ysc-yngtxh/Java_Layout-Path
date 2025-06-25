@@ -1,11 +1,11 @@
 /**
  * @Author 游家纨绔
  * @Description TODO
- * @Date 2025-04-30 11:31:50
+ * @Date 2025-04-30 11:30:50
  */
 /* MySql自带的4个系统数据库：information_schema、mysql、performance_schema、sys；
  *     1、information_schema
- *        这个数据库保存了mysql服务器所有数据库的信息。
+ *        这个数据库保存了MySql服务器所有数据库的信息。
  *        比如数据库的名、数据库的表、访问权限、数据库表的数据类型，数据库索引的信息等等。
  *     2、performance_schema
  *        主要用于收集数据库服务器性能参数，可用于监控服务器在一个较低级别的运行过程中的资源消耗、资源等待等情况。

@@ -30,6 +30,6 @@ public class ScheduleTimerConfig implements SchedulingConfigurer {
 					PeriodicTrigger periodicTrigger = new PeriodicTrigger(Duration.ofMillis(timer));
 					return periodicTrigger.nextExecution(triggerContext);
 				}
-		                            );
+		);
 	}
 }

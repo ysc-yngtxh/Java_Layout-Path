@@ -34,6 +34,6 @@ public class ScheduleCronConfig implements SchedulingConfigurer {
 					CronTrigger cronTrigger = new CronTrigger(cron);
 					return cronTrigger.nextExecution(triggerContext);
 				}
-		                            );
+		);
 	}
 }

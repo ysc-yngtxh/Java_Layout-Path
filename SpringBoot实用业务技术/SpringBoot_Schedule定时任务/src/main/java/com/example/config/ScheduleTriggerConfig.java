@@ -28,6 +28,6 @@ public class ScheduleTriggerConfig implements SchedulingConfigurer {
 				triggerContext -> {
 					return new CustomTrigger(trigger).nextExecution(triggerContext);
 				}
-		                            );
+		);
 	}
 }

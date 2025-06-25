@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author 游家纨绔
- * @dateTime 2024-08-15 21:00
+ * @dateTime 2024-08-15 21:00:00
  * @apiNote TODO 上传
  */
 @Controller
@@ -30,4 +30,5 @@ public class 上传 {
 		file.transferTo(dstFile);
 		return ResponseEntity.ok(Map.of("path", dstFile.getAbsolutePath()));
 	}
+
 }

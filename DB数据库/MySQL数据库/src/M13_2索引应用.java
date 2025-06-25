@@ -1,6 +1,6 @@
 /**
  * @author 游家纨绔
- * @dateTime 2023-10-05 06:38
+ * @dateTime 2023-10-05 06:40:00
  * @apiNote TODO Mysql索引应用
  */
 /* 1、索引的分类
@@ -11,13 +11,13 @@
  *    'MyISAM' 存储引擎下还有一个全文索引
  * ---------------------------------------------------------------------------------------------------------------
  * 2、建表时和建表之后添加、删除索引
- *    [1]、创建表的时候建立索引（MySQL中的INDEX和KEY是等价的，它们都是用来创建索引的关键字。因此，INDEX和KEY在语法上是相同的。）
+ *    [1]、创建表的时候建立索引（MySQL中的INDEX和KEY是等价的，它们都是用来创建索引的关键字。因此，INDEX和KEY在语法上是相同的）
  *         ①、普通索引：                       ②、联合索引：                       ③、唯一索引：
  *             CREATE TABLE t_student(           CREATE TABLE t_student(            CREATE TABLE t_student(
  *               id INT NOT NULL PRIMARY KEY,      id INT NOT NULL PRIMARY KEY,       id INT NOT NULL PRIMARY KEY,
  *               no BIGINT(50) NULL,               no BIGINT(50) null,                no BIGINT(50) NULL,
  *               name VARCHAR(20) NULL,            name VARCHAR(20) null,             name VARCHAR(20) NULL,
- *               INDEX index_no(no),                KEY index_no_name(no,name)         UNIQUE INDEX index_no(no)
+ *               INDEX index_no(no),               KEY index_no_name(no,name)         UNIQUE INDEX index_no(no)
  *               KEY index_name(name)            )                                  )
  *             )
  *            -- INDEX 和 KEY 是 完全等价 的关键字，KEY 是 MySQL 的历史遗留语法（早期版本更常用），现在推荐使用 INDEX 以提高可读性。
@@ -51,7 +51,7 @@
  *             -- 以下查询可以高效使用索引
  *             SELECT * FROM users WHERE name = 'John' ORDER BY age DESC;
  * ---------------------------------------------------------------------------------------------------------------
- * 3、Mysql 聚集(聚簇)索引 和 非聚集(非聚簇)索引 的区别
+ * 3、MySql 聚集(聚簇)索引 和 非聚集(非聚簇)索引 的区别
  *    [1]、MySQL中的 '一级索引' 又称为 '聚集索引'，通常是主键索引。
  *         '一级索引' 将索引和数据存储在一起，存储在同一个 'B+树' 中的叶子节点。当使用 '一级索引' 进行查询时，可以直接定位到数据行。
  *         例如：在一个表中使用字段 'id' 作为主键创建了 一级索引，当执行SQL语句 SELECT * FROM table WHERE id=1;
@@ -75,7 +75,7 @@
  *    总结：一级索引(聚集索引) 存储在 'B+树' 中叶子节点的数据，相当于表中对应索引值的一行数据
  *         二级索引(非聚集索引) 存储在 'B+树' 中叶子节点的数据，相当于表中对应索引字段的一个列数据（还包含一个主键值）
  * ---------------------------------------------------------------------------------------------------------------
- * 4、在Mysql中，什么是回表，什么是索引覆盖，索引下推？
+ * 4、在MySql中，什么是回表，什么是索引覆盖，索引下推？
  *    [1]、回表：是发生在 '二级索引' 上的一种数据查询操作，简单点讲就是我们要查询的列不在 '二级索引' 的列中，
  *              那么必须根据 '二级索引' 查到主键ID，然后再根据主键ID到 '聚簇索引树' 上去查询整行的数据，这一过程就叫作回表。
  *         比如：SQL语句 SELECT age,name FROM t_user WHERE age=30; 字段 [age] 为 '普通索引'，查询列 [name] 不是索引字段。
@@ -193,9 +193,9 @@
  *         SELECT * FROM t_student WHERE id+1=5;
  *
  *    [4]、where中索引列使用了函数;
- *         SELECT * FROM t_student WHERE SUBSTR(height,1,2)=17; // 截取了height字段的前面两位字符为 17的数据
+ *         SELECT * FROM t_student WHERE SUBSTR(height,1,2)=17; // 截取了height字段的前面两位字符为 17 的数据
  *
- *    [5]、在sql语句中因为字段类型不同，而导致索引失效的问题;
+ *    [5]、在Sql语句中因为字段类型不同，而导致索引失效的问题;
  *         SELECT * FROM t_student WHERE address=101;
  *         因为address字段的类型是varchar，而传参的类型是int，两种类型不同，从而导致索引失效。
  *

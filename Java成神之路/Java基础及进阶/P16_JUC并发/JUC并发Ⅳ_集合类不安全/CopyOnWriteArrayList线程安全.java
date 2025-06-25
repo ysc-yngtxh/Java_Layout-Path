@@ -47,7 +47,7 @@ public class CopyOnWriteArrayList线程安全 {
 	 *                  因为所有的修改操作都只会在副本容器里，对于原容器环境没有修改行为，自然就没有线程安全问题。
 	 *
 	 *        优势：CopyOnWriteArrayList 类，相比于使用 读写锁(ReentrantReadWriteLock) 处理List数据具有更优性能。
-	 *             可以说是对读写锁规则的升级。为了将读取的性能发挥到极致， CopyOnWriteArrayList 读取是完全不用加锁的。
+	 *             可以说是对读写锁规则的升级。为了将读取的性能发挥到极致，CopyOnWriteArrayList 读取是完全不用加锁的。
 	 *             并且更厉害的是：写入也不会阻塞读取操作，只有写入和写入之间需要进行同步等待，读操作的性能得到大幅度提升。
 	 *
 	 *        总结：CopyOnWriteArrayList由于写时进行复制，内存里面同时存在两个对象占用内存，如果对象过大容易发送YongGc和FullGc，

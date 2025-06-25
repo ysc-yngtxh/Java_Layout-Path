@@ -1,22 +1,22 @@
 /**
  * @author 游家纨绔
- * @dateTime 2024-05-07 07:47
+ * @dateTime 2024-05-07 07:50:00
  * @apiNote TODO
  */
 /* 自定义函数
  *    [1]、语法
  *         create function 函数名([参数列表]) returns 数据类型
  *         begin
- *             sql语句;
+ *             SQL语句;
  *             return 值;
  *         end;
  *
  *    [2]、示例：自定义函数 NEXTVAL()
  *         CREATE DEFINER=`root`@`localhost` FUNCTION `NEXTVAL`() RETURNS BIGINT(20) DETERMINISTIC
  *         BEGIN
- *             DECLARE current BIGINT; -- 声明bigint 类型的变量
+ *             DECLARE current BIGINT;               -- 声明bigint 类型的变量
  *             SELECT last_insert_id() INTO current; -- 获取插入数据的id，并将其赋值给变量 current
- *             RETURN current; -- 返回变量 current 的值
+ *             RETURN current;                       -- 返回变量 current 的值
  *         END;
  *
  *         语法解析：

@@ -1,6 +1,6 @@
 /**
  * @author 游家纨绔
- * @dateTime 2024-12-17 00:34
+ * @dateTime 2024-12-17 00:30:00
  * @apiNote TODO
  */
 /* 一、数学函数
@@ -196,13 +196,13 @@
  *            SELECT USER, CURRENT_USER;
  *
  * 六、加密函数
- *     1、加密函数MD5(str)
+ *     1、加密函数 MD5(str)
  *        ①、使用MD5函数加密字符串，输入语句如下：
- *            SELECT MD5 ('mypwd');
- *     2、加密函数ENCODE(str,pswd_str)
+ *            SELECT MD5('mypwd');
+ *     2、加密函数 ENCODE(str,pswd_str)
  *        ①、使用ENCODE加密字符串，输入语句如下：
  *            SELECT ENCODE('secret','hex'), LENGTH(ENCODE('secret','hex'));
- *     3、解密函数DECODE(cypt_str,pswd_str)
+ *     3、解密函数 DECODE(cypt_str,pswd_str)
  *        ①、使用DECODE函数解密被ENCODE加密的字符串，输入语句如下：
  *            SELECT DECODE(ENCODE('secret','hex'),'hex');
  *

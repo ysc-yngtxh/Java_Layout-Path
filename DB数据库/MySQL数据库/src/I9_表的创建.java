@@ -207,6 +207,7 @@
  *              ALTER TABLE t_student ADD COLUMN age int(11) DEFAULT NULL COMMENT '年龄' FIRST;
  *              ALTER TABLE t_student ADD COLUMN age int(11) DEFAULT NULL COMMENT '年龄' AFTER name;
  *              ALTER TABLE t_student ADD COLUMN age int(11) DEFAULT NULL COMMENT '年龄' BEFORE name;
+ *              # 注意⚠️：以下语句写法是错误的，不能在同一条语句中同时使用 AFTER 和 BEFORE 关键字。
  *              ALTER TABLE t_student ADD COLUMN age int(11) DEFAULT NULL COMMENT '年龄' AFTER name BEFORE sex;
  *         [2]、创建表之后修改字段名
  *              # ALTER TABLE 表名 CHANGE 旧字段名 新字段名 新数据类型;
@@ -216,6 +217,8 @@
  *              # ALTER TABLE 表名 MODIFY 字段名 数据类型;
  *              ALTER TABLE t_student MODIFY name varchar(32) UNIQUE COMMENT '姓名';
  *              ALTER TABLE t_student MODIFY name varchar(32) DEFAULT NULL COMMENT '姓名';
+ *              # ALTER TABLE 表名 MODIFY 字段名 数据类型 [约束条件];
+ *              ALTER TABLE t_student MODIFY name varchar(32) UNIQUE COMMENT '姓名' AFTER name;
  *         [4]、创建表之后删除字段
  *              # ALTER TABLE 表名 DROP 字段名;
  *              ALTER TABLE t_student DROP name;

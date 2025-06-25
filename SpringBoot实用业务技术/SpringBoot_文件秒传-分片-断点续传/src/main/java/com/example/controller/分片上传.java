@@ -86,4 +86,5 @@ public class 分片上传 {
 		// 由于是本地文件，所以开头是"file"，如果是服务器，请改成自己服务器前缀
 		return resource.getURI().toString();
 	}
+
 }
