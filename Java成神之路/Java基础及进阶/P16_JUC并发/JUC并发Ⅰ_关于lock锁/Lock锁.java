@@ -120,7 +120,7 @@ class Dataes {
 			System.out.println(Thread.currentThread().getName() + " --- demo1");
 			num = 2;
 			// condition1.signalAll(); // 唤醒所有线程
-			condition2.signal(); // 唤醒指定线程
+			condition2.signal();       // 唤醒指定线程
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -10,19 +10,16 @@ package L12_线程.线程Ⅴ_作业;
  *      t2 --> 6
  *      ...
  *
- *      要求：必须交替，并且 t1线程 负责输出奇数，t2线程 负责输出偶数。
+ *      要求：必须交替，并且 t1线程 负责输出奇数，t2线程 负责输出偶数，交替打印至 100.
  *           两个线程共享一个数字，每个线程执行时都要对这个数字进行：++
  */
-public class 线程15_线程作业 {
+public class 线程16_两线程交替打印 {
 
 	public static void main(String[] args) {
 		Number nb = new Number(1);
 
-		Thread t1 = new Thread(new Youshicheng(nb));
-		Thread t2 = new Thread(new Chenjiaqi(nb));
-
-		t1.setName("t1");
-		t2.setName("t2");
+		Thread t1 = new Thread(new Current(nb, 0), "t1");
+		Thread t2 = new Thread(new Current(nb, 1), "t2");
 
 		t1.start();
 		t2.start();
@@ -32,30 +29,41 @@ public class 线程15_线程作业 {
 
 class Number {
 	int n;
-
 	public Number(int n) {
 		this.n = n;
 	}
 }
 
-class Youshicheng implements Runnable {
+class Current implements Runnable {
+	private final Number nb;
+	private final int targetRemainder;
 
-	private Number nb;
-
-	public Youshicheng(Number nb) {
+	public Current(Number nb, int targetRemainder) {
 		this.nb = nb;
+		this.targetRemainder = targetRemainder;
 	}
 
 	@Override
 	public void run() {
 		while (true) {
 			synchronized (nb) {
-				if (nb.n % 2 == 0) {
+				// 终止条件
+				if (nb.n > 100) {
+					nb.notifyAll(); // 唤醒其他线程结束
+					break;
+				}
+				// ⚠️：多线程中判断尽量使用 while 而非 if 语句，因为 if 语句会出现【虚假唤醒】的问题
+				while (nb.n % 2 == targetRemainder) {
 					try {
 						nb.wait();
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+				}
+				// 再次检查终止条件
+				if (nb.n > 100) {
+					nb.notifyAll(); // 唤醒其他线程结束
+					break;
 				}
 				System.out.println(Thread.currentThread().getName() + "-->" + nb.n);
 				nb.n++;
@@ -63,33 +71,4 @@ class Youshicheng implements Runnable {
 			}
 		}
 	}
-
-}
-
-class Chenjiaqi implements Runnable {
-
-	private Number nb;
-
-	public Chenjiaqi(Number nb) {
-		this.nb = nb;
-	}
-
-	@Override
-	public void run() {
-		while (true) {
-			synchronized (nb) {
-				if (nb.n % 2 == 1) {
-					try {
-						nb.wait();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-				System.out.println(Thread.currentThread().getName() + "-->" + nb.n);
-				nb.n++;
-				nb.notifyAll();
-			}
-		}
-	}
-
 }

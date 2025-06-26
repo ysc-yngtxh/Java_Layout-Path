@@ -1,11 +1,11 @@
-package L12_线程.线程Ⅴ_作业;
+package L12_线程.线程Ⅳ_线程进阶内容;
 
 /**
  * @author 游家纨绔
  * @dateTime 2023-11-10 16:00:00
  * @apiNote TODO
  */
-public class 线程16_线程其他方法 {
+public class 线程15_线程其他方法 {
 
 	public static void main(String[] args) {
 
