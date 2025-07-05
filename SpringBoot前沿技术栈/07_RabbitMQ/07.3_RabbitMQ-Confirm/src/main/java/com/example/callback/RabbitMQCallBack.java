@@ -22,7 +22,7 @@ public class RabbitMQCallBack implements RabbitTemplate.ConfirmCallback, RabbitT
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
 
-	// 使用此方式就是将 ConfirmCallback、ReturnsCallback 。注入到 RabbitTemplate 当中。
+	// 使用此方式就是将 ConfirmCallback、ReturnsCallback。注入到 RabbitTemplate 当中。
 	// 这样在启动时候才会去执行 confirm 方法确认消息发布 。或者执行 returnedMessage 方法进行消息回退。
 	@PostConstruct  // 被注解的方法将在bean创建并且注入完成，在执行初始化方法之前调用。原理：后处理器
 	public void init() {
@@ -65,6 +65,7 @@ public class RabbitMQCallBack implements RabbitTemplate.ConfirmCallback, RabbitT
 				, returned.getReplyCode()
 				, returned.getReplyText()
 				, returned.getRoutingKey()
-		         );
+		);
 	}
+
 }

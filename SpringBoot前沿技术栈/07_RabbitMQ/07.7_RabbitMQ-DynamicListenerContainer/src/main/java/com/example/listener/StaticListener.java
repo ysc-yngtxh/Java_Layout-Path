@@ -24,4 +24,5 @@ public class StaticListener {
 	public void consume(Message message, Channel channel) {
 		log.info("StaticListener，收到消息: {}", message.toString());
 	}
+
 }

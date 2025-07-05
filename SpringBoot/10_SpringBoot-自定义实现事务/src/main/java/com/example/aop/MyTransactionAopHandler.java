@@ -52,9 +52,7 @@ public class MyTransactionAopHandler {
 		return result;
 	}
 
-	/**
-	 * 异常处理，捕获的异常是目标异常或者其子类，就进行回滚，否则就提交事务。
-	 */
+	// 异常处理，捕获的异常是目标异常或者其子类，就进行回滚，否则就提交事务。
 	private void completeTransactionAfterThrowing(Throwable throwable) {
 		if (exception != null) {
 			for (Class<? extends Throwable> e : exception) {
@@ -67,9 +65,7 @@ public class MyTransactionAopHandler {
 		doCommit();
 	}
 
-	/**
-	 * 执行回滚，最后关闭连接和清理线程绑定
-	 */
+	// 执行回滚，最后关闭连接和清理线程绑定
 	private void doRollBack() {
 		try {
 			connectHolder.getConnection().rollback();
@@ -80,9 +76,7 @@ public class MyTransactionAopHandler {
 		}
 	}
 
-	/**
-	 * 执行提交，最后关闭连接和清理线程绑定
-	 */
+	// 执行提交，最后关闭连接和清理线程绑定
 	private void doCommit() {
 		try {
 			connectHolder.getConnection().commit();
@@ -92,4 +86,5 @@ public class MyTransactionAopHandler {
 			connectHolder.cleanHolder();
 		}
 	}
+
 }

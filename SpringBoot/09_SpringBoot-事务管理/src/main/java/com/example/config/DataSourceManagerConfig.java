@@ -73,4 +73,5 @@ public class DataSourceManagerConfig {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource());
 		return jdbcTemplate;
 	}
+
 }

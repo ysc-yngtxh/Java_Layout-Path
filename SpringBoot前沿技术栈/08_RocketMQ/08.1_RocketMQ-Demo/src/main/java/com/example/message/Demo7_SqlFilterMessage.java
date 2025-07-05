@@ -41,8 +41,8 @@ public class Demo7_SqlFilterMessage {
 			// 发送消息到一个Broker
 			SendResult sendResult = producer.send(msg);
 			System.out.printf("RocketMQ 消息发送到Broker，Broker会将消息进行持久化处理。" +
-					                  "持久化成功后，Broker给生产者响应消息写入结果（ACK响应）。通过返回的结果判断是否成功送达。" +
-					                  "返回的结果为：%s %n", sendResult.getSendStatus());
+					          "持久化成功后，Broker给生产者响应消息写入结果（ACK响应）。通过返回的结果判断是否成功送达。" +
+					          "返回的结果为：%s %n", sendResult.getSendStatus());
 			System.out.printf("%s %n", sendResult);      // 打印返回结果
 		}
 		// 如果不再发送消息，关闭Producer实例。

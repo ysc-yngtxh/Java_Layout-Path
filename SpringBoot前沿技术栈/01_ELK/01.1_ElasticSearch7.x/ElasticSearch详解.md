@@ -194,7 +194,7 @@
         ```  
    - ![ES原理图片](src/main/resources/static/image-0.jpg)
 
-## **三、CURL语法**
+## **三、DSL语法**
 <figure>
 
   ## 1. 索引操作

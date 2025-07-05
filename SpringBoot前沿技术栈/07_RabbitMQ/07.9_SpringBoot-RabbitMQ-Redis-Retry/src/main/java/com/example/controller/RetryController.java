@@ -20,7 +20,7 @@ import java.util.Date;
 
 @Slf4j
 @Controller
-public class MyController {
+public class RetryController {
 
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
@@ -45,11 +45,11 @@ public class MyController {
 			if ("integrationExchange".equals(returned.getExchange()) || "orderExchange".equals(returned.getExchange())) {
 				return;
 			}
-			log.info("returnCallback:     " + "消息：" + returned.getMessage());
-			log.info("returnCallback:     " + "回应码：" + returned.getReplyCode());
-			log.info("returnCallback:     " + "回应信息：" + returned.getReplyText());
-			log.info("returnCallback:     " + "交换机：" + returned.getExchange());
-			log.info("returnCallback:     " + "路由键：" + returned.getRoutingKey());
+			log.info("returnCallback: 消息：{}", returned.getMessage());
+			log.info("returnCallback: 回应码：{}", returned.getReplyCode());
+			log.info("returnCallback: 回应信息：{}", returned.getReplyText());
+			log.info("returnCallback: 交换机：{}", returned.getExchange());
+			log.info("returnCallback: 路由键：{}", returned.getRoutingKey());
 		});
 		return rabbitTemplate;
 	}
@@ -93,7 +93,7 @@ public class MyController {
 			}
 		});
 		// 设置局部的消息返回机制
-		rabbitTemplate.setReturnsCallback(returned -> log.error("消息路由队列失败: " + returned.getReplyText()));
+		rabbitTemplate.setReturnsCallback(returned -> log.error("消息路由队列失败: {}", returned.getReplyText()));
 
 		rabbitTemplate.convertAndSend("integrationExchange"
 				, "integrationRoutingKey"
@@ -106,4 +106,5 @@ public class MyController {
 				, data);
 		return ResponseEntity.status(HttpStatus.OK).body("成功访问");
 	}
+
 }

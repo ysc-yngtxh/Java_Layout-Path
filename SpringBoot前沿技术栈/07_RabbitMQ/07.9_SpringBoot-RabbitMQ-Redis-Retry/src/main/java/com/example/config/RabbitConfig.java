@@ -82,4 +82,5 @@ public class RabbitConfig {
 	                                    @Qualifier("simpleDeadQueue") Queue queue) {
 		return BindingBuilder.bind(queue).to(directExchange).with("simpleDeadRoutingKey");
 	}
+
 }

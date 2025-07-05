@@ -30,4 +30,5 @@ public class AckConsumer {
 		// 第一个参数是消息的标识，第二个参数是是否批量确认，第三个参数是是否重新入队
 		// channel.basicNack(message.getMessageProperties().getDeliveryTag(), true, false);
 	}
+
 }

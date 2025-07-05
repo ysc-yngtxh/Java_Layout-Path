@@ -42,8 +42,8 @@ public class Demo8_Retry_DeadMessage {
 			Message msg = new Message("TopicRetry", "TagRetry", MessageKey, ("Hello RocketMQ " + i).getBytes(RemotingHelper.DEFAULT_CHARSET));
 			SendResult sendResult = producer.send(msg);
 			System.out.printf("RocketMQ 消息发送到Broker，Broker会将消息进行持久化处理。" +
-					                  "持久化成功后，Broker给生产者响应消息写入结果（ACK响应）。通过返回的结果判断是否成功送达。" +
-					                  "返回的结果为：%s %n", sendResult.getSendStatus());
+					          "持久化成功后，Broker给生产者响应消息写入结果（ACK响应）。通过返回的结果判断是否成功送达。" +
+					          "返回的结果为：%s %n", sendResult.getSendStatus());
 			System.out.printf("%s %n", sendResult);      // 打印返回结果
 		}
 		// 如果不再发送消息，关闭Producer实例。
@@ -63,7 +63,7 @@ public class Demo8_Retry_DeadMessage {
 			public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext context) {
 				System.out.printf("%s 接收队列的新消息: %s %n",
 				                  Thread.currentThread().getName(), list.stream().map(MessageExt::getBody).map(String::new).toList());
-				// TODO 业务报错了，比如可以在cache中返回 RECONSUME_LATER ，就会进行重试，重试达到上限该消息变为死信
+				// TODO 业务报错了，比如可以在cache中返回 RECONSUME_LATER，就会进行重试，重试达到上限该消息变为死信
 				return ConsumeConcurrentlyStatus.RECONSUME_LATER;
 			}
 		});

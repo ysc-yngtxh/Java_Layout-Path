@@ -29,4 +29,5 @@ public class ConfirmController {
 		rabbitTemplate.convertAndSend("confirmDirectExchange", "confirmDirectRoutingKey1", message + 1, correlationData2);
 		log.info("发送消息内容：{}，设置不正常的绑定交换机与路由「confirmRoutingKey1」", message);
 	}
+
 }

@@ -67,4 +67,5 @@ public class RabbitMQConfig {
            with("deadRoutingKey")：根据routingKey的值来绑定队列和交换机
         */
 	}
+
 }

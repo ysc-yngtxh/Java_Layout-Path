@@ -50,7 +50,7 @@ package com.example;
  *
  *      7、设值注入
  *         注入：就是赋值的意思
- *         简单类型：spring中规定Java的基本数据类型和String都是简单类型。
+ *         简单类型：Spring中规定Java的基本数据类型和String都是简单类型。
  *         di：给属性赋值
  *          1)、set注入(设置注入)：spring调用另类的set方法，你可以在set方法中完成属性赋值
  *             [1]、简单类型的set注入

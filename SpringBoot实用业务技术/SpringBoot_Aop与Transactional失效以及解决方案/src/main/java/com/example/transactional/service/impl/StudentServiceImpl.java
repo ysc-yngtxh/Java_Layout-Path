@@ -1,13 +1,21 @@
 package com.example.transactional.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.transactional.dao.StudentDao;
+import com.example.transactional.mapper.StudentMapper;
 import com.example.transactional.entity.Student;
 import com.example.transactional.service.StudentService;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionManager;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 
 /**
  * (Student)表服务实现类
@@ -16,21 +24,21 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2023-11-11 17:30:00
  */
 @Service("studentService")
-public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> implements StudentService {
+public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> implements StudentService {
 
 	@Autowired
-	private StudentDao studentDao;
+	private StudentMapper studentMapper;
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void saveUser() {
 		try {
 			Student student1 = new Student(10, "敏敏", "12345@11.com", 22);
-			studentDao.updateById(student1);
+			studentMapper.updateById(student1);
 			// 数据库中已经存在 Id=2 的数据，因此这条数据插入会失败，会出现运行异常
 			// 因此，只需要判断上述更新语句Id=10的这条数据是否被修改。如果修改，事务失效；如果没有修改，说明事务有效执行
 			Student student2 = new Student(2, "敏敏", "12387@11.com", 22);
-			studentDao.insert(student2);
+			studentMapper.insert(student2);
 		} catch (Exception e) {
 			System.out.println("insert()方法故意抛异常，制造回滚");
 			// 注意：事务默认回滚的异常为【RuntimeException】
@@ -44,7 +52,7 @@ public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> impleme
 		System.out.println("执行saveSigUser()方法...");
 		try {
 			Student student = new Student(8, "敏敏", "12387@11.com", 22);
-			studentDao.updateById(student);
+			studentMapper.updateById(student);
 		} catch (Exception e) {
 			System.out.println("updateById()方法更新异常");
 		}
@@ -57,7 +65,7 @@ public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> impleme
 		System.out.println("执行saveAllUser()方法...");
 		try {
 			Student student = new Student(9, "敏敏", "12387@11.com", 22);
-			studentDao.updateById(student);
+			studentMapper.updateById(student);
 		} catch (Exception e) {
 			System.out.println("updateById()方法更新异常");
 		}
@@ -67,4 +75,5 @@ public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> impleme
 		StudentService currentProxy = (StudentService) AopContext.currentProxy();
 		currentProxy.saveUser();
 	}
+
 }

@@ -2,9 +2,12 @@ package com.example.mapper;
 
 import com.example.pojo.Student;
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 public interface MappingParamDao {
+
+	List<Student> selectMap(Map<String,Object> map);
 
 	List<Student> selectStudents();
 

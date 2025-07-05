@@ -23,8 +23,8 @@ import java.util.List;
  * @dateTime 2023-10-21 18:00
  * @apiNote TODO 发送集合消息
  */
-@SpringBootTest(classes = Demo3_ListMessage.class)
-public class Demo3_ListMessage {
+@SpringBootTest(classes = Demo3_ListAndBatchMessage.class)
+public class Demo3_ListAndBatchMessage {
 
 	// 发送集合消息
 	@Test
@@ -65,7 +65,9 @@ public class Demo3_ListMessage {
 		pushConsumer.setConsumeThreadMin(5);
 		// 消费者最大线程量
 		pushConsumer.setConsumeThreadMax(10);
-		// 设置一次消费消息的条数，默认是1
+		// 控制消费者每次从 Broker 请求拉取的消息数量（网络传输层），默认是32
+		pushConsumer.setPullBatchSize(32);
+		// 控制传递给消费监听器 (MessageListener) 的批量消息数量（业务处理层），默认是1
 		pushConsumer.setConsumeMessageBatchMaxSize(1);
 
 		// 订阅一个或者多个Topic，以及Tag来过滤需要消费的消息

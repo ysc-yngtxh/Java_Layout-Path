@@ -63,13 +63,8 @@ public class PaymentService {
 		return result;
 	}
 
-	private void createOrder(Order order) {
-	}
+	private void createOrder(Order order) {}
 
-	;
+	private void updateOrder(Order order) {}
 
-	private void updateOrder(Order order) {
-	}
-
-	;
 }

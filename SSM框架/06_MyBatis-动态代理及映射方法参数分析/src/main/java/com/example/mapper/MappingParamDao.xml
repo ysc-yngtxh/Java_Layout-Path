@@ -4,6 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.MappingParamDao">
 
+    <select id="selectMap" resultType="com.example.pojo.Student">
+        select id,name,email,age from ssm_student where name = #{name} order by id
+    </select>
+
     <select id="selectStudents" resultType="com.example.pojo.Student">
         select id,name,email,age from ssm_student order by id
     </select>
@@ -12,7 +16,7 @@
     <select id="selectStudentsSingleParam" resultType="com.example.pojo.Student">
         select id,name,email,age from ssm_student where name = #{name}
         union all
-        select id,name,email,age from ssm_student where name = #{_paramenter}
+        select id,name,email,age from ssm_student where name = #{_parameter}
     </select>
 
     <!-- 当方法有多个参数时，直接使用 #{参数名} 的方式获取参数会报错 -->

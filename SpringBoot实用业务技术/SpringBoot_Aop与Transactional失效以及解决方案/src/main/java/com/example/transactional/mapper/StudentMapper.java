@@ -1,4 +1,4 @@
-package com.example.transactional.dao;
+package com.example.transactional.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.transactional.entity.Student;
@@ -9,4 +9,4 @@ import com.example.transactional.entity.Student;
  * @author 游家纨绔
  * @since 2023-11-11 17:30:00
  */
-public interface StudentDao extends BaseMapper<Student> {}
+public interface StudentMapper extends BaseMapper<Student> {}

@@ -3,11 +3,34 @@ package com.example;
 import com.example.mapper.MappingParamDao;
 import com.example.pojo.Student;
 import com.example.utils.MyBatisUtils;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
 public class TestMappingParam {
+
+	@Test
+	public void SelectMap() {
+		/* 使用mybatis的动态及代理机制，使用SqlSession.getMapper(dao接口)
+		 * getMapper能获取dao接口对于的实现类对象
+		 */
+		SqlSession sqlSession = MyBatisUtils.getSqlSession();
+		MappingParamDao dao = sqlSession.getMapper(MappingParamDao.class);
+		/**
+		 * 可以发现这里打印出的 mapper=com.sun.proxy.$Proxy6：即为jdk的动态代理
+		 * System.out.println("mapper=" + mapper.getClass().getName());
+		 */
+		// StudentDao类是接口，无法实例化，我们却能通过“接口对象dao”调用方法，很明显这里是jdk动态代理的对象执行数据库的操作
+		List<Student> Students = dao.selectMap(new HashMap<String, Object>() {{
+		    put("name", "敏敏");
+			put("age", 22);
+		}});
+		for (Student stu : Students) {
+			System.out.println("学生 = " + stu);
+		}
+	}
 
 	@Test
 	public void SelectStudents() {

@@ -68,7 +68,7 @@ public class DynamicListener {
 					channel.basicReject(
 							message.getMessageProperties().getDeliveryTag(),
 							false
-					                   );
+					);
 					throw e; // TODO 可选：继续抛出异常供重试策略 retryInterceptor 处理
 				}
 			}

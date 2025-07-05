@@ -11,4 +11,5 @@ import com.rabbitmq.client.Channel;
 public interface MessageHandler {
 
 	void handle(Object payload, Channel channel, long deliveryTag) throws Exception;
+
 }

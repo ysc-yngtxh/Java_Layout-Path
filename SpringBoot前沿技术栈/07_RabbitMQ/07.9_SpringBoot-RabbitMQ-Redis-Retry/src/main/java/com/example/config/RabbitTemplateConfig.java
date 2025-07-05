@@ -23,4 +23,5 @@ public class RabbitTemplateConfig {
 		// rabbitTemplate.setReturnsCallback(...);
 		return rabbitTemplate;
 	}
+
 }

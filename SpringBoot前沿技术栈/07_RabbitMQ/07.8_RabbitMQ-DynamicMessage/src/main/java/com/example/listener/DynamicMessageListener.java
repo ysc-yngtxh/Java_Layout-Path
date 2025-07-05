@@ -56,4 +56,5 @@ public class DynamicMessageListener implements ChannelAwareMessageListener {
 			channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, true);
 		}
 	}
+
 }

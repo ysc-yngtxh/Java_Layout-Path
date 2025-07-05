@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Service
-public class MyService {
+public class RetryService {
 
 	@Autowired
 	private StringRedisTemplate stringRedisTemplate;
@@ -31,7 +31,7 @@ public class MyService {
 			String msgId = (String) message.getMessageProperties().getHeaders().get("spring_returned_message_correlation");
 			System.out.println("获取消息关联Id：" + msgId);
 
-			// 这里获取 Redis 的 key 为"order"的数据，并判断其数据中 key 部分是否包含 msgId
+			// 这里获取 Redis 的 key 为"order" 的数据，并判断其数据中 key 部分是否包含 msgId
 			if (stringRedisTemplate.opsForHash().entries("order").containsKey(msgId)) {
 				// redis 中包含该 key，说明该消息已经被消费过,这个判断就是为了避免消息被重复消费。
 
@@ -92,4 +92,5 @@ public class MyService {
 		// 否则就会出现我虽然拿到了消息但并没有进行消费，造成死信队列的消息堆积
 		channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
 	}
+
 }

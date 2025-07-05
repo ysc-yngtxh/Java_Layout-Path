@@ -71,7 +71,7 @@ public class TaskController {
 					}
 					, 10
 					, TimeUnit.SECONDS
-			                                                                  );
+			);
 			System.out.println(scheduledFuture.get());
 
 			ScheduledFuture<?> scheduledFuture2 = executorService.scheduleAtFixedRate(
@@ -79,7 +79,7 @@ public class TaskController {
 					, 0
 					, 5000
 					, TimeUnit.MILLISECONDS
-			                                                                         );
+			);
 			System.out.println(scheduledFuture2.get());
 		} catch (Exception e) {
 			throw new RuntimeException(e);

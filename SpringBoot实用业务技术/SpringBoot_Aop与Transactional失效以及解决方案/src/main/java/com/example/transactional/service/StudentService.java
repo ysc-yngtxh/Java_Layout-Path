@@ -16,4 +16,5 @@ public interface StudentService extends IService<Student> {
 	void saveSigUser();
 
 	void saveAllUser();
+
 }

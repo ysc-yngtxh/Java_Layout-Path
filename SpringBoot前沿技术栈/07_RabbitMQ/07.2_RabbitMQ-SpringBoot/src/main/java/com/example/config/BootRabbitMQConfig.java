@@ -59,10 +59,10 @@ public class BootRabbitMQConfig {
 		return QueueBuilder
 				.durable("bootDirectQueueC")
 				// .maxLength(10) // 设置队列最大长度
-				.deadLetterExchange("deadExchange")  // 死信交换机声明
+				.deadLetterExchange("deadExchange")      // 死信交换机声明
 				.deadLetterRoutingKey("deadRoutingKey") // 死信消息的路由key
 				// .ttl(40000) // 消息过期时间设置 超出时间未消费成为死信
-				// .lazy() // 设置为惰性队列
+				// .lazy()     // 设置为惰性队列
 				.build();
 	}
 
