@@ -18,6 +18,12 @@
         <java.version>23</java.version>
     </properties>
 
+    <modules>
+        <module>10.1_SpringBoot-WebSocket</module>
+        <module>10.2_SpringBoot-WebSocket-STOMP</module>
+    </modules>
+    <packaging>pom</packaging>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

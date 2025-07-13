@@ -11,11 +11,11 @@ import java.util.logging.Logger;
  *    这一方法实际完成的是，给受阻塞的线程发出一个中断信号，这样受阻线程就得以退出阻塞的状态。
  *    更确切的说，如果线程被 Object.wait(), Thread.join() 和 Thread.sleep() 三种方法之一阻塞，
  *    此时调用该线程的 interrupt() 方法，那么该线程将抛出一个 InterruptedException中断异常，从而提早地终结被阻塞状态。
- *    如果线程没有被阻塞，这时调用interrupt()将不起作用，直到执行到wait(),sleep(),join()时，才马上会抛出异常。
+ *    如果线程没有被阻塞，这时调用interrupt()将不起作用，直到执行到 wait()、sleep()、join() 时，才马上会抛出异常。
  *
- *    线程A在执行sleep, wait, join时，线程B调用线程A的interrupt方法，的确这一个时候A会有 InterruptedException 异常抛出来。
- *    但这其实是在sleep,wait,join这些方法内部会不断检查中断状态的值，而自己抛出的InterruptedException。
- *    如果线程A正在执行一些指定的操作时如值：for、while、if,调用方法等,不会去检查中断状态,则线程A不会抛出 InterruptedException,而会一直执行着自己的操作。
+ *    线程A在执行sleep, wait, join时，线程B调用线程A的interrupt方法，这个时候A的确会有 InterruptedException 异常抛出来。
+ *    但这其实是在 sleep, wait, join 这些方法内部会不断检查中断状态的值，而自己抛出的InterruptedException。
+ *    如果线程A正在执行一些指定的操作时如值：for、while、if 调用方法等,不会去检查中断状态,则线程A不会抛出 InterruptedException,而会一直执行着自己的操作。
  *
  * 注意:
  *     当线程A执行到wait(),sleep(),join()时，抛出InterruptedException后，中断状态已经被系统复位了，即中断状态为执行前的状态

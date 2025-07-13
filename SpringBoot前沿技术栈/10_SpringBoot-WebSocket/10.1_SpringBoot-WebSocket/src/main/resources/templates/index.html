@@ -1,72 +1,507 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Java后端WebSocket的Tomcat实现</title>
-    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <title>WebSocket 客户端实现</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .jump-btn {
+            padding: 8px 16px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .jump-btn:hover {
+            background-color: #0b7dda;
+        }
+        #message-container {
+            height: 300px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+        .message {
+            margin-bottom: 8px;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        .system-message {
+            color: #666;
+            font-style: italic;
+        }
+        .user-message {
+            background-color: #e3f2fd;
+        }
+        .server-message {
+            background-color: #f1f8e9;
+        }
+        .error-message {
+            color: #d32f2f;
+            background-color: #ffebee;
+        }
+        #input-area {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        #text {
+            flex-grow: 1;
+            padding: 8px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .status-connected {
+            background-color: #4CAF50;
+        }
+        .status-disconnected {
+            background-color: #f44336;
+        }
+        .status-connecting {
+            background-color: #FFC107;
+        }
+    </style>
 </head>
-
 <body>
-    <div id="main" style="width: 1200px;height:100px;"></div>Welcome<br/>
-    <input id="text" type="text"/>
-    <button onclick="send()">发送消息</button>
-    <hr/>
-    <button onclick="closeWebSocket()">关闭WebSocket连接</button>
-    <hr/>
-    <div id="message"></div>
+    <div class="header-container">
+        <h1>WebSocket 客户端</h1>
+        <button class="jump-btn" onclick="window.open('http://localhost:8080/progress.html', '_blank')">跳转到进度监控</button>
+        <button class="jump-btn" onclick="window.open('http://localhost:8080/progress2.html', '_blank')">跳转到进度监控2</button>
+    </div>
+
+    <div>
+        <span class="status-indicator" id="status-indicator"></span>
+        <span id="status-text">正在连接...</span>
+    </div>
+
+    <div id="message-container"></div>
+
+    <div id="input-area">
+        <input id="text" type="text" placeholder="输入消息内容" disabled>
+        <button id="send-button" disabled>发送消息</button>
+        <button id="connect-button" style="display: none;">重新连接</button>
+        <button id="close-button" disabled>关闭WebSocket连接</button>
+    </div>
+
+    <div>
+        <h3>连接信息</h3>
+        <div id="connection-info"></div>
+    </div>
 </body>
 
-<script type="text/javascript">
-    var websocket = null;
-    // 判断当前浏览器是否支持WebSocket
-    if ('WebSocket' in window) {
-        // 改成你的地址
-        websocket = new WebSocket("ws://localhost:8080/api/websocket/100");
-    } else {
-        alert('当前浏览器 Not Support Websocket')
+<script>
+    /**
+     * WebSocket 客户端实现
+     * 功能：
+     *    1、自动连接 WebSocket 服务器
+     *    2、支持消息发送和接收
+     *    3、自动重连机制
+     *    4、状态管理和错误处理
+     */
+    class WebSocketClient {
+        constructor() {
+            this.config = {
+                // 最大重新连接次数
+                maxReconnectAttempts: 5,
+                // 重连基准延迟（毫秒）
+                reconnectBaseDelay: 1000,
+                // 最大重连延迟（毫秒）
+                maxReconnectDelay: 5000,
+                // 对应 @ServerEndpoint 注解中的 WebSocket 服务器地址
+                endpoint: "ws://localhost:8080/api/websocket/100"
+            };
+
+            // WebSocket 实例
+            this.websocket = null;
+            // 重连尝试次数
+            this.reconnectAttempts = 0;
+            // 是否手动关闭
+            this.isManualClose = false;
+            // 重连定时器
+            this.reconnectTimer = null;
+            // 当前连接状态
+            this.currentStatus = 'disconnected';
+
+            // 连接状态枚举
+            this.status = {
+                CONNECTING: 'connecting',
+                CONNECTED: 'connected',
+                DISCONNECTED: 'disconnected'
+            };
+
+            // 初始化 DOM 元素引用
+            this.elements = {
+                messageContainer: document.getElementById('message-container'),
+                textInput: document.getElementById('text'),
+                sendButton: document.getElementById('send-button'),
+                connectButton: document.getElementById('connect-button'),
+                closeButton: document.getElementById('close-button'),
+                statusIndicator: document.getElementById('status-indicator'),
+                statusText: document.getElementById('status-text'),
+                connectionInfo: document.getElementById('connection-info')
+            };
+
+            // 绑定事件
+            this.bindEvents();
+
+            // 初始化连接
+            this.initWebSocket();
+        }
+
+        /**
+         * 绑定 DOM 事件
+         */
+        bindEvents() {
+            this.elements.sendButton.addEventListener('click', () => this.send());
+            this.elements.connectButton.addEventListener('click', () => this.initWebSocket());
+            this.elements.closeButton.addEventListener('click', () => this.closeWebSocket());
+
+            // 监听输入框回车键
+            this.elements.textInput.addEventListener('keypress', (event) => {
+                if (event.key === 'Enter') {
+                    this.send();
+                }
+            });
+
+            // 监听窗口关闭事件
+            window.addEventListener('beforeunload', (event) => {
+                if (this.websocket && this.websocket.readyState === WebSocket.OPEN) {
+                    this.closeWebSocket();
+                    event.preventDefault();
+                    event.returnValue = '您确定要离开吗？WebSocket 连接将关闭。';
+                }
+            });
+        }
+
+        /**
+         * 初始化 WebSocket 连接
+         */
+        initWebSocket() {
+            // 清除之前的重连定时器
+            if (this.reconnectTimer) {
+                clearTimeout(this.reconnectTimer);
+                this.reconnectTimer = null;
+            }
+
+            // 如果已有连接，先关闭
+            if (this.websocket && this.websocket.readyState !== WebSocket.CLOSED) {
+                this.websocket.close();
+            }
+
+            this.updateStatus(this.status.CONNECTING);
+            this.isManualClose = false;
+
+            // 判断当前浏览器是否支持 WebSocket
+            if (!('WebSocket' in window)) {
+                this.showSystemMessage('当前浏览器不支持 WebSocket');
+                this.updateStatus(this.status.DISCONNECTED);
+                return;
+            }
+
+            try {
+                this.websocket = new WebSocket(this.config.endpoint);
+                this.setupEventHandlers();
+            } catch (error) {
+                console.error('WebSocket初始化失败:', error);
+                this.handleConnectionError();
+            }
+        }
+
+        /**
+         * 设置 WebSocket 事件处理器
+         */
+        setupEventHandlers() {
+            this.websocket.onopen = (event) => this.onWebSocketOpen(event);
+            this.websocket.onerror = (error) => this.onWebSocketError(error);
+            this.websocket.onmessage = (event) => this.onWebSocketMessage(event);
+            this.websocket.onclose = (event) => this.onWebSocketClose(event);
+        }
+
+        /**
+         * 更新连接状态
+         * @param {string} status - 新状态
+         */
+        updateStatus(status) {
+            this.currentStatus = status;
+
+            // 更新状态指示器
+            this.elements.statusIndicator.className = 'status-indicator';
+            switch(status) {
+                case this.status.CONNECTING:
+                    this.elements.statusIndicator.classList.add('status-connecting');
+                    this.elements.statusText.textContent = '正在连接...';
+                    break;
+                case this.status.CONNECTED:
+                    this.elements.statusIndicator.classList.add('status-connected');
+                    this.elements.statusText.textContent = '已连接';
+                    break;
+                case this.status.DISCONNECTED:
+                    this.elements.statusIndicator.classList.add('status-disconnected');
+                    this.elements.statusText.textContent = '已断开';
+                    break;
+            }
+
+            // 更新按钮状态
+            this.elements.textInput.disabled = status !== this.status.CONNECTED;
+            this.elements.sendButton.disabled = status !== this.status.CONNECTED;
+            this.elements.closeButton.disabled = status !== this.status.CONNECTED;
+            this.elements.connectButton.style.display = status === this.status.DISCONNECTED ? 'block' : 'none';
+        }
+
+        /**
+         * WebSocket 连接成功回调
+         */
+        onWebSocketOpen() {
+            this.reconnectAttempts = 0;
+            this.updateStatus(this.status.CONNECTED);
+            this.showSystemMessage('WebSocket 连接成功');
+            this.updateConnectionInfo();
+        }
+
+        /**
+         * WebSocket 错误回调
+         * @param {Error} error - 错误对象
+         */
+        onWebSocketError(error) {
+            console.error('WebSocket错误:', error);
+            this.handleConnectionError();
+        }
+
+        /**
+         * WebSocket 消息接收回调
+         * @param {MessageEvent} event - 消息事件
+         */
+        onWebSocketMessage(event) {
+            try {
+                const data = typeof event.data === 'string' ? event.data : JSON.parse(event.data);
+                this.showServerMessage(data);
+            } catch (error) {
+                console.error('消息处理错误:', error);
+                this.showErrorMessage('收到无法解析的消息');
+            }
+        }
+
+        /**
+         * WebSocket 连接关闭回调
+         * @param {{code: number, reason: string}} event - 关闭事件
+         */
+        onWebSocketClose(event) {
+            this.updateConnectionInfo(event);
+
+            if (this.isManualClose) {
+                this.showSystemMessage('WebSocket 连接已关闭');
+                this.updateStatus(this.status.DISCONNECTED);
+                return;
+            }
+
+            this.showSystemMessage(`WebSocket 连接断开，代码: ${event.code}, 原因: ${event.reason || '未知'}`);
+            this.updateStatus(this.status.DISCONNECTED);
+
+            // 自动重连逻辑
+            if (this.reconnectAttempts < this.config.maxReconnectAttempts) {
+                this.reconnectAttempts++;
+                const delay = Math.min(
+                    this.config.reconnectBaseDelay * Math.pow(2, this.reconnectAttempts - 1),
+                    this.config.maxReconnectDelay
+                );
+
+                this.showSystemMessage(`尝试重新连接 (${this.reconnectAttempts}/${this.config.maxReconnectAttempts})...`);
+                this.reconnectTimer = setTimeout(() => this.initWebSocket(), delay);
+            } else {
+                this.showSystemMessage('已达到最大重连次数');
+            }
+        }
+
+        /**
+         * 处理连接错误
+         */
+        handleConnectionError() {
+            this.showErrorMessage('WebSocket 连接发生错误');
+            this.updateStatus(this.status.DISCONNECTED);
+
+            if (!this.websocket || this.websocket.readyState === WebSocket.CLOSED) {
+                this.onWebSocketClose({code: 1006, reason: '连接错误'});
+            }
+        }
+
+        /**
+         * 发送消息
+         */
+        send() {
+            const message = this.elements.textInput.value.trim();
+            if (!message) {
+                alert('请输入消息内容');
+                return;
+            }
+
+            if (!this.websocket || this.websocket.readyState !== WebSocket.OPEN) {
+                alert('WebSocket 连接未就绪');
+                return;
+            }
+
+            try {
+                // 获取当前时间并格式化
+                function formatDateTime(date = new Date()) {
+                    const pad = num => num.toString().padStart(2, '0');
+                    return [
+                        date.getFullYear(),
+                        pad(date.getMonth() + 1),
+                        pad(date.getDate())
+                    ].join('-') + ' ' + [
+                        pad(date.getHours()),
+                        pad(date.getMinutes()),
+                        pad(date.getSeconds())
+                    ].join(':');
+                }
+
+                const payload = JSON.stringify({
+                    msg: message,
+                    timestamp: formatDateTime(new Date())
+                });
+
+                this.websocket.send(payload);
+                this.showUserMessage(message);
+                this.elements.textInput.value = '';
+                this.elements.textInput.focus();
+            } catch (error) {
+                console.error('发送消息失败:', error);
+                this.showErrorMessage('消息发送失败');
+            }
+        }
+
+        /**
+         * 关闭 WebSocket 连接
+         */
+        closeWebSocket() {
+            if (this.websocket && this.websocket.readyState === WebSocket.OPEN) {
+                this.isManualClose = true;
+                this.websocket.close();
+            }
+        }
+
+        /**
+         * 更新连接信息
+         * @param {CloseEvent} closeEvent - 关闭事件（可选）
+         */
+        updateConnectionInfo(closeEvent) {
+            let info = '';
+
+            if (this.websocket) {
+                info += `<p><strong>URL:</strong> ${this.websocket.url}</p>`;
+                info += `<p><strong>状态:</strong> ${this.getWebSocketState(this.websocket.readyState)}</p>`;
+
+                if (closeEvent) {
+                    info += `<p><strong>关闭代码:</strong> ${closeEvent.code}</p>`;
+                    info += `<p><strong>关闭原因:</strong> ${closeEvent.reason || '无'}</p>`;
+                }
+            } else {
+                info = '<p>未建立连接</p>';
+            }
+
+            this.elements.connectionInfo.innerHTML = info;
+        }
+
+        /**
+         * 获取 WebSocket 状态文本
+         * @param {number} state - WebSocket 状态码
+         * @returns {string} 状态描述
+         */
+        getWebSocketState(state) {
+            switch(state) {
+                case WebSocket.CONNECTING: return '连接中';
+                case WebSocket.OPEN: return '已连接';
+                case WebSocket.CLOSING: return '关闭中';
+                case WebSocket.CLOSED: return '已关闭';
+                default: return `未知状态 (${state})`;
+            }
+        }
+
+        /**
+         * 显示系统消息
+         * @param {string} content - 消息内容
+         */
+        showSystemMessage(content) {
+            this.appendMessage(content, 'system-message');
+        }
+
+        /**
+         * 显示服务器消息
+         * @param {string} content - 消息内容
+         */
+        showServerMessage(content) {
+            this.appendMessage(content, 'server-message');
+        }
+
+        /**
+         * 显示用户消息
+         * @param {string} content - 消息内容
+         */
+        showUserMessage(content) {
+            this.appendMessage(`我: ${content}`, 'user-message');
+        }
+
+        /**
+         * 显示错误消息
+         * @param {string} content - 消息内容
+         */
+        showErrorMessage(content) {
+            this.appendMessage(content, 'error-message');
+        }
+
+        /**
+         * 添加消息到容器
+         * @param {string} content - 消息内容
+         * @param {string} className - CSS 类名
+         */
+        appendMessage(content, className) {
+            const messageElement = document.createElement('div');
+            messageElement.className = `message ${className}`;
+            messageElement.textContent = content;
+            this.elements.messageContainer.appendChild(messageElement);
+            this.elements.messageContainer.scrollTop = this.elements.messageContainer.scrollHeight;
+        }
     }
 
-    // 连接发生错误的回调方法
-    websocket.onerror = function () {
-        setMessageInnerHTML("WebSocket连接发生错误");
-    };
-
-    // 连接成功建立的回调方法
-    websocket.onopen = function () {
-        setMessageInnerHTML("WebSocket连接成功");
-    }
-
-    // 接收到消息的回调方法
-    websocket.onmessage = function (event) {
-        console.log(event.data);
-        setMessageInnerHTML(event.data);
-    }
-
-    // 连接关闭的回调方法
-    websocket.onclose = function () {
-        setMessageInnerHTML("WebSocket连接关闭");
-    }
-
-    // 监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
-    window.onbeforeunload = function () {
-        closeWebSocket();
-    }
-
-    // 将消息显示在网页上
-    function setMessageInnerHTML(innerHTML) {
-        document.getElementById('message').innerHTML += innerHTML + '<br/>';
-    }
-
-    // 关闭WebSocket连接
-    function closeWebSocket() {
-        websocket.close();
-    }
-
-    // 发送消息
-    function send() {
-        var message = document.getElementById('text').value;
-        websocket.send('{"msg":"' + message + '"}');
-        setMessageInnerHTML(message + "&#13;");
-    }
+    // 初始化 WebSocket 客户端
+    document.addEventListener('DOMContentLoaded', () => {
+        new WebSocketClient();
+    });
 </script>
 </html>
