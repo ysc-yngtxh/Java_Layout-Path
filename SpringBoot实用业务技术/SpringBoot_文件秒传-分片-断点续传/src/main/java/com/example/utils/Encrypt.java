@@ -22,4 +22,5 @@ public class Encrypt {
 		}
 		return hexString.toString();
 	}
+
 }

@@ -28,4 +28,5 @@ public class GatewayController {
     public String fallbackHandler2() {
         return "This is the Gateway Fallback2.";
     }
+
 }

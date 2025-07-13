@@ -77,4 +77,5 @@ public class ContextProperties {
 		private String name;
 		private String address;
 	}
+
 }

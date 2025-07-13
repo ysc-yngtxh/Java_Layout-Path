@@ -36,6 +36,7 @@ public class StudentAsyncServiceImpl extends ServiceImpl<StudentMapper, Student>
 
 	private final StudentMapper studentMapper;
 
+	// 同步写操作异常报错，执行不到异步的写操作
 	@Override
 	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
 	public void saveAndAsync() {
@@ -47,6 +48,7 @@ public class StudentAsyncServiceImpl extends ServiceImpl<StudentMapper, Student>
 		});
 	}
 
+	// 异步写操作异常报错，但是整体方法执行成功，并不会将同步写操作进行回滚
 	@Override
 	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
 	public void saveAndAsyncException() {
@@ -78,7 +80,7 @@ public class StudentAsyncServiceImpl extends ServiceImpl<StudentMapper, Student>
 		}
 	}
 
-	// 解决事务失效问题的方案2：使用事务同步管理器（适用于Spring环境）
+	// 解决事务失效问题的方案2：
 	private final TransactionTemplate transactionTemplate;
 	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
 	public void saveAndAsyncScheme2() {
@@ -99,15 +101,10 @@ public class StudentAsyncServiceImpl extends ServiceImpl<StudentMapper, Student>
 		}).exceptionally(ex -> {
 			throw new RuntimeException("异步操作失败", ex);
 		});
-		try {
-			TimeUnit.SECONDS.sleep(3); // 等待异步操作完成
-		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
-		}
 	}
 
+	// 解决事务失效问题的方案3：使用事务同步回调（适用于Spring环境）
 	private final PlatformTransactionManager transactionManager;
-
 	@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
 	public void saveAndAsyncScheme3() {
 		// 写操作

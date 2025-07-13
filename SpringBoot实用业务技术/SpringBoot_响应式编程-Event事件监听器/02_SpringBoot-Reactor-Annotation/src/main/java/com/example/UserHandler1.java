@@ -33,12 +33,12 @@ public class UserHandler1 {
 		// 调用Service方法得到数据
 		Mono<User> userMono = userService.getById(Integer.parseInt(id));
 		// 把userMono进行转换返回
-		return userMono.flatMap(user ->
-				                        ServerResponse.ok()
+		return userMono.flatMap(
+				user -> ServerResponse.ok()
 				                                      .contentType(MediaType.APPLICATION_JSON)
 				                                      .body(BodyInserters.fromValue(userMono))
 				                                      .switchIfEmpty(notFound)
-		                       );
+		);
 	}
 
 	// 查询多个
@@ -78,4 +78,5 @@ public class UserHandler1 {
 		HttpServer httpServer = HttpServer.create();
 		httpServer.handle(adapter).bindNow();
 	}
+
 }

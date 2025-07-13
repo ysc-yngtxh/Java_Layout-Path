@@ -1,10 +1,10 @@
-package com.example;
+package org.example;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringBootAiApplicationTests {
+class WebSocketAnnotationApplicationTests {
 
 	@Test
 	void contextLoads() {

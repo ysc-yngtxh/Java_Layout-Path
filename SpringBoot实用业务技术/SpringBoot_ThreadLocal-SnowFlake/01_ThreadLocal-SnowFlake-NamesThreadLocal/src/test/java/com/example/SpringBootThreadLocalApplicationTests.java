@@ -7,11 +7,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.NamedThreadLocal;
+import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest
 class SpringBootThreadLocalApplicationTests {
-	private static final ThreadLocal<User> THREAD_LOCAL = new ThreadLocal<>();
 	private final Logger log = LoggerFactory.getLogger(SpringBootThreadLocalApplicationTests.class);
+
+	private static final ThreadLocal<User> THREAD_LOCAL = new ThreadLocal<>();
 
 	private static void setAndPrintData(User user) {
 		THREAD_LOCAL.set(user);
@@ -60,20 +62,20 @@ class SpringBootThreadLocalApplicationTests {
 		getAndPrintData();
 		THREAD_LOCAL.remove();
 
-		// 可以发现对于User共享对象,多线程并发互不影响数据。不论线程A和线程B赋值多少次，在主线程中的user始终为空。
+		// 可以发现对于User共享对象，多线程并发互不影响数据。不论线程A和线程B赋值多少次，在主线程中的user始终为空。
 	}
 
 
 	@Test
 	void contextLoads2() {
 		// NamedThreadLocal（Spring 框架提供），继承自 ThreadLocal，增加了名称标识功能，便于调试和日志记录。
-		NamedThreadLocal<String> transactionId =
-				new NamedThreadLocal<>("transactionId");
+		NamedThreadLocal<String> transactionId = new NamedThreadLocal<>("transactionId");
 		transactionId.set("1234567890");
 		log.info("当前线程：{}，上下文中的变量副本为: {}"
 				, Thread.currentThread().getName()
 				, transactionId.get()
-		        );
+		);
 		transactionId.remove();
 	}
+
 }

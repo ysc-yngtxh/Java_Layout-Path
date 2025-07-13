@@ -15,7 +15,7 @@
 ### 1、TransactionInterceptor类中的代码有很多，我简化一下逻辑，方便说明：
 
 ```java
-   // 以下代码省略部分内容
+// 以下代码省略部分内容
 public Object invoke(MethodInvocation invocation) throws Throwable {
 	// 获取事务调用的目标方法
 	Class<?> targetClass = (invocation.getThis() != null ? AopUtils.getTargetClass(invocation.getThis()) : null);
@@ -27,7 +27,7 @@ public Object invoke(MethodInvocation invocation) throws Throwable {
 ### 2、invokeWithinTransaction 简化逻辑如下：
 
 ```java
-   // TransactionAspectSupport.class 省略了部分代码
+// TransactionAspectSupport.class 省略了部分代码
 protected Object invokeWithinTransaction(Method method, @Nullable Class<?> targetClass
 		, final InvocationCallback invocation) throws Throwable {
 	Object retVal;
@@ -51,7 +51,7 @@ protected Object invokeWithinTransaction(Method method, @Nullable Class<?> targe
 ### 3、事务出现异常回滚的逻辑completeTransactionAfterThrowing如下：
 
 ```java
-    // 省略部分代码
+// 省略部分代码
 protected void completeTransactionAfterThrowing(@Nullable TransactionInfo txInfo, Throwable ex) {
 	// 判断是否需要回滚，判断的逻辑就是看有没有声明事务属性，同时判断是不是在目前的这个异常中执行回滚。
 	if (txInfo.transactionAttribute != null && txInfo.transactionAttribute.rollbackOn(ex)) {

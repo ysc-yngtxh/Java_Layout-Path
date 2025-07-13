@@ -78,9 +78,7 @@ public class User implements Serializable {
 	private UserInfo nestingUserInfo;
 
 
-	public interface Student {
-	}
+	public interface Student {}
 
-	public interface Teacher {
-	}
+	public interface Teacher {}
 }

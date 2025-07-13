@@ -76,7 +76,8 @@ public class DynamicThreadPool implements InitializingBean {
                         System.out.println(configInfo);
                         changeThreadPoolConfig(Integer.parseInt(coreSize), Integer.parseInt(maxSize));
                     }
-                });
+                }
+        );
     }
 
     /**
@@ -122,4 +123,5 @@ public class DynamicThreadPool implements InitializingBean {
             });
         }
     }
+
 }

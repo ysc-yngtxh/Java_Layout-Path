@@ -27,7 +27,7 @@ public class Example implements CommandLineRunner {
 	private QueryGrantTypeService queryGrantTypeService;
 
 	// 使用@Value注解需要注意：获取后缀properties配置文件中文数据会乱码；而yml/yaml配置文件中文数据则不会
-	// application.properties文件被设置以ISO-8859-1的编码格式进行加载。而yml/yaml文件默认以UTF-8加载
+	// application.properties 文件被设置以ISO-8859-1的编码格式进行加载。而yml/yaml文件默认以UTF-8加载
 	@Value("${spring.strategy.ormap}")
 	private String resourceType;
 
@@ -88,4 +88,5 @@ public class Example implements CommandLineRunner {
 		String result = queryGrantTypeService.getResult(resourceType);
 		logger.info("查询" + resourceType + "的派发方式为：" + result);
 	}
+
 }

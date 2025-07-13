@@ -12,7 +12,7 @@ public class ReactorSpringBootApplication {
 
 	/** 注解式驱动编程模型
 	 *
-	 * SpringWebflux请求和响应不再是ServletRequest和ServletResponse，而是ServerRequest和ServerResponse。
+	 * Spring Webflux 请求和响应不再是ServletRequest和ServletResponse，而是ServerRequest和ServerResponse。
 	 *
 	 * Flux 用于表示多个数据的流，而 Mono 用于表示单个数据。
 	 */

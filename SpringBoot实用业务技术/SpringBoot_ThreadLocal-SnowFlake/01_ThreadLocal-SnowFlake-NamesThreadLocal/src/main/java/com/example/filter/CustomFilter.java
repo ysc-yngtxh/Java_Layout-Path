@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 /**
  * @Author 游家纨绔
  * @Description TODO
- * @Date 2025-04-23 23:25:35
+ * @Date 2025-04-23 23:25:00
  */
 @Component
 public class CustomFilter implements Filter {
@@ -37,4 +37,5 @@ public class CustomFilter implements Filter {
 			MDC.remove("traceId"); // 清理
 		}
 	}
+
 }

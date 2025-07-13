@@ -28,4 +28,5 @@ public class CustomErrorAttribute extends DefaultErrorAttributes {
         map.put("msg", "对不起，没有找到您要的资源");
         return map;
     }
+
 }

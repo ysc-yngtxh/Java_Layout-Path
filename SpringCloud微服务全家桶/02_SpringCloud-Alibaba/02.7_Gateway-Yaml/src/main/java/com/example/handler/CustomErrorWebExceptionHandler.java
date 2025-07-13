@@ -28,8 +28,8 @@ import reactor.core.publisher.Mono;
 @Order(-1)
 public class CustomErrorWebExceptionHandler extends AbstractErrorWebExceptionHandler {
 
-    // AbstractErrorWebExceptionHandler是一个抽象类，用于自定义异常的处理方式。
-    // 它是Spring Webflux模块中的异常处理器，用于处理在Web请求处理过程中产生的异常。
+    // AbstractErrorWebExceptionHandler 是一个抽象类，用于自定义异常的处理方式。
+    // 它是 Spring Webflux 模块中的异常处理器，用于处理在Web请求处理过程中产生的异常。
     // 通过继承该类并实现其抽象方法，可以自定义异常处理的行为，例如定义错误响应的格式、错误码等。
     public CustomErrorWebExceptionHandler(ErrorAttributes errorAttributes
                                         , ApplicationContext applicationContext
@@ -52,4 +52,5 @@ public class CustomErrorWebExceptionHandler extends AbstractErrorWebExceptionHan
                 .contentType(MediaType.APPLICATION_JSON)    // 以 JSON 格式显示响应
                 .body(BodyInserters.fromValue(map));      // 响应体(响应内容)
     }
+
 }

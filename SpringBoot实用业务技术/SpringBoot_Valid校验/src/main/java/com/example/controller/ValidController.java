@@ -22,4 +22,5 @@ public class ValidController {
 	public List<User> queryByPage(@RequestBody @Valid User user) {
 		return Collections.emptyList();
 	}
+
 }
