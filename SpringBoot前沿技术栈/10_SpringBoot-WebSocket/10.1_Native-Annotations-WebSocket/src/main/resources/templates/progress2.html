@@ -1,0 +1,332 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <title>进度条监控系统2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+    <!-- 使用本地资源替代CDN -->
+    <link rel="stylesheet" href="/bootstrap.css">
+    <script src="/jquery-3.4.1.js"></script>
+    <script src="/bootstrap.js"></script>
+    <style>
+        body {
+            padding: 20px;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+        .progress-container {
+            margin: 50px auto;
+            width: 80%;
+        }
+        .progress {
+            height: 30px;
+            border-radius: 15px;
+            overflow: visible;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .progress-bar {
+            border-radius: 15px;
+            transition: width 0.5s ease;
+            position: relative;
+            overflow: visible;
+        }
+        .progress-value {
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: bold;
+            color: #333;
+        }
+        #status-message {
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .status-connected {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .status-disconnected {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .status-connecting {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        #btn {
+            min-width: 120px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="text-center">任务进度监控2</h2>
+
+        <div class="progress-container">
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated"
+                     role="progressbar"
+                     style="width: 0%"
+                     aria-valuenow="0"
+                     aria-valuemin="0"
+                     aria-valuemax="100">
+                    <span class="progress-value">0%</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="status-message" class="status-connecting">正在连接WebSocket服务器...</div>
+
+        <div class="btn-container">
+            <button id="btn" class="btn btn-primary" onclick="startTask()">开始任务</button>
+            <button id="pause-btn" class="btn btn-warning ml-3" onclick="pauseTask()">暂停任务</button>
+            <button id="continue-btn" class="btn btn-success d-none" onclick="continueTask()">继续任务</button>
+            <button id="cancel-btn" class="btn btn-danger ml-3" onclick="cancelTask()" disabled>取消任务</button>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    let websocket = null;
+    let isConnected = false;
+    let taskRunning = false;
+
+    // 初始化UI元素，并将DOM元素转换为jQuery对象
+    let $progressBar = $(".progress-bar").first();
+    let $progressValue = $(".progress-value").first();
+    let $statusMessage = $("#status-message");
+    let $startBtn = $("#btn");
+    let $cancelBtn = $("#cancel-btn");
+
+    // 初始化WebSocket连接
+    function initWebSocket() {
+        updateStatus("正在连接WebSocket服务器...", "connecting");
+
+        // 判断当前浏览器是否支持 WebSocket
+        if (!('WebSocket' in window)) {
+            updateStatus("您的浏览器不支持WebSocket", "disconnected");
+            return;
+        }
+
+        try {
+            // 生成随机数作为 WebSocket 连接的标识符 [100, 1000]
+            let randomNum = Math.floor(Math.random() * 901) + 100;
+            // 对应 @ServerEndpoint 注解中的 WebSocket 服务器地址
+            let wsAddress = "ws://localhost:8080/api/websocket/" + randomNum;
+            websocket = new WebSocket(wsAddress);
+
+            // 连接成功建立的回调方法
+            websocket.onopen = function(event) {
+                isConnected = true;
+                updateStatus("已连接到服务器", "connected");
+                console.log("WebSocket连接已建立", event);
+            }
+
+            // 连接发生错误的回调方法
+            websocket.onerror = function(error) {
+                console.error("WebSocket错误:", error);
+                updateStatus("连接发生错误", "disconnected");
+                isConnected = false;
+            };
+
+            // 接收到消息的回调方法
+            websocket.onmessage = function(event) {
+                try {
+                    const progress = parseInt(event.data);
+                    if (!isNaN(progress)) {
+                        updateProgress(progress);
+
+                        // 任务完成处理
+                        if (progress >= 100) {
+                            taskComplete();
+                        }
+                    } else {
+                        console.log("收到消息:", event.data);
+                    }
+                } catch (error) {
+                    console.error("消息处理错误:", error);
+                }
+            }
+
+            // 连接关闭的回调方法
+            websocket.onclose = function(event) {
+                console.log("WebSocket连接关闭", event);
+                isConnected = false;
+
+                if (event.wasClean) {
+                    updateStatus(`连接已关闭 (代码: ${event.code}, 原因: ${event.reason || '无'})`, "disconnected");
+                } else {
+                    updateStatus("连接意外断开", "disconnected");
+                }
+
+                // 如果任务正在运行，则停止
+                if (taskRunning) {
+                    taskStopped();
+                }
+            }
+        } catch (error) {
+            console.error("WebSocket初始化失败:", error);
+            updateStatus("连接初始化失败", "disconnected");
+        }
+    }
+
+    // 初始化WebSocket连接
+    initWebSocket();
+
+    // 监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+    window.onbeforeunload = function() {
+        alert("已关闭连接");
+        websocket.close();
+    }
+
+    // 开始任务
+    function startTask() {
+        if (!isConnected) {
+            alert("WebSocket未连接，请等待连接建立");
+            return;
+        } else if (taskRunning) {
+            alert("任务已在运行中");
+            return;
+        }
+
+        resetProgress();
+        taskRunning = true;
+        $startBtn.prop("disabled", true);
+        $cancelBtn.prop("disabled", false);
+        updateStatus("任务已启动，等待进度更新...", "connected");
+
+        $.ajax({
+            url: "http://localhost:8080/api/socket/progress2",
+            type: 'POST',
+            success: (data) => {
+                console.log("任务启动成功:", data);
+            },
+            error: (xhr, status, error) => {
+                console.error("任务启动失败:", error);
+                updateStatus("任务启动失败", "disconnected");
+                taskStopped();
+            }
+        })
+    }
+
+    // 暂停任务
+    function pauseTask() {
+        if (!isConnected || !taskRunning) {
+            alert("WebSocket未连接或任务未在运行中");
+            return;
+        }
+
+        // 隐藏【暂停按钮】，显示【继续按钮】
+        $("#pause-btn").addClass("d-none");
+        $("#continue-btn").removeClass("d-none");
+
+        // 通过 JSON 字符串发送暂停任务请求
+        websocket.send(JSON.stringify({ action: "pause" }));
+        updateStatus("任务已暂停", "connected");
+    }
+
+    // 继续任务
+    function continueTask() {
+        if (!isConnected || !taskRunning) {
+            alert("WebSocket未连接或任务未在运行中");
+            return;
+        }
+
+        // 显示【暂停按钮】，隐藏【继续按钮】
+        $("#pause-btn").removeClass("d-none");
+        $("#continue-btn").addClass("d-none");
+
+        // 通过 JSON 字符串发送继续任务请求
+        websocket.send(JSON.stringify({ action: "continue" }));
+        updateStatus("任务已继续", "connected");
+    }
+
+    // 取消任务
+    function cancelTask() {
+        // 通过 JSON 字符串发送暂停任务请求
+        websocket.send(JSON.stringify({ action: "pause" }));
+
+        if (!confirm("确定要取消当前任务吗？")) {
+            // 显示【暂停按钮】，隐藏【继续按钮】
+            $("#pause-btn").removeClass("d-none");
+            $("#continue-btn").addClass("d-none");
+            websocket.send(JSON.stringify({ action: "continue" }));
+            return;
+        } else if (!taskRunning) return;
+
+        // 显示【暂停按钮】，隐藏【继续按钮】
+        $("#pause-btn").removeClass("d-none");
+        $("#continue-btn").addClass("d-none");
+
+        // 通过 JSON 字符串发送取消任务请求
+        websocket.send(JSON.stringify({ action: "stop" }));
+        taskStopped();
+        setTimeout(() => resetProgress(), 50);
+        updateStatus("任务已取消", "disconnected");
+    }
+
+    // 任务完成处理
+    function taskComplete() {
+        taskRunning = false;
+        $startBtn.prop("disabled", false);
+        $cancelBtn.prop("disabled", true);
+        updateStatus("任务已完成", "connected");
+
+        // 移除动画效果
+        setTimeout(() => {
+            $progressBar.removeClass("progress-bar-animated progress-bar-striped");
+        }, 1000);
+    }
+
+    // 任务停止处理
+    function taskStopped() {
+        taskRunning = false;
+        $startBtn.prop("disabled", false);
+        $cancelBtn.prop("disabled", true);
+    }
+
+    // 更新进度条
+    function updateProgress(percent) {
+        const clampedPercent = Math.min(100, Math.max(0, percent));
+        $progressBar.css("width", clampedPercent + "%");
+        $progressBar.attr("aria-valuenow", clampedPercent);
+        $progressValue.text(clampedPercent + "%");
+
+        // 动态改变颜色
+        if (clampedPercent < 30) {
+            $progressBar.removeClass("bg-success bg-warning").addClass("bg-danger");
+        } else if (clampedPercent < 70) {
+            $progressBar.removeClass("bg-danger bg-success").addClass("bg-warning");
+        } else {
+            $progressBar.removeClass("bg-danger bg-warning").addClass("bg-success");
+        }
+    }
+
+    // 重置进度条
+    function resetProgress() {
+        updateProgress(0);
+        $progressBar.addClass("progress-bar-animated progress-bar-striped");
+    }
+
+    // 更新状态消息
+    function updateStatus(message, status) {
+        $statusMessage.text(message)
+                      .removeClass("status-connected status-disconnected status-connecting")
+                      .addClass("status-" + status);
+    }
+</script>
+</html>
