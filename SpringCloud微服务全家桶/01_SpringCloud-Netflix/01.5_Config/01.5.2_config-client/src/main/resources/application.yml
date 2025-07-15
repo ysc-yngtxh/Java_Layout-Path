@@ -12,7 +12,7 @@ spring:
       name: config_application  # 要加载的配置文件名称
       label: master             # 要加载的配置，所在分支命名，默认为null，相当于master
       # profile: default        # 要加载的配置的profile是什么，默认default
-      profile: dev             # 这里我使用的是版本是test。上述配置组装文件就是：config_application-dev.yml
+      profile: dev              # 这里我使用的是版本是test。上述配置组装文件就是：config_application-dev.yml
 
 # 这些热刷新配置信息可以写在远程仓库的配置中心，但也可以写在客户端
 management:

@@ -7,7 +7,7 @@ import java.util.logging.Logger;
  *        比如：sleep睡眠太久了，如果希望半道上醒来，怎么叫醒一个正在睡眠的线程？
  *             注意：这个不是中断线程的执行，是终止线程的睡眠
  *
- *        interrupt() 方法只是改变中断状态而已，它不会中断一个正在运行的线程。
+ *        interrupt() 方法只是改变中断状态而已，不会中断一个正在运行的线程。
  *    这一方法实际完成的是，给受阻塞的线程发出一个中断信号，这样受阻线程就得以退出阻塞的状态。
  *    更确切的说，如果线程被 Object.wait(), Thread.join() 和 Thread.sleep() 三种方法之一阻塞，
  *    此时调用该线程的 interrupt() 方法，那么该线程将抛出一个 InterruptedException中断异常，从而提早地终结被阻塞状态。
@@ -55,18 +55,17 @@ public class 线程11_中断线程 {
 		t.interrupt();
 		System.out.println("main线程调用t线程的interrupt()方法后，此时t线程的中断标志位为：" + t.isInterrupted());
 
-		Thread interrupted = new Thread(new InterruptedTask(), "m");
-		interrupted.start();
+		Thread m = new Thread(new InterruptedTask(), "m");
+		m.start();
 		try {
 			Thread.sleep(1000);  // 睡眠 1000 毫秒
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		// 中断 m线程 的睡眠
-		interrupted.interrupt();
+		m.interrupt();
 		System.out.println("main线程调用m线程的interrupt()方法后，此时t线程的中断标志位为：" + t.isInterrupted());
 	}
-
 }
 
 class MyRunnable2 implements Runnable {
@@ -112,7 +111,7 @@ class InterruptedTask implements Runnable {
 				//  原因：Java官方就是设计成在抛出 Interrupted Exception 异常后清除标志位。
 				//       即触发 Interrupted Exception 异常的同时，JVM会把执行线程的中断状态自动重置为false。
 				//  目的：是为了能让开发者显式处理线程的中断请求，避免中断状态在开发过程中被忽略、遗忘。造成应用程序的不稳定。
-				//  方案：如果需要 显氏传递中断标志位，可以在 catch 中再次调用 interrupt() 方法
+				//  方案：如果需要 显式传递中断标志位，可以在 catch 中再次调用 interrupt() 方法
 				currentThread.interrupt();  // 再次设置中断标志位为 true
 				break;
 			}

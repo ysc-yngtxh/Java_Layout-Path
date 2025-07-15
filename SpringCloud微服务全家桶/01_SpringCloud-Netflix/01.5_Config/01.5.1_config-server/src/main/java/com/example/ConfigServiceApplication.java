@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.config.server.EnableConfigServer;
 
 @EnableConfigServer
-/* 开启SpringCloud中的 config服务器，自动提供config服务器相关所有功能。启动时，同步启动Tomcat,默认端口8080。
+/* 开启SpringCloud中的 config服务器，自动提供config服务器相关所有功能。启动时，同步启动Tomcat，默认端口8080。
  * 已把配置中心端口定义为8888，因为config客户端默认查找的config服务器地址是：http://localhost:8888/
  * Config Server的功能是，处理config client的请求，并访问Git，实现配置文件的查询，下载（pull）后，
  * 在本地缓存，并将下载的配置发送给Config Client

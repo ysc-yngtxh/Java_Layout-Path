@@ -22,16 +22,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.util.MapUtils;
 
-/**
- * @ServerEndpoint 注解是一个类层次的注解，它的功能主要是将目前的类定义成一个WebSocket服务器端。
- *                 注解的值将被用于监听用户连接的终端访问URL地址，客户端可以通过这个URL来连接到WebSocket服务器端
- */
 @Slf4j
 @Component
-// @ServerEndpoint 注解的 value 属性指定了 WebSocket 端点的访问路径
-//     例如：客户端可以通过 ws://<host>:<port>/api/websocket/{sid} 来连接到这个 WebSocket 端点
-// @ServerEndpoint 注解的 configurator 属性指定了一个 ServerEndpointConfig.Configurator 的实现类
-//     用于在 WebSocket 握手过程中修改端点的配置，也可以用于处理握手请求、获取请求头信息等。
+// @ServerEndpoint 注解功能主要是将目前的类定义成一个WebSocket服务器端。
+//     属性value：指定了 WebSocket 端点的访问路径，用于监听用户连接的终端访问URL地址，客户端可以通过这个URL来连接到WebSocket服务器端
+//               例如：客户端可以通过 ws://<host>:<port>/api/websocket/{sid} 来连接到这个 WebSocket 端点
+//     属性configurator：指定了一个 ServerEndpointConfig.Configurator 的实现类
+//                      用于在 WebSocket 握手过程中修改端点的配置，也可以用于处理握手请求、获取请求头信息等。
 @ServerEndpoint(value = "/api/websocket/{sid}", configurator = WebSocketConfig.class)
 public class WebSocketServer {
 

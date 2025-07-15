@@ -188,7 +188,7 @@ class AtomicReference自动循环重试版 {
 					debitCardRefUpdateAndGet.getAndUpdate(
 							dc ->
 									new DebitCard(dc.getAccount(), dc.getAmount() + 10)
-					                                     );
+					);
 					System.out.println("使用 getAndUpdate 打印的金额：" + debitCardRefUpdateAndGet.get());
 				}
 			}.start();

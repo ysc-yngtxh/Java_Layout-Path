@@ -42,7 +42,7 @@ public class 动态规划 {
 		int n = nums.length;
 		int[] dp = new int[n];
 		Arrays.fill(dp, 1); // 初始化为1，因为每个元素本身就是一个长度为1的子序列
-		int maxLength = 1; // 至少为1
+		int maxLength = 1;         // 这里定义最长的递增子序列长度至少为1
 
 		for (int i = 1; i < n; i++) {
 			for (int j = 0; j < i; j++) {
