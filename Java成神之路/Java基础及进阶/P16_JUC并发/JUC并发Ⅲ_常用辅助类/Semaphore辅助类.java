@@ -4,8 +4,7 @@ import java.util.Random;
 import java.util.concurrent.Semaphore;
 
 public class Semaphore辅助类 {
-    /**
-     * Semaphore：信号机
+    /** Semaphore：信号机
      *   常用方法：
      *      acquire()  获取一个令牌，在获取到令牌、或者被其他线程调用中断之前线程一直处于阻塞状态。（假设如果已经满了，等待，等待被释放为止）
      *      acquire(int permits)  获取一个令牌，在获取到令牌、或者被其他线程调用中断、或超时之前线程一直处于阻塞状态。

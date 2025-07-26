@@ -23,8 +23,8 @@ public class MQTxController {
 	/**
 	 * 发送事务消息
 	 * {
-	 * "userId": 1,
-	 * "chargeAmount": 10.5
+	 *   "userId": 1,
+	 *   "chargeAmount": 10.5
 	 * }
 	 */
 	@PostMapping("/charge")

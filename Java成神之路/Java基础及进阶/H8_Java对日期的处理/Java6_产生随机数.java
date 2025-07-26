@@ -27,9 +27,7 @@ public class Java6_产生随机数 {
 		// 最终生成的5个随机数放到数组中，要求数组中这5个随机数不重复
 		int[] arr = new int[5];  // 数组arr的默认值是0
 		// 为区别数组中的默认值0和随机数中的0，直接赋给数组-1
-		for (int i = 0; i < arr.length; i++) {
-			arr[i] = -1;
-		}
+		Arrays.fill(arr, -1);  // 使用 Arrays 工具类的 fill() 填充方法，将数组元素全部填充为-1
 		// 循环，生成随机数
 		int index = 0;
 		while (index < arr.length) {

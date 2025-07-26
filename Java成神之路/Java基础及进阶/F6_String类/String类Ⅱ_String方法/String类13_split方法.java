@@ -3,6 +3,7 @@ package F6_String类.String类Ⅱ_String方法;
 import java.util.Arrays;
 
 public class String类13_split方法 {
+
 	public static void main(String[] args) {
 
 		// (掌握) String[] split(String regex) 拆分字符串
@@ -24,4 +25,5 @@ public class String类13_split方法 {
 		System.out.println(Arrays.toString("@2@3@".split("@", 4)));   // [, 2, 3, ]
 		System.out.println(Arrays.toString("@2@3@".split("@", 5)));   // [, 2, 3, ]
 	}
+
 }

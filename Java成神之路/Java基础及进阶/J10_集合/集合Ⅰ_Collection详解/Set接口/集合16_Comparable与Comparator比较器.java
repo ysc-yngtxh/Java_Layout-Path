@@ -54,7 +54,7 @@ public class 集合16_Comparable与Comparator比较器 {
 		Collections.sort(arrayList, Comparator.nullsFirst(Comparator.comparing(Available::getName)));
 		// 当集合中存在null元素时，null元素排在集合的最后面
 		Collections.sort(arrayList, Comparator.nullsLast(Comparator.comparing(Available::getName)));
-		// 首先使用 ege 排序，紧接着在使用 name 排序
+		// 首先使用 age 排序，紧接着在使用 name 排序。【原先的不同age排序整体不变，只针对相同 age 的不同 name 进行排序】
 		Collections.sort(arrayList, Comparator.comparing(Available::getAge).thenComparing(Available::getName));
 
 
@@ -80,7 +80,8 @@ public class 集合16_Comparable与Comparator比较器 {
 			                      }
 			                      return Integer.compare(a.size(), b.size());
 		                      })
-		           );
+		);
+		System.out.println("嵌套集合进行排序：" + result);
 	}
 
 }

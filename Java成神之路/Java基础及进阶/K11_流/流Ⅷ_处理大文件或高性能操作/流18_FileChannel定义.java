@@ -32,7 +32,7 @@ import java.nio.charset.StandardCharsets;
  *      网络文件传输： FileChannel 与网络套接字强强联手，让你在网络世界中畅快无阻地传输文件。
  *
  *  总结
- *      FileChannel 是 Java NIO 中不可多得的宝藏，它为文件读写带来了革命性的提升。
+ *      FileChannel 是 JAVA NIO 中不可多得的宝藏，它为文件读写带来了革命性的提升。
  *      其线程安全、高性能、易用的特点让它成为应对大文件处理、高并发操作和复杂文件处理场景的理想选择。
  *      掌握 FileChannel，你将成为文件读写领域的超级英雄，让你的代码闪耀夺目！
  *

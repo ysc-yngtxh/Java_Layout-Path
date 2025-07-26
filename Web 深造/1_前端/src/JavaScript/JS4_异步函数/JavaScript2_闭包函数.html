@@ -41,29 +41,46 @@
                     "因为闭包的存在，内部作用域还在使用，没有将其进行回收。所以引用的 test2.i 仍然可以访问到或者修改");
         test2.i++;  // 将闭包的引用，进行属性自增
         console.log("获取 test2.i 的值 == ", test2.i,
-         "由于已经将 test2.i 进行自增，所以这里获取的是自增后的值");
+                    "由于已经将 test2.i 进行自增，所以这里获取的是自增后的值");
 
 
         // TODO 闭包函数的典型应用：循环中的异步函数
-        // setTimeout() 是一个异步方法，在延时的1000ms内，for已经循环结束了。得到的 i最终值为 9，所以输出结果都是 10
+        // setTimeout() 是一个异步方法，在延时的1000ms内，for已经循环结束了，回调函数会在循环结束后才执行。
+        // 因此循环结束时，全局变量i的值已经是9（因为循环条件是i < 9，最后一次循环时i增加到9然后退出循环）
+        // 所有回调函数都共享同一个全局变量i，当回调函数执行时，它们看到的i值都是9，然后在输出时使用i+1，所以打印的是10
         let i;
         function spider() {
             for (i = 0; i < 9; i++) {
                 setTimeout(() => {
                     // ${} 是 JavaScript 模板字符串（Template Literals）中的插值语法，用于在字符串中动态嵌入变量或表达式。
                     console.log(`当前 i：${i+1}`)
-                 // 注意⚠️：双引号和单引号括起来的 ${i} 是不支持的进行插值的，只有使用反引号才起作用
+                    // 注意⚠️：双引号和单引号括起来的 ${i} 是不支持的进行插值的，只有使用反引号才起作用
                 }, 1000)
             }
         }
         spider();
 
 
-        // TODO 方案一：解决for循环中异步函数的 j 数据相同性
+        // TODO 方案一：解决for循环中异步函数的 m 数据相同性
+        // setTimeout()函数不止有第三个参数，后面可以紧跟无数个参数。
+        // 而从第三个参数开始，后续参数 param1,param2...paramN 是作为前面的回调函数的附加参数使用。
+        // 因此，这里setTimeout()中的第三个参数 m 值对应的是 for 循环值，并将循环值作为回调方法参数传入。
+        let m;
+        function spider2() {
+            for (m = 0; m < 9; m++) {
+                setTimeout((m) => {
+                    console.log(`当前 m：${m}`)
+                }, 1000, m)
+            }
+        }
+        spider2();
+
+
+        // TODO 方案二：解决for循环中异步函数的 j 数据相同性
         // 将 setTimeout()方法包装进一个函数，并将 j 作为函数参数。
         // 这样 setTimeout()方法在每次循环执行时，打印的都是当时传进函数的参数 j值，而每次传参都是不同的。
         let j;
-        function spider2() {
+        function spider3() {
             for (j = 0; j < 9; j++) {
                 (function (j) {
                     setTimeout(() => {
@@ -72,10 +89,10 @@
                 })(j)
             }
         }
-        spider2();
+        spider3();
 
 
-        // TODO 方案二：解决for循环中异步函数的 k 数据相同性
+        // TODO 方案三：解决for循环中异步函数的 k 数据相同性
         // 其实解决方案的思想和方案一如出一辙，只不过这里是将方法抽离出来了
         let k;
         function getData(k) {
@@ -83,12 +100,12 @@
                 console.log(`当前 k：${k}`)
             }, 1000)
         }
-        function spider3() {
+        function spider4() {
             for (k = 0; k < 9; k++) {
                 getData(k);
             }
         }
-        spider3();
+        spider4();
 
     </script>
 </body>

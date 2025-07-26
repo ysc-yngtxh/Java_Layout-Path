@@ -13,12 +13,12 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class 使用Lock锁实现三线程交替打印 {
 
-	private static final int THREAD_COUNT = 3;
-	private static final int MAX_NUMBER = 100;
+	private static final int THREAD_COUNT = 3; // 线程数
+	private static final int MAX_NUMBER = 100; // 打印最大数
 
 	private static Lock lock = new ReentrantLock();
 	private static Condition[] conditions = new Condition[THREAD_COUNT];
-	private static int currentNumber = 1;
+	private static int currentNumber = 1; // 初始数值
 	private static int currentThread = 0; // 0,1,2 分别表示三个线程
 
 	public static void main(String[] args) {

@@ -29,7 +29,7 @@ public class CustomClassLoader extends ClassLoader {
 				"target",
 				"classes",
 				name.replace('.', File.separatorChar) + ".class"
-		                              );
+		);
 		// 2、读取字节码文件（假设已编译为 .class 文件）
 		byte[] classData = Files.readAllBytes(classFilePath);
 		// 3. 检查数据是否为空（虽然 readAllBytes 通常不会返回 null，但安全起见）

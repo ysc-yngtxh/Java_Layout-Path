@@ -28,7 +28,7 @@ import java.util.TreeSet;
  *       Iterator迭代器采用的是中序遍历方式，左根右。
  *
  * 6、TreeSet或者TreeMap集合中根据Key部分元素可排序的方式：
- *       第一种：放在集合中的元素实现java.lang.Comparable接口（需要重写compareTo方法）
+ *       第一种：放在集合中的元素实现 java.lang.Comparable 接口（需要重写compareTo方法）
  *       第二种：在构造TreeSet或者TreeMap集合的时候给他传一个比较器对象
  */
 public class 集合17_TreeSet集合与自平衡二叉树 {
@@ -56,9 +56,9 @@ public class 集合17_TreeSet集合与自平衡二叉树 {
 		// 第一种写法：使用Comparable的内部比较规则，前提是Person类实现了Comparable，并重写了compareTo方法。不够灵活
 		TreeSet<Person> person1 = new TreeSet<>();
 		// 第二种写法，传进Comparator实现对象，只不过把比较规则写在了实现类中。简直就是脱裤子放屁
-		TreeSet<Person> person3 = new TreeSet<>(new PersonComparator());
+		TreeSet<Person> person2 = new TreeSet<>(new PersonComparator());
 		// 第三种写法：使用Comparator的静态方法。推荐
-		TreeSet<Person> person2 = new TreeSet<>(Comparator.comparing(Person::getAge).reversed());
+		TreeSet<Person> person3 = new TreeSet<>(Comparator.comparing(Person::getAge).reversed());
 		// 第四种写法：匿名内部类，把比较规则写在了匿名内部类中。可读性太差，但会更加灵活
 		TreeSet<Person> person4 = new TreeSet<Person>(new Comparator<Person>() {
 			@Override

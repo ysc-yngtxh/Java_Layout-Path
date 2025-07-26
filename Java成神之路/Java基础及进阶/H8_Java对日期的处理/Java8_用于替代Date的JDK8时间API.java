@@ -38,6 +38,7 @@ public class Java8_用于替代Date的JDK8时间API {
 		// 解析为LocalDate
 		System.out.println("解析为LocalDate：" + LocalDate.parse("2024-03-25"));
 
+
 		System.out.println("=============================================================");
 
 		// LocalDateTime是一个不可变类且线程安全，它的默认格式为 yyyy-MM-ddTHH:mm:ss.SSS
@@ -62,7 +63,7 @@ public class Java8_用于替代Date的JDK8时间API {
 
         System.out.println("Instant = " +
                 LocalDateTime.ofInstant(Instant.now(), ZoneId.systemDefault())
-                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
-         );
+                             .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+        );
     }
 }

@@ -26,10 +26,10 @@
         REPLACE
         INTO db_student(`id`, `name`, `email`, `age`)
         VALUES (
-        #{id,jdbcType=INTEGER},
-        #{name,jdbcType=VARCHAR},
-        #{email,jdbcType=VARCHAR},
-        #{age,jdbcType=INTEGER}
+          #{id,jdbcType=INTEGER},
+          #{name,jdbcType=VARCHAR},
+          #{email,jdbcType=VARCHAR},
+          #{age,jdbcType=INTEGER}
         )
     </insert>
 
@@ -40,10 +40,10 @@
         INSERT
         IGNORE INTO db_student(`id`, `name`, `email`, `age`)
         VALUES (
-        #{id,jdbcType=INTEGER},
-        #{name,jdbcType=VARCHAR},
-        #{email,jdbcType=VARCHAR},
-        #{age,jdbcType=INTEGER}
+          #{id,jdbcType=INTEGER},
+          #{name,jdbcType=VARCHAR},
+          #{email,jdbcType=VARCHAR},
+          #{age,jdbcType=INTEGER}
         )
     </insert>
 

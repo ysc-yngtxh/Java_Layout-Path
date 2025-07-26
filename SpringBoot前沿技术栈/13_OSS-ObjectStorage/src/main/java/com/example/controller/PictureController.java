@@ -35,20 +35,20 @@ public class PictureController {
 		String accessKeyId = "LTAI5tMGA97nbLGRdSVBqZxQcym";
 		String accessKeySecret = "VPBZ6qcRNlFdJ5PE2eFlOQ87y0XKIO"; // 这里密钥有点问题，需要更改
 		OSS ossClient = new OSSClientBuilder().build(
-				endpoint          // 地域节点
+				endpoint            // 地域节点
 				, accessKeyId       // 访问密钥 ID
 				, accessKeySecret   // 连接秘钥
-		                                            );
+		);
 
 		ObjectMetadata objectMetadata = new ObjectMetadata();
 		objectMetadata.setContentType("image/jpg");
 		objectMetadata.setContentDisposition("inline");
 		ossClient.putObject(
-				"ysc-test0322"  // 列表名
-				, reFileName    // 文件名
+				"ysc-test0322"           // 列表名
+				, reFileName             // 文件名
 				, file.getInputStream()  // 文件流
-				, objectMetadata  // 设置响应体参数
-		                   );
+				, objectMetadata         // 设置响应体参数
+		);
 
 		ossClient.shutdown();   // 关闭连接
 		return upPath + reFileName;

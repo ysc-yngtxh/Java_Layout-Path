@@ -32,7 +32,7 @@ public class StreamApi {
 	List<User> users = Arrays.asList(
 			new User(1L, null, null, 0, null, new Models(new ModelView("WUHAN"), null), null),
 			new User(2L, "YouShiCheng", "google@163.com", 25, null, new Models(new ModelView("shenzhen"), null), null)
-	                                );
+	);
 
 	@Test
 	public void test1() {

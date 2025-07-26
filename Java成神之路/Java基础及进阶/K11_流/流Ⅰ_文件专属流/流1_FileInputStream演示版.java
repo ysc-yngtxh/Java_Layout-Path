@@ -47,10 +47,10 @@ public class 流1_FileInputStream演示版 {
 			int readCount = fis3.read(bytes);
 			// 读取的是字节数量（不是字节本身），将 bytes[] 字节数组全部转换成字符串
 			System.out.println("fis3第一次读取字节数量 = " + readCount + "，读取的内容是："
-					                   + new String(bytes, 0, 6, StandardCharsets.UTF_8));
+					           + new String(bytes, 0, 6, StandardCharsets.UTF_8));
 			readCount = fis3.read(bytes);
 			System.out.println("fis3第二次读取字节数量 = " + readCount + "，读取的内容是："
-					                   + new String(bytes, 0, 6, StandardCharsets.UTF_8));
+					           + new String(bytes, 0, 6, StandardCharsets.UTF_8));
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {

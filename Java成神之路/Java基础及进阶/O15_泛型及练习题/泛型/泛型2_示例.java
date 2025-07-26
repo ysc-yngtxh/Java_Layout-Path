@@ -17,8 +17,8 @@ public class 泛型2_示例 {
 		String generic032 = generic03.toGeneric03(str);
 
 		System.out.println("Generic01<T>：" + generic011.getClass().getSimpleName() + " " + generic011 + "\n" +
-				                   "Generic03：" + generic031.getClass().getSimpleName() + " " + generic031 + "\n" +
-				                   "Generic03：" + generic032.getClass().getSimpleName() + " " + generic032);
+				           "Generic03：" + generic031.getClass().getSimpleName() + " " + generic031 + "\n" +
+				           "Generic03：" + generic032.getClass().getSimpleName() + " " + generic032);
 	}
 
 	static class Generic01<T> {

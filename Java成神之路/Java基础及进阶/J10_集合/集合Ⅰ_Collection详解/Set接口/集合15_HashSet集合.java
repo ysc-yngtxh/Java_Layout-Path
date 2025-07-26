@@ -15,7 +15,7 @@ public class 集合15_HashSet集合 {
 
 	public static void main(String[] args) {
 		// 演示一下HashSet集合特点
-		Set<String> s = new HashSet<String>() {{
+		Set<String> set = new HashSet<String>() {{
 			add("hello3");
 			add("hello4");
 			add("hello1");
@@ -23,18 +23,18 @@ public class 集合15_HashSet集合 {
 			add("hello3");
 			add("hello3");
 		}};
-		s.add("");
-		s.add(null);
-		System.out.println("HashSet集合：" + s);
+		set.add("");
+		set.add(null);
+		System.out.println("HashSet集合：" + set);
 
 
 		// Set集合转换成List集合
-		List<String> strings = new ArrayList<>(s);
-		System.out.println("Set集合转换成List集合：" + strings);
+		List<String> setConvertList = new ArrayList<>(set);
+		System.out.println("Set集合转换成List集合：" + setConvertList);
 
 		// List集合转换成Set集合
-		Set<String> set = new HashSet<>(strings);
-		System.out.println("List集合转换成Set集合：" + set);
+		Set<String> listConvertSet = new HashSet<>(setConvertList);
+		System.out.println("List集合转换成Set集合：" + listConvertSet);
 	}
 
 }

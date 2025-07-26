@@ -3,7 +3,7 @@ package I9_异常;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-/* 关于try..catch...中的finally子句：
+/* 关于 try..catch... 中的finally子句：
  *     1、在finally子句中的代码是最后执行的，并且是一定会执行的，即使try语句块中的代码出现了异常。
  *        finally子句必须和try一起出现，不能单独编写
  *
@@ -46,7 +46,7 @@ public class 异常5_finally子句的使用 {
 
 		System.out.println("=========================================================================================");
 
-		// 代码执行顺序：先执行try,再执行finally，最后执行return(return只要执行方法必然结束）
+		// 代码执行顺序：先执行try，再执行finally，最后执行return(return只要执行方法必然结束）
 		try {
 			System.out.println("try1...");
 			return;

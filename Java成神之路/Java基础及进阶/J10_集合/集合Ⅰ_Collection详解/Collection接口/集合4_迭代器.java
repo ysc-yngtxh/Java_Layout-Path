@@ -28,7 +28,7 @@ public class 集合4_迭代器 {
 		// 多态
 		Collection<Object> c = new ArrayList<>(); // 后面的集合无所谓，主要是看前面的Collection接口，怎么遍历/迭代
 		// ArrayList集合：有序可重复的
-		// 有序:存进去的顺序和取出来的顺序是一样的
+		// 有序：存进去的顺序和取出来的顺序是一样的
 
 		// 添加元素
 		c.add("abc");

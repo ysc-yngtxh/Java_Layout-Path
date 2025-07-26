@@ -45,13 +45,13 @@
                     resolve('写法三：我是Promise。我延迟了一秒')
                 }, 1000)
             });
-            console.log('我由于上面的程序还没执行完，先不执行“等待一会”');
+            console.log('由于上面的程序还没执行完，先不执行“等待一会”');
             // return result;
         }
         // demo3的返回当做Promise
         demo3().then(result => {
             console.log('输出', result);
-            // 这里输出的 result = undefined，因为demo3没有返回值。
+            // 这里输出的 result = undefined，因为demo3没有提供返回值。
         })
 
 

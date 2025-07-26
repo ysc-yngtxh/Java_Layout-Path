@@ -59,7 +59,7 @@ public class 集合18_Map接口的常用方法 {
 		map.put(2, "李四");
 		map.put(4, "赵六");
 
-		// 尝试计算指定键的新映射值（不管键是否存在）
+		// 尝试计算指定键的新映射值（如果键值不存在，则将键值对放入Map）
 		String compute1 = map.compute(4, (k, v) -> Objects.isNull(v) ? "钱七" : v);
 		String compute2 = map.compute(5, (k, v) -> Objects.isNull(v) ? "钱七" : v);
 		// 仅在【键不存在】或对应的值为 null 时执行计算
@@ -78,7 +78,7 @@ public class 集合18_Map接口的常用方法 {
 		//     如果key为4的值已经存在，则将key为4的value值和 "萧十一" 进行拼接，并更新Map值
 		String merge = map.merge(4, "萧十一", (oldValue, newValue) -> oldValue + newValue);
 
-		// 第一种方式：获取所有的key，通过遍历key,来遍历value
+		// 第一种方式：获取所有的key，通过遍历key，来遍历value
 		Set<Integer> keys = map.keySet();
 
 		// 方法一：建立迭代器对象，遍历key，可以通过key获取value，

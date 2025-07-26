@@ -17,7 +17,7 @@ public class String类1_String字符串 {
 		String s1 = "abcd";   // 在常量池创建一个对象"abcd"，然后返回常量池中"abcd"的地址给变量s1.
 		String s2 = "abcd" + "xy";
 
-		// 这里创建了两个对象：①、凡是双引号括起来的都在字符串常量池中有一份
+		// 这里创建了两个对象  ①、凡是双引号括起来的都在字符串常量池中有一份
 		//                  ②、new对象的时候一定在堆内存当中开辟空间
 		String s3 = new String("xyz");
 	}
