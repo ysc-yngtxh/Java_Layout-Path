@@ -23,6 +23,10 @@ abstract class StudyAbroad {
         Arriving();         // 抵达
     }
 
+    public abstract void LookingForSchool(); // 索取学校资料
+
+    public abstract void ApplyForEnrol();    // 入学申请
+
     public void ApplyForPassport() {
         System.out.println("三.办理因私出国护照、出境卡和公证：");
         System.out.println("  1）持录取通知书、本人户口簿或身份证向户口所在地公安机关申请办理因私出国护照和出境卡。");
@@ -40,10 +44,6 @@ abstract class StudyAbroad {
         System.out.println("  1）进行身体检查、免疫检查和接种传染病疫苗；");
         System.out.println("  2）确定机票时间、航班和转机地点。");
     }
-
-    public abstract void LookingForSchool();// 索取学校资料
-
-    public abstract void ApplyForEnrol();   // 入学申请
 
     public abstract void Arriving();        // 抵达
 }
