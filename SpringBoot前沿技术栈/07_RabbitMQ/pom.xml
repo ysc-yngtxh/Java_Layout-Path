@@ -24,6 +24,7 @@
         <module>07.7_RabbitMQ-DynamicListenerContainer</module>
         <module>07.8_RabbitMQ-DynamicMessage</module>
         <module>07.9_SpringBoot-RabbitMQ-Redis-Retry</module>
+        <module>07.10_RabbitMQ-Batch</module>
     </modules>
     <packaging>pom</packaging>
 
