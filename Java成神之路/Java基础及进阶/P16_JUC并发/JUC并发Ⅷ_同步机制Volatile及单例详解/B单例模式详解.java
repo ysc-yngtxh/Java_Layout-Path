@@ -46,7 +46,7 @@ public class B单例模式详解 {
  *
  * 思考一下：为什么会线程不安全？
  *           比如有两个线程a,b。都在其 run() 方法中调用了懒汉式单例的静态方法 getInstance()
- *           线程a会发现 lazyMan == null,就会去实例化对象，得到 LazyMan@5643x
+ *           线程a会发现 lazyMan == null，就会去实例化对象，得到 LazyMan@5643x
  *           线程b在线程a实例化对象时，也发现了lazyMan == null，也去实例化对象，得到 LazyMan@4564x
  */
 @SuppressWarnings("InstantiationOfUtilityClass")

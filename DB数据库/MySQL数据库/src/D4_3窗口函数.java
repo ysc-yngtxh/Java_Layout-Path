@@ -223,7 +223,7 @@
  *                         SUM(sal*10) OVER(PARTITION BY province ORDER BY sal rows between 1 preceding and current row) AS sum_sal2
  *                  FROM t_emp;
  *                  第一个框架的定义是 rows 1 preceding，框架单位是 rows（行），
- *                  第一个框架范围是 1 preceding（当框架单位为 rows 时，1 preceding 代表当前行的前 1 行）.
+ *                  第二个框架范围是 1 preceding（当框架单位为 rows 时，1 preceding 代表当前行的前 1 行）.
  *                  第一个框架采用了仅定义起始点的方式，框架的终止点默认就是当前行。
  *                  第二个框架采用了 between 1 preceding and current row 的方式，显式指定了框架的起始和结束范围，效果是相同的。
  *           示例 3：SELECT id, ename, sal, province,

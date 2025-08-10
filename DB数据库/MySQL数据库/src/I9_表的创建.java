@@ -54,11 +54,11 @@
  *                                                       是否毕业：tinyint（1表示true，0表示false）
  *         drop table if exists t_student;   // 当这个t_student表存在的话就删除掉
  *         create table `t_student`(
- *             `id`          int NOT NULL AUTO_INCREMENT COMMENT '主键Id',
- *             `no`          int NOT NULL COMMENT '编号',
+ *             `id`          int          NOT NULL AUTO_INCREMENT COMMENT '主键Id',
+ *             `no`          int          NOT NULL COMMENT '编号',
  *             `name`        varchar(255) DEFAULT NULL COMMENT '用户名',
  *             `age`         int          DEFAULT NULL COMMENT '年龄',
- *             `height`      double DEFAULT NULL COMMENT '身高',
+ *             `height`      double       DEFAULT NULL COMMENT '身高',
  *             `sex`         char(11)     NOT NULL COMMENT '性别',
  *             `class_no`    varchar(255) DEFAULT '' COMMENT '班级编号',
  *             `birth`       char(10)     NOT NULL COMMENT '生日',
