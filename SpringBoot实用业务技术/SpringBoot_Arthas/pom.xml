@@ -18,7 +18,7 @@
     <description>SpringBoot_Arthas</description>
 
     <properties>
-        <java.version>23</java.version>
+        <java.version>24</java.version>
     </properties>
 
     <dependencies>

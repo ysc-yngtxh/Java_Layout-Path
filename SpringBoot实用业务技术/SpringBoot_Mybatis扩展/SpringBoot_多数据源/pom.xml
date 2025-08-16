@@ -24,7 +24,7 @@
 
     <!--父管理依赖的版本号-->
     <properties>
-        <java.version>23</java.version>
+        <java.version>24</java.version>
         <spring-cloud.version>2022.0.4</spring-cloud.version>
         <spring.cloud.alibaba.version>2022.0.0.0</spring.cloud.alibaba.version>
     </properties>

@@ -11,7 +11,7 @@
     <description>Spring-底层解析1</description>
 
     <properties>
-        <java.version>23</java.version>
+        <java.version>24</java.version>
     </properties>
 
     <dependencies>

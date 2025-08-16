@@ -17,7 +17,7 @@
     <description>SpringBoot_CompletableFuture异步执行</description>
 
     <properties>
-        <java.version>23</java.version>
+        <java.version>24</java.version>
     </properties>
 
     <dependencies>

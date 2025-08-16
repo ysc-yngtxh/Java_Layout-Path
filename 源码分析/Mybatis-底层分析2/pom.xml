@@ -11,7 +11,7 @@
     <description>Mybatis-底层分析2</description>
 
     <properties>
-        <java.version>23</java.version>
+        <java.version>24</java.version>
     </properties>
 
     <dependencies>

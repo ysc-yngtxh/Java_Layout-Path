@@ -16,7 +16,7 @@
     <description>03_SpringBoot-漏斗</description>
 
     <properties>
-        <java.version>23</java.version>
+        <java.version>24</java.version>
     </properties>
 
     <dependencies>

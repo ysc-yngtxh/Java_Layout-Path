@@ -14,7 +14,7 @@
     <packaging>war</packaging>
 
     <properties>
-        <java.version>23</java.version>
+        <java.version>24</java.version>
     </properties>
 
     <dependencies>

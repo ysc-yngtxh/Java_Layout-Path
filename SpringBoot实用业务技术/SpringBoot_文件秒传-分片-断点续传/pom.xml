@@ -18,7 +18,7 @@
     <description>SpringBoot_文件秒传-分片-断点续传</description>
 
     <properties>
-        <java.version>23</java.version>
+        <java.version>24</java.version>
     </properties>
 
     <dependencies>
