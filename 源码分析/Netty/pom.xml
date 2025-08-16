@@ -18,10 +18,13 @@
 
     <properties>
         <java.version>24</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
 
     <modules>
         <module>IO</module>
+        <module>Reactor</module>
     </modules>
     <packaging>pom</packaging>
 
