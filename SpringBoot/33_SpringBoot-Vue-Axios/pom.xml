@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>32_SpringBoot-Vue-Axios</artifactId>
+    <artifactId>33_SpringBoot-Vue-Axios</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <description>${project.artifactId}</description>
