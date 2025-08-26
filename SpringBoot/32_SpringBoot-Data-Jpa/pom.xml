@@ -37,7 +37,8 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <version>1.18.38</version> <!-- 建议使用最新稳定版 -->
+            <scope>provided</scope> <!-- 关键！ -->
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
