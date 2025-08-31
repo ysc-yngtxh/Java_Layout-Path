@@ -44,7 +44,7 @@ public class CursorServiceImpl implements CursorService {
 		Cursor<Student> cursor = cursorMapper.streamingQuery2();
 
 		for (Student stu : cursor) {
-			try (BufferedWriter writer = new BufferedWriter(new FileWriter(getCurrentPath()+"/cym.json", true))) {
+			try (BufferedWriter writer = new BufferedWriter(new FileWriter(getCurrentPath() + "/cym.json", true))) {
 				writer.write(stu.toString() + "\n");
 			} catch (IOException e) {
 				throw new RuntimeException(e);
