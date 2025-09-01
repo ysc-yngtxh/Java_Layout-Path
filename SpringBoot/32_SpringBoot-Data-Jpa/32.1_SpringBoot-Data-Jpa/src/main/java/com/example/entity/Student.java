@@ -9,6 +9,7 @@ import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,7 @@ import lombok.ToString;
  @apiNote TODO
  */
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
