@@ -34,5 +34,21 @@
  *      ②、column_name1、column_name2 等是结果集的列名；
  *      ③、SELECT 子句定义了该结果集的内容；
  *      ④、condition 是查询的过滤条件。
+ *
+ *   4、示例
+ *      SQL 语法规定：WITH 子句必须位于语句开头（定义 CTE），不能嵌套在 IN 或其他子句中。
+ *      例如：
+ *          错误写法：SELECT *
+ *                   FROM table
+ *                   WHERE col IN (
+ *                       WITH cte AS (SELECT id FROM other_table)
+ *                       SELECT id FROM cte  -- 不允许在 IN 内部定义 CTE
+ *                   );
+ *          正确写法：WITH cte AS (SELECT id FROM other_table)
+ *                   SELECT *
+ *                   FROM table
+ *                   WHERE col IN (SELECT id FROM cte);
+ *               
+ *
  */
 public class W23_WITH语法 {}

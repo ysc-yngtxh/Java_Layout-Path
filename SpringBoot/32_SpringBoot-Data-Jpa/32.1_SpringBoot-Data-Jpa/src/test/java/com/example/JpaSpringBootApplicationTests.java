@@ -21,40 +21,50 @@ class JpaSpringBootApplicationTests {
 		studentRepository.findAll().forEach(System.out::println);
 	}
 
+
 	@Test
 	void teacherFindByName1() {
 		teacherRepository.findTeacher1("张伟").forEach(System.out::println);
 	}
-
 	@Test
 	void getTeachers() {
 		teacherRepository.getTeachers(52).forEach(System.out::println);
 	}
 
+
 	@Test
 	void teacherFindByName2() {
 		teacherRepository.findTeacher2("张伟").forEach(System.out::println);
 	}
-
 	@Test
 	void getTeachers2() {
 		teacherRepository.getTeachers2(52, 1).forEach(System.out::println);
 	}
+
+
+	@Test
+	void findByEmailAndStatus() {
+		teacherRepository.findByEmailAndStatus("wangfang@university.edu.cn", "王芳")
+		                 .forEach(System.out::println);
+	}
+	@Test
+	void getTeachersFromStudentInfo() {
+		Student student = Student.builder().age(40).name("游家纨绔").build();
+		teacherRepository.getTeachersFromStudentInfo(student).forEach(System.out::println);
+	}
+	@Test
+	void findUsersByMinAge() {
+		teacherRepository.findUsersByMinAge(28).forEach(System.out::println);
+	}
+
 
 	@Test
 	void getTeachersAndSort() {
 		Sort sort1 = Sort.by(Sort.Direction.ASC, "age");
 		teacherRepository.getTeachersAndSort(52, sort1).forEach(System.out::println);
 	}
-
 	@Test
-	void getTeachersFromStudentInfo() {
-		Student student = Student.builder().age(40).name("游家纨绔").build();
-		teacherRepository.getTeachersFromStudentInfo(student).forEach(System.out::println);
-	}
-
-	@Test
-	void findUsersByMinAge() {
-		teacherRepository.findUsersByMinAge(28).forEach(System.out::println);
+	void getTeachersWithCTE() {
+		teacherRepository.getTeachersWithCTE(28).forEach(System.out::println);
 	}
 }
