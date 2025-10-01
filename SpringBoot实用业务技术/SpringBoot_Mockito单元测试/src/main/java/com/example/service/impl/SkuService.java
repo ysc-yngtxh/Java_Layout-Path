@@ -1,7 +1,8 @@
-package com.example.service;
+package com.example.service.impl;
 
 import com.example.mapper.SkuMapper;
 import com.example.pojo.Sku;
+import com.example.service.AuditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,13 +12,13 @@ import org.springframework.stereotype.Service;
  * @apiNote TODO
  */
 @Service
-public class SkuService {
+public class SkuService implements AuditService<Sku> {
 
 	@Autowired
 	private SkuMapper skuMapper;
 
-	public Sku findSkuById(Integer id) {
-		Sku sku = skuMapper.findById(id);
-		return sku;
+	@Override
+	public Sku findAllById(Integer id) {
+		return skuMapper.findById(id);
 	}
 }

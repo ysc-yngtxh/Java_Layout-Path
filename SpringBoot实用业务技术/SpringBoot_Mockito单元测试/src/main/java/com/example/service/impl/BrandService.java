@@ -1,7 +1,8 @@
-package com.example.service;
+package com.example.service.impl;
 
 import com.example.mapper.BrandMapper;
 import com.example.pojo.Brand;
+import com.example.service.AuditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +13,13 @@ import org.springframework.stereotype.Service;
  * @since 2024-06-26 22:10:10
  */
 @Service
-public class BrandService {
+public class BrandService implements AuditService<Brand> {
 
 	@Autowired
 	private BrandMapper brandMapper;
 
-	public Brand findBrandById(Integer id) {
-		Brand brand = brandMapper.findById(id);
-		return brand;
+	@Override
+	public Brand findAllById(Integer id) {
+		return brandMapper.findById(id);
 	}
 }

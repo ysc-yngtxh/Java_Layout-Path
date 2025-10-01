@@ -3,6 +3,7 @@ package com.example.aop;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,8 +15,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class MethodProxy {
 
-	@Before(value = "execution(* *..findBrandById(*))")
+	@Before(value = "execution(* *..findAllById(*))")
 	public void before(JoinPoint joinPoint) {
-		System.err.println("进入切面逻辑～");
+		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+		String className = signature.getMethod().getDeclaringClass().getSimpleName();
+		String methodName = signature.getMethod().getName();
+		System.err.printf(
+				"""
+				进入类名为 %s 里的 %s() 方法的切面逻辑～
+				""",
+				className,
+				methodName
+		);
 	}
 }
