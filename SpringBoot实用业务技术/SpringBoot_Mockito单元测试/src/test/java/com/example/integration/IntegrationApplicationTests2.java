@@ -21,7 +21,8 @@ public class IntegrationApplicationTests2 {
     @Test
     public void testEndpoint() {
         // 使用 TestRestTemplate 发起请求
-        ResponseEntity<String> response = restTemplate.getForEntity("/brand/test", String.class);
+        ResponseEntity<String> response =
+		        restTemplate.getForEntity("/brand/test", String.class);
         
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 	    Assertions.assertThat(response.getBody()).isEqualTo("Hello, Spring!");

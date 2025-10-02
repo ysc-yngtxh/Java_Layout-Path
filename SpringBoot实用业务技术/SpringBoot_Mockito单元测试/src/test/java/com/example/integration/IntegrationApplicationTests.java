@@ -42,9 +42,10 @@ public class IntegrationApplicationTests {
 	public void test1() throws Exception {
 		// 发送 GET 请求
 		mockMvc
-			   .perform(MockMvcRequestBuilders.get("/brand/test")
-				                               .param("name", "World")
-				                               .accept(MediaType.APPLICATION_JSON)
+			   .perform(MockMvcRequestBuilders
+					            .get("/brand/test")
+				                .param("name", "World")
+				                .accept(MediaType.APPLICATION_JSON)
 		       )
 		       // 验证响应状态码
 		       .andExpect(MockMvcResultMatchers.status().isOk())
@@ -73,11 +74,13 @@ public class IntegrationApplicationTests {
 		// 模拟 brandService.add() 方法的行为
 		when(brandService.add(any(Brand.class))).thenReturn(saveBrand);
 
-		mockMvc.perform(MockMvcRequestBuilders.post("/brand/add")
-		                                      .contentType(MediaType.APPLICATION_JSON)
-		                                      .content(objectMapper.writeValueAsString(inputBrand))
-		               )
+		mockMvc.perform(MockMvcRequestBuilders
+				                .post("/brand/add")
+		                        .contentType(MediaType.APPLICATION_JSON)
+		                        .content(objectMapper.writeValueAsString(inputBrand))
+		       )
 		       .andExpect(status().isCreated())
+		       // jsonPath 用于验证 JSON响应体 中的具体字段值
 		       .andExpect(jsonPath("$.id").value(1))
 		       .andExpect(jsonPath("$.brandName").value("Nike"))
 		       .andExpect(jsonPath("$.racking").value(0))
