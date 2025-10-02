@@ -22,4 +22,9 @@ public class BrandService implements AuditService<Brand> {
 	public Brand findAllById(Integer id) {
 		return brandMapper.findById(id);
 	}
+
+	public Brand add(Brand brand) {
+		brandMapper.insert(brand);
+		return brand;
+	}
 }

@@ -1,4 +1,4 @@
-package com.example;
+package com.example.unit;
 
 import com.example.mapper.BrandMapper;
 import com.example.mapper.CategoryMapper;
@@ -26,7 +26,7 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 @SpringBootTest
 // @ExtendWith 注解是用来启用 Mockito 的扩展功能：如 @Mock、@Spy、@InjectMocks 注解的支持
 @ExtendWith(MockitoExtension.class)
-public class SpringBootMockitoApplicationTests3 {
+public class UnitMockitoApplicationTests3 {
 
 	// TODO
 	//  @Mock 和 @Spy 注解是纯 Mockito 框架的注解，无法注入到 Spring 容器中，因此不适合在 Spring Boot 测试中使用

@@ -1,5 +1,7 @@
 package com.example.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serial;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
@@ -15,15 +17,24 @@ import lombok.ToString;
  */
 @Data
 @ToString
+@TableName("brand")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Brand implements Serializable {
 	@Serial
 	private static final long serialVersionUID = 326235033000435685L;
 
+	public Brand(String brandName, Integer racking, Integer deleteFlag, String remark) {
+		this.brandName = brandName;
+		this.racking = racking;
+		this.deleteFlag = deleteFlag;
+		this.remark = remark;
+	}
+
 	/**
 	 * 主键Id
 	 */
+	@TableId
 	private Long id;
 	/**
 	 * 品牌名称

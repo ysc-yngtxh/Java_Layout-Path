@@ -1,4 +1,4 @@
-package com.example;
+package com.example.unit;
 
 import com.example.application.PositionDto;
 import org.junit.jupiter.api.AfterEach;
@@ -41,7 +41,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 // 这里我们只是做单元测试，无需Spring 的上下文环境，因此无需添加 @SpringBootTest 注解
 // 可以通过 @ExtendWith 注解，启用 Mockito 的扩展功能：如 @Mock、@Spy、@InjectMocks 注解的支持
-public class SpringBootMockitoApplicationTests {
+public class UnitMockitoApplicationTests1 {
 
 	// 被 @BeforeEach 标注的方法会在每个测试方法执行前被调用，执行一些初始化操作，如初始化变量、设置mock对象等
 	@BeforeEach

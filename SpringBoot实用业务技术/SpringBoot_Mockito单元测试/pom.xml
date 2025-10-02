@@ -31,10 +31,15 @@
         </dependency>
         <!--这个版本的 Mybatis 集成 SpringBoot 有缺陷，但是目前只能等待官方版本升级。
            【缺陷：数据库下划线字段无法映射实体类中转大写的字段，需要通过 resultMap 标签手动映射】-->
+        <!--<dependency>-->
+        <!--    <groupId>org.mybatis.spring.boot</groupId>-->
+        <!--    <artifactId>mybatis-spring-boot-starter</artifactId>-->
+        <!--    <version>3.0.4</version>-->
+        <!--</dependency>-->
         <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>3.0.4</version>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+            <version>3.5.14</version>
         </dependency>
         <dependency>
             <groupId>com.mysql</groupId>

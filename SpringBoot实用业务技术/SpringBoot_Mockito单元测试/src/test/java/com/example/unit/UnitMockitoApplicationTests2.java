@@ -1,4 +1,4 @@
-package com.example;
+package com.example.unit;
 
 import com.example.mapper.BrandMapper;
 import com.example.pojo.Brand;
@@ -18,7 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 // 这里我们只是做单元测试，无需Spring 的上下文环境，因此无需添加 @SpringBootTest 注解
 // 可以通过 @ExtendWith 注解，启用 Mockito 的扩展功能：如 @Mock、@Spy、@InjectMocks 注解的支持
-public class SpringBootMockitoApplicationTests2 {
+public class UnitMockitoApplicationTests2 {
 
 	// @Mock：用于代替 Mockito.mock() 创建mock对象。
 	//        Mock会将目标对象整个模拟，所有方法默认都返回null，并且原方法中的代码逻辑不会执行，

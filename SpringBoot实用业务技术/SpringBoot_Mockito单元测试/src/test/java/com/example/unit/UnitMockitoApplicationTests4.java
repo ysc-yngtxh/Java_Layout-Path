@@ -1,7 +1,6 @@
-package com.example;
+package com.example.unit;
 
 import com.example.mapper.BrandMapper;
-import com.example.mapper.CategoryMapper;
 import com.example.pojo.Brand;
 import com.example.pojo.Category;
 import com.example.service.impl.BrandService;
@@ -20,7 +19,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import static org.mockito.ArgumentMatchers.any;
 
 @SpringBootTest
-public class SpringBootMockitoApplicationTests4 {
+public class UnitMockitoApplicationTests4 {
 
 	// TODO @MockBean 和 @SpyBean 注解在 3.4.0 版本的 Spring Boot Test 中已经不推荐使用
 	//  原因：@MockBean 在某些场景下存在局限性
