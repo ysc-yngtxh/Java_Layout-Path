@@ -16,7 +16,7 @@
     <description>01_SpringBoot-固定窗口-滑动窗口限流算法</description>
 
     <properties>
-        <java.version>24</java.version>
+        <java.version>25</java.version>
     </properties>
 
     <dependencies>

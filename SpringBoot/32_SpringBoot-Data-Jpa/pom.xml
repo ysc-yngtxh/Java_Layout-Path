@@ -12,8 +12,8 @@
     <groupId>com.example</groupId>
     <artifactId>32_SpringBoot-Data-Jpa</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>32_SpringBoot-Jpa</name>
-    <description>32_SpringBoot-Jpa</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>1.8</java.version>

@@ -16,7 +16,7 @@
     <description>04_SpringBoot-布隆过滤器</description>
 
     <properties>
-        <java.version>24</java.version>
+        <java.version>25</java.version>
     </properties>
 
     <dependencies>

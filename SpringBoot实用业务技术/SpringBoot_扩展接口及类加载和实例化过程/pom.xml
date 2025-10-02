@@ -16,7 +16,7 @@
     <description>SpringBoot_扩展接口及类加载和实例化过程</description>
 
     <properties>
-        <java.version>24</java.version>
+        <java.version>25</java.version>
     </properties>
 
     <dependencies>
