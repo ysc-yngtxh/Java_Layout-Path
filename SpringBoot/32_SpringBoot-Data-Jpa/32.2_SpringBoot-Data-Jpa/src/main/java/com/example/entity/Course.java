@@ -3,11 +3,13 @@ package com.example.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +19,7 @@ import lombok.NoArgsConstructor;
 /**
  * @author 游家纨绔
  * @dateTime 2025-10-02 21:50
- * @apiNote TODO 学生课程关联表
+ * @apiNote TODO 课程表
  */
 @Data
 @Builder
@@ -32,31 +34,54 @@ import lombok.NoArgsConstructor;
 //      uniqueConstraints 用于指定表中的唯一约束，可以有多个。indexes 用于指定表中的索引，可以有多个。
 // uniqueConstraints 和 indexes 属性主要被Hibernate等 JPA提供商 的自动建表功能（如 hibernate.hbm2ddl.auto）所使用。
 // 如果你手动管理数据库表结构，这些注解不会影响现有表，它们只是作为元数据存在。
-@Table(name = "db_student_course")
-public class StudentCourse implements Serializable {
-	private static final long serialVersionUID = -5442078582756203325L;
+@Table(name = "db_course")
+public class Course implements Serializable {
+	private static final long serialVersionUID = 3997089347115228106L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@Column(name = "student_id")
-	private Integer studentId;
-	@Column(name = "course_id")
-	private Integer courseId;
-	@Column(name = "academic_year")
-	private String academicYear;
-	private Object semester;
-	private BigDecimal score;
-	@Column(name = "grade_point")
-	private BigDecimal gradePoint;
-	private Object status;
-	@Column(name = "registered_at")
-	private Date registeredAt;
-	@Column(name = "completed_at")
-	private Date completedAt;
+	@Column(name = "course_code")
+	private String courseCode;
+	@Column(name = "course_name")
+	private String courseName;
+	private BigDecimal credit;
+	private Integer hours;
+	@Column(name = "teacher_id")
+	private Integer teacherId;
+	@Column(name = "max_students")
+	private Integer maxStudents;
+	private String description;
+	private String status;
 	@Column(name = "created_at")
 	private Date createdAt;
 	@Column(name = "updated_at")
 	private Date updatedAt;
 
+
+	// TODO 在进行多对多关联映射时
+	//      @ManyToMany 的任意一方都可以作为关系的「主控方」（Owning Side）
+	//      但必须在关系的「主控方」使用 @JoinTable 注解来指定关联表的信息
+	//      另一方必须使用 mappedBy 属性来指示关系的维护端
+	@ManyToMany(mappedBy = "courses")
+	private List<Student> students;
+
+
+	@Override
+	public String toString() {
+		return "Course{" +
+				"id=" + id +
+				", courseCode='" + courseCode + '\'' +
+				", courseName='" + courseName + '\'' +
+				", credit=" + credit +
+				", hours=" + hours +
+				", teacherId=" + teacherId +
+				", maxStudents=" + maxStudents +
+				", description='" + description + '\'' +
+				", status='" + status + '\'' +
+				", createdAt=" + createdAt +
+				", updatedAt=" + updatedAt +
+				", students=" + students +
+				'}';
+	}
 }

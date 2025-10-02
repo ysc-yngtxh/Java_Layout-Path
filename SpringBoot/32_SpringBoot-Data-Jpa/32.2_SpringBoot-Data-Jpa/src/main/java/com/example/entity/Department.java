@@ -56,7 +56,6 @@ public class Department implements Serializable {
 	// TODO 在进行关联映射时，必须在关系的拥有方（主控方）使用 @JoinColumn 注解来指定外键列。
 	//   拥有方（主控方）：  包含外键列的一方，需要负责维护关联关系。
 	//   被拥有方（非主控方：不包含外键列的一方，不负责维护关联关系，但需要使用 mappedBy 属性来指示关系的维护端。
-
 	@OneToOne(
 			mappedBy = "department",      // mappedBy 属性用于指定关系的维护端，即在哪个实体中定义了关联关系。
 			targetEntity = Teacher.class, // targetEntity 属性用于指定关联的实体类。
@@ -75,11 +74,6 @@ public class Department implements Serializable {
 			orphanRemoval = true // 当从集合中移除子实体时，自动删除数据库中的对应记录
 	)
 	private Teacher teacher;
-
-
-
-
-
 
 
 	// TODO 当实体类中存在双向关联关系的字段时，不能使用 @Data、@ToString 注解，

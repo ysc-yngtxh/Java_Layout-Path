@@ -1,12 +1,15 @@
 package com.example;
 
 import com.example.entity.Student;
+import com.example.entity.Teacher;
 import com.example.repository.StudentRepository;
 import com.example.repository.TeacherRepository;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 class JpaSpringBootApplicationTests {

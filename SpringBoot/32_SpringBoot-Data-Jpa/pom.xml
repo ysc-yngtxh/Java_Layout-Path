@@ -18,6 +18,11 @@
     <properties>
         <java.version>1.8</java.version>
     </properties>
+    <modules>
+        <module>32.1_SpringBoot-Data-Jpa</module>
+        <module>32.2_SpringBoot-Data-Jpa</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <dependencies>
         <dependency>

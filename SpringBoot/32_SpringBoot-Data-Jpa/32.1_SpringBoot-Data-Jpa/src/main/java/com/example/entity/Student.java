@@ -1,18 +1,11 @@
 package com.example.entity;
 
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,33 +38,9 @@ public class Student implements Serializable {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
-	@Column(name = "teacher_id", insertable = false, updatable = false)
+	@Column(name = "teacher_id")
 	private Integer teacherId;
 	private String email;
 	private Integer age;
 
-
-	// TODO 在进行多对一的关联映射时
-	//      @ManyToOne 永远是关系的「主控方」（Owning Side）
-	//      @OneToMany 通常是关系的「被控方」（Inverse Side），而 mappedBy 属性只能用在「被控方」
-	//      原因：多对一关系中，设计表结构时候就应该让多的一方持有外键，负责维护关联关系。
-	//           那为什么要设计多的一方持有外键？
-	//           假如让一的一方持有外键，那么一个教师只能关联到一个学生，无法实现一个教师有多个学生的需求。
-	//      综上所述：
-	//           多对一关系中，必须在多的一方持有外建，并使用 @JoinColumn 注解来指定外键列。
-	@ManyToOne(
-			fetch = FetchType.EAGER,      // fetch 属性用于指定关联的加载策略，默认为 FetchType.EAGER，表示关联在查询时立即加载。如果设置为 FetchType.LAZY，则表示关联在访问时才加载。
-			cascade = {CascadeType.ALL},  // cascade 属性用于指定级联操作，默认为空，表示不进行级联操作。
-			optional = false              // optional 属性用于指定关联是否可选，默认为 true，表示关联是可选的。如果设置为 false，则表示关联是必需的，不能为 null。
-	)
-	@JoinColumn(name = "teacher_id", referencedColumnName = "id")
-	private Teacher teacher;
-
-
-	// TODO 在进行多对多的关联映射时，必须在关系的拥有方（主控方）使用 @JoinTable 注解来指定连接表。
-	@ManyToMany
-	@JoinTable(name = "db_student_course",
-			joinColumns = @JoinColumn(name = "student_id", unique = true),
-			inverseJoinColumns = @JoinColumn(name = "course_id", unique = true))
-	private List<Course> courses;
 }
