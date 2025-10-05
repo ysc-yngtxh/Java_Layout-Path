@@ -32,6 +32,7 @@ import org.springframework.util.CollectionUtils;
  */
 @Setter
 @Getter
+@ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -91,6 +92,9 @@ public class Student implements Serializable {
 	private List<Course> courses = new ArrayList<>();
 
 
+
+	// TODO 当实体类中存在双向关联关系的字段时，不能使用 @Data、@ToString 注解，
+	//      否则会导致循环引用【即字段属性的打印会一直嵌套下去】，进而引发栈溢出异常。
 	@Override
 	public String toString() {
 		return "Student{id=" + id +

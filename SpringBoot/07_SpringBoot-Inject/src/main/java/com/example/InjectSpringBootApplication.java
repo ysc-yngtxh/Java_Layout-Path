@@ -8,10 +8,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 @MapperScan("com.example.mapper")
-public class InjectApplication {
+public class InjectSpringBootApplication {
 
 	public static void main(String[] args) {
-		ConfigurableApplicationContext applicationContext = SpringApplication.run(InjectApplication.class, args);
+		ConfigurableApplicationContext applicationContext = SpringApplication.run(InjectSpringBootApplication.class, args);
 		// 获取容器里面的对象，并调用方法测试属性是否完成自动注入
 		UserService userService = applicationContext.getBean("userService", UserService.class);
 		userService.test();

@@ -20,7 +20,7 @@
     </properties>
     <modules>
         <module>32.1_JPQL-Native</module>
-        <module>32.2_One-Many</module>
+        <module>32.2_OneMany-CriteriaAPI</module>
     </modules>
     <packaging>pom</packaging>
 
