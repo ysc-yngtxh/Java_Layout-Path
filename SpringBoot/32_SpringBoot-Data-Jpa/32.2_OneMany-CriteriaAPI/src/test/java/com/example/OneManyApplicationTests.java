@@ -12,8 +12,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.EntityManager;
+import javax.persistence.Tuple;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,6 +35,8 @@ class OneManyApplicationTests {
 	private StudentRepository studentRepository;
 	@Autowired
 	private TeacherRepository teacherRepository;
+	@Autowired
+	private EntityManager entityManager;
 
 	// TODO 使用 Spring Data Jpa 时，不要使用 @Data（其中包含@ToString） 或者 @ToString 等注解，
 	//      这是因为 Lombok 生成的 toString() 方法会包含所有属性，包括那些使用 LAZY 或 EAGER 加载的属性。
@@ -63,9 +70,49 @@ class OneManyApplicationTests {
 		teacherRepository.findAll().forEach(System.out::println);
 	}
 
-	// 使用Criteria API实现动态查询
+
+
+	// 使用 Criteria API 实现动态查询
 	@Test
 	public void testJspSpecification1() {
+		// 创建 CriteriaBuilder、CriteriaQuery 和 Root 对象
+		//   CriteriaBuilder：查询构建器，用于创建查询条件
+		//   CriteriaQuery：  最终的查询对象，用于构建查询条件，所有的查询条件汇总到这个对象，由 JPA 去执行
+		//   Root<T>：		  根对象，即要查询的实体类，可表示实体的属性和嵌套属性，用来指定要查询的字段
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Tuple> criteriaQuery = criteriaBuilder.createQuery(Tuple.class);
+		Root<Teacher> root = criteriaQuery.from(Teacher.class);
+
+		// 使用 criteriaQuery 构建查询条件
+		// criteriaQuery.select(root);
+		// criteriaQuery.select(root.get("name"));
+		criteriaQuery.multiselect(root.get("name"), root.get("age"), root.get("email"), root.get("departmentId"), root.get("department").get("name"));
+		// distinct 去重
+		criteriaQuery.distinct(true);
+		criteriaQuery
+				.where(
+						criteriaBuilder.equal(root.get("name"), "张伟"),
+						criteriaBuilder.isNull(root.get("description")),
+				        criteriaBuilder.isNotNull(root.get("isFullTime")),
+						// 另一种写法：
+						root.get("id").in(1, 2, 3, 4, 5),
+						// criteriaBuilder.in(root.get("id")).value(1).value(2).value(3).value(4).value(5),
+				        criteriaBuilder.between(root.get("age"), 20, 30),
+				        criteriaBuilder.like(root.get("email"), "li"),
+				        criteriaBuilder.greaterThan(root.get("salary"), 5000.0),
+				        criteriaBuilder.equal(root.join("department", JoinType.LEFT).get("name"), "计算机系")
+				)
+				.groupBy(root.get("name"), root.get("age"), root.get("email"), root.get("departmentId"), root.get("department").get("name"))
+				.having(criteriaBuilder.greaterThan(root.get("departmentId"), 100))
+				.orderBy(criteriaBuilder.asc(root.get("name")));
+		// 执行查询：SELECT * FROM db_teacher t WHERE t.age > 25
+		List<Tuple> list = entityManager.createQuery(criteriaQuery).getResultList();
+		System.out.println(list);
+	}
+
+	// 通过继承 JpaSpecificationExecutor 接口，使用 Specification 实现动态查询。
+	@Test
+	public void testJspSpecification2() {
 		Teacher teacher = Teacher.builder()
 		                         .name("张三")
 		                         .age(25)
@@ -75,9 +122,9 @@ class OneManyApplicationTests {
 		                         .email("li").createTime(LocalDateTime.now())
 		                         .build();
 
-        // Root<T>：        根对象，即要查询的实体类，可表示实体的属性和嵌套属性，用来指定要查询的字段。
-        // CriteriaQuery：  最终的查询对象，用于构建查询条件，所有的查询条件汇总到这个对象，由JPA去执行。
-        // CriteriaBuilder：查询构建器，用于创建查询条件，如cb.isNull(root.get(“deleteTime”))
+		// Root<T>：        根对象，即要查询的实体类，可表示实体的属性和嵌套属性，用来指定要查询的字段。
+		// CriteriaQuery：  最终的查询对象，用于构建查询条件，所有的查询条件汇总到这个对象，由JPA去执行。
+		// CriteriaBuilder：查询构建器，用于创建查询条件，如cb.isNull(root.get(“deleteTime”))
 		Specification<Teacher> teacherSpecification =
 				(root, criteriaQuery, criteriaBuilder) -> {
 					List<Predicate> predicates = new ArrayList<>();
@@ -155,13 +202,10 @@ class OneManyApplicationTests {
 		//       AND s.name = ?
 		//       AND lower(t.name) LIKE ?
 		//     ORDER BY t.id DESC
+		// TODO TeacherResponse 继承JpaSpecificationExecutor类，用以执行 Criteria API 动态查询
 		teacherRepository.findAll(teacherSpecification).forEach(System.out::println);
 	}
 
-	@Test
-	public void testJspSpecification2() {
-
-	}
 
 
 	// 使用 Example 实现动态查询。
