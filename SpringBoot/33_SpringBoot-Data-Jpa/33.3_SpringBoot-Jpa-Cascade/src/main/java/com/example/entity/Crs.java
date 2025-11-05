@@ -1,7 +1,10 @@
 package com.example.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +27,7 @@ public class Crs implements Serializable {
 	private static final long serialVersionUID = 5596770566256882883L;
 
 	@Id
+	@Column(name = "crs_id", nullable = false, insertable = true, updatable = false)
     private Integer crsId;
 
 	@Column(name = "member_id", nullable = false, insertable = false, updatable = false)
@@ -86,6 +92,10 @@ public class Crs implements Serializable {
 			@JoinColumn(name = "record_type", referencedColumnName = "record_type", nullable = false, insertable = true, updatable = false)
 	})
 	private Member member;
+
+	@OneToMany(mappedBy = "crs", cascade = {CascadeType.ALL})
+	private List<CrsItem> crsItemList = new ArrayList<>();
+
 
 	@Override
 	public String toString() {

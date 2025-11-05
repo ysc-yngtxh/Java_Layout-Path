@@ -74,9 +74,9 @@ public class Member implements Serializable {
 				"MemberKey(memberId=" + id.getMemberId() +
 						", recordId=" + id.getRecordId() +
 						", recordType=" + id.getRecordType() + ")" : "null") +
-				// ", memberId='" + memberId + '\'' +
-				// ", recordId='" + recordId + '\'' +
-				// ", recordType='" + recordType + '\'' +
+				", memberId='" + memberId + '\'' +
+				", recordId='" + recordId + '\'' +
+				", recordType='" + recordType + '\'' +
 				", firstName='" + firstName + '\'' +
 				", lastName='" + lastName + '\'' +
 				", email='" + email + '\'' +
@@ -166,5 +166,15 @@ public class Member implements Serializable {
 		}
 
 		return newMember;
+	}
+
+	public Member copyWithNewMemberId2(String newMemberId) {
+		this.getId().setMemberId(newMemberId);
+		this.setMemberId(newMemberId);
+		this.getAml().setMemberId(newMemberId);
+		this.getCrs().forEach(crs -> {
+			crs.setMemberId(newMemberId);
+		});
+		return this;
 	}
 }

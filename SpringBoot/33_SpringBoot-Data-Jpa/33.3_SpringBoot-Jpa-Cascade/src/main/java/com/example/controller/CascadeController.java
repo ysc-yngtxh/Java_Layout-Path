@@ -24,7 +24,17 @@ public class CascadeController {
 			@RequestParam(value = "recordId", defaultValue = "REC002") String recordId,
 			@RequestParam(value = "recordType", defaultValue = "CORPORATE") String recordType,
 			@RequestParam(value = "newMemberId", defaultValue = "MEM005") String newMemberId) {
-		cascadeServices.updateCascade(memberId, recordId, recordType, newMemberId);
+		// cascadeServices.updateCascade(memberId, recordId, recordType, newMemberId);
+		return ResponseEntity.ok().build();
+	}
+
+	@RequestMapping("/cascade2")
+	public ResponseEntity<Void> cascade2(
+			@RequestParam(value = "memberId", defaultValue = "MEM001") String memberId,
+			@RequestParam(value = "recordId", defaultValue = "REC002") String recordId,
+			@RequestParam(value = "recordType", defaultValue = "CORPORATE") String recordType,
+			@RequestParam(value = "newMemberId", defaultValue = "MEM005") String newMemberId) {
+		cascadeServices.updateCascade2(memberId, recordId, recordType, newMemberId);
 		return ResponseEntity.ok().build();
 	}
 }
