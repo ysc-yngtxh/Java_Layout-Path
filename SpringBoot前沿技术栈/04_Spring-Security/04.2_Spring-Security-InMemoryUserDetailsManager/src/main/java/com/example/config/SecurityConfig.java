@@ -81,7 +81,7 @@ public class SecurityConfig {
 				              //       这里定义其他的处理器，那么Cookie 中的 XSRF-TOKEN令牌值 与MVC返回视图中的 CSRF令牌值 就是一致的。
 				              //       就可以在 请求参数 或者 请求头 中携带使用Cookie 中解析的 XSRF-TOKEN令牌值.
 				              .csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler())
-		          // .ignoringRequestMatchers("/login")  该配置能忽略 CSRF 的请求路径
+		                      // .ignoringRequestMatchers("/login")  该配置能忽略 CSRF 的请求路径
 		         );
 
 		http

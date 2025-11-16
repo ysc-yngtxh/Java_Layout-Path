@@ -54,7 +54,7 @@ public class LoginServiceImpl implements LoginService {
 		String jwt = JwtUtil.createJwt(Map.of("id", userId));
 		Map<String, Object> map = new HashMap<>();
 		map.put("token", jwt);
-		// 把完整的用户信息存入Redis,使用userId作为key
+		// 把完整的用户信息存入Redis，使用userId作为key
 		redisCache.setCacheObject("login:" + userId, loginUserDetails);
 
 		// 获取请求中的属性对象

@@ -99,16 +99,16 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
-				// 关闭csrf,前后端分离不需要. Spring Security6.2新写法
+				// 关闭csrf，前后端分离不需要. Spring Security6.2新写法
 				.csrf(AbstractHttpConfigurer::disable)
 				// 关闭cors跨域. Spring Security6.2新写法
 				.cors(AbstractHttpConfigurer::disable)
 				// 禁用httpBasic，因为我们传输数据用的是post，而且请求体是JSON
 				.httpBasic(AbstractHttpConfigurer::disable)
 				// 不创建会话(无状态) - 即通过前端传token到后台过滤器中验证是否存在访问权限。 Spring Security6.2新写法
-				.sessionManagement((sessions) -> sessions
-						                   .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				                  )
+				.sessionManagement(sessions ->
+						                   sessions.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				)
 
 				// 见名知意。添加过滤器在某某过滤器之前。这里我们添加在BasicAuthenticationFilter之前的过滤器myAuthenticationFilter
 				.addFilterBefore(myAuthenticationFilter, BasicAuthenticationFilter.class)
@@ -123,7 +123,7 @@ public class SecurityConfig {
 								                   .authenticationEntryPoint(authenticationEntryPoint())
 								                   // 登录后去访问该认证用户没有权限的路径时，被鉴权异常返回
 								                   .accessDeniedHandler(accessDeniedHandler())
-				                  )
+				)
 
 
 				// 设置哪些路径可以直接访问不需要认证（permitAll()表示允许所有人访问）
@@ -146,14 +146,14 @@ public class SecurityConfig {
 								                       // .anyRequest().authenticated()
 								                       // TODO 注意：这里设置成url权限认证处理
 								                       .anyRequest().access(urlAuthorizationManager)
-				                      )
+				)
 
 				// 自动登录 - cookie储存方式
 				.rememberMe(Customizer.withDefaults())
 				// 防止iframe 造成跨域
-				.headers((header) -> header
-						         .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
-				        )
+				.headers(header ->
+						         header.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
+				)
 				// 禁用form表单提交的方式
 				.formLogin(AbstractHttpConfigurer::disable)
 		;

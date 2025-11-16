@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.example.security.bo.LoginUserDetails;
 import com.example.mapper.UserMapper;
 import com.example.pojo.po.User;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -66,9 +67,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		 */
 
 		// 如果没有查询到用户就抛出异常
-		if (ObjectUtil.isNull(user1)) {
-			throw new RuntimeException("用户名或者密码错误!!!");
-		}
+		Optional.ofNullable(user1)
+		        .orElseThrow(() -> new RuntimeException("用户名或者密码错误!!!"));
+
 		// TODO 查询对应的权限信息
 
 		// 把数据封装成UserDetails返回

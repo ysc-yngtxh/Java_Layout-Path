@@ -26,7 +26,7 @@ public class JwtUtil {
 	// 设置默认密钥（盐值）
 	public static final String JWT_SECRET = "qwertyuiopasdfghjklzxcvbnm1234567890";
 	// 设置默认头部header
-	public static final Map<String, Object> JWT_HEADER = new HashMap<String, Object>(){{
+	public static final Map<String, Object> JWT_HEADER = new HashMap<String, Object>() {{
 		put("alg", "HS256");
 		put("typ", "JWT");
 	}};

@@ -60,19 +60,19 @@ public class SecurityConfig {
 				.cors(AbstractHttpConfigurer::disable)
 				.csrf(AbstractHttpConfigurer::disable)
 				.formLogin(Customizer.withDefaults())
-				// 配置"记住我"功能
+				// 配置 "记住我" 功能
 				.rememberMe(remember ->
 						            // 指定Cookie中生成的 remember-me 加密需要的key值，使其编码更加难以被破解
 						            remember.key("yjwk")
-						                    // 修改登陆表单中remember复选框的name值，其默认参数为remember-me
+						                    // 修改登陆表单中remember复选框的name值，其默认参数为 "remember-me"
 						                    .rememberMeParameter("rememberMe")
-						                    // 设置浏览器中存储的Cookie名称，其默认参数为remember-me
+						                    // 设置浏览器中存储的Cookie名称，其默认参数为 "remember-me"
 						                    .rememberMeCookieName("rememberMe")
-						                    // 设置 token 的有效时间(单位：秒)。Security默认时长为14天(两周)
+						                    // 设置 token 的有效时间(单位：秒)，Security默认时长为14天(两周)
 						                    .tokenValiditySeconds(30)
 						                    // 设置操作数据表的 Repository
 						                    .tokenRepository(persistentTokenRepository())
-				            // .userDetailsService(userDetailsService())
+				                            // .userDetailsService(userDetailsService())
 				           )
 				.authorizeHttpRequests(auth -> {
 					auth.anyRequest().authenticated();
