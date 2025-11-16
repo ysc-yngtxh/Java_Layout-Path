@@ -10,7 +10,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>19_SpringBoot-Activity</artifactId>
+    <artifactId>19.1_SpringBoot-Activity</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <description>${project.artifactId}</description>
@@ -19,15 +19,44 @@
         <java.version>25</java.version>
     </properties>
     <packaging>pom</packaging>
-    <modules>
-        <module>19.1_SpringBoot-Activity</module>
-        <module>19.2_SpringBoot-Activity-WorkFlow</module>
-    </modules>
+
+    <!--添加 Activity8.x 所在的 alfresco 仓库地址-->
+    <repositories>
+        <repository>
+            <id>activiti-releases</id>
+            <url>https://artifacts.alfresco.com/nexus/content/repositories/activiti-releases</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>3.0.5</version>
+        </dependency>
+
+        <!--⚠️：自 Activity 7.1.x 版本后官方不再将构建制品发布到 Maven 中央仓库了，而是发布在了 alfresco仓库，
+                并且 Activity7.x 只兼容集成 SpringBoot2.x，而 SpringBoot3.x 版本需要集成 Activity 8.x 版本。
+                这就需要在 alfresco仓库 才能正确下载依赖，因此需要在 pom文件 中添加 repositories标签【指定alfresco仓库地址】-->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring-boot-starter</artifactId>
+            <version>8.7.0</version>
+        </dependency>
+        <!--activity可以通过绘制流程的依赖-->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-image-generator</artifactId>
+            <version>8.7.0</version>
         </dependency>
 
         <dependency>
