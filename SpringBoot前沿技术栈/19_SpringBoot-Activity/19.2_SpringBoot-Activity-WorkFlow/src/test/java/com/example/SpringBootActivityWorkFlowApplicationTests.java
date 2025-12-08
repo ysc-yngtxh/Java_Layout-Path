@@ -14,9 +14,9 @@ class SpringBootActivityWorkFlowApplicationTests {
 
 	@Test
 	void testDeploy() {
-		// 创建ProcessEngine对象
+		// 创建 ProcessEngine对象
 		ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
-		// 获取RepositoryService对象
+		// 获取 RepositoryService对象
 		RepositoryService repositoryService = processEngine.getRepositoryService();
 		// 进行部署
 		Deployment deployment = repositoryService.createDeployment()
@@ -31,9 +31,9 @@ class SpringBootActivityWorkFlowApplicationTests {
 	// 或者使用自动部署（推荐）
 	@Test
 	public void testProcessDefinition() {
-		// 创建ProcessEngine对象
+		// 创建 ProcessEngine对象
 		ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
-		// 获取RepositoryService对象
+		// 获取 RepositoryService对象
 		RepositoryService repositoryService = processEngine.getRepositoryService();
 		List<ProcessDefinition> processDefinitions = repositoryService.createProcessDefinitionQuery().list();
 		processDefinitions.forEach(pd -> {

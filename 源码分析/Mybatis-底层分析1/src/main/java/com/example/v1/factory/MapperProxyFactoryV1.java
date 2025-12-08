@@ -39,13 +39,13 @@ public class MapperProxyFactoryV1 {
 	}
 
 	public static <T> T getMapper(Class<T> mapperInterface) {
-		// JDK的动态代理
+		// JDK 动态代理
 		Object proxyInstance = Proxy.newProxyInstance(
 				ClassLoader.getSystemClassLoader(),
 				new Class[]{mapperInterface},
 				(Object proxy, Method method, Object[] args) -> {
 
-					// JDBC获取连接
+					// JDBC 获取连接
 					Connection conn = getConnection();
 
 					// 获取代理方法的@Select注解的Value值SQL语句
