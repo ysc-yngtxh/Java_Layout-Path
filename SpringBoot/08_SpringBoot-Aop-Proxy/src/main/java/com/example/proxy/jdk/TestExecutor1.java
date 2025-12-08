@@ -20,7 +20,7 @@ public class TestExecutor1 {
 				containInterfaceService.getClass().getClassLoader(),
 				containInterfaceService.getClass().getInterfaces(),
 				jdkProxy
-		                                                                                   );
+		);
 		System.out.println("Jdk动态代理的执行结果：" + instance.definition());
 
 		System.out.println(instance.getClass().getName());

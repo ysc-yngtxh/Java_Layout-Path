@@ -31,9 +31,13 @@ public class MultiThreadHandler implements Runnable {
         sel.wakeup();
     }
 
-    boolean inputIsComplete() { /* ... */ return true; }
+    boolean inputIsComplete() {
+	    return true;
+	}
 
-    boolean outputIsComplete() { /* ... */ return true;	}
+    boolean outputIsComplete() {
+		return true;
+	}
 
     void process() { /* ... */ }
 

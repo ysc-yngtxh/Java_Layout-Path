@@ -50,9 +50,13 @@ public class Handler implements Runnable {
 		}
 	}
 
-	public boolean inputIsComplete() { /* ... */ return true; }
+	public boolean inputIsComplete() {
+		return true;
+	}
 
-	public boolean outputIsComplete() { /* ... */ return true;	}
+	public boolean outputIsComplete() {
+		return true;
+	}
 
 	@SneakyThrows
 	public void process(int readLet) {

@@ -41,8 +41,9 @@ public class MapperProxyFactoryV1 {
 	public static <T> T getMapper(Class<T> mapperInterface) {
 		// JDK的动态代理
 		Object proxyInstance = Proxy.newProxyInstance(
-				ClassLoader.getSystemClassLoader(), new Class[]{mapperInterface}
-				, (Object proxy, Method method, Object[] args) -> {
+				ClassLoader.getSystemClassLoader(),
+				new Class[]{mapperInterface},
+				(Object proxy, Method method, Object[] args) -> {
 
 					// JDBC获取连接
 					Connection conn = getConnection();
