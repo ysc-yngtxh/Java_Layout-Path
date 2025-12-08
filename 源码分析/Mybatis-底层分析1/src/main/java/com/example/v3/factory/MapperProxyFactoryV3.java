@@ -39,7 +39,7 @@ public class MapperProxyFactoryV3 {
 		typeHandlerMap.put(Integer.class, new IntegerTypeHandler());
 
 		try {
-			// JDBC注册驱动
+			// JDBC 注册驱动
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
@@ -52,12 +52,12 @@ public class MapperProxyFactoryV3 {
 	}
 
 	public static <T> T getMapper(Class<T> mapperInterface) {
-		// JDK的动态代理
+		// JDK 动态代理
 		Object proxyInstance = Proxy.newProxyInstance(
-				ClassLoader.getSystemClassLoader()
-				, new Class[]{mapperInterface}
-				, (Object proxy, Method method, Object[] args) -> {
-					// JDBC获取连接
+				ClassLoader.getSystemClassLoader(),
+				new Class[]{mapperInterface},
+				(Object proxy, Method method, Object[] args) -> {
+					// JDBC 获取连接
 					Connection conn = getConnection();
 
 					// 获取代理方法的@Select注解的Value值SQL语句
@@ -76,14 +76,14 @@ public class MapperProxyFactoryV3 {
 						paramValueMapping.put(parameters[i].getName(), args[i]);
 					}
 
-					// 解析Sql：将 #{} 解析为 ？占位符。这里的解析过程参考了 MyBatis 提供的解析器，自己做了些许改动
+					// 解析Sql：将 #{} 解析为 ?占位符。这里的解析过程参考了 MyBatis 提供的解析器，自己做了些许改动
 					ParameterMappingTokenHandler tokenHandler = new ParameterMappingTokenHandler();
 					GenericTokenParser genericTokenParser = new GenericTokenParser("#{", "}", tokenHandler);
 					String parseSql = genericTokenParser.parse(sql);
 					// 获取所有的占位符的参数名
 					List<ParameterMapping> parameterKeyMappings = tokenHandler.getParameterMappings();
 
-					// JDBC预编译Sql语句
+					// JDBC 预编译Sql语句
 					PreparedStatement ps = conn.prepareStatement(parseSql);
 					for (int i = 0; i < parameterKeyMappings.size(); i++) {
 						// 遍历得到占位符的参数名
@@ -96,14 +96,14 @@ public class MapperProxyFactoryV3 {
 						typeHandlerMap.get(aClass).setParameter(ps, i + 1, value);
 					}
 
-					// JDBC中的SQl执行
+					// JDBC 中的SQl执行
 					ps.execute();
 					ResultSet resultSet = ps.getResultSet();
 
 					// 定义当前方法的返回值类型
 					Object result = null;
 
-					// JDBC处理结果集
+					// JDBC 处理结果集
 					Class<?> resultType = null;
 					Type genericReturnType = method.getGenericReturnType();
 					if (genericReturnType instanceof Class) {
@@ -157,7 +157,7 @@ public class MapperProxyFactoryV3 {
 						result = list.get(0);
 					}
 
-					// JDBC关闭连接
+					// JDBC 关闭连接
 					conn.close();
 					return result;
 				});

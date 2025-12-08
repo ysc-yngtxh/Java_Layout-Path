@@ -26,7 +26,7 @@ public class MapperProxyFactoryV1 {
 
 	static {
 		try {
-			// JDBC注册驱动
+			// JDBC 注册驱动
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
@@ -69,16 +69,16 @@ public class MapperProxyFactoryV1 {
 					GenericTokenParser genericTokenParser = new GenericTokenParser("#{", "}", tokenHandler);
 					String parseSql = genericTokenParser.parse(sql);
 
-					// JDBC预编译Sql语句：将 #{} 替换为 ？，并使用参数值进行查询
+					// JDBC预编译Sql语句：将 #{} 替换为 ?，并使用参数值进行查询
 					PreparedStatement ps = conn.prepareStatement(parseSql);
 					ps.setString(1, paramValueMapping.get("name").toString());
 					ps.setInt(2, Integer.parseInt(paramValueMapping.get("age").toString()));
 
-					// JDBC中的Sql执行
+					// JDBC 中的Sql执行
 					ps.execute();
 					ResultSet resultSet = ps.getResultSet();
 
-					// JDBC解析结果集
+					// JDBC 解析结果集
 					List<Object> list = new ArrayList<>();
 					while (resultSet.next()) {
 						Student student = new Student();
@@ -89,7 +89,7 @@ public class MapperProxyFactoryV1 {
 						list.add(student);
 					}
 
-					// JDBC关闭连接
+					// JDBC 关闭连接
 					conn.close();
 
 					return list;

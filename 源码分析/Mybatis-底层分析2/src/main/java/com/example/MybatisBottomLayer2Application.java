@@ -20,7 +20,7 @@ public class MybatisBottomLayer2Application {
 		// 4、获取SqlSession对象，从SqlSessionFactory中获取SqlSession
 		SqlSession sqlSession = factory.openSession();
 
-		// 获取包含了MapperProxy代理
+		// 获取包含了 MapperProxy代理
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 		User user = mapper.selectOne(4);
 
