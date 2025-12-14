@@ -10,7 +10,7 @@
 	</parent>
 
 	<groupId>com.example</groupId>
-	<artifactId>14_SpringBoot-EasyExcel</artifactId>
+	<artifactId>14_SpringBoot-Excel</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>${project.artifactId}</name>
 	<description>${project.artifactId}</description>
