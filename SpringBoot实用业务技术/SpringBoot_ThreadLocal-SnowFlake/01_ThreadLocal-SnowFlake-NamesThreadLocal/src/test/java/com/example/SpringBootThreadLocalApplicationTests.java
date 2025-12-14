@@ -30,7 +30,7 @@ class SpringBootThreadLocalApplicationTests {
 	void contextLoads() throws InterruptedException {
 		setAndPrintData(new User());
 
-		Runnable A = () -> {
+		Thread t1 = new Thread(() -> {
 			for (int i = 0; i < 5; i++) {
 				// 方法入口处，设置一个变量和当前线程绑定
 				setAndPrintData(new User(i, "游家纨绔" + i));
@@ -40,8 +40,10 @@ class SpringBootThreadLocalApplicationTests {
 				System.out.println("======== Finish" + i + " =========");
 
 			}
-		};
-		Runnable B = () -> {
+		}, "t1");
+		t1.start();
+		t1.join();
+		Thread t2 = new Thread(() -> {
 			for (int i = 0; i < 5; i++) {
 				// 方法入口处，设置一个变量和当前线程绑定
 				setAndPrintData(new User(i, "曹家千金" + i));
@@ -50,11 +52,7 @@ class SpringBootThreadLocalApplicationTests {
 				THREAD_LOCAL.remove();
 				System.out.println("======== Finish" + i + " =========");
 			}
-		};
-		Thread t1 = new Thread(A, "t1");
-		t1.start();
-		t1.join();
-		Thread t2 = new Thread(B, "t2");
+		}, "t2");
 		t2.start();
 		t1.join();
 

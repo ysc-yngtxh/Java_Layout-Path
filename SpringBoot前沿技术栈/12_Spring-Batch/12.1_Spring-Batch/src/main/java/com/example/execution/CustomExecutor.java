@@ -29,8 +29,8 @@ public class CustomExecutor implements ApplicationContextAware {
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		// JobLauncher --- 作业启动器
 		JobLauncher jobLauncher = (JobLauncher) applicationContext.getBean("jobLauncher");
-		Job job = (Job) applicationContext.getBean("job");
-		// 这里传递的是批处理参数,相同参数的批处理只能执行一次，否则会报异常,且这时的参数为空
+		Job job = applicationContext.getBean("job", Job.class);
+		// 这里传递的是批处理参数，相同参数的批处理只能执行一次，否则会报异常，且这时的参数为空
 		jobLauncher.run(job, new JobParameters());
 	}
 }

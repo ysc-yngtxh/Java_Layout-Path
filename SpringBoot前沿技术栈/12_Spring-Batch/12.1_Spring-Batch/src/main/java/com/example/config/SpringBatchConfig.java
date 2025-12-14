@@ -25,7 +25,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 public class SpringBatchConfig {
 
 	@Autowired
-	private JobRepository jobRepository;  // SpringBatch数据库的操作
+	private JobRepository jobRepository;  // SpringBatch数据库的操作对象
 
 	@Autowired
 	private PlatformTransactionManager batchTransactionManager;  // 事务管理器
@@ -52,6 +52,7 @@ public class SpringBatchConfig {
 				.build();
 	}
 
+	// 批处理作业
 	@Bean
 	public Job job() {
 		return new JobBuilder("Spring Batch Job5", jobRepository)

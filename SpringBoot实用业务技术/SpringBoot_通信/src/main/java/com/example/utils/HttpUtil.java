@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
  * @author 游家纨绔
  */
 public class HttpUtil {
-	private static Logger logger = LoggerFactory.getLogger(HttpUtil.class);
+	private static Logger log = LoggerFactory.getLogger(HttpUtil.class);
 
 	/**
 	 * CloseableHttpClient
@@ -54,7 +54,7 @@ public class HttpUtil {
 			HttpGet request = new HttpGet(url);
 			CloseableHttpResponse response = client.execute(request);
 			int code = response.getCode();
-			logger.info("请求URL：" + url + ";code：" + code);
+			log.info("请求URL：" + url + ";code：" + code);
 			if (code == HttpStatus.SC_OK) {
 				String result = EntityUtils.toString(response.getEntity());
 				return result;
@@ -79,14 +79,14 @@ public class HttpUtil {
 			HttpPost request = new HttpPost(url);
 			List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 			for (Iterator<String> iter = params.keySet().iterator(); iter.hasNext(); ) {
-				String key = (String) iter.next();
+				String key = iter.next();
 				String value = String.valueOf(params.get(key));
 				nvps.add(new BasicNameValuePair(key, value));
 			}
 			request.setEntity(new UrlEncodedFormEntity(nvps, StandardCharsets.UTF_8));
 			CloseableHttpResponse response = (CloseableHttpResponse) client.execute(request);
 			int code = response.getCode();
-			logger.info("请求URL：" + url + ";code：" + code);
+			log.info("请求URL：" + url + ";code：" + code);
 			if (code == HttpStatus.SC_OK) {
 				in = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), StandardCharsets.UTF_8));
 				StringBuffer sb = new StringBuffer("");
@@ -122,7 +122,7 @@ public class HttpUtil {
 		try {
 			response = httpclient.execute(httpPost);
 			int code = response.getCode();
-			logger.info("请求URL：" + url + ";code：" + code);
+			log.info("请求URL：" + url + ";code：" + code);
 			if (code == HttpStatus.SC_OK) {
 				HttpEntity responseEntity = response.getEntity();
 				String jsonString = EntityUtils.toString(responseEntity);

@@ -24,8 +24,8 @@ public class CustomFilter implements Filter {
 		// 因此是需要在日志中添加 链路Id 作为标识进行判断，方便定位错误所在。
 		// 通常会在网关中的请求里添加相应的请求头参数【"X-Trace-ID", 链路Id】，如下网关部分代码：
 		// if (traceId == null) {
-		//  	CustomNamedThreadLocal.startTransaction();
-		//  	traceId = CustomNamedThreadLocal.getTransactionId();
+		// 	CustomNamedThreadLocal.startTransaction();
+		// 	traceId = CustomNamedThreadLocal.getTransactionId();
 		// }
 		//
 		String traceId = ((HttpServletRequest) request).getHeader("X-Trace-ID");

@@ -48,8 +48,8 @@ class SpringBootUrlApplicationTests {
 		URL url2 = new URL("http", "localhost", 8080, "/");
 		URL url3 = new URL("file:" + ABSOLUTE_PATH + "/src/main/resources/application.properties");
 		// 上述的构造器在 Jdk20版本中被弃用，可使用如下方式
-		URL uri4 = new URI("https://example.com").toURL();
-		URL uri5 = URI.create("https://example.com").toURL();
+		URL url4 = new URI("https://example.com").toURL();
+		URL url5 = URI.create("https://example.com").toURL();
 
 		System.out.println("协议为：" + url3.getProtocol());
 		System.out.println("验证信息：" + url3.getAuthority());

@@ -13,7 +13,7 @@ class SpringBootInheritableThreadLocalApplicationTests {
 	public static final ThreadLocal<String> threadLocal = new ThreadLocal<>();
 	public static final ThreadLocal<String> inheritableThreadLocal = new InheritableThreadLocal<>();
 	private static final TransmittableThreadLocal<String> transmittableThreadLocal = new TransmittableThreadLocal<>();
-	private static ExecutorService executorService = Executors.newFixedThreadPool(1);
+	private static final ExecutorService executorService = Executors.newFixedThreadPool(1);
 
 	// ThreadLocal（线程隔离，主线程和子线程之间是隔离的）
 	// 缺点：子线程无法获取父线程的值
@@ -21,7 +21,7 @@ class SpringBootInheritableThreadLocalApplicationTests {
 	public void setThreadLocal() {
 		threadLocal.set("主线程1。。。");
 		Thread thread = new Thread(() -> {
-			System.out.println("子线程1：" + Thread.currentThread().getName() + ":" + threadLocal.get());
+			System.out.println("子线程1：" + Thread.currentThread().getName() + " -- " + threadLocal.get());
 		});
 		thread.start();
 	}
@@ -31,7 +31,7 @@ class SpringBootInheritableThreadLocalApplicationTests {
 	public void setInheritableThreadLocal() {
 		inheritableThreadLocal.set("主线程1。。。");
 		Thread thread = new Thread(() -> {
-			System.out.println("子线程1：" + Thread.currentThread().getName() + ":" + inheritableThreadLocal.get());
+			System.out.println("子线程1：" + Thread.currentThread().getName() + " -- " + inheritableThreadLocal.get());
 		});
 		thread.start();
 	}
@@ -44,11 +44,11 @@ class SpringBootInheritableThreadLocalApplicationTests {
 	public void setExecutorService() throws InterruptedException {
 		inheritableThreadLocal.set("主线程1。。。");
 		System.out.println("线程1：" + inheritableThreadLocal.get());
-		executorService.submit(() -> System.out.println("子线程：" + Thread.currentThread().getName() + ":" + inheritableThreadLocal.get()));
+		executorService.submit(() -> System.out.println("子线程：" + Thread.currentThread().getName() + " -- " + inheritableThreadLocal.get()));
 		Thread.sleep(1000);
 		inheritableThreadLocal.set("主线程2。。。");
 		System.out.println("线程2：" + inheritableThreadLocal.get());
-		executorService.submit(() -> System.out.println("子线程：" + Thread.currentThread().getName() + ":" + inheritableThreadLocal.get()));
+		executorService.submit(() -> System.out.println("子线程：" + Thread.currentThread().getName() + " -- " + inheritableThreadLocal.get()));
 	}
 
 
@@ -60,7 +60,7 @@ class SpringBootInheritableThreadLocalApplicationTests {
 		System.out.println("线程1：" + inheritableThreadLocal.get());
 		executorService.submit(() -> {
 			try {
-				System.out.println("子线程：" + Thread.currentThread().getName() + ":" + inheritableThreadLocal.get());
+				System.out.println("子线程：" + Thread.currentThread().getName() + " -- " + inheritableThreadLocal.get());
 			} finally {
 				inheritableThreadLocal.remove();
 			}
@@ -70,7 +70,7 @@ class SpringBootInheritableThreadLocalApplicationTests {
 		System.out.println("线程2：" + inheritableThreadLocal.get());
 		executorService.submit(() -> {
 			try {
-				System.out.println("子线程：" + Thread.currentThread().getName() + ":" + inheritableThreadLocal.get());
+				System.out.println("子线程：" + Thread.currentThread().getName() + " -- " + inheritableThreadLocal.get());
 			} finally {
 				inheritableThreadLocal.remove();
 			}
@@ -89,10 +89,10 @@ class SpringBootInheritableThreadLocalApplicationTests {
 	public void setTransmittableThreadLocal() throws InterruptedException {
 		transmittableThreadLocal.set("主线程1。。。");
 		System.out.println("线程1：" + transmittableThreadLocal.get());
-		executorService.submit(TtlRunnable.get(() -> System.out.println("子线程：" + Thread.currentThread().getName() + ":" + transmittableThreadLocal.get())));
+		executorService.submit(TtlRunnable.get(() -> System.out.println("子线程：" + Thread.currentThread().getName() + " -- " + transmittableThreadLocal.get())));
 		Thread.sleep(1000);
 		transmittableThreadLocal.set("主线程2。。。");
 		System.out.println("线程2：" + transmittableThreadLocal.get());
-		executorService.submit(TtlRunnable.get(() -> System.out.println("子线程：" + Thread.currentThread().getName() + ":" + transmittableThreadLocal.get())));
+		executorService.submit(TtlRunnable.get(() -> System.out.println("子线程：" + Thread.currentThread().getName() + " -- " + transmittableThreadLocal.get())));
 	}
 }

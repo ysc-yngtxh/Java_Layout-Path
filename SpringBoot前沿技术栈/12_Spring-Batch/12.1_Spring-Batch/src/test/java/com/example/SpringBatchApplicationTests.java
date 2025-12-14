@@ -36,7 +36,7 @@ public class SpringBatchApplicationTests {
 		return new Tasklet() {
 			@Override
 			public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-				System.out.println("Spring Batch 执行 Job Test");
+				System.out.println("Spring Batch 执行 Task Test");
 				// 每个步骤都会包含一个完整的执行状态。这个状态通过RepeatStatus来表示
 				return RepeatStatus.FINISHED;
 			}
@@ -45,11 +45,12 @@ public class SpringBatchApplicationTests {
 
 	// 批处理中的顺序步骤
 	public Step step() {
-		return new StepBuilder("Spring Batch Step", jobRepository)
+		return new StepBuilder("Spring Batch Step Test", jobRepository)
 				.tasklet(tasklet(), batchTransactionManager)
 				.build();
 	}
 
+	// 批处理作业
 	public Job job() {
 		return new JobBuilder("Spring Batch Job Test", jobRepository)
 				.start(step())
@@ -60,8 +61,7 @@ public class SpringBatchApplicationTests {
 	void contextLoads() {
 		try {
 			jobLauncher.run(job(), new JobParameters());
-		} catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException |
-		         JobParametersInvalidException e) {
+		} catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException | JobParametersInvalidException e) {
 			throw new RuntimeException(e);
 		}
 	}
