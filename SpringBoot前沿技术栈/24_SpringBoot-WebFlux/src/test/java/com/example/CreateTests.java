@@ -31,7 +31,7 @@ class CreateTests {
 		// 从CompletableFuture创建
 		Mono<String> mono6 = Mono.fromFuture(
 				CompletableFuture.supplyAsync(() -> "FromFuture")
-		                                    );
+		);
 
 		System.out.println(mono1.block());
 		System.out.println(mono4.block());

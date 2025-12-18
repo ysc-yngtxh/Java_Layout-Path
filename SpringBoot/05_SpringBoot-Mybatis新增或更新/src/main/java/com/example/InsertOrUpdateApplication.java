@@ -7,9 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * @author 游家纨绔
  */
-// 开启spring配置
+// 开启 Spring配置
 @SpringBootApplication
-// 开启扫描Mpper接口的包以及子目录.就不用在StudentMapper类上加@Mapper注解
+// 开启扫描Mapper接口的包以及子目录.就不用在StudentMapper类上加@Mapper注解
 @MapperScan(basePackages = "com.example.mapper")
 public class InsertOrUpdateApplication {
 
