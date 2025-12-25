@@ -1,0 +1,47 @@
+# spring:
+#   r2dbc:
+#     password: 131474
+#     pool:
+#       enabled: true
+#     url: r2dbc:postgresql://localhost:5432/smartmatch_ece?currentSchema=smc_ece
+#     username: root
+
+
+spring:
+  application:
+    name: '@project.artifactId@'
+  r2dbc:
+    # H2 内存数据库详细配置
+    url: r2dbc:h2:mem:///testdb?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MySQL
+    username: sa
+    password:
+    pool:
+      enabled: true
+
+  sql:
+    init:
+      mode: always                            # 总是初始化
+      schema-locations: classpath:schema.sql  # 建表SQL
+      data-locations: classpath:data.sql      # 初始数据
+
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: true  # 启用跟踪
+        web-allow-others: true  # 允许远程访问
+
+  main:
+    web-application-type: reactive  # 或者 servlet
+
+server:
+  port: 8080
+
+# 日志配置，查看启动信息
+logging:
+  level:
+    org.springframework.boot: INFO
+    com.zaxxer.hikari: DEBUG
+    web: DEBUG

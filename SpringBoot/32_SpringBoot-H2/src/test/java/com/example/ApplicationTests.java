@@ -1,11 +1,10 @@
 package com.example;
 
-import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringBootAIApplicationTests {
+class ApplicationTests {
 
 	@Test
 	void contextLoads() {
