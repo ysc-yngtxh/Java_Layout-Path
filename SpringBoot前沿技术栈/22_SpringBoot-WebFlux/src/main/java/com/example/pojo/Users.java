@@ -1,33 +1,31 @@
 package com.example.pojo;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Table(name = "users")
-public class User {
+public class Users {
 
     @Id
-    @Column(name = "id")
+    @Column("id")
     private Integer id;
 
-    @Column(name = "user_name")
+    @Column("user_name")
     private String userName;
 
-    @Column(name = "email")
+    @Column("email")
     private String email;
 
-    @Column(name = "full_name")
+    @Column("full_name")
     private String fullName;
 
-    @Column(name = "active")
+    @Column("active")
     private boolean active;
 }

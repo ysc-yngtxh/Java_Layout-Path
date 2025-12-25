@@ -1,6 +1,7 @@
 package com.example;
 
 import com.example.handler.UserHandler;
+import com.example.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +19,8 @@ class SpringBootWebFluxH2ApplicationTests {
 
 	@Autowired
 	private UserHandler userHandler;
+	@Autowired
+	private UserRepository userRepository;
 
 	@Test
 	void contextLoads() {
@@ -32,5 +35,11 @@ class SpringBootWebFluxH2ApplicationTests {
 		httpServer.handle(adapter).bindNow();
 	}
 
+	@Test
+	void contextLoads2() {
+		userRepository.findAll()
+				.doOnNext(user -> System.out.println("Users: " + user))
+				.blockFirst();
+	}
 
 }
