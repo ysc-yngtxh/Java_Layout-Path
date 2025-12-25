@@ -13,7 +13,7 @@
     <div class="ui container">
         <div class="ui segment" id="index-header-nav" th:fragment="nav-menu">
             <div class="ui secondary menu">
-                <a class="item" th:href="@{/users/index}">首页</a>
+                <a class="item" th:href="@{/user/index}">首页</a>
                 <!--登录注销-->
                 <div class="right menu">
                     <!--如果未登录-->
@@ -28,7 +28,7 @@
                             <i class="address card icon"></i>
                             用户名：<span sec:authentication="principal.username"></span>&emsp;&emsp;&emsp;&emsp;
                             角色：<span sec:authentication="principal.authorities"></span>&emsp;&emsp;&emsp;&emsp;
-                            头像：<img th:src="@{/users/img}" alt="头像" style="border-radius: 50%;">
+                            头像：<img th:src="@{/user/img}" alt="头像" style="border-radius: 50%;">
                         </a>
                     </div>
                     <div sec:authorize="isAuthenticated()">

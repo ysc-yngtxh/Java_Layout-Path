@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, users-scalable=no" name="viewport">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="${request.contextPath}/static/adminlte/bower_components/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
@@ -81,7 +81,7 @@
 
           	<div class="navbar-custom-menu">
 				<ul class="nav navbar-nav">
-					<#-- login users -->
+					<#-- login user -->
                     <li class="dropdown">
                         <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             ${I18n.system_welcome} ${loginUser.username}
@@ -143,7 +143,7 @@
 				<li class="nav-click <#if pageName == "joblog">active</#if>" ><a href="${request.contextPath}/joblog"><i class="fa fa-circle-o text-green"></i><span>${I18n.joblog_name}</span></a></li>
 				<#if loginUser.role == 1>
                     <li class="nav-click <#if pageName == "jobgroup">active</#if>" ><a href="${request.contextPath}/jobgroup"><i class="fa fa-circle-o text-red"></i><span>${I18n.jobgroup_name}</span></a></li>
-                    <li class="nav-click <#if pageName == "users">active</#if>" ><a href="${request.contextPath}/users"><i class="fa fa-circle-o text-purple"></i><span>${I18n.user_manage}</span></a></li>
+                    <li class="nav-click <#if pageName == "user">active</#if>" ><a href="${request.contextPath}/user"><i class="fa fa-circle-o text-purple"></i><span>${I18n.user_manage}</span></a></li>
 				</#if>
 				<li class="nav-click <#if pageName == "help">active</#if>" ><a href="${request.contextPath}/help"><i class="fa fa-circle-o text-gray"></i><span>${I18n.job_help}</span></a></li>
 			</ul>
@@ -177,7 +177,7 @@
 					</li>
 					<li>
 						<a href="javascript::;"> 
-							<i class="menu-icon fa fa-users bg-yellow"></i>
+							<i class="menu-icon fa fa-user bg-yellow"></i>
 							<div class="menu-info">
 								<h4 class="control-sidebar-subheading">Frodo 更新了资料</h4>
 								<p>更新手机号码 +1(800)555-1234</p>

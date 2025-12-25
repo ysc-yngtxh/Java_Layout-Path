@@ -8,7 +8,7 @@
 
     2、Spring Security登录页面：
            默认登陆界面：http://localhost:8080/login
-           默认的用户名: users
+           默认的用户名: user
            默认的密码: 控制台打印
 
     情况一：  
@@ -44,3 +44,4 @@
    }
    ```
   ![img](./src/main/resources/static/img.png)
+

@@ -28,6 +28,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-r2dbc</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
         <!--该依赖中包含 Mongodb驱动-->
         <!--<dependency>-->
         <!--    <groupId>org.springframework.boot</groupId>-->
@@ -47,14 +51,6 @@
             <groupId>io.r2dbc</groupId>
             <artifactId>r2dbc-h2</artifactId>
         </dependency>
-
-        <!--注意⚠️：Spring Boot WebFlux 默认是使用 Netty 作为服务器，而 H2 Console 是一个 Servlet 应用，
-                   需要 Servlet 容器(如 Tomcat)才能运行。因此，这里不提供 H2数据库的Web控制台功能。-->
-        <!--<dependency>-->
-        <!--    <groupId>org.springframework.boot</groupId>-->
-        <!--    <artifactId>spring-boot-h2console</artifactId>-->
-        <!--</dependency>-->
-
         <!-- H2 数据库 -->
         <dependency>
             <groupId>com.h2database</groupId>

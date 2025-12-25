@@ -13,12 +13,12 @@
     <p th:text="${msg}"></p>
     <hr>
 
-    <div shiro:hasPermission="users:add">
-        <a th:href="@{/users/add}">add</a>
+    <div shiro:hasPermission="user:add">
+        <a th:href="@{/user/add}">add</a>
     </div>
 
-    <div shiro:hasPermission="users:update">
-        <a th:href="@{/users/update}">update</a>
+    <div shiro:hasPermission="user:update">
+        <a th:href="@{/user/update}">update</a>
     </div>
 </body>
 </html>

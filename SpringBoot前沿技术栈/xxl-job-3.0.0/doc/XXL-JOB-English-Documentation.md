@@ -35,7 +35,7 @@ XXL-JOB is a distributed task scheduling framework, the core design goal is to d
 - 13.GLUE: provide Web IDE, support online development task logic code, dynamic release, real-time compiler effective, omit the deployment of the on-line process. Supports historical versions of 30 versions back;
 - 14.Data Encryption: The communication between the dispatching center and the executor is used for data encryption, Enhancing the security of dispatching information;
 - 15.Task Dependency: Support configuration subtask dependencies, When the parent task executed end and after the success of the implementation will take the initiative to trigger a second task execution, multiple sub tasks are separated by commas;
-- 16.Push the Maven central warehouse: The latest stable version will be sent to the Maven central warehouse to facilitate users access and use;
+- 16.Push the Maven central warehouse: The latest stable version will be sent to the Maven central warehouse to facilitate user access and use;
 - 17.Task registration: The executor automatically registers tasks periodically, and the dispatch center automatically finds the registered tasks and triggers execution. It also supports manual input of executor address;
 - 18.Router strategy: A rich routing strategy is provided when the executor cluster is deployed, these include: first, last, poll, random, consistent HASH, least frequently used, least recently used, failover, busy over, sharding broadcast,etc.;
 - 19.Report monitor: Support real-time view of running data, such as the number of tasks, the number of dispatch, the number of executors, etc .; and scheduling reports, such as scheduling date distribution, scheduling success map;
@@ -416,7 +416,7 @@ The concrete contet describe as follows:
     ### JDBC connection info of schedule center：keep Consistent with chapter 2.1
     xxl.job.db.driverClass=com.mysql.jdbc.Driver
     xxl.job.db.url=jdbc:mysql://127.0.0.1:3306/xxl_job?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
-    xxl.job.db.users=root
+    xxl.job.db.user=root
     xxl.job.db.password=root_pwd
     
     ### Alarm mailbox
@@ -1054,8 +1054,8 @@ The scheduling center API service requests reference code：com.xxl.job.adminbiz
 	- /xxl-job-core -----------------------  Public core dependence
 	- /xxl-job-executor-example ------ 【executor】:Responsible for receiving scheduling request and execute task logic;
 	- /db ---------------------------------- create table script
-	- /doc --------------------------------- users manual
-- 2、Upgrade the users manual under the new directory structure;
+	- /doc --------------------------------- user manual
+- 2、Upgrade the user manual under the new directory structure;
 - 3、Optimize some interactions and UI;
 
 ### 6.5 version V1.3.2，New features [2016-05-28]

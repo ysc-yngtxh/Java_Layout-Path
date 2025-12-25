@@ -7,13 +7,9 @@
 #     username: root
 
 
-server:
-  port: 8080
 spring:
   application:
     name: '@project.artifactId@'
-  main:
-    web-application-type: reactive  # 或者 servlet
   r2dbc:
     # H2 内存数据库详细配置
     url: r2dbc:h2:mem:///myTest?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MySQL
@@ -28,6 +24,11 @@ spring:
       schema-locations: classpath:schema.sql  # 建表SQL
       data-locations: classpath:data.sql      # 初始数据
 
+  main:
+    web-application-type: reactive  # 或者 servlet
+
+server:
+  port: 8080
 
 # 日志配置，查看启动信息
 logging:

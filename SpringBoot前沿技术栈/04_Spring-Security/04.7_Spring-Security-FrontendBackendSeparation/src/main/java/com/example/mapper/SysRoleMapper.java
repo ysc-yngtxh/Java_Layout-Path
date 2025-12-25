@@ -19,8 +19,8 @@ public interface SysRoleMapper extends BaseMapper<SysRole> {
             SELECT role.id, role.name, role.role_key
             FROM `sys_role` AS role
             INNER JOIN `sys_user_role` AS ur ON role.id = ur.role_id
-            INNER JOIN `sys_user` AS users ON ur.user_id = users.id
-            WHERE users.user_name = #{userName}
+            INNER JOIN `sys_user` AS user ON ur.user_id = user.id
+            WHERE user.user_name = #{userName}
             """)
     List<SysRole> findUserByRole(@Param("userName") String userName);
 }
