@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.pojo.Users;
+import com.example.pojo.User;
 import com.example.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,19 +17,19 @@ public class UserController {
 	private final UserService userService;
 
 	@GetMapping
-	public Flux<Users> getAllUsers() {
+	public Flux<User> getAllUsers() {
 		return userService.findAll();
 	}
 
 	@GetMapping("/{id}")
-	public Mono<ResponseEntity<Users>> getUserById(@PathVariable Integer id) {
+	public Mono<ResponseEntity<User>> getUserById(@PathVariable Integer id) {
 		return userService.findById(id)
 		                  .map(ResponseEntity::ok)
 		                  .defaultIfEmpty(ResponseEntity.notFound().build());
 	}
 
 	@GetMapping("/username/{username}")
-	public Mono<ResponseEntity<Users>> getUserByUsername(@PathVariable String username) {
+	public Mono<ResponseEntity<User>> getUserByUsername(@PathVariable String username) {
 		return userService.findByUsername(username)
 		                  .map(ResponseEntity::ok)
 		                  .defaultIfEmpty(ResponseEntity.notFound().build());
@@ -37,13 +37,13 @@ public class UserController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Mono<Users> createUser(@RequestBody Users users) {
-		return userService.save(users);
+	public Mono<User> createUser(@RequestBody User user) {
+		return userService.save(user);
 	}
 
 	@PutMapping("/{id}")
-	public Mono<ResponseEntity<Users>> updateUser(@PathVariable Integer id, @RequestBody Users users) {
-		return userService.update(id, users)
+	public Mono<ResponseEntity<User>> updateUser(@PathVariable Integer id, @RequestBody User user) {
+		return userService.update(id, user)
 		                  .map(ResponseEntity::ok)
 		                  .defaultIfEmpty(ResponseEntity.notFound().build());
 	}

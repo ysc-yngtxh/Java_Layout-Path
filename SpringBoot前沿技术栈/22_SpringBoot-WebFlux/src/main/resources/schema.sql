@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
+DROP TABLE IF EXISTS `h2_users`;
+CREATE TABLE `h2_users` (
     `id` int NOT NULL AUTO_INCREMENT COMMENT '主键 Id',
     `user_name` varchar(50) DEFAULT NULL COMMENT '用户名',
     `email` varchar(100) DEFAULT NULL COMMENT '邮箱',

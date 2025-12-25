@@ -1,4 +1,4 @@
-INSERT INTO users(id, user_name, email, full_name, active)
+INSERT INTO `h2_users`(id, user_name, email, full_name, active)
 VALUES (1, '张三', 'zhangsan@example.com', '张三大爷', true),
        (2, '李四', 'lisi@example.com', '李四大佬', false),
        (3, '王五', 'wangwu@example.com', '王五先生', true),

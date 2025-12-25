@@ -38,7 +38,7 @@ class SpringBootWebFluxH2ApplicationTests {
 	@Test
 	void contextLoads2() {
 		userRepository.findAll()
-				.doOnNext(user -> System.out.println("Users: " + user))
+				.doOnNext(user -> System.out.println("User: " + user))
 				.blockFirst();
 	}
 

@@ -1,6 +1,6 @@
 package com.example.handler;
 
-import com.example.pojo.Users;
+import com.example.pojo.User;
 import com.example.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,7 +22,7 @@ public class UserHandler {
 	public Mono<ServerResponse> getAllUsers(ServerRequest request) {
 		return ServerResponse.ok()
 		                     .contentType(MediaType.APPLICATION_JSON)
-		                     .body(userService.findAll(), Users.class);
+		                     .body(userService.findAll(), User.class);
 	}
 
 	// 根据ID获取用户
@@ -32,7 +32,7 @@ public class UserHandler {
 		// 空值处理
 		Mono<ServerResponse> notFound = ServerResponse.notFound().build();
 		// 调用Service方法得到数据
-		Mono<Users> userMono = userService.findById(id);
+		Mono<User> userMono = userService.findById(id);
 		return userMono
 				.flatMap(user ->
 						         ServerResponse.ok()
@@ -46,7 +46,7 @@ public class UserHandler {
 	// 创建用户
 	public Mono<ServerResponse> createUser(ServerRequest request) {
 		// 获取请求体中的User对象
-		Mono<Users> userMono = request.bodyToMono(Users.class);
+		Mono<User> userMono = request.bodyToMono(User.class);
 		// 调用Service保存用户
 		return userMono
 				.flatMap(user -> userService.save(user))
@@ -60,7 +60,7 @@ public class UserHandler {
 		// 获取请求路径中的id值
 		Integer id = Integer.parseInt(request.pathVariable("id"));
 		// 获取请求体中的User对象
-		Mono<Users> userMono = request.bodyToMono(Users.class);
+		Mono<User> userMono = request.bodyToMono(User.class);
 
 		return userMono
 				.flatMap(user -> userService.update(id, user))
