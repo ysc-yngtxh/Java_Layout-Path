@@ -15,7 +15,7 @@
 
     <a th:href="@{|/admin/test|}">需要有admin角色的功能</a><br><br><br>
     <a th:href="@{|/admin/test2|}">需要有admin:add权限的功能</a><br><br><br>
-    <a th:href="@{|/user/test|}">需要有user角色的功能</a><br/><br/><br/>
+    <a th:href="@{|/users/test|}">需要有user角色的功能</a><br/><br/><br/>
 
     <button type="button" shiro:authenticated="ture">权限控制</button>
     <shiro:hasRole name="admin">

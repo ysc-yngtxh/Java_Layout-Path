@@ -1,6 +1,6 @@
 package com.example.service.impl;
 
-import com.example.pojo.User;
+import com.example.pojo.Users;
 import com.example.repository.UserRepository;
 import com.example.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -15,33 +15,33 @@ public class UserServiceImpl implements UserService {
 	private final UserRepository userRepository;
 
 	@Override
-	public Flux<User> findAll() {
+	public Flux<Users> findAll() {
 		return userRepository.findAll();
 	}
 
 	@Override
-	public Mono<User> findById(Integer id) {
+	public Mono<Users> findById(Integer id) {
 		return userRepository.findById(id)
-		                     .switchIfEmpty(Mono.error(new RuntimeException("User not found with id: " + id)));
+		                     .switchIfEmpty(Mono.error(new RuntimeException("Users not found with id: " + id)));
 	}
 
 	@Override
-	public Mono<User> save(User user) {
+	public Mono<Users> save(Users users) {
 		// 可以在这里添加业务验证逻辑
-		return userRepository.save(user);
+		return userRepository.save(users);
 	}
 
 	@Override
-	public Mono<User> update(Integer id, User user) {
+	public Mono<Users> update(Integer id, Users users) {
 		return userRepository.findById(id)
 		                     .flatMap(existingUser -> {
-			                     existingUser.setUserName(user.getUserName());
-			                     existingUser.setEmail(user.getEmail());
-			                     existingUser.setFullName(user.getFullName());
-			                     existingUser.setActive(user.isActive());
+			                     existingUser.setUserName(users.getUserName());
+			                     existingUser.setEmail(users.getEmail());
+			                     existingUser.setFullName(users.getFullName());
+			                     existingUser.setActive(users.getActive());
 			                     return userRepository.save(existingUser);
 		                     })
-		                     .switchIfEmpty(Mono.error(new RuntimeException("User not found with id: " + id)));
+		                     .switchIfEmpty(Mono.error(new RuntimeException("Users not found with id: " + id)));
 	}
 
 	@Override
@@ -51,15 +51,15 @@ public class UserServiceImpl implements UserService {
 			                     if (exists) {
 				                     return userRepository.deleteById(id);
 			                     } else {
-				                     return Mono.error(new RuntimeException("User not found with id: " + id));
+				                     return Mono.error(new RuntimeException("Users not found with id: " + id));
 			                     }
 		                     });
 	}
 
 	@Override
-	public Mono<User> findByUsername(String username) {
+	public Mono<Users> findByUsername(String username) {
 		return userRepository.findByUserName(username)
-		                     .switchIfEmpty(Mono.error(new RuntimeException("User not found with username: " + username)));
+		                     .switchIfEmpty(Mono.error(new RuntimeException("Users not found with username: " + username)));
 	}
 
 }
