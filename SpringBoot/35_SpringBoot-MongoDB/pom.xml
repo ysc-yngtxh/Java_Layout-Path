@@ -10,10 +10,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>34_SpringBoot-MongoDB</artifactId>
+    <artifactId>35_SpringBoot-MongoDB</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>34_SpringBoot-MongoDB</name>
-    <description>34_SpringBoot-MongoDB</description>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
 
     <properties>
         <java.version>25</java.version>

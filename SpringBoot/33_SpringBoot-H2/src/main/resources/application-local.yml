@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: '@project.artifactId@'
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:myTest?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MySQL
+    username: sa
+    password: ''
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: true
+        web-allow-others: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  sql:
+    init:
+      data-locations: classpath:data.sql
+      mode: always
+      schema-locations: classpath:schema.sql
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+      springframework: INFO
