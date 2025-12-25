@@ -1,12 +1,3 @@
-# spring:
-#   r2dbc:
-#     password: 131474
-#     pool:
-#       enabled: true
-#     url: r2dbc:postgresql://localhost:5432/smartmatch_ece?currentSchema=smc_ece
-#     username: root
-
-
 server:
   port: 8080
 spring:

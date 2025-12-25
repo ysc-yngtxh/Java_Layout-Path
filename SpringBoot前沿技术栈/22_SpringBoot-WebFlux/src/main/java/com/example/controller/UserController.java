@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/flux/users")
+@RequestMapping("/api/users")
 public class UserController {
 
 	private final UserService userService;

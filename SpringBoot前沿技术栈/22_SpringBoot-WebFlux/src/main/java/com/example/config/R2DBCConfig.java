@@ -24,4 +24,5 @@ public class R2DBCConfig {
 		                     .connectionFactory(connectionFactory)
 		                     .build();
 	}
+	
 }
