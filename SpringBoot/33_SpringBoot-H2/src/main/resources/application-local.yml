@@ -15,6 +15,7 @@ spring:
         web-allow-others: true
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
   sql:
     init:
       data-locations: classpath:data.sql

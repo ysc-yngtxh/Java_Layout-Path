@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
 	public Mono<User> update(Integer id, User user) {
 		return userRepository.findById(id)
 		                     .flatMap(existingUser -> {
-			                     existingUser.setUsername(user.getUsername());
+			                     existingUser.setUserName(user.getUserName());
 			                     existingUser.setEmail(user.getEmail());
 			                     existingUser.setFullName(user.getFullName());
 			                     existingUser.setActive(user.isActive());
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Mono<User> findByUsername(String username) {
-		return userRepository.findByUsername(username)
+		return userRepository.findByUserName(username)
 		                     .switchIfEmpty(Mono.error(new RuntimeException("User not found with username: " + username)));
 	}
 
