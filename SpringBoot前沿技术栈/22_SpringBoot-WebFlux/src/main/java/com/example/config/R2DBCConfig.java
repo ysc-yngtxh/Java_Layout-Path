@@ -12,16 +12,16 @@ import org.springframework.r2dbc.core.DatabaseClient;
 @EnableR2dbcRepositories(basePackages = "com.example.repository")
 public class R2DBCConfig {
 
-    @Bean
-    public R2dbcEntityTemplate r2dbcEntityTemplate(ConnectionFactory connectionFactory) {
-        return new R2dbcEntityTemplate(connectionFactory);
-    }
+	@Bean
+	public R2dbcEntityTemplate r2dbcEntityTemplate(ConnectionFactory connectionFactory) {
+		return new R2dbcEntityTemplate(connectionFactory);
+	}
 
-    // 或者使用 DatabaseClient
-    @Bean
-    public DatabaseClient databaseClient(ConnectionFactory connectionFactory) {
-        return DatabaseClient.builder()
-                             .connectionFactory(connectionFactory)
-                             .build();
-    }
+	// 或者使用 DatabaseClient
+	@Bean
+	public DatabaseClient databaseClient(ConnectionFactory connectionFactory) {
+		return DatabaseClient.builder()
+		                     .connectionFactory(connectionFactory)
+		                     .build();
+	}
 }

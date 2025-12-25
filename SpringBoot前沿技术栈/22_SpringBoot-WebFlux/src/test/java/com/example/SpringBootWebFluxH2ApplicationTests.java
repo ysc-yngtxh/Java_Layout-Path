@@ -14,7 +14,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.netty.http.server.HttpServer;
 
 @SpringBootTest
-class ApplicationTests {
+class SpringBootWebFluxH2ApplicationTests {
 
 	@Autowired
 	private UserHandler userHandler;
