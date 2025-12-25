@@ -13,7 +13,8 @@ class SpringBootH2ApplicationTests {
 
 	@Test
 	void contextLoads() {
-		System.out.println(userRepository.findByUserName("张三大爷"));
+		System.out.println("根据 userName 查询 H2 数据：" + userRepository.findByUserName("张三"));
+		System.out.println("查询 H2 所有数据：" + userRepository.findAll());
 	}
 
 }
