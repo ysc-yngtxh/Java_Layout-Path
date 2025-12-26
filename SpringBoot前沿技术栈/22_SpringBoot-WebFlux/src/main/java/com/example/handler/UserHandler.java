@@ -49,10 +49,12 @@ public class UserHandler {
 		Mono<User> userMono = request.bodyToMono(User.class);
 		// 调用Service保存用户
 		return userMono
-				.flatMap(user -> userService.save(user))
-				.flatMap(savedUser -> ServerResponse.status(HttpStatus.CREATED)
-				                                    .contentType(MediaType.APPLICATION_JSON)
-				                                    .bodyValue(savedUser));
+				.flatMap(userService::save)
+				.flatMap(savedUser ->
+					ServerResponse.status(HttpStatus.CREATED)
+							.contentType(MediaType.APPLICATION_JSON)
+							.bodyValue(savedUser)
+				);
 	}
 
 	// 更新用户

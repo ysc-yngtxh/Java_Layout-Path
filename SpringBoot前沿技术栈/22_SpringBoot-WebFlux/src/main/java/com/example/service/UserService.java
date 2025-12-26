@@ -8,8 +8,8 @@ public interface UserService {
    
     Flux<User> findAll();
     Mono<User> findById(Integer id);
+    Mono<User> findByUsername(String username);
     Mono<User> save(User user);
     Mono<User> update(Integer id, User user);
     Mono<Void> deleteById(Integer id);
-    Mono<User> findByUsername(String username);
 }

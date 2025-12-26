@@ -22,7 +22,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Mono<User> findById(Integer id) {
 		return userRepository.findById(id)
-		                     .switchIfEmpty(Mono.error(new RuntimeException("User not found with id: " + id)));
+		                     .switchIfEmpty(
+									 Mono.error(new RuntimeException("User not found with id: " + id))
+							 );
+	}
+
+	@Override
+	public Mono<User> findByUsername(String username) {
+		return userRepository.findByUserName(username)
+				.switchIfEmpty(
+						Mono.error(new RuntimeException("User not found with username: " + username))
+				);
 	}
 
 	@Override
@@ -34,14 +44,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Mono<User> update(Integer id, User user) {
 		return userRepository.findById(id)
-		                     .flatMap(existingUser -> {
-			                     existingUser.setUserName(user.getUserName());
-			                     existingUser.setEmail(user.getEmail());
-			                     existingUser.setFullName(user.getFullName());
-			                     existingUser.setActive(user.getActive());
-			                     return userRepository.save(existingUser);
+		                     .flatMap(item -> {
+			                     item.setUserName(user.getUserName());
+			                     item.setEmail(user.getEmail());
+			                     item.setFullName(user.getFullName());
+			                     item.setActive(user.getActive());
+			                     return userRepository.save(item);
 		                     })
-		                     .switchIfEmpty(Mono.error(new RuntimeException("User not found with id: " + id)));
+		                     .switchIfEmpty(
+									 Mono.error(new RuntimeException("User not found with id: " + id))
+							 );
 	}
 
 	@Override
@@ -54,12 +66,6 @@ public class UserServiceImpl implements UserService {
 				                     return Mono.error(new RuntimeException("User not found with id: " + id));
 			                     }
 		                     });
-	}
-
-	@Override
-	public Mono<User> findByUsername(String username) {
-		return userRepository.findByUserName(username)
-		                     .switchIfEmpty(Mono.error(new RuntimeException("User not found with username: " + username)));
 	}
 
 }
