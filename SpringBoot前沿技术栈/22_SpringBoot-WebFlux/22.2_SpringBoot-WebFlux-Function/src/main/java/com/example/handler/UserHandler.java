@@ -2,6 +2,7 @@ package com.example.handler;
 
 import com.example.pojo.User;
 import com.example.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -10,13 +11,10 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 @Component
+@RequiredArgsConstructor
 public class UserHandler {
 
 	private final UserRepository userRepository;
-
-	public UserHandler(UserRepository userRepository) {
-		this.userRepository = userRepository;
-	}
 
 	// 获取所有用户
 	public Mono<ServerResponse> getAllUsers(ServerRequest request) {
