@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -10,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>22_SpringBoot-WebFlux</artifactId>
+    <artifactId>22.1_SpringBoot-WebFlux-Annotation</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <description>${project.artifactId}</description>
@@ -18,11 +17,6 @@
     <properties>
         <java.version>25</java.version>
     </properties>
-    <modules>
-        <module>22.1_SpringBoot-WebFlux-Annotation</module>
-        <module>22.2_SpringBoot-WebFlux-Function</module>
-    </modules>
-    <packaging>pom</packaging>
 
     <dependencies>
         <dependency>

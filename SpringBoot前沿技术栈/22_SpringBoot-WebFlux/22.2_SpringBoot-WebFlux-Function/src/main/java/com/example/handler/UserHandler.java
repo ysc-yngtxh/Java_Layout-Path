@@ -1,7 +1,7 @@
 package com.example.handler;
 
 import com.example.pojo.User;
-import com.example.service.UserService;
+import com.example.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -12,17 +12,17 @@ import reactor.core.publisher.Mono;
 @Component
 public class UserHandler {
 
-	private final UserService userService;
+	private final UserRepository userRepository;
 
-	public UserHandler(UserService userService) {
-		this.userService = userService;
+	public UserHandler(UserRepository userRepository) {
+		this.userRepository = userRepository;
 	}
 
 	// 获取所有用户
 	public Mono<ServerResponse> getAllUsers(ServerRequest request) {
 		return ServerResponse.ok()
 		                     .contentType(MediaType.APPLICATION_JSON)
-		                     .body(userService.findAll(), User.class);
+		                     .body(userRepository.findAll(), User.class);
 	}
 
 	// 根据ID获取用户
@@ -32,7 +32,7 @@ public class UserHandler {
 		// 空值处理
 		Mono<ServerResponse> notFound = ServerResponse.notFound().build();
 		// 调用Service方法得到数据
-		Mono<User> userMono = userService.findById(id);
+		Mono<User> userMono = userRepository.findById(id);
 		return userMono
 				.flatMap(user ->
 						         ServerResponse.ok()
@@ -49,7 +49,7 @@ public class UserHandler {
 		Mono<User> userMono = request.bodyToMono(User.class);
 		// 调用Service保存用户
 		return userMono
-				.flatMap(userService::save)
+				.flatMap(userRepository::save)
 				.flatMap(savedUser ->
 					ServerResponse.status(HttpStatus.CREATED)
 							.contentType(MediaType.APPLICATION_JSON)
@@ -65,7 +65,7 @@ public class UserHandler {
 		Mono<User> userMono = request.bodyToMono(User.class);
 
 		return userMono
-				.flatMap(user -> userService.update(id, user))
+				.flatMap(userRepository::save)
 				.flatMap(updatedUser -> ServerResponse.ok()
 				                                      .contentType(MediaType.APPLICATION_JSON)
 				                                      .bodyValue(updatedUser))
@@ -77,7 +77,7 @@ public class UserHandler {
 		// 获取请求路径中的id值
 		Integer id = Integer.parseInt(request.pathVariable("id"));
 		// 调用Service删除用户
-		return userService.deleteById(id)
+		return userRepository.deleteById(id)
 		                  .then(ServerResponse.noContent().build())
 		                  .onErrorResume(e -> ServerResponse.notFound().build());
 	}
