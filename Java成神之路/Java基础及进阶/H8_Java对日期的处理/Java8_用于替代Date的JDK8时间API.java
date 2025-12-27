@@ -51,13 +51,13 @@ public class Java8_用于替代Date的JDK8时间API {
 		// 而使用 DateTimeFormatter 格式化时间是线程安全的。
 		DateTimeFormatter localDateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss SSS");
 		DateTimeFormatter localDateTimeParse = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		// 当前时间格式化为String
+		// 当前时间格式化为 String
 		String formatterStr = LocalDateTime.now().format(localDateTimeFormatter);
 		System.out.println("当前时间LocalDateTime类型格式化为String类型：" + formatterStr);
-		// 解析为LocalDateTime
+		// 解析为 LocalDateTime
 		LocalDateTime parse = LocalDateTime.parse(formatterStr, localDateTimeFormatter);
 		System.out.println("String类型解析为LocalDateTime类型：" + parse);
-		// 再解析为指定格式的String
+		// 再解析为指定格式的 String
 		String format = parse.format(localDateTimeParse);
 		System.out.println("指定格式的时间字符串：" + format);
 
@@ -65,5 +65,14 @@ public class Java8_用于替代Date的JDK8时间API {
                 LocalDateTime.ofInstant(Instant.now(), ZoneId.systemDefault())
                              .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
         );
+
+        System.out.println("=============================================================");
+
+        // LocalDateTime 转 Instant
+        Instant instant = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant();
+        System.out.println("LocalDateTime Reverse Instant：" + instant);
+        // Instant 转 LocalDateTime
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+        System.out.println("Instant Reverse LocalDateTime：" + localDateTime);
     }
 }

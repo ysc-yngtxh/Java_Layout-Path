@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.pojo.User;
 import com.example.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +14,11 @@ import reactor.core.publisher.Mono;
 import reactor.util.function.Tuples;
 
 import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.concurrent.ThreadLocalRandom;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/users")
@@ -28,9 +31,20 @@ public class UserController {
 		return userService.findAll();
 	}
 
+    // 示例：使用 @RequestParam 接收 LocalDateTime 参数，就会触发自定义的转换器（）
+    // 1、触发 格式化器（Formatter）：
+    //    curl --request GET --url 'http://localhost:8080/api/users/queryParam?created_date=2025-12-26%2023%3A30%3A00'
 	@GetMapping("/queryParam")
-	public Flux<User> getAllUsers(@RequestParam ("created_date") String createdDate) {
-        System.out.println("Created Date: " + createdDate);
+    public Flux<User> getAllUsers(@RequestParam("created_date") LocalDateTime createdDate) {
+        log.info("LocalDataTime created_date: {}", createdDate);
+		return userService.findAll();
+	}
+
+    // 1、触发 转换器（Converter）：
+    //    curl --request GET --url 'http://localhost:8080/api/users/queryParam?created_date=2025-12-26T23%3A30%3A00'
+    @GetMapping("/queryParam2")
+    public Flux<User> getAllUsers(@RequestParam("created_date") Instant createdDate) {
+        log.info("instant created_date: {}", createdDate);
 		return userService.findAll();
 	}
 

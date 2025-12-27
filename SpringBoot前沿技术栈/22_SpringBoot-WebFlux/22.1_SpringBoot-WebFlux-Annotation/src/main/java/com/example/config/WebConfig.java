@@ -11,7 +11,10 @@ import org.springframework.web.reactive.config.CorsRegistry;
 import org.springframework.web.reactive.config.EnableWebFlux;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
 
+import java.text.ParseException;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
@@ -23,12 +26,13 @@ import java.util.Locale;
 @EnableR2dbcRepositories(basePackages = "com.example.repository")
 public class WebConfig implements WebFluxConfigurer {  // @WebFluxTest 会自动配置这个类
     
-    // 1. 添加自定义转换器（Converter）
+    // 1. 添加自定义转换器（Converter）与格式化器（Formatter）。
+    // 注意⚠️：这里注册的组件采用的是责任链模式：FormatterRegistry → ConverterRegistry，且 后注册的优先级更高。
+    //        因此：请求参数 →  ConverterRegistry → FormatterRegistry → 默认转换器
     @Override
     public void addFormatters(FormatterRegistry registry) {
         // 注册时间字符串到 LocalDateTime的转换器
-        registry.addConverter(new StringToLocalDateTimeConverter());
-
+        registry.addConverter(new LocalDateTimeToInstantConverter2());
         // 注册格式化器（Formatter）
         registry.addFormatter(new LocalDateTimeFormatter());
     }
@@ -46,27 +50,38 @@ public class WebConfig implements WebFluxConfigurer {  // @WebFluxTest 会自动
 
     
     // 时间字符串到 LocalDateTime 的转换器
-    static class StringToLocalDateTimeConverter implements Converter<String, LocalDateTime> {
+    static class LocalDateTimeToInstantConverter implements Converter<LocalDateTime, Instant> {
         @Override
-        public LocalDateTime convert(String source) {
-            log.info("Converting LocalDateTime: {}", source);
-            return LocalDateTime.parse(source, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        public Instant convert(LocalDateTime source) {
+            log.info("🔵Converter 执行: source = {}", source);
+            return source.atZone(ZoneId.systemDefault()).toInstant();
+        }
+    }
+
+    // 时间字符串到 LocalDateTime 的转换器
+    static class LocalDateTimeToInstantConverter2 implements Converter<String, Instant> {
+        private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        @Override
+        public Instant convert(String source) {
+            log.info("🔵Converter 执行: source2 = {}", source);
+            Instant instant = LocalDateTime.parse(source, formatter).atZone(ZoneId.systemDefault()).toInstant();
+            return instant;
         }
     }
     
     // LocalDateTime 格式化器
     static class LocalDateTimeFormatter implements Formatter<LocalDateTime> {
         private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        
+
         @Override
         public LocalDateTime parse(@NonNull String text, @NonNull Locale locale) {
-            log.info("Parsing LocalDateTime: {}", text);
+            log.info("🟢Before Parsing LocalDateTime: {}", text);
             return LocalDateTime.parse(text, formatter);
         }
-        
+
         @Override
         public @NonNull String print(LocalDateTime object, @NonNull Locale locale) {
-            log.info("Printing LocalDateTime: {}", object);
+            log.info("🟢Before Printing LocalDateTime: {}", object);
             return object.format(formatter);
         }
     }
