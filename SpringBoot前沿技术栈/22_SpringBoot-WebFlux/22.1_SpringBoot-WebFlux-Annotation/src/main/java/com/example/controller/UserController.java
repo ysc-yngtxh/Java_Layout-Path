@@ -4,7 +4,6 @@ import com.example.pojo.User;
 import com.example.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.ServerSentEvent;
@@ -26,27 +25,25 @@ public class UserController {
 
 	private final UserService userService;
 
-	@GetMapping
-	public Flux<User> getAllUsers() {
-		return userService.findAll();
-	}
+    // TODO 注意：只有 @RequestParam、@PathVariable、@ModelAttribute 三种注解，才会触发格式化器（Formatter）与转换器（Converter）。
+    //           而 @RequestBody 则不会触发它们，因为请求体的反序列化是由 HttpMessageConverter 负责的。
 
-    // 示例：使用 @RequestParam 接收 LocalDateTime 参数，就会触发自定义的转换器（）
-    // 1、触发 格式化器（Formatter）：
+    // 使用 @RequestParam 接收 LocalDateTime 参数，触发 格式化器（Formatter）：
     //    curl --request GET --url 'http://localhost:8080/api/users/queryParam?created_date=2025-12-26%2023%3A30%3A00'
-	@GetMapping("/queryParam")
+	@GetMapping("/queryParam1")
     public Flux<User> getAllUsers(@RequestParam("created_date") LocalDateTime createdDate) {
         log.info("LocalDataTime created_date: {}", createdDate);
 		return userService.findAll();
 	}
 
-    // 1、触发 转换器（Converter）：
+    // 使用 @RequestParam 接收 LocalDateTime 参数，触发 转换器（Converter）：
     //    curl --request GET --url 'http://localhost:8080/api/users/queryParam?created_date=2025-12-26T23%3A30%3A00'
     @GetMapping("/queryParam2")
     public Flux<User> getAllUsers(@RequestParam("created_date") Instant createdDate) {
         log.info("instant created_date: {}", createdDate);
 		return userService.findAll();
 	}
+
 
 	@GetMapping("/{id}")
 	public Mono<ResponseEntity<User>> getUserById(@PathVariable Integer id) {

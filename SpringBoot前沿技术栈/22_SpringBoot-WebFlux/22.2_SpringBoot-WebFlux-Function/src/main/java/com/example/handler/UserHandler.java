@@ -1,8 +1,10 @@
 package com.example.handler;
 
+import com.example.dto.UserDto;
 import com.example.pojo.User;
 import com.example.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -10,6 +12,8 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Component
@@ -17,16 +21,25 @@ import java.util.Optional;
 public class UserHandler {
 
 	private final UserRepository userRepository;
+	private final ConversionService conversionService;
 
 	// 获取所有用户
 	public Mono<ServerResponse> getAllUsers(ServerRequest request) {
-        System.out.println(request.queryParam("created_date").orElse("123"));
+        request.queryParam("created_date").map(
+                dateStr -> {
+                    // 手动使用转换器
+                    LocalDateTime localDateTime = conversionService.convert(dateStr, LocalDateTime.class);
+                    Instant date = conversionService.convert(localDateTime, Instant.class);
+                    System.out.println("⚪️Converter 手动转换结果: " + date);
+                    return date;
+                }
+        ).ifPresent(System.out::println);
         return ServerResponse.ok()
 		                     .contentType(MediaType.APPLICATION_JSON)
 		                     .body(userRepository.findAll(), User.class);
 	}
 
-	// 根据ID获取用户
+	// 根据 ID获取用户
 	public Mono<ServerResponse> getUserById(ServerRequest request) {
 		// 获取请求路径中的id值
 		Integer id = Integer.parseInt(request.pathVariable("id"));

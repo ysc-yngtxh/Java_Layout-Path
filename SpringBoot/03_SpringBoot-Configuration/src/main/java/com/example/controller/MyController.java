@@ -5,6 +5,7 @@ import com.example.domain.School;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,5 +42,12 @@ public class MyController {
 		model.addAttribute("message", "Hello World");
 		// 返回值是一个是视图
 		return "solo";
+	}
+
+    // curl --request GET --url 'http://localhost:8080/attribute?name=123&webSit=www'
+	@RequestMapping(value = "/attribute")
+	public @ResponseBody Abc modelAttribute(@ModelAttribute Abc abc) {
+        System.out.println(abc);
+		return abc;
 	}
 }

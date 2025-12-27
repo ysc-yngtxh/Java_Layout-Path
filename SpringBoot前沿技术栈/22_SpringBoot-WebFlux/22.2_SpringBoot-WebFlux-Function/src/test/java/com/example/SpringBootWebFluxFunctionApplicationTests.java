@@ -1,7 +1,6 @@
 package com.example;
 
-import com.example.config.WebConfig;
-import com.example.router.UserRouter;
+import com.example.route.UserRouter;
 import com.example.handler.UserHandler;
 import com.example.pojo.User;
 import com.example.repository.UserRepository;
@@ -24,7 +23,7 @@ import static org.mockito.Mockito.when;
 // 3、@WebFluxTest注解默认会加载所有的 Controller 类，如果只想加载特定的 Controller，可以通过参数指定。
 //    例如：@WebFluxTest(controllers = MyController.class)
 @WebFluxTest
-@Import({UserRouter.class, UserHandler.class, WebConfig.class}) // 导入 UserRouter、UserHandler 路由组件，以确保它在测试上下文中可用
+@Import({UserRouter.class, UserHandler.class}) // 导入 UserRouter、UserHandler 路由组件，以确保它在测试上下文中可用
 public class SpringBootWebFluxFunctionApplicationTests {
 
     @Autowired
@@ -47,7 +46,7 @@ public class SpringBootWebFluxFunctionApplicationTests {
         webTestClient.get()
                 .uri(uriBuilder ->
                         uriBuilder.path("/api/users/queryParam")
-                                .queryParam("created_date", "2025-12-26T23:30:00")
+                                .queryParam("created_date", "2025-12-26 23:30:00")
                                 .build()
                 )
                 .accept(MediaType.APPLICATION_JSON)

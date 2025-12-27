@@ -45,7 +45,7 @@ public class UserWebClient {
                 .bodyToFlux(User.class);
     }
 
-    // 根据ID获取用户
+    // 根据 ID获取用户
     public Mono<User> getUserById(Long id) {
         return webClient.get()
                 .uri("/api/users/{id}", id)

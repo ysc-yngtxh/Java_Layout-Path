@@ -1,4 +1,4 @@
-package com.example.router;
+package com.example.route;
 
 import com.example.handler.UserHandler;
 import org.springframework.context.annotation.Bean;

@@ -11,7 +11,6 @@ import org.springframework.web.reactive.config.CorsRegistry;
 import org.springframework.web.reactive.config.EnableWebFlux;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
 
-import java.text.ParseException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -32,7 +31,7 @@ public class WebConfig implements WebFluxConfigurer {  // @WebFluxTest 会自动
     @Override
     public void addFormatters(FormatterRegistry registry) {
         // 注册时间字符串到 LocalDateTime的转换器
-        registry.addConverter(new LocalDateTimeToInstantConverter2());
+        registry.addConverter(new StringToInstantConverter());
         // 注册格式化器（Formatter）
         registry.addFormatter(new LocalDateTimeFormatter());
     }
@@ -48,24 +47,12 @@ public class WebConfig implements WebFluxConfigurer {  // @WebFluxTest 会自动
             .maxAge(3600);
     }
 
-    
-    // 时间字符串到 LocalDateTime 的转换器
-    static class LocalDateTimeToInstantConverter implements Converter<LocalDateTime, Instant> {
-        @Override
-        public Instant convert(LocalDateTime source) {
-            log.info("🔵Converter 执行: source = {}", source);
-            return source.atZone(ZoneId.systemDefault()).toInstant();
-        }
-    }
-
-    // 时间字符串到 LocalDateTime 的转换器
-    static class LocalDateTimeToInstantConverter2 implements Converter<String, Instant> {
-        private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    // 时间字符串到 Instant 的转换器
+    static class StringToInstantConverter implements Converter<String, Instant> {
         @Override
         public Instant convert(String source) {
-            log.info("🔵Converter 执行: source2 = {}", source);
-            Instant instant = LocalDateTime.parse(source, formatter).atZone(ZoneId.systemDefault()).toInstant();
-            return instant;
+            log.info("🔵Converter 执行: source = {}", source);
+            return LocalDateTime.parse(source).atZone(ZoneId.systemDefault()).toInstant();
         }
     }
     
