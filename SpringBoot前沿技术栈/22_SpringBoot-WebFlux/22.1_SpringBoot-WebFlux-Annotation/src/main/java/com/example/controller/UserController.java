@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.pojo.User;
 import com.example.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.ServerSentEvent;
@@ -12,6 +13,7 @@ import reactor.core.publisher.Mono;
 import reactor.util.function.Tuples;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.concurrent.ThreadLocalRandom;
 
 @RestController
@@ -23,6 +25,12 @@ public class UserController {
 
 	@GetMapping
 	public Flux<User> getAllUsers() {
+		return userService.findAll();
+	}
+
+	@GetMapping("/queryParam")
+	public Flux<User> getAllUsers(@RequestParam ("created_date") String createdDate) {
+        System.out.println("Created Date: " + createdDate);
 		return userService.findAll();
 	}
 

@@ -10,6 +10,8 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+import java.util.Optional;
+
 @Component
 @RequiredArgsConstructor
 public class UserHandler {
@@ -18,7 +20,8 @@ public class UserHandler {
 
 	// 获取所有用户
 	public Mono<ServerResponse> getAllUsers(ServerRequest request) {
-		return ServerResponse.ok()
+        System.out.println(request.queryParam("created_date").orElse("123"));
+        return ServerResponse.ok()
 		                     .contentType(MediaType.APPLICATION_JSON)
 		                     .body(userRepository.findAll(), User.class);
 	}

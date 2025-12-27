@@ -1,7 +1,6 @@
 package com.example;
 
 import com.example.config.WebConfig;
-import com.example.dto.UserDto;
 import com.example.router.UserRouter;
 import com.example.handler.UserHandler;
 import com.example.pojo.User;
@@ -45,7 +44,12 @@ public class SpringBootWebFluxFunctionApplicationTests {
         // 该段代码意思是：
         //     测试 GET 请求 /api/users 接口，期望返回状态码 200 OK，响应头的内容类型为 application/json，
         //     响应体是一个包含两个 User 对象的列表，并且列表中包含 user1 和 user2。
-        webTestClient.get().uri("/api/users")
+        webTestClient.get()
+                .uri(uriBuilder ->
+                        uriBuilder.path("/api/users/queryParam")
+                                .queryParam("created_date", "2025-12-26T23:30:00")
+                                .build()
+                )
                 .accept(MediaType.APPLICATION_JSON)
                 .exchange()
                 .expectStatus().isOk()
@@ -57,7 +61,7 @@ public class SpringBootWebFluxFunctionApplicationTests {
 
     @Test
     public void testCreateUser() {
-        UserDto userDto = new UserDto(null, "newuser", "newuser@example.com", "New User", (byte) 1);
+        User user = new User(null, "newuser", "newuser@example.com", "New User", (byte) 1);
         User savedUser = new User(3, "newuser", "newuser@example.com", "New User", (byte) 0);
 
         when(userRepository.save(any(User.class))).thenReturn(Mono.just(savedUser));
@@ -67,7 +71,7 @@ public class SpringBootWebFluxFunctionApplicationTests {
         //     期望返回状态码 201 Created，响应体是保存后的 User 对象，并且该对象与 savedUser 相等。
         webTestClient.post().uri("/api/users")
                 .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(userDto)
+                .bodyValue(user)
                 .exchange()
                 .expectStatus().isCreated()
                 .expectBody(User.class)

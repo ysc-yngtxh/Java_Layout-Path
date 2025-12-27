@@ -1,11 +1,10 @@
 package com.example.config;
 
-import com.example.dto.UserDto;
-import com.example.pojo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.jspecify.annotations.NonNull;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories;
 import org.springframework.format.Formatter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.reactive.config.CorsRegistry;
@@ -18,7 +17,10 @@ import java.util.Locale;
 
 @Slf4j
 @Configuration
-@EnableWebFlux // 启用 WebFlux 功能
+// 启用 WebFlux 功能
+@EnableWebFlux
+// 启用 R2DBC 仓库，指定基础包路径
+@EnableR2dbcRepositories(basePackages = "com.example.repository")
 public class WebConfig implements WebFluxConfigurer {  // @WebFluxTest 会自动配置这个类
     
     // 1. 添加自定义转换器（Converter）

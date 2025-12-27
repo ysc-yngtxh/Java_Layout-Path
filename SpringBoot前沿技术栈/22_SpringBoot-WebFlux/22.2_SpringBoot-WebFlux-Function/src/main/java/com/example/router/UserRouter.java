@@ -17,7 +17,12 @@ public class UserRouter {
     public RouterFunction<ServerResponse> userRoutes(UserHandler userHandler) {
         return RouterFunctions
                 .route(RequestPredicates.GET("/api/users")
-                        .and(RequestPredicates.accept(MediaType.APPLICATION_JSON)),
+                                .and(RequestPredicates.accept(MediaType.APPLICATION_JSON)),
+                        userHandler::getAllUsers)
+
+                .andRoute(RequestPredicates.GET("/api/users/queryParam")
+                                .and(RequestPredicates.queryParam("created_date", v->!v.isEmpty()))
+                                .and(RequestPredicates.accept(MediaType.APPLICATION_JSON)),
                         userHandler::getAllUsers)
 
                 .andRoute(RequestPredicates.GET("/api/users/{id}")
