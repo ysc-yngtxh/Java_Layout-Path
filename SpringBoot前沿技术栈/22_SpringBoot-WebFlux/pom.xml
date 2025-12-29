@@ -21,6 +21,7 @@
     <modules>
         <module>22.1_SpringBoot-WebFlux-Annotation</module>
         <module>22.2_SpringBoot-WebFlux-Function</module>
+        <module>22.3_SpringBoot-WebFlux</module>
     </modules>
     <packaging>pom</packaging>
 
