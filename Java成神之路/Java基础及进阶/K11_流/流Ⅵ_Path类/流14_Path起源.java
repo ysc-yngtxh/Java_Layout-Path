@@ -11,7 +11,7 @@ public class 流14_Path起源 {
 
 	/* 一、在Java中文件或是目录习惯用java.io.File对象来表示，但是File类有很多缺陷:
 	 *     1、它的很多方法不能抛出异常
-	 *     2、它的delete方法经常莫名其妙的失败等，旧的File类经常是程序失败的根源。
+	 *     2、它的 delete() 方法经常莫名其妙的失败等，旧的File类经常是程序失败的根源。
 	 *
 	 * 二、因此在Java7中有了更好的替代：java.nio.file.Path 及 java.nio.file.Files。
 	 *     1、Path接口的名字非常恰当，就是表示路径的，API中讲Path对象可以是一个文件，一个目录，或是一个符号链接，也可以是一个根目录。
