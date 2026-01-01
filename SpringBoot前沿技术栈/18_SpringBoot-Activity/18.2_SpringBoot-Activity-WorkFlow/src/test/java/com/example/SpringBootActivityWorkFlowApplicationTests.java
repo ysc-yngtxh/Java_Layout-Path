@@ -24,8 +24,8 @@ class SpringBootActivityWorkFlowApplicationTests {
 		                                         .name("请假流程")
 		                                         .deploy();
 		// 输出部署的一些信息
-		System.out.println("流程部署ID:" + deployment.getId());
-		System.out.println("流程部署名称:" + deployment.getName());
+		System.out.println("流程部署ID：" + deployment.getId());
+		System.out.println("流程部署名称：" + deployment.getName());
 	}
 
 	// 或者使用自动部署（推荐）

@@ -49,13 +49,14 @@
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-spring-boot-starter</artifactId>
-            <version>8.7.0</version>
+            <!-- 版本号可通过 Github 仓库查看 -->
+            <version>8.7.1</version>
         </dependency>
         <!--activity可以通过绘制流程的依赖-->
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-image-generator</artifactId>
-            <version>8.7.0</version>
+            <version>8.7.1</version>
         </dependency>
 
         <dependency>

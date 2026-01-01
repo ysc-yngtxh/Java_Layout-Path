@@ -2,7 +2,7 @@
 
 ### Activiti的25张表介绍
 启动SpringBoot后会在指定的数据库中自动创建activiti的25张表！！！
-![img](./19.1_SpringBoot-Activity/src/main/resources/image/img.png)
+![img](./18.1_SpringBoot-Activity/src/main/resources/image/img.png)
 
 Activiti 使用到的表都是 ACT_ 开头的，表名的第二部分表示用途。
 

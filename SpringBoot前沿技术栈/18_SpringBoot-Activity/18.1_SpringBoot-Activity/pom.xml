@@ -41,7 +41,7 @@
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>3.0.5</version>
+            <version>4.0.1</version>
         </dependency>
 
         <!--⚠️：自 Activity 7.1.x 版本后官方不再将构建制品发布到 Maven 中央仓库了，而是发布在了 alfresco仓库，
@@ -50,13 +50,15 @@
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-spring-boot-starter</artifactId>
-            <version>8.7.0</version>
+            <!-- 版本号可通过 Github 仓库查看 -->
+            <version>8.7.1</version>
         </dependency>
+
         <!--activity可以通过绘制流程的依赖-->
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-image-generator</artifactId>
-            <version>8.7.0</version>
+            <version>8.7.1</version>
         </dependency>
 
         <dependency>
