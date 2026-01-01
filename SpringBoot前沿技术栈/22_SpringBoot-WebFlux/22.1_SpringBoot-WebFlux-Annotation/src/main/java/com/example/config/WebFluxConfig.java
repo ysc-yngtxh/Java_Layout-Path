@@ -23,7 +23,7 @@ import java.util.Locale;
 @EnableWebFlux
 // 启用 R2DBC 仓库，指定基础包路径
 @EnableR2dbcRepositories(basePackages = "com.example.repository")
-public class WebConfig implements WebFluxConfigurer {  // @WebFluxTest 会自动配置这个类
+public class WebFluxConfig implements WebFluxConfigurer {  // @WebFluxTest 会自动配置这个类
     
     // 1. 添加自定义转换器（Converter）与格式化器（Formatter）。
     // 注意⚠️：这里注册的组件采用的是责任链模式：FormatterRegistry → ConverterRegistry，且 后注册的优先级更高。

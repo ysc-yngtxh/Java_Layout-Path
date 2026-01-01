@@ -33,7 +33,7 @@ public class UserController {
 	@GetMapping("/queryParam1")
     public Flux<User> getAllUsers(@RequestParam("created_date") LocalDateTime createdDate) {
         log.info("LocalDataTime created_date: {}", createdDate);
-		return userService.findAll();
+		return userService.findAllFlux();
 	}
 
     // 使用 @RequestParam 接收 LocalDateTime 参数，触发 转换器（Converter）：
@@ -41,9 +41,21 @@ public class UserController {
     @GetMapping("/queryParam2")
     public Flux<User> getAllUsers(@RequestParam("created_date") Instant createdDate) {
         log.info("instant created_date: {}", createdDate);
-		return userService.findAll();
+		return userService.findAllFlux();
 	}
 
+
+	@GetMapping
+	public ResponseEntity<Void> flux2ListAsync() {
+		userService.flux2ListAsync(userService.findAllFlux());
+        return ResponseEntity.ok().build();
+    }
+
+	@GetMapping("/cover")
+	public Mono<ResponseEntity<User>> findAllMono() {
+        return userService.findAllMono().map(ResponseEntity::ok)
+		                  .defaultIfEmpty(ResponseEntity.notFound().build());
+	}
 
 	@GetMapping("/{id}")
 	public Mono<ResponseEntity<User>> getUserById(@PathVariable Integer id) {
