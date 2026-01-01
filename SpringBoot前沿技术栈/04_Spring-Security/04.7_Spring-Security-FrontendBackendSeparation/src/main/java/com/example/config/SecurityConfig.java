@@ -112,7 +112,7 @@ public class SecurityConfig {
 
 				// 见名知意。添加过滤器在某某过滤器之前。这里我们添加在BasicAuthenticationFilter之前的过滤器myAuthenticationFilter
 				.addFilterBefore(myAuthenticationFilter, BasicAuthenticationFilter.class)
-				// 也是一样的添加过滤器adminAuthenticationProcessingFilter在UsernamePasswordAuthenticationFilter附近
+				// 也是一样的添加过滤器 adminAuthenticationProcessingFilter 在 UsernamePasswordAuthenticationFilter 附近
 				.addFilterAt(adminAuthenticationProcessingFilter, UsernamePasswordAuthenticationFilter.class)
 
 

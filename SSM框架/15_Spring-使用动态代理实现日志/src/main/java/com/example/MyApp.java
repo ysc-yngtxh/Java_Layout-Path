@@ -13,7 +13,7 @@ public class MyApp {
 		// 创建目标对象
 		SomeService target = new SomeServiceImpl();
 
-		// 创建InvocationHandler对象
+		// 创建 InvocationHandler对象
 		InvocationHandler handler = new MyInvocationHandler(target);
 
 		// 使用Proxy创建代理

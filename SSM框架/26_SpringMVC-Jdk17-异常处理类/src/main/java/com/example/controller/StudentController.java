@@ -15,8 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class StudentController {
 
 	@RequestMapping(value = "/some.do")
-	public ModelAndView doSome(@RequestParam("name") String name,
-	                           @RequestParam(value = "age", required = false) Integer age) throws MyUserException {
+	public ModelAndView doSome(
+            @RequestParam("name") String name,
+            @RequestParam(value = "age", required = false) Integer age) throws MyUserException {
 		ModelAndView mv = new ModelAndView();
 		// 根据请求参数抛出异常
 		if (!"zs".equals(name)) {

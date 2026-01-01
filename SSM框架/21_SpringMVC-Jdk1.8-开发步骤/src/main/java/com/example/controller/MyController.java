@@ -6,18 +6,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author 游家纨绔
- * @Controller：创建处理器对象，对象放在springMvc容器中 位置：在类的上面，和Spring中讲的@Service、@Component
+ * @Controller 创建处理器对象，对象放在springMvc容器中 位置：在类的上面，和Spring中讲的@Service、@Component
  */
 @Controller
 public class MyController {
 
-    /** @RequestMapping：请求映射，作用是把一个请求地址和一个方法绑定在一起（一个请求指定一个方法处理）
+    /** @RequestMapping 请求映射，作用是把一个请求地址和一个方法绑定在一起（一个请求指定一个方法处理）<p>
      *             属性：1、value是一个String，表示请求的uri地址的(some.do)
-     *                     value的值必须是唯一的，不能重复。在使用时，推荐地址以 “/” 开头
+     *                     value的值必须是唯一的，不能重复。在使用时，推荐地址以 “/” 开头。 <p>
      *             位置：1、在方法的上面，常用的
      *                  2、在类的上面
+     * <p>
      * 说明：使用 @RequestMapping 修饰的方法叫做处理器方法或者控制器方法。
-     *      使用 @RequestMapping 修饰的方法可以处理请求的，类似Servlet中的doGet()、doPost()
+     *      使用 @RequestMapping 修饰的方法可以处理请求的，类似Servlet中的doGet()、doPost() <p>
      * 返回值：ModelAndView 表示本次请求的处理结果
      *        Model: 数据，请求处理完成后，要显示给用户的数据
      *        View: 视图 ，比如jsp等等

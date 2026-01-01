@@ -13,10 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class GlobalExceptionHandler {
 
 	/**
-	 * 处理异常的方法和控制器方法的定义一样，可以有多个参数，可以有ModelAndView、String、void、对象类型的返回值
+	 * 处理异常的方法和控制器方法的定义一样，可以有多个参数，可以有ModelAndView、String、void、对象类型的返回值。<p>
 	 * 形参：Exception，表示Controller中抛出的异常对象。通过形参可以获取发生的异常信息
 	 *
-	 * @ExceptionHandler(异常的class)：表示异常的类型，当发生此类型异常时，由当前方法处理
+	 * @ExceptionHandler(异常的class) 表示异常的类型，当发生此类型异常时，由当前方法处理
 	 */
 	@ExceptionHandler(value = NameException.class)
 	public ModelAndView doNameException(Exception exception) {

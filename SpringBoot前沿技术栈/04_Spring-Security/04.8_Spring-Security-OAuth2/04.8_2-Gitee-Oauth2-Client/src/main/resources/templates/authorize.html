@@ -9,7 +9,9 @@
     <form method="post" action="/oauth/authorize">
         <input type="hidden" name="user_oauth_approval" value="true">
         <div th:each="item:${scopes}">
-            <input type="radio" th:name="'scope.'+${item}" value="true" hidden="hidden" checked="checked"/>
+            <label>
+                <input type="radio" th:name="'scope.'+${item}" value="true" hidden="hidden" checked="checked"/>
+            </label>
         </div>
         <button class="btn" type="submit"> 同意/授权</button>
     </form>

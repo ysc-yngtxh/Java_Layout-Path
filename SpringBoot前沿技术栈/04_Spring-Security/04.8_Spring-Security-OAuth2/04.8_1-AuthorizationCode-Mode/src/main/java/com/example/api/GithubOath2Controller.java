@@ -61,7 +61,8 @@ public class GithubOath2Controller {
 			String authRequest = HttpRequest.post(Oauth2Property.GITHUB_TOKEN_URL)
 			                                .form(params)      // 表单内容
 			                                .timeout(20000)  // 超时，毫秒
-			                                .execute().body();
+			                                .execute()
+                                            .body();
 
 			String[] resParam = authRequest.split("&");
 			Map<String, Object> map = new HashMap<>();
@@ -73,10 +74,10 @@ public class GithubOath2Controller {
 			});
 			System.out.println("accessTokenJson = " + map);
 			if (!map.containsKey("access_token")) {
-				throw new RuntimeException("获取accessToken失败");
+				throw new RuntimeException("获取 accessToken失败");
 			}
 
-			// 授权服务器提供的访问Token
+			// 授权服务器提供的访问 Token
 			String accessTokenStr = map.get("access_token").toString();
 
 			// TODO Step3: 获取用户信息

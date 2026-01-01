@@ -9,67 +9,67 @@
 </head>
 <body>
 
-<!--主容器-->
-<div class="ui container">
+    <!--主容器-->
+    <div class="ui container">
+        <div class="ui segment">
+            <div style="text-align: center">
+                <h1 class="header">登录</h1>
+            </div>
 
-    <div class="ui segment">
-
-        <div style="text-align: center">
-            <h1 class="header">登录</h1>
-        </div>
-
-        <div class="ui placeholder segment">
-            <div class="ui column very relaxed stackable grid">
-                <div class="column">
-                    <div class="ui form">
-                        <form th:action="@{/user/login}" method="post">
-                            <div class="field">
-                                <label>Username</label>
-                                <div class="ui left icon input">
-                                    <input type="text" placeholder="请输入账号" name="username">
-                                    <i class="user icon"></i>
+            <div class="ui placeholder segment">
+                <div class="ui column very relaxed stackable grid">
+                    <div class="column">
+                        <div class="ui form">
+                            <form th:action="@{/user/login}" method="post">
+                                <div class="field">
+                                    <label>Username</label>
+                                    <div class="ui left icon input">
+                                        <input type="text" placeholder="请输入账号" name="username">
+                                        <i class="user icon"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="field">
-                                <label>Password</label>
-                                <div class="ui left icon input">
-                                    <input type="password" placeholder="请输入密码" name="password">
-                                    <i class="lock icon"></i>
+                                <div class="field">
+                                    <label>Password</label>
+                                    <div class="ui left icon input">
+                                        <label>
+                                            <input type="password" placeholder="请输入密码" name="password">
+                                        </label>
+                                        <i class="lock icon"></i>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="field">
-                                <input type="checkbox" name="remember"> 记住我
-                            </div>
-                            <input type="submit" class="ui blue submit button"/></br>
-                            <a th:href="@{/gitee/auth}" target="_self">
-                                <img th:src="@{/static/gitee.svg}" style="whith: 35px;height: 35px;margin-left: 440px" alt="Gitee授权">
-                            </a>
-                            <a th:href="@{/github/auth}" target="_self">
-                                <img th:src="@{/static/github.svg}" style="whith: 35px;height: 35px;margin-left: 40px" alt="Github授权">
-                            </a>
-                            <a th:href="@{/google/auth}" target="_self">
-                                <img th:src="@{/static/google.svg}" style="whith: 35px;height: 35px;margin-left: 40px" alt="Google授权">
-                            </a>
-                        </form>
+                                <div class="field">
+                                    <label>
+                                        <input type="checkbox" name="remember">
+                                    </label> 记住我
+                                </div>
+                                <input type="submit" class="ui blue submit button"/><br/>
+                                <a th:href="@{/gitee/auth}" target="_self">
+                                    <img th:src="@{/static/gitee.svg}" style="whith: 35px;height: 35px;margin-left: 440px" alt="Gitee授权">
+                                </a>
+                                <a th:href="@{/github/auth}" target="_self">
+                                    <img th:src="@{/static/github.svg}" style="whith: 35px;height: 35px;margin-left: 40px" alt="Github授权">
+                                </a>
+                                <a th:href="@{/google/auth}" target="_self">
+                                    <img th:src="@{/static/google.svg}" style="whith: 35px;height: 35px;margin-left: 40px" alt="Google授权">
+                                </a>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div style="text-align: center">
-            <div class="ui label">
-                </i>注册
+            <div style="text-align: center">
+                <div class="ui label">
+                    </i>注册
+                </div>
+                <br><br>
+                <small>blog.plushuang.com</small>
             </div>
-            <br><br>
-            <small>blog.plushuang.com</small>
-        </div>
-        <div class="ui segment" style="text-align: center">
-            <h3>Spring Security PlusYou 2024</h3>
+            <div class="ui segment" style="text-align: center">
+                <h3>Spring Security PlusYou 2024</h3>
+            </div>
         </div>
     </div>
-
-
-</div>
 </body>
 </html>

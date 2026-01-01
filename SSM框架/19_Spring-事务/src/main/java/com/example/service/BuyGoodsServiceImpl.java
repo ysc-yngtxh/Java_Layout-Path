@@ -30,7 +30,7 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
 	}
 
     /**
-     * @Transactional (
+     * {@code @Transactional} (
      *      propagation = Propagation.REQUIRED,
      *      isolation = Isolation.DEFAULT,
      *      readOnly = false,
@@ -38,8 +38,9 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
      *          NullPointerException.class, NotEnoughException.class
      *      }
      * )
-     * rollbackFor：表示发生指定的异常才会回滚。
-     *    处理逻辑是：
+     * <p>
+     * rollbackFor：表示发生指定的异常才会回滚。<p>
+     *    处理逻辑是：<p>
      *      1)、Spring框架会首先检查方法抛出的异常是不是在rollbackFor的属性值中
      *          如果异常在rollbackFor列表中，不管是什么类型的异常，一定回滚。
      *      2)、如果你的抛出的异常不在rollbackFor列表中，Spring会判断异常是不是RuntimeException，如果是则回滚

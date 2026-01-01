@@ -93,18 +93,28 @@ public class SpringBootWebFluxFunctionApplicationTests {
     //        HandlerFunction（处理请求生成响应的函数）。
     // 核心任务定义两个函数式接口的实现并且启动需要的服务器。
     @Test
-    public void testCreateHttpServer() throws InterruptedException {
+    public void testCreateHttpServer() {
         // 创建路由
         RouterFunction<ServerResponse> route = RouterFunctions
                 .route(RequestPredicates.GET("/user/{id}").and(RequestPredicates.accept(MediaType.APPLICATION_JSON))
                         , userHandler::getUserById)
                 .andRoute(RequestPredicates.GET("/users").and(RequestPredicates.accept(MediaType.APPLICATION_JSON))
                         , userHandler::getAllUsers);
-        // 路由和handler适配
+
+        // 将自定义的 RouterFunction（路由规则），转换为 Spring 通用的 HttpHandler 接口实例；
+        // HttpHandler 是 Spring 定义的「HTTP 请求处理器标准接口」，屏蔽了底层不同服务器的差异。
         HttpHandler httpHandler = RouterFunctions.toHttpHandler(route);
+        // 将通用的 HttpHandler，适配为 Reactor 框架可识别的处理器；
         ReactorHttpHandlerAdapter adapter = new ReactorHttpHandlerAdapter(httpHandler);
-        // 创建服务器
+
+        // 创建 WebFlux 内置的响应式 HTTP 服务器实例（默认是 Netty 服务器，无需额外安装 Tomcat/Nginx）；
+        // 特点：轻量级、高性能，专为响应式编程优化，是 WebFlux 的默认服务器。
         HttpServer httpServer = HttpServer.create();
+        // 将服务器绑定到处理器适配器，含义：服务器收到所有 HTTP 请求后，都交给这个 adapter 处理（最终会转发到我们定义的路由规则）。
+        // bindNow() 方法作用：
+        //     1、立即启动 HTTP 服务器；
+        //     2、默认绑定 8080 端口（可手动指定：bindNow(new InetSocketAddress(8090))）；
+        //     3、启动后会阻塞主线程，保持服务运行（不会执行完 main 方法就退出）。
         httpServer.handle(adapter).bindNow();
     }
 }

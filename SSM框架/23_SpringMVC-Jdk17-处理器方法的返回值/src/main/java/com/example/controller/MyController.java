@@ -62,8 +62,8 @@ public class MyController {
 
     /**
      * 处理器方法返回一个Student，通过框架转为json,响应Ajax请求
-     * @ResponseBody:
-     *       作用：那处理器方法返回对象转为json后，通过HttpServletResponse输出给浏览器
+     * @ResponseBody <p>
+     *       作用：那处理器方法返回对象转为json后，通过HttpServletResponse输出给浏览器 <p>
      *       位置：方法的定义上面。和其他的注解没有顺序的关系
      */
     // 使用框架后，发送的Ajax请求
@@ -99,10 +99,10 @@ public class MyController {
 	}
 
 	/**
-	 * 区分返回值String是数据，还是视图，看有没有@ResponseBody注解
-	 * 如果有@ResponseBody注解，返回String就是数据，反之就是视图
+	 * 区分返回值String是数据还是视图，就看接口上有没有 @ResponseBody注解，或者类上使用的是否是 @RestController <p>
+	 * 如果有@ResponseBody注解或者@RestController，返回String就是数据，反之就是视图
 	 * <p>
-	 * 默认使用 "text/plain;charset=ISO-8859-1" 作为contextType，导致中文有乱码
+	 * 默认使用 "text/plain;charset=ISO-8859-1" 作为contextType，导致中文有乱码。 <p>
 	 * 解决方案：给RequestMapping增加一个属性 produces,使用这个属性指定新的contextType
 	 */
 	@RequestMapping(value = "/returnString1.do")

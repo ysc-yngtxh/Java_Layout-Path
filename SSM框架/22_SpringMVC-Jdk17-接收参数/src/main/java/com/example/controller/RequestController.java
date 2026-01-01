@@ -18,8 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/test")
 public class RequestController {
 
-    /** @RequestMapping:请求映射
-     *    属性：method，表示请求的方式。它的值RequestMethod类枚举值。
+    /** @RequestMapping 请求映射 <p>
+     *    属性：method，表示请求的方式。它的值RequestMethod类枚举值。<p>
      *         例如：get请求方式：RequestMethod.GET
      *              post请求方式：RequestMethod.POST
      */

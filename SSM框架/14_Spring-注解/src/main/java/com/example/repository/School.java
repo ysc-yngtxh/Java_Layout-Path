@@ -47,14 +47,13 @@ public class School {
 
     /**
      * 引用类型(Spring框架提供)
-     * @Autowired：spring框架提供的注解，实现引用类型的赋值。使用的是自动注入原理，支持byName、byType
-     * @Autowired：默认使用的是byType自动注入。
-     *      属性：required 是一个boolean类型的的，默认是true
-     *           required=true： 表示引用类型赋值失败，程序报错，并终止执行
-     *           required=false：引用类型如果赋值失败，程序正常执行，引用类型是null
-     *      位置：在属性定义的上面，无需set方法，推荐使用
+     * @Autowired: Spring框架提供的注解，实现引用类型的赋值。使用的是自动注入原理，支持byName、byType方式注入。默认使用的是byType自动注入。
+     *     属性：required 是一个boolean类型的的，默认是true
+     *          required=true： 表示引用类型赋值失败，程序报错，并终止执行
+     *          required=false：引用类型如果赋值失败，程序正常执行，引用类型是null
+     *     位置：在属性定义的上面，无需set方法，推荐使用
      *
-     * @Autowired注解的工作原理如下：
+     * @Autowired: 注解的工作原理如下：
      *      1、Spring框架会在你的应用启动时，自动扫描并解析所有的Bean。
      *      2、当Spring框架找到一个带有@Autowired注解的变量时，它会查找一个与这个变量类型匹配的Bean。
      *      3、如果Spring框架找到了一个匹配的Bean，那么它就会将这个Bean注入到这个变量中。
@@ -70,7 +69,7 @@ public class School {
 
     /**
      * 引用类型(Jdk提供的注解)
-     * @Resource：来自Jdk中的注解，Spring框架提供了对这个注解的功能支持，可以使用他给引用类型赋值
+     * @Resource: 来自Jdk中的注解，Spring框架提供了对这个注解的功能支持，可以使用他给引用类型赋值
      *            使用的也是自动注入原理，支持byName、byType，默认是byName
      *      位置：在属性定义的上面，无需set方法.
      */

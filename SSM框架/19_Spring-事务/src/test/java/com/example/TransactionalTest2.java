@@ -7,9 +7,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class TransactionalTest2 {
 
-    /** 按照顺序先后执行 text01 - text02 - text03 方法
+    /** 按照顺序先后执行 text01 - text02 - text03 方法 <p>
      *     1、执行结果：sale 表和 goods 表分别都成功插入了一条数据，说明其中有两次操作(sale 和 goods插入)同时失败，
-     *                表明其中有事务回滚机制在发挥作用(要么同时成功，要么同时失败)
+     *                表明其中有事务回滚机制在发挥作用(要么同时成功，要么同时失败) <p>
      *     2、如果我们没有加上事务机制的话，sale表中的数据虽不会缺失，但是goods表中的数据会因为执行异常无法插入。
      *        从而造成数据不完整，不一致的情况。
      */

@@ -15,14 +15,15 @@ public class MyInterceptor implements HandlerInterceptor {
 
     long btime = 0;
     /**
-     * preHandle叫做预处理方法
-     * 参数：
+     * preHandle叫做预处理方法。<p>
+     * 参数：<p>
      *     Object handler：被拦截的控制器对象
      *     返回值Boolean
      *            true
      *            false
-     * 特点：
-     *     1、方法在控制器方法（StudentController类的doSome()方法）之前先执行的，用户的请求首先到达此方法
+     * <p>
+     * 特点：<p>
+     *     1、方法在控制器方法（StudentController类的doSome()方法）之前先执行的，用户的请求首先到达此方法。<p>
      *     2、在这个方法中可以获取请求的信息，验证请求是否符合要求。
      *        可以验证用户是否登录，验证用户是否有权限访问某个连接地址(url)。
      *          如果验证失败，可以截断请求，请求不能被处理。
@@ -40,13 +41,14 @@ public class MyInterceptor implements HandlerInterceptor {
     }
 
     /**
-     * postHandle:后处理方法
-     * 参数：
+     * postHandle:后处理方法。<p>
+     * 参数：<p>
      *     Object handler:被拦截的处理器对象StudentController
      *     ModelAndView mv:处理器方法的返回值
-     * 特点：
-     *     1、在处理器方法之后执行的(StudentController.dosome())
-     *     2、能够获取到处理器方法的返回值ModelAndView,可以修改ModelAndView中的数据和视图，可以影响到最后的执行结果
+     * <p>
+     * 特点：<p>
+     *     1、在处理器方法之后执行的(StudentController.dosome()) <p>
+     *     2、能够获取到处理器方法的返回值ModelAndView,可以修改ModelAndView中的数据和视图，可以影响到最后的执行结果。<p>
      *     3、主要是对原来的执行结果做二次修正
      */
     @Override
@@ -61,12 +63,13 @@ public class MyInterceptor implements HandlerInterceptor {
     }
 
     /**
-     * afterCompletion:最后执行的方法
-     * 参数：：
+     * afterCompletion:最后执行的方法。<p>
+     * 参数：<p>
      *      Object handler:被拦截器的处理器对象
      *      Exception ex:程序中发生的异常
-     * 特点：
-     *     1、在请求处理完成后执行的。框架中规定是当你的视图处理完成后，对视图执行了forward。就认为请求处理完成
+     * <p>
+     * 特点：<p>
+     *     1、在请求处理完成后执行的。框架中规定是当你的视图处理完成后，对视图执行了forward。就认为请求处理完成。<p>
      *     2、一般做资源回收工作的，程序请求过程中创建了一些对象，在这里可以删除，把占用的内存回收
      */
     @Override
