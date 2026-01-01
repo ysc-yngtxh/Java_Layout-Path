@@ -46,26 +46,4 @@ public class UserRouter {
                         userHandler::deleteUser);
     }
 
-
-
-
-    // 基于函数式编程模型，有两个核心接口：
-    //        RouterFunction（实现路由功能，请求转发给对应的handler）
-    //        HandlerFunction（处理请求生成响应的函数）。
-    // 核心任务定义两个函数式接口的实现并且启动需要的服务器。
-    public static void main(String[] args) {
-        // 创建路由
-        RouterFunction<ServerResponse> route = RouterFunctions
-                .route(RequestPredicates.GET("/user/{id}").and(RequestPredicates.accept(MediaType.APPLICATION_JSON))
-                        , userHandler::getById)
-                .andRoute(RequestPredicates.GET("/users").and(RequestPredicates.accept(MediaType.APPLICATION_JSON))
-                        , userHandler::getAll);
-        // 路由和handler适配
-        HttpHandler httpHandler = RouterFunctions.toHttpHandler(route);
-        ReactorHttpHandlerAdapter adapter = new ReactorHttpHandlerAdapter(httpHandler);
-        // 创建服务器
-        HttpServer httpServer = HttpServer.create();
-        httpServer.handle(adapter).bindNow();
-    }
-
 }

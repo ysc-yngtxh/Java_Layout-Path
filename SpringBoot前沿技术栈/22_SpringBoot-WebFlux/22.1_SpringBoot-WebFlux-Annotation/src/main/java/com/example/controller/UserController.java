@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.pojo.User;
+import com.example.repository.UserRepository;
 import com.example.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.util.function.Tuples;
 
+import javax.xml.stream.events.Comment;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -24,6 +26,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class UserController {
 
 	private final UserService userService;
+	private final UserRepository userRepository;
 
     // TODO 注意：只有 @RequestParam、@PathVariable、@ModelAttribute 三种注解，才会触发格式化器（Formatter）与转换器（Converter）。
     //           而 @RequestBody 则不会触发它们，因为请求体的反序列化是由 HttpMessageConverter 负责的。
@@ -33,7 +36,7 @@ public class UserController {
 	@GetMapping("/queryParam1")
     public Flux<User> getAllUsers(@RequestParam("created_date") LocalDateTime createdDate) {
         log.info("LocalDataTime created_date: {}", createdDate);
-		return userService.findAllFlux();
+		return userRepository.findAll();
 	}
 
     // 使用 @RequestParam 接收 LocalDateTime 参数，触发 转换器（Converter）：
@@ -41,18 +44,19 @@ public class UserController {
     @GetMapping("/queryParam2")
     public Flux<User> getAllUsers(@RequestParam("created_date") Instant createdDate) {
         log.info("instant created_date: {}", createdDate);
-		return userService.findAllFlux();
+        return userRepository.findAll();
 	}
 
 
 	@GetMapping
 	public ResponseEntity<Void> flux2ListAsync() {
-		userService.flux2ListAsync(userService.findAllFlux());
+		userService.flux2ListAsync(userRepository.findAll());
         return ResponseEntity.ok().build();
     }
 
 	@GetMapping("/cover")
 	public Mono<ResponseEntity<User>> findAllMono() {
+        // defaultIfEmpty()：当 Mono 为空时，返回一个默认值；
         return userService.findAllMono().map(ResponseEntity::ok)
 		                  .defaultIfEmpty(ResponseEntity.notFound().build());
 	}
@@ -104,19 +108,10 @@ public class UserController {
 						ServerSentEvent.<Integer>builder()
 								.event("random")
 								.id(Long.toString(data.getT1()))
-								.data(data.getT2())
-								.build()
+                                .comment("comment:" + data.getT1())
+                                .data(data.getT2())
+                                .build()
 				);
-	}
-
-
-
-	// 全局异常处理
-	@ExceptionHandler(RuntimeException.class)
-	public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
-		return ResponseEntity
-				.status(HttpStatus.NOT_FOUND)
-				.body(ex.getMessage());
 	}
 
 }

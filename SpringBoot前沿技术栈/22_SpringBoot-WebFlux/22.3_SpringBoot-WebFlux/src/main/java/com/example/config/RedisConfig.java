@@ -21,10 +21,12 @@ public class RedisConfig {
 		GenericJackson2JsonRedisSerializer valueSerializer = new GenericJackson2JsonRedisSerializer();
 
 		RedisSerializationContext<String, Object> context =
-				RedisSerializationContext.<String, Object>newSerializationContext(keySerializer)
-				                         .value(valueSerializer)
-				                         .build();
+				RedisSerializationContext
+                        .<String, Object>newSerializationContext(keySerializer)
+                        .value(valueSerializer)
+                        .build();
 
 		return new ReactiveRedisTemplate<>(connectionFactory, context);
 	}
+
 }

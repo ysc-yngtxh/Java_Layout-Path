@@ -18,11 +18,13 @@ public class R2dbcConfig {
     @Primary
     @ConfigurationProperties("spring.r2dbc")
     public ConnectionFactory connectionFactory() {
-        return ConnectionFactories.get(ConnectionFactoryOptions.parse("r2dbc:postgresql://localhost:5432/mydb")
-                                                               .mutate()
-                                                               .option(ConnectionFactoryOptions.USER, "postgres")
-                                                               .option(ConnectionFactoryOptions.PASSWORD, "password")
-                                                               .build());
+        return ConnectionFactories.get(
+                ConnectionFactoryOptions.parse("r2dbc:postgresql://localhost:5432/mydb")
+                        .mutate()
+                        .option(ConnectionFactoryOptions.USER, "root")
+                        .option(ConnectionFactoryOptions.PASSWORD, "131474")
+                        .build()
+        );
     }
     
     @Bean
