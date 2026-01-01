@@ -10,8 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
+@RunWith(SpringRunner.class)
 class SpringBootEventApplicationTests {
 
 	@Autowired
@@ -24,7 +24,7 @@ class SpringBootEventApplicationTests {
 		for (int i = 0; i < 5; i++) {
 			applicationEventPublisher.publishEvent(
 					new AnnotationEvent<>("你若为我繁华，你好呀：" + (i + 1))
-			                                      );
+			);
 		}
 	}
 
@@ -33,7 +33,7 @@ class SpringBootEventApplicationTests {
 		for (int i = 0; i < 5; i++) {
 			applicationEventPublisher.publishEvent(
 					new CodeLogicEvent<>("你若为我繁华，你好呀：" + (i + 1))
-			                                      );
+			);
 		}
 	}
 

@@ -4,9 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory;
 import org.springframework.data.redis.core.ReactiveRedisTemplate;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializationContext;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.data.redis.serializer.*;
 
 /**
  * Redis响应式配置
@@ -18,7 +16,8 @@ public class RedisConfig {
 	public ReactiveRedisTemplate<String, Object> reactiveRedisTemplate(ReactiveRedisConnectionFactory connectionFactory) {
 
 		StringRedisSerializer keySerializer = new StringRedisSerializer();
-		GenericJackson2JsonRedisSerializer valueSerializer = new GenericJackson2JsonRedisSerializer();
+        // JacksonJsonRedisSerializer<Object> valueSerializer = new JacksonJsonRedisSerializer<>(Object.class);
+		GenericToStringSerializer<Object> valueSerializer = new GenericToStringSerializer<>(Object.class);
 
 		RedisSerializationContext<String, Object> context =
 				RedisSerializationContext
