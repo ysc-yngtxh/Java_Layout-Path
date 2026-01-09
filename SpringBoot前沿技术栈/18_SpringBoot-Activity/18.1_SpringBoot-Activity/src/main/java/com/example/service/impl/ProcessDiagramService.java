@@ -1,6 +1,5 @@
 package com.example.service.impl;
 
-import com.example.utils.SvgToPngUtils;
 import jakarta.annotation.Resource;
 import lombok.SneakyThrows;
 import org.activiti.bpmn.model.BpmnModel;
@@ -20,7 +19,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class ProcessDiagramService {
@@ -84,13 +82,13 @@ public class ProcessDiagramService {
                 .toList();
         highLightedActivityIds.addAll(historicActivityIds);
 
-        // ===================== 获取高亮连线ID =====================
+        // 4. 获取高亮连线ID
         List<String> highLightedFlows = getHighLightedFlows(historicActivityInstances, bpmnModel, highLightedActivityIds);
 
-        // 4. 初始化8.x.x版本的流程图生成器（核心适配点）
+        // 5. 初始化8.x.x版本的流程图生成器（核心适配点）
         ProcessDiagramGenerator diagramGenerator = new DefaultProcessDiagramGenerator();
 
-        // 5. 生成流程图（解决中文乱码 + 高亮节点）
+        // 6. 生成流程图（解决中文乱码 + 高亮节点）
         InputStream inputStream = diagramGenerator.generateDiagram(
                 bpmnModel,                 // BPMN 模型
                 highLightedActivityIds,    // 高亮节点 ID
@@ -107,10 +105,11 @@ public class ProcessDiagramService {
     /**
      * 通过历史节点执行顺序 + BPMN 模型结构推导连线 ID
      * @param historicActivityInstances 历史活动实例列表
+     * @param highLightedActivityIds 高亮节点ID列表
      * @param bpmnModel BPMN模型
      * @return 高亮连线ID列表
      */
-    private List<String> getHighLightedFlows(List<HistoricActivityInstance> historicActivityInstances, BpmnModel bpmnModel, List<String> highLightedActivityIds) {
+    private List<String> getHighLightedFlows(List<HistoricActivityInstance> historicActivityInstances, List<String> highLightedActivityIds, BpmnModel bpmnModel) {
         // 用Set去重，避免重复的连线ID
         Set<String> highLightedFlowSet = new HashSet<>();
 
@@ -123,9 +122,7 @@ public class ProcessDiagramService {
 
             // 从 BPMN模型中获取当前节点的所有出连线
             FlowNode currentNode = (FlowNode) bpmnModel.getMainProcess().getFlowElement(currentActivityId);
-            if (currentNode == null) {
-                continue; // 节点不存在则跳过
-            }
+            if (currentNode == null) continue; // 节点不存在则跳过
 
             // 遍历当前节点的出连线，找到指向“下一个节点”的连线
             for (SequenceFlow flow : currentNode.getOutgoingFlows()) {
