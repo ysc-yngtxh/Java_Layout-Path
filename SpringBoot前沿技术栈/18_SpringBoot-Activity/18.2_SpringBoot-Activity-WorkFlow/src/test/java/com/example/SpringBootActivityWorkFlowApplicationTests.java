@@ -31,10 +31,11 @@ class SpringBootActivityWorkFlowApplicationTests {
 	// 或者使用自动部署（推荐）
 	@Test
 	public void testProcessDefinition() {
-		// 创建 ProcessEngine对象
-		ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
-		// 获取 RepositoryService对象
-		RepositoryService repositoryService = processEngine.getRepositoryService();
+        // 获取 ProcessEngine 流程引擎
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        // 获取 RepositoryService
+        RepositoryService repositoryService = processEngine.getRepositoryService();
+
 		List<ProcessDefinition> processDefinitions = repositoryService.createProcessDefinitionQuery().list();
 		processDefinitions.forEach(pd -> {
 			System.out.println("流程定义: " + pd.getName() + " - " + pd.getKey());
