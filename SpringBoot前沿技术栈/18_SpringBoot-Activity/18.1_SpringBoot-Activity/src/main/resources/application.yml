@@ -28,7 +28,10 @@ spring:
     # 3、resource-parent-folder：与single-resource类似，但是以资源的父文件夹作为判断依据
     # 4、never-fail：            默认值，不会重新部署已经存在的流程文件
     deployment-mode: never-fail
+    # 关闭异步执行器，默认true开启
     async-executor-activate: false
+    # 关闭安全验证（方便测试）
+    security-enabled: false
 
 logging:
   level:

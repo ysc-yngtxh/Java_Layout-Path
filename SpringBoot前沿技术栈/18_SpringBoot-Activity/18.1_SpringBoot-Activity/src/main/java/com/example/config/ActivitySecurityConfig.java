@@ -11,6 +11,7 @@ import java.util.List;
 public class ActivitySecurityConfig {
 
 	// 在 Activity 工作流引擎中，UserGroupManager 是一个重要的身份管理接口，负责处理用户、组（用户组）以及它们之间关系的管理。
+    // activiti内置了SpringSecurity安全框架，需要配置UserDetailsService Bean。
     @Bean
     public UserGroupManager userGroupManager() {
         return new UserGroupManager() {
@@ -37,4 +38,5 @@ public class ActivitySecurityConfig {
             }
         };
     }
+
 }
