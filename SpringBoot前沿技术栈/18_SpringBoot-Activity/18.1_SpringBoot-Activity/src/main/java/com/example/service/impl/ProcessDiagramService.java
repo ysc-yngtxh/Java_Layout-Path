@@ -83,7 +83,7 @@ public class ProcessDiagramService {
         highLightedActivityIds.addAll(historicActivityIds);
 
         // 4. 获取高亮连线ID
-        List<String> highLightedFlows = getHighLightedFlows(historicActivityInstances, bpmnModel, highLightedActivityIds);
+        List<String> highLightedFlows = getHighLightedFlows(historicActivityInstances, highLightedActivityIds, bpmnModel);
 
         // 5. 初始化8.x.x版本的流程图生成器（核心适配点）
         ProcessDiagramGenerator diagramGenerator = new DefaultProcessDiagramGenerator();

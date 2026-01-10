@@ -30,8 +30,6 @@ spring:
     deployment-mode: never-fail
     # 关闭异步执行器，默认true开启
     async-executor-activate: false
-    # 关闭安全验证（方便测试）
-    security-enabled: false
 
 logging:
   level:

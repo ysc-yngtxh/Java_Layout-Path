@@ -2,7 +2,7 @@ package com.example.controller;
 
 import com.example.service.ProcessService;
 import com.example.service.impl.ProcessDiagramService;
-import com.example.utils.SvgToPngUtils;
+import com.example.utils.SecurityUtils;
 import lombok.RequiredArgsConstructor;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
@@ -29,6 +29,7 @@ public class ProcessController {
 
     private final ProcessService processService;
     private final ProcessDiagramService processDiagramService;
+    private final SecurityUtils securityUtils;
 
     /**
      * 1. 发起请假流程 <p>
@@ -37,6 +38,8 @@ public class ProcessController {
      */
     @PostMapping("/start")
     public ResponseEntity<Map<String, Object>> startProcess(@RequestBody Map<String, Object> params) {
+        // 模拟用户登录，同时同步 Spring Security 和 Activiti 的用户上下文，让两者身份一致
+        securityUtils.logInAs("Make");
         // 流程定义ID
         String processKey = "borrowArchive";
         // 启动流程
@@ -51,7 +54,23 @@ public class ProcessController {
     }
 
     /**
-     * 2. 查询个人待办任务 <p>
+     * 2. 查询流程实例 <p>
+     * GET: /process/todo/{assignee}
+     * 示例：/process/todo/001 （查询员工001的待办）、/process/todo/002（查询经理002的待办）
+     */
+    @GetMapping("/todo/{assignee}")
+    public ResponseEntity<Map<String, Object>> getProcessInstance(@PathVariable String assignee) {
+        List<Task> taskList = processService.getTodoTaskList(assignee);
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", 200);
+        result.put("msg", "查询成功");
+        result.put("count", taskList.size());
+        result.put("data", taskList);
+        return ResponseEntity.ok(result);
+    }
+
+    /**
+     * 3. 查询个人待办任务 <p>
      * GET: /process/todo/{assignee}
      * 示例：/process/todo/001 （查询员工001的待办）、/process/todo/002（查询经理002的待办）
      */
@@ -67,7 +86,7 @@ public class ProcessController {
     }
 
     /**
-     * 3. 完成任务（审批）<p>
+     * 4. 完成任务（审批）<p>
      * POST: /process/complete/{taskId}
      * 示例参数：{"approveResult":"pass","approveRemark":"同意请假"}
      */
@@ -83,7 +102,7 @@ public class ProcessController {
     }
 
     /**
-     * 4. 根据流程实例ID查询BPMN流程图
+     * 5. 根据流程实例ID查询BPMN流程图
      * @param processInstanceId 流程实例ID
      * @return 图片响应（PNG格式）
      */
