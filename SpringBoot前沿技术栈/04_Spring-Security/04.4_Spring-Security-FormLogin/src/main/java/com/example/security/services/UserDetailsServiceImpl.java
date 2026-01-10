@@ -1,6 +1,5 @@
 package com.example.security.services;
 
-import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -62,8 +61,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		User user3 = userMapper.selectOne(Wrappers.<User>lambdaQuery().eq(User::getUserName, username));
 		List<User> users = userMapper.selectList(null);
 		System.out.println(users);
-		/** 补充：这里的话是没有用到mybatis的一级缓存的，我们可以在控制台打印中看到。按理来说，一级缓存的是默认开启的
-		 *       我们只需要加上@Transactional注解即可实现一级缓存。原因可在SSM框架里的mybatis详解中了解
+		/** 补充：
+         *  这里的话是没有用到mybatis的一级缓存的，我们可以在控制台打印中看到。按理来说，一级缓存的是默认开启的，
+		 *  我们只需要加上@Transactional注解即可实现一级缓存。原因可在SSM框架里的mybatis详解中了解
 		 */
 
 		// 如果没有查询到用户就抛出异常

@@ -24,15 +24,20 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 @Configuration
 public class SecurityConfig {
 
-	/**
-	 * Spring Security 本身并没有默认的密码校验算法。
-	 * 从SpringSecurity 5.0开始，框架强制要求使用PasswordEncoder接口来处理密码，并且需要明确配置一个实现类来指定具体的密码编码和校验逻辑。
-	 * 官方推荐使用 DelegatingPasswordEncoder，它支持多种编码格式，并且可以透明地处理不同类型的哈希算法。
-	 * 这样，即使未来需要更改密码编码策略，也可以平滑过渡而不需要重新编码所有现有密码。
-	 * <p>
-	 * NoOpPasswordEncoder 表示不进行任何密码编码的密码编码器，但是明文存储密码是极其不安全，因此官方标记已过时。
-	 * 但在实际业务中可能还需要不进行编码的密码编码器，后续版本可能会讲过时的类删除。所以可自定义一个明文的密码解码器。
-	 */
+    /**
+     * Spring Security 5.0 之前默认的 NoOpPasswordEncoder 是明文编码器，已废弃，严禁生产环境使用；
+     * Spring Security 5.0 之后，无默认密码编码器，必须显式配置，否则会抛出异常；
+     * 框架强制要求显式使用PasswordEncoder接口来处理密码，并且需要明确配置一个实现类来指定具体的密码编码和校验逻辑。
+     * 官方推荐使用 DelegatingPasswordEncoder，它支持多种编码格式，并且可以透明地处理不同类型的哈希算法。
+     * 这样，即使未来需要更改密码编码策略，也可以平滑过渡而不需要重新编码所有现有密码。
+     * <p>
+     * 这里密码加密编码方式使用的是 BCryptPasswordEncoder.
+     * <p>
+     * 在Spring Security中，如果你选择使用明文存储密码，即 NoOpPasswordEncoder（生产环境中是非常不推荐）
+     * 需要在存储的密码前加上 {noop} 前缀，告诉Spring Security这是一个明文密码。
+     * 例如：如果你的密码是 "password"，那么在数据库中应该存储为 "{noop}password"。
+     *      这样，当用户登录时，Spring Security会识别这个前缀，并使用明文比较方式来验证密码。
+     */
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return NoOpPasswordEncoder.getInstance(); // 官方标记过时的密码编码器

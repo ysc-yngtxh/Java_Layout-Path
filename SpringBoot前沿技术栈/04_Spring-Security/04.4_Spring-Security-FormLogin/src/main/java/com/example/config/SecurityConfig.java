@@ -31,16 +31,18 @@ public class SecurityConfig {
 	private final UserDetailsServiceImpl userDetailsService;
 
 	/**
-	 * Spring Security 本身并没有默认的密码校验算法。
-	 * 从SpringSecurity 5.0开始，框架强制要求使用PasswordEncoder接口来处理密码，并且需要明确配置一个实现类来指定具体的密码编码和校验逻辑。
+	 * Spring Security 5.0 之前默认的 NoOpPasswordEncoder 是明文编码器，已废弃，严禁生产环境使用；
+	 * Spring Security 5.0 之后，无默认密码编码器，必须显式配置，否则会抛出异常；
+     * 框架强制要求显式使用PasswordEncoder接口来处理密码，并且需要明确配置一个实现类来指定具体的密码编码和校验逻辑。
 	 * 官方推荐使用 DelegatingPasswordEncoder，它支持多种编码格式，并且可以透明地处理不同类型的哈希算法。
 	 * 这样，即使未来需要更改密码编码策略，也可以平滑过渡而不需要重新编码所有现有密码。
 	 * <p>
 	 * 这里密码加密编码方式使用的是 BCryptPasswordEncoder.
 	 * <p>
-	 * 在Spring Security中，如果你选择使用明文存储密码（生产环境中是非常不推荐），你必须在密码前加上 {noop} 前缀。
-	 * {noop} 前缀表明这是一个故意以明文形式存储的密码。
-	 * 该情况下，Spring Security会跳过所有密码编码器，直接将用户输入的密码与数据库中存储的{noop} 前缀明文密码进行比较。
+	 * 在Spring Security中，如果你选择使用明文存储密码，即 NoOpPasswordEncoder（生产环境中是非常不推荐）
+     * 需要在存储的密码前加上 {noop} 前缀，告诉Spring Security这是一个明文密码。
+     * 例如：如果你的密码是 "password"，那么在数据库中应该存储为 "{noop}password"。
+     *      这样，当用户登录时，Spring Security会识别这个前缀，并使用明文比较方式来验证密码。
 	 */
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -63,13 +65,13 @@ public class SecurityConfig {
 
 	/**
 	 * Spring Security的过滤器链(UsernamePasswordAuthenticationFilter => ExceptionTranslationFilter => AuthorizationFilter)
-	 * 1、UsernamePasswordAuthenticationFilter 负责处理我们在登录页面填写了用户名密码后的登录请求，入门案例的认证工作主要由它负责
-	 * 2、ExceptionTranslationFilter 处理过滤器链中抛出的任何 AccessDeniedException 和 AuthenticationException
-	 * 3、AuthorizationFilter 负责权限校验的过滤器
+	 *     1、UsernamePasswordAuthenticationFilter 负责处理我们在登录页面填写了用户名密码后的登录请求，入门案例的认证工作主要由它负责
+	 *     2、ExceptionTranslationFilter 处理过滤器链中抛出的任何 AccessDeniedException 和 AuthenticationException
+	 *     3、AuthorizationFilter 负责权限校验的过滤器
 	 * <p>
 	 * 注意：在配置类中引入了 SecurityFilterChain 类型的Bean，就不会显示Spring Security的默认登陆界面了。
-	 * 如果有使用默认的登陆界面的必要，可以在 securityFilterChain 方法中加上 .and().formLogin() 就可以显示默认。
-	 * 另外，只使用 formLogin()，不进行表单的其他配置，控制台还是可以打印出登陆的默认密码；但是如果有配置其他的表单内容，控制台将不打印默认的登陆密码。
+	 *      如果有使用默认的登陆界面的必要，可以在 securityFilterChain 方法中加上 .and().formLogin() 就可以显示默认。
+	 *      另外，只使用 formLogin()，不进行表单的其他配置，控制台还是可以打印出登陆的默认密码；但是如果有配置其他的表单内容，控制台将不打印默认的登陆密码。
 	 */
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -102,7 +104,7 @@ public class SecurityConfig {
 				.formLogin()
 				// 定义登陆页面(这里有人喜欢使用index.html的形式，但是需要放在static路径下)
 				.loginPage("/user/index")
-				// 定义登陆提交表单的action,这里的话只是给一个象征性的接口，并不会去执行这个接口内容，因此也没必要在这个接口里处理业务逻辑
+				// 定义登陆提交表单的action，这里的话只是给一个象征性的接口，并不会去执行这个接口内容，因此也没必要在这个接口里处理业务逻辑
 				// 需要注意的是这个表单请求必须是Post请求
 				.loginProcessingUrl("/user/login")
 				// 对应表单里的提交用户名称
@@ -122,11 +124,12 @@ public class SecurityConfig {
 				// 登录成功后跳转的路径
 				// .successForwardUrl("/toMain")
 
-				// defaultSuccessUrl(String SuccessUrl)、defaultSuccessUrl(String SuccessUrl, boolean alwaysUse)
+				// defaultSuccessUrl(String SuccessUrl)
 				// 重载方法一：当只有一个参数时，表示一开始用户访问路径不是登录路径时，在登陆后跳转到访问路径。
 				//           但是一开始用户访问登陆路径时，那么登陆跳转的就是该方法的参数路径/toMain。
-				// 重载方法二：当存在两个参数，且第二个参数值为true时，表示无论用户在登陆前方法的是哪个路径，在登陆后跳转的路径始终都是/toMain
-				//           效果同successForwardUrl("/toMain")
+                // defaultSuccessUrl(String SuccessUrl, boolean alwaysUse)
+				// 重载方法二：当存在两个参数，且第二个参数值为true时，表示无论用户在登陆前方法的是哪个路径，
+                //           在登陆后跳转的路径始终都是/toMain，效果同successForwardUrl("/toMain")
 				.defaultSuccessUrl("/toMain")
 
 

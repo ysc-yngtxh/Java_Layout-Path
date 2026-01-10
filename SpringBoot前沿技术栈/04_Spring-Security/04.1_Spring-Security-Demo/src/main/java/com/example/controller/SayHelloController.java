@@ -19,7 +19,7 @@ public class SayHelloController {
 	}
 
 
-	// 测试SpringSecurity加盐值的加密算法
+	// 测试 SpringSecurity加盐值的加密算法
 	public static void main(String[] args) {
 		// 使用BcryptPasswordEncoder加密,需要注意的是，这样加密的话，盐值是随机的，最终结果每次都会不一样
 		BCryptPasswordEncoder bcyEncoder = new BCryptPasswordEncoder();
