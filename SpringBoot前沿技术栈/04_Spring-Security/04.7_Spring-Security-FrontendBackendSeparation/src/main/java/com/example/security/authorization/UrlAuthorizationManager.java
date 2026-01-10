@@ -75,4 +75,5 @@ public class UrlAuthorizationManager implements AuthorizationManager<RequestAuth
 		}
 		return new AuthorizationDecision(false);
 	}
+
 }

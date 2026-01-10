@@ -73,6 +73,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		 * 权限：设置和使用时，名称保持一至即可。
 		 * 角色：授权代码需要加ROLE_前缀(数据库取出来的数据要有前缀ROLE_)，controller上使用时不要加前缀。
 		 */
+        // db 中存储的 permission 字段值也可以不用加 ROLE_ 前缀，只需要在代码中拼接上前缀即可
 		return new LoginUserDetails(user, permission);
 	}
 }

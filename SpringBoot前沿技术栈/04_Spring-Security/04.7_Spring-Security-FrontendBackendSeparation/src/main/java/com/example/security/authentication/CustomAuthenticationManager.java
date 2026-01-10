@@ -28,4 +28,5 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 		}
 		throw new ProviderNotFoundException("Authentication failed!");
 	}
+
 }
