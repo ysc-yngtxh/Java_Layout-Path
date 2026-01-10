@@ -31,8 +31,18 @@ public class ProcessController {
     private final ProcessDiagramService processDiagramService;
     private final SecurityUtils securityUtils;
 
+
     /**
-     * 1. 发起请假流程 <p>
+     * 1. 部署流程（可选：Activiti会自动部署processes目录下的bpmn文件）
+     */
+    @GetMapping("/deploy")
+    public String deploy() {
+        processService.deployProcess();
+        return "流程部署成功！";
+    }
+
+    /**
+     * 2. 发起请假流程 <p>
      * POST: /process/start
      * 示例参数：{"applyUserId":"001","approveUserId":"002","leaveDays":3,"leaveReason":"事假"}
      */
@@ -54,25 +64,9 @@ public class ProcessController {
     }
 
     /**
-     * 2. 查询流程实例 <p>
-     * GET: /process/todo/{assignee}
-     * 示例：/process/todo/001 （查询员工001的待办）、/process/todo/002（查询经理002的待办）
-     */
-    @GetMapping("/todo/{assignee}")
-    public ResponseEntity<Map<String, Object>> getProcessInstance(@PathVariable String assignee) {
-        List<Task> taskList = processService.getTodoTaskList(assignee);
-        Map<String, Object> result = new HashMap<>();
-        result.put("code", 200);
-        result.put("msg", "查询成功");
-        result.put("count", taskList.size());
-        result.put("data", taskList);
-        return ResponseEntity.ok(result);
-    }
-
-    /**
      * 3. 查询个人待办任务 <p>
      * GET: /process/todo/{assignee}
-     * 示例：/process/todo/001 （查询员工001的待办）、/process/todo/002（查询经理002的待办）
+     * 示例参数：/process/todo/001 （查询员工001的待办）、/process/todo/002（查询经理002的待办）
      */
     @GetMapping("/todo/{assignee}")
     public ResponseEntity<Map<String, Object>> getTodoTask(@PathVariable String assignee) {
@@ -86,12 +80,12 @@ public class ProcessController {
     }
 
     /**
-     * 4. 完成任务（审批）<p>
+     * 4. 执行人完成审批（核心：审批通过/驳回）<p>
      * POST: /process/complete/{taskId}
      * 示例参数：{"approveResult":"pass","approveRemark":"同意请假"}
      */
     @PostMapping("/complete/{taskId}")
-    public ResponseEntity<Map<String, Object>> completeTask(
+    public ResponseEntity<Map<String, Object>> completeApproval(
             @PathVariable String taskId,
             @RequestBody Map<String, Object> params) {
         processService.completeTask(taskId, params);

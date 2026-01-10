@@ -31,6 +31,7 @@ spring:
     # 关闭异步执行器，默认true开启
     async-executor-activate: false
 
+
 logging:
   level:
     org.activiti: debug
