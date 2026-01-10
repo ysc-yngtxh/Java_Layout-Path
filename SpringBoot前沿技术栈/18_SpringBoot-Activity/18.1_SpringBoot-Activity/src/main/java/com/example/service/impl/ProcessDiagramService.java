@@ -50,6 +50,7 @@ public class ProcessDiagramService {
             // 已结束的流程，从历史表查询流程定义ID
             HistoricActivityInstance historicInstance = historyService.createHistoricActivityInstanceQuery()
                     .processInstanceId(processInstanceId)
+                    .activityType("startEvent") // 获取开始节点实例
                     .singleResult();
             if (historicInstance == null) {
                 throw new RuntimeException("流程实例ID不存在：" + processInstanceId);

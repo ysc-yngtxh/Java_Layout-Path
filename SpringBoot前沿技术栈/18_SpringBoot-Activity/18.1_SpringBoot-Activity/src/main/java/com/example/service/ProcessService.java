@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.dto.TaskDto;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 
@@ -29,7 +30,7 @@ public interface ProcessService {
      * @param assignee 任务负责人ID
      * @return 待办任务列表
      */
-    List<Task> getTodoTaskList(String assignee);
+    List<TaskDto> getTodoTaskList(String assignee);
 
     /**
      * 4. 完成任务（审批通过/驳回）

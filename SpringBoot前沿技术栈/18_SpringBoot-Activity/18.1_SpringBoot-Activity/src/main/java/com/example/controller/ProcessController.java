@@ -1,11 +1,15 @@
 package com.example.controller;
 
+import com.example.dto.TaskDto;
 import com.example.service.ProcessService;
 import com.example.service.impl.ProcessDiagramService;
 import com.example.utils.SecurityUtils;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import lombok.RequiredArgsConstructor;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
+import org.apache.commons.collections4.ListUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -34,6 +38,7 @@ public class ProcessController {
 
     /**
      * 1. 部署流程（可选：Activiti会自动部署processes目录下的bpmn文件）
+     * 注意⚠️：在项目启动时，已经通过 CommandLineRunner 部署过流程文件，所以这里的接口可以省略，保留仅作演示。
      */
     @GetMapping("/deploy")
     public String deploy() {
@@ -44,12 +49,12 @@ public class ProcessController {
     /**
      * 2. 发起请假流程 <p>
      * POST: /process/start
-     * 示例参数：{"applyUserId":"001","approveUserId":"002","leaveDays":3,"leaveReason":"事假"}
+     * 示例参数：{"applyUser":"Make","approver":"游家纨绔","leaveDays":3,"leaveReason":"事假"}
      */
     @PostMapping("/start")
     public ResponseEntity<Map<String, Object>> startProcess(@RequestBody Map<String, Object> params) {
         // 模拟用户登录，同时同步 Spring Security 和 Activiti 的用户上下文，让两者身份一致
-        securityUtils.logInAs("Make");
+        securityUtils.logInAs(params.get("applyUser").toString());
         // 流程定义ID
         String processKey = "borrowArchive";
         // 启动流程
@@ -66,11 +71,11 @@ public class ProcessController {
     /**
      * 3. 查询个人待办任务 <p>
      * GET: /process/todo/{assignee}
-     * 示例参数：/process/todo/001 （查询员工001的待办）、/process/todo/002（查询经理002的待办）
+     * 示例参数：/process/todo/Tony （查询主管Tony的待办）、/process/todo/游家纨绔（查询经理 游家纨绔 的待办）
      */
     @GetMapping("/todo/{assignee}")
     public ResponseEntity<Map<String, Object>> getTodoTask(@PathVariable String assignee) {
-        List<Task> taskList = processService.getTodoTaskList(assignee);
+        List<TaskDto> taskList = processService.getTodoTaskList(assignee);
         Map<String, Object> result = new HashMap<>();
         result.put("code", 200);
         result.put("msg", "查询成功");
@@ -82,12 +87,15 @@ public class ProcessController {
     /**
      * 4. 执行人完成审批（核心：审批通过/驳回）<p>
      * POST: /process/complete/{taskId}
-     * 示例参数：{"approveResult":"pass","approveRemark":"同意请假"}
+     * 示例参数：{"applyUser":"游家纨绔","approveResult":"pass","approveRemark":"同意请假"}
      */
     @PostMapping("/complete/{taskId}")
     public ResponseEntity<Map<String, Object>> completeApproval(
             @PathVariable String taskId,
             @RequestBody Map<String, Object> params) {
+        // 模拟用户登录，同时同步 Spring Security 和 Activiti 的用户上下文，让两者身份一致
+        securityUtils.logInAs(params.get("applyUser").toString());
+        // 执行审批任务
         processService.completeTask(taskId, params);
         Map<String, Object> result = new HashMap<>();
         result.put("code", 200);

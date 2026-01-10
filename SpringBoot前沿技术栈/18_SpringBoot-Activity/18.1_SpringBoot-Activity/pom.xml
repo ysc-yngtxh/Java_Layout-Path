@@ -41,17 +41,14 @@
             <!-- 版本号可通过 Github 仓库查看 -->
             <version>8.7.1</version>
         </dependency>
-
         <!--Activity 生成bpmn流程图所需依赖-->
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-image-generator</artifactId>
             <version>8.7.1</version>
         </dependency>
-
         <!-- Activiti 8.7.1 生成的流程图默认是 SVG 格式，但前端更常用 PNG/JPG。
-             batik-codec 依赖是 Batik 的编解码模块，负责将 SVG（可缩放矢量图形）转换为其他格式（如 PNG、JPG、PDF 等）。
-        -->
+             batik-codec 依赖是 Batik 的编解码模块，负责将 SVG（可缩放矢量图形）转换为其他格式（如 PNG、JPG、PDF 等）。-->
         <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-codec</artifactId>
@@ -67,6 +64,12 @@
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>33.5.0-jre</version>
         </dependency>
 
         <dependency>

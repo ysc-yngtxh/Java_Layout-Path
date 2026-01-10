@@ -1,5 +1,6 @@
 package com.example.service.impl;
 
+import com.example.dto.TaskDto;
 import com.example.service.ProcessService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -59,7 +60,7 @@ public class ProcessServiceImpl implements ProcessService {
     /**
      * 2. 启动流程实例（发起请假，指定审批人）
      * @param processKey 请假单ID（业务关联）
-     * @param variables 审批变量（比如：zhangsan）
+     * @param variables 审批参数（比如：zhangsan）
      * @return 流程实例ID
      */
     @Override
@@ -77,19 +78,20 @@ public class ProcessServiceImpl implements ProcessService {
      * @return 待办任务列表
      */
     @Override
-    public List<Task> getTodoTaskList(String assignee) {
+    public List<TaskDto> getTodoTaskList(String assignee) {
         // 查询指定负责人的待办任务
-        return taskService.createTaskQuery()
+        List<Task> taskList = taskService.createTaskQuery()
                 .taskAssignee(assignee)
                 .orderByTaskCreateTime()
                 .desc()
                 .list();
+        return taskList.stream().map(TaskDto::new).toList();
     }
 
     /**
      * 4. 执行人完成审批（核心：审批通过/驳回）
      * @param taskId 待办任务ID（从待办列表中获取）
-     * @param variables 审批变量（比如：approved/rejected）
+     * @param variables 审批参数（比如：approved/rejected）
      */
     @Override
     public void completeTask(String taskId, Map<String, Object> variables) {
