@@ -22,19 +22,19 @@
     </userTask>
     <!-- 2.1 一级审批超时边界事件：监听approveTaskA的执行时长（边界事件 - 24小时超时定时器） -->
     <boundaryEvent id="timeoutEventA" name="一级审批超时提醒" attachedToRef="approveTaskA">
-        <!-- 明确不终止原任务，仅触发提醒 -->
-        <documentation>当一级审批任务超过24小时未处理时，触发超时提醒逻辑</documentation>
-        <timerEventDefinition>
-            <!-- PT24H = 24小时（ISO 8601时间格式），可改为PT30M（30分钟）测试 -->
-            <timeDuration>PT24H</timeDuration>
-        </timerEventDefinition>
+      <!-- 明确不终止原任务，仅触发提醒 -->
+      <documentation>当一级审批任务超过24小时未处理时，触发超时提醒逻辑</documentation>
+      <timerEventDefinition>
+        <!-- PT24H = 24小时（ISO 8601时间格式），可改为PT30M（30分钟）测试 -->
+        <timeDuration>PT24H</timeDuration>
+      </timerEventDefinition>
     </boundaryEvent>
     <!-- 2.2 超时后执行的提醒任务，发送提醒通知（如短信/邮件） -->
-    <serviceTask id="timeoutRemindTaskA" name="一级审批超时提醒执行" activiti:class="com.example.delegate.TimeoutRemindService">
-        <documentation>调用超时提醒服务，向直属领导推送审批超时通知</documentation>
-        <extensionElements>
-            <activiti:field name="taskType" stringValue="FIRST_LEVEL_APPROVAL"/>
-        </extensionElements>
+    <serviceTask id="timeoutRemindTaskA" name="一级审批超时提醒执行" activiti:class="com.example.delegate.ApprovalTimeoutTask">
+      <documentation>调用超时提醒服务，向直属领导推送审批超时通知</documentation>
+      <extensionElements>
+        <activiti:field name="taskType" stringValue="FIRST_LEVEL_APPROVAL"/>
+      </extensionElements>
     </serviceTask>
     <!-- 2.3 超时提醒后回到原审批任务（继续等待处理） -->
     <sequenceFlow id="flow_timeoutA" sourceRef="timeoutEventA" targetRef="timeoutRemindTaskA"/>
@@ -56,11 +56,11 @@
         </timerEventDefinition>
     </boundaryEvent>
     <!-- 4.2 超时后执行的提醒任务 -->
-    <serviceTask id="timeoutRemindTaskB" name="二级审批超时提醒执行" activiti:class="com.example.delegate.TimeoutRemindService">
-        <documentation>调用超时提醒服务，向部门总监/HR推送审批超时通知</documentation>
-        <extensionElements>
-            <activiti:field name="taskType" stringValue="SECOND_LEVEL_APPROVAL"/>
-        </extensionElements>
+    <serviceTask id="timeoutRemindTaskB" name="二级审批超时提醒执行" activiti:class="com.example.delegate.ApprovalTimeoutTask">
+      <documentation>调用超时提醒服务，向部门总监/HR推送审批超时通知</documentation>
+      <extensionElements>
+        <activiti:field name="taskType" stringValue="SECOND_LEVEL_APPROVAL"/>
+      </extensionElements>
     </serviceTask>
     <!-- 4.3 超时提醒后回到原审批任务 -->
     <sequenceFlow id="flow_timeoutB" sourceRef="timeoutEventB" targetRef="timeoutRemindTaskB"/>
@@ -125,6 +125,12 @@
       <bpmndi:BPMNShape id="shape_A" bpmnElement="approveTaskA">
         <omgdc:Bounds x="-100.0" y="-90.0" width="100.0" height="80.0"/>
       </bpmndi:BPMNShape>
+      <!-- 一级审批超时边界事件 -->
+      <bpmndi:BPMNShape id="timeoutA" bpmnElement="timeoutEventA">
+        <omgdc:Bounds x="-100.0" y="-263.0825" width="100.0" height="80.0"/>
+      </bpmndi:BPMNShape>
+      <!-- timeoutEventA → timeoutRemindTaskA -->
+      <!-- timeoutRemindTaskA → approveTaskA -->
       <!-- 一级审批结果网关 -->
       <bpmndi:BPMNShape id="shape_gatewayA" bpmnElement="gatewayA">
         <omgdc:Bounds x="84.427155" y="-65.0" width="30.0" height="30.0"/>
@@ -132,6 +138,10 @@
       <!-- 二级审批任务 -->
       <bpmndi:BPMNShape id="shape_B" bpmnElement="approveTaskB">
         <omgdc:Bounds x="195.34354" y="-90.0" width="100.0" height="80.0"/>
+      </bpmndi:BPMNShape>
+      <!-- 二级审批超时边界事件 -->
+      <bpmndi:BPMNShape id="timeoutB" bpmnElement="timeoutEventB">
+        <omgdc:Bounds x="195.16656" y="-263.50153" width="100.0" height="80.0"/>
       </bpmndi:BPMNShape>
       <!-- 二级审批结果网关 -->
       <bpmndi:BPMNShape id="shape_gatewayB" bpmnElement="gatewayB">
@@ -195,6 +205,14 @@
         <omgdi:waypoint x="245.34357" y="262.53693"/>
         <omgdi:waypoint x="-50.0" y="262.53693"/>
         <omgdi:waypoint x="-50.0" y="-10.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge10" bpmnElement="flow_timeoutA_back">
+        <omgdi:waypoint x="-50.0" y="-183.08249"/>
+        <omgdi:waypoint x="-50.0" y="-90.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge11" bpmnElement="flow_timeoutB_back">
+        <omgdi:waypoint x="245.16656" y="-183.50153"/>
+        <omgdi:waypoint x="245.34354" y="-90.0"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

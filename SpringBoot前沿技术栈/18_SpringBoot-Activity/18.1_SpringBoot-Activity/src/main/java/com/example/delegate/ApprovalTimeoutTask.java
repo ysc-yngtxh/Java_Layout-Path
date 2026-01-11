@@ -9,7 +9,7 @@ import org.activiti.engine.delegate.JavaDelegate;
  * 定时器触发后执行（发送消息/邮件/短信提醒）
  */
 @Slf4j
-public class TimeoutRemindService implements JavaDelegate {
+public class ApprovalTimeoutTask implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution execution) {
