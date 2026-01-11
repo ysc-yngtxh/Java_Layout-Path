@@ -74,6 +74,7 @@
     <endEvent id="endEvent" name="审批结束">
       <documentation>流程正常结束（审批通过/发起人终止）</documentation>
     </endEvent>
+
     <!-- ===================== 流程连线规则（规范ID+补充注释+修复条件） ===================== -->
     <!-- 开始 → 一级审批 -->
     <sequenceFlow id="flow1" sourceRef="startEvent" targetRef="approveTaskA"/>
@@ -109,6 +110,7 @@
       <documentation>直属领导审批请假申请，1天内处理超时自动提醒</documentation>
     </userTask>
   </process>
+
   <!-- ===================== 流程图可视化坐标 ===================== -->
   <bpmndi:BPMNDiagram id="BPMNDiagram_leaveFlow">
     <bpmndi:BPMNPlane bpmnElement="leaveFlow" id="BPMNPlane_leaveFlow">
@@ -124,8 +126,10 @@
       <bpmndi:BPMNShape id="timeoutA" bpmnElement="timeoutEventA">
         <omgdc:Bounds x="-100.0" y="-263.0825" width="100.0" height="80.0"/>
       </bpmndi:BPMNShape>
-      <!-- timeoutEventA → timeoutRemindTaskA -->
-      <!-- timeoutRemindTaskA → approveTaskA -->
+      <!-- 一级审批超时提醒任务 -->
+      <bpmndi:BPMNShape id="shape_remindA" bpmnElement="timeoutRemindTaskA">
+          <omgdc:Bounds x="-150.0" y="-150.0" width="80.0" height="40.0"/>
+      </bpmndi:BPMNShape>
       <!-- 一级审批结果网关 -->
       <bpmndi:BPMNShape id="shape_gatewayA" bpmnElement="gatewayA">
         <omgdc:Bounds x="84.427155" y="-65.0" width="30.0" height="30.0"/>
@@ -137,6 +141,10 @@
       <!-- 二级审批超时边界事件 -->
       <bpmndi:BPMNShape id="timeoutB" bpmnElement="timeoutEventB">
         <omgdc:Bounds x="195.16656" y="-263.50153" width="100.0" height="80.0"/>
+      </bpmndi:BPMNShape>
+      <!-- 二级审批超时提醒任务 -->
+      <bpmndi:BPMNShape id="shape_remindB" bpmnElement="timeoutRemindTaskB">
+          <omgdc:Bounds x="150.0" y="-150.0" width="80.0" height="40.0"/>
       </bpmndi:BPMNShape>
       <!-- 二级审批结果网关 -->
       <bpmndi:BPMNShape id="shape_gatewayB" bpmnElement="gatewayB">
