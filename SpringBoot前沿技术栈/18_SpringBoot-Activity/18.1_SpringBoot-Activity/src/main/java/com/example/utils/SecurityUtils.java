@@ -62,4 +62,5 @@ public class SecurityUtils {
         );
         org.activiti.engine.impl.identity.Authentication.setAuthenticatedUserId(username);
     }
+
 }
