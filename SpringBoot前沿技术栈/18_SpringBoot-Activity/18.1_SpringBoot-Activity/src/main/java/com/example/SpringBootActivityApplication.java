@@ -24,7 +24,7 @@ public class SpringBootActivityApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         repositoryService.createDeployment()
                 .name("请假审批流程")
-                .addClasspathResource("processes/borrowArchive.bpmn20.xml")
+                .addClasspathResource("processes/leaveFlow.bpmn20.xml")
                 .deploy();
         System.out.println("流程部署成功！");
     }

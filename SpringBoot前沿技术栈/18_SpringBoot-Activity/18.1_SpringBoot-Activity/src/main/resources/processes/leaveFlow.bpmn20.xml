@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef">
-  <process id="borrowArchive1" name="请假流程" isExecutable="true">
+  <process id="leaveFlow" name="请假流程" isExecutable="true">
     <!-- 1. 流程开始 -->
     <startEvent id="startEvent" name="流程开始"/>
     <!-- 2. 第一级审批：A审批 -->
@@ -15,8 +15,8 @@
     </userTask>
     <!-- 5. B审批结果排他网关（判断通过/驳回） -->
     <exclusiveGateway id="gatewayB" name="B审批结果"/>
-    <!-- 6. 打回提议人任务 -->
-    <userTask id="rejectTask" activiti:assignee="${proposer}" name="申请打回" activiti:candidateUsers="system">
+    <!-- 6. 打回发起人任务 -->
+    <userTask id="rejectTask" activiti:assignee="${initiator}" name="申请打回" activiti:candidateUsers="system">
       <documentation>审批驳回后，打回给提议人修改/重新提交</documentation>
     </userTask>
     <!-- 7. 流程结束 -->
@@ -42,7 +42,7 @@
     </sequenceFlow>
     <!-- B审批驳回 → 打回提议人（条件：approvalResultB != approved） -->
     <sequenceFlow id="flow7" sourceRef="gatewayB" targetRef="rejectTask">
-      <conditionExpression xsi:type="tFormalExpression">${approvalResultB != approved}</conditionExpression>
+      <conditionExpression xsi:type="tFormalExpression">${approvalResultB != 'approved'}</conditionExpression>
     </sequenceFlow>
     <!-- 打回提议人后 → 流程结束（也可改为回到开始事件，根据需求调整） -->
     <sequenceFlow id="flow8" sourceRef="rejectTask" targetRef="endEvent"/>

@@ -45,14 +45,14 @@ public class ProcessController {
     /**
      * 2. 发起请假流程 <p>
      * POST: /process/start
-     * 示例参数：{"applyUser":"Make","approver":"游家纨绔","leaveDays":3,"leaveReason":"事假"}
+     * 示例参数：{"applyUser":"Make","approverA":"System","approverB":"游家纨绔","leaveDays":3,"leaveReason":"事假"}
      */
     @PostMapping("/start")
     public ResponseEntity<Map<String, Object>> startProcess(@RequestBody Map<String, Object> params) {
         // 模拟用户登录，同时同步 Spring Security 和 Activiti 的用户上下文，让两者身份一致
         securityUtils.logInAs(params.get("applyUser").toString());
         // 流程定义ID
-        String processKey = "borrowArchive1";
+        String processKey = "leaveFlow";
         // 启动流程
         ProcessInstance instance = processService.startProcess(processKey, params);
         // 返回结果
@@ -83,7 +83,8 @@ public class ProcessController {
     /**
      * 4. 执行人完成审批（核心：审批通过/驳回）<p>
      * POST: /process/complete/{taskId}
-     * 示例参数：{"applyUser":"游家纨绔","approveResult":"pass","approveRemark":"同意请假"}
+     * 示例参数1：{"applyUser":"游家纨绔","approvalResultA":"approved","approveRemark":"同意请假"}
+     * 示例参数2：{"applyUser":"游家纨绔","approvalResultA":"rejected","initiator":"Make","approveRemark":"拒绝请假"}
      */
     @PostMapping("/complete/{taskId}")
     public ResponseEntity<Map<String, Object>> completeApproval(@PathVariable String taskId, @RequestBody Map<String, Object> params) {

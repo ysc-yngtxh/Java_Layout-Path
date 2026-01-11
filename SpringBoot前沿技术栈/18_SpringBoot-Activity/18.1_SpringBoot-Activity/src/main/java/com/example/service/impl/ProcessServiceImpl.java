@@ -36,10 +36,10 @@ public class ProcessServiceImpl implements ProcessService {
      */
     public void deployProcess() {
         try {
-            String bpmnFilePath = "processes/borrowArchive.bpmn20.xml"; // 静态流程文件路径
+            String bpmnFilePath = "processes/leaveFlow.bpmn20.xml"; // 静态流程文件路径
             // 检查流程是否已经部署，避免重复部署
             long count = repositoryService.createProcessDefinitionQuery()
-                    .processDefinitionKey("borrowArchive")
+                    .processDefinitionKey("leaveFlow")
                     .count();
 
             if (count == 0) {
@@ -50,7 +50,7 @@ public class ProcessServiceImpl implements ProcessService {
                         .deploy();
                 log.info("Static Deployment Completed: Process Deployment ID: {}", deployment.getId());
             } else {
-                log.info("borrowArchive Process is already deployed.");
+                log.info("leaveFlow Process is already deployed.");
             }
         } catch (Exception e) {
             log.error("Failed to deploy process", e);
@@ -60,7 +60,7 @@ public class ProcessServiceImpl implements ProcessService {
     /**
      * 2. 启动流程实例（发起请假，指定审批人）
      * @param processKey 请假单ID（业务关联）
-     * @param variables 审批参数（比如：{"applyUser":"Make","approver":"游家纨绔","leaveDays":3,"leaveReason":"事假"}）
+     * @param variables 审批参数（比如：{"applyUser":"Make","approverA":"System","approverB":"游家纨绔","leaveDays":3,"leaveReason":"事假"}）
      * @return 流程实例ID
      */
     @Override
@@ -91,7 +91,9 @@ public class ProcessServiceImpl implements ProcessService {
     /**
      * 4. 执行人完成审批（核心：审批通过/驳回）
      * @param taskId 待办任务ID（从待办列表中获取）
-     * @param variables 审批参数（比如：{"applyUser":"游家纨绔","approveResult":"approved","approveRemark":"同意请假"}）
+     * @param variables 审批参数
+     *        示例参数1：{"applyUser":"游家纨绔","approvalResultA":"approved","approveRemark":"同意请假"}
+     *        示例参数2：{"applyUser":"游家纨绔","approvalResultA":"rejected","initiator":"Make","approveRemark":"拒绝请假"}）
      */
     @Override
     public void completeTask(String taskId, Map<String, Object> variables) {
