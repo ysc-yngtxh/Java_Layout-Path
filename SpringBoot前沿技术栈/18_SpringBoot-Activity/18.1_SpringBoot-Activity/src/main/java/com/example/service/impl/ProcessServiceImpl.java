@@ -46,7 +46,7 @@ public class ProcessServiceImpl implements ProcessService {
                 // 如果不存在，就开始部署流程，传入名称与文件路径
                 Deployment deployment = repositoryService.createDeployment()
                         .addClasspathResource(bpmnFilePath) // 流程文件路径
-                        .name("档案借阅流程") // 流程名
+                        .name("请假流程") // 流程名
                         .deploy();
                 log.info("Static Deployment Completed: Process Deployment ID: {}", deployment.getId());
             } else {
@@ -60,7 +60,7 @@ public class ProcessServiceImpl implements ProcessService {
     /**
      * 2. 启动流程实例（发起请假，指定审批人）
      * @param processKey 请假单ID（业务关联）
-     * @param variables 审批参数（比如：zhangsan）
+     * @param variables 审批参数（比如：{"applyUser":"Make","approver":"游家纨绔","leaveDays":3,"leaveReason":"事假"}）
      * @return 流程实例ID
      */
     @Override
@@ -91,7 +91,7 @@ public class ProcessServiceImpl implements ProcessService {
     /**
      * 4. 执行人完成审批（核心：审批通过/驳回）
      * @param taskId 待办任务ID（从待办列表中获取）
-     * @param variables 审批参数（比如：approved/rejected）
+     * @param variables 审批参数（比如：{"applyUser":"游家纨绔","approveResult":"approved","approveRemark":"同意请假"}）
      */
     @Override
     public void completeTask(String taskId, Map<String, Object> variables) {

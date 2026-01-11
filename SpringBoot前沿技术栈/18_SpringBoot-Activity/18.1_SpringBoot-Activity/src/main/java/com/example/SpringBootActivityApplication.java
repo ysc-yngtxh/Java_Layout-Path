@@ -8,7 +8,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @Slf4j
-// Activiti 默认集成 Spring Security 进行权限管理，如果不需要权限管理功能，可以通过 exclude 属性排除掉相关的自动配置类
 @SpringBootApplication
 public class SpringBootActivityApplication implements CommandLineRunner {
 

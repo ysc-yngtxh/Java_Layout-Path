@@ -1,75 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef">
-  <process id="ApplyForLevel-key" name="ApplyForLevel" isExecutable="true">
-    <documentation>请假审批流程</documentation>
-    <startEvent id="startEvent1" activiti:initiator="${initiator}"/>
-    <userTask id="sid-564EB5F4-5D5D-4AE9-9009-C12B5130010C" name="主管审批" activiti:assignee="${assignManager}">
-      <extensionElements>
-        <modeler:initiator-can-complete xmlns:modeler="http://activiti.com/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
-      </extensionElements>
+  <process id="borrowArchive1" name="请假流程" isExecutable="true">
+    <!-- 1. 流程开始 -->
+    <startEvent id="startEvent" name="流程开始"/>
+    <!-- 2. 第一级审批：A审批 -->
+    <userTask id="approveTaskA" activiti:assignee="${approverA}" name="A审批" activiti:candidateUsers="system">
+      <documentation>A作为第一审批人，审批请假申请</documentation>
     </userTask>
-    <userTask id="sid-AA05AA0E-21BE-4403-8AC3-90AD64956F01" name="产品经理审批" activiti:assignee="${assignProductLineManager}">
-      <extensionElements>
-        <modeler:initiator-can-complete xmlns:modeler="http://activiti.com/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
-      </extensionElements>
+    <!-- 3. A审批结果排他网关（判断通过/驳回） -->
+    <exclusiveGateway id="gatewayA" name="A审批结果"/>
+    <!-- 4. 第二级审批：B审批 -->
+    <userTask id="approveTaskB" activiti:assignee="${approverB}" name="B审批" activiti:candidateUsers="system">
+      <documentation>B作为第二审批人，仅A通过后可见</documentation>
     </userTask>
-    <endEvent id="sid-2AEC2F34-49D5-437E-9956-05C085ADEE12">
-      <extensionElements>
-        <activiti:executionListener event="end" class="com.uai.activiti7.listener.EndListener"/>
-      </extensionElements>
-    </endEvent>
-    <exclusiveGateway id="sid-D66C8B20-089D-4EAA-9D4F-9F3D8E65A7D7"/>
-    <sequenceFlow id="sid-37F25884-3DDB-4B6B-B028-16C2A7FE71A7" sourceRef="sid-D66C8B20-089D-4EAA-9D4F-9F3D8E65A7D7" targetRef="sid-AA05AA0E-21BE-4403-8AC3-90AD64956F01">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isPass==true}]]></conditionExpression>
+    <!-- 5. B审批结果排他网关（判断通过/驳回） -->
+    <exclusiveGateway id="gatewayB" name="B审批结果"/>
+    <!-- 6. 打回提议人任务 -->
+    <userTask id="rejectTask" activiti:assignee="${proposer}" name="申请打回" activiti:candidateUsers="system">
+      <documentation>审批驳回后，打回给提议人修改/重新提交</documentation>
+    </userTask>
+    <!-- 7. 流程结束 -->
+    <endEvent id="endEvent" name="审批结束"/>
+    <!-- 流程连线规则 -->
+    <!-- 开始 → A审批 -->
+    <sequenceFlow id="flow1" sourceRef="startEvent" targetRef="approveTaskA"/>
+    <!-- A审批 → A审批结果网关 -->
+    <sequenceFlow id="flow2" sourceRef="approveTaskA" targetRef="gatewayA"/>
+    <!-- A审批通过 → B审批（条件：approvalResultA = approved） -->
+    <sequenceFlow id="flow3" sourceRef="gatewayA" targetRef="approveTaskB">
+      <conditionExpression xsi:type="tFormalExpression">${approvalResultA == 'approved'}</conditionExpression>
     </sequenceFlow>
-    <sequenceFlow id="sid-987DC409-F4E5-4631-A7A2-07C4C75D8CCB" sourceRef="sid-D66C8B20-089D-4EAA-9D4F-9F3D8E65A7D7" targetRef="sid-2AEC2F34-49D5-437E-9956-05C085ADEE12">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isPass==false}]]></conditionExpression>
+    <!-- A审批驳回 → 打回提议人（条件：approvalResultA != approved） -->
+    <sequenceFlow id="flow4" sourceRef="gatewayA" targetRef="rejectTask">
+      <conditionExpression xsi:type="tFormalExpression">${approvalResultA != 'approved'}</conditionExpression>
     </sequenceFlow>
-    <sequenceFlow id="sid-61DA014F-A6CB-4ADD-9CBF-99306E5CAD94" sourceRef="sid-AA05AA0E-21BE-4403-8AC3-90AD64956F01" targetRef="sid-2AEC2F34-49D5-437E-9956-05C085ADEE12">
-      <extensionElements>
-        <activiti:executionListener event="take" class="com.uai.activiti7.listener.GlobalNodeConnectionListener"/>
-      </extensionElements>
+    <!-- B审批 → B审批结果网关 -->
+    <sequenceFlow id="flow5" sourceRef="approveTaskB" targetRef="gatewayB"/>
+    <!-- B审批通过 → 流程结束（条件：approvalResultB = approved） -->
+    <sequenceFlow id="flow6" sourceRef="gatewayB" targetRef="endEvent">
+      <conditionExpression xsi:type="tFormalExpression">${approvalResultB == 'approved'}</conditionExpression>
     </sequenceFlow>
-    <sequenceFlow id="sid-4158A9C8-8FA3-4A83-AC36-D4430C8423C3" sourceRef="sid-564EB5F4-5D5D-4AE9-9009-C12B5130010C" targetRef="sid-D66C8B20-089D-4EAA-9D4F-9F3D8E65A7D7">
-      <extensionElements>
-        <activiti:executionListener event="take" class="com.uai.activiti7.listener.GlobalNodeConnectionListener"/>
-      </extensionElements>
+    <!-- B审批驳回 → 打回提议人（条件：approvalResultB != approved） -->
+    <sequenceFlow id="flow7" sourceRef="gatewayB" targetRef="rejectTask">
+      <conditionExpression xsi:type="tFormalExpression">${approvalResultB != approved}</conditionExpression>
     </sequenceFlow>
+    <!-- 打回提议人后 → 流程结束（也可改为回到开始事件，根据需求调整） -->
+    <sequenceFlow id="flow8" sourceRef="rejectTask" targetRef="endEvent"/>
   </process>
-  <bpmndi:BPMNDiagram id="BPMNDiagram_ApplyForLevel-key">
-    <bpmndi:BPMNPlane bpmnElement="ApplyForLevel-key" id="BPMNPlane_ApplyForLevel-key">
-      <bpmndi:BPMNShape bpmnElement="startEvent1" id="BPMNShape_startEvent1">
-        <omgdc:Bounds height="30.0" width="30.0" x="100.0" y="163.0"/>
+
+
+  <!-- 流程图可视化坐标（调整后布局） -->
+  <bpmndi:BPMNDiagram id="BPMNDiagram_borrowArchive">
+    <bpmndi:BPMNPlane bpmnElement="borrowArchive" id="BPMNPlane_borrowArchive">
+      <!-- 开始事件 -->
+      <bpmndi:BPMNShape id="shape_start" bpmnElement="startEvent">
+        <omgdc:Bounds x="-200.0" y="-65.0" width="30.0" height="30.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="sid-564EB5F4-5D5D-4AE9-9009-C12B5130010C" id="BPMNShape_sid-564EB5F4-5D5D-4AE9-9009-C12B5130010C">
-        <omgdc:Bounds height="80.0" width="100.0" x="175.0" y="138.0"/>
+      <!-- A审批任务 -->
+      <bpmndi:BPMNShape id="shape_A" bpmnElement="approveTaskA">
+        <omgdc:Bounds x="-100.0" y="-90.0" width="100.0" height="80.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="sid-AA05AA0E-21BE-4403-8AC3-90AD64956F01" id="BPMNShape_sid-AA05AA0E-21BE-4403-8AC3-90AD64956F01">
-        <omgdc:Bounds height="79.99999999999997" width="100.0" x="509.99996200204066" y="137.99999794363978"/>
+      <!-- A审批网关 -->
+      <bpmndi:BPMNShape id="shape_gatewayA" bpmnElement="gatewayA">
+        <omgdc:Bounds x="84.427155" y="-65.0" width="30.0" height="30.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="sid-2AEC2F34-49D5-437E-9956-05C085ADEE12" id="BPMNShape_sid-2AEC2F34-49D5-437E-9956-05C085ADEE12">
-        <omgdc:Bounds height="28.0" width="28.0" x="719.9999785423283" y="163.99998611211845"/>
+      <!-- B审批任务 -->
+      <bpmndi:BPMNShape id="shape_B" bpmnElement="approveTaskB">
+        <omgdc:Bounds x="195.34354" y="-90.0" width="100.0" height="80.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape bpmnElement="sid-D66C8B20-089D-4EAA-9D4F-9F3D8E65A7D7" id="BPMNShape_sid-D66C8B20-089D-4EAA-9D4F-9F3D8E65A7D7">
-        <omgdc:Bounds height="40.0" width="40.0" x="375.0" y="158.0"/>
+      <!-- B审批网关 -->
+      <bpmndi:BPMNShape id="shape_gatewayB" bpmnElement="gatewayB">
+        <omgdc:Bounds x="388.2445" y="-65.0" width="30.0" height="30.0"/>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge bpmnElement="sid-37F25884-3DDB-4B6B-B028-16C2A7FE71A7" id="BPMNEdge_sid-37F25884-3DDB-4B6B-B028-16C2A7FE71A7">
-        <omgdi:waypoint x="414.55792" y="178.44208"/>
-        <omgdi:waypoint x="509.99996200204066" y="178.15197356688822"/>
+      <!-- 打回提议人任务 -->
+      <bpmndi:BPMNShape id="shape_reject" bpmnElement="rejectTask">
+        <omgdc:Bounds x="195.34355" y="135.07385" width="100.0" height="80.0"/>
+      </bpmndi:BPMNShape>
+      <!-- 结束事件 -->
+      <bpmndi:BPMNShape id="shape_end" bpmnElement="endEvent">
+        <omgdc:Bounds x="506.15283" y="-65.0" width="30.0" height="30.0"/>
+      </bpmndi:BPMNShape>
+      <!-- 连线：开始→A审批 -->
+      <bpmndi:BPMNEdge id="edge1" bpmnElement="flow1">
+        <omgdi:waypoint x="-170.0" y="-50.0"/>
+        <omgdi:waypoint x="-100.0" y="-50.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="sid-987DC409-F4E5-4631-A7A2-07C4C75D8CCB" id="BPMNEdge_sid-987DC409-F4E5-4631-A7A2-07C4C75D8CCB">
-        <omgdi:waypoint x="395.5" y="197.5"/>
-        <omgdi:waypoint x="395.4999944120646" y="256.9999988079071"/>
-        <omgdi:waypoint x="733.9999785423283" y="256.9999988079071"/>
-        <omgdi:waypoint x="733.9999785423283" y="191.99998611211845"/>
+      <!-- 连线：A审批→A网关 -->
+      <bpmndi:BPMNEdge id="edge2" bpmnElement="flow2">
+        <omgdi:waypoint x="0.0" y="-50.0"/>
+        <omgdi:waypoint x="84.427155" y="-50.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="sid-61DA014F-A6CB-4ADD-9CBF-99306E5CAD94" id="BPMNEdge_sid-61DA014F-A6CB-4ADD-9CBF-99306E5CAD94">
-        <omgdi:waypoint x="609.9999620020407" y="177.99999454377763"/>
-        <omgdi:waypoint x="719.9999785423283" y="177.99998706407985"/>
+      <!-- 连线：A网关→B审批 -->
+      <bpmndi:BPMNEdge id="edge3" bpmnElement="flow3">
+        <omgdi:waypoint x="114.427155" y="-50.0"/>
+        <omgdi:waypoint x="195.34354" y="-50.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="sid-4158A9C8-8FA3-4A83-AC36-D4430C8423C3" id="BPMNEdge_sid-4158A9C8-8FA3-4A83-AC36-D4430C8423C3">
-        <omgdi:waypoint x="275.0" y="178.1466268803529"/>
-        <omgdi:waypoint x="375.44116" y="178.44118"/>
+      <!-- 连线：A网关→打回 -->
+      <bpmndi:BPMNEdge id="edge4" bpmnElement="flow4">
+        <omgdi:waypoint x="99.427155" y="-35.0"/>
+        <omgdi:waypoint x="99.427155" y="175.07385"/>
+        <omgdi:waypoint x="195.34355" y="175.07385"/>
+      </bpmndi:BPMNEdge>
+      <!-- 连线：B审批→B网关 -->
+      <bpmndi:BPMNEdge id="edge5" bpmnElement="flow5">
+        <omgdi:waypoint x="295.3435" y="-50.0"/>
+        <omgdi:waypoint x="388.2445" y="-50.0"/>
+      </bpmndi:BPMNEdge>
+      <!-- 连线：B网关→结束 -->
+      <bpmndi:BPMNEdge id="edge6" bpmnElement="flow6">
+        <omgdi:waypoint x="418.2445" y="-50.0"/>
+        <omgdi:waypoint x="506.15283" y="-50.0"/>
+      </bpmndi:BPMNEdge>
+      <!-- 连线：B网关→打回 -->
+      <bpmndi:BPMNEdge id="edge7" bpmnElement="flow7">
+        <omgdi:waypoint x="403.2445" y="-35.0"/>
+        <omgdi:waypoint x="403.2445" y="52.38726"/>
+        <omgdi:waypoint x="245.34354" y="52.387257"/>
+        <omgdi:waypoint x="245.34355" y="135.07385"/>
+      </bpmndi:BPMNEdge>
+      <!-- 连线：打回→结束 -->
+      <bpmndi:BPMNEdge id="edge8" bpmnElement="flow8">
+        <omgdi:waypoint x="295.34357" y="175.07385"/>
+        <omgdi:waypoint x="521.1528" y="175.07385"/>
+        <omgdi:waypoint x="521.1528" y="-35.000004"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

@@ -2,7 +2,6 @@ package com.example.service;
 
 import com.example.dto.TaskDto;
 import org.activiti.engine.runtime.ProcessInstance;
-import org.activiti.engine.task.Task;
 
 import java.util.List;
 import java.util.Map;
@@ -38,4 +37,5 @@ public interface ProcessService {
      * @param variables 审批参数
      */
     void completeTask(String taskId, Map<String, Object> variables);
+
 }

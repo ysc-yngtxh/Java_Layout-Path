@@ -4,12 +4,8 @@ import com.example.dto.TaskDto;
 import com.example.service.ProcessService;
 import com.example.service.impl.ProcessDiagramService;
 import com.example.utils.SecurityUtils;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import lombok.RequiredArgsConstructor;
 import org.activiti.engine.runtime.ProcessInstance;
-import org.activiti.engine.task.Task;
-import org.apache.commons.collections4.ListUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -56,7 +52,7 @@ public class ProcessController {
         // 模拟用户登录，同时同步 Spring Security 和 Activiti 的用户上下文，让两者身份一致
         securityUtils.logInAs(params.get("applyUser").toString());
         // 流程定义ID
-        String processKey = "borrowArchive";
+        String processKey = "borrowArchive1";
         // 启动流程
         ProcessInstance instance = processService.startProcess(processKey, params);
         // 返回结果
@@ -90,9 +86,7 @@ public class ProcessController {
      * 示例参数：{"applyUser":"游家纨绔","approveResult":"pass","approveRemark":"同意请假"}
      */
     @PostMapping("/complete/{taskId}")
-    public ResponseEntity<Map<String, Object>> completeApproval(
-            @PathVariable String taskId,
-            @RequestBody Map<String, Object> params) {
+    public ResponseEntity<Map<String, Object>> completeApproval(@PathVariable String taskId, @RequestBody Map<String, Object> params) {
         // 模拟用户登录，同时同步 Spring Security 和 Activiti 的用户上下文，让两者身份一致
         securityUtils.logInAs(params.get("applyUser").toString());
         // 执行审批任务
@@ -106,7 +100,7 @@ public class ProcessController {
     /**
      * 5. 根据流程实例ID查询BPMN流程图
      * @param processInstanceId 流程实例ID
-     * @return 图片响应（PNG格式）
+     * @return 图片响应（PNG 或 SVG 格式）
      */
     @GetMapping("/diagram/{processInstanceId}")
     public ResponseEntity<byte[]> getProcessDiagram(@PathVariable String processInstanceId) {
@@ -129,4 +123,5 @@ public class ProcessController {
             throw new RuntimeException("生成流程图失败：" + e.getMessage(), e);
         }
     }
+
 }

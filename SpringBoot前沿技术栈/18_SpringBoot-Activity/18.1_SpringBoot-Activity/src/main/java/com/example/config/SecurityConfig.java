@@ -1,7 +1,6 @@
 package com.example.config;
 
 import lombok.extern.slf4j.Slf4j;
-import org.activiti.api.runtime.shared.identity.UserGroupManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,7 +10,6 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

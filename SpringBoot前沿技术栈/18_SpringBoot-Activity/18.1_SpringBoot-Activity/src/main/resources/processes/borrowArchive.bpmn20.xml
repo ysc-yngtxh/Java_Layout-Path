@@ -3,7 +3,7 @@
   <process id="borrowArchive" name="请假流程" isExecutable="true">
     <startEvent id="sid-f65a724e-dc6f-4d8d-8aff-8b728ef3f374" name="流程开始"/>
     <userTask id="sid-cc0de073-ed2b-4f46-8c69-f18aafc4126d" activiti:assignee="${approver}" name="请假审批" activiti:candidateUsers="system">
-      <documentation>需要上级批准后，才能正常请假</documentation>
+      <documentation>需要上级主管批准后，才能正常请假</documentation>
     </userTask>
     <endEvent id="sid-0d00bded-7008-45c8-bbe8-44f0abedd3a1" name="审批结束"/>
     <sequenceFlow id="sid-fea3b238-5668-4bd9-81ae-4d2180f7d6e2" sourceRef="sid-cc0de073-ed2b-4f46-8c69-f18aafc4126d" targetRef="sid-0d00bded-7008-45c8-bbe8-44f0abedd3a1"/>
