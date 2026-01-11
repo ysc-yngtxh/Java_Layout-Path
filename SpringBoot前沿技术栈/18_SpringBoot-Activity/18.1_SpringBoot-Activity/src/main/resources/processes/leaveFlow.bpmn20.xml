@@ -20,15 +20,18 @@
         <activiti:taskListener event="create" class="com.example.listener.ApproveTaskCreateListener"/>
       </extensionElements>
     </userTask>
-    <!-- 2.1 一级审批任务 - 24小时超时定时器（边界事件） -->
+    <!-- 2.1 一级审批超时边界事件：监听approveTaskA的执行时长（边界事件 - 24小时超时定时器） -->
     <boundaryEvent id="timeoutEventA" name="一级审批超时提醒" attachedToRef="approveTaskA">
+        <!-- 明确不终止原任务，仅触发提醒 -->
+        <documentation>当一级审批任务超过24小时未处理时，触发超时提醒逻辑</documentation>
         <timerEventDefinition>
             <!-- PT24H = 24小时（ISO 8601时间格式），可改为PT30M（30分钟）测试 -->
             <timeDuration>PT24H</timeDuration>
         </timerEventDefinition>
     </boundaryEvent>
-    <!-- 2.2 超时后执行的提醒任务（可调用Java类/发送消息） -->
+    <!-- 2.2 超时后执行的提醒任务，发送提醒通知（如短信/邮件） -->
     <serviceTask id="timeoutRemindTaskA" name="一级审批超时提醒执行" activiti:class="com.example.delegate.TimeoutRemindService">
+        <documentation>调用超时提醒服务，向直属领导推送审批超时通知</documentation>
         <extensionElements>
             <activiti:field name="taskType" stringValue="FIRST_LEVEL_APPROVAL"/>
         </extensionElements>
@@ -45,14 +48,16 @@
         <activiti:taskListener event="create" class="com.example.listener.ApproveTaskCreateListener"/>
       </extensionElements>
     </userTask>
-    <!-- 4.1 二级审批任务 - 24小时超时定时器（边界事件） -->
+    <!-- 4.1 二级审批超时边界事件：监听approveTaskB的执行时长（边界事件 - 24小时超时定时器） -->
     <boundaryEvent id="timeoutEventB" name="二级审批超时提醒" attachedToRef="approveTaskB">
+        <documentation>当二级审批任务超过24小时未处理时，触发超时提醒逻辑</documentation>
         <timerEventDefinition>
             <timeDuration>PT24H</timeDuration>
         </timerEventDefinition>
     </boundaryEvent>
     <!-- 4.2 超时后执行的提醒任务 -->
     <serviceTask id="timeoutRemindTaskB" name="二级审批超时提醒执行" activiti:class="com.example.delegate.TimeoutRemindService">
+        <documentation>调用超时提醒服务，向部门总监/HR推送审批超时通知</documentation>
         <extensionElements>
             <activiti:field name="taskType" stringValue="SECOND_LEVEL_APPROVAL"/>
         </extensionElements>
