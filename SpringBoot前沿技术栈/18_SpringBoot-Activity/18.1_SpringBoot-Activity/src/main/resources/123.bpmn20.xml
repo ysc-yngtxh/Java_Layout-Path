@@ -2,18 +2,24 @@
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef">
   <process id="leaveFlow" name="两级审批请假流程" isExecutable="true">
     <documentation>
-        企业级两级串行审批请假流程：
-        1. 支持事假/病假/调休三类请假类型；
-        2. 一级审批（直属领导）、二级审批（部门总监/HR）串行执行；
-        3. 每级审批24小时未处理触发超时提醒，提醒后回到原审批任务；
-        4. 任意一级审批驳回后，发起人可重提或终止流程；
-        5. 审批通过/发起人终止均触发流程正常结束。
-    </documentation>
+            企业级两级串行审批请假流程：
+            1. 支持事假/病假/调休三类请假类型；
+            2. 一级审批（直属领导）、二级审批（部门总监/HR）串行执行；
+            3. 每级审批24小时未处理触发超时提醒，提醒后回到原审批任务；
+            4. 任意一级审批驳回后，发起人可重提或终止流程；
+            5. 审批通过/发起人终止均触发流程正常结束。
+        </documentation>
     <!-- 1. 流程开始 -->
     <startEvent id="startEvent" name="流程开始">
       <documentation>员工填写请假信息并提交，流程正式启动</documentation>
     </startEvent>
     <!-- 2. 一级审批任务（直属领导） -->
+    <userTask id="approveTaskA" name="一级审批（直属领导）" activiti:assignee="${approverA}" activiti:candidateUsers="system">
+      <documentation>直属领导审批请假申请，1天内处理超时自动提醒</documentation>
+      <extensionElements>
+        <activiti:taskListener event="create" class="com.example.listener.ApproveTaskCreateListener"/>
+      </extensionElements>
+    </userTask>
     <!-- 2.1 一级审批超时边界事件：监听approveTaskA的执行时长（边界事件 - 24小时超时定时器） -->
     <boundaryEvent id="timeoutEventA" name="一级审批超时提醒" attachedToRef="approveTaskA">
       <!-- 明确不终止原任务，仅触发提醒 -->
@@ -105,9 +111,6 @@
     <sequenceFlow id="flow9" sourceRef="rejectTask" targetRef="approveTaskA">
       <conditionExpression xsi:type="tFormalExpression">${initiatorAction == 'resubmit'}</conditionExpression>
     </sequenceFlow>
-    <userTask id="approveTaskA" name="一级审批（直属领导）">
-      <documentation>直属领导审批请假申请，1天内处理超时自动提醒</documentation>
-    </userTask>
   </process>
   <!-- ===================== 流程图可视化坐标 ===================== -->
   <bpmndi:BPMNDiagram id="BPMNDiagram_leaveFlow">
@@ -124,8 +127,10 @@
       <bpmndi:BPMNShape id="timeoutA" bpmnElement="timeoutEventA">
         <omgdc:Bounds x="-100.0" y="-263.0825" width="100.0" height="80.0"/>
       </bpmndi:BPMNShape>
-      <!-- timeoutEventA → timeoutRemindTaskA -->
-      <!-- timeoutRemindTaskA → approveTaskA -->
+      <!-- 一级审批超时提醒任务 -->
+      <bpmndi:BPMNShape id="shape_remindA" bpmnElement="timeoutRemindTaskA">
+        <omgdc:Bounds x="-150.0" y="-150.0" width="80.0" height="40.0"/>
+      </bpmndi:BPMNShape>
       <!-- 一级审批结果网关 -->
       <bpmndi:BPMNShape id="shape_gatewayA" bpmnElement="gatewayA">
         <omgdc:Bounds x="84.427155" y="-65.0" width="30.0" height="30.0"/>
