@@ -2,13 +2,13 @@
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef">
   <process id="leaveFlow" name="两级审批请假流程" isExecutable="true">
     <documentation>
-        企业级两级串行审批请假流程：
-        1. 支持事假/病假/调休三类请假类型；
-        2. 一级审批（直属领导）、二级审批（部门总监/HR）串行执行；
-        3. 每级审批24小时未处理触发超时提醒，提醒后回到原审批任务；
-        4. 任意一级审批驳回后，发起人可重提或终止流程；
-        5. 审批通过/发起人终止均触发流程正常结束。
-    </documentation>
+            企业级两级串行审批请假流程：
+            1. 支持事假/病假/调休三类请假类型；
+            2. 一级审批（直属领导）、二级审批（部门总监/HR）串行执行；
+            3. 每级审批24小时未处理触发超时提醒，提醒后回到原审批任务；
+            4. 任意一级审批驳回后，发起人可重提或终止流程；
+            5. 审批通过/发起人终止均触发流程正常结束。
+        </documentation>
     <!-- 1. 流程开始 -->
     <startEvent id="startEvent" name="流程开始">
       <documentation>员工填写请假信息并提交，流程正式启动</documentation>
@@ -56,7 +56,7 @@
       </timerEventDefinition>
     </boundaryEvent>
     <!-- 4.2 超时后执行的提醒任务 -->
-    <serviceTask id="timeoutRemindTaskB" name="二级审批超时提醒执行" activiti:class="com.example.delegate.ApprovalTimeoutTask" activiti:assignee="${approverA}" activiti:candidateUsers="system">
+    <serviceTask id="timeoutRemindTaskB" name="二级审批超时提醒执行" activiti:class="com.example.delegate.ApprovalTimeoutTask" activiti:assignee="${approverB}" activiti:candidateUsers="system">
       <documentation>调用超时提醒服务，向部门总监/HR推送审批超时通知</documentation>
       <extensionElements>
         <activiti:field name="taskType" stringValue="SECOND_LEVEL_APPROVAL"/>
@@ -127,11 +127,11 @@
       </bpmndi:BPMNShape>
       <!-- 一级审批超时边界事件 -->
       <bpmndi:BPMNShape id="timeoutA" bpmnElement="timeoutEventA">
-        <omgdc:Bounds x="-100.0" y="-263.0825" width="100.0" height="80.0"/>
+        <omgdc:Bounds x="-37.3068" y="-89.077866" width="30.0" height="30.0"/>
       </bpmndi:BPMNShape>
       <!-- 一级审批超时提醒任务 -->
-      <bpmndi:BPMNShape id="shape_remindA" bpmnElement="timeoutRemindTaskA">
-          <omgdc:Bounds x="-150.0" y="-150.0" width="80.0" height="40.0"/>
+      <bpmndi:BPMNShape id="shape-remindA" bpmnElement="timeoutRemindTaskB">
+        <omgdc:Bounds x="64.427155" y="-250.0" width="100.0" height="80.0"/>
       </bpmndi:BPMNShape>
       <!-- 一级审批结果网关 -->
       <bpmndi:BPMNShape id="shape_gatewayA" bpmnElement="gatewayA">
@@ -143,12 +143,9 @@
       </bpmndi:BPMNShape>
       <!-- 二级审批超时边界事件 -->
       <bpmndi:BPMNShape id="timeoutB" bpmnElement="timeoutEventB">
-        <omgdc:Bounds x="195.16656" y="-263.50153" width="100.0" height="80.0"/>
+        <omgdc:Bounds x="258.8466" y="-87.92446" width="30.0" height="30.0"/>
       </bpmndi:BPMNShape>
       <!-- 二级审批超时提醒任务 -->
-      <bpmndi:BPMNShape id="shape_remindB" bpmnElement="timeoutRemindTaskB">
-          <omgdc:Bounds x="150.0" y="-150.0" width="80.0" height="40.0"/>
-      </bpmndi:BPMNShape>
       <!-- 二级审批结果网关 -->
       <bpmndi:BPMNShape id="shape_gatewayB" bpmnElement="gatewayB">
         <omgdc:Bounds x="388.2445" y="-65.0" width="30.0" height="30.0"/>
@@ -212,13 +209,15 @@
         <omgdi:waypoint x="-50.0" y="262.53693"/>
         <omgdi:waypoint x="-50.0" y="-10.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge10" bpmnElement="flow_timeoutA_back">
-        <omgdi:waypoint x="-50.0" y="-183.08249"/>
-        <omgdi:waypoint x="-50.0" y="-90.0"/>
+
+
+      <bpmndi:BPMNEdge id="edge10" bpmnElement="flow_timeoutA">
+          <omgdi:waypoint x="-7.306801" y="-74.077866"/>
+          <omgdi:waypoint x="89.427155" y="-170.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="edge11" bpmnElement="flow_timeoutB_back">
-        <omgdi:waypoint x="245.16656" y="-183.50153"/>
-        <omgdi:waypoint x="245.34354" y="-90.0"/>
+      <bpmndi:BPMNEdge id="edge11" bpmnElement="flow_timeoutB">
+        <omgdi:waypoint x="258.8466" y="-72.92446"/>
+        <omgdi:waypoint x="144.42715" y="-169.99998"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
