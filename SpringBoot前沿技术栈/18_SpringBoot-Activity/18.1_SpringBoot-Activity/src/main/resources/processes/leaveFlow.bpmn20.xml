@@ -18,11 +18,24 @@
         <startEvent id="startEvent" name="流程开始">
             <documentation>员工填写请假信息并提交，流程正式启动</documentation>
         </startEvent>
+        <!-- 1.1 通用审批超时提醒任务（A/B审批共用），发送提醒通知（如短信/邮件） -->
+        <serviceTask id="timeoutRemindTask" name="审批超时提醒执行"
+                     activiti:class="com.example.delegate.ApprovalTimeoutTask"
+                     activiti:assignee="${currentApprover}"> <!-- 动态取当前审批人 -->
+            <documentation>超时提醒服务：向当前审批人推送审批超时通知（兼容一级/二级审批）</documentation>
+            <extensionElements>
+                <activiti:field name="taskType" expression="${approvalLevel}"/>
+            </extensionElements>
+        </serviceTask>
         <!-- 2. 一级审批任务（直属领导） -->
         <userTask id="approveTaskA" name="一级审批（直属领导）" activiti:assignee="${approverA}" activiti:candidateUsers="system">
             <documentation>直属领导审批请假申请，1天内处理超时自动提醒</documentation>
             <extensionElements>
-                <activiti:taskListener event="create" class="com.example.listener.ApproveTaskCreateListener"/>
+                <activiti:taskListener event="create" class="com.example.listener.ApproveTaskCreateListener">
+                    <!-- 传递参数：审批级别+当前审批人 -->
+                    <activiti:field name="approvalLevel" stringValue="FIRST_LEVEL_APPROVAL"/>
+                    <activiti:field name="approverVarName" stringValue="approverA"/>
+                </activiti:taskListener>
             </extensionElements>
         </userTask>
         <!-- 2.1 一级审批超时边界事件：监听approveTaskA的执行时长（边界事件 - 24小时超时定时器） -->
@@ -34,26 +47,36 @@
                 <timeDuration>PT24H</timeDuration>
             </timerEventDefinition>
         </boundaryEvent>
-        <!-- 2.2 超时后执行的提醒任务，发送提醒通知（如短信/邮件） -->
-        <serviceTask id="timeoutRemindTaskA" name="一级审批超时提醒执行"
-                     activiti:class="com.example.delegate.ApprovalTimeoutTask"
-                     activiti:assignee="${approverA}"
-                     activiti:candidateUsers="system">
-            <documentation>调用超时提醒服务，向直属领导推送审批超时通知</documentation>
+        <!-- 2.2 超时提醒后回到原审批任务（继续等待处理） -->
+        <sequenceFlow id="flow_timeoutA" sourceRef="timeoutEventA" targetRef="timeoutRemindTask">
             <extensionElements>
-                <activiti:field name="taskType" stringValue="FIRST_LEVEL_APPROVAL"/>
+                <!-- 触发超时事件时，将approverA赋值给currentApprover -->
+                <activiti:executionListener event="take" class="org.activiti.engine.impl.bpmn.listener.ScriptExecutionListener">
+                    <activiti:field name="script">
+                        <activiti:string>
+                            <![CDATA[
+                                execution.setVariable("currentApprover", execution.getVariable("approverA"));
+                                execution.setVariable("approvalLevel", "FIRST_LEVEL_APPROVAL");
+                            ]]>
+                        </activiti:string>
+                    </activiti:field>
+                    <activiti:field name="language" stringValue="javascript"/>
+                </activiti:executionListener>
             </extensionElements>
-        </serviceTask>
-        <!-- 2.3 超时提醒后回到原审批任务（继续等待处理） -->
-        <sequenceFlow id="flow_timeoutA" sourceRef="timeoutEventA" targetRef="timeoutRemindTaskA"/>
-        <sequenceFlow id="flow_timeoutA_back" sourceRef="timeoutRemindTaskA" targetRef="approveTaskA"/>
+        </sequenceFlow>
+        <sequenceFlow id="flow_remind_back_A" sourceRef="timeoutRemindTask" targetRef="approveTaskA">
+            <conditionExpression xsi:type="tFormalExpression">${approvalLevel == 'FIRST_LEVEL_APPROVAL'}</conditionExpression>
+        </sequenceFlow>
         <!-- 3. 一级审批结果排他网关（判断通过/驳回） -->
         <exclusiveGateway id="gatewayA" name="一级审批结果判断"/>
         <!-- 4. 二级审批任务（部门总监/HR） -->
         <userTask id="approveTaskB" name="二级审批（部门总监/HR）" activiti:assignee="${approverB}" activiti:candidateUsers="system">
             <documentation>部门总监/HR审批（仅一级审批通过后触发），1天内处理超时自动提醒</documentation>
             <extensionElements>
-                <activiti:taskListener event="create" class="com.example.listener.ApproveTaskCreateListener"/>
+                <activiti:taskListener event="create" class="com.example.listener.ApproveTaskCreateListener">
+                    <activiti:field name="approvalLevel" stringValue="SECOND_LEVEL_APPROVAL"/>
+                    <activiti:field name="approverVarName" stringValue="approverB"/>
+                </activiti:taskListener>
             </extensionElements>
         </userTask>
         <!-- 4.1 二级审批超时边界事件：监听approveTaskB的执行时长（边界事件 - 24小时超时定时器） -->
@@ -63,19 +86,26 @@
                 <timeDuration>PT24H</timeDuration>
             </timerEventDefinition>
         </boundaryEvent>
-        <!-- 4.2 超时后执行的提醒任务 -->
-        <serviceTask id="timeoutRemindTaskB" name="二级审批超时提醒执行"
-                     activiti:class="com.example.delegate.ApprovalTimeoutTask"
-                     activiti:assignee="${approverB}"
-                     activiti:candidateUsers="system">
-            <documentation>调用超时提醒服务，向部门总监/HR推送审批超时通知</documentation>
+        <!-- 4.2 超时提醒后回到原审批任务 -->
+        <sequenceFlow id="flow_timeoutB" sourceRef="timeoutEventB" targetRef="timeoutRemindTask">
             <extensionElements>
-                <activiti:field name="taskType" stringValue="SECOND_LEVEL_APPROVAL"/>
+                <!-- 触发超时事件时，将approverB赋值给currentApprover -->
+                <activiti:executionListener event="take" class="org.activiti.engine.impl.bpmn.listener.ScriptExecutionListener">
+                    <activiti:field name="script">
+                        <activiti:string>
+                            <![CDATA[
+                                execution.setVariable("currentApprover", execution.getVariable("approverB"));
+                                execution.setVariable("approvalLevel", "SECOND_LEVEL_APPROVAL");
+                            ]]>
+                        </activiti:string>
+                    </activiti:field>
+                    <activiti:field name="language" stringValue="javascript"/>
+                </activiti:executionListener>
             </extensionElements>
-        </serviceTask>
-        <!-- 4.3 超时提醒后回到原审批任务 -->
-        <sequenceFlow id="flow_timeoutB" sourceRef="timeoutEventB" targetRef="timeoutRemindTaskB"/>
-        <sequenceFlow id="flow_timeoutB_back" sourceRef="timeoutRemindTaskB" targetRef="approveTaskB"/>
+        </sequenceFlow>
+        <sequenceFlow id="flow_remind_back_B" sourceRef="timeoutRemindTask" targetRef="approveTaskB">
+            <conditionExpression xsi:type="tFormalExpression">${approvalLevel == 'SECOND_LEVEL_APPROVAL'}</conditionExpression>
+        </sequenceFlow>
         <!-- 5. 二级审批结果排他网关（判断通过/驳回） -->
         <exclusiveGateway id="gatewayB" name="二级审批结果判断"/>
         <!-- 6. 驳回后发起人处理任务 -->
@@ -143,7 +173,7 @@
                 <omgdc:Bounds x="-37.3068" y="-89.077866" width="30.0" height="30.0"/>
             </bpmndi:BPMNShape>
             <!-- 一级审批超时提醒任务 -->
-            <bpmndi:BPMNShape id="shape-remindA" bpmnElement="timeoutRemindTaskB">
+            <bpmndi:BPMNShape id="shape-remindA" bpmnElement="timeoutRemindTask">
                 <omgdc:Bounds x="64.427155" y="-250.0" width="100.0" height="80.0"/>
             </bpmndi:BPMNShape>
             <!-- 一级审批结果网关 -->
