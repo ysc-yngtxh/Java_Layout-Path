@@ -60,7 +60,7 @@ public class ProcessServiceImpl implements ProcessService {
     /**
      * 2. 启动流程实例（发起请假，指定审批人）
      * @param processKey 请假单ID（业务关联）
-     * @param variables 审批参数（比如：{"applyUser":"Make","approverA":"System","approverB":"游家纨绔","leaveDays":3,"leaveReason":"事假"}）
+     * @param variables 审批参数（比如：{"initiator":"Make","approverA":"System","approverB":"游家纨绔","leaveDays":3,"leaveReason":"事假"}）
      * @return 流程实例ID
      */
     @Override
@@ -92,8 +92,8 @@ public class ProcessServiceImpl implements ProcessService {
      * 4. 执行人完成审批（核心：审批通过/驳回）
      * @param taskId 待办任务ID（从待办列表中获取）
      * @param variables 审批参数
-     *        示例参数1：{"applyUser":"游家纨绔","approvalResultA":"approved","approveRemark":"同意请假"}
-     *        示例参数2：{"applyUser":"游家纨绔","approvalResultA":"rejected","initiator":"Make","approveRemark":"拒绝请假"}）
+     *        示例参数1：{"initiator":"Make","approvalResultA":"approved","approveRemark":"同意请假"}
+     *        示例参数2：{"initiator":"Make","approvalResultA":"rejected","approveRemark":"拒绝请假"}）
      */
     @Override
     public void completeTask(String taskId, Map<String, Object> variables) {

@@ -136,22 +136,22 @@ public class ProcessDiagramService {
 
         // 方式2：从BPMN模型中根据高亮节点，匹配节点之间的连线（补充方式）
         // 遍历所有流程节点，找到高亮节点之间的连线
-        for (String activityId : bpmnModel.getProcesses().getFirst().getFlowElements().stream()
-                .filter(flowElement -> flowElement instanceof FlowNode)
-                .map(flowElement -> ((FlowNode) flowElement).getId())
-                .toList()) {
-            if (highLightedActivityIds.contains(activityId)) {
-                FlowNode flowNode = (FlowNode) bpmnModel.getProcesses().getFirst().getFlowElement(activityId);
-                // 获取该节点的出连线 ID
-                List<SequenceFlow> outgoingFlows = flowNode.getOutgoingFlows();
-                for (SequenceFlow flow : outgoingFlows) {
-                    // 若连线的目标节点也是高亮节点，则加入高亮列表
-                    if (highLightedActivityIds.contains(flow.getTargetRef())) {
-                        highLightedFlowSet.add(flow.getId());
-                    }
-                }
-            }
-        }
+        // for (String activityId : bpmnModel.getProcesses().getFirst().getFlowElements().stream()
+        //         .filter(flowElement -> flowElement instanceof FlowNode)
+        //         .map(flowElement -> ((FlowNode) flowElement).getId())
+        //         .toList()) {
+        //     if (highLightedActivityIds.contains(activityId)) {
+        //         FlowNode flowNode = (FlowNode) bpmnModel.getProcesses().getFirst().getFlowElement(activityId);
+        //         // 获取该节点的出连线 ID
+        //         List<SequenceFlow> outgoingFlows = flowNode.getOutgoingFlows();
+        //         for (SequenceFlow flow : outgoingFlows) {
+        //             // 若连线的目标节点也是高亮节点，则加入高亮列表
+        //             if (highLightedActivityIds.contains(flow.getTargetRef())) {
+        //                 highLightedFlowSet.add(flow.getId());
+        //             }
+        //         }
+        //     }
+        // }
 
         // 转成List 返回
         return new ArrayList<>(highLightedFlowSet);
