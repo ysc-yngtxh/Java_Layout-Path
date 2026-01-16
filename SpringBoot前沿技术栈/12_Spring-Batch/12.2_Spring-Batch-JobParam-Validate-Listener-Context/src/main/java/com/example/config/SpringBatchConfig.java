@@ -22,7 +22,6 @@ import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.repeat.RepeatStatus;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -226,14 +225,14 @@ public class SpringBatchConfig {
 				System.out.println("Spring Batch 获取作业及步骤上下文 Job1");
 
 				/**
-				 TODO 通过获取(Job或者Step)上下文来获取同一个组件中的共享数据。
-				 在一个Job中我可以通过获取 Job上下文 来共享或者修改 Job 或者 Step 里数据
-				 而在同一个Job里的同一个Step中我可以通过获取 Step上下文 来共享或者修改 Step 里数据
-
-				 TODO 注意：
-				 不同的Step获取的是不同的Step上下文，所以无法在Step2中获取Step1里的数据。
-				 在不同的Job里肯定是不能通过上下文获取共享数据的。但是，同一个Job里因为是包含多个步骤Step的，
-				 所以只要获取到 Job上下文 就可以获取所有的Step中的共享数据。
+				 * TODO 通过获取(Job或者Step)上下文来获取同一个组件中的共享数据。
+				 *      在一个Job中我可以通过获取 Job上下文 来共享或者修改 Job 或者 Step 里数据
+				 *      而在同一个Job里的同一个Step中我可以通过获取 Step上下文 来共享或者修改 Step 里数据
+                 *
+				 * TODO 注意：
+				 *      不同的Step获取的是不同的Step上下文，所以无法在Step2中获取Step1里的数据。
+				 *      在不同的Job里肯定是不能通过上下文获取共享数据的。但是，同一个Job里因为是包含多个步骤Step的，
+				 *      所以只要获取到 Job上下文 就可以获取所有的Step中的共享数据。
 				 */
 
 				// 步骤Step
