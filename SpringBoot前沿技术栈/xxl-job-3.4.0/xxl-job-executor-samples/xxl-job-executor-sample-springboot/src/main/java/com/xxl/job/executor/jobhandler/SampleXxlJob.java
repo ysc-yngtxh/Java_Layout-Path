@@ -76,7 +76,7 @@ public class SampleXxlJob {
 
     /**
      * 3、命令行任务
-     *
+	 * <p>
      *  参数示例："ls -a" 或者 "pwd"
      */
     @XxlJob("commandJobHandler")
@@ -134,7 +134,7 @@ public class SampleXxlJob {
 
     /**
      * 4、跨平台Http任务
-     *
+	 * <p>
      *  参数示例：
      *  <pre>
      *      // 1、简单示例：

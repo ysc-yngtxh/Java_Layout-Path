@@ -23,6 +23,9 @@ public class XxlJobConfig {
 	@Value("${xxl.job.accessToken}")
 	private String accessToken;
 
+    @Value("${xxl.job.admin.timeout}")
+    private int timeout;
+
 	@Value("${xxl.job.executor.appname}")
 	private String appname;
 
@@ -46,6 +49,7 @@ public class XxlJobConfig {
 		logger.info(">>>>>>>>>>> xxl-job config init.\n{}", logPath);
 		XxlJobSpringExecutor xxlJobSpringExecutor = new XxlJobSpringExecutor();
 		xxlJobSpringExecutor.setAdminAddresses(adminAddresses);
+        xxlJobSpringExecutor.setTimeout(timeout);
 		xxlJobSpringExecutor.setAppname(appname);
 		xxlJobSpringExecutor.setAddress(address);
 		xxlJobSpringExecutor.setIp(ip);
