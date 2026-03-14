@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fop version="1.0">
+    <!-- 基础目录，用于解析相对路径 -->
+    <base>.</base>
+
+    <!-- PDF 渲染配置 -->
+    <renderers>
+        <renderer mime="application/pdf">
+            <!-- 字体配置 -->
+            <fonts>
+                <font kerning="yes"
+                      embed-url="fonts/SourceHanSansSC-Light.otf"
+                      embedding-mode="subset">
+                    <font-triplet name="SourceHanSans" style="normal" weight="300"/>
+                </font>
+
+                <font kerning="yes"
+                      embed-url="fonts/SourceHanSansSC-Regular.otf"
+                      embedding-mode="subset">
+                    <font-triplet name="SourceHanSans" style="normal" weight="400"/>
+                    <font-triplet name="SourceHanSans" style="normal" weight="normal"/>
+                    <font-triplet name="SourceHanSans" style="italic" weight="400"/>
+                    <font-triplet name="SourceHanSans" style="italic" weight="normal"/>
+                </font>
+
+                <font kerning="yes"
+                      embed-url="fonts/SourceHanSansSC-Medium.otf"
+                      embedding-mode="subset">
+                    <font-triplet name="SourceHanSans" style="normal" weight="500"/>
+                </font>
+
+                <font kerning="yes"
+                      embed-url="fonts/SourceHanSansSC-Bold.otf"
+                      embedding-mode="subset">
+                    <font-triplet name="SourceHanSans" style="normal" weight="700"/>
+                    <font-triplet name="SourceHanSans" style="bold" weight="700"/>
+                </font>
+
+                <font kerning="yes"
+                      embed-url="fonts/SourceHanSansSC-Heavy.otf"
+                      embedding-mode="subset">
+                    <font-triplet name="SourceHanSans" style="normal" weight="900"/>
+                </font>
+            </fonts>
+        </renderer>
+    </renderers>
+</fop>

@@ -3,6 +3,7 @@ package com.example;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.RepositoryService;
+import org.activiti.engine.RuntimeService;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.junit.jupiter.api.Test;
@@ -19,9 +20,12 @@ class SpringBootActivityApplicationTests {
     @Autowired
     private RepositoryService repositoryService;
 
+    @Autowired
+    private RuntimeService runtimeService;
+
 
     @Test
-    public Deployment deploy() {
+    public void deploy() {
         // 获取 ProcessEngine 流程引擎
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
         // 获取 RepositoryService
@@ -35,12 +39,11 @@ class SpringBootActivityApplicationTests {
 
         System.out.println("流程部署id:" + deploy.getId());
         System.out.println("流程部署name:" + deploy.getName());
-        return deploy;
     }
 
 
     @Test
-    public Deployment deployZip() {
+    public void deployZip() {
         InputStream inputStream = this.getClass()
                 .getClassLoader()
                 .getResourceAsStream("bpmn/leave.bpmn20.zip");
@@ -51,7 +54,6 @@ class SpringBootActivityApplicationTests {
                 .deploy();
         System.out.println("流程部署id:" + deploy.getId());
         System.out.println("流程部署name:" + deploy.getName());
-        return deploy;
     }
 
 

@@ -93,7 +93,7 @@ public class ESApplicationTests {
 	 */
 
 	@Resource
-	private static ElasticsearchProperties elasticsearchProperties;
+	private ElasticsearchProperties elasticsearchProperties;
 
 	// 这就是一个普通的 HTTP 请求，请求参数就是查询的条件，这个条件是一个 JSON 字符串，需要我们自己组装，
 	// 请求的返回值也是一个 JSON 字符串，这个 JSON 字符串也需要我们自己手动去解析，这种可以算是弱类型的请求和响应
@@ -140,7 +140,7 @@ public class ESApplicationTests {
 
 
 	// 获取ES操作对象。(可以把ElasticsearchClient对象注入到SpringBoot容器中，方便我们可以使用)
-	private static ElasticsearchClient elasticsearchClient() {
+	private ElasticsearchClient elasticsearchClient() {
 		// 基本凭证提供者(用户名、密码)
 		CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
 		credentialsProvider.setCredentials(

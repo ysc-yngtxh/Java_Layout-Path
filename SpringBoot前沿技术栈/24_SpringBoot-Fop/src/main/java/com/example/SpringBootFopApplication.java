@@ -2,14 +2,16 @@ package com.example;
 
 import com.example.pdf.XslFoPdfGenerator;
 import jakarta.annotation.Resource;
+import org.apache.fop.apps.FopFactory;
+import org.jspecify.annotations.NonNull;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Properties;
 
 @SpringBootApplication
 public class SpringBootFopApplication implements CommandLineRunner {
@@ -22,7 +24,7 @@ public class SpringBootFopApplication implements CommandLineRunner {
     private XslFoPdfGenerator pdfGenerator;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String @NonNull ... args) throws Exception {
         // 生成PDF到指定路径
         String parentPath = System.getProperty("user.dir");
         Path path = Paths.get(parentPath, "24_SpringBoot-Fop", "src", "main", "resources", "demo.pdf");
