@@ -8,14 +8,15 @@
         <renderer mime="application/pdf">
             <!-- 字体配置 -->
             <fonts>
+                <!-- embed-url 的路径需要向上调整一级，因为基础路径为：/Users/xxx/target/classes/fop/ -->
                 <font kerning="yes"
-                      embed-url="fonts/SourceHanSansSC-Light.otf"
+                      embed-url="classpath:fonts/SourceHanSansSC-Light.otf"
                       embedding-mode="subset">
                     <font-triplet name="SourceHanSans" style="normal" weight="300"/>
                 </font>
 
                 <font kerning="yes"
-                      embed-url="fonts/SourceHanSansSC-Regular.otf"
+                      embed-url="classpath:fonts/SourceHanSansSC-Regular.otf"
                       embedding-mode="subset">
                     <font-triplet name="SourceHanSans" style="normal" weight="400"/>
                     <font-triplet name="SourceHanSans" style="normal" weight="normal"/>
@@ -24,20 +25,20 @@
                 </font>
 
                 <font kerning="yes"
-                      embed-url="fonts/SourceHanSansSC-Medium.otf"
+                      embed-url="classpath:fonts/SourceHanSansSC-Medium.otf"
                       embedding-mode="subset">
                     <font-triplet name="SourceHanSans" style="normal" weight="500"/>
                 </font>
 
                 <font kerning="yes"
-                      embed-url="fonts/SourceHanSansSC-Bold.otf"
+                      embed-url="classpath:fonts/SourceHanSansSC-Bold.otf"
                       embedding-mode="subset">
                     <font-triplet name="SourceHanSans" style="normal" weight="700"/>
                     <font-triplet name="SourceHanSans" style="bold" weight="700"/>
                 </font>
 
                 <font kerning="yes"
-                      embed-url="fonts/SourceHanSansSC-Heavy.otf"
+                      embed-url="classpath:fonts/SourceHanSansSC-Heavy.otf"
                       embedding-mode="subset">
                     <font-triplet name="SourceHanSans" style="normal" weight="900"/>
                 </font>
