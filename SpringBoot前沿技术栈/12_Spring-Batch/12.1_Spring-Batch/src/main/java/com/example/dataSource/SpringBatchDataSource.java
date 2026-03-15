@@ -54,4 +54,5 @@ public class SpringBatchDataSource {
 		transactionManager.setDataSource(batchDataSource);
 		return transactionManager;
 	}
+
 }

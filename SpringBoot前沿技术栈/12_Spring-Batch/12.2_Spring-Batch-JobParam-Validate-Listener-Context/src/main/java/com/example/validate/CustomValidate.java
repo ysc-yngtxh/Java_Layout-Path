@@ -24,4 +24,5 @@ public class CustomValidate implements JobParametersValidator {
 			throw new JobParametersInvalidException("批处理name参数不合法");
 		}
 	}
+
 }

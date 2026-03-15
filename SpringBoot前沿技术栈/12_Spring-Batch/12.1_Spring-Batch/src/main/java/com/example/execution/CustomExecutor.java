@@ -33,4 +33,5 @@ public class CustomExecutor implements ApplicationContextAware {
 		// 这里传递的是批处理参数，相同参数的批处理只能执行一次，否则会报异常，且这时的参数为空
 		jobLauncher.run(job, new JobParameters());
 	}
+
 }

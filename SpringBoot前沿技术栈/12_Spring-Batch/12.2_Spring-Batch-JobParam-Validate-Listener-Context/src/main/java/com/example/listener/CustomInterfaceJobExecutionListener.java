@@ -20,4 +20,5 @@ public class CustomInterfaceJobExecutionListener implements JobExecutionListener
 	public void afterJob(JobExecution jobExecution) {
 		System.err.println("作业执行后的状态" + jobExecution.getStatus());
 	}
+
 }
