@@ -39,10 +39,10 @@ public class RabbitBatchConfig {
 	                              @Qualifier("batchDirectQueue") Queue directQueue) {
 		return BindingBuilder.bind(directQueue).to(directExchange).with("bootDirectRoutingKey");
         /*
-           BindingBuilder.bind(directQueue)：指定队列
-           to(directExchange)：to英语翻译为到，达。所以这句话的意思是指定队列到交换机
-           with("bootDirectRoutingKey")：根据routingKey的值来绑定队列和交换机
-        */
+         * BindingBuilder.bind(directQueue)：指定队列
+         * to(directExchange)：to英语翻译为到，达。所以这句话的意思是指定队列到交换机
+         * with("bootDirectRoutingKey")：根据routingKey的值来绑定队列和交换机
+         */
 	}
 
 
