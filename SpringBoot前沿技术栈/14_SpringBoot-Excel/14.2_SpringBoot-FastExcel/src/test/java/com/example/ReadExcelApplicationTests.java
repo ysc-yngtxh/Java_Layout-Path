@@ -38,7 +38,7 @@ class ReadExcelApplicationTests {
 		FastExcel.read(
 				file
 				, ReadDemo1.class
-				// ExcelReadListener监听器 不能被spring管理，要每次读取excel都要new.为什么呢？仔细想想高并发的情况下
+				// ExcelReadListener监听器 不能被Spring管理，要每次读取excel都要new.为什么呢？仔细想想高并发的情况下
 				// PageReadListener是官方提供的继承ReadListener的监听器，一般我们是在监听器中进行解析数据处理数据
 				, new PageReadListener<ReadDemo1>(dataList -> {
 					for (ReadDemo1 readDemo1Data : dataList) {

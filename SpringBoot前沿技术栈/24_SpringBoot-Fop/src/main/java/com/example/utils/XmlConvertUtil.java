@@ -101,5 +101,6 @@ public class XmlConvertUtil {
         } else if (node != null) {
             parent.setTextContent(String.valueOf(node));
         }
+
     }
 }
