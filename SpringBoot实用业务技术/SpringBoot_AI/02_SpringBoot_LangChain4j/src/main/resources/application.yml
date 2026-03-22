@@ -1,0 +1,13 @@
+spring:
+    application:
+        name: '@project.artifactId@'
+
+langchain4j:
+  open-ai:
+    # 你的OpenAI API密钥（必填，从OpenAI官网获取）
+    api-key: sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    # 模型名称（可选，默认gpt-3.5-turbo，可指定gpt-4/gpt-4o）
+    chat-model:
+      model-name: gpt-3.5-turbo
+      # 超时时间（可选，默认10s，网络差可调大）
+      timeout: 30s

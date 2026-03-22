@@ -3,6 +3,8 @@ spring:
     name: @project.artifactId@
   # 访问 SiliconFlow 模型列表（https://cloud.siliconflow.cn/），选择一个免费的 AI 模型。
   ai:
+    model:
+      chat: deepseek
     deepseek:
       api-key: sk-rvapdexvsytqwpljauvotwbasjqmaxeqrildqyumzalsgjpr  # 替换为你的 API 密钥
       base-url: https://api.siliconflow.cn  # DeepSeek API 地址
