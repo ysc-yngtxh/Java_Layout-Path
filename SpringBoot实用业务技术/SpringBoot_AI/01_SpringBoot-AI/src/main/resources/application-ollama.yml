@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: @project.artifactId@
+  # 访问 SiliconFlow 模型列表（https://cloud.siliconflow.cn/），选择一个免费的 AI 模型。
+  ai:
+    model:
+      chat: ollama
+    ollama:
+      base-url: http://localhost:11434  # ollama API 地址
+      chat:
+        options:
+          model: qwen3.5:4b # 选择的模型
+          temperature: 0.7  # 控制生成文本的随机性，范围是 0 到 1
+          max-tokens: 1024  # 最大生成 token 数量
+
+logging:
+  level:
+    org:
+      springframework:
+        ai:
+          chat:
+            client:
+              advisor: DEBUG

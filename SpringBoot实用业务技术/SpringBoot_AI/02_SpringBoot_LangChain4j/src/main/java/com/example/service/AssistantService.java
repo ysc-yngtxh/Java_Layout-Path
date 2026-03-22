@@ -3,6 +3,7 @@ package com.example.service;
 import dev.langchain4j.service.MemoryId;
 import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.service.UserMessage;
+import dev.langchain4j.service.V;
 import dev.langchain4j.service.spring.AiService;
 
 // ✨ 关键注解：标记为AI服务，框架自动生成实现类
@@ -16,8 +17,9 @@ public interface AssistantService {
     String chatWithJavaExpert(@UserMessage String userQuestion);
 
     // 支持多参数、自定义提示词模板
+    // @V：参数占位符，框架自动替换为调用时传入的值
     @SystemMessage("你是一个翻译专家，将{sourceLang}翻译成{targetLang}，保持语义不变")
-    String translate(@UserMessage String content, String sourceLang, String targetLang);
+    String translate(@UserMessage String content, @V("sourceLang") String sourceLang, @V("targetLang") String targetLang);
 
     // ✅ @MemoryId：指定会话ID，框架自动管理该ID的对话上下文
     // 调用时传入唯一的sessionId（如用户ID），即可实现多轮对话上下文关联。

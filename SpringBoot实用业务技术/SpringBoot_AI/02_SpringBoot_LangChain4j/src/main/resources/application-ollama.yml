@@ -1,0 +1,17 @@
+spring:
+    application:
+        name: @project.artifactId@
+
+langchain4j:
+  ollama:
+    chat-model:
+        base-url: http://localhost:11434
+        # 模型名称（可选，默认gpt-3.5-turbo，可指定gpt-4/gpt-4o）
+        model-name: qwen3.5:4b
+        # 超时时间（可选，默认10s，网络差可调大）
+        timeout: 30s
+        # 关闭 思考环节，直接返回答案（可选，默认true，开启后会先返回思考过程，再返回答案）
+        think: false
+    streaming-chat-model:
+      base-url: http://localhost:11434
+      model-name: qwen3.5:4b
