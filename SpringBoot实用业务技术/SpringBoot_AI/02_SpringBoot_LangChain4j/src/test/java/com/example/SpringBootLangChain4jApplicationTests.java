@@ -1,14 +1,13 @@
 package com.example;
 
-import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringBootAIApplicationTests {
+class SpringBootLangChain4jApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }
