@@ -11,16 +11,20 @@ spring:
     # 将消息发送到的默认主题，KafkaTemplate.sendDefault
     template:
       default-topic: default-topic
-    # 监听器类型，可选值有：SINGLE（单条消费[默认配置]）、BATCH（批量消息）
-    listener:
-      type: batch
     # 生产者配置
     producer:
+      transaction-id-prefix: tx- # 开启事务前缀
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
       retries: 3  # 发送失败重试次数
-      # 消息确认机制（all=leader和follower都确认）
-      acks: all
+      # 消息确认机制（all=leader和follower都确认）acks: all 保证数据不丢失，但性能稍低；1 或 0 性能高但可能丢数据。
+      acks: all    # 如果消息发送失败，是否阻塞等待，确保所有副本都写入成功
+      # batch.size: 默认 16384 (16KB)。增加此值可以让单批次容纳更多消息，提高吞吐量。
+      batch-size: 65536
+      # linger.ms: 默认 0。设置为 5-100ms，让 Producer 等待一点时间以凑满 batch.size，减少网络请求次数。
+      linger-ms: 20
+      # buffer.memory: 生产者缓冲区大小，默认 33554432 (32MB)。批量发送大数量消息时需调大。
+      buffer-memory: 67108864
     # 消费者配置
     consumer:
       group-id: my-group  # 消费者组
@@ -29,3 +33,10 @@ spring:
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       max-poll-records: 500  # 单次拉取最大消息数
       fetch-max-wait: 5000   # 等待时间（ms）
+    listener:
+      # 监听器类型，可选值有：SINGLE（单条消费[默认配置]）、BATCH（批量消息）
+      type: batch
+      # ack 模式：RECORD (处理完一条提交一次), BATCH (处理完一批提交一次), MANUAL (手动提交)
+      ack-mode: manual
+      # 并发消费者数量，适用于批量消费，增加并发可以提高吞吐量，但也要注意资源限制和消息顺序问题
+      concurrency: 3
