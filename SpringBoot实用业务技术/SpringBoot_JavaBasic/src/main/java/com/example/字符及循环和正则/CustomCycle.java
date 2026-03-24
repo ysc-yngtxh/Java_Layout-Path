@@ -34,7 +34,6 @@ public class CustomCycle {
 				break;    // 跳出整个循环
 			}
 			System.out.println(i);
-			;
 		}
 		for (String k : Arrays.asList("123", "456", "789")) {
 			if ("123".equals(k)) {
@@ -45,7 +44,7 @@ public class CustomCycle {
 			System.out.println(k);
 		}
 
-		// 使用list.foreach或者stream.foreach跳出当前循环使用return(不支持跳出整个循环的关键字)
+		// 使用 list.foreach 或者 stream.foreach 跳出当前循环使用return(不支持跳出整个循环的关键字)
 		// 怎么理解支持return呢？foreach()里是函数式Consumer消费者没有返回值，所以return只结束当前的循环的Consumer
 		Arrays.asList("ysc", "ysq", "jack").forEach(a -> {
 			if ("ysq".equals(a)) {
