@@ -49,6 +49,6 @@ public class SpringBootKafkaApplication implements ApplicationRunner {
 
     // TODO 删除 Topic 命令：
     //  1、进入 kafka 的 bin 文件夹
-    //  2、执行：./kafka-topics --bootstrap-server localhost:9092 --delete --topic my-topic,batch-topic,headers-topic,filtered-topic
+    //  2、执行：./kafka-topics --bootstrap-server localhost:9092 --delete --topic my-topic,batch-topic,headers-topic,filtered-topic,test-topic
 
 }
