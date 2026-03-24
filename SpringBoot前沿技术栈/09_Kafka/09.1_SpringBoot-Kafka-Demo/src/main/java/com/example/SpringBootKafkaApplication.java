@@ -29,14 +29,15 @@ public class SpringBootKafkaApplication implements ApplicationRunner {
 		kafkaProducerService.sendMessage("my-topic", "Hello, Kafka!");
 
 		// 发送带有 Headers 的消息
-		User user = new User(1, "游家纨绔", "18");
+		User user1 = new User(1, "游家纨绔1", "18");
 		// ProducerRecord封装了消息的所有元数据和内容，可简单理解为消息的包装体
-		ProducerRecord<String, User> pr = new ProducerRecord<>("headers-topic", user);
-		pr.headers().add("user", user.getClass().getName().getBytes(StandardCharsets.UTF_8));
+		ProducerRecord<String, User> pr = new ProducerRecord<>("headers-topic", user1);
+		pr.headers().add("user", User.class.getName().getBytes(StandardCharsets.UTF_8));
 		kafkaProducerService.sendMessageWithKey(pr);
 
         // 发送事务的消息
-        kafkaProducerService.sendTransactionalMessage("my-topic", user, user);
+        User user2 = new User(2, "游家纨绔2", "20");
+        kafkaProducerService.sendTransactionalMessage("my-topic", user1, user2);
 
         // 发送批量的消息
         List<User> users = List.of(new User(1, "游家纨绔1", "18"), new User(2, "游家纨绔2", "19"), new User(3, "游家纨绔3", "20"));
@@ -45,5 +46,9 @@ public class SpringBootKafkaApplication implements ApplicationRunner {
         // 发送具有过滤功能的消息
         kafkaProducerService.sendFilterMessage("filtered-topic", users);
     }
+
+    // TODO 删除 Topic 命令：
+    //  1、进入 kafka 的 bin 文件夹
+    //  2、执行：./kafka-topics --bootstrap-server localhost:9092 --delete --topic my-topic,batch-topic,headers-topic,filtered-topic
 
 }

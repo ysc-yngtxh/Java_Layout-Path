@@ -10,6 +10,8 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -81,7 +83,7 @@ public class KafkaProducerService {
 
     // 发送批量消息
     public void sendBatchMessages(String topic, List<User> messages) {
-        messages.forEach(message -> kafkaTemplate.send(topic, message.toString()));
+        messages.forEach(message -> userKafkaTemplate.send(topic, message));
         // 刷新缓冲区，确保消息发出。（同步模式，性能较低）
         kafkaTemplate.flush();
     }

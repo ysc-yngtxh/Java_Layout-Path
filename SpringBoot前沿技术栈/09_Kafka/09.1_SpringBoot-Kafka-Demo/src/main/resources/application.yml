@@ -1,10 +1,13 @@
 server:
   port: 8081
 
+logging:
+  level:
+    org.apache.kafka: ERROR
+
 spring:
   application:
     name: @project.artifactId@
-
   kafka:
     # Kafka 集群地址（多个用逗号分隔）
     bootstrap-servers: localhost:9092
@@ -35,8 +38,8 @@ spring:
       fetch-max-wait: 5000   # 等待时间（ms）
     listener:
       # 监听器类型，可选值有：SINGLE（单条消费[默认配置]）、BATCH（批量消息）
-      type: batch
+      type: single
       # ack 模式：RECORD (处理完一条提交一次), BATCH (处理完一批提交一次), MANUAL (手动提交)
       ack-mode: manual
       # 并发消费者数量，适用于批量消费，增加并发可以提高吞吐量，但也要注意资源限制和消息顺序问题
-      concurrency: 3
+      concurrency: 8

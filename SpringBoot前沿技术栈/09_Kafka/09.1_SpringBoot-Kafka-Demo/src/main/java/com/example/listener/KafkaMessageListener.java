@@ -1,8 +1,6 @@
 package com.example.listener;
 
 import com.example.pojo.User;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -10,8 +8,12 @@ import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
+import tools.jackson.databind.ObjectMapper;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author 游家纨绔
@@ -25,16 +27,13 @@ public class KafkaMessageListener {
     // topics：指定要监听的主题，groupId：指定消费者组ID
 	@KafkaListener(topics = "my-topic", groupId = "my-group")
 	public void consume(@Payload String message, Acknowledgment ack) {
-        log.info("收到消息 [test-topic]: {}", message);
-
         // 模拟业务处理
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-
-        log.info("消息处理完成: {}", message);
+        log.info("[my-topic] 收到消息: {}", message);
 
         // 如果配置了 ack-mode: MANUAL，这里需要手动提交偏移量.
         ack.acknowledge();  // 手动确认消息已消费，避免重复消费
@@ -44,22 +43,29 @@ public class KafkaMessageListener {
 	@KafkaListener(topics = "headers-topic")
 	public void consumeWithHeaders(@Payload String message,
 	                               @Header(KafkaHeaders.RECEIVED_PARTITION) int partition,
-	                               @Header(value = "user", required = false) String user) throws JsonProcessingException {
-		ObjectMapper objectMapper = new ObjectMapper();
+	                               @Header(name = "user", required = false) byte[] userHeaderBytes) {
+        ObjectMapper objectMapper = new ObjectMapper();
 		User obj = objectMapper.readValue(message, User.class);
-		System.out.println("Message: " + obj + " from partition: " + partition + " user: " + user);
+        // ⚠️：headers-topic 监听器方法是按照单条消息（@Payload String）定义的，且未指定专用的单条模式 containerFactory。
+        //     application.yml 中全局开启了 listener.type: batch（批量监听模式）。这种模式会不匹配导致 Spring Kafka 无法正确解析消息头。
+        //     因此，listener.type: single（单条监听模式）是默认且推荐的模式，可以实现 Header 传值。
+        String userHeader = "不存在 Header";
+        if (userHeaderBytes != null && userHeaderBytes.length != 0 ) {
+            userHeader = new String(userHeaderBytes, StandardCharsets.UTF_8);
+        }
+		System.out.println("[headers-topic] 收到消息: " + obj + ", from partition: " + partition + ", Header 'user': " + userHeader);
 	}
 
     // 监听消息，接收批量消息
     @KafkaListener(topics = "batch-topic", containerFactory = "batchFactory")
     public void consumeBatchMessages(@Payload List<User> messages) {
-        log.info("Received batch of {} messages", messages);
+        log.info("[batch-topic] 收到消息: {}", messages.toString());
     }
 
     // 监听消息，结合自定义过滤器过滤消息
     @KafkaListener(topics = "filtered-topic", groupId = "json-group", containerFactory = "batchFactory", filter = "kafkaMessageFilter")
     public void consumeFilteredMessage(@Payload List<User> messages) {
-        log.info("Received filtered message: {}", messages);
+        log.info("[filtered-topic] 收到消息: {}", messages.toString());
     }
 
 }
