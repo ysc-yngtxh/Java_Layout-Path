@@ -2,6 +2,7 @@ package com.example.listener;
 
 import com.example.pojo.User;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
@@ -11,9 +12,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import tools.jackson.databind.ObjectMapper;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author 游家纨绔
@@ -26,14 +25,20 @@ public class KafkaMessageListener {
 
     // topics：指定要监听的主题，groupId：指定消费者组ID
 	@KafkaListener(topics = "my-topic", groupId = "my-group")
-	public void consume(@Payload String message, Acknowledgment ack) {
+	public void consume(@Payload String message, Acknowledgment ack,
+                        // 1. 获取分区号
+                        @Header(KafkaHeaders.RECEIVED_PARTITION) int partition,
+                        // 2. 获取偏移量
+                        @Header(KafkaHeaders.OFFSET) long offset,
+                        // 可选：获取 topic 名称
+                        @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) {
         // 模拟业务处理
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        log.info("[my-topic] 收到消息: {}", message);
+        log.info("{} 收到消息: {}，Partition：{}，Offset：{}", topic, message, partition, offset);
 
         // 如果配置了 ack-mode: MANUAL，这里需要手动提交偏移量.
         ack.acknowledge();  // 手动确认消息已消费，避免重复消费
@@ -41,8 +46,14 @@ public class KafkaMessageListener {
 
 	// 监听带 Header 的消息
 	@KafkaListener(topics = "headers-topic")
-	public void consumeWithHeaders(@Payload String message,
-	                               @Header(KafkaHeaders.RECEIVED_PARTITION) int partition,
+	public void consumeWithHeaders(@Payload String message, Acknowledgment ack,
+                                   // 1. 获取分区号
+                                   @Header(KafkaHeaders.RECEIVED_PARTITION) int partition,
+                                   // 2. 获取偏移量
+                                   @Header(KafkaHeaders.OFFSET) long offset,
+                                   // 可选：获取 topic 名称
+                                   @Header(KafkaHeaders.RECEIVED_TOPIC) String topic,
+                                   // 选择自定义的 Header
 	                               @Header(name = "user", required = false) byte[] userHeaderBytes) {
         ObjectMapper objectMapper = new ObjectMapper();
 		User obj = objectMapper.readValue(message, User.class);
@@ -53,19 +64,40 @@ public class KafkaMessageListener {
         if (userHeaderBytes != null && userHeaderBytes.length != 0 ) {
             userHeader = new String(userHeaderBytes, StandardCharsets.UTF_8);
         }
-		System.out.println("[headers-topic] 收到消息: " + obj + ", from partition: " + partition + ", Header 'user': " + userHeader);
+		System.out.println(topic + " 收到消息: " + message + "，Partition：" + partition + "，Offset：" + offset + "， Header 'user': " + userHeader);
+
+        // 如果配置了 ack-mode: MANUAL，这里需要手动提交偏移量.
+        ack.acknowledge();  // 手动确认消息已消费，避免重复消费
 	}
 
     // 监听消息，接收批量消息
     @KafkaListener(topics = "batch-topic", containerFactory = "batchFactory")
-    public void consumeBatchMessages(@Payload List<User> messages) {
-        log.info("[batch-topic] 收到消息: {}", messages.toString());
+    public void consumeBatchMessages(List<ConsumerRecord<String, User>> records, Acknowledgment ack
+                                     // @Payload List<User> messages
+                                     // 不支持在同一个方法签名中同时混合使用 @Payload List<User>（反序列化后的值列表）和 List<ConsumerRecord>（原始记录列表）。
+    ) {
+        for (ConsumerRecord<String, User> record : records) {
+            log.info("批量消息 -> Topic: {}, Partition: {}, Offset: {}, User: {}",
+                    record.topic(), record.partition(), record.offset(), record.value());
+        }
+
+        // 如果配置了 ack-mode: MANUAL，这里需要手动提交偏移量.
+        ack.acknowledge();  // 手动确认消息已消费，避免重复消费
     }
 
     // 监听消息，结合自定义过滤器过滤消息
     @KafkaListener(topics = "filtered-topic", groupId = "json-group", containerFactory = "batchFactory", filter = "kafkaMessageFilter")
-    public void consumeFilteredMessage(@Payload List<User> messages) {
-        log.info("[filtered-topic] 收到消息: {}", messages.toString());
+    public void consumeFilteredMessage(List<ConsumerRecord<String, User>> records, Acknowledgment ack
+                                       // @Payload List<User> messages
+                                       // 不支持在同一个方法签名中同时混合使用 @Payload List<User>（反序列化后的值列表）和 List<ConsumerRecord>（原始记录列表）。
+    ) {
+        for (ConsumerRecord<String, User> record : records) {
+            log.info("批量消息 -> Topic: {}, Partition: {}, Offset: {}, User: {}",
+                    record.topic(), record.partition(), record.offset(), record.value());
+        }
+
+        // 如果配置了 ack-mode: MANUAL，这里需要手动提交偏移量.
+        ack.acknowledge();  // 手动确认消息已消费，避免重复消费
     }
 
 }

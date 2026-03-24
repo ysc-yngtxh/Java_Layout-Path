@@ -13,6 +13,7 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
+import org.springframework.kafka.listener.ContainerProperties;
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.kafka.support.serializer.JacksonJsonDeserializer;
 import org.springframework.kafka.support.serializer.JacksonJsonSerializer;
@@ -72,6 +73,8 @@ public class KafkaConfig {
         factory.setConsumerFactory(consumerStringDeserializerFactory());
         // 开启批量监听为 true，这样才会把多条消息聚合成 List 传给监听器
         factory.setBatchListener(true);
+        // 关键配置：设置确认模式为 MANUAL
+        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
         return factory;
     }
 
@@ -79,7 +82,7 @@ public class KafkaConfig {
     private ConsumerFactory<String, String> consumerStringDeserializerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        configProps.put(ConsumerConfig.GROUP_ID_CONFIG, "my-group");
+        configProps.put(ConsumerConfig.GROUP_ID_CONFIG, "string-group");
         configProps.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         configProps.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         return new DefaultKafkaConsumerFactory<>(configProps);
@@ -92,6 +95,8 @@ public class KafkaConfig {
         factory.setConsumerFactory(consumerJsonDeserializerFactory());
         // 开启批量监听为 true，这样才会把多条消息聚合成 List 传给监听器
         factory.setBatchListener(true);
+        // 关键配置：设置确认模式为 MANUAL
+        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
         return factory;
     }
 
