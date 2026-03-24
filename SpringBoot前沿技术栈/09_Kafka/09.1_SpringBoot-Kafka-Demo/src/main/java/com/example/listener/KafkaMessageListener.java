@@ -55,8 +55,6 @@ public class KafkaMessageListener {
                                    @Header(KafkaHeaders.RECEIVED_TOPIC) String topic,
                                    // 选择自定义的 Header
 	                               @Header(name = "user", required = false) byte[] userHeaderBytes) {
-        ObjectMapper objectMapper = new ObjectMapper();
-		User obj = objectMapper.readValue(message, User.class);
         // ⚠️：headers-topic 监听器方法是按照单条消息（@Payload String）定义的，且未指定专用的单条模式 containerFactory。
         //     application.yml 中全局开启了 listener.type: batch（批量监听模式）。这种模式会不匹配导致 Spring Kafka 无法正确解析消息头。
         //     因此，listener.type: single（单条监听模式）是默认且推荐的模式，可以实现 Header 传值。
@@ -92,7 +90,7 @@ public class KafkaMessageListener {
                                        // 不支持在同一个方法签名中同时混合使用 @Payload List<User>（反序列化后的值列表）和 List<ConsumerRecord>（原始记录列表）。
     ) {
         for (ConsumerRecord<String, User> record : records) {
-            log.info("批量消息 -> Topic: {}, Partition: {}, Offset: {}, User: {}",
+            log.info("过滤批量消息 -> Topic: {}, Partition: {}, Offset: {}, User: {}",
                     record.topic(), record.partition(), record.offset(), record.value());
         }
 
