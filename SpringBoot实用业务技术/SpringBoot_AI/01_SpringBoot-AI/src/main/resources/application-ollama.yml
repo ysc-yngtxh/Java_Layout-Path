@@ -1,7 +1,6 @@
 spring:
   application:
     name: @project.artifactId@
-  # 访问 SiliconFlow 模型列表（https://cloud.siliconflow.cn/），选择一个免费的 AI 模型。
   ai:
     model:
       chat: ollama

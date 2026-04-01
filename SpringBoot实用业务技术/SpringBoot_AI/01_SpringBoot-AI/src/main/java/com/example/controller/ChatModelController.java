@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.ai.deepseek.DeepSeekChatModel;
 import org.springframework.ai.deepseek.DeepSeekChatOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,25 +24,28 @@ public class ChatModelController {
 
 	@Autowired
 	private ChatModel chatModel;
+	// @Autowired
+	// private DeepSeekChatModel chatModel2;
 
-	@GetMapping(value = "/ai03", produces = "text/html;charset=utf-8")
-	public String generation03(@RequestParam(value = "message", defaultValue = "给我讲个笑话") String message) {
-		ChatResponse response = chatModel.call(
-				new Prompt(
-						message, // new UserMessage(message)
-						DeepSeekChatOptions.builder()
-						                   .model("gpt-3.5-turbo")
-						                   .temperature(0.4) // 让生成文字更有温度
-						                   .build()
-				)
-		);
-		// 等同于 .content
+	@GetMapping(value = "/ai01", produces = "text/html;charset=utf-8")
+	public String generation01(@RequestParam(value = "message", defaultValue = "给我讲个笑话") String message) {
+        // 1. 手动构建 Prompt 对象
+        Prompt prompt = new Prompt(
+                message, // new UserMessage(message)
+                DeepSeekChatOptions.builder()
+                        .model("gpt-3.5-turbo")
+                        .temperature(0.4) // 让生成文字更有温度
+                        .build()
+        );
+        // 2. 调用模型，获取原始响应
+        ChatResponse response = chatModel.call(prompt);
+		// 3. 手动从响应中解析出内容
 		return response.getResult().getOutput().getText();
 	}
 
 
-	// @GetMapping(value = "/ai05")
-	// public String generation05(@RequestParam(value = "message", defaultValue = "画个龙") String message) {
+	// @GetMapping(value = "/ai02")
+	// public String generation02(@RequestParam(value = "message", defaultValue = "画个龙") String message) {
 	// 	ImageResponse response = DeepSeekImageModel.call(
 	// 			new ImagePrompt(message, // 图片提示词
 	// 			                DeepseekImageOptions.builder()
