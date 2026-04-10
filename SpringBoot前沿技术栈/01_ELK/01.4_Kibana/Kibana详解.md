@@ -73,7 +73,7 @@ nohup ./bin/kibana &
 
 ---
 
-1、打开ElasticSearch 的安全配置（`xpack.security.enabled: true`）和打开 Https配置（`xpack.security.http.ssl.enabled: true`），在启动 Kibana 后，Kibana 会自动根据提供的注册Token生成连接 Elasticsearch 的配置在 `Kibana.yml` 文件中，如下：
+### 2.3、默认ElasticSearch 的安全配置（`xpack.security.enabled: true`）和 Https配置（`xpack.security.http.ssl.enabled: true`），在启动 Kibana 后，Kibana 会自动根据提供的注册Token生成连接 Elasticsearch 的配置在 `Kibana.yml` 文件中，如下：
 ```yaml
 elasticsearch.hosts: [https://192.168.1.17:9200]
 elasticsearch.serviceAccountToken: AAEAAWVsYXN0aWMva2liYW5hL2Vucm9sbC1wcm9jZXNzLXRva2VuLTE3NzU3OTYwNjEzODc6Wkd4Zkg3UVpTdlNuRnlwTnpZVXlKdw
@@ -81,7 +81,7 @@ elasticsearch.ssl.certificateAuthorities: [/Users/yousc/Development/ELK/kibana-9
 xpack.fleet.outputs: [{id: fleet-default-output, name: default, is_default: true, is_default_monitoring: true, type: elasticsearch, hosts: [https://192.168.1.17:9200], ca_trusted_fingerprint: 080e99081372307b4a6c6cf99df5ecac1bc59939698eb049a8c814f28157f6e2}]
 ```
 
-2、打开ElasticSearch 的安全配置（`xpack.security.enabled: true`）但是关闭 Https配置（`xpack.security.http.ssl.enabled: false`），则需要人为手动添加 `Kibana.yml` 文件中的 Elasticsearch 连接配置，确保 Kibana 能够正确连接到 Elasticsearch 集群。
+### 2.4、打开ElasticSearch 的安全配置（`xpack.security.enabled: true`）但是关闭 Https配置（`xpack.security.http.ssl.enabled: false`），则需要人为手动添加 `Kibana.yml` 文件中的 Elasticsearch 连接配置，确保 Kibana 能够正确连接到 Elasticsearch 集群。
 ```yaml
 # Elasticsearch 地址（支持多节点、Http、Https配置）
 elasticsearch.hosts: ["http://localhost:9200"]
