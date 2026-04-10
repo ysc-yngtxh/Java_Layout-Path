@@ -73,25 +73,28 @@ nohup ./bin/kibana &
 
 ---
 
-在启动 Kibana 后，Kibana 会自动生成连接 Elasticsearch 的配置在 `Kibana.yml` 文件中，如下：
+1、打开ElasticSearch 的安全配置（`xpack.security.enabled: true`）和打开 Https配置（`xpack.security.http.ssl.enabled: true`），在启动 Kibana 后，Kibana 会自动根据提供的注册Token生成连接 Elasticsearch 的配置在 `Kibana.yml` 文件中，如下：
+```yaml
+elasticsearch.hosts: [https://192.168.1.17:9200]
+elasticsearch.serviceAccountToken: AAEAAWVsYXN0aWMva2liYW5hL2Vucm9sbC1wcm9jZXNzLXRva2VuLTE3NzU3OTYwNjEzODc6Wkd4Zkg3UVpTdlNuRnlwTnpZVXlKdw
+elasticsearch.ssl.certificateAuthorities: [/Users/yousc/Development/ELK/kibana-9.3.2/data/ca_1775796061667.crt]
+xpack.fleet.outputs: [{id: fleet-default-output, name: default, is_default: true, is_default_monitoring: true, type: elasticsearch, hosts: [https://192.168.1.17:9200], ca_trusted_fingerprint: 080e99081372307b4a6c6cf99df5ecac1bc59939698eb049a8c814f28157f6e2}]
+```
+
+2、打开ElasticSearch 的安全配置（`xpack.security.enabled: true`）但是关闭 Https配置（`xpack.security.http.ssl.enabled: false`），则需要人为手动添加 `Kibana.yml` 文件中的 Elasticsearch 连接配置，确保 Kibana 能够正确连接到 Elasticsearch 集群。
 ```yaml
 # Elasticsearch 地址（支持多节点、Http、Https配置）
-elasticsearch.hosts: ["http://localhost:9200", "https://192.168.1.100:9200"]
+elasticsearch.hosts: ["http://localhost:9200"]
 
-# 认证账号（建议使用 kibana_system 专用账号）
+# 认证账号（建议使用 kibana_system 专用账号）ES 专门给 Kibana 内置的最小权限系统账号 kibana_system（不能删数据，只能给 Kibana 做连接）
+# 密码获取方式：在 Elasticsearch 安全配置中启用安全功能后。你可以通过以下命令获取该密码：
+  ./elasticsearch-reset-password -u kibana_system
 elasticsearch.username: "kibana_system"
 elasticsearch.password: "你的密码"
 
-# SSL 证书配置
-elasticsearch.ssl.certificateAuthorities: ["/path/to/ca.crt"]
-
 # SSL 验证模式
 # certificate（默认，严格验证）、none（不验证）、warning（警告但不阻止）
-elasticsearch.ssl.verificationMode: certificate
-
-# 自定义客户端证书（双向认证）
-elasticsearch.ssl.certificate: "/path/to/cert.pem"
-elasticsearch.ssl.key: "/path/to/key.pem"
+elasticsearch.ssl.verificationMode: none
 ```
 
 ## 三、配置文件详解（根据需要进行配置）
