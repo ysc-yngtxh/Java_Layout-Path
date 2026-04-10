@@ -7,11 +7,16 @@ spring:
     deepseek:
       api-key: sk-rvapdexvsytqwpljauvotwbasjqmaxeqrildqyumzalsgjpr  # 替换为你的 API 密钥
       base-url: https://api.deepseek.com  # DeepSeek API 地址
-      chat:
+      chat:      # chat 模型配置
         options:
           model: deepseek-chat  # 选择的模型
           temperature: 0.7  # 控制生成文本的随机性，范围是 0 到 2，数值越大表示随机性越大
           max-tokens: 1024  # 最大生成 token 数量
+    zhipuai:
+      embedding: # embedding 模型配置
+        options:
+          model: deepseek-embedding  # 选择的模型
+          dimensions: 512            # 嵌入向量的维度
 
 logging:
   level:

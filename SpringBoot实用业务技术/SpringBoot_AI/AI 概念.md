@@ -128,3 +128,37 @@
 - **Transformer 架构**：具备自监督学习、自我调节能力
 - **Token 划分原理**：基于 BPE（字节对编码）算法，根据上下文的不同进行编码
 - **Agent Skill 层级**：Agent Skill 层、工具层、资源层、执行层
+
+
+
+2.2. Embedding Models
+2.2.1. Embedding 介绍
+Embedding 是一种将文本（也可扩展至图像、视频）转换成数字向量的技术，这些向量表示了输入内容在语义空间中的位置，能够反映它们之间的相似度——向量距离越近，内容越相似。
+Spring AI 通过其 EmbeddingModel 接口提供一套统一、简单、可替换的访问方式，支持多种底层模型（如OpenAl、Titan、Azure、Ollama、智谱等），这样可以统一接口，切换模型仅需要改配置，不改调用逻辑。
+Spring Al 中的Embedding 使用场景如下：
+• 相似度计算/语义搜索：将查询和文档全部转换为向量，构建向量数据库进行近邻检索；
+• 聚类与分类：将文本转换为向量后，使用传统算法进行聚类或分类；
+• 检索增强生成（RAG）：先用向量搜索获取相关知识，再结合生成模型回答；
+• 推荐系统：如问答推荐、内容推荐等；
+• 异常检测：语义异常内容检测。
+
+2.2.2. 智普Al Embedding 使用示例
+智普Al（北京智谱华章科技有限公司）是清华大学知识工程实验室成果转化成立的大模型研发公司，专注于构建“认知智能”体系。其产品线包括文字对话模型（如 ChatGLM、GLM-4）、图像乃至视频理解模型（如GLM-4V-Plus）以及文本视频生成模型（如 CogVideoX/“清影”）等，覆盖文字、图像、音视频等多种模态。
+使用智誓AI需要在以下网站中进行注册并充值。智普AI相关网站如下：
+• 智普AI官网地址：https://open.bigmodel.cn/
+• Al Keyst: https://open.bigmodel.cn/usercenter/proj-mgmt/apikeys
+• 智普AI充值地址：https://open.bigmodel.cn/finance/pay
+
+
+2.2.3. Embedding案例1：查找相似文本
+本案例中实现通过智普AI的Embedding模型实现对用户输入文本的向量化，然后通过余弦相似度与已有的本地知识内容进行匹配，查找并输出与用户输入相似的文本内容。
+该案例实现思路如下：
+1） SpringBoot中创建Service，当脈务启动时，将所有本地知识批量通过embed（List<T>）转换为向量。在Service中定义queryBastMatch方法，该方法对传入的文本进行向量化，然后与本地知识转换的向量通过余弦相似度计算，找出最相似的本地知识内容。
+2） SpringBoot中创建Controller，用户通过浏览器URL访问到Controller中similarity方法，该方法调用到Service中queryBestMatch方法，返回给用户最相似的本地知识内容。
+2.2.3.1. 余弦相似度
+余弦相似度是一种衡量两个向量方向相似程度的度量方法，通过计算它们夹角的余弦值来评估相似性，广泛应用于文本分析、数撂挖掘等领域。
+余弦相似度的数学本质是向量空间模型中夹角的余弦值，计算公式为两个向量的点积除以它们的模长乘积。对于
+n维向量A和B，公式可表示为：
+![image.png](./01_SpringBoot-AI/src/main/resources/static/img.png)
+
+其值氾围在-1到1之间，1表示完全相同，-1表示完全相又，0表不大关。

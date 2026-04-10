@@ -43,7 +43,7 @@
    ```
 
    <h3 style="color: #e0501a; line-height: 25px">
-      以上为 elasticsearch.env 文件中的代码片段，可以得出分析知：<br/>
+      以上为 bin/elasticsearch.env 文件中的代码片段，可以得出分析知：<br/>
       无论是使用 本地JDK 还是 自带JDK，都是需要在系统环境变量中配置<br/>
       使用 本地JDK（配置 $ES_JAVA_HOME）<br/>
       使用 自带JDK（配置 $ES_HOME）
@@ -62,6 +62,14 @@
        推荐使用命令行进行解压：tar --no-same-owner -xzf elasticsearch-x.x.x-darwin-aarch64.tar.gz
    </h3>
 
+   安装方式（Mac M 芯片）<br/>
+   1、使用Homebrew安装：
+   ```
+      brew tap elastic/tap
+      brew install elastic/tap/elasticsearch-full
+      但是该种方式下载安装的 elasticsearch 版本只有 7.17.4，无法使用最新版本的 elasticsearch 8.x.x 以及 elasticsearch 9.x 版本。
+   ```
+   2、直接在官网中下载压缩包进行解压后使用
 
    </figure>
    <hr/>
@@ -76,9 +84,9 @@
          <h4 style="color: #1983e0; line-height: 25px">
             用户名 ==> elastic【固定的】<br/>
             <br/>
-            密码 ==> `Ilum*gumfsa76L0g-Q1l`<br/>
+            密码 ==> `Q4jz0JOkBGHcRCi*f*7Q`<br/>
             <br/>
-            随机生成的提供给 Kibana 的注册Token令牌，30分钟的有效时限：`eyJ2ZXIiOiI4LjE0LjAiLCJhZHIiOlsiMTkyLjE2OC4yLjExMzo5MjAwIl0sImZnciI6IjA4MzUyNTJjNDZjMGFjMDZhZDFiNDU1MTNkMDM0NjEyNWM4NDU3Y2M1YzI5NzE5MTEyMjdiZWZmNGEyNzA4MjgiLCJrZXkiOiJzR2s1aXBZQlNsSFNDc0JlLWlCVTpVLXFJMW9CS1BjS3oyUHJyZGpQeHFnIn0=`
+            随机生成的提供给 Kibana 的注册Token令牌，30分钟的有效时限：`eyJ2ZXIiOiI4LjE0LjAiLCJhZHIiOlsiMTkyLjE2OC4xLjE3OjkyMDAiXSwiZmdyIjoiYzdkNDBlMTA2NWEzMDEwYWYxYzA1MWE3YTEyOTYyMDU0MjM0OWI5NTY2ZjJmZTM1Y2Q2MzNjYjA5NzM1NjA2ZiIsImtleSI6IlRZeEVXNTBCTVlCN2RvZnNGUUR5Ok1LOW83YVdnY0VacXpvU2tXbkpDLVEifQ==`
          </h4>
       </figure>
    </figure>
@@ -109,7 +117,7 @@
    </h3>
    <hr/>
 
-   ### 4、通过 HTTP 请求访问
+   ### 4、ElasticSearch配置
    <h3 style="line-height: 25px">
    ES 默认使用的是 HTTPS 请求，而 HTTP 请求会被 ES 拒绝访问。但在本地学习 ES，会有使用 HTTP 请求的必要。<br/>
    因此我们需要在 ES 的 config包下的 elasticsearch.yml 文件中更新配置，开启 HTTP 请求。
@@ -118,12 +126,12 @@
    <figure>
 
    ![输入图片说明](src/main/resources/static/image-2.png)
-   ①、禁用 SSL<br/>
+   ①、关闭登录功能以及禁用 SSL<br/>
    <figure>
 
-    # 禁用安全连接
+    # 禁用安全连接（关闭 ElasticSearch 连接时的登录功能）
       xpack.security.enabled: false
-    # 禁用 SSL
+    # 禁用 SSL（关闭启用 Https 请求协议）
       xpack.security.http.ssl.enabled: false
    </figure>
    ②、开启 HTTP<br/>
