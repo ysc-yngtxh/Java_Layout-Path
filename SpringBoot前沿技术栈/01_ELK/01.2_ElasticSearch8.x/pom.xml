@@ -17,11 +17,10 @@
 
     <properties>
         <java.version>25</java.version>
-        <elasticsearch.version>8.17.2</elasticsearch.version>
+        <elasticsearch.version>8.19.14</elasticsearch.version>
     </properties>
 
     <dependencies>
-
         <!--使用新版ES8 API Client就引入这个依赖-->
         <dependency>
             <groupId>co.elastic.clients</groupId>

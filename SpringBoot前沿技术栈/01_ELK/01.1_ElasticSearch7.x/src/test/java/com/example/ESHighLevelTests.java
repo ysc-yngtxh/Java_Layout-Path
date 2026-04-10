@@ -435,4 +435,5 @@ class ESHighLevelTests {
 		// 关闭 ES 客户端
 		hlClient.close();
 	}
+
 }
