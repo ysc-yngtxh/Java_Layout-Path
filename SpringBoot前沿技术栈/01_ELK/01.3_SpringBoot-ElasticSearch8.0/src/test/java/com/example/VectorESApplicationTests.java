@@ -1,5 +1,8 @@
 package com.example;
 
+import co.elastic.clients.elasticsearch._types.mapping.DenseVectorIndexOptionsType;
+import co.elastic.clients.elasticsearch._types.mapping.DenseVectorProperty;
+import co.elastic.clients.elasticsearch._types.mapping.DenseVectorSimilarity;
 import co.elastic.clients.elasticsearch._types.mapping.Property;
 import com.example.pojo.VectorEntity;
 import com.example.services.EsVectorService;
@@ -24,49 +27,6 @@ class VectorESApplicationTests {
     @Autowired
     private EsVectorService service;
 
-
-    @Test
-    public void createVectorIndex() {
-        String indexName = "vector_index";
-        IndexCoordinates indexCoordinates = IndexCoordinates.of(indexName);
-
-        // 2. 构建索引信息
-        IndexOperations indexOps = elasticsearchOperations.indexOps(indexCoordinates);
-
-        // 3. 如果索引已存在，先删除（可选）
-        if (indexOps.exists()) indexOps.delete();
-
-        indexOps.create();
-
-        // 1. 构建 mappings properties
-        Map<String, Property> properties = new HashMap<>();
-        // title: text
-        properties.put("title", Property.of(p -> p
-                .text(t -> t
-                        .analyzer("ik_max_word")  // 必须指定分词器
-                        .searchAnalyzer("ik_smart") // 搜索时使用
-                )
-        ));
-        // properties.put("title", Property.of(p -> p.text(t -> t)));
-        // // content: text
-        // properties.put("content", Property.of(p -> p.text(t -> t)));
-        // // vector: dense_vector (768维, 余弦相似度)
-        // properties.put("vector", Property.of(p -> p
-        //         .denseVector(dv -> dv
-        //                 .dims(768)               // 维度 768
-        //                 .index(true)             // 开启索引
-        //                 .similarity(DenseVectorSimilarity.Cosine) // 余弦相似度
-        //                 .indexOptions(io -> io.type(DenseVectorIndexOptionsType.Hnsw).m(16).efConstruction(100))
-        //         )
-        // ));
-
-        // 4. 创建索引
-        Document document = Document.create();
-        document.put("properties", properties);
-        indexOps.putMapping(document);
-
-        System.out.println("索引 " + indexName + " 创建成功！");
-    }
 
     /**
      * 创建向量索引 vector_index（方式一：组装 DSL 参数）
