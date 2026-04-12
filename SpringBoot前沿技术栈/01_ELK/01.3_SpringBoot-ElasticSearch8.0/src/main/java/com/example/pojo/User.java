@@ -25,10 +25,10 @@ public class User {
     @Field(type = FieldType.Integer)
     private Integer id;
 
-    @Field(type = FieldType.Text,analyzer="ik_max_word")
+    @Field(type = FieldType.Text, analyzer="ik_max_word")
     private String name;
 
-    @Field(type=FieldType.Keyword)
+    @Field(type = FieldType.Keyword)
     private String price;
 
     @Field(type = FieldType.Integer)

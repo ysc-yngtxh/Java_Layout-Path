@@ -32,7 +32,8 @@ import org.springframework.data.elasticsearch.core.query.StringQuery;
 @SpringBootTest
 class SpringBootESApplicationTests2 {
 
-	// ElasticsearchTemplate 已弃用，请使用 ElasticsearchOperations
+	// ElasticsearchTemplate 已弃用，因为底层使用的是过时客户端 RestHighLevelClient。
+    // 推荐使用新客户端：ElasticsearchOperations
 	@Autowired
 	private ElasticsearchOperations elasticsearchOperations;
 

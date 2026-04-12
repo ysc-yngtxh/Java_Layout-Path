@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.core.geo.GeoPoint;
 
 /**
@@ -16,6 +17,7 @@ import org.springframework.data.elasticsearch.core.geo.GeoPoint;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Document(indexName="produce")
 public class Produce {
 
 	// 商品ID

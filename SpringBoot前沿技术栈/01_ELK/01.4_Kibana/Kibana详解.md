@@ -59,7 +59,7 @@ docker run -d \
 - 仪表盘示例：![仪表盘示例](src/main/resources/static/img_3.png)
 
 ### 2.3 Elasticsearch 连接配置
-#### 场景 1：ES 启用安全配置（`xpack.security.enabled: true`） + 启用 Https（`xpack.security.http.ssl.enabled: true`）
+#### 场景 1：ES 启用安全配置（`xpack.security.enabled: true`） + 启用 Https（`xpack.security.http.ssl.enabled: true`）-- Https://localhost:9200
 Kibana 启动后会自动生成连接配置到 `config/kibana.yml`，无需手动修改：
 ```yaml
 # 自动生成的 ES 连接配置
@@ -78,16 +78,17 @@ xpack.fleet.outputs: [{
 }]
 ```
 
-#### 场景 2：ES 启用安全配置（`xpack.security.enabled: true`） + 关闭 Https（`xpack.security.http.ssl.enabled: false`）
+#### 场景 2：ES 启用安全配置（`xpack.security.enabled: true`） + 关闭 Https（`xpack.security.http.ssl.enabled: false`）-- Http://localhost:9200
 需手动修改 `config/kibana.yml`，配置 ES 连接信息：
 ```yaml
 # 1. ES 集群地址（支持多节点，逗号分隔）
 elasticsearch.hosts: ["http://localhost:9200"]
 
-# 2. 认证账号（建议使用 kibana_system 专用账号）ES 专门给 Kibana 内置的最小权限系统账号 kibana_system（不能删数据，只能给 Kibana 做连接）
-# 密码重置命令：./elasticsearch-reset-password -u kibana_system
+# 2. 认证账号
+# Kibana 8.0 版本开始出于安全考虑，不再允许使用 elastic 这个超级用户账号来连接 Elasticsearch 的后台系统索引。建议使用 kibana_system，这是 ES 专门给 Kibana 内置的最小权限系统账号【不能删数据，只能给 Kibana 做连接】
+# kibana_system 密码重置命令：./elasticsearch-reset-password -u kibana_system -i
 elasticsearch.username: "kibana_system"
-elasticsearch.password: "你的重置密码"
+elasticsearch.password: "kibana_system 用户重置的密码"
 
 # 3. SSL 验证模式（关闭 HTTPS 时设为 none）
 # 可选值：certificate（严格验证）、none（不验证）、warning（警告不阻止）

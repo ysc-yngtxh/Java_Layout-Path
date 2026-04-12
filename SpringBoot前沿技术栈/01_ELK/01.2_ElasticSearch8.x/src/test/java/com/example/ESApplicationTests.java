@@ -107,7 +107,7 @@ public class ESApplicationTests {
         con.setRequestProperty("content-type", "application/json;charset=utf-8");
         // 包装Basic信息
         String username = "elastic";
-        String password = "Z*h-KkWj6FGdy2gYUQpC";
+        String password = "EnrIof27oTa_SwYQMlVj";
         String auth = username + ":" + password;  // elastic:Z*h-KkWj6FGdy2gYUQpC
         // 对其进行加密
         byte[] rel = Base64.encodeBase64(auth.getBytes());
@@ -205,7 +205,7 @@ public class ESApplicationTests {
     @Test
     void deleteIndex() throws IOException {
         ElasticsearchClient elasticsearchClient = elasticsearchClient();
-        DeleteIndexResponse deleteIndexResponse = elasticsearchClient.indices().delete(s -> s.index("products"));
+        DeleteIndexResponse deleteIndexResponse = elasticsearchClient.indices().delete(s -> s.index("users"));
         log.error("删除索引操作结果：{}", deleteIndexResponse.acknowledged());
     }
 
