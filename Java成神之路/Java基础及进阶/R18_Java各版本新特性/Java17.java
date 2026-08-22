@@ -96,8 +96,7 @@ public class Java17 {
 	}
 
 	// 可变对象作为字段
-	record Person3(List<String> members) {
-	}
+	record Person3(List<String> members) {}
 
 	// 解决可变对象作为字段的问题：在构造器中进行防御性拷贝
 	record Person4(List<String> members) {

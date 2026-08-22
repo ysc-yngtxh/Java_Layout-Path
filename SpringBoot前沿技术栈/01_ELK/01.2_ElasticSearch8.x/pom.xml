@@ -16,7 +16,7 @@
     <description>${project.artifactId}</description>
 
     <properties>
-        <java.version>25</java.version>
+        <java.version>26</java.version>
         <elasticsearch.version>8.19.14</elasticsearch.version>
     </properties>
 

@@ -23,7 +23,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <java.version>25</java.version>
+        <java.version>26</java.version>
     </properties>
 
     <dependencies>

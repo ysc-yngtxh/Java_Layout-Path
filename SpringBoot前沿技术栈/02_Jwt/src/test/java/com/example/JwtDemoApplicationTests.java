@@ -47,7 +47,7 @@ class JwtDemoApplicationTests {
 		                      .signWith(key)
 		                      .compact();
 
-		log.info("生成的JWT Token: {}", jwtToken);
+		log.info("\n生成的JWT Token: {}", jwtToken);
 	}
 
 	@Test

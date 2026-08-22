@@ -21,8 +21,8 @@ public class ShiroConfig {
 		// 创建过滤器配置Bean
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
-		shiroFilterFactoryBean.setLoginUrl("/"); // 配置用户登录请求  如果需要进行登录时Shiro就会转到这个请求进入登陆页面
-		shiroFilterFactoryBean.setSuccessUrl("/success"); // 配置登陆成功以后转向的请求地址
+		shiroFilterFactoryBean.setLoginUrl("/");                    // 配置用户登录请求  如果需要进行登录时Shiro就会转到这个请求进入登陆页面
+		shiroFilterFactoryBean.setSuccessUrl("/success");           // 配置登陆成功以后转向的请求地址
 		shiroFilterFactoryBean.setUnauthorizedUrl("/noPermission"); // 配置没有权限时转向的请求地址
 
 		// 权限拦截
