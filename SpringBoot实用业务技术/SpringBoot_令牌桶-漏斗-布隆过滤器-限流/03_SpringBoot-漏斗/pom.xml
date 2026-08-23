@@ -9,14 +9,13 @@
         <version>1.0.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.example</groupId>
     <artifactId>03_SpringBoot-Funnel</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>03_SpringBoot-漏斗</name>
     <description>03_SpringBoot-漏斗</description>
 
     <properties>
-        <java.version>25</java.version>
+        <java.version>26</java.version>
     </properties>
 
     <dependencies>

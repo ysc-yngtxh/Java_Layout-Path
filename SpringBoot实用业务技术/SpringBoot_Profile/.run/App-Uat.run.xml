@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="App-Uat" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" value="uat" />
+    <option name="MAIN_CLASS_NAME" value="com.example.SpringBootProfileApplication" />
+    <module name="SpringBoot_Profile" />
+    <option name="PROGRAM_PARAMETERS" value="--server.port=8081" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.SpringBootProfileApplication" />
+    <option name="VM_PARAMETERS" value="-Xms512m -Xmx1024m" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

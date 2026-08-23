@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.7</version>
+        <version>4.1.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
@@ -24,7 +24,7 @@
 
     <!--父管理依赖的版本号-->
     <properties>
-        <java.version>25</java.version>
+        <java.version>26</java.version>
         <spring-cloud.version>2022.0.4</spring-cloud.version>
         <spring.cloud.alibaba.version>2022.0.0.0</spring.cloud.alibaba.version>
     </properties>

@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.7</version>
+        <version>4.1.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
@@ -15,7 +15,7 @@
     <description>${project.artifactId}</description>
 
     <properties>
-        <java.version>25</java.version>
+        <java.version>26</java.version>
         <langchain4j.version>1.5.0-beta11</langchain4j.version>
     </properties>
 

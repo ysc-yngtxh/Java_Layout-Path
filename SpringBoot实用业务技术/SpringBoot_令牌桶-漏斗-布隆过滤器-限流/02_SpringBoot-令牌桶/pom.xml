@@ -10,14 +10,13 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.example</groupId>
     <artifactId>02_SpringBoot-TokenBucket</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>02_SpringBoot-令牌桶</name>
     <description>02_SpringBoot-令牌桶</description>
 
     <properties>
-        <java.version>25</java.version>
+        <java.version>26</java.version>
     </properties>
 
     <dependencies>

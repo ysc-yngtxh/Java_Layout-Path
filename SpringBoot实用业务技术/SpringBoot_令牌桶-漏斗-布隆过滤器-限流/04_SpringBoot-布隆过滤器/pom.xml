@@ -9,14 +9,13 @@
         <version>1.0.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.example</groupId>
     <artifactId>04_SpringBoot-BloomFilter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>04_SpringBoot-布隆过滤器</name>
     <description>04_SpringBoot-布隆过滤器</description>
 
     <properties>
-        <java.version>25</java.version>
+        <java.version>26</java.version>
     </properties>
 
     <dependencies>

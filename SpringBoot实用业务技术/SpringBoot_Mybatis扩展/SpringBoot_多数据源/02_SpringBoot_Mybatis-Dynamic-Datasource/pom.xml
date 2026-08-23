@@ -9,14 +9,13 @@
         <version>1.0.0</version>
     </parent>
 
-    <groupId>com.example</groupId>
     <artifactId>02_SpringBoot_Mybatis-Dynamic-Datasource</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <description>${project.artifactId}</description>
 
     <properties>
-        <java.version>25</java.version>
+        <java.version>26</java.version>
     </properties>
 
     <dependencies>

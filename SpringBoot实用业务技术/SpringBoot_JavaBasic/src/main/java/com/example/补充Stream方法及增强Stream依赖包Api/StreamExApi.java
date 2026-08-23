@@ -39,7 +39,7 @@ public class StreamExApi {
 	List<User> users = Arrays.asList(
 			new User(null, null, null, 0, null, new Models(new ModelView("WUHAN"), null), null),
 			new User(1L, "YouShiCheng", "google@163.com", 25, null, new Models(new ModelView("SHENZHEN"), null), null)
-	                                );
+	);
 
 	@Test
 	public void test1() {

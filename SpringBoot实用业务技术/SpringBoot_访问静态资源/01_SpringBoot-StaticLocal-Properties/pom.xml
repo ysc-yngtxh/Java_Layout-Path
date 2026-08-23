@@ -7,18 +7,15 @@
         <groupId>com.example</groupId>
         <artifactId>SpringBoot_AccessStaticResource</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../pom.xml
-        </relativePath> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.example</groupId>
     <artifactId>01_SpringBoot-StaticLocal-Properties</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <description>${project.artifactId}</description>
 
     <properties>
-        <java.version>25</java.version>
+        <java.version>26</java.version>
     </properties>
 
     <dependencies>

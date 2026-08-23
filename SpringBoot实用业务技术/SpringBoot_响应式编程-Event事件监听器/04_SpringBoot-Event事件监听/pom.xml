@@ -10,14 +10,12 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.example</groupId>
     <artifactId>04_SpringBoot-EventListeners</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>04_SpringBoot-Event事件监听</name>
     <description>04_SpringBoot-Event事件监听</description>
 
     <properties>
-        <java.version>25</java.version>
+        <java.version>26</java.version>
     </properties>
 
     <dependencies>

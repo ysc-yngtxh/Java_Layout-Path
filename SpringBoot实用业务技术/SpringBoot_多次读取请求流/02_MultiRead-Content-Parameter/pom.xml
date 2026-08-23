@@ -7,17 +7,15 @@
         <groupId>com.example</groupId>
         <artifactId>SpringBoot_MultipleReadRequestStream</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../pom.xml
-        </relativePath> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
     </parent>
 
     <artifactId>02_MultiRead-Content-Parameter</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <description>${project.artifactId}</description>
 
     <properties>
-        <java.version>25</java.version>
+        <java.version>26</java.version>
         <spring-boot-web>3.1.1</spring-boot-web>
         <spring-boot-devtools>3.1.1</spring-boot-devtools>
         <lombok-version>1.18.26</lombok-version>

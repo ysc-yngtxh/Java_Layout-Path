@@ -10,14 +10,13 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.example</groupId>
     <artifactId>DDD-Demo1</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>DDD-Demo1</name>
     <description>DDD-Demo1</description>
 
     <properties>
-        <java.version>25</java.version>
+        <java.version>26</java.version>
     </properties>
 
     <dependencies>
