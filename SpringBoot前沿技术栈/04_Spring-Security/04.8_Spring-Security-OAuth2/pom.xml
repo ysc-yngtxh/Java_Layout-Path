@@ -24,4 +24,5 @@
         <module>04.8_7-SSO-SpringAuthorizationServer</module>
     </modules>
     <packaging>pom</packaging>
+
 </project>

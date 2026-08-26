@@ -16,9 +16,9 @@ public class SSOAuthorizationServerApplication {
     //    单点登录，英文叫做Single Sign On，简称SSO。
     //    SSO允许用户在一个应用系统群中的某一个应用里登录之后，能够访问多个相互信任的其他应用系统而无需再次进行登录。
     //    例如：哔哩哔哩的应用系统群
-    //         1️⃣. 主站: https://www.bilibili.com/
-    //         2️⃣. 会员购: https://show.bilibili.com/
-    //         3️⃣. 漫画: https://manga.bilibili.com/
+    //         1︎⃣ 、主站:  https://www.bilibili.com/
+    //         2︎⃣ 、会员购: https://show.bilibili.com/
+    //         3︎⃣ 、漫画:   https://manga.bilibili.com/
 
     // 2、SSO认证中心
     //    相比于单应用系统的登录，SSO需要一个独立的认证中心。

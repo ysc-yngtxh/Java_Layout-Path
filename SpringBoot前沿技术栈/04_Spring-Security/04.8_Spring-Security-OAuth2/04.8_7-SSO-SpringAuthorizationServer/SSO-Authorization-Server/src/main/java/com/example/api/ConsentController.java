@@ -51,4 +51,5 @@ public class ConsentController {
 		// 返回 consent.html
 		return "consent";
 	}
+
 }
