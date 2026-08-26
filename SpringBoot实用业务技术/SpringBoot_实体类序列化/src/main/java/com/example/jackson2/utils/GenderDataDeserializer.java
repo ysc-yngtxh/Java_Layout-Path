@@ -1,10 +1,11 @@
-package com.example.utils;
+package com.example.jackson2.utils;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import java.io.IOException;
+
 import org.springframework.util.ObjectUtils;
 
 @SuppressWarnings("rawtypes")
@@ -25,4 +26,5 @@ public class GenderDataDeserializer extends JsonDeserializer {
 
 		return gender;
 	}
+
 }

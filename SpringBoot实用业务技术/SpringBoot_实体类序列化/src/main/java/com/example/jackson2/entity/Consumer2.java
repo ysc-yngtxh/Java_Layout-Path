@@ -1,9 +1,8 @@
-package com.example.entity;
+package com.example.jackson2.entity;
 
-import com.example.utils.CustomDateSerialize;
+import com.example.jackson2.utils.CustomDateSerialize;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,12 +16,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.NumberFormat;
 
 /**
- * Consumer1 实体类
+ * Consumer2 实体类
  *
  * @author 游家纨绔
- * @since 2023-08-19 17:30:50
+ * @since 2023-08-19 17:30:00
  */
 @Data
 @Builder
@@ -34,12 +34,11 @@ import lombok.NoArgsConstructor;
  * NON_ABSENT：注解的字段为 null 的不序列化（包括 Optional 类、AtomicReference 类）
  * NON_EMPTY ：注解的字段为 null 或 为空 不序列化
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)    // 实际效果就是返回给前端的 Json 字符串中 值为 null 的字段不显示
-// @JsonIgnoreProperties 可以 忽略指定属性 的 序列化 和 反序列化
-@JsonIgnoreProperties({"age", "deleteFlag"})
+@JsonInclude(JsonInclude.Include.NON_ABSENT)  // 实际效果就是返回给前端的的Json字符串中值为 null 的字段不显示
 // @JsonPropertyOrder 可以指定json映射名称属性在 json 字符串中的顺序
-@JsonPropertyOrder({"consumerId", "username", "password", "alias", "age", "sex", "phone", "address", "deleteFlag", "date", "price", "optional", "atomicReference", "supplier"})
-public class Consumer1 implements Serializable {
+@JsonPropertyOrder({"consumerId", "username", "password", "alias", "age", "sex", "phone", "address", "deleteFlag", "date", "price", "optional", "atomicReference", "supplier",
+		"customer"})
+public class Consumer2 implements Serializable {
 	@Serial
 	private static final long serialVersionUID = 424381199466784776L;
 
@@ -53,7 +52,7 @@ public class Consumer1 implements Serializable {
 	@JsonIgnore  // 用来完全忽略被注解的字段和方法对应的属性
 	private String alias;
 
-	private Integer age;
+	private int age;
 
 	private String sex;
 
@@ -61,9 +60,8 @@ public class Consumer1 implements Serializable {
 
 	private String address;
 
-	private Integer deleteFlag;
+	private long deleteFlag;
 
-	// JsonFormat默认是格林威治时间，需要添加八个时区【我们所在东八区】
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss SSS", timezone = "GMT+8")  // 格式化 时间数据
 	private Date date;
 
@@ -72,7 +70,7 @@ public class Consumer1 implements Serializable {
 	 * Style.NUMBER：正常数字类型
 	 * Style.PERCENT：百分比类型
 	 */
-	@JsonFormat(pattern = "#.##%")  // 格式化 数字数据
+	@NumberFormat(pattern = "#.##%")  // 格式化 数字数据
 	private double price;
 
 	// Optional 类是一个可以为null的容器对象
@@ -83,7 +81,7 @@ public class Consumer1 implements Serializable {
 
 	private Supplier supplier;
 
-	// 用于属性或getter方法，在序列化时嵌入自定义代码
+	// @JsonSerialize 用于属性或getter方法，在序列化时嵌入自定义代码逻辑
 	@JsonSerialize(using = CustomDateSerialize.class)
 	private Date customer;
 }

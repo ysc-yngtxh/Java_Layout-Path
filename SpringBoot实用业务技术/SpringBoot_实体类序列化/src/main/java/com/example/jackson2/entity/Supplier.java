@@ -1,4 +1,4 @@
-package com.example.entity;
+package com.example.jackson2.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import lombok.Builder;

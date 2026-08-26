@@ -1,7 +1,7 @@
-package com.example.entity;
+package com.example.jackson2.entity;
 
-import com.example.utils.GenderDataDeserializer;
-import com.example.utils.GenderJsonSerializer;
+import com.example.jackson2.utils.GenderDataDeserializer;
+import com.example.jackson2.utils.GenderJsonSerializer;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonInclude;

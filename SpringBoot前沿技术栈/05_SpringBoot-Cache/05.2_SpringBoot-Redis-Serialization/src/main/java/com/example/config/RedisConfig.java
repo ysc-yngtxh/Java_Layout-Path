@@ -14,8 +14,8 @@ import tools.jackson.databind.json.JsonMapper;
 /**
  * 描述：redis配置类
  * redis序列化方式选择：
- * 1、(默认的)JdkSerializationRedisSerializer序列化方式，其编码为 ISO-8859-1，会出现乱码问题；
- * 2、StringRedisSerializer序列化方式，其编码为 UTF-8，可以解决乱码问题；
+ *     1、(默认的)JdkSerializationRedisSerializer序列化方式，其编码为 ISO-8859-1，会出现乱码问题；
+ *     2、StringRedisSerializer序列化方式，其编码为 UTF-8，可以解决乱码问题；
  */
 @Configuration
 public class RedisConfig {

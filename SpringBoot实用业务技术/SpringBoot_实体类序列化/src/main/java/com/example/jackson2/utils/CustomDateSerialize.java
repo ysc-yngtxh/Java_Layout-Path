@@ -1,4 +1,4 @@
-package com.example.utils;
+package com.example.jackson2.utils;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -16,10 +16,11 @@ import java.util.Date;
 public class CustomDateSerialize extends JsonSerializer<Date> {
 
 	// 定义日期格式
-	private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 	@Override
 	public void serialize(Date date, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
 		jsonGenerator.writeString(simpleDateFormat.format(date));
 	}
+
 }

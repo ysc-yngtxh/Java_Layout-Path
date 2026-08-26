@@ -1,27 +1,28 @@
-package com.example.controller;
+package com.example.jackson3.controller;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
-import com.example.entity.Consumer1;
-import com.example.entity.Consumer2;
-import com.example.entity.Consumer3;
-import com.example.entity.Supplier;
+import com.example.jackson3.entity.Consumer1;
+import com.example.jackson3.entity.Consumer2;
+import com.example.jackson3.entity.Consumer3;
+import com.example.jackson3.entity.Supplier;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author 游家纨绔
  * @dateTime 2023-08-19 17:00
  * @apiNote TODO
  */
-@RestController
+@RestController("/jackson3")
 public class JsonAnnotationController {
 
 	@RequestMapping("/consumer1")

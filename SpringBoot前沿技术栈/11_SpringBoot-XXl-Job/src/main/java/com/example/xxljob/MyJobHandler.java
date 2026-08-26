@@ -4,7 +4,8 @@ import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import com.xxl.tool.core.StringTool;
 import com.xxl.tool.http.HttpTool;
-import com.xxl.tool.http.http.HttpResponse;
+import com.xxl.tool.http.http.auth.AuthProvider;
+import com.xxl.tool.http.http.auth.impl.BasicAuthProvider;
 import com.xxl.tool.http.http.enums.ContentType;
 import com.xxl.tool.http.http.enums.Method;
 import com.xxl.tool.json.GsonTool;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.http.HttpResponse;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Set;
@@ -175,12 +177,10 @@ public class MyJobHandler {
      */
     @XxlJob("httpJobHandler")
     public void httpJobHandler() throws Exception {
-
         // param data
         String param = XxlJobHelper.getJobParam();
         if (param == null || param.trim().isEmpty()) {
             XxlJobHelper.log("param[" + param + "] invalid.");
-
             XxlJobHelper.handleFail();
             return;
         }
@@ -236,7 +236,7 @@ public class MyJobHandler {
 
         // do request
         try {
-            HttpResponse httpResponse = HttpTool.createRequest()
+            HttpResponse<?> httpResponse = (HttpResponse<?>) HttpTool.createRequest()
                     .url(httpJobParam.getUrl())
                     .method(method)
                     .contentType(contentType)
@@ -244,11 +244,11 @@ public class MyJobHandler {
                     .cookie(httpJobParam.getCookies())
                     .body(httpJobParam.getData())
                     .form(httpJobParam.getForm())
-                    .auth(httpJobParam.getAuth())
+                    .auth(new BasicAuthProvider(httpJobParam.getForm().get("username"), httpJobParam.getForm().get("password")))
                     .execute();
 
             XxlJobHelper.log("StatusCode: " + httpResponse.statusCode());
-            XxlJobHelper.log("Response: <br>" + httpResponse.response());
+            XxlJobHelper.log("Response: <br>" + httpResponse.body());
         } catch (Exception e) {
             XxlJobHelper.log(e);
             XxlJobHelper.handleFail();
@@ -258,7 +258,7 @@ public class MyJobHandler {
     /**
      * domain white-list, for httpJobHandler
      */
-    private static Set<String> DOMAIN_WHITE_LIST = Set.of(
+    private static final Set<String> DOMAIN_WHITE_LIST = Set.of(
             "http://www.baidu.com",
             "http://cn.bing.com"
     );
