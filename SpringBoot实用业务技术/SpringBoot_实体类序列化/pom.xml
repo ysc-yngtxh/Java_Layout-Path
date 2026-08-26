@@ -20,11 +20,18 @@
     </properties>
 
     <dependencies>
-        <!-- SpringBoot3的 Web依赖 中会传递依赖 Jackson2，但是在 SpringBoot4中传递的是 Jackson3 -->
+        <!-- SpringBoot 3 Web依赖 中会传递依赖 Jackson2，但是在 SpringBoot 4 Web依赖 中传递的是 Jackson3
+             Jackson2 与 Jackson3 区别：
+                1、将所有代码中 com.fasterxml.jackson 的导入语句，替换为 tools.jackson。（排除 @JsonProperty等注解类型）
+                2、将 ObjectMapper 的实例化方式改为使用 JsonMapper.builder()
+                3、JsonSerializer<T>、JsonDeserializer<T> 被重命名为 ValueSerializer<T>、ValueDeserializer<T>
+                4、一个重要的例外是 jackson-annotations 模块中的注解（如 @JsonProperty），它们为了保持兼容性，仍然保留在 com.fasterxml.jackson.annotation 包下。
+         -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!-- jackson版本2 -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
