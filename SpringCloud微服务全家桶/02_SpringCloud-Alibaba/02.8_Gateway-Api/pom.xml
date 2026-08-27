@@ -6,6 +6,11 @@
         <groupId>com.example</groupId>
         <artifactId>02_SpringCloud-Alibaba</artifactId>
         <version>1.0.0</version>
+        <!--
+            <relativePath/>标签 为默认配置时，那么当前 子模块Maven 就会默认从本地仓库中解析获取父POM，但 父模块(02_SpringCloud-Alibaba) 并没有安装到本地仓库，就会导致查找不到。
+            因此，需要通过 <relativePath>标签 指定 父POM 的相对路径，这样 Maven 会优先从相对路径读取父 POM，而不依赖本地仓库
+        -->
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>02.8_Gateway-Api</artifactId>
@@ -14,14 +19,18 @@
     <description>${project.artifactId}</description>
 
     <properties>
-        <java.version>25</java.version>
+        <java.version>26</java.version>
     </properties>
 
     <dependencies>
         <!--Spring Cloud Gateway依赖-->
+        <!-- <dependency> -->
+        <!--     <groupId>org.springframework.cloud</groupId> -->
+        <!--     <artifactId>spring-cloud-starter-gateway</artifactId> -->
+        <!-- </dependency> -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
+            <artifactId>spring-cloud-starter-gateway-server-webflux</artifactId>
         </dependency>
         <!--使用Gateway网关，必须把web依赖注释掉。因为Gateway依赖中集成了Spring Webflux，不注释掉启动会报错。
             SpringMVC 构建于 Servlet API 之上，同步阻塞I/O模型, 认为应用会阻塞当前线程，所以一个Request对应一个Thread，需要有一个含有大量线程的线程池
@@ -41,7 +50,6 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-resolver-dns-native-macos</artifactId>
-            <version>4.1.106.Final</version> <!--版本号自己切-->
             <classifier>osx-aarch_64</classifier>
         </dependency>
     </dependencies>

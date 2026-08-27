@@ -1,5 +1,6 @@
 package com.example.factory.filter;
 
+import org.jspecify.annotations.NonNull;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractNameValueGatewayFilterFactory;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
@@ -19,7 +20,7 @@ public class AddHeaderGatewayFilterFactory extends AbstractNameValueGatewayFilte
 
     // 在传入的配置项（NameValueConfig）中指定的请求头中添加一个新的请求头，并将修改后的请求转发给下一个过滤器链（Filter Chain）。
     @Override
-    public GatewayFilter apply(NameValueConfig config) {
+    public GatewayFilter apply(@NonNull NameValueConfig config) {
         return (exchange, chain) -> {
             // 使用ServerWebExchange工具类获取到uri变量的Map集合
             Map<String, String> uriVariables = ServerWebExchangeUtils.getUriTemplateVariables(exchange);

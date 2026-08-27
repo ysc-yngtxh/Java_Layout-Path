@@ -1,6 +1,7 @@
 package com.example.factory.router;
 
 import lombok.Data;
+import org.jspecify.annotations.NonNull;
 import org.springframework.cloud.gateway.handler.predicate.AbstractRoutePredicateFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
@@ -25,7 +26,7 @@ public class AuthRoutePredicateFactory extends AbstractRoutePredicateFactory<Aut
 	}
 
 	@Override
-	public Predicate<ServerWebExchange> apply(Config config) {
+	public Predicate<ServerWebExchange> apply(@NonNull Config config) {
 		return exchange -> {
 			// 获取到请求中的所有header
 			HttpHeaders headers = exchange.getRequest().getHeaders();

@@ -1,6 +1,7 @@
 package com.example.factory.filter;
 
 import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.NonNull;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractNameValueGatewayFilterFactory;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,7 @@ public class OneGatewayFilterFactory extends AbstractNameValueGatewayFilterFacto
 
     // 所有“预”过滤器逻辑都会被执行。然后发出代理请求。在发出代理请求之后，将运行“post”过滤器逻辑。
     @Override
-    public GatewayFilter apply(NameValueConfig config) {
+    public GatewayFilter apply(@NonNull NameValueConfig config) {
         return (exchange, chain) -> {
             // pre-filter “预”过滤器逻辑
             StopWatch stopWatch = new StopWatch();

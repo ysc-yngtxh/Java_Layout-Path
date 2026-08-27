@@ -1,7 +1,8 @@
 package com.example.handler;
 
+import org.jspecify.annotations.NonNull;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
-import org.springframework.boot.web.reactive.error.DefaultErrorAttributes;
+import org.springframework.boot.webflux.error.DefaultErrorAttributes;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -21,7 +22,7 @@ public class CustomErrorAttribute extends DefaultErrorAttributes {
     // 它为异常提供了默认的属性值，包括异常类名、异常消息等。在异常处理过程中，Spring会调用DefaultErrorAttributes的实例来创建错误的属性，
     // 然后将这些属性添加到错误的响应中。开发人员也可以通过扩展DefaultErrorAttributes类来自定义错误属性的生成方式。
     @Override
-    public Map<String, Object> getErrorAttributes(ServerRequest request, ErrorAttributeOptions options) {
+    public Map<String, Object> getErrorAttributes(@NonNull ServerRequest request, @NonNull ErrorAttributeOptions options) {
         // return super.getErrorAttributes(request, options);
         Map<String, Object> map = new HashMap<>();
         map.put("status", HttpStatus.NOT_FOUND);

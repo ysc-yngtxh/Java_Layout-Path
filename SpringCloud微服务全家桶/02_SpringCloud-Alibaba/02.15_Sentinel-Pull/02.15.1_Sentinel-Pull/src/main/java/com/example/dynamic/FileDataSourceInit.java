@@ -5,7 +5,7 @@ import com.example.rule.AuthorizationRule;
 import com.example.rule.FallbackRule;
 import com.example.rule.FlowRule;
 import com.example.rule.ParamRule;
-import com.example.rule.SystemerRule;
+import com.example.rule.SystemRule;
 
 import java.io.File;
 
@@ -41,7 +41,7 @@ public class FileDataSourceInit implements InitFunc {
         AuthorizationRule authorizationRule = new AuthorizationRule();
         authorizationRule.readWriteRuleFileFlow(ruleFileDir.getPath());
         // 动态读写系统规则
-        SystemerRule systemerRule = new SystemerRule();
-        systemerRule.readWriteRuleFileFlow(ruleFileDir.getPath());
+        SystemRule systemRule = new SystemRule();
+        systemRule.readWriteRuleFileFlow(ruleFileDir.getPath());
     }
 }

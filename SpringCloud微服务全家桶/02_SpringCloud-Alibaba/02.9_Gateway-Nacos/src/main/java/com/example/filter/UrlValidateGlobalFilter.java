@@ -1,5 +1,6 @@
 package com.example.filter;
 
+import org.jspecify.annotations.NonNull;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -21,7 +22,7 @@ public class UrlValidateGlobalFilter implements GlobalFilter, Ordered {
     // 它是在 Gateway 配置中全局定义的一个过滤器，会在每个请求和响应上都被调用。
     // 全局过滤器对于一些通用的操作非常有用，例如鉴权、日志记录等。它在整个网关中生效，无需为每个路由单独配置。
     @Override
-    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+    public Mono<Void> filter(ServerWebExchange exchange, @NonNull GatewayFilterChain chain) {
         // 从请求中获取请求参数token的值
         String token = exchange.getRequest().getQueryParams().getFirst("token");
         // 若token为空，则响应客户端状态码为401，未授权。否则通过验证
