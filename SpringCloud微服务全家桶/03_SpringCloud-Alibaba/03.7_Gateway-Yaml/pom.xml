@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.example</groupId>
+        <artifactId>03_SpringCloud-Alibaba</artifactId>
+        <version>1.0.0</version>
+        <!--
+            <relativePath/>标签 为默认配置时，那么当前 子模块Maven 就会默认从本地仓库中解析获取父POM，但 父模块(02_SpringCloud-Alibaba) 并没有安装到本地仓库，就会导致查找不到。
+            因此，需要通过 <relativePath>标签 指定 父POM 的相对路径，这样 Maven 会优先从相对路径读取父 POM，而不依赖本地仓库
+        -->
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <groupId>org.example</groupId>
+    <artifactId>03.7_Gateway-Yaml</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
+
+    <properties>
+        <java.version>26</java.version>
+    </properties>
+
+    <dependencies>
+        <!--Spring Cloud Gateway依赖
+            SpringBoot3 版本的 spring-cloud-starter-gateway 是一个“大而全”的启动器，但在 SpringBoot4 新的架构下已不再适用，开发者现在必须明确选择自己将要使用的技术栈。
+            为了应对 Java虚拟线程（Virtual Threads）带来的变革，以及明确区分 Reactive(响应式) 和 Servlet(传统同步) 两种技术栈，Spring Cloud Gateway 被强制拆分成了两个独立版本。
+                1、spring-cloud-starter-gateway-server-webmvc： 适用于传统的 Spring MVC 应用（非响应式编程），同步阻塞，基于 Servlet API 构建。
+                2、spring-cloud-starter-gateway-server-webflux：适用于 Spring WebFlux 应用（响应式编程），异步非阻塞，基于 Reactive Streams Adapters
+            Gateway除了依赖名，相关的配置前缀也发生了变化。例如：
+                旧前缀：spring.cloud.gateway.*
+                新前缀（以 WebFlux 为例）：spring.cloud.gateway.server.webflux.*
+        -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway-server-webflux</artifactId>
+        </dependency>
+
+
+        <!--在 SpringBoot3 下使用Gateway网关，必须把web依赖注释掉。因为Gateway依赖中集成了Spring Webflux，不注释掉启动会报错。
+            而 SpringBoot4 下，Gateway分为 webmvc/webflux 两个版本，webmvc 版本包含了 SpringWeb依赖，webflux 版本则不需要再引入 SpringWeb依赖。
+            SpringMVC 构建于 Servlet API 之上，同步阻塞I/O模型, 认为应用会阻塞当前线程，所以一个Request对应一个Thread，需要有一个含有大量线程的线程池
+            Spring WebFlux 构建于 Reactive Streams Adapters 之上，异步非阻塞I/O模型，认为应用不会阻塞当前线程，所以只是需要一个包含少数固定线程数的线程池 (event loop workers) 来处理请求
+        -->
+        <!-- <dependency> -->
+        <!--     <groupId>org.springframework.boot</groupId> -->
+        <!--     <artifactId>spring-boot-starter-web</artifactId> -->
+        <!-- </dependency> -->
+
+
+        <!--网关请求服务降级所需依赖：断路器。
+        ⚠️：spring-cloud-starter-circuitbreaker-resilience4j
+                适用于普通Spring MVC应用（非响应式编程）同步阻塞
+            spring-cloud-starter-circuitbreaker-reactor-resilience4j
+                适用于Spring WebFlux应用（响应式编程）。异步非阻塞，支持 Mono/Flux
+        -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

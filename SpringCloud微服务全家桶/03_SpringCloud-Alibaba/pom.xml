@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.1.0</version> <!-- 对应最新的Spring Cloud Alibaba版本 -->
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>com.example</groupId>
+    <artifactId>03_SpringCloud-Alibaba</artifactId>
+    <version>1.0.0</version>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
+
+    <modules>
+        <module>03.1_Alibaba-NacosDiscovery-Provider</module>
+        <module>03.2_Alibaba-NacosDiscovery-Consumer</module>
+        <module>03.3_NacosCluster-8850-8860-8870</module>
+        <module>03.4_NacosConfig-Bootstrap</module>
+        <module>03.5_NacosConfig-ConfigImport-DynamicThreadPool</module>
+        <module>03.6_NacosDiscovery-OpenFeign</module>
+        <module>03.7_Gateway-Yaml</module>
+        <module>03.8_Gateway-Api</module>
+        <module>03.9_Gateway-Nacos</module>
+        <module>03.10_Sentinel</module>
+        <module>03.11_Sentinel-OpenFeign</module>
+        <module>03.12_Sentinel-Entry-FlowMode</module>
+        <module>03.13_Sentinel-Authorization-ParamMode</module>
+        <module>03.14_Sentinel-Gateway-Route-API</module>
+        <module>03.15_Sentinel-Pull</module>
+        <module>03.16_Sentinel-Push</module>
+        <module>03.17_Seata</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <!--父管理依赖的版本号-->
+    <properties>
+        <java.version>26</java.version>
+        <spring-cloud.version>2025.1.3</spring-cloud.version>
+        <spring-cloud-alibaba.version>2025.1.0.0</spring-cloud-alibaba.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
