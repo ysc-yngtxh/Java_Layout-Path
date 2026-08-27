@@ -6,7 +6,7 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:dubbo-userservice-provider.xml</param-value>
+        <param-value>classpath:dubbo-link1-provider.xml</param-value>
     </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

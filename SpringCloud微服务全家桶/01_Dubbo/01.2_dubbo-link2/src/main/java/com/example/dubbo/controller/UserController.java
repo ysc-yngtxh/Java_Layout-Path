@@ -14,9 +14,9 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value="/user")
-    public String userDetail(Model model, Integer id){
+    public String userDetail(Model model, Integer id) {
         User user = userService.queryUserById(id);
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "index";
     }
 }
