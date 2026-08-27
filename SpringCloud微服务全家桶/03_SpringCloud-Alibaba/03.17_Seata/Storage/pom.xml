@@ -3,21 +3,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.3</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>com.example</groupId>
+        <artifactId>03.17_Seata</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <!--
+            <relativePath/>标签 为默认配置时，那么当前 子模块Maven 就会默认从本地仓库中解析获取父POM，但 父模块(03.17_Seata) 并没有安装到本地仓库，就会导致查找不到。
+            因此，需要通过 <relativePath>标签 指定 父POM 的相对路径，这样 Maven 会优先从相对路径读取父 POM，而不依赖本地仓库
+        -->
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>com.example</groupId>
     <artifactId>Storage</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <description>${project.artifactId}</description>
 
     <properties>
         <java.version>26</java.version>
-        <spring-cloud.version>2024.0.0</spring-cloud.version>
     </properties>
 
     <dependencies>

@@ -7,7 +7,7 @@
         <artifactId>03_SpringCloud-Alibaba</artifactId>
         <version>1.0.0</version>
         <!--
-            <relativePath/>标签 为默认配置时，那么当前 子模块Maven 就会默认从本地仓库中解析获取父POM，但 父模块(02_SpringCloud-Alibaba) 并没有安装到本地仓库，就会导致查找不到。
+            <relativePath/>标签 为默认配置时，那么当前 子模块Maven 就会默认从本地仓库中解析获取父POM，但 父模块(03_SpringCloud-Alibaba) 并没有安装到本地仓库，就会导致查找不到。
             因此，需要通过 <relativePath>标签 指定 父POM 的相对路径，这样 Maven 会优先从相对路径读取父 POM，而不依赖本地仓库
         -->
         <relativePath>../pom.xml</relativePath>
