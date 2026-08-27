@@ -22,6 +22,15 @@
         <java.version>26</java.version>
     </properties>
 
+    <modules>
+        <module>Account</module>
+        <module>Business</module>
+        <module>Commons</module>
+        <module>Order</module>
+        <module>Storage</module>
+    </modules>
+    <packaging>pom</packaging>
+
     <build>
         <plugins>
             <plugin>

@@ -58,6 +58,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!-- 在 SpringBoot4 之前，RestClient 是 spring-boot-starter-web 的一部分，无需额外声明即可使用。
+             现在，你需要显式添加 spring-boot-starter-restclient 依赖来表达对阻塞式 HTTP 客户端的明确需求。-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-restclient</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

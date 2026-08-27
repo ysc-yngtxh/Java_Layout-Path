@@ -1,6 +1,6 @@
 package com.example.handler;
 
-import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.BlockExceptionHandler;
+import com.alibaba.csp.sentinel.adapter.spring.webmvc_v6x.callback.BlockExceptionHandler;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.alibaba.csp.sentinel.slots.block.authority.AuthorityException;
 import com.alibaba.csp.sentinel.slots.block.degrade.DegradeException;
@@ -18,8 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class CustomBlockExceptionHandlerPage implements BlockExceptionHandler {
 
     @Override
-    public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, BlockException e) throws Exception {
-
+    public void handle(HttpServletRequest request, HttpServletResponse response, String resourceName, BlockException e) throws Exception {
         String msg = "";
 
         if (e instanceof FlowException) {
@@ -36,7 +35,8 @@ public class CustomBlockExceptionHandlerPage implements BlockExceptionHandler {
         }
 
         // 请求转发
-        httpServletRequest.getRequestDispatcher(msg)
-                .forward(httpServletRequest, httpServletResponse);
+        request
+                .getRequestDispatcher(msg)
+                .forward(request, response);
     }
 }

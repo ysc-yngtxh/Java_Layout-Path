@@ -1,6 +1,6 @@
 package com.example.handler;
 
-import com.alibaba.csp.sentinel.adapter.spring.webmvc.callback.BlockExceptionHandler;
+import com.alibaba.csp.sentinel.adapter.spring.webmvc_v6x.callback.BlockExceptionHandler;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.alibaba.csp.sentinel.slots.block.authority.AuthorityException;
 import com.alibaba.csp.sentinel.slots.block.degrade.DegradeException;
@@ -19,10 +19,10 @@ import java.io.PrintWriter;
 public class CustomBlockExceptionHandler implements BlockExceptionHandler {
 
     @Override
-    public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, BlockException e) throws Exception {
-        httpServletResponse.setStatus(429);
+    public void handle(HttpServletRequest request, HttpServletResponse response, String resourceName, BlockException e) throws Exception {
+        response.setStatus(429);
 
-        PrintWriter out = httpServletResponse.getWriter();
+        PrintWriter out = response.getWriter();
         String msg = "Blocked by Sentinel - ";
 
         if (e instanceof FlowException) {
@@ -35,11 +35,12 @@ public class CustomBlockExceptionHandler implements BlockExceptionHandler {
             msg += "ParamFlow Exception";
         } else if (e instanceof AuthorityException) {
             msg += "Authority Exception";
-            httpServletResponse.setStatus(401);
+            response.setStatus(401);
         }
 
         out.print(msg);
         out.flush();
         out.close();
     }
+
 }
