@@ -22,6 +22,7 @@
 	<modules>
 		<module>14.1_SpringBoot-EasyExcel</module>
 		<module>14.2_SpringBoot-FastExcel</module>
+		<module>14.3_SpringBoot-FesodExcel</module>
 	</modules>
 	<packaging>pom</packaging>
 

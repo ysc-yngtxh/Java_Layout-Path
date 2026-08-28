@@ -20,11 +20,11 @@
         <java.version>26</java.version>
     </properties>
 
-    <packaging>pom</packaging>
     <modules>
         <module>18.1_SpringBoot-Activity</module>
         <module>18.2_SpringBoot-Activity-WorkFlow</module>
     </modules>
+    <packaging>pom</packaging>
 
     <build>
         <plugins>

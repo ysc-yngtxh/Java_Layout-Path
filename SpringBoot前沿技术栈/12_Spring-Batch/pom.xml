@@ -15,6 +15,10 @@
     <name>${project.artifactId}</name>
     <description>${project.artifactId}</description>
 
+    <properties>
+        <java.version>26</java.version>
+    </properties>
+
     <modules>
         <module>12.1_Spring-Batch</module>
         <module>12.2_Spring-Batch-JobParam-Validate-Listener-Context</module>
@@ -27,9 +31,6 @@
         <module>12.9_Spring-Batch-ComprehensiveCase</module>
     </modules>
     <packaging>pom</packaging>
-    <properties>
-        <java.version>26</java.version>
-    </properties>
 
     <build>
         <plugins>
