@@ -16,7 +16,7 @@
 
     <properties>
         <java.version>26</java.version>
-        <activity.version>9.0.0</activity.version>
+        <activity.version>9.1.0-alpha.64</activity.version>
     </properties>
 
     <!--添加 Activity 所在的 alfresco 仓库地址

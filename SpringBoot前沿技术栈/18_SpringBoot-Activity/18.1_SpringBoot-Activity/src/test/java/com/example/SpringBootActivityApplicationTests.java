@@ -33,7 +33,7 @@ class SpringBootActivityApplicationTests {
 
         // 进行部署
         Deployment deploy = repositoryService.createDeployment()
-                .addClasspathResource("bpmn/leave.bpmn20.xml")
+                .addClasspathResource("processes/leaveFlow.bpmn20.xml")
                 .name("请假流程")
                 .deploy();
 
