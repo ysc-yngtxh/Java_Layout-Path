@@ -8,6 +8,7 @@
         <version>4.1.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.example</groupId>
     <artifactId>08_RocketMQ</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -24,6 +25,8 @@
 
     <properties>
         <java.version>26</java.version>
+        <rocketmq-client.version>5.5.0</rocketmq-client.version>
+        <mybatis-plus.version>3.5.17</mybatis-plus.version>
     </properties>
 
     <build>

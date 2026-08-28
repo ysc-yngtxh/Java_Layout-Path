@@ -6,6 +6,7 @@
         <groupId>com.example</groupId>
         <artifactId>04_Spring-Security</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>04.1_Spring-Security-Demo</artifactId>

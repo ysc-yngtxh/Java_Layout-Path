@@ -6,7 +6,7 @@
         <groupId>com.example</groupId>
         <artifactId>05_SpringBoot-Cache</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>05.1_SpringBoot-Redis</artifactId>

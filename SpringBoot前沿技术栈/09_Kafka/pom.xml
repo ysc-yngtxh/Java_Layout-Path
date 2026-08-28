@@ -19,6 +19,7 @@
         <module>09.2_SpringBoot-Kafka-Demo</module>
     </modules>
     <packaging>pom</packaging>
+
     <properties>
         <java.version>26</java.version>
     </properties>

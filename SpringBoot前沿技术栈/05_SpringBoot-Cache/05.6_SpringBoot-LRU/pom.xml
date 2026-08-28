@@ -7,6 +7,7 @@
         <groupId>com.example</groupId>
         <artifactId>05_SpringBoot-Cache</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>05.6_SpringBoot-LRU</artifactId>
     <name>${project.artifactId}</name>
@@ -25,7 +26,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
