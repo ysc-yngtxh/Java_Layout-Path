@@ -1,9 +1,33 @@
-server:
-  port: 10086
-
 spring:
   application:
-    name: eureka-server
+    name: @project.artifactId@
+server:
+  port: 8761
+
+
+# Spring Boot Actuator 的配置，用于管理和监控应用程序的运行状态。
+management:
+  endpoint:
+    health:
+      # 控制健康检查端点的详细信息显示方式
+      # 其他可选值：
+      #     never：          从不显示详细信息（默认值）
+      #     when-authorized：仅对授权用户显示
+      #     always：         总是显示详细信息
+      show-details: always
+  endpoints:
+    web:
+      base-path: /manage  # 将所有 Actuator 端点的访问路径前缀从默认的 /actuator 改为 /manage。
+      exposure:
+        # Spring Boot Actuator 默认不通过 Web 暴露任何端点，这里只配置了 health 端点，表示只公开健康检查端点
+        # 其他常用端点：
+        #     info：      应用基本信息
+        #     health：    应用健康信息
+        #     metrics：   应用指标
+        #     prometheus：Prometheus 格式的指标
+        #     env：       环境变量
+        #     beans：     所有 Spring beans
+        include: '*'
 
 
 # Eureka 配置
@@ -62,34 +86,6 @@ eureka:
     # 如果当前应用是 Eureka Server 本身，且没有集群节点，那么不配置也不会导致启动失败；但如果是集群模式，则必须配置其他节点的地址，否则无法同步服务注册信息。
     service-url:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
-
-
-# Eureka Server 会定期调用客户端的健康检查端点来确认服务实例是否健康
-# 负载均衡器会根据健康状态决定是否将请求路由到该实例（不健康的实例会被标记为 "DOWN" 并从负载均衡池中移除）
-
-# Spring Boot Actuator 的配置，用于管理和监控应用程序的运行状态。
-management:
-  endpoint:
-    health:
-      # 控制健康检查端点的详细信息显示方式
-      # 其他可选值：
-      #     never：          从不显示详细信息（默认值）
-      #     when-authorized：仅对授权用户显示
-      #     always：         总是显示详细信息
-      show-details: always
-  endpoints:
-    web:
-      base-path: /manage  # 将所有 Actuator 端点的访问路径前缀从默认的 /actuator 改为 /manage。
-      exposure:
-        # Spring Boot Actuator 默认不通过 Web 暴露任何端点，这里只配置了 health 端点，表示只公开健康检查端点
-        # 其他常用端点：
-        #     info：      应用基本信息
-        #     health：    应用健康信息
-        #     metrics：   应用指标
-        #     prometheus：Prometheus 格式的指标
-        #     env：       环境变量
-        #     beans：     所有 Spring beans
-        include: '*'
 
 
 # 打开Eureka视图页面 http://127.0.0.1:10086
