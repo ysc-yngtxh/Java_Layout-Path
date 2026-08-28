@@ -3,22 +3,24 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.1.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>com.example</groupId>
+        <artifactId>18_SpringBoot-Activity</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
-    <groupId>com.example</groupId>
+
     <artifactId>18.1_SpringBoot-Activity</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <description>${project.artifactId}</description>
 
     <properties>
         <java.version>26</java.version>
+        <activity.version>9.0.0</activity.version>
     </properties>
 
-    <!--添加 Activity8.x 所在的 alfresco 仓库地址-->
+    <!--添加 Activity 所在的 alfresco 仓库地址
+        Activity版本参考地址：https://artifacts.alfresco.com/nexus/#browse/browse:activiti-releases:org
+    -->
     <repositories>
         <repository>
             <id>activiti-releases</id>
@@ -38,16 +40,16 @@
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-spring-boot-starter</artifactId>
-            <!-- 版本号可通过 Github 仓库查看 -->
-            <version>8.7.1</version>
+            <version>${activity.version}</version>
+            <!-- Activity版本参考地址：https://artifacts.alfresco.com/nexus/#browse/browse:activiti-releases:org -->
         </dependency>
         <!--Activity 生成bpmn流程图所需依赖-->
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-image-generator</artifactId>
-            <version>8.7.1</version>
+            <version>${activity.version}</version>
         </dependency>
-        <!-- Activiti 8.7.1 生成的流程图默认是 SVG 格式，但前端更常用 PNG/JPG。
+        <!-- Activiti 9.0.0 生成的流程图默认是 SVG 格式，但前端更常用 PNG/JPG。
              batik-codec 依赖是 Batik 的编解码模块，负责将 SVG（可缩放矢量图形）转换为其他格式（如 PNG、JPG、PDF 等）。-->
         <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
@@ -58,7 +60,7 @@
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>3.0.5</version>
+            <version>4.1.0</version>
         </dependency>
         <dependency>
             <groupId>com.mysql</groupId>
@@ -69,7 +71,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>33.5.0-jre</version>
+            <version>33.7.1-jre</version>
         </dependency>
 
         <dependency>

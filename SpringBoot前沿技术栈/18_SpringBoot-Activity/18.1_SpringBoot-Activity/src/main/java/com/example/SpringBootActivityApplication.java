@@ -2,6 +2,7 @@ package com.example;
 
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.RepositoryService;
+import org.jspecify.annotations.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,7 +22,7 @@ public class SpringBootActivityApplication implements CommandLineRunner {
     private RepositoryService repositoryService;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String @NonNull ... args) throws Exception {
         repositoryService.createDeployment()
                 .name("请假审批流程")
                 .addClasspathResource("processes/leaveFlow.bpmn20.xml")

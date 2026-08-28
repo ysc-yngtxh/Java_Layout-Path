@@ -4,22 +4,24 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.1.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>com.example</groupId>
+        <artifactId>18_SpringBoot-Activity</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
-    <groupId>com.example</groupId>
+
     <artifactId>18.2_SpringBoot-Activity-WorkFlow</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <description>${project.artifactId}</description>
 
     <properties>
         <java.version>26</java.version>
+        <activity.version>9.0.0</activity.version>
     </properties>
 
-    <!--添加 Activity8.x 所在的 alfresco 仓库地址-->
+    <!--添加 Activity 所在的 alfresco 仓库地址
+        Activity版本参考地址：https://artifacts.alfresco.com/nexus/#browse/browse:activiti-releases:org
+    -->
     <repositories>
         <repository>
             <id>activiti-releases</id>
@@ -40,7 +42,7 @@
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>3.0.5</version>
+            <version>4.1.0</version>
         </dependency>
 
         <!--注意⚠️：自 Activity 7.1.x 版本后官方不再将构建制品发布到 Maven 中央仓库了，而是发布在了 alfresco仓库，
@@ -49,14 +51,14 @@
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-spring-boot-starter</artifactId>
-            <!-- 版本号可通过 Github 仓库查看 -->
-            <version>8.7.1</version>
+            <version>${activity.version}</version>
+            <!-- Activity版本参考地址：https://artifacts.alfresco.com/nexus/#browse/browse:activiti-releases:org -->
         </dependency>
         <!--activity可以通过绘制流程的依赖-->
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-image-generator</artifactId>
-            <version>8.7.1</version>
+            <version>${activity.version}</version>
         </dependency>
 
         <dependency>

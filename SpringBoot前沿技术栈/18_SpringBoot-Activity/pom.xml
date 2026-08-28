@@ -9,6 +9,7 @@
         <version>4.1.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.example</groupId>
     <artifactId>18_SpringBoot-Activity</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -18,6 +19,7 @@
     <properties>
         <java.version>26</java.version>
     </properties>
+
     <packaging>pom</packaging>
     <modules>
         <module>18.1_SpringBoot-Activity</module>

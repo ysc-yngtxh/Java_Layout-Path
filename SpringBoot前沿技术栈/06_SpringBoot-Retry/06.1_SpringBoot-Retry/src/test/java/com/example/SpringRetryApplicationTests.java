@@ -1,6 +1,7 @@
-package com.example.spring;
+package com.example;
 
-import com.example.service.RetryService;
+import com.example.service.RetryAnnotationService;
+import com.example.service.RetryProgrammingService;
 import com.example.utils.RetryUtil;
 import java.util.HashMap;
 import java.util.Map;
@@ -60,19 +61,34 @@ class SpringRetryApplicationTests {
 
 
 	/**
-	 * Spring-Retry  注解的方式进行重试机制
+	 * Spring-Retry 声明式进行重试机制
 	 * 注意事项
 	 * 1、异常类型需要与Recover方法参数类型保持一致，且重试方法第一个参数必须为Throwable或其子类，否则找不到重试回调的方法；
 	 * 2、recover方法返回值需要与重试方法返回值保证一致
 	 */
 	@Autowired
-	private RetryService retryService;
+	private RetryAnnotationService retryAnnotationService;
 
 	// 这种就是与应用层相联系的重试机制
 	@Test
 	public void retry() {
-		boolean result = retryService.calls("abc");
+		boolean result = retryAnnotationService.calls("abc");
 		log.info("----结果是: {} --", result);
+	}
+
+
+	/**
+	 * Spring-Retry 编程式进行重试机制
+	 */
+	@Autowired
+	private RetryProgrammingService retryProgrammaticService;
+
+	// 这种就是与应用层相联系的重试机制
+	@Test
+	public void retry2() {
+        System.out.println("\n========== 开始测试 RetryTemplate ==========");
+        String result = retryProgrammaticService.executeWithRetry("test-id-001");
+        System.out.println("最终业务结果: " + result);
 	}
 
 }
