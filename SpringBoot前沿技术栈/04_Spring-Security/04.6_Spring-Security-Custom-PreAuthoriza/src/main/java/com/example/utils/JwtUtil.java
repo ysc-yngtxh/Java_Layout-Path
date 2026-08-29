@@ -6,15 +6,16 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.lang.Collections;
 import io.jsonwebtoken.security.Keys;
+
+import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
-import javax.crypto.SecretKey;
 
 /**
  * @author 游家纨绔
@@ -83,11 +84,11 @@ public class JwtUtil {
 
 		return Jwts.builder()
 		           .header().add(headerMap).and()    // 头部header
-		           .claims(payLoadMap)               // 负载
-		           .id(id)                        // 唯一标识Id
-		           .subject(subject)              // 主题
-		           .issuer(issuer)                // 签发者
-		           .issuedAt(now)              // 签发时间
+		           .claims(payLoadMap)        // 负载
+		           .id(id)                       // 唯一标识Id
+		           .subject(subject)                // 主题
+		           .issuer(issuer)                  // 签发者
+		           .issuedAt(now)               // 签发时间
 		           .expiration(expDate)             // 过期时间
 		           .signWith(secretKey)             // 签名算法和密钥
 		           .audience().add(audience).and(); // 接收者
@@ -95,19 +96,18 @@ public class JwtUtil {
 	private static SecretKey generalKey(String secret) {
 		// 1. 确定使用的密钥
 		String keyToUse = Objects.nonNull(secret) ? secret : JWT_SECRET;
-		// 2. Base64解码
-		byte[] decodedKey = Base64.getDecoder().decode(keyToUse);
-		// 3. 验证并确保密钥长度符合要求
-		if (decodedKey.length == 0) {
+        // 2. JWT 的 HMAC 签名算法（如 HS256）要求一个字节数组作为密钥，而非普通字符串。所以将密钥转为 byte 类型
+        byte[] keyBytes = keyToUse.getBytes(StandardCharsets.UTF_8);
+		// 3. JWT 规范要求 HMAC-SHA 算法的密钥至少需要 256 位（32字节），因此当密钥长度不够时做填充处理。
+		if (keyBytes.length == 0) {
 			throw new IllegalArgumentException("解码后的密钥不能为空");
 		}
-		// JWT 规范要求 HMAC-SHA 算法的密钥至少需要 256 位（32字节），因此当密钥长度不够时做填充处理。
-		if (decodedKey.length < 32) {
+		if (keyBytes.length < 32) {
 			// 警告：简单填充不是最佳实践，仅作为后备方案
-			System.err.println("警告：密钥长度不足，正在填充到最小长度。建议使用更强的密钥。");
-			decodedKey = Arrays.copyOf(decodedKey, 32);
+			System.err.println("警告：JWT密钥长度不足，系统正自动填充到最小长度。建议使用更强的密钥。");
+            keyBytes = Arrays.copyOf(keyBytes, 32);
 		}
-		return Keys.hmacShaKeyFor(decodedKey);
+		return Keys.hmacShaKeyFor(keyBytes);
 	}
 
 	/**

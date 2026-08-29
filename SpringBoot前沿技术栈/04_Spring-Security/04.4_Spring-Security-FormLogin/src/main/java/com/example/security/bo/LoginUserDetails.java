@@ -5,10 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serial;
 import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author 游家纨绔
@@ -24,15 +27,27 @@ public class LoginUserDetails implements UserDetails {
 
 	private transient User user;
 
-	/**
+    // 存储Security所需要的权限信息集合，这里权限敏感数据，不去做序列化
+    // 这里的SimpleGrantedAuthority类是GrantedAuthority类的实现类
+    // @JSONField(serialize = false) 或者使用 transient 关键字
+    private transient List<SimpleGrantedAuthority> authorityList;
+
+    public LoginUserDetails(User user) {
+        this.user = user;
+    }
+
+    /**
 	 * 返回用户的权限
-	 *
 	 * @return Collection<? extends GrantedAuthority>
 	 */
 	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
-	}
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (Objects.nonNull(authorityList)) {
+            return authorityList;
+        }
+        authorityList = user.getPermission().stream().map(SimpleGrantedAuthority::new).toList();
+        return authorityList;
+    }
 
 	/**
 	 * 原返回值是null，这里返回user的密码(需要注意的是：这里获取的密码是要和界面输入的密码进行进行比对的，所以要改成user的密码)

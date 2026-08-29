@@ -1,38 +1,192 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- TODO 使用<meta>标签来嵌入CSRF令牌。
               这种方法允许前端JavaScript代码方便地获取CSRF令牌和对应的请求头名称。 -->
-    <meta id="csrf-token" name="_csrf" th:content="${_csrf.token}"/>
     <meta id="csrf-header" name="_csrf_header" th:content="${_csrf.headerName}"/>
-    <title>ADMIN</title>
+    <meta id="csrf-token" name="_csrf" th:content="${_csrf.token}"/>
+    <title>管理后台 | ADMIN</title>
+
+    <!-- 引入 Font Awesome 图标库 (可选) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script type="text/javascript" th:src="@{/static/jquery-4.0.0.js}"></script>
 
     <style>
+        /* CSS 变量 - 主题色 */
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --bg: #f1f5f9;
+            --card-bg: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --radius: 16px;
+            --shadow: 0 20px 60px -12px rgba(0, 0, 0, 0.15);
+            --transition: 0.25s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--bg);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+        }
+
         .container {
-            max-width: 550px;
-            margin: 0 auto;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-        }
-        .input-group {
-            margin-bottom: 15px;
-        }
-        .input-group input {
+            max-width: 700px;
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 40px 48px;
+            text-align: center;
+            transition: var(--transition);
         }
-        .input-group input:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.25);
-            outline: none;
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 28px 20px;
+            }
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        h1 i {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 32px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 16px;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group input[type="submit"],
+        .input-group input[type="button"] {
+            width: 100%;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 500;
+            background: var(--primary);
+            color: #fff;
+            cursor: pointer;
+            transition: background var(--transition), transform 0.1s;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+            letter-spacing: 0.3px;
+        }
+
+        .input-group input[type="submit"]:hover,
+        .input-group input[type="button"]:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
+        }
+
+        .input-group input[type="submit"]:active,
+        .input-group input[type="button"]:active {
+            transform: translateY(0);
+        }
+
+        /* 不同按钮使用不同颜色 (通过类名区分) */
+        .btn-danger {
+            background: var(--danger) !important;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25) !important;
+        }
+        .btn-danger:hover {
+            background: #dc2626 !important;
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.35) !important;
+        }
+
+        .btn-success {
+            background: var(--success) !important;
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25) !important;
+        }
+        .btn-success:hover {
+            background: #16a34a !important;
+            box-shadow: 0 8px 20px rgba(34, 197, 94, 0.35) !important;
+        }
+
+        /* 成功提示信息块 */
+        .result-message {
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: #dcfce7;
+            border-radius: 10px;
+            color: #166534;
+            font-weight: 500;
+            visibility: hidden;  /* 由 JS 控制显示 */
+            transition: visibility 0.2s;
+            border: 1px solid #bbf7d0;
+        }
+
+        .result-message.visible {
+            visibility: visible;
+        }
+
+        /* 分隔装饰 */
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 28px 0 20px;
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+        }
+        .divider::before {
+            margin-right: 16px;
+        }
+        .divider::after {
+            margin-left: 16px;
+        }
+
+        /* 表单内联说明 */
+        .hint {
+            display: block;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 6px;
+        }
+
+        /* 图标辅助 */
+        .icon {
+            margin-right: 10px;
         }
     </style>
 
-    <script type="text/javascript" th:src="@{/static/jquery-4.0.0.js}"></script>
     <script>
         function getCsrfToken() {
             return document.querySelector('[name=_csrf]').content;
@@ -45,8 +199,8 @@
             // 从 Cookie 中提取 XSRF-TOKEN 的值
             const csrfToken = document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/, '$1');
             console.log("Cookie中解析出的 XSRF-TOKEN 值：" + csrfToken);
-            console.log("从视图中解析出的 ${_csrf.token} 值：" + getCsrfToken());
             console.log("从视图中解析出的 ${_csrf.headerName} 值：" + getCsrfHeader());
+            console.log("从视图中解析出的 ${_csrf.token} 值：" + getCsrfToken());
             let csrfHeaderName = getCsrfHeader();
             $.ajax({
                 url: "/xor",
@@ -56,7 +210,7 @@
                     [csrfHeaderName]: getCsrfToken()    // 'X-XSRF-TOKEN': csrfToken
                 },
                 success: function (data) {
-                    document.getElementById("xor").style.visibility = 'visible';
+                    document.getElementById("xor").classList.add('visible');
                 }
             })
         }
@@ -64,8 +218,8 @@
         function toCustom() {
             const csrfToken = document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/, '$1');
             console.log("Cookie中解析出的 XSRF-TOKEN 值：" + csrfToken);
-            console.log("从视图中解析出的 ${_csrf.token} 值：" + getCsrfToken());
             console.log("从视图中解析出的 ${_csrf.headerName} 值：" + getCsrfHeader());
+            console.log("从视图中解析出的 ${_csrf.token} 值：" + getCsrfToken());
             let csrfHeaderName = getCsrfHeader();
             $.ajax({
                 url: "/custom",
@@ -75,43 +229,66 @@
                     [csrfHeaderName]: csrfToken    // 'X-XSRF-TOKEN': csrfToken
                 },
                 success: function (data) {
-                    document.getElementById("custom").style.visibility = 'visible';
+                    document.getElementById("custom").classList.add('visible');
                 }
             })
         }
     </script>
 </head>
-<body style="text-align: center" class="container">
-    <h1>你好！访问 ADMIN 成功！</h1><br/>
 
-    <!-- post请求没有携带 csrf Token令牌，请求被拦截掉，报错 403 -->
-    <form action="/manager" method="post">
+<body>
+    <div class="container">
+        <!-- 标题区 -->
+        <h1><i class="fas fa-shield-alt"></i>你好！访问 ADMIN 成功！</h1>
+        <div class="subtitle">🔐 这里演示 Spring Security 的 CSRF 防护机制</div>
+
+        <!-- ===== 第1个按钮：不带 CSRF =====
+             post请求没有携带 csrf Token令牌，请求被拦截掉，报错 401 -->
         <div class="input-group">
-            <input type="submit" name="manager" value="表单提交，跳转/manager。按钮🔘"/>
+            <form action="/manager" method="post">
+                <input type="submit" value="⚠️ 表单提交 /manager（无 CSRF 令牌）" class="btn-danger"/>
+                <span class="hint">预期行为：401 Unauthorized（CSRF 拦截）</span>
+            </form>
         </div>
-    </form><br/>
 
-    <!-- 方法一：请求参数 _csrf 携带令牌 -->
-    <form action="/button" method="post">
+        <div class="divider">✦ 带 CSRF 令牌的提交方式 ✦</div>
+
+        <!-- ===== 第2个按钮：请求参数携带 =====
+             方法一：请求参数 _csrf 携带令牌 -->
         <div class="input-group">
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-            <input type="submit" name="name" value="表单提交，跳转/button，请求参数中携带 _csrf 令牌。按钮🔘"/>
+            <form action="/button" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                <input type="submit" value="✅ 表单提交 /button（参数携带 _csrf）" class="btn-success"/>
+                <span class="hint">通过隐藏域传递 CSRF 令牌</span>
+            </form>
         </div>
-    </form><br/>
 
-    <!-- 方法二：请求头 header 中携带 csrf 令牌 -->
-    <div class="input-group">
-        <input type="button" name="xor" value="跳转/xor，请求头携带 从视图中解析出的 ${_csrf.token} 令牌。按钮🔘" onclick="toXor()"/></br>
-        <h1 id="xor" style="visibility: hidden;">请求 Xor 路径成功！！！</h1>
+        <!-- ===== 第3个按钮：Ajax 携带视图中的 token =====
+             方法二：请求头 header 中携带 csrf 令牌 -->
+        <div class="input-group">
+            <input type="button" value="🚀 Ajax POST /xor（请求头携带视图 _csrf.token）" onclick="toXor()" style="background:#8b5cf6; box-shadow:0 4px 12px rgba(139,92,246,0.25);"/>
+            <div id="xor" class="result-message">
+                <i class="fas fa-check-circle"></i> 请求 Xor 路径成功！！！
+            </div>
+            <span class="hint">从 meta 中读取 CSRF 令牌并放入请求头</span>
+        </div>
+
+        <!-- ===== 第4个按钮：Ajax 携带 Cookie 中的 token =====
+             方法三：可以从 Cookie 中解析出CSRF令牌
+             TODO 当注释 SpringSecurity 的 csrfTokenRequestHandler 配置，那么使用的是默认 CSRF 处理器
+                  这时候Cookie 中的 XSRF-TOKEN令牌值 与视图中解析出的 CSRF令牌值 不是一致的。就会导致请求失败(403)-->
+        <div class="input-group">
+            <input type="button" value="🍪 Ajax POST /custom（请求头携带 Cookie 中 XSRF-TOKEN）" onclick="toCustom()" style="background:#0ea5e9; box-shadow:0 4px 12px rgba(14,165,233,0.25);"/>
+            <div id="custom" class="result-message">
+                <i class="fas fa-check-circle"></i> 请求 Custom 路径成功！！！
+            </div>
+            <span class="hint">从 Cookie 解析 XSRF-TOKEN 并放入请求头</span>
+        </div>
+
+        <!-- 底部提示 -->
+        <div style="margin-top: 28px; font-size:0.8rem; color:#94a3b8; border-top:1px solid #e2e8f0; padding-top:16px;">
+            <i class="fas fa-info-circle"></i> 注意：若未认证，先执行 Basic 登录，否则请求会返回 401
+        </div>
     </div>
-
-    <!-- 方法三：可以从 Cookie 中解析出CSRF令牌
-         TODO 当注释 SpringSecurity 的 csrfTokenRequestHandler 配置，那么使用的是默认 CSRF 处理器
-              这时候Cookie 中的 XSRF-TOKEN令牌值 与视图中解析出的 CSRF令牌值 不是一致的。就会导致请求失败(403)-->
-    <div class="input-group">
-        <input type="button" name="custom" value="跳转/custom，请求头携带Cookie中解析的 XSRF-TOKEN令牌值。按钮🔘" onclick="toCustom()"/></br>
-        <h1 id="custom" style="visibility: hidden;">请求 Custom 路径成功！！！</h1>
-    </div>
-
 </body>
 </html>
