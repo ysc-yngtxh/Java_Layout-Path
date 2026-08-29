@@ -21,7 +21,6 @@ import org.springframework.security.web.access.intercept.RequestAuthorizationCon
 import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Supplier;
