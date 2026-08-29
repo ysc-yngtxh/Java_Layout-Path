@@ -19,4 +19,5 @@ public class UserServiceImpl implements UserService {
 	public User queryUser(String name) {
 		return userMapper.selectByName(name);
 	}
+
 }

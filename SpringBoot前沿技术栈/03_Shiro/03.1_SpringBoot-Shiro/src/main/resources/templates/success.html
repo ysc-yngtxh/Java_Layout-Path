@@ -1,25 +1,167 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:shiro="http://www.thymeleaf.org/thymeleaf-extras-shiro">
+                xmlns:shiro="http://www.thymeleaf.org/thymeleaf-extras-shiro">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录成功 - 用户中心</title>
+    <style>
+        /* 全局基础样式 */
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px 0;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background: #2980b9;
+        }
+        .btn-danger {
+            background: #e74c3c;
+        }
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+        .btn-success {
+            background: #2ecc71;
+        }
+        .btn-success:hover {
+            background: #27ae60;
+        }
+        .action-group {
+            margin: 20px 0;
+            padding: 15px 0;
+            border-top: 1px solid #eee;
+        }
+        .action-group a {
+            margin-right: 15px;
+        }
+        .guest-message {
+            background: #f1c40f;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .auth-message {
+            background: #2ecc71;
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .permission-hint {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        /* 按钮行内排列 */
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+        .btn-group .btn {
+            margin: 0;
+        }
+        /* 让 shiro 标签包裹的元素不产生额外边距 */
+        shiro\:guest, shiro\:authenticated, shiro\:hasRole {
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
-    <!--<guest标签(与@RequiresGuest对应)，验证用户没有登录认证或被记住过，验证是否是一个guest的请求-->
-    <shiro:guest><h4>没有登陆</h4></shiro:guest>
-    <!--用户登陆验证后才能显示的标签。否则就会隐藏这条标签-->
-    <shiro:authenticated><h4>登陆成功</h4></shiro:authenticated>
+    <div class="container">
+        <!-- 头部 -->
+        <header>
+            <h1>👋 用户中心</h1>
+        </header>
 
-    <a href="/logout">登出</a><br><br><br>
+        <!-- 身份状态提示 -->
+        <section>
+            <!-- 未登录（guest）状态 -->
+            <shiro:guest>
+                <div class="guest-message">
+                    <strong>⚠️ 您尚未登录</strong> — 请先登录以使用全部功能。
+                </div>
+            </shiro:guest>
 
-    <a th:href="@{|/admin/test|}">需要有admin角色的功能</a><br><br><br>
-    <a th:href="@{|/admin/test2|}">需要有admin:add权限的功能</a><br><br><br>
-    <a th:href="@{|/user/test|}">需要有user角色的功能</a><br/><br/><br/>
+            <!-- 已登录（authenticated）状态 -->
+            <shiro:authenticated>
+                <div class="auth-message">
+                    <strong>✅ 登录成功</strong> — 欢迎回来！
+                </div>
+            </shiro:authenticated>
+        </section>
 
-    <button type="button" shiro:authenticated="ture">权限控制</button>
-    <shiro:hasRole name="admin">
-        <button type="button">权限控制</button>
-    </shiro:hasRole>
+        <!-- 登出操作 -->
+        <div style="margin: 20px 0;">
+            <a th:href="@{/logout}" class="btn btn-danger">登出</a>
+        </div>
+
+        <!-- 功能导航区 -->
+        <section class="action-group">
+            <h3>功能入口</h3>
+            <div class="btn-group">
+                <!-- 需要 admin 角色 -->
+                <a th:href="@{/admin/test}" class="btn btn-success">Admin 角色测试</a>
+                <!-- 需要 admin:add 权限 -->
+                <a th:href="@{/admin/test2}" class="btn btn-success">Admin:add 权限测试</a>
+                <!-- 需要 user 角色 -->
+                <a th:href="@{/user/test}" class="btn btn-success">User 角色测试</a>
+            </div>
+            <div class="permission-hint">
+                <span>💡 提示：部分链接需要对应角色或权限，无权限时将跳转或报错。</span>
+            </div>
+        </section>
+
+        <!-- 权限控制按钮示例 -->
+        <section class="action-group">
+            <h3>当前用户权限控制列表</h3>
+            <div class="btn-group">
+                <!-- 仅通过身份验证（authenticated）即可显示 -->
+                <button type="button" class="btn" shiro:authenticated="true">基础权限</button>
+
+                <!-- 需要 admin 角色才显示 -->
+                <shiro:hasRole name="admin">
+                    <button type="button" class="btn btn-success">管理员权限</button>
+                </shiro:hasRole>
+
+                <!-- 额外示例：如果没有任何角色，显示提示 -->
+                <shiro:lacksRole name="admin">
+                    <span style="color: #95a5a6; font-size: 0.9em;">（您没有 admin 角色，该按钮已隐藏）</span>
+                </shiro:lacksRole>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer style="margin-top: 40px; border-top: 1px solid #eee; padding-top: 15px; text-align: center; color: #95a5a6;">
+            <small>&copy; 2026 您的应用 &bull; 使用 Apache Shiro 进行权限管理</small>
+        </footer>
+    </div>
 </body>
 </html>

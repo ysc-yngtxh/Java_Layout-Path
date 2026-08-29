@@ -3,25 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
-    <script type="text/javascript" src="/js/md5.js"></script>
+    <style>
+        /* 将 body 设置为弹性容器，使子元素居中 */
+        body {
+            display: flex;
+            justify-content: center;   /* 水平居中 */
+            align-items: center;       /* 垂直居中 */
+            height: 100vh;             /* 视口高度，保证垂直方向铺满 */
+            margin: 0;                 /* 清除默认外边距 */
+            background: #f5f5f5;       /* 可选：加个浅色背景便于观察 */
+        }
+
+        /* 表单本身可增加内边距和阴影，显得更精致 */
+        form {
+            background: white;
+            padding: 2rem 3rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;        /* 让内部文本居中（如提示信息） */
+        }
+
+        /* 输入框和按钮可以适当美化 */
+        input[type="text"],
+        input[type="password"] {
+            width: 200px;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            padding: 8px 30px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background: #45a049;
+        }
+    </style>
+    <script type="text/javascript" th:src="@{/js/jquery-4.0.0.js}"></script>
+    <script type="text/javascript" th:src="@{/js/md5.js}"></script>
     <script type="text/javascript">
         $(function(){
-            $("#loginBut").click(function(){
-                let v_md5password = $.md5($("#password").val());
-                alert(v_md5password)
-                $("#md5Password").val(v_md5password)
-            })
-        })
+            $("#loginBut").click(function(e){
+                e.preventDefault();  // 阻止默认提交
+                let plainPwd = $("#password").val();
+                let v_md5password = md5(plainPwd);   // 注意是 md5() 不是 $.md5()
+                alert(v_md5password);
+                $("#md5Password").val(v_md5password);
+                $("form").submit();  // 手动提交
+            });
+        });
     </script>
 </head>
+
 <body>
     <form action="/login" method="post">
         账号<input type="text" name="username"><br>
         密码<input type="text" id="password"><br>
-        <input type="hidden" name="password" id="md5Password">
+        <input type="hidden" name="password" id="md5Password"><br>
         <input type="submit" value="登录" id="loginBut">
     </form>
     <span style="color: #e33434" th:text="${errorMessage}"></span>
 </body>
+
 </html>

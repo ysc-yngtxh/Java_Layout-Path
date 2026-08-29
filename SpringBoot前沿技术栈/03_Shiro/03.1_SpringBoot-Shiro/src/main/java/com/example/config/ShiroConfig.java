@@ -35,8 +35,10 @@ public class ShiroConfig {
 		 *    user:必须拥有 记住我 功能才能用
 		 *    perms:拥有对某个资源的权限才能访问
 		 * */
-		filterChainMap.put("/login", "anon");    // 配置登录请求不需要认证 anon表示某个请求不需要认证
-		filterChainMap.put("/logout", "logout"); // 配置登录的请求，登出后会请求当前用户的内存
+        filterChainMap.put("/",       "anon");    // 配置首页不需要认证
+        filterChainMap.put("/js/**",  "anon");    // 配置静态资源不需要认证
+		filterChainMap.put("/login",  "anon");    // 配置登录请求不需要认证
+		filterChainMap.put("/logout", "logout");  // 配置登录的请求，登出后会请空当前用户的内存
 
 		// 这后面注释的代码都是可以通过加注解的方式实现
 		// filterChainMap.put("/admin/**", "authc");配置一个user开头的所有的请求需要登陆 authc表示需要登录认证

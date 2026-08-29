@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -11,14 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletResponse;
-
 @Controller
 public class UserController {
 
 	@RequestMapping({"/", "/index"})
 	public String toIndex(Model model) {
-		model.addAttribute("msg", "hello Shiro");
+		model.addAttribute("msg", "Hello Shiro");
 		return "index";
 	}
 
@@ -47,7 +46,8 @@ public class UserController {
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 		// token.setRememberMe(true); // 设置记住我
 		try {
-			subject.login(token); // 执行登陆方法,即Shiro开始进行认证授权的工作
+			subject.login(token);     // 执行登陆方法，即Shiro开始进行认证授权的工作
+            model.addAttribute("msg", username);
 			return "index";
 		} catch (UnknownAccountException e) {
 			model.addAttribute("msg", "用户名错误");
@@ -57,6 +57,14 @@ public class UserController {
 			return "login";
 		}
 	}
+
+    @RequestMapping("/logout")
+    public String logout() {
+        Subject subject = SecurityUtils.getSubject();
+        // 登陆当前帐号，清空shiro当前用户的缓存，否则无法重新登陆
+        subject.logout();
+        return "redirect:/";
+    }
 
 	@RequestMapping("/noauto")
 	public @ResponseBody String authorization(HttpServletResponse response) {

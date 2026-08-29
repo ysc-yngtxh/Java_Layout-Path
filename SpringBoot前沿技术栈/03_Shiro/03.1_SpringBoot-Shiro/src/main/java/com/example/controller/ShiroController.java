@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class ShiroController {
 
+    @RequiresGuest // 这个注解表示当前用户必须是未认证的用户才能访问这个请求，已登录的用户访问这个请求会被Shiro拦截
 	@RequestMapping("/")
 	public String index() {
 		return "login";
@@ -64,7 +65,6 @@ public class ShiroController {
 		return "redirect:/";
 	}
 
-	@RequiresGuest
 	@RequestMapping("/success")
 	public String loginSuccess() {
 		return "success";

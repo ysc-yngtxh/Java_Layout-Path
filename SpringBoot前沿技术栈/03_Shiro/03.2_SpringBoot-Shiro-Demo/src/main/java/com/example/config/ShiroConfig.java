@@ -21,28 +21,36 @@ public class ShiroConfig {
 		// 设置安全管理器
 		bean.setSecurityManager(defaultWebSecurityManager);
 
+        // 1. 设置登录页（即认证失败后重定向的页面）
+        bean.setLoginUrl("/toLogin");       // 登录页地址(未认证的请求会转到登录页面)
+        bean.setUnauthorizedUrl("/noauto"); // 未授权页面
+
 		/* 添加shiro的内置过滤器
-		 *    anon:无需认证就可以访问
-		 *    authc:必须认证了才能访问
-		 *    role:拥有某个角色权限才能访问
-		 *    user:必须拥有用户功能才能用
-		 *    perms:拥有对某个资源的权限才能访问
-		 * */
-		Map<String, String> Map = new LinkedHashMap<>();
+		 *    anon:  无需认证就可以访问
+		 *    authc: 必须认证了才能访问
+		 *    role:  拥有某个角色权限才能访问
+		 *    user:  必须拥有用户功能才能用
+		 *    perms: 拥有对某个资源的权限才能访问
+		 */
+		Map<String, String> map = new LinkedHashMap<>();
 
-		// 授权了才能访问
-		Map.put("/user/update", "perms[user:update]");  // 授权要写在认证前面，否则会发生安全穿透
+        // 所有不需要认证的路径必须明确声明为 anon
+        map.put("/",        "anon");
+        map.put("/index",   "anon");
+        map.put("/toLogin", "anon");
+        map.put("/login",   "anon");
+        map.put("/noauto",  "anon");
+        map.put("/logout",  "logout");  // 配置登录的请求，登出后会请空当前用户的内存
+        // 静态资源（如果有）也要放行，例如：
+        // map.put("/css/**", "anon");
+        // map.put("/js/**", "anon");
 
+		// 设置认证或授权的路径，只有授权了才能访问
+		map.put("/user/update", "perms[user:update]");  // 授权要写在认证前面，否则会发生安全穿透
 		// 必须认证了才能访问
-		// Map.put("/user/*", "authc");
+		// map.put("/user/*", "authc");
 
-		bean.setFilterChainDefinitionMap(Map);
-
-		// 设置登陆的请求(未认证的请求会转到登录页面)
-		bean.setLoginUrl("/toLogin");
-		// 设置未授权的页面
-		bean.setUnauthorizedUrl("/noauto");
-
+		bean.setFilterChainDefinitionMap(map);
 		return bean;
 	}
 

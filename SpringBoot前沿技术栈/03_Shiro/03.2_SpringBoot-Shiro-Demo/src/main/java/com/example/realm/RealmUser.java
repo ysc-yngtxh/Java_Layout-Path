@@ -22,7 +22,7 @@ public class RealmUser extends AuthorizingRealm {
 	@Autowired
 	private UserService userService;
 
-	/* springboot集成shiro一定要加上这个，不然会报错。我找错误找了一个星期，
+	/* SpringBoot 集成 shiro 一定要加上这个，不然会报错。我找错误找了一个星期，
 	 * 期间还无数次熬夜通宵，很多次想放弃，皇天不负有心人，终于找到了这个😭😭😭😭😭
 	 */
 	// @Override
@@ -68,7 +68,7 @@ public class RealmUser extends AuthorizingRealm {
 		// 这里的话是用于在登陆后回到首页，没有登录标志
 		Subject subject1 = SecurityUtils.getSubject();
 		Session session = subject1.getSession();
-		session.setAttribute("loginuser", query);
+		session.setAttribute("loginUser", query);
 
 		return new SimpleAuthenticationInfo(query, query.getPwd(), "");
 		/* 参数一：用户的映射资源对象
@@ -76,4 +76,5 @@ public class RealmUser extends AuthorizingRealm {
 		 * 参数三：realm名字，随便取
 		 */
 	}
+
 }

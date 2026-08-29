@@ -46,7 +46,7 @@ public class MyRealm extends AuthorizingRealm {
 		}
 
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		info.setRoles(roles); // 设置角色信息
+		info.setRoles(roles);                   // 设置角色信息
 		info.setStringPermissions(permissions); // 设置权限信息
 		return info;
 	}
@@ -57,27 +57,26 @@ public class MyRealm extends AuthorizingRealm {
 	 * @param authenticationToken 用户身份 这里存放着用户的帐号和密码
 	 * @return 用户登陆成功后的身份证明
 	 * @throws AuthenticationException 如果认证失败 Shiro会抛出各种异常
-	 *                                 <p>
-	 *                                 常用异常：
-	 *                                 UnknownAccountException：账号不存在
-	 *                                 LockedAccountException：账号异常
-	 *                                 IncorrectCredentialsException：账户锁定异常(冻结异常)
-	 *                                 AuthenticationException：密码认证失败以后shiro自动抛出表示密码错误
-	 *                                 注意：
-	 *                                 如果这些异常不够用可以自定义异常类并继承Shiro认证异常父类AuthenticationException
+	 *   常用异常：
+	 *     UnknownAccountException：账号不存在
+	 *     LockedAccountException：账号异常
+	 *     IncorrectCredentialsException：账户锁定异常(冻结异常)
+	 *     AuthenticationException：密码认证失败以后shiro自动抛出表示密码错误
+	 *   注意：
+	 *   如果这些异常不够用可以自定义异常类并继承Shiro认证异常父类AuthenticationException
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
 		UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-		String username = token.getUsername(); // 获取页面中传递的用户账号
+		String username = token.getUsername();                   // 获取页面中传递的用户账号
 		String password = new String(token.getPassword()); // 获取页面中的用户密码。实际工作中基本不需要获取
-		System.out.println(username + "---" + password);
+		System.out.println("进入认证流程～：" + username + "---" + password);
 
 		if (!"admin".equals(username) && !"zhangsan".equals(username) && !"user".equals(username)) {
 			throw new UnknownAccountException(); // 抛出账号错误的异常
 		}
 		if ("zhangsan".equals(username)) {
-			throw new LockedAccountException(); // 抛出账号锁定异常
+			throw new LockedAccountException();  // 抛出账号锁定异常
 		}
 
 		/* 数据密码加密主要是防止数据在浏览器到后台服务器之间的数据传递时被篡改或被截获，因此应该在前端到后台的过程中进行加密，
@@ -91,7 +90,7 @@ public class MyRealm extends AuthorizingRealm {
 		 *    Object obj = new SimpleHash("MD5","123456","",2);
 		 */
 
-		return new SimpleAuthenticationInfo(username, "e10adc3949ba59abbe56e057f20f883e", getName());
+		return new SimpleAuthenticationInfo(username, password, getName());
 		/* 创建密码认证对象，由Shiro自动认证密码
 		 *     参数1：数据库中的账号(或页面账号均可)
 		 *     参数2：为数据库中读取数据来的密码
@@ -116,6 +115,6 @@ public class MyRealm extends AuthorizingRealm {
 		System.out.println("123456使用MD5加密1次后再对这个数据加密一次--" + obj3);
 
 		Object obj4 = new SimpleHash("MD5", "123456", "admin", 1);
-		System.out.println("123456使用MD5 加盐admin 加密1次--" + obj);
+		System.out.println("123456使用MD5 加盐admin 加密1次--" + obj4);
 	}
 }
