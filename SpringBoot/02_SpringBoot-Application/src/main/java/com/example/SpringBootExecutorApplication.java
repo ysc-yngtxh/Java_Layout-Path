@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.controller.MyController;
+import com.example.controller.SpringBootController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -10,7 +10,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @Description TODO Springboot项目启动入口类
  */
 @SpringBootApplication // Springboot核心注解，主要用于开启Spring自动配置
-public class FirstApplication {
+public class SpringBootExecutorApplication {
 
 	public static void main(String[] args) {
 		// TODO ⚠️
@@ -18,8 +18,8 @@ public class FirstApplication {
 		//  因为它们都是用来初始化 Spring 应用上下文的方法。通常情况下，你只需要使用其中一种方法。
 		//  如果你需要自定义 Spring 上下文的初始化过程，你可以使用 AnnotationConfigApplicationContext；
 		//  而如果你想要使用 SpringBoot 的自动配置和默认行为，你可以使用 SpringApplication.run 方式。
-		ConfigurableApplicationContext applicationContext = SpringApplication.run(FirstApplication.class, args);
+		ConfigurableApplicationContext applicationContext = SpringApplication.run(SpringBootExecutorApplication.class, args);
 
-		System.out.println(applicationContext.getBean("myController", MyController.class));
+		System.out.println(applicationContext.getBean("springBootController", SpringBootController.class));
 	}
 }

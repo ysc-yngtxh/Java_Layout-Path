@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.18</version>
+        <version>4.1.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
@@ -16,29 +16,29 @@
     <description>03_SpringBoot-Configuration</description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>26</java.version>
     </properties>
 
     <dependencies>
 
-        <!--解决使用@ConfigurationProperties 注解出现警告问题-->
+        <!--springboot框架web项目起步依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--解决使用 @ConfigurationProperties 注解出现警告问题-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <!--引入SpringBoot内嵌Tomcat对jsp的解析依赖，不添加解析不了jsp-->
+        <!--引入 SpringBoot 内嵌 Tomcat 对jsp的解析依赖，不添加解析不了jsp-->
         <!--仅仅只是展示jsp页面，只添加以下一个依赖-->
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
-        </dependency>
-
-        <!--springboot框架web项目起步依赖-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <!--springboot框架测试起步依赖-->
@@ -57,9 +57,9 @@
 
     <build>
         <!--
-            SpringBoot项目默认推荐使用的前端引擎是thymeleaf
-            现在我们要使用SpringBoot集成jsp，手动指定jsp最后编译的路径
-            而且SpringBoot集成jsp编译jsp的路径是SpringBoot规定好的位置 META-INF/resources
+            SpringBoot项目 默认推荐使用的前端引擎是 thymeleaf
+            现在我们要使用 SpringBoot 集成 jsp，手动指定 jsp 最后编译的路径
+            而且 SpringBoot 集成 jsp，编译jsp的路径是SpringBoot规定好的位置 META-INF/resources
         -->
         <resources>
             <resource>

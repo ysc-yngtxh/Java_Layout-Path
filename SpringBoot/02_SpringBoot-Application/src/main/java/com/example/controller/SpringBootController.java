@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author 游家纨绔
  */
 @Controller
-public class MyController {
+public class SpringBootController {
 
 	@RequestMapping("/say")
 	public @ResponseBody String say() {

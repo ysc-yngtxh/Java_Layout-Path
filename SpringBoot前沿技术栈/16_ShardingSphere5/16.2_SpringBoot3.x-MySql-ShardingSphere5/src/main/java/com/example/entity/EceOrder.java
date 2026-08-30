@@ -1,6 +1,5 @@
 package com.example.entity;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.AllArgsConstructor;
@@ -21,7 +20,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EceOrder implements Serializable {
-    @Serial
     private static final long serialVersionUID = 781386944648250417L;
 
     /**

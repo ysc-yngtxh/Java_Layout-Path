@@ -1,5 +1,5 @@
 /*
-一、SpringMVC:是基于spring的一个框架，实际上就是spring的一个模块，专门做web开发的。可以理解为是servlet的一个升级
+一、SpringMVC:是基于spring的一个框架，实际上就是Spring的一个模块，专门做web开发的。可以理解为是servlet的一个升级
 
           web开发底层是servlet，框架是在servlet基础上面加入一些功能，让你做web开发方便
 
@@ -324,4 +324,3 @@
            也将其存到ServletContext中，以便后续使用。这样每个servlet就持有自己的上下文，即拥有自己独立的bean空间，
            同时各个servlet共享相同的bean，即根上下文定义的那些bean。
 */
-
