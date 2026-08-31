@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <!--1、指定约束文件
+               <?xml version="1.0" encoding="UTF-8" ?>
+               <!DOCTYPE mapper
+                      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+               mybatis-3-mapper.dtd 是约束文件的名称，扩展名是dtd的。
+            2、约束文件作用：限制，检查在当前文件中出现的标签，属性必须符合 mybatis 的要求。
+            3、mapper是当前文件的根标签，必须的。
+               namespace：叫做命名空间，唯一值的，可以是自定义的字符串。
+                          要求使用 mapper 接口的全限定名称
+            4、在当前文件中，可以使用特定的标签，表示数据库的特定操作。
+               <select>：表示执行查询，select语句
+               <update>：表示更新数据库的操作，就是在<update>标签中 写的是update sql语句
+               <insert>：表示插入：放的是insert语句
+               <delete>：表示删除，执行的是delete语句
+        -->
+<mapper namespace="com.example.mapper.DeleteMapper">  <!--实体类的映射文件 namespace 指定接口的类全名-->
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from db_student
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+</mapper>

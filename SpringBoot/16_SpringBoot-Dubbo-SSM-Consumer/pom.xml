@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.18</version>
+        <version>4.1.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
@@ -16,8 +16,9 @@
     <description>16_SpringBoot-Dubbo-SSM-Consumer</description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>26</java.version>
     </properties>
+    <packaging>war</packaging>
 
     <dependencies>
         <!--springboot框架web项目起步依赖-->
@@ -81,31 +82,39 @@
 
     <build>
         <resources>
+            <!--
+                Spring Boot 项目默认推荐使用 Thymeleaf 作为前端模板引擎。
+                现在我们要集成 JSP，需要手动指定 JSP 文件的最终编译路径。
+                Spring Boot 内嵌 Tomcat 识别 JSP 的固定路径为 META-INF/resources，
+                所以我们需要将 src/main/webapp 下的内容复制到对应目录。
+            -->
+            <!-- 将 webapp 下的 JSP/静态资源复制到 META-INF/resources -->
             <resource>
-                <!--源文件夹-->
                 <directory>src/main/webapp</directory>
-                <!--指定编译到META-INF/resources-->
                 <targetPath>META-INF/resources</targetPath>
-                <!--指定源文件夹中哪个资源要进行编译-->
                 <includes>
-                    <include>*.*</include>
+                    <include>**/*</include>
                 </includes>
             </resource>
+
+            <!--
+                将 resources 目录下的配置/静态资源复制到 classpath 根目录
+                注意：Maven 默认只打包 src/main/resources，但一旦我们自定义了 <resources> 标签，就需要显式包含它，否则会被忽略。
+                此配置保证 application.properties、static... 等文件正常打包到 classpath 下。
+            -->
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>**/*.yml</include>
-                    <include>**/*.properties</include>
+                    <include>**/*</include>
                 </includes>
-                <filtering>true</filtering>
             </resource>
         </resources>
 
         <plugins>
+            <!-- Spring Boot 官方打包插件，用于生成可执行 jar/war 包 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.7.18</version>
             </plugin>
         </plugins>
     </build>

@@ -23,6 +23,7 @@
         <module>03_SpringBoot-漏斗</module>
         <module>04_SpringBoot-布隆过滤器</module>
     </modules>
+    <!-- 该配置表示这个项目本身不产生任何代码（不生成 Jar 或 War 包），它只生成一个 pom.xml 文件作为构件，专门用来管理其他项目。 -->
     <packaging>pom</packaging>
 
     <!--父管理依赖的版本号-->

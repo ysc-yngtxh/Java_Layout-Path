@@ -3,6 +3,12 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.1.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
     <groupId>com.example</groupId>
     <artifactId>14_SpringBoot-Dubbo-SSM-Interface</artifactId>
@@ -12,7 +18,37 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.36</version>
+            <optional>true</optional>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Spring Boot 官方打包插件，用于生成可执行 jar/war 包 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <!-- 由于当前项目是一个 接口/公共模块，通常只包含接口、DTO、枚举等，没有 @SpringBootApplication 标注的启动类。
+                     而 spring-boot-maven-plugin 插件中 repackage 功能会默认将项目打包成可执行的 SpringBoot Jar包，
+                     就是把一个普通的 Jar 包，改造成一个可以直接用 java -jar 命令运行的“可执行”包，这就必须要求项目中必须存在一个带有 main 方法的启动类。
+                     如果找不到，就会抛出 Unable to find main class 错误。因此为避免报错就需要配置 <skip>true</skip> 来跳过 repackage 功能。-->
+                <configuration>
+                    <skip>true</skip>   <!-- 跳过 repackage -->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

@@ -34,6 +34,7 @@
         <module>03.16_Sentinel-Push</module>
         <module>03.17_Seata</module>
     </modules>
+    <!-- 该配置表示这个项目本身不产生任何代码（不生成 Jar 或 War 包），它只生成一个 pom.xml 文件作为构件，专门用来管理其他项目。 -->
     <packaging>pom</packaging>
 
     <!--父管理依赖的版本号-->

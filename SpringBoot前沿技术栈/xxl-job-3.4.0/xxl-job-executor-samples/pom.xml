@@ -7,6 +7,7 @@
         <version>3.4.0-SNAPSHOT</version>
     </parent>
     <artifactId>xxl-job-executor-samples</artifactId>
+    <!-- 该配置表示这个项目本身不产生任何代码（不生成 Jar 或 War 包），它只生成一个 pom.xml 文件作为构件，专门用来管理其他项目。 -->
     <packaging>pom</packaging>
 
     <modules>

@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.config.UserService;
+import com.example.config.SetterService;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,8 +13,8 @@ public class InjectSpringBootApplication {
 	public static void main(String[] args) {
 		ConfigurableApplicationContext applicationContext = SpringApplication.run(InjectSpringBootApplication.class, args);
 		// 获取容器里面的对象，并调用方法测试属性是否完成自动注入
-		UserService userService = applicationContext.getBean("userService", UserService.class);
-		userService.test();
+		SetterService setterService = applicationContext.getBean("userService", SetterService.class);
+		setterService.injectMethod();
 	}
 
 	// TODO

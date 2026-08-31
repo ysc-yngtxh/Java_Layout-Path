@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <!--1、指定约束文件
+               <?xml version="1.0" encoding="UTF-8" ?>
+               <!DOCTYPE mapper
+                      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+               mybatis-3-mapper.dtd 是约束文件的名称，扩展名是dtd的。
+            2、约束文件作用：限制，检查在当前文件中出现的标签，属性必须符合 mybatis 的要求。
+            3、mapper是当前文件的根标签，必须的。
+               namespace：叫做命名空间，唯一值的，可以是自定义的字符串。
+                          要求使用 mapper 接口的全限定名称
+            4、在当前文件中，可以使用特定的标签，表示数据库的特定操作。
+               <select>：表示执行查询，select语句
+               <update>：表示更新数据库的操作，就是在<update>标签中 写的是update sql语句
+               <insert>：表示插入：放的是insert语句
+               <delete>：表示删除，执行的是delete语句
+        -->
+<mapper namespace="com.example.mapper.SelectMapper"> <!--实体类的映射文件 namespace 指定接口的类全名-->
+    <!--使用 resultMap 标签:
+             1、当数据库中字段名称与实体类对象的属性名不一致时，可以进行转换
+             2、当前查询的结果没有对象一个表的时候，可以自定义一个结果集
+          id：  自定义名称，表示你定义的这个resultMap名称
+          type：Java类型的全限定名称（这里 type 属性值爆红不影响使用：因为properties配置文件中设置了实体类的别名，因此不需要全限定类名）
+    -->
+    <resultMap id="baseResultMap" type="Student">
+        <!--id 标签用于定义主键字段
+               column    DB中的属性列名
+               property  Java类型中的属性名
+               jdbcType  属性列在数据库中字段的类型（可以省略不写）
+        -->
+        <id     column="id"    property="id"    jdbcType="INTEGER"/>
+        <!--result 标签用于定义非主键列-->
+        <result column="name"  property="name"  jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="age"   property="age"   jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--sql语句片段，将公共的部分抽取出来-->
+    <sql id="base_column_list">
+        id, name, email, age
+    </sql>
+
+    <!--select标签： 表示查询操作。
+        id：        表示要执行的 Sql映射配置 的唯一标识，Mybatis 会使用这个id的值来找到要执行的sql语句。
+                    可以自定义，但是要求是与使用接口中的方法名称保持一致。
+        resultType：表示结果类型的，是 Sql映射配置 执行后得到 ResultSet，得到Java对象的类型。
+                    值的类型是 Java对象全限定名称
+        parameterType：表示 mapper接口 中对应方法参数的数据类型（Java的数据类型全限定名称 或者 Mybatis定义的别名）
+            例如：parameterType="java.lang.Integer"
+                 parameterType="int"
+            注意：parameterType不是强制的，mybatis通过反射机制能够发现接口参数的数据类型。
+                 所以可以没有。一般我们也不写
+
+        使用 #{} 占位符，相当于 Mybatis 执行 SQL 使用的是 JDBC 中的 PreparedStatement对象
+        由 Mybatis 执行下面的代码：
+            1、Mybatis 创建 Connection、PreparedStatement对象
+               String sql = "select id,name,email,age from db_student where id=?";
+               PreparedStatement ps = conn.prepareStatement(sql);
+               ps.setInt(1,1001);
+            2、执行SQL封装为 resultType="com.example.Student" 这个对象
+               ResultSet rs = ps.executeQuery();
+               Student Student = null;
+               while(rs.next()) {
+                  Student = new Student();  // 从数据库取表的一行数据，存到一个Java对象属性中
+                  Student.setId(rs.getInt("id"));
+                  Student.setName(rs.getString("name"));
+                  Student.setEmail(rs.getString("email"));
+                  Student.setAge(rs.getInt("age"));
+               }
+               return Student; // 赋给了 mapper方法 的返回值
+    -->
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="baseResultMap">
+        select
+          <include refid="base_column_list"/><!--这里就没有查询字段，而是采用SQL语句片段-->
+        from db_student
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <!-- TODO 当方法需要多个参数时，可以使用 Map 或者 Java对象 作为传参值。
+              MyBatis 会通过反射机制来解析这个 Map/Java对象 的属性，我们可以使用 #{} 语法来直接引用这些属性。-->
+    <!-- 当方法传入参数是一个 Map 时，可直接使用 #{Key值} 的方式获取参数 -->
+    <select id="selectByMap" resultType="com.example.pojo.Student">
+        select id,name,email,age from db_student where name = #{name} and age = #{age} order by id
+    </select>
+    <!-- 当方法传入参数是一个 Java对象 时，可直接使用 #{对象属性名} 的方式获取参数
+         对象语法：#{属性名, javaType=类型名称, jdbcType=数据类型}
+                 javaType：指Java中的属性数据类型
+                 jdbcType：在数据库中的数据类型
+                 例如： #{name, javaType=java.lang.String, jdbcType=VARCHAR}
+         简化语法：#{属性名}。而 javaType、jdbcType 的值是可以通过 Mybatis 反射自动获取 -->
+    <select id="selectByObject" resultType="com.example.pojo.Student">
+        select id,name,email,age from db_student
+        where name = #{name, javaType=java.lang.String, jdbcType=VARCHAR} and age = #{age} order by id
+    </select>
+
+
+    <!-- TODO 当方法只有一个参数时，可以直接使用 #{参数名}、#{_parameter} 的方式获取参数 -->
+    <select id="selectStudentsSingleParam" resultType="com.example.pojo.Student">
+        select id,name,email,age from db_student where name = #{name}
+        union all
+        select id,name,email,age from db_student where name = #{_parameter}
+    </select>
+
+
+    <!-- TODO 当方法有多个参数时，直接使用 #{参数名} 的方式获取参数会报错 -->
+    <select id="selectStudentsPropertyParam" resultType="com.example.pojo.Student">
+        select id,name,email,age from db_student where name = #{name} and age = #{age}
+    </select>
+
+
+    <!-- TODO 当方法有多个参数时，MyBatis 默认会将参数封装为一个 Map。
+              可以使用 #{arg0}、#{arg1}、#{param1}、#{param2} 的方式获取参数.
+              写法可读性不高，不推荐这种写法-->
+    <select id="selectStudentsReflect" resultType="com.example.pojo.Student">
+        select id,name,email,age from db_student where name = #{arg0} and age = #{arg1}
+        union all
+        select id,name,email,age from db_student where name = #{param1} and age = #{param2}
+    </select>
+
+
+    <!-- TODO 当方法有多个参数时，推荐使用@Param注解的方式获取参数 -->
+    <select id="selectStudentsAnnotationParam" resultType="com.example.pojo.Student">
+        select id,name,email,age from db_student where name = #{name} and age = #{age}
+    </select>
+
+</mapper>

@@ -61,8 +61,7 @@
                     <include>**/*.properties</include>
                     <include>**/*.xml</include>
                 </includes>
-                <filtering>false
-                </filtering>  <!--filtering选项false不启用过滤器，#.properties已经起到了过滤器的作用-->
+                <filtering>false</filtering>  <!--filtering选项false不启用过滤器，#.properties已经起到了过滤器的作用-->
             </resource>
         </resources>
     </build>

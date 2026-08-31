@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.1.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>com.example</groupId>
+    <artifactId>04_SpringBoot-War</artifactId>
+    <version>1.0.0</version>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
+
+    <properties>
+        <java.version>26</java.version>
+    </properties>
+
+    <!--修改当前项目打包为 war包 方式-->
+    <packaging>war</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- 以下依赖提供了 JSP 引擎（Jasper），让 Tomcat 具备编译 .jsp 文件的能力。
+             但还是推荐 SpringBoot 项目集成 Thymeleaf模板，实现页面渲染。-->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!--指定打war包的文件名称-->
+        <finalName>SpringBootWar</finalName>
+
+        <resources>
+            <!--
+                Spring Boot 项目默认推荐使用 Thymeleaf 作为前端模板引擎。
+                现在我们要集成 JSP，需要手动指定 JSP 文件的最终编译路径。
+                Tomcat 识别 JSP 的固定路径为 META-INF/resources，所以我们需要将 src/main/webapp 下的内容复制到对应目录。
+            -->
+            <!-- 将 webapp 下的 JSP/静态资源复制到 META-INF/resources -->
+            <resource>
+                <directory>src/main/webapp</directory>
+                <targetPath>META-INF/resources</targetPath>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+
+            <!--
+                注意：Maven 默认只打包 src/main/resources，但一旦我们自定义了 <resources> 标签，就需要显式包含它，否则会被忽略。
+                此配置将 resources 目录下的配置/静态资源复制到 classpath 根目录，保证 application.properties、static... 等文件正常打包到 classpath 下。
+            -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+        </resources>
+
+        <!-- Spring Boot 项目打包编译的插件 -->
+        <plugins>
+            <!-- Spring Boot 官方打包插件，用于生成可执行 jar/war 包 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+    </build>
+
+</project>
