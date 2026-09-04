@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.1.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.example</groupId>
+    <artifactId>19_SpringBoot-Dubbo-SSM-Consumer</artifactId>
+    <version>1.0.0</version>
+    <name>19_SpringBoot-Dubbo-SSM-Consumer</name>
+    <description>19_SpringBoot-Dubbo-SSM-Consumer</description>
+
+    <properties>
+        <java.version>26</java.version>
+    </properties>
+    <packaging>war</packaging>
+
+    <dependencies>
+        <!--springboot框架web项目起步依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--Dubbo集成SpringBoot框架起步依赖-->
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+        <!--Apache Dubbo 官方提供的一个 Spring Boot Starter 组件，
+            其核心作用是 简化 Dubbo 与 Zookeeper 注册中心的集成，实现开箱即用的服务注册与发现功能。
+        -->
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-zookeeper-spring-boot-starter</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+
+        <!--zookeeper注册中心
+            zookeeper 依赖属于官方apache提供的客户端。
+                      Apache ZooKeeper团队维护的原生Java客户端，提供原生、底层的 ZooKeeper 客户端 API。
+            zkclient 依赖属于第三方zookeeper客户端。
+                     基于 ZooKeeper 原生客户端的简化封装库，旨在提供更简洁的 API 和增强功能。
+            dubbo-zookeeper-spring-boot-starter 依赖中包含了 zookeeper 依赖，因此不需要另添加 zookeeper 依赖
+        -->
+        <!--<dependency>-->
+        <!--    <groupId>com.github.adyliu</groupId>-->
+        <!--    <artifactId>zkclient</artifactId>-->
+        <!--    <version>2.2.0</version>-->
+        <!--    <exclusions>-->
+        <!--        <exclusion>-->
+        <!--            <groupId>org.apache.zookeeper</groupId>-->
+        <!--            <artifactId>zookeeper</artifactId>-->
+        <!--        </exclusion>-->
+        <!--    </exclusions>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--    <groupId>org.apache.zookeeper</groupId>-->
+        <!--    <artifactId>zookeeper</artifactId>-->
+        <!--    <version>3.9.3</version>-->
+        <!--</dependency>-->
+
+        <!--接口工程-->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>17_SpringBoot-Dubbo-SSM-Interface</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <!--springboot集成Jsp，仅仅只是展示jsp页面需要添加解析jsp页面的依赖-->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <!--
+                Spring Boot 项目默认推荐使用 Thymeleaf 作为前端模板引擎。
+                现在我们要集成 JSP，需要手动指定 JSP 文件的最终编译路径。
+                Spring Boot 内嵌 Tomcat 识别 JSP 的固定路径为 META-INF/resources，
+                所以我们需要将 src/main/webapp 下的内容复制到对应目录。
+            -->
+            <!-- 将 webapp 下的 JSP/静态资源复制到 META-INF/resources -->
+            <resource>
+                <directory>src/main/webapp</directory>
+                <targetPath>META-INF/resources</targetPath>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+
+            <!--
+                将 resources 目录下的配置/静态资源复制到 classpath 根目录
+                注意：Maven 默认只打包 src/main/resources，但一旦我们自定义了 <resources> 标签，就需要显式包含它，否则会被忽略。
+                此配置保证 application.properties、static... 等文件正常打包到 classpath 下。
+            -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+        </resources>
+
+        <plugins>
+            <!-- Spring Boot 官方打包插件，用于生成可执行 jar/war 包 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
