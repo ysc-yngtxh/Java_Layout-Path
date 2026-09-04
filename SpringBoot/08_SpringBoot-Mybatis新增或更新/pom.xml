@@ -11,10 +11,10 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>08_SpringBoot-Mybatis-FindBigDate-InsertSlow</artifactId>
+    <artifactId>08_SpringBoot-Mybatis-InsertOrUpdate</artifactId>
     <version>1.0.0</version>
-    <name>08_SpringBoot-Mybatis大数据量查询及插入慢问题</name>
-    <description>08_SpringBoot-Mybatis大数据量查询及插入慢问题</description>
+    <name>08_SpringBoot-Mybatis新增或更新</name>
+    <description>08_SpringBoot-Mybatis新增或更新</description>
 
     <properties>
         <java.version>26</java.version>
@@ -27,27 +27,27 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!--MySQL驱动-->
+        <!--mysql驱动-->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
         </dependency>
 
-        <!--mybatis框架整合springboot框架的起步依赖-->
+        <!--mybatis框架-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>4.1.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>33.7.1-jre</version>
-        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <scope>provided</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
     </dependencies>
 
