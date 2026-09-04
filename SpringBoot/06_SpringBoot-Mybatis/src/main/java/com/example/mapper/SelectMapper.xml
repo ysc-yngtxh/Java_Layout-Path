@@ -18,64 +18,98 @@
                <delete>：表示删除，执行的是delete语句
         -->
 <mapper namespace="com.example.mapper.SelectMapper"> <!--实体类的映射文件 namespace 指定接口的类全名-->
+
     <!--使用 resultMap 标签:
              1、当数据库中字段名称与实体类对象的属性名不一致时，可以进行转换
              2、当前查询的结果没有对象一个表的时候，可以自定义一个结果集
           id：  自定义名称，表示你定义的这个resultMap名称
           type：Java类型的全限定名称（这里 type 属性值爆红不影响使用：因为properties配置文件中设置了实体类的别名，因此不需要全限定类名）
     -->
-    <resultMap id="baseResultMap" type="Student">
+    <resultMap id="baseResultMap" type="Course">
         <!--id 标签用于定义主键字段
                column    DB中的属性列名
                property  Java类型中的属性名
-               jdbcType  属性列在数据库中字段的类型（可以省略不写）
+               jdbcType  属性列在数据库中字段的类型
+               javaType  属性列在 Java 实体类中的类型（MyBatis 能通过反射拿到字段类型，javaType 是完全可以省略不写的）
         -->
-        <id     column="id"    property="id"    jdbcType="INTEGER"/>
-        <!--result 标签用于定义非主键列-->
-        <result column="name"  property="name"  jdbcType="VARCHAR"/>
-        <result column="email" property="email" jdbcType="VARCHAR"/>
-        <result column="age"   property="age"   jdbcType="INTEGER"/>
+        <id     column="id"           property="id"          jdbcType="INTEGER"   javaType="java.lang.Integer"/>
+        <!-- result 标签用于定义非主键列 -->
+        <result column="course_code"  property="courseCode"  jdbcType="VARCHAR"   javaType="java.lang.String"/>
+        <result column="course_name"  property="courseName"  jdbcType="VARCHAR"   javaType="java.lang.String"/>
+        <!-- 注意！jdbcType 必须写成 DECIMAL（或 NUMERIC），javaType 写全限定名 -->
+        <result column="credit"       property="credit"      jdbcType="DECIMAL"   javaType="java.math.BigDecimal"/>
+        <result column="hours"        property="hours"       jdbcType="INTEGER"   javaType="java.lang.Integer"/>
+        <result column="teacher_id"   property="teacherId"   jdbcType="INTEGER"   javaType="java.lang.Integer"/>
+        <result column="max_students" property="maxStudents" jdbcType="INTEGER"   javaType="java.lang.Integer"/>
+        <result column="description"  property="description" jdbcType="VARCHAR"   javaType="java.lang.String"/>
+        <result column="status"       property="status"      jdbcType="VARCHAR"   javaType="java.lang.String"/>
+        <!-- 时间戳类型，用 TIMESTAMP 对应 LocalDateTime -->
+        <result column="created_at"   property="createdAt"   jdbcType="TIMESTAMP" javaType="java.time.LocalDateTime"/>
+        <result column="updated_at"   property="updatedAt"   jdbcType="TIMESTAMP" javaType="java.time.LocalDateTime"/>
     </resultMap>
 
     <!--sql语句片段，将公共的部分抽取出来-->
     <sql id="base_column_list">
-        id, name, email, age
+        id, course_code, course_name, credit, hours, teacher_id, max_students, description, status, created_at, updated_at
     </sql>
 
     <!--select标签： 表示查询操作。
-        id：        表示要执行的 Sql映射配置 的唯一标识，Mybatis 会使用这个id的值来找到要执行的sql语句。
-                    可以自定义，但是要求是与使用接口中的方法名称保持一致。
-        resultType：表示结果类型的，是 Sql映射配置 执行后得到 ResultSet，得到Java对象的类型。
-                    值的类型是 Java对象全限定名称
+        id：        表示要执行的 Sql映射配置 的唯一标识，Mybatis 会使用这个id的值来找到要执行的Sql语句。
+                    id值可以自定义，但是要求是与使用接口中的方法名称保持一致。
         parameterType：表示 mapper接口 中对应方法参数的数据类型（Java的数据类型全限定名称 或者 Mybatis定义的别名）
-            例如：parameterType="java.lang.Integer"
-                 parameterType="int"
-            注意：parameterType不是强制的，mybatis通过反射机制能够发现接口参数的数据类型。
-                 所以可以没有。一般我们也不写
+                    例如：parameterType="java.lang.Integer"
+                         parameterType="int"
+                    注意：parameterType不是强制的，mybatis通过反射机制能够发现接口参数的数据类型。
+                         所以可以没有。一般我们也不写
+        resultType：表示结果类型的，是 Sql映射配置 执行后得到 ResultSet，得到Java对象的类型。
+                    resultType值的类型是 Java对象全限定名称
 
-        使用 #{} 占位符，相当于 Mybatis 执行 SQL 使用的是 JDBC 中的 PreparedStatement对象
+        使用 #{} 占位符，相当于 Mybatis 执行 SQL 使用的是 JDBC 中的 PreparedStatement对象（预编译，防止Sql注入）
         由 Mybatis 执行下面的代码：
             1、Mybatis 创建 Connection、PreparedStatement对象
-               String sql = "select id,name,email,age from db_student where id=?";
+               String sql = "select * from db_course where id=?";
                PreparedStatement ps = conn.prepareStatement(sql);
-               ps.setInt(1,1001);
+               ps.setInt(1, 1001);
             2、执行SQL封装为 resultType="com.example.Student" 这个对象
                ResultSet rs = ps.executeQuery();
                Student Student = null;
                while(rs.next()) {
                   Student = new Student();  // 从数据库取表的一行数据，存到一个Java对象属性中
                   Student.setId(rs.getInt("id"));
-                  Student.setName(rs.getString("name"));
-                  Student.setEmail(rs.getString("email"));
-                  Student.setAge(rs.getInt("age"));
+                  Student.setName(rs.getString("course_code"));
+                  Student.setEmail(rs.getString("course_name"));
+                  ...
                }
                return Student; // 赋给了 mapper方法 的返回值
     -->
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="baseResultMap">
         select
           <include refid="base_column_list"/><!--这里就没有查询字段，而是采用SQL语句片段-->
-        from db_student
+        from db_course
         where id = #{id,jdbcType=INTEGER}
+    </select>
+    <!-- 当 db 中字段与Java对象属性名不一致时，除了使用 resultMap 标签进行映射。还可以通过 别名（Alias） 进行映射 -->
+    <select id="selectByPrimaryKeyToAliasProperty" parameterType="java.lang.Integer" resultType="com.example.pojo.Course">
+        select
+            id,
+            course_code as courseCode,
+            course_name as courseName,
+            credit,
+            hours,
+            teacher_id as teacherId,
+            max_students as maxStudents,
+            description,
+            status,
+            created_at as createdAt,
+            updated_at as updatedAt
+        from db_course
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <!-- TODO 当方法的返回值类型希望是一个 Map 时，可通过 resultType="java.util.Map" 来指定 -->
+    <select id="selectByPrimaryKeyToMap" resultType="java.util.Map">
+        select id,name,email,age from db_student where id = #{id}
     </select>
 
 
@@ -112,8 +146,7 @@
 
 
     <!-- TODO 当方法有多个参数时，MyBatis 默认会将参数封装为一个 Map。
-              可以使用 #{arg0}、#{arg1}、#{param1}、#{param2} 的方式获取参数.
-              写法可读性不高，不推荐这种写法-->
+              可以使用 #{arg0}、#{arg1}、#{param1}、#{param2} 的方式获取参数。该写法可读性不高，不推荐这种写法-->
     <select id="selectStudentsReflect" resultType="com.example.pojo.Student">
         select id,name,email,age from db_student where name = #{arg0} and age = #{arg1}
         union all
@@ -121,9 +154,47 @@
     </select>
 
 
-    <!-- TODO 当方法有多个参数时，推荐使用@Param注解的方式获取参数 -->
+    <!-- TODO 当方法有多个参数时，推荐使用 @Param注解 的方式获取参数 -->
     <select id="selectStudentsAnnotationParam" resultType="com.example.pojo.Student">
         select id,name,email,age from db_student where name = #{name} and age = #{age}
     </select>
 
+
+    <select id="findById" resultMap="baseResultMap">
+        select *
+        from db_course
+        where id = #{id,jdbcType=INTEGER}
+        <where>
+            <if test="course.id != null">
+                and id >= #{course.id}
+            </if>
+            <if test="course.hours != null">
+                <!-- 在 XML 文件中，小于号 '<' 是一个特殊的字符，因为它用于标记 XML 标签的开始。
+                     小于号'<' 可以看成是标签的 '<'左符号，所以需要通过转义，使其能够正常解析成 Sql 语句。 -->
+                <!-- and hours < #{course.hours} -->
+            </if>
+            <if test="course.teacherId != null">
+                -- 第一种方式：使用xml 原生转义的方式进行转义
+                and teacher_id &lt; #{course.teacherId}
+            </if>
+            <if test="course.maxStudents != null">
+                -- 第二种方式：使用 <![CDATA[ 内容 ]]> 转义
+                and max_students <![CDATA[ < ]]> #{course.maxStudents}
+            </if>
+        </where>
+    </select>
+
+    <!--方法一：使用xml 原生转义的方式进行转义-->
+    <!--TODO 字符名称	sql符号	 转义字符   -->
+    <!--     大于号	      >	       &gt;    -->
+    <!--     小于号	      <	       &lt;    -->
+    <!--     不等于	      <>	   &lt;&gt;-->
+    <!--     大于等于号	  >=	   &gt;=   -->
+    <!--     小于等于号	  <=	   &lt;=   -->
+    <!--     与	          &	       &amp;   -->
+    <!--     单引号	      '	       &apos;  -->
+    <!--     双引号	      "	       &quot;  -->
+
+    <!--方法二：使用 <![CDATA[ 内容 ]]> -->
+    <!--在 xml 格式中，当遇到 <![CDATA[ ]]> 这种格式时，会把方块中的内容直接输出，不做任何的解析转义-->
 </mapper>

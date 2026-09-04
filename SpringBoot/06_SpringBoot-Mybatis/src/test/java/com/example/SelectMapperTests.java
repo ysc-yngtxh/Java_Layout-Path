@@ -1,6 +1,7 @@
 package com.example;
 
 import com.example.mapper.SelectMapper;
+import com.example.pojo.Course;
 import com.example.pojo.Student;
 import java.util.List;
 import java.util.Map;
@@ -10,14 +11,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class TestMappingParam {
+public class SelectMapperTests {
 
     @Autowired
-    private SelectMapper studentMapper;
+    private SelectMapper selectMapper;
 
+    // 使用 resultMap 标签，用以 Java类属性 与 DB中的字段映射
+	@Test
+	public void selectByPrimaryKey() {
+		Course course = selectMapper.selectByPrimaryKey(1);
+		System.out.println("课程 = " + course);
+	}
+
+    // 使用 别名，用以 DB中的字段 映射 Java类属性
+	@Test
+	public void selectByPrimaryKeyToAliasProperty() {
+		Course course = selectMapper.selectByPrimaryKeyToAliasProperty(1);
+		System.out.println("课程 = " + course);
+	}
+
+    // 使用 Map 作为返回值类型
+	@Test
+	public void selectByPrimaryKeyToMap() {
+		Map<Object, Object> courseMap = selectMapper.selectByPrimaryKeyToMap(1);
+		System.out.println("课程 = " + courseMap);
+	}
+
+    // Mybatis 的映射 Sql 方法参数为 Map 类型
 	@Test
 	public void selectByMap() {
-		List<Student> Students = studentMapper.selectByMap(
+		List<Student> Students = selectMapper.selectByMap(
                 Map.of("name", "敏敏", "age", 22)
         );
 		for (Student stu : Students) {
@@ -25,10 +48,11 @@ public class TestMappingParam {
 		}
 	}
 
+    // Mybatis 的映射 Sql 方法参数为 Java对象
 	@Test
 	public void selectByObject() {
         Student student = Student.builder().name("敏敏").age(22).build();
-        List<Student> Students = studentMapper.selectByObject(student);
+        List<Student> Students = selectMapper.selectByObject(student);
 		for (Student stu : Students) {
 			System.out.println("学生 = " + stu);
 		}
@@ -38,7 +62,7 @@ public class TestMappingParam {
 	// MyBatis 可以直接将单个参数作为 SQL 语句的参数，无需额外的映射。
 	@Test
 	public void selectStudentsSingleParam() {
-		List<Student> Students = studentMapper.selectStudentsSingleParam("敏敏");
+		List<Student> Students = selectMapper.selectStudentsSingleParam("敏敏");
 		for (Student stu : Students) {
 			System.out.println("学生 = " + stu);
 		}
@@ -68,12 +92,12 @@ public class TestMappingParam {
 	//                    </plugins>
 	//                </build>
 	@Test
-	public void selectStudentsParam() {
+	public void selectStudentsPropertyParam() {
 		// Mybatis 中通过反射获取到方法的参数名称：method.getParameters()
 		// jdk1.8之前：通过反射获取到的参数名为[arg0、arg1]、[param1、param2]
 		// jdk1.8之后：可以在编译时添加 -parameters 参数来保留方法参数名。
 		//            这样通过反射获取到的参数名为参数的变量名，即：name、age。。。
-		List<Student> Students = studentMapper.selectStudentsPropertyParam("敏敏", 22);
+		List<Student> Students = selectMapper.selectStudentsPropertyParam("敏敏", 22);
 		for (Student stu : Students) {
 			System.out.println("学生 = " + stu);
 		}
@@ -85,7 +109,7 @@ public class TestMappingParam {
 	@Test
 	public void selectStudentsReflect() {
 		// 这种写法可读性不高，不推荐使用
-		List<Student> Students = studentMapper.selectStudentsReflect("敏敏", 22);
+		List<Student> Students = selectMapper.selectStudentsReflect("敏敏", 22);
 		for (Student stu : Students) {
 			System.out.println("学生 = " + stu);
 		}
@@ -95,7 +119,7 @@ public class TestMappingParam {
 	@Test
 	public void selectStudentsAnnotationParam() {
 		// 所以，基于上述存在的问题：当查询中存在多个参数值时，需要使用注解 @Param 进行指定映射
-		List<Student> Students = studentMapper.selectStudentsAnnotationParam("敏敏", 22);
+		List<Student> Students = selectMapper.selectStudentsAnnotationParam("敏敏", 22);
 		for (Student stu : Students) {
 			System.out.println("学生 = " + stu);
 		}

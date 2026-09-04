@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <!--1、指定约束文件
+               <?xml version="1.0" encoding="UTF-8" ?>
+               <!DOCTYPE mapper
+                      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+               mybatis-3-mapper.dtd 是约束文件的名称，扩展名是dtd的。
+            2、约束文件作用：限制，检查在当前文件中出现的标签，属性必须符合 mybatis 的要求。
+            3、mapper是当前文件的根标签，必须的。
+               namespace：叫做命名空间，唯一值的，可以是自定义的字符串。
+                          要求使用 mapper 接口的全限定名称
+            4、在当前文件中，可以使用特定的标签，表示数据库的特定操作。
+               <select>：表示执行查询，select语句
+               <update>：表示更新数据库的操作，就是在<update>标签中 写的是update sql语句
+               <insert>：表示插入：放的是insert语句
+               <delete>：表示删除，执行的是delete语句
+        -->
+<mapper namespace="com.example.mapper.SelectResultMapMapper"> <!--实体类的映射文件 namespace 指定接口的类全名-->
+
+    <!-- TODO type：Java类型的全限定名称
+              autoMapping=true（自动映射）: 当Java实体类的属性名和DB中的字段名一致，自动映射-->
+    <resultMap id="studentWithProfileResultMap" type="com.example.pojo.Student" autoMapping="true">
+        <id     column="id"            property="id"/>            <!-- id标签：主键字段映射（必须要写）-->
+        <result column="name"          property="name"/>          <!-- result标签：非主键字段映射（同名可不写，推荐写）-->
+        <result column="teacher_id"    property="teacherId"/>     <!-- result标签：非主键字段映射（属性名有差异，必须写）-->
+        <result column="department_id" property="departmentId"/>  <!-- result标签：非主键字段映射（属性名有差异，必须写）-->
+        <!--这后面还有映射属性没写，但是我加了 autoMapping="true" 属性，可以自动映射（必须是同名，属性名称无差异）-->
+
+        <!-- 关系：一名学生对应一份档案（一对一）
+                 1、association : 一对一
+                 2、collection  : 一对多、多对多
+             <association> 标签
+                 1、property: 属性名（Student实体类中对应的属性名studentProfile）
+                 2、javaType: 此属性的类型
+             子标签: 设置user和结果集之间的映射
+                    注意 最左原则
+        -->
+        <association property="studentProfile" javaType="com.example.pojo.StudentProfile" autoMapping="true">
+            <id column="pid"                   property="id"/> <!-- pid 是查询结果集中 db_course 主键的别名 -->
+            <result column="student_id"        property="studentId"/>
+            <result column="emergency_contact" property="emergencyContact"/>
+            <result column="emergency_phone"   property="emergencyPhone"/>
+            <result column="birth_date"        property="birthDate"/>
+            <result column="political_status"  property="politicalStatus"/>
+            <result column="created_at"        property="createdAt"/>
+            <result column="updated_at"        property="updatedAt"/>
+            <!--这后面还有映射属性没写，但是我加了 autoMapping="true" 属性，可以自动映射（必须是同名，属性名称无差异）-->
+        </association>
+    </resultMap>
+
+    <select id="selectStudentWithProfile" resultMap="studentWithProfileResultMap">
+        SELECT
+            s.*,
+            p.id AS pid,  <!-- 返回结果中存在两个 id 属性，因此需要通过别名做区分 -->
+            p.student_id,
+            p.address,
+            p.emergency_contact,
+            p.emergency_phone,
+            p.birth_date,
+            p.political_status,
+            p.hobby,
+            p.bio,
+            p.created_at,
+            p.updated_at
+        FROM db_student s
+        LEFT JOIN db_student_profile p ON s.id = p.student_id
+        WHERE s.id = #{id}
+    </select>
+
+
+
+
+    <resultMap id="departmentWithStudentsResultMap" type="com.example.pojo.Department" autoMapping="true">
+        <id     column="id"         property="id"/>          <!-- id标签：主键字段映射（必须要写）-->
+        <result column="del_flag"    property="delFlag"/>    <!-- result标签：非主键字段映射（属性名有差异，必须写）-->
+        <result column="create_time" property="createTime"/> <!-- result标签：非主键字段映射（属性名有差异，必须写）-->
+        <result column="update_time" property="updateTime"/> <!-- result标签：非主键字段映射（属性名有差异，必须写）-->
+        <!--这后面还有映射属性没写，但是我加了 autoMapping="true" 属性，可以自动映射（必须是同名，属性名称无差异）-->
+
+        <!-- 关系：一个院系（Department）有多个学生（Student），但一个学生只能属于一个院系。（一对多）
+                 1、association : 一对一
+                 2、collection  : 一对多、多对多
+             <collection> 标签
+                 1、property : 属性名（Department实体类中对应的属性名studentList）
+                 2、ofType   : 指定集合的元素类型
+             注意: 结果集同名字段的最左原则
+        -->
+        <collection property="studentList" ofType="com.example.pojo.Student" autoMapping="true">
+            <id column="sid"               property="id"/> <!--sid 是查询结果集中 db_student 主键的别名-->
+            <result column="teacher_id"    property="teacherId"/>
+            <result column="department_id" property="departmentId"/>
+            <!--这后面还有映射属性没写，但是我加了 autoMapping="true" 属性，可以自动映射（必须是同名，属性名称无差异）-->
+        </collection>
+    </resultMap>
+
+    <select id="departmentWithStudents" resultMap="departmentWithStudentsResultMap">
+        SELECT
+            d.*,
+            s.id AS sid,  <!-- 返回结果中存在两个 id 属性，因此需要通过别名做区分 -->
+            s.name,
+            s.teacher_id,
+            s.email,
+            s.age,
+            s.department_id
+        FROM db_department d
+        INNER JOIN db_student s ON s.department_id = d.id
+        WHERE d.id = #{did}
+    </select>
+
+
+
+
+    <!-- TODO 一对多：外键在子表，一个父表记录对应多条子表记录。
+              多对多：必须要中间表做桥梁，两边都可拥有对方多个记录。-->
+    <resultMap id="studentWithCoursesResultMap" type="com.example.pojo.Student" autoMapping="true">
+        <id     column="id"            property="id"/>           <!-- id标签：主键字段映射（必须要写）-->
+        <result column="teacher_id"    property="teacherId"/>    <!-- result标签：非主键字段映射（属性名有差异，必须写）-->
+        <result column="department_id" property="departmentId"/> <!-- result标签：非主键字段映射（属性名有差异，必须写）-->
+        <!--这后面还有映射属性没写，但是我加了 autoMapping="true" 属性，可以自动映射（必须是同名，属性名称无差异）-->
+
+        <!-- 关系: 一个学生可以选修多门课程（Course），而一门课程也可以被多名学生选修。（多对多）
+                 1、association : 一对一
+                 2、collection  : 一对多、多对多
+             <collection> 标签
+                 1、property : 属性名（Student实体类中对应的属性名courseList）
+                 2、ofType   : 指定集合的元素类型
+             注意: 结果集同名字段的最左原则
+        -->
+        <collection property="courseList" ofType="com.example.pojo.Course" autoMapping="true">
+            <id     column="cid"          property="id"/> <!--cid 是查询结果集中 db_course 主键的别名-->
+            <result column="course_code"  property="courseCode"  jdbcType="VARCHAR"   javaType="java.lang.String"/>
+            <result column="course_name"  property="courseName"  jdbcType="VARCHAR"   javaType="java.lang.String"/>
+            <result column="teacher_id"   property="teacherId"   jdbcType="INTEGER"   javaType="java.lang.Integer"/>
+            <result column="max_students" property="maxStudents" jdbcType="INTEGER"   javaType="java.lang.Integer"/>
+            <result column="created_at"   property="createdAt"   jdbcType="TIMESTAMP" javaType="java.time.LocalDateTime"/>
+            <result column="updated_at"   property="updatedAt"   jdbcType="TIMESTAMP" javaType="java.time.LocalDateTime"/>
+            <!--这后面还有映射属性没写，但是我加了 autoMapping="true" 属性，可以自动映射（必须是同名，属性名称无差异）-->
+        </collection>
+    </resultMap>
+
+    <select id="studentWithCourses" resultMap="studentWithCoursesResultMap">
+        SELECT
+            s.*,
+            c.id AS cid,  <!-- 返回结果中存在两个 id 属性，因此需要通过别名做区分 -->
+            c.*
+        FROM db_student s
+        INNER JOIN db_student_course sc ON s.id = sc.student_id
+        INNER JOIN db_course c ON c.id = sc.course_id
+        WHERE s.id = #{sid}
+    </select>
+
+</mapper>

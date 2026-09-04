@@ -1,5 +1,6 @@
 package com.example.mapper;
 
+import com.example.pojo.Course;
 import com.example.pojo.Student;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -13,7 +14,11 @@ import java.util.Map;
 @Mapper // 扫描mapper接口到Spring容器
 public interface SelectMapper {
 
-	Student selectByPrimaryKey(Integer id);
+	Course selectByPrimaryKey(Integer id);
+
+	Course selectByPrimaryKeyToAliasProperty(Integer id);
+
+    Map<Object, Object> selectByPrimaryKeyToMap(Integer id);
 
     List<Student> selectByMap(Map<String, Object> map);
 

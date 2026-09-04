@@ -1,22 +1,23 @@
 DROP TABLE IF EXISTS `db_student`;
 CREATE TABLE `db_student` (
-    `id`         int          NOT NULL AUTO_INCREMENT COMMENT '主键Id',
-    `name`       varchar(255) DEFAULT NULL COMMENT '用户名',
-    `teacher_id` int          DEFAULT NULL COMMENT '教师ID',
-    `email`      varchar(255) DEFAULT NULL COMMENT '邮箱',
-    `age`        int          DEFAULT NULL COMMENT '年龄',
+    `id`            int          NOT NULL AUTO_INCREMENT COMMENT '主键Id',
+    `name`          varchar(255) DEFAULT NULL COMMENT '用户名',
+    `teacher_id`    int          DEFAULT NULL COMMENT '教师ID',
+    `email`         varchar(255) DEFAULT NULL COMMENT '邮箱',
+    `age`           int          DEFAULT NULL COMMENT '年龄',
+    `department_id` int          DEFAULT NULL COMMENT '院系ID',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT '学生表';
-INSERT INTO `springboot`.`db_student` (`id`, `name`, `teacher_id`, `email`, `age`) VALUES (1, '陆子异', 1, 'ziyilu9@gmail.com', 29);
-INSERT INTO `springboot`.`db_student` (`id`, `name`, `teacher_id`, `email`, `age`) VALUES (2, '袁子异', 1, 'zyuan@icloud.com', 25);
-INSERT INTO `springboot`.`db_student` (`id`, `name`, `teacher_id`, `email`, `age`) VALUES (3, '傅安琪', 1, 'fu923@gmail.com', 89);
-INSERT INTO `springboot`.`db_student` (`id`, `name`, `teacher_id`, `email`, `age`) VALUES (4, '秦岚', 4, 'lqin@gmail.com', 18);
-INSERT INTO `springboot`.`db_student` (`id`, `name`, `teacher_id`, `email`, `age`) VALUES (5, '谢子异', 4, 'xiezi@gmail.com', 39);
-INSERT INTO `springboot`.`db_student` (`id`, `name`, `teacher_id`, `email`, `age`) VALUES (6, '赵安琪', 6, 'anqizhao@icloud.com', 53);
-INSERT INTO `springboot`.`db_student` (`id`, `name`, `teacher_id`, `email`, `age`) VALUES (7, '赵嘉伦', 6, 'jialun89@yahoo.com', 22);
-INSERT INTO `springboot`.`db_student` (`id`, `name`, `teacher_id`, `email`, `age`) VALUES (8, '徐子韬', 6, 'xuz10@icloud.com', 63);
-INSERT INTO `springboot`.`db_student` (`id`, `name`, `teacher_id`, `email`, `age`) VALUES (9, '严詩涵', 8, 'yan9@yahoo.com', 77);
-INSERT INTO `springboot`.`db_student` (`id`, `name`, `teacher_id`, `email`, `age`) VALUES (10, '吴云熙', 8,'wuyunxi@hotmail.com', 30);
+INSERT INTO `springboot`.`db_student` (`id`, `name`, `teacher_id`, `email`, `age`, `department_id`) VALUES (1, '陆子异', 1, 'ziyilu9@gmail.com', 29, 101);
+INSERT INTO `springboot`.`db_student` (`id`, `name`, `teacher_id`, `email`, `age`, `department_id`) VALUES (2, '袁子异', 1, 'zyuan@icloud.com', 25, 101);
+INSERT INTO `springboot`.`db_student` (`id`, `name`, `teacher_id`, `email`, `age`, `department_id`) VALUES (3, '傅安琪', 1, 'fu923@gmail.com', 89, 101);
+INSERT INTO `springboot`.`db_student` (`id`, `name`, `teacher_id`, `email`, `age`, `department_id`) VALUES (4, '秦岚', 4, 'lqin@gmail.com', 18, 102);
+INSERT INTO `springboot`.`db_student` (`id`, `name`, `teacher_id`, `email`, `age`, `department_id`) VALUES (5, '谢子异', 4, 'xiezi@gmail.com', 39, 102);
+INSERT INTO `springboot`.`db_student` (`id`, `name`, `teacher_id`, `email`, `age`, `department_id`) VALUES (6, '赵安琪', 6, 'anqizhao@icloud.com', 53, 103);
+INSERT INTO `springboot`.`db_student` (`id`, `name`, `teacher_id`, `email`, `age`, `department_id`) VALUES (7, '赵嘉伦', 6, 'jialun89@yahoo.com', 22, 103);
+INSERT INTO `springboot`.`db_student` (`id`, `name`, `teacher_id`, `email`, `age`, `department_id`) VALUES (8, '徐子韬', 6, 'xuz10@icloud.com', 63, 103);
+INSERT INTO `springboot`.`db_student` (`id`, `name`, `teacher_id`, `email`, `age`, `department_id`) VALUES (9, '严詩涵', 8, 'yan9@yahoo.com', 77, 104);
+INSERT INTO `springboot`.`db_student` (`id`, `name`, `teacher_id`, `email`, `age`, `department_id`) VALUES (10, '吴云熙', 8,'wuyunxi@hotmail.com', 30, 104);
 
 
 DROP TABLE IF EXISTS `db_department`;
@@ -139,6 +140,33 @@ INSERT INTO db_student_course (student_id, course_id, academic_year, semester, s
 INSERT INTO db_student_course (student_id, course_id, academic_year, semester, score, grade_point, status, registered_at, completed_at, created_at, updated_at) VALUES(4, 6, '2023-2024', 'FALL', 81.0, 3.2, 'COMPLETED', '2023-09-04 10:20:00', '2024-01-15 00:00:00', NOW(), NOW());
 INSERT INTO db_student_course (student_id, course_id, academic_year, semester, score, grade_point, status, registered_at, completed_at, created_at, updated_at) VALUES(5, 7, '2023-2024', 'FALL', NULL, NULL, 'REGISTERED', '2023-09-05 15:30:00', NULL, NOW(), NOW());
 INSERT INTO db_student_course (student_id, course_id, academic_year, semester, score, grade_point, status, registered_at, completed_at, created_at, updated_at) VALUES(5, 8, '2023-2024', 'FALL', 79.5, 3.0, 'COMPLETED', '2023-09-05 16:45:00', '2024-01-15 00:00:00', NOW(), NOW());
+
+
+DROP TABLE IF EXISTS `db_student_profile`;
+CREATE TABLE `db_student_profile` (
+    `id`                INT PRIMARY KEY AUTO_INCREMENT COMMENT '档案ID',
+    `student_id`        INT UNIQUE   NOT NULL COMMENT '学生ID',
+    `address`           VARCHAR(255) DEFAULT NULL COMMENT '家庭住址',
+    `emergency_contact` VARCHAR(50)  DEFAULT NULL COMMENT '紧急联系人姓名',
+    `emergency_phone`   VARCHAR(20)  DEFAULT NULL COMMENT '紧急联系电话',
+    `birth_date`        DATE         DEFAULT NULL COMMENT '出生日期',
+    `political_status`  ENUM('群众', '共青团员', '中共党员', '其他') DEFAULT '群众' COMMENT '政治面貌',
+    `hobby`             VARCHAR(200) DEFAULT NULL COMMENT '兴趣爱好',
+    `bio`               TEXT         DEFAULT NULL COMMENT '个人简介',
+    `created_at`        TIMESTAMP    DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at`        TIMESTAMP    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    FOREIGN KEY (`student_id`) REFERENCES `db_student`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='学生档案表';
+INSERT INTO `db_student_profile`(`student_id`, `address`, `emergency_contact`, `emergency_phone`, `birth_date`, `political_status`, `hobby`, `bio`) VALUES(1, '北京市朝阳区建国路88号', '陆建国', '13800000001', '1995-03-12', '共青团员', '篮球、编程、吉他', '热爱技术，喜欢研究开源项目');
+INSERT INTO `db_student_profile`(`student_id`, `address`, `emergency_contact`, `emergency_phone`, `birth_date`, `political_status`, `hobby`, `bio`) VALUES(2, '上海市浦东新区陆家嘴环路1000号', '袁丽华', '13800000002', '1999-07-25', '群众', '摄影、旅行、阅读', '喜欢用镜头记录生活点滴');
+INSERT INTO `db_student_profile`(`student_id`, `address`, `emergency_contact`, `emergency_phone`, `birth_date`, `political_status`, `hobby`, `bio`) VALUES(3, '广州市天河区天河路385号', '傅国强', '13800000003', '1937-11-02', '中共党员', '书法、园艺、太极', '退休教师，热爱传统文化');
+INSERT INTO `db_student_profile`(`student_id`, `address`, `emergency_contact`, `emergency_phone`, `birth_date`, `political_status`, `hobby`, `bio`) VALUES(4, '深圳市南山区科技园南区', '秦海', '13800000004', '2006-05-18', '共青团员', '电竞、动漫、滑板', '年轻有活力，热爱二次元文化');
+INSERT INTO `db_student_profile`(`student_id`, `address`, `emergency_contact`, `emergency_phone`, `birth_date`, `political_status`, `hobby`, `bio`) VALUES(5, '杭州市西湖区文三路100号', '谢伟明', '13800000005', '1985-09-30', '群众', '登山、游泳、美食', '户外运动爱好者，享受大自然');
+INSERT INTO `db_student_profile`(`student_id`, `address`, `emergency_contact`, `emergency_phone`, `birth_date`, `political_status`, `hobby`, `bio`) VALUES(6, '成都市高新区天府大道中段', '赵志刚', '13800000006', '1971-12-08', '中共党员', '钓鱼、象棋、品茶', '性格沉稳，喜欢安静的生活');
+INSERT INTO `db_student_profile`(`student_id`, `address`, `emergency_contact`, `emergency_phone`, `birth_date`, `political_status`, `hobby`, `bio`) VALUES(7, '武汉市洪山区珞喻路152号', '赵秀英', '13800000007', '2002-08-14', '共青团员', '篮球、音乐、游戏', '在校大学生，阳光开朗');
+INSERT INTO `db_student_profile`(`student_id`, `address`, `emergency_contact`, `emergency_phone`, `birth_date`, `political_status`, `hobby`, `bio`) VALUES(8, '南京市鼓楼区汉口路22号', '徐伟', '13800000008', '1961-04-22', '群众', '跑步、书法、养花', '坚持晨跑20年，生活规律');
+INSERT INTO `db_student_profile`(`student_id`, `address`, `emergency_contact`, `emergency_phone`, `birth_date`, `political_status`, `hobby`, `bio`) VALUES(9, '西安市雁塔区长安南路300号', '严建国', '13800000009', '1947-06-06', '中共党员', '读书、写作、戏曲', '退休老干部，热爱文学创作');
+INSERT INTO `db_student_profile`(`student_id`, `address`, `emergency_contact`, `emergency_phone`, `birth_date`, `political_status`, `hobby`, `bio`) VALUES(10, '长沙市岳麓区麓山南路1号', '吴云峰', '13800000010', '1994-01-15', '群众', '电影、美食、健身', '美食博主，喜欢探店分享');
 
 
 DROP TABLE IF EXISTS `db_user`;
