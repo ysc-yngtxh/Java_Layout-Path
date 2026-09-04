@@ -123,7 +123,7 @@
          对象语法：#{属性名, javaType=类型名称, jdbcType=数据类型}
                  javaType：指Java中的属性数据类型
                  jdbcType：在数据库中的数据类型
-                 例如： #{name, javaType=java.lang.String, jdbcType=VARCHAR}
+                 例如：#{name, javaType=java.lang.String, jdbcType=VARCHAR}
          简化语法：#{属性名}。而 javaType、jdbcType 的值是可以通过 Mybatis 反射自动获取 -->
     <select id="selectByObject" resultType="com.example.pojo.Student">
         select id,name,email,age from db_student
@@ -146,7 +146,9 @@
 
 
     <!-- TODO 当方法有多个参数时，MyBatis 默认会将参数封装为一个 Map。
-              可以使用 #{arg0}、#{arg1}、#{param1}、#{param2} 的方式获取参数。该写法可读性不高，不推荐这种写法-->
+              可以使用 #{arg0}、#{arg1}、#{param1}、#{param2} 的方式获取参数。该写法可读性不高，不推荐这种写法
+	          注意⚠️：当使用了 -parameters 编译选项，Mybatis通过反射获取到的参数名为参数的变量名，即：name、age。。。
+	                 因此[arg0、arg1]方式传递参数值失效，但[param1、pram2] 参数值还可使用。-->
     <select id="selectStudentsReflect" resultType="com.example.pojo.Student">
         select id,name,email,age from db_student where name = #{arg0} and age = #{arg1}
         union all

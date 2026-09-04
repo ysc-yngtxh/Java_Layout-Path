@@ -24,6 +24,7 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
 
+
     <update id="updateByPrimaryKeySelective" parameterType="com.example.pojo.Student">
         update db_student
         <set>

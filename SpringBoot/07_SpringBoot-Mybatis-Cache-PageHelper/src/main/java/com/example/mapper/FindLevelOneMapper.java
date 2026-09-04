@@ -19,6 +19,8 @@ public interface FindLevelOneMapper {
 
 	Student selectByPrimaryKey(Integer id);
 
+
+
     @Select("""
              select
                  id,
@@ -31,6 +33,7 @@ public interface FindLevelOneMapper {
              where id = #{id}
     """)
     Student selectByPrimaryKeyOnAnnotation(Integer id);
+
 
     @Update("""
              update db_student

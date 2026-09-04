@@ -10,9 +10,6 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * 学生视图对象（VO）
- * 用于前端展示，可以只包含需要的字段，或对字段进行格式化
- *
  * @author 游家纨绔
  */
 @Data

@@ -6,7 +6,7 @@ import com.example.pojo.User;
 import com.example.pojo.World;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-public class SpringBootInjectApplication {
+public class AnnotationApplication {
 
 	public static void main(String[] args) {
 		// 创建一个AnnotationConfigApplicationContext的实例，并传入AppConfig.class作为参数。
