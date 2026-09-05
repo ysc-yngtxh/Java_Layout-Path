@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户登录</title>
+    <style>
+        /* 全局重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f0f2f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            padding: 40px 36px;
+            transition: all 0.2s;
+        }
+
+        .login-container h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1d2129;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .login-container .subtitle {
+            text-align: center;
+            color: #86909c;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .login-container .subtitle a {
+            color: #1677ff;
+            text-decoration: none;
+        }
+
+        .login-container .subtitle a:hover {
+            text-decoration: underline;
+        }
+
+        /* 错误消息 */
+        .error-msg {
+            background: #fff2f0;
+            border: 1px solid #ffccc7;
+            color: #cf1322;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: none; /* 默认隐藏，有消息时显示 */
+        }
+        .error-msg.show {
+            display: block;
+        }
+
+        /* 表单组 */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            color: #4e5969;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #d9d9d9;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="password"]:focus {
+            border-color: #1677ff;
+            box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.1);
+        }
+
+        .form-group input[type="text"]::placeholder,
+        .form-group input[type="password"]::placeholder {
+            color: #c9cdd4;
+        }
+
+        /* 提交按钮 */
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: #1677ff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 8px;
+        }
+
+        .submit-btn:hover {
+            background: #0958d9;
+        }
+
+        .submit-btn:active {
+            background: #003eb3;
+        }
+
+        /* 额外链接 */
+        .extra-links {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #86909c;
+        }
+
+        .extra-links a {
+            color: #1677ff;
+            text-decoration: none;
+        }
+
+        .extra-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* 响应式 */
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 20px;
+            }
+            .login-container h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>🔐 用户登录</h1>
+        <div class="subtitle">欢迎回来，请登录您的账户</div>
+
+        <!-- 错误消息区域（由后端 msg 控制） -->
+        <div class="error-msg" th:classappend="${msg != null} ? 'show' : ''" th:text="${msg}"></div>
+
+        <!-- 登录表单 -->
+        <form th:action="@{/login}" method="post">
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" id="username" name="username" placeholder="请输入用户名" required autofocus>
+            </div>
+
+            <div class="form-group">
+                <label for="password">密码</label>
+                <!-- 密码框建议使用 type="password" 隐藏输入 -->
+                <input type="password" id="password" name="password" placeholder="请输入密码" required>
+            </div>
+
+            <button type="submit" class="submit-btn">登 录</button>
+        </form>
+
+        <div class="extra-links">
+            <span>还没有账号？</span>
+            <a th:href="@{/register}">立即注册</a>
+            <span style="margin: 0 8px;">|</span>
+            <a th:href="@{/forgot}">忘记密码？</a>
+        </div>
+    </div>
+</body>
+</html>
