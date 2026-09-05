@@ -98,7 +98,7 @@
     </dependencies>
 
     <build>
-        <finalName>25_SpringMVC-Jdk17-整合SSM</finalName>
+        <finalName>${project.artifactId}</finalName>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (maybe moved to parent pom) -->
             <plugins>
                 <plugin>
