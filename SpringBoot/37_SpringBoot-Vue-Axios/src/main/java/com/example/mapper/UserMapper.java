@@ -21,4 +21,5 @@ public interface UserMapper extends BaseMapper<User> {
 	 * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
 	 */
 	int insertOrUpdateBatch(@Param("entities") List<User> entities);
+
 }

@@ -28,4 +28,5 @@ public class ResponseVo<T> {
 	public static <T> ResponseVo<T> fail(Integer code, String message) {
 		return new ResponseVo<>(code, message);
 	}
+
 }

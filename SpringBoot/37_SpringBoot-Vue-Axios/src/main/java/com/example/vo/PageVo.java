@@ -18,4 +18,5 @@ public class PageVo {
 	public static PageVo info(Object data, Integer total) {
 		return new PageVo(data, total);
 	}
+
 }
