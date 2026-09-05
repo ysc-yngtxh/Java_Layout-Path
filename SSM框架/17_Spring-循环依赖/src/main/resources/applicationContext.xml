@@ -46,4 +46,5 @@
 
     <!--TODO 扫描具有 @Component 注解的aop类-->
     <context:component-scan base-package="com.example"/>
+
 </beans>

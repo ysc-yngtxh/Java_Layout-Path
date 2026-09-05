@@ -3,7 +3,7 @@ package com.example;
 import com.example.pojo.SysUser;
 import com.example.repository.Student;
 import com.example.service.UserService;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -29,4 +29,5 @@ public class AnnotationTest {
 		user.setAge(23);
 		service.addUser(user);
 	}
+
 }

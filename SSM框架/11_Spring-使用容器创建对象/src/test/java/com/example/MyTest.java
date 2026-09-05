@@ -3,7 +3,7 @@ package com.example;
 import com.example.service.SomeService;
 import com.example.service.SomeServiceImpl;
 import java.util.Date;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -60,4 +60,5 @@ public class MyTest {
 		Date my = (Date) ac.getBean("myDate");
 		System.out.println("Date:" + my);
 	}
+
 }

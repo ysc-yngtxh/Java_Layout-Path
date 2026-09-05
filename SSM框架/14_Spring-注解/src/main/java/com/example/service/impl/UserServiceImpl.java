@@ -22,4 +22,5 @@ public class UserServiceImpl implements UserService {
 	public void addUser(SysUser user) {
 		dao.insertUser(user);
 	}
+
 }

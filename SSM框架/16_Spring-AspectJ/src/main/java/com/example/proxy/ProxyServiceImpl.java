@@ -48,4 +48,5 @@ public class ProxyServiceImpl implements ProxyService {
 		ProxyService currentProxy = (ProxyService) AopContext.currentProxy();
 		currentProxy.saveUser();
 	}
+
 }

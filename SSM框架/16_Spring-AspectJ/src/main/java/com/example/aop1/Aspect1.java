@@ -76,4 +76,5 @@ public class Aspect1 {
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		System.out.println("4==前置通知，切面功能：在目标方法之前输出执行时间" + LocalDateTime.now().format(dateTimeFormatter));
 	}
+
 }

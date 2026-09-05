@@ -7,4 +7,5 @@
     <insert id="insertSale">
         insert into ssm_sale(gid,nums) values(#{gid},#{nums})
     </insert>
+
 </mapper>

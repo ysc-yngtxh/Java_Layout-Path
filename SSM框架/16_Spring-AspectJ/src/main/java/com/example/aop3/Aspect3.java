@@ -74,4 +74,5 @@ public class Aspect3 {
 		// 返回目标方法的执行结果
 		return result;
 	}
+
 }

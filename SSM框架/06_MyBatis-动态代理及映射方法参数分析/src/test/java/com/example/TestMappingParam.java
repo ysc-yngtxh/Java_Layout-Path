@@ -3,11 +3,11 @@ package com.example;
 import com.example.mapper.MappingParamDao;
 import com.example.pojo.Student;
 import com.example.utils.MyBatisUtils;
+import org.apache.ibatis.session.SqlSession;
+import org.junit.jupiter.api.Test;
+
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import org.apache.ibatis.session.SqlSession;
-import org.junit.Test;
 
 public class TestMappingParam {
 

@@ -11,4 +11,5 @@
     <select id="selectStudents" resultType="com.example.pojo.Student">
         select id,name,email,age from ssm_student order by id desc
     </select>
+
 </mapper>

@@ -7,35 +7,43 @@
     <groupId>com.example</groupId>
     <artifactId>16_Spring-AspectJ</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <name>${project.artifactId}</name>
 
-    <name>16_Spring-AspectJ</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>26</maven.compiler.source>
+        <maven.compiler.target>26</maven.compiler.target>
     </properties>
 
     <dependencies>
+        <!--单元测试-->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>6.1.3</version>
             <scope>test</scope>
         </dependency>
-        <!--spring依赖-->
+        <!--Spring依赖-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>6.2.5</version>
+            <version>7.1.0-M1</version>
+        </dependency>
+        <!-- Jdk8 版本有内置的 Java EE 相关模块（javax 等系列包）
+             Jdk8 之后的版本将 Java EE 相关模块 分离出去，并更名为 jakarta 包名。因此需要手动添加它的依赖包-->
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <version>3.0.0</version>
         </dependency>
         <!--aspectJ依赖-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
-            <version>6.2.5</version>
+            <version>7.1.0-M1</version>
         </dependency>
     </dependencies>
 

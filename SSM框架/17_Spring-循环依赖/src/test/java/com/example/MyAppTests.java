@@ -2,7 +2,7 @@ package com.example;
 
 import com.example.service.AService;
 import com.example.service.BService;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class MyAppTests {
@@ -24,4 +24,5 @@ public class MyAppTests {
 		BService bService = applicationContext.getBean("bService", BService.class);
 		bService.sayHello();
 	}
+
 }

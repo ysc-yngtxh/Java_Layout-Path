@@ -30,4 +30,5 @@
         <servlet-name>springmvc</servlet-name> <!--servlet映射名称-->
         <url-pattern>*.do</url-pattern>        <!--匹配访问路径 URL-->
     </servlet-mapping>
+
 </web-app>

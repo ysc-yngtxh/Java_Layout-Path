@@ -51,4 +51,5 @@ public class MyController {
 		mv.setViewName("other");
 		return mv;
 	}
+
 }

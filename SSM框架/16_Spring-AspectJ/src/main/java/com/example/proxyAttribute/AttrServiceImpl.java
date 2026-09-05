@@ -17,4 +17,5 @@ public class AttrServiceImpl {
 	public void doSomething() {
 		System.out.println("AttrServiceImpl获取属性：" + injectServiceImpl.getClass());
 	}
+
 }

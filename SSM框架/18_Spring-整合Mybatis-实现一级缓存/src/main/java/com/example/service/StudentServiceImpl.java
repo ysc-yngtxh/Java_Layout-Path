@@ -22,4 +22,5 @@ public class StudentServiceImpl implements StudentService {
 	public List<Student> selectStudents() {
 		return studentMapper.selectStudents();
 	}
+
 }

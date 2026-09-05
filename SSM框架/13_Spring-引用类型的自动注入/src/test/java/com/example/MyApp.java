@@ -3,7 +3,7 @@ package com.example;
 import com.example.pojo.SysUser;
 import com.example.repository.Student;
 import com.example.service.UserService;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -40,4 +40,5 @@ public class MyApp {
 
 		System.out.println("Student对象" + service);
 	}
+
 }

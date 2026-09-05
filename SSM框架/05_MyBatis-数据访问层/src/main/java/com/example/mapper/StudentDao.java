@@ -18,4 +18,5 @@ public interface StudentDao {
 	//     参数：Student，表示要插入到数据库的数据
 	//     返回值：int，表示insert操作后的 影响数据库的行数
 	int insertStudent(Student Student);
+
 }

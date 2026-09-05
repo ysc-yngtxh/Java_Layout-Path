@@ -148,8 +148,8 @@
  *                  4)、properties:设置属性
  *                       <properties>
  *                          <java.version>1.8</java.version>
- *                          <maven.compiler.source>1.8</maven.compiler.source>
- *                          <maven.compiler.target>1.8</maven.compiler.target>
+ *                          <maven.compiler.source>26</maven.compiler.source>
+ *                          <maven.compiler.target>26</maven.compiler.target>
  *                       </properties>
  *                  5)、build：maven在进行项目的构建时，配置信息，例如指定编译Java代码使用的jdk的版本
  *          5、maven生命周期，maven的命令，maven的插件

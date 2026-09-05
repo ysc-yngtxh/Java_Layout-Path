@@ -71,4 +71,5 @@ public class BuyGoodsServiceImpl implements BuyGoodsService {
 		buyGoods.setAmount(nums);
 		goodsDao.updateGoods(buyGoods);
 	}
+
 }

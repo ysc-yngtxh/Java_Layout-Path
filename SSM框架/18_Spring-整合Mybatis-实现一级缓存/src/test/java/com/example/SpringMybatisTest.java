@@ -6,25 +6,28 @@ import com.example.service.StudentService;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
-// @RunWith(SpringRunner.class)：主要作用是使得单元测试可以在Spring框架提供的环境下执行属性注入。
-//                               如：在单元测试中使用 @Autowired 注解，注入Spring容器中管理的Bean
-// 如果是 Junit 4.x 则需要加 @RunWith，是 Junit 5.x 就不需要加，因为内置了。
-@RunWith(SpringRunner.class)
-// @ContextConfiguration：指定了用于测试的应用程序上下文从哪个XML配置文件加载Spring的bean定义。
+// @ExtendWith(SpringExtension.class)：这是一个 JUnit 5 的扩展机制注解。
+//     作用：使得单元测试可以在 Spring框架 提供的环境下执行属性注入。
+//          如：在可以在单元测试中使用 @Autowired 注解，以便管理注入 Spring容器 中的 Bean
+// 在 JUnit 4 时代，这个功能由 @RunWith(SpringRunner.class) 实现。升级到 JUnit 5 后，@RunWith 被弃用，统一改用 @ExtendWith。
+@ExtendWith(SpringExtension.class)
+// @ContextConfiguration：告诉 Spring 去哪里读取配置，来构建应用程序上下文（ApplicationContext）
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+// @SpringJUnitConfig：是 @ExtendWith(SpringExtension.class) 和 @ContextConfiguration 的组合注解。
+// @SpringJUnitConfig(locations = {"classpath:applicationContext.xml"})
 public class SpringMybatisTest {
 
 	@Autowired
-	private StudentService service;
+	private StudentService studentService;
 
 	// 遍历Spring容器中的所有的Bean
 	@Test
@@ -47,7 +50,7 @@ public class SpringMybatisTest {
 		student.setEmail("lijingjing@163.com");
 		student.setAge(2020919);
 		int nums = mapper.insertStudent(student);
-		// Spring和Mybatis整合在一起使用，事务是自动提交的。无需执行SqlSession.commit()
+		// Spring 和 Mybatis 整合在一起使用，事务是自动提交的。无需执行 SqlSession.commit()
 		System.out.println("nums = " + nums);
 	}
 
@@ -103,12 +106,13 @@ public class SpringMybatisTest {
 	@Test
 	@Transactional
 	public void test5() {
-		List<Student> students = service.selectStudents();
+		List<Student> students = studentService.selectStudents();
 		students.forEach(System.out::println);
 
 		System.err.println("=================================================================");
 
-		List<Student> students2 = service.selectStudents();
+		List<Student> students2 = studentService.selectStudents();
 		students2.forEach(System.out::println);
 	}
+
 }

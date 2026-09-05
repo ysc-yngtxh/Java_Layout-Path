@@ -29,4 +29,5 @@
 
     <!--Spring能创建一个非自定义类的对象吗？可以创建一个存在的某个类的对象-->
     <bean id="myDate" class="java.util.Date"/>
+
 </beans>

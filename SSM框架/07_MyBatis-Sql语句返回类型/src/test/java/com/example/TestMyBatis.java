@@ -8,7 +8,7 @@ import com.example.vo.ViewStudent;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TestMyBatis {
 

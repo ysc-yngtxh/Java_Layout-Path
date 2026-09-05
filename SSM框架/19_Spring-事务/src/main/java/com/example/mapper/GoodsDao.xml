@@ -5,11 +5,12 @@
 <mapper namespace="com.example.mapper.GoodsDao">
 
     <select id="selectGoods" resultType="com.example.pojo.Goods">
-        select id,name,amount,price from ssm_goods where id=#{gid}
+        select id,name,amount,price from ssm_goods where id = #{gid}
     </select>
 
     <update id="updateGoods">
         -- 确保库存足够，否则不更新
-        update ssm_goods set amount=amount-#{amount} where id=#{id} and amount-#{amount}>=0
+        update ssm_goods set amount = amount-#{amount} where id = #{id} and amount-#{amount} >= 0
     </update>
+
 </mapper>

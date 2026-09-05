@@ -23,4 +23,5 @@ public class AService {
 	public void testProxy() {
 		System.err.println("进入 AService 类的 testProxy() 方法，且 BService 对象为：" + bService.getClass());
 	}
+
 }

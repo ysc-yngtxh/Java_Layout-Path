@@ -8,69 +8,65 @@
     <groupId>com.example</groupId>
     <artifactId>20_Spring-Web</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <name>${project.artifactId}</name>
 
-    <name>20_Spring-Web</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>24</maven.compiler.source>
-        <maven.compiler.target>24</maven.compiler.target>
+        <maven.compiler.source>26</maven.compiler.source>
+        <maven.compiler.target>26</maven.compiler.target>
     </properties>
 
+    <!--Tomcat服务器是专门用来运行Java Web应用的容器，它部署的是 war 文件或者是已解压的Web应用目录。
+        因此在使用Tomcat服务器时，项目应该打包成 war 包部署-->
+    <packaging>war</packaging>
+
     <dependencies>
-        <!--spring依赖-->
+        <!--Spring依赖-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>6.2.5</version>
+            <version>7.1.0-M1</version>
         </dependency>
-        <!--做spring事务用到的-->
+        <!--做Spring事务用到的-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <version>6.2.5</version>
+            <version>7.1.0-M1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>6.2.5</version>
+            <version>7.1.0-M1</version>
         </dependency>
-        <!--Spring框架中没有集成servlet依赖，如需使用需要自行添加。Tomcat@8 可使用javax（已被弃用）。
-            Tomcat@8 以上版本推荐使用jakarta
-        -->
-        <!--<dependency>-->
-        <!--  <groupId>javax.servlet</groupId>-->
-        <!--  <artifactId>javax.servlet-api</artifactId>-->
-        <!--  <version>4.0.1</version>-->
-        <!--  <scope>compile</scope>-->
-        <!--</dependency>-->
+        <!-- Jdk8 版本有内置的 Java EE 相关模块（javax 等系列包）
+             Jdk8 之后的版本将 Java EE 相关模块 分离出去，并更名为 jakarta 包名。因此需要手动添加它的依赖包-->
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
             <version>6.1.0</version>
             <scope>provided</scope>
         </dependency>
-        <!--jsp依赖-->
+        <!--Jsp依赖-->
         <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>jsp-api</artifactId>
-            <version>2.2</version>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jsp-api</artifactId>
+            <version>11.0.25</version>
             <scope>compile</scope>
         </dependency>
-        <!--mybatis依赖-->
+        <!--Mybatis依赖-->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
-            <version>3.5.13</version>
+            <version>3.5.19</version>
         </dependency>
-        <!--spring和mybatis集成的依赖-->
+        <!--Spring集成Mybatis的依赖-->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
-            <version>3.0.0</version>
+            <version>4.1.0</version>
         </dependency>
         <!--MySQL驱动-->
         <dependency>
@@ -82,18 +78,21 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.2.16</version>
+            <version>1.2.28</version>
         </dependency>
         <!--为了使用监听器对象，加入依赖-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>6.2.5</version>
+            <version>7.1.0-M1</version>
         </dependency>
     </dependencies>
 
     <build>
+        <finalName>${project.artifactId}</finalName>
+
         <resources>
+            <!--目的是把src/main/java目录中的xnl文件包含到输出结果中-->
             <resource>
                 <directory>src/main/java</directory>
                 <includes>
@@ -102,9 +101,20 @@
                 </includes>
                 <filtering>false</filtering>
             </resource>
+            <!--
+                注意：Maven 默认只打包 src/main/resources，但一旦我们自定义了 <resources> 标签，就需要显式包含它，否则会被忽略。
+                此配置将 resources 目录下的配置/静态资源复制到 classpath 根目录，保证 application.properties、static... 等文件正常打包到 classpath 下。
+            -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
         </resources>
 
-        <finalName>25_Spring-Web</finalName>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
                 <plugin>

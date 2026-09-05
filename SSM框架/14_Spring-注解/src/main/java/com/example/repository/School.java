@@ -1,6 +1,6 @@
 package com.example.repository;
 
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,7 +42,7 @@ public class School {
      */
     @Value("游家纨绔")       // 或者加在set方法上
     private String name;
-    @Value("陕西西安雁塔区") // 或者加在set方法上
+    @Value("陕西西安雁塔区")  // 或者加在set方法上
     private String address;
 
     /**

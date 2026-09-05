@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-    <!--控制mybatis全局行为-->
+    <!--控制Mybatis全局行为-->
     <settings>
         <!--设置mybatis输出日志-->
         <setting name="logImpl" value="STDOUT_LOGGING"/>
@@ -21,4 +21,5 @@
         <!--<package name="com.example.mapper.StudentMapper.xml"/>-->
         <package name="com.example.mapper"/>
     </mappers>
+
 </configuration>

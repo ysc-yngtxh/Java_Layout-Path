@@ -36,4 +36,5 @@
         <servlet-name>registerController</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
+
 </web-app>

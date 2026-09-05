@@ -2,7 +2,7 @@ package com.example;
 
 import com.example.pojo.Student;
 import java.io.File;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -54,4 +54,5 @@ public class MyTest {
 		System.out.println("File = " + st);
 		System.out.println("File = " + st.getName());
 	}
+
 }

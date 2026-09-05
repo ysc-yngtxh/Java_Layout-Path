@@ -8,7 +8,7 @@ import com.github.pagehelper.PageInfo;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TestMyBatis {
 

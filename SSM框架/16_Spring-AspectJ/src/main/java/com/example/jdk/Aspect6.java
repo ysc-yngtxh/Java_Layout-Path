@@ -27,4 +27,5 @@ public class Aspect6 {
 		}
 		System.out.println("来，看看小曹的前置通知是怎么做的。");
 	}
+
 }

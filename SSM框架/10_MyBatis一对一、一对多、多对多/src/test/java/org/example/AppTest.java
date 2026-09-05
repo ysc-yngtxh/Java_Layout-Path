@@ -8,7 +8,7 @@ import com.example.mapper.RoleMapper;
 import com.example.mapper.UserMapper;
 import com.example.pojo.User;
 import com.example.utils.MyBatisUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit test for simple App.

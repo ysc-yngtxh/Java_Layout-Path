@@ -17,4 +17,5 @@ public class CAop {
 	public void proxy() {
 		System.out.println("你正在执行Aop切面逻辑");
 	}
+
 }

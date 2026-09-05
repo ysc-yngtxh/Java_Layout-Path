@@ -20,4 +20,5 @@
     <mappers>
         <package name="com.example.mapper"/>
     </mappers>
+
 </configuration>

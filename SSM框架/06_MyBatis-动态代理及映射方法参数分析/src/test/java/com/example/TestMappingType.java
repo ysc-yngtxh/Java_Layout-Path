@@ -5,7 +5,7 @@ import com.example.pojo.Student;
 import com.example.utils.MyBatisUtils;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TestMappingType {
 
@@ -45,4 +45,5 @@ public class TestMappingType {
 		}
 		sqlSession.close();
 	}
+
 }

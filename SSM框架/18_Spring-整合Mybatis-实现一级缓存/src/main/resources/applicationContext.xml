@@ -10,7 +10,7 @@
     -->
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
-    <!--声明druid(德鲁伊)数据源DataSource，作用是连接数据库的-->
+    <!--声明druid（德鲁伊）数据源 DataSource，作用是连接数据库的-->
     <!--<bean id="myDataSource" class="com.alibaba.druid.pool.DruidDataSource"-->
     <!--      init-method="init" destroy-method="close">-->
     <!--    <property name="url" value="${jdbc.url}"/>-->
@@ -65,4 +65,5 @@
     </bean>
     <!--2、开启事务注解驱动，告诉spring使用注解管理事务，创建代理对象-->
     <tx:annotation-driven transaction-manager="transactionManager"/>
+
 </beans>

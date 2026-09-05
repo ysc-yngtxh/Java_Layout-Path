@@ -14,4 +14,5 @@
         <!--后缀：视图文件的扩展名-->
         <property name="suffix" value=".jsp"/>
     </bean>
+
 </beans>

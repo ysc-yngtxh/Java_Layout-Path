@@ -28,4 +28,5 @@ public class SysUser {
 				", age=" + age +
 				'}';
 	}
+
 }

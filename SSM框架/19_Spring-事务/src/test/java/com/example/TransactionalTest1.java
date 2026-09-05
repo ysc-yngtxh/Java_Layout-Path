@@ -1,7 +1,7 @@
 package com.example;
 
 import com.example.service.BuyGoodsService;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -53,4 +53,5 @@ public class TransactionalTest1 {
 		BuyGoodsService service = ac.getBean("buyService", BuyGoodsService.class);
 		service.buy(3, 3);
 	}
+
 }

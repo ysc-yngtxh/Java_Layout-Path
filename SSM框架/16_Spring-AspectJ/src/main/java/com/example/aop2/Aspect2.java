@@ -52,4 +52,5 @@ public class Aspect2 {
 		// Object res:是目标方法执行后的返回值，根据返回值做你的切面的功能处理
 		System.out.println("2==后置通知：在目标方法之后执行的，获取的返回值是：" + res);
 	}
+
 }
