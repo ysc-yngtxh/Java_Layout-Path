@@ -18,6 +18,7 @@ public class JdkProxy implements InvocationHandler {
 
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        System.out.println("JdkProxy.invoke() 方法被调用，方法名 = " + method.getName());
 		return method.invoke(target, args);
 	}
 }

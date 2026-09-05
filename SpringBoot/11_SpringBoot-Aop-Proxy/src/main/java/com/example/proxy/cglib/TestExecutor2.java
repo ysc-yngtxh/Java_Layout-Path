@@ -10,7 +10,12 @@ import org.springframework.cglib.proxy.Enhancer;
  */
 public class TestExecutor2 {
 
-	// 这里执行的是静态main()方法，没有注入Spring容器中，切面逻辑不会生效
+	// Cglib 动态代理的实现步骤：
+    //    1. 创建一个被代理类的实例对象
+    //    2. 创建一个 CglibInterceptor 拦截器对象，并将被代理类的实例对象传入
+    //    3. 创建一个 Enhancer 对象，并设置被代理类的父类
+    //    4. 设置 Enhancer 对象的回调函数为 CglibInterceptor �拦截器对象
+    //    5. 调用 Enhancer 对象的 create()  方法创建代理对象
 	public static void main(String[] args) {
 		DirectServiceImpl directService = new DirectServiceImpl();
 		CgLibInterceptor cglibInterceptor = new CgLibInterceptor(directService);
