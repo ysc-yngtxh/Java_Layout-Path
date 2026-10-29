@@ -1,5 +1,7 @@
 package com.example.config;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import org.apache.catalina.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +11,10 @@ import org.springframework.data.redis.serializer.GenericJacksonJsonRedisSerializ
 import org.springframework.data.redis.serializer.JacksonJsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import tools.jackson.databind.DefaultTyping;
+import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.json.JsonMapper;
+import tools.jackson.databind.jsontype.BasicPolymorphicTypeValidator;
 
 /**
  * 描述：redis配置类
@@ -35,21 +40,40 @@ public class RedisConfig {
         // jackson2JsonRedisSerializer.setObjectMapper(new ObjectMapper(), Object.class);
 
         // TODO SpringBoot版本 4 开始，使用 Jackson 的序列化
+        ObjectMapper obm = JsonMapper.builder()
+                // 设置 序列化/反序列化 时哪些成员可见。
+                //    PropertyAccessor.ALL：所有访问器类型（包括字段、getter、setter、构造器等）
+                //    JsonAutoDetect.Visibility.ANY：所有可见性级别都允许（包括 private、public、protected 等）
+                .changeDefaultVisibility(visibilityChecker ->
+                        visibilityChecker.withVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY)
+                )
+                // 激活默认类型信息（创建类型白名单验证器，限制允许反序列化的类。）
+                .activateDefaultTyping(
+                        // 创建一个安全的验证器，限定允许的子类型白名单
+                        BasicPolymorphicTypeValidator.builder()
+                                .allowIfSubType("com.example") // 允许你项目中的包
+                                .allowIfSubType("java.util")   // 允许一些常用的JDK类
+                                .build(),
+                        // DefaultTyping.NON_FINAL：对于所有非 final 类（即可以被继承的类）在序列化时添加类型信息
+                        // 例如：String、Integer 等 final 类不会添加类型信息，但自定义的 User 类会添加
+                        DefaultTyping.NON_FINAL
+                )
+                .build();
+
         GenericJacksonJsonRedisSerializer jacksonJsonRedisSerializer =
-                new GenericJacksonJsonRedisSerializer(new JsonMapper());
+                new GenericJacksonJsonRedisSerializer(obm);
         // 针对 User 类型的序列化器
         JacksonJsonRedisSerializer<User> userSerializer =
-                new JacksonJsonRedisSerializer<>(JsonMapper.builder().build(), User.class);
+                new JacksonJsonRedisSerializer<>(obm, User.class);
 
-        RedisSerializer stringSerializer = new StringRedisSerializer();
 
         // 设置Redis的String数据类型key部分，序列化方式为 StringRedisSerializer
-        template.setKeySerializer(stringSerializer);
+        template.setKeySerializer(new StringRedisSerializer());
         // 设置Redis的String数据类型value部分，序列化方式为 jacksonJsonRedisSerializer
         template.setValueSerializer(jacksonJsonRedisSerializer);
 
         // 设置Redis的hash数据类型key部分，序列化方式为 StringRedisSerializer
-        template.setHashKeySerializer(stringSerializer);
+        template.setHashKeySerializer(new StringRedisSerializer());
         // 设置Redis的hash数据类型value部分，序列化方式为 jacksonJsonRedisSerializer
         template.setHashValueSerializer(jacksonJsonRedisSerializer);
 
@@ -61,4 +85,5 @@ public class RedisConfig {
         template.afterPropertiesSet();
         return template;
     }
+
 }
